@@ -32,7 +32,7 @@ import type {
   TextNode,
   SpaceNode,
 } from '../types';
-import { generateLatexId, resetLatexIdCounter, deriveId } from '../utils/id-generator';
+import { generateLatexId, resetLatexIdCounter, deriveId, deriveCellId } from '../utils/id-generator';
 import { getCommandHandler, type CommandContext } from './command-registry';
 import {
   type ParseError,
@@ -465,40 +465,40 @@ function createOperator(op: string): OperatorNode {
 
 function createFrac(numerator: MathNode[], denominator: MathNode[]): FracNode {
   const fracId = generateId();
-  const numRow: RowNode = { id: `${fracId}_num`, type: 'row', children: numerator };
-  const denRow: RowNode = { id: `${fracId}_den`, type: 'row', children: denominator };
+  const numRow: RowNode = { id: deriveId(fracId, '_num'), type: 'row', children: numerator };
+  const denRow: RowNode = { id: deriveId(fracId, '_den'), type: 'row', children: denominator };
   return { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] };
 }
 
 function createPower(base: MathNode[], exponent: MathNode[]): PowerNode {
   const powerId = generateId();
-  const expRow: RowNode = { id: `${powerId}_exp`, type: 'row', children: exponent };
+  const expRow: RowNode = { id: deriveId(powerId, '_exp'), type: 'row', children: exponent };
   return { id: powerId, type: 'power', base, exponent: [expRow] };
 }
 
 function createSubscript(base: MathNode[], subscript: MathNode[]): SubscriptNode {
   const subId = generateId();
-  const subRow: RowNode = { id: `${subId}_sub`, type: 'row', children: subscript };
+  const subRow: RowNode = { id: deriveId(subId, '_sub'), type: 'row', children: subscript };
   return { id: subId, type: 'subscript', base, subscript: [subRow] };
 }
 
 function createParen(content: MathNode[], parenType: '(' | '[' | '{', autoSize: boolean = false): ParenNode {
   const parenId = generateId();
-  const contentRow: RowNode = { id: `${parenId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(parenId, '_content'), type: 'row', children: content };
   return { id: parenId, type: 'paren', content: [contentRow], parenType, autoSize };
 }
 
 function createAbs(content: MathNode[]): AbsNode {
   const absId = generateId();
-  const contentRow: RowNode = { id: `${absId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(absId, '_content'), type: 'row', children: content };
   return { id: absId, type: 'abs', content: [contentRow] };
 }
 
 function createSqrt(content: MathNode[], index?: MathNode[]): SqrtNode {
   const sqrtId = generateId();
-  const contentRow: RowNode = { id: `${sqrtId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(sqrtId, '_content'), type: 'row', children: content };
   if (index) {
-    const indexRow: RowNode = { id: `${sqrtId}_index`, type: 'row', children: index };
+    const indexRow: RowNode = { id: deriveId(sqrtId, '_index'), type: 'row', children: index };
     return { id: sqrtId, type: 'sqrt', content: [contentRow], index: [indexRow] };
   }
   return { id: sqrtId, type: 'sqrt', content: [contentRow] };
@@ -516,9 +516,9 @@ function createIntegral(
   integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int'
 ): IntegralNode {
   const integralId = generateId();
-  const lowerRow: RowNode = { id: `${integralId}_lower`, type: 'row', children: lower };
-  const upperRow: RowNode = { id: `${integralId}_upper`, type: 'row', children: upper };
-  const integrandRow: RowNode = { id: `${integralId}_integrand`, type: 'row', children: integrand };
+  const lowerRow: RowNode = { id: deriveId(integralId, '_lower'), type: 'row', children: lower };
+  const upperRow: RowNode = { id: deriveId(integralId, '_upper'), type: 'row', children: upper };
+  const integrandRow: RowNode = { id: deriveId(integralId, '_integrand'), type: 'row', children: integrand };
   return {
     id: integralId,
     type: 'integral',
@@ -532,9 +532,9 @@ function createIntegral(
 
 function createSum(lower: MathNode[], upper: MathNode[], body: MathNode[]): SumNode {
   const sumId = generateId();
-  const lowerRow: RowNode = { id: `${sumId}_lower`, type: 'row', children: lower };
-  const upperRow: RowNode = { id: `${sumId}_upper`, type: 'row', children: upper };
-  const bodyRow: RowNode = { id: `${sumId}_body`, type: 'row', children: body };
+  const lowerRow: RowNode = { id: deriveId(sumId, '_lower'), type: 'row', children: lower };
+  const upperRow: RowNode = { id: deriveId(sumId, '_upper'), type: 'row', children: upper };
+  const bodyRow: RowNode = { id: deriveId(sumId, '_body'), type: 'row', children: body };
   return {
     id: sumId,
     type: 'sum',
@@ -546,8 +546,8 @@ function createSum(lower: MathNode[], upper: MathNode[], body: MathNode[]): SumN
 
 function createLimit(variable: string, approach: MathNode[], body: MathNode[]): LimitNode {
   const limitId = generateId();
-  const approachRow: RowNode = { id: `${limitId}_approach`, type: 'row', children: approach };
-  const bodyRow: RowNode = { id: `${limitId}_body`, type: 'row', children: body };
+  const approachRow: RowNode = { id: deriveId(limitId, '_approach'), type: 'row', children: approach };
+  const bodyRow: RowNode = { id: deriveId(limitId, '_body'), type: 'row', children: body };
   return {
     id: limitId,
     type: 'limit',
@@ -559,9 +559,9 @@ function createLimit(variable: string, approach: MathNode[], body: MathNode[]): 
 
 function createProduct(lower: MathNode[], upper: MathNode[], body: MathNode[]): ProductNode {
   const productId = generateId();
-  const lowerRow: RowNode = { id: `${productId}_lower`, type: 'row', children: lower };
-  const upperRow: RowNode = { id: `${productId}_upper`, type: 'row', children: upper };
-  const bodyRow: RowNode = { id: `${productId}_body`, type: 'row', children: body };
+  const lowerRow: RowNode = { id: deriveId(productId, '_lower'), type: 'row', children: lower };
+  const upperRow: RowNode = { id: deriveId(productId, '_upper'), type: 'row', children: upper };
+  const bodyRow: RowNode = { id: deriveId(productId, '_body'), type: 'row', children: body };
   return {
     id: productId,
     type: 'product',
@@ -573,7 +573,7 @@ function createProduct(lower: MathNode[], upper: MathNode[], body: MathNode[]): 
 
 function createOverline(content: MathNode[]): OverlineNode {
   const overlineId = generateId();
-  const contentRow: RowNode = { id: `${overlineId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(overlineId, '_content'), type: 'row', children: content };
   return {
     id: overlineId,
     type: 'overline',
@@ -586,7 +586,7 @@ function createAccent(
   accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check'
 ): AccentNode {
   const accentId = generateId();
-  const contentRow: RowNode = { id: `${accentId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(accentId, '_content'), type: 'row', children: content };
   return {
     id: accentId,
     type: 'accent',
@@ -618,11 +618,11 @@ function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '
     row.map((cell, j) => {
       if (cell.type === 'row') {
         // 이미 row 노드면 ID만 교체
-        return { ...cell, id: `${matrixId}_cell_${i}_${j}` };
+        return { ...cell, id: deriveCellId(matrixId, i, j) };
       }
       // 아니면 row로 감싸기
       const cellRow: RowNode = {
-        id: `${matrixId}_cell_${i}_${j}`,
+        id: deriveCellId(matrixId, i, j),
         type: 'row',
         children: [cell]
       };

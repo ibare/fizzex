@@ -103,34 +103,34 @@ export function createOperator(op: OperatorSymbol): OperatorNode {
 export function createFrac(numerator: MathNode[], denominator: MathNode[]): FracNode {
   const fracId = generateId();
   // 분자와 분모를 각각 row로 감싸서 별도 ID 부여
-  const numRow: RowNode = { id: `${fracId}_num`, type: 'row', children: numerator };
-  const denRow: RowNode = { id: `${fracId}_den`, type: 'row', children: denominator };
+  const numRow: RowNode = { id: deriveId(fracId, '_num'), type: 'row', children: numerator };
+  const denRow: RowNode = { id: deriveId(fracId, '_den'), type: 'row', children: denominator };
   return { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] };
 }
 
 export function createPower(base: MathNode[], exponent: MathNode[]): PowerNode {
   const powerId = generateId();
   // exponent를 row로 감싸서 별도 ID 부여 (커서 이동용)
-  const expRow: RowNode = { id: `${powerId}_exp`, type: 'row', children: exponent };
+  const expRow: RowNode = { id: deriveId(powerId, '_exp'), type: 'row', children: exponent };
   return { id: powerId, type: 'power', base, exponent: [expRow] };
 }
 
 export function createParen(content: MathNode[], parenType: '(' | '[' | '{' = '('): ParenNode {
   const parenId = generateId();
-  const contentRow: RowNode = { id: `${parenId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(parenId, '_content'), type: 'row', children: content };
   return { id: parenId, type: 'paren', content: [contentRow], parenType };
 }
 
 export function createSubscript(base: MathNode[], subscript: MathNode[]): SubscriptNode {
   const subId = generateId();
   // subscript를 row로 감싸서 별도 ID 부여 (커서 이동용)
-  const subRow: RowNode = { id: `${subId}_sub`, type: 'row', children: subscript };
+  const subRow: RowNode = { id: deriveId(subId, '_sub'), type: 'row', children: subscript };
   return { id: subId, type: 'subscript', base, subscript: [subRow] };
 }
 
 export function createAbs(content: MathNode[]): AbsNode {
   const absId = generateId();
-  const contentRow: RowNode = { id: `${absId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(absId, '_content'), type: 'row', children: content };
   return { id: absId, type: 'abs', content: [contentRow] };
 }
 
@@ -141,9 +141,9 @@ export function createIntegral(
   differential: string = 'x'
 ): IntegralNode {
   const integralId = generateId();
-  const lowerRow: RowNode = { id: `${integralId}_lower`, type: 'row', children: lower };
-  const upperRow: RowNode = { id: `${integralId}_upper`, type: 'row', children: upper };
-  const integrandRow: RowNode = { id: `${integralId}_integrand`, type: 'row', children: integrand };
+  const lowerRow: RowNode = { id: deriveId(integralId, '_lower'), type: 'row', children: lower };
+  const upperRow: RowNode = { id: deriveId(integralId, '_upper'), type: 'row', children: upper };
+  const integrandRow: RowNode = { id: deriveId(integralId, '_integrand'), type: 'row', children: integrand };
   return {
     id: integralId,
     type: 'integral',
@@ -160,9 +160,9 @@ export function createSum(
   body: MathNode[] = []
 ): SumNode {
   const sumId = generateId();
-  const lowerRow: RowNode = { id: `${sumId}_lower`, type: 'row', children: lower };
-  const upperRow: RowNode = { id: `${sumId}_upper`, type: 'row', children: upper };
-  const bodyRow: RowNode = { id: `${sumId}_body`, type: 'row', children: body };
+  const lowerRow: RowNode = { id: deriveId(sumId, '_lower'), type: 'row', children: lower };
+  const upperRow: RowNode = { id: deriveId(sumId, '_upper'), type: 'row', children: upper };
+  const bodyRow: RowNode = { id: deriveId(sumId, '_body'), type: 'row', children: body };
   return {
     id: sumId,
     type: 'sum',
@@ -178,8 +178,8 @@ export function createLimit(
   body: MathNode[] = []
 ): LimitNode {
   const limitId = generateId();
-  const approachRow: RowNode = { id: `${limitId}_approach`, type: 'row', children: approach };
-  const bodyRow: RowNode = { id: `${limitId}_body`, type: 'row', children: body };
+  const approachRow: RowNode = { id: deriveId(limitId, '_approach'), type: 'row', children: approach };
+  const bodyRow: RowNode = { id: deriveId(limitId, '_body'), type: 'row', children: body };
   return {
     id: limitId,
     type: 'limit',
@@ -195,9 +195,9 @@ export function createProduct(
   body: MathNode[] = []
 ): ProductNode {
   const productId = generateId();
-  const lowerRow: RowNode = { id: `${productId}_lower`, type: 'row', children: lower };
-  const upperRow: RowNode = { id: `${productId}_upper`, type: 'row', children: upper };
-  const bodyRow: RowNode = { id: `${productId}_body`, type: 'row', children: body };
+  const lowerRow: RowNode = { id: deriveId(productId, '_lower'), type: 'row', children: lower };
+  const upperRow: RowNode = { id: deriveId(productId, '_upper'), type: 'row', children: upper };
+  const bodyRow: RowNode = { id: deriveId(productId, '_body'), type: 'row', children: body };
   return {
     id: productId,
     type: 'product',
@@ -209,7 +209,7 @@ export function createProduct(
 
 export function createOverline(content: MathNode[] = []): OverlineNode {
   const overlineId = generateId();
-  const contentRow: RowNode = { id: `${overlineId}_content`, type: 'row', children: content };
+  const contentRow: RowNode = { id: deriveId(overlineId, '_content'), type: 'row', children: content };
   return {
     id: overlineId,
     type: 'overline',
@@ -229,7 +229,7 @@ export function createMatrix(
     const row: MathNode[] = [];
     for (let j = 0; j < cols; j++) {
       const cellRow: RowNode = {
-        id: `${matrixId}_cell_${i}_${j}`,
+        id: deriveCellId(matrixId, i, j),
         type: 'row',
         children: []
       };
@@ -597,7 +597,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, fracNode);
 
     // 커서를 분모 row로 이동
-    const denRowId = `${fracNode.id}_den`;
+    const denRowId = deriveId(fracNode.id, '_den');
     this.state.cursor = { nodeId: denRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -646,7 +646,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, powerNode);
 
     // 커서를 지수 row로 이동
-    const expRowId = `${powerNode.id}_exp`;
+    const expRowId = deriveId(powerNode.id, '_exp');
     this.state.cursor = { nodeId: expRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -676,7 +676,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, subscriptNode);
 
     // 커서를 아래첨자 row로 이동
-    const subRowId = `${subscriptNode.id}_sub`;
+    const subRowId = deriveId(subscriptNode.id, '_sub');
     this.state.cursor = { nodeId: subRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -695,7 +695,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, absNode);
 
     // 커서를 절댓값 내부 row로 이동
-    const contentRowId = `${absNode.id}_content`;
+    const contentRowId = deriveId(absNode.id, '_content');
     this.state.cursor = { nodeId: contentRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -714,7 +714,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, integralNode);
 
     // 커서를 피적분함수 row로 이동
-    const integrandRowId = `${integralNode.id}_integrand`;
+    const integrandRowId = deriveId(integralNode.id, '_integrand');
     this.state.cursor = { nodeId: integrandRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -733,7 +733,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, sumNode);
 
     // 커서를 하한 row로 이동
-    const lowerRowId = `${sumNode.id}_lower`;
+    const lowerRowId = deriveId(sumNode.id, '_lower');
     this.state.cursor = { nodeId: lowerRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -752,7 +752,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, limitNode);
 
     // 커서를 접근값 row로 이동
-    const approachRowId = `${limitNode.id}_approach`;
+    const approachRowId = deriveId(limitNode.id, '_approach');
     this.state.cursor = { nodeId: approachRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -771,7 +771,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, productNode);
 
     // 커서를 하한 row로 이동
-    const lowerRowId = `${productNode.id}_lower`;
+    const lowerRowId = deriveId(productNode.id, '_lower');
     this.state.cursor = { nodeId: lowerRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -790,7 +790,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, overlineNode);
 
     // 커서를 내용 row로 이동
-    const contentRowId = `${overlineNode.id}_content`;
+    const contentRowId = deriveId(overlineNode.id, '_content');
     this.state.cursor = { nodeId: contentRowId, offset: 0 };
 
     this.onChange(this.state);
@@ -809,7 +809,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, matrixNode);
 
     // 커서를 첫 번째 셀로 이동
-    const firstCellId = `${matrixNode.id}_cell_0_0`;
+    const firstCellId = deriveCellId(matrixNode.id, 0, 0);
     this.state.cursor = { nodeId: firstCellId, offset: 0 };
 
     this.onChange(this.state);
@@ -844,7 +844,7 @@ export class MathEditor {
     children.splice(this.state.cursor.offset, 0, parenNode);
 
     // 커서를 괄호 내부 row로 이동
-    const contentRowId = `${parenNode.id}_content`;
+    const contentRowId = deriveId(parenNode.id, '_content');
     this.state.cursor = { nodeId: contentRowId, offset: 0 };
 
     this.onChange(this.state);
