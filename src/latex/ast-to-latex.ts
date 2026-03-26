@@ -120,6 +120,11 @@ export function astToLatex(node: MathNode): string {
       return `\\overline{${content}}`;
     }
 
+    case 'accent': {
+      const content = node.content.map(astToLatex).join('');
+      return `\\${node.accentType}{${content}}`;
+    }
+
     case 'matrix': {
       const bracketEnv = getBmatrixEnv(node.bracketType);
       const rowsLatex = node.rows.map(row =>
