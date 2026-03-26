@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useLang } from '../i18n/context';
-import { parseLatex, analyzeExpression, astToLatex } from 'fizzex';
+import { parseLatex, analyzeExpression, astToLatex, createStateFromLatex } from 'fizzex';
 import { MathCanvas } from 'fizzex/react';
 import type { ExpressionAnalysis, EditorState } from 'fizzex';
 
@@ -34,7 +34,6 @@ export default function Playground() {
 
   const handlePreset = useCallback((preset: string) => {
     try {
-      const { createStateFromLatex } = require('fizzex') as typeof import('fizzex');
       const state = createStateFromLatex(preset);
       setPresetState(state);
       setEditorState(state);
