@@ -5,7 +5,7 @@
  * 복합 휴리스틱 기반 점수 계산
  */
 
-import type { RootNode, MathNode, PowerNode, SubscriptNode } from '../types';
+import type { RootNode, MathNode, PowerNode, SubscriptNode, IntegralNode, SumNode, LimitNode, ProductNode } from '../types';
 import type { VariableClassification, VariableScore } from './types';
 import { findNodes } from './ast-walker';
 
@@ -426,9 +426,30 @@ function getNodeChildren(node: MathNode): MathNode[] {
     case 'paren':
     case 'abs':
     case 'overline':
+    case 'accent':
       return (node as { content: MathNode[] }).content;
     case 'func':
       return (node as { argument: MathNode[] }).argument;
+    case 'integral': {
+      const integral = node as IntegralNode;
+      return [...(integral.lower || []), ...(integral.upper || []), ...integral.integrand];
+    }
+    case 'sum':
+    case 'product': {
+      const sumProd = node as SumNode | ProductNode;
+      return [...sumProd.lower, ...sumProd.upper, ...sumProd.body];
+    }
+    case 'limit': {
+      const limit = node as LimitNode;
+      return [...limit.approach, ...limit.body];
+    }
+    case 'matrix':
+    case 'align':
+    case 'cases':
+    case 'array':
+      return (node as { rows: MathNode[][] }).rows.flat();
+    case 'gather':
+      return (node as { rows: MathNode[] }).rows;
     default:
       return [];
   }

@@ -25,7 +25,12 @@ import type {
   LimitNode,
   ProductNode,
   OverlineNode,
+  AccentNode,
   MatrixNode,
+  AlignNode,
+  CasesNode,
+  GatherNode,
+  ArrayNode,
   TextNode,
 } from './types';
 import { parseLatex } from './latex/latex-parser';
@@ -33,7 +38,9 @@ import { generateEditorId, deriveId, deriveCellId } from './utils/id-generator';
 
 /** MathNode에서 문자열 키로 자식 배열을 안전하게 접근하는 헬퍼 */
 function getNodeChildArray(node: MathNode, key: string): MathNode[] {
-  return (node as unknown as Record<string, MathNode[]>)[key] ?? [];
+  const descriptor = Object.getOwnPropertyDescriptor(node, key);
+  if (!descriptor) return [];
+  return Array.isArray(descriptor.value) ? descriptor.value : [];
 }
 
 /** generateId를 generateEditorId로 매핑 (하위 호환성) */
@@ -287,6 +294,7 @@ function getChildKeys(node: MathNode): string[] {
     case 'paren':
     case 'abs':
     case 'overline':
+    case 'accent':
       return ['content'];
     case 'func':
       return ['argument'];
@@ -298,8 +306,17 @@ function getChildKeys(node: MathNode): string[] {
     case 'limit':
       return ['approach', 'body'];
     case 'matrix':
+    case 'align':
+    case 'cases':
+    case 'array':
       return ['rows'];
-    default:
+    case 'gather':
+      return ['rows'];
+    case 'number':
+    case 'variable':
+    case 'operator':
+    case 'text':
+    case 'space':
       return [];
   }
 }

@@ -586,10 +586,10 @@ function findNodeById(node: MathNode, id: string): MathNode | null {
 
   for (const key of childArrays) {
     if (key in node) {
-      const arr = (node as unknown as Record<string, unknown>)[key];
-      if (Array.isArray(arr)) {
-        for (const child of arr) {
-          const found = findNodeById(child as MathNode, id);
+      const descriptor = Object.getOwnPropertyDescriptor(node, key);
+      if (descriptor && Array.isArray(descriptor.value)) {
+        for (const child of descriptor.value as MathNode[]) {
+          const found = findNodeById(child, id);
           if (found) return found;
         }
       }

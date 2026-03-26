@@ -19,7 +19,12 @@ import type {
   LimitNode,
   ProductNode,
   OverlineNode,
+  AccentNode,
   MatrixNode,
+  AlignNode,
+  CasesNode,
+  GatherNode,
+  ArrayNode,
   RowNode,
   OperatorNode,
 } from '../types';
@@ -185,9 +190,45 @@ function walkNode(
       break;
     }
 
+    case 'accent': {
+      const accent = node as AccentNode;
+      walkChildren(accent.content, result, depth + 1);
+      break;
+    }
+
     case 'matrix': {
       const matrix = node as MatrixNode;
       for (const row of matrix.rows) {
+        walkChildren(row, result, depth + 1);
+      }
+      break;
+    }
+
+    case 'align': {
+      const align = node as AlignNode;
+      for (const row of align.rows) {
+        walkChildren(row, result, depth + 1);
+      }
+      break;
+    }
+
+    case 'cases': {
+      const cases = node as CasesNode;
+      for (const row of cases.rows) {
+        walkChildren(row, result, depth + 1);
+      }
+      break;
+    }
+
+    case 'gather': {
+      const gather = node as GatherNode;
+      walkChildren(gather.rows, result, depth + 1);
+      break;
+    }
+
+    case 'array': {
+      const arr = node as ArrayNode;
+      for (const row of arr.rows) {
         walkChildren(row, result, depth + 1);
       }
       break;
@@ -296,9 +337,30 @@ export function findNodes<T extends MathNode>(
       case 'overline':
         (node as OverlineNode).content.forEach(search);
         break;
+      case 'accent':
+        (node as AccentNode).content.forEach(search);
+        break;
       case 'matrix': {
         const matrix = node as MatrixNode;
         matrix.rows.forEach((row) => row.forEach(search));
+        break;
+      }
+      case 'align': {
+        const align = node as AlignNode;
+        align.rows.forEach((row) => row.forEach(search));
+        break;
+      }
+      case 'cases': {
+        const cases = node as CasesNode;
+        cases.rows.forEach((row) => row.forEach(search));
+        break;
+      }
+      case 'gather':
+        (node as GatherNode).rows.forEach(search);
+        break;
+      case 'array': {
+        const arr = node as ArrayNode;
+        arr.rows.forEach((row) => row.forEach(search));
         break;
       }
     }

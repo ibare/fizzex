@@ -227,7 +227,12 @@ function hasChildren(node: MathNode): boolean {
     'limit',
     'product',
     'overline',
+    'accent',
     'matrix',
+    'align',
+    'cases',
+    'gather',
+    'array',
   ].includes(node.type);
 }
 
@@ -261,6 +266,7 @@ function getChildren(node: MathNode): MathNode[] {
     case 'paren':
     case 'abs':
     case 'overline':
+    case 'accent':
       return (node as { content: MathNode[] }).content;
     case 'func':
       return (node as { argument: MathNode[] }).argument;
@@ -289,10 +295,15 @@ function getChildren(node: MathNode): MathNode[] {
       const limit = node as { approach: MathNode[]; body: MathNode[] };
       return [...limit.approach, ...limit.body];
     }
-    case 'matrix': {
-      const matrix = node as { rows: MathNode[][] };
-      return matrix.rows.flat();
+    case 'matrix':
+    case 'align':
+    case 'cases':
+    case 'array': {
+      const env = node as { rows: MathNode[][] };
+      return env.rows.flat();
     }
+    case 'gather':
+      return (node as { rows: MathNode[] }).rows;
     default:
       return [];
   }
