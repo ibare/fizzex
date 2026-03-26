@@ -1,0 +1,96 @@
+{
+  "name": "fizzex",
+  "version": "0.1.0",
+  "description": "Fizzex - Canvas-based mathematical expression editor. Light and easy formula input.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && vite build -c vite.lib.config.ts",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build:browser": "vite build -c vite.lib.config.ts",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "demo": "vite",
+    "demo:build": "vite build",
+    "demo:preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist demo-dist node_modules"
+  },
+  "keywords": [
+    "math",
+    "formula",
+    "editor",
+    "canvas",
+    "latex",
+    "equation",
+    "typesetting",
+    "mathematics"
+  ],
+  "author": "ibare",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibare/fizzex.git"
+  },
+  "homepage": "https://ibare.github.io/fizzex",
+  "bugs": {
+    "url": "https://github.com/ibare/fizzex/issues"
+  },
+  "sideEffects": false,
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
+  "peerDependencies": {
+    "konva": ">=10.0.0",
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "konva": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "nerdamer": "^1.1.13"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.7",
+    "@types/node": "^20.10.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^4.0.17",
+    "katex": "^0.16.27",
+    "konva": "^10.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-konva": "^19.0.3",
+    "typescript": "^5.3.3",
+    "vite": "^6.0.7",
+    "vitest": "^4.0.17"
+  }
+}

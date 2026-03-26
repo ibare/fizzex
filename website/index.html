@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Fizzex — Canvas-based mathematical expression editor</title>
+    <meta name="description" content="Fizzex - A lightweight, TeX-quality formula editor for the web. Parse LaTeX, render on Canvas, analyze expressions, and visualize." />
+    <meta name="keywords" content="Fizzex, math, formula, editor, canvas, latex, equation, typesetting, React, TypeScript, open source" />
+    <meta name="author" content="ibare" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#6c5ce7" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ibare.github.io/fizzex/" />
+    <meta property="og:title" content="Fizzex — Canvas-based mathematical expression editor" />
+    <meta property="og:description" content="A lightweight, TeX-quality formula editor for the web. Parse LaTeX, render on Canvas, analyze expressions, and visualize." />
+    <meta property="og:site_name" content="Fizzex" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fizzex — Canvas-based mathematical expression editor" />
+    <meta name="twitter:description" content="A lightweight, TeX-quality formula editor for the web. Parse LaTeX, render on Canvas, analyze expressions, and visualize." />
+
+    <link rel="canonical" href="https://ibare.github.io/fizzex/" />
+
+    <script>
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      }(window.location));
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

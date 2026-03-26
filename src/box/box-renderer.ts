@@ -1,0 +1,324 @@
+/**
+ * Box 렌더러
+ *
+ * Box 트리를 Canvas에 렌더링
+ * RenderBackend 추상화를 통해 테스트 가능성 향상
+ */
+
+import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox } from './types';
+import type { CanvasFontMetrics } from './font-metrics';
+import type { CursorPosition } from '../types';
+import { findBoxBySourceId, getCursorXPosition } from './box-layout';
+import { isComplexNodeSlot } from './constants';
+import type { RenderBackend } from './render-backend';
+import { CanvasRenderBackend } from './render-backend';
+
+export class BoxRenderer {
+  private backend: RenderBackend;
+  private config: BoxRenderConfig;
+  private metrics: CanvasFontMetrics;
+
+  /**
+   * BoxRenderer 생성
+   * @param ctxOrBackend Canvas 컨텍스트 또는 RenderBackend 인스턴스
+   * @param config 렌더링 설정
+   * @param metrics 폰트 메트릭스
+   */
+  constructor(
+    ctxOrBackend: CanvasRenderingContext2D | RenderBackend,
+    config: BoxRenderConfig,
+    metrics: CanvasFontMetrics
+  ) {
+    // Canvas 컨텍스트가 전달되면 CanvasRenderBackend로 래핑 (하위 호환성)
+    if ('canvas' in ctxOrBackend) {
+      this.backend = new CanvasRenderBackend(ctxOrBackend);
+    } else {
+      this.backend = ctxOrBackend;
+    }
+    this.config = config;
+    this.metrics = metrics;
+  }
+
+  /** 설정 업데이트 */
+  updateConfig(config: BoxRenderConfig): void {
+    this.config = config;
+  }
+
+  /** Box 트리 렌더링 */
+  render(box: Box): void {
+    switch (box.type) {
+      case 'glyph':
+        this.renderGlyph(box);
+        break;
+      case 'hbox':
+        this.renderHBox(box);
+        break;
+      case 'vbox':
+        this.renderVBox(box);
+        break;
+      case 'rule':
+        this.renderRule(box);
+        break;
+      case 'surd':
+        this.renderSurd(box);
+        break;
+      case 'kern':
+        // Kern은 보이지 않음
+        break;
+    }
+  }
+
+  /** 구분자(괄호 등) 문자인지 확인 */
+  private static readonly DELIMITER_CHARS = new Set([
+    '(', ')', '[', ']', '{', '}', '|',
+    // Unicode 확장 괄호 문자들
+    '\u239B', '\u239C', '\u239D', '\u239E', '\u239F', '\u23A0', // 소괄호
+    '\u23A1', '\u23A2', '\u23A3', '\u23A4', '\u23A5', '\u23A6', // 대괄호
+    '\u23A7', '\u23A8', '\u23A9', '\u23AA', '\u23AB', '\u23AC', '\u23AD', // 중괄호
+    '\u23D0', '\u2223', // 수직선
+  ]);
+
+  /** 적분 기호 (기울임 적용 대상) */
+  private static readonly INTEGRAL_CHARS = new Set(['∫', '∬', '∭', '∮']);
+
+  /** Glyph 렌더링 */
+  private renderGlyph(glyph: GlyphBox): void {
+    this.backend.setFont(this.metrics.getFont(glyph.fontSize, glyph.italic));
+    this.backend.setFillStyle(this.config.color);
+    this.backend.setTextBaseline('alphabetic');
+
+    // 구분자(괄호 등)는 폰트 스케일만 사용, 수직 스트레칭 비적용
+    // 폰트 스케일이 box-builder.ts에서 이미 적절히 계산되어 있음
+
+    // 적분 기호는 기울임 변환 적용
+    if (BoxRenderer.INTEGRAL_CHARS.has(glyph.char)) {
+      this.backend.save();
+      // skewX 변환으로 약 12도 기울임 (tan(12°) ≈ 0.21)
+      this.backend.transform(1, 0, -0.21, 1, 0, 0);
+      this.backend.fillText(glyph.char, glyph.x, glyph.y);
+      this.backend.restore();
+    } else {
+      // 일반 글리프: y는 baseline 위치
+      this.backend.fillText(glyph.char, glyph.x, glyph.y);
+    }
+  }
+
+  /** HBox 렌더링 */
+  private renderHBox(hbox: HBox): void {
+    // 빈 복합 노드 영역이면 placeholder 표시 (편집 모드에서만)
+    if (this.config.showPlaceholders && this.isEmptyComplexNodeSlot(hbox)) {
+      this.renderPlaceholder(hbox);
+    }
+
+    for (const child of hbox.children) {
+      this.render(child);
+    }
+  }
+
+  /** 빈 복합 노드 영역인지 확인 */
+  private isEmptyComplexNodeSlot(hbox: HBox): boolean {
+    if (hbox.children.length > 0) return false;
+    return isComplexNodeSlot(hbox.sourceId);
+  }
+
+  /** Placeholder 렌더링 */
+  private renderPlaceholder(hbox: HBox): void {
+    const config = this.config.placeholder ?? {
+      backgroundColor: 'rgba(59, 130, 246, 0.08)',
+      borderColor: 'rgba(59, 130, 246, 0.25)',
+      borderWidth: 1,
+      borderRadius: 2,
+    };
+
+    const defaultHeight = this.config.baseFontSize * 0.75;
+    const defaultDepth = this.config.baseFontSize * 0.25;
+    const minWidth = this.config.baseFontSize * 0.5;
+
+    const x = hbox.x;
+    const y = hbox.y - defaultHeight;
+    const width = Math.max(hbox.width, minWidth);
+    const height = defaultHeight + defaultDepth;
+    const r = config.borderRadius;
+
+    // 투명도 적용 (애니메이션용)
+    const prevAlpha = this.backend.getGlobalAlpha();
+    if (config.opacity !== undefined) {
+      this.backend.setGlobalAlpha(config.opacity);
+    }
+
+    // 둥근 사각형 경로
+    this.backend.beginPath();
+    this.backend.moveTo(x + r, y);
+    this.backend.lineTo(x + width - r, y);
+    this.backend.quadraticCurveTo(x + width, y, x + width, y + r);
+    this.backend.lineTo(x + width, y + height - r);
+    this.backend.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+    this.backend.lineTo(x + r, y + height);
+    this.backend.quadraticCurveTo(x, y + height, x, y + height - r);
+    this.backend.lineTo(x, y + r);
+    this.backend.quadraticCurveTo(x, y, x + r, y);
+    this.backend.closePath();
+
+    // 배경
+    this.backend.setFillStyle(config.backgroundColor);
+    this.backend.fill();
+
+    // 테두리
+    this.backend.setStrokeStyle(config.borderColor);
+    this.backend.setLineWidth(config.borderWidth);
+    this.backend.stroke();
+
+    // 투명도 복원
+    this.backend.setGlobalAlpha(prevAlpha);
+  }
+
+  /** VBox 렌더링 */
+  private renderVBox(vbox: VBox): void {
+    for (const child of vbox.children) {
+      this.render(child);
+    }
+  }
+
+  /** Rule (선) 렌더링 */
+  private renderRule(rule: RuleBox): void {
+    this.backend.setFillStyle(this.config.color);
+    // y는 baseline, rule은 baseline 중심으로 그림
+    const top = rule.y - rule.height;
+    this.backend.fillRect(rule.x, top, rule.width, rule.thickness);
+  }
+
+  /** Surd (제곱근) 렌더링 - √ 기호와 vinculum을 Path로 직접 그림 */
+  private renderSurd(surd: SurdBox): void {
+    this.backend.setFillStyle(this.config.color);
+    this.backend.setStrokeStyle(this.config.color);
+    this.backend.setLineWidth(surd.ruleThickness);
+    this.backend.setLineCap('square');
+    this.backend.setLineJoin('miter');
+
+    // content 영역 좌표
+    const contentTop = surd.y - surd.height + surd.ruleThickness;
+    const contentRight = surd.content.x + surd.content.width;
+
+    // √ 기호 폭
+    const sqrtWidth = surd.width - surd.content.width - surd.gap;
+
+    // √ 전체 높이 (baseline 위 + 아래)
+    const totalHeight = surd.height + surd.depth;
+
+    // √ 기호 각 부분의 좌표 (KaTeX 스타일)
+    // 1. 왼쪽 세리프 시작점 (거의 수평으로 시작)
+    const serifStartX = surd.x;
+    const serifStartY = surd.y - totalHeight * 0.4;
+
+    // 2. 세리프 끝점 (수평 또는 약간 위로)
+    const serifEndX = surd.x + sqrtWidth * 0.18;
+    const serifEndY = surd.y - totalHeight * 0.42;
+
+    // 3. V자 바닥점 (세리프에서 급격히 내려감)
+    const checkBottomX = surd.x + sqrtWidth * 0.45;
+    const checkBottomY = surd.y + surd.depth * 0.8;
+
+    // 4. √ 기호 상단 (vinculum과 연결점)
+    const sqrtTopX = surd.x + sqrtWidth;
+    const sqrtTopY = contentTop;
+
+    // √ 기호 그리기 (한 번에 연결)
+    this.backend.beginPath();
+    // 세리프 (수평에 가까움)
+    this.backend.moveTo(serifStartX, serifStartY);
+    this.backend.lineTo(serifEndX, serifEndY);
+    // V자 하강
+    this.backend.lineTo(checkBottomX, checkBottomY);
+    // 상승 및 vinculum 연결
+    this.backend.lineTo(sqrtTopX, sqrtTopY);
+    this.backend.lineTo(contentRight + surd.gap * 0.5, sqrtTopY);
+    this.backend.stroke();
+
+    // content 렌더링
+    this.render(surd.content);
+  }
+
+  /** 커서 위치 계산 */
+  getCursorPosition(rootBox: Box, cursor: CursorPosition): { x: number; y: number; height: number } | null {
+    // 커서가 위치한 Box 찾기
+    const targetBox = findBoxBySourceId(rootBox, cursor.nodeId);
+    if (!targetBox) return null;
+
+    let cursorX: number;
+    let cursorTop: number;
+    let cursorBottom: number;
+
+    // 기본 커서 높이 (빈 Box용)
+    const defaultHeight = this.config.baseFontSize * 0.75;
+    const defaultDepth = this.config.baseFontSize * 0.25;
+
+    if (targetBox.type === 'hbox') {
+      // HBox 내에서 offset 위치의 x 좌표
+      cursorX = getCursorXPosition(targetBox, cursor.offset);
+      // 빈 HBox인 경우 기본 높이 사용
+      const height = targetBox.height > 0 ? targetBox.height : defaultHeight;
+      const depth = targetBox.depth > 0 ? targetBox.depth : defaultDepth;
+      cursorTop = targetBox.y - height;
+      cursorBottom = targetBox.y + depth;
+    } else {
+      // 다른 타입은 Box 끝에 커서
+      cursorX = targetBox.x + targetBox.width;
+      cursorTop = targetBox.y - targetBox.height;
+      cursorBottom = targetBox.y + targetBox.depth;
+    }
+
+    return {
+      x: cursorX,
+      y: cursorBottom,
+      height: cursorBottom - cursorTop,
+    };
+  }
+
+  /** 커서 렌더링 */
+  renderCursor(rootBox: Box, cursor: CursorPosition): void {
+    const pos = this.getCursorPosition(rootBox, cursor);
+    if (!pos) return;
+
+    const cursorTop = pos.y - pos.height;
+    const cursorBottom = pos.y;
+
+    // 커서 그리기
+    this.backend.beginPath();
+    this.backend.setStrokeStyle(this.config.cursorColor);
+    this.backend.setLineWidth(2);
+    this.backend.moveTo(pos.x, cursorTop);
+    this.backend.lineTo(pos.x, cursorBottom);
+    this.backend.stroke();
+  }
+
+  /** 디버그: Box 경계 표시 */
+  renderDebugBounds(box: Box, depth: number = 0): void {
+    const colors = ['red', 'green', 'blue', 'orange', 'purple'];
+    const color = colors[depth % colors.length];
+
+    const top = box.y - box.height;
+    const height = box.height + box.depth;
+
+    this.backend.setStrokeStyle(color);
+    this.backend.setLineWidth(1);
+    this.backend.setLineDash([2, 2]);
+    this.backend.strokeRect(box.x, top, box.width, height);
+    this.backend.setLineDash([]);
+
+    // baseline 표시
+    this.backend.setStrokeStyle('rgba(0, 0, 0, 0.3)');
+    this.backend.beginPath();
+    this.backend.moveTo(box.x, box.y);
+    this.backend.lineTo(box.x + box.width, box.y);
+    this.backend.stroke();
+
+    // 자식들
+    if (box.type === 'hbox' || box.type === 'vbox') {
+      for (const child of box.children) {
+        this.renderDebugBounds(child, depth + 1);
+      }
+    } else if (box.type === 'surd') {
+      this.renderDebugBounds(box.content, depth + 1);
+    }
+  }
+}
