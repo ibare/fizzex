@@ -759,12 +759,14 @@ export class MathEditor {
     const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
     if (!node) return;
 
-    // 부모가 paren인지 확인하고 밖으로 이동
     const parentInfo = findParent(this.state.ast, node.id);
     if (parentInfo && parentInfo.parent.type === 'paren') {
       const grandParentInfo = findParent(this.state.ast, parentInfo.parent.id);
       if (grandParentInfo) {
-        this.state.cursor = { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 };
+        this.state = buildNewState(
+          this.state.ast,
+          { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 },
+        );
         this.onChange(this.state);
       }
     }
@@ -782,10 +784,12 @@ export class MathEditor {
     const offset = this.state.cursor.offset;
 
     if (offset > 0) {
-      // 커서 앞 노드 삭제
-      children.splice(offset - 1, 1);
-      this.state.cursor.offset--;
-
+      // 커서 앞 노드 삭제 (불변)
+      const newChildren = spliceChildren(children, offset - 1, 1);
+      const newAst = rebuildAstWithNewChildren(
+        this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+      );
+      this.state = buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset - 1 });
       this.onChange(this.state);
     } else {
       // offset이 0일 때: 부모로 이동하거나 복합 노드 삭제
@@ -794,19 +798,21 @@ export class MathEditor {
 
       const parent = parentInfo.parent;
 
-      // 부모가 복합 노드이고 현재가 그 내부 row라면
       const complexTypes = ['frac', 'power', 'paren', 'subscript', 'abs', 'integral', 'sum', 'limit', 'product', 'overline', 'matrix'];
       if (complexTypes.includes(parent.type)) {
-        // 복합 노드 전체를 삭제
+        // 복합 노드 전체를 삭제 (불변)
         const grandParentInfo = findParent(this.state.ast, parent.id);
         if (grandParentInfo) {
           const grandChildren = getNodeChildArray(grandParentInfo.parent, grandParentInfo.childKey);
-          grandChildren.splice(grandParentInfo.index, 1);
-          this.state.cursor = { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index };
+          const newGrandChildren = spliceChildren(grandChildren, grandParentInfo.index, 1);
+          const newAst = rebuildAstWithNewChildren(
+            this.state.ast, grandParentInfo.parent.id, grandParentInfo.childKey, newGrandChildren,
+          );
+          this.state = buildNewState(newAst, { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index });
         }
       } else {
-        // 일반적인 경우: 부모로 이동
-        this.state.cursor = { nodeId: parent.id, offset: parentInfo.index };
+        // 일반적인 경우: 부모로 이동 (AST 불변, 커서만 변경)
+        this.state = buildNewState(this.state.ast, { nodeId: parent.id, offset: parentInfo.index });
       }
 
       this.onChange(this.state);
@@ -820,10 +826,9 @@ export class MathEditor {
 
     const childKey = getChildKeys(node)[0];
     if (!childKey) {
-      // 부모로 이동
       const parentInfo = findParent(this.state.ast, this.state.cursor.nodeId);
       if (parentInfo) {
-        this.state.cursor = { nodeId: parentInfo.parent.id, offset: parentInfo.index };
+        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index });
         this.onChange(this.state);
       }
       return;
@@ -832,24 +837,19 @@ export class MathEditor {
     const children = getNodeChildArray(node, childKey);
 
     if (this.state.cursor.offset > 0) {
-      // 왼쪽 노드 확인
       const leftNode = children[this.state.cursor.offset - 1];
       const enterableChild = this.getEnterableChild(leftNode, 'end');
 
       if (enterableChild) {
-        // 복합 노드 안으로 들어가기 (끝으로)
-        this.state.cursor = { nodeId: enterableChild.id, offset: enterableChild.length };
-        this.onChange(this.state);
+        this.state = buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: enterableChild.length });
       } else {
-        // 단순 노드는 건너뛰기
-        this.state.cursor.offset--;
-        this.onChange(this.state);
+        this.state = buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset - 1 });
       }
+      this.onChange(this.state);
     } else {
-      // 부모로 이동
       const parentInfo = findParent(this.state.ast, this.state.cursor.nodeId);
       if (parentInfo) {
-        this.state.cursor = { nodeId: parentInfo.parent.id, offset: parentInfo.index };
+        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index });
         this.onChange(this.state);
       }
     }
@@ -862,10 +862,9 @@ export class MathEditor {
 
     const childKey = getChildKeys(node)[0];
     if (!childKey) {
-      // 부모로 이동
       const parentInfo = findParent(this.state.ast, node.id);
       if (parentInfo) {
-        this.state.cursor = { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 };
+        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 });
         this.onChange(this.state);
       }
       return;
@@ -874,24 +873,19 @@ export class MathEditor {
     const children = getNodeChildArray(node, childKey);
 
     if (this.state.cursor.offset < children.length) {
-      // 오른쪽 노드 확인
       const rightNode = children[this.state.cursor.offset];
       const enterableChild = this.getEnterableChild(rightNode, 'start');
 
       if (enterableChild) {
-        // 복합 노드 안으로 들어가기 (처음으로)
-        this.state.cursor = { nodeId: enterableChild.id, offset: 0 };
-        this.onChange(this.state);
+        this.state = buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: 0 });
       } else {
-        // 단순 노드는 건너뛰기
-        this.state.cursor.offset++;
-        this.onChange(this.state);
+        this.state = buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset + 1 });
       }
+      this.onChange(this.state);
     } else {
-      // 부모로 이동
       const parentInfo = findParent(this.state.ast, node.id);
       if (parentInfo) {
-        this.state.cursor = { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 };
+        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 });
         this.onChange(this.state);
       }
     }
