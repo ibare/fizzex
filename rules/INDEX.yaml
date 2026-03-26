@@ -1,0 +1,61 @@
+# rules/INDEX.yaml
+# Rule Registry — 트리거 조건에 따라 로드할 규칙 결정
+#
+# Trigger types:
+#   paths:    파일 경로 glob 패턴
+#   patterns: 코드에서 발견되는 문자열/정규식
+#   imports:  import/include/require 문에 포함된 모듈명
+#   events:   작업 유형 (create-file, rename-file 등)
+
+# ─────────────────────────────────────
+# Always loaded
+# ─────────────────────────────────────
+always:
+  - file: principles.md
+    description: 모든 코드에 적용되는 핵심 원칙 (AST 중심, 파이프라인 독립, 프레임워크 격리, 불변 상태, 타입 안전, 최소 영향)
+
+# ─────────────────────────────────────
+# Concerns (Cross-cutting)
+# ─────────────────────────────────────
+concerns:
+  - id: C1
+    file: concerns/C1-node-creation.md
+    description: AST 노드 생성 규칙 (ID 생성, RowNode 래핑, astToBox/astToLatex 분기)
+    triggers:
+      paths: ["src/types.ts", "src/editor.ts", "src/latex/**"]
+      patterns: ["createNode", "generateEditorId", "generateLatexId", "MathNode"]
+
+  - id: C2
+    file: concerns/C2-command-registry.md
+    description: LaTeX 명령어 등록 규칙 (CommandHandler, 레지스트리 패턴)
+    triggers:
+      paths: ["src/latex/**"]
+      patterns: ["CommandHandler", "commandRegistry", "getCommandHandler"]
+
+  - id: C3
+    file: concerns/C3-framework-isolation.md
+    description: 프레임워크 격리 (core 모듈에 React/Konva 금지)
+    triggers:
+      paths: ["src/box/**", "src/latex/**", "src/analyzer/**", "src/cas/**", "src/utils/**", "src/headless/**", "src/integrations/**"]
+      imports: ["react", "react-dom", "konva", "react-konva"]
+
+  - id: C4
+    file: concerns/C4-box-model.md
+    description: Box 모델 규칙 (baseline 좌표계, HiDPI, context 재생성)
+    triggers:
+      paths: ["src/box/**", "src/headless/**", "src/export/**"]
+      patterns: ["BoxRenderer", "CanvasFontMetrics", "layoutBox", "astToBox"]
+
+  - id: C5
+    file: concerns/C5-headless-contract.md
+    description: Headless adapter 계약 (API 하위 호환, destroy 정리, silent fail)
+    triggers:
+      paths: ["src/headless/**", "src/integrations/**"]
+      patterns: ["FizzexRenderer", "FizzexEditor", "FizzexConfig"]
+
+  - id: C6
+    file: concerns/C6-subpath-exports.md
+    description: Subpath export 규칙 (격리, optional peer, 하위 호환)
+    triggers:
+      paths: ["package.json"]
+      patterns: ["exports", "peerDependencies", "peerDependenciesMeta"]
