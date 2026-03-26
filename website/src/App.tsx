@@ -10,6 +10,7 @@ import Home from './pages/Home';
 const Playground = lazy(() => import('./pages/Playground'));
 const PipelineExplorer = lazy(() => import('./pages/PipelineExplorer'));
 const Examples = lazy(() => import('./pages/Examples'));
+const Plugins = lazy(() => import('./pages/Plugins'));
 const Comparison = lazy(() => import('./pages/Comparison'));
 
 function LangRoot() {
@@ -30,6 +31,7 @@ function LangShell() {
               <Route index element={<Home />} />
               <Route path="playground" element={<Playground />} />
               <Route path="pipeline" element={<PipelineExplorer />} />
+              <Route path="plugins" element={<Plugins />} />
               <Route path="examples" element={<Examples />} />
               <Route path="examples/:category" element={<Examples />} />
               <Route path="comparison" element={<Comparison />} />

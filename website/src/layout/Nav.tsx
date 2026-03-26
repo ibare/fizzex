@@ -10,6 +10,7 @@ export default function Nav() {
   const navItems = [
     { to: 'playground', label: t.playground.title },
     { to: 'pipeline', label: t.pipelineExplorer.title },
+    { to: 'plugins', label: t.pluginsPage.title },
     { to: 'examples', label: t.examples.title },
     { to: 'comparison', label: t.comparisonPage.title },
   ];

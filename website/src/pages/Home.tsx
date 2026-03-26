@@ -4,6 +4,7 @@ import PipelineSection from './home/PipelineSection';
 import FeaturesSection from './home/FeaturesSection';
 import ComparisonSection from './home/ComparisonSection';
 import QuickStartSection from './home/QuickStartSection';
+import PluginSection from './home/PluginSection';
 import FooterCTASection from './home/FooterCTASection';
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <FeaturesSection />
       <ComparisonSection />
       <QuickStartSection />
+      <PluginSection />
       <FooterCTASection />
     </>
   );

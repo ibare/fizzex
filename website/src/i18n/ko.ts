@@ -183,4 +183,76 @@ export const ko: Dictionary = {
       sets: '집합론 & 논리',
     },
   },
+  pluginSection: {
+    title: '어떤 에디터에든 연결하세요',
+    sub: 'Headless adapter 레이어로 최소한의 코드만으로 Fizzex를 어떤 호스트 에디터에든 통합할 수 있습니다.',
+    layer_core: {
+      title: '코어',
+      desc: '파서, 렌더러, 분석, CAS — 완전한 수식 엔진',
+    },
+    layer_headless: {
+      title: 'Headless Adapter',
+      desc: 'FizzexRenderer & FizzexEditor — 어떤 DOM 요소에든 마운트',
+    },
+    layer_plugins: {
+      title: '호스트 플러그인',
+      desc: 'Tiptap, Slate, ProseMirror — headless 위의 얇은 래퍼',
+    },
+    cta: '플러그인 자세히 보기',
+  },
+  pluginsPage: {
+    title: '플러그인',
+    sub: 'Headless adapter 레이어로 Fizzex를 어떤 에디터에든 통합하세요.',
+    arch: {
+      title: '아키텍처',
+      sub: '세 개의 레이어, 명확한 관심사 분리.',
+      core_title: 'fizzex (코어)',
+      core_desc: 'LaTeX 파서, TeX 박스 모델 렌더러, 수식 분석기, CAS 엔진, 시각화 컴포넌트. 프레임워크 무관, DOM 의존성 없음.',
+      headless_title: 'fizzex/headless',
+      headless_desc: 'FizzexRenderer(읽기 전용)와 FizzexEditor(편집 가능). DOM 요소를 넘기면 Canvas 설정, HiDPI 스케일링, 폰트 로딩, 렌더링 파이프라인을 모두 처리합니다.',
+      plugins_title: 'fizzex/tiptap, fizzex/slate, ...',
+      plugins_desc: 'Headless adapter를 특정 호스트 에디터에 연결하는 얇은 래퍼. 각 플러그인은 보통 20~30줄의 코드입니다.',
+      philosophy: 'Headless 레이어가 무거운 작업을 처리하므로 플러그인 개발자는 호스트 전용 연결 코드만 작성하면 됩니다.',
+    },
+    api: {
+      title: 'Headless API',
+      sub: '두 개의 클래스로 모든 통합 요구를 충족합니다.',
+      renderer_title: 'FizzexRenderer',
+      renderer_desc: '읽기 전용 수식 렌더링. 컨테이너 요소와 LaTeX 문자열을 전달하면 됩니다.',
+      editor_title: 'FizzexEditor',
+      editor_desc: '키보드 입력, 커서, IME 지원, 자동완성이 내장된 인터랙티브 수식 에디터.',
+      config_title: 'FizzexConfig',
+    },
+    guide: {
+      title: '나만의 플러그인 만들기',
+      sub: '세 단계로 Fizzex를 어떤 에디터에든 통합할 수 있습니다.',
+      step1_title: '1. 컨테이너 얻기',
+      step1_desc: '호스트 에디터가 커스텀 노드 렌더링을 위한 DOM 요소를 제공합니다 (NodeView, Element 등).',
+      step2_title: '2. 렌더러 생성',
+      step2_desc: 'FizzexRenderer 또는 FizzexEditor를 컨테이너와 설정으로 인스턴스화합니다.',
+      step3_title: '3. 라이프사이클 관리',
+      step3_desc: '데이터가 변경되면 render(), 노드가 제거되면 destroy()를 호출합니다.',
+      tiptap_example: 'Tiptap 플러그인 — 전체 구현',
+      outro: '이 패턴은 Slate, ProseMirror, Quill, CodeMirror 등 커스텀 노드 렌더링을 지원하는 모든 에디터에서 동일하게 작동합니다.',
+    },
+    demo: {
+      title: 'Tiptap 라이브 데모',
+      sub: 'Fizzex가 구동하는 MathInline과 MathBlock 확장이 포함된 실제 Tiptap 에디터입니다.',
+      instructions: '실제 Tiptap 에디터입니다. 텍스트를 자유롭게 편집할 수 있습니다. 블록 수식을 더블클릭하면 편집할 수 있습니다.',
+      content: `
+        <h2>오일러 항등식 — 가장 아름다운 방정식</h2>
+        <p>1748년, 레온하르트 오일러는 수학에서 가장 근본적인 다섯 개의 상수 사이의 깊은 연결을 발견했습니다. 그 결과물이 바로 <strong>오일러 항등식</strong>입니다:</p>
+        <div data-math-block data-latex="e^{i\\pi} + 1 = 0">e^{i\\pi} + 1 = 0</div>
+        <p>이 하나의 방정식은 덧셈의 항등원 <span data-math-inline data-latex="0">0</span>, 곱셈의 항등원 <span data-math-inline data-latex="1">1</span>, 자연로그의 밑 <span data-math-inline data-latex="e">e</span>, 허수 단위 <span data-math-inline data-latex="i">i</span>, 그리고 원주율 <span data-math-inline data-latex="\\pi">\\pi</span>를 하나로 연결합니다.</p>
+        <h3>어디서 왔을까?</h3>
+        <p>오일러 항등식은 복소 지수함수와 삼각함수를 연결하는 <strong>오일러 공식</strong>의 특수한 경우입니다:</p>
+        <div data-math-block data-latex="e^{i\\theta} = \\cos\\theta + i\\sin\\theta">e^{i\\theta} = \\cos\\theta + i\\sin\\theta</div>
+        <p>여기에 <span data-math-inline data-latex="\\theta = \\pi">\\theta = \\pi</span>를 대입하면 <span data-math-inline data-latex="\\cos\\pi = -1">\\cos\\pi = -1</span>이고 <span data-math-inline data-latex="\\sin\\pi = 0">\\sin\\pi = 0</span>이므로:</p>
+        <div data-math-block data-latex="e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1">e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1</div>
+        <p>이를 정리하면 항등식을 얻습니다. 오일러 공식 자체는 테일러 급수 전개로부터 유도할 수 있습니다:</p>
+        <div data-math-block data-latex="e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}, \\quad \\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}, \\quad \\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}">...</div>
+        <p><span data-math-inline data-latex="e^x">e^x</span>의 급수에 <span data-math-inline data-latex="x = i\\theta">x = i\\theta</span>를 대입하고 실수부와 허수부를 분리하면 코사인과 사인 급수가 그대로 나타납니다 — 놀라울 만큼 우아한 증명입니다.</p>
+      `,
+    },
+  },
 };

@@ -166,6 +166,56 @@ export interface Dictionary {
       sets: string;
     };
   };
+  pluginSection: {
+    title: string;
+    sub: string;
+    layer_core: { title: string; desc: string };
+    layer_headless: { title: string; desc: string };
+    layer_plugins: { title: string; desc: string };
+    cta: string;
+  };
+  pluginsPage: {
+    title: string;
+    sub: string;
+    arch: {
+      title: string;
+      sub: string;
+      core_title: string;
+      core_desc: string;
+      headless_title: string;
+      headless_desc: string;
+      plugins_title: string;
+      plugins_desc: string;
+      philosophy: string;
+    };
+    api: {
+      title: string;
+      sub: string;
+      renderer_title: string;
+      renderer_desc: string;
+      editor_title: string;
+      editor_desc: string;
+      config_title: string;
+    };
+    guide: {
+      title: string;
+      sub: string;
+      step1_title: string;
+      step1_desc: string;
+      step2_title: string;
+      step2_desc: string;
+      step3_title: string;
+      step3_desc: string;
+      tiptap_example: string;
+      outro: string;
+    };
+    demo: {
+      title: string;
+      sub: string;
+      instructions: string;
+      content: string;
+    };
+  };
 }
 
 export type Lang = 'en' | 'ko';

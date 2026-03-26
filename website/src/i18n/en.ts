@@ -183,4 +183,76 @@ export const en: Dictionary = {
       sets: 'Set Theory & Logic',
     },
   },
+  pluginSection: {
+    title: 'Plug into any editor',
+    sub: 'A headless adapter layer lets you integrate Fizzex into any host editor with minimal code.',
+    layer_core: {
+      title: 'Core',
+      desc: 'Parser, renderer, analysis, CAS — the full math engine',
+    },
+    layer_headless: {
+      title: 'Headless Adapter',
+      desc: 'FizzexRenderer & FizzexEditor — mount to any DOM element',
+    },
+    layer_plugins: {
+      title: 'Host Plugins',
+      desc: 'Tiptap, Slate, ProseMirror — thin wrappers over headless',
+    },
+    cta: 'Learn more about plugins',
+  },
+  pluginsPage: {
+    title: 'Plugins',
+    sub: 'Integrate Fizzex into any editor with the headless adapter layer.',
+    arch: {
+      title: 'Architecture',
+      sub: 'Three layers, clear separation of concerns.',
+      core_title: 'fizzex (Core)',
+      core_desc: 'LaTeX parser, TeX box model renderer, expression analyzer, CAS engine, visualization components. Framework-agnostic, no DOM dependency.',
+      headless_title: 'fizzex/headless',
+      headless_desc: 'FizzexRenderer for read-only rendering and FizzexEditor for interactive editing. Give it a DOM element — it handles Canvas setup, HiDPI scaling, font loading, and the full rendering pipeline.',
+      plugins_title: 'fizzex/tiptap, fizzex/slate, ...',
+      plugins_desc: 'Thin wrappers that connect the headless adapter to a specific host editor. Each plugin is typically 20-30 lines of code.',
+      philosophy: 'The headless layer does the heavy lifting so that plugin authors only write host-specific glue code.',
+    },
+    api: {
+      title: 'Headless API',
+      sub: 'Two classes cover all integration needs.',
+      renderer_title: 'FizzexRenderer',
+      renderer_desc: 'Read-only math rendering. Pass a container element and a LaTeX string.',
+      editor_title: 'FizzexEditor',
+      editor_desc: 'Interactive math editor with keyboard input, cursor, IME support, and auto-complete.',
+      config_title: 'FizzexConfig',
+    },
+    guide: {
+      title: 'Build Your Own Plugin',
+      sub: 'Three steps to integrate Fizzex into any editor.',
+      step1_title: '1. Get a container',
+      step1_desc: 'Your host editor provides a DOM element for custom node rendering (NodeView, Element, etc.).',
+      step2_title: '2. Create a renderer',
+      step2_desc: 'Instantiate FizzexRenderer or FizzexEditor with the container and your config.',
+      step3_title: '3. Manage lifecycle',
+      step3_desc: 'Call render() when data changes, destroy() when the node is removed.',
+      tiptap_example: 'Tiptap plugin — complete implementation',
+      outro: 'This same pattern works for Slate, ProseMirror, Quill, CodeMirror, or any editor that supports custom node rendering.',
+    },
+    demo: {
+      title: 'Tiptap Live Demo',
+      sub: 'A real Tiptap editor with MathInline and MathBlock extensions powered by Fizzex.',
+      instructions: 'This is a live Tiptap editor. You can freely edit the text. Double-click any block formula to edit it.',
+      content: `
+        <h2>Euler's Identity — The Most Beautiful Equation</h2>
+        <p>In 1748, Leonhard Euler discovered a profound connection between the five most fundamental constants in mathematics. The result is known as <strong>Euler's identity</strong>:</p>
+        <div data-math-block data-latex="e^{i\\pi} + 1 = 0">e^{i\\pi} + 1 = 0</div>
+        <p>This single equation unifies the additive identity <span data-math-inline data-latex="0">0</span>, the multiplicative identity <span data-math-inline data-latex="1">1</span>, the base of natural logarithms <span data-math-inline data-latex="e">e</span>, the imaginary unit <span data-math-inline data-latex="i">i</span>, and the ratio of a circle's circumference to its diameter <span data-math-inline data-latex="\\pi">\\pi</span>.</p>
+        <h3>Where does it come from?</h3>
+        <p>Euler's identity is a special case of <strong>Euler's formula</strong>, which relates complex exponentials to trigonometric functions:</p>
+        <div data-math-block data-latex="e^{i\\theta} = \\cos\\theta + i\\sin\\theta">e^{i\\theta} = \\cos\\theta + i\\sin\\theta</div>
+        <p>When we substitute <span data-math-inline data-latex="\\theta = \\pi">\\theta = \\pi</span>, we get <span data-math-inline data-latex="\\cos\\pi = -1">\\cos\\pi = -1</span> and <span data-math-inline data-latex="\\sin\\pi = 0">\\sin\\pi = 0</span>, which gives us:</p>
+        <div data-math-block data-latex="e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1">e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1</div>
+        <p>Rearranging yields the identity. Euler's formula itself can be derived from the Taylor series expansions:</p>
+        <div data-math-block data-latex="e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}, \\quad \\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}, \\quad \\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}">...</div>
+        <p>Substituting <span data-math-inline data-latex="x = i\\theta">x = i\\theta</span> into the series for <span data-math-inline data-latex="e^x">e^x</span> and separating real and imaginary parts reproduces the cosine and sine series — a remarkably elegant proof.</p>
+      `,
+    },
+  },
 };
