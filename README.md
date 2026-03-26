@@ -2,6 +2,8 @@
 
 > Canvas-based mathematical expression editor — light and easy formula input, like fizzy bubbles
 
+**[Website](https://ibare.github.io/fizzex)** | **[GitHub](https://github.com/ibare/fizzex)**
+
 ## What's in a Name?
 
 **Fizzex** = **Fizz** + **TeX**
@@ -31,6 +33,8 @@ Like a sparkling Prosecco, Fizzex is:
 │  Visualization│  FunctionGraph │ UnitCircle │ NumberLine │...│
 ├─────────────────────────────────────────────────────────────┤
 │  UX           │  Autocomplete │ Coefficient slider │ i18n   │
+├─────────────────────────────────────────────────────────────┤
+│  Integration  │  Headless adapter │ Tiptap │ Plugin system  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -40,12 +44,49 @@ Like a sparkling Prosecco, Fizzex is:
 npm install fizzex
 ```
 
+## Subpath Exports
+
+Fizzex provides multiple entry points for different use cases:
+
+| Import | Purpose | Peer Dependencies |
+|--------|---------|-------------------|
+| `fizzex` | Core: parser, renderer, analysis, CAS | none |
+| `fizzex/headless` | Framework-agnostic renderer & editor | none |
+| `fizzex/react` | React components (MathCanvas, etc.) | `react`, `react-dom` |
+| `fizzex/tiptap` | Tiptap editor extensions | `@tiptap/core` |
+
+All peer dependencies are **optional** — import only what you need.
+
 ## Quick Start
 
-### Math Editor (React)
+### Headless Rendering (No Framework)
+
+```typescript
+import { FizzexRenderer } from 'fizzex/headless';
+
+const renderer = new FizzexRenderer(container, {
+  baseFontSize: 20,
+  theme: 'light',
+});
+renderer.render('\\frac{1}{2} + x^2');
+```
+
+### Headless Editor (No Framework)
+
+```typescript
+import { FizzexEditor } from 'fizzex/headless';
+
+const editor = new FizzexEditor(container, {
+  baseFontSize: 20,
+});
+editor.setLatex('x^2 + 2x - 3 = 0');
+editor.onChange((latex) => console.log(latex));
+```
+
+### React Editor
 
 ```tsx
-import { MathCanvas } from 'fizzex';
+import { MathCanvas } from 'fizzex/react';
 
 function App() {
   return (
@@ -53,10 +94,25 @@ function App() {
       width={400}
       height={80}
       theme="light"
+      showSuggestions
       onChange={(state) => console.log(state)}
     />
   );
 }
+```
+
+### Tiptap Integration
+
+```typescript
+import { MathInline, MathBlock } from 'fizzex/tiptap';
+
+const editor = new Editor({
+  extensions: [
+    StarterKit,
+    MathInline.configure({ fizzexConfig: { baseFontSize: 18 } }),
+    MathBlock.configure({ fizzexConfig: { baseFontSize: 24 }, editable: true }),
+  ],
+});
 ```
 
 ### LaTeX Conversion
@@ -64,10 +120,7 @@ function App() {
 ```typescript
 import { parseLatex, astToLatex } from 'fizzex';
 
-// LaTeX → AST
 const ast = parseLatex('\\frac{1}{2} + x^2');
-
-// AST → LaTeX
 const latex = astToLatex(ast);
 ```
 
@@ -79,11 +132,9 @@ import { parseLatex, analyzeExpression } from 'fizzex';
 const ast = parseLatex('x^2 + 2x - 3 = 0');
 const analysis = analyzeExpression(ast);
 
-console.log(analysis.primaryDomain);      // 'polynomial'
-console.log(analysis.polynomial?.degree); // 2
-console.log(analysis.variableClassification);
-// { mainVariables: ['x'], coefficients: [], confidence: 1.0 }
-console.log(analysis.visualization.bestFit); // 'function-graph-2d'
+console.log(analysis.primaryDomain);           // 'polynomial'
+console.log(analysis.polynomial?.degree);      // 2
+console.log(analysis.visualization.bestFit);   // 'function-graph-2d'
 ```
 
 ### CAS (Computer Algebra System)
@@ -94,9 +145,7 @@ import { parseLatex, simplify, expand, factor, solve, diff, integrate } from 'fi
 const ast = parseLatex('(x+1)^2');
 
 const expanded = expand(ast);              // x^2 + 2x + 1
-const factored = factor(expanded.result!); // (x+1)^2
-const derivative = diff(ast);              // 2(x+1) = 2x + 2
-const integral = integrate(ast);           // (x+1)^3/3
+const derivative = diff(ast);             // 2(x+1) = 2x + 2
 
 const equation = parseLatex('x^2 - 4 = 0');
 const solutions = solve(equation);         // x = 2, x = -2
@@ -107,87 +156,65 @@ const solutions = solve(equation);         // x = 2, x = -2
 ```tsx
 import { FunctionGraph, UnitCircle, NumberLine, PolarGraph, AutoVisualizer } from 'fizzex';
 
-// 2D Function Graph
-<FunctionGraph
-  expression="x^2 - 1"
-  width={400}
-  height={300}
-  interactive
-/>
-
-// Unit Circle (Trigonometric)
-<UnitCircle
-  size={300}
-  initialAngle={Math.PI / 4}
-  interactive
-/>
-
-// Number Line (Inequality)
-<NumberLine
-  points={[{ value: 3, label: '3', included: false }]}
-  intervals={[{ start: -10, end: 3, startIncluded: true, endIncluded: false }]}
-  range={[-5, 8]}
-/>
-
-// Polar Graph
-<PolarGraph
-  expression="1 + \\cos(\\theta)"
-  size={300}
-/>
-
-// Auto Visualization (based on analysis)
-<AutoVisualizer
-  analysis={analysis}
-  latex={latex}
-  showSelector
-  coefficientValues={{ a: 1, b: 2 }}
-/>
+<FunctionGraph expression="x^2 - 1" width={400} height={300} interactive />
+<UnitCircle size={300} initialAngle={Math.PI / 4} interactive />
+<NumberLine points={[{ value: 3, label: '3' }]} range={[-5, 8]} />
+<PolarGraph expression="1 + \\cos(\\theta)" size={300} />
+<AutoVisualizer analysis={analysis} latex={latex} showSelector />
 ```
 
-### Autocomplete
+## Plugin Architecture
 
-```tsx
-import { SuggestionChips, SuggestionPopover, getSuggestions } from 'fizzex';
+Fizzex uses a three-layer architecture that makes it easy to integrate into any host editor:
 
-const suggestions = getSuggestions(editorState);
-
-<SuggestionChips
-  suggestions={suggestions}
-  onSelect={(suggestion) => applyAction(suggestion.action)}
-/>
-
-<SuggestionPopover
-  isOpen={showSuggestions}
-  suggestions={suggestions}
-  onSelect={handleSelect}
-/>
+```
+fizzex (Core)
+  │  Parser, renderer, analysis, CAS — framework-agnostic
+  │
+  ├── fizzex/headless
+  │     FizzexRenderer (read-only) & FizzexEditor (interactive)
+  │     Give it a DOM element — it handles everything
+  │
+  └── fizzex/tiptap, fizzex/slate, ...
+        Thin wrappers (~20 lines) over the headless adapter
 ```
 
-### i18n
+### Building Your Own Plugin
 
-```tsx
-import { FizzexI18nProvider } from 'fizzex';
+Any editor that supports custom node rendering can integrate Fizzex:
 
-const customLabels = {
-  categories: {
-    greek: 'Greek Letters',
-    operators: 'Operators',
-    functions: 'Functions',
-  },
-};
+```typescript
+// 1. Get a container from your host editor
+const container = nodeView.dom;
 
-<FizzexI18nProvider labels={customLabels}>
-  <MathCanvas />
-</FizzexI18nProvider>
+// 2. Create a renderer
+const renderer = new FizzexRenderer(container, { baseFontSize: 20 });
+
+// 3. Render when data changes
+renderer.render(node.attrs.latex);
+
+// 4. Clean up
+renderer.destroy();
 ```
+
+See the [Plugins page](https://ibare.github.io/fizzex/en/plugins) for the full guide and live Tiptap demo.
 
 ## API Reference
 
-### Core
+### Core (`fizzex`)
 
 ```typescript
-import { MathEditor, createInitialState, createEmptyRoot } from 'fizzex';
+// Editor
+import { MathEditor, createInitialState, createStateFromLatex } from 'fizzex';
+
+// LaTeX
 import { parseLatex, astToLatex } from 'fizzex';
+
+// Analysis & CAS
+import { analyzeExpression, matchVisualization } from 'fizzex';
+import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizzex';
+
+// Node creators
 import {
   createNumber, createVariable, createOperator,
   createFrac, createPower, createParen, createSubscript,
@@ -197,14 +224,14 @@ import {
 } from 'fizzex';
 ```
 
-### Analysis & CAS
+### Headless (`fizzex/headless`)
 
 ```typescript
-import { analyzeExpression, matchVisualization } from 'fizzex';
-import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizzex';
+import { FizzexRenderer, FizzexEditor } from 'fizzex/headless';
+import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from 'fizzex/headless';
 ```
 
-### React Components
+### React (`fizzex/react`)
 
 ```typescript
 import {
@@ -212,20 +239,32 @@ import {
   SuggestionChips, SuggestionPopover,
   FunctionGraph, UnitCircle, NumberLine, PolarGraph, AutoVisualizer,
   FizzexI18nProvider,
-} from 'fizzex';
+} from 'fizzex/react';
+```
+
+### Tiptap (`fizzex/tiptap`)
+
+```typescript
+import { MathInline, MathBlock } from 'fizzex/tiptap';
+import type { MathInlineOptions, MathBlockOptions } from 'fizzex/tiptap';
 ```
 
 ### Types
 
 ```typescript
 import type {
+  // AST
   MathNode, RootNode, NumberNode, VariableNode, OperatorNode,
   FracNode, PowerNode, SubscriptNode, SqrtNode, ParenNode, AbsNode,
   FuncNode, IntegralNode, SumNode, LimitNode, ProductNode,
   OverlineNode, MatrixNode, TextNode,
+  // Editor
   EditorState, CursorPosition,
+  // Analysis
   ExpressionAnalysis, VariableClassification, VisualizationType,
+  // CAS
   CASResult, CASOperation,
+  // Visualization
   GraphConfig, GraphRange,
 } from 'fizzex';
 ```
@@ -236,9 +275,15 @@ import type {
 src/
 ├── types.ts              # AST type definitions (MathNode, EditorState)
 ├── editor.ts             # Editor logic (keyboard input, node creation)
+├── headless/             # Headless adapter layer
+│   ├── renderer.ts       # FizzexRenderer — read-only rendering
+│   ├── editor-view.ts    # FizzexEditor — interactive editor
+│   └── types.ts          # FizzexConfig, FizzexSize
+├── integrations/         # Host editor plugins
+│   └── tiptap/           # Tiptap extensions (MathInline, MathBlock)
 ├── box/                  # Box model (TeX-style layout)
 │   ├── types.ts          # Box type definitions
-│   ├── constants.ts      # TeX constants (σ, ξ, etc.)
+│   ├── constants.ts      # TeX constants
 │   ├── font-metrics.ts   # Font metrics (LRU cached)
 │   ├── box-builder.ts    # Box creation helpers
 │   ├── box-layout.ts     # Layout calculation
@@ -249,17 +294,16 @@ src/
 │   ├── latex-parser.ts   # LaTeX → AST parser
 │   ├── ast-to-latex.ts   # AST → LaTeX conversion
 │   ├── node-factory.ts   # Generic node creation factory
-│   ├── parse-errors.ts   # Parse error definitions
-│   ├── command-registry.ts  # Command registry
+│   ├── command-registry.ts  # Command registry (187+ commands)
 │   └── commands/         # Modularized command handlers
-├── suggestion/           # Autocomplete
-├── analyzer/             # Expression analysis
-├── cas/                  # Computer Algebra System
+├── suggestion/           # Context-aware autocomplete
+├── analyzer/             # Expression analysis (9 modules)
+├── cas/                  # Computer Algebra System (Nerdamer)
 ├── visualizer/           # Visualization components
-├── fonts/                # Font management
+├── fonts/                # STIX Two Math font management
 ├── i18n/                 # Internationalization
-├── export/               # Export functionality
-├── utils/                # Utilities
+├── export/               # PNG export
+├── utils/                # LRU cache, ID generation, benchmarks
 └── react/                # React components
 ```
 
@@ -292,6 +336,17 @@ pnpm test:coverage    # Coverage report
 pnpm build       # Full build (tsc + vite)
 pnpm typecheck   # Type check only
 ```
+
+### Website
+
+```bash
+cd website
+pnpm install
+pnpm dev         # Local dev server
+pnpm build       # Production build
+```
+
+The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automatically on push to main.
 
 ## Browser Support
 
