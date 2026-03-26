@@ -8,6 +8,14 @@ import type { RootNode, MathNode, PowerNode, VariableNode } from '../types';
 import type { PolynomialInfo, ASTCollectionResult } from './types';
 import { findNodes } from './ast-walker';
 
+/** 디버그 로깅 플래그 (window 전역 의존 없이 모듈 레벨로 관리) */
+let debugEnabled = false;
+
+/** 다항식 분석 디버그 로깅 활성화/비활성화 */
+export function setDebugAnalyzer(enabled: boolean): void {
+  debugEnabled = enabled;
+}
+
 /**
  * 다항식 정보 분석
  *
@@ -66,7 +74,7 @@ function findMaxDegree(ast: RootNode, targetVariable: string): number {
   const powerNodes = findNodes<PowerNode>(ast, 'power');
 
   // DEBUG: 발견된 PowerNode 수 로깅
-  if (typeof window !== 'undefined' && (window as unknown as { DEBUG_ANALYZER?: boolean }).DEBUG_ANALYZER) {
+  if (debugEnabled) {
     console.log(`[Analyzer] Finding degree for '${targetVariable}', found ${powerNodes.length} power nodes`);
   }
 
@@ -75,7 +83,7 @@ function findMaxDegree(ast: RootNode, targetVariable: string): number {
     const hasVar = containsVariable(power.base, targetVariable);
 
     // DEBUG: 각 PowerNode 검사 로깅
-    if (typeof window !== 'undefined' && (window as unknown as { DEBUG_ANALYZER?: boolean }).DEBUG_ANALYZER) {
+    if (debugEnabled) {
       console.log(`[Analyzer] PowerNode base:`, power.base, `contains '${targetVariable}':`, hasVar);
       console.log(`[Analyzer] PowerNode exponent:`, power.exponent);
     }
@@ -84,7 +92,7 @@ function findMaxDegree(ast: RootNode, targetVariable: string): number {
       const degree = extractDegree(power.exponent);
 
       // DEBUG: 추출된 차수 로깅
-      if (typeof window !== 'undefined' && (window as unknown as { DEBUG_ANALYZER?: boolean }).DEBUG_ANALYZER) {
+      if (debugEnabled) {
         console.log(`[Analyzer] Extracted degree: ${degree}`);
       }
 
@@ -104,7 +112,7 @@ function findMaxDegree(ast: RootNode, targetVariable: string): number {
   }
 
   // DEBUG: 최종 차수 로깅
-  if (typeof window !== 'undefined' && (window as unknown as { DEBUG_ANALYZER?: boolean }).DEBUG_ANALYZER) {
+  if (debugEnabled) {
     console.log(`[Analyzer] Final degree for '${targetVariable}': ${maxDegree}`);
   }
 

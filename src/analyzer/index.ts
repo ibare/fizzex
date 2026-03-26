@@ -154,7 +154,7 @@ export type { VisualizationMatch } from './visualization-matcher';
 export { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker';
 export { getFunctionCategory, createFunctionInfoList } from './function-detector';
 export { detectDomains, determinePrimaryDomain } from './domain-detector';
-export { analyzePolynomial, getDegreeLabel } from './polynomial-analyzer';
+export { analyzePolynomial, getDegreeLabel, setDebugAnalyzer } from './polynomial-analyzer';
 export { classifyVariables } from './variable-classifier';
 export {
   extractFeatures,
