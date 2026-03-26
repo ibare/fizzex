@@ -6,6 +6,7 @@ import {
   spliceChildren,
   rebuildAstWithNewChildren,
   buildNewState,
+  freezeState,
 } from './editor-utils';
 
 /** 테스트용 간단한 AST 생성 */
@@ -206,5 +207,39 @@ describe('buildNewState', () => {
     const state = buildNewState(ast, cursor, selection);
 
     expect(state.selection).toBe(selection);
+  });
+});
+
+describe('freezeState', () => {
+  it('freeze된 state의 cursor 변경 시 예외 발생', () => {
+    const ast = createTestAst();
+    const state = freezeState(buildNewState(ast, { nodeId: 'root', offset: 0 }));
+
+    expect(() => {
+      (state as { cursor: { offset: number } }).cursor.offset = 999;
+    }).toThrow();
+  });
+
+  it('freeze된 state의 ast children 변경 시 예외 발생', () => {
+    const ast = createTestAst();
+    const state = freezeState(buildNewState(ast, { nodeId: 'root', offset: 0 }));
+
+    expect(() => {
+      (state.ast.children as MathNode[]).push({ id: 'x', type: 'number', value: '0' } as NumberNode);
+    }).toThrow();
+  });
+
+  it('MathEditor에서 반환된 state가 freeze되어 있는지 확인', async () => {
+    const { MathEditor } = await import('./editor');
+
+    let capturedState: ReturnType<typeof buildNewState> | null = null;
+    const editor = new MathEditor((state) => { capturedState = state; });
+
+    editor.insertNumber('5');
+    expect(capturedState).not.toBeNull();
+
+    expect(() => {
+      capturedState!.cursor.offset = 999;
+    }).toThrow();
   });
 });

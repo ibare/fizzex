@@ -201,3 +201,36 @@ export function buildNewState(
 ): EditorState {
   return { ast, cursor, selection };
 }
+
+/**
+ * AST 노드를 재귀적으로 freeze한다 (개발 모드 전용).
+ */
+function deepFreezeNode(node: MathNode): void {
+  Object.freeze(node);
+  const keys = getChildKeys(node);
+  for (const key of keys) {
+    const children = getChildArray(node, key);
+    Object.freeze(children);
+    for (const child of children) {
+      deepFreezeNode(child);
+    }
+  }
+}
+
+/**
+ * EditorState를 freeze하여 의도치 않은 mutation을 방지한다.
+ * 테스트 환경과 개발 모드에서만 활성화된다.
+ */
+export function freezeState(state: EditorState): EditorState {
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'test') {
+    Object.freeze(state);
+    Object.freeze(state.cursor);
+    if (state.selection) {
+      Object.freeze(state.selection);
+      Object.freeze(state.selection.start);
+      Object.freeze(state.selection.end);
+    }
+    deepFreezeNode(state.ast);
+  }
+  return state;
+}

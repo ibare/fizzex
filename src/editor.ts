@@ -39,6 +39,7 @@ import {
   spliceChildren,
   rebuildAstWithNewChildren,
   buildNewState,
+  freezeState,
 } from './editor-utils';
 
 /** MathNode에서 문자열 키로 자식 배열을 안전하게 접근하는 헬퍼 */
@@ -326,17 +327,6 @@ function getChildKeys(node: MathNode): string[] {
   }
 }
 
-/** 커서 위치의 자식 배열 가져오기 */
-function getChildrenAtCursor(state: EditorState): MathNode[] | null {
-  const node = findNodeById(state.ast, state.cursor.nodeId);
-  if (!node) return null;
-
-  const childKeys = getChildKeys(node);
-  if (childKeys.length === 0) return null;
-
-  return getNodeChildArray(node, childKeys[0]);
-}
-
 /** ID로 노드 찾기 */
 function findNodeById(root: MathNode, id: string): MathNode | null {
   if (root.id === id) return root;
@@ -360,7 +350,7 @@ export class MathEditor {
   private onChange: (state: EditorState) => void;
 
   constructor(onChange: (state: EditorState) => void) {
-    this.state = createInitialState();
+    this.state = freezeState(createInitialState());
     this.onChange = onChange;
   }
 
@@ -369,8 +359,8 @@ export class MathEditor {
   }
 
   setState(state: EditorState): void {
-    this.state = state;
-    this.onChange(state);
+    this.state = freezeState(state);
+    this.onChange(this.state);
   }
 
   /** 커서 위치에 노드를 불변적으로 삽입하는 공유 헬퍼 */
@@ -391,7 +381,7 @@ export class MathEditor {
       newChildren,
     );
 
-    this.state = buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset + 1 });
+    this.state = freezeState(buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset + 1 }));
     this.onChange(this.state);
   }
 
@@ -413,7 +403,7 @@ export class MathEditor {
       newChildren,
     );
 
-    this.state = buildNewState(newAst, { nodeId: cursorTargetId, offset: 0 });
+    this.state = freezeState(buildNewState(newAst, { nodeId: cursorTargetId, offset: 0 }));
     this.onChange(this.state);
   }
 
@@ -581,10 +571,10 @@ export class MathEditor {
     if (!grandParentInfo) return;
 
     // 복합 노드 다음 위치로 커서 이동 (불변: 새 state 생성)
-    this.state = buildNewState(
+    this.state = freezeState(buildNewState(
       this.state.ast,
       { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 },
-    );
+    ));
   }
 
   /** 분수 삽입 */
@@ -616,7 +606,7 @@ export class MathEditor {
     const newAst = rebuildAstWithNewChildren(
       this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
     );
-    this.state = buildNewState(newAst, { nodeId: deriveId(fracNode.id, '_den'), offset: 0 });
+    this.state = freezeState(buildNewState(newAst, { nodeId: deriveId(fracNode.id, '_den'), offset: 0 }));
     this.onChange(this.state);
   }
 
@@ -666,7 +656,7 @@ export class MathEditor {
     const newAst = rebuildAstWithNewChildren(
       this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
     );
-    this.state = buildNewState(newAst, { nodeId: deriveId(powerNode.id, '_exp'), offset: 0 });
+    this.state = freezeState(buildNewState(newAst, { nodeId: deriveId(powerNode.id, '_exp'), offset: 0 }));
     this.onChange(this.state);
   }
 
@@ -697,7 +687,7 @@ export class MathEditor {
     const newAst = rebuildAstWithNewChildren(
       this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
     );
-    this.state = buildNewState(newAst, { nodeId: deriveId(subscriptNode.id, '_sub'), offset: 0 });
+    this.state = freezeState(buildNewState(newAst, { nodeId: deriveId(subscriptNode.id, '_sub'), offset: 0 }));
     this.onChange(this.state);
   }
 
@@ -763,10 +753,10 @@ export class MathEditor {
     if (parentInfo && parentInfo.parent.type === 'paren') {
       const grandParentInfo = findParent(this.state.ast, parentInfo.parent.id);
       if (grandParentInfo) {
-        this.state = buildNewState(
+        this.state = freezeState(buildNewState(
           this.state.ast,
           { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 },
-        );
+        ));
         this.onChange(this.state);
       }
     }
@@ -789,7 +779,7 @@ export class MathEditor {
       const newAst = rebuildAstWithNewChildren(
         this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
       );
-      this.state = buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset - 1 });
+      this.state = freezeState(buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset - 1 }));
       this.onChange(this.state);
     } else {
       // offset이 0일 때: 부모로 이동하거나 복합 노드 삭제
@@ -808,11 +798,11 @@ export class MathEditor {
           const newAst = rebuildAstWithNewChildren(
             this.state.ast, grandParentInfo.parent.id, grandParentInfo.childKey, newGrandChildren,
           );
-          this.state = buildNewState(newAst, { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index });
+          this.state = freezeState(buildNewState(newAst, { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index }));
         }
       } else {
         // 일반적인 경우: 부모로 이동 (AST 불변, 커서만 변경)
-        this.state = buildNewState(this.state.ast, { nodeId: parent.id, offset: parentInfo.index });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parent.id, offset: parentInfo.index }));
       }
 
       this.onChange(this.state);
@@ -828,7 +818,7 @@ export class MathEditor {
     if (!childKey) {
       const parentInfo = findParent(this.state.ast, this.state.cursor.nodeId);
       if (parentInfo) {
-        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index }));
         this.onChange(this.state);
       }
       return;
@@ -841,15 +831,15 @@ export class MathEditor {
       const enterableChild = this.getEnterableChild(leftNode, 'end');
 
       if (enterableChild) {
-        this.state = buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: enterableChild.length });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: enterableChild.length }));
       } else {
-        this.state = buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset - 1 });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset - 1 }));
       }
       this.onChange(this.state);
     } else {
       const parentInfo = findParent(this.state.ast, this.state.cursor.nodeId);
       if (parentInfo) {
-        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index }));
         this.onChange(this.state);
       }
     }
@@ -864,7 +854,7 @@ export class MathEditor {
     if (!childKey) {
       const parentInfo = findParent(this.state.ast, node.id);
       if (parentInfo) {
-        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 }));
         this.onChange(this.state);
       }
       return;
@@ -877,15 +867,15 @@ export class MathEditor {
       const enterableChild = this.getEnterableChild(rightNode, 'start');
 
       if (enterableChild) {
-        this.state = buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: 0 });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: 0 }));
       } else {
-        this.state = buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset + 1 });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset + 1 }));
       }
       this.onChange(this.state);
     } else {
       const parentInfo = findParent(this.state.ast, node.id);
       if (parentInfo) {
-        this.state = buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 });
+        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 }));
         this.onChange(this.state);
       }
     }
