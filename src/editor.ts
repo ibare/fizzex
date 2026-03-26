@@ -395,6 +395,28 @@ export class MathEditor {
     this.onChange(this.state);
   }
 
+  /** 구조 노드를 커서 위치에 삽입하고 커서를 내부로 이동하는 공유 헬퍼 */
+  private insertStructureAtCursor(newNode: MathNode, cursorTargetId: string): void {
+    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    if (!targetNode) return;
+
+    const childKey = getChildKeys(targetNode)[0];
+    if (!childKey) return;
+
+    const children = getNodeChildArray(targetNode, childKey);
+    const offset = this.state.cursor.offset;
+    const newChildren = spliceChildren(children, offset, 0, newNode);
+    const newAst = rebuildAstWithNewChildren(
+      this.state.ast,
+      this.state.cursor.nodeId,
+      childKey,
+      newChildren,
+    );
+
+    this.state = buildNewState(newAst, { nodeId: cursorTargetId, offset: 0 });
+    this.onChange(this.state);
+  }
+
   /** 조합 완료된 문자 입력 (한글 등 IME 입력) */
   handleCompositionEnd(data: string): void {
     for (const char of data) {
@@ -567,31 +589,34 @@ export class MathEditor {
 
   /** 분수 삽입 */
   insertFraction(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
+    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    if (!targetNode) return;
 
-    const childKey = getChildKeys(node)[0];
+    const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
-    const children = getNodeChildArray(node, childKey);
+    const children = getNodeChildArray(targetNode, childKey);
     const offset = this.state.cursor.offset;
 
     // 커서 앞의 연속된 숫자/변수/괄호를 분자로 (연산자 전까지)
     const numerator = this.collectPrecedingTerm(children, offset);
     const removeCount = numerator.length;
 
+    // 불변 이중 splice: 선행 term 제거 → frac 삽입
+    let newChildren = children;
+    let insertOffset = offset;
     if (removeCount > 0) {
-      children.splice(offset - removeCount, removeCount);
-      this.state.cursor.offset -= removeCount;
+      newChildren = spliceChildren(newChildren, offset - removeCount, removeCount);
+      insertOffset = offset - removeCount;
     }
 
     const fracNode = createFrac(numerator, []);
-    children.splice(this.state.cursor.offset, 0, fracNode);
+    newChildren = spliceChildren(newChildren, insertOffset, 0, fracNode);
 
-    // 커서를 분모 row로 이동
-    const denRowId = deriveId(fracNode.id, '_den');
-    this.state.cursor = { nodeId: denRowId, offset: 0 };
-
+    const newAst = rebuildAstWithNewChildren(
+      this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+    );
+    this.state = buildNewState(newAst, { nodeId: deriveId(fracNode.id, '_den'), offset: 0 });
     this.onChange(this.state);
   }
 
@@ -616,195 +641,106 @@ export class MathEditor {
 
   /** 거듭제곱 삽입 */
   insertPower(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
+    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    if (!targetNode) return;
 
-    const childKey = getChildKeys(node)[0];
+    const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
-    const children = getNodeChildArray(node, childKey);
+    const children = getNodeChildArray(targetNode, childKey);
     const offset = this.state.cursor.offset;
 
-    // 커서 앞의 연속된 숫자/변수/괄호를 밑으로 (연산자 전까지)
     const base = this.collectPrecedingTerm(children, offset);
     const removeCount = base.length;
 
+    let newChildren = children;
+    let insertOffset = offset;
     if (removeCount > 0) {
-      children.splice(offset - removeCount, removeCount);
-      this.state.cursor.offset -= removeCount;
+      newChildren = spliceChildren(newChildren, offset - removeCount, removeCount);
+      insertOffset = offset - removeCount;
     }
 
     const powerNode = createPower(base, []);
-    children.splice(this.state.cursor.offset, 0, powerNode);
+    newChildren = spliceChildren(newChildren, insertOffset, 0, powerNode);
 
-    // 커서를 지수 row로 이동
-    const expRowId = deriveId(powerNode.id, '_exp');
-    this.state.cursor = { nodeId: expRowId, offset: 0 };
-
+    const newAst = rebuildAstWithNewChildren(
+      this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+    );
+    this.state = buildNewState(newAst, { nodeId: deriveId(powerNode.id, '_exp'), offset: 0 });
     this.onChange(this.state);
   }
 
   /** 아래첨자 삽입 */
   insertSubscript(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
+    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    if (!targetNode) return;
 
-    const childKey = getChildKeys(node)[0];
+    const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
-    const children = getNodeChildArray(node, childKey);
+    const children = getNodeChildArray(targetNode, childKey);
     const offset = this.state.cursor.offset;
 
-    // 커서 앞의 연속된 숫자/변수/괄호를 밑으로 (연산자 전까지)
     const base = this.collectPrecedingTerm(children, offset);
     const removeCount = base.length;
 
+    let newChildren = children;
+    let insertOffset = offset;
     if (removeCount > 0) {
-      children.splice(offset - removeCount, removeCount);
-      this.state.cursor.offset -= removeCount;
+      newChildren = spliceChildren(newChildren, offset - removeCount, removeCount);
+      insertOffset = offset - removeCount;
     }
 
     const subscriptNode = createSubscript(base, []);
-    children.splice(this.state.cursor.offset, 0, subscriptNode);
+    newChildren = spliceChildren(newChildren, insertOffset, 0, subscriptNode);
 
-    // 커서를 아래첨자 row로 이동
-    const subRowId = deriveId(subscriptNode.id, '_sub');
-    this.state.cursor = { nodeId: subRowId, offset: 0 };
-
+    const newAst = rebuildAstWithNewChildren(
+      this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+    );
+    this.state = buildNewState(newAst, { nodeId: deriveId(subscriptNode.id, '_sub'), offset: 0 });
     this.onChange(this.state);
   }
 
   /** 절댓값 삽입 */
   insertAbs(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const absNode = createAbs([]);
-    children.splice(this.state.cursor.offset, 0, absNode);
-
-    // 커서를 절댓값 내부 row로 이동
-    const contentRowId = deriveId(absNode.id, '_content');
-    this.state.cursor = { nodeId: contentRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(absNode, deriveId(absNode.id, '_content'));
   }
 
   /** 적분 삽입 (프로그래매틱 삽입용) */
   insertIntegral(differential: string = 'x'): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const integralNode = createIntegral([], [], [], differential);
-    children.splice(this.state.cursor.offset, 0, integralNode);
-
-    // 커서를 피적분함수 row로 이동
-    const integrandRowId = deriveId(integralNode.id, '_integrand');
-    this.state.cursor = { nodeId: integrandRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(integralNode, deriveId(integralNode.id, '_integrand'));
   }
 
   /** 시그마/합 삽입 (프로그래매틱 삽입용) */
   insertSum(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const sumNode = createSum([], [], []);
-    children.splice(this.state.cursor.offset, 0, sumNode);
-
-    // 커서를 하한 row로 이동
-    const lowerRowId = deriveId(sumNode.id, '_lower');
-    this.state.cursor = { nodeId: lowerRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(sumNode, deriveId(sumNode.id, '_lower'));
   }
 
   /** 극한 삽입 (프로그래매틱 삽입용) */
   insertLimit(variable: string = 'x'): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const limitNode = createLimit(variable, [], []);
-    children.splice(this.state.cursor.offset, 0, limitNode);
-
-    // 커서를 접근값 row로 이동
-    const approachRowId = deriveId(limitNode.id, '_approach');
-    this.state.cursor = { nodeId: approachRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(limitNode, deriveId(limitNode.id, '_approach'));
   }
 
   /** 곱(∏) 삽입 (프로그래매틱 삽입용) */
   insertProduct(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const productNode = createProduct([], [], []);
-    children.splice(this.state.cursor.offset, 0, productNode);
-
-    // 커서를 하한 row로 이동
-    const lowerRowId = deriveId(productNode.id, '_lower');
-    this.state.cursor = { nodeId: lowerRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(productNode, deriveId(productNode.id, '_lower'));
   }
 
   /** 윗줄 삽입 (프로그래매틱 삽입용) */
   insertOverline(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const overlineNode = createOverline([]);
-    children.splice(this.state.cursor.offset, 0, overlineNode);
-
-    // 커서를 내용 row로 이동
-    const contentRowId = deriveId(overlineNode.id, '_content');
-    this.state.cursor = { nodeId: contentRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(overlineNode, deriveId(overlineNode.id, '_content'));
   }
 
   /** 행렬 삽입 (프로그래매틱 삽입용) */
   insertMatrix(rows: number = 2, cols: number = 2, bracketType: '(' | '[' | '{' | '|' | 'none' = '('): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const matrixNode = createMatrix(rows, cols, bracketType);
-    children.splice(this.state.cursor.offset, 0, matrixNode);
-
-    // 커서를 첫 번째 셀로 이동
-    const firstCellId = deriveCellId(matrixNode.id, 0, 0);
-    this.state.cursor = { nodeId: firstCellId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(matrixNode, deriveCellId(matrixNode.id, 0, 0));
   }
 
   /** 텍스트 삽입 (프로그래매틱 삽입용) */
@@ -814,21 +750,8 @@ export class MathEditor {
 
   /** 괄호 삽입 */
   insertParen(parenType: '(' | '[' | '{'): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const parenNode = createParen([], parenType);
-    children.splice(this.state.cursor.offset, 0, parenNode);
-
-    // 커서를 괄호 내부 row로 이동
-    const contentRowId = deriveId(parenNode.id, '_content');
-    this.state.cursor = { nodeId: contentRowId, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(parenNode, deriveId(parenNode.id, '_content'));
   }
 
   /** 괄호 밖으로 이동 */
@@ -1115,58 +1038,26 @@ export class MathEditor {
 
   /** 제곱근 삽입 */
   insertSqrt(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const sqrtId = generateEditorId();
+    const contentRowId = deriveId(sqrtId, '_content');
     const sqrtNode: SqrtNode = {
       id: sqrtId,
       type: 'sqrt',
-      content: [{
-        id: deriveId(sqrtId, '_content'),
-        type: 'row',
-        children: [],
-      }],
+      content: [{ id: contentRowId, type: 'row', children: [] }],
     };
-    children.splice(this.state.cursor.offset, 0, sqrtNode);
-
-    // 커서를 sqrt 내부로 이동
-    const contentRow = sqrtNode.content[0] as RowNode;
-    this.state.cursor = { nodeId: contentRow.id, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(sqrtNode, contentRowId);
   }
 
   /** 함수 삽입 */
   insertFunc(name: string): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const funcId = generateEditorId();
+    const argRowId = deriveId(funcId, '_arg');
     const funcNode: FuncNode = {
       id: funcId,
       type: 'func',
       name,
-      argument: [{
-        id: deriveId(funcId, '_arg'),
-        type: 'row',
-        children: [],
-      }],
+      argument: [{ id: argRowId, type: 'row', children: [] }],
     };
-    children.splice(this.state.cursor.offset, 0, funcNode);
-
-    // 커서를 인자로 이동
-    const argRow = funcNode.argument[0] as RowNode;
-    this.state.cursor = { nodeId: argRow.id, offset: 0 };
-
-    this.onChange(this.state);
+    this.insertStructureAtCursor(funcNode, argRowId);
   }
 }
