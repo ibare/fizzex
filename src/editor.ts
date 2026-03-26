@@ -35,6 +35,11 @@ import type {
 } from './types';
 import { parseLatex } from './latex/latex-parser';
 import { generateEditorId, deriveId, deriveCellId } from './utils/id-generator';
+import {
+  spliceChildren,
+  rebuildAstWithNewChildren,
+  buildNewState,
+} from './editor-utils';
 
 /** MathNode에서 문자열 키로 자식 배열을 안전하게 접근하는 헬퍼 */
 function getNodeChildArray(node: MathNode, key: string): MathNode[] {
@@ -368,6 +373,28 @@ export class MathEditor {
     this.onChange(state);
   }
 
+  /** 커서 위치에 노드를 불변적으로 삽입하는 공유 헬퍼 */
+  private insertNodeAtCursor(newNode: MathNode): void {
+    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    if (!targetNode) return;
+
+    const childKey = getChildKeys(targetNode)[0];
+    if (!childKey) return;
+
+    const children = getNodeChildArray(targetNode, childKey);
+    const offset = this.state.cursor.offset;
+    const newChildren = spliceChildren(children, offset, 0, newNode);
+    const newAst = rebuildAstWithNewChildren(
+      this.state.ast,
+      this.state.cursor.nodeId,
+      childKey,
+      newChildren,
+    );
+
+    this.state = buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset + 1 });
+    this.onChange(this.state);
+  }
+
   /** 조합 완료된 문자 입력 (한글 등 IME 입력) */
   handleCompositionEnd(data: string): void {
     for (const char of data) {
@@ -491,37 +518,12 @@ export class MathEditor {
 
   /** 숫자 삽입 */
   insertNumber(digit: string): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
-    const offset = this.state.cursor.offset;
-
-    // 각 자릿수를 별도 노드로 삽입 (커서 이동을 위해)
-    const newNode = createNumber(digit);
-    children.splice(offset, 0, newNode);
-    this.state.cursor.offset++;
-
-    this.onChange(this.state);
+    this.insertNodeAtCursor(createNumber(digit));
   }
 
   /** 변수 삽입 */
   insertVariable(name: string): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
-    const newNode = createVariable(name);
-    children.splice(this.state.cursor.offset, 0, newNode);
-    this.state.cursor.offset++;
-
-    this.onChange(this.state);
+    this.insertNodeAtCursor(createVariable(name));
   }
 
   /** 연산자 삽입 */
@@ -529,18 +531,8 @@ export class MathEditor {
     // 복합 노드(지수, 분자, 분모 등) 안에 있으면 먼저 밖으로 나감
     this.exitComplexNodeIfNeeded();
 
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
     const newNode: OperatorNode = { id: generateId(), type: 'operator', operator: op };
-    children.splice(this.state.cursor.offset, 0, newNode);
-    this.state.cursor.offset++;
-
-    this.onChange(this.state);
+    this.insertNodeAtCursor(newNode);
   }
 
   /** 복합 노드(지수, 분자/분모, 괄호 내부, 아래첨자, 적분, 시그마, 극한) 안에 있으면 밖으로 이동 */
@@ -566,11 +558,11 @@ export class MathEditor {
     const grandParentInfo = findParent(this.state.ast, complexNode.id);
     if (!grandParentInfo) return;
 
-    // 복합 노드 다음 위치로 커서 이동
-    this.state.cursor = {
-      nodeId: grandParentInfo.parent.id,
-      offset: grandParentInfo.index + 1,
-    };
+    // 복합 노드 다음 위치로 커서 이동 (불변: 새 state 생성)
+    this.state = buildNewState(
+      this.state.ast,
+      { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 },
+    );
   }
 
   /** 분수 삽입 */
@@ -817,18 +809,7 @@ export class MathEditor {
 
   /** 텍스트 삽입 (프로그래매틱 삽입용) */
   insertText(content: string = ''): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
-    if (!node) return;
-
-    const childKey = getChildKeys(node)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(node, childKey);
-    const textNode = createText(content);
-    children.splice(this.state.cursor.offset, 0, textNode);
-    this.state.cursor.offset++;
-
-    this.onChange(this.state);
+    this.insertNodeAtCursor(createText(content));
   }
 
   /** 괄호 삽입 */
