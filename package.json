@@ -10,9 +10,17 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./headless": {
+      "types": "./dist/headless/index.d.ts",
+      "import": "./dist/headless/index.js"
+    },
     "./react": {
       "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.js"
+    },
+    "./tiptap": {
+      "types": "./dist/integrations/tiptap/index.d.ts",
+      "import": "./dist/integrations/tiptap/index.js"
     }
   },
   "files": [
@@ -61,7 +69,8 @@
   "peerDependencies": {
     "konva": ">=10.0.0",
     "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
+    "react-dom": ">=19.0.0",
+    "@tiptap/core": ">=2.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -71,6 +80,9 @@
       "optional": true
     },
     "konva": {
+      "optional": true
+    },
+    "@tiptap/core": {
       "optional": true
     }
   },
@@ -89,6 +101,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-konva": "^19.0.3",
+    "@tiptap/core": "^2.0.0",
+    "@tiptap/pm": "^2.0.0",
     "typescript": "^5.3.3",
     "vite": "^6.0.7",
     "vitest": "^4.0.17"

@@ -9,7 +9,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "paths": {
+      "fizzex": ["../src"],
+      "fizzex/*": ["../src/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "../src"]
 }

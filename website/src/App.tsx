@@ -4,7 +4,13 @@ import { LangProvider } from './i18n/context';
 import { detectLanguage } from './i18n/detect';
 import Nav from './layout/Nav';
 import Footer from './layout/Footer';
+import { lazy, Suspense } from 'react';
 import Home from './pages/Home';
+
+const Playground = lazy(() => import('./pages/Playground'));
+const PipelineExplorer = lazy(() => import('./pages/PipelineExplorer'));
+const Examples = lazy(() => import('./pages/Examples'));
+const Comparison = lazy(() => import('./pages/Comparison'));
 
 function LangRoot() {
   return <Navigate to={`/${detectLanguage()}/`} replace />;
@@ -19,10 +25,18 @@ function LangShell() {
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Nav />
         <main style={{ flex: 1 }}>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="*" element={<Navigate to={`/${validLang}/`} replace />} />
-          </Routes>
+          <Suspense fallback={<div style={{ padding: '4em', textAlign: 'center' }}>Loading...</div>}>
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="playground" element={<Playground />} />
+              <Route path="pipeline" element={<PipelineExplorer />} />
+              <Route path="examples" element={<Examples />} />
+              <Route path="examples/:category" element={<Examples />} />
+              <Route path="comparison" element={<Comparison />} />
+              <Route path="comparison/:category" element={<Comparison />} />
+              <Route path="*" element={<Navigate to={`/${validLang}/`} replace />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>
