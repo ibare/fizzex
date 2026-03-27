@@ -9,10 +9,10 @@ export default function Nav() {
 
   const navItems = [
     { to: 'playground', label: t.playground.title },
-    { to: 'pipeline', label: t.pipelineExplorer.title },
+    { to: 'pipeline', label: 'Pipeline' },
     { to: 'plugins', label: t.pluginsPage.title },
-    { to: 'examples', label: t.examples.title },
-    { to: 'comparison', label: t.comparisonPage.title },
+    { to: 'examples', label: lang === 'ko' ? '예제' : 'Examples' },
+    { to: 'comparison', label: lang === 'ko' ? '비교' : 'Comparison' },
   ];
 
   return (
@@ -42,20 +42,12 @@ export default function Nav() {
           >
             <GitHubIcon />
           </a>
-          <div style={styles.langGroup}>
-            <button
-              onClick={() => navigate('/en/')}
-              style={lang === 'en' ? styles.langBtnActive : styles.langBtn}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => navigate('/ko/')}
-              style={lang === 'ko' ? styles.langBtnActive : styles.langBtn}
-            >
-              KO
-            </button>
-          </div>
+          <button
+            onClick={() => navigate(lang === 'ko' ? '/en/' : '/ko/')}
+            style={styles.langBtn}
+          >
+            {lang === 'ko' ? 'EN' : 'KO'}
+          </button>
         </nav>
       </div>
     </header>
@@ -108,38 +100,21 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'center',
   },
   linkActive: {
-    color: 'var(--color-heading)',
+    color: 'var(--color-accent)',
     fontSize: '0.9em',
-    fontWeight: 700,
     textDecoration: 'none',
     display: 'inline-flex',
     alignItems: 'center',
   },
-  langGroup: {
-    display: 'flex',
-    gap: '0.25em',
-  },
   langBtn: {
     background: 'none',
-    border: 'none',
-    padding: '0.25em 0.5em',
+    border: '1px solid var(--color-border)',
+    padding: '0.25em 0.6em',
     fontSize: '0.82em',
     cursor: 'pointer',
     color: 'var(--color-muted)',
     fontFamily: 'inherit',
     fontWeight: 500,
-    transition: 'all 0.15s',
-    borderRadius: 'var(--radius-sm)',
-  },
-  langBtnActive: {
-    background: 'var(--color-accent-light)',
-    border: 'none',
-    padding: '0.25em 0.5em',
-    fontSize: '0.82em',
-    cursor: 'pointer',
-    color: 'var(--color-accent)',
-    fontFamily: 'inherit',
-    fontWeight: 600,
     transition: 'all 0.15s',
     borderRadius: 'var(--radius-sm)',
   },

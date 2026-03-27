@@ -19,12 +19,27 @@ export default function Playground() {
   const { t } = useLang();
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [presetState, setPresetState] = useState<EditorState | null>(null);
-  const [analysis, setAnalysis] = useState<ExpressionAnalysis | null>(null);
   const [latex, setLatex] = useState('');
+  const [analysisError, setAnalysisError] = useState(false);
+
+  const analysis = useMemo<ExpressionAnalysis | null>(() => {
+    const ast = editorState?.ast;
+    if (!ast || ast.children.length === 0) {
+      setAnalysisError(false);
+      return null;
+    }
+    try {
+      const result = analyzeExpression(ast);
+      setAnalysisError(false);
+      return result;
+    } catch {
+      setAnalysisError(true);
+      return null;
+    }
+  }, [editorState]);
 
   const handleChange = useCallback((state: EditorState) => {
     setEditorState(state);
-    setAnalysis(null);
     try {
       setLatex(astToLatex(state.ast));
     } catch {
@@ -38,21 +53,10 @@ export default function Playground() {
       setPresetState(state);
       setEditorState(state);
       setLatex(preset);
-      setAnalysis(null);
     } catch {
       /* ignore */
     }
   }, []);
-
-  const handleAnalyze = () => {
-    const ast = editorState?.ast;
-    if (!ast) return;
-    try {
-      setAnalysis(analyzeExpression(ast));
-    } catch {
-      setAnalysis(null);
-    }
-  };
 
   return (
     <section className="section">
@@ -103,20 +107,11 @@ export default function Playground() {
             </div>
           </div>
 
-          {/* Right: Analysis */}
+          {/* Right: Analysis (real-time) */}
           <div>
-            <button
-              className="btn btn--primary"
-              style={styles.analyzeBtn}
-              onClick={handleAnalyze}
-              disabled={!editorState}
-            >
-              {t.playground.analyze_btn}
-            </button>
-
-            {analysis && (
-              <div className="card" style={{ marginTop: '1em' }}>
-                <h3 className="card__title">{t.playground.analyze_btn}</h3>
+            <label style={styles.label}>{t.playground.analyze_btn}</label>
+            <div className="card">
+              {analysis ? (
                 <div style={styles.analysisGrid}>
                   <AnalysisRow label={t.playground.analysis.form} value={analysis.form} />
                   <AnalysisRow label={t.playground.analysis.domain} value={analysis.primaryDomain} />
@@ -141,8 +136,14 @@ export default function Playground() {
                     value={String(analysis.complexity)}
                   />
                 </div>
-              </div>
-            )}
+              ) : (
+                <p style={styles.emptyMsg}>
+                  {analysisError
+                    ? t.playground.analysis_error
+                    : t.playground.analysis_empty}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -218,8 +219,12 @@ const styles: Record<string, React.CSSProperties> = {
     padding: '0.35em 0.7em',
     fontFamily: 'var(--font-mono)',
   },
-  analyzeBtn: {
-    width: '100%',
+  emptyMsg: {
+    fontSize: '0.85em',
+    color: 'var(--color-muted)',
+    textAlign: 'center' as const,
+    padding: '2em 1em',
+    margin: 0,
   },
   analysisGrid: {
     display: 'flex',

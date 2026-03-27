@@ -96,13 +96,13 @@ export default function Comparison() {
 const styles: Record<string, React.CSSProperties> = {
   layout: { display: 'flex', gap: '2em', alignItems: 'flex-start' },
   sidebar: { minWidth: '180px', flexShrink: 0 },
-  sidebarList: { display: 'flex', flexDirection: 'column', gap: '0.25em' },
+  sidebarList: { display: 'flex', flexDirection: 'column', gap: '0' },
   sidebarBtn: {
     display: 'block',
-    padding: '0.6em 1em',
+    padding: '0.2em 1em',
     borderRadius: 'var(--radius-sm)',
     border: 'none',
-    fontSize: '0.9em',
+    fontSize: '12px',
     fontFamily: 'inherit',
     cursor: 'pointer',
     textAlign: 'left' as const,

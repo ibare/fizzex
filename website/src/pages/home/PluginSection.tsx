@@ -1,5 +1,5 @@
 import { useLang } from '../../i18n/context';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CodeBlock from '../../components/CodeBlock';
 
 const snippet = `const renderer = new FizzexRenderer(container);
@@ -13,6 +13,7 @@ const layers = [
 
 export default function PluginSection() {
   const { t } = useLang();
+  const { lang } = useParams();
 
   return (
     <section className="section" style={{ background: '#fff' }}>
@@ -46,7 +47,7 @@ export default function PluginSection() {
         </div>
 
         <div style={styles.ctaWrapper}>
-          <Link to="/plugins" className="btn btn--outline">
+          <Link to={`/${lang}/plugins`} className="btn btn--outline">
             {t.pluginSection.cta}
           </Link>
         </div>

@@ -1,10 +1,10 @@
-import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
 import type { Lang } from './i18n/types';
 import { LangProvider } from './i18n/context';
 import { detectLanguage } from './i18n/detect';
 import Nav from './layout/Nav';
 import Footer from './layout/Footer';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import Home from './pages/Home';
 
 const Playground = lazy(() => import('./pages/Playground'));
@@ -17,12 +17,31 @@ function LangRoot() {
   return <Navigate to={`/${detectLanguage()}/`} replace />;
 }
 
+/** /:lang/:page 까지만 비교하여 페이지 전환 시에만 스크롤 리셋.
+ *  카테고리 변경(/examples/basic → /examples/calc)은 스크롤 유지. */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  const prevBase = useRef('');
+
+  useEffect(() => {
+    const segments = pathname.split('/').filter(Boolean);
+    const base = segments.slice(0, 2).join('/');
+    if (base !== prevBase.current) {
+      window.scrollTo(0, 0);
+    }
+    prevBase.current = base;
+  }, [pathname]);
+
+  return null;
+}
+
 function LangShell() {
   const { lang } = useParams<{ lang: string }>();
   const validLang: Lang = lang === 'ko' ? 'ko' : 'en';
 
   return (
     <LangProvider lang={validLang}>
+      <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Nav />
         <main style={{ flex: 1 }}>

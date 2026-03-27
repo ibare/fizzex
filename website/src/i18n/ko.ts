@@ -121,6 +121,8 @@ export const ko: Dictionary = {
     input_placeholder: 'LaTeX를 입력하세요... 예: x^2 + 2x - 3 = 0',
     presets_label: '프리셋',
     analyze_btn: '분석',
+    analysis_empty: '수식을 입력하면 분석 결과가 표시됩니다.',
+    analysis_error: '이 수식은 분석할 수 없습니다.',
     ast_btn: 'AST 보기',
     analysis: {
       domain: '도메인',

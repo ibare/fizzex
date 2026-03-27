@@ -121,6 +121,8 @@ export const en: Dictionary = {
     input_placeholder: 'Type LaTeX here... e.g. x^2 + 2x - 3 = 0',
     presets_label: 'Presets',
     analyze_btn: 'Analyze',
+    analysis_empty: 'Enter an expression to see analysis.',
+    analysis_error: 'Unable to analyze this expression.',
     ast_btn: 'View AST',
     analysis: {
       domain: 'Domain',

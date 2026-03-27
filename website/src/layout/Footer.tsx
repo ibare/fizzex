@@ -6,14 +6,21 @@ export default function Footer() {
   return (
     <footer style={styles.footer}>
       <div style={styles.container}>
-        <span style={styles.brand}>Fizzex</span>
         <span style={styles.tagline}>{t.footer.tagline}</span>
+        <div style={styles.copyright}>
+          © 2026 <a href="https://day1company.co.kr/home" target="_blank" rel="noopener noreferrer" className="copyright-link" style={styles.copyrightLink}>DAY 1 COMPANY</a>. All rights reserved.
+        </div>
         <div style={styles.links}>
           <a href="https://github.com/ibare/fizzex" target="_blank" rel="noopener noreferrer" style={styles.link}>GitHub</a>
           <a href="https://www.npmjs.com/package/fizzex" target="_blank" rel="noopener noreferrer" style={styles.link}>npm</a>
           <span style={styles.link}>MIT</span>
         </div>
       </div>
+      <style>{`
+        .copyright-link:hover {
+          text-decoration: underline !important;
+        }
+      `}</style>
     </footer>
   );
 }
@@ -36,11 +43,15 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: '0.85em',
     color: 'var(--color-muted)',
   },
-  brand: {
-    fontWeight: 600,
-    color: 'var(--color-heading)',
-  },
   tagline: {},
+  copyright: {
+    fontSize: '0.75em',
+    color: 'var(--color-muted)',
+  },
+  copyrightLink: {
+    color: 'var(--color-muted)',
+    textDecoration: 'none',
+  },
   links: {
     display: 'flex',
     gap: '1.2em',

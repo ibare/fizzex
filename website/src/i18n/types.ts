@@ -104,6 +104,8 @@ export interface Dictionary {
     input_placeholder: string;
     presets_label: string;
     analyze_btn: string;
+    analysis_empty: string;
+    analysis_error: string;
     ast_btn: string;
     analysis: {
       domain: string;
