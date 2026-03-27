@@ -37,7 +37,7 @@ export default function Examples() {
   return (
     <section className="section">
       <div className="container">
-        <div className="section__header">
+        <div className="section__header section__header--left">
           <h2 className="section__title">{t.examples.title}</h2>
           <p className="section__sub">{t.examples.sub}</p>
         </div>

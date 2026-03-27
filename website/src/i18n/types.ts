@@ -146,6 +146,7 @@ export interface Dictionary {
       inequality: string;
       polar: string;
       structures: string;
+      complex: string;
     };
   };
   comparisonPage: {

@@ -163,6 +163,7 @@ export const ko: Dictionary = {
       inequality: '부등식',
       polar: '극좌표',
       structures: '행렬 & 구조',
+      complex: '복잡한 수식',
     },
   },
   comparisonPage: {

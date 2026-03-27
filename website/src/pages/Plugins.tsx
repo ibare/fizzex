@@ -58,7 +58,7 @@ export default function Plugins() {
       {/* ── Section 1: Architecture ── */}
       <section className="section section--alt">
         <div className="container">
-          <div className="section__header">
+          <div className="section__header section__header--left">
             <h2 className="section__title">{p.arch.title}</h2>
             <p className="section__sub">{p.arch.sub}</p>
           </div>
@@ -82,12 +82,12 @@ export default function Plugins() {
       {/* ── Section 2: Headless API ── */}
       <section className="section">
         <div className="container">
-          <div className="section__header">
+          <div className="section__header section__header--left">
             <h2 className="section__title">{p.api.title}</h2>
             <p className="section__sub">{p.api.sub}</p>
           </div>
 
-          <div className="grid grid--2">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5em' }}>
             <Card title={p.api.renderer_title} description={p.api.renderer_desc}>
               <CodeBlock>{rendererExample}</CodeBlock>
             </Card>
@@ -107,7 +107,7 @@ export default function Plugins() {
       {/* ── Section 3: Build Your Own Plugin ── */}
       <section className="section section--alt">
         <div className="container">
-          <div className="section__header">
+          <div className="section__header section__header--left">
             <h2 className="section__title">{p.guide.title}</h2>
             <p className="section__sub">{p.guide.sub}</p>
           </div>
@@ -137,7 +137,7 @@ export default function Plugins() {
       {/* ── Section 4: Tiptap Live Demo ── */}
       <section className="section">
         <div className="container">
-          <div className="section__header">
+          <div className="section__header section__header--left">
             <h2 className="section__title">{p.demo.title}</h2>
             <p className="section__sub">{p.demo.sub}</p>
           </div>

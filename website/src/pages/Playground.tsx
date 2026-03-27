@@ -61,7 +61,7 @@ export default function Playground() {
   return (
     <section className="section">
       <div className="container">
-        <div className="section__header">
+        <div className="section__header section__header--left">
           <h2 className="section__title">{t.playground.title}</h2>
           <p className="section__sub">{t.playground.sub}</p>
         </div>

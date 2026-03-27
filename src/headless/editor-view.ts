@@ -44,6 +44,7 @@ export class FizzexEditor {
 
   // Change handlers
   private changeHandlers = new Set<FizzexChangeHandler>();
+  private destroyed = false;
 
   // Bound event handlers (stored for removal in destroy)
   private boundCanvasClick: (e: MouseEvent) => void;
@@ -115,6 +116,7 @@ export class FizzexEditor {
     // --- Font loading ---
 
     loadSTIXMathFont().then((result) => {
+      if (this.destroyed) return;
       this.boxConfig = { ...this.boxConfig, fontFamily: result.fontFamily };
       this.userConfig.fontFamily = result.fontFamily;
       this.renderFrame();
@@ -194,6 +196,7 @@ export class FizzexEditor {
 
   /** Tear down all DOM and timers. */
   destroy(): void {
+    this.destroyed = true;
     // Stop cursor blink
     this.stopCursorBlink();
 

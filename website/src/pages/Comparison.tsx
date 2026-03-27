@@ -29,7 +29,7 @@ export default function Comparison() {
   return (
     <section className="section">
       <div className="container">
-        <div className="section__header">
+        <div className="section__header section__header--left">
           <h2 className="section__title">{t.comparisonPage.title}</h2>
           <p className="section__sub">{t.comparisonPage.sub}</p>
         </div>

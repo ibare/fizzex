@@ -61,4 +61,29 @@ export const categories: ExampleCategory[] = [
       { label: 'System of equations', latex: '\\begin{cases} 2x + y = 5 \\\\ x - y = 1 \\end{cases}' },
     ],
   },
+  {
+    key: 'complex',
+    items: [
+      {
+        label: 'Nested integrals + series',
+        latex: '\\int_{0}^{\\infty}\\left(\\sum_{n=1}^{\\infty}\\frac{(-1)^n}{n!}\\left(\\int_{0}^{1}x^{n}t\\ e^{-t^2} \\, dt\\right)\\right)\\ln\\!\\left(1 + e^{-x^2}\\right)\\, dx',
+      },
+      {
+        label: 'Matrix + exponent + eigenvalue',
+        latex: '\\Phi(A)=\\frac{\\det\\!\\left(A^\\top A + \\lambda I\\right)}{\\operatorname{tr}\\!\\left(e^{A} + \\sum_{k=1}^{m} \\frac{A^k}{k!}\\right)}\\cdot\\prod_{i=1}^{n}\\sqrt{|\\mu_i(A)|}',
+      },
+      {
+        label: 'Variational problem',
+        latex: '\\mathcal{L}[u]=\\int_{\\Omega}\\left(\\frac{1}{2}\\sum_{i,j=1}^{n}a_{ij}(x)\\frac{\\partial u}{\\partial x_i}\\frac{\\partial u}{\\partial x_j}+V(x)\\ u^2-f(x)\\ u\\right)\\, dx+\\epsilon\\int_{\\partial \\Omega}|\\nabla u|^3 \\, dS',
+      },
+      {
+        label: 'Probability + information theory',
+        latex: '\\Psi(X,Y)=\\mathbb{E}\\left[\\sum_{i=1}^{N}\\frac{P(X_i \\mid Y)^2}{\\int_{\\mathcal{Y}} P(X_i \\mid y)\\, dy}\\right]+\\beta H(X \\mid Y)-\\gamma D_{\\mathrm{KL}}(P \\Vert Q)',
+      },
+      {
+        label: 'Renderer stress test',
+        latex: '\\Xi=\\left(\\sum_{k=0}^{\\infty}\\frac{(-1)^k}{(2k+1)!}\\left[\\prod_{j=1}^{k}\\left(\\int_{0}^{1}\\frac{\\sqrt{1 + x^{2j}}}{1 + \\ln(1+x)} \\, dx\\right)\\right]\\right)^{1/\\pi}\\Bigg/\\left|\\lim_{n\\to\\infty}\\frac{1}{n}\\sum_{m=1}^{n}e^{i\\ m\\ \\theta}\\right|',
+      },
+    ],
+  },
 ];

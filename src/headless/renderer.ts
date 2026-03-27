@@ -26,6 +26,7 @@ export class FizzexRenderer {
 
   private currentLatex: string | null = null;
   private currentSize: FizzexSize = { width: 0, height: 0, baseline: 0 };
+  private destroyed = false;
 
   constructor(container: HTMLElement, config: FizzexConfig = {}) {
     this.container = container;
@@ -45,6 +46,7 @@ export class FizzexRenderer {
 
     // Start async font loading
     loadSTIXMathFont().then((result) => {
+      if (this.destroyed) return;
       this.boxConfig = {
         ...this.boxConfig,
         fontFamily: result.fontFamily,
@@ -137,6 +139,7 @@ export class FizzexRenderer {
 
   /** Remove the canvas from the DOM and release references. */
   destroy(): void {
+    this.destroyed = true;
     this.container.removeChild(this.canvas);
     // Null-out to help GC / prevent accidental reuse
     (this as Record<string, unknown>).canvas = null;

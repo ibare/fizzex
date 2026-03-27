@@ -163,6 +163,7 @@ export const en: Dictionary = {
       inequality: 'Inequality',
       polar: 'Polar',
       structures: 'Matrix & Structures',
+      complex: 'Complex Formulas',
     },
   },
   comparisonPage: {
