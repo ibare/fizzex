@@ -176,27 +176,29 @@ function extractGlyphPath(font: opentype.Font, glyphId: number): GlyphPathData |
   let minY = Infinity;
   let maxY = -Infinity;
 
+  // opentype.js getPath()는 이미 Canvas 방향 Y를 반환 (양수=아래)
+  // 별도 Y 반전 불필요 — 그대로 정규화만 수행
   for (const cmd of path.commands) {
     switch (cmd.type) {
       case 'M':
-        commands.push({ type: 'M', args: [cmd.x / unitsPerEm, -cmd.y / unitsPerEm] });
-        minY = Math.min(minY, -cmd.y / unitsPerEm);
-        maxY = Math.max(maxY, -cmd.y / unitsPerEm);
+        commands.push({ type: 'M', args: [cmd.x / unitsPerEm, cmd.y / unitsPerEm] });
+        minY = Math.min(minY, cmd.y / unitsPerEm);
+        maxY = Math.max(maxY, cmd.y / unitsPerEm);
         break;
       case 'L':
-        commands.push({ type: 'L', args: [cmd.x / unitsPerEm, -cmd.y / unitsPerEm] });
-        minY = Math.min(minY, -cmd.y / unitsPerEm);
-        maxY = Math.max(maxY, -cmd.y / unitsPerEm);
+        commands.push({ type: 'L', args: [cmd.x / unitsPerEm, cmd.y / unitsPerEm] });
+        minY = Math.min(minY, cmd.y / unitsPerEm);
+        maxY = Math.max(maxY, cmd.y / unitsPerEm);
         break;
       case 'Q':
-        commands.push({ type: 'Q', args: [cmd.x1 / unitsPerEm, -cmd.y1 / unitsPerEm, cmd.x / unitsPerEm, -cmd.y / unitsPerEm] });
-        minY = Math.min(minY, -cmd.y / unitsPerEm, -cmd.y1 / unitsPerEm);
-        maxY = Math.max(maxY, -cmd.y / unitsPerEm, -cmd.y1 / unitsPerEm);
+        commands.push({ type: 'Q', args: [cmd.x1 / unitsPerEm, cmd.y1 / unitsPerEm, cmd.x / unitsPerEm, cmd.y / unitsPerEm] });
+        minY = Math.min(minY, cmd.y / unitsPerEm, cmd.y1 / unitsPerEm);
+        maxY = Math.max(maxY, cmd.y / unitsPerEm, cmd.y1 / unitsPerEm);
         break;
       case 'C':
-        commands.push({ type: 'C', args: [cmd.x1 / unitsPerEm, -cmd.y1 / unitsPerEm, cmd.x2 / unitsPerEm, -cmd.y2 / unitsPerEm, cmd.x / unitsPerEm, -cmd.y / unitsPerEm] });
-        minY = Math.min(minY, -cmd.y / unitsPerEm, -cmd.y1 / unitsPerEm, -cmd.y2 / unitsPerEm);
-        maxY = Math.max(maxY, -cmd.y / unitsPerEm, -cmd.y1 / unitsPerEm, -cmd.y2 / unitsPerEm);
+        commands.push({ type: 'C', args: [cmd.x1 / unitsPerEm, cmd.y1 / unitsPerEm, cmd.x2 / unitsPerEm, cmd.y2 / unitsPerEm, cmd.x / unitsPerEm, cmd.y / unitsPerEm] });
+        minY = Math.min(minY, cmd.y / unitsPerEm, cmd.y1 / unitsPerEm, cmd.y2 / unitsPerEm);
+        maxY = Math.max(maxY, cmd.y / unitsPerEm, cmd.y1 / unitsPerEm, cmd.y2 / unitsPerEm);
         break;
       case 'Z':
         commands.push({ type: 'Z', args: [] });
@@ -204,9 +206,9 @@ function extractGlyphPath(font: opentype.Font, glyphId: number): GlyphPathData |
     }
   }
 
-  // 정규화된 좌표에서: ascent = 기준선 위 높이 (음수 방향의 최소값의 절대값)
-  // descent = 기준선 아래 깊이 (양수 방향의 최대값)
-  // Y반전 후: 기준선 = y=0, 위 = 음수, 아래 = 양수
+  // Canvas 방향: 기준선 = y=0, 위 = 음수, 아래 = 양수
+  // ascent = 기준선 위 높이 (음수 Y의 절대값)
+  // descent = 기준선 아래 깊이 (양수 Y의 최대값)
   const ascent = Math.abs(Math.min(0, minY));
   const descent = Math.max(0, maxY);
 
