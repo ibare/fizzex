@@ -6,6 +6,7 @@ import { useLang } from '../i18n/context';
 import { comparisonCategories } from '../data/comparison-data';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import { renderMathJax } from '../utils/mathjax';
 import type { EditorState } from 'fizzex';
 
 export default function Comparison() {
@@ -20,9 +21,11 @@ export default function Comparison() {
     return currentCategory.items.map((latex) => {
       let fizzexState: EditorState | null = null;
       let katexHtml = '';
+      let mathjaxHtml = '';
       try { fizzexState = createStateFromLatex(latex); } catch { /* skip */ }
       try { katexHtml = katex.renderToString(latex, { throwOnError: false }); } catch { /* skip */ }
-      return { fizzexState, katexHtml };
+      try { mathjaxHtml = renderMathJax(latex); } catch { /* skip */ }
+      return { fizzexState, katexHtml, mathjaxHtml };
     });
   }, [activeCategory]);
 
@@ -59,29 +62,42 @@ export default function Comparison() {
           <div style={styles.content}>
             {/* Header row */}
             <div style={styles.headerRow}>
-              <span>{t.comparisonPage.latex_source}</span>
               <span>{t.comparisonPage.fizzex_label}</span>
               <span>{t.comparisonPage.katex_label}</span>
+              <span>{t.comparisonPage.mathjax_label}</span>
             </div>
 
             {currentCategory.items.map((latex, i) => {
               const item = rendered[i];
               return (
-                <div key={`${currentCategory.key}-${i}`} style={styles.row}>
-                  <code style={styles.latexCode}>{latex}</code>
-                  <div style={styles.renderCell}>
-                    {item.fizzexState ? (
-                      <MathCanvas initialState={item.fizzexState} readOnly autoSize />
-                    ) : (
-                      <span style={styles.muted}>Error</span>
-                    )}
+                <div key={`${currentCategory.key}-${i}`} style={styles.itemGroup}>
+                  {/* LaTeX source row — spans full width */}
+                  <div style={styles.latexRow}>
+                    <code style={styles.latexCode}>{latex}</code>
                   </div>
-                  <div style={styles.renderCell}>
-                    {item.katexHtml ? (
-                      <span dangerouslySetInnerHTML={{ __html: item.katexHtml }} />
-                    ) : (
-                      <span style={styles.muted}>Error</span>
-                    )}
+                  {/* Render row — 3 columns */}
+                  <div style={styles.renderRow}>
+                    <div style={styles.renderCell}>
+                      {item.fizzexState ? (
+                        <MathCanvas initialState={item.fizzexState} readOnly autoSize />
+                      ) : (
+                        <span style={styles.muted}>Error</span>
+                      )}
+                    </div>
+                    <div style={styles.renderCell}>
+                      {item.katexHtml ? (
+                        <span dangerouslySetInnerHTML={{ __html: item.katexHtml }} />
+                      ) : (
+                        <span style={styles.muted}>Error</span>
+                      )}
+                    </div>
+                    <div style={styles.renderCell}>
+                      {item.mathjaxHtml ? (
+                        <span dangerouslySetInnerHTML={{ __html: item.mathjaxHtml }} />
+                      ) : (
+                        <span style={styles.muted}>Error</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
@@ -120,15 +136,25 @@ const styles: Record<string, React.CSSProperties> = {
     color: 'var(--color-heading)',
     borderBottom: '2px solid var(--color-border)',
   },
-  row: {
+  itemGroup: {
+    borderBottom: '1px solid var(--color-border)',
+  },
+  latexRow: {
+    padding: '0.5em 1em 0.25em',
+    background: 'var(--color-surface, #f8f8f8)',
+  },
+  latexCode: {
+    fontSize: '0.75em',
+    color: 'var(--color-muted)',
+    wordBreak: 'break-all' as const,
+  },
+  renderRow: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
     gap: '1em',
-    padding: '0.75em 1em',
-    borderBottom: '1px solid var(--color-border)',
+    padding: '0.5em 1em 0.75em',
     alignItems: 'center',
   },
-  latexCode: { fontSize: '0.8em', wordBreak: 'break-all' as const },
   renderCell: {
     minHeight: '2em',
     display: 'flex',

@@ -168,10 +168,11 @@ export const ko: Dictionary = {
   },
   comparisonPage: {
     title: '렌더링 비교',
-    sub: '동일한 LaTeX를 나란히 렌더링: Fizzex (Canvas) vs KaTeX (DOM).',
+    sub: '동일한 LaTeX를 나란히 렌더링: Fizzex (Canvas) vs KaTeX (DOM) vs MathJax (SVG).',
     render_btn: '전체 렌더링',
     fizzex_label: 'Fizzex',
     katex_label: 'KaTeX',
+    mathjax_label: 'MathJax',
     latex_source: 'LaTeX',
     categories: {
       fractions: '분수',

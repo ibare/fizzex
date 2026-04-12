@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "mathjax-full": "^3.2.2",
     "nerdamer": "^1.1.13",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

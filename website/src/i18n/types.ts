@@ -155,6 +155,7 @@ export interface Dictionary {
     render_btn: string;
     fizzex_label: string;
     katex_label: string;
+    mathjax_label: string;
     latex_source: string;
     categories: {
       fractions: string;

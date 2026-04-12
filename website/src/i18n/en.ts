@@ -168,10 +168,11 @@ export const en: Dictionary = {
   },
   comparisonPage: {
     title: 'Rendering Comparison',
-    sub: 'The same LaTeX rendered side-by-side: Fizzex (Canvas) vs KaTeX (DOM).',
+    sub: 'The same LaTeX rendered side-by-side: Fizzex (Canvas) vs KaTeX (DOM) vs MathJax (SVG).',
     render_btn: 'Render All',
     fizzex_label: 'Fizzex',
     katex_label: 'KaTeX',
+    mathjax_label: 'MathJax',
     latex_source: 'LaTeX',
     categories: {
       fractions: 'Fractions',
