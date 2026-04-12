@@ -53,6 +53,8 @@ export interface MathCanvasProps {
   minHeight?: number;
   /** 자동 크기 조절 시 패딩 */
   padding?: number;
+  /** 표시 모드 (display: 독립 수식, inline: 본문 내 수식) */
+  displayMode?: 'display' | 'inline';
 }
 
 /** 기본 폰트 (STIX Two Math 로드 전 폴백) */
@@ -98,6 +100,7 @@ export function MathCanvas({
   minWidth = 40,
   minHeight = 40,
   padding = 20,
+  displayMode = 'display',
 }: MathCanvasProps) {
   // autoSize 기본값: readOnly일 때 true
   const shouldAutoSize = autoSize ?? readOnly;
@@ -277,7 +280,8 @@ export function MathCanvas({
     }
 
     // AST → Box 변환
-    const box = astToBox(state.ast, metricsRef.current, 1.0);
+    const displayStyle = displayMode === 'display';
+    const box = astToBox(state.ast, metricsRef.current, 1.0, displayStyle);
 
     // 임시 레이아웃 (크기 계산용)
     layoutBox(box, padding, tempHeight / 2);
@@ -296,7 +300,7 @@ export function MathCanvas({
         Math.abs(computedSize.height - requiredHeight) > 1) {
       setComputedSize({ width: requiredWidth, height: requiredHeight });
     }
-  }, [state.ast, config, shouldAutoSize, minWidth, minHeight, padding, computedSize]);
+  }, [state.ast, config, shouldAutoSize, minWidth, minHeight, padding, computedSize, displayMode]);
 
   // 렌더링
   useEffect(() => {
@@ -330,7 +334,8 @@ export function MathCanvas({
     }
 
     // AST → Box 변환
-    const box = astToBox(state.ast, metricsRef.current, 1.0);
+    const displayStyle = displayMode === 'display';
+    const box = astToBox(state.ast, metricsRef.current, 1.0, displayStyle);
     boxRef.current = box;
 
     // 레이아웃 계산
@@ -373,7 +378,7 @@ export function MathCanvas({
       ctx.fillStyle = theme === 'dark' ? '#666' : '#999';
       ctx.fillText(labels.placeholder, startX, height / 2 + 6);
     }
-  }, [state, config, width, height, isFocused, cursorVisible, theme, debug, isComposing, labels.placeholder, shouldAutoSize, padding]);
+  }, [state, config, width, height, isFocused, cursorVisible, theme, debug, isComposing, labels.placeholder, shouldAutoSize, padding, displayMode]);
 
   // 숨겨진 input 키보드 이벤트
   const handleHiddenInputKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {

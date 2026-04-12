@@ -157,6 +157,8 @@ export interface Dictionary {
     katex_label: string;
     mathjax_label: string;
     latex_source: string;
+    display_mode_display: string;
+    display_mode_inline: string;
     categories: {
       fractions: string;
       powers: string;

@@ -14,6 +14,7 @@ export interface FizzexConfig {
   color?: string;             // default '#1a1a1a'
   theme?: 'light' | 'dark';  // default 'light'
   padding?: number;           // default 8
+  displayMode?: 'display' | 'inline';  // default 'display'
 }
 
 export interface FizzexSize {
@@ -42,6 +43,7 @@ export function resolveBoxRenderConfig(
     fontFamily: config.fontFamily ?? STIX_TWO_MATH_CONFIG.fallback,
     color: config.color ?? (isDark ? '#e0e0e0' : '#1a1a1a'),
     cursorColor: isDark ? '#60a5fa' : '#3b82f6',
+    displayMode: config.displayMode ?? 'display',
     showPlaceholders: isEditor,
     placeholder: isEditor
       ? {

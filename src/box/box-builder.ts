@@ -223,11 +223,13 @@ export function createFraction(
   denominator: Box,
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  displayStyle: boolean = true
 ): VBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
-  const gap = actualFontSize * MathConstants.fractionGap;
+  // inline 모드: gap을 60%로 축소
+  const gap = actualFontSize * MathConstants.fractionGap * (displayStyle ? 1 : 0.6);
 
   // 분자와 분모 중 더 넓은 것 기준으로 분수선 너비 결정
   const ruleWidth = Math.max(numerator.width, denominator.width) + gap * 2;
@@ -479,7 +481,8 @@ export function createIntegralBox(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int'
+  integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int',
+  displayStyle: boolean = true
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
@@ -492,13 +495,15 @@ export function createIntegralBox(
   };
   const integralChar = integralSymbols[integralType] || '∫';
 
-  // Display style: 큰 적분 기호 (이탤릭으로 기울임 적용)
-  const integralScale = 2.5;
+  // display: 2.5배, inline: 1.4배
+  const integralScale = displayStyle ? 2.5 : 1.4;
   const integralGlyph = createGlyph(integralChar, metrics, fontSize * integralScale, true);
 
-  // 적분 기호의 높이/깊이 조정 (길쭉하게)
-  integralGlyph.height = actualFontSize * 1.8;
-  integralGlyph.depth = actualFontSize * 0.8;
+  // 적분 기호의 높이/깊이 조정
+  const heightFactor = displayStyle ? 1.8 : 1.0;
+  const depthFactor = displayStyle ? 0.8 : 0.4;
+  integralGlyph.height = actualFontSize * heightFactor;
+  integralGlyph.depth = actualFontSize * depthFactor;
 
   // 상하한이 있는 경우에만 처리
   const hasLimits = lower.width > 0 || upper.width > 0;
@@ -585,12 +590,33 @@ export function createSumBox(
   body: Box,
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  displayStyle: boolean = true
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
+  if (!displayStyle) {
+    // Inline style: 작은 Σ + sideset (위첨자/아래첨자)
+    const sigmaScale = 1.3;
+    const sigmaGlyph = createGlyph('Σ', metrics, fontSize * sigmaScale, false);
+
+    // 상한은 위첨자, 하한은 아래첨자로 배치
+    const shiftedUpper: Box = { ...upper, shift: -(sigmaGlyph.height * 0.6) };
+    const shiftedLower: Box = { ...lower, shift: sigmaGlyph.depth + lower.height * 0.3 };
+
+    const limitsWidth = Math.max(upper.width, lower.width);
+    const limitsBox = createHBox([shiftedUpper, createKern(-upper.width), shiftedLower]);
+    limitsBox.width = limitsWidth;
+
+    const kern = createKern(actualFontSize * 0.1);
+    const result = createHBox([sigmaGlyph, limitsBox, kern, body], sourceId);
+    result.height = Math.max(result.height, sigmaGlyph.height, -(shiftedUpper.shift ?? 0) + upper.height);
+    result.depth = Math.max(result.depth, sigmaGlyph.depth, (shiftedLower.shift ?? 0) + lower.depth);
+    return result;
+  }
+
   // Display style: 큰 시그마 기호 (Σ)
-  const sigmaScale = 2.0; // 기본보다 2배 크게
+  const sigmaScale = 2.0;
   const sigmaGlyph = createGlyph('Σ', metrics, fontSize * sigmaScale, false);
 
   // 상하한 간격
@@ -635,7 +661,8 @@ export function createLimitBox(
   body: Box,
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  displayStyle: boolean = true
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const smallFontSize = fontSize * MathConstants.subscriptScale;
@@ -643,13 +670,25 @@ export function createLimitBox(
   // "lim" 텍스트
   const limGlyph = createGlyphString('lim', metrics, fontSize, false);
 
-  // 변수 → 접근값 (아래에 표시)
+  // 변수 → 접근값
   const varGlyph = createGlyph(variable, metrics, smallFontSize, true);
   const arrowGlyph = createGlyph('→', metrics, smallFontSize, false);
-
   const limitInfo = createHBox([varGlyph, arrowGlyph, approach]);
 
-  // lim과 limitInfo의 너비 중 큰 값
+  if (!displayStyle) {
+    // Inline style: "lim" + 아래첨자
+    const shiftedInfo: Box = {
+      ...limitInfo,
+      shift: limGlyph.depth + limitInfo.height * 0.3,
+    };
+
+    const kern = createKern(actualFontSize * 0.15);
+    const result = createHBox([limGlyph, shiftedInfo, kern, body], sourceId);
+    result.depth = Math.max(result.depth, (shiftedInfo.shift ?? 0) + limitInfo.depth);
+    return result;
+  }
+
+  // Display style: VBox (lim 위, x→0 아래)
   const maxWidth = Math.max(limGlyph.width, limitInfo.width);
 
   // lim을 중앙 정렬
@@ -685,12 +724,32 @@ export function createProductBox(
   body: Box,
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  displayStyle: boolean = true
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
+  if (!displayStyle) {
+    // Inline style: 작은 ∏ + sideset (위첨자/아래첨자)
+    const productScale = 1.3;
+    const productGlyph = createGlyph('∏', metrics, fontSize * productScale, false);
+
+    const shiftedUpper: Box = { ...upper, shift: -(productGlyph.height * 0.6) };
+    const shiftedLower: Box = { ...lower, shift: productGlyph.depth + lower.height * 0.3 };
+
+    const limitsWidth = Math.max(upper.width, lower.width);
+    const limitsBox = createHBox([shiftedUpper, createKern(-upper.width), shiftedLower]);
+    limitsBox.width = limitsWidth;
+
+    const kern = createKern(actualFontSize * 0.1);
+    const result = createHBox([productGlyph, limitsBox, kern, body], sourceId);
+    result.height = Math.max(result.height, productGlyph.height, -(shiftedUpper.shift ?? 0) + upper.height);
+    result.depth = Math.max(result.depth, productGlyph.depth, (shiftedLower.shift ?? 0) + lower.depth);
+    return result;
+  }
+
   // Display style: 큰 곱 기호 (∏)
-  const productScale = 2.0; // 기본보다 2배 크게
+  const productScale = 2.0;
   const productGlyph = createGlyph('∏', metrics, fontSize * productScale, false);
 
   // 상하한 간격

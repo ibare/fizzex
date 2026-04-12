@@ -12,9 +12,9 @@ const tex = new TeX({ packages: AllPackages });
 const svg = new SVG({ fontCache: 'none' });
 const htmlDoc = mathjax.document('', { InputJax: tex, OutputJax: svg });
 
-export function renderMathJax(latex: string): string {
+export function renderMathJax(latex: string, display: boolean = true): string {
   try {
-    const node = htmlDoc.convert(latex, { display: true });
+    const node = htmlDoc.convert(latex, { display });
     return adaptor.outerHTML(node);
   } catch {
     return '';

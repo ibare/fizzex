@@ -174,6 +174,8 @@ export const ko: Dictionary = {
     katex_label: 'KaTeX',
     mathjax_label: 'MathJax',
     latex_source: 'LaTeX',
+    display_mode_display: 'Display',
+    display_mode_inline: 'Inline',
     categories: {
       fractions: '분수',
       powers: '거듭제곱 & 근호',

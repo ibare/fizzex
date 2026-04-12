@@ -121,6 +121,8 @@ export interface BoxRenderConfig {
   color: string;
   /** 커서 색상 */
   cursorColor: string;
+  /** 표시 모드 (display: 독립 수식, inline: 본문 내 수식) */
+  displayMode?: 'display' | 'inline';
   /** Placeholder 설정 (선택적) */
   placeholder?: PlaceholderConfig;
   /** 빈 영역 Placeholder 표시 여부 (편집 모드에서만 true) */

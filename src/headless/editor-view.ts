@@ -237,7 +237,8 @@ export class FizzexEditor {
 
     // Fresh metrics - context state resets on canvas resize
     const metrics = new CanvasFontMetrics(this.ctx, this.boxConfig);
-    const box = astToBox(ast, metrics, 1.0);
+    const displayStyle = (this.boxConfig.displayMode ?? 'display') === 'display';
+    const box = astToBox(ast, metrics, 1.0, displayStyle);
 
     // Calculate canvas dimensions
     const cssWidth = box.width + this.padding * 2;

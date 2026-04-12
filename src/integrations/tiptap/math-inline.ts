@@ -10,7 +10,7 @@ export const MathInline = Node.create<MathInlineOptions>({
 
   addOptions() {
     return {
-      fizzexConfig: { baseFontSize: 18 },
+      fizzexConfig: { baseFontSize: 18, displayMode: 'inline' },
     };
   },
 

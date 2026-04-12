@@ -40,12 +40,13 @@ import {
 export function astToBox(
   node: MathNode,
   metrics: CanvasFontMetrics,
-  fontSize: number = 1.0
+  fontSize: number = 1.0,
+  displayStyle: boolean = true
 ): Box {
   switch (node.type) {
     case 'root':
     case 'row':
-      return convertRow(node, metrics, fontSize);
+      return convertRow(node, metrics, fontSize, displayStyle);
 
     case 'number':
       return convertNumber(node, metrics, fontSize);
@@ -57,46 +58,46 @@ export function astToBox(
       return convertOperatorNode(node, metrics, fontSize);
 
     case 'frac':
-      return convertFrac(node, metrics, fontSize);
+      return convertFrac(node, metrics, fontSize, displayStyle);
 
     case 'power':
-      return convertPowerNode(node, metrics, fontSize);
+      return convertPowerNode(node, metrics, fontSize, displayStyle);
 
     case 'sqrt':
-      return convertSqrt(node, metrics, fontSize);
+      return convertSqrt(node, metrics, fontSize, displayStyle);
 
     case 'paren':
-      return convertParen(node, metrics, fontSize);
+      return convertParen(node, metrics, fontSize, displayStyle);
 
     case 'subscript':
-      return convertSubscriptNode(node, metrics, fontSize);
+      return convertSubscriptNode(node, metrics, fontSize, displayStyle);
 
     case 'abs':
-      return convertAbs(node, metrics, fontSize);
+      return convertAbs(node, metrics, fontSize, displayStyle);
 
     case 'func':
-      return convertFunc(node, metrics, fontSize);
+      return convertFunc(node, metrics, fontSize, displayStyle);
 
     case 'integral':
-      return convertIntegral(node, metrics, fontSize);
+      return convertIntegral(node, metrics, fontSize, displayStyle);
 
     case 'sum':
-      return convertSum(node, metrics, fontSize);
+      return convertSum(node, metrics, fontSize, displayStyle);
 
     case 'limit':
-      return convertLimit(node, metrics, fontSize);
+      return convertLimit(node, metrics, fontSize, displayStyle);
 
     case 'product':
-      return convertProduct(node, metrics, fontSize);
+      return convertProduct(node, metrics, fontSize, displayStyle);
 
     case 'overline':
-      return convertOverline(node, metrics, fontSize);
+      return convertOverline(node, metrics, fontSize, displayStyle);
 
     case 'accent':
-      return convertAccent(node, metrics, fontSize);
+      return convertAccent(node, metrics, fontSize, displayStyle);
 
     case 'matrix':
-      return convertMatrix(node, metrics, fontSize);
+      return convertMatrix(node, metrics, fontSize, displayStyle);
 
     case 'text':
       return convertText(node, metrics, fontSize);
@@ -105,16 +106,16 @@ export function astToBox(
       return convertSpace(node, metrics, fontSize);
 
     case 'align':
-      return convertAlign(node, metrics, fontSize);
+      return convertAlign(node, metrics, fontSize, displayStyle);
 
     case 'cases':
-      return convertCases(node, metrics, fontSize);
+      return convertCases(node, metrics, fontSize, displayStyle);
 
     case 'gather':
-      return convertGather(node, metrics, fontSize);
+      return convertGather(node, metrics, fontSize, displayStyle);
 
     case 'array':
-      return convertArray(node, metrics, fontSize);
+      return convertArray(node, metrics, fontSize, displayStyle);
 
     default: {
       // TypeScript exhaustive check: 모든 노드 타입이 처리되었는지 컴파일 타임에 검증
@@ -131,9 +132,10 @@ export function astToBox(
 function convertRow(
   node: MathNode & { children: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): HBox {
-  const children = node.children.map(child => astToBox(child, metrics, fontSize));
+  const children = node.children.map(child => astToBox(child, metrics, fontSize, displayStyle));
   return createHBox(children, node.id);
 }
 
@@ -169,32 +171,36 @@ function convertOperatorNode(
 function convertFrac(
   node: MathNode & { numerator: MathNode[]; denominator: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // numerator[0]과 denominator[0]이 row 노드
   const numNode = node.numerator[0];
   const denNode = node.denominator[0];
 
-  const numeratorBox = astToBox(numNode, metrics, fontSize);
-  const denominatorBox = astToBox(denNode, metrics, fontSize);
+  // inline 모드: 분자/분모를 0.7배 축소
+  const childFontSize = displayStyle ? fontSize : fontSize * MathConstants.exponentScale;
+  const numeratorBox = astToBox(numNode, metrics, childFontSize, displayStyle);
+  const denominatorBox = astToBox(denNode, metrics, childFontSize, displayStyle);
 
-  return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id);
+  return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id, displayStyle);
 }
 
 /** 거듭제곱 노드 변환 */
 function convertPowerNode(
   node: MathNode & { base: MathNode[]; exponent: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // base 변환
-  const baseChildren = node.base.map(child => astToBox(child, metrics, fontSize));
+  const baseChildren = node.base.map(child => astToBox(child, metrics, fontSize, displayStyle));
   const baseBox = createHBox(baseChildren);
 
   // 지수는 작은 크기로 (exponent[0]이 row 노드)
   const expFontSize = fontSize * MathConstants.exponentScale;
   const expNode = node.exponent[0];
-  const exponentBox = astToBox(expNode, metrics, expFontSize);
+  const exponentBox = astToBox(expNode, metrics, expFontSize, displayStyle);
 
   return createPower(baseBox, exponentBox, metrics, fontSize, node.id);
 }
@@ -203,16 +209,17 @@ function convertPowerNode(
 function convertSubscriptNode(
   node: MathNode & { base: MathNode[]; subscript: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // base 변환
-  const baseChildren = node.base.map(child => astToBox(child, metrics, fontSize));
+  const baseChildren = node.base.map(child => astToBox(child, metrics, fontSize, displayStyle));
   const baseBox = createHBox(baseChildren);
 
   // 아래첨자는 작은 크기로 (subscript[0]이 row 노드)
   const subFontSize = fontSize * MathConstants.subscriptScale;
   const subNode = node.subscript[0];
-  const subscriptBox = astToBox(subNode, metrics, subFontSize);
+  const subscriptBox = astToBox(subNode, metrics, subFontSize, displayStyle);
 
   return createSubscript(baseBox, subscriptBox, metrics, fontSize, node.id);
 }
@@ -221,11 +228,12 @@ function convertSubscriptNode(
 function convertAbs(
   node: MathNode & { content: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // content[0]이 row 노드
   const contentNode = node.content[0];
-  const contentBox = astToBox(contentNode, metrics, fontSize);
+  const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
   return createAbsoluteValue(contentBox, metrics, fontSize, node.id);
 }
@@ -234,11 +242,12 @@ function convertAbs(
 function convertSqrt(
   node: MathNode & { content: MathNode[]; index?: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): SurdBox {
   // content[0]이 row 노드
   const contentNode = node.content[0];
-  const contentBox = astToBox(contentNode, metrics, fontSize);
+  const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
   // SurdBox 생성 (√ 기호와 vinculum을 함께 렌더링)
   return createSurd(contentBox, metrics, fontSize, node.id);
@@ -248,11 +257,12 @@ function convertSqrt(
 function convertParen(
   node: MathNode & { content: MathNode[]; parenType: '(' | '[' | '{'; autoSize?: boolean },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // content[0]이 row 노드
   const contentNode = node.content[0];
-  const contentBox = astToBox(contentNode, metrics, fontSize);
+  const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
   return createParenthesized(
     contentBox,
@@ -268,7 +278,8 @@ function convertParen(
 function convertFunc(
   node: MathNode & { name: string; argument: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): HBox {
   // 함수 이름 (정체, 이탤릭 아님)
   const nameBox = createGlyphString(node.name, metrics, fontSize, false);
@@ -279,7 +290,7 @@ function convertFunc(
   }
 
   // 인자 변환 (paren 노드가 있으면 괄호 포함, 없으면 괄호 없음)
-  const argChildren = node.argument.map(child => astToBox(child, metrics, fontSize));
+  const argChildren = node.argument.map(child => astToBox(child, metrics, fontSize, displayStyle));
   const argBox = createHBox(argChildren);
 
   // 함수 이름과 인자 사이에 약간의 간격
@@ -293,19 +304,20 @@ function convertFunc(
 function convertIntegral(
   node: MathNode & { lower?: MathNode[]; upper?: MathNode[]; integrand: MathNode[]; differential: string; integralType?: 'int' | 'iint' | 'iiint' | 'oint' },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   const smallFontSize = fontSize * MathConstants.subscriptScale;
 
   // 하한/상한 변환 (작은 폰트)
   const lowerNode = node.lower?.[0];
   const upperNode = node.upper?.[0];
-  const lowerBox = lowerNode ? astToBox(lowerNode, metrics, smallFontSize) : createHBox([]);
-  const upperBox = upperNode ? astToBox(upperNode, metrics, smallFontSize) : createHBox([]);
+  const lowerBox = lowerNode ? astToBox(lowerNode, metrics, smallFontSize, displayStyle) : createHBox([]);
+  const upperBox = upperNode ? astToBox(upperNode, metrics, smallFontSize, displayStyle) : createHBox([]);
 
   // 피적분함수 변환
   const integrandNode = node.integrand[0];
-  const integrandBox = astToBox(integrandNode, metrics, fontSize);
+  const integrandBox = astToBox(integrandNode, metrics, fontSize, displayStyle);
 
   return createIntegralBox(
     lowerBox,
@@ -315,7 +327,8 @@ function convertIntegral(
     metrics,
     fontSize,
     node.id,
-    node.integralType || 'int'
+    node.integralType || 'int',
+    displayStyle
   );
 }
 
@@ -323,72 +336,76 @@ function convertIntegral(
 function convertSum(
   node: MathNode & { lower: MathNode[]; upper: MathNode[]; body: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   const smallFontSize = fontSize * MathConstants.subscriptScale;
 
   // 하한/상한 변환 (작은 폰트)
   const lowerNode = node.lower[0];
   const upperNode = node.upper[0];
-  const lowerBox = astToBox(lowerNode, metrics, smallFontSize);
-  const upperBox = astToBox(upperNode, metrics, smallFontSize);
+  const lowerBox = astToBox(lowerNode, metrics, smallFontSize, displayStyle);
+  const upperBox = astToBox(upperNode, metrics, smallFontSize, displayStyle);
 
   // 본문 변환
   const bodyNode = node.body[0];
-  const bodyBox = astToBox(bodyNode, metrics, fontSize);
+  const bodyBox = astToBox(bodyNode, metrics, fontSize, displayStyle);
 
-  return createSumBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id);
+  return createSumBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id, displayStyle);
 }
 
 /** 극한 노드 변환 */
 function convertLimit(
   node: MathNode & { variable: string; approach: MathNode[]; body: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   const smallFontSize = fontSize * MathConstants.subscriptScale;
 
   // 접근값 변환 (작은 폰트)
   const approachNode = node.approach[0];
-  const approachBox = astToBox(approachNode, metrics, smallFontSize);
+  const approachBox = astToBox(approachNode, metrics, smallFontSize, displayStyle);
 
   // 본문 변환
   const bodyNode = node.body[0];
-  const bodyBox = astToBox(bodyNode, metrics, fontSize);
+  const bodyBox = astToBox(bodyNode, metrics, fontSize, displayStyle);
 
-  return createLimitBox(node.variable, approachBox, bodyBox, metrics, fontSize, node.id);
+  return createLimitBox(node.variable, approachBox, bodyBox, metrics, fontSize, node.id, displayStyle);
 }
 
 /** 곱 노드 변환 */
 function convertProduct(
   node: MathNode & { lower: MathNode[]; upper: MathNode[]; body: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   const smallFontSize = fontSize * MathConstants.subscriptScale;
 
   // 하한/상한 변환 (작은 폰트)
   const lowerNode = node.lower[0];
   const upperNode = node.upper[0];
-  const lowerBox = astToBox(lowerNode, metrics, smallFontSize);
-  const upperBox = astToBox(upperNode, metrics, smallFontSize);
+  const lowerBox = astToBox(lowerNode, metrics, smallFontSize, displayStyle);
+  const upperBox = astToBox(upperNode, metrics, smallFontSize, displayStyle);
 
   // 본문 변환
   const bodyNode = node.body[0];
-  const bodyBox = astToBox(bodyNode, metrics, fontSize);
+  const bodyBox = astToBox(bodyNode, metrics, fontSize, displayStyle);
 
-  return createProductBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id);
+  return createProductBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id, displayStyle);
 }
 
 /** 윗줄 노드 변환 */
 function convertOverline(
   node: MathNode & { content: MathNode[] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // content[0]이 row 노드
   const contentNode = node.content[0];
-  const contentBox = astToBox(contentNode, metrics, fontSize);
+  const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
   return createOverlineBox(contentBox, metrics, fontSize, node.id);
 }
@@ -397,11 +414,12 @@ function convertOverline(
 function convertAccent(
   node: MathNode & { content: MathNode[]; accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // content[0]이 row 노드
   const contentNode = node.content[0];
-  const contentBox = astToBox(contentNode, metrics, fontSize);
+  const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
   return createAccentBox(contentBox, node.accentType, metrics, fontSize, node.id);
 }
@@ -410,11 +428,12 @@ function convertAccent(
 function convertMatrix(
   node: MathNode & { rows: MathNode[][]; bracketType: '(' | '[' | '{' | '|' | '||' | 'none' },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // 각 셀을 Box로 변환
   const cellBoxes: Box[][] = node.rows.map(row =>
-    row.map(cell => astToBox(cell, metrics, fontSize))
+    row.map(cell => astToBox(cell, metrics, fontSize, displayStyle))
   );
 
   return createMatrixBox(cellBoxes, node.bracketType, metrics, fontSize, node.id);
@@ -447,11 +466,12 @@ function convertSpace(
 function convertAlign(
   node: MathNode & { rows: MathNode[][]; starred: boolean; isInline: boolean },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // 각 셀을 Box로 변환
   const cellBoxes: Box[][] = node.rows.map(row =>
-    row.map(cell => astToBox(cell, metrics, fontSize))
+    row.map(cell => astToBox(cell, metrics, fontSize, displayStyle))
   );
 
   return createAlignBox(cellBoxes, metrics, fontSize, node.id);
@@ -461,11 +481,12 @@ function convertAlign(
 function convertCases(
   node: MathNode & { rows: MathNode[][] },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // 각 셀을 Box로 변환
   const cellBoxes: Box[][] = node.rows.map(row =>
-    row.map(cell => astToBox(cell, metrics, fontSize))
+    row.map(cell => astToBox(cell, metrics, fontSize, displayStyle))
   );
 
   return createCasesBox(cellBoxes, metrics, fontSize, node.id);
@@ -475,10 +496,11 @@ function convertCases(
 function convertGather(
   node: MathNode & { rows: MathNode[]; starred: boolean; isInline: boolean },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // 각 행을 Box로 변환
-  const rowBoxes: Box[] = node.rows.map(row => astToBox(row, metrics, fontSize));
+  const rowBoxes: Box[] = node.rows.map(row => astToBox(row, metrics, fontSize, displayStyle));
 
   return createGatherBox(rowBoxes, metrics, fontSize, node.id);
 }
@@ -492,11 +514,12 @@ function convertArray(
     rowLines: boolean[];
   },
   metrics: CanvasFontMetrics,
-  fontSize: number
+  fontSize: number,
+  displayStyle: boolean
 ): Box {
   // 각 셀을 Box로 변환
   const cellBoxes: Box[][] = node.rows.map(row =>
-    row.map(cell => astToBox(cell, metrics, fontSize))
+    row.map(cell => astToBox(cell, metrics, fontSize, displayStyle))
   );
 
   return createArrayBox(

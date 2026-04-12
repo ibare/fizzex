@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { createStateFromLatex } from 'fizzex';
 import { MathCanvas } from 'fizzex/react';
@@ -12,10 +12,12 @@ import type { EditorState } from 'fizzex';
 export default function Comparison() {
   const { t, lang } = useLang();
   const { category: categoryParam } = useParams<{ category?: string }>();
+  const [displayMode, setDisplayMode] = useState<'display' | 'inline'>('display');
 
   const activeCategory = Math.max(0, comparisonCategories.findIndex((c) => c.key === categoryParam));
   const currentCategory = comparisonCategories[activeCategory];
   const categoryLabels = t.comparisonPage.categories as Record<string, string>;
+  const isDisplay = displayMode === 'display';
 
   const rendered = useMemo(() => {
     return currentCategory.items.map((latex) => {
@@ -23,11 +25,11 @@ export default function Comparison() {
       let katexHtml = '';
       let mathjaxHtml = '';
       try { fizzexState = createStateFromLatex(latex); } catch { /* skip */ }
-      try { katexHtml = katex.renderToString(latex, { throwOnError: false }); } catch { /* skip */ }
-      try { mathjaxHtml = renderMathJax(latex); } catch { /* skip */ }
+      try { katexHtml = katex.renderToString(latex, { throwOnError: false, displayMode: isDisplay }); } catch { /* skip */ }
+      try { mathjaxHtml = renderMathJax(latex, isDisplay); } catch { /* skip */ }
       return { fizzexState, katexHtml, mathjaxHtml };
     });
-  }, [activeCategory]);
+  }, [activeCategory, displayMode]);
 
   return (
     <section className="section">
@@ -60,7 +62,29 @@ export default function Comparison() {
 
           {/* Content */}
           <div style={styles.content}>
-            {/* Header row */}
+            {/* Toggle + Header */}
+            <div style={styles.toggleRow}>
+              <div style={styles.modeToggle}>
+                <button
+                  style={{
+                    ...styles.modeBtn,
+                    ...(isDisplay ? styles.modeBtnActive : {}),
+                  }}
+                  onClick={() => setDisplayMode('display')}
+                >
+                  {t.comparisonPage.display_mode_display}
+                </button>
+                <button
+                  style={{
+                    ...styles.modeBtn,
+                    ...(!isDisplay ? styles.modeBtnActive : {}),
+                  }}
+                  onClick={() => setDisplayMode('inline')}
+                >
+                  {t.comparisonPage.display_mode_inline}
+                </button>
+              </div>
+            </div>
             <div style={styles.headerRow}>
               <span>{t.comparisonPage.fizzex_label}</span>
               <span>{t.comparisonPage.katex_label}</span>
@@ -79,7 +103,7 @@ export default function Comparison() {
                   <div style={styles.renderRow}>
                     <div style={styles.renderCell}>
                       {item.fizzexState ? (
-                        <MathCanvas initialState={item.fizzexState} readOnly autoSize />
+                        <MathCanvas initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
                       ) : (
                         <span style={styles.muted}>Error</span>
                       )}
@@ -126,6 +150,11 @@ const styles: Record<string, React.CSSProperties> = {
     transition: 'all 0.15s ease-out',
   },
   content: { flex: 1, display: 'flex', flexDirection: 'column' as const, gap: '0' },
+  toggleRow: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: '0 1em 0.5em',
+  },
   headerRow: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
@@ -140,11 +169,11 @@ const styles: Record<string, React.CSSProperties> = {
     borderBottom: '1px solid var(--color-border)',
   },
   latexRow: {
-    padding: '0.5em 1em 0.25em',
+    padding: '2px 1em',
     background: 'var(--color-surface, #f8f8f8)',
   },
   latexCode: {
-    fontSize: '0.75em',
+    fontSize: '12px',
     color: 'var(--color-muted)',
     wordBreak: 'break-all' as const,
   },
@@ -162,4 +191,23 @@ const styles: Record<string, React.CSSProperties> = {
     overflow: 'visible',
   },
   muted: { color: 'var(--color-muted)', fontSize: '0.85em' },
+  modeToggle: {
+    display: 'flex',
+    gap: '0',
+  },
+  modeBtn: {
+    padding: '0.2em 0.8em',
+    border: 'none',
+    background: 'transparent',
+    color: 'var(--color-text)',
+    fontSize: '12px',
+    fontFamily: 'inherit',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease-out',
+  },
+  modeBtnActive: {
+    background: 'var(--color-accent)',
+    color: '#fff',
+    borderRadius: 'var(--radius-sm)',
+  },
 };

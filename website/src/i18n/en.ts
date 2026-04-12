@@ -174,6 +174,8 @@ export const en: Dictionary = {
     katex_label: 'KaTeX',
     mathjax_label: 'MathJax',
     latex_source: 'LaTeX',
+    display_mode_display: 'Display',
+    display_mode_inline: 'Inline',
     categories: {
       fractions: 'Fractions',
       powers: 'Powers & Roots',
