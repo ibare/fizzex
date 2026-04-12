@@ -4,3 +4,4 @@
 
 export * from './glyph-mappings';
 export * from './font-loader';
+export * from './delimiter-paths';

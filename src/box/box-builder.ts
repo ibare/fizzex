@@ -4,10 +4,11 @@
  * 다양한 Box를 쉽게 생성하기 위한 빌더 함수들
  */
 
-import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox } from './types';
+import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox } from './types';
 import type { CanvasFontMetrics } from './font-metrics';
 import { MathConstants } from './font-metrics';
 import { isComplexNodeSlot } from './constants';
+import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
 
 /** Glyph Box 생성 */
 export function createGlyph(
@@ -304,6 +305,59 @@ export function createPower(
   return hbox;
 }
 
+/** 경로 데이터로 최적 크기 변형 인덱스 선택 */
+function selectPathVariant(pathChar: string, targetHeightEm: number): { variantIndex: number; pathWidth: number; pathHeight: number } {
+  const entry = DELIMITER_PATHS[pathChar];
+  if (!entry) return { variantIndex: -1, pathWidth: 0, pathHeight: 0 };
+
+  // base 글리프 확인
+  const baseHeight = entry.base.ascent + entry.base.descent;
+  if (targetHeightEm <= baseHeight) {
+    return { variantIndex: -1, pathWidth: entry.base.advanceWidth, pathHeight: baseHeight };
+  }
+
+  // 크기 변형에서 적절한 것 선택 (targetHeight 이상인 최소 변형)
+  if (entry.variants) {
+    for (let i = 0; i < entry.variants.length; i++) {
+      const v = entry.variants[i];
+      const vHeight = v.ascent + v.descent;
+      if (vHeight >= targetHeightEm) {
+        return { variantIndex: i, pathWidth: v.advanceWidth, pathHeight: vHeight };
+      }
+    }
+    // 모든 변형보다 크면 마지막 변형 사용
+    const last = entry.variants[entry.variants.length - 1];
+    return {
+      variantIndex: entry.variants.length - 1,
+      pathWidth: last.advanceWidth,
+      pathHeight: last.ascent + last.descent,
+    };
+  }
+
+  return { variantIndex: -1, pathWidth: entry.base.advanceWidth, pathHeight: baseHeight };
+}
+
+/** PathBox 생성 */
+function createPathBox(
+  pathChar: string,
+  variantIndex: number,
+  targetWidth: number,
+  height: number,
+  depth: number,
+): PathBox {
+  return {
+    type: 'path',
+    pathChar,
+    variantIndex,
+    targetWidth,
+    width: targetWidth,
+    height,
+    depth,
+    x: 0,
+    y: 0,
+  };
+}
+
 /** 괄호로 감싼 Box 생성 */
 export function createParenthesized(
   content: Box,
@@ -320,58 +374,71 @@ export function createParenthesized(
   const contentDepth = content.depth > 0 ? content.depth : metrics.getDepth(fontSize);
   const totalHeight = contentHeight + contentDepth;
 
-  // 높이를 em 단위로 변환
-  const heightEm = totalHeight / actualFontSize;
-
   // autoSize일 때 괄호 높이에 약간의 여유 공간 (내용물보다 살짝 크게)
   const verticalPadding = autoSize ? actualFontSize * 0.06 : 0;
   const parenHeight = contentHeight + verticalPadding;
   const parenDepth = contentDepth + verticalPadding;
 
-  // 글리프 선택용 높이 (em 단위)
+  // 대응하는 닫는 괄호
+  const closeParen = parenType === '(' ? ')' : parenType === '[' ? ']' : '}';
+
+  // 경로 데이터 기반 렌더링 시도 (현재 ( ) 만 지원)
+  const openPathEntry = DELIMITER_PATHS[parenType];
+  const closePathEntry = DELIMITER_PATHS[closeParen];
+
+  if (openPathEntry && closePathEntry) {
+    // 정규화 높이 (em 단위 → 경로 데이터의 정규화 좌표 단위)
+    const targetHeightNorm = (parenHeight + parenDepth) / actualFontSize;
+
+    const openVariant = selectPathVariant(parenType, targetHeightNorm);
+    const closeVariant = selectPathVariant(closeParen, targetHeightNorm);
+
+    // 경로의 자연 폭을 실제 px로 변환
+    const openWidth = openVariant.pathWidth * actualFontSize;
+    const closeWidth = closeVariant.pathWidth * actualFontSize;
+
+    const openBox = createPathBox(parenType, openVariant.variantIndex, openWidth, parenHeight, parenDepth);
+    const closeBox = createPathBox(closeParen, closeVariant.variantIndex, closeWidth, parenHeight, parenDepth);
+
+    const innerPadding = createKern(actualFontSize * MathConstants.parenPadding);
+    const minWidthKern = content.width > 0 ? content : createKern(actualFontSize * 0.3);
+
+    return createHBox([openBox, innerPadding, minWidthKern, innerPadding, closeBox], sourceId);
+  }
+
+  // 폴백: 기존 GlyphBox 방식 (경로 데이터가 없는 괄호)
+  const heightEm = totalHeight / actualFontSize;
   const effectiveHeightEm = (parenHeight + parenDepth) / actualFontSize;
 
-  // 수학 폰트 글리프 선택
   const openGlyphInfo = metrics.getDelimiterGlyph(parenType, true, effectiveHeightEm);
   const closeGlyphInfo = metrics.getDelimiterGlyph(parenType, false, effectiveHeightEm);
 
-  let openGlyph: GlyphBox;
-  let closeGlyph: GlyphBox;
-
-  // 스케일 계산: 내용물 높이(em)에 비례하여 괄호 크기 결정
-  // 수직 스트레칭 없이 폰트 스케일만으로 처리
   let glyphScale: number;
   if (autoSize) {
-    // autoSize: 내용물 높이의 1.05배 (약간의 여유만)
     glyphScale = Math.min(3.0, Math.max(1.0, heightEm * 1.05));
   } else {
-    // 일반 모드: 기본 크기 유지
     glyphScale = Math.min(1.2, Math.max(1.0, heightEm));
   }
+
+  let openGlyph: GlyphBox;
+  let closeGlyph: GlyphBox;
 
   if (openGlyphInfo.type === 'single' && closeGlyphInfo.type === 'single') {
     openGlyph = createGlyph(openGlyphInfo.char, metrics, fontSize * glyphScale, false);
     closeGlyph = createGlyph(closeGlyphInfo.char, metrics, fontSize * glyphScale, false);
   } else {
-    // 확장형 글리프 (VBox로 구성) - 추후 구현
-    // 현재는 폴백으로 스케일링 사용
     const openChar = openGlyphInfo.type === 'single' ? openGlyphInfo.char : parenType;
-    const closeParen = parenType === '(' ? ')' : parenType === '[' ? ']' : '}';
     const closeChar = closeGlyphInfo.type === 'single' ? closeGlyphInfo.char : closeParen;
-
     openGlyph = createGlyph(openChar, metrics, fontSize * glyphScale, false);
     closeGlyph = createGlyph(closeChar, metrics, fontSize * glyphScale, false);
   }
 
-  // 레이아웃: 내용물 높이 사용 (괄호가 내용물을 감쌈)
   openGlyph.height = parenHeight;
   openGlyph.depth = parenDepth;
   closeGlyph.height = parenHeight;
   closeGlyph.depth = parenDepth;
 
   const innerPadding = createKern(actualFontSize * MathConstants.parenPadding);
-
-  // 빈 content일 때 최소 너비 확보
   const minWidthKern = content.width > 0 ? content : createKern(actualFontSize * 0.3);
 
   return createHBox([openGlyph, innerPadding, minWidthKern, innerPadding, closeGlyph], sourceId);
@@ -992,32 +1059,46 @@ export function createMatrixBox(
     closeParen = bracketType === '(' ? ')' : bracketType === '[' ? ']' : '}';
   }
 
+  const padding = createKern(actualFontSize * MathConstants.parenPadding);
+
+  // 경로 기반 괄호 렌더링 시도 (현재 ( ) 만 지원)
+  const openPathEntry = DELIMITER_PATHS[openParen];
+  const closePathEntry = DELIMITER_PATHS[closeParen];
+
+  if (openPathEntry && closePathEntry) {
+    const targetHeightNorm = totalHeight / actualFontSize;
+    const openVariant = selectPathVariant(openParen, targetHeightNorm);
+    const closeVariant = selectPathVariant(closeParen, targetHeightNorm);
+
+    const openWidth = openVariant.pathWidth * actualFontSize;
+    const closeWidth = closeVariant.pathWidth * actualFontSize;
+
+    // PathBox는 height/depth를 직접 지정하므로 shift 불필요
+    const openBox = createPathBox(openParen, openVariant.variantIndex, openWidth, contentHeight, contentDepth);
+    const closeBox = createPathBox(closeParen, closeVariant.variantIndex, closeWidth, contentHeight, contentDepth);
+
+    return createHBox([openBox, padding, matrixContent, padding, closeBox], sourceId);
+  }
+
+  // 폴백: 기존 GlyphBox 방식 (경로 데이터가 없는 괄호)
   const openGlyph = createGlyph(openParen, metrics, parenFontSize, false);
   const closeGlyph = createGlyph(closeParen, metrics, parenFontSize, false);
 
-  // 원래 괄호 높이/깊이 저장
   const originalHeight = openGlyph.height;
   const originalDepth = openGlyph.depth;
 
-  // 괄호의 높이를 내용에 맞춤
   openGlyph.height = contentHeight;
   openGlyph.depth = contentDepth;
   closeGlyph.height = contentHeight;
   closeGlyph.depth = contentDepth;
 
-  // 괄호가 원래 비대칭(위쪽으로 더 김)이므로 스케일 후에도 비대칭
-  // 괄호의 시각적 중앙을 행렬 중앙에 맞추기 위한 shift 계산
-  // 괄호의 시각적 중앙이 baseline 위에 있으므로, 괄호를 아래로 이동시켜야 함
   const scaleY = totalHeight / (originalHeight + originalDepth);
   const scaledOriginalHeight = originalHeight * scaleY;
   const scaledOriginalDepth = originalDepth * scaleY;
-  // 양수 shift = 아래로 이동
   const parenCenterOffset = (scaledOriginalHeight - scaledOriginalDepth) / 2;
 
   const shiftedOpenGlyph: Box = { ...openGlyph, shift: parenCenterOffset };
   const shiftedCloseGlyph: Box = { ...closeGlyph, shift: parenCenterOffset };
-
-  const padding = createKern(actualFontSize * MathConstants.parenPadding);
 
   return createHBox([shiftedOpenGlyph, padding, matrixContent, padding, shiftedCloseGlyph], sourceId);
 }

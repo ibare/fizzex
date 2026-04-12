@@ -38,6 +38,7 @@ export interface RenderBackend {
   moveTo(x: number, y: number): void;
   lineTo(x: number, y: number): void;
   quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
+  bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void;
   fill(): void;
   stroke(): void;
 }
@@ -128,6 +129,10 @@ export class CanvasRenderBackend implements RenderBackend {
 
   quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void {
     this.ctx.quadraticCurveTo(cpx, cpy, x, y);
+  }
+
+  bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void {
+    this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
   }
 
   fill(): void {
@@ -280,6 +285,10 @@ export class MockRenderBackend implements RenderBackend {
 
   quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void {
     this.record('quadraticCurveTo', cpx, cpy, x, y);
+  }
+
+  bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void {
+    this.record('bezierCurveTo', cp1x, cp1y, cp2x, cp2y, x, y);
   }
 
   fill(): void {

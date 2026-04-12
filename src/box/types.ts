@@ -16,7 +16,8 @@ export type BoxType =
   | 'glyph'   // 단일 문자/기호
   | 'rule'    // 선 (분수선 등)
   | 'kern'    // 간격 (spacing)
-  | 'surd';   // 제곱근 (√ + vinculum)
+  | 'surd'    // 제곱근 (√ + vinculum)
+  | 'path';   // 경로 기반 글리프 (베지어 커브)
 
 /** 기본 Box 인터페이스 */
 export interface BoxBase {
@@ -94,8 +95,19 @@ export interface SurdBox extends BoxBase {
   gap: number;
 }
 
+/** Path Box - 경로 기반 글리프 렌더링 (베지어 커브) */
+export interface PathBox extends BoxBase {
+  type: 'path';
+  /** 경로 데이터 키 (DELIMITER_PATHS 참조용) */
+  pathChar: string;
+  /** 크기 변형 인덱스 (-1 = base, 0~ = variants[]) */
+  variantIndex: number;
+  /** 렌더링 폭 (px) */
+  targetWidth: number;
+}
+
 /** 모든 Box 타입 */
-export type Box = GlyphBox | HBox | VBox | RuleBox | KernBox | SurdBox;
+export type Box = GlyphBox | HBox | VBox | RuleBox | KernBox | SurdBox | PathBox;
 
 /** Placeholder 렌더링 설정 */
 export interface PlaceholderConfig {

@@ -5,13 +5,15 @@
  * RenderBackend 추상화를 통해 테스트 가능성 향상
  */
 
-import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox } from './types';
+import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox } from './types';
 import type { CanvasFontMetrics } from './font-metrics';
 import type { CursorPosition } from '../types';
 import { findBoxBySourceId, getCursorXPosition } from './box-layout';
 import { isComplexNodeSlot } from './constants';
 import type { RenderBackend } from './render-backend';
 import { CanvasRenderBackend } from './render-backend';
+import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
+import type { GlyphPathData } from '../fonts/delimiter-paths';
 
 export class BoxRenderer {
   private backend: RenderBackend;
@@ -61,6 +63,9 @@ export class BoxRenderer {
         break;
       case 'surd':
         this.renderSurd(box);
+        break;
+      case 'path':
+        this.renderPath(box);
         break;
       case 'kern':
         // Kern은 보이지 않음
@@ -236,6 +241,81 @@ export class BoxRenderer {
 
     // content 렌더링
     this.render(surd.content);
+  }
+
+  /** Path Box 렌더링 — 글리프 경로 데이터를 Canvas bezier curve로 그림 */
+  private renderPath(pathBox: PathBox): void {
+    const entry = DELIMITER_PATHS[pathBox.pathChar];
+    if (!entry) return;
+
+    // 크기 변형 선택
+    let pathData: GlyphPathData;
+    if (pathBox.variantIndex < 0) {
+      pathData = entry.base;
+    } else if (entry.variants && pathBox.variantIndex < entry.variants.length) {
+      pathData = entry.variants[pathBox.variantIndex];
+    } else {
+      pathData = entry.base;
+    }
+
+    const totalHeight = pathBox.height + pathBox.depth;
+    this.renderDelimiterPath(
+      pathData,
+      pathBox.x,
+      pathBox.y,
+      totalHeight,
+      pathBox.targetWidth,
+      pathBox.height,
+    );
+  }
+
+  /** 경로 데이터를 Canvas에 렌더링 */
+  private renderDelimiterPath(
+    pathData: GlyphPathData,
+    x: number,
+    baselineY: number,
+    targetHeight: number,
+    targetWidth: number,
+    heightAboveBaseline: number,
+  ): void {
+    const pathNaturalHeight = pathData.ascent + pathData.descent;
+    if (pathNaturalHeight <= 0 || pathData.advanceWidth <= 0) return;
+
+    const scaleX = targetWidth / pathData.advanceWidth;
+    const scaleY = targetHeight / pathNaturalHeight;
+
+    this.backend.save();
+    // baseline 기준으로 위치 조정: pathData에서 ascent 부분이 baseline 위
+    // 변환: (x, baselineY - heightAboveBaseline) 이 경로의 상단
+    // 경로 좌표에서 ascent 부분은 음수 Y (Canvas 위쪽)
+    // translate 후 scale 적용
+    this.backend.transform(scaleX, 0, 0, scaleY, x, baselineY - heightAboveBaseline + pathData.ascent * scaleY);
+
+    this.backend.setFillStyle(this.config.color);
+    this.backend.beginPath();
+
+    for (const cmd of pathData.commands) {
+      switch (cmd.type) {
+        case 'M':
+          this.backend.moveTo(cmd.args[0], cmd.args[1]);
+          break;
+        case 'L':
+          this.backend.lineTo(cmd.args[0], cmd.args[1]);
+          break;
+        case 'Q':
+          this.backend.quadraticCurveTo(cmd.args[0], cmd.args[1], cmd.args[2], cmd.args[3]);
+          break;
+        case 'C':
+          this.backend.bezierCurveTo(cmd.args[0], cmd.args[1], cmd.args[2], cmd.args[3], cmd.args[4], cmd.args[5]);
+          break;
+        case 'Z':
+          this.backend.closePath();
+          break;
+      }
+    }
+
+    this.backend.fill();
+    this.backend.restore();
   }
 
   /** 커서 위치 계산 */

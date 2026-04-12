@@ -27,7 +27,7 @@ export function layoutBox(box: Box, startX: number, startY: number): void {
     case 'surd':
       layoutSurd(box);
       break;
-    // glyph, rule, kern은 자식이 없으므로 x, y만 설정하면 됨
+    // glyph, rule, kern, path는 자식이 없으므로 x, y만 설정하면 됨
   }
 }
 

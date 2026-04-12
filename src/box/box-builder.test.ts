@@ -626,8 +626,9 @@ describe('Box Builder', () => {
       const result = createParenthesized(content, '(', metrics);
       // open + padding + content + padding + close = 5 children
       expect(result.children).toHaveLength(5);
-      expect(result.children[0].type).toBe('glyph');
-      expect(result.children[4].type).toBe('glyph');
+      // ( ) 는 경로 데이터가 있으므로 PathBox, 없으면 GlyphBox
+      expect(['glyph', 'path']).toContain(result.children[0].type);
+      expect(['glyph', 'path']).toContain(result.children[4].type);
     });
 
     it('sourceId를 설정한다', () => {
