@@ -192,55 +192,77 @@ export class BoxRenderer {
     this.backend.fillRect(rule.x, top, rule.width, rule.thickness);
   }
 
-  /** Surd (제곱근) 렌더링 - √ 기호와 vinculum을 Path로 직접 그림 */
+  /** Surd (제곱근) 렌더링 - √ 기호와 vinculum */
   private renderSurd(surd: SurdBox): void {
-    this.backend.setFillStyle(this.config.color);
-    this.backend.setStrokeStyle(this.config.color);
-    this.backend.setLineWidth(surd.ruleThickness);
-    this.backend.setLineCap('square');
-    this.backend.setLineJoin('miter');
-
-    // content 영역 좌표
+    const sqrtWidth = surd.width - surd.content.width - surd.gap;
+    const totalHeight = surd.height + surd.depth;
     const contentTop = surd.y - surd.height + surd.ruleThickness;
     const contentRight = surd.content.x + surd.content.width;
 
-    // √ 기호 폭
-    const sqrtWidth = surd.width - surd.content.width - surd.gap;
+    const sqrtEntry = DELIMITER_PATHS['√'];
 
-    // √ 전체 높이 (baseline 위 + 아래)
-    const totalHeight = surd.height + surd.depth;
+    if (sqrtEntry) {
+      // 경로 기반 √ 렌더링
+      const targetHeightNorm = totalHeight / this.config.baseFontSize;
+      const variant = this.selectSurdVariant(sqrtEntry, targetHeightNorm);
 
-    // √ 기호 각 부분의 좌표 (KaTeX 스타일)
-    // 1. 왼쪽 세리프 시작점 (거의 수평으로 시작)
-    const serifStartX = surd.x;
-    const serifStartY = surd.y - totalHeight * 0.4;
+      this.renderDelimiterPath(
+        variant,
+        surd.x,
+        surd.y,
+        totalHeight,
+        sqrtWidth,
+        surd.height,
+      );
+    } else {
+      // 폴백: 직선 기반 √ 렌더링
+      this.backend.setStrokeStyle(this.config.color);
+      this.backend.setLineWidth(surd.ruleThickness);
+      this.backend.setLineCap('square');
+      this.backend.setLineJoin('miter');
 
-    // 2. 세리프 끝점 (수평 또는 약간 위로)
-    const serifEndX = surd.x + sqrtWidth * 0.18;
-    const serifEndY = surd.y - totalHeight * 0.42;
+      const serifStartX = surd.x;
+      const serifStartY = surd.y - totalHeight * 0.4;
+      const serifEndX = surd.x + sqrtWidth * 0.18;
+      const serifEndY = surd.y - totalHeight * 0.42;
+      const checkBottomX = surd.x + sqrtWidth * 0.45;
+      const checkBottomY = surd.y + surd.depth * 0.8;
+      const sqrtTopX = surd.x + sqrtWidth;
+      const sqrtTopY = contentTop;
 
-    // 3. V자 바닥점 (세리프에서 급격히 내려감)
-    const checkBottomX = surd.x + sqrtWidth * 0.45;
-    const checkBottomY = surd.y + surd.depth * 0.8;
+      this.backend.beginPath();
+      this.backend.moveTo(serifStartX, serifStartY);
+      this.backend.lineTo(serifEndX, serifEndY);
+      this.backend.lineTo(checkBottomX, checkBottomY);
+      this.backend.lineTo(sqrtTopX, sqrtTopY);
+      this.backend.lineTo(contentRight + surd.gap * 0.5, sqrtTopY);
+      this.backend.stroke();
+    }
 
-    // 4. √ 기호 상단 (vinculum과 연결점)
-    const sqrtTopX = surd.x + sqrtWidth;
-    const sqrtTopY = contentTop;
-
-    // √ 기호 그리기 (한 번에 연결)
-    this.backend.beginPath();
-    // 세리프 (수평에 가까움)
-    this.backend.moveTo(serifStartX, serifStartY);
-    this.backend.lineTo(serifEndX, serifEndY);
-    // V자 하강
-    this.backend.lineTo(checkBottomX, checkBottomY);
-    // 상승 및 vinculum 연결
-    this.backend.lineTo(sqrtTopX, sqrtTopY);
-    this.backend.lineTo(contentRight + surd.gap * 0.5, sqrtTopY);
-    this.backend.stroke();
+    // vinculum (가로선) — √ 상단에서 content 끝까지
+    this.backend.setFillStyle(this.config.color);
+    const vinculumLeft = surd.x + sqrtWidth;
+    const vinculumTop = contentTop - surd.ruleThickness;
+    const vinculumWidth = contentRight + surd.gap * 0.5 - vinculumLeft;
+    this.backend.fillRect(vinculumLeft, vinculumTop, vinculumWidth, surd.ruleThickness);
 
     // content 렌더링
     this.render(surd.content);
+  }
+
+  /** √ 글리프 크기 변형 선택 */
+  private selectSurdVariant(entry: typeof DELIMITER_PATHS[string], targetHeightNorm: number): GlyphPathData {
+    const baseHeight = entry.base.ascent + entry.base.descent;
+    if (targetHeightNorm <= baseHeight) return entry.base;
+
+    if (entry.variants) {
+      for (const v of entry.variants) {
+        if (v.ascent + v.descent >= targetHeightNorm) return v;
+      }
+      return entry.variants[entry.variants.length - 1];
+    }
+
+    return entry.base;
   }
 
   /** Path Box 렌더링 — 글리프 경로 데이터를 Canvas bezier curve로 그림 */

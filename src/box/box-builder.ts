@@ -1543,8 +1543,19 @@ export function createSurd(
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness * 1.5;
   const gap = actualFontSize * 0.08; // vinculum과 content 사이 간격
 
-  // √ 기호의 폭 (대략적으로 계산)
-  const sqrtWidth = actualFontSize * 0.6;
+  // √ 기호의 폭: 경로 데이터가 있으면 자연 비율 기반, 없으면 고정값
+  const surdTotalHeight = content.height + gap + ruleThickness + content.depth;
+  const sqrtEntry = DELIMITER_PATHS['√'];
+  let sqrtWidth: number;
+
+  if (sqrtEntry) {
+    const targetHeightNorm = surdTotalHeight / actualFontSize;
+    const variant = selectPathVariant('√', targetHeightNorm);
+    const aspectRatio = variant.pathWidth / variant.pathHeight;
+    sqrtWidth = surdTotalHeight * aspectRatio;
+  } else {
+    sqrtWidth = actualFontSize * 0.6;
+  }
 
   // 전체 크기 계산
   const totalWidth = sqrtWidth + content.width + gap;
