@@ -161,13 +161,21 @@ export interface Dictionary {
       fractions: string;
       powers: string;
       trig: string;
+      hyperbolic: string;
+      log: string;
       integrals: string;
       sigma: string;
-      limits: string;
+      algebra: string;
       greek: string;
+      accents: string;
+      relations: string;
+      arrows: string;
+      sets: string;
+      operators: string;
+      dots: string;
+      fonts: string;
       matrices: string;
       complex: string;
-      sets: string;
     };
   };
   pluginSection: {
