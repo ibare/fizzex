@@ -12,6 +12,7 @@ const PipelineExplorer = lazy(() => import('./pages/PipelineExplorer'));
 const Examples = lazy(() => import('./pages/Examples'));
 const Plugins = lazy(() => import('./pages/Plugins'));
 const Comparison = lazy(() => import('./pages/Comparison'));
+const SymbolComparison = lazy(() => import('./pages/SymbolComparison'));
 
 function LangRoot() {
   return <Navigate to={`/${detectLanguage()}/`} replace />;
@@ -55,6 +56,8 @@ function LangShell() {
               <Route path="examples/:category" element={<Examples />} />
               <Route path="comparison" element={<Comparison />} />
               <Route path="comparison/:category" element={<Comparison />} />
+              <Route path="symbols" element={<SymbolComparison />} />
+              <Route path="symbols/:category" element={<SymbolComparison />} />
               <Route path="*" element={<Navigate to={`/${validLang}/`} replace />} />
             </Routes>
           </Suspense>

@@ -246,4 +246,6 @@ export const bigOpHandlers: Map<string, CommandHandler> = new Map([
 
   // 극한
   ['lim', limHandler],
+  ['limsup', limHandler],
+  ['liminf', limHandler],
 ]);

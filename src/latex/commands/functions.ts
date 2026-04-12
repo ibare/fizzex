@@ -95,4 +95,5 @@ export const functionHandlers: Map<string, CommandHandler> = new Map([
   ['sup', mathFunctionHandler('sup')],
   ['inf', mathFunctionHandler('inf')],
   ['mod', mathFunctionHandler('mod')],
+  ['Pr', mathFunctionHandler('Pr')],
 ]);

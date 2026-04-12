@@ -7,7 +7,7 @@ import { createAccent, createOverline } from './helpers';
 
 /** 악센트 핸들러 생성 */
 function accentHandler(
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check'
+  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring'
 ): CommandHandler {
   return (ctx) => {
     const contentResult = ctx.parseGroup(ctx.latex, ctx.pos);
@@ -41,4 +41,7 @@ export const accentHandlers: Map<string, CommandHandler> = new Map([
   ['overline', overlineHandler],
   ['breve', accentHandler('breve')],
   ['check', accentHandler('check')],
+  ['acute', accentHandler('acute')],
+  ['grave', accentHandler('grave')],
+  ['mathring', accentHandler('mathring')],
 ]);

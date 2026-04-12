@@ -398,7 +398,7 @@ function parseBeginEnvironment(latex: string, pos: number): ParseResult {
   pos++; // '}' 스킵
 
   // 행렬 환경
-  const matrixEnvs = ['matrix', 'pmatrix', 'bmatrix', 'Bmatrix', 'vmatrix', 'Vmatrix'];
+  const matrixEnvs = ['matrix', 'pmatrix', 'bmatrix', 'Bmatrix', 'vmatrix', 'Vmatrix', 'smallmatrix'];
   if (matrixEnvs.includes(envName)) {
     const bracketType = getMatrixBracketType(envName);
     const matrixResult = parseMatrixContent(latex, pos, envName);

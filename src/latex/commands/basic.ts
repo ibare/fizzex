@@ -99,6 +99,7 @@ export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['frac', fracHandler],
   ['dfrac', fracHandler],
   ['tfrac', fracHandler],
+  ['cfrac', fracHandler],
   ['sqrt', sqrtHandler],
   ['text', textHandler],
   ['mathrm', textHandler],

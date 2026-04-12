@@ -893,7 +893,7 @@ export function createOverlineBox(
  */
 export function createAccentBox(
   content: Box,
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check',
+  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring',
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
@@ -910,6 +910,9 @@ export function createAccentBox(
     'bar': { char: '¯', scale: 0.9, extraGap: 0.15 },
     'breve': { char: '˘', scale: 0.8, extraGap: 0.2 },
     'check': { char: 'ˇ', scale: 0.8, extraGap: 0.2 },
+    'acute': { char: '´', scale: 0.8, extraGap: 0.2 },
+    'grave': { char: '`', scale: 0.8, extraGap: 0.2 },
+    'mathring': { char: '˚', scale: 0.6, extraGap: 0.15 },
   };
 
   const config = accentConfig[accentType] || { char: 'ˆ', scale: 0.8, extraGap: 0 };

@@ -139,7 +139,7 @@ export function createOverline(content: MathNode[]): MathNode {
 
 export function createAccent(
   content: MathNode[],
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check'
+  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring'
 ): MathNode {
   const accentId = generateId();
   const contentRow: RowNode = { id: deriveId(accentId, '_content'), type: 'row', children: content };

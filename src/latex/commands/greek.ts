@@ -55,4 +55,11 @@ export const greekHandlers: Map<string, CommandHandler> = new Map([
   ['Phi', variableHandler('Φ')],
   ['Psi', variableHandler('Ψ')],
   ['Omega', variableHandler('Ω')],
+
+  // 확장 그리스 문자 및 히브리 문자
+  ['digamma', variableHandler('ϝ')],
+  ['varkappa', variableHandler('ϰ')],
+  ['beth', variableHandler('ℶ')],
+  ['gimel', variableHandler('ℷ')],
+  ['daleth', variableHandler('ℸ')],
 ]);

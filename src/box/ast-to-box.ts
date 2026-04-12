@@ -412,7 +412,7 @@ function convertOverline(
 
 /** 악센트 노드 변환 */
 function convertAccent(
-  node: MathNode & { content: MathNode[]; accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' },
+  node: MathNode & { content: MathNode[]; accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   displayStyle: boolean

@@ -188,6 +188,32 @@ export interface Dictionary {
     layer_plugins: { title: string; desc: string };
     cta: string;
   };
+  symbolPage: {
+    title: string;
+    sub: string;
+    command_label: string;
+    fizzex_label: string;
+    katex_label: string;
+    mathjax_label: string;
+    items_label: string;
+    display_mode_display: string;
+    display_mode_inline: string;
+    categories: {
+      greek: string;
+      binary: string;
+      relations: string;
+      negated: string;
+      arrows: string;
+      delimiters: string;
+      bigops: string;
+      accents: string;
+      functions: string;
+      structures: string;
+      environments: string;
+      fonts: string;
+      spacing: string;
+    };
+  };
   pluginsPage: {
     title: string;
     sub: string;

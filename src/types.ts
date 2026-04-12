@@ -148,7 +148,7 @@ export interface OverlineNode extends MathNodeBase {
 export interface AccentNode extends MathNodeBase {
   type: 'accent';
   content: MathNode[];   // 악센트 아래 내용
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check';
+  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring';
 }
 
 /** 행렬 노드 */

@@ -13,6 +13,7 @@ export default function Nav() {
     { to: 'plugins', label: t.pluginsPage.title },
     { to: 'examples', label: lang === 'ko' ? '예제' : 'Examples' },
     { to: 'comparison', label: lang === 'ko' ? '비교' : 'Comparison' },
+    { to: 'symbols', label: lang === 'ko' ? '심볼' : 'Symbols' },
   ];
 
   return (
