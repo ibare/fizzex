@@ -350,7 +350,20 @@ function parseCommand(latex: string, start: number): ParseResult {
     return { nodes: [createNumber(char)], consumed: pos };
   }
 
-  // 명령어 이름 추출
+  // 비알파벳 단일문자 명령어 (\, \: \; \! \  등)
+  if (pos < latex.length && !/[a-zA-Z]/.test(latex[pos])) {
+    cmdName = latex[pos];
+    pos++;
+    const singleCharHandler = getCommandHandler(cmdName);
+    if (singleCharHandler) {
+      const ctx: CommandContext = { latex, pos, parseExpression, parseGroup, parseNumber, parseCommand };
+      return singleCharHandler(ctx);
+    }
+    // 알 수 없는 단일문자 명령어 → 그대로 출력
+    return { nodes: [createNumber(cmdName)], consumed: pos };
+  }
+
+  // 알파벳 명령어 이름 추출
   while (pos < latex.length && /[a-zA-Z]/.test(latex[pos])) {
     cmdName += latex[pos];
     pos++;

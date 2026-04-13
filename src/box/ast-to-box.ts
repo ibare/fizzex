@@ -5,8 +5,9 @@
  */
 
 import type { MathNode } from '../types';
-import type { Box, HBox, SurdBox } from './types';
+import type { Box, HBox, PathBox, SurdBox } from './types';
 import type { CanvasFontMetrics } from './font-metrics';
+import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
 import { MathConstants } from './font-metrics';
 import {
   createGlyph,
@@ -150,15 +151,30 @@ function convertNumber(
   return createGlyphString(node.value, metrics, fontSize, false, node.id);
 }
 
-/** TeX 표준에 따라 upright로 렌더링하는 문자 (대문자 그리스 + 히브리 + digamma) */
-const UPRIGHT_CHARS = new Set('ΓΔΘΛΞΠΣΥΦΨΩϝℶℷℸ');
+/** TeX 표준에 따라 upright로 렌더링하는 문자 (대문자 그리스 + 히브리 + 수학 기호) */
+const UPRIGHT_CHARS = new Set('ΓΔΘΛΞΠΣΥΦΨΩϝℶℷℸ∞∂∇′∅∠∡∖ℵ℘ℜℑ♣♢♡♠△□\u{1D6A4}\u{1D6A5}\uE000');
 
 /** 변수 노드 변환 */
 function convertVariable(
   node: MathNode & { name: string },
   metrics: CanvasFontMetrics,
   fontSize: number
-): HBox {
+): Box {
+  // path 기반 글리프 오버라이드 (폰트 cv01 대체 글리프 등)
+  const pathEntry = DELIMITER_PATHS[node.name];
+  if (pathEntry && !('variants' in pathEntry && pathEntry.variants!.length > 0)) {
+    const actualFontSize = metrics.getActualFontSize(fontSize);
+    const base = pathEntry.base;
+    const width = base.advanceWidth * actualFontSize;
+    const height = base.ascent * actualFontSize;
+    const depth = base.descent * actualFontSize;
+    const pathBox: PathBox = {
+      type: 'path', pathChar: node.name, variantIndex: -1,
+      targetWidth: width, width, height, depth,
+      x: 0, y: 0, sourceId: node.id,
+    };
+    return pathBox;
+  }
   const italic = !UPRIGHT_CHARS.has(node.name);
   return createGlyphString(node.name, metrics, fontSize, italic, node.id);
 }

@@ -3,7 +3,7 @@
  */
 
 import type { CommandHandler } from './types';
-import { createFrac, createBinom, createSqrt, createText, createParen, createAbs, mapMathFont } from './helpers';
+import { createFrac, createBinom, createSqrt, createText, createParen, createAbs, createSpace, mapMathFont } from './helpers';
 import type { MathFontStyle } from './helpers';
 
 /** \frac{num}{den} */
@@ -169,6 +169,39 @@ function createFontDeclarationHandler(style: MathFontStyle | null): CommandHandl
   };
 }
 
+/** \phantom{...} — 내용의 너비만큼 투명 공백 */
+const phantomHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  if (ctx.latex[pos] !== '{') return { nodes: [], consumed: pos };
+  pos++;
+  const start = pos;
+  let depth = 1;
+  while (pos < ctx.latex.length && depth > 0) {
+    if (ctx.latex[pos] === '{') depth++;
+    else if (ctx.latex[pos] === '}') depth--;
+    if (depth > 0) pos++;
+  }
+  const content = ctx.latex.substring(start, pos);
+  // 글자 수 기반 너비 근사 (1문자 ≈ 0.5em)
+  const width = Math.max(content.length * 0.5, 0.167);
+  return { nodes: [createSpace(width)], consumed: pos + 1 };
+};
+
+/** \vphantom{...} — 내용의 높이만 확보 (너비 0) */
+const vphantomHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  if (ctx.latex[pos] !== '{') return { nodes: [], consumed: pos };
+  pos++;
+  let depth = 1;
+  while (pos < ctx.latex.length && depth > 0) {
+    if (ctx.latex[pos] === '{') depth++;
+    else if (ctx.latex[pos] === '}') depth--;
+    if (depth > 0) pos++;
+  }
+  // 인자를 소비하되 출력 없음
+  return { nodes: [], consumed: pos + 1 };
+};
+
 /** 기본 명령어 핸들러 레지스트리 */
 export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['frac', fracHandler],
@@ -198,5 +231,8 @@ export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['it', createFontDeclarationHandler('mathit')],
   ['sf', createFontDeclarationHandler('mathsf')],
   ['tt', createFontDeclarationHandler('mathtt')],
+  ['phantom', phantomHandler],
+  ['hphantom', phantomHandler],
+  ['vphantom', vphantomHandler],
   ['left', leftHandler],
 ]);
