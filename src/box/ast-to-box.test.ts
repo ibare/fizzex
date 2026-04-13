@@ -62,10 +62,11 @@ describe('AST to Box', () => {
       const root = box as HBox;
       const varBox = root.children[0] as HBox;
       expect(varBox.type).toBe('hbox');
-      // variable is converted with italic=true via createGlyphString
+      // variable is converted with math italic unicode mapping (italic=false, mapped char)
       expect(varBox.children.length).toBe(1);
       expect(varBox.children[0].type).toBe('glyph');
-      expect((varBox.children[0] as any).italic).toBe(true);
+      expect((varBox.children[0] as any).italic).toBe(false);
+      expect((varBox.children[0] as any).char).toBe(String.fromCodePoint(0x1D465)); // 𝑥
     });
 
     it('operator 노드를 HBox로 변환한다', () => {

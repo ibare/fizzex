@@ -101,7 +101,9 @@ describe('Box Builder', () => {
       const normal = createGlyph('x', metrics, 1.0, false);
       const italic = createGlyph('x', metrics, 1.0, true);
       expect(normal.italic).toBe(false);
-      expect(italic.italic).toBe(true);
+      // 라틴 문자는 수학 이탤릭 유니코드로 매핑되어 italic=false가 됨
+      expect(italic.italic).toBe(false);
+      expect(italic.char).toBe(String.fromCodePoint(0x1D465)); // 𝑥
     });
 
     it('metrics로 너비를 측정한다', () => {
@@ -159,7 +161,8 @@ describe('Box Builder', () => {
     it('이탤릭 여부를 각 글리프에 전달한다', () => {
       const hbox = createGlyphString('ab', metrics, 1.0, true);
       for (const child of hbox.children) {
-        expect((child as GlyphBox).italic).toBe(true);
+        // 라틴 문자는 수학 이탤릭 유니코드로 매핑되어 italic=false
+        expect((child as GlyphBox).italic).toBe(false);
       }
     });
   });

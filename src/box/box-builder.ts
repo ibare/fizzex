@@ -10,6 +10,25 @@ import { MathConstants } from './font-metrics';
 import { isComplexNodeSlot } from './constants';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
 
+/**
+ * ASCII 문자를 수학 이탤릭 유니코드 코드포인트로 변환.
+ * OpenType MATH 폰트의 진짜 수학 이탤릭 글리프를 사용하기 위함.
+ * 매핑할 수 없는 문자는 null을 반환.
+ */
+export function toMathItalic(char: string): string | null {
+  const code = char.codePointAt(0)!;
+  // 라틴 대문자 A-Z → U+1D434-U+1D44D
+  if (code >= 0x41 && code <= 0x5A) return String.fromCodePoint(0x1D434 + (code - 0x41));
+  // 라틴 소문자 a-z → U+1D44E-U+1D467 (h는 U+210E로 대체)
+  if (code >= 0x61 && code <= 0x7A) {
+    if (code === 0x68) return String.fromCodePoint(0x210E); // h → ℎ (planck constant)
+    return String.fromCodePoint(0x1D44E + (code - 0x61));
+  }
+  // 그리스 소문자 α(U+03B1)-ω(U+03C9) → U+1D6FC-U+1D714
+  if (code >= 0x03B1 && code <= 0x03C9) return String.fromCodePoint(0x1D6FC + (code - 0x03B1));
+  return null;
+}
+
 /** Glyph Box 생성 */
 export function createGlyph(
   char: string,
@@ -18,14 +37,25 @@ export function createGlyph(
   italic: boolean = false,
   sourceId?: string
 ): GlyphBox {
-  const width = metrics.measureWidth(char, fontSize, italic);
+  // 수학 이탤릭: 유니코드 매핑이 가능하면 진짜 글리프 사용
+  let renderChar = char;
+  let renderItalic = italic;
+  if (italic && char.length === 1) {
+    const mapped = toMathItalic(char);
+    if (mapped) {
+      renderChar = mapped;
+      renderItalic = false; // 폰트 자체에 이탤릭 글리프가 있으므로 CSS italic 불필요
+    }
+  }
+
+  const width = metrics.measureWidth(renderChar, fontSize, renderItalic);
   const height = metrics.getHeight(fontSize);
   const depth = metrics.getDepth(fontSize);
 
   return {
     type: 'glyph',
-    char,
-    italic,
+    char: renderChar,
+    italic: renderItalic,
     fontSize,
     width,
     height,
