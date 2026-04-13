@@ -74,7 +74,7 @@ export function createGlyphString(
   italic: boolean = false,
   sourceId?: string
 ): HBox {
-  const glyphs = str.split('').map(char =>
+  const glyphs = [...str].map(char =>
     createGlyph(char, metrics, fontSize, italic)
   );
   return createHBox(glyphs, sourceId);

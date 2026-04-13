@@ -3,7 +3,8 @@
  */
 
 import type { CommandHandler } from './types';
-import { createFrac, createBinom, createSqrt, createText, createParen, createAbs } from './helpers';
+import { createFrac, createBinom, createSqrt, createText, createParen, createAbs, mapMathFont } from './helpers';
+import type { MathFontStyle } from './helpers';
 
 /** \frac{num}{den} */
 export const fracHandler: CommandHandler = (ctx) => {
@@ -107,6 +108,67 @@ export const binomHandler: CommandHandler = (ctx) => {
   };
 };
 
+/** 수학 폰트 명령어 핸들러 생성 */
+function createMathFontHandler(style: MathFontStyle): CommandHandler {
+  return (ctx) => {
+    let pos = ctx.pos;
+    if (ctx.latex[pos] !== '{') {
+      return { nodes: [], consumed: pos };
+    }
+    pos++;
+    const start = pos;
+    let depth = 1;
+    while (pos < ctx.latex.length && depth > 0) {
+      if (ctx.latex[pos] === '{') depth++;
+      else if (ctx.latex[pos] === '}') depth--;
+      if (depth > 0) pos++;
+    }
+    const content = ctx.latex.substring(start, pos);
+    const mapped = mapMathFont(content, style);
+    return {
+      nodes: [createText(mapped)],
+      consumed: pos + 1,
+    };
+  };
+}
+
+/** 폰트 선언 명령어 핸들러 생성 (\rm, \bf 등 — 중괄호 없이 사용 가능) */
+function createFontDeclarationHandler(style: MathFontStyle | null): CommandHandler {
+  return (ctx) => {
+    let pos = ctx.pos;
+    while (pos < ctx.latex.length && ctx.latex[pos] === ' ') pos++;
+
+    // 중괄호가 있으면 createMathFontHandler와 동일하게 동작
+    if (ctx.latex[pos] === '{') {
+      pos++;
+      const start = pos;
+      let depth = 1;
+      while (pos < ctx.latex.length && depth > 0) {
+        if (ctx.latex[pos] === '{') depth++;
+        else if (ctx.latex[pos] === '}') depth--;
+        if (depth > 0) pos++;
+      }
+      const content = ctx.latex.substring(start, pos);
+      if (style === null) {
+        return { nodes: [createText(content)], consumed: pos + 1 };
+      }
+      return { nodes: [createText(mapMathFont(content, style))], consumed: pos + 1 };
+    }
+
+    // 중괄호 없음: 그룹 끝(}) 또는 다음 명령어(\) 또는 문자열 끝까지 소비
+    const start = pos;
+    while (pos < ctx.latex.length && ctx.latex[pos] !== '}' && ctx.latex[pos] !== '\\') {
+      pos++;
+    }
+    const content = ctx.latex.substring(start, pos).trim();
+    if (!content) return { nodes: [], consumed: pos };
+    if (style === null) {
+      return { nodes: [createText(content)], consumed: pos };
+    }
+    return { nodes: [createText(mapMathFont(content, style))], consumed: pos };
+  };
+}
+
 /** 기본 명령어 핸들러 레지스트리 */
 export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['frac', fracHandler],
@@ -120,14 +182,21 @@ export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['text', textHandler],
   ['mathrm', textHandler],
   ['textrm', textHandler],
-  ['textbf', textHandler],
-  ['textit', textHandler],
-  ['mathbf', textHandler],
-  ['mathit', textHandler],
-  ['mathsf', textHandler],
-  ['mathtt', textHandler],
-  ['mathcal', textHandler],
-  ['mathbb', textHandler],
-  ['mathfrak', textHandler],
+  ['textbf', createMathFontHandler('mathbf')],
+  ['textit', createMathFontHandler('mathit')],
+  ['textsf', createMathFontHandler('mathsf')],
+  ['texttt', createMathFontHandler('mathtt')],
+  ['mathbf', createMathFontHandler('mathbf')],
+  ['mathit', createMathFontHandler('mathit')],
+  ['mathsf', createMathFontHandler('mathsf')],
+  ['mathtt', createMathFontHandler('mathtt')],
+  ['mathcal', createMathFontHandler('mathcal')],
+  ['mathbb', createMathFontHandler('mathbb')],
+  ['mathfrak', createMathFontHandler('mathfrak')],
+  ['rm', createFontDeclarationHandler(null)],
+  ['bf', createFontDeclarationHandler('mathbf')],
+  ['it', createFontDeclarationHandler('mathit')],
+  ['sf', createFontDeclarationHandler('mathsf')],
+  ['tt', createFontDeclarationHandler('mathtt')],
   ['left', leftHandler],
 ]);
