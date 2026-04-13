@@ -11,6 +11,9 @@ coverage/
 # Turbo
 .turbo/
 
+# Claude Code
+.claude/plans/
+
 # IDE
 .idea/
 .vscode/
