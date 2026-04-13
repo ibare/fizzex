@@ -322,6 +322,20 @@ export const MathConstants = {
    * @see The TeXbook, Appendix G, Rule 13
    */
   lowerLimitGap: 0.166,
+
+  /**
+   * sigma18: sup_drop — 위첨자 초기 위치 계산 (base.height - supDrop)
+   * 큰 base(적분 등)에서 위첨자를 상단 근처에 배치하는 데 사용
+   * @see The TeXbook, Appendix G, Rule 18c
+   */
+  supDrop: 0.386,
+
+  /**
+   * sigma19: sub_drop — 아래첨자 초기 위치 계산 (base.depth + subDrop)
+   * 큰 base(적분 등)에서 아래첨자를 하단 근처에 배치하는 데 사용
+   * @see The TeXbook, Appendix G, Rule 18a
+   */
+  subDrop: 0.05,
 } as const;
 
 /** MathConstants 타입 */

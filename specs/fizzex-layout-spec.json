@@ -198,12 +198,12 @@
         "opentype": "superscriptBaselineDropMax",
         "cambria": "큰 박스 꼭대기에서 위첨자 기준선이 내려오는 양"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
+      "fizzex_location": "src/box/font-metrics.ts (supDrop)",
+      "fizzex_current": 0.386,
+      "status": "match",
       "tolerance": 0.02,
       "priority": 2,
-      "note": "초기 shift_up = base.height - sup_drop 계산 미구현"
+      "note": "createIntegralBox에서 base.height - supDrop으로 적분 상한 위치 계산에 사용"
     },
     "sigma19_subDrop": {
       "value": 0.050,
@@ -213,12 +213,12 @@
         "opentype": "subscriptBaselineDropMin",
         "cambria": "큰 박스 바닥에서 아래첨자 기준선이 더 내려가는 양"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
+      "fizzex_location": "src/box/font-metrics.ts (subDrop)",
+      "fizzex_current": 0.05,
+      "status": "match",
       "tolerance": 0.02,
       "priority": 2,
-      "note": "초기 shift_down = base.depth + sub_drop 계산 미구현"
+      "note": "createIntegralBox에서 base.depth + subDrop으로 적분 하한 위치 계산에 사용"
     },
     "sigma20_delim1": {
       "value": 2.390,
@@ -775,6 +775,65 @@
       ]
     },
 
+    "integral": {
+      "source_rules": ["tex-rule-002 (Rule 13 nolimits branch)", "cambria-013 (italic correction)", "tex-rule-008 (Rule 18a,c)"],
+      "fizzex_location": "src/box/box-builder.ts:createIntegralBox() (line 642)",
+      "parameters_used": ["sigma16_sub1 (subscriptShift)", "sigma13_sup1 (exponentShift)", "sigma5_xHeight", "italicCorrection (GlyphPathData)"],
+      "note": "적분은 기본 nolimits — 상하한을 subscript/superscript로 배치하되 italic correction 보정 적용",
+      "verification_cases": [
+        {
+          "id": "int-display-limits",
+          "latex": "\\int_0^1",
+          "style": "display",
+          "known_fail": false,
+          "assertions": [
+            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05},
+            {"type": "superscript_shift_up", "expected_param": "sigma13_sup1", "tolerance": 0.05}
+          ]
+        },
+        {
+          "id": "int-italic-correction",
+          "latex": "\\int_0^1",
+          "style": "display",
+          "known_fail": false,
+          "assertions": [
+            {"type": "sub_x_offset", "expected": "integral.right - italicCorr", "tolerance": 0.02, "note": "TeX 표준: 하한에만 full italic correction 적용"},
+            {"type": "sup_x_offset", "expected": "integral.right", "tolerance": 0.02, "note": "TeX 표준: 상한에 보정 없음"}
+          ]
+        },
+        {
+          "id": "iint-display",
+          "latex": "\\iint_D",
+          "style": "display",
+          "known_fail": false,
+          "assertions": [
+            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05},
+            {"type": "nolimits_style", "expected": true}
+          ]
+        },
+        {
+          "id": "oint-display",
+          "latex": "\\oint_C",
+          "style": "display",
+          "known_fail": false,
+          "assertions": [
+            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05},
+            {"type": "nolimits_style", "expected": true}
+          ]
+        },
+        {
+          "id": "int-inline",
+          "latex": "\\int_0^1",
+          "style": "text",
+          "known_fail": false,
+          "assertions": [
+            {"type": "nolimits_style", "expected": true},
+            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05}
+          ]
+        }
+      ]
+    },
+
     "spacing": {
       "source_rules": ["tex-rule-001 (Rules 1-4)", "Oxford Rules"],
       "fizzex_location": "src/box/box-builder.ts:createOperator() (line 536)",
@@ -826,13 +885,13 @@
 
   "diagnostic_summary": {
     "total_parameters": 28,
-    "match": 7,
+    "match": 9,
     "mismatch": 3,
-    "missing": 18,
+    "missing": 16,
     "hardcoded": 0,
-    "total_verification_cases": 27,
+    "total_verification_cases": 32,
     "known_fail_cases": 18,
-    "testable_cases": 9,
+    "testable_cases": 14,
     "priority_1_params": ["sigma5_xHeight", "sigma22_axisHeight", "xi8_defaultRuleThickness", "scriptPercentScaleDown"],
     "top_issues": [
       {

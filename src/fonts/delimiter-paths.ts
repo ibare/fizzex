@@ -12,6 +12,8 @@ export interface GlyphPathData {
   advanceWidth: number;
   ascent: number;
   descent: number;
+  /** N항 연산자의 상한/하한 수평 보정값 (cambria-013) */
+  italicCorrection?: number;
 }
 
 export interface DelimiterPathEntry {
@@ -1440,6 +1442,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 0.665,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     variants: [
     {
@@ -1468,6 +1471,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 0.665,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     {
     commands: [
@@ -1495,6 +1499,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 0.999,
     ascent: 1.361,
     descent: 0.861,
+    italicCorrection: 0.44,
   },
     ],
     extensible: {
@@ -1599,6 +1604,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 1.035,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     variants: [
     {
@@ -1647,6 +1653,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 1.035,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     {
     commands: [
@@ -1694,6 +1701,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 1.419,
     ascent: 1.361,
     descent: 0.861,
+    italicCorrection: 0.44,
   },
     ],
   },
@@ -1764,6 +1772,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 1.405,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     variants: [
     {
@@ -1832,6 +1841,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 1.405,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     {
     commands: [
@@ -1899,6 +1909,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 1.839,
     ascent: 1.361,
     descent: 0.861,
+    italicCorrection: 0.44,
   },
     ],
   },
@@ -1945,6 +1956,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 0.665,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     variants: [
     {
@@ -1989,6 +2001,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 0.665,
     ascent: 0.805,
     descent: 0.306,
+    italicCorrection: 0.28,
   },
     {
     commands: [
@@ -2034,6 +2047,7 @@ export const DELIMITER_PATHS: Record<string, DelimiterPathEntry> = {
     advanceWidth: 0.999,
     ascent: 1.361,
     descent: 0.861,
+    italicCorrection: 0.44,
   },
     ],
   },

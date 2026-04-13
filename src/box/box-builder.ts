@@ -687,41 +687,76 @@ export function createIntegralBox(
   let integralWithLimits: HBox;
 
   if (hasLimits) {
-    // 상한 (적분 기호 위쪽에) - baseline에서 위로 이동
+    // italic correction: 적분 기호의 기울기 보정 (cambria-013)
+    let italicCorr = 0;
+    if (pathEntry?.variants && pathEntry.variants.length > 0) {
+      const variant = displayStyle ? pathEntry.variants[pathEntry.variants.length - 1] : pathEntry.base;
+      italicCorr = (variant.italicCorrection ?? 0) * actualFontSize;
+    }
+    // nolimits 배치 (TeX Rule 13 → Rule 18): base 크기 의존 subscript/superscript
+
+    // Rule 18c: supShift = max(sup1, base.height - supDrop)
+    const supDrop = actualFontSize * MathConstants.supDrop;
+    const supShift = Math.max(
+      actualFontSize * MathConstants.exponentShift,
+      integralBox.height - supDrop,
+    );
     const shiftedUpper: Box = {
       ...upper,
-      shift: -(integralBox.height - upper.height * 0.5),
+      shift: -supShift,
     };
 
-    // 하한 (적분 기호 아래쪽에) - baseline에서 아래로 이동
+    // Rule 18a: subShift = max(sub1, base.depth + subDrop)
+    const subDrop = actualFontSize * MathConstants.subDrop;
+    let subShift = Math.max(
+      actualFontSize * MathConstants.subscriptShift,
+      integralBox.depth + subDrop,
+    );
+    // Rule 18a 조건: subscript 상단이 4/5 × xHeight 초과하면 shift 증가
+    const topMax = actualFontSize * MathConstants.xHeight * 4 / 5;
+    const subscriptTop = lower.height - subShift;
+    if (subscriptTop > topMax) {
+      subShift = lower.height - topMax;
+    }
     const shiftedLower: Box = {
       ...lower,
-      shift: integralBox.depth - lower.depth * 0.5,
+      shift: subShift,
     };
 
-    // 상하한을 겹쳐서 배치
-    const limitsWidth = Math.max(upper.width, lower.width);
-    const limitsBox = createHBox([
-      shiftedUpper,
-      createKern(-upper.width),
-      shiftedLower,
-    ]);
-    limitsBox.width = limitsWidth;
+    // 수평 배치 (TeX 표준): 하한에 -italicCorr, 상한에 보정 없음
+    const limitsChildren: Box[] = [integralBox];
 
-    integralWithLimits = createHBox([
-      integralBox,
-      createKern(actualFontSize * 0.05),
-      limitsBox,
-    ]);
+    if (upper.width > 0 && lower.width > 0) {
+      // 상하한 모두: 겹침 배치
+      limitsChildren.push(
+        createKern(-italicCorr),
+        shiftedLower,
+        createKern(-lower.width + italicCorr),
+        shiftedUpper,
+      );
+    } else if (lower.width > 0) {
+      limitsChildren.push(createKern(-italicCorr), shiftedLower);
+    } else {
+      limitsChildren.push(shiftedUpper);
+    }
+
+    integralWithLimits = createHBox(limitsChildren);
+
+    // 너비 보정
+    const limitsRight = Math.max(
+      upper.width > 0 ? upper.width : 0,
+      lower.width > 0 ? lower.width - italicCorr : 0,
+    );
+    integralWithLimits.width = integralBox.width + limitsRight;
 
     // 전체 높이/깊이 조정
     integralWithLimits.height = Math.max(
       integralBox.height,
-      -shiftedUpper.shift! + upper.height
+      upper.width > 0 ? supShift + upper.height : 0
     );
     integralWithLimits.depth = Math.max(
       integralBox.depth,
-      shiftedLower.shift! + lower.depth
+      lower.width > 0 ? subShift + lower.depth : 0
     );
   } else {
     integralWithLimits = createHBox([integralBox]);
