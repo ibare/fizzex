@@ -213,6 +213,18 @@ export const operatorHandlers: Map<string, CommandHandler> = new Map([
   ['triangle', variableHandler('△')],
   ['square', variableHandler('□')],
 
+  // ─── 구분자 (standalone) ─────────────────────────────────
+  ['langle', operatorHandler('⟨')],
+  ['rangle', operatorHandler('⟩')],
+  ['lceil', operatorHandler('⌈')],
+  ['rceil', operatorHandler('⌉')],
+  ['lfloor', operatorHandler('⌊')],
+  ['rfloor', operatorHandler('⌋')],
+  ['lvert', operatorHandler('|')],
+  ['rvert', operatorHandler('|')],
+  ['lVert', operatorHandler('‖')],
+  ['rVert', operatorHandler('‖')],
+
   // ─── 점 기호 ───────────────────────────────────────────
   ['ldots', operatorHandler('…')],
   ['cdots', operatorHandler('⋯')],

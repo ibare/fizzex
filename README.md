@@ -352,6 +352,9 @@ The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automa
 
 - [ ] **합성 글리프 렌더링 파이프라인** — 현재 렌더링은 단일 유니코드 문자 → 글리프 방식만 지원. `\npreceq`(⪯ + 슬래시), `\not\equiv` 등 두 글리프를 겹쳐 합성하는 부정 기호를 KaTeX/MathJax와 동일하게 렌더링하려면 슬래시 오버레이 합성 파이프라인이 필요. 현재는 가장 가까운 precomposed 유니코드 문자(⋠ U+22E0 등)를 사용하며, 기반 심볼의 등호 스타일이 달라 형태 차이가 발생 (`\preceq`=⪯ 직선 등호 vs `\npreceq`=⋠ tilde 등호).
 - [ ] **Extensible arrow 명령어** (`\xleftarrow`, `\xrightarrow`) — 인자 텍스트 너비에 맞게 화살표가 늘어나고 그 위/아래에 텍스트를 배치하는 구조. 새로운 Box 타입(화살표 + 텍스트 레이아웃), 동적 화살표 길이 계산, Rule 렌더링 + 화살촉 렌더링이 필요.
+- [ ] **`\left`/`\right` named delimiter 지원** — 현재 `\left`/`\right`는 `(`, `)`, `[`, `]`, `\{`, `\}`, `|` 등 단일 문자 구분자만 인식. `\left\langle`…`\right\rangle`, `\left\lceil`…`\right\rceil` 등 backslash 명령어 형태의 구분자를 `leftHandler`에서 파싱하는 로직이 필요.
+- [ ] **`\left\|`…`\right\|` 이중 세로줄 구분자** — `\|`를 `\left`/`\right` 뒤에서 구분자로 인식하고, 내용물 높이에 맞게 ‖(double vertical bar)를 신축 렌더링하는 기능. `leftHandler`의 구분자 파싱 확장 + delimiter-paths에 ‖ extensible 데이터 추가 필요.
+- [ ] **크기 지정 구분자** (`\big`, `\Big`, `\bigg`, `\Bigg`) — 4단계 고정 크기 구분자 명령어. 각 크기별 scale factor 정의, 다음 토큰을 구분자로 파싱하여 해당 크기로 렌더링하는 새로운 CommandHandler + Box 렌더링 로직 필요.
 
 ## Browser Support
 

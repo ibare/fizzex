@@ -199,7 +199,7 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
     }
 
     // 연산자
-    if ('+-=<>:'.includes(latex[pos])) {
+    if ('+-=<>:/'.includes(latex[pos])) {
       nodes.push(createOperator(latex[pos]));
       pos++;
       continue;
@@ -334,13 +334,17 @@ function parseCommand(latex: string, start: number): ParseResult {
   let pos = start + 1;
   let cmdName = '';
 
-  // 특수 문자 이스케이프 처리 (\{, \}, \%, \& 등)
-  if (pos < latex.length && /[{}%&$#_]/.test(latex[pos])) {
+  // 특수 문자 이스케이프 처리 (\{, \}, \|, \%, \& 등)
+  if (pos < latex.length && /[{}|%&$#_]/.test(latex[pos])) {
     const char = latex[pos];
     pos++;
     // \{ 와 \} 는 중괄호 기호로 렌더링
     if (char === '{' || char === '}') {
       return { nodes: [createNumber(char)], consumed: pos };
+    }
+    // \| 는 이중 세로줄 (‖)
+    if (char === '|') {
+      return { nodes: [createOperator('‖')], consumed: pos };
     }
     // 다른 특수문자는 그대로 출력
     return { nodes: [createNumber(char)], consumed: pos };
