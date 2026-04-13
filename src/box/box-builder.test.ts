@@ -553,9 +553,9 @@ describe('Box Builder', () => {
       const content = makeBox({ height: 14, depth: 4 });
       const surd = createSurd(content, metrics);
       // gap = 20 * 0.08 = 1.6
-      // ruleThickness = 20 * 0.04 * 1.5 = 1.2
-      // totalHeight = 14 + 1.6 + 1.2 = 16.8
-      expect(surd.height).toBeCloseTo(16.8);
+      // ruleThickness = 20 * 0.04 = 0.8
+      // totalHeight = 14 + 1.6 + 0.8 = 16.4
+      expect(surd.height).toBeCloseTo(16.4);
     });
 
     it('depth는 content의 depth와 같다', () => {

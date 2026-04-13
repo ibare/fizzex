@@ -163,7 +163,7 @@ export const MathConstants = {
    *
    * @see The TeXbook, Chapter 17 (More About Math)
    */
-  exponentScale: 0.7,
+  exponentScale: 0.8,
 
   /**
    * 지수의 위쪽 이동량 (baseline 기준, em 단위)
@@ -186,7 +186,7 @@ export const MathConstants = {
    *
    * @see The TeXbook, Chapter 17 (More About Math)
    */
-  subscriptScale: 0.7,
+  subscriptScale: 0.8,
 
   /**
    * 첨자의 아래쪽 이동량 (baseline 기준, em 단위)
@@ -240,6 +240,68 @@ export const MathConstants = {
    * @see The TeXbook, Appendix G, Rules 11, 11'
    */
   sqrtPadding: 0.1,
+
+  /**
+   * x-height (em 단위)
+   *
+   * TeX의 \fontdimen5 (sigma5). 소문자 'x'의 높이.
+   * 위첨자/아래첨자 조건 판정, 악센트 배치 등에 사용.
+   *
+   * 표준 TeX 값: 0.431em (Computer Modern 폰트 기준)
+   *
+   * @see The TeXbook, Appendix G
+   */
+  xHeight: 0.431,
+
+  /**
+   * 분수 분자 shift (display style, em 단위)
+   *
+   * TeX의 \fontdimen8 (sigma8, num1).
+   * 분자 baseline이 수학 축으로부터 위로 이동하는 거리.
+   *
+   * @see The TeXbook, Appendix G, Rule 15d
+   */
+  fracNumDisplayShift: 0.677,
+
+  /**
+   * 분수 분자 shift (text style, em 단위)
+   *
+   * TeX의 \fontdimen9 (sigma9, num2).
+   *
+   * @see The TeXbook, Appendix G, Rule 15e
+   */
+  fracNumTextShift: 0.394,
+
+  /**
+   * 분수 분모 shift (display style, em 단위)
+   *
+   * TeX의 \fontdimen11 (sigma11, denom1).
+   * 분모 baseline이 수학 축으로부터 아래로 이동하는 거리.
+   *
+   * @see The TeXbook, Appendix G, Rule 15d
+   */
+  fracDenomDisplayShift: 0.686,
+
+  /**
+   * 분수 분모 shift (text style, em 단위)
+   *
+   * TeX의 \fontdimen12 (sigma12, denom2).
+   *
+   * @see The TeXbook, Appendix G, Rule 15e
+   */
+  fracDenomTextShift: 0.345,
+
+  /**
+   * 수학 축 높이 (em 단위)
+   *
+   * TeX의 \fontdimen22 (sigma22). 분수선, 연산자 등이
+   * 수직 중앙에 배치되는 기준선.
+   *
+   * 표준 TeX 값: 0.250em (Computer Modern 폰트 기준)
+   *
+   * @see The TeXbook, Appendix G, Rule 15
+   */
+  axisHeight: 0.25,
 } as const;
 
 /** MathConstants 타입 */

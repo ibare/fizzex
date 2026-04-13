@@ -259,11 +259,28 @@ export function createFraction(
 ): VBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
-  // inline 모드: gap을 60%로 축소
-  const gap = actualFontSize * MathConstants.fractionGap * (displayStyle ? 1 : 0.6);
 
-  // 분자와 분모 중 더 넓은 것 기준으로 분수선 너비 결정
-  const ruleWidth = Math.max(numerator.width, denominator.width) + gap * 2;
+  // 수평 패딩 (분수선 양옆 여백)
+  const hPadding = actualFontSize * MathConstants.fractionGap;
+  const ruleWidth = Math.max(numerator.width, denominator.width) + hPadding * 2;
+
+  // TeX shift 기반 수직 간격 계산
+  // numShift: 수학 축에서 분자 baseline까지의 거리 (em)
+  // denomShift: 수학 축에서 분모 baseline까지의 거리 (em)
+  const numShiftEm = displayStyle ? MathConstants.fracNumDisplayShift : MathConstants.fracNumTextShift;
+  const denomShiftEm = displayStyle ? MathConstants.fracDenomDisplayShift : MathConstants.fracDenomTextShift;
+
+  // 최소 clearance (분수선과 분자/분모 사이)
+  // Display: 3*xi8, Text: xi8
+  const clearanceMin = displayStyle ? 3 * ruleThickness : ruleThickness;
+
+  // numGap = numShift - ruleThickness/2 - numerator.depth
+  let numGap = numShiftEm * actualFontSize - ruleThickness / 2 - numerator.depth;
+  numGap = Math.max(numGap, clearanceMin);
+
+  // denomGap = denomShift - ruleThickness/2 - denominator.height
+  let denomGap = denomShiftEm * actualFontSize - ruleThickness / 2 - denominator.height;
+  denomGap = Math.max(denomGap, clearanceMin);
 
   // 분자를 HBox로 감싸서 중앙 정렬 가능하게
   const numBox = createHBox([
@@ -274,7 +291,7 @@ export function createFraction(
 
   // 분자 아래 간격 (분자와 분수선 사이)
   const numGapKern = createKern(0);
-  numGapKern.height = gap;
+  numGapKern.height = numGap;
   numGapKern.depth = 0;
 
   // 분수선
@@ -283,7 +300,7 @@ export function createFraction(
   // 분모 위 간격 (분수선과 분모 사이)
   const denGapKern = createKern(0);
   denGapKern.height = 0;
-  denGapKern.depth = gap;
+  denGapKern.depth = denomGap;
 
   // 분모를 HBox로 감싸서 중앙 정렬
   const denBox = createHBox([
@@ -296,9 +313,8 @@ export function createFraction(
   // baselineType을 2로 설정하여 분수선이 baseline이 되도록
   const vbox = createVBox([numBox, numGapKern, rule, denGapKern, denBox], 2, sourceId);
 
-  // 분수선을 x-height 중앙으로 올리기 위해 shift 적용
-  // 수학에서 분수선은 보통 baseline 위 약 0.25em에 위치
-  const axisHeight = actualFontSize * 0.25;
+  // 분수선을 수학 축 높이로 올리기 위해 shift 적용
+  const axisHeight = actualFontSize * MathConstants.axisHeight;
   vbox.shift = -axisHeight;
 
   return vbox;
@@ -343,7 +359,7 @@ export function createBinomBox(
   const vbox = createVBox([numBox, gapKern, denBox], 'center', sourceId);
 
   // axis height 보정
-  const axisHeight = actualFontSize * 0.25;
+  const axisHeight = actualFontSize * MathConstants.axisHeight;
   vbox.shift = -axisHeight;
 
   // 괄호로 감싸기
@@ -1636,7 +1652,7 @@ export function createSurd(
   index?: Box
 ): SurdBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
-  const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness * 1.5;
+  const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
   const gap = actualFontSize * 0.08; // vinculum과 content 사이 간격
 
   // √ 기호의 폭: 경로 데이터가 있으면 자연 비율 기반, 없으면 고정값
