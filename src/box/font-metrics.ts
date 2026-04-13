@@ -334,6 +334,106 @@ export const MathConstants = {
    * @see The TeXbook, Appendix G, Rule 18a
    */
   subDrop: 0.05,
+
+  // ── 8-style 시스템 ──
+
+  /**
+   * scriptscript 축소 비율
+   *
+   * SS, SS' 스타일에서 적용되는 폰트 크기 비율.
+   * OpenType MATH: scriptScriptPercentScaleDown (60%)
+   *
+   * @see The TeXbook, Chapter 17
+   */
+  scriptScriptPercentScaleDown: 0.6,
+
+  /**
+   * sigma14: text style, non-cramped 위첨자 올림 (em 단위)
+   *
+   * T 스타일에서 위첨자의 baseline shift.
+   *
+   * @see The TeXbook, Appendix G, Rule 18a
+   */
+  supTextShift: 0.363,
+
+  /**
+   * sigma15: cramped style 위첨자 올림 (em 단위)
+   *
+   * D', T', S', SS' 등 cramped 환경에서 위첨자의 baseline shift.
+   *
+   * @see The TeXbook, Appendix G, Rule 18a
+   */
+  supCrampedShift: 0.289,
+
+  /**
+   * sigma17: 위첨자 있을 때 아래첨자 내림 (em 단위)
+   *
+   * 위+아래 동시 첨자에서 아래첨자의 baseline shift.
+   *
+   * @see The TeXbook, Appendix G, Rule 18e
+   */
+  subscriptShiftWithSup: 0.247,
+
+  // ── 큰 연산자 크기 ──
+
+  /**
+   * display style에서 n-ary 연산자(적분, 시그마, 곱)의 최소 높이 (em 단위)
+   *
+   * OpenType MATH 테이블의 displayOperatorMinHeight.
+   * display 모드에서 큰 연산자 글리프 선택 기준.
+   *
+   * @see Rule 13
+   */
+  displayOperatorMinHeight: 1.3,
+
+  /**
+   * 큰 연산자(Σ, Π 등) display 크기 비율
+   *
+   * display style에서 large variant 글리프 선택 시 적용.
+   * displayOperatorMinHeight로부터 유도.
+   */
+  largeOpDisplayScale: 2.0,
+
+  /**
+   * 큰 연산자(Σ, Π 등) inline 크기 비율
+   *
+   * text style에서 base variant glyph 사용 시 적용.
+   */
+  largeOpInlineScale: 1.3,
+
+  /**
+   * 적분 기호 display 크기 비율 (fallback)
+   *
+   * path 기반 variant가 없을 때만 사용.
+   */
+  integralDisplayScale: 2.5,
+
+  /**
+   * 적분 기호 inline 크기 비율 (fallback)
+   *
+   * path 기반 variant가 없을 때만 사용.
+   */
+  integralInlineScale: 1.4,
+
+  /**
+   * 적분 기호 fallback height (display, actualFontSize 대비 비율)
+   */
+  integralFallbackHeightDisplay: 1.8,
+
+  /**
+   * 적분 기호 fallback depth (display, actualFontSize 대비 비율)
+   */
+  integralFallbackDepthDisplay: 0.8,
+
+  /**
+   * 적분 기호 fallback height (inline, actualFontSize 대비 비율)
+   */
+  integralFallbackHeightInline: 1.0,
+
+  /**
+   * 적분 기호 fallback depth (inline, actualFontSize 대비 비율)
+   */
+  integralFallbackDepthInline: 0.4,
 } as const;
 
 /** MathConstants 타입 */

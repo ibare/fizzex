@@ -7,6 +7,7 @@
 import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox } from './types';
 import type { CanvasFontMetrics } from './font-metrics';
 import { MathConstants } from './font-metrics';
+import { MathStyle, isDisplay, isCramped } from './math-style';
 import { isComplexNodeSlot } from './constants';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
 
@@ -255,7 +256,7 @@ export function createFraction(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  displayStyle: boolean = true
+  style: MathStyle = MathStyle.Display
 ): VBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
@@ -267,12 +268,12 @@ export function createFraction(
   // TeX shift 기반 수직 간격 계산
   // numShift: 수학 축에서 분자 baseline까지의 거리 (em)
   // denomShift: 수학 축에서 분모 baseline까지의 거리 (em)
-  const numShiftEm = displayStyle ? MathConstants.fracNumDisplayShift : MathConstants.fracNumTextShift;
-  const denomShiftEm = displayStyle ? MathConstants.fracDenomDisplayShift : MathConstants.fracDenomTextShift;
+  const numShiftEm = isDisplay(style) ? MathConstants.fracNumDisplayShift : MathConstants.fracNumTextShift;
+  const denomShiftEm = isDisplay(style) ? MathConstants.fracDenomDisplayShift : MathConstants.fracDenomTextShift;
 
   // 최소 clearance (분수선과 분자/분모 사이)
   // Display: 3*xi8, Text: xi8
-  const clearanceMin = displayStyle ? 3 * ruleThickness : ruleThickness;
+  const clearanceMin = isDisplay(style) ? 3 * ruleThickness : ruleThickness;
 
   // numGap = numShift - ruleThickness/2 - numerator.depth
   let numGap = numShiftEm * actualFontSize - ruleThickness / 2 - numerator.depth;
@@ -327,10 +328,10 @@ export function createBinomBox(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  displayStyle: boolean = true
+  style: MathStyle = MathStyle.Display
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
-  const gap = actualFontSize * MathConstants.fractionGap * (displayStyle ? 1 : 0.6);
+  const gap = actualFontSize * MathConstants.fractionGap * (isDisplay(style) ? 1 : 0.6);
 
   // 분자와 분모 중 더 넓은 것 기준
   const stackWidth = Math.max(numerator.width, denominator.width) + gap * 2;
@@ -372,10 +373,15 @@ export function createPower(
   exponent: Box,
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  style: MathStyle = MathStyle.Display
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
-  const baseShift = actualFontSize * MathConstants.exponentShift;
+  // TeX 스타일별 위첨자 shift: cramped → sup3, display → sup1, text → sup2
+  const supShiftEm = isCramped(style) ? MathConstants.supCrampedShift
+    : isDisplay(style) ? MathConstants.exponentShift
+    : MathConstants.supTextShift;
+  const baseShift = actualFontSize * supShiftEm;
 
   // base 높이가 기본보다 큰 경우 (예: autoSize 괄호, 분수 등) 추가 shift
   // 지수가 base의 오른쪽 위 모서리에 위치하도록 조정
@@ -648,7 +654,7 @@ export function createIntegralBox(
   fontSize: number = 1.0,
   sourceId?: string,
   integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int',
-  displayStyle: boolean = true
+  style: MathStyle = MathStyle.Display
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
@@ -667,18 +673,18 @@ export function createIntegralBox(
 
   if (pathEntry?.variants && pathEntry.variants.length > 0) {
     // display: 마지막 variant (가장 큰 글리프), inline: base
-    const variantIndex = displayStyle ? pathEntry.variants.length - 1 : 0;
-    const variant = displayStyle ? pathEntry.variants[variantIndex] : pathEntry.base;
+    const variantIndex = isDisplay(style) ? pathEntry.variants.length - 1 : 0;
+    const variant = isDisplay(style) ? pathEntry.variants[variantIndex] : pathEntry.base;
     const width = variant.advanceWidth * actualFontSize;
     const height = variant.ascent * actualFontSize;
     const depth = variant.descent * actualFontSize;
-    integralBox = createPathBox(integralChar, displayStyle ? variantIndex : -1, width, height, depth);
+    integralBox = createPathBox(integralChar, isDisplay(style) ? variantIndex : -1, width, height, depth);
   } else {
     // fallback: 텍스트 글리프
-    const integralScale = displayStyle ? 2.5 : 1.4;
+    const integralScale = isDisplay(style) ? MathConstants.integralDisplayScale : MathConstants.integralInlineScale;
     integralBox = createGlyph(integralChar, metrics, fontSize * integralScale, true);
-    integralBox.height = actualFontSize * (displayStyle ? 1.8 : 1.0);
-    integralBox.depth = actualFontSize * (displayStyle ? 0.8 : 0.4);
+    integralBox.height = actualFontSize * (isDisplay(style) ? MathConstants.integralFallbackHeightDisplay : MathConstants.integralFallbackHeightInline);
+    integralBox.depth = actualFontSize * (isDisplay(style) ? MathConstants.integralFallbackDepthDisplay : MathConstants.integralFallbackDepthInline);
   }
 
   // 상하한이 있는 경우에만 처리
@@ -690,7 +696,7 @@ export function createIntegralBox(
     // italic correction: 적분 기호의 기울기 보정 (cambria-013)
     let italicCorr = 0;
     if (pathEntry?.variants && pathEntry.variants.length > 0) {
-      const variant = displayStyle ? pathEntry.variants[pathEntry.variants.length - 1] : pathEntry.base;
+      const variant = isDisplay(style) ? pathEntry.variants[pathEntry.variants.length - 1] : pathEntry.base;
       italicCorr = (variant.italicCorrection ?? 0) * actualFontSize;
     }
     // nolimits 배치 (TeX Rule 13 → Rule 18): base 크기 의존 subscript/superscript
@@ -802,14 +808,14 @@ export function createSumBox(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  displayStyle: boolean = true,
+  style: MathStyle = MathStyle.Display,
   symbol: string = 'Σ'
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
-  if (!displayStyle) {
+  if (!isDisplay(style)) {
     // Inline style: 작은 기호 + sideset (위첨자/아래첨자)
-    const sigmaScale = 1.3;
+    const sigmaScale = MathConstants.largeOpInlineScale;
     const sigmaGlyph = createGlyph(symbol, metrics, fontSize * sigmaScale, false);
 
     // 상한은 위첨자, 하한은 아래첨자로 배치
@@ -828,7 +834,7 @@ export function createSumBox(
   }
 
   // Display style: 큰 연산자 기호
-  const sigmaScale = 2.0;
+  const sigmaScale = MathConstants.largeOpDisplayScale;
   const sigmaGlyph = createGlyph(symbol, metrics, fontSize * sigmaScale, false);
 
   // 상하한 간격 (TeX xi9/xi10 기반)
@@ -875,7 +881,7 @@ export function createLimitBox(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  displayStyle: boolean = true
+  style: MathStyle = MathStyle.Display
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const smallFontSize = fontSize * MathConstants.subscriptScale;
@@ -888,7 +894,7 @@ export function createLimitBox(
   const arrowGlyph = createGlyph('→', metrics, smallFontSize, false);
   const limitInfo = createHBox([varGlyph, arrowGlyph, approach]);
 
-  if (!displayStyle) {
+  if (!isDisplay(style)) {
     // Inline style: "lim" + 아래첨자
     const shiftedInfo: Box = {
       ...limitInfo,
@@ -938,13 +944,13 @@ export function createProductBox(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  displayStyle: boolean = true
+  style: MathStyle = MathStyle.Display
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
-  if (!displayStyle) {
+  if (!isDisplay(style)) {
     // Inline style: 작은 ∏ + sideset (위첨자/아래첨자)
-    const productScale = 1.3;
+    const productScale = MathConstants.largeOpInlineScale;
     const productGlyph = createGlyph('∏', metrics, fontSize * productScale, false);
 
     const shiftedUpper: Box = { ...upper, shift: -(productGlyph.height * 0.6) };
@@ -962,7 +968,7 @@ export function createProductBox(
   }
 
   // Display style: 큰 곱 기호 (∏)
-  const productScale = 2.0;
+  const productScale = MathConstants.largeOpDisplayScale;
   const productGlyph = createGlyph('∏', metrics, fontSize * productScale, false);
 
   // 상하한 간격 (TeX xi9/xi10 기반)

@@ -90,19 +90,69 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
     resolve: () => MathConstants.lowerLimitGap,
     location: 'MathConstants.lowerLimitGap',
   },
+  displayOperatorMinHeight: {
+    resolve: () => MathConstants.displayOperatorMinHeight,
+    location: 'MathConstants.displayOperatorMinHeight',
+  },
+  largeOpDisplayScale: {
+    resolve: () => MathConstants.largeOpDisplayScale,
+    location: 'MathConstants.largeOpDisplayScale',
+  },
+  largeOpInlineScale: {
+    resolve: () => MathConstants.largeOpInlineScale,
+    location: 'MathConstants.largeOpInlineScale',
+  },
+  integralDisplayScale: {
+    resolve: () => MathConstants.integralDisplayScale,
+    location: 'MathConstants.integralDisplayScale',
+  },
+  integralInlineScale: {
+    resolve: () => MathConstants.integralInlineScale,
+    location: 'MathConstants.integralInlineScale',
+  },
+  integralFallbackHeightDisplay: {
+    resolve: () => MathConstants.integralFallbackHeightDisplay,
+    location: 'MathConstants.integralFallbackHeightDisplay',
+  },
+  integralFallbackDepthDisplay: {
+    resolve: () => MathConstants.integralFallbackDepthDisplay,
+    location: 'MathConstants.integralFallbackDepthDisplay',
+  },
+  integralFallbackHeightInline: {
+    resolve: () => MathConstants.integralFallbackHeightInline,
+    location: 'MathConstants.integralFallbackHeightInline',
+  },
+  integralFallbackDepthInline: {
+    resolve: () => MathConstants.integralFallbackDepthInline,
+    location: 'MathConstants.integralFallbackDepthInline',
+  },
+
+  // ── 8-style 시스템 ──
+  scriptScriptPercentScaleDown: {
+    resolve: () => MathConstants.scriptScriptPercentScaleDown,
+    location: 'MathConstants.scriptScriptPercentScaleDown',
+  },
+  sigma14_sup2: {
+    resolve: () => MathConstants.supTextShift,
+    location: 'MathConstants.supTextShift',
+  },
+  sigma15_sup3: {
+    resolve: () => MathConstants.supCrampedShift,
+    location: 'MathConstants.supCrampedShift',
+  },
+  sigma17_sub2: {
+    resolve: () => MathConstants.subscriptShiftWithSup,
+    location: 'MathConstants.subscriptShiftWithSup',
+  },
 
   // ── 미구현 (unbound) ──
   sigma6_mathQuad: null,
   sigma10_num3: null,
-  sigma14_sup2: null,
-  sigma15_sup3: null,
-  sigma17_sub2: null,
   sigma20_delim1: null,
   sigma21_delim2: null,
   xi11_bigOpSpacing3: null,
   xi12_bigOpSpacing4: null,
   xi13_bigOpSpacing5: null,
-  scriptScriptPercentScaleDown: null,
   operatorSpacing_thin: null,
   operatorSpacing_medium: null,
   operatorSpacing_thick: null,
