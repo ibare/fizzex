@@ -241,6 +241,9 @@ function hasChildren(node: MathNode): boolean {
     'cases',
     'gather',
     'array',
+    'overset',
+    'cancel',
+    'xarrow',
   ].includes(node.type);
 }
 
@@ -312,6 +315,16 @@ function getChildren(node: MathNode): MathNode[] {
     }
     case 'gather':
       return (node as { rows: MathNode[] }).rows;
+    case 'overset': {
+      const overset = node as { base: MathNode[]; annotation: MathNode[] };
+      return [...overset.base, ...overset.annotation];
+    }
+    case 'cancel':
+      return (node as { content: MathNode[] }).content;
+    case 'xarrow': {
+      const xarrow = node as { above: MathNode[]; below?: MathNode[] };
+      return [...xarrow.above, ...(xarrow.below || [])];
+    }
     default:
       return [];
   }

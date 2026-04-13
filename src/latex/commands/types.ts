@@ -14,6 +14,7 @@ export interface CommandResult {
 export interface CommandContext {
   latex: string;
   pos: number;
+  commandName: string;  // 호출된 명령어 이름 (예: 'frac', 'dfrac', 'tfrac')
   parseExpression: (latex: string, start: number, stopChars?: string[]) => CommandResult;
   parseGroup: (latex: string, start: number) => CommandResult;
   parseNumber: (latex: string, start: number) => CommandResult;

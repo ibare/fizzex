@@ -145,6 +145,70 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
     location: 'MathConstants.subscriptShiftWithSup',
   },
 
+  // ── 구조 명령어 (overset, boxed, cancel) ──
+  oversetGap: {
+    resolve: () => MathConstants.oversetGap,
+    location: 'MathConstants.oversetGap',
+  },
+  undersetGap: {
+    resolve: () => MathConstants.undersetGap,
+    location: 'MathConstants.undersetGap',
+  },
+  oversetAnnotationScale: {
+    resolve: () => MathConstants.oversetAnnotationScale,
+    location: 'MathConstants.oversetAnnotationScale',
+  },
+  boxedPadding: {
+    resolve: () => MathConstants.boxedPadding,
+    location: 'MathConstants.boxedPadding',
+  },
+  boxedRuleThickness: {
+    resolve: () => MathConstants.boxedRuleThickness,
+    location: 'MathConstants.boxedRuleThickness',
+  },
+  cancelRuleThickness: {
+    resolve: () => MathConstants.cancelRuleThickness,
+    location: 'MathConstants.cancelRuleThickness',
+  },
+
+  // ── 고정 크기 구분자 ──
+  bigDelimiterScale: {
+    resolve: () => MathConstants.bigDelimiterScale,
+    location: 'MathConstants.bigDelimiterScale',
+  },
+  BigDelimiterScale: {
+    resolve: () => MathConstants.BigDelimiterScale,
+    location: 'MathConstants.BigDelimiterScale',
+  },
+  biggDelimiterScale: {
+    resolve: () => MathConstants.biggDelimiterScale,
+    location: 'MathConstants.biggDelimiterScale',
+  },
+  BiggDelimiterScale: {
+    resolve: () => MathConstants.BiggDelimiterScale,
+    location: 'MathConstants.BiggDelimiterScale',
+  },
+
+  // ── 넓은 악센트 / 중괄호 / 확장 화살표 ──
+  wideAccentMinWidth: {
+    resolve: () => MathConstants.wideAccentMinWidth,
+    location: 'MathConstants.wideAccentMinWidth',
+  },
+  overbraceGap: {
+    resolve: () => MathConstants.overbraceGap,
+    location: 'MathConstants.overbraceGap',
+  },
+  xarrowPadding: {
+    resolve: () => MathConstants.xarrowPadding,
+    location: 'MathConstants.xarrowPadding',
+  },
+
+  // ── smallmatrix ──
+  smallMatrixScale: {
+    resolve: () => MathConstants.smallMatrixScale,
+    location: 'MathConstants.smallMatrixScale',
+  },
+
   // ── 미구현 (unbound) ──
   sigma6_mathQuad: null,
   sigma10_num3: null,

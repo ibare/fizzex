@@ -23,6 +23,11 @@ export {
   createProductBox,
   createOverlineBox,
   createUnderlineBox,
+  createOversetBox,
+  createBoxedBox,
+  createCancelBox,
+  createOverbraceBox,
+  createXArrowBox,
   createMatrixBox,
   createTextBox,
 } from './box-builder';

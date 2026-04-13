@@ -434,6 +434,26 @@ export const MathConstants = {
    * 적분 기호 fallback depth (inline, actualFontSize 대비 비율)
    */
   integralFallbackDepthInline: 0.4,
+
+  // ── 구조 명령어 (overset, boxed, cancel) ──
+  oversetGap: 0.12,
+  undersetGap: 0.12,
+  oversetAnnotationScale: 0.7,
+  boxedPadding: 0.15,
+  boxedRuleThickness: 0.04,
+  cancelRuleThickness: 0.04,
+
+  // ── 고정 크기 구분자 (\big, \Big, \bigg, \Bigg) ──
+  bigDelimiterScale: 1.2,
+  BigDelimiterScale: 1.8,
+  biggDelimiterScale: 2.4,
+  BiggDelimiterScale: 3.0,
+
+  // ── 넓은 악센트 / 중괄호 / 확장 화살표 ──
+  wideAccentMinWidth: 0.8,
+  overbraceGap: 0.12,
+  xarrowPadding: 0.3,
+  smallMatrixScale: 0.7,
 } as const;
 
 /** MathConstants 타입 */

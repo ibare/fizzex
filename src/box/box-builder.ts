@@ -463,9 +463,56 @@ export function createParenthesized(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  autoSize: boolean = false
+  autoSize: boolean = false,
+  delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg'
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
+
+  // 고정 크기 구분자: delimiterSize가 지정되면 scale factor로 높이 결정
+  if (delimiterSize) {
+    const scaleMap: Record<string, number> = {
+      big: MathConstants.bigDelimiterScale,
+      Big: MathConstants.BigDelimiterScale,
+      bigg: MathConstants.biggDelimiterScale,
+      Bigg: MathConstants.BiggDelimiterScale,
+    };
+    const scale = scaleMap[delimiterSize];
+    const baseHeight = metrics.getHeight(fontSize);
+    const baseDepth = metrics.getDepth(fontSize);
+    const parenHeight = baseHeight * scale;
+    const parenDepth = baseDepth * scale;
+
+    const closeParen = parenType === '(' ? ')' : parenType === '[' ? ']' : '}';
+
+    // 경로 기반 렌더링 시도
+    const openPathEntry = DELIMITER_PATHS[parenType];
+    const closePathEntry = DELIMITER_PATHS[closeParen];
+
+    if (openPathEntry && closePathEntry) {
+      const targetHeightNorm = (parenHeight + parenDepth) / actualFontSize;
+      const openVariant = selectPathVariant(parenType, targetHeightNorm);
+      const closeVariant = selectPathVariant(closeParen, targetHeightNorm);
+      const openWidth = openVariant.pathWidth * actualFontSize;
+      const closeWidth = closeVariant.pathWidth * actualFontSize;
+      const openBox = createPathBox(parenType, openVariant.variantIndex, openWidth, parenHeight, parenDepth);
+      const closeBox = createPathBox(closeParen, closeVariant.variantIndex, closeWidth, parenHeight, parenDepth);
+      const innerPadding = createKern(actualFontSize * MathConstants.parenPadding);
+      const minWidthKern = content.width > 0 ? content : createKern(actualFontSize * 0.3);
+      return createHBox([openBox, innerPadding, minWidthKern, innerPadding, closeBox], sourceId);
+    }
+
+    // 폴백: GlyphBox
+    const glyphScale = scale;
+    const openGlyph = createGlyph(parenType, metrics, fontSize * glyphScale, false);
+    const closeGlyph = createGlyph(closeParen, metrics, fontSize * glyphScale, false);
+    openGlyph.height = parenHeight;
+    openGlyph.depth = parenDepth;
+    closeGlyph.height = parenHeight;
+    closeGlyph.depth = parenDepth;
+    const innerPadding = createKern(actualFontSize * MathConstants.parenPadding);
+    const minWidthKern = content.width > 0 ? content : createKern(actualFontSize * 0.3);
+    return createHBox([openGlyph, innerPadding, minWidthKern, innerPadding, closeGlyph], sourceId);
+  }
 
   // 빈 content일 때 기본 높이 사용
   const contentHeight = content.height > 0 ? content.height : metrics.getHeight(fontSize);
@@ -1074,18 +1121,98 @@ export function createUnderlineBox(
   return vbox;
 }
 
+/** Overset/Underset Box 생성 (\overset, \underset, \stackrel) */
+export function createOversetBox(
+  base: Box,
+  annotation: Box,
+  position: 'above' | 'below',
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): VBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const gap = actualFontSize * MathConstants.oversetGap;
+
+  const gapKern = createKern(0);
+  gapKern.height = gap;
+  gapKern.depth = 0;
+
+  if (position === 'above') {
+    // annotation - gap - base
+    return createVBox([annotation, gapKern, base], 2, sourceId);
+  } else {
+    // base - gap - annotation
+    return createVBox([base, gapKern, annotation], 0, sourceId);
+  }
+}
+
+/** Boxed Box 생성 (\boxed) */
+export function createBoxedBox(
+  content: Box,
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): HBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const padding = actualFontSize * MathConstants.boxedPadding;
+  const ruleThickness = actualFontSize * MathConstants.boxedRuleThickness;
+
+  // 전체 크기 계산
+  const totalWidth = content.width + padding * 2 + ruleThickness * 2;
+  const totalHeight = content.height + padding + ruleThickness;
+  const totalDepth = content.depth + padding + ruleThickness;
+
+  // boxed를 위한 특수 Box: 렌더러에서 rect를 그리도록 마킹
+  const box = createHBox([
+    createKern(padding + ruleThickness),
+    content,
+    createKern(padding + ruleThickness),
+  ], sourceId);
+
+  box.width = totalWidth;
+  box.height = totalHeight;
+  box.depth = totalDepth;
+  // boxed 마킹: box-renderer에서 감지
+  (box as any).boxed = { padding, ruleThickness };
+
+  return box;
+}
+
+/** Cancel Box 생성 (\cancel, \bcancel, \xcancel) */
+export function createCancelBox(
+  content: Box,
+  cancelType: 'cancel' | 'bcancel' | 'xcancel',
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): HBox {
+  // 콘텐츠 박스를 그대로 반환하되, cancel 마킹 추가
+  const box = createHBox([content], sourceId);
+  box.width = content.width;
+  box.height = content.height;
+  box.depth = content.depth;
+  (box as any).cancel = { cancelType, ruleThickness: metrics.getActualFontSize(fontSize) * MathConstants.cancelRuleThickness };
+  return box;
+}
+
 /**
  * 악센트 Box 생성 (hat, vec, dot, ddot, tilde 등)
  * 악센트를 내용 바로 위에 오버레이 방식으로 배치
  */
 export function createAccentBox(
   content: Box,
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring',
+  accentType: import('../types').AccentNode['accentType'],
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
+
+  // 확장형 악센트: 콘텐츠 너비에 맞게 Rule 기반 렌더링
+  const extensibleTypes = ['widehat', 'widetilde', 'overleftarrow', 'overrightarrow', 'overleftrightarrow'];
+  if (extensibleTypes.includes(accentType)) {
+    return createExtensibleAccentBox(content, accentType, metrics, fontSize, sourceId);
+  }
 
   // 악센트별 문자와 크기, 추가 간격 설정
   const accentConfig: Record<string, { char: string; scale: number; extraGap: number }> = {
@@ -1137,6 +1264,117 @@ export function createAccentBox(
   result.height = Math.max(content.height, content.height - accentShift + accentGlyph.height);
 
   return result;
+}
+
+/** 확장형 악센트 (widehat, widetilde, overarrow) — 콘텐츠 너비에 맞게 확장 */
+function createExtensibleAccentBox(
+  content: Box,
+  accentType: string,
+  metrics: CanvasFontMetrics,
+  fontSize: number,
+  sourceId?: string
+): HBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
+  const gap = actualFontSize * 0.15;
+
+  // 악센트 영역 높이 (Rule 기반)
+  const accentHeight = ruleThickness * 3;
+
+  // 악센트 장식을 마킹한 Rule — box-renderer에서 감지하여 경로 그리기
+  const accentRule = createRule(content.width, accentHeight);
+  (accentRule as any).extensibleAccent = { accentType, width: content.width };
+
+  // 악센트를 콘텐츠 위에 배치 (오버레이 방식)
+  const accentShift = -(content.height + gap);
+  const shiftedAccent: Box = { ...accentRule, shift: accentShift };
+  const overlayAccent = createHBox([shiftedAccent, createKern(-accentRule.width)]);
+
+  const result = createHBox([overlayAccent, content], sourceId);
+  result.height = content.height + gap + accentHeight;
+
+  return result;
+}
+
+/** overbrace/underbrace Box 생성 */
+export function createOverbraceBox(
+  content: Box,
+  variant: 'overbrace' | 'underbrace',
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): HBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const gap = actualFontSize * MathConstants.overbraceGap;
+  const braceHeight = actualFontSize * 0.2;
+
+  // 중괄호 장식 Rule — box-renderer에서 감지하여 경로 그리기
+  const braceRule = createRule(content.width, braceHeight);
+  (braceRule as any).brace = { variant, width: content.width };
+
+  if (variant === 'overbrace') {
+    // 중괄호를 콘텐츠 위에 배치
+    const braceShift = -(content.height + gap);
+    const shiftedBrace: Box = { ...braceRule, shift: braceShift };
+    const overlayBrace = createHBox([shiftedBrace, createKern(-braceRule.width)]);
+    const result = createHBox([overlayBrace, content], sourceId);
+    result.height = content.height + gap + braceHeight;
+    return result;
+  } else {
+    // underbrace: 중괄호를 콘텐츠 아래에 배치
+    const braceShift = content.depth + gap;
+    const shiftedBrace: Box = { ...braceRule, shift: braceShift };
+    const overlayBrace = createHBox([shiftedBrace, createKern(-braceRule.width)]);
+    const result = createHBox([overlayBrace, content], sourceId);
+    result.depth = content.depth + gap + braceHeight;
+    return result;
+  }
+}
+
+/** 확장 화살표 (xleftarrow/xrightarrow) Box 생성 */
+export function createXArrowBox(
+  aboveBox: Box,
+  belowBox: Box | undefined,
+  direction: 'left' | 'right' | 'both',
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): HBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const padding = actualFontSize * MathConstants.xarrowPadding;
+  const gap = actualFontSize * 0.08;
+  const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
+
+  // 화살표 너비 = max(위 텍스트, 아래 텍스트) + 좌우 패딩
+  const textWidth = Math.max(aboveBox.width, belowBox ? belowBox.width : 0);
+  const arrowWidth = textWidth + padding * 2;
+
+  // 화살표 Rule (box-renderer에서 감지하여 화살표 경로 그리기)
+  const arrowRule = createRule(arrowWidth, ruleThickness);
+  (arrowRule as any).xarrow = { direction, width: arrowWidth };
+
+  // 위 텍스트 중앙 정렬
+  const aboveOffset = (arrowWidth - aboveBox.width) / 2;
+  const aboveRow = createHBox([createKern(aboveOffset), aboveBox]);
+
+  // VBox 구성: [위 텍스트] [gap] [화살표] [gap] [아래 텍스트]
+  const elements: Box[] = [aboveRow, createKern(gap), arrowRule];
+
+  if (belowBox) {
+    const belowOffset = (arrowWidth - belowBox.width) / 2;
+    const belowRow = createHBox([createKern(belowOffset), belowBox]);
+    elements.push(createKern(gap), belowRow);
+  }
+
+  const vbox = createVBox(elements, 'top');
+
+  // 수직 중앙을 axis 높이에 맞춤
+  const totalHeight = vbox.height + vbox.depth;
+  const axisOffset = actualFontSize * MathConstants.axisHeight;
+  vbox.height = totalHeight / 2 + axisOffset;
+  vbox.depth = totalHeight / 2 - axisOffset;
+
+  return createHBox([vbox], sourceId);
 }
 
 /** 행렬(Matrix) Box 생성 */

@@ -24,6 +24,9 @@ import type {
   ProductNode,
   OverlineNode,
   AccentNode,
+  OversetNode,
+  CancelNode,
+  XArrowNode,
   MatrixNode,
   AlignNode,
   CasesNode,
@@ -58,6 +61,9 @@ export type MathNodeMap = {
   product: ProductNode;
   overline: OverlineNode;
   accent: AccentNode;
+  overset: OversetNode;
+  cancel: CancelNode;
+  xarrow: XArrowNode;
   matrix: MatrixNode;
   align: AlignNode;
   cases: CasesNode;
@@ -348,6 +354,9 @@ export function hasChildren(node: MathNode): boolean {
     type === 'align' ||
     type === 'cases' ||
     type === 'gather' ||
-    type === 'array'
+    type === 'array' ||
+    type === 'overset' ||
+    type === 'cancel' ||
+    type === 'xarrow'
   );
 }

@@ -3,18 +3,26 @@
  */
 
 import type { CommandHandler } from './types';
-import { createFrac, createBinom, createSqrt, createText, createParen, createAbs, createSpace, mapMathFont } from './helpers';
+import {
+  createFrac, createBinom, createSqrt, createText, createParen, createAbs,
+  createSpace, createStyledRow, createOverset, createUnderset, createBoxed,
+  createCancel, createFunc, createOperator, mapMathFont,
+  generateId as generateLatexId, deriveId,
+} from './helpers';
 import type { MathFontStyle } from './helpers';
 
-/** \frac{num}{den} */
+/** \frac{num}{den}, \dfrac, \tfrac, \cfrac */
 export const fracHandler: CommandHandler = (ctx) => {
   let pos = ctx.pos;
   const numResult = ctx.parseGroup(ctx.latex, pos);
   pos = numResult.consumed;
   while (pos < ctx.latex.length && ctx.latex[pos] === ' ') pos++;
   const denResult = ctx.parseGroup(ctx.latex, pos);
+  const styleOverride = ctx.commandName === 'dfrac' ? 'display' as const
+    : (ctx.commandName === 'tfrac' || ctx.commandName === 'cfrac') ? 'text' as const
+    : undefined;
   return {
-    nodes: [createFrac(numResult.nodes, denResult.nodes)],
+    nodes: [createFrac(numResult.nodes, denResult.nodes, styleOverride)],
     consumed: denResult.consumed,
   };
 };
@@ -56,33 +64,77 @@ export const textHandler: CommandHandler = (ctx) => {
   };
 };
 
+/** named delimiter 매핑 (open/close) */
+const NAMED_DELIMITERS: Record<string, { char: string; parenType: '(' | '[' | '{' }> = {
+  langle: { char: '⟨', parenType: '(' },
+  rangle: { char: '⟩', parenType: '(' },
+  lceil: { char: '⌈', parenType: '[' },
+  rceil: { char: '⌉', parenType: '[' },
+  lfloor: { char: '⌊', parenType: '[' },
+  rfloor: { char: '⌋', parenType: '[' },
+  lbrace: { char: '{', parenType: '{' },
+  rbrace: { char: '}', parenType: '{' },
+  lvert: { char: '|', parenType: '(' },
+  rvert: { char: '|', parenType: '(' },
+  lVert: { char: '‖', parenType: '(' },
+  rVert: { char: '‖', parenType: '(' },
+};
+
+/** delimiter 파싱 (단일 문자 또는 \ 명령어) */
+function parseDelimiter(latex: string, pos: number): { parenType: '(' | '[' | '{'; isAbs: boolean; isDoubleBar: boolean; consumed: number } | null {
+  if (pos >= latex.length) return null;
+
+  // \| (이중 세로줄)
+  if (latex[pos] === '\\' && pos + 1 < latex.length && latex[pos + 1] === '|') {
+    return { parenType: '(', isAbs: false, isDoubleBar: true, consumed: pos + 2 };
+  }
+
+  // \ 명령어 delimiter (\langle, \lceil 등)
+  if (latex[pos] === '\\') {
+    let cmdEnd = pos + 1;
+    while (cmdEnd < latex.length && /[a-zA-Z]/.test(latex[cmdEnd])) cmdEnd++;
+    const cmd = latex.substring(pos + 1, cmdEnd);
+    const delim = NAMED_DELIMITERS[cmd];
+    if (delim) {
+      return { parenType: delim.parenType, isAbs: false, isDoubleBar: cmd === 'lVert' || cmd === 'rVert', consumed: cmdEnd };
+    }
+    return null;
+  }
+
+  // 단일 문자 delimiter
+  const ch = latex[pos];
+  if ('([{'.includes(ch)) return { parenType: ch as '(' | '[' | '{', isAbs: false, isDoubleBar: false, consumed: pos + 1 };
+  if (')]}'.includes(ch)) return { parenType: '(' as const, isAbs: false, isDoubleBar: false, consumed: pos + 1 };
+  if (ch === '|') return { parenType: '(', isAbs: true, isDoubleBar: false, consumed: pos + 1 };
+  if (ch === '.') return { parenType: '(', isAbs: false, isDoubleBar: false, consumed: pos + 1 };
+
+  return null;
+}
+
 /** \left ... \right 처리 */
 export const leftHandler: CommandHandler = (ctx) => {
   let pos = ctx.pos;
-  const openChar = ctx.latex[pos];
-  if (!openChar || !'([{|.'.includes(openChar)) {
+
+  const openDelim = parseDelimiter(ctx.latex, pos);
+  if (!openDelim) {
     return { nodes: [], consumed: pos };
   }
-  pos++;
+  pos = openDelim.consumed;
 
   const innerResult = ctx.parseExpression(ctx.latex, pos, ['\\right']);
   pos = innerResult.consumed;
 
-  // \right 건너뛰기
+  // \right 건너뛰기 + close delimiter 파싱
   if (ctx.latex.substring(pos, pos + 6) === '\\right') {
     pos += 6;
-    const closeChar = ctx.latex[pos];
-    if (closeChar && ')]}|.'.includes(closeChar)) {
-      pos++;
+    const closeDelim = parseDelimiter(ctx.latex, pos);
+    if (closeDelim) {
+      pos = closeDelim.consumed;
     }
   }
 
-  // 괄호 타입 결정
-  let parenType: '(' | '[' | '{' = '(';
-  if (openChar === '[') parenType = '[';
-  else if (openChar === '{' || openChar === '\\') parenType = '{';
-  else if (openChar === '|') {
-    // 절댓값 처리
+  // 절댓값 처리 (양쪽 모두 |)
+  if (openDelim.isAbs) {
     return {
       nodes: [createAbs(innerResult.nodes)],
       consumed: pos,
@@ -90,20 +142,23 @@ export const leftHandler: CommandHandler = (ctx) => {
   }
 
   return {
-    nodes: [createParen(innerResult.nodes, parenType, true)],
+    nodes: [createParen(innerResult.nodes, openDelim.parenType, true)],
     consumed: pos,
   };
 };
 
-/** \binom{n}{k} */
+/** \binom{n}{k}, \dbinom, \tbinom */
 export const binomHandler: CommandHandler = (ctx) => {
   let pos = ctx.pos;
   const numResult = ctx.parseGroup(ctx.latex, pos);
   pos = numResult.consumed;
   while (pos < ctx.latex.length && ctx.latex[pos] === ' ') pos++;
   const denResult = ctx.parseGroup(ctx.latex, pos);
+  const styleOverride = ctx.commandName === 'dbinom' ? 'display' as const
+    : ctx.commandName === 'tbinom' ? 'text' as const
+    : undefined;
   return {
-    nodes: [createBinom(numResult.nodes, denResult.nodes)],
+    nodes: [createBinom(numResult.nodes, denResult.nodes, styleOverride)],
     consumed: denResult.consumed,
   };
 };
@@ -169,6 +224,144 @@ function createFontDeclarationHandler(style: MathFontStyle | null): CommandHandl
   };
 }
 
+/** \displaystyle, \textstyle, \scriptstyle, \scriptscriptstyle — 스타일 전환 */
+function createStyleHandler(styleHint: 'display' | 'text' | 'script' | 'scriptscript'): CommandHandler {
+  return (ctx) => {
+    // 이후 그룹 끝(})이나 \right 등 stopChar까지의 콘텐츠를 파싱
+    const result = ctx.parseExpression(ctx.latex, ctx.pos, ['}', '\\right', '\\end']);
+    return {
+      nodes: [createStyledRow(result.nodes, styleHint)],
+      consumed: result.consumed,
+    };
+  };
+}
+
+/** \overset{above}{base} */
+const oversetHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  const annoResult = ctx.parseGroup(ctx.latex, pos);
+  pos = annoResult.consumed;
+  while (pos < ctx.latex.length && ctx.latex[pos] === ' ') pos++;
+  const baseResult = ctx.parseGroup(ctx.latex, pos);
+  return {
+    nodes: [createOverset(baseResult.nodes, annoResult.nodes)],
+    consumed: baseResult.consumed,
+  };
+};
+
+/** \underset{below}{base} */
+const undersetHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  const annoResult = ctx.parseGroup(ctx.latex, pos);
+  pos = annoResult.consumed;
+  while (pos < ctx.latex.length && ctx.latex[pos] === ' ') pos++;
+  const baseResult = ctx.parseGroup(ctx.latex, pos);
+  return {
+    nodes: [createUnderset(baseResult.nodes, annoResult.nodes)],
+    consumed: baseResult.consumed,
+  };
+};
+
+/** \stackrel{above}{base} — overset과 동일 */
+const stackrelHandler: CommandHandler = oversetHandler;
+
+/** \boxed{expr} */
+const boxedHandler: CommandHandler = (ctx) => {
+  const result = ctx.parseGroup(ctx.latex, ctx.pos);
+  return {
+    nodes: [createBoxed(result.nodes)],
+    consumed: result.consumed,
+  };
+};
+
+/** \cancel{expr}, \bcancel{expr}, \xcancel{expr} */
+const cancelHandler: CommandHandler = (ctx) => {
+  const cancelType = ctx.commandName as 'cancel' | 'bcancel' | 'xcancel';
+  const result = ctx.parseGroup(ctx.latex, ctx.pos);
+  return {
+    nodes: [createCancel(result.nodes, cancelType)],
+    consumed: result.consumed,
+  };
+};
+
+/** \not — 다음 기호에 슬래시 오버레이 */
+const NEGATION_MAP: Record<string, string> = {
+  '=': '≠', '<': '≮', '>': '≯', '≤': '≰', '≥': '≱',
+  '∈': '∉', '⊂': '⊄', '⊆': '⊈', '≡': '≢', '∼': '≁',
+  '≈': '≉', '⪯': '⋠', '⪰': '⋡', '∋': '∌', '∥': '∦',
+  '⊢': '⊬', '⊨': '⊭',
+};
+
+const notHandler: CommandHandler = (ctx) => {
+  // 다음 토큰 파싱
+  const result = ctx.parseCommand(ctx.latex, ctx.pos);
+  if (result.nodes.length > 0) {
+    const node = result.nodes[0];
+    // 연산자 노드면 부정 기호로 대체 시도
+    if (node.type === 'operator' && NEGATION_MAP[node.operator]) {
+      return {
+        nodes: [createOperator(NEGATION_MAP[node.operator])],
+        consumed: result.consumed,
+      };
+    }
+  }
+  // 대체 불가 시 슬래시 + 원본 기호
+  return {
+    nodes: [createOperator('̸'), ...result.nodes],
+    consumed: result.consumed,
+  };
+};
+
+/** \operatorname{name} */
+const operatornameHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  if (ctx.latex[pos] !== '{') return { nodes: [], consumed: pos };
+  pos++;
+  const start = pos;
+  let depth = 1;
+  while (pos < ctx.latex.length && depth > 0) {
+    if (ctx.latex[pos] === '{') depth++;
+    else if (ctx.latex[pos] === '}') depth--;
+    if (depth > 0) pos++;
+  }
+  const name = ctx.latex.substring(start, pos);
+  return {
+    nodes: [createFunc(name, [])],
+    consumed: pos + 1,
+  };
+};
+
+/** \substack{a \\ b} — 수직 스택 (1열 matrix로 변환) */
+const substackHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  if (ctx.latex[pos] !== '{') return { nodes: [], consumed: pos };
+  pos++;
+  const start = pos;
+  let depth = 1;
+  while (pos < ctx.latex.length && depth > 0) {
+    if (ctx.latex[pos] === '{') depth++;
+    else if (ctx.latex[pos] === '}') depth--;
+    if (depth > 0) pos++;
+  }
+  const content = ctx.latex.substring(start, pos);
+  // \\ 로 행 분리 후 각 행을 파싱
+  const lines = content.split('\\\\').map(s => s.trim());
+  const rows = lines.map(line => {
+    const result = ctx.parseExpression(line, 0);
+    return result.nodes;
+  });
+
+  const matrixId = generateLatexId();
+  const matrixRows = rows.map((row, i) => {
+    const rowNode = { id: deriveId(matrixId, `_r${i}`), type: 'row' as const, children: row };
+    return [rowNode];
+  });
+  return {
+    nodes: [{ id: matrixId, type: 'matrix' as const, rows: matrixRows, bracketType: 'none' as const }],
+    consumed: pos + 1,
+  };
+};
+
 /** \phantom{...} — 내용의 너비만큼 투명 공백 */
 const phantomHandler: CommandHandler = (ctx) => {
   let pos = ctx.pos;
@@ -202,6 +395,23 @@ const vphantomHandler: CommandHandler = (ctx) => {
   return { nodes: [], consumed: pos + 1 };
 };
 
+/** \big, \Big, \bigg, \Bigg — 고정 크기 구분자 */
+function createBigDelimHandler(size: 'big' | 'Big' | 'bigg' | 'Bigg'): CommandHandler {
+  return (ctx) => {
+    let pos = ctx.pos;
+    // 다음 토큰이 구분자 문자
+    const delim = parseDelimiter(ctx.latex, pos);
+    if (!delim) return { nodes: [], consumed: pos };
+    pos = delim.consumed;
+    // 빈 콘텐츠의 ParenNode를 생성하고 delimiterSize 설정
+    const node = createParen([], delim.parenType, false, size);
+    return { nodes: [node], consumed: pos };
+  };
+}
+
+/** \bigl, \bigr 등 좌/우 명시 변형도 동일하게 처리 */
+const bigVariants = ['big', 'Big', 'bigg', 'Bigg'] as const;
+
 /** 기본 명령어 핸들러 레지스트리 */
 export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['frac', fracHandler],
@@ -226,6 +436,8 @@ export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['mathcal', createMathFontHandler('mathcal')],
   ['mathbb', createMathFontHandler('mathbb')],
   ['mathfrak', createMathFontHandler('mathfrak')],
+  ['mathscr', createMathFontHandler('mathcal')],
+  ['boldsymbol', createMathFontHandler('mathbf')],
   ['rm', createFontDeclarationHandler(null)],
   ['bf', createFontDeclarationHandler('mathbf')],
   ['it', createFontDeclarationHandler('mathit')],
@@ -235,4 +447,25 @@ export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['hphantom', phantomHandler],
   ['vphantom', vphantomHandler],
   ['left', leftHandler],
+  ['displaystyle', createStyleHandler('display')],
+  ['textstyle', createStyleHandler('text')],
+  ['scriptstyle', createStyleHandler('script')],
+  ['scriptscriptstyle', createStyleHandler('scriptscript')],
+  ['overset', oversetHandler],
+  ['underset', undersetHandler],
+  ['stackrel', stackrelHandler],
+  ['boxed', boxedHandler],
+  ['cancel', cancelHandler],
+  ['bcancel', cancelHandler],
+  ['xcancel', cancelHandler],
+  ['not', notHandler],
+  ['operatorname', operatornameHandler],
+  ['substack', substackHandler],
+  // ── 고정 크기 구분자 ──
+  ...bigVariants.flatMap(size => [
+    [size, createBigDelimHandler(size)] as [string, CommandHandler],
+    [`${size}l`, createBigDelimHandler(size)] as [string, CommandHandler],
+    [`${size}r`, createBigDelimHandler(size)] as [string, CommandHandler],
+    [`${size}m`, createBigDelimHandler(size)] as [string, CommandHandler],
+  ]),
 ]);

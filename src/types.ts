@@ -28,7 +28,10 @@ export type MathNodeType =
   | 'align'     // 정렬 환경 (align, align*, aligned)
   | 'cases'     // 조건부 환경 (cases)
   | 'gather'    // 중앙 정렬 환경 (gather, gather*, gathered)
-  | 'array';    // 배열 환경 (array)
+  | 'array'     // 배열 환경 (array)
+  | 'overset'   // 위/아래 첨자 구조 (overset, underset, stackrel)
+  | 'cancel'    // 취소선 (cancel, bcancel, xcancel)
+  | 'xarrow';   // 확장 화살표 (xleftarrow, xrightarrow)
 
 /** 기본 노드 인터페이스 */
 export interface MathNodeBase {
@@ -58,6 +61,7 @@ export interface OperatorNode extends MathNodeBase {
 export interface FracNode extends MathNodeBase {
   type: 'frac';
   variant?: 'binom';       // 이항계수 변형 (괄호, 분수선 없음)
+  styleOverride?: 'display' | 'text';  // dfrac/tfrac/cfrac, dbinom/tbinom 스타일 강제
   numerator: MathNode[];   // 분자
   denominator: MathNode[]; // 분모
 }
@@ -90,6 +94,8 @@ export interface ParenNode extends MathNodeBase {
   parenType: '(' | '[' | '{';
   /** 자동 크기 조절 여부 (\left \right 사용 시 true) */
   autoSize?: boolean;
+  /** 고정 크기 구분자 (\big, \Big, \bigg, \Bigg) */
+  delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg';
 }
 
 /** 절댓값 노드 */
@@ -140,10 +146,10 @@ export interface ProductNode extends MathNodeBase {
   body: MathNode[];      // 피곱 표현식
 }
 
-/** 윗줄/밑줄 노드 (평균, 벡터, underline 등) */
+/** 윗줄/밑줄/박스 노드 (평균, 벡터, underline, boxed 등) */
 export interface OverlineNode extends MathNodeBase {
   type: 'overline';
-  variant?: 'underline'; // 밑줄 변형 (기본: overline)
+  variant?: 'underline' | 'boxed' | 'overbrace' | 'underbrace'; // 변형 (기본: overline)
   content: MathNode[];   // 선 아래/위 내용
 }
 
@@ -151,7 +157,31 @@ export interface OverlineNode extends MathNodeBase {
 export interface AccentNode extends MathNodeBase {
   type: 'accent';
   content: MathNode[];   // 악센트 아래 내용
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring';
+  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring'
+    | 'widehat' | 'widetilde' | 'overleftarrow' | 'overrightarrow' | 'overleftrightarrow';
+}
+
+/** 위/아래 주석 노드 (\overset, \underset, \stackrel) */
+export interface OversetNode extends MathNodeBase {
+  type: 'overset';
+  base: MathNode[];        // 기본 기호
+  annotation: MathNode[];  // 위/아래 주석
+  position: 'above' | 'below';  // 주석 위치
+}
+
+/** 취소선 노드 (\cancel, \bcancel, \xcancel) */
+export interface CancelNode extends MathNodeBase {
+  type: 'cancel';
+  content: MathNode[];     // 취소선 대상
+  cancelType: 'cancel' | 'bcancel' | 'xcancel';
+}
+
+/** 확장 화살표 노드 (\xleftarrow, \xrightarrow) */
+export interface XArrowNode extends MathNodeBase {
+  type: 'xarrow';
+  above: MathNode[];        // 화살표 위 텍스트
+  below?: MathNode[];       // 화살표 아래 텍스트 (선택)
+  direction: 'left' | 'right' | 'both';
 }
 
 /** 행렬 노드 */
@@ -159,6 +189,7 @@ export interface MatrixNode extends MathNodeBase {
   type: 'matrix';
   rows: MathNode[][];    // 2D 배열 (각 셀은 row 노드)
   bracketType: '(' | '[' | '{' | '|' | '‖' | 'none';  // 괄호 타입
+  small?: boolean;       // smallmatrix 환경 (축소 렌더링)
 }
 
 /**
@@ -226,6 +257,7 @@ export interface SpaceNode extends MathNodeBase {
 export interface RowNode extends MathNodeBase {
   type: 'row';
   children: MathNode[];
+  styleHint?: 'display' | 'text' | 'script' | 'scriptscript';  // \displaystyle 등 스타일 전환
 }
 
 /** Root 노드 */
@@ -252,6 +284,9 @@ export type MathNode =
   | ProductNode
   | OverlineNode
   | AccentNode
+  | OversetNode
+  | CancelNode
+  | XArrowNode
   | MatrixNode
   | AlignNode
   | CasesNode

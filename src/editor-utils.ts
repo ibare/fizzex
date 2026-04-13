@@ -37,7 +37,12 @@ function getChildKeys(node: MathNode): string[] {
     case 'abs':
     case 'overline':
     case 'accent':
+    case 'cancel':
       return ['content'];
+    case 'overset':
+      return ['base', 'annotation'];
+    case 'xarrow':
+      return ['above', 'below'];
     case 'func':
       return ['argument'];
     case 'integral':

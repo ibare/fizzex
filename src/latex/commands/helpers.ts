@@ -2,7 +2,7 @@
  * 명령어 핸들러용 노드 생성 헬퍼 함수
  */
 
-import type { MathNode, RowNode, VariableNode, OperatorNode, SumNode } from '../../types';
+import type { MathNode, RowNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types';
 import { generateLatexId, deriveId } from '../../utils/id-generator';
 
 /** ID 생성 (내부용 alias) */
@@ -33,6 +33,14 @@ export function createNumber(value: string): MathNode {
   return { id: generateId(), type: 'number', value };
 }
 
+/** 스타일 힌트가 포함된 Row 노드 생성 (\displaystyle, \textstyle 등) */
+export function createStyledRow(
+  children: MathNode[],
+  styleHint: 'display' | 'text' | 'script' | 'scriptscript',
+): RowNode {
+  return { id: generateId(), type: 'row', children, styleHint };
+}
+
 // ============================================================================
 // 복합 노드 생성 (Row 래핑 포함)
 // ============================================================================
@@ -40,11 +48,14 @@ export function createNumber(value: string): MathNode {
 export function createParen(
   content: MathNode[],
   parenType: '(' | '[' | '{',
-  autoSize: boolean = false
+  autoSize: boolean = false,
+  delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg'
 ): MathNode {
   const parenId = generateId();
   const contentRow: RowNode = { id: deriveId(parenId, '_content'), type: 'row', children: content };
-  return { id: parenId, type: 'paren', content: [contentRow], parenType, autoSize };
+  const node: ParenNode = { id: parenId, type: 'paren', content: [contentRow], parenType, autoSize };
+  if (delimiterSize) node.delimiterSize = delimiterSize;
+  return node;
 }
 
 export function createAbs(content: MathNode[]): MathNode {
@@ -53,18 +64,28 @@ export function createAbs(content: MathNode[]): MathNode {
   return { id: absId, type: 'abs', content: [contentRow] };
 }
 
-export function createFrac(numerator: MathNode[], denominator: MathNode[]): MathNode {
+export function createFrac(
+  numerator: MathNode[],
+  denominator: MathNode[],
+  styleOverride?: 'display' | 'text',
+): MathNode {
   const fracId = generateId();
   const numRow: RowNode = { id: deriveId(fracId, '_num'), type: 'row', children: numerator };
   const denRow: RowNode = { id: deriveId(fracId, '_den'), type: 'row', children: denominator };
-  return { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] };
+  const node: FracNode = { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow], styleOverride };
+  return node;
 }
 
-export function createBinom(numerator: MathNode[], denominator: MathNode[]): MathNode {
+export function createBinom(
+  numerator: MathNode[],
+  denominator: MathNode[],
+  styleOverride?: 'display' | 'text',
+): MathNode {
   const fracId = generateId();
   const numRow: RowNode = { id: deriveId(fracId, '_num'), type: 'row', children: numerator };
   const denRow: RowNode = { id: deriveId(fracId, '_den'), type: 'row', children: denominator };
-  return { id: fracId, type: 'frac', variant: 'binom', numerator: [numRow], denominator: [denRow] };
+  const node: FracNode = { id: fracId, type: 'frac', variant: 'binom', numerator: [numRow], denominator: [denRow], styleOverride };
+  return node;
 }
 
 export function createSqrt(content: MathNode[], index?: MathNode[]): MathNode {
@@ -243,11 +264,64 @@ export function mapMathFont(text: string, style: MathFontStyle): string {
   return [...text].map(ch => mapCharToMathFont(ch, style)).join('');
 }
 
+export function createOverset(base: MathNode[], annotation: MathNode[]): OversetNode {
+  const id = generateId();
+  const baseRow: RowNode = { id: deriveId(id, '_base'), type: 'row', children: base };
+  const annoRow: RowNode = { id: deriveId(id, '_anno'), type: 'row', children: annotation };
+  return { id, type: 'overset', base: [baseRow], annotation: [annoRow], position: 'above' };
+}
+
+export function createUnderset(base: MathNode[], annotation: MathNode[]): OversetNode {
+  const id = generateId();
+  const baseRow: RowNode = { id: deriveId(id, '_base'), type: 'row', children: base };
+  const annoRow: RowNode = { id: deriveId(id, '_anno'), type: 'row', children: annotation };
+  return { id, type: 'overset', base: [baseRow], annotation: [annoRow], position: 'below' };
+}
+
+export function createBoxed(content: MathNode[]): MathNode {
+  const id = generateId();
+  const contentRow: RowNode = { id: deriveId(id, '_content'), type: 'row', children: content };
+  return { id, type: 'overline', variant: 'boxed', content: [contentRow] };
+}
+
+export function createCancel(
+  content: MathNode[],
+  cancelType: 'cancel' | 'bcancel' | 'xcancel',
+): CancelNode {
+  const id = generateId();
+  const contentRow: RowNode = { id: deriveId(id, '_content'), type: 'row', children: content };
+  return { id, type: 'cancel', content: [contentRow], cancelType };
+}
+
 export function createAccent(
   content: MathNode[],
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring'
+  accentType: AccentNode['accentType']
 ): MathNode {
   const accentId = generateId();
   const contentRow: RowNode = { id: deriveId(accentId, '_content'), type: 'row', children: content };
   return { id: accentId, type: 'accent', content: [contentRow], accentType };
+}
+
+export function createXArrow(
+  above: MathNode[],
+  below: MathNode[] | undefined,
+  direction: 'left' | 'right' | 'both'
+): MathNode {
+  const id = generateId();
+  const aboveRow: RowNode = { id: deriveId(id, '_above'), type: 'row', children: above };
+  const node: XArrowNode = { id, type: 'xarrow', above: [aboveRow], direction };
+  if (below && below.length > 0) {
+    const belowRow: RowNode = { id: deriveId(id, '_below'), type: 'row', children: below };
+    node.below = [belowRow];
+  }
+  return node;
+}
+
+export function createOverbrace(
+  content: MathNode[],
+  variant: 'overbrace' | 'underbrace'
+): MathNode {
+  const id = generateId();
+  const contentRow: RowNode = { id: deriveId(id, '_content'), type: 'row', children: content };
+  return { id, type: 'overline', variant, content: [contentRow] };
 }

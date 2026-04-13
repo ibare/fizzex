@@ -7,6 +7,7 @@ function createMockContext(pos: number): CommandContext {
   return {
     latex: '',
     pos,
+    commandName: '',
     parseExpression: () => ({ nodes: [], consumed: pos }),
     parseGroup: () => ({ nodes: [], consumed: pos }),
     parseNumber: () => ({ nodes: [], consumed: pos }),

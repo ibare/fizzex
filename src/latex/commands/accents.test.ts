@@ -84,13 +84,13 @@ describe('Accent Command Handlers', () => {
       expect((contentChildren[0] as VariableNode).name).toBe('x');
     });
 
-    it('\\widehat{AB} → accent(hat) 노드를 생성한다', () => {
+    it('\\widehat{AB} → accent(widehat) 노드를 생성한다', () => {
       const result = parseLatex('\\widehat{AB}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
       expect(accent.type).toBe('accent');
-      expect(accent.accentType).toBe('hat');
+      expect(accent.accentType).toBe('widehat');
       const contentChildren = (accent.content[0] as any).children;
       expect(contentChildren).toHaveLength(2);
       expect((contentChildren[0] as VariableNode).name).toBe('A');

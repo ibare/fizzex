@@ -47,6 +47,11 @@ import {
   createGatherBox,
   createArrayBox,
   createSurd,
+  createOversetBox,
+  createBoxedBox,
+  createCancelBox,
+  createOverbraceBox,
+  createXArrowBox,
 } from './box-builder';
 
 /** AST를 Box로 변환 (외부 API — displayStyle boolean 유지) */
@@ -141,6 +146,15 @@ function astToBoxInternal(
     case 'array':
       return convertArray(node, metrics, fontSize, style);
 
+    case 'overset':
+      return convertOverset(node, metrics, fontSize, style);
+
+    case 'cancel':
+      return convertCancel(node, metrics, fontSize, style);
+
+    case 'xarrow':
+      return convertXArrow(node, metrics, fontSize, style);
+
     default: {
       const exhaustiveCheck: never = node;
       console.warn(`[ast-to-box] 처리되지 않은 노드 타입: ${(exhaustiveCheck as MathNode).type}`);
@@ -149,14 +163,27 @@ function astToBoxInternal(
   }
 }
 
+/** styleHint → MathStyle 변환 */
+function styleHintToMathStyle(hint: 'display' | 'text' | 'script' | 'scriptscript'): MathStyle {
+  switch (hint) {
+    case 'display': return MathStyle.Display;
+    case 'text': return MathStyle.Text;
+    case 'script': return MathStyle.Script;
+    case 'scriptscript': return MathStyle.ScriptScript;
+  }
+}
+
 /** Row/Root 노드 변환 */
 function convertRow(
-  node: MathNode & { children: MathNode[] },
+  node: MathNode & { children: MathNode[]; styleHint?: 'display' | 'text' | 'script' | 'scriptscript' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle
 ): HBox {
-  const children = node.children.map(child => astToBoxInternal(child, metrics, fontSize, style));
+  // styleHint가 있으면 해당 스타일로 전환 (\displaystyle 등)
+  const effectiveStyle = node.styleHint ? styleHintToMathStyle(node.styleHint) : style;
+  const effectiveFontSize = node.styleHint ? fontSizeForStyle(fontSize, effectiveStyle) : fontSize;
+  const children = node.children.map(child => astToBoxInternal(child, metrics, effectiveFontSize, effectiveStyle));
   return createHBox(children, node.id);
 }
 
@@ -208,7 +235,7 @@ function convertOperatorNode(
 
 /** 분수 노드 변환 */
 function convertFrac(
-  node: MathNode & { numerator: MathNode[]; denominator: MathNode[]; variant?: 'binom' },
+  node: MathNode & { numerator: MathNode[]; denominator: MathNode[]; variant?: 'binom'; styleOverride?: 'display' | 'text' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle
@@ -217,19 +244,24 @@ function convertFrac(
   const numNode = node.numerator[0];
   const denNode = node.denominator[0];
 
+  // styleOverride가 있으면 스타일 강제 (dfrac → Display, tfrac/cfrac → Text)
+  let effectiveStyle = style;
+  if (node.styleOverride === 'display') effectiveStyle = MathStyle.Display;
+  else if (node.styleOverride === 'text') effectiveStyle = MathStyle.Text;
+
   // TeX 스타일 전환: D→T, T→S, S→SS (분모는 항상 cramped)
-  const numStyle = fracNumeratorStyle(style);
-  const denStyle = fracDenominatorStyle(style);
+  const numStyle = fracNumeratorStyle(effectiveStyle);
+  const denStyle = fracDenominatorStyle(effectiveStyle);
   const numFontSize = fontSizeForStyle(fontSize, numStyle);
   const denFontSize = fontSizeForStyle(fontSize, denStyle);
   const numeratorBox = astToBoxInternal(numNode, metrics, numFontSize, numStyle);
   const denominatorBox = astToBoxInternal(denNode, metrics, denFontSize, denStyle);
 
   if (node.variant === 'binom') {
-    return createBinomBox(numeratorBox, denominatorBox, metrics, fontSize, node.id, style);
+    return createBinomBox(numeratorBox, denominatorBox, metrics, fontSize, node.id, effectiveStyle);
   }
 
-  return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id, style);
+  return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id, effectiveStyle);
 }
 
 /** 거듭제곱 노드 변환 */
@@ -312,7 +344,7 @@ function convertSqrt(
 
 /** 괄호 노드 변환 */
 function convertParen(
-  node: MathNode & { content: MathNode[]; parenType: '(' | '[' | '{'; autoSize?: boolean },
+  node: MathNode & { content: MathNode[]; parenType: '(' | '[' | '{'; autoSize?: boolean; delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle
@@ -327,7 +359,8 @@ function convertParen(
     metrics,
     fontSize,
     node.id,
-    node.autoSize
+    node.autoSize,
+    node.delimiterSize
   );
 }
 
@@ -463,7 +496,7 @@ function convertProduct(
 
 /** 윗줄/밑줄 노드 변환 */
 function convertOverline(
-  node: MathNode & { content: MathNode[]; variant?: 'underline' },
+  node: MathNode & { content: MathNode[]; variant?: 'underline' | 'boxed' | 'overbrace' | 'underbrace' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle
@@ -475,12 +508,18 @@ function convertOverline(
   if (node.variant === 'underline') {
     return createUnderlineBox(contentBox, metrics, fontSize, node.id);
   }
+  if (node.variant === 'boxed') {
+    return createBoxedBox(contentBox, metrics, fontSize, node.id);
+  }
+  if (node.variant === 'overbrace' || node.variant === 'underbrace') {
+    return createOverbraceBox(contentBox, node.variant, metrics, fontSize, node.id);
+  }
   return createOverlineBox(contentBox, metrics, fontSize, node.id);
 }
 
 /** 악센트 노드 변환 */
 function convertAccent(
-  node: MathNode & { content: MathNode[]; accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring' },
+  node: MathNode & { content: MathNode[]; accentType: import('../types').AccentNode['accentType'] },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle
@@ -492,19 +531,41 @@ function convertAccent(
   return createAccentBox(contentBox, node.accentType, metrics, fontSize, node.id);
 }
 
-/** 행렬 노드 변환 */
-function convertMatrix(
-  node: MathNode & { rows: MathNode[][]; bracketType: '(' | '[' | '{' | '|' | '‖' | 'none' },
+/** 확장 화살표 노드 변환 */
+function convertXArrow(
+  node: MathNode & { above: MathNode[]; below?: MathNode[]; direction: 'left' | 'right' | 'both' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
+  const aboveNode = node.above[0];
+  const aboveBox = astToBoxInternal(aboveNode, metrics, fontSize * MathConstants.exponentScale, style);
+
+  let belowBox: Box | undefined;
+  if (node.below && node.below.length > 0) {
+    const belowNode = node.below[0];
+    belowBox = astToBoxInternal(belowNode, metrics, fontSize * MathConstants.exponentScale, style);
+  }
+
+  return createXArrowBox(aboveBox, belowBox, node.direction, metrics, fontSize, node.id);
+}
+
+/** 행렬 노드 변환 */
+function convertMatrix(
+  node: MathNode & { rows: MathNode[][]; bracketType: '(' | '[' | '{' | '|' | '‖' | 'none'; small?: boolean },
+  metrics: CanvasFontMetrics,
+  fontSize: number,
+  style: MathStyle
+): Box {
+  // smallmatrix 환경이면 축소 스케일 적용
+  const effectiveFontSize = node.small ? fontSize * MathConstants.smallMatrixScale : fontSize;
+
   // 각 셀을 Box로 변환
   const cellBoxes: Box[][] = node.rows.map(row =>
-    row.map(cell => astToBoxInternal(cell, metrics, fontSize, style))
+    row.map(cell => astToBoxInternal(cell, metrics, effectiveFontSize, style))
   );
 
-  return createMatrixBox(cellBoxes, node.bracketType, metrics, fontSize, node.id);
+  return createMatrixBox(cellBoxes, node.bracketType, metrics, effectiveFontSize, node.id);
 }
 
 /** 텍스트 노드 변환 */
@@ -599,4 +660,34 @@ function convertArray(
     fontSize,
     node.id
   );
+}
+
+/** Overset/Underset 노드 변환 */
+function convertOverset(
+  node: MathNode & { base: MathNode[]; annotation: MathNode[]; position: 'above' | 'below' },
+  metrics: CanvasFontMetrics,
+  fontSize: number,
+  style: MathStyle
+): Box {
+  const baseNode = node.base[0];
+  const annoNode = node.annotation[0];
+
+  const baseBox = astToBoxInternal(baseNode, metrics, fontSize, style);
+  // annotation은 축소 크기로 렌더링
+  const annoFontSize = fontSize * MathConstants.oversetAnnotationScale;
+  const annoBox = astToBoxInternal(annoNode, metrics, annoFontSize, style);
+
+  return createOversetBox(baseBox, annoBox, node.position, metrics, fontSize, node.id);
+}
+
+/** Cancel 노드 변환 */
+function convertCancel(
+  node: MathNode & { content: MathNode[]; cancelType: 'cancel' | 'bcancel' | 'xcancel' },
+  metrics: CanvasFontMetrics,
+  fontSize: number,
+  style: MathStyle
+): Box {
+  const contentNode = node.content[0];
+  const contentBox = astToBoxInternal(contentNode, metrics, fontSize, style);
+  return createCancelBox(contentBox, node.cancelType, metrics, fontSize, node.id);
 }

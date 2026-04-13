@@ -356,7 +356,7 @@ function parseCommand(latex: string, start: number): ParseResult {
     pos++;
     const singleCharHandler = getCommandHandler(cmdName);
     if (singleCharHandler) {
-      const ctx: CommandContext = { latex, pos, parseExpression, parseGroup, parseNumber, parseCommand };
+      const ctx: CommandContext = { latex, pos, commandName: cmdName, parseExpression, parseGroup, parseNumber, parseCommand };
       return singleCharHandler(ctx);
     }
     // 알 수 없는 단일문자 명령어 → 그대로 출력
@@ -380,6 +380,7 @@ function parseCommand(latex: string, start: number): ParseResult {
     const ctx: CommandContext = {
       latex,
       pos,
+      commandName: cmdName,
       parseExpression,
       parseGroup,
       parseNumber,
@@ -420,7 +421,7 @@ function parseBeginEnvironment(latex: string, pos: number): ParseResult {
     const bracketType = getMatrixBracketType(envName);
     const matrixResult = parseMatrixContent(latex, pos, envName);
     return {
-      nodes: [createMatrix(matrixResult.rows, bracketType)],
+      nodes: [createMatrix(matrixResult.rows, bracketType, envName === 'smallmatrix')],
       consumed: matrixResult.consumed,
     };
   }
@@ -628,7 +629,7 @@ function createSpace(width: number): SpaceNode {
   };
 }
 
-function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '‖' | 'none'): MatrixNode {
+function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '‖' | 'none', small?: boolean): MatrixNode {
   const matrixId = generateId();
   // 각 셀을 RowNode로 감싸기
   const wrappedRows = rows.map((row, i) =>
@@ -652,6 +653,7 @@ function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '
     type: 'matrix',
     rows: wrappedRows,
     bracketType,
+    ...(small ? { small: true } : {}),
   };
 }
 

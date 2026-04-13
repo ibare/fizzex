@@ -10,8 +10,16 @@ import type { MathNode } from '../types';
 export function astToLatex(node: MathNode): string {
   switch (node.type) {
     case 'root':
-    case 'row':
       return node.children.map(astToLatex).join('');
+
+    case 'row': {
+      const inner = node.children.map(astToLatex).join('');
+      if (node.styleHint) {
+        const styleCmd = { display: '\\displaystyle', text: '\\textstyle', script: '\\scriptstyle', scriptscript: '\\scriptscriptstyle' }[node.styleHint];
+        return `${styleCmd} ${inner}`;
+      }
+      return inner;
+    }
 
     case 'number':
       return node.value;
@@ -25,7 +33,16 @@ export function astToLatex(node: MathNode): string {
     case 'frac': {
       const num = node.numerator.map(astToLatex).join('');
       const den = node.denominator.map(astToLatex).join('');
-      const cmd = node.variant === 'binom' ? 'binom' : 'frac';
+      let cmd: string;
+      if (node.variant === 'binom') {
+        cmd = node.styleOverride === 'display' ? 'dbinom'
+          : node.styleOverride === 'text' ? 'tbinom'
+          : 'binom';
+      } else {
+        cmd = node.styleOverride === 'display' ? 'dfrac'
+          : node.styleOverride === 'text' ? 'tfrac'
+          : 'frac';
+      }
       return `\\${cmd}{${num}}{${den}}`;
     }
 
@@ -65,16 +82,22 @@ export function astToLatex(node: MathNode): string {
 
     case 'paren': {
       const content = node.content.map(astToLatex).join('');
-      switch (node.parenType) {
-        case '(':
-          return `(${content})`;
-        case '[':
-          return `[${content}]`;
-        case '{':
-          return `\\{${content}\\}`;
-        default:
-          return `(${content})`;
+      const openClose: Record<string, [string, string]> = {
+        '(': ['(', ')'],
+        '[': ['[', ']'],
+        '{': ['\\{', '\\}'],
+      };
+      const [open, close] = openClose[node.parenType] || ['(', ')'];
+
+      if (node.delimiterSize) {
+        return `\\${node.delimiterSize}${open} ${content} \\${node.delimiterSize}${close}`;
       }
+      if (node.autoSize) {
+        const leftOpen = node.parenType === '{' ? '\\{' : node.parenType;
+        const rightClose = node.parenType === '(' ? ')' : node.parenType === '[' ? ']' : '\\}';
+        return `\\left${leftOpen} ${content} \\right${rightClose}`;
+      }
+      return `${open}${content}${close}`;
     }
 
     case 'func': {
@@ -122,19 +145,53 @@ export function astToLatex(node: MathNode): string {
       return `\\prod_{${lower}}^{${upper}} ${body}`;
     }
 
+    case 'overset': {
+      const base = node.base.map(astToLatex).join('');
+      const anno = node.annotation.map(astToLatex).join('');
+      const cmd = node.position === 'below' ? 'underset' : 'overset';
+      return `\\${cmd}{${anno}}{${base}}`;
+    }
+
+    case 'cancel': {
+      const content = node.content.map(astToLatex).join('');
+      return `\\${node.cancelType}{${content}}`;
+    }
+
     case 'overline': {
       const content = node.content.map(astToLatex).join('');
-      const cmd = node.variant === 'underline' ? 'underline' : 'overline';
+      const variantMap: Record<string, string> = {
+        underline: 'underline', boxed: 'boxed',
+        overbrace: 'overbrace', underbrace: 'underbrace',
+      };
+      const cmd = (node.variant && variantMap[node.variant]) || 'overline';
       return `\\${cmd}{${content}}`;
     }
 
     case 'accent': {
       const content = node.content.map(astToLatex).join('');
-      return `\\${node.accentType}{${content}}`;
+      // 확장형 악센트의 LaTeX 명령어 매핑
+      const accentCmdMap: Record<string, string> = {
+        widehat: 'widehat', widetilde: 'widetilde',
+        overleftarrow: 'overleftarrow', overrightarrow: 'overrightarrow',
+        overleftrightarrow: 'overleftrightarrow',
+      };
+      const cmd = accentCmdMap[node.accentType] || node.accentType;
+      return `\\${cmd}{${content}}`;
+    }
+
+    case 'xarrow': {
+      const above = node.above.map(astToLatex).join('');
+      const dirMap: Record<string, string> = { left: 'xleftarrow', right: 'xrightarrow', both: 'xleftrightarrow' };
+      const cmd = dirMap[node.direction] || 'xrightarrow';
+      if (node.below && node.below.length > 0) {
+        const below = node.below.map(astToLatex).join('');
+        return `\\${cmd}[${below}]{${above}}`;
+      }
+      return `\\${cmd}{${above}}`;
     }
 
     case 'matrix': {
-      const bracketEnv = getBmatrixEnv(node.bracketType);
+      const bracketEnv = node.small ? 'smallmatrix' : getBmatrixEnv(node.bracketType);
       const rowsLatex = node.rows.map(row =>
         row.map(cell => astToLatex(cell)).join(' & ')
       ).join(' \\\\ ');

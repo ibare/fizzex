@@ -436,6 +436,174 @@
       },
       "tolerance": 0.1,
       "priority": 2
+    },
+    "oversetGap": {
+      "value": 0.12,
+      "unit": "em",
+      "sources": {
+        "tex": "\\overset/\\stackrel — base와 annotation 사이 간격",
+        "opentype": "UpperLimitGapMin 참고",
+        "cambria": "accent-like gap"
+      },
+      "tolerance": 0.05,
+      "priority": 2,
+      "note": "\\overset, \\stackrel, \\underset의 base-annotation 간격"
+    },
+    "undersetGap": {
+      "value": 0.12,
+      "unit": "em",
+      "sources": {
+        "tex": "\\underset — base와 annotation 사이 간격",
+        "opentype": "LowerLimitGapMin 참고",
+        "cambria": "under-accent gap"
+      },
+      "tolerance": 0.05,
+      "priority": 2,
+      "note": "\\underset의 base-annotation 간격"
+    },
+    "oversetAnnotationScale": {
+      "value": 0.7,
+      "unit": "ratio",
+      "sources": {
+        "tex": "annotation 텍스트의 축소 비율 (scriptscript 유사)",
+        "opentype": "N/A",
+        "cambria": "annotation font size ratio"
+      },
+      "tolerance": 0.05,
+      "priority": 2,
+      "note": "\\overset, \\underset, \\stackrel의 annotation 축소 비율"
+    },
+    "boxedPadding": {
+      "value": 0.15,
+      "unit": "em",
+      "sources": {
+        "tex": "\\boxed — 테두리와 콘텐츠 사이 여백 (fboxsep 유사)",
+        "opentype": "N/A",
+        "cambria": "boxed content padding"
+      },
+      "tolerance": 0.05,
+      "priority": 3,
+      "note": "\\boxed 명령어의 콘텐츠 패딩"
+    },
+    "boxedRuleThickness": {
+      "value": 0.04,
+      "unit": "em",
+      "sources": {
+        "tex": "\\boxed — 테두리 선 두께 (fboxrule 유사)",
+        "opentype": "N/A",
+        "cambria": "boxed border thickness"
+      },
+      "tolerance": 0.01,
+      "priority": 3,
+      "note": "\\boxed 명령어의 테두리 선 두께"
+    },
+    "cancelRuleThickness": {
+      "value": 0.04,
+      "unit": "em",
+      "sources": {
+        "tex": "\\cancel — 취소선 두께",
+        "opentype": "N/A",
+        "cambria": "cancel line thickness"
+      },
+      "tolerance": 0.01,
+      "priority": 3,
+      "note": "\\cancel, \\bcancel, \\xcancel의 취소선 두께"
+    },
+    "bigDelimiterScale": {
+      "value": 1.2,
+      "unit": "ratio",
+      "sources": {
+        "tex": "\\big — 1.2배 구분자",
+        "opentype": "N/A",
+        "cambria": "1.2x delimiter"
+      },
+      "tolerance": 0.1,
+      "priority": 3,
+      "note": "\\big 고정 크기 구분자 스케일"
+    },
+    "BigDelimiterScale": {
+      "value": 1.8,
+      "unit": "ratio",
+      "sources": {
+        "tex": "\\Big — 1.8배 구분자",
+        "opentype": "N/A",
+        "cambria": "1.8x delimiter"
+      },
+      "tolerance": 0.1,
+      "priority": 3,
+      "note": "\\Big 고정 크기 구분자 스케일"
+    },
+    "biggDelimiterScale": {
+      "value": 2.4,
+      "unit": "ratio",
+      "sources": {
+        "tex": "\\bigg — 2.4배 구분자",
+        "opentype": "N/A",
+        "cambria": "2.4x delimiter"
+      },
+      "tolerance": 0.1,
+      "priority": 3,
+      "note": "\\bigg 고정 크기 구분자 스케일"
+    },
+    "BiggDelimiterScale": {
+      "value": 3.0,
+      "unit": "ratio",
+      "sources": {
+        "tex": "\\Bigg — 3.0배 구분자",
+        "opentype": "N/A",
+        "cambria": "3.0x delimiter"
+      },
+      "tolerance": 0.1,
+      "priority": 3,
+      "note": "\\Bigg 고정 크기 구분자 스케일"
+    },
+    "wideAccentMinWidth": {
+      "value": 0.8,
+      "unit": "em",
+      "sources": {
+        "tex": "wide accent 확장 전환 임계 너비",
+        "opentype": "N/A",
+        "cambria": "0.8em"
+      },
+      "tolerance": 0.1,
+      "priority": 3,
+      "note": "콘텐츠 너비가 이 값 이상이면 확장형 악센트 렌더링"
+    },
+    "overbraceGap": {
+      "value": 0.12,
+      "unit": "em",
+      "sources": {
+        "tex": "overbrace/underbrace 간격",
+        "opentype": "N/A",
+        "cambria": "0.12em"
+      },
+      "tolerance": 0.02,
+      "priority": 3,
+      "note": "콘텐츠와 중괄호 사이 간격"
+    },
+    "xarrowPadding": {
+      "value": 0.3,
+      "unit": "em",
+      "sources": {
+        "tex": "xarrow 텍스트 좌우 여백",
+        "opentype": "N/A",
+        "cambria": "0.3em"
+      },
+      "tolerance": 0.05,
+      "priority": 3,
+      "note": "xleftarrow/xrightarrow 텍스트 좌우 패딩"
+    },
+    "smallMatrixScale": {
+      "value": 0.7,
+      "unit": "ratio",
+      "sources": {
+        "tex": "smallmatrix 환경 축소 비율",
+        "opentype": "N/A",
+        "cambria": "0.7x"
+      },
+      "tolerance": 0.1,
+      "priority": 3,
+      "note": "smallmatrix 환경의 폰트 축소 비율"
     }
   },
   "spacing_matrix": {

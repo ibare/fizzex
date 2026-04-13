@@ -2,13 +2,12 @@
  * 악센트 명령어 핸들러
  */
 
+import type { AccentNode } from '../../types';
 import type { CommandHandler } from './types';
-import { createAccent, createOverline, createUnderline } from './helpers';
+import { createAccent, createOverline, createUnderline, createOverbrace, createXArrow } from './helpers';
 
 /** 악센트 핸들러 생성 */
-function accentHandler(
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring'
-): CommandHandler {
+function accentHandler(accentType: AccentNode['accentType']): CommandHandler {
   return (ctx) => {
     const contentResult = ctx.parseGroup(ctx.latex, ctx.pos);
     return {
@@ -27,16 +26,55 @@ const overlineHandler: CommandHandler = (ctx) => {
   };
 };
 
+/** overbrace/underbrace 핸들러 생성 */
+function braceHandler(variant: 'overbrace' | 'underbrace'): CommandHandler {
+  return (ctx) => {
+    const contentResult = ctx.parseGroup(ctx.latex, ctx.pos);
+    return {
+      nodes: [createOverbrace(contentResult.nodes, variant)],
+      consumed: contentResult.consumed,
+    };
+  };
+}
+
+/** xleftarrow/xrightarrow 핸들러 생성 */
+function xarrowHandler(direction: 'left' | 'right' | 'both'): CommandHandler {
+  return (ctx) => {
+    let pos = ctx.pos;
+
+    // 선택적 아래 텍스트: [below]
+    let below: import('../../types').MathNode[] | undefined;
+    if (ctx.latex[pos] === '[') {
+      pos++; // skip '['
+      const belowResult = ctx.parseExpression(ctx.latex, pos, [']']);
+      below = belowResult.nodes;
+      pos = belowResult.consumed;
+      if (ctx.latex[pos] === ']') pos++; // skip ']'
+    }
+
+    // 필수 위 텍스트: {above}
+    const aboveResult = ctx.parseGroup(ctx.latex, pos);
+    pos = aboveResult.consumed;
+
+    return {
+      nodes: [createXArrow(aboveResult.nodes, below, direction)],
+      consumed: pos,
+    };
+  };
+}
+
 /** 악센트 핸들러 레지스트리 */
 export const accentHandlers: Map<string, CommandHandler> = new Map([
   ['hat', accentHandler('hat')],
-  ['widehat', accentHandler('hat')],
+  ['widehat', accentHandler('widehat')],
   ['vec', accentHandler('vec')],
-  ['overrightarrow', accentHandler('vec')],
+  ['overrightarrow', accentHandler('overrightarrow')],
+  ['overleftarrow', accentHandler('overleftarrow')],
+  ['overleftrightarrow', accentHandler('overleftrightarrow')],
   ['dot', accentHandler('dot')],
   ['ddot', accentHandler('ddot')],
   ['tilde', accentHandler('tilde')],
-  ['widetilde', accentHandler('tilde')],
+  ['widetilde', accentHandler('widetilde')],
   ['bar', accentHandler('bar')],
   ['overline', overlineHandler],
   ['underline', (ctx) => {
@@ -48,4 +86,9 @@ export const accentHandlers: Map<string, CommandHandler> = new Map([
   ['acute', accentHandler('acute')],
   ['grave', accentHandler('grave')],
   ['mathring', accentHandler('mathring')],
+  ['overbrace', braceHandler('overbrace')],
+  ['underbrace', braceHandler('underbrace')],
+  ['xleftarrow', xarrowHandler('left')],
+  ['xrightarrow', xarrowHandler('right')],
+  ['xleftrightarrow', xarrowHandler('both')],
 ]);

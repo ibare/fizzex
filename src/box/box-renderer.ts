@@ -115,8 +115,48 @@ export class BoxRenderer {
       this.renderPlaceholder(hbox);
     }
 
+    // boxed 마킹이 있으면 테두리 렌더링
+    const boxedInfo = (hbox as any).boxed as { padding: number; ruleThickness: number } | undefined;
+    if (boxedInfo) {
+      this.backend.save();
+      this.backend.setStrokeStyle(this.config.color);
+      this.backend.setLineWidth(boxedInfo.ruleThickness);
+      this.backend.strokeRect(
+        hbox.x + boxedInfo.ruleThickness / 2,
+        hbox.y - hbox.height + boxedInfo.ruleThickness / 2,
+        hbox.width - boxedInfo.ruleThickness,
+        hbox.height + hbox.depth - boxedInfo.ruleThickness,
+      );
+      this.backend.restore();
+    }
+
     for (const child of hbox.children) {
       this.render(child);
+    }
+
+    // cancel 마킹이 있으면 취소선 렌더링
+    const cancelInfo = (hbox as any).cancel as { cancelType: string; ruleThickness: number } | undefined;
+    if (cancelInfo) {
+      this.backend.save();
+      this.backend.setStrokeStyle(this.config.color);
+      this.backend.setLineWidth(cancelInfo.ruleThickness);
+      this.backend.beginPath();
+      const x = hbox.x;
+      const top = hbox.y - hbox.height;
+      const bottom = hbox.y + hbox.depth;
+      const right = hbox.x + hbox.width;
+      if (cancelInfo.cancelType === 'cancel' || cancelInfo.cancelType === 'xcancel') {
+        // 좌하 → 우상
+        this.backend.moveTo(x, bottom);
+        this.backend.lineTo(right, top);
+      }
+      if (cancelInfo.cancelType === 'bcancel' || cancelInfo.cancelType === 'xcancel') {
+        // 좌상 → 우하
+        this.backend.moveTo(x, top);
+        this.backend.lineTo(right, bottom);
+      }
+      this.backend.stroke();
+      this.backend.restore();
     }
   }
 
@@ -186,10 +226,171 @@ export class BoxRenderer {
 
   /** Rule (선) 렌더링 */
   private renderRule(rule: RuleBox): void {
+    // 확장형 악센트 마킹 감지
+    const extensibleAccent = (rule as any).extensibleAccent as { accentType: string; width: number } | undefined;
+    if (extensibleAccent) {
+      this.renderExtensibleAccent(rule, extensibleAccent);
+      return;
+    }
+
+    // overbrace/underbrace 마킹 감지
+    const braceInfo = (rule as any).brace as { variant: string; width: number } | undefined;
+    if (braceInfo) {
+      this.renderBrace(rule, braceInfo);
+      return;
+    }
+
+    // xarrow 마킹 감지
+    const xarrowInfo = (rule as any).xarrow as { direction: string; width: number } | undefined;
+    if (xarrowInfo) {
+      this.renderXArrow(rule, xarrowInfo);
+      return;
+    }
+
     this.backend.setFillStyle(this.config.color);
     // y는 baseline, rule은 baseline 중심으로 그림
     const top = rule.y - rule.height;
     this.backend.fillRect(rule.x, top, rule.width, rule.thickness);
+  }
+
+  /** 확장형 악센트 렌더링 (widehat, widetilde, overarrow) */
+  private renderExtensibleAccent(
+    rule: RuleBox,
+    info: { accentType: string; width: number }
+  ): void {
+    const x = rule.x;
+    const y = rule.y - rule.height;
+    const w = info.width;
+    const h = rule.height + rule.depth;
+    const lw = this.config.baseFontSize * 0.04;
+
+    this.backend.save();
+    this.backend.setStrokeStyle(this.config.color);
+    this.backend.setLineWidth(lw);
+    this.backend.beginPath();
+
+    if (info.accentType === 'widehat') {
+      // ^ 모양
+      this.backend.moveTo(x, y + h);
+      this.backend.lineTo(x + w / 2, y);
+      this.backend.lineTo(x + w, y + h);
+    } else if (info.accentType === 'widetilde') {
+      // ~ 모양 (베지어 커브)
+      const midY = y + h / 2;
+      this.backend.moveTo(x, midY + h * 0.3);
+      (this.backend as any).quadraticCurveTo?.(x + w * 0.25, y - h * 0.3, x + w / 2, midY) ||
+        this.backend.lineTo(x + w / 2, midY);
+      (this.backend as any).quadraticCurveTo?.(x + w * 0.75, y + h * 1.3, x + w, midY - h * 0.3) ||
+        this.backend.lineTo(x + w, midY - h * 0.3);
+    } else if (info.accentType === 'overleftarrow') {
+      const midY = y + h / 2;
+      this.backend.moveTo(x + w, midY);
+      this.backend.lineTo(x, midY);
+      // 화살촉 (왼쪽)
+      this.backend.moveTo(x + h, midY - h * 0.6);
+      this.backend.lineTo(x, midY);
+      this.backend.lineTo(x + h, midY + h * 0.6);
+    } else if (info.accentType === 'overrightarrow') {
+      const midY = y + h / 2;
+      this.backend.moveTo(x, midY);
+      this.backend.lineTo(x + w, midY);
+      // 화살촉 (오른쪽)
+      this.backend.moveTo(x + w - h, midY - h * 0.6);
+      this.backend.lineTo(x + w, midY);
+      this.backend.lineTo(x + w - h, midY + h * 0.6);
+    } else if (info.accentType === 'overleftrightarrow') {
+      const midY = y + h / 2;
+      this.backend.moveTo(x, midY);
+      this.backend.lineTo(x + w, midY);
+      // 화살촉 (왼쪽)
+      this.backend.moveTo(x + h, midY - h * 0.6);
+      this.backend.lineTo(x, midY);
+      this.backend.lineTo(x + h, midY + h * 0.6);
+      // 화살촉 (오른쪽)
+      this.backend.moveTo(x + w - h, midY - h * 0.6);
+      this.backend.lineTo(x + w, midY);
+      this.backend.lineTo(x + w - h, midY + h * 0.6);
+    }
+
+    this.backend.stroke();
+    this.backend.restore();
+  }
+
+  /** overbrace/underbrace 렌더링 */
+  private renderBrace(
+    rule: RuleBox,
+    info: { variant: string; width: number }
+  ): void {
+    const x = rule.x;
+    const y = rule.y - rule.height;
+    const w = info.width;
+    const h = rule.height + rule.depth;
+    const lw = this.config.baseFontSize * 0.04;
+
+    this.backend.save();
+    this.backend.setStrokeStyle(this.config.color);
+    this.backend.setLineWidth(lw);
+    this.backend.beginPath();
+
+    if (info.variant === 'overbrace') {
+      // ⏞ 모양: 양 끝에서 올라와 중앙에서 뾰족하게
+      const midX = x + w / 2;
+      const top = y;
+      const bottom = y + h;
+      this.backend.moveTo(x, bottom);
+      this.backend.lineTo(x, top + h * 0.3);
+      this.backend.lineTo(midX, top);
+      this.backend.lineTo(x + w, top + h * 0.3);
+      this.backend.lineTo(x + w, bottom);
+    } else {
+      // ⏟ 모양: 양 끝에서 내려와 중앙에서 뾰족하게
+      const midX = x + w / 2;
+      const top = y;
+      const bottom = y + h;
+      this.backend.moveTo(x, top);
+      this.backend.lineTo(x, bottom - h * 0.3);
+      this.backend.lineTo(midX, bottom);
+      this.backend.lineTo(x + w, bottom - h * 0.3);
+      this.backend.lineTo(x + w, top);
+    }
+
+    this.backend.stroke();
+    this.backend.restore();
+  }
+
+  /** 확장 화살표 (xleftarrow/xrightarrow) 렌더링 */
+  private renderXArrow(
+    rule: RuleBox,
+    info: { direction: string; width: number }
+  ): void {
+    const x = rule.x;
+    const midY = rule.y - rule.height / 2;
+    const w = info.width;
+    const lw = this.config.baseFontSize * 0.04;
+    const headSize = this.config.baseFontSize * 0.15;
+
+    this.backend.save();
+    this.backend.setStrokeStyle(this.config.color);
+    this.backend.setLineWidth(lw);
+    this.backend.beginPath();
+
+    // 수평선
+    this.backend.moveTo(x, midY);
+    this.backend.lineTo(x + w, midY);
+
+    if (info.direction === 'left' || info.direction === 'both') {
+      this.backend.moveTo(x + headSize, midY - headSize);
+      this.backend.lineTo(x, midY);
+      this.backend.lineTo(x + headSize, midY + headSize);
+    }
+    if (info.direction === 'right' || info.direction === 'both') {
+      this.backend.moveTo(x + w - headSize, midY - headSize);
+      this.backend.lineTo(x + w, midY);
+      this.backend.lineTo(x + w - headSize, midY + headSize);
+    }
+
+    this.backend.stroke();
+    this.backend.restore();
   }
 
   /** Surd (제곱근) 렌더링 - √ 기호와 vinculum */
