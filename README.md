@@ -353,9 +353,7 @@ The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automa
 
 ### Layout Engine (TeX Compliance)
 
-- [ ] **8-style math style system** — Implement TeX's 8 math styles (D, D', T, T', S, S', SS, SS') with cramped variants. Currently only `displayStyle: boolean` (2 states). Required for correct superscript shift in cramped mode (sigma15), automatic cramped style in denominators/radical content/accented content, and fraction/radical inner style reduction.
 - [ ] **Atom spacing matrix** — Implement TeX's 8x8 atom spacing matrix (Ord, Op, Bin, Rel, Open, Close, Punct, Inner) with style-dependent suppression. Currently uses single `operatorSpacing: 0.2em` for all operators. Required for correct Rel spacing (5mu), Bin spacing (4mu), script-style suppression, and Bin-to-Ord conversion for unary operators.
-- [ ] **Fraction inner style reduction** — Fractions should reduce inner content style (D->T, T->S). Currently content renders at full size, causing denominator shift to exceed TeX sigma values. Depends on 8-style system.
 - [ ] **Super/subscript gap condition** (TeX Rule 18e) — When both super and subscript are present, enforce minimum gap of 4*xi8 between them, and ensure superscript bottom >= 4/5 * xHeight. Requires combined detection of simultaneous super/subscript in parser or layout.
 
 ### Rendering
