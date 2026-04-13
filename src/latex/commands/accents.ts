@@ -3,7 +3,7 @@
  */
 
 import type { CommandHandler } from './types';
-import { createAccent, createOverline } from './helpers';
+import { createAccent, createOverline, createUnderline } from './helpers';
 
 /** 악센트 핸들러 생성 */
 function accentHandler(
@@ -39,6 +39,10 @@ export const accentHandlers: Map<string, CommandHandler> = new Map([
   ['widetilde', accentHandler('tilde')],
   ['bar', accentHandler('bar')],
   ['overline', overlineHandler],
+  ['underline', (ctx) => {
+    const contentResult = ctx.parseGroup(ctx.latex, ctx.pos);
+    return { nodes: [createUnderline(contentResult.nodes)], consumed: contentResult.consumed };
+  }],
   ['breve', accentHandler('breve')],
   ['check', accentHandler('check')],
   ['acute', accentHandler('acute')],

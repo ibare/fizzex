@@ -123,7 +123,8 @@ export function astToLatex(node: MathNode): string {
 
     case 'overline': {
       const content = node.content.map(astToLatex).join('');
-      return `\\overline{${content}}`;
+      const cmd = node.variant === 'underline' ? 'underline' : 'overline';
+      return `\\${cmd}{${content}}`;
     }
 
     case 'accent': {

@@ -355,6 +355,9 @@ The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automa
 - [ ] **`\left`/`\right` named delimiter 지원** — 현재 `\left`/`\right`는 `(`, `)`, `[`, `]`, `\{`, `\}`, `|` 등 단일 문자 구분자만 인식. `\left\langle`…`\right\rangle`, `\left\lceil`…`\right\rceil` 등 backslash 명령어 형태의 구분자를 `leftHandler`에서 파싱하는 로직이 필요.
 - [ ] **`\left\|`…`\right\|` 이중 세로줄 구분자** — `\|`를 `\left`/`\right` 뒤에서 구분자로 인식하고, 내용물 높이에 맞게 ‖(double vertical bar)를 신축 렌더링하는 기능. `leftHandler`의 구분자 파싱 확장 + delimiter-paths에 ‖ extensible 데이터 추가 필요.
 - [ ] **크기 지정 구분자** (`\big`, `\Big`, `\bigg`, `\Bigg`) — 4단계 고정 크기 구분자 명령어. 각 크기별 scale factor 정의, 다음 토큰을 구분자로 파싱하여 해당 크기로 렌더링하는 새로운 CommandHandler + Box 렌더링 로직 필요.
+- [ ] **Wide accent 렌더링** (`\widetilde`, `\widehat`) — 현재 단일 글리프(˜, ˆ)로 첫 글자에만 배치됨. 내용 전체 너비에 맞게 늘어나는 extensible accent 렌더링 필요. OpenType MATH 테이블의 MathGlyphVariantRecord 또는 Rule 기반 동적 그리기 방식으로 구현.
+- [ ] **Overbrace/Underbrace** (`\overbrace{...}^{...}`, `\underbrace{...}_{...}`) — 내용 너비에 맞는 중괄호를 위/아래에 그리고, 그 위/아래에 주석을 배치하는 구조. 새 AST 노드 타입 + extensible brace 렌더링 + 주석 레이아웃 필요.
+- [ ] **Extensible over-arrow** (`\overleftarrow`, `\overrightarrow`, `\overleftrightarrow`) — 내용 전체 너비에 맞게 늘어나는 화살표를 내용 위에 배치. 현재 `\overrightarrow`는 단일 글리프 `\vec`로 매핑되어 첫 글자만 커버. Rule + 화살촉 조합의 extensible 렌더링 필요.
 
 ## Browser Support
 

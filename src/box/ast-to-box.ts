@@ -26,6 +26,7 @@ import {
   createLimitBox,
   createProductBox,
   createOverlineBox,
+  createUnderlineBox,
   createAccentBox,
   createMatrixBox,
   createTextBox,
@@ -399,9 +400,9 @@ function convertProduct(
   return createProductBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id, displayStyle);
 }
 
-/** 윗줄 노드 변환 */
+/** 윗줄/밑줄 노드 변환 */
 function convertOverline(
-  node: MathNode & { content: MathNode[] },
+  node: MathNode & { content: MathNode[]; variant?: 'underline' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   displayStyle: boolean
@@ -410,6 +411,9 @@ function convertOverline(
   const contentNode = node.content[0];
   const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
+  if (node.variant === 'underline') {
+    return createUnderlineBox(contentBox, metrics, fontSize, node.id);
+  }
   return createOverlineBox(contentBox, metrics, fontSize, node.id);
 }
 

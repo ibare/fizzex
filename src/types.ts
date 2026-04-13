@@ -139,10 +139,11 @@ export interface ProductNode extends MathNodeBase {
   body: MathNode[];      // 피곱 표현식
 }
 
-/** 윗줄 노드 (평균, 벡터 등) */
+/** 윗줄/밑줄 노드 (평균, 벡터, underline 등) */
 export interface OverlineNode extends MathNodeBase {
   type: 'overline';
-  content: MathNode[];   // 윗줄 아래 내용
+  variant?: 'underline'; // 밑줄 변형 (기본: overline)
+  content: MathNode[];   // 선 아래/위 내용
 }
 
 /** 악센트 노드 (hat, vec, dot, ddot, tilde 등) */

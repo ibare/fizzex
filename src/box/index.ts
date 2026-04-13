@@ -22,6 +22,7 @@ export {
   createLimitBox,
   createProductBox,
   createOverlineBox,
+  createUnderlineBox,
   createMatrixBox,
   createTextBox,
 } from './box-builder';

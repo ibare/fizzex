@@ -888,6 +888,39 @@ export function createOverlineBox(
   return vbox;
 }
 
+/** 밑줄(Underline) Box 생성 */
+export function createUnderlineBox(
+  content: Box,
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): VBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
+  const gap = actualFontSize * 0.05; // 밑줄과 내용 사이 간격
+
+  // 밑줄
+  const rule = createRule(content.width + gap * 2, ruleThickness);
+
+  // 간격
+  const kern = createKern(0);
+  kern.height = gap;
+  kern.depth = 0;
+
+  // 내용을 HBox로 감싸서 간격 추가
+  const contentBox = createHBox([
+    createKern(gap),
+    content,
+    createKern(gap),
+  ]);
+
+  // VBox로 조합: 내용 - 간격 - 밑줄
+  // baselineType을 0으로 설정하여 내용의 baseline을 사용
+  const vbox = createVBox([contentBox, kern, rule], 0, sourceId);
+
+  return vbox;
+}
+
 /**
  * 악센트 Box 생성 (hat, vec, dot, ddot, tilde 등)
  * 악센트를 내용 바로 위에 오버레이 방식으로 배치

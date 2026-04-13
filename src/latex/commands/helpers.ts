@@ -139,6 +139,12 @@ export function createOverline(content: MathNode[]): MathNode {
   return { id: overlineId, type: 'overline', content: [contentRow] };
 }
 
+export function createUnderline(content: MathNode[]): MathNode {
+  const underlineId = generateId();
+  const contentRow: RowNode = { id: deriveId(underlineId, '_content'), type: 'row', children: content };
+  return { id: underlineId, type: 'overline', variant: 'underline', content: [contentRow] };
+}
+
 export function createAccent(
   content: MathNode[],
   accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check' | 'acute' | 'grave' | 'mathring'
