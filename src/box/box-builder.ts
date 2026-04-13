@@ -638,15 +638,25 @@ export function createIntegralBox(
   };
   const integralChar = integralSymbols[integralType] || '∫';
 
-  // display: 2.5배, inline: 1.4배
-  const integralScale = displayStyle ? 2.5 : 1.4;
-  const integralGlyph = createGlyph(integralChar, metrics, fontSize * integralScale, true);
+  // Path 기반 렌더링: DELIMITER_PATHS에서 display variant 사용
+  const pathEntry = DELIMITER_PATHS[integralChar];
+  let integralBox: Box;
 
-  // 적분 기호의 높이/깊이 조정
-  const heightFactor = displayStyle ? 1.8 : 1.0;
-  const depthFactor = displayStyle ? 0.8 : 0.4;
-  integralGlyph.height = actualFontSize * heightFactor;
-  integralGlyph.depth = actualFontSize * depthFactor;
+  if (pathEntry?.variants && pathEntry.variants.length > 0) {
+    // display: 마지막 variant (가장 큰 글리프), inline: base
+    const variantIndex = displayStyle ? pathEntry.variants.length - 1 : 0;
+    const variant = displayStyle ? pathEntry.variants[variantIndex] : pathEntry.base;
+    const width = variant.advanceWidth * actualFontSize;
+    const height = variant.ascent * actualFontSize;
+    const depth = variant.descent * actualFontSize;
+    integralBox = createPathBox(integralChar, displayStyle ? variantIndex : -1, width, height, depth);
+  } else {
+    // fallback: 텍스트 글리프
+    const integralScale = displayStyle ? 2.5 : 1.4;
+    integralBox = createGlyph(integralChar, metrics, fontSize * integralScale, true);
+    integralBox.height = actualFontSize * (displayStyle ? 1.8 : 1.0);
+    integralBox.depth = actualFontSize * (displayStyle ? 0.8 : 0.4);
+  }
 
   // 상하한이 있는 경우에만 처리
   const hasLimits = lower.width > 0 || upper.width > 0;
@@ -657,13 +667,13 @@ export function createIntegralBox(
     // 상한 (적분 기호 위쪽에) - baseline에서 위로 이동
     const shiftedUpper: Box = {
       ...upper,
-      shift: -(integralGlyph.height - upper.height * 0.5),
+      shift: -(integralBox.height - upper.height * 0.5),
     };
 
     // 하한 (적분 기호 아래쪽에) - baseline에서 아래로 이동
     const shiftedLower: Box = {
       ...lower,
-      shift: integralGlyph.depth - lower.depth * 0.5,
+      shift: integralBox.depth - lower.depth * 0.5,
     };
 
     // 상하한을 겹쳐서 배치
@@ -676,24 +686,24 @@ export function createIntegralBox(
     limitsBox.width = limitsWidth;
 
     integralWithLimits = createHBox([
-      integralGlyph,
+      integralBox,
       createKern(actualFontSize * 0.05),
       limitsBox,
     ]);
 
     // 전체 높이/깊이 조정
     integralWithLimits.height = Math.max(
-      integralGlyph.height,
+      integralBox.height,
       -shiftedUpper.shift! + upper.height
     );
     integralWithLimits.depth = Math.max(
-      integralGlyph.depth,
+      integralBox.depth,
       shiftedLower.shift! + lower.depth
     );
   } else {
-    integralWithLimits = createHBox([integralGlyph]);
-    integralWithLimits.height = integralGlyph.height;
-    integralWithLimits.depth = integralGlyph.depth;
+    integralWithLimits = createHBox([integralBox]);
+    integralWithLimits.height = integralBox.height;
+    integralWithLimits.depth = integralBox.depth;
   }
 
   // 결과 Box 구성

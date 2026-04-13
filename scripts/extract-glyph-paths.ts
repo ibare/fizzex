@@ -15,7 +15,7 @@ const ROOT = resolve(__dirname, '..');
 const FONT_PATH = resolve(ROOT, 'fonts/NewCMMath-Regular.otf');
 const OUTPUT_PATH = resolve(ROOT, 'src/fonts/delimiter-paths.ts');
 
-// 추출 대상: ( ) [ ] √ ‖
+// 추출 대상: ( ) [ ] √ ‖ ∫ ∬ ∭ ∮
 const TARGET_CHARS: Record<string, number> = {
   '(': 0x0028,
   ')': 0x0029,
@@ -23,6 +23,10 @@ const TARGET_CHARS: Record<string, number> = {
   ']': 0x005D,
   '√': 0x221A,
   '‖': 0x2016,
+  '∫': 0x222B,
+  '∬': 0x222C,
+  '∭': 0x222D,
+  '∮': 0x222E,
 };
 
 // ─── OTF 바이너리 유틸 ───────────────────────────────────────
