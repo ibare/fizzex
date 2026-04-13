@@ -300,7 +300,7 @@ src/
 ├── analyzer/             # Expression analysis (9 modules)
 ├── cas/                  # Computer Algebra System (Nerdamer)
 ├── visualizer/           # Visualization components
-├── fonts/                # STIX Two Math font management
+├── fonts/                # New Computer Modern Math font management
 ├── i18n/                 # Internationalization
 ├── export/               # PNG export
 ├── utils/                # LRU cache, ID generation, benchmarks
@@ -347,6 +347,10 @@ pnpm build       # Production build
 ```
 
 The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automatically on push to main.
+
+## TODO
+
+- [ ] **합성 글리프 렌더링 파이프라인** — 현재 렌더링은 단일 유니코드 문자 → 글리프 방식만 지원. `\npreceq`(⪯ + 슬래시), `\not\equiv` 등 두 글리프를 겹쳐 합성하는 부정 기호를 KaTeX/MathJax와 동일하게 렌더링하려면 슬래시 오버레이 합성 파이프라인이 필요. 현재는 가장 가까운 precomposed 유니코드 문자(⋠ U+22E0 등)를 사용하며, 기반 심볼의 등호 스타일이 달라 형태 차이가 발생 (`\preceq`=⪯ 직선 등호 vs `\npreceq`=⋠ tilde 등호).
 
 ## Browser Support
 
