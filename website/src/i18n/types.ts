@@ -159,26 +159,11 @@ export interface Dictionary {
     latex_source: string;
     display_mode_display: string;
     display_mode_inline: string;
-    categories: {
-      fractions: string;
-      powers: string;
-      trig: string;
-      hyperbolic: string;
-      log: string;
-      integrals: string;
-      sigma: string;
-      algebra: string;
-      greek: string;
-      accents: string;
-      relations: string;
-      arrows: string;
-      sets: string;
-      operators: string;
-      dots: string;
-      fonts: string;
-      matrices: string;
-      complex: string;
+    sections: {
+      rendering: string;
+      symbols: string;
     };
+    categories: Record<string, string>;
   };
   pluginSection: {
     title: string;

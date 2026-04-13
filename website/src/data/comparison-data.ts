@@ -101,23 +101,6 @@ export const comparisonCategories: ComparisonCategory[] = [
     ],
   },
   {
-    key: 'greek',
-    items: [
-      '\\alpha, \\beta, \\gamma, \\delta',
-      '\\epsilon, \\varepsilon, \\zeta, \\eta',
-      '\\theta, \\vartheta, \\iota, \\kappa',
-      '\\lambda, \\mu, \\nu, \\xi',
-      '\\pi, \\varpi, \\rho, \\varrho',
-      '\\sigma, \\varsigma, \\tau, \\upsilon',
-      '\\phi, \\varphi, \\chi, \\psi, \\omega',
-      '\\Gamma, \\Delta, \\Theta, \\Lambda',
-      '\\Xi, \\Pi, \\Sigma, \\Upsilon',
-      '\\Phi, \\Psi, \\Omega',
-      '\\nabla \\cdot \\vec{F}',
-      '\\partial f / \\partial x',
-    ],
-  },
-  {
     key: 'accents',
     items: [
       '\\hat{x}',
@@ -128,32 +111,6 @@ export const comparisonCategories: ComparisonCategory[] = [
       '\\dot{x}, \\ddot{x}',
       '\\tilde{f}, \\widetilde{ABC}',
       '\\breve{a}, \\check{x}',
-    ],
-  },
-  {
-    key: 'relations',
-    items: [
-      'a \\approx 3.14',
-      'a \\equiv b',
-      'A \\sim B, \\; A \\simeq B',
-      'A \\cong B',
-      'y \\propto x^2',
-      'a \\ne b, \\; a \\neq c',
-      'a \\le b \\leq c',
-      'a \\ge b \\geq c',
-      '1 \\ll n, \\; n \\gg 1',
-    ],
-  },
-  {
-    key: 'arrows',
-    items: [
-      'a \\to b, \\; a \\rightarrow b',
-      'a \\leftarrow b, \\; a \\leftrightarrow b',
-      'A \\Rightarrow B, \\; A \\Leftarrow B',
-      'A \\Leftrightarrow B',
-      'P \\implies Q, \\; P \\iff Q',
-      'f: x \\mapsto x^2',
-      'x \\uparrow, \\; x \\downarrow',
     ],
   },
   {
@@ -183,39 +140,6 @@ export const comparisonCategories: ComparisonCategory[] = [
       'AB \\perp CD',
       'AB \\parallel CD',
       'f^\\prime(x)',
-    ],
-  },
-  {
-    key: 'dots',
-    items: [
-      'a_1, a_2, \\ldots, a_n',
-      'a_1 + a_2 + \\cdots + a_n',
-      '1, 2, 3, \\dots',
-      'a \\quad b \\qquad c',
-      'a\\ b\\:c\\;d\\!e',
-      'a \\enspace b \\thinspace c',
-      'a \\hspace{2em} b',
-    ],
-  },
-  {
-    key: 'fonts',
-    items: [
-      '\\mathbf{v} = (v_1, v_2, v_3)',
-      '\\mathcal{L}(f(t)) = F(s)',
-      '\\mathfrak{g}',
-      '\\mathit{dx}, \\; \\mathrm{d}x',
-      '\\mathsf{ABC}, \\; \\mathtt{CODE}',
-      'f(x) = x^2 \\text{ if } x > 0',
-      '\\textbf{bold}, \\textit{italic}, \\textrm{roman}',
-    ],
-  },
-  {
-    key: 'matrices',
-    items: [
-      '\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}',
-      '\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}',
-      '\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}',
-      '\\begin{pmatrix} 1 & \\cdots & 0 \\\\ \\vdots & \\ddots & \\vdots \\\\ 0 & \\cdots & 1 \\end{pmatrix}',
     ],
   },
   {

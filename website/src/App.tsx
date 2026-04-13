@@ -7,12 +7,18 @@ import Footer from './layout/Footer';
 import { lazy, Suspense, useEffect, useRef } from 'react';
 import Home from './pages/Home';
 
+/** /symbols/:category → /comparison/sym-:category 리다이렉트 */
+function SymbolRedirect() {
+  const { lang, category } = useParams<{ lang: string; category?: string }>();
+  const target = category ? `/${lang}/comparison/sym-${category}` : `/${lang}/comparison/sym-greek`;
+  return <Navigate to={target} replace />;
+}
+
 const Playground = lazy(() => import('./pages/Playground'));
 const PipelineExplorer = lazy(() => import('./pages/PipelineExplorer'));
 const Examples = lazy(() => import('./pages/Examples'));
 const Plugins = lazy(() => import('./pages/Plugins'));
 const Comparison = lazy(() => import('./pages/Comparison'));
-const SymbolComparison = lazy(() => import('./pages/SymbolComparison'));
 
 function LangRoot() {
   return <Navigate to={`/${detectLanguage()}/`} replace />;
@@ -56,8 +62,8 @@ function LangShell() {
               <Route path="examples/:category" element={<Examples />} />
               <Route path="comparison" element={<Comparison />} />
               <Route path="comparison/:category" element={<Comparison />} />
-              <Route path="symbols" element={<SymbolComparison />} />
-              <Route path="symbols/:category" element={<SymbolComparison />} />
+              <Route path="symbols" element={<SymbolRedirect />} />
+              <Route path="symbols/:category" element={<SymbolRedirect />} />
               <Route path="*" element={<Navigate to={`/${validLang}/`} replace />} />
             </Routes>
           </Suspense>
