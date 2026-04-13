@@ -101,19 +101,6 @@ export const comparisonCategories: ComparisonCategory[] = [
     ],
   },
   {
-    key: 'accents',
-    items: [
-      '\\hat{x}',
-      '\\widehat{ABC}',
-      '\\bar{x} = \\frac{1}{n}\\sum x_i',
-      '\\overline{AB}',
-      '\\vec{v} = \\overrightarrow{AB}',
-      '\\dot{x}, \\ddot{x}',
-      '\\tilde{f}, \\widetilde{ABC}',
-      '\\breve{a}, \\check{x}',
-    ],
-  },
-  {
     key: 'sets',
     items: [
       'A \\cup B',

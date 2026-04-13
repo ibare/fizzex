@@ -189,7 +189,6 @@ export const ko: Dictionary = {
       integrals: '적분',
       sigma: '합 & 극한',
       algebra: '대수 함수',
-      accents: '악센트',
       sets: '집합 & 논리',
       operators: '연산자',
       complex: '복잡한 수식',

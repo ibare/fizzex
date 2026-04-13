@@ -189,7 +189,6 @@ export const en: Dictionary = {
       integrals: 'Integrals',
       sigma: 'Sums & Limits',
       algebra: 'Algebra Functions',
-      accents: 'Accents',
       sets: 'Sets & Logic',
       operators: 'Operators',
       complex: 'Complex Formulas',
