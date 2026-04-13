@@ -55,6 +55,7 @@ export interface VariableNode extends MathNodeBase {
 export interface OperatorNode extends MathNodeBase {
   type: 'operator';
   operator: string; // +, -, ×, ÷, =, ·, <, >, ≤, ≥, ≠, ∀, ∃, ∧, ∨, ¬, →, ←, ↔, ⟹, ⟺, ∈, ∉, ⊂, ⊆, ∪, ∩, etc.
+  delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg';  // \big( 등 단일 고정 크기 구분자
 }
 
 /** 분수 노드 */

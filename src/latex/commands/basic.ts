@@ -80,13 +80,22 @@ const NAMED_DELIMITERS: Record<string, { char: string; parenType: '(' | '[' | '{
   rVert: { char: '‖', parenType: '(' },
 };
 
+/** delimiter 파싱 결과 */
+interface DelimiterInfo {
+  parenType: '(' | '[' | '{';
+  char: string;        // 실제 구분자 문자 ('(', ')', '⟨', '⟩' 등)
+  isAbs: boolean;
+  isDoubleBar: boolean;
+  consumed: number;
+}
+
 /** delimiter 파싱 (단일 문자 또는 \ 명령어) */
-function parseDelimiter(latex: string, pos: number): { parenType: '(' | '[' | '{'; isAbs: boolean; isDoubleBar: boolean; consumed: number } | null {
+function parseDelimiter(latex: string, pos: number): DelimiterInfo | null {
   if (pos >= latex.length) return null;
 
   // \| (이중 세로줄)
   if (latex[pos] === '\\' && pos + 1 < latex.length && latex[pos + 1] === '|') {
-    return { parenType: '(', isAbs: false, isDoubleBar: true, consumed: pos + 2 };
+    return { parenType: '(', char: '‖', isAbs: false, isDoubleBar: true, consumed: pos + 2 };
   }
 
   // \ 명령어 delimiter (\langle, \lceil 등)
@@ -96,17 +105,20 @@ function parseDelimiter(latex: string, pos: number): { parenType: '(' | '[' | '{
     const cmd = latex.substring(pos + 1, cmdEnd);
     const delim = NAMED_DELIMITERS[cmd];
     if (delim) {
-      return { parenType: delim.parenType, isAbs: false, isDoubleBar: cmd === 'lVert' || cmd === 'rVert', consumed: cmdEnd };
+      return { parenType: delim.parenType, char: delim.char, isAbs: false, isDoubleBar: cmd === 'lVert' || cmd === 'rVert', consumed: cmdEnd };
     }
     return null;
   }
 
   // 단일 문자 delimiter
   const ch = latex[pos];
-  if ('([{'.includes(ch)) return { parenType: ch as '(' | '[' | '{', isAbs: false, isDoubleBar: false, consumed: pos + 1 };
-  if (')]}'.includes(ch)) return { parenType: '(' as const, isAbs: false, isDoubleBar: false, consumed: pos + 1 };
-  if (ch === '|') return { parenType: '(', isAbs: true, isDoubleBar: false, consumed: pos + 1 };
-  if (ch === '.') return { parenType: '(', isAbs: false, isDoubleBar: false, consumed: pos + 1 };
+  if ('([{'.includes(ch)) return { parenType: ch as '(' | '[' | '{', char: ch, isAbs: false, isDoubleBar: false, consumed: pos + 1 };
+  if (')]}'.includes(ch)) {
+    const openMap: Record<string, '(' | '[' | '{'> = { ')': '(', ']': '[', '}': '{' };
+    return { parenType: openMap[ch] || '(', char: ch, isAbs: false, isDoubleBar: false, consumed: pos + 1 };
+  }
+  if (ch === '|') return { parenType: '(', char: '|', isAbs: true, isDoubleBar: false, consumed: pos + 1 };
+  if (ch === '.') return { parenType: '(', char: '.', isAbs: false, isDoubleBar: false, consumed: pos + 1 };
 
   return null;
 }
@@ -395,7 +407,7 @@ const vphantomHandler: CommandHandler = (ctx) => {
   return { nodes: [], consumed: pos + 1 };
 };
 
-/** \big, \Big, \bigg, \Bigg — 고정 크기 구분자 */
+/** \big, \Big, \bigg, \Bigg — 고정 크기 단일 구분자 */
 function createBigDelimHandler(size: 'big' | 'Big' | 'bigg' | 'Bigg'): CommandHandler {
   return (ctx) => {
     let pos = ctx.pos;
@@ -403,8 +415,9 @@ function createBigDelimHandler(size: 'big' | 'Big' | 'bigg' | 'Bigg'): CommandHa
     const delim = parseDelimiter(ctx.latex, pos);
     if (!delim) return { nodes: [], consumed: pos };
     pos = delim.consumed;
-    // 빈 콘텐츠의 ParenNode를 생성하고 delimiterSize 설정
-    const node = createParen([], delim.parenType, false, size);
+    // 단일 구분자를 OperatorNode로 표현 (ParenNode는 항상 쌍으로 렌더링되므로 부적합)
+    const node = createOperator(delim.char);
+    (node as import('../../types').OperatorNode).delimiterSize = size;
     return { nodes: [node], consumed: pos };
   };
 }

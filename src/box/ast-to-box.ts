@@ -52,6 +52,7 @@ import {
   createCancelBox,
   createOverbraceBox,
   createXArrowBox,
+  createSingleDelimiter,
 } from './box-builder';
 
 /** AST를 Box로 변환 (외부 API — displayStyle boolean 유지) */
@@ -226,10 +227,14 @@ function convertVariable(
 
 /** 연산자 노드 변환 */
 function convertOperatorNode(
-  node: MathNode & { operator: string },
+  node: MathNode & { operator: string; delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg' },
   metrics: CanvasFontMetrics,
   fontSize: number
 ): HBox {
+  // \big( 등 고정 크기 단일 구분자
+  if (node.delimiterSize) {
+    return createSingleDelimiter(node.operator, node.delimiterSize, metrics, fontSize, node.id);
+  }
   return createOperator(node.operator, metrics, fontSize, node.id);
 }
 

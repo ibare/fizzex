@@ -589,6 +589,46 @@ export function createParenthesized(
   return createHBox([openGlyph, innerPadding, minWidthKern, innerPadding, closeGlyph], sourceId);
 }
 
+/** 단일 구분자 렌더링 (\big(, \Big) 등 — 한쪽 괄호만) */
+export function createSingleDelimiter(
+  char: string,
+  delimiterSize: 'big' | 'Big' | 'bigg' | 'Bigg',
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string
+): HBox {
+  const scaleMap: Record<string, number> = {
+    big: MathConstants.bigDelimiterScale,
+    Big: MathConstants.BigDelimiterScale,
+    bigg: MathConstants.biggDelimiterScale,
+    Bigg: MathConstants.BiggDelimiterScale,
+  };
+  const scale = scaleMap[delimiterSize];
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+
+  // TeX 기준: 구분자는 math axis 중심으로 위아래 대칭 확장
+  const axisHeight = actualFontSize * MathConstants.axisHeight;
+  const baseTotal = (metrics.getHeight(fontSize) + metrics.getDepth(fontSize)) * scale;
+  const parenHeight = baseTotal / 2 + axisHeight;
+  const parenDepth = baseTotal / 2 - axisHeight;
+
+  // 경로 기반 렌더링 시도 (현재 '(' ')' 지원)
+  const pathEntry = DELIMITER_PATHS[char];
+  if (pathEntry) {
+    const targetHeightNorm = (parenHeight + parenDepth) / actualFontSize;
+    const variant = selectPathVariant(char, targetHeightNorm);
+    const width = variant.pathWidth * actualFontSize;
+    const pathBox = createPathBox(char, variant.variantIndex, width, parenHeight, parenDepth);
+    return createHBox([pathBox], sourceId);
+  }
+
+  // 폴백: 스케일된 글리프
+  const glyph = createGlyph(char, metrics, fontSize * scale, false);
+  glyph.height = parenHeight;
+  glyph.depth = parenDepth;
+  return createHBox([glyph], sourceId);
+}
+
 /**
  * 연산자 문자 매핑
  * 일반 ASCII 문자를 수학용 유니코드 문자로 변환

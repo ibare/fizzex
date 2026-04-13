@@ -28,6 +28,7 @@ export {
   createCancelBox,
   createOverbraceBox,
   createXArrowBox,
+  createSingleDelimiter,
   createMatrixBox,
   createTextBox,
 } from './box-builder';

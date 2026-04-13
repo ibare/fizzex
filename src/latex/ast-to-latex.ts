@@ -28,6 +28,9 @@ export function astToLatex(node: MathNode): string {
       return convertVariable(node.name);
 
     case 'operator':
+      if (node.delimiterSize) {
+        return `\\${node.delimiterSize}${node.operator}`;
+      }
       return convertOperator(node.operator);
 
     case 'frac': {
