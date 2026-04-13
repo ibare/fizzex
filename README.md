@@ -328,6 +328,7 @@ pnpm demo      # Run demo app
 pnpm test             # Run all tests
 pnpm test:watch       # Watch mode
 pnpm test:coverage    # Coverage report
+pnpm test:layout      # TeX layout compliance check
 ```
 
 ### Build
@@ -350,6 +351,15 @@ The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automa
 
 ## TODO
 
+### Layout Engine (TeX Compliance)
+
+- [ ] **8-style math style system** — Implement TeX's 8 math styles (D, D', T, T', S, S', SS, SS') with cramped variants. Currently only `displayStyle: boolean` (2 states). Required for correct superscript shift in cramped mode (sigma15), automatic cramped style in denominators/radical content/accented content, and fraction/radical inner style reduction.
+- [ ] **Atom spacing matrix** — Implement TeX's 8x8 atom spacing matrix (Ord, Op, Bin, Rel, Open, Close, Punct, Inner) with style-dependent suppression. Currently uses single `operatorSpacing: 0.2em` for all operators. Required for correct Rel spacing (5mu), Bin spacing (4mu), script-style suppression, and Bin-to-Ord conversion for unary operators.
+- [ ] **Fraction inner style reduction** — Fractions should reduce inner content style (D->T, T->S). Currently content renders at full size, causing denominator shift to exceed TeX sigma values. Depends on 8-style system.
+- [ ] **Super/subscript gap condition** (TeX Rule 18e) — When both super and subscript are present, enforce minimum gap of 4*xi8 between them, and ensure superscript bottom >= 4/5 * xHeight. Requires combined detection of simultaneous super/subscript in parser or layout.
+
+### Rendering
+
 - [ ] **Composite glyph rendering pipeline** — Currently only single Unicode codepoint → glyph rendering is supported. Negated symbols like `\npreceq` (⪯ + slash) and `\not\equiv` require a slash overlay compositing pipeline to match KaTeX/MathJax. Currently falls back to the closest precomposed Unicode character (e.g. ⋠ U+22E0), which causes visual differences due to mismatched equality styles (`\preceq`=⪯ straight vs `\npreceq`=⋠ tilde).
 - [ ] **Extensible arrow commands** (`\xleftarrow`, `\xrightarrow`) — Arrows that stretch to fit argument text width, with text placed above/below. Requires a new Box type (arrow + text layout), dynamic arrow length calculation, and rule + arrowhead rendering.
 - [ ] **`\left`/`\right` named delimiter support** — Currently `\left`/`\right` only recognizes single-character delimiters like `(`, `)`, `[`, `]`, `\{`, `\}`, `|`. Needs parsing logic in `leftHandler` for backslash command delimiters such as `\left\langle`…`\right\rangle`, `\left\lceil`…`\right\rceil`.
@@ -361,7 +371,7 @@ The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automa
 - [ ] **Stackrel/Overset/Underset** (`\stackrel`, `\overset`, `\underset`) — Structure commands that place text above/below a symbol. Requires a new AST node type + VBox-based layout + reduced font size rendering.
 - [ ] **Boxed** (`\boxed`) — Draws a rectangular border around an expression. Requires stroke rectangle rendering on Box output. Can be implemented as a new AST node type or an accent variant.
 - [ ] **Cancel family** (`\cancel`, `\bcancel`, `\xcancel`) — Draws diagonal lines or X marks over an expression. Requires a new AST node type + Canvas path-based diagonal rendering. Originates from the `cancel` package.
-- [ ] **Simultaneous super/subscript alignment** (`x^a_b`) — Optimize vertical alignment when both superscript and subscript are present. Currently processed independently, resulting in different spacing compared to KaTeX/MathJax. Requires unifying super/subscripts into a single SupersubNode structure.
+- [ ] **Simultaneous super/subscript alignment** (`x^a_b`) — Optimize vertical alignment when both superscript and subscript are present. Currently processed independently, resulting in different spacing compared to KaTeX/MathJax. Requires unifying super/subscripts into a single SupersubNode structure. See also "Super/subscript gap condition" in Layout Engine TODO.
 
 ## Browser Support
 

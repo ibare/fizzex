@@ -527,7 +527,7 @@
           "latex": "\\frac{1}{2}",
           "style": "display",
           "known_fail": true,
-          "known_fail_reason": "현재 gap 기반 알고리즘, shift 기반 미구현",
+          "known_fail_reason": "분자 shift 정확, 분모 shift는 스타일 축소(D->T) 미구현으로 content height 초과",
           "assertions": [
             {"type": "numerator_shift_up", "expected_param": "sigma8_num1", "tolerance": 0.02},
             {"type": "denominator_shift_down", "expected_param": "sigma11_denom1", "tolerance": 0.02},
@@ -539,7 +539,7 @@
           "latex": "\\frac{1}{2}",
           "style": "text",
           "known_fail": true,
-          "known_fail_reason": "현재 gap 기반 알고리즘, shift 기반 미구현",
+          "known_fail_reason": "분자 shift 정확, 분모 shift는 스타일 축소(T->S) ��구현으로 content height 초과",
           "assertions": [
             {"type": "numerator_shift_up", "expected_param": "sigma9_num2", "tolerance": 0.02},
             {"type": "denominator_shift_down", "expected_param": "sigma12_denom2", "tolerance": 0.02}
@@ -608,8 +608,7 @@
           "id": "sub-basic",
           "latex": "x_i",
           "style": "display",
-          "known_fail": true,
-          "known_fail_reason": "sigma16=0.150 vs Fizzex subscriptShift=0.2",
+          "known_fail": false,
           "assertions": [
             {"type": "subscript_shift_down_min", "expected_param": "sigma16_sub1", "tolerance": 0.02},
             {"type": "subscript_top_max", "expected": "0.8 * sigma5_xHeight", "tolerance": 0.02}
@@ -668,8 +667,7 @@
           "id": "sqrt-text",
           "latex": "\\sqrt{x}",
           "style": "text",
-          "known_fail": true,
-          "known_fail_reason": "text clearance = 1.25 * xi8 미적용",
+          "known_fail": false,
           "assertions": [
             {"type": "content_rule_clearance_min", "expected": "1.25 * xi8", "tolerance": 0.01}
           ]
@@ -706,8 +704,7 @@
           "id": "hat-uppercase",
           "latex": "\\hat{A}",
           "style": "display",
-          "known_fail": true,
-          "known_fail_reason": "대문자에서도 xHeight 기준 clearance 필요",
+          "known_fail": false,
           "assertions": [
             {"type": "accent_clearance_max", "expected_param": "sigma5_xHeight", "tolerance": 0.02}
           ]
@@ -724,8 +721,7 @@
           "id": "overline-gap",
           "latex": "\\overline{x}",
           "style": "display",
-          "known_fail": true,
-          "known_fail_reason": "gap = 0.05 고정, TeX는 3 * xi8 = 0.12",
+          "known_fail": false,
           "assertions": [
             {"type": "overline_gap", "expected": "3 * xi8", "tolerance": 0.01},
             {"type": "overline_thickness", "expected_param": "xi8_defaultRuleThickness", "tolerance": 0.005}
@@ -761,8 +757,7 @@
           "id": "sum-limits-display",
           "latex": "\\sum_{i=0}^{n}",
           "style": "display",
-          "known_fail": true,
-          "known_fail_reason": "xi9-13 미적용, 고정 limitGap=0.15 사용",
+          "known_fail": false,
           "assertions": [
             {"type": "upper_limit_gap_min", "expected_param": "xi9_bigOpSpacing1", "tolerance": 0.01},
             {"type": "lower_limit_gap_min", "expected_param": "xi10_bigOpSpacing2", "tolerance": 0.01}

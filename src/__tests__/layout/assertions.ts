@@ -158,6 +158,8 @@ function extractActualValue(
     // 근호
     content_rule_clearance_min: 'radical.content_rule_clearance',
     radical_rule_thickness: 'radical.rule_thickness',
+    // Accent
+    accent_clearance_max: 'accent.clearance',
     // Overline
     overline_gap: 'overline.gap',
     overline_thickness: 'overline.thickness',

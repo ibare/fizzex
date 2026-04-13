@@ -581,7 +581,14 @@ export function createSubscript(
   sourceId?: string
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
-  const shift = actualFontSize * MathConstants.subscriptShift;
+  let shift = actualFontSize * MathConstants.subscriptShift;
+
+  // TeX Rule 18a: 아래첨자 상단이 4/5 * xHeight를 초과하면 shift 증가
+  const topMax = actualFontSize * MathConstants.xHeight * 4 / 5;
+  const subscriptTop = subscript.height - shift;
+  if (subscriptTop > topMax) {
+    shift = subscript.height - topMax;
+  }
 
   // 아래첨자를 아래로 이동 (shift를 양수로 설정하여 baseline을 아래로)
   const shiftedSubscript: Box = {
@@ -789,8 +796,9 @@ export function createSumBox(
   const sigmaScale = 2.0;
   const sigmaGlyph = createGlyph(symbol, metrics, fontSize * sigmaScale, false);
 
-  // 상하한 간격
-  const limitGap = actualFontSize * 0.15;
+  // 상하한 간격 (TeX xi9/xi10 기반)
+  const upperGap = actualFontSize * MathConstants.upperLimitGap;
+  const lowerGap = actualFontSize * MathConstants.lowerLimitGap;
 
   // 시그마, 상한, 하한의 너비 계산하여 중앙 정렬용
   const maxWidth = Math.max(sigmaGlyph.width, lower.width, upper.width);
@@ -810,9 +818,9 @@ export function createSumBox(
   // VBox로 위에서 아래로 배치: 상한 → 시그마 → 하한
   const sigmaWithLimits = createVBox([
     upperWithPadding,
-    createKern(limitGap),  // 상한과 시그마 사이 간격
+    createKern(upperGap),  // 상한과 시그마 사이 간격
     sigmaWithPadding,
-    createKern(limitGap),  // 시그마와 하한 사이 간격
+    createKern(lowerGap),  // 시그마와 하한 사이 간격
     lowerWithPadding,
   ], 2); // 시그마 (인덱스 2)를 baseline으로
 
@@ -922,8 +930,9 @@ export function createProductBox(
   const productScale = 2.0;
   const productGlyph = createGlyph('∏', metrics, fontSize * productScale, false);
 
-  // 상하한 간격
-  const limitGap = actualFontSize * 0.15;
+  // 상하한 간격 (TeX xi9/xi10 기반)
+  const upperGap = actualFontSize * MathConstants.upperLimitGap;
+  const lowerGap = actualFontSize * MathConstants.lowerLimitGap;
 
   // 곱 기호, 상한, 하한의 너비 계산하여 중앙 정렬용
   const maxWidth = Math.max(productGlyph.width, lower.width, upper.width);
@@ -943,9 +952,9 @@ export function createProductBox(
   // VBox로 위에서 아래로 배치: 상한 → 곱기호 → 하한
   const productWithLimits = createVBox([
     upperWithPadding,
-    createKern(limitGap),  // 상한과 곱기호 사이 간격
+    createKern(upperGap),  // 상한과 곱기호 사이 간격
     productWithPadding,
-    createKern(limitGap),  // 곱기호와 하한 사이 간격
+    createKern(lowerGap),  // 곱기호와 하한 사이 간격
     lowerWithPadding,
   ], 2); // 곱기호 (인덱스 2)를 baseline으로
 
@@ -966,7 +975,8 @@ export function createOverlineBox(
 ): VBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
-  const gap = actualFontSize * 0.05; // 윗줄과 내용 사이 간격
+  // TeX Rule 9: overline gap = 3 * default_rule_thickness (xi8)
+  const gap = actualFontSize * MathConstants.fractionRuleThickness * 3;
 
   // 윗줄
   const rule = createRule(content.width + gap * 2, ruleThickness);

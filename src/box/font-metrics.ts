@@ -302,6 +302,26 @@ export const MathConstants = {
    * @see The TeXbook, Appendix G, Rule 15
    */
   axisHeight: 0.25,
+
+  /**
+   * 큰 연산자 상한 간격 (em 단위)
+   *
+   * TeX의 \fontdimen9 (xi9, big_op_spacing1).
+   * 큰 연산자와 상한(upper limit) 사이의 최소 간격.
+   *
+   * @see The TeXbook, Appendix G, Rule 13
+   */
+  upperLimitGap: 0.111,
+
+  /**
+   * 큰 연산자 하한 간격 (em 단위)
+   *
+   * TeX의 \fontdimen10 (xi10, big_op_spacing2).
+   * 큰 연산자와 하한(lower limit) 사이의 최소 간격.
+   *
+   * @see The TeXbook, Appendix G, Rule 13
+   */
+  lowerLimitGap: 0.166,
 } as const;
 
 /** MathConstants 타입 */

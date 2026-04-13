@@ -53,6 +53,7 @@ export function measureLayout(
   extractDelimiterMeasurements(box, actualFontSize, values, flags);
   extractLimitsMeasurements(box, actualFontSize, values, flags);
   extractSpacingMeasurements(box, actualFontSize, values, flags);
+  extractAccentMeasurements(box, actualFontSize, values, flags);
 
   return { latex, displayStyle, baseFontSize, boxTree: box, values, flags };
 }
@@ -277,6 +278,43 @@ function extractSpacingMeasurements(
         }
       }
     }
+  });
+}
+
+/** Accent 관련 측정값 추출 */
+function extractAccentMeasurements(
+  box: Box, actualFontSize: number,
+  values: Record<string, number>, _flags: Record<string, boolean>
+): void {
+  visitBox(box, (b) => {
+    if (b.type !== 'hbox') return;
+    const hbox = b as HBox;
+    if (hbox.children.length < 2) return;
+
+    // accent 패턴: 첫 번째 child가 overlay HBox (width ≈ 0), 두 번째가 content
+    const first = hbox.children[0];
+    if (first.type !== 'hbox' || first.width > 0.001 * actualFontSize) return;
+
+    // overlay 내부에서 shifted glyph 찾기
+    const overlay = first as HBox;
+    let accentShiftUp = 0;
+    let accentDepth = 0;
+    let found = false;
+    visitBox(overlay, (inner) => {
+      if (found) return;
+      if (inner.shift !== undefined && inner.shift < 0 && inner.type === 'glyph') {
+        accentShiftUp = Math.abs(inner.shift);
+        accentDepth = inner.depth;
+        found = true;
+      }
+    });
+
+    if (!found) return;
+
+    // accent clearance: accent bottom 위치 (baseline 기준, em 단위)
+    // accent bottom = shift_up - accent_depth
+    const clearance = (accentShiftUp - accentDepth) / actualFontSize;
+    values['accent.clearance'] = clearance;
   });
 }
 
