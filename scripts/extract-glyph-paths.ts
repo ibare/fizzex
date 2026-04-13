@@ -1,5 +1,5 @@
 /**
- * STIX Two Math 폰트에서 괄호 글리프 경로를 추출하는 빌드 스크립트.
+ * New Computer Modern Math 폰트에서 괄호 글리프 경로를 추출하는 빌드 스크립트.
  *
  * - opentype.js: 글리프 윤곽선(path) 추출
  * - DataView: MATH 테이블 파싱 (크기 변형 글리프 ID, extensible 파트)
@@ -12,7 +12,7 @@ import opentype from 'opentype.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
-const FONT_PATH = resolve(ROOT, 'fonts/STIXTwoMath-Regular.otf');
+const FONT_PATH = resolve(ROOT, 'fonts/NewCMMath-Regular.otf');
 const OUTPUT_PATH = resolve(ROOT, 'src/fonts/delimiter-paths.ts');
 
 // 추출 대상: ( ) [ ] √
@@ -357,7 +357,7 @@ function formatEntry(
 
 function generateOutput(entries: string[]): string {
   return `// 자동 생성 파일 — scripts/extract-glyph-paths.ts 에서 생성
-// STIX Two Math 폰트에서 추출한 글리프 경로 데이터
+// New Computer Modern Math 폰트에서 추출한 글리프 경로 데이터
 // 좌표: unitsPerEm 정규화, Y축 반전 (Canvas 방향: 양수=아래)
 
 export interface PathCommand {

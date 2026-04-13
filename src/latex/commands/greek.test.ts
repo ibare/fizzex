@@ -150,13 +150,13 @@ describe('Greek Command Handlers', () => {
       expect((result.nodes[0] as any).name).toBe('ε');
     });
 
-    it('varphi → ϕ 변수를 생성한다', () => {
+    it('varphi → φ 변수를 생성한다', () => {
       const handler = greekHandlers.get('varphi')!;
       const result = handler(createMockContext(0));
 
       expect(result.nodes).toHaveLength(1);
       expect(result.nodes[0].type).toBe('variable');
-      expect((result.nodes[0] as any).name).toBe('ϕ');
+      expect((result.nodes[0] as any).name).toBe('φ');
     });
   });
 

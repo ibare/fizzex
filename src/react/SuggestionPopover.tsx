@@ -221,7 +221,7 @@ export function SuggestionPopover({
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontFamily: '"Times New Roman", serif',
+                    fontFamily: '"NewCMMath", "New Computer Modern Math", "Times New Roman", serif',
                     fontSize: 16,
                     marginRight: 8,
                     color: isSelected

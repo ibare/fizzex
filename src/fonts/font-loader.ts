@@ -26,22 +26,28 @@ export interface MathFontConfig {
   fallback: string;
 }
 
-/** STIX Two Math 폰트 설정 */
-export const STIX_TWO_MATH_CONFIG: MathFontConfig = {
-  name: 'STIX Two Math',
-  fontFamily: 'STIXMathJax',
-  // MathJax STIX Web 폰트 (확장 글리프 포함)
-  url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/STIX-Web/woff/STIXMathJax_Main-Regular.woff',
-  fallback: '"Times New Roman", Times, serif',
+/** New Computer Modern Math 폰트 설정 */
+export const NEW_CM_MATH_CONFIG: MathFontConfig = {
+  name: 'New Computer Modern Math',
+  fontFamily: 'NewCMMath',
+  // 로컬 WOFF2 폰트 (프로젝트 번들)
+  url: '/fonts/NewCMMath-Regular.woff2',
+  fallback: '"Latin Modern Math", "Computer Modern", "Times New Roman", serif',
 };
 
-/** 대체 CDN URL들 */
-const STIX_MATH_URLS = [
-  // MathJax Size 폰트들 (더 큰 글리프)
-  'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/STIX-Web/woff/STIXMathJax_Size1-Regular.woff',
-  // 백업: Google Fonts의 Noto Sans Math
-  'https://fonts.gstatic.com/s/notosansmath/v15/7Aump_cpkSecTWaHRlH2hyV5UHkG-V048PW0.woff2',
-];
+/**
+ * 폰트 URL 설정
+ *
+ * 배포 환경의 base path에 맞게 폰트 URL을 조정할 때 사용.
+ * loadMathFont() 호출 전에 설정해야 함.
+ *
+ * @example
+ * // Vite 프로젝트에서 base path가 있는 경우
+ * setMathFontUrl(import.meta.env.BASE_URL + 'fonts/NewCMMath-Regular.woff2');
+ */
+export function setMathFontUrl(url: string): void {
+  NEW_CM_MATH_CONFIG.url = url;
+}
 
 /** 로드된 폰트 캐시 */
 const loadedFonts = new Map<string, FontLoadResult>();
@@ -65,8 +71,15 @@ async function loadFontFace(config: MathFontConfig): Promise<FontLoadResult> {
       };
     }
 
-    // 이미 문서에 폰트가 있는지 확인
-    if (document.fonts.check(`16px "${fontFamily}"`)) {
+    // 이미 document.fonts에 같은 이름의 FontFace가 등록되어 있는지 확인
+    // (document.fonts.check()는 등록된 @font-face가 없어도 true를 반환할 수 있으므로 사용하지 않음)
+    let alreadyRegistered = false;
+    document.fonts.forEach((face) => {
+      if (face.family === fontFamily && face.status === 'loaded') {
+        alreadyRegistered = true;
+      }
+    });
+    if (alreadyRegistered) {
       return {
         status: 'loaded',
         fontFamily: `"${fontFamily}", ${fallback}`,
@@ -74,7 +87,7 @@ async function loadFontFace(config: MathFontConfig): Promise<FontLoadResult> {
     }
 
     // 폰트 페이스 생성 및 로드
-    const fontFace = new FontFace(fontFamily, `url(${url})`, {
+    const fontFace = new FontFace(fontFamily, `url("${url}")`, {
       style: 'normal',
       weight: '400',
     });
@@ -99,42 +112,14 @@ async function loadFontFace(config: MathFontConfig): Promise<FontLoadResult> {
   }
 }
 
-/**
- * 여러 URL에서 폰트 로드 시도
- */
-async function loadFontWithFallbackUrls(
-  config: MathFontConfig,
-  urls: string[]
-): Promise<FontLoadResult> {
-  // 먼저 기본 URL 시도
-  let result = await loadFontFace(config);
-  if (result.status === 'loaded' && !result.error) {
-    return result;
-  }
-
-  // 실패 시 대체 URL들 시도
-  for (const url of urls) {
-    result = await loadFontFace({ ...config, url });
-    if (result.status === 'loaded' && !result.error) {
-      return result;
-    }
-  }
-
-  // 모두 실패 시 폴백 반환
-  return {
-    status: 'error',
-    fontFamily: config.fallback,
-    error: new Error('All font URLs failed'),
-  };
-}
 
 /**
- * STIX Two Math 폰트 로드
+ * New Computer Modern Math 폰트 로드
  *
  * @returns 로드 결과
  */
-export async function loadSTIXMathFont(): Promise<FontLoadResult> {
-  const cacheKey = 'stix-two-math';
+export async function loadMathFont(): Promise<FontLoadResult> {
+  const cacheKey = 'new-cm-math';
 
   // 이미 로드됨
   const cached = loadedFonts.get(cacheKey);
@@ -149,7 +134,7 @@ export async function loadSTIXMathFont(): Promise<FontLoadResult> {
   }
 
   // 새로 로드
-  const loadPromise = loadFontWithFallbackUrls(STIX_TWO_MATH_CONFIG, STIX_MATH_URLS);
+  const loadPromise = loadFontFace(NEW_CM_MATH_CONFIG);
   loadingPromises.set(cacheKey, loadPromise);
 
   const result = await loadPromise;
@@ -162,7 +147,7 @@ export async function loadSTIXMathFont(): Promise<FontLoadResult> {
 /**
  * 폰트 로드 상태 확인
  */
-export function getFontLoadStatus(fontName: string = 'stix-two-math'): FontLoadStatus {
+export function getFontLoadStatus(fontName: string = 'new-cm-math'): FontLoadStatus {
   const cached = loadedFonts.get(fontName);
   if (cached) {
     return cached.status;
@@ -178,13 +163,13 @@ export function getFontLoadStatus(fontName: string = 'stix-two-math'): FontLoadS
 /**
  * 현재 사용 가능한 폰트 패밀리 반환
  */
-export function getAvailableFontFamily(fontName: string = 'stix-two-math'): string {
+export function getAvailableFontFamily(fontName: string = 'new-cm-math'): string {
   const cached = loadedFonts.get(fontName);
   if (cached) {
     return cached.fontFamily;
   }
 
-  return STIX_TWO_MATH_CONFIG.fallback;
+  return NEW_CM_MATH_CONFIG.fallback;
 }
 
 /**
@@ -192,10 +177,10 @@ export function getAvailableFontFamily(fontName: string = 'stix-two-math'): stri
  *
  * 컴포넌트에서 사용:
  * ```
- * const [fontFamily, setFontFamily] = useState(STIX_TWO_MATH_CONFIG.fallback);
+ * const [fontFamily, setFontFamily] = useState(NEW_CM_MATH_CONFIG.fallback);
  *
  * useEffect(() => {
- *   loadSTIXMathFont().then(result => {
+ *   loadMathFont().then(result => {
  *     setFontFamily(result.fontFamily);
  *   });
  * }, []);
@@ -210,6 +195,6 @@ export function useMathFont(): {
   return {
     fontFamily: getAvailableFontFamily(),
     status: getFontLoadStatus(),
-    load: loadSTIXMathFont,
+    load: loadMathFont,
   };
 }

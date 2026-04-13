@@ -17,7 +17,7 @@ editor.onChange((latex) => saveToDocument(latex));`;
 
 export const configExample = `interface FizzexConfig {
   baseFontSize?: number;   // default 20
-  fontFamily?: string;     // default STIX Two Math
+  fontFamily?: string;     // default New CM Math
   color?: string;          // default '#1a1a1a'
   theme?: 'light' | 'dark';
   padding?: number;        // default 8

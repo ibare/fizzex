@@ -52,13 +52,13 @@ export interface FontGlyphMapping {
 }
 
 /**
- * STIX Two Math 폰트 글리프 매핑
+ * New Computer Modern Math 폰트 글리프 매핑
  *
  * Unicode Technical Note #28 (Math Typesetting)의 확장 괄호 문자 사용
  * https://unicode.org/notes/tn28/
  */
-export const STIX_TWO_MATH: FontGlyphMapping = {
-  fontFamily: '"STIXMathJax", "STIX Two Math", serif',
+export const NEW_CM_MATH: FontGlyphMapping = {
+  fontFamily: '"NewCMMath", "New Computer Modern Math", serif',
 
   // 참고: medium/large에 hook 글리프(\u239B 등)를 사용하면 괄호 일부만 보임
   // 단독 사용 시에는 일반 괄호를 스케일링하여 사용해야 함
@@ -191,7 +191,7 @@ export const STIX_TWO_MATH: FontGlyphMapping = {
  * 확장 글리프 없이 스케일링만 사용
  */
 export const DEFAULT_FONT: FontGlyphMapping = {
-  fontFamily: '"Times New Roman", Times, serif',
+  fontFamily: '"Latin Modern Math", "Computer Modern", "Times New Roman", Times, serif',
 
   parenthesis: {
     open: { small: '(' },
@@ -216,12 +216,12 @@ export const DEFAULT_FONT: FontGlyphMapping = {
 
 /** 사용 가능한 폰트 매핑 */
 export const FONT_MAPPINGS: Record<string, FontGlyphMapping> = {
-  'stix2': STIX_TWO_MATH,
+  'newcm': NEW_CM_MATH,
   'default': DEFAULT_FONT,
 };
 
 /** 현재 활성 폰트 매핑 */
-let currentMapping: FontGlyphMapping = STIX_TWO_MATH;
+let currentMapping: FontGlyphMapping = NEW_CM_MATH;
 
 /** 폰트 매핑 설정 */
 export function setFontMapping(name: string): void {

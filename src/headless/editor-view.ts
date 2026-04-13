@@ -12,7 +12,7 @@ import { BoxRenderer } from '../box/box-renderer';
 import type { BoxRenderConfig, Box, HBox } from '../box/types';
 import { astToLatex } from '../latex/ast-to-latex';
 import { MathEditor, createStateFromLatex } from '../editor';
-import { loadSTIXMathFont } from '../fonts';
+import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
 import { resolveBoxRenderConfig } from './types';
 
@@ -115,7 +115,7 @@ export class FizzexEditor {
 
     // --- Font loading ---
 
-    loadSTIXMathFont().then((result) => {
+    loadMathFont().then((result) => {
       if (this.destroyed) return;
       this.boxConfig = { ...this.boxConfig, fontFamily: result.fontFamily };
       this.userConfig.fontFamily = result.fontFamily;

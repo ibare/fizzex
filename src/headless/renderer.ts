@@ -12,7 +12,7 @@ import { layoutBox } from '../box/box-layout';
 import { BoxRenderer } from '../box/box-renderer';
 import type { BoxRenderConfig } from '../box/types';
 import { parseLatex } from '../latex';
-import { loadSTIXMathFont } from '../fonts';
+import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize } from './types';
 import { resolveBoxRenderConfig } from './types';
 
@@ -45,7 +45,7 @@ export class FizzexRenderer {
     this.ctx = ctx;
 
     // Start async font loading
-    loadSTIXMathFont().then((result) => {
+    loadMathFont().then((result) => {
       if (this.destroyed) return;
       this.boxConfig = {
         ...this.boxConfig,

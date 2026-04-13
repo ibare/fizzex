@@ -148,14 +148,17 @@ function convertNumber(
   return createGlyphString(node.value, metrics, fontSize, false, node.id);
 }
 
+/** TeX 표준에 따라 upright로 렌더링하는 문자 (대문자 그리스 + 히브리 + digamma) */
+const UPRIGHT_CHARS = new Set('ΓΔΘΛΞΠΣΥΦΨΩϝℶℷℸ');
+
 /** 변수 노드 변환 */
 function convertVariable(
   node: MathNode & { name: string },
   metrics: CanvasFontMetrics,
   fontSize: number
 ): HBox {
-  // 변수는 이탤릭
-  return createGlyphString(node.name, metrics, fontSize, true, node.id);
+  const italic = !UPRIGHT_CHARS.has(node.name);
+  return createGlyphString(node.name, metrics, fontSize, italic, node.id);
 }
 
 /** 연산자 노드 변환 */

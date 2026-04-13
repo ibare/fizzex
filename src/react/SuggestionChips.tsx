@@ -159,7 +159,7 @@ export function SuggestionChips({
           {/* 아이콘 */}
           <span
             style={{
-              fontFamily: '"Times New Roman", serif',
+              fontFamily: '"NewCMMath", "New Computer Modern Math", "Times New Roman", serif',
               fontSize: 14,
             }}
           >

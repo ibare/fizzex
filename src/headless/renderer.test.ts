@@ -8,7 +8,7 @@ describe('Headless Types', () => {
       const config = resolveBoxRenderConfig({}, false);
 
       expect(config.baseFontSize).toBe(20);
-      expect(config.fontFamily).toBe('"Times New Roman", Times, serif');
+      expect(config.fontFamily).toBe('"Latin Modern Math", "Computer Modern", "Times New Roman", serif');
       expect(config.color).toBe('#1a1a1a');
       expect(config.cursorColor).toBe('#3b82f6');
       expect(config.showPlaceholders).toBe(false);

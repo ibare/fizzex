@@ -66,10 +66,11 @@ export type {
 
 // 폰트
 export {
-  loadSTIXMathFont,
+  loadMathFont,
+  setMathFontUrl,
   getFontLoadStatus,
   getAvailableFontFamily,
-  STIX_TWO_MATH_CONFIG,
+  NEW_CM_MATH_CONFIG,
   setFontMapping,
   getFontMapping,
   getFontFamily,

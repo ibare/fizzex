@@ -11,7 +11,7 @@ import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox } from '../box/box-layout';
 import { BoxRenderer } from '../box/box-renderer';
-import { loadSTIXMathFont, STIX_TWO_MATH_CONFIG } from '../fonts';
+import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
 
 /** PNG 렌더링 결과 */
 export interface MathPNGResult {
@@ -37,7 +37,7 @@ export interface MathPNGOptions {
   backgroundColor?: string;
   /** 패딩 (CSS 픽셀, 기본 4) */
   padding?: number;
-  /** 폰트 패밀리 (기본 STIX Two Math) */
+  /** 폰트 패밀리 (기본 New Computer Modern Math) */
   fontFamily?: string;
 }
 
@@ -48,7 +48,7 @@ const DEFAULT_OPTIONS: Required<MathPNGOptions> = {
   color: '#000000',
   backgroundColor: 'transparent',
   padding: 4,
-  fontFamily: STIX_TWO_MATH_CONFIG.fontFamily,
+  fontFamily: NEW_CM_MATH_CONFIG.fontFamily,
 };
 
 /**
@@ -264,5 +264,5 @@ export function renderAstToPNGWithCanvas(
  * PNG 렌더링 전 폰트가 로드되었는지 확인
  */
 export async function ensureFontsLoaded(): Promise<void> {
-  await loadSTIXMathFont();
+  await loadMathFont();
 }

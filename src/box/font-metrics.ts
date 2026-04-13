@@ -61,16 +61,16 @@ export class CanvasFontMetrics implements FontMetrics {
 
   /** baseline 위쪽 높이 (픽셀) */
   getHeight(fontSize: number): number {
-    // 일반적인 폰트에서 ascent는 약 0.75 * fontSize
+    // New Computer Modern Math: sTypoAscender = 806 / unitsPerEm = 1000
     const actualSize = this.config.baseFontSize * fontSize;
-    return actualSize * 0.75;
+    return actualSize * 0.806;
   }
 
   /** baseline 아래쪽 깊이 (픽셀) */
   getDepth(fontSize: number): number {
-    // 일반적인 폰트에서 descent는 약 0.25 * fontSize
+    // New Computer Modern Math: sTypoDescender = -194 / unitsPerEm = 1000
     const actualSize = this.config.baseFontSize * fontSize;
-    return actualSize * 0.25;
+    return actualSize * 0.194;
   }
 
   /** 폰트 문자열 생성 */

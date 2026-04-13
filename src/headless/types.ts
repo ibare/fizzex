@@ -6,11 +6,11 @@
  */
 
 import type { BoxRenderConfig } from '../box/types';
-import { STIX_TWO_MATH_CONFIG } from '../fonts';
+import { NEW_CM_MATH_CONFIG } from '../fonts';
 
 export interface FizzexConfig {
   baseFontSize?: number;      // default 20
-  fontFamily?: string;        // default STIX Two Math fallback chain
+  fontFamily?: string;        // default New CM Math fallback chain
   color?: string;             // default '#1a1a1a'
   theme?: 'light' | 'dark';  // default 'light'
   padding?: number;           // default 8
@@ -40,7 +40,7 @@ export function resolveBoxRenderConfig(
 
   return {
     baseFontSize: config.baseFontSize ?? 20,
-    fontFamily: config.fontFamily ?? STIX_TWO_MATH_CONFIG.fallback,
+    fontFamily: config.fontFamily ?? NEW_CM_MATH_CONFIG.fallback,
     color: config.color ?? (isDark ? '#e0e0e0' : '#1a1a1a'),
     cursorColor: isDark ? '#60a5fa' : '#3b82f6',
     displayMode: config.displayMode ?? 'display',

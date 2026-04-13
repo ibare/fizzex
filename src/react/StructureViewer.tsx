@@ -578,7 +578,7 @@ function FormulaPreview({ ast, selectedSourceId, theme, width, height }: Formula
 
   const config: BoxRenderConfig = {
     baseFontSize: 24,
-    fontFamily: '"STIX Two Math", "Times New Roman", Times, serif',
+    fontFamily: '"NewCMMath", "New Computer Modern Math", "Times New Roman", serif',
     color: theme === 'dark' ? '#e5e5e5' : '#1a1a1a',
     cursorColor: '#3b82f6',
   };

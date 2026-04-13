@@ -16,7 +16,7 @@ import { getSuggestions, getAllSuggestionsForContext, getAllSuggestions } from '
 import type { SuggestionWithAction } from '../suggestion/types';
 import { SuggestionChips } from './SuggestionChips';
 import { useFizzexLabels, useLocalizedSuggestions } from '../i18n';
-import { loadSTIXMathFont, STIX_TWO_MATH_CONFIG } from '../fonts';
+import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
 import { StructureViewer } from './StructureViewer';
 
 /** 커서 위치 정보 */
@@ -57,8 +57,8 @@ export interface MathCanvasProps {
   displayMode?: 'display' | 'inline';
 }
 
-/** 기본 폰트 (STIX Two Math 로드 전 폴백) */
-const DEFAULT_FONT_FAMILY = STIX_TWO_MATH_CONFIG.fallback;
+/** 기본 폰트 (New CM Math 로드 전 폴백) */
+const DEFAULT_FONT_FAMILY = NEW_CM_MATH_CONFIG.fallback;
 
 const createLightConfig = (fontFamily: string): BoxRenderConfig => ({
   baseFontSize: 20,
@@ -131,9 +131,9 @@ export function MathCanvas({
   // i18n 라벨
   const labels = useFizzexLabels();
 
-  // STIX Two Math 폰트 로드
+  // New Computer Modern Math 폰트 로드
   useEffect(() => {
-    loadSTIXMathFont().then(result => {
+    loadMathFont().then(result => {
       setFontFamily(result.fontFamily);
     });
   }, []);
@@ -228,7 +228,13 @@ export function MathCanvas({
   }, [isFocused, readOnly]);
 
   // Placeholder 투명도 애니메이션 (800ms 주기, 0.3~1.0)
+  // readOnly이거나 포커스 상태면 placeholder가 보이지 않으므로 애니메이션 불필요
   useEffect(() => {
+    if (readOnly || isFocused) {
+      setPlaceholderOpacity(1.0);
+      return;
+    }
+
     let animationId: number;
     let startTime: number | null = null;
     const duration = 800; // 한 방향 애니메이션 시간 (ms)
@@ -252,7 +258,7 @@ export function MathCanvas({
     animationId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationId);
-  }, []);
+  }, [readOnly, isFocused]);
 
   // 자동 크기 계산 (shouldAutoSize일 때만)
   useEffect(() => {
