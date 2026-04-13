@@ -16,6 +16,7 @@ import {
   createKern,
   createRule,
   createFraction,
+  createBinomBox,
   createPower,
   createSubscript,
   createParenthesized,
@@ -173,7 +174,7 @@ function convertOperatorNode(
 
 /** 분수 노드 변환 */
 function convertFrac(
-  node: MathNode & { numerator: MathNode[]; denominator: MathNode[] },
+  node: MathNode & { numerator: MathNode[]; denominator: MathNode[]; variant?: 'binom' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   displayStyle: boolean
@@ -186,6 +187,10 @@ function convertFrac(
   const childFontSize = displayStyle ? fontSize : fontSize * MathConstants.exponentScale;
   const numeratorBox = astToBox(numNode, metrics, childFontSize, displayStyle);
   const denominatorBox = astToBox(denNode, metrics, childFontSize, displayStyle);
+
+  if (node.variant === 'binom') {
+    return createBinomBox(numeratorBox, denominatorBox, metrics, fontSize, node.id, displayStyle);
+  }
 
   return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id, displayStyle);
 }
@@ -253,8 +258,16 @@ function convertSqrt(
   const contentNode = node.content[0];
   const contentBox = astToBox(contentNode, metrics, fontSize, displayStyle);
 
+  // 인덱스가 있으면 작은 폰트로 변환
+  let indexBox: Box | undefined;
+  if (node.index && node.index.length > 0) {
+    const indexFontSize = fontSize * MathConstants.subscriptScale * 0.85;
+    const indexNode = node.index[0];
+    indexBox = astToBox(indexNode, metrics, indexFontSize, displayStyle);
+  }
+
   // SurdBox 생성 (√ 기호와 vinculum을 함께 렌더링)
-  return createSurd(contentBox, metrics, fontSize, node.id);
+  return createSurd(contentBox, metrics, fontSize, node.id, indexBox);
 }
 
 /** 괄호 노드 변환 */

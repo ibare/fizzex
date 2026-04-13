@@ -350,14 +350,18 @@ The website is deployed to [GitHub Pages](https://ibare.github.io/fizzex) automa
 
 ## TODO
 
-- [ ] **합성 글리프 렌더링 파이프라인** — 현재 렌더링은 단일 유니코드 문자 → 글리프 방식만 지원. `\npreceq`(⪯ + 슬래시), `\not\equiv` 등 두 글리프를 겹쳐 합성하는 부정 기호를 KaTeX/MathJax와 동일하게 렌더링하려면 슬래시 오버레이 합성 파이프라인이 필요. 현재는 가장 가까운 precomposed 유니코드 문자(⋠ U+22E0 등)를 사용하며, 기반 심볼의 등호 스타일이 달라 형태 차이가 발생 (`\preceq`=⪯ 직선 등호 vs `\npreceq`=⋠ tilde 등호).
-- [ ] **Extensible arrow 명령어** (`\xleftarrow`, `\xrightarrow`) — 인자 텍스트 너비에 맞게 화살표가 늘어나고 그 위/아래에 텍스트를 배치하는 구조. 새로운 Box 타입(화살표 + 텍스트 레이아웃), 동적 화살표 길이 계산, Rule 렌더링 + 화살촉 렌더링이 필요.
-- [ ] **`\left`/`\right` named delimiter 지원** — 현재 `\left`/`\right`는 `(`, `)`, `[`, `]`, `\{`, `\}`, `|` 등 단일 문자 구분자만 인식. `\left\langle`…`\right\rangle`, `\left\lceil`…`\right\rceil` 등 backslash 명령어 형태의 구분자를 `leftHandler`에서 파싱하는 로직이 필요.
-- [ ] **`\left\|`…`\right\|` 이중 세로줄 구분자** — `\|`를 `\left`/`\right` 뒤에서 구분자로 인식하고, 내용물 높이에 맞게 ‖(double vertical bar)를 신축 렌더링하는 기능. `leftHandler`의 구분자 파싱 확장 + delimiter-paths에 ‖ extensible 데이터 추가 필요.
-- [ ] **크기 지정 구분자** (`\big`, `\Big`, `\bigg`, `\Bigg`) — 4단계 고정 크기 구분자 명령어. 각 크기별 scale factor 정의, 다음 토큰을 구분자로 파싱하여 해당 크기로 렌더링하는 새로운 CommandHandler + Box 렌더링 로직 필요.
-- [ ] **Wide accent 렌더링** (`\widetilde`, `\widehat`) — 현재 단일 글리프(˜, ˆ)로 첫 글자에만 배치됨. 내용 전체 너비에 맞게 늘어나는 extensible accent 렌더링 필요. OpenType MATH 테이블의 MathGlyphVariantRecord 또는 Rule 기반 동적 그리기 방식으로 구현.
-- [ ] **Overbrace/Underbrace** (`\overbrace{...}^{...}`, `\underbrace{...}_{...}`) — 내용 너비에 맞는 중괄호를 위/아래에 그리고, 그 위/아래에 주석을 배치하는 구조. 새 AST 노드 타입 + extensible brace 렌더링 + 주석 레이아웃 필요.
-- [ ] **Extensible over-arrow** (`\overleftarrow`, `\overrightarrow`, `\overleftrightarrow`) — 내용 전체 너비에 맞게 늘어나는 화살표를 내용 위에 배치. 현재 `\overrightarrow`는 단일 글리프 `\vec`로 매핑되어 첫 글자만 커버. Rule + 화살촉 조합의 extensible 렌더링 필요.
+- [ ] **Composite glyph rendering pipeline** — Currently only single Unicode codepoint → glyph rendering is supported. Negated symbols like `\npreceq` (⪯ + slash) and `\not\equiv` require a slash overlay compositing pipeline to match KaTeX/MathJax. Currently falls back to the closest precomposed Unicode character (e.g. ⋠ U+22E0), which causes visual differences due to mismatched equality styles (`\preceq`=⪯ straight vs `\npreceq`=⋠ tilde).
+- [ ] **Extensible arrow commands** (`\xleftarrow`, `\xrightarrow`) — Arrows that stretch to fit argument text width, with text placed above/below. Requires a new Box type (arrow + text layout), dynamic arrow length calculation, and rule + arrowhead rendering.
+- [ ] **`\left`/`\right` named delimiter support** — Currently `\left`/`\right` only recognizes single-character delimiters like `(`, `)`, `[`, `]`, `\{`, `\}`, `|`. Needs parsing logic in `leftHandler` for backslash command delimiters such as `\left\langle`…`\right\rangle`, `\left\lceil`…`\right\rceil`.
+- [ ] **`\left\|`…`\right\|` double vertical bar delimiter** — Recognize `\|` as a delimiter after `\left`/`\right` and render ‖ (double vertical bar) that stretches to match content height. Requires extending `leftHandler` delimiter parsing + adding ‖ extensible data to delimiter-paths.
+- [ ] **Fixed-size delimiters** (`\big`, `\Big`, `\bigg`, `\Bigg`) — Four fixed-size delimiter commands. Requires scale factor definitions per size, a new CommandHandler to parse the next token as a delimiter, and Box rendering logic for sized delimiters.
+- [ ] **Wide accent rendering** (`\widetilde`, `\widehat`) — Currently rendered as a single glyph (˜, ˆ) placed over only the first character. Needs extensible accent rendering that stretches to cover the full content width, using OpenType MATH table MathGlyphVariantRecord or rule-based dynamic drawing.
+- [ ] **Overbrace/Underbrace** (`\overbrace{...}^{...}`, `\underbrace{...}_{...}`) — Draws an extensible brace above/below content with annotation text above/below the brace. Requires a new AST node type + extensible brace rendering + annotation layout.
+- [ ] **Extensible over-arrow** (`\overleftarrow`, `\overrightarrow`, `\overleftrightarrow`) — Arrows placed above content that stretch to match content width. Currently `\overrightarrow` maps to a single `\vec` glyph covering only the first character. Requires rule + arrowhead extensible rendering.
+- [ ] **Stackrel/Overset/Underset** (`\stackrel`, `\overset`, `\underset`) — Structure commands that place text above/below a symbol. Requires a new AST node type + VBox-based layout + reduced font size rendering.
+- [ ] **Boxed** (`\boxed`) — Draws a rectangular border around an expression. Requires stroke rectangle rendering on Box output. Can be implemented as a new AST node type or an accent variant.
+- [ ] **Cancel family** (`\cancel`, `\bcancel`, `\xcancel`) — Draws diagonal lines or X marks over an expression. Requires a new AST node type + Canvas path-based diagonal rendering. Originates from the `cancel` package.
+- [ ] **Simultaneous super/subscript alignment** (`x^a_b`) — Optimize vertical alignment when both superscript and subscript are present. Currently processed independently, resulting in different spacing compared to KaTeX/MathJax. Requires unifying super/subscripts into a single SupersubNode structure.
 
 ## Browser Support
 

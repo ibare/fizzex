@@ -25,7 +25,8 @@ export function astToLatex(node: MathNode): string {
     case 'frac': {
       const num = node.numerator.map(astToLatex).join('');
       const den = node.denominator.map(astToLatex).join('');
-      return `\\frac{${num}}{${den}}`;
+      const cmd = node.variant === 'binom' ? 'binom' : 'frac';
+      return `\\${cmd}{${num}}{${den}}`;
     }
 
     case 'power': {

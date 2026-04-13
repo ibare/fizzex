@@ -60,6 +60,13 @@ export function createFrac(numerator: MathNode[], denominator: MathNode[]): Math
   return { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] };
 }
 
+export function createBinom(numerator: MathNode[], denominator: MathNode[]): MathNode {
+  const fracId = generateId();
+  const numRow: RowNode = { id: deriveId(fracId, '_num'), type: 'row', children: numerator };
+  const denRow: RowNode = { id: deriveId(fracId, '_den'), type: 'row', children: denominator };
+  return { id: fracId, type: 'frac', variant: 'binom', numerator: [numRow], denominator: [denRow] };
+}
+
 export function createSqrt(content: MathNode[], index?: MathNode[]): MathNode {
   const sqrtId = generateId();
   const contentRow: RowNode = { id: deriveId(sqrtId, '_content'), type: 'row', children: content };

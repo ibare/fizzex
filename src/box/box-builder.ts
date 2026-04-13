@@ -304,6 +304,52 @@ export function createFraction(
   return vbox;
 }
 
+/** 이항계수 Box 생성 (분수선 없이 괄호로 감싼 상하 배치) */
+export function createBinomBox(
+  numerator: Box,
+  denominator: Box,
+  metrics: CanvasFontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string,
+  displayStyle: boolean = true
+): HBox {
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const gap = actualFontSize * MathConstants.fractionGap * (displayStyle ? 1 : 0.6);
+
+  // 분자와 분모 중 더 넓은 것 기준
+  const stackWidth = Math.max(numerator.width, denominator.width) + gap * 2;
+
+  // 분자 중앙 정렬
+  const numBox = createHBox([
+    createKern((stackWidth - numerator.width) / 2),
+    numerator,
+    createKern((stackWidth - numerator.width) / 2),
+  ]);
+
+  // 분자-분모 사이 간격
+  const gapKern = createKern(0);
+  gapKern.height = gap;
+  gapKern.depth = gap;
+
+  // 분모 중앙 정렬
+  const denBox = createHBox([
+    createKern((stackWidth - denominator.width) / 2),
+    denominator,
+    createKern((stackWidth - denominator.width) / 2),
+  ]);
+
+  // VBox: 분자 - 간격 - 분모 (분수선 없음)
+  // baselineType 'center'로 중앙 정렬
+  const vbox = createVBox([numBox, gapKern, denBox], 'center', sourceId);
+
+  // axis height 보정
+  const axisHeight = actualFontSize * 0.25;
+  vbox.shift = -axisHeight;
+
+  // 괄호로 감싸기
+  return createParenthesized(vbox, '(', metrics, fontSize, sourceId, true);
+}
+
 /** 거듭제곱 Box 생성 */
 export function createPower(
   base: Box,
@@ -1604,7 +1650,8 @@ export function createSurd(
   content: Box,
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  index?: Box
 ): SurdBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness * 1.5;
@@ -1624,11 +1671,14 @@ export function createSurd(
     sqrtWidth = actualFontSize * 0.6;
   }
 
+  // 인덱스가 있으면 √ 기호 왼쪽에 공간 확보
+  const indexOverlap = index ? Math.max(0, index.width - sqrtWidth * 0.5) : 0;
+
   // 전체 크기 계산
-  const totalWidth = sqrtWidth + content.width + gap;
+  const totalWidth = indexOverlap + sqrtWidth + content.width + gap;
   const totalHeight = content.height + gap + ruleThickness;
 
-  return {
+  const surd: SurdBox = {
     type: 'surd',
     content,
     ruleThickness,
@@ -1640,4 +1690,6 @@ export function createSurd(
     y: 0,
     sourceId,
   };
+  if (index) surd.index = index;
+  return surd;
 }

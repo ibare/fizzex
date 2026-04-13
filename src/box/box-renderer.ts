@@ -194,10 +194,13 @@ export class BoxRenderer {
 
   /** Surd (제곱근) 렌더링 - √ 기호와 vinculum */
   private renderSurd(surd: SurdBox): void {
-    const sqrtWidth = surd.width - surd.content.width - surd.gap;
+    // 인덱스로 인한 왼쪽 오프셋 계산
+    const indexOverlap = surd.index ? Math.max(0, surd.index.width - (surd.width - surd.content.width - surd.gap) * 0.5) : 0;
+    const sqrtWidth = surd.width - surd.content.width - surd.gap - indexOverlap;
     const totalHeight = surd.height + surd.depth;
     const contentTop = surd.y - surd.height + surd.ruleThickness;
     const contentRight = surd.content.x + surd.content.width;
+    const sqrtX = surd.x + indexOverlap;
 
     const sqrtEntry = DELIMITER_PATHS['√'];
 
@@ -208,7 +211,7 @@ export class BoxRenderer {
 
       this.renderDelimiterPath(
         variant,
-        surd.x,
+        sqrtX,
         surd.y,
         totalHeight,
         sqrtWidth,
@@ -221,13 +224,13 @@ export class BoxRenderer {
       this.backend.setLineCap('square');
       this.backend.setLineJoin('miter');
 
-      const serifStartX = surd.x;
+      const serifStartX = sqrtX;
       const serifStartY = surd.y - totalHeight * 0.4;
-      const serifEndX = surd.x + sqrtWidth * 0.18;
+      const serifEndX = sqrtX + sqrtWidth * 0.18;
       const serifEndY = surd.y - totalHeight * 0.42;
-      const checkBottomX = surd.x + sqrtWidth * 0.45;
+      const checkBottomX = sqrtX + sqrtWidth * 0.45;
       const checkBottomY = surd.y + surd.depth * 0.8;
-      const sqrtTopX = surd.x + sqrtWidth;
+      const sqrtTopX = sqrtX + sqrtWidth;
       const sqrtTopY = contentTop;
 
       this.backend.beginPath();
@@ -241,10 +244,17 @@ export class BoxRenderer {
 
     // vinculum (가로선) — √ 상단에서 content 끝까지
     this.backend.setFillStyle(this.config.color);
-    const vinculumLeft = surd.x + sqrtWidth;
+    const vinculumLeft = sqrtX + sqrtWidth;
     const vinculumTop = contentTop - surd.ruleThickness;
     const vinculumWidth = contentRight + surd.gap * 0.5 - vinculumLeft;
     this.backend.fillRect(vinculumLeft, vinculumTop, vinculumWidth, surd.ruleThickness);
+
+    // 인덱스 렌더링 (√ 기호 왼쪽 위)
+    if (surd.index) {
+      surd.index.x = surd.x;
+      surd.index.y = surd.y - totalHeight * 0.6;
+      this.render(surd.index);
+    }
 
     // content 렌더링
     this.render(surd.content);

@@ -89,6 +89,8 @@ export interface SurdBox extends BoxBase {
   type: 'surd';
   /** 내용물 Box */
   content: Box;
+  /** n차 근호 인덱스 (예: ³√ 의 3) */
+  index?: Box;
   /** vinculum(가로선) 두께 */
   ruleThickness: number;
   /** √ 기호와 내용물 사이 간격 */

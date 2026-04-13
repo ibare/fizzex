@@ -57,6 +57,7 @@ export interface OperatorNode extends MathNodeBase {
 /** 분수 노드 */
 export interface FracNode extends MathNodeBase {
   type: 'frac';
+  variant?: 'binom';       // 이항계수 변형 (괄호, 분수선 없음)
   numerator: MathNode[];   // 분자
   denominator: MathNode[]; // 분모
 }

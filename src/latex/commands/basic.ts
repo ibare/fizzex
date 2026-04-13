@@ -3,7 +3,7 @@
  */
 
 import type { CommandHandler } from './types';
-import { createFrac, createSqrt, createText, createParen, createAbs } from './helpers';
+import { createFrac, createBinom, createSqrt, createText, createParen, createAbs } from './helpers';
 
 /** \frac{num}{den} */
 export const fracHandler: CommandHandler = (ctx) => {
@@ -94,12 +94,28 @@ export const leftHandler: CommandHandler = (ctx) => {
   };
 };
 
+/** \binom{n}{k} */
+export const binomHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  const numResult = ctx.parseGroup(ctx.latex, pos);
+  pos = numResult.consumed;
+  while (pos < ctx.latex.length && ctx.latex[pos] === ' ') pos++;
+  const denResult = ctx.parseGroup(ctx.latex, pos);
+  return {
+    nodes: [createBinom(numResult.nodes, denResult.nodes)],
+    consumed: denResult.consumed,
+  };
+};
+
 /** 기본 명령어 핸들러 레지스트리 */
 export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['frac', fracHandler],
   ['dfrac', fracHandler],
   ['tfrac', fracHandler],
   ['cfrac', fracHandler],
+  ['binom', binomHandler],
+  ['dbinom', binomHandler],
+  ['tbinom', binomHandler],
   ['sqrt', sqrtHandler],
   ['text', textHandler],
   ['mathrm', textHandler],
