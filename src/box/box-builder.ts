@@ -658,14 +658,15 @@ export function createSumBox(
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
-  displayStyle: boolean = true
+  displayStyle: boolean = true,
+  symbol: string = 'Σ'
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
 
   if (!displayStyle) {
-    // Inline style: 작은 Σ + sideset (위첨자/아래첨자)
+    // Inline style: 작은 기호 + sideset (위첨자/아래첨자)
     const sigmaScale = 1.3;
-    const sigmaGlyph = createGlyph('Σ', metrics, fontSize * sigmaScale, false);
+    const sigmaGlyph = createGlyph(symbol, metrics, fontSize * sigmaScale, false);
 
     // 상한은 위첨자, 하한은 아래첨자로 배치
     const shiftedUpper: Box = { ...upper, shift: -(sigmaGlyph.height * 0.6) };
@@ -682,9 +683,9 @@ export function createSumBox(
     return result;
   }
 
-  // Display style: 큰 시그마 기호 (Σ)
+  // Display style: 큰 연산자 기호
   const sigmaScale = 2.0;
-  const sigmaGlyph = createGlyph('Σ', metrics, fontSize * sigmaScale, false);
+  const sigmaGlyph = createGlyph(symbol, metrics, fontSize * sigmaScale, false);
 
   // 상하한 간격
   const limitGap = actualFontSize * 0.15;

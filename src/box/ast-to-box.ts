@@ -337,7 +337,7 @@ function convertIntegral(
 
 /** 시그마/합 노드 변환 */
 function convertSum(
-  node: MathNode & { lower: MathNode[]; upper: MathNode[]; body: MathNode[] },
+  node: MathNode & { lower: MathNode[]; upper: MathNode[]; body: MathNode[]; symbol?: string },
   metrics: CanvasFontMetrics,
   fontSize: number,
   displayStyle: boolean
@@ -354,7 +354,7 @@ function convertSum(
   const bodyNode = node.body[0];
   const bodyBox = astToBox(bodyNode, metrics, fontSize, displayStyle);
 
-  return createSumBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id, displayStyle);
+  return createSumBox(lowerBox, upperBox, bodyBox, metrics, fontSize, node.id, displayStyle, node.symbol);
 }
 
 /** 극한 노드 변환 */

@@ -114,9 +114,10 @@ export interface IntegralNode extends MathNodeBase {
   integralType?: 'int' | 'iint' | 'iiint' | 'oint';  // 적분 타입 (기본: int)
 }
 
-/** 시그마/합 노드 */
+/** 시그마/합 및 대형 연산자 노드 */
 export interface SumNode extends MathNodeBase {
   type: 'sum';
+  symbol?: string;        // 연산자 기호 (기본: 'Σ', 예: '∩', '∪', '∐' 등)
   lower: MathNode[];     // 하한 (i=1 등)
   upper: MathNode[];     // 상한 (n 등)
   body: MathNode[];      // 피합 표현식

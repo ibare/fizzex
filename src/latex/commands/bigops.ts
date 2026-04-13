@@ -122,8 +122,8 @@ function integralHandler(integralType: 'int' | 'iint' | 'iiint' | 'oint'): Comma
   };
 }
 
-/** 시그마/곱 핸들러 생성 */
-function bigOpHandler(creator: typeof createSum | typeof createProduct): CommandHandler {
+/** 시그마/곱/대형 연산자 핸들러 생성 */
+function bigOpHandler(creator: typeof createSum | typeof createProduct, symbol?: string): CommandHandler {
   return (ctx) => {
     let pos = ctx.pos;
     let lower: MathNode[] = [];
@@ -169,7 +169,7 @@ function bigOpHandler(creator: typeof createSum | typeof createProduct): Command
     }
 
     return {
-      nodes: [creator(lower, upper, bodyNodes)],
+      nodes: [creator === createSum ? createSum(lower, upper, bodyNodes, symbol) : creator(lower, upper, bodyNodes)],
       consumed: pos,
     };
   };
@@ -243,6 +243,20 @@ export const bigOpHandlers: Map<string, CommandHandler> = new Map([
 
   // 곱
   ['prod', bigOpHandler(createProduct)],
+
+  // 여곱
+  ['coprod', bigOpHandler(createSum, '∐')],
+
+  // 대형 집합/논리 연산자
+  ['bigcap', bigOpHandler(createSum, '∩')],
+  ['bigcup', bigOpHandler(createSum, '∪')],
+  ['bigvee', bigOpHandler(createSum, '∨')],
+  ['bigwedge', bigOpHandler(createSum, '∧')],
+  ['bigoplus', bigOpHandler(createSum, '⊕')],
+  ['bigotimes', bigOpHandler(createSum, '⊗')],
+  ['bigodot', bigOpHandler(createSum, '⊙')],
+  ['biguplus', bigOpHandler(createSum, '⊎')],
+  ['bigsqcup', bigOpHandler(createSum, '⊔')],
 
   // 극한
   ['lim', limHandler],

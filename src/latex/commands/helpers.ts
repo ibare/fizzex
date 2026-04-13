@@ -2,7 +2,7 @@
  * 명령어 핸들러용 노드 생성 헬퍼 함수
  */
 
-import type { MathNode, RowNode, VariableNode, OperatorNode } from '../../types';
+import type { MathNode, RowNode, VariableNode, OperatorNode, SumNode } from '../../types';
 import { generateLatexId, deriveId } from '../../utils/id-generator';
 
 /** ID 생성 (내부용 alias) */
@@ -108,12 +108,14 @@ export function createIntegral(
   };
 }
 
-export function createSum(lower: MathNode[], upper: MathNode[], body: MathNode[]): MathNode {
+export function createSum(lower: MathNode[], upper: MathNode[], body: MathNode[], symbol?: string): SumNode {
   const sumId = generateId();
   const lowerRow: RowNode = { id: deriveId(sumId, '_lower'), type: 'row', children: lower };
   const upperRow: RowNode = { id: deriveId(sumId, '_upper'), type: 'row', children: upper };
   const bodyRow: RowNode = { id: deriveId(sumId, '_body'), type: 'row', children: body };
-  return { id: sumId, type: 'sum', lower: [lowerRow], upper: [upperRow], body: [bodyRow] };
+  const node: SumNode = { id: sumId, type: 'sum', lower: [lowerRow], upper: [upperRow], body: [bodyRow] };
+  if (symbol) node.symbol = symbol;
+  return node;
 }
 
 export function createLimit(variable: string, approach: MathNode[], body: MathNode[]): MathNode {

@@ -99,7 +99,13 @@ export function astToLatex(node: MathNode): string {
       const lower = node.lower.map(astToLatex).join('');
       const upper = node.upper.map(astToLatex).join('');
       const body = node.body.map(astToLatex).join('');
-      return `\\sum_{${lower}}^{${upper}} ${body}`;
+      const symbolToCmd: Record<string, string> = {
+        '∐': 'coprod', '∩': 'bigcap', '∪': 'bigcup',
+        '∨': 'bigvee', '∧': 'bigwedge', '⊕': 'bigoplus',
+        '⊗': 'bigotimes', '⊙': 'bigodot', '⊎': 'biguplus', '⊔': 'bigsqcup',
+      };
+      const cmd = (node.symbol && symbolToCmd[node.symbol]) || 'sum';
+      return `\\${cmd}_{${lower}}^{${upper}} ${body}`;
     }
 
     case 'limit': {
