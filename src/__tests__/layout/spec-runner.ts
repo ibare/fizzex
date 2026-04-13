@@ -31,13 +31,6 @@ export interface SpecRunResult {
   knownFail: number;
   skipped: number;
   categories: Record<string, CategoryResult>;
-  parameterStatus: {
-    total: number;
-    match: number;
-    mismatch: number;
-    missing: number;
-    hardcoded: number;
-  };
   failures: AssertionResult[];
   knownFailures: AssertionResult[];
   complianceScore: number;
@@ -47,22 +40,12 @@ export interface LayoutSpec {
   version: string;
   parameters: Record<string, {
     value: number;
-    status: string;
-    fizzex_current?: number | null;
     [key: string]: unknown;
   }>;
   layout_algorithms: Record<string, {
     verification_cases: SpecVerificationCase[];
     [key: string]: unknown;
   }>;
-  diagnostic_summary: {
-    total_parameters: number;
-    match: number;
-    mismatch: number;
-    missing: number;
-    hardcoded: number;
-    [key: string]: unknown;
-  };
   [key: string]: unknown;
 }
 
@@ -129,12 +112,6 @@ export function runLayoutSpec(spec: LayoutSpec): SpecRunResult {
   const testable = totalAssertions - knownFail - skipped;
   const complianceScore = testable > 0 ? Math.round((passed / testable) * 100) : 0;
 
-  // 파라미터 상태 집계
-  const parameterStatus = spec.diagnostic_summary ?? {
-    total_parameters: Object.keys(spec.parameters).length,
-    match: 0, mismatch: 0, missing: 0, hardcoded: 0,
-  };
-
   return {
     totalCases: Object.values(categories).reduce((sum, c) => sum + c.results.length, 0),
     totalAssertions,
@@ -143,13 +120,6 @@ export function runLayoutSpec(spec: LayoutSpec): SpecRunResult {
     knownFail,
     skipped,
     categories,
-    parameterStatus: {
-      total: parameterStatus.total_parameters,
-      match: parameterStatus.match,
-      mismatch: parameterStatus.mismatch,
-      missing: parameterStatus.missing,
-      hardcoded: parameterStatus.hardcoded,
-    },
     failures,
     knownFailures,
     complianceScore,

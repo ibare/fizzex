@@ -171,12 +171,11 @@ export const MathConstants = {
    * TeX의 \fontdimen13 (sup1), \fontdimen14 (sup2), \fontdimen15 (sup3) 기반.
    * x-height의 일정 비율로 설정됨.
    *
-   * 표준 TeX 범위: 0.36em ~ 0.47em (스타일에 따라 다름)
-   * 현재 값은 cramped style 아닌 경우의 중간값.
+   * 표준 TeX 값: 0.413em (sup1, non-cramped style)
    *
    * @see The TeXbook, Appendix G, Rules 18a-18f
    */
-  exponentShift: 0.4,
+  exponentShift: 0.413,
 
   /**
    * 첨자(아래첨자)의 크기 비율
@@ -193,12 +192,11 @@ export const MathConstants = {
    *
    * TeX의 \fontdimen16 (sub1), \fontdimen17 (sub2) 기반.
    *
-   * 표준 TeX 범위: 0.15em ~ 0.25em
-   * 현재 값은 cramped style의 중간값.
+   * 표준 TeX 값: 0.15em (sub1)
    *
    * @see The TeXbook, Appendix G, Rules 18a-18f
    */
-  subscriptShift: 0.2,
+  subscriptShift: 0.15,
 
   /**
    * 괄호 내부 여백 (em 단위)

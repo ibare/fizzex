@@ -7,7 +7,6 @@
     "source": "KaTeX fontMetrics.ts, TeX by Topic, TeXbook Appendix G",
     "note": "폰트 변경 시 이 섹션의 값을 갱신한다"
   },
-
   "parameters": {
     "sigma5_xHeight": {
       "value": 0.431,
@@ -17,9 +16,6 @@
         "opentype": "폰트 OS/2 테이블에서 직접 읽음",
         "cambria": "악센트, 첨자 기준점으로 사용"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.005,
       "priority": 1,
       "note": "악센트 배치, 위첨자/아래첨자 조건식에 필요"
@@ -32,9 +28,6 @@
         "opentype": "N/A",
         "cambria": "1em = 18mu 기준값 변환"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 3,
       "note": "mu 단위 변환에 필요, atom spacing에서 사용"
@@ -47,10 +40,6 @@
         "opentype": "fractionNumeratorDisplayStyleShiftUp",
         "cambria": "분자가 분수선에서 충분히 떨어져야 가독성 확보"
       },
-      "fizzex_location": "src/box/font-metrics.ts (fracNumDisplayShift)",
-      "fizzex_current": 0.677,
-      "fizzex_current_note": "shift 기반으로 전환 완료, MathConstants.fracNumDisplayShift",
-      "status": "match",
       "tolerance": 0.02,
       "priority": 2,
       "note": "shift 기반 알고리즘으로 전환 — TeX 표준과 일치"
@@ -63,10 +52,6 @@
         "opentype": "fractionNumeratorShiftUp",
         "cambria": "text style에서 분자의 기준선 올림"
       },
-      "fizzex_location": "src/box/font-metrics.ts (fracNumTextShift)",
-      "fizzex_current": 0.394,
-      "fizzex_current_note": "shift 기반으로 전환 완료, MathConstants.fracNumTextShift",
-      "status": "match",
       "tolerance": 0.02,
       "priority": 2
     },
@@ -78,9 +63,6 @@
         "opentype": "stackTopShiftUp",
         "cambria": "\\atop에서 분자 올림"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.02,
       "priority": 2,
       "note": "createBinomBox에서 사용해야 하지만 현재 fractionGap 기반"
@@ -93,10 +75,6 @@
         "opentype": "fractionDenominatorDisplayStyleShiftDown",
         "cambria": "display style에서 분모의 기준선 내림"
       },
-      "fizzex_location": "src/box/font-metrics.ts (fracDenomDisplayShift)",
-      "fizzex_current": 0.686,
-      "fizzex_current_note": "shift 기반으로 전환 완료, MathConstants.fracDenomDisplayShift. 실제 결과는 content 높이에 따라 clearance minimum 적용됨",
-      "status": "match",
       "tolerance": 0.02,
       "priority": 2
     },
@@ -108,10 +86,6 @@
         "opentype": "fractionDenominatorShiftDown",
         "cambria": "text style에서 분모의 기준선 내림"
       },
-      "fizzex_location": "src/box/font-metrics.ts (fracDenomTextShift)",
-      "fizzex_current": 0.345,
-      "fizzex_current_note": "shift 기반으로 전환 완료, MathConstants.fracDenomTextShift. 실제 결과는 content 높이에 따라 clearance minimum 적용됨",
-      "status": "match",
       "tolerance": 0.02,
       "priority": 2
     },
@@ -123,9 +97,6 @@
         "opentype": "superscriptShiftUp",
         "cambria": "display style에서 위첨자 최소 올림"
       },
-      "fizzex_location": "src/box/font-metrics.ts:179",
-      "fizzex_current": 0.4,
-      "status": "mismatch",
       "tolerance": 0.02,
       "priority": 2,
       "note": "값 근사하나 스타일별 분기 없음 (sigma14/15 부재)"
@@ -138,9 +109,6 @@
         "opentype": "superscriptShiftUp (text style variant)",
         "cambria": "text style에서 위첨자 최소 올림"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.02,
       "priority": 2,
       "note": "현재 단일 exponentShift=0.4만 사용, text style 분기 없음"
@@ -153,24 +121,18 @@
         "opentype": "superscriptShiftUpCramped",
         "cambria": "분모, 근호 내부 등 cramped 환경에서의 위첨자"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.02,
       "priority": 3,
       "note": "cramped style 자체가 미구현"
     },
     "sigma16_sub1": {
-      "value": 0.150,
+      "value": 0.15,
       "unit": "em",
       "sources": {
         "tex": "sigma16 (sub1, fontdimen 16) — 위첨자 없을 때 아래첨자 내림",
         "opentype": "subscriptShiftDown",
         "cambria": "아래첨자 단독 시 최소 내림"
       },
-      "fizzex_location": "src/box/font-metrics.ts:201",
-      "fizzex_current": 0.2,
-      "status": "mismatch",
       "tolerance": 0.02,
       "priority": 2,
       "note": "Fizzex 0.2 > TeX 0.150, 아래첨자가 과도하게 내려감"
@@ -183,9 +145,6 @@
         "opentype": "subscriptShiftDown (with superscript)",
         "cambria": "위+아래 동시 시 아래첨자 더 내림"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.02,
       "priority": 2,
       "note": "위+아래 동시 처리 자체가 별도 함수 없음"
@@ -198,67 +157,52 @@
         "opentype": "superscriptBaselineDropMax",
         "cambria": "큰 박스 꼭대기에서 위첨자 기준선이 내려오는 양"
       },
-      "fizzex_location": "src/box/font-metrics.ts (supDrop)",
-      "fizzex_current": 0.386,
-      "status": "match",
       "tolerance": 0.02,
       "priority": 2,
       "note": "createIntegralBox에서 base.height - supDrop으로 적분 상한 위치 계산에 사용"
     },
     "sigma19_subDrop": {
-      "value": 0.050,
+      "value": 0.05,
       "unit": "em",
       "sources": {
         "tex": "sigma19 (sub_drop, fontdimen 19)",
         "opentype": "subscriptBaselineDropMin",
         "cambria": "큰 박스 바닥에서 아래첨자 기준선이 더 내려가는 양"
       },
-      "fizzex_location": "src/box/font-metrics.ts (subDrop)",
-      "fizzex_current": 0.05,
-      "status": "match",
       "tolerance": 0.02,
       "priority": 2,
       "note": "createIntegralBox에서 base.depth + subDrop으로 적분 하한 위치 계산에 사용"
     },
     "sigma20_delim1": {
-      "value": 2.390,
+      "value": 2.39,
       "unit": "em",
       "sources": {
         "tex": "sigma20 (delim1, fontdimen 20) — display style 분수 구분자 크기",
         "opentype": "delimitedSubFormulaMinHeight",
         "cambria": "display style에서 \\frac 구분자 최소 크기"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.05,
       "priority": 3
     },
     "sigma21_delim2": {
-      "value": 1.010,
+      "value": 1.01,
       "unit": "em",
       "sources": {
         "tex": "sigma21 (delim2, fontdimen 21) — text style 분수 구분자 크기",
         "opentype": "delimitedSubFormulaMinHeight (text variant)",
         "cambria": "text style에서 \\frac 구분자 크기"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.05,
       "priority": 3
     },
     "sigma22_axisHeight": {
-      "value": 0.250,
+      "value": 0.25,
       "unit": "em",
       "sources": {
         "tex": "sigma22 (axis_height, fontdimen 22)",
         "opentype": "axisHeight",
         "cambria": "분수선, 큰 연산자, 구분자의 수직 중심 기준"
       },
-      "fizzex_location": "src/box/box-builder.ts:301",
-      "fizzex_current": 0.25,
-      "status": "match",
       "tolerance": 0.005,
       "priority": 1,
       "note": "값 일치, 하드코딩 → 상수화 권장"
@@ -271,9 +215,6 @@
         "opentype": "fractionRuleThickness",
         "cambria": "분수선, overline, underline, 근호선 두께"
       },
-      "fizzex_location": "src/box/font-metrics.ts:138",
-      "fizzex_current": 0.04,
-      "status": "match",
       "tolerance": 0.005,
       "priority": 1
     },
@@ -285,10 +226,6 @@
         "opentype": "upperLimitGapMin",
         "cambria": "큰 연산자 위 상한과의 최소 간격"
       },
-      "fizzex_location": "src/box/box-builder.ts:777",
-      "fizzex_current": null,
-      "fizzex_current_note": "고정 limitGap = 0.15 * actualFontSize 사용",
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 2
     },
@@ -300,52 +237,39 @@
         "opentype": "lowerLimitGapMin",
         "cambria": "큰 연산자 아래 하한과의 최소 간격"
       },
-      "fizzex_location": "src/box/box-builder.ts:777",
-      "fizzex_current": null,
-      "fizzex_current_note": "고정 limitGap = 0.15 * actualFontSize 사용",
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 2
     },
     "xi11_bigOpSpacing3": {
-      "value": 0.200,
+      "value": 0.2,
       "unit": "em",
       "sources": {
         "tex": "xi11 (big_op_spacing3, fontdimen 11 of family 3)",
         "opentype": "upperLimitBaselineRiseMin",
         "cambria": "큰 연산자와 상한 사이 최소 기준선 거리"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 2
     },
     "xi12_bigOpSpacing4": {
-      "value": 0.600,
+      "value": 0.6,
       "unit": "em",
       "sources": {
         "tex": "xi12 (big_op_spacing4, fontdimen 12 of family 3)",
         "opentype": "lowerLimitBaselineDropMin",
         "cambria": "큰 연산자와 하한 사이 최소 기준선 거리"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 2
     },
     "xi13_bigOpSpacing5": {
-      "value": 0.100,
+      "value": 0.1,
       "unit": "em",
       "sources": {
         "tex": "xi13 (big_op_spacing5, fontdimen 13 of family 3)",
         "opentype": "N/A",
         "cambria": "display 상한/하한 위아래 여백(padding)"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 2
     },
@@ -357,9 +281,6 @@
         "opentype": "scriptPercentScaleDown (80%)",
         "cambria": "cambria-006: 크기별 전용 디자인"
       },
-      "fizzex_location": "src/box/font-metrics.ts:166,189",
-      "fizzex_current": 0.8,
-      "status": "match",
       "tolerance": 0.02,
       "priority": 1,
       "note": "exponentScale=subscriptScale=0.8, TeX 표준과 일치"
@@ -372,9 +293,6 @@
         "opentype": "scriptScriptPercentScaleDown (60%)",
         "cambria": "cambria-006: 2단계 축소 전용 디자인"
       },
-      "fizzex_location": null,
-      "fizzex_current": null,
-      "status": "missing",
       "tolerance": 0.02,
       "priority": 3,
       "note": "scriptscript 스타일 자체가 미구현"
@@ -387,10 +305,6 @@
         "opentype": "N/A",
         "cambria": "Ord-Op, Op-Ord 등 thin space"
       },
-      "fizzex_location": "src/box/font-metrics.ts:230",
-      "fizzex_current": null,
-      "fizzex_current_note": "operatorSpacing=0.2 단일값으로 모든 연산자에 동일 적용",
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 3,
       "note": "atom spacing table 미구현"
@@ -403,9 +317,6 @@
         "opentype": "N/A",
         "cambria": "Bin 연산자 좌우 medium space"
       },
-      "fizzex_location": "src/box/font-metrics.ts:230",
-      "fizzex_current": 0.2,
-      "status": "mismatch",
       "tolerance": 0.01,
       "priority": 3,
       "note": "Fizzex operatorSpacing=0.2, TeX medium=0.222"
@@ -418,82 +329,283 @@
         "opentype": "N/A",
         "cambria": "Rel 연산자 좌우 thick space"
       },
-      "fizzex_location": "src/box/font-metrics.ts:230",
-      "fizzex_current": null,
-      "fizzex_current_note": "operatorSpacing=0.2 단일값 사용, Rel 구분 없음",
-      "status": "missing",
       "tolerance": 0.01,
       "priority": 3
     }
   },
-
   "spacing_matrix": {
     "display_and_text": {
       "source": "03-tex-layout-rules.json → atom_spacing_table.display_and_text_style",
-      "fizzex_location": "src/box/box-builder.ts:createOperator() — 단일 operatorSpacing만 사용",
-      "fizzex_status": "missing",
       "matrix": [
-        [0, 1, 2, 3, 0, 0, 0, 1],
-        [1, 1, 0, 3, 0, 0, 0, 1],
-        [2, 2, 0, 0, 2, 0, 0, 2],
-        [3, 3, 0, 0, 3, 0, 0, 3],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 2, 3, 0, 0, 0, 1],
-        [1, 1, 0, 1, 1, 1, 1, 1],
-        [1, 1, 2, 3, 1, 0, 1, 1]
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          3,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          2
+        ],
+        [
+          3,
+          3,
+          0,
+          0,
+          3,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          3,
+          1,
+          0,
+          1,
+          1
+        ]
       ],
-      "labels": ["ord", "op", "bin", "rel", "open", "close", "punct", "inner"],
+      "labels": [
+        "ord",
+        "op",
+        "bin",
+        "rel",
+        "open",
+        "close",
+        "punct",
+        "inner"
+      ],
       "values_meaning": {
-        "-1": "불가능 (Bin이 Ord로 변환)",
         "0": "간격 없음 (0mu)",
         "1": "thin space (3mu = 0.167em)",
         "2": "medium space (4mu = 0.222em)",
-        "3": "thick space (5mu = 0.278em)"
+        "3": "thick space (5mu = 0.278em)",
+        "-1": "불가능 (Bin이 Ord로 변환)"
       }
     },
     "script_and_scriptscript": {
       "source": "03-tex-layout-rules.json → atom_spacing_table.script_and_scriptscript_style",
-      "fizzex_status": "missing",
       "matrix": [
-        [0, 1, 0, 0, 0, 0, 0, 0],
-        [1, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0, 0, 0]
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
       ]
     }
   },
-
   "style_transitions": {
     "source": "03-tex-layout-rules.json → math_styles.transitions",
-    "fizzex_location": "src/box/ast-to-box.ts — displayStyle: boolean만 사용",
-    "fizzex_status": "missing",
-    "styles": ["D", "D'", "T", "T'", "S", "S'", "SS", "SS'"],
+    "styles": [
+      "D",
+      "D'",
+      "T",
+      "T'",
+      "S",
+      "S'",
+      "SS",
+      "SS'"
+    ],
     "rules": {
       "subscript_always_cramped": true,
       "denominator_always_cramped": true,
       "superscript_inherits_cramped": true
     },
     "transition_table": {
-      "superscript":  [4, 5, 4, 5, 6, 7, 6, 7],
-      "subscript":    [5, 5, 5, 5, 7, 7, 7, 7],
-      "numerator":    [2, 3, 4, 5, 6, 7, 6, 7],
-      "denominator":  [3, 3, 5, 5, 7, 7, 7, 7],
-      "cramped":      [1, 1, 3, 3, 5, 5, 7, 7]
+      "superscript": [
+        4,
+        5,
+        4,
+        5,
+        6,
+        7,
+        6,
+        7
+      ],
+      "subscript": [
+        5,
+        5,
+        5,
+        5,
+        7,
+        7,
+        7,
+        7
+      ],
+      "numerator": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        6,
+        7
+      ],
+      "denominator": [
+        3,
+        3,
+        5,
+        5,
+        7,
+        7,
+        7,
+        7
+      ],
+      "cramped": [
+        1,
+        1,
+        3,
+        3,
+        5,
+        5,
+        7,
+        7
+      ]
     }
   },
-
   "layout_algorithms": {
     "fraction": {
-      "source_rules": ["tex-rule-006 (Rule 15a-d)", "OpenType fractionNumerator*/fractionDenominator*"],
-      "fizzex_location": "src/box/box-builder.ts:createFraction() (line 252)",
+      "source_rules": [
+        "tex-rule-006 (Rule 15a-d)",
+        "OpenType fractionNumerator*/fractionDenominator*"
+      ],
       "parameters_used": [
-        "sigma8_num1", "sigma9_num2", "sigma10_num3",
-        "sigma11_denom1", "sigma12_denom2",
-        "sigma22_axisHeight", "xi8_defaultRuleThickness"
+        "sigma8_num1",
+        "sigma9_num2",
+        "sigma10_num3",
+        "sigma11_denom1",
+        "sigma12_denom2",
+        "sigma22_axisHeight",
+        "xi8_defaultRuleThickness"
       ],
       "clearance_rules": {
         "display_with_rule": "3 * xi8",
@@ -508,8 +620,16 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "rule_on_axis", "expected_param": "sigma22_axisHeight", "tolerance": 0.02},
-            {"type": "rule_thickness", "expected_param": "xi8_defaultRuleThickness", "tolerance": 0.005}
+            {
+              "type": "rule_on_axis",
+              "expected_param": "sigma22_axisHeight",
+              "tolerance": 0.02
+            },
+            {
+              "type": "rule_thickness",
+              "expected_param": "xi8_defaultRuleThickness",
+              "tolerance": 0.005
+            }
           ]
         },
         {
@@ -518,8 +638,16 @@
           "style": "text",
           "known_fail": false,
           "assertions": [
-            {"type": "rule_on_axis", "expected_param": "sigma22_axisHeight", "tolerance": 0.02},
-            {"type": "rule_thickness", "expected_param": "xi8_defaultRuleThickness", "tolerance": 0.005}
+            {
+              "type": "rule_on_axis",
+              "expected_param": "sigma22_axisHeight",
+              "tolerance": 0.02
+            },
+            {
+              "type": "rule_thickness",
+              "expected_param": "xi8_defaultRuleThickness",
+              "tolerance": 0.005
+            }
           ]
         },
         {
@@ -529,9 +657,21 @@
           "known_fail": true,
           "known_fail_reason": "분자 shift 정확, 분모 shift는 스타일 축소(D->T) 미구현으로 content height 초과",
           "assertions": [
-            {"type": "numerator_shift_up", "expected_param": "sigma8_num1", "tolerance": 0.02},
-            {"type": "denominator_shift_down", "expected_param": "sigma11_denom1", "tolerance": 0.02},
-            {"type": "num_rule_clearance_min", "expected": "3 * xi8", "tolerance": 0.01}
+            {
+              "type": "numerator_shift_up",
+              "expected_param": "sigma8_num1",
+              "tolerance": 0.02
+            },
+            {
+              "type": "denominator_shift_down",
+              "expected_param": "sigma11_denom1",
+              "tolerance": 0.02
+            },
+            {
+              "type": "num_rule_clearance_min",
+              "expected": "3 * xi8",
+              "tolerance": 0.01
+            }
           ]
         },
         {
@@ -541,8 +681,16 @@
           "known_fail": true,
           "known_fail_reason": "분자 shift 정확, 분모 shift는 스타일 축소(T->S) ��구현으로 content height 초과",
           "assertions": [
-            {"type": "numerator_shift_up", "expected_param": "sigma9_num2", "tolerance": 0.02},
-            {"type": "denominator_shift_down", "expected_param": "sigma12_denom2", "tolerance": 0.02}
+            {
+              "type": "numerator_shift_up",
+              "expected_param": "sigma9_num2",
+              "tolerance": 0.02
+            },
+            {
+              "type": "denominator_shift_down",
+              "expected_param": "sigma12_denom2",
+              "tolerance": 0.02
+            }
           ]
         },
         {
@@ -552,19 +700,30 @@
           "known_fail": true,
           "known_fail_reason": "스타일 전환 미구현 (inner frac은 text style이어야 함)",
           "assertions": [
-            {"type": "inner_frac_style", "expected": "text"},
-            {"type": "no_overlap", "element1": "inner_numerator", "element2": "inner_rule"}
+            {
+              "type": "inner_frac_style",
+              "expected": "text"
+            },
+            {
+              "type": "no_overlap",
+              "element1": "inner_numerator",
+              "element2": "inner_rule"
+            }
           ]
         }
       ]
     },
-
     "superscript": {
-      "source_rules": ["tex-rule-008 (Rule 18a,c,d)", "OpenType superscriptShiftUp*"],
-      "fizzex_location": "src/box/box-builder.ts:createPower() (line 354)",
+      "source_rules": [
+        "tex-rule-008 (Rule 18a,c,d)",
+        "OpenType superscriptShiftUp*"
+      ],
       "parameters_used": [
-        "sigma13_sup1", "sigma14_sup2", "sigma15_sup3",
-        "sigma18_supDrop", "sigma5_xHeight"
+        "sigma13_sup1",
+        "sigma14_sup2",
+        "sigma15_sup3",
+        "sigma18_supDrop",
+        "sigma5_xHeight"
       ],
       "verification_cases": [
         {
@@ -573,8 +732,16 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "superscript_shift_up_min", "expected_param": "sigma13_sup1", "tolerance": 0.05},
-            {"type": "superscript_bottom_min", "expected": "sigma5_xHeight / 4", "tolerance": 0.02}
+            {
+              "type": "superscript_shift_up_min",
+              "expected_param": "sigma13_sup1",
+              "tolerance": 0.05
+            },
+            {
+              "type": "superscript_bottom_min",
+              "expected": "sigma5_xHeight / 4",
+              "tolerance": 0.02
+            }
           ]
         },
         {
@@ -584,8 +751,15 @@
           "known_fail": true,
           "known_fail_reason": "cramped style 미구현",
           "assertions": [
-            {"type": "superscript_shift_up_min", "expected_param": "sigma15_sup3", "tolerance": 0.02},
-            {"type": "inner_style_is_cramped", "expected": true}
+            {
+              "type": "superscript_shift_up_min",
+              "expected_param": "sigma15_sup3",
+              "tolerance": 0.02
+            },
+            {
+              "type": "inner_style_is_cramped",
+              "expected": true
+            }
           ]
         },
         {
@@ -593,16 +767,25 @@
           "latex": "x^2",
           "style": "display",
           "assertions": [
-            {"type": "superscript_font_scale", "expected_param": "scriptPercentScaleDown", "tolerance": 0.02}
+            {
+              "type": "superscript_font_scale",
+              "expected_param": "scriptPercentScaleDown",
+              "tolerance": 0.02
+            }
           ]
         }
       ]
     },
-
     "subscript": {
-      "source_rules": ["tex-rule-009 (Rule 18a,b)", "OpenType subscriptShiftDown*"],
-      "fizzex_location": "src/box/box-builder.ts:createSubscript() (line 560)",
-      "parameters_used": ["sigma16_sub1", "sigma19_subDrop", "sigma5_xHeight"],
+      "source_rules": [
+        "tex-rule-009 (Rule 18a,b)",
+        "OpenType subscriptShiftDown*"
+      ],
+      "parameters_used": [
+        "sigma16_sub1",
+        "sigma19_subDrop",
+        "sigma5_xHeight"
+      ],
       "verification_cases": [
         {
           "id": "sub-basic",
@@ -610,8 +793,16 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "subscript_shift_down_min", "expected_param": "sigma16_sub1", "tolerance": 0.02},
-            {"type": "subscript_top_max", "expected": "0.8 * sigma5_xHeight", "tolerance": 0.02}
+            {
+              "type": "subscript_shift_down_min",
+              "expected_param": "sigma16_sub1",
+              "tolerance": 0.02
+            },
+            {
+              "type": "subscript_top_max",
+              "expected": "0.8 * sigma5_xHeight",
+              "tolerance": 0.02
+            }
           ]
         },
         {
@@ -619,18 +810,25 @@
           "latex": "x_i",
           "style": "display",
           "assertions": [
-            {"type": "subscript_font_scale", "expected_param": "scriptPercentScaleDown", "tolerance": 0.02}
+            {
+              "type": "subscript_font_scale",
+              "expected_param": "scriptPercentScaleDown",
+              "tolerance": 0.02
+            }
           ]
         }
       ]
     },
-
     "subsup": {
-      "source_rules": ["tex-rule-010 (Rule 18e)", "OpenType subSuperscriptGapMin"],
-      "fizzex_location": "src/box/ast-to-box.ts — 위+아래 동시 처리 함수",
+      "source_rules": [
+        "tex-rule-010 (Rule 18e)",
+        "OpenType subSuperscriptGapMin"
+      ],
       "parameters_used": [
-        "sigma13_sup1", "sigma17_sub2",
-        "xi8_defaultRuleThickness", "sigma5_xHeight"
+        "sigma13_sup1",
+        "sigma17_sub2",
+        "xi8_defaultRuleThickness",
+        "sigma5_xHeight"
       ],
       "verification_cases": [
         {
@@ -640,17 +838,29 @@
           "known_fail": true,
           "known_fail_reason": "위+아래 동시 처리 시 sigma17 사용 미구현, 4*xi8 gap 조건 미구현",
           "assertions": [
-            {"type": "subsup_gap_min", "expected": "4 * xi8", "tolerance": 0.01},
-            {"type": "sup_bottom_with_sub", "expected": "0.8 * sigma5_xHeight", "tolerance": 0.01}
+            {
+              "type": "subsup_gap_min",
+              "expected": "4 * xi8",
+              "tolerance": 0.01
+            },
+            {
+              "type": "sup_bottom_with_sub",
+              "expected": "0.8 * sigma5_xHeight",
+              "tolerance": 0.01
+            }
           ]
         }
       ]
     },
-
     "radical": {
-      "source_rules": ["tex-rule-003 (Rule 11)", "OpenType radical*"],
-      "fizzex_location": "src/box/box-builder.ts:createSurd() (line 1631)",
-      "parameters_used": ["xi8_defaultRuleThickness", "sigma5_xHeight"],
+      "source_rules": [
+        "tex-rule-003 (Rule 11)",
+        "OpenType radical*"
+      ],
+      "parameters_used": [
+        "xi8_defaultRuleThickness",
+        "sigma5_xHeight"
+      ],
       "verification_cases": [
         {
           "id": "sqrt-display",
@@ -659,8 +869,15 @@
           "known_fail": true,
           "known_fail_reason": "display clearance = xi8 + sigma5/4 미적용, cramped 미적용",
           "assertions": [
-            {"type": "content_rule_clearance_min", "expected": "xi8 + sigma5 / 4", "tolerance": 0.01},
-            {"type": "content_style_is_cramped", "expected": true}
+            {
+              "type": "content_rule_clearance_min",
+              "expected": "xi8 + sigma5 / 4",
+              "tolerance": 0.01
+            },
+            {
+              "type": "content_style_is_cramped",
+              "expected": true
+            }
           ]
         },
         {
@@ -669,7 +886,11 @@
           "style": "text",
           "known_fail": false,
           "assertions": [
-            {"type": "content_rule_clearance_min", "expected": "1.25 * xi8", "tolerance": 0.01}
+            {
+              "type": "content_rule_clearance_min",
+              "expected": "1.25 * xi8",
+              "tolerance": 0.01
+            }
           ]
         },
         {
@@ -678,16 +899,23 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "radical_rule_thickness", "expected_param": "xi8_defaultRuleThickness", "tolerance": 0.02}
+            {
+              "type": "radical_rule_thickness",
+              "expected_param": "xi8_defaultRuleThickness",
+              "tolerance": 0.02
+            }
           ]
         }
       ]
     },
-
     "accent": {
-      "source_rules": ["tex-rule-005 (Rule 12)", "OpenType accentBaseHeight"],
-      "fizzex_location": "src/box/box-builder.ts:createAccentBox() (line 1014)",
-      "parameters_used": ["sigma5_xHeight"],
+      "source_rules": [
+        "tex-rule-005 (Rule 12)",
+        "OpenType accentBaseHeight"
+      ],
+      "parameters_used": [
+        "sigma5_xHeight"
+      ],
       "verification_cases": [
         {
           "id": "hat-lowercase",
@@ -696,8 +924,15 @@
           "known_fail": true,
           "known_fail_reason": "악센트 clearance = min(height, xHeight) 미적용, cramped 미적용",
           "assertions": [
-            {"type": "accent_clearance_max", "expected_param": "sigma5_xHeight", "tolerance": 0.02},
-            {"type": "content_style_is_cramped", "expected": true}
+            {
+              "type": "accent_clearance_max",
+              "expected_param": "sigma5_xHeight",
+              "tolerance": 0.02
+            },
+            {
+              "type": "content_style_is_cramped",
+              "expected": true
+            }
           ]
         },
         {
@@ -706,16 +941,23 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "accent_clearance_max", "expected_param": "sigma5_xHeight", "tolerance": 0.02}
+            {
+              "type": "accent_clearance_max",
+              "expected_param": "sigma5_xHeight",
+              "tolerance": 0.02
+            }
           ]
         }
       ]
     },
-
     "overline": {
-      "source_rules": ["tex-rule-013 (Rule 13 extended)", "OpenType overbar*"],
-      "fizzex_location": "src/box/box-builder.ts:createOverlineBox() (line 945)",
-      "parameters_used": ["xi8_defaultRuleThickness"],
+      "source_rules": [
+        "tex-rule-013 (Rule 13 extended)",
+        "OpenType overbar*"
+      ],
+      "parameters_used": [
+        "xi8_defaultRuleThickness"
+      ],
       "verification_cases": [
         {
           "id": "overline-gap",
@@ -723,17 +965,28 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "overline_gap", "expected": "3 * xi8", "tolerance": 0.01},
-            {"type": "overline_thickness", "expected_param": "xi8_defaultRuleThickness", "tolerance": 0.005}
+            {
+              "type": "overline_gap",
+              "expected": "3 * xi8",
+              "tolerance": 0.01
+            },
+            {
+              "type": "overline_thickness",
+              "expected_param": "xi8_defaultRuleThickness",
+              "tolerance": 0.005
+            }
           ]
         }
       ]
     },
-
     "delimiter": {
-      "source_rules": ["tex-rule-011 (Delimiter Sizing)", "OpenType MathVariants"],
-      "fizzex_location": "src/box/box-builder.ts:createParenthesized()",
-      "parameters_used": ["sigma22_axisHeight"],
+      "source_rules": [
+        "tex-rule-011 (Delimiter Sizing)",
+        "OpenType MathVariants"
+      ],
+      "parameters_used": [
+        "sigma22_axisHeight"
+      ],
       "verification_cases": [
         {
           "id": "delim-frac",
@@ -741,17 +994,31 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "delimiter_covers_content", "expected": true},
-            {"type": "delimiter_centered_on_axis", "expected_param": "sigma22_axisHeight", "tolerance": 0.05}
+            {
+              "type": "delimiter_covers_content",
+              "expected": true
+            },
+            {
+              "type": "delimiter_centered_on_axis",
+              "expected_param": "sigma22_axisHeight",
+              "tolerance": 0.05
+            }
           ]
         }
       ]
     },
-
     "limits": {
-      "source_rules": ["tex-rule-002 (Rule 13)", "OpenType upperLimit*/lowerLimit*"],
-      "fizzex_location": "src/box/box-builder.ts:createSumBox() (line 740)",
-      "parameters_used": ["xi9_bigOpSpacing1", "xi10_bigOpSpacing2", "xi11_bigOpSpacing3", "xi12_bigOpSpacing4", "xi13_bigOpSpacing5"],
+      "source_rules": [
+        "tex-rule-002 (Rule 13)",
+        "OpenType upperLimit*/lowerLimit*"
+      ],
+      "parameters_used": [
+        "xi9_bigOpSpacing1",
+        "xi10_bigOpSpacing2",
+        "xi11_bigOpSpacing3",
+        "xi12_bigOpSpacing4",
+        "xi13_bigOpSpacing5"
+      ],
       "verification_cases": [
         {
           "id": "sum-limits-display",
@@ -759,8 +1026,16 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "upper_limit_gap_min", "expected_param": "xi9_bigOpSpacing1", "tolerance": 0.01},
-            {"type": "lower_limit_gap_min", "expected_param": "xi10_bigOpSpacing2", "tolerance": 0.01}
+            {
+              "type": "upper_limit_gap_min",
+              "expected_param": "xi9_bigOpSpacing1",
+              "tolerance": 0.01
+            },
+            {
+              "type": "lower_limit_gap_min",
+              "expected_param": "xi10_bigOpSpacing2",
+              "tolerance": 0.01
+            }
           ]
         },
         {
@@ -769,16 +1044,26 @@
           "style": "text",
           "known_fail": false,
           "assertions": [
-            {"type": "limits_as_scripts", "expected": true}
+            {
+              "type": "limits_as_scripts",
+              "expected": true
+            }
           ]
         }
       ]
     },
-
     "integral": {
-      "source_rules": ["tex-rule-002 (Rule 13 nolimits branch)", "cambria-013 (italic correction)", "tex-rule-008 (Rule 18a,c)"],
-      "fizzex_location": "src/box/box-builder.ts:createIntegralBox() (line 642)",
-      "parameters_used": ["sigma16_sub1 (subscriptShift)", "sigma13_sup1 (exponentShift)", "sigma5_xHeight", "italicCorrection (GlyphPathData)"],
+      "source_rules": [
+        "tex-rule-002 (Rule 13 nolimits branch)",
+        "cambria-013 (italic correction)",
+        "tex-rule-008 (Rule 18a,c)"
+      ],
+      "parameters_used": [
+        "sigma16_sub1 (subscriptShift)",
+        "sigma13_sup1 (exponentShift)",
+        "sigma5_xHeight",
+        "italicCorrection (GlyphPathData)"
+      ],
       "note": "적분은 기본 nolimits — 상하한을 subscript/superscript로 배치하되 italic correction 보정 적용",
       "verification_cases": [
         {
@@ -787,8 +1072,16 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05},
-            {"type": "superscript_shift_up", "expected_param": "sigma13_sup1", "tolerance": 0.05}
+            {
+              "type": "subscript_shift_down",
+              "expected_param": "sigma16_sub1",
+              "tolerance": 0.05
+            },
+            {
+              "type": "superscript_shift_up",
+              "expected_param": "sigma13_sup1",
+              "tolerance": 0.05
+            }
           ]
         },
         {
@@ -797,8 +1090,18 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "sub_x_offset", "expected": "integral.right - italicCorr", "tolerance": 0.02, "note": "TeX 표준: 하한에만 full italic correction 적용"},
-            {"type": "sup_x_offset", "expected": "integral.right", "tolerance": 0.02, "note": "TeX 표준: 상한에 보정 없음"}
+            {
+              "type": "sub_x_offset",
+              "expected": "integral.right - italicCorr",
+              "tolerance": 0.02,
+              "note": "TeX 표준: 하한에만 full italic correction 적용"
+            },
+            {
+              "type": "sup_x_offset",
+              "expected": "integral.right",
+              "tolerance": 0.02,
+              "note": "TeX 표준: 상한에 보정 없음"
+            }
           ]
         },
         {
@@ -807,8 +1110,15 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05},
-            {"type": "nolimits_style", "expected": true}
+            {
+              "type": "subscript_shift_down",
+              "expected_param": "sigma16_sub1",
+              "tolerance": 0.05
+            },
+            {
+              "type": "nolimits_style",
+              "expected": true
+            }
           ]
         },
         {
@@ -817,8 +1127,15 @@
           "style": "display",
           "known_fail": false,
           "assertions": [
-            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05},
-            {"type": "nolimits_style", "expected": true}
+            {
+              "type": "subscript_shift_down",
+              "expected_param": "sigma16_sub1",
+              "tolerance": 0.05
+            },
+            {
+              "type": "nolimits_style",
+              "expected": true
+            }
           ]
         },
         {
@@ -827,16 +1144,24 @@
           "style": "text",
           "known_fail": false,
           "assertions": [
-            {"type": "nolimits_style", "expected": true},
-            {"type": "subscript_shift_down", "expected_param": "sigma16_sub1", "tolerance": 0.05}
+            {
+              "type": "nolimits_style",
+              "expected": true
+            },
+            {
+              "type": "subscript_shift_down",
+              "expected_param": "sigma16_sub1",
+              "tolerance": 0.05
+            }
           ]
         }
       ]
     },
-
     "spacing": {
-      "source_rules": ["tex-rule-001 (Rules 1-4)", "Oxford Rules"],
-      "fizzex_location": "src/box/box-builder.ts:createOperator() (line 536)",
+      "source_rules": [
+        "tex-rule-001 (Rules 1-4)",
+        "Oxford Rules"
+      ],
       "verification_cases": [
         {
           "id": "spacing-rel",
@@ -845,7 +1170,11 @@
           "known_fail": true,
           "known_fail_reason": "atom spacing table 미구현, 단일 operatorSpacing=0.2 사용",
           "assertions": [
-            {"type": "space_around_rel", "expected": "5mu", "tolerance": "0.5mu"}
+            {
+              "type": "space_around_rel",
+              "expected": "5mu",
+              "tolerance": "0.5mu"
+            }
           ]
         },
         {
@@ -855,7 +1184,11 @@
           "known_fail": true,
           "known_fail_reason": "Bin=medium space(4mu) vs Fizzex operatorSpacing(0.2em≈3.6mu)",
           "assertions": [
-            {"type": "space_around_bin", "expected": "4mu", "tolerance": "0.5mu"}
+            {
+              "type": "space_around_bin",
+              "expected": "4mu",
+              "tolerance": "0.5mu"
+            }
           ]
         },
         {
@@ -865,7 +1198,11 @@
           "known_fail": true,
           "known_fail_reason": "script style에서 spacing 억제 미구현",
           "assertions": [
-            {"type": "space_around_bin", "expected": "0mu", "tolerance": "0.1mu"}
+            {
+              "type": "space_around_bin",
+              "expected": "0mu",
+              "tolerance": "0.1mu"
+            }
           ]
         },
         {
@@ -875,55 +1212,15 @@
           "known_fail": true,
           "known_fail_reason": "Bin→Ord 변환 미구현",
           "assertions": [
-            {"type": "space_before_ord", "expected": "0mu", "tolerance": "0.1mu",
-             "note": "Bin이 Ord로 변환되어 간격 없음"}
+            {
+              "type": "space_before_ord",
+              "expected": "0mu",
+              "tolerance": "0.1mu",
+              "note": "Bin이 Ord로 변환되어 간격 없음"
+            }
           ]
         }
       ]
     }
-  },
-
-  "diagnostic_summary": {
-    "total_parameters": 28,
-    "match": 9,
-    "mismatch": 3,
-    "missing": 16,
-    "hardcoded": 0,
-    "total_verification_cases": 32,
-    "known_fail_cases": 18,
-    "testable_cases": 14,
-    "priority_1_params": ["sigma5_xHeight", "sigma22_axisHeight", "xi8_defaultRuleThickness", "scriptPercentScaleDown"],
-    "top_issues": [
-      {
-        "rank": 1,
-        "id": "scriptPercentScaleDown",
-        "issue": "[해결됨] exponentScale/subscriptScale=0.8로 수정 완료",
-        "priority": 1
-      },
-      {
-        "rank": 2,
-        "id": "sigma8-12 (fraction shifts)",
-        "issue": "분수 레이아웃이 gap 기반으로 TeX의 shift 기반과 구조적 차이 — 가장 흔한 수식 구조",
-        "priority": 2
-      },
-      {
-        "rank": 3,
-        "id": "sigma16_sub1",
-        "issue": "subscriptShift=0.2 vs TeX sub1=0.150 — 아래첨자가 과도하게 내려감",
-        "priority": 2
-      },
-      {
-        "rank": 4,
-        "id": "sigma5_xHeight",
-        "issue": "xHeight(0.431) 미사용 — 위첨자/아래첨자 조건식, 악센트 배치에 필수",
-        "priority": 1
-      },
-      {
-        "rank": 5,
-        "id": "xi9-13 (big_op_spacing)",
-        "issue": "큰 연산자 limits 간격이 고정값(0.15) — TeX xi9-13으로 정밀 제어 필요",
-        "priority": 2
-      }
-    ]
   }
 }

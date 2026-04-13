@@ -23,7 +23,6 @@ function generateReport(result: SpecRunResult): string {
   lines.push(`- Compliance Score: **${result.complianceScore}%**`);
   lines.push(`- Passed: ${result.passed} / ${result.totalAssertions} assertions`);
   lines.push(`- Failed: ${result.failed} | Known Fail: ${result.knownFail} | Skipped: ${result.skipped}`);
-  lines.push(`- Parameters: ${result.parameterStatus.match} match, ${result.parameterStatus.mismatch} mismatch, ${result.parameterStatus.missing} missing`);
   lines.push('');
 
   // Category Results
@@ -64,22 +63,6 @@ function generateReport(result: SpecRunResult): string {
     lines.push('');
   }
 
-  // Parameter Status
-  lines.push('## Parameter Status');
-  const specData = spec as LayoutSpec;
-  lines.push('| Parameter | Expected | Actual | Status |');
-  lines.push('|-----------|----------|--------|--------|');
-
-  for (const [key, param] of Object.entries(specData.parameters)) {
-    const statusIcon = param.status === 'match' ? 'match' :
-                       param.status === 'mismatch' ? 'mismatch' :
-                       param.status === 'missing' ? 'missing' :
-                       param.status;
-    const actual = param.fizzex_current !== null && param.fizzex_current !== undefined
-      ? String(param.fizzex_current) : '-';
-    lines.push(`| ${key} | ${param.value} | ${actual} | ${statusIcon} |`);
-  }
-  lines.push('');
 
   return lines.join('\n');
 }

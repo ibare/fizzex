@@ -26,13 +26,6 @@ describe('Layout Spec Compliance', () => {
     expect(result.complianceScore).toBeGreaterThanOrEqual(0);
   });
 
-  it('파라미터 상태를 보고한다', () => {
-    const p = result.parameterStatus;
-    console.log(`\nParameters: ${p.match} match, ${p.mismatch} mismatch, ${p.missing} missing, ${p.hardcoded} hardcoded (total: ${p.total})`);
-
-    expect(p.total).toBeGreaterThan(0);
-  });
-
   describe('카테고리별 결과', () => {
     const categoryNames = [
       'fraction', 'superscript', 'subscript', 'subsup',

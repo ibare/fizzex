@@ -40,8 +40,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:layout": "vitest run src/__tests__/layout/spec-runner.test.ts",
-    "test:layout:watch": "vitest src/__tests__/layout/spec-runner.test.ts",
+    "test:layout": "vitest run src/__tests__/layout/*.test.ts",
+    "test:layout:watch": "vitest src/__tests__/layout/*.test.ts",
     "test:layout:report": "tsx src/__tests__/layout/report-generator.ts",
     "clean": "rm -rf dist demo-dist node_modules",
     "extract-glyphs": "tsx scripts/extract-glyph-paths.ts"
