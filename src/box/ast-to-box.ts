@@ -446,7 +446,7 @@ function convertAccent(
 
 /** 행렬 노드 변환 */
 function convertMatrix(
-  node: MathNode & { rows: MathNode[][]; bracketType: '(' | '[' | '{' | '|' | '||' | 'none' },
+  node: MathNode & { rows: MathNode[][]; bracketType: '(' | '[' | '{' | '|' | '‖' | 'none' },
   metrics: CanvasFontMetrics,
   fontSize: number,
   displayStyle: boolean

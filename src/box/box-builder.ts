@@ -1065,7 +1065,7 @@ export function createAccentBox(
 /** 행렬(Matrix) Box 생성 */
 export function createMatrixBox(
   cells: Box[][],
-  bracketType: '(' | '[' | '{' | '|' | '||' | 'none',
+  bracketType: '(' | '[' | '{' | '|' | '‖' | 'none',
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
@@ -1132,38 +1132,10 @@ export function createMatrixBox(
   let openParen: string;
   let closeParen: string;
 
-  if (bracketType === '||') {
-    // Vmatrix: 이중 세로줄
-    const bar1Open = createGlyph('|', metrics, parenFontSize, false);
-    const bar2Open = createGlyph('|', metrics, parenFontSize, false);
-    const bar1Close = createGlyph('|', metrics, parenFontSize, false);
-    const bar2Close = createGlyph('|', metrics, parenFontSize, false);
-
-    // 원래 높이/깊이 저장 (shift 계산용)
-    const origHeight = bar1Open.height;
-    const origDepth = bar1Open.depth;
-
-    // 높이 맞춤
-    bar1Open.height = bar2Open.height = bar1Close.height = bar2Close.height = contentHeight;
-    bar1Open.depth = bar2Open.depth = bar1Close.depth = bar2Close.depth = contentDepth;
-
-    // 세로줄 중앙 정렬을 위한 shift 계산
-    const scaleY = totalHeight / (origHeight + origDepth);
-    const barCenterOffset = (origHeight * scaleY - origDepth * scaleY) / 2;
-
-    const shiftedBar1Open: Box = { ...bar1Open, shift: barCenterOffset };
-    const shiftedBar2Open: Box = { ...bar2Open, shift: barCenterOffset };
-    const shiftedBar1Close: Box = { ...bar1Close, shift: barCenterOffset };
-    const shiftedBar2Close: Box = { ...bar2Close, shift: barCenterOffset };
-
-    const barGap = createKern(actualFontSize * 0.08); // 세로줄 간격
-    const padding = createKern(actualFontSize * MathConstants.parenPadding);
-
-    return createHBox([
-      shiftedBar1Open, barGap, shiftedBar2Open, padding,
-      matrixContent,
-      padding, shiftedBar1Close, barGap, shiftedBar2Close
-    ], sourceId);
+  if (bracketType === '‖') {
+    // Vmatrix: ‖를 path 기반으로 렌더링 (열림/닫힘 동일 글리프)
+    openParen = '‖';
+    closeParen = '‖';
   } else if (bracketType === '|') {
     openParen = '|';
     closeParen = '|';

@@ -615,7 +615,7 @@ function createSpace(width: number): SpaceNode {
   };
 }
 
-function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '||' | 'none'): MatrixNode {
+function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '‖' | 'none'): MatrixNode {
   const matrixId = generateId();
   // 각 셀을 RowNode로 감싸기
   const wrappedRows = rows.map((row, i) =>
@@ -643,7 +643,7 @@ function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '
 }
 
 /** 행렬 환경 이름에서 괄호 타입 반환 */
-function getMatrixBracketType(envName: string): '(' | '[' | '{' | '|' | '||' | 'none' {
+function getMatrixBracketType(envName: string): '(' | '[' | '{' | '|' | '‖' | 'none' {
   switch (envName) {
     case 'pmatrix':
       return '(';
@@ -654,7 +654,7 @@ function getMatrixBracketType(envName: string): '(' | '[' | '{' | '|' | '||' | '
     case 'vmatrix':
       return '|';
     case 'Vmatrix':
-      return '||';
+      return '‖';
     case 'matrix':
     default:
       return 'none';

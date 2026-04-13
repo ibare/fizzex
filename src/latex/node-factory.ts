@@ -223,7 +223,7 @@ export function accent(
 /** 행렬 노드 생성 */
 export function matrix(
   rows: MathNode[][],
-  bracketType: '(' | '[' | '{' | '|' | '||' | 'none' = 'none'
+  bracketType: '(' | '[' | '{' | '|' | '‖' | 'none' = 'none'
 ): MatrixNode {
   return createNode('matrix', { rows, bracketType });
 }

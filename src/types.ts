@@ -158,7 +158,7 @@ export interface AccentNode extends MathNodeBase {
 export interface MatrixNode extends MathNodeBase {
   type: 'matrix';
   rows: MathNode[][];    // 2D 배열 (각 셀은 row 노드)
-  bracketType: '(' | '[' | '{' | '|' | '||' | 'none';  // 괄호 타입
+  bracketType: '(' | '[' | '{' | '|' | '‖' | 'none';  // 괄호 타입
 }
 
 /**

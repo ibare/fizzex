@@ -192,7 +192,7 @@ export function astToLatex(node: MathNode): string {
 }
 
 /** 행렬 괄호 타입에 맞는 LaTeX 환경 반환 */
-function getBmatrixEnv(bracketType: '(' | '[' | '{' | '|' | '||' | 'none'): string {
+function getBmatrixEnv(bracketType: '(' | '[' | '{' | '|' | '‖' | 'none'): string {
   switch (bracketType) {
     case '(':
       return 'pmatrix';
@@ -202,7 +202,7 @@ function getBmatrixEnv(bracketType: '(' | '[' | '{' | '|' | '||' | 'none'): stri
       return 'Bmatrix';
     case '|':
       return 'vmatrix';
-    case '||':
+    case '‖':
       return 'Vmatrix';
     case 'none':
     default:

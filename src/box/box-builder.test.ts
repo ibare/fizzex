@@ -962,11 +962,11 @@ describe('Box Builder', () => {
       expect(result.children).toHaveLength(5);
     });
 
-    it('|| 타입은 이중 세로줄을 사용한다', () => {
+    it('‖ 타입은 이중 세로줄을 사용한다', () => {
       const cells = [[makeBox({ width: 10 })]];
-      const result = createMatrixBox(cells, '||', metrics);
-      // bar1 + barGap + bar2 + padding + content + padding + bar1 + barGap + bar2
-      expect(result.children).toHaveLength(9);
+      const result = createMatrixBox(cells, '‖', metrics);
+      // openBox + padding + matrixContent + padding + closeBox
+      expect(result.children).toHaveLength(5);
     });
   });
 
