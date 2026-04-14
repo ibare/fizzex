@@ -5,7 +5,7 @@
 
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { parseLatex } from '../../latex/latex-parser';
+import { parseLatexWithErrors } from '../../latex/latex-parser';
 import { astToLatex } from '../../latex/ast-to-latex';
 import { astToBox } from '../../box/ast-to-box';
 import { createDeterministicMetrics } from '../layout/deterministic-metrics';
@@ -24,10 +24,12 @@ export interface TestResult {
   results: {
     parseSuccess: boolean;
     parseError?: string;
+    parseWarnings?: string[];
     roundTripSuccess: boolean;
     roundTripDiff?: string;
     boxSuccess: boolean;
     boxError?: string;
+    boxWidth?: number;
   };
 }
 
@@ -35,16 +37,20 @@ export interface CorpusTestReport {
   total: number;
   parseSuccess: number;
   parseFail: number;
+  /** 경고 없는 완전한 파싱 성공 수 */
+  parseClean: number;
   roundTripSuccess: number;
   roundTripFail: number;
   boxSuccess: number;
   boxFail: number;
   duration: number;
-  bySource: Record<string, { total: number; parseSuccess: number; roundTrip: number; box: number }>;
+  bySource: Record<string, { total: number; parseSuccess: number; parseClean: number; roundTrip: number; box: number }>;
   failurePatterns: { pattern: string; count: number; severity: string; example: string }[];
   unsupportedCommands: { command: string; occurrences: number; source: string; priority: string }[];
   failures: TestResult[];
   parseRate: number;
+  /** 경고 없는 파싱 성공률 */
+  parseCleanRate: number;
   roundTripRate: number;
   boxRate: number;
 }
@@ -56,10 +62,11 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
 
   const metrics = createDeterministicMetrics();
   const results: TestResult[] = [];
-  const bySource: Record<string, { total: number; parseSuccess: number; roundTrip: number; box: number }> = {};
+  const bySource: Record<string, { total: number; parseSuccess: number; parseClean: number; roundTrip: number; box: number }> = {};
   const errorPatterns: Record<string, { count: number; example: string; source: string }> = {};
 
   let parseOk = 0;
+  let parseClean = 0;
   let roundTripOk = 0;
   let boxOk = 0;
 
@@ -79,57 +86,71 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
 
     // 소스별 통계 초기화
     if (!bySource[entry.source]) {
-      bySource[entry.source] = { total: 0, parseSuccess: 0, roundTrip: 0, box: 0 };
+      bySource[entry.source] = { total: 0, parseSuccess: 0, parseClean: 0, roundTrip: 0, box: 0 };
     }
     bySource[entry.source].total++;
 
-    // 1. 파싱 테스트
-    try {
-      const ast = parseLatex(entry.latex);
-      if (ast) {
-        result.results.parseSuccess = true;
-        parseOk++;
-        bySource[entry.source].parseSuccess++;
+    // 1. 파싱 테스트 — hasErrors로 판정 (throw 안 남 ≠ 성공)
+    const parseResult = parseLatexWithErrors(entry.latex);
+    const ast = parseResult.ast;
 
-        // 2. 라운드트립 테스트
-        try {
-          const regenerated = astToLatex(ast);
-          const reParsed = parseLatex(regenerated);
-          const reRegenerated = astToLatex(reParsed);
-
-          // 라운드트립 비교: 두 번째 변환이 동일한지 (정규화 후 안정성)
-          if (regenerated === reRegenerated) {
-            result.results.roundTripSuccess = true;
-            roundTripOk++;
-            bySource[entry.source].roundTrip++;
-          } else {
-            result.results.roundTripDiff = `"${regenerated}" → "${reRegenerated}"`;
-          }
-        } catch (e: any) {
-          result.results.roundTripDiff = `Error: ${e.message}`;
-        }
-
-        // 3. 박스 생성 테스트
-        try {
-          const box = astToBox(ast, metrics as any);
-          if (box) {
-            result.results.boxSuccess = true;
-            boxOk++;
-            bySource[entry.source].box++;
-          }
-        } catch (e: any) {
-          result.results.boxError = e.message;
-        }
-      }
-    } catch (e: any) {
-      result.results.parseError = e.message;
+    if (parseResult.hasErrors) {
+      // 에러가 있으면 파싱 실패
+      const firstError = parseResult.errors[0];
+      result.results.parseError = firstError?.message || 'Unknown parse error';
 
       // 에러 패턴 수집
-      const pattern = categorizeError(e.message);
+      const pattern = categorizeError(result.results.parseError);
       if (!errorPatterns[pattern]) {
         errorPatterns[pattern] = { count: 0, example: entry.latex, source: entry.source };
       }
       errorPatterns[pattern].count++;
+    } else {
+      result.results.parseSuccess = true;
+      parseOk++;
+      bySource[entry.source].parseSuccess++;
+
+      // 경고가 없으면 깨끗한 파싱
+      if (parseResult.warnings.length === 0) {
+        parseClean++;
+        bySource[entry.source].parseClean++;
+      } else {
+        result.results.parseWarnings = parseResult.warnings.map((w) => w.message);
+      }
+
+      // 2. 라운드트립 테스트
+      try {
+        const regenerated = astToLatex(ast);
+        const reParsedResult = parseLatexWithErrors(regenerated);
+        const reRegenerated = astToLatex(reParsedResult.ast);
+
+        // 라운드트립 비교: 두 번째 변환이 동일한지 (정규화 후 안정성)
+        if (regenerated === reRegenerated) {
+          result.results.roundTripSuccess = true;
+          roundTripOk++;
+          bySource[entry.source].roundTrip++;
+        } else {
+          result.results.roundTripDiff = `"${regenerated}" → "${reRegenerated}"`;
+        }
+      } catch (e: any) {
+        result.results.roundTripDiff = `Error: ${e.message}`;
+      }
+
+      // 3. 박스 생성 테스트 — width > 0 검증
+      try {
+        const box = astToBox(ast, metrics as any);
+        if (box && box.width > 0) {
+          result.results.boxSuccess = true;
+          result.results.boxWidth = box.width;
+          boxOk++;
+          bySource[entry.source].box++;
+        } else {
+          result.results.boxError = box ? `빈 박스: width=${box.width}` : 'null 박스';
+          result.results.boxWidth = box?.width ?? 0;
+        }
+      } catch (e: any) {
+        result.results.boxError = e.message;
+      }
     }
 
     // 실패한 것만 결과에 추가
@@ -157,6 +178,7 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
   return {
     total,
     parseSuccess: parseOk,
+    parseClean,
     parseFail: total - parseOk,
     roundTripSuccess: roundTripOk,
     roundTripFail: total - roundTripOk,
@@ -173,6 +195,7 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
       return bScore - aScore;
     }),
     parseRate: total > 0 ? (parseOk / total) * 100 : 0,
+    parseCleanRate: total > 0 ? (parseClean / total) * 100 : 0,
     roundTripRate: total > 0 ? (roundTripOk / total) * 100 : 0,
     boxRate: total > 0 ? (boxOk / total) * 100 : 0,
   };

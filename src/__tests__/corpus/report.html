@@ -59,6 +59,7 @@
   .chart-legend { display: flex; gap: 20px; margin-top: 12px; font-size: 13px; color: var(--text2); }
   .chart-legend span::before { content: ''; display: inline-block; width: 12px; height: 3px; margin-right: 6px; border-radius: 2px; vertical-align: middle; }
   .legend-parse::before { background: var(--green); }
+  .legend-clean::before { background: var(--green); opacity: 0.4; }
   .legend-rt::before { background: var(--blue); }
   .legend-box::before { background: var(--orange); }
 
@@ -122,6 +123,7 @@
       <canvas id="trendChart"></canvas>
       <div class="chart-legend">
         <span class="legend-parse">Parse</span>
+        <span class="legend-clean">Clean Parse</span>
         <span class="legend-rt">Round-trip</span>
         <span class="legend-box">Box</span>
       </div>
@@ -131,7 +133,7 @@
   <section>
     <h2>Source Breakdown</h2>
     <table class="source-table" id="sourceTable"><thead><tr>
-      <th>Source</th><th>Total</th><th>Parse</th><th>Round-trip</th><th>Box</th>
+      <th>Source</th><th>Total</th><th>Parse</th><th>Clean Parse</th><th>Round-trip</th><th>Box</th>
     </tr></thead><tbody></tbody></table>
   </section>
 
@@ -190,6 +192,7 @@ function renderSummary() {
   const s = data.summary;
   const cards = [
     { label: 'Parse', ...s.parse },
+    { label: 'Clean Parse', ...(s.parseClean || s.parse) },
     { label: 'Round-trip', ...s.roundTrip },
     { label: 'Box', ...s.box },
   ];
@@ -236,30 +239,43 @@ function renderTrend() {
   ctx.textAlign = 'center';
   history.forEach((h, i) => {
     const px = pad.left + (i / (history.length - 1)) * cw;
-    ctx.fillText(h.date.slice(5), px, H - 6);
+    const label = h.run
+      ? new Date(h.run).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+      : (h.date || '').slice(5);
+    ctx.fillText(label, px, H - 6);
   });
   // Lines
+  const greenColor = getComputedStyle(document.documentElement).getPropertyValue('--green').trim();
   const lines = [
-    { key: 'parseRate', color: getComputedStyle(document.documentElement).getPropertyValue('--green').trim() },
+    { key: 'parseRate', color: greenColor },
+    { key: 'parseCleanRate', color: greenColor, dashed: true },
     { key: 'roundTripRate', color: getComputedStyle(document.documentElement).getPropertyValue('--blue').trim() || '#007aff' },
     { key: 'boxRate', color: getComputedStyle(document.documentElement).getPropertyValue('--orange').trim() },
   ];
-  lines.forEach(({ key, color }) => {
+  lines.forEach(({ key, color, dashed }) => {
+    // parseCleanRate가 없는 이전 기록은 스킵
+    if (key === 'parseCleanRate' && !history.some(h => h[key] != null)) return;
     ctx.strokeStyle = color;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = dashed ? 1.5 : 2.5;
+    ctx.setLineDash(dashed ? [6, 4] : []);
+    ctx.globalAlpha = dashed ? 0.5 : 1;
     ctx.beginPath();
     history.forEach((h, i) => {
+      if (h[key] == null) return;
       const px = pad.left + (i / (history.length - 1)) * cw;
       const py = pad.top + ch - (h[key] / 100) * ch;
       i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
     });
     ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.globalAlpha = 1;
     // Dots
     ctx.fillStyle = color;
     history.forEach((h, i) => {
+      if (h[key] == null) return;
       const px = pad.left + (i / (history.length - 1)) * cw;
       const py = pad.top + ch - (h[key] / 100) * ch;
-      ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(px, py, dashed ? 2 : 3, 0, Math.PI * 2); ctx.fill();
     });
   });
 }
@@ -269,6 +285,7 @@ function renderSourceBreakdown() {
   const entries = Object.entries(data.bySource).sort((a, b) => b[1].total - a[1].total);
   tbody.innerHTML = entries.map(([name, s]) => {
     const pr = s.total > 0 ? (s.parseSuccess / s.total * 100).toFixed(1) : '0.0';
+    const cr = s.total > 0 ? ((s.parseClean || 0) / s.total * 100).toFixed(1) : '0.0';
     const rr = s.total > 0 ? (s.roundTrip / s.total * 100).toFixed(1) : '0.0';
     const br = s.total > 0 ? (s.box / s.total * 100).toFixed(1) : '0.0';
     const barW = (v) => Math.max(2, v * 0.8);
@@ -276,6 +293,7 @@ function renderSourceBreakdown() {
       <td><strong>${name}</strong></td>
       <td>${s.total.toLocaleString()}</td>
       <td class="bar-cell"><span class="bar bar-parse" style="width:${barW(pr)}px"></span><span class="bar-label">${pr}%</span></td>
+      <td class="bar-cell"><span class="bar bar-parse" style="width:${barW(cr)}px; opacity:0.5"></span><span class="bar-label">${cr}%</span></td>
       <td class="bar-cell"><span class="bar bar-rt" style="width:${barW(rr)}px"></span><span class="bar-label">${rr}%</span></td>
       <td class="bar-cell"><span class="bar bar-box" style="width:${barW(br)}px"></span><span class="bar-label">${br}%</span></td>
     </tr>`;
