@@ -19,7 +19,8 @@ describe('Corpus Test Suite', () => {
   });
 
   it('파싱 성공률 임계값 초과', () => {
-    expect(report.parseRate).toBeGreaterThan(80);
+    // 에러 분류 정상화 후 현실적 임계값 — 표준 미구현 명령어/환경 매칭 실패가 에러로 분류됨
+    expect(report.parseRate).toBeGreaterThan(70);
   });
 
   it('라운드트립 성공률 임계값 초과', () => {
@@ -29,7 +30,7 @@ describe('Corpus Test Suite', () => {
 
   it('퍼즈 입력에서 크래시 없음', () => {
     const fuzzCrashes = report.failures.filter(
-      (f) => f.source.startsWith('fuzz-') && f.results.parseError?.includes('crash')
+      (f) => f.source.startsWith('fuzz-') && f.results.parseErrors?.some(e => e.includes('crash'))
     );
     expect(fuzzCrashes).toHaveLength(0);
   });
@@ -73,7 +74,7 @@ describe('Corpus Test Suite', () => {
     report.failures.slice(0, 20).forEach((f, i) => {
       console.log(`  ${i + 1}. [${f.source}] ${f.latex.substring(0, 60)}${f.latex.length > 60 ? '...' : ''}`);
       console.log(`     파싱: ${f.results.parseSuccess ? 'O' : 'X'}, 라운드트립: ${f.results.roundTripSuccess ? 'O' : 'X'}, 박스: ${f.results.boxSuccess ? 'O' : 'X'}`);
-      if (f.results.parseError) console.log(`     에러: ${f.results.parseError.substring(0, 80)}`);
+      if (f.results.parseErrors) console.log(`     에러: ${f.results.parseErrors[0]?.substring(0, 80)}`);
     });
   });
 

@@ -10,6 +10,7 @@ import {
   generateId as generateLatexId, deriveId,
 } from './helpers';
 import type { MathFontStyle } from './helpers';
+import { reportError } from '../parse-errors';
 
 /** \frac{num}{den}, \dfrac, \tfrac, \cfrac */
 export const fracHandler: CommandHandler = (ctx) => {
@@ -426,6 +427,101 @@ function createBigDelimHandler(size: 'big' | 'Big' | 'bigg' | 'Bigg'): CommandHa
 const bigVariants = ['big', 'Big', 'bigg', 'Bigg'] as const;
 
 /** 기본 명령어 핸들러 레지스트리 */
+/** No-op 핸들러 — 명령어만 소비하고 아무 노드도 생성하지 않음 */
+const noopHandler: CommandHandler = (ctx) => {
+  return { nodes: [], consumed: ctx.pos };
+};
+
+/** 그룹 인자를 소비하고 버리는 핸들러 (\tag{...}, \label{...}) */
+const consumeGroupHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  if (pos < ctx.latex.length && ctx.latex[pos] === '{') {
+    pos++;
+    let depth = 1;
+    while (pos < ctx.latex.length && depth > 0) {
+      if (ctx.latex[pos] === '{') depth++;
+      else if (ctx.latex[pos] === '}') depth--;
+      pos++;
+    }
+  }
+  return { nodes: [], consumed: pos };
+};
+
+/** \color{red} — 색상값을 소비하고 이후 내용을 그대로 파싱 */
+const colorHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  // {color} 소비
+  if (pos < ctx.latex.length && ctx.latex[pos] === '{') {
+    pos++;
+    let depth = 1;
+    while (pos < ctx.latex.length && depth > 0) {
+      if (ctx.latex[pos] === '{') depth++;
+      else if (ctx.latex[pos] === '}') depth--;
+      pos++;
+    }
+  }
+  // \color는 선언형 — 이후 같은 스코프 내 내용에 적용
+  return { nodes: [], consumed: pos };
+};
+
+/** \textcolor{red}{content} — 색상값 소비 후 내용 반환 */
+const textcolorHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  // {color} 소비
+  if (pos < ctx.latex.length && ctx.latex[pos] === '{') {
+    pos++;
+    let depth = 1;
+    while (pos < ctx.latex.length && depth > 0) {
+      if (ctx.latex[pos] === '{') depth++;
+      else if (ctx.latex[pos] === '}') depth--;
+      pos++;
+    }
+  }
+  // {content} 파싱하여 반환
+  const content = ctx.parseGroup(ctx.latex, pos);
+  return { nodes: content.nodes, consumed: content.consumed };
+};
+
+/**
+ * \end{...} — 환경 매칭 실패 시 단독 출현
+ * \begin{env}에서 환경을 인식한 경우 \end는 parseBeginEnvironment 내부에서 소비된다.
+ * 여기에 도달했다면 환경이 미지원이거나 매칭에 실패한 것이다.
+ */
+const unmatchedEndHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  // \end{envname} 소비
+  let envName = 'unknown';
+  if (pos < ctx.latex.length && ctx.latex[pos] === '{') {
+    pos++;
+    const nameStart = pos;
+    while (pos < ctx.latex.length && ctx.latex[pos] !== '}') pos++;
+    envName = ctx.latex.substring(nameStart, pos);
+    if (pos < ctx.latex.length) pos++; // '}' 스킵
+  }
+  reportError('environment', `매칭되지 않은 환경 종료: \\end{${envName}}`, ctx.pos, ctx.latex, 'end');
+  return { nodes: [], consumed: pos };
+};
+
+/**
+ * \right — \left와 매칭되지 않은 단독 출현
+ * 정상적인 \left...\right 쌍에서는 leftHandler가 \right를 소비한다.
+ * 여기에 도달했다면 \left 없이 \right가 나타난 것이다.
+ */
+const unmatchedRightHandler: CommandHandler = (ctx) => {
+  let pos = ctx.pos;
+  // 뒤따르는 구분자 소비 (\right. \right) \right| 등)
+  if (pos < ctx.latex.length) {
+    if (ctx.latex[pos] === '\\') {
+      pos++;
+      while (pos < ctx.latex.length && /[a-zA-Z]/.test(ctx.latex[pos])) pos++;
+    } else {
+      pos++;
+    }
+  }
+  reportError('syntax', `매칭되지 않은 \\right`, ctx.pos, ctx.latex, 'right');
+  return { nodes: [], consumed: pos };
+};
+
 export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['frac', fracHandler],
   ['dfrac', fracHandler],
@@ -474,6 +570,38 @@ export const basicHandlers: Map<string, CommandHandler> = new Map([
   ['not', notHandler],
   ['operatorname', operatornameHandler],
   ['substack', substackHandler],
+  ['end', unmatchedEndHandler],
+  ['right', unmatchedRightHandler],
+  // ── 텍스트 박스 ──
+  ['mbox', textHandler],
+  ['hbox', textHandler],
+  ['fbox', textHandler],
+  // ── 연산자 수식어 (no-op: 렌더링 위치 제어는 향후 구현) ──
+  ['limits', noopHandler],
+  ['nolimits', noopHandler],
+  // ── 환경 제어 (no-op: 수식 번호/태그) ──
+  ['nonumber', noopHandler],
+  ['notag', noopHandler],
+  ['tag', consumeGroupHandler],
+  ['label', consumeGroupHandler],
+  // ── 폰트 선언 ──
+  ['cal', createFontDeclarationHandler('mathcal')],
+  // ── 수학 연산자 ──
+  ['mathop', operatornameHandler],
+  // ── 크기 명령어 (no-op: 크기 변경은 향후 구현) ──
+  ['tiny', noopHandler],
+  ['scriptsize', noopHandler],
+  ['footnotesize', noopHandler],
+  ['small', noopHandler],
+  ['normalsize', noopHandler],
+  ['large', noopHandler],
+  ['Large', noopHandler],
+  ['LARGE', noopHandler],
+  ['huge', noopHandler],
+  ['Huge', noopHandler],
+  // ── 색상 (색상값 소비, 내용만 반환) ──
+  ['color', colorHandler],
+  ['textcolor', textcolorHandler],
   // ── 고정 크기 구분자 ──
   ...bigVariants.flatMap(size => [
     [size, createBigDelimHandler(size)] as [string, CommandHandler],

@@ -237,6 +237,11 @@ export const bigOpHandlers: Map<string, CommandHandler> = new Map([
   ['iint', integralHandler('iint')],
   ['iiint', integralHandler('iiint')],
   ['oint', integralHandler('oint')],
+  ['iiiint', integralHandler('iiint')],  // 근사: 4중→3중 적분
+  ['oiint', integralHandler('oint')],    // 근사: 이중 윤곽→단일 윤곽
+  ['oiiint', integralHandler('oint')],   // 근사: 3중 윤곽→단일 윤곽
+  ['smallint', integralHandler('int')],  // 작은 적분→일반 적분
+  ['intop', integralHandler('int')],     // 적분 (limits 위치 기본값)
 
   // 시그마/합
   ['sum', bigOpHandler(createSum)],

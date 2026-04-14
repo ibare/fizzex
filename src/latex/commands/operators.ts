@@ -224,6 +224,16 @@ export const operatorHandlers: Map<string, CommandHandler> = new Map([
   ['rvert', operatorHandler('|')],
   ['lVert', operatorHandler('‖')],
   ['rVert', operatorHandler('‖')],
+  ['vert', operatorHandler('|')],
+  ['Vert', operatorHandler('‖')],
+
+  // ─── 추가 기호 ─────────────────────────────────────────
+  ['sharp', operatorHandler('♯')],
+  ['flat', operatorHandler('♭')],
+  ['natural', operatorHandler('♮')],
+  ['colon', operatorHandler(':')],
+  ['top', operatorHandler('⊤')],
+  ['bot', operatorHandler('⊥')],
 
   // ─── 점 기호 ───────────────────────────────────────────
   ['ldots', operatorHandler('…')],

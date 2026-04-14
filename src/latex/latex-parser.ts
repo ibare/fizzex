@@ -38,8 +38,10 @@ import {
   type ParseError,
   createErrorCollector,
   clearErrorCollector,
+  reportError,
   reportWarning,
 } from './parse-errors';
+import { isStandardUnimplemented, getPackageName } from './known-commands';
 
 /** generateId를 generateLatexId로 매핑 (하위 호환성) */
 const generateId = generateLatexId;
@@ -399,9 +401,16 @@ function parseCommand(latex: string, start: number): ParseResult {
     return parseBeginEnvironment(latex, pos);
   }
 
-  // 알 수 없는 명령어 - 경고 보고
+  // 알 수 없는 명령어 — 심각도 분류
   if (cmdName) {
-    reportWarning('unknown_command', `알 수 없는 명령어: \\${cmdName}`, start, latex, cmdName);
+    const pkgName = getPackageName(cmdName);
+    if (isStandardUnimplemented(cmdName)) {
+      reportError('unsupported', `미구현 표준 명령어: \\${cmdName}`, start, latex, cmdName);
+    } else if (pkgName) {
+      reportWarning('unsupported', `패키지 명령어: \\${cmdName} (${pkgName})`, start, latex, cmdName);
+    } else {
+      reportWarning('unknown_command', `알 수 없는 명령어: \\${cmdName}`, start, latex, cmdName);
+    }
   }
   return { nodes: [], consumed: pos };
 }
