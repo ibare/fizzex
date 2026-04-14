@@ -593,6 +593,42 @@
       "priority": 3,
       "note": "xleftarrow/xrightarrow 텍스트 좌우 패딩"
     },
+    "radicalDegreeBottomRaisePercent": {
+      "value": 0.6,
+      "unit": "ratio",
+      "sources": {
+        "tex": "Rule 11 — degree bottom raise = 60% of radical total height",
+        "opentype": "radicalDegreeBottomRaisePercent = 60",
+        "cambria": "60%"
+      },
+      "tolerance": 0.05,
+      "priority": 2,
+      "note": "\\sqrt[n]{x}에서 degree(n)의 하단이 radical 전체 높이의 60% 지점에 위치"
+    },
+    "radicalKernBeforeDegree": {
+      "value": 0.278,
+      "unit": "em",
+      "sources": {
+        "tex": "Rule 11 — 5/18 em kern before degree",
+        "opentype": "radicalKernBeforeDegree = 5/18 em",
+        "cambria": "0.278em"
+      },
+      "tolerance": 0.05,
+      "priority": 2,
+      "note": "degree 왼쪽 여백 (5/18 em)"
+    },
+    "radicalKernAfterDegree": {
+      "value": -0.556,
+      "unit": "em",
+      "sources": {
+        "tex": "Rule 11 — -10/18 em kern after degree",
+        "opentype": "radicalKernAfterDegree = -10/18 em",
+        "cambria": "-0.556em"
+      },
+      "tolerance": 0.05,
+      "priority": 2,
+      "note": "degree 오른쪽 음수 kern — radical 기호와 겹치도록 (-10/18 em)"
+    },
     "smallMatrixScale": {
       "value": 0.7,
       "unit": "ratio",
@@ -1132,7 +1168,10 @@
       ],
       "parameters_used": [
         "xi8_defaultRuleThickness",
-        "sigma5_xHeight"
+        "sigma5_xHeight",
+        "radicalDegreeBottomRaisePercent",
+        "radicalKernBeforeDegree",
+        "radicalKernAfterDegree"
       ],
       "verification_cases": [
         {

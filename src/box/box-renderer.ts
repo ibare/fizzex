@@ -6,7 +6,7 @@
  */
 
 import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox } from './types';
-import type { CanvasFontMetrics } from './font-metrics';
+import { type CanvasFontMetrics, MathConstants } from './font-metrics';
 import type { CursorPosition } from '../types';
 import { findBoxBySourceId, getCursorXPosition } from './box-layout';
 import { isComplexNodeSlot } from './constants';
@@ -395,13 +395,16 @@ export class BoxRenderer {
 
   /** Surd (제곱근) 렌더링 - √ 기호와 vinculum */
   private renderSurd(surd: SurdBox): void {
-    // 인덱스로 인한 왼쪽 오프셋 계산
-    const indexOverlap = surd.index ? Math.max(0, surd.index.width - (surd.width - surd.content.width - surd.gap) * 0.5) : 0;
-    const sqrtWidth = surd.width - surd.content.width - surd.gap - indexOverlap;
+    // degree 영역 폭 계산 (TeX kern 기반)
+    const em = surd.actualFontSize;
+    const degreeExtraWidth = surd.index
+      ? Math.max(0, em * MathConstants.radicalKernBeforeDegree + surd.index.width + em * MathConstants.radicalKernAfterDegree)
+      : 0;
+    const sqrtWidth = surd.width - surd.content.width - surd.gap - degreeExtraWidth;
     const totalHeight = surd.height + surd.depth;
     const contentTop = surd.y - surd.height + surd.ruleThickness;
     const contentRight = surd.content.x + surd.content.width;
-    const sqrtX = surd.x + indexOverlap;
+    const sqrtX = surd.x + degreeExtraWidth;
 
     const sqrtEntry = DELIMITER_PATHS['√'];
 
@@ -450,10 +453,8 @@ export class BoxRenderer {
     const vinculumWidth = contentRight + surd.gap * 0.5 - vinculumLeft;
     this.backend.fillRect(vinculumLeft, vinculumTop, vinculumWidth, surd.ruleThickness);
 
-    // 인덱스 렌더링 (√ 기호 왼쪽 위)
+    // 인덱스 렌더링 (좌표는 layoutSurd에서 설정)
     if (surd.index) {
-      surd.index.x = surd.x;
-      surd.index.y = surd.y - totalHeight * 0.6;
       this.render(surd.index);
     }
 

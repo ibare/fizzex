@@ -95,6 +95,8 @@ export interface SurdBox extends BoxBase {
   ruleThickness: number;
   /** √ 기호와 내용물 사이 간격 */
   gap: number;
+  /** 실제 폰트 크기 (em→px 변환용) */
+  actualFontSize: number;
 }
 
 /** Path Box - 경로 기반 글리프 렌더링 (베지어 커브) */

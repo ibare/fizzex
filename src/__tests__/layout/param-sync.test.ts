@@ -203,6 +203,20 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
     location: 'MathConstants.xarrowPadding',
   },
 
+  // ── radical degree ──
+  radicalDegreeBottomRaisePercent: {
+    resolve: () => MathConstants.radicalDegreeBottomRaisePercent,
+    location: 'MathConstants.radicalDegreeBottomRaisePercent',
+  },
+  radicalKernBeforeDegree: {
+    resolve: () => MathConstants.radicalKernBeforeDegree,
+    location: 'MathConstants.radicalKernBeforeDegree',
+  },
+  radicalKernAfterDegree: {
+    resolve: () => MathConstants.radicalKernAfterDegree,
+    location: 'MathConstants.radicalKernAfterDegree',
+  },
+
   // ── smallmatrix ──
   smallMatrixScale: {
     resolve: () => MathConstants.smallMatrixScale,

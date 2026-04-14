@@ -6,6 +6,7 @@
  */
 
 import type { Box, HBox, VBox, SurdBox } from './types';
+import { MathConstants } from './font-metrics';
 
 /**
  * Box 트리 레이아웃 계산
@@ -82,12 +83,25 @@ function layoutVBox(vbox: VBox): void {
  * √ 기호 오른쪽에 content 배치
  */
 function layoutSurd(surd: SurdBox): void {
-  // √ 기호 폭 계산 (surd.width - content.width - gap)
-  const sqrtWidth = surd.width - surd.content.width - surd.gap;
-
-  // content를 √ 기호 오른쪽에 배치
-  const contentX = surd.x + sqrtWidth + surd.gap;
+  // content는 surd 오른쪽 끝에 배치
+  const contentX = surd.x + surd.width - surd.content.width;
   layoutBox(surd.content, contentX, surd.y);
+
+  // index를 TeX Rule 11 기준으로 배치
+  if (surd.index) {
+    const em = surd.actualFontSize;
+    const totalHeight = surd.height + surd.depth;
+
+    // 수직: degree의 하단(bottom)이 radical bottom에서 60% 올라간 위치
+    const radicalBottom = surd.y + surd.depth;
+    const degreeBottom = radicalBottom - MathConstants.radicalDegreeBottomRaisePercent * totalHeight;
+    const indexY = degreeBottom - surd.index.depth;
+
+    // 수평: kernBefore만큼 우측 이동
+    const indexX = surd.x + em * MathConstants.radicalKernBeforeDegree;
+
+    layoutBox(surd.index, indexX, indexY);
+  }
 }
 
 /**
@@ -114,6 +128,7 @@ export function collectBoxPositions(box: Box): Map<string, { x: number; y: numbe
       }
     } else if (b.type === 'surd') {
       collect(b.content);
+      if (b.index) collect(b.index);
     }
   }
 
@@ -148,6 +163,10 @@ export function hitTest(box: Box, x: number, y: number): Box | null {
     if (hit && hit.sourceId) {
       return hit;
     }
+    if (box.index) {
+      const indexHit = hitTest(box.index, x, y);
+      if (indexHit && indexHit.sourceId) return indexHit;
+    }
   }
 
   // 자식에서 못 찾았으면 자신 반환 (sourceId가 있는 경우)
@@ -170,6 +189,10 @@ export function findBoxBySourceId(box: Box, sourceId: string): Box | null {
   } else if (box.type === 'surd') {
     const found = findBoxBySourceId(box.content, sourceId);
     if (found) return found;
+    if (box.index) {
+      const indexFound = findBoxBySourceId(box.index, sourceId);
+      if (indexFound) return indexFound;
+    }
   }
 
   return null;

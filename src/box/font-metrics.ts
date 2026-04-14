@@ -454,6 +454,14 @@ export const MathConstants = {
   overbraceGap: 0.12,
   xarrowPadding: 0.3,
   smallMatrixScale: 0.7,
+
+  // ── radical degree (Rule 11) ──
+  /** degree 하단이 radical 전체 높이의 60% 지점에 위치 */
+  radicalDegreeBottomRaisePercent: 0.6,
+  /** degree 왼쪽 여백 (5/18 em) */
+  radicalKernBeforeDegree: 0.278,
+  /** degree 오른쪽 음수 kern — radical 기호와 겹침 (-10/18 em) */
+  radicalKernAfterDegree: -0.556,
 } as const;
 
 /** MathConstants 타입 */

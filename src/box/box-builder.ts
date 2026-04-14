@@ -1998,11 +1998,15 @@ export function createSurd(
     sqrtWidth = actualFontSize * 0.6;
   }
 
-  // 인덱스가 있으면 √ 기호 왼쪽에 공간 확보
-  const indexOverlap = index ? Math.max(0, index.width - sqrtWidth * 0.5) : 0;
+  // 인덱스가 있으면 TeX kern 기반으로 공간 확보
+  // degree 영역 = kernBefore + index.width + kernAfter (음수 kern으로 √와 겹침)
+  const degreeWidth = index
+    ? actualFontSize * MathConstants.radicalKernBeforeDegree + index.width + actualFontSize * MathConstants.radicalKernAfterDegree
+    : 0;
+  const degreeExtraWidth = Math.max(0, degreeWidth);
 
   // 전체 크기 계산
-  const totalWidth = indexOverlap + sqrtWidth + content.width + gap;
+  const totalWidth = degreeExtraWidth + sqrtWidth + content.width + gap;
   const totalHeight = content.height + gap + ruleThickness;
 
   const surd: SurdBox = {
@@ -2010,6 +2014,7 @@ export function createSurd(
     content,
     ruleThickness,
     gap,
+    actualFontSize,
     width: totalWidth,
     height: totalHeight,
     depth: content.depth,
