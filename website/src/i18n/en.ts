@@ -39,7 +39,7 @@ export const en: Dictionary = {
     sub: 'From LaTeX input to interactive visualization — a clean, testable pipeline.',
     steps: {
       input: { label: 'Input', desc: 'LaTeX string or keyboard-driven editor' },
-      parse: { label: 'Parse', desc: 'Bidirectional LaTeX-AST conversion, 187+ commands' },
+      parse: { label: 'Parse', desc: 'Bidirectional LaTeX-AST conversion, 400+ commands' },
       analyze: { label: 'Analyze', desc: 'Domain detection, variable classification, feature extraction' },
       compute: { label: 'Compute', desc: 'Simplify, expand, factor, solve, differentiate, integrate' },
       visualize: { label: 'Visualize', desc: 'Function graphs, unit circles, number lines, polar plots' },
@@ -54,7 +54,7 @@ export const en: Dictionary = {
     },
     latex: {
       title: 'LaTeX Parser',
-      desc: 'Bidirectional LaTeX-AST conversion with 187+ commands. Parse, transform, and serialize back.',
+      desc: 'Bidirectional LaTeX-AST conversion with 400+ commands. Parse, transform, and serialize back.',
     },
     analysis: {
       title: 'Expression Analyzer',

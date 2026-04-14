@@ -39,7 +39,7 @@ export const ko: Dictionary = {
     sub: 'LaTeX 입력부터 인터랙티브 시각화까지 — 깔끔하고 테스트 가능한 파이프라인.',
     steps: {
       input: { label: '입력', desc: 'LaTeX 문자열 또는 키보드 기반 에디터' },
-      parse: { label: '파싱', desc: 'LaTeX-AST 양방향 변환, 187개+ 명령어' },
+      parse: { label: '파싱', desc: 'LaTeX-AST 양방향 변환, 400개+ 명령어' },
       analyze: { label: '분석', desc: '도메인 감지, 변수 분류, 특성 추출' },
       compute: { label: '연산', desc: '간소화, 전개, 인수분해, 풀이, 미분, 적분' },
       visualize: { label: '시각화', desc: '함수 그래프, 단위원, 수직선, 극좌표 그래프' },
@@ -54,7 +54,7 @@ export const ko: Dictionary = {
     },
     latex: {
       title: 'LaTeX 파서',
-      desc: '187개+ 명령어를 지원하는 LaTeX-AST 양방향 변환. 파싱, 변환, 직렬화.',
+      desc: '400개+ 명령어를 지원하는 LaTeX-AST 양방향 변환. 파싱, 변환, 직렬화.',
     },
     analysis: {
       title: '수식 분석기',
