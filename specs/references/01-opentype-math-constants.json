@@ -1,0 +1,463 @@
+{
+  "source": "OpenType MATH Table Specification v1.9.1",
+  "url": "https://learn.microsoft.com/en-us/typography/opentype/spec/math",
+  "extracted_date": "2026-04-13",
+  "constants": [
+    {
+      "name": "scriptPercentScaleDown",
+      "description": "Percentage of scaling down for level 1 superscripts and subscripts.",
+      "category": "general",
+      "data_type": "int16",
+      "typical_value": "80%",
+      "notes": "첫 번째 수준의 위첨자/아래첨자에 적용되는 축소 비율"
+    },
+    {
+      "name": "scriptScriptPercentScaleDown",
+      "description": "Percentage of scaling down for level 2 (scriptScript) superscripts and subscripts.",
+      "category": "general",
+      "data_type": "int16",
+      "typical_value": "60%",
+      "notes": "두 번째 수준(scriptScript)의 위첨자/아래첨자에 적용되는 축소 비율"
+    },
+    {
+      "name": "delimitedSubFormulaMinHeight",
+      "description": "Minimum height required for a delimited expression (contained within parentheses, etc.) to be treated as a sub-formula.",
+      "category": "delimiters",
+      "data_type": "UFWORD",
+      "typical_value": "normal line height × 1.5",
+      "notes": "괄호 등으로 감싸인 식이 하위 수식으로 처리되기 위한 최소 높이"
+    },
+    {
+      "name": "displayOperatorMinHeight",
+      "description": "Minimum height of n-ary operators (such as integral and summation) for formulas in display mode (appearing as standalone page elements, not embedded inline within text).",
+      "category": "limits",
+      "data_type": "UFWORD",
+      "typical_value": null,
+      "notes": "디스플레이 모드에서 적분, 시그마 등 n항 연산자의 최소 높이"
+    },
+    {
+      "name": "mathLeading",
+      "description": "White space to be left between math formulas to ensure proper line spacing. For applications that treat line gap as a part of line ascender, formulas with ink going above (os2.sTypoAscender + os2.sTypoLineGap - MathLeading) or below os2.sTypoDescender will result in increasing line height.",
+      "category": "general",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "수식 간 줄 간격을 확보하기 위한 여백"
+    },
+    {
+      "name": "axisHeight",
+      "description": "Axis height of the font. In math typesetting, the term axis refers to a horizontal reference line used for positioning elements in a formula. The math axis is similar to but distinct from the baseline for regular text layout. For example, a minus symbol or fraction rule would be on the axis, but a string for a variable name would be set on a baseline that is offset from the axis.",
+      "category": "general",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "수학 축 높이. 분수선, 마이너스 기호 등이 이 축 위에 놓임"
+    },
+    {
+      "name": "accentBaseHeight",
+      "description": "Maximum (ink) height of accent base that does not require raising the accents.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "x-height of the font (os2.sxHeight) plus any possible overshots",
+      "notes": "악센트를 올리지 않아도 되는 베이스의 최대 잉크 높이"
+    },
+    {
+      "name": "flattenedAccentBaseHeight",
+      "description": "Maximum (ink) height of accent base that does not require flattening the accents.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "cap height of the font (os2.sCapHeight)",
+      "notes": "악센트를 납작하게 만들지 않아도 되는 베이스의 최대 잉크 높이. 이 높이를 초과하면 'flac' 피처로 납작한 악센트 사용"
+    },
+    {
+      "name": "subscriptShiftDown",
+      "description": "The standard shift down applied to subscript elements. Positive for moving in the downward direction.",
+      "category": "subscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": "os2.ySubscriptYOffset",
+      "notes": "아래첨자의 기본 하향 이동 거리"
+    },
+    {
+      "name": "subscriptTopMax",
+      "description": "Maximum allowed height of the (ink) top of subscripts that does not require moving subscripts further down.",
+      "category": "subscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": "4/5 x-height",
+      "notes": "아래첨자 상단이 이 높이를 초과하면 더 아래로 이동시킴"
+    },
+    {
+      "name": "subscriptBaselineDropMin",
+      "description": "Minimum allowed drop of the baseline of subscripts relative to the (ink) bottom of the base. Checked for bases that are treated as a box or extended shape. Positive for subscript baseline dropped below the base bottom.",
+      "category": "subscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "박스/확장 도형으로 처리되는 베이스에서 아래첨자 베이스라인의 최소 하강 거리"
+    },
+    {
+      "name": "superscriptShiftUp",
+      "description": "Standard shift up applied to superscript elements.",
+      "category": "superscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": "os2.ySuperscriptYOffset",
+      "notes": "위첨자의 기본 상향 이동 거리"
+    },
+    {
+      "name": "superscriptShiftUpCramped",
+      "description": "Standard shift of superscripts relative to the base, in cramped style.",
+      "category": "superscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "cramped 스타일에서의 위첨자 상향 이동 거리 (일반보다 작음)"
+    },
+    {
+      "name": "superscriptBottomMin",
+      "description": "Minimum allowed height of the (ink) bottom of superscripts that does not require moving subscripts further up.",
+      "category": "superscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": "1/4 x-height",
+      "notes": "위첨자 하단의 최소 높이. 이보다 낮으면 위첨자를 더 올림"
+    },
+    {
+      "name": "superscriptBaselineDropMax",
+      "description": "Maximum allowed drop of the baseline of superscripts relative to the (ink) top of the base. Checked for bases that are treated as a box or extended shape. Positive for superscript baseline below the base top.",
+      "category": "superscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "박스/확장 도형으로 처리되는 베이스에서 위첨자 베이스라인의 최대 하강 거리"
+    },
+    {
+      "name": "subSuperscriptGapMin",
+      "description": "Minimum gap between the superscript and subscript ink.",
+      "category": "superscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": "4 × default rule thickness",
+      "notes": "위첨자와 아래첨자 잉크 사이의 최소 간격"
+    },
+    {
+      "name": "superscriptBottomMaxWithSubscript",
+      "description": "The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down.",
+      "category": "superscripts",
+      "data_type": "MathValueRecord",
+      "typical_value": "4/5 x-height",
+      "notes": "아래첨자를 내리기 전에 위첨자 하단을 올릴 수 있는 최대 수준"
+    },
+    {
+      "name": "spaceAfterScript",
+      "description": "Extra white space to be added after each subscript and superscript that occurs after a baseline element, and before each subscript and superscript that occurs before a baseline element.",
+      "category": "spacing",
+      "data_type": "MathValueRecord",
+      "typical_value": "0.5pt for 12pt font (approximately 1/24 em)",
+      "notes": "위첨자/아래첨자 뒤에 추가되는 여백"
+    },
+    {
+      "name": "upperLimitGapMin",
+      "description": "Minimum gap between the (ink) bottom of the upper limit, and the (ink) top of the base operator.",
+      "category": "limits",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "상한(upper limit)과 기저 연산자 사이의 최소 간격"
+    },
+    {
+      "name": "upperLimitBaselineRiseMin",
+      "description": "Minimum distance between baseline of upper limit and (ink) top of the base operator.",
+      "category": "limits",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "상한 베이스라인과 기저 연산자 상단 사이의 최소 거리"
+    },
+    {
+      "name": "lowerLimitGapMin",
+      "description": "Minimum gap between (ink) top of the lower limit, and (ink) bottom of the base operator.",
+      "category": "limits",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "하한(lower limit)과 기저 연산자 사이의 최소 간격"
+    },
+    {
+      "name": "lowerLimitBaselineDropMin",
+      "description": "Minimum distance between baseline of the lower limit and (ink) bottom of the base operator.",
+      "category": "limits",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "하한 베이스라인과 기저 연산자 하단 사이의 최소 거리"
+    },
+    {
+      "name": "stackTopShiftUp",
+      "description": "Standard shift up applied to the top element of a stack.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "스택(분수선 없는 분수)의 상단 요소 상향 이동 거리 (텍스트 스타일)"
+    },
+    {
+      "name": "stackTopDisplayStyleShiftUp",
+      "description": "Standard shift up applied to the top element of a stack in display style.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "디스플레이 스타일에서 스택 상단 요소의 상향 이동 거리"
+    },
+    {
+      "name": "stackBottomShiftDown",
+      "description": "Standard shift down applied to the bottom element of a stack. Positive for moving in the downward direction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "스택 하단 요소의 하향 이동 거리 (텍스트 스타일)"
+    },
+    {
+      "name": "stackBottomDisplayStyleShiftDown",
+      "description": "Standard shift down applied to the bottom element of a stack in display style. Positive for moving in the downward direction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "디스플레이 스타일에서 스택 하단 요소의 하향 이동 거리"
+    },
+    {
+      "name": "stackGapMin",
+      "description": "Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "3 × default rule thickness",
+      "notes": "스택 상단/하단 요소 사이의 최소 간격 (텍스트 스타일)"
+    },
+    {
+      "name": "stackDisplayStyleGapMin",
+      "description": "Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element in display style.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "7 × default rule thickness",
+      "notes": "디스플레이 스타일에서 스택 상단/하단 요소 사이의 최소 간격"
+    },
+    {
+      "name": "stretchStackTopShiftUp",
+      "description": "Standard shift up applied to the top element of the stretch stack.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "스트레치 스택 상단 요소의 상향 이동 거리"
+    },
+    {
+      "name": "stretchStackBottomShiftDown",
+      "description": "Standard shift down applied to the bottom element of the stretch stack. Positive for moving in the downward direction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "스트레치 스택 하단 요소의 하향 이동 거리"
+    },
+    {
+      "name": "stretchStackGapAboveMin",
+      "description": "Minimum gap between the ink of the stretched element, and the (ink) bottom of the element above.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "same value as upperLimitGapMin",
+      "notes": "스트레치 요소와 위 요소 사이의 최소 간격"
+    },
+    {
+      "name": "stretchStackGapBelowMin",
+      "description": "Minimum gap between the ink of the stretched element, and the (ink) top of the element below.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "same value as lowerLimitGapMin",
+      "notes": "스트레치 요소와 아래 요소 사이의 최소 간격"
+    },
+    {
+      "name": "fractionNumeratorShiftUp",
+      "description": "Standard shift up applied to the numerator.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "분자의 기본 상향 이동 거리 (텍스트 스타일)"
+    },
+    {
+      "name": "fractionNumeratorDisplayStyleShiftUp",
+      "description": "Standard shift up applied to the numerator in display style.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "same value as stackTopDisplayStyleShiftUp",
+      "notes": "디스플레이 스타일에서 분자의 상향 이동 거리"
+    },
+    {
+      "name": "fractionDenominatorShiftDown",
+      "description": "Standard shift down applied to the denominator. Positive for moving in the downward direction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "분모의 기본 하향 이동 거리 (텍스트 스타일)"
+    },
+    {
+      "name": "fractionDenominatorDisplayStyleShiftDown",
+      "description": "Standard shift down applied to the denominator in display style. Positive for moving in the downward direction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "same value as stackBottomDisplayStyleShiftDown",
+      "notes": "디스플레이 스타일에서 분모의 하향 이동 거리"
+    },
+    {
+      "name": "fractionNumeratorGapMin",
+      "description": "Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "분자 하단과 분수선 사이의 최소 간격 (텍스트 스타일)"
+    },
+    {
+      "name": "fractionNumDisplayStyleGapMin",
+      "description": "Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar in display style.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "3 × default rule thickness",
+      "notes": "디스플레이 스타일에서 분자 하단과 분수선 사이의 최소 간격"
+    },
+    {
+      "name": "fractionRuleThickness",
+      "description": "Thickness of the fraction bar.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "분수선의 두께"
+    },
+    {
+      "name": "fractionDenominatorGapMin",
+      "description": "Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "분모 상단과 분수선 사이의 최소 간격 (텍스트 스타일)"
+    },
+    {
+      "name": "fractionDenomDisplayStyleGapMin",
+      "description": "Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar in display style.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": "3 × default rule thickness",
+      "notes": "디스플레이 스타일에서 분모 상단과 분수선 사이의 최소 간격"
+    },
+    {
+      "name": "skewedFractionHorizontalGap",
+      "description": "Horizontal distance between the top and bottom elements of a skewed fraction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "비스듬한 분수(skewed fraction)에서 분자와 분모 사이의 수평 거리"
+    },
+    {
+      "name": "skewedFractionVerticalGap",
+      "description": "Vertical distance between the ink of the top and bottom elements of a skewed fraction.",
+      "category": "fractions",
+      "data_type": "MathValueRecord",
+      "typical_value": null,
+      "notes": "비스듬한 분수에서 분자와 분모 잉크 사이의 수직 거리"
+    },
+    {
+      "name": "overbarVerticalGap",
+      "description": "Distance between the overbar and the (ink) top of the base.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "3 × default rule thickness",
+      "notes": "윗줄(overbar)과 베이스 잉크 상단 사이의 거리"
+    },
+    {
+      "name": "overbarRuleThickness",
+      "description": "Thickness of overbar.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "윗줄의 두께"
+    },
+    {
+      "name": "overbarExtraAscender",
+      "description": "Extra white space reserved above the overbar.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "윗줄 위에 예약된 추가 여백"
+    },
+    {
+      "name": "underbarVerticalGap",
+      "description": "Distance between underbar and (ink) bottom of the base.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "3 × default rule thickness",
+      "notes": "아랫줄(underbar)과 베이스 잉크 하단 사이의 거리"
+    },
+    {
+      "name": "underbarRuleThickness",
+      "description": "Thickness of underbar.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "아랫줄의 두께"
+    },
+    {
+      "name": "underbarExtraDescender",
+      "description": "Extra white space reserved below the underbar. Always positive.",
+      "category": "accents",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "아랫줄 아래에 예약된 추가 여백"
+    },
+    {
+      "name": "radicalVerticalGap",
+      "description": "Space between the (ink) top of the expression and the bar over it.",
+      "category": "radicals",
+      "data_type": "MathValueRecord",
+      "typical_value": "1.25 × default rule thickness",
+      "notes": "근호 아래 식의 잉크 상단과 근호선 사이의 간격 (텍스트 스타일)"
+    },
+    {
+      "name": "radicalDisplayStyleVerticalGap",
+      "description": "Space between the (ink) top of the expression and the bar over it in display style.",
+      "category": "radicals",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness + 1/4 x-height",
+      "notes": "디스플레이 스타일에서 근호 아래 식의 잉크 상단과 근호선 사이의 간격"
+    },
+    {
+      "name": "radicalRuleThickness",
+      "description": "Thickness of the radical rule. This is the thickness of the rule in designed or constructed radical signs.",
+      "category": "radicals",
+      "data_type": "MathValueRecord",
+      "typical_value": "default rule thickness",
+      "notes": "근호선의 두께"
+    },
+    {
+      "name": "radicalExtraAscender",
+      "description": "Extra white space reserved above the radical.",
+      "category": "radicals",
+      "data_type": "MathValueRecord",
+      "typical_value": "same value as radicalRuleThickness",
+      "notes": "근호 위에 예약된 추가 여백"
+    },
+    {
+      "name": "radicalKernBeforeDegree",
+      "description": "Extra horizontal kern before the degree of a radical, if such is present.",
+      "category": "radicals",
+      "data_type": "MathValueRecord",
+      "typical_value": "5/18 em",
+      "notes": "근호의 차수(degree) 앞에 추가되는 수평 커닝"
+    },
+    {
+      "name": "radicalKernAfterDegree",
+      "description": "Negative kern after the degree of a radical, if such is present.",
+      "category": "radicals",
+      "data_type": "MathValueRecord",
+      "typical_value": "-10/18 em",
+      "notes": "근호의 차수 뒤에 적용되는 음수 커닝 (차수를 근호 기호 안쪽으로 이동)"
+    },
+    {
+      "name": "radicalDegreeBottomRaisePercent",
+      "description": "Height of the bottom of the radical degree, if such is present, in proportion to the height (ascender + descender) of the radical sign.",
+      "category": "radicals",
+      "data_type": "int16",
+      "typical_value": "60%",
+      "notes": "근호 차수 하단의 높이 비율 (근호 기호 전체 높이 대비)"
+    }
+  ],
+  "glyph_info_summary": "MathGlyphInfo 테이블은 글리프별 위치 정보를 제공한다. 4개의 하위 테이블로 구성: (1) MathItalicsCorrectionInfo - 기울어진 글리프의 이탤릭 보정값. 위첨자/아래첨자 위치, 연산자 한계 위치, 후행 직립 문자와의 간격 조정에 사용. (2) MathTopAccentAttachment - 수학 악센트의 수평 부착점. 베이스 글리프와 악센트의 부착점을 정렬하여 수평 위치 결정. (3) ExtendedShapeCoverage - 확장 도형(높은 괄호 등) 지정. 이 글리프 옆의 위첨자/아래첨자는 글리프 자체가 아닌 포함 하위식 기준으로 위치 결정. (4) MathKernInfo - 수학 커닝 정보. 높이에 따라 다른 커닝값을 제공하여 위첨자/아래첨자의 수평 위치를 정밀하게 조정 (4개 모서리: top-right, top-left, bottom-right, bottom-left).",
+  "variants_summary": "MathVariants 테이블은 가변 크기 글리프 구성 정보를 제공한다. 주요 구성: (1) minConnectorOverlap - 글리프 조립 시 연결 부분의 최소 겹침량. (2) 수직/수평 방향별 Coverage와 MathGlyphConstruction 테이블 배열. MathGlyphConstruction은 두 가지 방법을 제공: (a) 미리 만들어진 크기별 글리프 변형(MathGlyphVariantRecord) - 점점 큰 괄호 등, (b) GlyphAssembly - 글리프 조각들을 조립하여 임의 크기의 도형을 구성. GlyphAssembly의 각 GlyphPart는 시작/끝 연결부 길이, 전체 전진폭, 확장자(extender) 여부 플래그를 가짐. 확장자 조각은 반복 또는 생략 가능하여 대칭성을 유지하며 목표 크기에 도달.",
+  "opentype_layout_tags": {
+    "math": "수학 레이아웃용 스크립트 태그. 기본 언어 시스템만 지원",
+    "ssty": "수학 스크립트 스타일 대체 글리프. scriptPercentScaleDown/scriptScriptPercentScaleDown에 의해 크기 조정될 때 적합한 형태의 글리프를 제공. 파라미터 1=단순 첨자, 2=이중 첨자",
+    "flac": "납작한 악센트 형태. flattenedAccentBaseHeight를 초과하는 높은 베이스(대문자 등) 위에 사용. 악센트 모양만 변경하고 위치 이동은 레이아웃 엔진이 처리",
+    "dtls": "점 없는 형태. 수학 알파벳 문자(볼드 i, 이탤릭 j 등)의 점 없는 버전 제공. 악센트 부착용 베이스로 사용"
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "source": "Mathematical Typesetting: Mathematical and Scientific Typesetting Solutions from Microsoft (Cambria Math)",
+  "url": "https://learn.microsoft.com/en-us/typography/cleartype/pdfs/cambriamath.pdf",
+  "extracted_date": "2026-04-13",
+  "editors": "Ross Mills & John Hudson, with contributions by Richard Lawrence and Murray Sargent",
+  "year": 2007,
+  "sections": [
+    {
+      "topic": "Oxford Rules and Historical Context",
+      "category": "general",
+      "principles": [
+        {
+          "id": "cambria-001",
+          "rule": "수학 조판에서 간격(spacing)은 올바른 서체 선택만큼이나 중요하다",
+          "rationale": "Johnson이 수학자 패널과 함께 옥스포드 규칙을 성문화했을 때, 규칙의 절반 이상이 간격에 관한 것이었다. 올바른 서체를 고르는 것뿐 아니라 각 요소의 올바른 배치가 핵심이다.",
+          "details": "T.W. Chaundy et al.의 'The Printing of Mathematics' (1950)에 출판. 이 규칙들은 Monotype 키보드와 주조기 사용을 위해 개발됨.",
+          "related_opentype_constants": [],
+          "source_section": "Historical perspectives, p.18"
+        },
+        {
+          "id": "cambria-002",
+          "rule": "수학은 2차원 배열에 의존하는 비선형 구조이므로, 일반 텍스트 조판과 근본적으로 다른 접근이 필요하다",
+          "rationale": "수식에서는 기호의 상대적 크기와 공간적 관계가 의미를 전달한다. 수직/수평 배열, 감싸기, 내용에 따른 크기 변화 등이 수학을 가장 도전적인 조판 대상으로 만든다.",
+          "details": "수학 기호는 페이지 위로 퍼져나가고, 줄과 중괄호 주위를 돌아다니며, 베이스라인에서 뛰어오르고, 동반 요소 옆에 자리잡는다.",
+          "related_opentype_constants": [],
+          "source_section": "Introduction, p.6-7"
+        },
+        {
+          "id": "cambria-003",
+          "rule": "좋은 조판은 투명하고 독자의 이해를 조용히 돕는다",
+          "rationale": "Stanley Morison (1951): '조판은 특정 목적에 따라 인쇄 재료를 올바르게 배치하는 기술로 정의될 수 있다; 독자의 텍스트 이해를 최대한 돕도록 서체를 제어하는 것.' 수학 조판도 같은 원칙을 따른다.",
+          "details": "Alfred North Whitehead (1947): '좋은 표기법은 뇌에서 불필요한 작업을 모두 덜어주어 더 고급 문제에 집중할 수 있게 하며, 사실상 인류의 정신적 능력을 높인다.'",
+          "related_opentype_constants": [],
+          "source_section": "Historical perspectives, p.11"
+        }
+      ]
+    },
+    {
+      "topic": "Font Design for Mathematics",
+      "category": "general",
+      "principles": [
+        {
+          "id": "cambria-004",
+          "rule": "수학 전용 서체는 처음부터 수학의 필요를 고려하여 설계되어야 한다",
+          "rationale": "역사적으로 기존 서체를 확장하여 수학 기호를 추가하는 방식이었으나, Cambria Math는 처음부터 수학용으로 설계되었다. 이는 Inland Typefoundry, Oxford University Press, Monotype 등이 기존 서체를 적응시키던 전통과 대비된다.",
+          "details": "Cambria Math는 Jelle Bosma가 설계한 Cambria 패밀리의 확장으로, ClearType 화면 렌더링에 최적화. 원래 Cambria Regular의 992개 글리프에 2,900개 추가 글리프를 포함.",
+          "related_opentype_constants": [],
+          "source_section": "The Cambria Math font, p.23-25"
+        },
+        {
+          "id": "cambria-005",
+          "rule": "수학 서체의 글리프는 수학적 맥락에서의 가독성을 위해 일반 텍스트용과 다른 형태를 가져야 한다",
+          "rationale": "수학에서는 모든 개별 문자와 기호를 독립적으로 식별할 수 있어야 한다. 자연어에서는 맥락으로 보완되지만, 수학에서는 이탤릭/로만/산세리프/볼드/프락투어 등의 구분이 의미를 전달한다.",
+          "details": "Cambria Math의 이탤릭 글리프는 일반 Cambria Italic과 형태와 간격이 다르다. 수학 이탤릭 문자는 Unicode 수학 영숫자 문자로 인코딩된다.",
+          "related_opentype_constants": [],
+          "source_section": "Math input and layout, p.40; Historical perspectives, p.13"
+        }
+      ]
+    },
+    {
+      "topic": "Script Styles and Scaling",
+      "category": "scripts",
+      "principles": [
+        {
+          "id": "cambria-006",
+          "rule": "위첨자/아래첨자용 글리프는 단순 축소가 아닌 크기별 전용 디자인을 사용해야 한다",
+          "rationale": "기계적으로 축소하면 획이 가늘어지고, 내부 공간이 좁아지며, 글자 형태가 왜곡된다. 축소된 글리프는 더 굵은 획과 더 넉넉한 비율/간격이 필요하다.",
+          "details": "Microsoft 수학 폰트에서 script/script-script 변형은 원래 크기로 디자인된 후 MATH 테이블의 축소 상수에 따라 크기가 조절된다. Cambria Math의 경우 script 변형은 어센더와 캡 높이가 짧아져 인라인 수식에서 더 컴팩트하고, script-script 변형은 매우 작은 크기에서의 가독성을 위해 더 높다.",
+          "related_opentype_constants": ["scriptPercentScaleDown", "scriptScriptPercentScaleDown"],
+          "source_section": "Size-specific OpenType script-styles, p.29"
+        },
+        {
+          "id": "cambria-007",
+          "rule": "ssty OpenType 피처를 통해 크기별 글리프를 선택한다",
+          "rationale": "글리프 모양은 폰트가 제공하고, 크기 조절과 위치 이동은 수학 레이아웃 엔진이 담당한다. 역할을 분리하여 폰트 디자이너와 레이아웃 엔진이 각자의 영역을 최적화할 수 있다.",
+          "details": "ssty 피처는 열거형 룩업 타입을 사용하여 script(첫 번째 대체)과 script-script(두 번째 대체) 변형을 매핑한다. 스크립트 레벨이 올라가면(예: 위첨자의 위첨자) script-script 변형이 사용된다.",
+          "related_opentype_constants": ["scriptPercentScaleDown", "scriptScriptPercentScaleDown"],
+          "source_section": "Size-specific OpenType script-styles, p.29"
+        }
+      ]
+    },
+    {
+      "topic": "Accent Handling",
+      "category": "accents",
+      "principles": [
+        {
+          "id": "cambria-008",
+          "rule": "높은 베이스(대문자 등) 위의 악센트는 납작한 형태를 사용해야 한다",
+          "rationale": "x-height 소문자용으로 디자인된 악센트를 대문자 위에 그대로 사용하면 줄 간격이 과도하게 넓어지고, 수직으로 스택된 수식의 간격이 불균일해진다.",
+          "details": "flac OpenType 피처가 납작한 악센트 변형을 제공한다. MATH 테이블의 flattenedAccentBaseHeight 값이 납작한 악센트 적용 임계값을 결정한다. 악센트 모양만 변경하고 위치는 레이아웃 엔진이 결정한다.",
+          "related_opentype_constants": ["flattenedAccentBaseHeight", "accentBaseHeight"],
+          "source_section": "Flattened accents and dotless forms, p.30"
+        },
+        {
+          "id": "cambria-009",
+          "rule": "악센트의 수평 위치는 글리프별 부착점(accent attachment)으로 정밀하게 제어해야 한다",
+          "rationale": "글리프의 기하학적 중심과 시각적 중심이 일치하지 않는 경우가 많다. 비대칭 글리프(특히 이탤릭)에서는 단순 중앙 정렬이 악센트를 시각적으로 어긋나게 배치한다.",
+          "details": "MATH 테이블의 TopAccentAttachment가 글리프별 수평 부착점을 정의한다. 부착점이 없는 글리프는 전진폭의 기하학적 중심에 악센트를 배치한다. 이 기능은 flac/dtls 피처와 연동된다.",
+          "related_opentype_constants": [],
+          "source_section": "Accent attachment, p.36"
+        },
+        {
+          "id": "cambria-010",
+          "rule": "악센트를 놓을 때 i, j 등 점 있는 문자는 점 없는 형태(dotless form)를 사용해야 한다",
+          "rationale": "점 위에 악센트를 올리면 두 요소가 충돌하거나 시각적으로 불쾌해진다. 점 없는 형태가 악센트 부착의 베이스로 사용되어야 한다.",
+          "details": "dtls OpenType 피처가 점 없는 변형을 제공한다. 수학 볼드 i, 이탤릭 j 등 Unicode 수학 알파벳 문자의 모든 변형에 대해 점 없는 형태가 필요하다.",
+          "related_opentype_constants": [],
+          "source_section": "Flattened accents and dotless forms, p.30"
+        }
+      ]
+    },
+    {
+      "topic": "Math Kerning (Cut-ins)",
+      "category": "scripts",
+      "principles": [
+        {
+          "id": "cambria-011",
+          "rule": "위첨자/아래첨자의 수평 위치는 글리프 형태에 따른 높이별 커닝(cut-in)으로 정밀하게 조정해야 한다",
+          "rationale": "일반 텍스트 커닝은 단일 수평 값이지만, 수학에서는 글리프의 높이에 따라 다른 커닝이 필요하다. 예를 들어 기울어진 L의 상단은 돌출되지만 하단은 아니므로, 위첨자는 가까이 붙이되 아래첨자는 떨어뜨려야 한다.",
+          "details": "MATH 테이블의 MathKernInfo에서 4개 사분면(upper-left, upper-right, lower-left, lower-right)에 대해 높이별 커닝값을 정의한다. cut-in 값은 양수(가까이) 또는 음수(멀리)가 될 수 있다. 두 글리프의 cut-in이 만나면 상호작용하여 최종 간격에 영향을 준다.",
+          "related_opentype_constants": [],
+          "source_section": "Math kerning, p.33-34"
+        }
+      ]
+    },
+    {
+      "topic": "Italics Correction",
+      "category": "spacing",
+      "principles": [
+        {
+          "id": "cambria-012",
+          "rule": "이탤릭/기울어진 글리프 뒤에 직립 문자가 올 때 이탤릭 보정(italics correction)을 적용해야 한다",
+          "rationale": "기울어진 글리프의 상단이 전진폭을 넘어 돌출되어 후행 직립 문자와 너무 가깝거나 겹칠 수 있다. 이탤릭 보정값이 전진폭에 추가되어 적절한 간격을 보장한다.",
+          "details": "이탤릭 보정은 세 가지 상황에서 사용된다: (1) 기울어진 문자열 뒤에 직립 문자(구분기호, 연산자)가 올 때, (2) 위첨자/아래첨자의 수평 위치 차이 결정, (3) N항 연산자의 상한/하한 위치 결정 (상한은 보정값의 절반만큼 오른쪽, 하한은 왼쪽으로 이동).",
+          "related_opentype_constants": [],
+          "source_section": "Italics correction, p.35"
+        },
+        {
+          "id": "cambria-013",
+          "rule": "적분 기호 등 N항 연산자에서 이탤릭 보정을 통해 상한/하한의 일관된 기울기 관계를 유지해야 한다",
+          "rationale": "적분 기호가 커지면 여러 줄에 걸칠 수 있고 동적 수직 조정이 필요하므로, cut-in 기반 커닝보다 이탤릭 보정값 기반의 수평 조정이 더 유연한 메커니즘을 제공한다.",
+          "details": "상한은 이탤릭 보정값의 절반만큼 오른쪽으로, 하한은 같은 양만큼 왼쪽으로 이동. 이렇게 하면 적분 기호의 기울기와 일관된 각도가 유지된다.",
+          "related_opentype_constants": [],
+          "source_section": "Italics correction, p.35"
+        }
+      ]
+    },
+    {
+      "topic": "Variants and Assemblies",
+      "category": "delimiters",
+      "principles": [
+        {
+          "id": "cambria-014",
+          "rule": "구분기호(괄호, 중괄호 등)는 감싸는 수식의 높이에 맞게 커져야 한다",
+          "rationale": "수식의 내용물이 작으면 작은 괄호를, 분수나 행렬 등으로 높아지면 큰 괄호를 사용해야 한다. 이는 수식의 구조를 시각적으로 명확하게 한다.",
+          "details": "Cambria Math는 일부 문자에 대해 최대 8개의 크기별 변형(variant)을 제공한다. 모든 변형이 부족할 경우 조립(assembly) 방식으로 임의 크기를 구성한다.",
+          "related_opentype_constants": ["delimitedSubFormulaMinHeight"],
+          "source_section": "Variants and assemblies, p.31-32"
+        },
+        {
+          "id": "cambria-015",
+          "rule": "글리프 조립(assembly)에서 연결부(connector)의 겹침은 최소 겹침량(minConnectorOverlap) 이상이어야 한다",
+          "rationale": "반올림 오류와 힌팅 보정으로 인해 저해상도에서 조각 사이에 틈이 생길 수 있다. 겹침이 이를 보상한다.",
+          "details": "조립은 상단/하단/좌/우 조각과 중간 섹션으로 구성된다. 중간 섹션은 직선이므로 조립된 중괄호 등이 우아한 곡선을 갖지 못하지만, 매우 유연하고 크기 적응이 뛰어나다.",
+          "related_opentype_constants": [],
+          "source_section": "Variants and assemblies, p.32"
+        }
+      ]
+    },
+    {
+      "topic": "Math Objects and Spacing",
+      "category": "spacing",
+      "principles": [
+        {
+          "id": "cambria-016",
+          "rule": "수식 레이아웃에서 연산자와 수학 객체에 대한 확장된 간격 규칙을 사용해야 한다",
+          "rationale": "TeX이 사용자에게 위임하는 많은 간격 조정을 자동화하기 위해, Microsoft의 수학 핸들러는 확장된 간격 규칙 세트를 내장하고 있다.",
+          "details": "내장 수학 객체 목록: accent(1), box(1), boxed formula(1), delimiters(1), equation array(n), fraction(2), function apply(2), left subsup(3), lower limit(2), matrix(nxm), n-ary(3), operator character(1), overbar(1), phantom(1), radical(1-2), slashed fraction(2), stack(2), stretch stack(1), subscript(2), subsup(3), superscript(2), underbar(1), upper limit(2)",
+          "related_opentype_constants": ["spaceAfterScript"],
+          "source_section": "Math objects and spacing, p.44-45"
+        },
+        {
+          "id": "cambria-017",
+          "rule": "function-apply 객체를 사용하여 함수명과 인자 사이에 적절한 간격을 자동 삽입해야 한다",
+          "rationale": "sin x에서 sin과 x 사이의 간격은 일반 단어 간격과도 다르고 수학 변수 간 간격과도 다르다. 이 간격은 함수 적용이라는 의미를 시각적으로 전달해야 한다.",
+          "details": "function-apply 객체가 함수명과 인자 사이의 올바른 간격을 처리한다. 마찬가지로 N항 연산자는 n-ary 객체가 기호 주변의 간격을 처리한다.",
+          "related_opentype_constants": [],
+          "source_section": "Math objects and spacing, p.44"
+        }
+      ]
+    },
+    {
+      "topic": "TeX Relationship",
+      "category": "general",
+      "principles": [
+        {
+          "id": "cambria-018",
+          "rule": "Microsoft의 수학 레이아웃은 TeX과 MathML 2.0의 선례를 따르되, OpenType 폰트 기술에 맞게 확장한다",
+          "rationale": "TeX의 박스-글루 모델은 Monotype 기계의 물리적 작동 방식에서 영감을 받았다. Microsoft는 이 검증된 접근을 OpenType 아키텍처에 통합하여 폰트-레이아웃 엔진 간의 정보 교환을 표준화했다.",
+          "details": "TeX의 Computer Modern은 Monotype Modern Series 7과 유사하다. TeX은 상자(box)의 고정 크기가 문자의 크기를 결정하거나 그 역을 수행하며, 상자 사이의 글루(glue)가 가변적 간격을 제공한다. Microsoft는 이 원리를 유니코드 인코딩, MathML 호환, OpenType 폰트 포맷과 결합했다.",
+          "related_opentype_constants": [],
+          "source_section": "Historical perspectives, p.21-22; Math input and layout, p.40"
+        },
+        {
+          "id": "cambria-019",
+          "rule": "수학 입력은 선형 입력 언어를 통해 TeX보다 단순한 형태로 제공되어야 한다",
+          "rationale": "TeX의 입력 방식보다 단순하면서도 수학적 구조를 정확히 표현할 수 있는 입력 체계가 일반 사용자의 접근성을 높인다.",
+          "details": "수학 영역에서 /는 분수, _는 아래첨자, ^는 위첨자를 트리거한다. 공백은 피연산자 구분 역할. 예: a/(b+c) [공백]으로 분수 입력. \\alpha는 그리스 문자 등 특수 기호 입력.",
+          "related_opentype_constants": [],
+          "source_section": "The math input language, p.41-42"
+        }
+      ]
+    },
+    {
+      "topic": "Screen Rendering",
+      "category": "general",
+      "principles": [
+        {
+          "id": "cambria-020",
+          "rule": "수학 폰트는 화면 렌더링을 위해 특별히 최적화되어야 한다",
+          "rationale": "화면 해상도는 인쇄보다 훨씬 낮으며(예: 145 PPI), 픽셀 그리드의 제약이 글리프 형태에 큰 영향을 미친다. 수학 수식은 다양한 크기의 요소를 포함하므로 화면 가독성이 특히 중요하다.",
+          "details": "Cambria Math는 최초로 화면 환경에서의 고품질 수학 조판을 위해 개발된 폰트이다. ClearType 서브픽셀 렌더링을 활용하여 수평 해상도를 3배로 높이고, 폰트 힌팅으로 획 두께와 비율의 일관성을 유지한다. MATH 테이블의 device-dependent 조정값이 특정 크기에서의 커닝과 cut-in 값을 보정한다.",
+          "related_opentype_constants": [],
+          "source_section": "Cambria Math on screen, p.37-38"
+        }
+      ]
+    },
+    {
+      "topic": "Layout Handler Architecture",
+      "category": "general",
+      "principles": [
+        {
+          "id": "cambria-021",
+          "rule": "수학 레이아웃은 클라이언트 애플리케이션, 레이아웃 핸들러, 폰트 핸들러, 폰트의 4개 엔티티 간 협업으로 수행된다",
+          "rationale": "각 엔티티가 담당 영역을 분담하여 최적의 결과를 달성한다. 폰트는 글리프와 메트릭을, 레이아웃 핸들러는 배치 알고리즘을, 클라이언트는 백킹 스토어와 속성을, 폰트 핸들러는 폰트 정보 접근을 담당한다.",
+          "details": "레이아웃 핸들러는 callback 메커니즘으로 클라이언트에게 텍스트 실행 시작/종료, 글리프/치수 정보 등을 질의한다. E=mc^2 같은 간단한 수식조차 클라이언트, 핸들러, 폰트 간의 긴밀한 상호작용이 필요하다. 예: c^2의 2에 대해 폰트 핸들러가 script-level-1 글리프 변형(ssty)을 반환하고, 텍스트 크기의 약 70%로 축소한다.",
+          "related_opentype_constants": [],
+          "source_section": "An example: displaying E=mc^2, p.46-47"
+        }
+      ]
+    }
+  ]
+}

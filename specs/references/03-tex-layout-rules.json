@@ -1,0 +1,444 @@
+{
+  "source": "TeX Layout Rules (reconstructed from KaTeX/MathJax implementations and TeX by Topic)",
+  "references": [
+    "TeXbook Appendix G (Knuth, 1984)",
+    "KaTeX source code (https://github.com/KaTeX/KaTeX/tree/main/src)",
+    "TeX by Topic (Victor Eijkhout)",
+    "TeX source code (tex.web)"
+  ],
+  "extracted_date": "2026-04-13",
+  "atom_spacing_table": {
+    "description": "8x8 원자간 간격 매트릭스. 행=왼쪽 원자, 열=오른쪽 원자. TeX의 간격 코드: 0=없음, 1=thin(3mu), 2=medium(4mu), 3=thick(5mu). *=불가능(Bin→Ord 변환으로 발생하지 않음). KaTeX spacingData.ts에서 추출.",
+    "atom_types": ["ord", "op", "bin", "rel", "open", "close", "punct", "inner"],
+    "display_and_text_style": [
+      [0, 1, 2, 3, 0, 0, 0, 1],
+      [1, 1, 0, 3, 0, 0, 0, 1],
+      [2, 2, 0, 0, 2, 0, 0, 2],
+      [3, 3, 0, 0, 3, 0, 0, 3],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 2, 3, 0, 0, 0, 1],
+      [1, 1, 0, 1, 1, 1, 1, 1],
+      [1, 1, 2, 3, 1, 0, 1, 1]
+    ],
+    "script_and_scriptscript_style": [
+      [0, 1, 0, 0, 0, 0, 0, 0],
+      [1, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 0]
+    ],
+    "space_values": {
+      "0": { "name": "no space", "mu": 0, "em": "0" },
+      "1": { "name": "thin space", "mu": 3, "em": "3/18 em ≈ 0.167 em", "tex": "\\thinmuskip" },
+      "2": { "name": "medium space", "mu": 4, "em": "4/18 em ≈ 0.222 em", "tex": "\\medmuskip (4mu plus 2mu minus 4mu)" },
+      "3": { "name": "thick space", "mu": 5, "em": "5/18 em ≈ 0.278 em", "tex": "\\thickmuskip (5mu plus 5mu)" }
+    },
+    "notes": {
+      "bin_cancellation": "Bin 원자가 수식 시작, Bin/Op/Open/Punct/Rel 뒤, 또는 Close/Punct 앞에 오면 Ord로 변환된다 (TeXbook Rule 14). 변환 후 Ord 행/열의 간격이 적용된다.",
+      "script_suppression": "Script/ScriptScript 스타일에서는 대부분의 간격이 억제된다. 유지되는 것은 Ord-Op, Op-Ord, Op-Op, Close-Op, Inner-Op 사이의 thin space(3mu)뿐이다.",
+      "mu_unit": "1mu = 1/18 em. em은 현재 수학 폰트 크기 기준."
+    }
+  },
+  "math_styles": {
+    "description": "TeX의 8가지 수학 스타일과 전환 규칙",
+    "styles": [
+      { "id": 0, "name": "D", "full_name": "display_style", "size": "text_size", "cramped": false },
+      { "id": 1, "name": "D'", "full_name": "cramped_display", "size": "text_size", "cramped": true },
+      { "id": 2, "name": "T", "full_name": "text_style", "size": "text_size", "cramped": false },
+      { "id": 3, "name": "T'", "full_name": "cramped_text", "size": "text_size", "cramped": true },
+      { "id": 4, "name": "S", "full_name": "script_style", "size": "script_size", "cramped": false },
+      { "id": 5, "name": "S'", "full_name": "cramped_script", "size": "script_size", "cramped": true },
+      { "id": 6, "name": "SS", "full_name": "script_script_style", "size": "scriptscript_size", "cramped": false },
+      { "id": 7, "name": "SS'", "full_name": "cramped_scriptscript", "size": "scriptscript_size", "cramped": true }
+    ],
+    "transitions": {
+      "superscript":  [4, 5, 4, 5, 6, 7, 6, 7],
+      "subscript":    [5, 5, 5, 5, 7, 7, 7, 7],
+      "numerator":    [2, 3, 4, 5, 6, 7, 6, 7],
+      "denominator":  [3, 3, 5, 5, 7, 7, 7, 7],
+      "cramped":      [1, 1, 3, 3, 5, 5, 7, 7]
+    },
+    "transition_rules": [
+      "위첨자(sup): 한 단계 축소, 원래 cramped이면 cramped 유지",
+      "아래첨자(sub): 한 단계 축소, 항상 cramped",
+      "분자(num): 한 단계 축소, cramped 유지",
+      "분모(denom): 한 단계 축소, 항상 cramped",
+      "cramped: 같은 크기, cramped로 전환"
+    ]
+  },
+  "font_parameters": {
+    "description": "TeX fontdimen 파라미터. Family 2(수학 기호 폰트)의 sigma와 Family 3(수학 확장 폰트)의 xi. KaTeX의 fontMetrics.ts에서 추출한 값 포함.",
+    "sigma_parameters": [
+      {
+        "name": "sigma5",
+        "tex_name": "math_x_height",
+        "fontdimen": 5,
+        "family": 2,
+        "description": "소문자 x의 높이. 악센트 배치, 위첨자/아래첨자 기준점에 사용",
+        "katex_key": "xHeight",
+        "katex_values": { "text": 0.431, "script": 0.431, "scriptscript": 0.431 }
+      },
+      {
+        "name": "sigma6",
+        "tex_name": "math_quad",
+        "fontdimen": 6,
+        "family": 2,
+        "description": "쿼드 너비 (1 em = 18mu의 기준값). mu 단위 변환에 사용",
+        "katex_key": "quad",
+        "katex_values": { "text": 1.171, "script": 1.171, "scriptscript": 1.171 }
+      },
+      {
+        "name": "sigma8",
+        "tex_name": "num1",
+        "fontdimen": 8,
+        "family": 2,
+        "description": "분자 올림량 — 디스플레이 스타일, 분수선 있는 경우",
+        "katex_key": "num1",
+        "katex_values": { "text": 0.677, "script": 0.732, "scriptscript": 0.925 },
+        "usage": "Rule 15a: \\frac에서 display style 분자의 기준선 올림"
+      },
+      {
+        "name": "sigma9",
+        "tex_name": "num2",
+        "fontdimen": 9,
+        "family": 2,
+        "description": "분자 올림량 — 비디스플레이 스타일, 분수선 있는 경우",
+        "katex_key": "num2",
+        "katex_values": { "text": 0.394, "script": 0.384, "scriptscript": 0.387 },
+        "usage": "Rule 15a: \\frac에서 text/script style 분자의 기준선 올림"
+      },
+      {
+        "name": "sigma10",
+        "tex_name": "num3",
+        "fontdimen": 10,
+        "family": 2,
+        "description": "분자 올림량 — 비디스플레이 스타일, 분수선 없는 경우 (\\atop)",
+        "katex_key": "num3",
+        "katex_values": { "text": 0.444, "script": 0.471, "scriptscript": 0.504 },
+        "usage": "Rule 15a: \\atop에서 text/script style 분자의 기준선 올림"
+      },
+      {
+        "name": "sigma11",
+        "tex_name": "denom1",
+        "fontdimen": 11,
+        "family": 2,
+        "description": "분모 내림량 — 디스플레이 스타일",
+        "katex_key": "denom1",
+        "katex_values": { "text": 0.686, "script": 0.752, "scriptscript": 1.025 },
+        "usage": "Rule 15a: display style 분모의 기준선 내림"
+      },
+      {
+        "name": "sigma12",
+        "tex_name": "denom2",
+        "fontdimen": 12,
+        "family": 2,
+        "description": "분모 내림량 — 비디스플레이 스타일",
+        "katex_key": "denom2",
+        "katex_values": { "text": 0.345, "script": 0.344, "scriptscript": 0.532 },
+        "usage": "Rule 15a: text/script style 분모의 기준선 내림"
+      },
+      {
+        "name": "sigma13",
+        "tex_name": "sup1",
+        "fontdimen": 13,
+        "family": 2,
+        "description": "위첨자 올림량 — 비cramped 디스플레이 스타일",
+        "katex_key": "sup1",
+        "katex_values": { "text": 0.413, "script": 0.503, "scriptscript": 0.504 },
+        "usage": "Rule 18c: display style에서 위첨자 최소 올림"
+      },
+      {
+        "name": "sigma14",
+        "tex_name": "sup2",
+        "fontdimen": 14,
+        "family": 2,
+        "description": "위첨자 올림량 — 비cramped 비디스플레이 스타일",
+        "katex_key": "sup2",
+        "katex_values": { "text": 0.363, "script": 0.431, "scriptscript": 0.404 },
+        "usage": "Rule 18c: text style에서 위첨자 최소 올림"
+      },
+      {
+        "name": "sigma15",
+        "tex_name": "sup3",
+        "fontdimen": 15,
+        "family": 2,
+        "description": "위첨자 올림량 — cramped 스타일 (분모, 근호 내부 등)",
+        "katex_key": "sup3",
+        "katex_values": { "text": 0.289, "script": 0.286, "scriptscript": 0.294 },
+        "usage": "Rule 18c: cramped style에서 위첨자 최소 올림 (낮은 값)"
+      },
+      {
+        "name": "sigma16",
+        "tex_name": "sub1",
+        "fontdimen": 16,
+        "family": 2,
+        "description": "아래첨자 내림량 — 위첨자 없을 때",
+        "katex_key": "sub1",
+        "katex_values": { "text": 0.150, "script": 0.143, "scriptscript": 0.200 },
+        "usage": "Rule 18b: 아래첨자 단독 시 최소 내림"
+      },
+      {
+        "name": "sigma17",
+        "tex_name": "sub2",
+        "fontdimen": 17,
+        "family": 2,
+        "description": "아래첨자 내림량 — 위첨자 있을 때 (더 큰 값)",
+        "katex_key": "sub2",
+        "katex_values": { "text": 0.247, "script": 0.286, "scriptscript": 0.400 },
+        "usage": "Rule 18e: 위+아래 동시 시 아래첨자 최소 내림"
+      },
+      {
+        "name": "sigma18",
+        "tex_name": "sup_drop",
+        "fontdimen": 18,
+        "family": 2,
+        "description": "위첨자 기준선이 큰 박스(핵) 꼭대기에서 내려오는 양",
+        "katex_key": "supDrop",
+        "katex_values": { "text": 0.386, "script": 0.353, "scriptscript": 0.494 },
+        "usage": "Rule 18a: 초기 shift_up = base.height - sup_drop"
+      },
+      {
+        "name": "sigma19",
+        "tex_name": "sub_drop",
+        "fontdimen": 19,
+        "family": 2,
+        "description": "아래첨자 기준선이 큰 박스(핵) 바닥에서 더 내려가는 양",
+        "katex_key": "subDrop",
+        "katex_values": { "text": 0.050, "script": 0.071, "scriptscript": 0.100 },
+        "usage": "Rule 18a: 초기 shift_down = base.depth + sub_drop"
+      },
+      {
+        "name": "sigma20",
+        "tex_name": "delim1",
+        "fontdimen": 20,
+        "family": 2,
+        "description": "구분자(delimiter) 최소 크기 — 디스플레이 스타일 분수",
+        "katex_key": "delim1",
+        "katex_values": { "text": 2.390, "script": 1.700, "scriptscript": 1.980 },
+        "usage": "Rule 15e: display \\frac 구분자 크기"
+      },
+      {
+        "name": "sigma21",
+        "tex_name": "delim2",
+        "fontdimen": 21,
+        "family": 2,
+        "description": "구분자(delimiter) 최소 크기 — 비디스플레이 스타일 분수",
+        "katex_key": "delim2",
+        "katex_values": { "text": 1.010, "script": 1.157, "scriptscript": 1.420 },
+        "usage": "Rule 15e: text \\frac 구분자 크기"
+      },
+      {
+        "name": "sigma22",
+        "tex_name": "axis_height",
+        "fontdimen": 22,
+        "family": 2,
+        "description": "수학 축 높이 — 분수선, 큰 연산자, 구분자의 수직 중심 기준",
+        "katex_key": "axisHeight",
+        "katex_values": { "text": 0.250, "script": 0.250, "scriptscript": 0.250 },
+        "usage": "분수선을 축에 중심 배치, 구분자 수직 중심 정렬"
+      }
+    ],
+    "xi_parameters": [
+      {
+        "name": "xi8",
+        "tex_name": "default_rule_thickness",
+        "fontdimen": 8,
+        "family": 3,
+        "description": "기본 선 두께 — 분수선, \\overline, \\underline, 근호선에 사용",
+        "katex_key": "defaultRuleThickness",
+        "katex_values": { "text": 0.04, "script": 0.049, "scriptscript": 0.049 },
+        "usage": "Rule 11, 15: 분수선 두께, 근호 내 여유 간격 기준"
+      },
+      {
+        "name": "xi9",
+        "tex_name": "big_op_spacing1",
+        "fontdimen": 9,
+        "family": 3,
+        "description": "큰 연산자 위 상한(limit)과의 최소 간격",
+        "katex_key": "bigOpSpacing1",
+        "katex_values": { "text": 0.111, "script": 0.111, "scriptscript": 0.111 }
+      },
+      {
+        "name": "xi10",
+        "tex_name": "big_op_spacing2",
+        "fontdimen": 10,
+        "family": 3,
+        "description": "큰 연산자 아래 하한(limit)과의 최소 간격",
+        "katex_key": "bigOpSpacing2",
+        "katex_values": { "text": 0.166, "script": 0.166, "scriptscript": 0.166 }
+      },
+      {
+        "name": "xi11",
+        "tex_name": "big_op_spacing3",
+        "fontdimen": 11,
+        "family": 3,
+        "description": "큰 연산자와 상한 사이 최소 기준선 거리",
+        "katex_key": "bigOpSpacing3",
+        "katex_values": { "text": 0.200, "script": 0.200, "scriptscript": 0.200 }
+      },
+      {
+        "name": "xi12",
+        "tex_name": "big_op_spacing4",
+        "fontdimen": 12,
+        "family": 3,
+        "description": "큰 연산자와 하한 사이 최소 기준선 거리",
+        "katex_key": "bigOpSpacing4",
+        "katex_values": { "text": 0.600, "script": 0.600, "scriptscript": 0.600 }
+      },
+      {
+        "name": "xi13",
+        "tex_name": "big_op_spacing5",
+        "fontdimen": 13,
+        "family": 3,
+        "description": "디스플레이 상한/하한 위아래 여백(padding)",
+        "katex_key": "bigOpSpacing5",
+        "katex_values": { "text": 0.100, "script": 0.100, "scriptscript": 0.100 }
+      }
+    ]
+  },
+  "layout_rules": [
+    {
+      "id": "tex-rule-001",
+      "rule_number": "Rules 1-4 (Atom Spacing)",
+      "category": "spacing",
+      "description": "인접 원자 사이의 간격을 8x8 매트릭스에서 조회한다. 8종 원자: Ord, Op, Bin, Rel, Open, Close, Punct, Inner.",
+      "algorithm": "1. 왼쪽/오른쪽 원자 타입 결정\n2. Bin 취소 규칙 적용 (Bin이 수식 시작, Bin/Op/Open/Punct/Rel 뒤, Close/Punct 앞에 오면 Ord로 변환)\n3. 현재 스타일이 Script/ScriptScript이면 tightSpacings 테이블, 아니면 spacings 테이블 참조\n4. 해당 mu값의 glue를 삽입 (1em = 18mu)",
+      "tex_parameters": ["thinmuskip (3mu)", "medmuskip (4mu plus 2mu minus 4mu)", "thickmuskip (5mu plus 5mu)"],
+      "katex_implementation": "src/spacingData.ts (spacings, tightSpacings), src/buildHTML.ts (간격 삽입 루프)",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-002",
+      "rule_number": "Rule 13 (Op with Limits)",
+      "category": "limits",
+      "description": "큰 연산자(Op)의 상한/하한 배치. Display style에서 limits 위치, text style에서 scripts 위치.",
+      "algorithm": "1. Display style이고 \\limits 모드이면:\n   - 상한: shift_up = max(big_op_spacing3 - depth(upper), big_op_spacing1)\n   - 하한: shift_down = max(big_op_spacing4 - height(lower), big_op_spacing2)\n   - 위아래에 big_op_spacing5 여백 추가\n2. Text style이거나 \\nolimits이면: 위첨자/아래첨자로 처리 (Rule 18)",
+      "tex_parameters": ["xi9 (big_op_spacing1)", "xi10 (big_op_spacing2)", "xi11 (big_op_spacing3)", "xi12 (big_op_spacing4)", "xi13 (big_op_spacing5)"],
+      "katex_implementation": "src/functions/op.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-003",
+      "rule_number": "Rule 11 (Radical)",
+      "category": "radicals",
+      "description": "근호(√) 레이아웃. 내용물은 cramped style로 렌더링하며, 내용물과 근호선 사이의 여유 간격을 계산한다.",
+      "algorithm": "1. 내용물을 cramped_style(cur_style)로 렌더링\n2. theta = default_rule_thickness (xi8)\n3. Display style이면: phi = math_x_height (sigma5)\n   아니면: phi = theta\n4. lineClearance = theta + phi/4\n   - Display: 0.04 + 0.431/4 ≈ 0.148 em\n   - Text: 0.04 + 0.04/4 = 0.05 em\n5. minHeight = inner.height + inner.depth + lineClearance + theta\n6. 근호 기호 선택 (small → large → stack)\n7. 기호가 필요 이상 크면: 초과분의 절반을 lineClearance에 추가",
+      "tex_parameters": ["xi8 (default_rule_thickness)", "sigma5 (math_x_height)"],
+      "katex_implementation": "src/functions/sqrt.ts, src/delimiter.ts (makeSqrtImage)",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-004",
+      "rule_number": "Rule 11 (Radical - nth root)",
+      "category": "radicals",
+      "description": "n차 근호의 차수(degree) 위치 결정",
+      "algorithm": "1. 차수를 SCRIPTSCRIPT 스타일로 렌더링\n2. 수직 이동 = 0.6 * (body.height - body.depth)\n3. 차수를 근호 기호 왼쪽 위에 배치",
+      "tex_parameters": [],
+      "katex_implementation": "src/functions/sqrt.ts (rootm 부분)",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-005",
+      "rule_number": "Rule 12 (Accent)",
+      "category": "accents",
+      "description": "수학 악센트의 수평/수직 배치. 내용물은 cramped style.",
+      "algorithm": "1. 내용물을 cramped_style(cur_style)로 렌더링\n2. 수평 위치: skew = 핵(단일 문자)의 skew 값 (폰트 메트릭에서)\n   - 오프셋 = skew - accent_width/2\n3. 수직 간격: clearance = min(body.height, math_x_height)\n   - 내용물이 x-height보다 높아도 악센트는 x-height까지만 내려옴\n4. VList 구성: body → 음수 kern (-clearance) → accent",
+      "tex_parameters": ["sigma5 (math_x_height)", "skew (per-glyph)"],
+      "katex_implementation": "src/functions/accent.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-006",
+      "rule_number": "Rule 15a-d (Fraction with rule)",
+      "category": "fractions",
+      "description": "분수선이 있는 분수(\\frac, \\over)의 레이아웃",
+      "algorithm": "1. 분자: num_style(cur_style), 분모: denom_style(cur_style)\n2. 분수선 두께 = default_rule_thickness (xi8) 또는 명시적 값\n3. 초기 시프트:\n   - Display: numShift=num1(sigma8), denomShift=denom1(sigma11)\n   - Text: numShift=num2(sigma9), denomShift=denom2(sigma12)\n4. 최소 여유 (분자/분모와 분수선 사이):\n   - Display: clearance = 3 * ruleThickness\n   - Text: clearance = ruleThickness\n5. 분수선은 axis_height(sigma22)에 중심 정렬\n6. 분자쪽 간격 부족하면 numShift 증가\n7. 분모쪽 간격 부족하면 denomShift 증가",
+      "tex_parameters": ["sigma8 (num1)", "sigma9 (num2)", "sigma11 (denom1)", "sigma12 (denom2)", "sigma22 (axis_height)", "xi8 (default_rule_thickness)"],
+      "katex_implementation": "src/functions/genfrac.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-007",
+      "rule_number": "Rule 15a-c (Stack / no rule)",
+      "category": "fractions",
+      "description": "분수선이 없는 분수(\\atop, \\binom)의 레이아웃",
+      "algorithm": "1. 분자: num_style, 분모: denom_style\n2. 분수선 두께 = 0, ruleSpacing = default_rule_thickness\n3. 초기 시프트:\n   - Display: numShift=num1(sigma8), denomShift=denom1(sigma11)\n   - Text: numShift=num3(sigma10), denomShift=denom2(sigma12)\n4. 최소 여유 (분자 하단과 분모 상단 사이):\n   - Display: clearance = 7 * ruleSpacing\n   - Text: clearance = 3 * ruleSpacing\n5. 간격 부족하면 분자/분모를 균등하게 벌림: 각각 (부족분)/2 추가",
+      "tex_parameters": ["sigma8 (num1)", "sigma10 (num3)", "sigma11 (denom1)", "sigma12 (denom2)", "xi8 (default_rule_thickness)"],
+      "katex_implementation": "src/functions/genfrac.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-008",
+      "rule_number": "Rule 18a,c,d (Superscript only)",
+      "category": "scripts",
+      "description": "위첨자만 있는 경우의 수직 위치 결정",
+      "algorithm": "1. 위첨자를 sup_style(cur_style)로 렌더링\n2. 초기 shift_up = base.height - sup_drop(sigma18) (비문자 핵일 때)\n3. 최소 올림 결정:\n   - Display 비cramped: min = sup1 (sigma13)\n   - Text 비cramped: min = sup2 (sigma14)\n   - Cramped: min = sup3 (sigma15)\n4. shift_up = max(shift_up, min, sup.depth + xHeight/4)\n   - 마지막 조건: 위첨자 하단이 x-height의 1/4 아래로 내려가지 않도록\n5. scriptspace(0.5pt) 오른쪽 여백 추가",
+      "tex_parameters": ["sigma13 (sup1)", "sigma14 (sup2)", "sigma15 (sup3)", "sigma18 (sup_drop)", "sigma5 (math_x_height)"],
+      "katex_implementation": "src/functions/supsub.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-009",
+      "rule_number": "Rule 18a,b (Subscript only)",
+      "category": "scripts",
+      "description": "아래첨자만 있는 경우의 수직 위치 결정",
+      "algorithm": "1. 아래첨자를 sub_style(cur_style)로 렌더링 (항상 cramped)\n2. 초기 shift_down = base.depth + sub_drop(sigma19)\n3. shift_down = max(shift_down, sub1(sigma16), sub.height - 4/5 * xHeight)\n   - 아래첨자 상단이 x-height의 4/5 위로 올라가지 않도록\n4. 이탤릭 보정: base가 단일 기호이면 아래첨자를 italic_correction만큼 왼쪽 이동\n5. scriptspace(0.5pt) 오른쪽 여백 추가",
+      "tex_parameters": ["sigma16 (sub1)", "sigma19 (sub_drop)", "sigma5 (math_x_height)"],
+      "katex_implementation": "src/functions/supsub.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-010",
+      "rule_number": "Rule 18e (Superscript + Subscript)",
+      "category": "scripts",
+      "description": "위첨자와 아래첨자가 동시에 있는 경우의 수직 위치 결정",
+      "algorithm": "1. 각각 sup_style, sub_style로 렌더링\n2. 위첨자 shift_up = max(Rule 18c/d 결과)\n3. 아래첨자 shift_down = max(sub2(sigma17), ...)\n   - sub1이 아닌 sub2 사용 (더 큰 값)\n4. 최소 간격 검사: 위첨자 하단 - 아래첨자 상단 ≥ 4 * defaultRuleThickness\n   - 부족하면 아래첨자를 더 내림\n5. 추가 보정: 위첨자 하단이 xHeight의 4/5 이상 유지\n   - psi = 0.8*xHeight - (shift_up - sup.depth)\n   - psi > 0이면: shift_up += psi, shift_down -= psi",
+      "tex_parameters": ["sigma17 (sub2)", "xi8 (default_rule_thickness)", "sigma5 (math_x_height)"],
+      "katex_implementation": "src/functions/supsub.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-011",
+      "rule_number": "Delimiter Sizing (\\left/\\right)",
+      "category": "delimiters",
+      "description": "\\left/\\right 구분자의 자동 크기 결정",
+      "algorithm": "1. 내용물의 height, depth 측정\n2. maxDistFromAxis = max(height - axisHeight, depth + axisHeight)\n3. totalHeight = max(\n     maxDistFromAxis / 500 * delimiterFactor,\n     2 * maxDistFromAxis - delimiterExtend\n   )\n   - delimiterFactor = 901 (TeX의 \\delimiterfactor)\n   - delimiterExtend = 5.0 / ptPerEm ≈ 0.5em (TeX의 \\delimitershortfall)\n4. 3단계 구분자 시퀀스 순회: small → large(1-4) → stack\n   - 각 단계에서 heightDepth > totalHeight이면 해당 크기 선택\n5. 축(axis_height) 기준 수직 중앙 정렬",
+      "tex_parameters": ["sigma22 (axis_height)", "\\delimiterfactor (901)", "\\delimitershortfall (5pt)"],
+      "katex_implementation": "src/delimiter.ts (makeLeftRightDelim, traverseSequence)",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-012",
+      "rule_number": "Stacked Delimiter Construction",
+      "category": "delimiters",
+      "description": "가장 큰 미리 디자인된 구분자보다 더 큰 크기가 필요할 때의 조립식 구분자",
+      "algorithm": "1. 부품: top, bottom, middle(선택), repeat(extender)\n2. minHeight = top + bottom + middle\n3. repeatCount = ceil((targetHeight - minHeight) / (middleFactor * repeatHeight))\n   - middle이 있으면 middleFactor=2 (위아래 대칭 반복)\n4. 부품 사이 0.008em 겹침(lap)으로 이음새 방지\n5. depth = totalHeight/2 - axisHeight (축 중심 배치)",
+      "tex_parameters": ["sigma22 (axis_height)"],
+      "katex_implementation": "src/delimiter.ts (makeStackedDelim)",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-013",
+      "rule_number": "Overline / Underline",
+      "category": "accents",
+      "description": "\\overline, \\underline의 레이아웃",
+      "algorithm": "1. 내용물을 cramped_style(cur_style)로 렌더링\n2. 선 두께 = default_rule_thickness (xi8)\n3. 내용물과 선 사이 간격 = 3 * default_rule_thickness\n4. 선 위 여백 = default_rule_thickness\n5. \\overline: 선이 위에, \\underline: 선이 아래에",
+      "tex_parameters": ["xi8 (default_rule_thickness)"],
+      "katex_implementation": "src/functions/overline.ts, src/functions/underline.ts",
+      "fizzex_mapping": null
+    },
+    {
+      "id": "tex-rule-014",
+      "rule_number": "Explicit Delimiter Sizes",
+      "category": "delimiters",
+      "description": "\\big, \\Big, \\bigg, \\Bigg 등 명시적 크기 구분자",
+      "algorithm": "sizeToMaxHeight = [0, 1.2, 1.8, 2.4, 3.0] (em)\n- \\big = size 1 = 최대 1.2em\n- \\Big = size 2 = 최대 1.8em\n- \\bigg = size 3 = 최대 2.4em\n- \\Bigg = size 4 = 최대 3.0em\n각 크기에서 해당 높이를 target으로 구분자 선택",
+      "tex_parameters": [],
+      "katex_implementation": "src/functions/delimsizing.ts, src/delimiter.ts (sizeToMaxHeight)",
+      "fizzex_mapping": null
+    }
+  ]
+}

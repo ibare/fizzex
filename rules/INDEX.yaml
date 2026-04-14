@@ -59,3 +59,10 @@ concerns:
     triggers:
       paths: ["package.json"]
       patterns: ["exports", "peerDependencies", "peerDependenciesMeta"]
+
+  - id: C7
+    file: concerns/C7-spec-first.md
+    description: Spec-First 레이아웃 파라미터 규칙 (spec.json → MathConstants → param-sync 파이프라인)
+    triggers:
+      paths: ["src/box/font-metrics.ts", "src/box/box-builder.ts", "src/box/box-layout.ts", "src/box/ast-to-box.ts", "specs/**"]
+      patterns: ["MathConstants", "fizzex-layout-spec"]
