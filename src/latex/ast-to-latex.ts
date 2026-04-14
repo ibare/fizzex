@@ -270,50 +270,109 @@ function getBmatrixEnv(bracketType: '(' | '[' | '{' | '|' | '‖' | 'none'): str
   }
 }
 
+/** 유니코드 변수 → LaTeX 역매핑 (greek.ts + operators.ts의 variableHandler 기반) */
+const VARIABLE_REVERSE_MAP: Record<string, string> = {
+  // 소문자 그리스 문자
+  'α': '\\alpha', 'β': '\\beta', 'γ': '\\gamma', 'δ': '\\delta',
+  'ϵ': '\\epsilon', 'ε': '\\varepsilon', 'ζ': '\\zeta', 'η': '\\eta',
+  'θ': '\\theta', 'ϑ': '\\vartheta', 'ι': '\\iota', 'κ': '\\kappa',
+  'λ': '\\lambda', 'μ': '\\mu', 'ν': '\\nu', 'ξ': '\\xi',
+  'π': '\\pi', 'ϖ': '\\varpi', 'ρ': '\\rho', 'ϱ': '\\varrho',
+  'σ': '\\sigma', 'ς': '\\varsigma', 'τ': '\\tau', 'υ': '\\upsilon',
+  'ϕ': '\\phi', 'φ': '\\varphi', 'χ': '\\chi', 'ψ': '\\psi', 'ω': '\\omega',
+  // 대문자 그리스 문자
+  'Γ': '\\Gamma', 'Δ': '\\Delta', 'Θ': '\\Theta', 'Λ': '\\Lambda',
+  'Ξ': '\\Xi', 'Π': '\\Pi', 'Σ': '\\Sigma', 'Υ': '\\Upsilon',
+  'Φ': '\\Phi', 'Ψ': '\\Psi', 'Ω': '\\Omega',
+  // 확장 그리스 / 히브리
+  'ϝ': '\\digamma', 'ϰ': '\\varkappa',
+  'ℶ': '\\beth', 'ℷ': '\\gimel', 'ℸ': '\\daleth',
+  // 기타 기호 (operators.ts에서 variableHandler로 등록된 것)
+  '∞': '\\infty', '∂': '\\partial', '∇': '\\nabla', '′': '\\prime',
+  '\uE000': '\\emptyset', '∅': '\\varnothing',
+  '∠': '\\angle', '∡': '\\measuredangle', '∖': '\\backslash',
+  'ℵ': '\\aleph', '℘': '\\wp', 'ℜ': '\\Re', 'ℑ': '\\Im',
+  'ℓ': '\\ell', 'ℏ': '\\hbar',
+  '\u{1D6A4}': '\\imath', '\u{1D6A5}': '\\jmath',
+  '♣': '\\clubsuit', '♢': '\\diamondsuit', '♡': '\\heartsuit', '♠': '\\spadesuit',
+  '△': '\\triangle', '□': '\\square',
+};
+
 /** 변수를 LaTeX로 변환 */
 function convertVariable(name: string): string {
-  const greekMap: Record<string, string> = {
-    'α': '\\alpha',
-    'β': '\\beta',
-    'γ': '\\gamma',
-    'δ': '\\delta',
-    'θ': '\\theta',
-    'π': '\\pi',
-    'σ': '\\sigma',
-    'ω': '\\omega',
-  };
-
-  return greekMap[name] || name;
+  return VARIABLE_REVERSE_MAP[name] || name;
 }
+
+/** 유니코드 연산자 → LaTeX 역매핑 (operators.ts의 operatorHandler 기반) */
+const OPERATOR_REVERSE_MAP: Record<string, string> = {
+  // 기본 연산자
+  '×': '\\times', '÷': '\\div', '·': '\\cdot', '±': '\\pm', '∓': '\\mp',
+  '∗': '\\ast', '⋆': '\\star', '∘': '\\circ', '•': '\\bullet', '⋄': '\\diamond',
+  '⊕': '\\oplus', '⊖': '\\ominus', '⊗': '\\otimes', '⊘': '\\oslash', '⊙': '\\odot', '○': '\\bigcirc',
+  '†': '\\dagger', '‡': '\\ddagger',
+  '∨': '\\vee', '∧': '\\wedge', '⊓': '\\sqcap', '⊔': '\\sqcup', '⊎': '\\uplus',
+  '◁': '\\triangleleft', '▷': '\\triangleright', '▽': '\\bigtriangledown',
+  '⨿': '\\amalg', '≀': '\\wr',
+  '⊲': '\\lhd', '⊳': '\\rhd', '⊴': '\\unlhd', '⊵': '\\unrhd',
+  // 관계 연산자
+  '≠': '\\neq', '≤': '\\leq', '≥': '\\geq', '⩽': '\\leqslant', '⩾': '\\geqslant',
+  '≪': '\\ll', '≫': '\\gg', '≡': '\\equiv', '∼': '\\sim', '≃': '\\simeq',
+  '≈': '\\approx', '≅': '\\cong', '≐': '\\doteq', '∝': '\\propto', '≍': '\\asymp',
+  '≺': '\\prec', '≻': '\\succ', '⪯': '\\preceq', '⪰': '\\succeq',
+  '⋈': '\\bowtie', '⌣': '\\smile', '⌢': '\\frown',
+  // 집합 연산자
+  '∈': '\\in', '∋': '\\ni', '∉': '\\notin',
+  '⊂': '\\subset', '⊃': '\\supset', '⊆': '\\subseteq', '⊇': '\\supseteq',
+  '⊑': '\\sqsubseteq', '⊒': '\\sqsupseteq',
+  '∪': '\\cup', '∩': '\\cap',
+  '⊢': '\\vdash', '⊣': '\\dashv', '⊨': '\\models',
+  // 부정 관계 연산자
+  '≮': '\\nless', '≯': '\\ngtr', '≰': '\\nleq', '≱': '\\ngeq',
+  '⊀': '\\nprec', '⊁': '\\nsucc', '⋠': '\\npreceq', '⋡': '\\nsucceq',
+  '⊈': '\\nsubseteq', '⊉': '\\nsupseteq', '⊊': '\\subsetneq', '⊋': '\\supsetneq',
+  '∤': '\\nmid', '∦': '\\nparallel',
+  '⊬': '\\nvdash', '⊮': '\\nVdash', '⊭': '\\nvDash', '⊯': '\\nVDash',
+  '⋪': '\\ntriangleleft', '⋫': '\\ntriangleright', '⋬': '\\ntrianglelefteq', '⋭': '\\ntrianglerighteq',
+  '≇': '\\ncong', '≁': '\\nsim',
+  // 논리 연산자
+  '¬': '\\neg', '∀': '\\forall', '∃': '\\exists', '∄': '\\nexists',
+  // 화살표
+  '→': '\\to', '←': '\\leftarrow', '↔': '\\leftrightarrow',
+  '⇒': '\\Rightarrow', '⇐': '\\Leftarrow', '⇔': '\\Leftrightarrow',
+  '⟹': '\\implies', '⟺': '\\iff', '↦': '\\mapsto',
+  '↑': '\\uparrow', '↓': '\\downarrow',
+  '⟵': '\\longleftarrow', '⟶': '\\longrightarrow', '⟷': '\\longleftrightarrow',
+  '⟸': '\\Longleftarrow', '⟼': '\\longmapsto',
+  '↕': '\\updownarrow', '⇑': '\\Uparrow', '⇓': '\\Downarrow', '⇕': '\\Updownarrow',
+  '↗': '\\nearrow', '↘': '\\searrow', '↙': '\\swarrow', '↖': '\\nwarrow',
+  '↪': '\\hookrightarrow', '↩': '\\hookleftarrow',
+  '⇀': '\\rightharpoonup', '⇁': '\\rightharpoondown',
+  '↼': '\\leftharpoonup', '↽': '\\leftharpoondown',
+  '⇌': '\\rightleftharpoons', '⇋': '\\leftrightharpoons',
+  '⇢': '\\dashrightarrow', '⇠': '\\dashleftarrow',
+  '↠': '\\twoheadrightarrow', '↞': '\\twoheadleftarrow',
+  '↣': '\\rightarrowtail', '↢': '\\leftarrowtail',
+  '⇝': '\\rightsquigarrow', '↭': '\\leftrightsquigarrow',
+  '↶': '\\curvearrowleft', '↷': '\\curvearrowright',
+  '↺': '\\circlearrowleft', '↻': '\\circlearrowright',
+  '↰': '\\Lsh', '↱': '\\Rsh',
+  // 기타 기호 (operatorHandler)
+  '⊥': '\\perp', '∥': '\\parallel', '∣': '\\mid',
+  // 구분자 (standalone)
+  '⟨': '\\langle', '⟩': '\\rangle',
+  '⌈': '\\lceil', '⌉': '\\rceil', '⌊': '\\lfloor', '⌋': '\\rfloor',
+  '‖': '\\|',
+  // 점 기호
+  '…': '\\ldots', '⋯': '\\cdots', '⋮': '\\vdots', '⋱': '\\ddots',
+};
 
 /** 연산자를 LaTeX로 변환 */
 function convertOperator(op: string): string {
-  switch (op) {
-    case '×':
-      return ' \\times ';
-    case '÷':
-      return ' \\div ';
-    case '·':
-      return ' \\cdot ';
-    case '+':
-      return ' + ';
-    case '-':
-      return ' - ';
-    case '=':
-      return ' = ';
-    case '<':
-      return ' < ';
-    case '>':
-      return ' > ';
-    case '≤':
-      return ' \\leq ';
-    case '≥':
-      return ' \\geq ';
-    case '≠':
-      return ' \\neq ';
-    default:
-      return ` ${op} `;
-  }
+  // 기본 산술/비교 연산자는 양쪽에 공백
+  if ('+-=<>'.includes(op)) return ` ${op} `;
+  const mapped = OPERATOR_REVERSE_MAP[op];
+  if (mapped) return ` ${mapped} `;
+  return ` ${op} `;
 }
 
 /** 필요시 중괄호로 감싸기 */
