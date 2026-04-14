@@ -1,0 +1,6008 @@
+{
+  "source": "MathBridge (Textbook-level)",
+  "license": "MIT",
+  "total_available": 98961,
+  "sampled": 1000,
+  "formulas": [
+    {
+      "id": "textbook-0000",
+      "latex": "T_ { 3 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0001",
+      "latex": "d\\ge 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0002",
+      "latex": "A \\in \\mathcal { T }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0003",
+      "latex": "\\tilde { c } _1 , \\tilde { c } _2 , \\tilde { c } _3",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0004",
+      "latex": "\\theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0005",
+      "latex": "Mat_ { M|N }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0006",
+      "latex": "X ( \\bi )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0007",
+      "latex": "I_i^ { \\text { LCS } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0008",
+      "latex": "\\overset { D } { \\sim }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0009",
+      "latex": "\\psi_N\\grad\\cdot ( X\\varphi ) \\to\\grad\\cdot ( X\\varphi )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0010",
+      "latex": "\\Lambda_N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0011",
+      "latex": "\\chi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0012",
+      "latex": "\\nu",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0013",
+      "latex": "z\\in X",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0014",
+      "latex": "\\phi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0015",
+      "latex": "L^2 ( X , m )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0016",
+      "latex": "A_0^t ( -\\psi , \\psi )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0017",
+      "latex": "p_t",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0018",
+      "latex": "\\theta_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0019",
+      "latex": "\\mathcal { O } ( \\alpha_s )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0020",
+      "latex": "\\mathcal { T }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0021",
+      "latex": "\\rho \\le \\frac12 \\epsilon^ { -\\sigma_1 }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0022",
+      "latex": "i_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0023",
+      "latex": "|\\Gamma^ { \\prime } |=v",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0024",
+      "latex": "A_ { \\omega k }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0025",
+      "latex": "K_2 ( d ) =\\Proj [ \\Psi_ { x , d } [ U_2 ] \\cap Q_2 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0026",
+      "latex": "-\\phi_ { ddN }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0027",
+      "latex": "T_1 , T_2 , T_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0028",
+      "latex": "S \\in \\mathcal { F }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0029",
+      "latex": "\\tau_ { x } < \\tau_ { B^ { 2 } _ { N_ { 1 } } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0030",
+      "latex": "D ( Q ) \\cap C_c ( X )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0031",
+      "latex": "\\widehat { \\bP } _i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0032",
+      "latex": "be a",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0033",
+      "latex": "\\bf { 67.5\\pm0.1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0034",
+      "latex": "Y_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0035",
+      "latex": "( H^\\pm\\to cb )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0036",
+      "latex": "U_\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0037",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0038",
+      "latex": "f_n \\in D ( Q_ { \\mu , O } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0039",
+      "latex": "\\log \\sigma^ { 2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0040",
+      "latex": "\\mathbf { R } ^ { b } _ { tr }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0041",
+      "latex": "\\hat y=\\overline m_t/ ( v\\cos\\beta )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0042",
+      "latex": "T_p",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0043",
+      "latex": "\\ { X_ { i , k } \\ } _ { i\\in [ M ] , k =0 , 1 , \\ldots , t-1 }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0044",
+      "latex": "\\varphi \\in H^0_X ( \\Omega )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0045",
+      "latex": "\\tcb { H^ { 1/2+s } ( \\Sigma ; \\R^n ) } _ { s\\in\\N }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0046",
+      "latex": "\\left| { \\rm 3 } \\right\\rangle",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0047",
+      "latex": "\\kappa",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0048",
+      "latex": "\\gamma_ { 10 } ^ { \\ , r } /a = ( v/a ) \\cos \\chi",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0049",
+      "latex": "PQ_ { st }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0050",
+      "latex": "c_2+d_2=\\left\\lceil \\frac { \\sigma_2 } { 2 } \\right \\rceil-1",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0051",
+      "latex": "\\approxparamdyn",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0052",
+      "latex": "r , R > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0053",
+      "latex": "\\mathcal { N } =2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0054",
+      "latex": "\\Hom { \\cC } ( T_n , \\Sigma Y )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0055",
+      "latex": "\\hat { \\mathbf { y } } _i=\\tilde { \\mathbf { y } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0056",
+      "latex": "\\beta\\gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0057",
+      "latex": "^ { 12 } C- { ^ { 12 } C }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0058",
+      "latex": "( i , j )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0059",
+      "latex": "j\\in\\ { 1 , \\ldots , s\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0060",
+      "latex": "\\kappa_1 = \\frac { 1 } { 4C_ { 0 , \\eta } ( 1+C_1 ) }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0061",
+      "latex": "|\\nu|",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0062",
+      "latex": "a=b",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0063",
+      "latex": "f ( u ) =u^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0064",
+      "latex": "\\Fun ( \\mathcal { L } , \\mathcal { S } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0065",
+      "latex": "c_i\\in\\RR^3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0066",
+      "latex": "1\\leq j\\leq n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0067",
+      "latex": "K_y",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0068",
+      "latex": "\\psi\\in\\Eb ( \\ { \\mathbf\\ R^2 )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0069",
+      "latex": "M_ { \\bullet } = 10^6M_ { \\odot }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0070",
+      "latex": "\\sim 10^ { -6 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0071",
+      "latex": "F_+^ { ( m_1 , s ) }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0072",
+      "latex": "\\overline { \\text { IoU } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0073",
+      "latex": "\\mathcal { D }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0074",
+      "latex": "\\mathbb { D } ^0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0075",
+      "latex": "\\left|5\\right\\rangle",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0076",
+      "latex": "\\mathbf { a } _ { i ' }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0077",
+      "latex": "u=\\theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0078",
+      "latex": "F_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0079",
+      "latex": "\\Sigma^-\\bar { \\Sigma } ^+",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0080",
+      "latex": "42.01^ { +7.70 } _ { -5.92 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0081",
+      "latex": "L_ { cce }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0082",
+      "latex": "-\\delta_ { S , w }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0083",
+      "latex": "L^1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0084",
+      "latex": "A_a^i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0085",
+      "latex": "\\l_k\\ge0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0086",
+      "latex": "m_0 = FC ( k , n_0 ) \\leq \\binom { n_0 } { k }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0087",
+      "latex": "\\sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0088",
+      "latex": "c\\coloneqq C_\\Theta ( \\vartheta )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0089",
+      "latex": "\\CH_ { \\rm BPS }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0090",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0091",
+      "latex": "\\forall",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0092",
+      "latex": "{ \\mathcal G }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0093",
+      "latex": "\\mathbb { E } [ R_C ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0094",
+      "latex": "\\lb \\tfrac { 1 } { 8 } , \\tfrac { 1 } { 8 } \\rb",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0095",
+      "latex": "\\lambda_ { M+1 } \\leq N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0096",
+      "latex": "10^5~M_\\odot",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0097",
+      "latex": "M_p ( H , T ) = \\chi _p ( T ) H",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0098",
+      "latex": "g\\left ( \\mathbf { x } _ { j } \\right )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0099",
+      "latex": "Q_ { t }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0100",
+      "latex": "\\bm { \\pi }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0101",
+      "latex": "\\tilde { y }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0102",
+      "latex": "\\C { M } _l , \\dots , \\C { M } _ { n_\\mu }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0103",
+      "latex": "\\Sigma_3^ { \\mathrm { NG } } ( \\Delta )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0104",
+      "latex": "\\leq_ { sc }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0105",
+      "latex": "P_k",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0106",
+      "latex": "[ 1 , n ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0107",
+      "latex": "\\hat { \\Psi } ^ { \\dagger } ( \\mathbf { r } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0108",
+      "latex": "r = ( j-i_u ) a-p",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0109",
+      "latex": "\\mathcal { F } _1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0110",
+      "latex": "M_ { 3 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0111",
+      "latex": "m > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0112",
+      "latex": "20-50",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0113",
+      "latex": "( t , x ) \\in \\Omega^c",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0114",
+      "latex": "\\phantom { 0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0115",
+      "latex": "\\tau_2=-\\tau_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0116",
+      "latex": "\\sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0117",
+      "latex": "|\\Psi_0 ( P ) | \\leq C|P|^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0118",
+      "latex": "\\Psi^\\ph",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0119",
+      "latex": "2v -1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0120",
+      "latex": "c > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0121",
+      "latex": "P_ { AB }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0122",
+      "latex": "\\chi ( \\Gr { g } ( FY ) )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0123",
+      "latex": "\\delta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0124",
+      "latex": "\\varphi_ { N-1 } =2\\pi -\\theta_ { N }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0125",
+      "latex": "x^1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0126",
+      "latex": "\\Gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0127",
+      "latex": "2\\varepsilon",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0128",
+      "latex": "\\zeta = \\frac { \\pi } { 2 }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0129",
+      "latex": "4.8\\ %",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0130",
+      "latex": "a < c , b > d",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0131",
+      "latex": "\\reals^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0132",
+      "latex": "\\rho ( t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0133",
+      "latex": "2.2\\cdot 10^ { -10 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0134",
+      "latex": "S ( C )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0135",
+      "latex": "C_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0136",
+      "latex": "T_n\\convL \\tT",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0137",
+      "latex": "d_ { 12 } < d_ { 2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0138",
+      "latex": "\\kernelsizeconstant ' > \\kernelsizeconstant",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0139",
+      "latex": "K_t",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0140",
+      "latex": "k_T",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0141",
+      "latex": "j\\ge J ( g+h )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0142",
+      "latex": "\\varepsilon > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0143",
+      "latex": "\\lambda = \\lambda_M",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0144",
+      "latex": "10^ { -10 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0145",
+      "latex": "\\sigma \\in \\angle_ { J \\subset I } ^ { * , \\zeta }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0146",
+      "latex": "G^\\mu",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0147",
+      "latex": "\\mathbf { 0.028 \\pm 0.001 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0148",
+      "latex": "( \\varphi_n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0149",
+      "latex": "a^\\prime_ { \\pi ( \\beta-1 ) } =i^ { \\prime } _ { \\pi ( \\beta-1 ) -n }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0150",
+      "latex": "X_i = 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0151",
+      "latex": "\\tau_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0152",
+      "latex": "{ \\rm DM_ { \\rm host } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0153",
+      "latex": "{ \\bm A } ( \\varphi , \\theta )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0154",
+      "latex": "\\tau",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0155",
+      "latex": "( x^2-y^2 , xy )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0156",
+      "latex": "\\widetilde k ( \\cdot ) =\\widetilde k ( -\\cdot )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0157",
+      "latex": "f_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0158",
+      "latex": "O_SE\\|O_TQ",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0159",
+      "latex": "1.317 \\pm 0.460",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0160",
+      "latex": "T^ { ( i ) } _ { \\sX , \\sY }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0161",
+      "latex": "u_ { \\infty }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0162",
+      "latex": "\\theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0163",
+      "latex": "t_ { c }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0164",
+      "latex": "\\delta_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0165",
+      "latex": "Q ( \\bm { c } _ { \\bm j } ) < 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0166",
+      "latex": "k\\in { \\ { 1 , \\cdots , n\\ } } \\backslash\\ { x , j\\ }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0167",
+      "latex": "\\mu_ { x_ { \\text { real } } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0168",
+      "latex": "g\\in\\Sc ( \\R )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0169",
+      "latex": "\\varsigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0170",
+      "latex": "1/f",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0171",
+      "latex": "P_1^ { 16 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0172",
+      "latex": "C^1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0173",
+      "latex": "A^0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0174",
+      "latex": "T_ { \\textrm { C } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0175",
+      "latex": "( 0 , r_ { 0 } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0176",
+      "latex": "\\lambda_n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0177",
+      "latex": "\\eta_\\app^E , \\phi_\\app^E",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0178",
+      "latex": "x_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0179",
+      "latex": "s=3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0180",
+      "latex": "m\\ge 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0181",
+      "latex": "\\fX_v= [ V^ { g ( v ) } /G ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0182",
+      "latex": "t < T",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0183",
+      "latex": "k_ { 2P } ,",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0184",
+      "latex": "||\\tilde { \\W } -\\tilde { \\H } ||_F^2",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0185",
+      "latex": "d_ { rcm }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0186",
+      "latex": "D_2^ { max } =\\sup \\ { D_2 ( d ) |d\\in ( 0 , \\infty ) \\ }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0187",
+      "latex": "\\theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0188",
+      "latex": "r_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0189",
+      "latex": "\\ket { \\phi }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0190",
+      "latex": "g_ { \\bm { \\phi } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0191",
+      "latex": "w \\in L^ { 2 } ( { \\mathcal { O } } _ { \\ep } ^ * ) ,",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0192",
+      "latex": "x_ { new } ^ { \\prime }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0193",
+      "latex": "j_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0194",
+      "latex": "f_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0195",
+      "latex": "\\hat { \\boldsymbol { H } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0196",
+      "latex": "\\epsilon_ { 0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0197",
+      "latex": "g_1 , g_2 \\in \\Sc ( \\R )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0198",
+      "latex": "\\mathcal { T }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0199",
+      "latex": "\\Gamma_0=\\Gamma ( t_ { \\rm obs } =0 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0200",
+      "latex": "X_4=\\ { x_j\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0201",
+      "latex": "1/2^p",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0202",
+      "latex": "X_2 =\\ { z_1 , z_2\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0203",
+      "latex": "\\phantom { 0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0204",
+      "latex": "\\theta-1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0205",
+      "latex": "\\bf { G } =\\tcb { G^s } _ { s\\in\\j { N } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0206",
+      "latex": "\\ell=2000",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0207",
+      "latex": "\\tilde { u } \\in GSBD ( \\Om )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0208",
+      "latex": "( \\mathbf { A } ^ { p , n } ) ^T\\mathbf { A } ^ { p , n }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0209",
+      "latex": "N_c",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0210",
+      "latex": "\\nu",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0211",
+      "latex": "|\\rho|=|\\lambda|+e",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0212",
+      "latex": "v_ { n , \\mathrm { pp } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0213",
+      "latex": "x_n : =x^n_ { n }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0214",
+      "latex": "i\\in \\ { 1 , \\ldots , s\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0215",
+      "latex": "V ( r_ * )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0216",
+      "latex": "k\\in \\ { N-1 , N\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0217",
+      "latex": "T_ { 1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0218",
+      "latex": "56.91 ( 1.39 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0219",
+      "latex": "L^2 ( X , m )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0220",
+      "latex": "\\Sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0221",
+      "latex": "g_ { \\bm { \\phi } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0222",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0223",
+      "latex": "\\ , \\ , \\,60.7113\\ , \\ , \\ ,",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0224",
+      "latex": "R_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0225",
+      "latex": "\\ell",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0226",
+      "latex": "\\mu_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0227",
+      "latex": "C_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0228",
+      "latex": "1/r",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0229",
+      "latex": "C_u ( \\FC )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0230",
+      "latex": "q_ { \\theta } ( . )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0231",
+      "latex": "( e_i ) _ { i=1 } ^ { n }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0232",
+      "latex": "\\Omega=n\\Omega_ { \\rm res } ( d ) = 2\\pi n\\sqrt { a_ { \\rm max } /d }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0233",
+      "latex": "} Here we use a unique inner dot product",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0234",
+      "latex": "( N , \\sigma ( N ) )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0235",
+      "latex": "G_ { \\ # } \\nu_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0236",
+      "latex": "$ \\mathrm { supp } \\ , D = X_\\Psi ( w_0 ) \\setminus T^ * _\\Psi X , $",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0237",
+      "latex": "0^\\ell",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0238",
+      "latex": "[ g ( x ) { { f } _ { 1 } } ( x ) ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0239",
+      "latex": "N_p \\in ( 2 , \\infty ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0240",
+      "latex": "\\mathcal { D } _1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0241",
+      "latex": "\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0242",
+      "latex": "v_g < < v_ { \\rm up }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0243",
+      "latex": "82.2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0244",
+      "latex": "X_\\Psi \\setminus T^ * _\\Psi X",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0245",
+      "latex": "0 , 1 , ... , M",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0246",
+      "latex": "S^7",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0247",
+      "latex": "k=0,1,2 , ... , \\left [ \\dfrac { T } { \\eta } \\right ]",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0248",
+      "latex": "C^ { 0,1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0249",
+      "latex": "n !",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0250",
+      "latex": "29\\le n \\le 45",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0251",
+      "latex": "C_1 , C_2 , C_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0252",
+      "latex": "\\beta > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0253",
+      "latex": "E_b/N_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0254",
+      "latex": "\\Introtau\\to \\pm 1/4",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0255",
+      "latex": "\\omega",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0256",
+      "latex": "r ( R ) \\colon\\ , x+y+u = x_k + x_l",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0257",
+      "latex": "\\Delta I_ { 12 } \\geq \\Delta I_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0258",
+      "latex": "B_ { \\rm th }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0259",
+      "latex": "( J , u )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0260",
+      "latex": "\\partial A",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0261",
+      "latex": "\\mathcal { V } = \\ { v_1 , ... , v_n\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0262",
+      "latex": "\\epsilon_2=1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0263",
+      "latex": "Q_ { abs , i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0264",
+      "latex": "\\eta_ { \\alpha_ { i } } \\leq \\eta_ { \\beta_ { i } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0265",
+      "latex": "X \\to X_ { i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0266",
+      "latex": "0.027 \\pm 0.006",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0267",
+      "latex": "\\Pi_\\lambda X",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0268",
+      "latex": "-0.021 \\pm 0.008",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0269",
+      "latex": "\\gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0270",
+      "latex": "f\\colon M\\to\\RR",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0271",
+      "latex": "( q_0 , u_0 , \\eta_0 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0272",
+      "latex": "\\tau \\in [ 0,1 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0273",
+      "latex": "with scalar curvature",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0274",
+      "latex": "y_C",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0275",
+      "latex": "L^1_ { D , \\mathfrak { g } , 0 } = U^ { 1 } _ { 0 } \\oplus I^ { 1 } _ { 0 }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0276",
+      "latex": "\\mathcal C",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0277",
+      "latex": "S_n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0278",
+      "latex": "V_ { 2^2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0279",
+      "latex": "\\lambda_L",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0280",
+      "latex": "P ( A|B )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0281",
+      "latex": "\\mathbf { G }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0282",
+      "latex": "( h_ { c , n } ) _ { n\\in\\NN }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0283",
+      "latex": "l/ ( l+k ) \\approx m/ ( n+m )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0284",
+      "latex": "\\gam_0\\in I",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0285",
+      "latex": "y = x_ { i } x_ { i+1 } \\dots x_ { i+n-1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0286",
+      "latex": "w ( E_j^n ( u ) ) > M_n+L_n+I^n_j",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0287",
+      "latex": "h=-\\frac { \\lambda } { 2 } + i p , \\tilde h=-\\frac { \\lambda } { 2 } - i p",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0288",
+      "latex": "T_d",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0289",
+      "latex": "\\vec { v } _1 \\cdot \\vec { v } _2 = 0",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0290",
+      "latex": "\\bold { G } = ( G_ { 1 } , G_ { 2 } , \\cdots , G_ { K } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0291",
+      "latex": "( U_i ) _ { 1\\leq i\\leq n }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0292",
+      "latex": "( x , t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0293",
+      "latex": "\\mathcal { H } _ { i=0,1 , \\cdots n }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0294",
+      "latex": "~NM oriented South ( first runway ) ,",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0295",
+      "latex": "\\widetilde O ( n \\cdot d^ { O ( 1 ) } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0296",
+      "latex": "\\norm { f } _ { \\infty } \\leq 1",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0297",
+      "latex": "\\phi_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0298",
+      "latex": "W_ { G } ^j",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0299",
+      "latex": "2n=2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0300",
+      "latex": "Q_ { k\\ # } ( \\frac { \\mu^ * \\cdot \\rho_k } { p_k } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0301",
+      "latex": "{ \\CA } _1=\\CA_2 = \\CA",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0302",
+      "latex": "F_ { \\textrm { i } \\partial\\phi } ^ { ( n ) } = f_n",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0303",
+      "latex": "\\textrm { ord } ( f_ { i-1 } ) =e_ { i-1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0304",
+      "latex": "j \\in \\ { 1 , \\dotsc , n-1\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0305",
+      "latex": "\\displaystyle\\sum_ { i=0 } ^ { n-1 } a_ix^i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0306",
+      "latex": "k = \\NC ( \\eps/4 , \\Theta , d_\\Theta )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0307",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0308",
+      "latex": "\\chi ( H ) \\leq n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0309",
+      "latex": "q\\in H^ { 1+s } ( \\Omega )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0310",
+      "latex": "\\operatorname * { ord } _ { p } ( c )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0311",
+      "latex": "\\alpha+z=u+v",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0312",
+      "latex": "T^2V^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0313",
+      "latex": "128^ { +82 } _ { -50 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0314",
+      "latex": "( J , u )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0315",
+      "latex": "V_\\infty",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0316",
+      "latex": "\\Sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0317",
+      "latex": "M_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0318",
+      "latex": "bitsize ( \\kappa_ { q , z } ( x ) ) \\in O ( \\log n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0319",
+      "latex": "\\ell_B \\propto 1/\\sqrt { \\bar B }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0320",
+      "latex": "\\mathbf { x } _ { i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0321",
+      "latex": "m^2_ { 22 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0322",
+      "latex": "^ { 3 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0323",
+      "latex": "1\\leq k \\leq N.",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0324",
+      "latex": "\\beta\\in \\ { E\\^\\ *",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0325",
+      "latex": "at station",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0326",
+      "latex": "G \\subseteq O_1 \\cap O_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0327",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0328",
+      "latex": "b^\\text { th }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0329",
+      "latex": "X ( 3872 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0330",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0331",
+      "latex": "\\epsilon_ { \\vec { k } } \\rightarrow 0",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0332",
+      "latex": "C ( x-y )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0333",
+      "latex": "M_e",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0334",
+      "latex": "\\phi_ { ( 0 , t ) } ( x )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0335",
+      "latex": "\\E \\bigl [ J_ { t+1 } ^ * ( x , y ' ) \\bigr ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0336",
+      "latex": "g^ * _ { \\cp } ( s ) \\triangleq \\max_ { \\pi } g^\\pi_ { \\cp } ( s )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0337",
+      "latex": "x\\cdot c",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0338",
+      "latex": "\\phi '' \\colon L_ { * } I \\to J",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0339",
+      "latex": "\\psi ( P )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0340",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0341",
+      "latex": "O ( 1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0342",
+      "latex": "\\sigma_\\mathrm { N } ^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0343",
+      "latex": "Z_ { i , t }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0344",
+      "latex": "B [ h_i ( x ) ] \\leftarrow B [ h_i ( x ) ] +1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0345",
+      "latex": "\\F_ { p^2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0346",
+      "latex": "s^ *",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0347",
+      "latex": "\\omega > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0348",
+      "latex": "s > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0349",
+      "latex": "\\mathcal { M } _ { W^ * } ( \\hat p )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0350",
+      "latex": "\\Gamma \\to 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0351",
+      "latex": "x \\in S",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0352",
+      "latex": "( \\z_i , \\y_i )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0353",
+      "latex": "97.5",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0354",
+      "latex": "I_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0355",
+      "latex": "\\Psi_H^m",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0356",
+      "latex": "\\overrightarrow { H_\\mathrm { a } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0357",
+      "latex": "\\rho",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0358",
+      "latex": "10^ { -1357 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0359",
+      "latex": "\\langle G ( \\sigma ) \\cup P \\setminus \\ { x_i\\ } \\rangle \\notin \\Sigma_X",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0360",
+      "latex": "E^n_j ( v )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0361",
+      "latex": "\\sigma ( 1 ) =N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0362",
+      "latex": "L^ { \\rm GW } _ { \\rm bin }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0363",
+      "latex": "m+1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0364",
+      "latex": "C \\in \\mathcal { C }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0365",
+      "latex": "\\mathcal { T } _i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0366",
+      "latex": "\\|\\mathbf { x } _ { i } - \\mathbf { x } _ { j } \\|",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0367",
+      "latex": "\\bw_\\zeta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0368",
+      "latex": "\\Omega [ \\eta ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0369",
+      "latex": "O\\cap \\partial X",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0370",
+      "latex": "\\hat { S } _ { j_1 , j_2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0371",
+      "latex": "s^ *",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0372",
+      "latex": "L_ { peak }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0373",
+      "latex": "L_\\gamma=L_z",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0374",
+      "latex": "\\rvy^\\top ( \\rmH^\\infty ) ^ { -1 } \\rvy",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0375",
+      "latex": "n\\ge 2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0376",
+      "latex": "f_l",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0377",
+      "latex": "B_ { \\rm th }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0378",
+      "latex": "\\Theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0379",
+      "latex": "S_0 , A_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0380",
+      "latex": "\\alpha \\notin P",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0381",
+      "latex": "Q ( \\bm x ) > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0382",
+      "latex": "U , V \\subset M",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0383",
+      "latex": "K/K_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0384",
+      "latex": "\\tilde \\mu_n\\in \\PC ( \\XC )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0385",
+      "latex": "\\nu_k",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0386",
+      "latex": "T_s",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0387",
+      "latex": "a_1 , \\dots , a_m\\in \\R",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0388",
+      "latex": "abc",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0389",
+      "latex": "q \\to 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0390",
+      "latex": "\\sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0391",
+      "latex": "\\sigma : \\cA_Q \\to \\cA_ { Q ' }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0392",
+      "latex": "\\DD_j = [ ( \\tD_j\\cap U_\\zeta ) /G ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0393",
+      "latex": "\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0394",
+      "latex": "\\eta : \\Sigma\\to\\R",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0395",
+      "latex": "\\ell_d/4",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0396",
+      "latex": "P_ { s , c }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0397",
+      "latex": "\\Sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0398",
+      "latex": "100",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0399",
+      "latex": "r\\geq 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0400",
+      "latex": "C_ { p_\\Lb } \\cong f",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0401",
+      "latex": "\\Psi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0402",
+      "latex": "ST_ { r } ( \\Gamma_ { M } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0403",
+      "latex": "\\alpha\\in\\F_q ( ( X^ { -1 } ) ) \\ ( \\text { or } \\ \\mathbb { Q } _p )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0404",
+      "latex": "\\bar { D }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0405",
+      "latex": "H_ { i , ( i ' ) }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0406",
+      "latex": "r'\\leq \\frac { r } { 2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0407",
+      "latex": "t \\geq 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0408",
+      "latex": "\\mathcal { F } \\supseteq \\mathcal { A }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0409",
+      "latex": "Z_ { k , j }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0410",
+      "latex": "Road4",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0411",
+      "latex": "\\kappa \\in \\RR",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0412",
+      "latex": "\\underline { S } ^ * _ { jk }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0413",
+      "latex": "j^ *",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0414",
+      "latex": "( t_ { \\rm th } , \\Delta t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0415",
+      "latex": "\\mu=0.2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0416",
+      "latex": "s\\in\\mathcal { S }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0417",
+      "latex": "{ \\boldsymbol\\chi } _6",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0418",
+      "latex": "\\Omega",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0419",
+      "latex": "C=A+B",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0420",
+      "latex": "r_\\mathrm { H }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0421",
+      "latex": "\\Delta x",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0422",
+      "latex": "\\be=\\sum_ { \\nu=\\upnu+1 } ^\\ell ( j_\\nu-1 )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0423",
+      "latex": "v'_i ( j )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0424",
+      "latex": "\\hat y",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0425",
+      "latex": "\\l_ { -j } =B ( -\\bm { c_j } , \\bm\\lambda )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0426",
+      "latex": "I_ { p , r ' } ^r",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0427",
+      "latex": "\\langle L \\rangle = 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0428",
+      "latex": "\\omega = x\\cdot \\hat { \\nu } _x",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0429",
+      "latex": "g_N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0430",
+      "latex": "\\delta=0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0431",
+      "latex": "X_K = ( 0 , 0 , 0 , 0 , 0 , 0 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0432",
+      "latex": "l ( \\delta { \\bf x } _k , \\delta { \\bf u } _k )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0433",
+      "latex": "a\\in \\ell ( V )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0434",
+      "latex": "\\N \\in \\nsetpos",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0435",
+      "latex": "\\eta\\nabla\\eta = \\eta_3\\nabla\\eta_3 + \\eta_4\\nabla\\eta_4",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0436",
+      "latex": "\\boldsymbol { V } \\le \\boldsymbol { V ' }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0437",
+      "latex": "1-\\frac { 1 } { n^2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0438",
+      "latex": "\\F_p [ x ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0439",
+      "latex": "\\rho_ { \\m { cont } } =\\rho_ { ( H_ { \\m { min } } , H_ { \\m { max } } ) }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0440",
+      "latex": "\\ell ( m , n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0441",
+      "latex": "H^1 ( \\Omega )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0442",
+      "latex": "\\boldsymbol { \\pi_ { i } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0443",
+      "latex": "d_ { \\Eb }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0444",
+      "latex": "A^0 h^0 Z",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0445",
+      "latex": "\\tilde { f } ^ * ( x ) : = \\tilde { f } ( x ; a^ * , b^ * )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0446",
+      "latex": "K_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0447",
+      "latex": "L_1=span\\ { e_ { 12 } , e_ { 21 } \\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0448",
+      "latex": "\\mathcal { C }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0449",
+      "latex": "\\bigl\\langle x \\big| \\hat { f } \\big| y\\bigr\\rangle",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0450",
+      "latex": "_ { * } \\sim 10^ { 9.5 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0451",
+      "latex": "\\sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0452",
+      "latex": "\\ell\\in\\ { 2 , \\ldots e_1\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0453",
+      "latex": "a_ { i+k }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0454",
+      "latex": "( y , u_ { 0 } , u_ { 1 } , u_ { 2 } ) \\in\\mathcal { R } _ { 2 }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0455",
+      "latex": "X_o",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0456",
+      "latex": "P_ { \\alpha }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0457",
+      "latex": "z=x_1-x_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0458",
+      "latex": "\\delta_ { 1,2 } , m",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0459",
+      "latex": "< ( x_m - y )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0460",
+      "latex": "3141",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0461",
+      "latex": "V \\in [ 0,1 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0462",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0463",
+      "latex": "H ( \\rho )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0464",
+      "latex": "\\mathbb { E } _ { q } \\log p ( \\mathbf { x } _0 | z )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0465",
+      "latex": "i_ { \\ell } \\leq i-1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0466",
+      "latex": "h\\geq\\delta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0467",
+      "latex": "-2.73935106365787 \\cdot 10^ { -6 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0468",
+      "latex": "\\mathcal { P }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0469",
+      "latex": "\\theta_ { \\rm outflow } \\simeq 50^\\circ",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0470",
+      "latex": "\\mathscr { P } _ { n }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0471",
+      "latex": "{ \\lambda_ { 2 } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0472",
+      "latex": "\\gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0473",
+      "latex": "S = D",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0474",
+      "latex": "\\square\\in \\blacksquare_\\nu",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0475",
+      "latex": "f\\colon X \\to \\mathbb { R }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0476",
+      "latex": "\\rho_k ( G_k ( \\cdot ) )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0477",
+      "latex": "B_\\lambda \\approx -1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0478",
+      "latex": "\\Bar { \\varphi } \\in C^\\infty_c ( \\Bar { \\Omega } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0479",
+      "latex": "\\Omega^ { \\bullet } _ { \\mathbb { C } ^ { k } } ( \\log D )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0480",
+      "latex": "g_U = \\langle\\cdot , \\cdot \\rangle_ { \\cN_ { 23 } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0481",
+      "latex": "2.73^ { +0.29 } _ { -0.25 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0482",
+      "latex": "I=\\emptyset",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0483",
+      "latex": "\\boldsymbol { \\Gamma }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0484",
+      "latex": "g_1=0.461425^ { +0.000044 } _ { -0.000043 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0485",
+      "latex": "V ( \\mathcal { E } _ { P_ { Y } } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0486",
+      "latex": "-2\\log\\hat { \\mathcal { L } } _ { \\rm free }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0487",
+      "latex": "m_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0488",
+      "latex": "i/2 > \\mu",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0489",
+      "latex": "S_m",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0490",
+      "latex": "T_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0491",
+      "latex": "\\frac { H_L ( \\cdot ; \\ { l_t\\ } , \\ { \\bm { z } ^ * _t\\ } ) } { T }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0492",
+      "latex": "\\pi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0493",
+      "latex": "i_ { \\nu_0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0494",
+      "latex": "b , \\ , ( p_b/L_\\circ ) , \\ , ( c/L_\\circ ) , \\ , p_c",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0495",
+      "latex": "S_ { 11 } ( \\rho|\\sigma )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0496",
+      "latex": "( U , \\varphi )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0497",
+      "latex": "\\langle\\bm { f } , \\bm { u } \\rangle",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0498",
+      "latex": "\\mu^ { ET }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0499",
+      "latex": "n > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0500",
+      "latex": "|\\vec { \\sigma_i } |=1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0501",
+      "latex": "\\mathrm { log } ( L_ { \\mathrm { bol } } /L_\\odot ) = -4.994 \\pm 0.063",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0502",
+      "latex": "\\zeta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0503",
+      "latex": "R_P",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0504",
+      "latex": "( j+1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0505",
+      "latex": "a_i , b_i > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0506",
+      "latex": "S=\\ { s_1 , s_2 , \\ldots , s_n\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0507",
+      "latex": "i , j \\in I",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0508",
+      "latex": "E\\ge ( \\alpha-\\beta ) E_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0509",
+      "latex": "\\pi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0510",
+      "latex": "\\bP_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0511",
+      "latex": "( g_k ) _ { k\\in\\N } \\subset\\leb^q ( M , \\mm )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0512",
+      "latex": "\\varepsilon_ { 2 ; 0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0513",
+      "latex": "n\\geq 2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0514",
+      "latex": "\\Gamma_k [ \\phi ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0515",
+      "latex": "P_5",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0516",
+      "latex": "\\varepsilon",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0517",
+      "latex": "N_ { \\mu , T }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0518",
+      "latex": "\\delta p^0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0519",
+      "latex": "\\Sh ( \\Lb )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0520",
+      "latex": "\\hat { \\bm { s } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0521",
+      "latex": "\\lambda_ { r } =0.1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0522",
+      "latex": "p\\le m",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0523",
+      "latex": "{ \\bf 1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0524",
+      "latex": "r_ { \\phi } ( . )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0525",
+      "latex": "n_ { i-1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0526",
+      "latex": "\\bb { L }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0527",
+      "latex": "x= ( x_i ) _ { 1\\le i\\le d }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0528",
+      "latex": "\\cv ( \\omega ) =\\sum_ { j=1 } ^ { n-1 } I^v_j ( \\omega )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0529",
+      "latex": "\\rho_ { \\text { obs } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0530",
+      "latex": "\\Fun ( X , \\mathcal { S } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0531",
+      "latex": "\\l_ { N-1 } : =\\bm v^T\\cdot\\bm\\lambda",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0532",
+      "latex": "\\norm\\lambda = -\\sfrac\\alpha\\beta",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0533",
+      "latex": "\\mathbf { K }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0534",
+      "latex": "\\pi= ( 1,2,3,4,5,6,7 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0535",
+      "latex": "N_ { b|s }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0536",
+      "latex": "-0.66 \\leq \\omega_q \\leq -0.62",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0537",
+      "latex": "\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0538",
+      "latex": "1.96",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0539",
+      "latex": "C_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0540",
+      "latex": "\\protect \\textrm { GBS } ^ { \\textrm { PNR+ } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0541",
+      "latex": "A = G_A ( Z_A )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0542",
+      "latex": "L^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0543",
+      "latex": "d_I",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0544",
+      "latex": "\\phi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0545",
+      "latex": "T^f_ { i , j }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0546",
+      "latex": "\\tau",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0547",
+      "latex": "( 1-\\eta ( |\\psi| ) )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0548",
+      "latex": "O ( n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0549",
+      "latex": "\\pm 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0550",
+      "latex": "k_ { 1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0551",
+      "latex": "\\alpha\\ll1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0552",
+      "latex": "\\mathcal { F } _ { i-1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0553",
+      "latex": "^ { -1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0554",
+      "latex": "\\bx \\in \\sX\\cup\\sY",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0555",
+      "latex": "m=1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0556",
+      "latex": "\\lambda_ { k , T }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0557",
+      "latex": "r_ { { } _ { \\rm T } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0558",
+      "latex": "Z\\in \\mathcal { E } _T ( U )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0559",
+      "latex": "4,160",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0560",
+      "latex": "\\mu_1 > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0561",
+      "latex": "u_h^n ( \\xx ; \\mu )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0562",
+      "latex": "\\psi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0563",
+      "latex": "P=4",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0564",
+      "latex": "\\beta_\\Gamma \\in \\tbL_\\bQ",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0565",
+      "latex": "\\mathcal { F } _ { 1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0566",
+      "latex": "\\bm { U } _p= ( \\alpha+\\lambda\\gamma/3 ) \\bm { 1 } _1",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0567",
+      "latex": "T_ { \\sX , F_ { 0 } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0568",
+      "latex": "\\boldsymbol { \\beta } , \\boldsymbol { \\beta } ' \\in \\mathbb { R } ^M",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0569",
+      "latex": "\\widetilde { \\textbf { X } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0570",
+      "latex": "\\pi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0571",
+      "latex": "B_\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0572",
+      "latex": "\\langle \\alpha \\rangle",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0573",
+      "latex": "k_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0574",
+      "latex": "u_j^n= ( \\rho_j^n , m_j^n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0575",
+      "latex": "-56",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0576",
+      "latex": "[ 31.4,44.7 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0577",
+      "latex": "f ( R , T )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0578",
+      "latex": "\\Gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0579",
+      "latex": "\\lambda_i > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0580",
+      "latex": "|f|",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0581",
+      "latex": "n=1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0582",
+      "latex": "\\mathbf { x } _ { i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0583",
+      "latex": "\\Delta\\leqslant 2\\Delta_\\phi+N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0584",
+      "latex": "\\log \\kappa",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0585",
+      "latex": "\\Sigma_ { \\P }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0586",
+      "latex": "70.1 \\pm 0.7",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0587",
+      "latex": "\\Theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0588",
+      "latex": "N_s",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0589",
+      "latex": "\\gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0590",
+      "latex": "\\textrm { ord } ( f )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0591",
+      "latex": "0.5P_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0592",
+      "latex": "\\mathbf x",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0593",
+      "latex": "\\dot { \\mathcal H } _\\sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0594",
+      "latex": "C^1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0595",
+      "latex": "u_ { \\infty } ' ( x )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0596",
+      "latex": "\\rho_ { i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0597",
+      "latex": "\\textbf { 99.62 } ( 0.03 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0598",
+      "latex": "10^6",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0599",
+      "latex": "( m , n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0600",
+      "latex": "Y=K ( W^\\vee , n+1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0601",
+      "latex": "1/\\ln 2 - \\log_2 ( s_ { \\rm min } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0602",
+      "latex": "W= k_BTn\\ln 2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0603",
+      "latex": "\\ { \\Tilde { \\Delta } _ { i } , \\Tilde { z } _ { j } \\ }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0604",
+      "latex": "\\nu_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0605",
+      "latex": "p_ { data }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0606",
+      "latex": "T_ { \\rm eff }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0607",
+      "latex": "\\mathbb E [ h ( X ) ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0608",
+      "latex": "\\lambda\\lambda 3727,3729",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0609",
+      "latex": ". By construction",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0610",
+      "latex": "\\bf { F }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0611",
+      "latex": "\\boldsymbol { x }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0612",
+      "latex": "u\\equiv 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0613",
+      "latex": "L_ { \\mu } -L_ { \\tau }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0614",
+      "latex": "\\tx_y=\\tx ( \\theta_y\\omega ) , \\tx_y'=\\tx ( \\theta_y\\omega'_y )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0615",
+      "latex": "p_r",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0616",
+      "latex": "[ 0 \\hspace { 1mm } 1 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0617",
+      "latex": "w_0= ( q_0 , u_0 , \\eta_0 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0618",
+      "latex": "to the north towards the ALMA source",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0619",
+      "latex": "X \\simeq \\PS^n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0620",
+      "latex": "SL ( 2 , \\mathbb { R } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0621",
+      "latex": "V^ { \\pi^ * } ( s ) \\ge V^ { \\pi } ( s ) , \\forall \\pi , s\\in\\mathcal { S }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0622",
+      "latex": "\\Psi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0623",
+      "latex": "D^ * ( d ' ) > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0624",
+      "latex": "w_k = \\frac { 2 ( m-k ) } { m ( m+1 ) }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0625",
+      "latex": "s\\in [ 0,1 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0626",
+      "latex": "X_T",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0627",
+      "latex": "GL_ { M|N }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0628",
+      "latex": "n\\ge 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0629",
+      "latex": "c_5^T",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0630",
+      "latex": "\\gcd ( c,4 ) =2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0631",
+      "latex": "tensor :",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0632",
+      "latex": "A_n = \\ { 0 , 1 \\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0633",
+      "latex": "\\mb E [ \\exp ( c\\tx^ { d-\\error } ) ] < \\infty",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0634",
+      "latex": "0 \\leq i \\leq j \\leq n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0635",
+      "latex": "\\bm \\alpha_t",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0636",
+      "latex": "\\beta_ { { \\bk } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0637",
+      "latex": "b_ { l+1 } , c_ { l+1 } \\in\\mathbb { R }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0638",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0639",
+      "latex": "\\mathbf { P }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0640",
+      "latex": "\\bar { U }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0641",
+      "latex": "m+1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0642",
+      "latex": "\\rho^0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0643",
+      "latex": "\\eta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0644",
+      "latex": "\\mathcal { M }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0645",
+      "latex": "40\\ , { \\rm GeV } < m_ { h^0 } < 100",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0646",
+      "latex": "_ { \\rm 163\\mu m }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0647",
+      "latex": "f ( g+\\psi ) \\varphi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0648",
+      "latex": "\\theta_K\\geq1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0649",
+      "latex": "\\pi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0650",
+      "latex": "\\iota^ * [ \\Sigma_ { \\P } ] = [ \\underline { \\Sigma } _ { \\P } ]",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0651",
+      "latex": "\\Longleftrightarrow",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0652",
+      "latex": "l ( t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0653",
+      "latex": "\\mathsf { Br } ^\\chi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0654",
+      "latex": "a+b \\omega",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0655",
+      "latex": "P_l ( k )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0656",
+      "latex": "\\ { \\rho_k\\ } _ { k\\in [ K ] }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0657",
+      "latex": "\\Delta_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0658",
+      "latex": "{ { \\bm { R } } ^ { } } ^ { \\prime }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0659",
+      "latex": "\\Gamma'=1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0660",
+      "latex": "\\chi=2 - d",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0661",
+      "latex": "\\Delta t < 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0662",
+      "latex": "\\mathcal { M } _ { W^ * } ( \\hat q )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0663",
+      "latex": "\\bK^ { \\dim \\cT }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0664",
+      "latex": "g=0,1 , \\cdots , L_1-1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0665",
+      "latex": "\\rmH^\\infty\\approx ( 1/2 ) \\mI_ { n }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0666",
+      "latex": "S_A",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0667",
+      "latex": "472",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0668",
+      "latex": "F_ { j } ( \\bbeta )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0669",
+      "latex": "\\phi_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0670",
+      "latex": "\\Phi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0671",
+      "latex": "\\mathbb R^n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0672",
+      "latex": "\\eul_t",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0673",
+      "latex": "\\max ( 0 , x )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0674",
+      "latex": "\\SingTime { j } \\geq \\frac { 1 } { 4 } \\NETime { j }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0675",
+      "latex": "x=1+1/s",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0676",
+      "latex": "\\vA_P ( t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0677",
+      "latex": "\\omega",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0678",
+      "latex": "1.58",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0679",
+      "latex": "i = 1,2 , \\ldots , n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0680",
+      "latex": "A_ { 11 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0681",
+      "latex": "\\mathbf { f } ^ { c * } _ { j }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0682",
+      "latex": "V_ { ib }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0683",
+      "latex": "\\delta_p",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0684",
+      "latex": "\\fg_ { \\bR } =\\bL_\\bR",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0685",
+      "latex": "l=i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0686",
+      "latex": "( 1+n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0687",
+      "latex": "A'\\cup B '",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0688",
+      "latex": "0.326",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0689",
+      "latex": "\\sigma_1^ * ( e_1 , e_2 , \\gamma ) = -1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0690",
+      "latex": "m_+",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0691",
+      "latex": "a_0 = b_0 = 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0692",
+      "latex": "\\d_ { V_J } ( \\bm\\lambda )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0693",
+      "latex": "\\theta_t - \\bar { \\theta } _t = e_ { p , t } .",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0694",
+      "latex": "[ B , A ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0695",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0696",
+      "latex": "et\\ al.",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0697",
+      "latex": "\\widetilde { O } ( n_\\mathcal { P } + \\parameter^\\kernelsizeconstant )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0698",
+      "latex": "\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0699",
+      "latex": "\\\\ H1PDF &",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0700",
+      "latex": "7.0\\pm0.5",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0701",
+      "latex": "y^-_ { j ( -m-1 ) }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0702",
+      "latex": "U ( 1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0703",
+      "latex": "_ { 1-x }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0704",
+      "latex": "\\nu_0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0705",
+      "latex": "2^ { k-1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0706",
+      "latex": "D_M : \\D_0 \\to \\CMet",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0707",
+      "latex": "R_ { AA } [ 1S ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0708",
+      "latex": "\\epsilon",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0709",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0710",
+      "latex": "B\\mathrm { Diff } ^+ ( W_g )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0711",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0712",
+      "latex": "\\tilde O ( k )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0713",
+      "latex": "u '",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0714",
+      "latex": "( T_t^ { ( M ) } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0715",
+      "latex": "[ 0 , L )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0716",
+      "latex": "s^ * = 1.0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0717",
+      "latex": "\\forall\\varphi\\in\\mathscr { D } _ { K }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0718",
+      "latex": "\\delta > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0719",
+      "latex": "F \\colon \\Tw ( [ n ] ) \\to \\xF",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0720",
+      "latex": "M_ { \\rm CGM }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0721",
+      "latex": "39.1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0722",
+      "latex": "m_ { h^0 } , m_ { H^0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0723",
+      "latex": "U \\in \\Sub_ { \\Sh ( \\Lb ) } ( U )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0724",
+      "latex": "x_ { t+1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0725",
+      "latex": "p\\neq2,3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0726",
+      "latex": "x=0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0727",
+      "latex": "( \\partial_\\mu X , \\mu )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0728",
+      "latex": "N_h",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0729",
+      "latex": "\\mathcal { D }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0730",
+      "latex": "\\vec { 0 } _\\mathbf { A }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0731",
+      "latex": "F_ { ( \\cT , \\cP ) } ( 0 ) =0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0732",
+      "latex": "0 \\leq \\alpha_2 < \\Delta_2-1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0733",
+      "latex": "|\\la| : = \\sum_ { i=1 } ^n \\la_i \\in \\Z",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0734",
+      "latex": "\\beta^ { ( d ' ) } ( t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0735",
+      "latex": "k_t",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0736",
+      "latex": "\\R\\bm f",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0737",
+      "latex": "\\mathcal { M } =SO ( 3 ) /O ( 2 ) \\equiv S^2/Z_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0738",
+      "latex": "{ \\mathcal V } ( \\Om )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0739",
+      "latex": "\\pi [ \\|\\beta\\|^6 ] < \\infty",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0740",
+      "latex": "\\hat S_x ( 0 ) =\\hat S_x ( L ) =0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0741",
+      "latex": "\\theta^ * \\in \\mc { B }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0742",
+      "latex": "d_ { 01 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0743",
+      "latex": "N_c = 6",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0744",
+      "latex": "u^ { ( 2 ) } _ { \\rm L }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0745",
+      "latex": "\\upmu",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0746",
+      "latex": "\\partial_r\\rho\\le0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0747",
+      "latex": "\\lambda = \\SI { 520 } { \\nano\\meter }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0748",
+      "latex": "\\underline { k } \\in\\mathbb { N } ^r",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0749",
+      "latex": "A^ * _ { \\orb , \\tT } ( \\sX_\\zeta ) = H^ * _ { \\CR , \\tT } ( \\sX_\\zeta )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0750",
+      "latex": "\\mathbb { E } [ R_B ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0751",
+      "latex": "0 < \\lambda \\leq \\frac { 1 } { 2 }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0752",
+      "latex": "w = 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0753",
+      "latex": "75.47",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0754",
+      "latex": "66.412 \\pm 5.307",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0755",
+      "latex": "|\\bar { \\boldsymbol\\jmath } |",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0756",
+      "latex": "\\mu_t ( x )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0757",
+      "latex": "x_i \\in X_i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0758",
+      "latex": "f_A",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0759",
+      "latex": "0.5",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0760",
+      "latex": "\\langle B\\rangle",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0761",
+      "latex": "V_ { \\rm O } ^ { \\bullet \\bullet } +2 \\textrm { Ti } ^ { 3+ }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0762",
+      "latex": "T_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0763",
+      "latex": "C \\subseteq \\mathbb { F } _ { p^2 } ^ { n }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0764",
+      "latex": "\\ { \\omega\\in C_ { \\lambda } : \\omega ( i ) =j , \\omega ( j ) =k\\ }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0765",
+      "latex": "w_ { z_ { i } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0766",
+      "latex": "E_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0767",
+      "latex": "\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0768",
+      "latex": "\\ell_i\\in A_i^ *",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0769",
+      "latex": "P_5",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0770",
+      "latex": "0 \\leq j \\leq \\ell-1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0771",
+      "latex": "\\epsilon-",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0772",
+      "latex": "Y_R",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0773",
+      "latex": "abc",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0774",
+      "latex": "0 \\leq \\varphi \\leq 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0775",
+      "latex": "c_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0776",
+      "latex": "\\varphi : \\R^ { n } \\to \\R",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0777",
+      "latex": "P_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0778",
+      "latex": "|\\psi^r\\rangle= ( \\alpha_ { 1 } , \\beta_ { 1 } ) ^T",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0779",
+      "latex": "k_n = k - 1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0780",
+      "latex": "f_ { \\hat { \\bm { \\theta } } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0781",
+      "latex": "f ( x ) \\in C_4",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0782",
+      "latex": "\\sets^ { \\cat^ { op } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0783",
+      "latex": "\\bigcup_ { k ' > k } \\Pi_k",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0784",
+      "latex": "\\FC_ { \\bar c } \\subseteq \\FC^ { \\bar c\\bar c }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0785",
+      "latex": "T_ { 2 , n } ''",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0786",
+      "latex": "n\\rightarrow \\infty",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0787",
+      "latex": "\\sim 0.21",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0788",
+      "latex": "abc",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0789",
+      "latex": "l ( x )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0790",
+      "latex": "Z_ { i7 } \\sim \\mathcal { N } ( 0 , 1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0791",
+      "latex": "\\alpha_1 ( m ' ) =x_B",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0792",
+      "latex": "( M , \\dd )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0793",
+      "latex": "u_j^T",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0794",
+      "latex": "K_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0795",
+      "latex": "y\\neq x '",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0796",
+      "latex": "\\F_p",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0797",
+      "latex": "s=\\tau/h^2\\in ( 0 , s_m^ { ( c ) } ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0798",
+      "latex": "1.07 \\pm 0.01",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0799",
+      "latex": "\\E |u_ { \\infty } ( x ) |^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0800",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0801",
+      "latex": "V_ { T }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0802",
+      "latex": "\\mathrm { MT } \\theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0803",
+      "latex": "T_a = 1/\\nu_a",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0804",
+      "latex": "\\mathbf { b }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0805",
+      "latex": "p^r",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0806",
+      "latex": "H_ { FM }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0807",
+      "latex": "\\delta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0808",
+      "latex": "\\mathbf { \\Lambda_ { \\text { DAP } } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0809",
+      "latex": "\\mathbf { Q } _\\mathrm { C }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0810",
+      "latex": "\\epsilon_ { \\bk } \\to 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0811",
+      "latex": "|\\ell| < \\kappa",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0812",
+      "latex": "\\mathbf { v } ^G",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0813",
+      "latex": "\\mathcal { F } _ { 2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0814",
+      "latex": "\\mathcal { O }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0815",
+      "latex": "V_z^r",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0816",
+      "latex": "e^ { -\\xi\\kappa } -e^ { -\\xi m }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0817",
+      "latex": "X ' \\to X ' _ { i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0818",
+      "latex": "\\Delta < 2\\Delta_\\phi+N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0819",
+      "latex": "S'=\\left < T'_1 , T'_2 , \\cdots , T'_k\\right >",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0820",
+      "latex": "c \\sup_ { \\bar { M } } \\lvert \\sigma_ { 3 } \\circ \\phi \\rvert",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0821",
+      "latex": "p \\in \\Lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0822",
+      "latex": "C_ { x , \\overline { \\Psi_\\alpha } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0823",
+      "latex": "\\lambda_1+\\lambda_2+\\lambda_3+\\lambda_4 \\in \\mathbb { Z }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0824",
+      "latex": "47.41",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0825",
+      "latex": "\\ , \\ , \\,212.166\\ , \\ , \\ ,",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0826",
+      "latex": "D ( z , r )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0827",
+      "latex": "\\mathrm { char } ( \\bk ) =p",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0828",
+      "latex": "\\tcb { f_\\del } _ { \\del\\in ( 0,1 ) }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0829",
+      "latex": "z=4.304",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0830",
+      "latex": "\\R\\rightarrow\\R",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0831",
+      "latex": "T '",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0832",
+      "latex": "\\Gamma_i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0833",
+      "latex": "\\sigma^ { -1 } ( N )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0834",
+      "latex": "\\lesssim2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0835",
+      "latex": "\\rho_ { \\rm 0 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0836",
+      "latex": "^\\circ",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0837",
+      "latex": "C ( t ) \\in [ 0 , R ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0838",
+      "latex": "n=0,1,5",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0839",
+      "latex": "\\sim few",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0840",
+      "latex": "h^+",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0841",
+      "latex": "t \\in [ 0 , T ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0842",
+      "latex": "5.8~\\mum",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0843",
+      "latex": "\\theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0844",
+      "latex": "256^ { 2 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0845",
+      "latex": "2^ { k^ { 1/3 } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0846",
+      "latex": "$ \\q ( f , g ) \\geq \\qp ( f , g ) $",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0847",
+      "latex": "\\gamma^ { \\bmit { \\Psi } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0848",
+      "latex": "k > n/2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0849",
+      "latex": "e_i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0850",
+      "latex": "\\E [ \\tK ( x , x ' ) \\tL ( y , y ' ) ] =\\HSIC > 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0851",
+      "latex": "\\sigma\\in S_n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0852",
+      "latex": "x_i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0853",
+      "latex": "\\ { S^k\\ } , k=1,2 , ...",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0854",
+      "latex": "\\Phi_1 \\left ( 1,4 , -\\frac { 3 } { 2 } \\right )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0855",
+      "latex": "\\mu_ { c_i }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0856",
+      "latex": "\\vec { r_n }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0857",
+      "latex": "A_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0858",
+      "latex": "h_ { \\pm } ( { K } , z_1 , z_2 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0859",
+      "latex": "E ( v , f , \\theta )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0860",
+      "latex": "Q_t|_ { \\sangle { C_T } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0861",
+      "latex": "96 \\pm 16",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0862",
+      "latex": "R^ { -1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0863",
+      "latex": "u_n=0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0864",
+      "latex": "\\mathrm { Diff } ( W_g , * )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0865",
+      "latex": "\\eta = K_ { D_i } /K_ { D_m }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0866",
+      "latex": "80\\hMpc",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0867",
+      "latex": "\\bf { 12.95 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0868",
+      "latex": "Q|_ { V_ { K_ * } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0869",
+      "latex": "vc_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0870",
+      "latex": "r=|\\kappa|",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0871",
+      "latex": "E^s",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0872",
+      "latex": "l , m",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0873",
+      "latex": "( \\pi_ { ei } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0874",
+      "latex": "T ( m )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0875",
+      "latex": "\\pi_ { ig } ^ { ( \\ell+1 ) }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0876",
+      "latex": "( -1 ) ^n",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0877",
+      "latex": "\\gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0878",
+      "latex": "B ( x ) \\geq 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0879",
+      "latex": "^ { 1,2,3,4 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0880",
+      "latex": "g : \\mathbb { R } ^ { p } \\rightarrow\\mathbb { R } ^ { d }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0881",
+      "latex": "\\mc { C } _4",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0882",
+      "latex": "\\pi",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0883",
+      "latex": "\\mathbf { p }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0884",
+      "latex": "E_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0885",
+      "latex": "\\epsilon",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0886",
+      "latex": "H_ { \\del }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0887",
+      "latex": "\\mathcal { H } ^d|_\\Sigma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0888",
+      "latex": "B_ { s } = 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0889",
+      "latex": "\\lambda_ { i } > 2\\ell",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0890",
+      "latex": "z_ { \\text { deco } } = \\text { En } ( x_ { \\text { real } } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0891",
+      "latex": "\\Delta E",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0892",
+      "latex": "d_ { \\alpha } \\in \\ { 0,1\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0893",
+      "latex": "\\mathbb { FC } \\gets \\emptyset",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0894",
+      "latex": "p ( r_ { ij } |\\mathbf { u } _ { i } , \\mathbf { v } _ { j } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0895",
+      "latex": "X ( 3872 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0896",
+      "latex": "g_B",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0897",
+      "latex": "\\tau_1= 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0898",
+      "latex": "Y=\\vectD { \\psi }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0899",
+      "latex": "k \\in \\N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0900",
+      "latex": "G ( \\Sigma )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0901",
+      "latex": "\\bbR^ { d }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0902",
+      "latex": "25^ { +9 } _ { -8 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0903",
+      "latex": "\\hat { \\boldsymbol { H } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0904",
+      "latex": "^ { -1 }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0905",
+      "latex": "\\QQ^2 \\simeq \\QQ^n / \\Gamma",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0906",
+      "latex": "173.956",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0907",
+      "latex": "m\\to\\infty",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0908",
+      "latex": "K\\subseteq \\Theta",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0909",
+      "latex": "\\gamma : S^1\\to \\R^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0910",
+      "latex": "{ \\boldsymbol { s } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0911",
+      "latex": "\\Longleftrightarrow",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0912",
+      "latex": "Q_ { nlm }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0913",
+      "latex": "J_\\eta,1/J_\\eta\\in L^\\infty ( \\Omega )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0914",
+      "latex": "\\varphi_0 = 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0915",
+      "latex": "i \\in \\tI_\\af",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0916",
+      "latex": "u^ { ( 5 ) } _ { \\rm L }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0917",
+      "latex": "\\nu_ { \\parallel } =1.04 ( 4 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0918",
+      "latex": "\\BF_ { p^ { r } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0919",
+      "latex": "0.99",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0920",
+      "latex": "\\Omega_n = n \\Omega",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0921",
+      "latex": "\\mathcal { O } ( ( \\|\\mathbf F\\|\\Delta t ) ^ { k+1 } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0922",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0923",
+      "latex": "[ 0,1 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0924",
+      "latex": "\\vec { \\beta }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0925",
+      "latex": "\\boldsymbol { \\hat { u } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0926",
+      "latex": "U ( 1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0927",
+      "latex": "q ( f , g ) \\geq 0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0928",
+      "latex": "\\pm { } 50",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0929",
+      "latex": "I=\\ { 1 , \\ldots , j\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0930",
+      "latex": "f_ { cost } \\ { \\underline { n } _i , \\underline { n } _ { k } \\ }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0931",
+      "latex": "k_c ( V ) \\land U",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0932",
+      "latex": "i \\in C",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0933",
+      "latex": "\\ { c ( \\ { t_0 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0934",
+      "latex": "s+1-\\lvert I\\rvert",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0935",
+      "latex": "\\pm",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0936",
+      "latex": "j\\in \\mathbb N_0^d",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0937",
+      "latex": "\\rpathp \\approx x_w '",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0938",
+      "latex": "\\m ' = [ -b_N ; -a_N ] + \\cdots + [ -b_1 ; -a_1 ]",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0939",
+      "latex": "H_ { 0 } : \\bX \\sim N_ { 2 } ( \\zero_ { 2 } , \\bI_ { 2 } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0940",
+      "latex": "x\\in U",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0941",
+      "latex": "E ( Z Z^T ) =Cov ( Z ) =\\sum_ { i=1 } ^ { m } { \\lambda_i U_i { U_i } ^T }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0942",
+      "latex": "\\Delta_N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0943",
+      "latex": "O ( \\sqrt { n } \\cdot \\log n )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0944",
+      "latex": "\\lambda=25",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0945",
+      "latex": "\\ , \\ , \\,120.801\\ , \\ , \\ ,",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0946",
+      "latex": "\\ { \\bm { x } _u'\\ } _ { u=1 } ^ { N }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0947",
+      "latex": "( V_i ) _i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0948",
+      "latex": "j \\in \\ { 1 , \\ldots , q\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0949",
+      "latex": "in Model~\\eqref { Model : k_sigma_models_rewrite } , we assume that",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0950",
+      "latex": "C : =4\\hat C",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0951",
+      "latex": "r_ { ij } ( a_ { ij } =1 )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0952",
+      "latex": "\\supp ( d ) = \\ { z\\in Z\\mid d ( z ) > 0\\ }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0953",
+      "latex": "79.4\\pm1.2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0954",
+      "latex": "s \\to \\infty",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0955",
+      "latex": "h=g+u_1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0956",
+      "latex": "\\boldsymbol { \\Theta } ^ *",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0957",
+      "latex": "\\ep_\\nu ( \\Gamma ) \\in ( 0 , \\ep_0 ]",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0958",
+      "latex": "e^ { \\lambda_k } V",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0959",
+      "latex": "( \\alpha , d_\\mathcal { Y } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0960",
+      "latex": "y_t",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0961",
+      "latex": "( x , y )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0962",
+      "latex": "R_2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0963",
+      "latex": "L^2",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0964",
+      "latex": "\\Fset",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0965",
+      "latex": "( \\mb { G } ) _ { i ' , j ' }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0966",
+      "latex": "\\wedge^2_ { \\Z } M",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0967",
+      "latex": "K_\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0968",
+      "latex": "\\eitD\\psi_0-\\psi_0\\in L^2 ( \\ { \\mathbf\\ R^d )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0969",
+      "latex": "i= 1 , \\dots , k",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0970",
+      "latex": "|\\vec { \\psi } | = 224",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0971",
+      "latex": "s=0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0972",
+      "latex": "44.73",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0973",
+      "latex": "| \\Cl_ { K|K_0 } [ p ] |^k",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0974",
+      "latex": "\\mathbb { R } ^ { + }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0975",
+      "latex": "\\operatorname { cosocle } ( c-1 ) > \\operatorname { rad } ( c )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0976",
+      "latex": "{ \\hat { \\boldsymbol { \\delta } } }",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0977",
+      "latex": "C^\\infty_c ( \\bar { \\Omega } )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0978",
+      "latex": "G= ( V , E )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0979",
+      "latex": "X = \\PP^N",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0980",
+      "latex": "D ( \\bm q , \\omega ) \\mp A ( \\bm q , \\omega )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0981",
+      "latex": "\\mathrm { NV } ^0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0982",
+      "latex": "\\overline { a } _i",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0983",
+      "latex": "M^ { ( n ) } ( \\rho_p ; b_n ) =0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0984",
+      "latex": "\\text { h } _ { \\theta }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0985",
+      "latex": "0 < \\gamma \\leq +\\infty",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0986",
+      "latex": "\\dim_ { \\F_p } ( C_i ) =0",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0987",
+      "latex": "\\Omega_ { k , \\epsilon }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0988",
+      "latex": "\\mathcal { K } ( t , \\hat { \\tau } )",
+      "source": "textbook",
+      "complexity": "medium"
+    },
+    {
+      "id": "textbook-0989",
+      "latex": "\\alpha",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0990",
+      "latex": "\\gamma_ { \\textrm { pred } }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0991",
+      "latex": "C_3",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0992",
+      "latex": "\\boldsymbol { D } _\\text { sync }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0993",
+      "latex": "K=\\partial_ { \\nonrotatingt }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0994",
+      "latex": "\\mathcal { O }",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0995",
+      "latex": "( Y_t )",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0996",
+      "latex": "40.0\\pm0.1",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0997",
+      "latex": "|Z_i|",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0998",
+      "latex": "\\lambda",
+      "source": "textbook",
+      "complexity": "simple"
+    },
+    {
+      "id": "textbook-0999",
+      "latex": "j=1 , \\ldots , M",
+      "source": "textbook",
+      "complexity": "simple"
+    }
+  ]
+}

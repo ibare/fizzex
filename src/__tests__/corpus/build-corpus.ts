@@ -22,6 +22,7 @@ interface Corpus {
     fuzz: { count: number; seed: number };
     katex: { count: number; version: string };
     mathjax: { count: number; version: string };
+    realworld: { count: number; sources: Record<string, number> };
   };
   total: number;
   formulas: CorpusEntry[];
@@ -96,6 +97,22 @@ function loadMathjaxFormulas(): CorpusEntry[] {
   }));
 }
 
+function loadRealworldFormulas(): CorpusEntry[] {
+  const path = resolve(BASE_DIR, 'realworld-formulas.json');
+  if (!existsSync(path)) {
+    console.warn('  경고: realworld-formulas.json 없음');
+    return [];
+  }
+  const data = JSON.parse(readFileSync(path, 'utf-8'));
+  console.log(`  realworld-formulas.json: ${data.formulas.length}개`);
+  return data.formulas.map((f: any) => ({
+    id: f.id,
+    latex: f.latex,
+    source: f.source || 'realworld',
+    category: f.complexity,
+  }));
+}
+
 function deduplicateAndReindex(entries: CorpusEntry[]): CorpusEntry[] {
   const seen = new Set<string>();
   const unique: CorpusEntry[] = [];
@@ -126,16 +143,19 @@ function buildCorpus(): Corpus {
     fuzzSeed = meta.base_seed;
   }
 
-  console.log('[1/3] Fuzz 수식 로딩...');
+  console.log('[1/4] Fuzz 수식 로딩...');
   const fuzz = loadFuzzFormulas();
 
-  console.log('\n[2/3] KaTeX 수식 로딩...');
+  console.log('\n[2/4] KaTeX 수식 로딩...');
   const katex = loadKatexFormulas();
 
-  console.log('\n[3/3] MathJax 수식 로딩...');
+  console.log('\n[3/4] MathJax 수식 로딩...');
   const mathjax = loadMathjaxFormulas();
 
-  const all = [...fuzz, ...katex, ...mathjax];
+  console.log('\n[4/4] 실전 수식 로딩...');
+  const realworld = loadRealworldFormulas();
+
+  const all = [...fuzz, ...katex, ...mathjax, ...realworld];
   console.log(`\n통합 전 총 수식: ${all.length}개`);
 
   const deduplicated = deduplicateAndReindex(all);
@@ -153,13 +173,20 @@ function buildCorpus(): Corpus {
     mathjaxVersion = JSON.parse(readFileSync(mathjaxPath, 'utf-8')).source_version || 'unknown';
   }
 
+  // realworld 소스별 통계
+  const realworldBySource: Record<string, number> = {};
+  for (const entry of realworld) {
+    realworldBySource[entry.source] = (realworldBySource[entry.source] || 0) + 1;
+  }
+
   const corpus: Corpus = {
-    version: '1.0',
+    version: '2.0',
     built_date: new Date().toISOString().split('T')[0],
     sources: {
       fuzz: { count: fuzz.length, seed: fuzzSeed },
       katex: { count: katex.length, version: katexVersion },
       mathjax: { count: mathjax.length, version: mathjaxVersion },
+      realworld: { count: realworld.length, sources: realworldBySource },
     },
     total: deduplicated.length,
     formulas: deduplicated,
