@@ -277,7 +277,7 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
   };
 }
 
-function categorizeError(message: string): string {
+export function categorizeError(message: string): string {
   if (message.includes('매칭되지 않은 환경 종료')) return 'unmatched_end';
   if (message.includes('매칭되지 않은 \\right')) return 'unmatched_right';
   if (message.includes('미구현 표준 명령어')) return 'standard_unimplemented';

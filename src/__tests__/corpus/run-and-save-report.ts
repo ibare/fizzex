@@ -21,7 +21,7 @@ async function main() {
   if (existsSync(resultPath)) {
     try {
       const prev = JSON.parse(readFileSync(resultPath, 'utf-8'));
-      history = prev.history || [];
+      history = (prev.history || []).filter((h: any) => h.run);
     } catch { /* 무시 */ }
   }
 

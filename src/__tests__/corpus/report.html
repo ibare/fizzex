@@ -103,6 +103,43 @@
   .pagination button:disabled { opacity: 0.4; cursor: default; }
   .pagination .page-info { font-size: 13px; color: var(--text2); }
   .empty { text-align: center; padding: 40px; color: var(--text3); }
+
+  /* Engine Comparison */
+  .comp-section { display: none; }
+  .comp-bar-chart { background: var(--bg2); border-radius: var(--radius); padding: 20px; }
+  .comp-bar-chart canvas { width: 100%; height: 260px; }
+  .comp-legend { display: flex; gap: 20px; margin-top: 12px; font-size: 13px; color: var(--text2); }
+  .comp-legend span { display: flex; align-items: center; gap: 6px; }
+  .comp-legend span::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+  .legend-fizzex::before { background: var(--blue); }
+  .legend-katex::before { background: var(--green); }
+  .legend-mathjax::before { background: var(--orange); }
+
+  .gap-positive { color: var(--green); font-weight: 600; }
+  .gap-negative { color: var(--red); font-weight: 600; }
+  .gap-zero { color: var(--text3); }
+
+  .priority-bar { background: var(--bg2); border-radius: var(--radius); padding: 20px; }
+  .priority-bar canvas { width: 100%; height: 80px; }
+  .priority-legend { display: flex; gap: 16px; margin-top: 12px; font-size: 13px; color: var(--text2); flex-wrap: wrap; }
+  .priority-legend span { display: flex; align-items: center; gap: 5px; }
+  .priority-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+  .legend-critical::before { background: var(--red); }
+  .legend-high::before { background: var(--orange); }
+  .legend-low::before { background: var(--text3); }
+  .legend-pass::before { background: var(--green); }
+  .legend-fonly::before { background: var(--blue); }
+  .legend-partial::before { background: #a78bfa; }
+
+  .critical-msg { margin-top: 12px; padding: 12px 16px; background: var(--blue-bg); border-radius: var(--radius-sm); font-size: 14px; color: var(--text); }
+
+  .badge-critical { background: var(--red-bg); color: var(--red); }
+  .badge-none { background: var(--green-bg); color: var(--green); }
+
+  .engine-status { display: flex; gap: 8px; font-size: 11px; margin-top: 4px; }
+  .engine-status span { padding: 1px 6px; border-radius: 4px; }
+  .engine-pass { background: var(--green-bg); color: var(--green); }
+  .engine-fail { background: var(--red-bg); color: var(--red); }
 </style>
 </head>
 <body>
@@ -137,6 +174,49 @@
     </tr></thead><tbody></tbody></table>
   </section>
 
+  <!-- ─── Engine Comparison (비교 데이터 있을 때만 표시) ─── -->
+  <section class="comp-section" id="compSummarySection">
+    <h2>Engine Comparison</h2>
+    <div class="comp-bar-chart">
+      <canvas id="compChart"></canvas>
+      <div class="comp-legend">
+        <span class="legend-fizzex">Fizzex</span>
+        <span class="legend-katex">KaTeX</span>
+        <span class="legend-mathjax">MathJax</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="comp-section" id="sourceCompSection">
+    <h2>Source x Engine Breakdown</h2>
+    <table class="source-table" id="sourceCompTable"><thead><tr>
+      <th>Source</th><th>Total</th><th>Fizzex</th><th>KaTeX</th><th>MathJax</th><th>GAP</th>
+    </tr></thead><tbody></tbody></table>
+  </section>
+
+  <section class="comp-section" id="prioritySection">
+    <h2>Priority Classification</h2>
+    <div class="priority-bar">
+      <canvas id="priorityChart"></canvas>
+      <div class="priority-legend">
+        <span class="legend-pass">All Pass</span>
+        <span class="legend-critical">Critical</span>
+        <span class="legend-high">High</span>
+        <span class="legend-low">All Fail</span>
+        <span class="legend-fonly">Fizzex Only Pass</span>
+        <span class="legend-partial">Partial</span>
+      </div>
+    </div>
+    <div class="critical-msg" id="criticalMsg"></div>
+  </section>
+
+  <section class="comp-section" id="criticalSection">
+    <h2>Critical Failure Analysis</h2>
+    <table class="cmd-table" id="criticalTable"><thead><tr>
+      <th>#</th><th>Error Pattern</th><th>Count</th><th>%</th><th>Cumulative</th><th>Example</th>
+    </tr></thead><tbody></tbody></table>
+  </section>
+
   <section id="patternsSection">
     <h2>Failure Patterns</h2>
     <div class="pattern-grid" id="patterns"></div>
@@ -147,6 +227,7 @@
     <table class="cmd-table" id="cmdTable"><thead><tr>
       <th>Command</th><th>Count</th><th>Source</th><th>Priority</th>
     </tr></thead><tbody></tbody></table>
+    <div class="pagination" id="cmdPagination"></div>
   </section>
 
   <section>
@@ -159,6 +240,13 @@
         <option value="roundtrip">Round-trip Fail</option>
         <option value="box">Box Fail</option>
       </select>
+      <select id="filterPriority" style="display:none">
+        <option value="all">All Priorities</option>
+        <option value="critical">Critical</option>
+        <option value="high">High</option>
+        <option value="low">Low</option>
+        <option value="none">Pass / Fizzex Only</option>
+      </select>
       <input type="text" id="filterSearch" placeholder="LaTeX 검색...">
     </div>
     <div class="failure-list" id="failureList"></div>
@@ -169,6 +257,8 @@
 <script>
 const PER_PAGE = 20;
 let data = null;
+let compData = null;
+let compEntryMap = null; // id → ComparisonEntry lookup
 let filteredFailures = [];
 let currentPage = 1;
 
@@ -260,11 +350,13 @@ function renderTrend() {
     ctx.setLineDash(dashed ? [6, 4] : []);
     ctx.globalAlpha = dashed ? 0.5 : 1;
     ctx.beginPath();
+    let moved = false;
     history.forEach((h, i) => {
       if (h[key] == null) return;
       const px = pad.left + (i / (history.length - 1)) * cw;
       const py = pad.top + ch - (h[key] / 100) * ch;
-      i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      moved ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+      moved = true;
     });
     ctx.stroke();
     ctx.setLineDash([]);
@@ -316,14 +408,27 @@ function renderPatterns() {
   `).join('');
 }
 
+const CMD_PER_PAGE = 20;
+let cmdPage = 1;
+let allCmds = [];
+
 function renderUnsupportedCommands() {
-  const tbody = document.querySelector('#cmdTable tbody');
-  const cmds = data.unsupportedCommands || [];
-  if (cmds.length === 0) {
+  allCmds = data.unsupportedCommands || [];
+  if (allCmds.length === 0) {
     document.getElementById('cmdsSection').style.display = 'none';
     return;
   }
-  tbody.innerHTML = cmds.map(c => `
+  cmdPage = 1;
+  renderCmdPage();
+}
+
+function renderCmdPage() {
+  const tbody = document.querySelector('#cmdTable tbody');
+  const totalPages = Math.ceil(allCmds.length / CMD_PER_PAGE) || 1;
+  const start = (cmdPage - 1) * CMD_PER_PAGE;
+  const page = allCmds.slice(start, start + CMD_PER_PAGE);
+
+  tbody.innerHTML = page.map(c => `
     <tr>
       <td class="cmd">${escapeHtml(c.command)}</td>
       <td>${c.occurrences}</td>
@@ -331,11 +436,21 @@ function renderUnsupportedCommands() {
       <td><span class="badge badge-${c.priority}">${c.priority}</span></td>
     </tr>
   `).join('');
+
+  const pag = document.getElementById('cmdPagination');
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+  let html = `<button onclick="goCmdPage(${cmdPage-1})" ${cmdPage===1?'disabled':''}>&#x2190;</button>`;
+  html += `<span class="page-info">${cmdPage} / ${totalPages} (${allCmds.length})</span>`;
+  html += `<button onclick="goCmdPage(${cmdPage+1})" ${cmdPage===totalPages?'disabled':''}>&#x2192;</button>`;
+  pag.innerHTML = html;
 }
+
+function goCmdPage(p) { cmdPage = p; renderCmdPage(); }
 
 function applyFilters() {
   const source = document.getElementById('filterSource').value;
   const type = document.getElementById('filterType').value;
+  const priority = document.getElementById('filterPriority').value;
   const search = document.getElementById('filterSearch').value.toLowerCase();
 
   filteredFailures = (data.failures || []).filter(f => {
@@ -343,6 +458,11 @@ function applyFilters() {
     if (type === 'parse' && f.results.parseSuccess) return false;
     if (type === 'roundtrip' && f.results.roundTripSuccess) return false;
     if (type === 'box' && f.results.boxSuccess) return false;
+    if (priority !== 'all' && compEntryMap) {
+      const ce = compEntryMap.get(f.id);
+      const p = ce ? ce.priority : 'none';
+      if (priority !== p) return false;
+    }
     if (search && !f.latex.toLowerCase().includes(search) && !f.id.toLowerCase().includes(search)) return false;
     return true;
   });
@@ -359,11 +479,21 @@ function renderFailures() {
   if (page.length === 0) {
     list.innerHTML = '<div class="empty">필터 조건에 맞는 실패 항목이 없습니다.</div>';
   } else {
-    list.innerHTML = page.map(f => `
+    list.innerHTML = page.map(f => {
+      const ce = compEntryMap ? compEntryMap.get(f.id) : null;
+      const priorityBadge = ce ? `<span class="badge badge-${ce.priority}">${ce.priority}</span>` : '';
+      const engineStatus = ce ? `
+        <div class="engine-status">
+          <span class="${ce.fizzex.parseSuccess ? 'engine-pass' : 'engine-fail'}">Fizzex ${ce.fizzex.parseSuccess ? 'O' : 'X'}</span>
+          <span class="${ce.katex.parseSuccess ? 'engine-pass' : 'engine-fail'}">KaTeX ${ce.katex.parseSuccess ? 'O' : 'X'}</span>
+          <span class="${ce.mathjax.parseSuccess ? 'engine-pass' : 'engine-fail'}">MathJax ${ce.mathjax.parseSuccess ? 'O' : 'X'}</span>
+        </div>` : '';
+      const errText = f.results.parseErrors ? f.results.parseErrors[0] : f.results.parseError;
+      return `
       <div class="failure-item">
         <div class="failure-header">
           <span class="failure-id">${f.id}</span>
-          <span class="failure-source badge badge-${f.source.startsWith('fuzz') ? 'low' : 'medium'}">${f.source}</span>
+          <span>${priorityBadge} <span class="badge badge-${f.source.startsWith('fuzz') ? 'low' : 'medium'}">${f.source}</span></span>
         </div>
         <div class="failure-latex">${escapeHtml(f.latex.substring(0, 200))}${f.latex.length > 200 ? '...' : ''}</div>
         <div class="failure-status">
@@ -371,10 +501,11 @@ function renderFailures() {
           <span class="${f.results.roundTripSuccess ? 'pass' : 'fail'}">Round-trip: ${f.results.roundTripSuccess ? 'PASS' : 'FAIL'}</span>
           <span class="${f.results.boxSuccess ? 'pass' : 'fail'}">Box: ${f.results.boxSuccess ? 'PASS' : 'FAIL'}</span>
         </div>
-        ${f.results.parseError ? `<div class="failure-error">${escapeHtml(f.results.parseError.substring(0, 120))}</div>` : ''}
+        ${engineStatus}
+        ${errText ? `<div class="failure-error">${escapeHtml(errText.substring(0, 120))}</div>` : ''}
         ${f.results.roundTripDiff ? `<div class="failure-error">${escapeHtml(f.results.roundTripDiff.substring(0, 120))}</div>` : ''}
-      </div>
-    `).join('');
+      </div>`;
+    }).join('');
   }
 
   // Pagination
@@ -402,6 +533,194 @@ function populateSourceFilter() {
   });
 }
 
+// ─── Engine Comparison Renderers ───────────────────────────
+
+function renderCompChart() {
+  const canvas = document.getElementById('compChart');
+  const ctx = canvas.getContext('2d');
+  const s = compData.summary;
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 260 * dpr;
+  ctx.scale(dpr, dpr);
+  const W = rect.width, H = 260;
+  const pad = { top: 30, right: 20, bottom: 40, left: 50 };
+
+  ctx.clearRect(0, 0, W, H);
+
+  const cs = getComputedStyle(document.documentElement);
+  const blue = cs.getPropertyValue('--blue').trim();
+  const green = cs.getPropertyValue('--green').trim();
+  const orange = cs.getPropertyValue('--orange').trim();
+  const border = cs.getPropertyValue('--border').trim();
+  const text3 = cs.getPropertyValue('--text3').trim();
+  const text = cs.getPropertyValue('--text').trim();
+
+  const groups = [
+    { label: 'Parse Rate', vals: [s.fizzex.parseRate, s.katex.parseRate, s.mathjax.parseRate] },
+    { label: 'Render Rate', vals: [s.fizzex.renderRate, s.katex.renderRate, s.mathjax.renderRate] },
+  ];
+  const colors = [blue, green, orange];
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+  const groupW = cw / groups.length;
+  const barW = Math.min(40, groupW / 5);
+  const gap = barW * 0.3;
+
+  // Y grid
+  ctx.strokeStyle = border; ctx.lineWidth = 1;
+  ctx.font = '11px -apple-system, sans-serif'; ctx.fillStyle = text3; ctx.textAlign = 'right';
+  for (let y = 0; y <= 100; y += 20) {
+    const py = pad.top + ch - (y / 100) * ch;
+    ctx.beginPath(); ctx.moveTo(pad.left, py); ctx.lineTo(W - pad.right, py); ctx.stroke();
+    ctx.fillText(y + '%', pad.left - 6, py + 4);
+  }
+
+  // Bars
+  groups.forEach((g, gi) => {
+    const cx = pad.left + gi * groupW + groupW / 2;
+    const totalBarsW = 3 * barW + 2 * gap;
+    const startX = cx - totalBarsW / 2;
+
+    g.vals.forEach((v, vi) => {
+      const x = startX + vi * (barW + gap);
+      const barH = (v / 100) * ch;
+      const y = pad.top + ch - barH;
+
+      ctx.fillStyle = colors[vi];
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      const r = 4;
+      ctx.moveTo(x + r, y); ctx.lineTo(x + barW - r, y);
+      ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+      ctx.lineTo(x + barW, pad.top + ch); ctx.lineTo(x, pad.top + ch);
+      ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Value label
+      ctx.fillStyle = text; ctx.font = 'bold 12px -apple-system, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(v.toFixed(1) + '%', x + barW / 2, y - 6);
+    });
+
+    // Group label
+    ctx.fillStyle = text3; ctx.font = '13px -apple-system, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(g.label, cx, H - 10);
+  });
+}
+
+function renderSourceComp() {
+  const tbody = document.querySelector('#sourceCompTable tbody');
+  const entries = Object.entries(compData.bySource).sort((a, b) => b[1].total - a[1].total);
+  tbody.innerHTML = entries.map(([name, s]) => {
+    const fRate = s.total > 0 ? (s.fizzex.parsePass / s.total * 100).toFixed(1) : '0.0';
+    const kRate = s.total > 0 ? (s.katex.parsePass / s.total * 100).toFixed(1) : '0.0';
+    const mRate = s.total > 0 ? (s.mathjax.parsePass / s.total * 100).toFixed(1) : '0.0';
+    const best = Math.max(Number(kRate), Number(mRate));
+    const gap = Number(fRate) - best;
+    const gapClass = gap > 0.5 ? 'gap-positive' : gap < -0.5 ? 'gap-negative' : 'gap-zero';
+    const gapStr = gap > 0 ? `+${gap.toFixed(1)}%` : `${gap.toFixed(1)}%`;
+    return `<tr>
+      <td><strong>${name}</strong></td>
+      <td>${s.total.toLocaleString()}</td>
+      <td>${fRate}%</td>
+      <td>${kRate}%</td>
+      <td>${mRate}%</td>
+      <td class="${gapClass}">${gapStr}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderPriorityChart() {
+  const canvas = document.getElementById('priorityChart');
+  const ctx = canvas.getContext('2d');
+  const c = compData.classifications;
+  const total = compData.meta.total_formulas;
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 80 * dpr;
+  ctx.scale(dpr, dpr);
+  const W = rect.width, H = 80;
+  const pad = { left: 10, right: 10, top: 15, bottom: 25 };
+  const barW = W - pad.left - pad.right;
+  const barH = 30;
+  const y = pad.top;
+
+  const cs = getComputedStyle(document.documentElement);
+  const segments = [
+    { key: 'all-pass', color: cs.getPropertyValue('--green').trim(), count: c['all-pass'] },
+    { key: 'fizzex-only-fail', color: cs.getPropertyValue('--red').trim(), count: c['fizzex-only-fail'] },
+    { key: 'fizzex-and-one', color: cs.getPropertyValue('--orange').trim(), count: c['fizzex-and-one'] },
+    { key: 'all-fail', color: cs.getPropertyValue('--text3').trim(), count: c['all-fail'] },
+    { key: 'fizzex-only-pass', color: cs.getPropertyValue('--blue').trim(), count: c['fizzex-only-pass'] },
+    { key: 'partial', color: '#a78bfa', count: c['partial'] },
+  ];
+
+  ctx.clearRect(0, 0, W, H);
+  let x = pad.left;
+  segments.forEach(seg => {
+    const w = (seg.count / total) * barW;
+    if (w < 1) return;
+    ctx.fillStyle = seg.color;
+    ctx.globalAlpha = 0.85;
+    ctx.fillRect(x, y, w, barH);
+    ctx.globalAlpha = 1;
+    // Label if wide enough
+    if (w > 40) {
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 11px -apple-system, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(((seg.count / total) * 100).toFixed(1) + '%', x + w / 2, y + barH / 2 + 4);
+    }
+    x += w;
+  });
+
+  // Bottom labels
+  ctx.font = '11px -apple-system, sans-serif';
+  ctx.fillStyle = cs.getPropertyValue('--text2').trim();
+  ctx.textAlign = 'left';
+  const critical = c['fizzex-only-fail'];
+  const high = c['fizzex-and-one'];
+  ctx.fillText(
+    `CRITICAL ${critical} (${((critical/total)*100).toFixed(1)}%)  |  HIGH ${high} (${((high/total)*100).toFixed(1)}%)  |  ALL PASS ${c['all-pass']} (${((c['all-pass']/total)*100).toFixed(1)}%)`,
+    pad.left, y + barH + 18
+  );
+
+  // Critical message
+  const msgEl = document.getElementById('criticalMsg');
+  if (critical > 0) {
+    msgEl.innerHTML = `<strong>CRITICAL ${critical}건</strong>을 전부 수정하면 Fizzex 파싱률이 ` +
+      `${compData.summary.fizzex.parseRate}%에서 ` +
+      `${Math.min(100, Math.round((compData.summary.fizzex.parsePass + critical) / total * 1000) / 10)}%로 상승합니다.`;
+  } else {
+    msgEl.innerHTML = 'CRITICAL 실패가 없습니다. Fizzex가 모든 표준 수식을 처리합니다.';
+  }
+}
+
+function renderCriticalClusters() {
+  const tbody = document.querySelector('#criticalTable tbody');
+  const clusters = compData.criticalClusters || [];
+  if (clusters.length === 0) {
+    document.getElementById('criticalSection').querySelector('table').style.display = 'none';
+    return;
+  }
+  tbody.innerHTML = clusters.slice(0, 15).map((c, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td class="cmd">${escapeHtml(c.pattern)}</td>
+      <td>${c.count}</td>
+      <td>${c.percent}%</td>
+      <td>${c.cumulativePercent}%</td>
+      <td class="pattern-example">${escapeHtml((c.examples[0] || '').substring(0, 80))}</td>
+    </tr>
+  `).join('');
+}
+
+function showCompSections() {
+  document.querySelectorAll('.comp-section').forEach(el => el.style.display = 'block');
+  document.getElementById('filterPriority').style.display = '';
+}
+
 async function init() {
   try {
     const resp = await fetch('./corpus-result.json');
@@ -411,6 +730,15 @@ async function init() {
       '<div class="empty" style="margin-top:80px"><h2>corpus-result.json을 불러올 수 없습니다.</h2><p>pnpm corpus:full 실행 후 다시 시도하세요.</p></div>';
     return;
   }
+
+  // 비교 데이터 로드 (없어도 기존 리포트는 정상 동작)
+  try {
+    const compResp = await fetch('./comparison-result.json');
+    compData = await compResp.json();
+    compEntryMap = new Map();
+    (compData.entries || []).forEach(e => compEntryMap.set(e.id, e));
+  } catch { compData = null; compEntryMap = null; }
+
   renderMeta();
   renderSummary();
   renderTrend();
@@ -418,10 +746,21 @@ async function init() {
   renderPatterns();
   renderUnsupportedCommands();
   populateSourceFilter();
+
+  // 비교 섹션 렌더
+  if (compData) {
+    showCompSections();
+    renderCompChart();
+    renderSourceComp();
+    renderPriorityChart();
+    renderCriticalClusters();
+  }
+
   applyFilters();
 
   document.getElementById('filterSource').addEventListener('change', applyFilters);
   document.getElementById('filterType').addEventListener('change', applyFilters);
+  document.getElementById('filterPriority').addEventListener('change', applyFilters);
   document.getElementById('filterSearch').addEventListener('input', applyFilters);
 }
 
