@@ -1,10 +1,203 @@
 /**
  * LaTeX 수학 문법 생성 규칙 정의
- * 각 규칙은 "이 자리에 올 수 있는 것들"의 목록이다.
+ *
+ * latex-commands.json에서 명령어를 로드하여 문법 규칙을 동적으로 구성.
+ * KaTeX + MathJax 전체 명령어를 사용하므로 Fizzex 미지원 명령어도 포함됨.
  */
 
+import { readFileSync } from 'fs';
+import { resolve, dirname } from 'path';
+
+// ──────── JSON 로드 ────────
+
+interface CommandEntry {
+  command: string;
+  category: string;
+  inFizzex: boolean;
+  argCount: number;
+}
+
+interface CommandsData {
+  commands: CommandEntry[];
+}
+
+function loadCommands(): CommandsData {
+  const jsonPath = resolve(dirname(new URL(import.meta.url).pathname), 'latex-commands.json');
+  return JSON.parse(readFileSync(jsonPath, 'utf-8'));
+}
+
+function byCategory(data: CommandsData, category: string): string[] {
+  return data.commands
+    .filter(c => c.category === category)
+    .map(c => c.command);
+}
+
+// ──────── 명령어 로드 및 분류 ────────
+
+const data = loadCommands();
+
+const greekCmds = byCategory(data, 'greek');
+const symbolCmds = byCategory(data, 'symbol');
+const funcCmds = byCategory(data, 'function');
+const opCmds = byCategory(data, 'operator');
+const relCmds = byCategory(data, 'relation');
+const arrowCmds = byCategory(data, 'arrow');
+const negCmds = byCategory(data, 'negation');
+const bigopCmds = byCategory(data, 'bigop');
+const spacingCmds = byCategory(data, 'spacing').filter(c => /^\\[,;:!]$/.test(c) || /^\\(quad|qquad|enspace|thinspace|medspace|thickspace)$/.test(c));
+const delimCmds = byCategory(data, 'delimiter');
+const envCmds = byCategory(data, 'environment');
+
+// 폰트 명령어: argCount=1인 것만 (적용 가능한 래핑 명령어)
+const fontCmds = data.commands
+  .filter(c => c.category === 'font' && c.argCount === 1)
+  .map(c => c.command);
+
+// 구조 명령어: argCount별 분류
+const struct1Cmds = data.commands
+  .filter(c => c.category === 'structure' && c.argCount === 1)
+  .map(c => c.command);
+const struct2Cmds = data.commands
+  .filter(c => c.category === 'structure' && c.argCount === 2)
+  .map(c => c.command);
+
+// 악센트 명령어: argCount=1 (위에 놓는 장식)
+const accentCmds = data.commands
+  .filter(c => c.category === 'accent' && c.argCount === 1)
+  .map(c => c.command);
+
+// ──────── struct 프로덕션 생성 ────────
+
+function buildStructProductions(): string[] {
+  const prods: string[] = [];
+
+  // 기본 구조 (항상 포함)
+  prods.push('\\frac{expr}{expr}');
+  prods.push('\\sqrt{expr}');
+  prods.push('\\sqrt[number]{expr}');
+
+  // argCount=2 구조: \cmd{expr}{expr}
+  for (const cmd of struct2Cmds) {
+    if (cmd === '\\frac') continue; // 이미 추가
+    prods.push(`${cmd}{expr}{expr}`);
+  }
+
+  // argCount=1 구조: \cmd{expr}
+  for (const cmd of struct1Cmds) {
+    if (cmd === '\\sqrt') continue;
+    prods.push(`${cmd}{expr}`);
+  }
+
+  // 악센트: \cmd{atom}
+  for (const cmd of accentCmds) {
+    prods.push(`${cmd}{atom}`);
+  }
+
+  return prods;
+}
+
+// ──────── delimited 프로덕션 생성 ────────
+
+// 주요 구분자 쌍 (가장 일반적인 것들)
+const DELIM_PAIRS: [string, string][] = [
+  ['(', ')'],
+  ['[', ']'],
+  ['\\{', '\\}'],
+  ['|', '|'],
+  ['\\langle', '\\rangle'],
+  ['\\lfloor', '\\rfloor'],
+  ['\\lceil', '\\rceil'],
+  ['\\lvert', '\\rvert'],
+  ['\\lVert', '\\rVert'],
+  // 편측 구분자
+  ['(', '.'],
+  ['.', ')'],
+];
+
+function buildDelimitedProductions(): string[] {
+  return DELIM_PAIRS.map(([l, r]) => `\\left${l} expr \\right${r}`);
+}
+
+// ──────── bigop 프로덕션 생성 ────────
+
+function buildBigopProductions(): string[] {
+  const prods: string[] = [];
+  for (const cmd of bigopCmds) {
+    // 적분류: 상하한
+    if (/int|oint/.test(cmd)) {
+      prods.push(`${cmd}_{subscript}^{supscript}`);
+      prods.push(`${cmd}_{subscript}`);
+    }
+    // lim류: 아래첨자만
+    else if (/lim/.test(cmd)) {
+      prods.push(`${cmd}_{subscript}`);
+    }
+    // 나머지: 상하한
+    else {
+      prods.push(`${cmd}_{subscript}^{supscript}`);
+    }
+  }
+  return prods;
+}
+
+// ──────── environment 프로덕션 생성 ────────
+
+function buildEnvironmentProductions(): string[] {
+  const prods: string[] = [];
+
+  for (const env of envCmds) {
+    // \begin{name} 에서 이름 추출
+    const match = env.match(/\\begin\{(.+)\}/);
+    if (!match) continue;
+    const name = match[1];
+
+    // matrix 계열
+    if (/matrix|Bmatrix|Vmatrix/.test(name)) {
+      prods.push(`\\begin{${name}} matrix_content \\end{${name}}`);
+    }
+    // cases
+    else if (name === 'cases' || name === 'rcases' || name === 'dcases') {
+      prods.push(`\\begin{${name}} cases_content \\end{${name}}`);
+    }
+    // align/aligned/gather
+    else if (/align|gather|split|multline/.test(name)) {
+      prods.push(`\\begin{${name}} align_content \\end{${name}}`);
+    }
+    // array (특수 — column spec 필요)
+    else if (name === 'array') {
+      prods.push(`\\begin{array}{cc} matrix_content \\end{array}`);
+    }
+    // CD (commutative diagram)
+    else if (name === 'CD') {
+      prods.push(`\\begin{CD} expr @>>> expr \\\\\\\\ @VVV @AAA \\\\\\\\ expr @>>> expr \\end{CD}`);
+    }
+    // 나머지는 일반 align 콘텐츠
+    else {
+      prods.push(`\\begin{${name}} align_content \\end{${name}}`);
+    }
+  }
+
+  return prods;
+}
+
+// ──────── font_wrap 프로덕션 생성 ────────
+
+function buildFontWrapProductions(): string[] {
+  const prods: string[] = [];
+  for (const cmd of fontCmds) {
+    if (cmd === '\\text' || cmd === '\\textrm' || cmd === '\\textbf' || cmd === '\\textit') {
+      prods.push(`${cmd}{short_text}`);
+    } else {
+      prods.push(`${cmd}{atom}`);
+    }
+  }
+  return prods;
+}
+
+// ──────── 문법 구성 ────────
+
 export const GRAMMAR: Record<string, string[]> = {
-  // 최상위: 수식은 expr의 나열
+  // 최상위
   formula: ['expr', 'expr op expr', 'expr rel expr', 'equation'],
 
   // 표현식
@@ -33,105 +226,39 @@ export const GRAMMAR: Record<string, string[]> = {
   // 숫자
   number: ['0', '1', '2', '3', '4', '5', '10', '42', '100', '3.14'],
 
-  // 그리스 문자
-  greek: [
-    '\\alpha', '\\beta', '\\gamma', '\\delta', '\\epsilon', '\\zeta', '\\eta', '\\theta',
-    '\\lambda', '\\mu', '\\nu', '\\xi', '\\pi', '\\rho', '\\sigma', '\\tau', '\\phi', '\\psi', '\\omega',
-    '\\Gamma', '\\Delta', '\\Theta', '\\Lambda', '\\Xi', '\\Pi', '\\Sigma', '\\Phi', '\\Psi', '\\Omega',
-  ],
+  // JSON 기반 터미널
+  greek: greekCmds,
+  symbol: symbolCmds,
+  func: funcCmds,
+  op: opCmds,
+  rel: [...relCmds, ...arrowCmds],
+  unary: ['-', ...negCmds.slice(0, 10)],  // 부정 연산자 일부를 단항으로
+  spacing: spacingCmds,
+  short_text: ['if', 'for', 'and', 'or', 'where', 'such that', 'otherwise'],
 
-  // 기호
-  symbol: ['\\infty', '\\emptyset', '\\forall', '\\exists', '\\partial', '\\nabla', '\\ell', '\\hbar'],
+  // JSON 기반 구조적 규칙
+  struct: buildStructProductions(),
+  delimited: buildDelimitedProductions(),
+  bigop: buildBigopProductions(),
+  environment: buildEnvironmentProductions(),
+  font_wrap: buildFontWrapProductions(),
 
-  // 구조 커맨드
-  struct: [
-    '\\frac{expr}{expr}',
-    '\\sqrt{expr}',
-    '\\sqrt[number]{expr}',
-    '\\binom{expr}{expr}',
-    '\\overset{atom}{expr}',
-    '\\underset{atom}{expr}',
-    '\\overline{expr}',
-    '\\underline{expr}',
-    '\\hat{atom}',
-    '\\bar{atom}',
-    '\\vec{atom}',
-    '\\dot{atom}',
-    '\\ddot{atom}',
-    '\\tilde{atom}',
-    '\\widehat{expr}',
-    '\\widetilde{expr}',
-    '\\overbrace{expr}',
-    '\\underbrace{expr}',
-  ],
-
-  // 구분자
-  delimited: [
-    '\\left( expr \\right)',
-    '\\left[ expr \\right]',
-    '\\left\\{ expr \\right\\}',
-    '\\left| expr \\right|',
-    '\\left\\langle expr \\right\\rangle',
-    '\\left( expr \\right.',
-    '\\left. expr \\right)',
-  ],
-
-  // 위첨자/아래첨자
-  supscript: ['^{expr}', '^atom', '^\\prime', '^{\\dagger}'],
+  // 첨자
+  supscript: ['^{expr}', '^atom', "^\\prime", '^{\\dagger}'],
   subscript: ['_{expr}', '_atom', '_{atom,atom}'],
 
-  // 함수명
-  func: [
-    '\\sin', '\\cos', '\\tan', '\\log', '\\ln', '\\exp', '\\lim', '\\max', '\\min',
-    '\\sup', '\\inf', '\\det', '\\gcd', '\\dim', '\\ker', '\\arg',
-  ],
-
-  // 이항 연산자
-  op: [
-    '+', '-', '\\pm', '\\mp', '\\times', '\\div', '\\cdot', '\\circ',
-    '\\cup', '\\cap', '\\oplus', '\\otimes', '\\wedge', '\\vee',
-  ],
-
-  // 관계 연산자
-  rel: [
-    '=', '<', '>', '\\leq', '\\geq', '\\neq', '\\equiv', '\\approx', '\\sim',
-    '\\subset', '\\supset', '\\subseteq', '\\supseteq', '\\in', '\\ni',
-    '\\rightarrow', '\\Rightarrow', '\\leftrightarrow', '\\mapsto',
-  ],
-
-  // 단항 연산자
-  unary: ['-', '\\neg', '\\nabla', '\\partial'],
-
-  // 큰 연산자
-  bigop: [
-    '\\sum_{subscript}^{supscript}',
-    '\\prod_{subscript}^{supscript}',
-    '\\int_{subscript}^{supscript}',
-    '\\iint_{subscript}',
-    '\\oint_{subscript}',
-    '\\bigcup_{subscript}^{supscript}',
-    '\\bigcap_{subscript}^{supscript}',
-    '\\lim_{subscript}',
-  ],
-
-  // 환경
-  environment: [
-    '\\begin{pmatrix} matrix_content \\end{pmatrix}',
-    '\\begin{bmatrix} matrix_content \\end{bmatrix}',
-    '\\begin{vmatrix} matrix_content \\end{vmatrix}',
-    '\\begin{cases} cases_content \\end{cases}',
-  ],
-
-  // 행렬 내용
+  // 행렬/정렬 내용
   matrix_content: [
     'expr & expr \\\\\\\\ expr & expr',
     'expr & expr & expr \\\\\\\\ expr & expr & expr',
   ],
-
-  // cases 내용
   cases_content: [
     'expr & \\text{if } expr \\\\\\\\ expr & \\text{otherwise}',
     'expr & expr \\\\\\\\ expr & expr \\\\\\\\ expr & expr',
+  ],
+  align_content: [
+    'expr &= expr',
+    'expr &= expr \\\\\\\\ expr &= expr',
   ],
 
   // 등식
@@ -140,20 +267,6 @@ export const GRAMMAR: Record<string, string[]> = {
     'expr rel expr',
     'expr = expr = expr',
   ],
-
-  // 간격
-  spacing: ['\\,', '\\;', '\\:', '\\!', '\\quad', '\\qquad'],
-
-  // 폰트 커맨드
-  font_wrap: [
-    '\\mathrm{atom}',
-    '\\mathbf{atom}',
-    '\\mathbb{variable}',
-    '\\mathcal{variable}',
-    '\\text{short_text}',
-  ],
-
-  short_text: ['if', 'for', 'and', 'or', 'where', 'such that'],
 };
 
 /** 터미널 심볼 (더 이상 확장하지 않는 것들) */
@@ -167,3 +280,14 @@ export const RECURSIVE_RULES = new Set([
   'expr', 'struct', 'delimited', 'bigop', 'environment',
   'supscript', 'subscript', 'formula', 'equation', 'font_wrap',
 ]);
+
+/** Fizzex 지원 여부 조회 (커버리지 태깅용) */
+export function isInFizzex(command: string): boolean {
+  const entry = data.commands.find(c => c.command === command);
+  return entry?.inFizzex ?? false;
+}
+
+/** 전체 명령어 목록 (커버리지 분석용) */
+export function getAllCommands(): CommandEntry[] {
+  return data.commands;
+}

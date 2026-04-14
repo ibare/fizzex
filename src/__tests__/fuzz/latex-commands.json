@@ -1,0 +1,6724 @@
+{
+  "extracted_date": "2026-04-14",
+  "sources": {
+    "katex": {
+      "version": "0.16.43",
+      "count": 718
+    },
+    "mathjax": {
+      "version": "3.2.2",
+      "count": 530
+    }
+  },
+  "coverage": {
+    "total": 838,
+    "in_fizzex": 383,
+    "missing_in_fizzex": 455
+  },
+  "commands": [
+    {
+      "command": "\\acute",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\bar",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\breve",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\check",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\ddddot",
+      "category": "accent",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\dddot",
+      "category": "accent",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\ddot",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\dot",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\grave",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\hat",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathring",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\overbrace",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\overbracket",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\overgroup",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\overleftharpoon",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\overline",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\overlinesegment",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\overrightharpoon",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textcircled",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\tilde",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\underbrace",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\underbracket",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\undergroup",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\underline",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\underlinesegment",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\utilde",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vec",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\widecheck",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\widehat",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\widetilde",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\xleftequilibrium",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xleftharpoondown",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xleftharpoonup",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xleftrightharpoons",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xlongequal",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xmapsto",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xrightequilibrium",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xrightharpoondown",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xrightharpoonup",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xrightleftharpoons",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xtofrom",
+      "category": "accent",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\arrowvert",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\Arrowvert",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\downarrow",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\Downarrow",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\uparrow",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\Uparrow",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\updownarrow",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\Updownarrow",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circlearrowleft",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\circlearrowright",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\curvearrowleft",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\curvearrowright",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\dashleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\dashrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\downarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Downarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\downdownarrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\downharpoonleft",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\downharpoonright",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gets",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\hookleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\hookrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\iff",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\impliedby",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\implies",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Leftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftarrowtail",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftleftarrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Leftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftrightarrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftrightsquigarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Lleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\longleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Longleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\longleftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Longleftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\longmapsto",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\longrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Longrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\looparrowleft",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\looparrowright",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mapsto",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\minCDarrowheight",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\minCDarrowwidth",
+      "category": "arrow",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\multimap",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nearrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nLeftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nleftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nLeftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nRightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nwarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\overleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\overleftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\overrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\Overrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Rightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightarrowtail",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightleftarrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightrightarrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightsquigarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Rrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\searrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\swarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\to",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\twoheadleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\twoheadrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\underleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\underleftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\underrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\uparrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Uparrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\updownarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Updownarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\upharpoonleft",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\upharpoonright",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\upuparrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xhookleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xhookrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\xLeftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xleftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\xLeftrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\xRightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xrightleftarrows",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xtwoheadleftarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\xtwoheadrightarrow",
+      "category": "arrow",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigcap",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigcup",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigodot",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigoplus",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigotimes",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigsqcup",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\biguplus",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigvee",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigwedge",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\coprod",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\idotsint",
+      "category": "bigop",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\iiiint",
+      "category": "bigop",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\iiint",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\iint",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\int",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\intop",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathop",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\oiiint",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\oiint",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\oint",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\prod",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\smallint",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sum",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\tg",
+      "category": "bigop",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\/",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\\\\\",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\|",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\backslash",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\bracevert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\gt",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\langle",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\lgroup",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\llcorner",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\lmoustache",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\lrcorner",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\lt",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\lvert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\lVert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\rangle",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\rbrace",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\rgroup",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\rmoustache",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\rvert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\rVert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\ulcorner",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\urcorner",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\vert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\\\Vert",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\<",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\>",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\|",
+      "category": "delimiter",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\big",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Big",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigg",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bigg",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\biggl",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Biggl",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\biggm",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Biggm",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\biggr",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Biggr",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigl",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bigl",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigm",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bigm",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigr",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bigr",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\langle",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lbrace",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lbrack",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lceil",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\left",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lfloor",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lgroup",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lmoustache",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lparen",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lvert",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lVert",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\middle",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rangle",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rbrace",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rbrack",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rceil",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rfloor",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rgroup",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\right",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rmoustache",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rparen",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rvert",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rVert",
+      "category": "delimiter",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{align}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{align*}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{aligned}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{array}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{bmatrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{Bmatrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{cases}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{CD}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{eqnarray}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{equation}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{matrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{pmatrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{smallmatrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{vmatrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\begin{Vmatrix}",
+      "category": "environment",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bbb",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bf",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bm",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\bold",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\boldsymbol",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\cal",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\displaystyle",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\emph",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\frak",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\it",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathbb",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathbf",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathcal",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathfrak",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathit",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathnormal",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathrm",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathscr",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathsf",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathsfit",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathtt",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\pmb",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\rm",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\scriptscriptstyle",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\scriptstyle",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sf",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\textbf",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\textit",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\textmd",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textnormal",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textrm",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\textsf",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\textstyle",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\texttt",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\textup",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\tt",
+      "category": "font",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\arccos",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\arcctg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\arcsin",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\arctan",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\arctg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\arg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ch",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cos",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\cosec",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cosh",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\cot",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\cotg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\coth",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\csc",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ctg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cth",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\deg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\det",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\dim",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\exp",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\gcd",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\hom",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\inf",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ker",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lg",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lim",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\liminf",
+      "category": "function",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\limsup",
+      "category": "function",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ln",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\log",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\max",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\min",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\mod",
+      "category": "function",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\operatornamewithlimits",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Pr",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sec",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sh",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sin",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sinh",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sup",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\tan",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\tanh",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\th",
+      "category": "function",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\alpha",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\beta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\chi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\delta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Delta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\digamma",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\epsilon",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\eta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\gamma",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Gamma",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\iota",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\kappa",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lambda",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Lambda",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\mu",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nu",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\omega",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Omega",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\omicron",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\phi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Phi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\pi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Pi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\psi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Psi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rho",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sigma",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Sigma",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\tau",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\theta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Theta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\upsilon",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Upsilon",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varepsilon",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varkappa",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varphi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varpi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varrho",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varsigma",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\vartheta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\xi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Xi",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\zeta",
+      "category": "greek",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ncong",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\neq",
+      "category": "negation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ngeq",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ngtr",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nleq",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nless",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nmid",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nparallel",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nprec",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\npreceq",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nshortmid",
+      "category": "negation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nshortparallel",
+      "category": "negation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsim",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsucc",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsucceq",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ntriangleleft",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ntrianglelefteq",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ntriangleright",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ntrianglerighteq",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nvdash",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nvDash",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nVdash",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nVDash",
+      "category": "negation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\amalg",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\And",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ast",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\backslash",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\barwedge",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigtriangledown",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigtriangleup",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\boxdot",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\boxminus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\boxplus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\boxtimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bullet",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\cap",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Cap",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cdot",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\centerdot",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circ",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\circledast",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circledcirc",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circleddash",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cup",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Cup",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\curlyvee",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\curlywedge",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dagger",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ddagger",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\diamond",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\div",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\divideontimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\divsymbol",
+      "category": "operator",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dotplus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\doublebarwedge",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\doublecap",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\doublecup",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gtrdot",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\intercal",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\land",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftthreetimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lessdot",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lhd",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lor",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ltimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\movesupsub",
+      "category": "operator",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mp",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\notChar",
+      "category": "operator",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\odot",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ominus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\oplus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\oslash",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\otimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\pm",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rhd",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightthreetimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rtimes",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\setminus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\smallsetminus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqcap",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqcup",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\star",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\times",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\triangleleft",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\triangleright",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\unlhd",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\unrhd",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\uplus",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\vee",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\veebar",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\wedge",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\wr",
+      "category": "operator",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\approx",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\approxeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\asymp",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\backsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\backsimeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\between",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bowtie",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bumpeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bumpeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cong",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\curlyeqprec",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\curlyeqsucc",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dashv",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\doteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Doteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\doteqdot",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\eqcirc",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\eqsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\eqslantgtr",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\eqslantless",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\equiv",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\fallingdotseq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\frown",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ge",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\geq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\geqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\geqslant",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\gg",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ggg",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gggtr",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gnapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gneq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gneqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gnsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gt",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gtrapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gtreqless",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gtreqqless",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gtrless",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gtrsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gvertneqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\imageof",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\in",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Join",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\le",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leadsto",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftharpoondown",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftharpoonup",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leftrightharpoons",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\leqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\leqslant",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lessapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lesseqgtr",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lesseqqgtr",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lessgtr",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lesssim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ll",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lll",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\llless",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lnapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lneq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lneqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lnsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Lsh",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lt",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\lvertneqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mid",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\models",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ne",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ngeqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ngeqslant",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ni",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nleqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nleqslant",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\notin",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsubseteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsubseteqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsupseteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nsupseteqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\origof",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\owns",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\parallel",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\perp",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\pitchfork",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\prec",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\precapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\preccurlyeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\preceq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\precnapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\precneqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\precnsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\precsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\propto",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightharpoondown",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightharpoonup",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\rightleftharpoons",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\risingdotseq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Rsh",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\shortmid",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\shortparallel",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\simeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\smallfrown",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\smallsmile",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\smile",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqsubset",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqsubseteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqsupset",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqsupseteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\subset",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Subset",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\subseteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\subseteqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\subsetneq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\subsetneqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\succ",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\succapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\succcurlyeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\succeq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\succnapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\succneqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\succnsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\succsim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\supset",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Supset",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\supseteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\supseteqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\supsetneq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\supsetneqq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\thickapprox",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\thicksim",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\trianglelefteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\triangleq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\trianglerighteq",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varpropto",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varsubsetneq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varsubsetneqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varsupsetneq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varsupsetneqq",
+      "category": "relation",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vartriangle",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vartriangleleft",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vartriangleright",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vdash",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\vDash",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Vdash",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Vvdash",
+      "category": "relation",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ ",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\,",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\;",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\:",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\!",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\allowbreak",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\enspace",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\hskip",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\hspace",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\kern",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\mathclap",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathllap",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathrlap",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mkern",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\mskip",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\negmedspace",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\negthickspace",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nobreak",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nobreakspace",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\qquad",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\quad",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\space",
+      "category": "spacing",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\thinspace",
+      "category": "spacing",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\above",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\angl",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\atop",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bcancel",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\binom",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\boxed",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\brace",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\brack",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cancel",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\cfrac",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\choose",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\color",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 2
+    },
+    {
+      "command": "\\colorbox",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 2
+    },
+    {
+      "command": "\\dbinom",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\DeclareMathOperator",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\def",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dfrac",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\edef",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\eqref",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\fbox",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\fcolorbox",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 3
+    },
+    {
+      "command": "\\frac",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\futurelet",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gdef",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\genfrac",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 6
+    },
+    {
+      "command": "\\global",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\hbox",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\hphantom",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\href",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 2
+    },
+    {
+      "command": "\\htmlClass",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\htmlData",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\htmlId",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\htmlStyle",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\includegraphics",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\injlim",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\let",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\long",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathbin",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathchoice",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathclose",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathinner",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathopen",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathord",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathpunct",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathrel",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\not",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\notag",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\operatorname",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\over",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\overset",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\phantom",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\phase",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\projlim",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\raisebox",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 2
+    },
+    {
+      "command": "\\relax",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\rule",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 2
+    },
+    {
+      "command": "\\shoveleft",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\shoveright",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sideset",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\smash",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\sout",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sqrt",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\stackrel",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\substack",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\tag",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\tbinom",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\text",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\textcolor",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 2
+    },
+    {
+      "command": "\\tfrac",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\underset",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 2
+    },
+    {
+      "command": "\\url",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 1
+    },
+    {
+      "command": "\\varinjlim",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varliminf",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varlimsup",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varprojlim",
+      "category": "structure",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vcenter",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\verb",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vphantom",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\xcancel",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 1
+    },
+    {
+      "command": "\\xdef",
+      "category": "structure",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\$",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ae",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\AE",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\aleph",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\angle",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\backepsilon",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\backprime",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Bbbk",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\because",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\beth",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigcirc",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\bigstar",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\blacklozenge",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\blacksquare",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\blacktriangle",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\blacktriangledown",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\blacktriangleleft",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\blacktriangleright",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\bot",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Box",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cdotp",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\cdots",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\checkmark",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circledR",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\circledS",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\clubsuit",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\colon",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\complement",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dag",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\daleth",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ddag",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ddots",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\degree",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\diagdown",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\diagup",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Diamond",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\diamondsuit",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\dots",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": false,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\dotsb",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dotsc",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dotsi",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dotsm",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\dotso",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ell",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\emptyset",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\eth",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\exists",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Finv",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\flat",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\forall",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Game",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\gimel",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\hbar",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\heartsuit",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\hslash",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\i",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Im",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\imath",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\infty",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\j",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\jmath",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ldotp",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\ldots",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lnot",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\lozenge",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\maltese",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathellipsis",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\mathsterling",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\measuredangle",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\mho",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\nabla",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\natural",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\neg",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\nexists",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\o",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\O",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\oe",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\OE",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\P",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\partial",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\pounds",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\prime",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\Re",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\restriction",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\S",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\sharp",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\spadesuit",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\sphericalangle",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\square",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\ss",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\surd",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textasciicircum",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textasciitilde",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textbackslash",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textbar",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textbardbl",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textbraceleft",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textbraceright",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textdagger",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textdaggerdbl",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textdegree",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textdollar",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textellipsis",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textemdash",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textendash",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textgreater",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textless",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textquotedblleft",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textquotedblright",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textquoteleft",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textquoteright",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textsterling",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\textunderscore",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\therefore",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\top",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\triangle",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\triangledown",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varDelta",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varGamma",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varLambda",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varnothing",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\varOmega",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varPhi",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varPi",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varPsi",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varSigma",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varTheta",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varUpsilon",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varvdots",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\varXi",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\vdots",
+      "category": "symbol",
+      "inKatex": false,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\vert",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\Vert",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": false,
+      "inFizzex": false,
+      "argCount": 0
+    },
+    {
+      "command": "\\wp",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": true,
+      "argCount": 0
+    },
+    {
+      "command": "\\yen",
+      "category": "symbol",
+      "inKatex": true,
+      "inMathjax": true,
+      "inFizzex": false,
+      "argCount": 0
+    }
+  ]
+}

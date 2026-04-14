@@ -7,7 +7,7 @@
 
 import { writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { GRAMMAR, TERMINALS, RECURSIVE_RULES } from './grammar';
+import { GRAMMAR, TERMINALS, RECURSIVE_RULES, isInFizzex } from './grammar';
 
 // --- 시드 기반 PRNG (Mulberry32) ---
 
@@ -39,6 +39,8 @@ interface FormulaEntry {
   latex: string;
   depth: number;
   elements: string[];
+  fizzexCoverage: 'full' | 'mixed' | 'unknown';
+  unknownCommands: string[];
 }
 
 interface GeneratedCorpus {
@@ -47,6 +49,41 @@ interface GeneratedCorpus {
   generated_date: string;
   options: Omit<GeneratorOptions, 'seed' | 'count'>;
   formulas: FormulaEntry[];
+}
+
+// --- 커버리지 분석 ---
+
+// 파서 레벨에서 직접 처리되는 명령어 (command registry에 없지만 지원됨)
+const PARSER_BUILTINS = new Set([
+  '\\left', '\\right', '\\begin', '\\end', '\\text',
+  '\\limits', '\\nolimits', '\\middle',
+]);
+
+function analyzeCoverage(latex: string): { coverage: 'full' | 'mixed' | 'unknown'; unknownCommands: string[] } {
+  // 수식에서 백슬래시 명령어 추출
+  const cmdRegex = /\\([a-zA-Z]+)/g;
+  let match;
+  const found = new Set<string>();
+  const unknown: string[] = [];
+
+  while ((match = cmdRegex.exec(latex)) !== null) {
+    const cmd = '\\' + match[1];
+    if (found.has(cmd)) continue;
+    found.add(cmd);
+    if (!isInFizzex(cmd) && !PARSER_BUILTINS.has(cmd)) {
+      unknown.push(cmd);
+    }
+  }
+
+  if (found.size === 0) return { coverage: 'full', unknownCommands: [] };
+  const unknownRatio = unknown.length / found.size;
+
+  let coverage: 'full' | 'mixed' | 'unknown';
+  if (unknown.length === 0) coverage = 'full';
+  else if (unknownRatio >= 0.7) coverage = 'unknown';
+  else coverage = 'mixed';
+
+  return { coverage, unknownCommands: unknown };
 }
 
 // --- 생성기 ---
@@ -347,11 +384,14 @@ export function generateBigOps(count: number, seed: number = 56789): FormulaEntr
     if (!result.elements.includes('bigop') && i < count * 3) continue;
     if (seen.has(result.latex)) continue;
     seen.add(result.latex);
+    const { coverage, unknownCommands } = analyzeCoverage(result.latex);
     formulas.push({
       id: `fuzz-bigops-${String(formulas.length + 1).padStart(4, '0')}`,
       latex: result.latex,
       depth: result.depth,
       elements: result.elements,
+      fizzexCoverage: coverage,
+      unknownCommands,
     });
   }
   return formulas;
@@ -372,11 +412,14 @@ export function generateEnvironments(count: number, seed: number = 67890): Formu
     if (!result.elements.includes('environment') && i < count * 3) continue;
     if (seen.has(result.latex)) continue;
     seen.add(result.latex);
+    const { coverage: envCoverage, unknownCommands: envUnknown } = analyzeCoverage(result.latex);
     formulas.push({
       id: `fuzz-env-${String(formulas.length + 1).padStart(4, '0')}`,
       latex: result.latex,
       depth: result.depth,
       elements: result.elements,
+      fizzexCoverage: envCoverage,
+      unknownCommands: envUnknown,
     });
   }
   return formulas;
@@ -391,11 +434,14 @@ function generateBatch(options: GeneratorOptions, prefix: string): FormulaEntry[
     const result = gen.generate();
     if (seen.has(result.latex)) continue;
     seen.add(result.latex);
+    const { coverage, unknownCommands } = analyzeCoverage(result.latex);
     formulas.push({
       id: `${prefix}-${String(formulas.length + 1).padStart(4, '0')}`,
       latex: result.latex,
       depth: result.depth,
       elements: result.elements,
+      fizzexCoverage: coverage,
+      unknownCommands,
     });
     // 안전장치: 무한루프 방지
     if (i > options.count * 5) break;
@@ -499,7 +545,38 @@ function main() {
   writeFileSync(metaPath, JSON.stringify(metadata, null, 2));
 
   console.log(`\nTotal: ${metadata.total} formulas generated.`);
-  console.log(`Metadata saved to generated/metadata.json`);
+
+  // 커버리지 요약
+  const allFormulas = [...simple, ...medium, ...complex, ...extreme, ...bigops, ...envs];
+  const fullCount = allFormulas.filter(f => f.fizzexCoverage === 'full').length;
+  const mixedCount = allFormulas.filter(f => f.fizzexCoverage === 'mixed').length;
+  const unknownCount = allFormulas.filter(f => f.fizzexCoverage === 'unknown').length;
+
+  console.log(`\n=== Fuzz Generation Summary ===`);
+  console.log(`Total formulas: ${allFormulas.length}`);
+  console.log(`  full (Fizzex-known only): ${fullCount} (${((fullCount / allFormulas.length) * 100).toFixed(0)}%)`);
+  console.log(`  mixed (some unknown): ${mixedCount} (${((mixedCount / allFormulas.length) * 100).toFixed(0)}%)`);
+  console.log(`  unknown (mostly unknown): ${unknownCount} (${((unknownCount / allFormulas.length) * 100).toFixed(0)}%)`);
+
+  // 미지원 명령어 빈도
+  const cmdFreq: Record<string, number> = {};
+  for (const f of allFormulas) {
+    for (const cmd of f.unknownCommands) {
+      cmdFreq[cmd] = (cmdFreq[cmd] || 0) + 1;
+    }
+  }
+  const topMissing = Object.entries(cmdFreq)
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, 15);
+
+  if (topMissing.length > 0) {
+    console.log(`\nTop missing commands by frequency:`);
+    for (const [cmd, count] of topMissing) {
+      console.log(`  ${cmd}: ${count} occurrences`);
+    }
+  }
+
+  console.log(`\nMetadata saved to generated/metadata.json`);
 }
 
 main();
