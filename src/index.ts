@@ -168,6 +168,17 @@ export type {
   RenderDecision,
 } from './latex/tolerant';
 
+// Streaming Parser
+export { StreamTokenizer, FizzexStreamParser } from './latex/streaming';
+export type {
+  StreamToken,
+  StreamOutput,
+  StreamParserOptions,
+  StreamParserState,
+  TokenizerState,
+  TokenizerOptions,
+} from './latex/streaming';
+
 // 타입
 export type {
   MathNode,
