@@ -50,11 +50,11 @@ export const en: Dictionary = {
     sub: 'From input to visualization, one package covers the full pipeline.',
     editor: {
       title: 'Canvas Editor',
-      desc: 'Keyboard-driven math input rendered on HTML Canvas with TeX-quality box model layout. No DOM overhead.',
+      desc: 'Box model layout with TeX\'s 8-stage MathStyle and baseline coordinate system. Auto HiDPI support, IME compatible.',
     },
     latex: {
       title: 'LaTeX Parser',
-      desc: 'Bidirectional LaTeX-AST conversion with 400+ commands. Parse, transform, and serialize back.',
+      desc: 'Tolerant parser that renders even incomplete input gracefully. 400+ commands, bidirectional LaTeX-AST conversion, optimized for real-time parsing.',
     },
     analysis: {
       title: 'Expression Analyzer',
@@ -73,24 +73,24 @@ export const en: Dictionary = {
       desc: 'Context-aware suggestions based on cursor position. Knows when to suggest calculus, symbols, or structure.',
     },
   },
-  comparison: {
-    title: 'How Fizzex compares',
-    sub: 'Not just another renderer — a complete math expression platform.',
-    headers: {
-      feature: 'Feature',
-      katex: 'KaTeX',
-      mathjax: 'MathJax',
-      mathlive: 'MathLive',
-      fizzex: 'Fizzex',
+  underTheHood: {
+    title: 'Built on TeX foundations',
+    sub: 'Not just the look — the structure follows TeX from the ground up.',
+    tolerantParser: {
+      title: 'Tolerant Parser',
+      desc: 'Invalid LaTeX won\'t break anything. Errors are collected while the AST is built as completely as possible, rendering partial results. Optimized for real-time input.',
     },
-    rows: {
-      rendering: { label: 'Rendering', values: ['CSS/DOM', 'SVG/DOM', 'DOM', 'Canvas'] },
-      editing: { label: 'Editing', values: ['-', '-', 'Yes', 'Yes'] },
-      latex_parse: { label: 'LaTeX Parse', values: ['Yes', 'Yes', 'Yes', 'Yes'] },
-      analysis: { label: 'Expression Analysis', values: ['-', '-', '-', 'Yes'] },
-      cas: { label: 'CAS (Algebra)', values: ['-', '-', '-', 'Yes'] },
-      visualization: { label: 'Visualization', values: ['-', '-', '-', 'Yes'] },
-      autocomplete: { label: 'Autocomplete', values: ['-', '-', 'Basic', 'Context-aware'] },
+    texLayout: {
+      title: 'TeX Layout Engine',
+      desc: 'Display/Text/Script/ScriptScript 8-stage style switching, baseline coordinate system, and TeX standard parameters with no magic numbers.',
+    },
+    modular: {
+      title: 'Modular Architecture',
+      desc: 'fizzex/headless for framework-free use, fizzex/react for React, fizzex/tiptap for rich editors. Import only what you need.',
+    },
+    hiFidelity: {
+      title: 'High-Fidelity Output',
+      desc: 'Bezier curve glyph rendering extracted from a dedicated math font. PNG export (300 DPI), automatic HiDPI display support.',
     },
   },
   quickStart: {

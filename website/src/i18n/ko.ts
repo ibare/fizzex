@@ -50,11 +50,11 @@ export const ko: Dictionary = {
     sub: '입력부터 시각화까지, 하나의 패키지가 전체 파이프라인을 지원합니다.',
     editor: {
       title: 'Canvas 에디터',
-      desc: 'HTML Canvas 위에 TeX 품질의 Box 모델 레이아웃으로 렌더링. DOM 오버헤드 없는 키보드 기반 수식 입력.',
+      desc: 'TeX의 8단계 MathStyle과 baseline 좌표계를 정밀 구현한 Box 모델 레이아웃. HiDPI 자동 지원, IME 입력 호환.',
     },
     latex: {
       title: 'LaTeX 파서',
-      desc: '400개+ 명령어를 지원하는 LaTeX-AST 양방향 변환. 파싱, 변환, 직렬화.',
+      desc: '불완전한 입력도 최대한 렌더링하는 관대한 파서. 400개+ 명령어, LaTeX-AST 양방향 변환, 실시간 파싱에 최적화.',
     },
     analysis: {
       title: '수식 분석기',
@@ -73,24 +73,24 @@ export const ko: Dictionary = {
       desc: '커서 위치 기반 컨텍스트 인식 제안. 미적분, 기호, 구조를 적재적소에 추천.',
     },
   },
-  comparison: {
-    title: 'Fizzex는 어떻게 다른가',
-    sub: '또 하나의 렌더러가 아닌, 완전한 수식 표현 플랫폼.',
-    headers: {
-      feature: '기능',
-      katex: 'KaTeX',
-      mathjax: 'MathJax',
-      mathlive: 'MathLive',
-      fizzex: 'Fizzex',
+  underTheHood: {
+    title: 'TeX의 기반 위에 구축',
+    sub: '겉모습뿐 아니라 구조부터 TeX을 따릅니다.',
+    tolerantParser: {
+      title: '관대한 파서',
+      desc: '잘못된 LaTeX도 깨지지 않습니다. 에러를 수집하면서 최대한 AST를 생성하고, 부분 결과를 렌더링합니다. 실시간 입력에 최적화.',
     },
-    rows: {
-      rendering: { label: '렌더링', values: ['CSS/DOM', 'SVG/DOM', 'DOM', 'Canvas'] },
-      editing: { label: '편집', values: ['-', '-', '지원', '지원'] },
-      latex_parse: { label: 'LaTeX 파싱', values: ['지원', '지원', '지원', '지원'] },
-      analysis: { label: '수식 분석', values: ['-', '-', '-', '지원'] },
-      cas: { label: 'CAS (대수)', values: ['-', '-', '-', '지원'] },
-      visualization: { label: '시각화', values: ['-', '-', '-', '지원'] },
-      autocomplete: { label: '자동완성', values: ['-', '-', '기본', '컨텍스트 인식'] },
+    texLayout: {
+      title: 'TeX 레이아웃 엔진',
+      desc: 'Display/Text/Script/ScriptScript 8단계 스타일 전환, baseline 좌표계, TeX 표준 파라미터를 매직넘버 없이 준수합니다.',
+    },
+    modular: {
+      title: '모듈형 아키텍처',
+      desc: 'fizzex/headless로 프레임워크 없이, fizzex/react로 React에서, fizzex/tiptap으로 리치 에디터에서. 필요한 것만 가져오세요.',
+    },
+    hiFidelity: {
+      title: '고품질 출력',
+      desc: '수학 전용 폰트에서 추출한 베지어 곡선 글리프 렌더링. PNG 내보내기(300 DPI), HiDPI 디스플레이 자동 대응.',
     },
   },
   quickStart: {

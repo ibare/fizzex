@@ -8,11 +8,6 @@ export interface FeatureItem {
   desc: string;
 }
 
-export interface ComparisonRow {
-  label: string;
-  values: [string, string, string, string];
-}
-
 export interface Dictionary {
   nav: {
     home: string;
@@ -56,25 +51,13 @@ export interface Dictionary {
     visualization: FeatureItem;
     autocomplete: FeatureItem;
   };
-  comparison: {
+  underTheHood: {
     title: string;
     sub: string;
-    headers: {
-      feature: string;
-      katex: string;
-      mathjax: string;
-      mathlive: string;
-      fizzex: string;
-    };
-    rows: {
-      rendering: ComparisonRow;
-      editing: ComparisonRow;
-      latex_parse: ComparisonRow;
-      analysis: ComparisonRow;
-      cas: ComparisonRow;
-      visualization: ComparisonRow;
-      autocomplete: ComparisonRow;
-    };
+    tolerantParser: { title: string; desc: string };
+    texLayout: { title: string; desc: string };
+    modular: { title: string; desc: string };
+    hiFidelity: { title: string; desc: string };
   };
   quickStart: {
     title: string;
