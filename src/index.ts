@@ -158,10 +158,22 @@ export type {
   GraphRange,
 } from './visualizer';
 
+// Tolerant Parser
+export { determineRenderMode } from './latex/tolerant';
+export type {
+  SemanticSafety,
+  NormalizationRecord,
+  Diagnostic,
+  RenderMode,
+  RenderDecision,
+} from './latex/tolerant';
+
 // 타입
 export type {
   MathNode,
   MathNodeType,
+  ParseStatus,
+  SourceRange,
   RootNode,
   NumberNode,
   VariableNode,
@@ -181,6 +193,9 @@ export type {
   MatrixNode,
   TextNode,
   RowNode,
+  LiteralNode,
+  ErrorNode,
+  OpaqueNode,
   CursorPosition,
   EditorState,
 } from './types';

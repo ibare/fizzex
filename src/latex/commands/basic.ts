@@ -498,7 +498,7 @@ const unmatchedEndHandler: CommandHandler = (ctx) => {
     envName = ctx.latex.substring(nameStart, pos);
     if (pos < ctx.latex.length) pos++; // '}' 스킵
   }
-  reportError('environment', `매칭되지 않은 환경 종료: \\end{${envName}}`, ctx.pos, ctx.latex, 'end');
+  reportError('environment', `매칭되지 않은 환경 종료: \\end{${envName}}`, ctx.pos, ctx.latex, 'end', [`\\begin{${envName}}`]);
   return { nodes: [], consumed: pos };
 };
 
@@ -518,7 +518,7 @@ const unmatchedRightHandler: CommandHandler = (ctx) => {
       pos++;
     }
   }
-  reportError('syntax', `매칭되지 않은 \\right`, ctx.pos, ctx.latex, 'right');
+  reportError('syntax', `매칭되지 않은 \\right`, ctx.pos, ctx.latex, 'right', ['\\left']);
   return { nodes: [], consumed: pos };
 };
 

@@ -135,4 +135,43 @@ describe('Parse Errors', () => {
       }).not.toThrow();
     });
   });
+
+  describe('expected 필드', () => {
+    let collector: ParseErrorCollector;
+
+    beforeEach(() => {
+      collector = new ParseErrorCollector();
+    });
+
+    it('expected 필드를 설정할 수 있다', () => {
+      collector.addError('syntax', '문법 오류', 5, 'test input', '\\bad', ['}', '\\right']);
+      const error = collector.getErrors()[0];
+      expect(error.expected).toEqual(['}', '\\right']);
+    });
+
+    it('expected 필드가 없으면 에러 객체에 포함되지 않는다', () => {
+      collector.addError('syntax', '문법 오류', 5, 'test input');
+      const error = collector.getErrors()[0];
+      expect(error.expected).toBeUndefined();
+    });
+
+    it('경고에도 expected를 설정할 수 있다', () => {
+      collector.addWarning('syntax', '경고', 5, 'test input', undefined, ['\\left']);
+      const warning = collector.getWarnings()[0];
+      expect(warning.expected).toEqual(['\\left']);
+    });
+
+    it('정보에도 expected를 설정할 수 있다', () => {
+      collector.addInfo('syntax', '정보', 5, 'test input', undefined, ['token']);
+      const info = collector.getAll()[0];
+      expect(info.expected).toEqual(['token']);
+    });
+
+    it('token 없이 expected만 설정할 수 있다', () => {
+      collector.addError('syntax', '문법 오류', 5, 'test input', undefined, ['{']);
+      const error = collector.getErrors()[0];
+      expect(error.token).toBeUndefined();
+      expect(error.expected).toEqual(['{']);
+    });
+  });
 });

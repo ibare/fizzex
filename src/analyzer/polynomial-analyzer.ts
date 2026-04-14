@@ -244,6 +244,7 @@ function hasChildren(node: MathNode): boolean {
     'overset',
     'cancel',
     'xarrow',
+    'opaque',
   ].includes(node.type);
 }
 
@@ -325,6 +326,8 @@ function getChildren(node: MathNode): MathNode[] {
       const xarrow = node as { above: MathNode[]; below?: MathNode[] };
       return [...xarrow.above, ...(xarrow.below || [])];
     }
+    case 'opaque':
+      return (node as import('../types').OpaqueNode).args.flat();
     default:
       return [];
   }

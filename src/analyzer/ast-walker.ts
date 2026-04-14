@@ -236,8 +236,17 @@ function walkNode(
 
     case 'text':
     case 'space':
-      // 텍스트와 공백은 분석에서 제외
+    case 'literal':
+    case 'error':
+      // 텍스트, 공백, 리터럴, 에러는 분석에서 제외
       break;
+
+    case 'opaque': {
+      for (const arg of node.args) {
+        walkChildren(arg, result, depth + 1);
+      }
+      break;
+    }
   }
 }
 
@@ -363,6 +372,9 @@ export function findNodes<T extends MathNode>(
         arr.rows.forEach((row) => row.forEach(search));
         break;
       }
+      case 'opaque':
+        (node as import('../types').OpaqueNode).args.forEach(arg => arg.forEach(search));
+        break;
     }
   }
 

@@ -450,6 +450,8 @@ function getNodeChildren(node: MathNode): MathNode[] {
       return (node as { rows: MathNode[][] }).rows.flat();
     case 'gather':
       return (node as { rows: MathNode[] }).rows;
+    case 'opaque':
+      return (node as import('../types').OpaqueNode).args.flat();
     default:
       return [];
   }

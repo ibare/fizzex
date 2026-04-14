@@ -164,4 +164,94 @@ describe('LaTeX Parser', () => {
       expect(Array.isArray(result.warnings)).toBe(true);
     });
   });
+
+  describe('sourceRange 추적', () => {
+    it('단일 변수의 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('x');
+      const node = result.ast.children[0];
+      expect(node.sourceRange).toEqual({ start: 0, end: 1 });
+    });
+
+    it('수식 x+y의 각 노드 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('x+y');
+      expect(result.ast.children[0].sourceRange).toEqual({ start: 0, end: 1 }); // x
+      expect(result.ast.children[1].sourceRange).toEqual({ start: 1, end: 2 }); // +
+      expect(result.ast.children[2].sourceRange).toEqual({ start: 2, end: 3 }); // y
+    });
+
+    it('숫자 123의 각 자릿수 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('123');
+      expect(result.ast.children[0].sourceRange).toEqual({ start: 0, end: 1 }); // 1
+      expect(result.ast.children[1].sourceRange).toEqual({ start: 1, end: 2 }); // 2
+      expect(result.ast.children[2].sourceRange).toEqual({ start: 2, end: 3 }); // 3
+    });
+
+    it('\\frac{1}{2}의 sourceRange가 전체 명령어를 포함한다', () => {
+      const result = parseLatexWithErrors('\\frac{1}{2}');
+      const frac = result.ast.children[0];
+      expect(frac.sourceRange).toEqual({ start: 0, end: 11 });
+    });
+
+    it('x^2의 power 노드 sourceRange가 base를 포함한다', () => {
+      const result = parseLatexWithErrors('x^2');
+      const power = result.ast.children[0];
+      expect(power.type).toBe('power');
+      expect(power.sourceRange).toEqual({ start: 0, end: 3 });
+    });
+
+    it('x_n의 subscript 노드 sourceRange가 base를 포함한다', () => {
+      const result = parseLatexWithErrors('x_n');
+      const sub = result.ast.children[0];
+      expect(sub.type).toBe('subscript');
+      expect(sub.sourceRange).toEqual({ start: 0, end: 3 });
+    });
+
+    it('(x+1)의 paren 노드 sourceRange가 괄호를 포함한다', () => {
+      const result = parseLatexWithErrors('(x+1)');
+      const paren = result.ast.children[0];
+      expect(paren.type).toBe('paren');
+      expect(paren.sourceRange).toEqual({ start: 0, end: 5 });
+    });
+
+    it('|x|의 abs 노드 sourceRange가 구분자를 포함한다', () => {
+      const result = parseLatexWithErrors('|x|');
+      const abs = result.ast.children[0];
+      expect(abs.type).toBe('abs');
+      expect(abs.sourceRange).toEqual({ start: 0, end: 3 });
+    });
+
+    it('root 노드의 sourceRange가 전체 입력이다', () => {
+      const result = parseLatexWithErrors('a+b');
+      expect(result.ast.sourceRange).toEqual({ start: 0, end: 3 });
+    });
+
+    it('\\alpha 같은 그리스 문자의 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('\\alpha');
+      const node = result.ast.children[0];
+      expect(node.sourceRange).toEqual({ start: 0, end: 6 });
+    });
+
+    it('구두점의 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('a,b');
+      expect(result.ast.children[1].sourceRange).toEqual({ start: 1, end: 2 }); // ,
+    });
+
+    it('팩토리얼의 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('n!');
+      expect(result.ast.children[1].sourceRange).toEqual({ start: 1, end: 2 }); // !
+    });
+
+    it('이스케이프 문자의 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('\\{');
+      const node = result.ast.children[0];
+      expect(node.sourceRange).toEqual({ start: 0, end: 2 });
+    });
+
+    it('[x+1]의 대괄호 paren 노드 sourceRange가 정확하다', () => {
+      const result = parseLatexWithErrors('[x+1]');
+      const paren = result.ast.children[0];
+      expect(paren.type).toBe('paren');
+      expect(paren.sourceRange).toEqual({ start: 0, end: 5 });
+    });
+  });
 });

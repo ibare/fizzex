@@ -36,6 +36,9 @@ import type {
   SpaceNode,
   RowNode,
   RootNode,
+  LiteralNode,
+  ErrorNode,
+  OpaqueNode,
 } from '../types';
 import { generateLatexId } from '../utils/id-generator';
 
@@ -73,6 +76,9 @@ export type MathNodeMap = {
   space: SpaceNode;
   row: RowNode;
   root: RootNode;
+  literal: LiteralNode;
+  error: ErrorNode;
+  opaque: OpaqueNode;
 };
 
 /**
@@ -287,6 +293,21 @@ export function root(children: MathNode[]): RootNode {
   return createNode('root', { children });
 }
 
+/** 리터럴 노드 생성 (원본 LaTeX 보존) */
+export function literal(raw: string): LiteralNode {
+  return createNode('literal', { raw });
+}
+
+/** 에러 노드 생성 (파싱 실패 구간) */
+export function error(raw: string, message: string, expected?: string[]): ErrorNode {
+  return createNode('error', { raw, errorInfo: { message, expected } });
+}
+
+/** 불투명 노드 생성 (미지 커맨드) */
+export function opaque(command: string, args: MathNode[][] = []): OpaqueNode {
+  return createNode('opaque', { command, args });
+}
+
 // ============================================================================
 // 노드 타입 검사 유틸리티
 // ============================================================================
@@ -357,6 +378,7 @@ export function hasChildren(node: MathNode): boolean {
     type === 'array' ||
     type === 'overset' ||
     type === 'cancel' ||
-    type === 'xarrow'
+    type === 'xarrow' ||
+    type === 'opaque'
   );
 }

@@ -31,6 +31,7 @@ import type {
   ArrayNode,
   TextNode,
   SpaceNode,
+  SourceRange,
 } from '../types';
 import { generateLatexId, resetLatexIdCounter, deriveId, deriveCellId } from '../utils/id-generator';
 import { getCommandHandler, type CommandContext } from './command-registry';
@@ -81,6 +82,7 @@ export function parseLatexWithErrors(latex: string): LatexParseResult {
       id: generateId(),
       type: 'root',
       children: result.nodes,
+      sourceRange: { start: 0, end: trimmed.length },
     };
 
     return {
@@ -158,9 +160,10 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
       }
 
       // 절댓값 시작
+      const absStart = pos;
       pos++;
       const innerResult = parseExpression(latex, pos, ['|']);
-      nodes.push(createAbs(innerResult.nodes));
+      nodes.push(createAbs(innerResult.nodes, { start: absStart, end: innerResult.consumed + 1 }));
       pos = innerResult.consumed + 1; // '|' 스킵
       continue;
     }
@@ -187,7 +190,7 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
 
     // 변수 (단일 영문자)
     if (/[a-zA-Z]/.test(latex[pos]) && latex[pos] !== '\\') {
-      nodes.push(createVariable(latex[pos]));
+      nodes.push(createVariable(latex[pos], { start: pos, end: pos + 1 }));
       pos++;
       continue;
     }
@@ -202,59 +205,67 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
 
     // 연산자
     if ('+-=<>:/'.includes(latex[pos])) {
-      nodes.push(createOperator(latex[pos]));
+      nodes.push(createOperator(latex[pos], { start: pos, end: pos + 1 }));
       pos++;
       continue;
     }
 
     // 팩토리얼 (!) - 후위 연산자, 간격 없이 정체로 렌더링
     if (latex[pos] === '!') {
-      nodes.push(createOperator('!'));
+      nodes.push(createOperator('!', { start: pos, end: pos + 1 }));
       pos++;
       continue;
     }
 
     // 구두점 (콤마, 세미콜론 등) - 정체로 렌더링 (숫자처럼 처리)
     if (',;'.includes(latex[pos])) {
-      nodes.push(createNumber(latex[pos]));
+      nodes.push(createNumber(latex[pos], { start: pos, end: pos + 1 }));
       pos++;
       continue;
     }
 
     // 거듭제곱
     if (latex[pos] === '^') {
+      const caretPos = pos;
       pos++;
       const expResult = parseGroup(latex, pos);
       // 이전 노드를 base로
-      const base = nodes.length > 0 ? [nodes.pop()!] : [];
-      nodes.push(createPower(base, expResult.nodes));
+      const baseNode = nodes.length > 0 ? nodes.pop()! : undefined;
+      const base = baseNode ? [baseNode] : [];
+      const powerStart = baseNode?.sourceRange?.start ?? caretPos;
+      nodes.push(createPower(base, expResult.nodes, { start: powerStart, end: expResult.consumed }));
       pos = expResult.consumed;
       continue;
     }
 
     // 아래첨자
     if (latex[pos] === '_') {
+      const underscorePos = pos;
       pos++;
       const subResult = parseGroup(latex, pos);
       // 이전 노드를 base로
-      const base = nodes.length > 0 ? [nodes.pop()!] : [];
-      nodes.push(createSubscript(base, subResult.nodes));
+      const baseNode = nodes.length > 0 ? nodes.pop()! : undefined;
+      const base = baseNode ? [baseNode] : [];
+      const subStart = baseNode?.sourceRange?.start ?? underscorePos;
+      nodes.push(createSubscript(base, subResult.nodes, { start: subStart, end: subResult.consumed }));
       pos = subResult.consumed;
       continue;
     }
 
     // 괄호
     if (latex[pos] === '(') {
+      const parenStart = pos;
       pos++;
       const innerResult = parseExpression(latex, pos, [')']);
-      nodes.push(createParen(innerResult.nodes, '('));
+      nodes.push(createParen(innerResult.nodes, '(', false, { start: parenStart, end: innerResult.consumed + 1 }));
       pos = innerResult.consumed + 1; // ')' 스킵
       continue;
     }
     if (latex[pos] === '[') {
+      const bracketStart = pos;
       pos++;
       const innerResult = parseExpression(latex, pos, [']']);
-      nodes.push(createParen(innerResult.nodes, '['));
+      nodes.push(createParen(innerResult.nodes, '[', false, { start: bracketStart, end: innerResult.consumed + 1 }));
       pos = innerResult.consumed + 1;
       continue;
     }
@@ -287,7 +298,7 @@ function parseNumber(latex: string, start: number): ParseResult {
   let pos = start;
 
   while (pos < latex.length && /[0-9.]/.test(latex[pos])) {
-    nodes.push(createNumber(latex[pos]));
+    nodes.push(createNumber(latex[pos], { start: pos, end: pos + 1 }));
     pos++;
   }
 
@@ -319,17 +330,26 @@ function parseGroup(latex: string, start: number): ParseResult {
 
   // 단일 문자
   if (/[0-9]/.test(latex[start])) {
-    return { nodes: [createNumber(latex[start])], consumed: start + 1 };
+    return { nodes: [createNumber(latex[start], { start, end: start + 1 })], consumed: start + 1 };
   }
   if (/[a-zA-Z]/.test(latex[start])) {
-    return { nodes: [createVariable(latex[start])], consumed: start + 1 };
+    return { nodes: [createVariable(latex[start], { start, end: start + 1 })], consumed: start + 1 };
   }
   // 연산자 (+, -, 등) - 첨자에서 사용될 수 있음
   if ('+-'.includes(latex[start])) {
-    return { nodes: [createOperator(latex[start] as '+' | '-')], consumed: start + 1 };
+    return { nodes: [createOperator(latex[start] as '+' | '-', { start, end: start + 1 })], consumed: start + 1 };
   }
 
   return { nodes: [], consumed: start + 1 };
+}
+
+/** command handler 반환 노드에 sourceRange가 없으면 command 전체 범위를 설정 */
+function patchSourceRange(nodes: MathNode[], cmdStart: number, cmdEnd: number): void {
+  for (const node of nodes) {
+    if (!node.sourceRange) {
+      node.sourceRange = { start: cmdStart, end: cmdEnd };
+    }
+  }
 }
 
 /** LaTeX 명령어 파싱 */
@@ -345,16 +365,17 @@ function parseCommand(latex: string, start: number): ParseResult {
   if (pos < latex.length && /[{}|%&$#_]/.test(latex[pos])) {
     const char = latex[pos];
     pos++;
+    const escRange: SourceRange = { start, end: pos };
     // \{ 와 \} 는 중괄호 기호로 렌더링
     if (char === '{' || char === '}') {
-      return { nodes: [createNumber(char)], consumed: pos };
+      return { nodes: [createNumber(char, escRange)], consumed: pos };
     }
     // \| 는 이중 세로줄 (‖)
     if (char === '|') {
-      return { nodes: [createOperator('‖')], consumed: pos };
+      return { nodes: [createOperator('‖', escRange)], consumed: pos };
     }
     // 다른 특수문자는 그대로 출력
-    return { nodes: [createNumber(char)], consumed: pos };
+    return { nodes: [createNumber(char, escRange)], consumed: pos };
   }
 
   // 비알파벳 단일문자 명령어 (\, \: \; \! \  등)
@@ -364,10 +385,12 @@ function parseCommand(latex: string, start: number): ParseResult {
     const singleCharHandler = getCommandHandler(cmdName);
     if (singleCharHandler) {
       const ctx: CommandContext = { latex, pos, commandName: cmdName, parseExpression, parseGroup, parseNumber, parseCommand };
-      return singleCharHandler(ctx);
+      const result = singleCharHandler(ctx);
+      patchSourceRange(result.nodes, start, result.consumed);
+      return result;
     }
     // 알 수 없는 단일문자 명령어 → 그대로 출력
-    return { nodes: [createNumber(cmdName)], consumed: pos };
+    return { nodes: [createNumber(cmdName, { start, end: pos })], consumed: pos };
   }
 
   // 알파벳 명령어 이름 추출
@@ -393,12 +416,16 @@ function parseCommand(latex: string, start: number): ParseResult {
       parseNumber,
       parseCommand,
     };
-    return handler(ctx);
+    const result = handler(ctx);
+    patchSourceRange(result.nodes, start, result.consumed);
+    return result;
   }
 
   // \begin 환경은 별도 처리
   if (cmdName === 'begin') {
-    return parseBeginEnvironment(latex, pos);
+    const result = parseBeginEnvironment(latex, pos);
+    patchSourceRange(result.nodes, start, result.consumed);
+    return result;
   }
 
   // 알 수 없는 명령어 — 심각도 분류
@@ -482,62 +509,68 @@ function parseBeginEnvironment(latex: string, pos: number): ParseResult {
 }
 
 
+/** sourceRange를 조건부로 설정하는 헬퍼 */
+function withRange<T extends MathNode>(node: T, sourceRange?: SourceRange): T {
+  if (sourceRange) node.sourceRange = sourceRange;
+  return node;
+}
+
 /** 노드 생성 헬퍼들 */
-function createNumber(value: string): NumberNode {
-  return { id: generateId(), type: 'number', value };
+function createNumber(value: string, sourceRange?: SourceRange): NumberNode {
+  return withRange({ id: generateId(), type: 'number', value }, sourceRange);
 }
 
-function createVariable(name: string): VariableNode {
-  return { id: generateId(), type: 'variable', name };
+function createVariable(name: string, sourceRange?: SourceRange): VariableNode {
+  return withRange({ id: generateId(), type: 'variable', name }, sourceRange);
 }
 
-function createOperator(op: string): OperatorNode {
-  return { id: generateId(), type: 'operator', operator: op };
+function createOperator(op: string, sourceRange?: SourceRange): OperatorNode {
+  return withRange({ id: generateId(), type: 'operator', operator: op }, sourceRange);
 }
 
-function createFrac(numerator: MathNode[], denominator: MathNode[]): FracNode {
+function createFrac(numerator: MathNode[], denominator: MathNode[], sourceRange?: SourceRange): FracNode {
   const fracId = generateId();
   const numRow: RowNode = { id: deriveId(fracId, '_num'), type: 'row', children: numerator };
   const denRow: RowNode = { id: deriveId(fracId, '_den'), type: 'row', children: denominator };
-  return { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] };
+  return withRange({ id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] }, sourceRange);
 }
 
-function createPower(base: MathNode[], exponent: MathNode[]): PowerNode {
+function createPower(base: MathNode[], exponent: MathNode[], sourceRange?: SourceRange): PowerNode {
   const powerId = generateId();
   const expRow: RowNode = { id: deriveId(powerId, '_exp'), type: 'row', children: exponent };
-  return { id: powerId, type: 'power', base, exponent: [expRow] };
+  return withRange({ id: powerId, type: 'power', base, exponent: [expRow] }, sourceRange);
 }
 
-function createSubscript(base: MathNode[], subscript: MathNode[]): SubscriptNode {
+function createSubscript(base: MathNode[], subscript: MathNode[], sourceRange?: SourceRange): SubscriptNode {
   const subId = generateId();
   const subRow: RowNode = { id: deriveId(subId, '_sub'), type: 'row', children: subscript };
-  return { id: subId, type: 'subscript', base, subscript: [subRow] };
+  return withRange({ id: subId, type: 'subscript', base, subscript: [subRow] }, sourceRange);
 }
 
-function createParen(content: MathNode[], parenType: '(' | '[' | '{', autoSize: boolean = false): ParenNode {
+function createParen(content: MathNode[], parenType: '(' | '[' | '{', autoSize: boolean = false, sourceRange?: SourceRange): ParenNode {
   const parenId = generateId();
   const contentRow: RowNode = { id: deriveId(parenId, '_content'), type: 'row', children: content };
-  return { id: parenId, type: 'paren', content: [contentRow], parenType, autoSize };
+  return withRange({ id: parenId, type: 'paren', content: [contentRow], parenType, autoSize }, sourceRange);
 }
 
-function createAbs(content: MathNode[]): AbsNode {
+function createAbs(content: MathNode[], sourceRange?: SourceRange): AbsNode {
   const absId = generateId();
   const contentRow: RowNode = { id: deriveId(absId, '_content'), type: 'row', children: content };
-  return { id: absId, type: 'abs', content: [contentRow] };
+  return withRange({ id: absId, type: 'abs', content: [contentRow] }, sourceRange);
 }
 
-function createSqrt(content: MathNode[], index?: MathNode[]): SqrtNode {
+function createSqrt(content: MathNode[], index?: MathNode[], sourceRange?: SourceRange): SqrtNode {
   const sqrtId = generateId();
   const contentRow: RowNode = { id: deriveId(sqrtId, '_content'), type: 'row', children: content };
   if (index) {
     const indexRow: RowNode = { id: deriveId(sqrtId, '_index'), type: 'row', children: index };
-    return { id: sqrtId, type: 'sqrt', content: [contentRow], index: [indexRow] };
+    return withRange({ id: sqrtId, type: 'sqrt', content: [contentRow], index: [indexRow] }, sourceRange);
   }
-  return { id: sqrtId, type: 'sqrt', content: [contentRow] };
+  return withRange({ id: sqrtId, type: 'sqrt', content: [contentRow] }, sourceRange);
 }
 
-function createFunc(name: string, argument: MathNode[]): FuncNode {
-  return { id: generateId(), type: 'func', name, argument };
+function createFunc(name: string, argument: MathNode[], sourceRange?: SourceRange): FuncNode {
+  return withRange({ id: generateId(), type: 'func', name, argument }, sourceRange);
 }
 
 function createIntegral(
@@ -545,13 +578,14 @@ function createIntegral(
   upper: MathNode[],
   integrand: MathNode[],
   differential: string,
-  integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int'
+  integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int',
+  sourceRange?: SourceRange,
 ): IntegralNode {
   const integralId = generateId();
   const lowerRow: RowNode = { id: deriveId(integralId, '_lower'), type: 'row', children: lower };
   const upperRow: RowNode = { id: deriveId(integralId, '_upper'), type: 'row', children: upper };
   const integrandRow: RowNode = { id: deriveId(integralId, '_integrand'), type: 'row', children: integrand };
-  return {
+  return withRange({
     id: integralId,
     type: 'integral',
     lower: [lowerRow],
@@ -559,91 +593,92 @@ function createIntegral(
     integrand: [integrandRow],
     differential,
     integralType,
-  };
+  }, sourceRange);
 }
 
-function createSum(lower: MathNode[], upper: MathNode[], body: MathNode[]): SumNode {
+function createSum(lower: MathNode[], upper: MathNode[], body: MathNode[], sourceRange?: SourceRange): SumNode {
   const sumId = generateId();
   const lowerRow: RowNode = { id: deriveId(sumId, '_lower'), type: 'row', children: lower };
   const upperRow: RowNode = { id: deriveId(sumId, '_upper'), type: 'row', children: upper };
   const bodyRow: RowNode = { id: deriveId(sumId, '_body'), type: 'row', children: body };
-  return {
+  return withRange({
     id: sumId,
     type: 'sum',
     lower: [lowerRow],
     upper: [upperRow],
     body: [bodyRow],
-  };
+  }, sourceRange);
 }
 
-function createLimit(variable: string, approach: MathNode[], body: MathNode[]): LimitNode {
+function createLimit(variable: string, approach: MathNode[], body: MathNode[], sourceRange?: SourceRange): LimitNode {
   const limitId = generateId();
   const approachRow: RowNode = { id: deriveId(limitId, '_approach'), type: 'row', children: approach };
   const bodyRow: RowNode = { id: deriveId(limitId, '_body'), type: 'row', children: body };
-  return {
+  return withRange({
     id: limitId,
     type: 'limit',
     variable,
     approach: [approachRow],
     body: [bodyRow],
-  };
+  }, sourceRange);
 }
 
-function createProduct(lower: MathNode[], upper: MathNode[], body: MathNode[]): ProductNode {
+function createProduct(lower: MathNode[], upper: MathNode[], body: MathNode[], sourceRange?: SourceRange): ProductNode {
   const productId = generateId();
   const lowerRow: RowNode = { id: deriveId(productId, '_lower'), type: 'row', children: lower };
   const upperRow: RowNode = { id: deriveId(productId, '_upper'), type: 'row', children: upper };
   const bodyRow: RowNode = { id: deriveId(productId, '_body'), type: 'row', children: body };
-  return {
+  return withRange({
     id: productId,
     type: 'product',
     lower: [lowerRow],
     upper: [upperRow],
     body: [bodyRow],
-  };
+  }, sourceRange);
 }
 
-function createOverline(content: MathNode[]): OverlineNode {
+function createOverline(content: MathNode[], sourceRange?: SourceRange): OverlineNode {
   const overlineId = generateId();
   const contentRow: RowNode = { id: deriveId(overlineId, '_content'), type: 'row', children: content };
-  return {
+  return withRange({
     id: overlineId,
     type: 'overline',
     content: [contentRow],
-  };
+  }, sourceRange);
 }
 
 function createAccent(
   content: MathNode[],
-  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check'
+  accentType: 'hat' | 'vec' | 'dot' | 'ddot' | 'tilde' | 'bar' | 'breve' | 'check',
+  sourceRange?: SourceRange,
 ): AccentNode {
   const accentId = generateId();
   const contentRow: RowNode = { id: deriveId(accentId, '_content'), type: 'row', children: content };
-  return {
+  return withRange({
     id: accentId,
     type: 'accent',
     content: [contentRow],
     accentType,
-  };
+  }, sourceRange);
 }
 
-function createText(content: string): TextNode {
-  return {
+function createText(content: string, sourceRange?: SourceRange): TextNode {
+  return withRange({
     id: generateId(),
     type: 'text',
     content,
-  };
+  }, sourceRange);
 }
 
-function createSpace(width: number): SpaceNode {
-  return {
+function createSpace(width: number, sourceRange?: SourceRange): SpaceNode {
+  return withRange({
     id: generateId(),
     type: 'space',
     width,
-  };
+  }, sourceRange);
 }
 
-function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '‖' | 'none', small?: boolean): MatrixNode {
+function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '‖' | 'none', small?: boolean, sourceRange?: SourceRange): MatrixNode {
   const matrixId = generateId();
   // 각 셀을 RowNode로 감싸기
   const wrappedRows = rows.map((row, i) =>
@@ -662,13 +697,13 @@ function createMatrix(rows: MathNode[][], bracketType: '(' | '[' | '{' | '|' | '
     })
   );
 
-  return {
+  return withRange({
     id: matrixId,
     type: 'matrix',
     rows: wrappedRows,
     bracketType,
     ...(small ? { small: true } : {}),
-  };
+  }, sourceRange);
 }
 
 /** 행렬 환경 이름에서 괄호 타입 반환 */
@@ -1092,34 +1127,34 @@ function parseArrayContent(
 }
 
 /** align 노드 생성 */
-function createAlign(rows: MathNode[][], starred: boolean, isInline: boolean): AlignNode {
-  return {
+function createAlign(rows: MathNode[][], starred: boolean, isInline: boolean, sourceRange?: SourceRange): AlignNode {
+  return withRange({
     id: generateId(),
     type: 'align',
     rows,
     starred,
     isInline,
-  };
+  }, sourceRange);
 }
 
 /** cases 노드 생성 */
-function createCases(rows: MathNode[][]): CasesNode {
-  return {
+function createCases(rows: MathNode[][], sourceRange?: SourceRange): CasesNode {
+  return withRange({
     id: generateId(),
     type: 'cases',
     rows,
-  };
+  }, sourceRange);
 }
 
 /** gather 노드 생성 */
-function createGather(rows: MathNode[], starred: boolean, isInline: boolean): GatherNode {
-  return {
+function createGather(rows: MathNode[], starred: boolean, isInline: boolean, sourceRange?: SourceRange): GatherNode {
+  return withRange({
     id: generateId(),
     type: 'gather',
     rows,
     starred,
     isInline,
-  };
+  }, sourceRange);
 }
 
 /** array 노드 생성 */
@@ -1127,14 +1162,15 @@ function createArray(
   rows: MathNode[][],
   colAlign: ('l' | 'c' | 'r')[],
   colLines: boolean[],
-  rowLines: boolean[]
+  rowLines: boolean[],
+  sourceRange?: SourceRange,
 ): ArrayNode {
-  return {
+  return withRange({
     id: generateId(),
     type: 'array',
     rows,
     colAlign,
     colLines,
     rowLines,
-  };
+  }, sourceRange);
 }

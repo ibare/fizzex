@@ -23,6 +23,9 @@ import {
   space,
   row,
   root,
+  literal,
+  error,
+  opaque,
   isNodeType,
   isAnyNodeType,
   isContainerNode,
@@ -258,6 +261,61 @@ describe('Node Factory', () => {
       expect(hasChildren(row([]))).toBe(true);
       expect(hasChildren(num('42'))).toBe(false);
       expect(hasChildren(operator('+'))).toBe(false);
+    });
+
+    it('hasChildren - opaque는 자식이 있고, literal/error는 없다', () => {
+      expect(hasChildren(opaque('myCmd', [[variable('x')]]))).toBe(true);
+      expect(hasChildren(literal('\\raw'))).toBe(false);
+      expect(hasChildren(error('bad', '에러'))).toBe(false);
+    });
+  });
+
+  describe('신규 노드 팩토리 함수 (literal, error, opaque)', () => {
+    it('literal() - 리터럴 노드', () => {
+      const node = literal('\\raw{stuff}');
+      expect(node.type).toBe('literal');
+      expect(node.raw).toBe('\\raw{stuff}');
+      expect(node.id).toBeDefined();
+    });
+
+    it('error() - 에러 노드', () => {
+      const node = error('\\bad', '알 수 없는 명령어');
+      expect(node.type).toBe('error');
+      expect(node.raw).toBe('\\bad');
+      expect(node.errorInfo.message).toBe('알 수 없는 명령어');
+      expect(node.errorInfo.expected).toBeUndefined();
+    });
+
+    it('error() - expected 포함 에러 노드', () => {
+      const node = error('\\bad', '예상하지 못한 토큰', ['\\frac', '\\sqrt']);
+      expect(node.errorInfo.expected).toEqual(['\\frac', '\\sqrt']);
+    });
+
+    it('opaque() - 불투명 노드 (인자 없음)', () => {
+      const node = opaque('unknownCmd');
+      expect(node.type).toBe('opaque');
+      expect(node.command).toBe('unknownCmd');
+      expect(node.args).toEqual([]);
+    });
+
+    it('opaque() - 불투명 노드 (인자 있음)', () => {
+      const node = opaque('myCmd', [[variable('x')], [num('1')]]);
+      expect(node.type).toBe('opaque');
+      expect(node.command).toBe('myCmd');
+      expect(node.args).toHaveLength(2);
+      expect(node.args[0][0].type).toBe('variable');
+      expect(node.args[1][0].type).toBe('number');
+    });
+
+    it('createNode으로도 신규 노드를 생성할 수 있다', () => {
+      const lit = createNode('literal', { raw: '\\test' });
+      expect(lit.type).toBe('literal');
+
+      const err = createNode('error', { raw: '\\err', errorInfo: { message: '에러' } });
+      expect(err.type).toBe('error');
+
+      const opq = createNode('opaque', { command: 'cmd', args: [] });
+      expect(opq.type).toBe('opaque');
     });
   });
 });

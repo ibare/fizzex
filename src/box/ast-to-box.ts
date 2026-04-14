@@ -156,6 +156,12 @@ function astToBoxInternal(
     case 'xarrow':
       return convertXArrow(node, metrics, fontSize, style);
 
+    case 'literal':
+    case 'error':
+    case 'opaque':
+      // 단계 5에서 시각적 피드백 렌더링 구현 예정
+      return createHBox([], node.id);
+
     default: {
       const exhaustiveCheck: never = node;
       console.warn(`[ast-to-box] 처리되지 않은 노드 타입: ${(exhaustiveCheck as MathNode).type}`);

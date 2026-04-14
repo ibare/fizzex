@@ -31,12 +31,30 @@ export type MathNodeType =
   | 'array'     // 배열 환경 (array)
   | 'overset'   // 위/아래 첨자 구조 (overset, underset, stackrel)
   | 'cancel'    // 취소선 (cancel, bcancel, xcancel)
-  | 'xarrow';   // 확장 화살표 (xleftarrow, xrightarrow)
+  | 'xarrow'    // 확장 화살표 (xleftarrow, xrightarrow)
+  | 'literal'   // 원본 LaTeX 보존 (해석 없이)
+  | 'error'     // 파싱 실패 구간
+  | 'opaque';   // 미지 커맨드 (구조는 있으나 의미 불명)
+
+/** AST 노드 파싱 상태 */
+export type ParseStatus = 'parsed' | 'partial' | 'failed';
+
+/** 원본 LaTeX 문자열 내 위치 범위 */
+export interface SourceRange {
+  /** 시작 위치 (0-based, inclusive) */
+  start: number;
+  /** 끝 위치 (0-based, exclusive) */
+  end: number;
+}
 
 /** 기본 노드 인터페이스 */
 export interface MathNodeBase {
   id: string;
   type: MathNodeType;
+  /** 원본 LaTeX 문자열에서의 위치 (파서가 설정) */
+  sourceRange?: SourceRange;
+  /** 파싱 상태 (미설정 시 'parsed'로 간주) */
+  parseStatus?: ParseStatus;
 }
 
 /** 숫자 노드 */
@@ -267,6 +285,29 @@ export interface RootNode extends MathNodeBase {
   children: MathNode[];
 }
 
+/** 리터럴 노드 — 원본 LaTeX 그대로 보존 (해석 없이) */
+export interface LiteralNode extends MathNodeBase {
+  type: 'literal';
+  raw: string;
+}
+
+/** 에러 노드 — 파싱 실패 구간 */
+export interface ErrorNode extends MathNodeBase {
+  type: 'error';
+  raw: string;
+  errorInfo: {
+    message: string;
+    expected?: string[];
+  };
+}
+
+/** 불투명 노드 — 미지 커맨드 (구조는 있으나 의미 불명) */
+export interface OpaqueNode extends MathNodeBase {
+  type: 'opaque';
+  command: string;
+  args: MathNode[][];
+}
+
 /** 모든 노드 타입 */
 export type MathNode =
   | NumberNode
@@ -296,7 +337,10 @@ export type MathNode =
   | TextNode
   | SpaceNode
   | RowNode
-  | RootNode;
+  | RootNode
+  | LiteralNode
+  | ErrorNode
+  | OpaqueNode;
 
 /** 레이아웃 계산 결과 */
 export interface LayoutBox {

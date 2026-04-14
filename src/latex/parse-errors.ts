@@ -2,6 +2,8 @@
  * LaTeX 파싱 에러 타입 정의
  */
 
+import type { MathNode } from '../types';
+
 /** 에러 심각도 */
 export type ParseErrorSeverity = 'error' | 'warning' | 'info';
 
@@ -29,6 +31,10 @@ export interface ParseError {
   context: string;
   /** 문제가 된 명령어 또는 토큰 */
   token?: string;
+  /** 에러 시점에 파서가 기대한 토큰 목록 */
+  expected?: string[];
+  /** 에러 이전까지 파싱된 부분 AST (tolerant parser에서 활용) */
+  partialAST?: MathNode;
 }
 
 /** 에러 수집기 */
@@ -41,16 +47,19 @@ export class ParseErrorCollector {
     message: string,
     position: number,
     latex: string,
-    token?: string
+    token?: string,
+    expected?: string[],
   ): void {
-    this.errors.push({
+    const error: ParseError = {
       type,
       severity: 'error',
       message,
       position,
       context: this.extractContext(latex, position),
-      token,
-    });
+    };
+    if (token) error.token = token;
+    if (expected) error.expected = expected;
+    this.errors.push(error);
   }
 
   /** 경고 추가 */
@@ -59,16 +68,19 @@ export class ParseErrorCollector {
     message: string,
     position: number,
     latex: string,
-    token?: string
+    token?: string,
+    expected?: string[],
   ): void {
-    this.errors.push({
+    const warning: ParseError = {
       type,
       severity: 'warning',
       message,
       position,
       context: this.extractContext(latex, position),
-      token,
-    });
+    };
+    if (token) warning.token = token;
+    if (expected) warning.expected = expected;
+    this.errors.push(warning);
   }
 
   /** 정보 추가 */
@@ -77,16 +89,19 @@ export class ParseErrorCollector {
     message: string,
     position: number,
     latex: string,
-    token?: string
+    token?: string,
+    expected?: string[],
   ): void {
-    this.errors.push({
+    const info: ParseError = {
       type,
       severity: 'info',
       message,
       position,
       context: this.extractContext(latex, position),
-      token,
-    });
+    };
+    if (token) info.token = token;
+    if (expected) info.expected = expected;
+    this.errors.push(info);
   }
 
   /** 에러 목록 조회 */
@@ -154,9 +169,10 @@ export function reportError(
   message: string,
   position: number,
   latex: string,
-  token?: string
+  token?: string,
+  expected?: string[],
 ): void {
-  globalErrorCollector?.addError(type, message, position, latex, token);
+  globalErrorCollector?.addError(type, message, position, latex, token, expected);
 }
 
 /** 편의 함수: 경고 추가 */
@@ -165,7 +181,8 @@ export function reportWarning(
   message: string,
   position: number,
   latex: string,
-  token?: string
+  token?: string,
+  expected?: string[],
 ): void {
-  globalErrorCollector?.addWarning(type, message, position, latex, token);
+  globalErrorCollector?.addWarning(type, message, position, latex, token, expected);
 }

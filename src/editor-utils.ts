@@ -64,6 +64,9 @@ function getChildKeys(node: MathNode): string[] {
     case 'operator':
     case 'text':
     case 'space':
+    case 'literal':
+    case 'error':
+    case 'opaque':
       return [];
   }
 }

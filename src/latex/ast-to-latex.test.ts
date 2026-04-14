@@ -23,6 +23,9 @@ import {
   space,
   root,
   row,
+  literal,
+  error,
+  opaque,
 } from './node-factory';
 import { resetLatexIdCounter } from '../utils/id-generator';
 
@@ -211,6 +214,37 @@ describe('AST to LaTeX', () => {
       const ast = parseLatex(input);
       const output = astToLatex(ast);
       expect(output).toBe('\\frac{1}{2}');
+    });
+  });
+
+  describe('신규 노드 역변환 (literal, error, opaque)', () => {
+    it('literal 노드는 raw를 그대로 반환한다', () => {
+      const node = literal('\\customMacro{arg}');
+      expect(astToLatex(node)).toBe('\\customMacro{arg}');
+    });
+
+    it('error 노드는 raw를 그대로 반환한다', () => {
+      const node = error('\\broken{', '닫는 괄호 없음');
+      expect(astToLatex(node)).toBe('\\broken{');
+    });
+
+    it('opaque 노드는 \\command{args} 형태로 반환한다', () => {
+      const node = opaque('myCmd', [[variable('x')], [num('1')]]);
+      expect(astToLatex(node)).toBe('\\myCmd{x}{1}');
+    });
+
+    it('opaque 노드 (인자 없음)는 \\command만 반환한다', () => {
+      const node = opaque('noArgs');
+      expect(astToLatex(node)).toBe('\\noArgs');
+    });
+
+    it('root 안에 literal/error/opaque를 포함할 수 있다', () => {
+      const node = root([
+        variable('x'),
+        operator('+'),
+        literal('\\custom'),
+      ]);
+      expect(astToLatex(node)).toBe('x + \\custom');
     });
   });
 });

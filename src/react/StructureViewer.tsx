@@ -136,6 +136,12 @@ function getNodeDisplayText(node: MathNode): string {
     case 'row':
     case 'root':
       return '';
+    case 'literal':
+      return node.raw;
+    case 'error':
+      return node.raw;
+    case 'opaque':
+      return '\\' + node.command;
     default:
       return node.type;
   }
@@ -193,6 +199,8 @@ function getNodeChildren(node: MathNode): { label?: string; nodes: MathNode[] }[
       ];
     case 'matrix':
       return node.rows.map((row, i) => ({ label: `행 ${i + 1}`, nodes: row }));
+    case 'opaque':
+      return node.args.map((arg, i) => ({ label: `인자 ${i + 1}`, nodes: arg }));
     default:
       return [];
   }

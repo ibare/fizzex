@@ -246,6 +246,19 @@ export function astToLatex(node: MathNode): string {
       return `\\begin{array}{${colSpec}}${rowsLatex}\\end{array}`;
     }
 
+    case 'literal':
+      return node.raw;
+
+    case 'error':
+      return node.raw;
+
+    case 'opaque': {
+      const argsLatex = node.args.map(arg =>
+        `{${arg.map(astToLatex).join('')}}`
+      ).join('');
+      return `\\${node.command}${argsLatex}`;
+    }
+
     default:
       return '';
   }
