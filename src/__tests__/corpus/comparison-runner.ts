@@ -47,6 +47,12 @@ interface ComparisonEntry {
   priority: Priority;
 }
 
+interface VisualSample {
+  id: string;
+  latex: string;
+  source: string;
+}
+
 interface ErrorCluster {
   pattern: string;
   count: number;
@@ -85,6 +91,11 @@ interface ComparisonReport {
   bySource: Record<string, SourceEngineStats>;
   classifications: Record<Classification, number>;
   criticalClusters: ErrorCluster[];
+  visualSamples: {
+    allFail: VisualSample[];
+    fizzexOnlyPass: VisualSample[];
+    critical: VisualSample[];
+  };
   entries: ComparisonEntry[];
 }
 
@@ -141,6 +152,43 @@ function clusterCriticalErrors(criticals: ComparisonEntry[]): ErrorCluster[] {
       examples: data.examples,
     };
   });
+}
+
+// ─── 시각 검증 샘플 추출 ──────────────────────────────────
+
+function sampleWithDiversity(entries: ComparisonEntry[], count: number): VisualSample[] {
+  if (entries.length === 0) return [];
+
+  // 짧은 수식 우선 (시각 검증에 적합), 너무 짧은 것은 제외
+  const sorted = [...entries]
+    .filter(e => e.latex.length >= 5 && e.latex.length <= 200)
+    .sort((a, b) => a.latex.length - b.latex.length);
+
+  if (sorted.length === 0) return entries.slice(0, count).map(e => ({ id: e.id, latex: e.latex, source: e.source }));
+
+  // 소스별 그룹화 후 라운드 로빈
+  const bySource = new Map<string, ComparisonEntry[]>();
+  for (const e of sorted) {
+    const arr = bySource.get(e.source) || [];
+    arr.push(e);
+    bySource.set(e.source, arr);
+  }
+
+  const result: VisualSample[] = [];
+  const sources = [...bySource.keys()];
+  let si = 0;
+  while (result.length < count) {
+    const src = sources[si % sources.length];
+    const arr = bySource.get(src)!;
+    if (arr.length > 0) {
+      const e = arr.shift()!;
+      result.push({ id: e.id, latex: e.latex, source: e.source });
+    }
+    si++;
+    if ([...bySource.values()].every(a => a.length === 0)) break;
+  }
+
+  return result;
 }
 
 // ─── 메인 러너 ────────────────────────────────────────────
@@ -252,6 +300,13 @@ async function runComparisonTest(): Promise<ComparisonReport> {
   const criticals = entries.filter(e => e.classification === 'fizzex-only-fail');
   const criticalClusters = clusterCriticalErrors(criticals);
 
+  // 시각 검증 샘플 추출 (3그룹 x 5개)
+  const visualSamples = {
+    allFail: sampleWithDiversity(entries.filter(e => e.classification === 'all-fail'), 5),
+    fizzexOnlyPass: sampleWithDiversity(entries.filter(e => e.classification === 'fizzex-only-pass'), 5),
+    critical: sampleWithDiversity(criticals, 5),
+  };
+
   // 버전 정보
   let katexVersion = '0.16.27';
   let mathjaxVersion = '3.2.2';
@@ -279,6 +334,7 @@ async function runComparisonTest(): Promise<ComparisonReport> {
     bySource,
     classifications,
     criticalClusters,
+    visualSamples,
     entries,
   };
 }
@@ -337,6 +393,13 @@ async function main() {
       const gap = (best - Number(fRate)).toFixed(1);
       console.log(`  ${source.padEnd(18)} Fizzex ${fRate}% | KaTeX ${kRate}% | MathJax ${mRate}% | GAP ${gap}%`);
     });
+
+  // 시각 검증 샘플 요약
+  const vs = report.visualSamples;
+  console.log(`\n[시각 검증 샘플]`);
+  console.log(`  All Fail        : ${vs.allFail.length}개`);
+  console.log(`  Fizzex Only Pass: ${vs.fizzexOnlyPass.length}개`);
+  console.log(`  Critical        : ${vs.critical.length}개`);
 
   console.log(`\n결과 저장: ${resultPath}`);
   console.log('report.html을 브라우저에서 열어 시각화를 확인하세요.');

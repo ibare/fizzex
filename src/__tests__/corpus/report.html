@@ -140,6 +140,19 @@
   .engine-status span { padding: 1px 6px; border-radius: 4px; }
   .engine-pass { background: var(--green-bg); color: var(--green); }
   .engine-fail { background: var(--red-bg); color: var(--red); }
+
+  /* Visual Samples */
+  .sample-group { margin-bottom: 28px; }
+  .sample-group h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .sample-group .group-desc { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
+  .sample-row { background: var(--bg2); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px; }
+  .sample-latex { font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--text2); margin-bottom: 10px; word-break: break-all; }
+  .sample-renders { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .render-cell { background: var(--bg); border-radius: 6px; padding: 12px; min-height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid var(--border); }
+  .render-cell .engine-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; margin-bottom: 8px; }
+  .render-cell .render-output { text-align: center; overflow: hidden; max-width: 100%; }
+  .render-cell .render-error { font-size: 11px; color: var(--red); font-family: 'SF Mono', Menlo, monospace; word-break: break-all; }
+  .render-cell img { max-width: 100%; height: auto; }
 </style>
 </head>
 <body>
@@ -215,6 +228,12 @@
     <table class="cmd-table" id="criticalTable"><thead><tr>
       <th>#</th><th>Error Pattern</th><th>Count</th><th>%</th><th>Cumulative</th><th>Example</th>
     </tr></thead><tbody></tbody></table>
+  </section>
+
+  <section class="comp-section" id="visualSection">
+    <h2>Visual Samples</h2>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:20px">각 분류 그룹에서 샘플을 추출하여 KaTeX, MathJax, Fizzex 세 엔진의 실제 렌더링 결과를 비교합니다.</p>
+    <div id="visualSamples"></div>
   </section>
 
   <section id="patternsSection">
@@ -726,6 +745,152 @@ function showCompSections() {
   document.getElementById('filterPriority').style.display = '';
 }
 
+// ─── Visual Samples ──────────────────────────────────────
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+function loadCSS(href) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet'; link.href = href;
+  document.head.appendChild(link);
+}
+
+async function renderVisualSamples() {
+  const vs = compData.visualSamples;
+  if (!vs) { document.getElementById('visualSection').style.display = 'none'; return; }
+
+  const groups = [
+    { key: 'allFail', title: 'All Fail', desc: '세 엔진 모두 실패 — 업계 공통 난이도', samples: vs.allFail || [] },
+    { key: 'fizzexOnlyPass', title: 'Fizzex Only Pass', desc: 'Fizzex만 성공 — Fizzex 고유 강점', samples: vs.fizzexOnlyPass || [] },
+    { key: 'critical', title: 'Critical (Fizzex Only Fail)', desc: 'KaTeX/MathJax는 성공, Fizzex만 실패 — 개선 우선순위', samples: vs.critical || [] },
+  ];
+
+  const hasAnySamples = groups.some(g => g.samples.length > 0);
+  if (!hasAnySamples) { document.getElementById('visualSection').style.display = 'none'; return; }
+
+  // CDN 로드
+  loadCSS('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.css');
+  await loadScript('https://cdn.jsdelivr.net/npm/katex@0.16.27/dist/katex.min.js').catch(() => null);
+
+  // MathJax 설정 (로드 전에 설정해야 함)
+  if (!window.MathJax) {
+    window.MathJax = { tex: { packages: {'[+]': ['ams','newcommand','autoload']} }, svg: { fontCache: 'global' }, startup: { typeset: false } };
+  }
+  await loadScript('https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js').catch(() => null);
+  // MathJax startup 대기
+  if (window.MathJax && window.MathJax.startup) {
+    await window.MathJax.startup.promise.catch(() => null);
+  }
+
+  // Fizzex 번들 로드
+  await loadScript('../../../dist/browser/fizzex-export.js').catch(() => null);
+  if (window.FizzexExport && window.FizzexExport.ensureFontsLoaded) {
+    await window.FizzexExport.ensureFontsLoaded().catch(() => null);
+  }
+
+  const container = document.getElementById('visualSamples');
+  let html = '';
+
+  // 전체 규모 요약 차트
+  const cls = compData.classifications;
+  const total = compData.meta.total_formulas;
+  const criticalN = cls['fizzex-only-fail'] || 0;
+  const onlyPassN = cls['fizzex-only-pass'] || 0;
+  const criticalPct = total > 0 ? (criticalN / total * 100).toFixed(1) : '0';
+  const onlyPassPct = total > 0 ? (onlyPassN / total * 100).toFixed(1) : '0';
+  const maxN = Math.max(criticalN, onlyPassN, 1);
+
+  html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">`;
+  // Critical card
+  html += `<div style="background:var(--bg2);border-radius:var(--radius-sm);padding:16px;border-left:4px solid var(--red)">`;
+  html += `<div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Fizzex Only Fail (Critical)</div>`;
+  html += `<div style="font-size:32px;font-weight:700;color:var(--red);margin:4px 0">${criticalN.toLocaleString()}<span style="font-size:16px;font-weight:400;color:var(--text2)"> / ${total.toLocaleString()}</span></div>`;
+  html += `<div style="background:var(--bg3);border-radius:4px;height:8px;margin-top:6px"><div style="background:var(--red);border-radius:4px;height:8px;width:${Math.max(1, criticalN / maxN * 100)}%"></div></div>`;
+  html += `<div style="font-size:12px;color:var(--text3);margin-top:4px">${criticalPct}% — KaTeX/MathJax는 성공, Fizzex만 실패</div>`;
+  html += `</div>`;
+  // Fizzex Only Pass card
+  html += `<div style="background:var(--bg2);border-radius:var(--radius-sm);padding:16px;border-left:4px solid var(--blue)">`;
+  html += `<div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Fizzex Only Pass</div>`;
+  html += `<div style="font-size:32px;font-weight:700;color:var(--blue);margin:4px 0">${onlyPassN.toLocaleString()}<span style="font-size:16px;font-weight:400;color:var(--text2)"> / ${total.toLocaleString()}</span></div>`;
+  html += `<div style="background:var(--bg3);border-radius:4px;height:8px;margin-top:6px"><div style="background:var(--blue);border-radius:4px;height:8px;width:${Math.max(1, onlyPassN / maxN * 100)}%"></div></div>`;
+  html += `<div style="font-size:12px;color:var(--text3);margin-top:4px">${onlyPassPct}% — KaTeX/MathJax는 실패, Fizzex만 성공</div>`;
+  html += `</div></div>`;
+
+  for (const group of groups) {
+    if (group.samples.length === 0) continue;
+    html += `<div class="sample-group">`;
+    html += `<h3>${group.title}</h3>`;
+    html += `<div class="group-desc">${group.desc}</div>`;
+    for (const sample of group.samples) {
+      const safeLatex = escapeHtml(sample.latex.length > 120 ? sample.latex.substring(0, 120) + '...' : sample.latex);
+      html += `<div class="sample-row" data-latex="${escapeHtml(sample.latex)}" data-group="${group.key}">`;
+      html += `<div class="sample-latex"><span class="badge badge-medium">${sample.source}</span> ${safeLatex}</div>`;
+      html += `<div class="sample-renders">`;
+      html += `<div class="render-cell"><div class="engine-label">KaTeX</div><div class="render-output" data-engine="katex"></div></div>`;
+      html += `<div class="render-cell"><div class="engine-label">MathJax</div><div class="render-output" data-engine="mathjax"></div></div>`;
+      html += `<div class="render-cell"><div class="engine-label">Fizzex</div><div class="render-output" data-engine="fizzex"></div></div>`;
+      html += `</div></div>`;
+    }
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+
+  // 각 샘플에 실제 렌더링 적용
+  const rows = container.querySelectorAll('.sample-row');
+  for (const row of rows) {
+    const latex = row.getAttribute('data-latex');
+
+    // KaTeX
+    const katexEl = row.querySelector('[data-engine="katex"]');
+    if (window.katex) {
+      try {
+        katexEl.innerHTML = window.katex.renderToString(latex, { throwOnError: true, displayMode: true });
+      } catch (e) {
+        katexEl.innerHTML = `<div class="render-error">Error: ${escapeHtml(e.message.substring(0, 100))}</div>`;
+      }
+    } else {
+      katexEl.innerHTML = '<div class="render-error">KaTeX CDN 로드 실패</div>';
+    }
+
+    // MathJax
+    const mjEl = row.querySelector('[data-engine="mathjax"]');
+    if (window.MathJax && window.MathJax.tex2svgPromise) {
+      try {
+        const node = await window.MathJax.tex2svgPromise(latex, { display: true });
+        mjEl.appendChild(node);
+      } catch (e) {
+        mjEl.innerHTML = `<div class="render-error">Error: ${escapeHtml((e.message || '').substring(0, 100))}</div>`;
+      }
+    } else {
+      mjEl.innerHTML = '<div class="render-error">MathJax CDN 로드 실패</div>';
+    }
+
+    // Fizzex
+    const fxEl = row.querySelector('[data-engine="fizzex"]');
+    if (window.FizzexExport && window.FizzexExport.renderLatexToPNG) {
+      try {
+        const result = await window.FizzexExport.renderLatexToPNG(latex, { fontSize: 18, scale: 2 });
+        const img = document.createElement('img');
+        img.src = result.dataUrl;
+        img.style.width = result.width + 'px';
+        img.style.height = result.height + 'px';
+        fxEl.appendChild(img);
+      } catch (e) {
+        fxEl.innerHTML = `<div class="render-error">Error: ${escapeHtml((e.message || '').substring(0, 100))}</div>`;
+      }
+    } else {
+      fxEl.innerHTML = '<div class="render-error">Fizzex 번들 로드 실패</div>';
+    }
+  }
+}
+
 async function init() {
   try {
     const resp = await fetch('./corpus-result.json');
@@ -759,6 +924,7 @@ async function init() {
     renderSourceComp();
     renderPriorityChart();
     renderCriticalClusters();
+    renderVisualSamples();
   }
 
   applyFilters();
