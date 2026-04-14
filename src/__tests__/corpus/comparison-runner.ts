@@ -8,7 +8,7 @@
  * 출력: comparison-result.json → report.html에서 시각화
  */
 
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { categorizeError } from './corpus-runner';
 import { fizzexEngine } from './engines/fizzex-engine';
@@ -345,6 +345,20 @@ async function main() {
   const report = await runComparisonTest();
   const resultPath = resolve(BASE_DIR, 'comparison-result.json');
   writeFileSync(resultPath, JSON.stringify(report, null, 2));
+
+  // Fizzex 브라우저 번들 + 폰트를 corpus 디렉터리에 복사 (report.html의 시각 샘플용)
+  const bundleSrc = resolve(BASE_DIR, '../../../dist/browser/fizzex-export.js');
+  const bundleDst = resolve(BASE_DIR, 'fizzex-export.js');
+  if (existsSync(bundleSrc)) {
+    copyFileSync(bundleSrc, bundleDst);
+    console.log(`Fizzex 번들 복사: ${bundleDst}`);
+  }
+  const fontSrc = resolve(BASE_DIR, '../../../fonts/NewCMMath-Regular.woff2');
+  const fontDst = resolve(BASE_DIR, 'NewCMMath-Regular.woff2');
+  if (existsSync(fontSrc)) {
+    copyFileSync(fontSrc, fontDst);
+    console.log(`폰트 복사: ${fontDst}`);
+  }
 
   // 결과 요약 출력
   const { summary: s, classifications: c, meta, criticalClusters } = report;

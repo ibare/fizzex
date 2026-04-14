@@ -788,8 +788,16 @@ async function renderVisualSamples() {
     await window.MathJax.startup.promise.catch(() => null);
   }
 
+  // Fizzex 폰트를 @font-face로 미리 등록 (번들의 loadMathFont가 이를 감지하여 스킵)
+  try {
+    const ff = new FontFace('NewCMMath', 'url("./NewCMMath-Regular.woff2")', { style: 'normal', weight: '400' });
+    const loaded = await ff.load();
+    document.fonts.add(loaded);
+    await document.fonts.ready;
+  } catch { /* 폰트 로드 실패해도 fallback 폰트로 진행 */ }
+
   // Fizzex 번들 로드
-  await loadScript('../../../dist/browser/fizzex-export.js').catch(() => null);
+  await loadScript('./fizzex-export.js').catch(() => null);
   if (window.FizzexExport && window.FizzexExport.ensureFontsLoaded) {
     await window.FizzexExport.ensureFontsLoaded().catch(() => null);
   }

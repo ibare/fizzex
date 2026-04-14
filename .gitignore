@@ -35,6 +35,8 @@ tasks
 src/__tests__/fuzz/generated/
 src/__tests__/corpus/*.json
 src/__tests__/corpus/corpus-result.json
+src/__tests__/corpus/fizzex-export.js
+src/__tests__/corpus/NewCMMath-Regular.woff2
 
 # Logs
 *.log
