@@ -44,7 +44,14 @@
     "test:layout:watch": "vitest src/__tests__/layout/*.test.ts",
     "test:layout:report": "tsx src/__tests__/layout/report-generator.ts",
     "clean": "rm -rf dist demo-dist node_modules",
-    "extract-glyphs": "tsx scripts/extract-glyph-paths.ts"
+    "extract-glyphs": "tsx scripts/extract-glyph-paths.ts",
+    "fuzz:generate": "tsx src/__tests__/fuzz/generator.ts",
+    "fuzz:generate:fresh": "tsx src/__tests__/fuzz/generator.ts --seed random",
+    "corpus:build": "tsx src/__tests__/corpus/build-corpus.ts",
+    "corpus:test": "vitest run src/__tests__/corpus/corpus.test.ts --test-timeout 120000",
+    "corpus:report": "tsx src/__tests__/corpus/run-and-save-report.ts",
+    "corpus:full": "pnpm corpus:build && pnpm corpus:report",
+    "corpus:open": "open src/__tests__/corpus/report.html"
   },
   "keywords": [
     "math",
