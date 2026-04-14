@@ -63,17 +63,12 @@ export const functionHandlers: Map<string, CommandHandler> = new Map([
   ['arcsin', mathFunctionHandler('arcsin')],
   ['arccos', mathFunctionHandler('arccos')],
   ['arctan', mathFunctionHandler('arctan')],
-  ['arccot', mathFunctionHandler('arccot')],
-  ['arcsec', mathFunctionHandler('arcsec')],
-  ['arccsc', mathFunctionHandler('arccsc')],
 
   // 쌍곡선함수
   ['sinh', mathFunctionHandler('sinh')],
   ['cosh', mathFunctionHandler('cosh')],
   ['tanh', mathFunctionHandler('tanh')],
   ['coth', mathFunctionHandler('coth')],
-  ['sech', mathFunctionHandler('sech')],
-  ['csch', mathFunctionHandler('csch')],
 
   // 로그/지수 함수
   ['log', mathFunctionHandler('log')],
@@ -89,7 +84,6 @@ export const functionHandlers: Map<string, CommandHandler> = new Map([
   ['arg', mathFunctionHandler('arg')],
   ['deg', mathFunctionHandler('deg')],
   ['gcd', mathFunctionHandler('gcd')],
-  ['lcm', mathFunctionHandler('lcm')],
   ['min', mathFunctionHandler('min')],
   ['max', mathFunctionHandler('max')],
   ['sup', mathFunctionHandler('sup')],

@@ -39,8 +39,8 @@ export const comparisonCategories: ComparisonCategory[] = [
       '\\csc x = \\frac{1}{\\sin x}',
       '\\arcsin x + \\arccos x = \\frac{\\pi}{2}',
       '\\arctan 1 = \\frac{\\pi}{4}',
-      '\\arccot x = \\frac{\\pi}{2} - \\arctan x',
-      '\\arcsec x,\\; \\arccsc x',
+      '\\operatorname{arccot} x = \\frac{\\pi}{2} - \\arctan x',
+      '\\operatorname{arcsec} x,\\; \\operatorname{arccsc} x',
     ],
   },
   {
@@ -50,7 +50,7 @@ export const comparisonCategories: ComparisonCategory[] = [
       '\\cosh^2 x - \\sinh^2 x = 1',
       '\\tanh x = \\frac{\\sinh x}{\\cosh x}',
       '\\coth x = \\frac{1}{\\tanh x}',
-      '\\sech x,\\; \\csch x',
+      '\\operatorname{sech} x,\\; \\operatorname{csch} x',
     ],
   },
   {
@@ -90,7 +90,7 @@ export const comparisonCategories: ComparisonCategory[] = [
     items: [
       '\\min(a, b) + \\max(a, b) = a + b',
       '\\gcd(12, 18) = 6',
-      '\\lcm(4, 6) = 12',
+      '\\operatorname{lcm}(4, 6) = 12',
       '17 \\mod 5 = 2',
       '\\det A = ad - bc',
       '\\dim V = n',
