@@ -276,6 +276,19 @@ function convertPowerNode(
   fontSize: number,
   style: MathStyle
 ): Box {
+  // overbrace annotation 감지: \overbrace{...}^{n}
+  const baseNode = node.base.length === 1 ? node.base[0] : null;
+  if (baseNode && baseNode.type === 'overline' && 'variant' in baseNode && baseNode.variant === 'overbrace') {
+    const contentBox = convertOverline(baseNode as MathNode & { content: MathNode[]; variant?: 'underline' | 'boxed' | 'overbrace' | 'underbrace' }, metrics, fontSize, style);
+    const annotStyle = superscriptStyle(style);
+    const annotFontSize = fontSizeForStyle(fontSize, annotStyle);
+    const annotBox = astToBoxInternal(node.exponent[0], metrics, annotFontSize, annotStyle);
+    // contentBox는 이미 overbrace 렌더링 — annotation 포함 재생성
+    const innerContent = (baseNode as MathNode & { content: MathNode[] }).content;
+    const innerBox = astToBoxInternal(innerContent[0], metrics, fontSize, style);
+    return createOverbraceBox(innerBox, 'overbrace', metrics, fontSize, node.id, annotBox);
+  }
+
   // base 변환
   const baseChildren = node.base.map(child => astToBoxInternal(child, metrics, fontSize, style));
   const baseBox = createHBox(baseChildren);
@@ -296,6 +309,17 @@ function convertSubscriptNode(
   fontSize: number,
   style: MathStyle
 ): Box {
+  // underbrace annotation 감지: \underbrace{...}_{n}
+  const baseNode = node.base.length === 1 ? node.base[0] : null;
+  if (baseNode && baseNode.type === 'overline' && 'variant' in baseNode && baseNode.variant === 'underbrace') {
+    const annotStyle = subscriptStyle(style);
+    const annotFontSize = fontSizeForStyle(fontSize, annotStyle);
+    const annotBox = astToBoxInternal(node.subscript[0], metrics, annotFontSize, annotStyle);
+    const innerContent = (baseNode as MathNode & { content: MathNode[] }).content;
+    const innerBox = astToBoxInternal(innerContent[0], metrics, fontSize, style);
+    return createOverbraceBox(innerBox, 'underbrace', metrics, fontSize, node.id, annotBox);
+  }
+
   // base 변환
   const baseChildren = node.base.map(child => astToBoxInternal(child, metrics, fontSize, style));
   const baseBox = createHBox(baseChildren);

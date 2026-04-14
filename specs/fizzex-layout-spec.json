@@ -581,6 +581,30 @@
       "priority": 3,
       "note": "콘텐츠와 중괄호 사이 간격"
     },
+    "overbraceBraceHeight": {
+      "value": 0.3,
+      "unit": "em",
+      "sources": {
+        "tex": "overbrace/underbrace 중괄호 장식 높이",
+        "opentype": "N/A",
+        "cambria": "0.3em"
+      },
+      "tolerance": 0.05,
+      "priority": 3,
+      "note": "중괄호 장식 자체의 높이 (곡선 꼭대기~팔 바닥)"
+    },
+    "overbraceAnnotationGap": {
+      "value": 0.15,
+      "unit": "em",
+      "sources": {
+        "tex": "overbrace/underbrace annotation 간격",
+        "opentype": "N/A",
+        "cambria": "0.15em"
+      },
+      "tolerance": 0.03,
+      "priority": 3,
+      "note": "중괄호 장식과 annotation(^{n}/_{n}) 사이 간격"
+    },
     "xarrowPadding": {
       "value": 0.3,
       "unit": "em",

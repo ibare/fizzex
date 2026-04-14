@@ -1342,13 +1342,28 @@ export function createOverbraceBox(
   variant: 'overbrace' | 'underbrace',
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  annotation?: Box
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const gap = actualFontSize * MathConstants.overbraceGap;
-  const braceHeight = actualFontSize * 0.2;
+  const annotationGap = actualFontSize * MathConstants.overbraceAnnotationGap;
 
-  // 중괄호 장식 Rule — box-renderer에서 감지하여 경로 그리기
+  // 글리프 자연 높이로 brace 크기 결정
+  const braceChar = variant === 'overbrace' ? '⏞' : '⏟';
+  const braceEntry = DELIMITER_PATHS[braceChar];
+  const targetWidthNorm = content.width / actualFontSize;
+  // 적절한 크기 변형의 높이 사용
+  let glyphHeight = braceEntry?.base.ascent ?? 0;
+  if (braceEntry?.variants) {
+    for (const v of braceEntry.variants) {
+      if (v.advanceWidth >= targetWidthNorm) { glyphHeight = v.ascent + v.descent; break; }
+      glyphHeight = v.ascent + v.descent;
+    }
+  }
+  const braceHeight = actualFontSize * (glyphHeight || MathConstants.overbraceBraceHeight);
+
+  // 중괄호 장식 Rule — box-renderer에서 감지하여 글리프 렌더링
   const braceRule = createRule(content.width, braceHeight);
   (braceRule as any).brace = { variant, width: content.width };
 
@@ -1359,6 +1374,17 @@ export function createOverbraceBox(
     const overlayBrace = createHBox([shiftedBrace, createKern(-braceRule.width)]);
     const result = createHBox([overlayBrace, content], sourceId);
     result.height = content.height + gap + braceHeight;
+
+    if (annotation) {
+      // annotation을 brace 위에 중앙 배치
+      const annotShift = -(result.height + annotationGap);
+      const annotOffset = (content.width - annotation.width) / 2;
+      const shiftedAnnot: Box = { ...annotation, shift: annotShift };
+      const annotRow = createHBox([createKern(annotOffset), shiftedAnnot, createKern(-annotOffset - annotation.width)]);
+      const wrapper = createHBox([annotRow, result], sourceId);
+      wrapper.height = result.height + annotationGap + annotation.height + annotation.depth;
+      return wrapper;
+    }
     return result;
   } else {
     // underbrace: 중괄호를 콘텐츠 아래에 배치
@@ -1367,6 +1393,17 @@ export function createOverbraceBox(
     const overlayBrace = createHBox([shiftedBrace, createKern(-braceRule.width)]);
     const result = createHBox([overlayBrace, content], sourceId);
     result.depth = content.depth + gap + braceHeight;
+
+    if (annotation) {
+      // annotation을 brace 아래에 중앙 배치
+      const annotShift = result.depth + annotationGap;
+      const annotOffset = (content.width - annotation.width) / 2;
+      const shiftedAnnot: Box = { ...annotation, shift: annotShift };
+      const annotRow = createHBox([createKern(annotOffset), shiftedAnnot, createKern(-annotOffset - annotation.width)]);
+      const wrapper = createHBox([annotRow, result], sourceId);
+      wrapper.depth = result.depth + annotationGap + annotation.height + annotation.depth;
+      return wrapper;
+    }
     return result;
   }
 }

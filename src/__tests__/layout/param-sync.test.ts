@@ -198,6 +198,14 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
     resolve: () => MathConstants.overbraceGap,
     location: 'MathConstants.overbraceGap',
   },
+  overbraceBraceHeight: {
+    resolve: () => MathConstants.overbraceBraceHeight,
+    location: 'MathConstants.overbraceBraceHeight',
+  },
+  overbraceAnnotationGap: {
+    resolve: () => MathConstants.overbraceAnnotationGap,
+    location: 'MathConstants.overbraceAnnotationGap',
+  },
   xarrowPadding: {
     resolve: () => MathConstants.xarrowPadding,
     location: 'MathConstants.xarrowPadding',

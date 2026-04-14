@@ -15,7 +15,7 @@ const ROOT = resolve(__dirname, '..');
 const FONT_PATH = resolve(ROOT, 'fonts/NewCMMath-Regular.otf');
 const OUTPUT_PATH = resolve(ROOT, 'src/fonts/delimiter-paths.ts');
 
-// 추출 대상: ( ) [ ] √ ‖ ∫ ∬ ∭ ∮
+// 추출 대상 (수직 변형): ( ) [ ] √ ‖ ∫ ∬ ∭ ∮
 const TARGET_CHARS: Record<string, number> = {
   '(': 0x0028,
   ')': 0x0029,
@@ -27,6 +27,12 @@ const TARGET_CHARS: Record<string, number> = {
   '∬': 0x222C,
   '∭': 0x222D,
   '∮': 0x222E,
+};
+
+// 추출 대상 (수평 변형): ⏞ ⏟
+const TARGET_HORIZ_CHARS: Record<string, number> = {
+  '⏞': 0x23DE,
+  '⏟': 0x23DF,
 };
 
 // ─── OTF 바이너리 유틸 ───────────────────────────────────────
@@ -156,6 +162,85 @@ function parseMathVariants(view: DataView, mathTableOffset: number, targetGlyphI
   return result;
 }
 
+/** 수평 MathVariants 파싱 (overbrace/underbrace 등) */
+function parseHorizMathVariants(view: DataView, mathTableOffset: number, targetGlyphIds: number[]): Map<number, MathVariantInfo> {
+  const result = new Map<number, MathVariantInfo>();
+
+  const mathVariantsOffset = view.getUint16(mathTableOffset + 8);
+  const V = mathTableOffset + mathVariantsOffset;
+
+  const horizCoverageOffset = view.getUint16(V + 4);
+  const vertGlyphCount = view.getUint16(V + 6);
+  const horizGlyphCount = view.getUint16(V + 8);
+
+  const coverageGlyphs = parseCoverage(view, V + horizCoverageOffset);
+
+  for (const targetGlyphId of targetGlyphIds) {
+    const coverageIndex = coverageGlyphs.indexOf(targetGlyphId);
+    if (coverageIndex === -1 || coverageIndex >= horizGlyphCount) continue;
+
+    // 수평 Construction 오프셋: 수직 오프셋 배열 다음에 위치
+    const constructionRelOffset = view.getUint16(V + 10 + vertGlyphCount * 2 + coverageIndex * 2);
+    const C = V + constructionRelOffset;
+
+    const info: MathVariantInfo = { variantGlyphIds: [] };
+
+    const assemblyOffset = view.getUint16(C);
+    const variantCount = view.getUint16(C + 2);
+
+    for (let i = 0; i < variantCount; i++) {
+      const variantGlyphId = view.getUint16(C + 4 + i * 4);
+      info.variantGlyphIds.push(variantGlyphId);
+    }
+
+    if (assemblyOffset !== 0) {
+      const A = C + assemblyOffset;
+      const partCount = view.getUint16(A + 4);
+      const parts: MathVariantInfo['assembly'] extends undefined ? never : NonNullable<MathVariantInfo['assembly']>['parts'] = [];
+
+      for (let i = 0; i < partCount; i++) {
+        const base = A + 6 + i * 10;
+        parts.push({
+          glyphId: view.getUint16(base),
+          startConnectorLength: view.getUint16(base + 2),
+          endConnectorLength: view.getUint16(base + 4),
+          fullAdvance: view.getUint16(base + 6),
+          isExtender: (view.getUint16(base + 8) & 0x0001) !== 0,
+        });
+      }
+
+      info.assembly = { parts };
+    }
+
+    result.set(targetGlyphId, info);
+  }
+
+  return result;
+}
+
+// ─── MATH ItalicsCorrection 파싱 ─────────────────────────────
+
+function parseItalicsCorrections(view: DataView, mathTableOffset: number): Map<number, number> {
+  const result = new Map<number, number>();
+  const glyphInfoOffset = view.getUint16(mathTableOffset + 6);
+  const GI = mathTableOffset + glyphInfoOffset;
+  const italicsCorrInfoOffset = view.getUint16(GI);
+  if (italicsCorrInfoOffset === 0) return result;
+
+  const IC = GI + italicsCorrInfoOffset;
+  const coverageOffset = view.getUint16(IC);
+  const count = view.getUint16(IC + 2);
+  const coverageGlyphs = parseCoverage(view, IC + coverageOffset);
+
+  for (let i = 0; i < Math.min(count, coverageGlyphs.length); i++) {
+    const value = view.getInt16(IC + 4 + i * 4);
+    if (value !== 0) {
+      result.set(coverageGlyphs[i], value);
+    }
+  }
+  return result;
+}
+
 // ─── 글리프 경로 추출 ────────────────────────────────────────
 
 interface PathCommand {
@@ -168,9 +253,10 @@ interface GlyphPathData {
   advanceWidth: number;
   ascent: number;
   descent: number;
+  italicCorrection?: number;
 }
 
-function extractGlyphPath(font: opentype.Font, glyphId: number): GlyphPathData | null {
+function extractGlyphPath(font: opentype.Font, glyphId: number, italicCorrMap?: Map<number, number>): GlyphPathData | null {
   const glyph = font.glyphs.get(glyphId);
   if (!glyph) return null;
 
@@ -217,12 +303,21 @@ function extractGlyphPath(font: opentype.Font, glyphId: number): GlyphPathData |
   const ascent = Math.abs(Math.min(0, minY));
   const descent = Math.max(0, maxY);
 
-  return {
+  const result: GlyphPathData = {
     commands,
     advanceWidth: (glyph.advanceWidth ?? 0) / unitsPerEm,
     ascent,
     descent,
   };
+
+  if (italicCorrMap) {
+    const ic = italicCorrMap.get(glyphId);
+    if (ic !== undefined) {
+      result.italicCorrection = Math.round((ic / unitsPerEm) * 10000) / 10000;
+    }
+  }
+
+  return result;
 }
 
 // ─── 메인 ────────────────────────────────────────────────────
@@ -242,6 +337,10 @@ function main() {
     throw new Error('MATH 테이블을 찾을 수 없습니다.');
   }
   console.log(`MATH 테이블: offset=${mathTable.offset}, length=${mathTable.length}`);
+
+  // ItalicsCorrection 맵 파싱
+  const italicCorrMap = parseItalicsCorrections(view, mathTable.offset);
+  console.log(`ItalicsCorrection: ${italicCorrMap.size}개 글리프`);
 
   // 대상 글리프 ID 수집
   const charToGlyphId = new Map<string, number>();
@@ -263,7 +362,7 @@ function main() {
   const entries: string[] = [];
 
   for (const [char, baseGlyphId] of charToGlyphId) {
-    const basePath = extractGlyphPath(font, baseGlyphId);
+    const basePath = extractGlyphPath(font, baseGlyphId, italicCorrMap);
     if (!basePath) {
       console.warn(`기본 글리프 경로 추출 실패: ${char}`);
       continue;
@@ -275,32 +374,52 @@ function main() {
     const variants: GlyphPathData[] = [];
     if (variantInfo) {
       for (const varGlyphId of variantInfo.variantGlyphIds) {
-        const varPath = extractGlyphPath(font, varGlyphId);
+        const varPath = extractGlyphPath(font, varGlyphId, italicCorrMap);
         if (varPath) variants.push(varPath);
       }
       console.log(`${char}: ${variants.length}개 크기 변형 추출`);
     }
 
-    // Extensible 파트 추출
-    let extensible: { top: GlyphPathData; ext: GlyphPathData; bottom: GlyphPathData } | undefined;
-    if (variantInfo?.assembly) {
-      const parts = variantInfo.assembly.parts;
-      const topPart = parts.find((p) => !p.isExtender && parts.indexOf(p) === 0);
-      const extPart = parts.find((p) => p.isExtender);
-      const bottomPart = parts.find((p) => !p.isExtender && parts.indexOf(p) === parts.length - 1);
+    // Extensible 파트 추출 (3부품: top+ext+bottom 또는 5부품: top+ext+mid+ext+bottom)
+    const extensible = extractExtensible(font, variantInfo, char, italicCorrMap);
 
-      if (topPart && extPart && bottomPart) {
-        const topPath = extractGlyphPath(font, topPart.glyphId);
-        const extPath = extractGlyphPath(font, extPart.glyphId);
-        const bottomPath = extractGlyphPath(font, bottomPart.glyphId);
+    entries.push(formatEntry(char, basePath, variants, extensible));
+  }
 
-        if (topPath && extPath && bottomPath) {
-          extensible = { top: topPath, ext: extPath, bottom: bottomPath };
-          console.log(`${char}: extensible 파트 추출 완료`);
-        }
-      }
+  // ── 수평 변형 글리프 (⏞, ⏟) ──
+  const horizCharToGlyphId = new Map<string, number>();
+  for (const [char, codePoint] of Object.entries(TARGET_HORIZ_CHARS)) {
+    const glyphId = font.charToGlyphIndex(String.fromCodePoint(codePoint));
+    if (glyphId === 0) {
+      console.warn(`글리프를 찾을 수 없음: ${char} (U+${codePoint.toString(16).padStart(4, '0')})`);
+      continue;
+    }
+    horizCharToGlyphId.set(char, glyphId);
+    console.log(`${char} → glyphId=${glyphId} (수평)`);
+  }
+
+  const horizGlyphIds = [...horizCharToGlyphId.values()];
+  const horizMathVariants = parseHorizMathVariants(view, mathTable.offset, horizGlyphIds);
+
+  for (const [char, baseGlyphId] of horizCharToGlyphId) {
+    const basePath = extractGlyphPath(font, baseGlyphId, italicCorrMap);
+    if (!basePath) {
+      console.warn(`기본 글리프 경로 추출 실패: ${char}`);
+      continue;
     }
 
+    const variantInfo = horizMathVariants.get(baseGlyphId);
+
+    const variants: GlyphPathData[] = [];
+    if (variantInfo) {
+      for (const varGlyphId of variantInfo.variantGlyphIds) {
+        const varPath = extractGlyphPath(font, varGlyphId, italicCorrMap);
+        if (varPath) variants.push(varPath);
+      }
+      console.log(`${char}: ${variants.length}개 수평 크기 변형 추출`);
+    }
+
+    const extensible = extractExtensible(font, variantInfo, char, italicCorrMap);
     entries.push(formatEntry(char, basePath, variants, extensible));
   }
 
@@ -309,6 +428,39 @@ function main() {
   writeFileSync(OUTPUT_PATH, output, 'utf-8');
   console.log(`\n출력: ${OUTPUT_PATH}`);
   console.log('완료!');
+}
+
+/** Assembly에서 extensible 파트 추출 (3부품 또는 5부품 지원) */
+function extractExtensible(
+  font: opentype.Font,
+  variantInfo: MathVariantInfo | undefined,
+  charLabel: string,
+  italicCorrMap?: Map<number, number>,
+): { top: GlyphPathData; ext: GlyphPathData; bottom: GlyphPathData; mid?: GlyphPathData } | undefined {
+  if (!variantInfo?.assembly) return undefined;
+
+  const parts = variantInfo.assembly.parts;
+  const nonExtenders = parts.filter((p) => !p.isExtender);
+  const extPart = parts.find((p) => p.isExtender);
+
+  if (!extPart || nonExtenders.length < 2) return undefined;
+
+  const topPart = nonExtenders[0];
+  const bottomPart = nonExtenders[nonExtenders.length - 1];
+  // 5부품 구조 (중괄호): top + ext + mid + ext + bottom
+  const midPart = nonExtenders.length >= 3 ? nonExtenders[1] : undefined;
+
+  const topPath = extractGlyphPath(font, topPart.glyphId, italicCorrMap);
+  const extPath = extractGlyphPath(font, extPart.glyphId, italicCorrMap);
+  const bottomPath = extractGlyphPath(font, bottomPart.glyphId, italicCorrMap);
+  const midPath = midPart ? extractGlyphPath(font, midPart.glyphId, italicCorrMap) : undefined;
+
+  if (!topPath || !extPath || !bottomPath) return undefined;
+
+  console.log(`${charLabel}: extensible 파트 추출 완료${midPath ? ' (mid 포함)' : ''}`);
+  return midPath
+    ? { top: topPath, ext: extPath, mid: midPath, bottom: bottomPath }
+    : { top: topPath, ext: extPath, bottom: bottomPath };
 }
 
 // ─── 코드 생성 ───────────────────────────────────────────────
@@ -321,14 +473,18 @@ function formatPathData(data: GlyphPathData): string {
     })
     .join(',\n      ');
 
-  return `{
+  let result = `{
     commands: [
       ${cmds},
     ],
     advanceWidth: ${round(data.advanceWidth)},
     ascent: ${round(data.ascent)},
-    descent: ${round(data.descent)},
-  }`;
+    descent: ${round(data.descent)},`;
+  if (data.italicCorrection !== undefined) {
+    result += `\n    italicCorrection: ${round(data.italicCorrection)},`;
+  }
+  result += `\n  }`;
+  return result;
 }
 
 function round(n: number): number {
@@ -339,7 +495,7 @@ function formatEntry(
   char: string,
   base: GlyphPathData,
   variants: GlyphPathData[],
-  extensible?: { top: GlyphPathData; ext: GlyphPathData; bottom: GlyphPathData },
+  extensible?: { top: GlyphPathData; ext: GlyphPathData; bottom: GlyphPathData; mid?: GlyphPathData },
 ): string {
   let result = `  '${char}': {\n    base: ${formatPathData(base)},\n`;
 
@@ -352,6 +508,9 @@ function formatEntry(
     result += `    extensible: {\n`;
     result += `      top: ${formatPathData(extensible.top)},\n`;
     result += `      ext: ${formatPathData(extensible.ext)},\n`;
+    if (extensible.mid) {
+      result += `      mid: ${formatPathData(extensible.mid)},\n`;
+    }
     result += `      bottom: ${formatPathData(extensible.bottom)},\n`;
     result += `    },\n`;
   }
@@ -375,6 +534,8 @@ export interface GlyphPathData {
   advanceWidth: number;
   ascent: number;
   descent: number;
+  /** N항 연산자의 상한/하한 수평 보정값 (cambria-013) */
+  italicCorrection?: number;
 }
 
 export interface DelimiterPathEntry {
@@ -383,6 +544,7 @@ export interface DelimiterPathEntry {
   extensible?: {
     top: GlyphPathData;
     ext: GlyphPathData;
+    mid?: GlyphPathData;
     bottom: GlyphPathData;
   };
 }

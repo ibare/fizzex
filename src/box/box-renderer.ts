@@ -316,46 +316,47 @@ export class BoxRenderer {
     this.backend.restore();
   }
 
-  /** overbrace/underbrace 렌더링 */
+  /** overbrace/underbrace 렌더링 — 폰트 글리프 기반 */
   private renderBrace(
     rule: RuleBox,
     info: { variant: string; width: number }
   ): void {
-    const x = rule.x;
-    const y = rule.y - rule.height;
-    const w = info.width;
-    const h = rule.height + rule.depth;
-    const lw = this.config.baseFontSize * 0.04;
+    const char = info.variant === 'overbrace' ? '⏞' : '⏟';
+    const entry = DELIMITER_PATHS[char];
+    if (!entry) return;
 
-    this.backend.save();
-    this.backend.setStrokeStyle(this.config.color);
-    this.backend.setLineWidth(lw);
-    this.backend.beginPath();
+    // 목표 너비를 정규화 단위(em)로 변환
+    const targetWidthNorm = info.width / this.config.baseFontSize;
 
-    if (info.variant === 'overbrace') {
-      // ⏞ 모양: 양 끝에서 올라와 중앙에서 뾰족하게
-      const midX = x + w / 2;
-      const top = y;
-      const bottom = y + h;
-      this.backend.moveTo(x, bottom);
-      this.backend.lineTo(x, top + h * 0.3);
-      this.backend.lineTo(midX, top);
-      this.backend.lineTo(x + w, top + h * 0.3);
-      this.backend.lineTo(x + w, bottom);
-    } else {
-      // ⏟ 모양: 양 끝에서 내려와 중앙에서 뾰족하게
-      const midX = x + w / 2;
-      const top = y;
-      const bottom = y + h;
-      this.backend.moveTo(x, top);
-      this.backend.lineTo(x, bottom - h * 0.3);
-      this.backend.lineTo(midX, bottom);
-      this.backend.lineTo(x + w, bottom - h * 0.3);
-      this.backend.lineTo(x + w, top);
+    // 적절한 크기 변형 선택
+    const pathData = this.selectHorizVariant(entry, targetWidthNorm);
+
+    // 글리프의 자연 높이로 렌더링 (너비만 목표에 맞춤)
+    const naturalHeight = (pathData.ascent + pathData.descent) * this.config.baseFontSize;
+    const heightAboveBaseline = pathData.ascent * this.config.baseFontSize;
+
+    this.renderDelimiterPath(
+      pathData,
+      rule.x,
+      rule.y,
+      naturalHeight,
+      info.width,
+      heightAboveBaseline,
+    );
+  }
+
+  /** 수평 글리프 크기 변형 선택 — 목표 너비에 맞는 가장 작은 변형 */
+  private selectHorizVariant(entry: typeof DELIMITER_PATHS[string], targetWidthNorm: number): GlyphPathData {
+    if (entry.base.advanceWidth >= targetWidthNorm) return entry.base;
+
+    if (entry.variants) {
+      for (const v of entry.variants) {
+        if (v.advanceWidth >= targetWidthNorm) return v;
+      }
+      return entry.variants[entry.variants.length - 1];
     }
 
-    this.backend.stroke();
-    this.backend.restore();
+    return entry.base;
   }
 
   /** 확장 화살표 (xleftarrow/xrightarrow) 렌더링 */

@@ -452,6 +452,8 @@ export const MathConstants = {
   // ── 넓은 악센트 / 중괄호 / 확장 화살표 ──
   wideAccentMinWidth: 0.8,
   overbraceGap: 0.12,
+  overbraceBraceHeight: 0.3,
+  overbraceAnnotationGap: 0.15,
   xarrowPadding: 0.3,
   smallMatrixScale: 0.7,
 
