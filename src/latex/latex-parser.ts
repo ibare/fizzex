@@ -310,6 +310,11 @@ function parseGroup(latex: string, start: number): ParseResult {
     return { nodes: innerResult.nodes, consumed: innerResult.consumed + 1 };
   }
 
+  // 백슬래시 명령어 (\circ, \prime 등)
+  if (latex[start] === '\\') {
+    return parseCommand(latex, start);
+  }
+
   // 단일 문자
   if (/[0-9]/.test(latex[start])) {
     return { nodes: [createNumber(latex[start])], consumed: start + 1 };
