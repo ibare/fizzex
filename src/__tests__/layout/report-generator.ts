@@ -9,6 +9,9 @@ import { runLayoutSpec, type SpecRunResult, type LayoutSpec } from './spec-runne
 import spec from '../../../specs/fizzex-layout-spec.json';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function generateReport(result: SpecRunResult): string {
   const lines: string[] = [];
@@ -72,12 +75,68 @@ function main() {
   const result = runLayoutSpec(spec as LayoutSpec);
   const report = generateReport(result);
 
+  // 마크다운 리포트 저장
   const reportPath = path.resolve(__dirname, '../../../docs/layout-compliance-report.md');
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
   fs.writeFileSync(reportPath, report, 'utf-8');
 
-  console.log(report);
-  console.log(`\nReport saved to: ${reportPath}`);
+  // JSON 결과 저장 (corpus report.html에서 참조)
+  const jsonResult = {
+    meta: {
+      generated_at: new Date().toISOString(),
+    },
+    complianceScore: result.complianceScore,
+    totalAssertions: result.totalAssertions,
+    passed: result.passed,
+    failed: result.failed,
+    knownFail: result.knownFail,
+    skipped: result.skipped,
+    categories: Object.fromEntries(
+      Object.entries(result.categories).map(([name, cat]) => {
+        const testable = cat.total - cat.knownFail - cat.skipped;
+        const score = testable > 0 ? Math.round((cat.passed / testable) * 100) : 0;
+        return [name, {
+          total: cat.total,
+          passed: cat.passed,
+          failed: cat.failed,
+          knownFail: cat.knownFail,
+          skipped: cat.skipped,
+          score,
+        }];
+      }),
+    ),
+    topIssues: result.failures
+      .sort((a, b) => {
+        const aDiff = typeof a.diff === 'number' ? a.diff : Infinity;
+        const bDiff = typeof b.diff === 'number' ? b.diff : Infinity;
+        return bDiff - aDiff;
+      })
+      .slice(0, 10)
+      .map(f => ({
+        caseId: f.caseId,
+        type: f.type,
+        expected: f.expected,
+        actual: f.actual,
+        diff: f.diff,
+        message: f.message,
+      })),
+    knownFailures: result.knownFailures.map(f => ({
+      caseId: f.caseId,
+      type: f.type,
+      message: f.message,
+    })),
+  };
+
+  const jsonPath = path.resolve(__dirname, '../corpus/layout-result.json');
+  fs.writeFileSync(jsonPath, JSON.stringify(jsonResult, null, 2), 'utf-8');
+
+  // 콘솔 요약
+  console.log('=== 레이아웃 준수도 테스트 결과 ===');
+  console.log(`준수율: ${result.complianceScore}%`);
+  console.log(`Pass: ${result.passed} / ${result.totalAssertions}`);
+  console.log(`Fail: ${result.failed} | Known Fail: ${result.knownFail} | Skip: ${result.skipped}`);
+  console.log(`\n마크다운 저장: ${reportPath}`);
+  console.log(`JSON 저장: ${jsonPath}`);
 }
 
 main();
