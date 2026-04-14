@@ -88,12 +88,14 @@ export {
   StructureViewer,
   SuggestionChips,
   SuggestionPopover,
+  StreamingMath,
 } from './react';
 export type {
   MathCanvasProps,
   StructureViewerProps,
   SuggestionChipsProps,
   SuggestionPopoverProps,
+  StreamingMathProps,
 } from './react';
 
 // 수식 분석기
@@ -178,6 +180,14 @@ export type {
   TokenizerState,
   TokenizerOptions,
 } from './latex/streaming';
+
+// Confidence Indicator
+export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './box';
+export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './box';
+
+// Headless Streaming Renderer
+export { FizzexStreamRenderer, classifyConfidence, buildConfidenceRegions } from './headless/stream-renderer';
+export type { StreamRendererConfig } from './headless/stream-renderer';
 
 // 타입
 export type {

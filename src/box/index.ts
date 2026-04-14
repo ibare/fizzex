@@ -41,3 +41,5 @@ export {
   getCursorXPosition,
 } from './box-layout';
 export { BoxRenderer } from './box-renderer';
+export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator';
+export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './confidence-indicator';

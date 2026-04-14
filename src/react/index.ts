@@ -13,3 +13,6 @@ export type { SuggestionPopoverProps } from './SuggestionPopover';
 
 export { StructureViewer } from './StructureViewer';
 export type { StructureViewerProps } from './StructureViewer';
+
+export { StreamingMath } from './StreamingMath';
+export type { StreamingMathProps } from './StreamingMath';

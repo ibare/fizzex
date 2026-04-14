@@ -14,6 +14,8 @@ import type { RenderBackend } from './render-backend';
 import { CanvasRenderBackend } from './render-backend';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
 import type { GlyphPathData } from '../fonts/delimiter-paths';
+import { ConfidenceIndicator } from './confidence-indicator';
+import type { ConfidenceRegion } from './confidence-indicator';
 
 export class BoxRenderer {
   private backend: RenderBackend;
@@ -635,5 +637,17 @@ export class BoxRenderer {
     } else if (box.type === 'surd') {
       this.renderDebugBounds(box.content, depth + 1);
     }
+  }
+
+  /**
+   * Confidence 오버레이 렌더링 (render() 호출 후 별도 호출)
+   *
+   * confidence config가 없으면 no-op.
+   * 호출자가 Diagnostic → ConfidenceRegion 변환을 수행하여 전달한다.
+   */
+  renderConfidence(regions: ConfidenceRegion[]): void {
+    if (!this.config.confidence || regions.length === 0) return;
+    const indicator = new ConfidenceIndicator(this.backend, this.config.confidence);
+    indicator.renderOverlays(regions);
   }
 }

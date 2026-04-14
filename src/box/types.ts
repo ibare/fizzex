@@ -1,3 +1,5 @@
+import type { ConfidenceIndicatorConfig } from './confidence-indicator';
+
 /**
  * Box 모델 타입 정의
  *
@@ -143,6 +145,8 @@ export interface BoxRenderConfig {
   placeholder?: PlaceholderConfig;
   /** 빈 영역 Placeholder 표시 여부 (편집 모드에서만 true) */
   showPlaceholders?: boolean;
+  /** Confidence 오버레이 설정 (없으면 오버레이 비활성) */
+  confidence?: Partial<ConfidenceIndicatorConfig>;
 }
 
 /** 폰트 메트릭스 (문자 측정용) */
