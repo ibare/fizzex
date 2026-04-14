@@ -10,6 +10,12 @@
 
 import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
+
+function resolveCorpusPath(baseDir: string): string {
+  const verified = resolve(baseDir, 'combined-corpus-verified.json');
+  if (existsSync(verified)) return verified;
+  return resolve(baseDir, 'combined-corpus.json');
+}
 import { categorizeError } from './corpus-runner';
 import { fizzexEngine } from './engines/fizzex-engine';
 import { katexEngine } from './engines/katex-engine';
@@ -195,8 +201,9 @@ function sampleWithDiversity(entries: ComparisonEntry[], count: number): VisualS
 
 async function runComparisonTest(): Promise<ComparisonReport> {
   // 코퍼스 로드
-  const corpusPath = resolve(BASE_DIR, 'combined-corpus.json');
+  const corpusPath = resolveCorpusPath(BASE_DIR);
   const corpus = JSON.parse(readFileSync(corpusPath, 'utf-8'));
+  console.log(`코퍼스: ${corpusPath.split('/').pop()}`);
   const formulas: CorpusEntry[] = corpus.formulas;
   const total = formulas.length;
 

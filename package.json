@@ -53,7 +53,8 @@
     "corpus:test": "vitest run src/__tests__/corpus/corpus.test.ts --test-timeout 120000",
     "corpus:report": "tsx src/__tests__/corpus/run-and-save-report.ts",
     "corpus:compare": "tsx src/__tests__/corpus/comparison-runner.ts",
-    "corpus:full": "pnpm corpus:build && pnpm corpus:report && pnpm corpus:compare",
+    "corpus:pdflatex-filter": "tsx src/__tests__/corpus/pdflatex-filter.ts",
+    "corpus:full": "pnpm corpus:build && pnpm corpus:pdflatex-filter && pnpm corpus:report && pnpm corpus:compare",
     "corpus:open": "open src/__tests__/corpus/report.html"
   },
   "keywords": [

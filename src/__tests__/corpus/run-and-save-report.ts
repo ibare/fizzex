@@ -10,9 +10,11 @@ import { runCorpusTest } from './corpus-runner';
 const BASE_DIR = dirname(new URL(import.meta.url).pathname);
 
 async function main() {
-  const corpusPath = './combined-corpus.json';
+  const verifiedPath = resolve(BASE_DIR, 'combined-corpus-verified.json');
+  const corpusPath = existsSync(verifiedPath) ? './combined-corpus-verified.json' : './combined-corpus.json';
   const resultPath = resolve(BASE_DIR, 'corpus-result.json');
 
+  console.log(`코퍼스: ${corpusPath}`);
   console.log('코퍼스 테스트 실행 중...\n');
   const report = await runCorpusTest(corpusPath);
 

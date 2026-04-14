@@ -34,6 +34,7 @@ tasks
 # Corpus test (generated data + results)
 src/__tests__/fuzz/generated/
 src/__tests__/corpus/*.json
+src/__tests__/corpus/pdflatex-filter-report.json
 src/__tests__/corpus/corpus-result.json
 src/__tests__/corpus/fizzex-export.js
 src/__tests__/corpus/NewCMMath-Regular.woff2
