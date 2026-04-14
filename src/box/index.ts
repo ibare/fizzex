@@ -43,3 +43,5 @@ export {
 export { BoxRenderer } from './box-renderer';
 export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator';
 export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './confidence-indicator';
+export { buildExplorerMap, explorerHitTest, getBoxBounds } from './explorer-map';
+export type { ExplorerBoxInfo, BoxBounds, ExplorerHitResult } from './explorer-map';

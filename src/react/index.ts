@@ -16,3 +16,6 @@ export type { StructureViewerProps } from './StructureViewer';
 
 export { StreamingMath } from './StreamingMath';
 export type { StreamingMathProps } from './StreamingMath';
+
+export { ExpressionExplorer } from './ExpressionExplorer';
+export type { ExpressionExplorerProps } from './ExpressionExplorer';

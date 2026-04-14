@@ -89,6 +89,7 @@ export {
   SuggestionChips,
   SuggestionPopover,
   StreamingMath,
+  ExpressionExplorer,
 } from './react';
 export type {
   MathCanvasProps,
@@ -96,6 +97,7 @@ export type {
   SuggestionChipsProps,
   SuggestionPopoverProps,
   StreamingMathProps,
+  ExpressionExplorerProps,
 } from './react';
 
 // 수식 분석기

@@ -13,6 +13,7 @@ const PRESETS = [
   '\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}',
   '|x - 1| < 3',
   'E = mc^2',
+  '\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x) e^{-2\\pi i x \\xi} \\, dx',
 ];
 
 export default function Playground() {
@@ -79,6 +80,7 @@ export default function Playground() {
                 height={120}
                 showSuggestions
                 showStructureToggle
+                showExplorerToggle
                 theme="light"
               />
             </div>
