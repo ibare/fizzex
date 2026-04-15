@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { BoxRenderer } from './box-renderer';
-import { MockRenderBackend } from './render-backend';
+import { Projector } from './projector';
+import { MockSurface } from './surface';
 import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, BoxRenderConfig } from './types';
 
 function createMockMetrics(): any {
@@ -94,27 +94,27 @@ function makeKern(width: number): KernBox {
   };
 }
 
-describe('BoxRenderer', () => {
-  let backend: MockRenderBackend;
+describe('Projector', () => {
+  let backend: MockSurface;
   let metrics: any;
   let config: BoxRenderConfig;
 
   beforeEach(() => {
-    backend = new MockRenderBackend();
+    backend = new MockSurface();
     metrics = createMockMetrics();
     config = createDefaultConfig();
   });
 
   describe('생성', () => {
-    it('MockRenderBackend로 생성할 수 있다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+    it('MockSurface로 생성할 수 있다', () => {
+      const renderer = new Projector(backend, config, metrics);
       expect(renderer).toBeDefined();
     });
   });
 
   describe('render - glyph', () => {
     it('glyph Box를 렌더링한다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const glyph = makeGlyph('x', { x: 10, y: 25 });
 
       renderer.render(glyph);
@@ -123,7 +123,7 @@ describe('BoxRenderer', () => {
     });
 
     it('fillText가 호출된다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const glyph = makeGlyph('A', { x: 5, y: 30 });
 
       renderer.render(glyph);
@@ -133,7 +133,7 @@ describe('BoxRenderer', () => {
     });
 
     it('올바른 폰트를 설정한다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const glyph = makeGlyph('B', { italic: true, fontSize: 1.0 });
 
       renderer.render(glyph);
@@ -145,7 +145,7 @@ describe('BoxRenderer', () => {
 
   describe('render - hbox', () => {
     it('HBox의 자식들을 순회하며 렌더링한다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const child1 = makeGlyph('a', { x: 0, y: 20 });
       const child2 = makeGlyph('b', { x: 10, y: 20 });
       const hbox = makeHBox([child1, child2]);
@@ -159,7 +159,7 @@ describe('BoxRenderer', () => {
 
   describe('render - vbox', () => {
     it('VBox의 자식들을 순회하며 렌더링한다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const child1 = makeGlyph('1', { x: 0, y: 10 });
       const child2 = makeGlyph('2', { x: 0, y: 30 });
       const vbox = makeVBox([child1, child2]);
@@ -172,7 +172,7 @@ describe('BoxRenderer', () => {
 
   describe('render - rule', () => {
     it('rule Box를 fillRect로 렌더링한다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const rule = makeRule({ x: 5, y: 20, width: 50, height: 0.5, thickness: 1 });
 
       renderer.render(rule);
@@ -189,7 +189,7 @@ describe('BoxRenderer', () => {
 
   describe('render - kern', () => {
     it('kern Box는 렌더링을 건너뛴다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const kern = makeKern(10);
 
       renderer.render(kern);
@@ -203,7 +203,7 @@ describe('BoxRenderer', () => {
 
   describe('커서', () => {
     it('getCursorPosition이 좌표를 반환한다', () => {
-      const renderer = new BoxRenderer(backend, config, metrics);
+      const renderer = new Projector(backend, config, metrics);
       const glyph = makeGlyph('x', { x: 10, y: 20 });
       const rootBox = makeHBox([glyph], { sourceId: 'root_1', x: 0, y: 20 });
 

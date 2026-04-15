@@ -8,7 +8,7 @@
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox, hitTest } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 import type { BoxRenderConfig, Box, HBox } from '../box/types';
 import { astToLatex } from '../latex/ast-to-latex';
 import { MathEditor, createStateFromLatex } from '../editor';
@@ -262,7 +262,7 @@ export class FizzexEditor {
     layoutBox(box, this.padding, this.padding + box.height);
 
     // Render boxes
-    const renderer = new BoxRenderer(this.ctx, this.boxConfig, freshMetrics);
+    const renderer = new Projector(this.ctx, this.boxConfig, freshMetrics);
     renderer.render(box);
 
     // Cursor

@@ -44,7 +44,7 @@ concerns:
     description: Box 모델 규칙 (baseline 좌표계, HiDPI, context 재생성)
     triggers:
       paths: ["src/box/**", "src/headless/**", "src/export/**"]
-      patterns: ["BoxRenderer", "CanvasFontMetrics", "layoutBox", "astToBox"]
+      patterns: ["Projector", "CanvasFontMetrics", "layoutBox", "astToBox"]
 
   - id: C5
     file: concerns/C5-headless-contract.md

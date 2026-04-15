@@ -1,11 +1,12 @@
 /**
- * 렌더링 백엔드 추상화
+ * Surface — 투영 대상 추상화
  *
- * Canvas 의존성을 분리하여 테스트 가능성 향상
+ * 물리적 렌더링 대상(Canvas, SVG, Skia 등)의 공통 인터페이스.
+ * Projector가 Box 트리를 Surface에 투영한다.
  */
 
-/** 렌더링 백엔드 인터페이스 */
-export interface RenderBackend {
+/** 투영 대상 인터페이스 */
+export interface Surface {
   // 상태 관리
   save(): void;
   restore(): void;
@@ -43,8 +44,8 @@ export interface RenderBackend {
   stroke(): void;
 }
 
-/** Canvas 기반 렌더 백엔드 구현 */
-export class CanvasRenderBackend implements RenderBackend {
+/** Canvas 2D 표면 구현 */
+export class CanvasSurface implements Surface {
   constructor(private ctx: CanvasRenderingContext2D) {}
 
   save(): void {
@@ -149,16 +150,16 @@ export class CanvasRenderBackend implements RenderBackend {
   }
 }
 
-/** 렌더링 호출 기록 타입 */
-export interface RenderCall {
+/** 표면 호출 기록 타입 */
+export interface SurfaceCall {
   method: string;
   args: unknown[];
 }
 
-/** 테스트용 Mock 렌더 백엔드 */
-export class MockRenderBackend implements RenderBackend {
-  /** 모든 렌더링 호출 기록 */
-  readonly calls: RenderCall[] = [];
+/** 테스트용 Mock 표면 */
+export class MockSurface implements Surface {
+  /** 모든 표면 호출 기록 */
+  readonly calls: SurfaceCall[] = [];
 
   /** 현재 상태 (검증용) */
   private stateStack: Array<{

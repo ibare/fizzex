@@ -9,7 +9,7 @@
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 import type { BoxRenderConfig } from '../box/types';
 import { parseLatex } from '../latex';
 import { loadMathFont } from '../fonts';
@@ -111,7 +111,7 @@ export class FizzexRenderer {
     layoutBox(box, this.padding, this.padding + box.height);
 
     // Render
-    new BoxRenderer(this.ctx, this.boxConfig, freshMetrics).render(box);
+    new Projector(this.ctx, this.boxConfig, freshMetrics).render(box);
 
     // Store computed size
     this.currentSize = {

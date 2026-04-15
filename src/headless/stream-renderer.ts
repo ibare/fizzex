@@ -11,7 +11,7 @@ import type { Diagnostic, RenderDecision } from '../latex/tolerant/types';
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox, collectBoxPositions } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 import type { BoxRenderConfig, Box } from '../box/types';
 import type { ConfidenceRegion, ConfidenceLevel } from '../box/confidence-indicator';
 import { DEFAULT_CONFIDENCE_CONFIG } from '../box/confidence-indicator';
@@ -283,7 +283,7 @@ export class FizzexStreamRenderer {
       // Canvas 크기 변경 후 metrics/renderer 재생성 (C4 MUST 준수)
       const freshMetrics = new CanvasFontMetrics(ctx, this.boxConfig);
       layoutBox(box, this.padding, this.padding + box.height);
-      const renderer = new BoxRenderer(ctx, this.boxConfig, freshMetrics);
+      const renderer = new Projector(ctx, this.boxConfig, freshMetrics);
       renderer.render(box);
 
       // Confidence 오버레이

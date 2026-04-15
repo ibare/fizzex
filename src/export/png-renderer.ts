@@ -10,7 +10,7 @@ import type { Box, BoxRenderConfig } from '../box/types';
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
 
 /** PNG 렌더링 결과 */
@@ -113,7 +113,7 @@ export function renderAstToPNG(
 
   // 렌더러 재생성 (캔버스 리사이즈 후)
   const metricsNew = new CanvasFontMetrics(ctx, config);
-  const renderer = new BoxRenderer(ctx, config, metricsNew);
+  const renderer = new Projector(ctx, config, metricsNew);
 
   // Box를 다시 레이아웃 (새 캔버스 크기)
   const boxNew = astToBox(ast, metricsNew, 1.0);
@@ -244,7 +244,7 @@ export function renderAstToPNGWithCanvas(
   const boxNew = astToBox(ast, metricsNew, 1.0);
   layoutBox(boxNew, paddingScaled, paddingScaled + boxNew.height);
 
-  const renderer = new BoxRenderer(ctx, config, metricsNew);
+  const renderer = new Projector(ctx, config, metricsNew);
   renderer.render(boxNew);
 
   const dataUrl = canvas.toDataURL('image/png');

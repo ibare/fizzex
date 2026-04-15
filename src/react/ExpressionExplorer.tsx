@@ -11,13 +11,15 @@ import type { Box, BoxRenderConfig } from '../box/types';
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 import { loadMathFont } from '../fonts';
 import {
   buildExplorerMap,
   explorerHitTest,
 } from '../box/explorer-map';
 import type { ExplorerBoxInfo } from '../box/explorer-map';
+import { buildSemanticMap } from '../analyzer/semantic-roles';
+import type { SemanticResult } from '../analyzer/semantic-roles';
 
 export interface ExpressionExplorerProps {
   /** AST 루트 노드 */
@@ -40,6 +42,7 @@ export function ExpressionExplorer({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const boxRef = useRef<Box | null>(null);
   const explorerInfosRef = useRef<ExplorerBoxInfo[]>([]);
+  const semanticMapRef = useRef<Map<string, SemanticResult>>(new Map());
 
   // Viewport 변환 파라미터 (렌더링 + 히트 테스트 공유)
   const viewportRef = useRef({ offsetX: 0, offsetY: 0, scale: 1 });
@@ -108,6 +111,7 @@ export function ExpressionExplorer({
     if (!isOpen || ast.children.length === 0) {
       boxRef.current = null;
       explorerInfosRef.current = [];
+      semanticMapRef.current = new Map();
       setBoxVersion((v) => v + 1);
       return;
     }
@@ -123,6 +127,7 @@ export function ExpressionExplorer({
     layoutBox(box, 0, 0);
     boxRef.current = box;
     explorerInfosRef.current = buildExplorerMap(box, ast);
+    semanticMapRef.current = buildSemanticMap(ast);
     setBoxVersion((v) => v + 1);
   }, [isOpen, ast, config, fontReady]);
 
@@ -160,7 +165,7 @@ export function ExpressionExplorer({
 
     // C4: Canvas 크기 변경 후 Metrics/Renderer 재생성
     const metrics = new CanvasFontMetrics(ctx, config);
-    const renderer = new BoxRenderer(ctx, config, metrics);
+    const renderer = new Projector(ctx, config, metrics);
 
     // ── Viewport 계산 (FormulaPreview 패턴) ──
     const padding = 80;
@@ -327,32 +332,41 @@ export function ExpressionExplorer({
         ✕
       </button>
 
-      {/* 호버 정보 표시 */}
-      {hoveredInfo && hoveredInfo.astNode && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 16,
-            left: 16,
-            padding: '8px 14px',
-            borderRadius: 8,
-            background: isDark ? 'rgba(30,30,30,0.9)' : 'rgba(255,255,255,0.9)',
-            color: isDark ? '#e5e5e5' : '#1a1a1a',
-            fontSize: 14,
-            fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            border: `1px solid ${isDark ? '#404040' : '#e5e5e5'}`,
-            pointerEvents: 'none',
-          }}
-        >
-          <span style={{ fontWeight: 600 }}>{hoveredInfo.astNode.type}</span>
-          {hoveredInfo.groupId && (
-            <span style={{ color: isDark ? '#6b7280' : '#9ca3af', marginLeft: 8 }}>
-              depth: {hoveredInfo.depth}
-            </span>
-          )}
-        </div>
-      )}
+      {/* 호버 정보 표시 — 구조적 의미 */}
+      {hoveredInfo && hoveredInfo.astNode && (() => {
+        const semantic = semanticMapRef.current.get(hoveredInfo.astNode!.id);
+        if (!semantic) return null;
+        return (
+          <div
+            style={{
+              position: 'absolute',
+              top: 16,
+              left: 16,
+              maxWidth: 360,
+              padding: '10px 14px',
+              borderRadius: 8,
+              background: isDark ? 'rgba(30,30,30,0.95)' : 'rgba(255,255,255,0.95)',
+              color: isDark ? '#e5e5e5' : '#1a1a1a',
+              fontSize: 14,
+              fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              border: `1px solid ${isDark ? '#404040' : '#e5e5e5'}`,
+              pointerEvents: 'none',
+            }}
+          >
+            <div style={{ fontWeight: 600, marginBottom: 4 }}>
+              {semantic.role}
+            </div>
+            <div style={{
+              fontSize: 13,
+              color: isDark ? '#a0a0a0' : '#555',
+              lineHeight: 1.45,
+            }}>
+              {semantic.description}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* 조작 힌트 */}
       <div

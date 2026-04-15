@@ -1,11 +1,11 @@
 /**
  * Confidence Indicator — 진단 기반 시각적 피드백 렌더링
  *
- * RenderBackend만 사용하여 물결선/배경 오버레이를 Canvas에 그린다.
+ * Surface만 사용하여 물결선/배경 오버레이를 Canvas에 그린다.
  * src/latex/ 타입에 의존하지 않음 — 호출자가 ConfidenceRegion을 변환하여 전달.
  */
 
-import type { RenderBackend } from './render-backend';
+import type { Surface } from './surface';
 
 // =========================================================================
 // 타입 정의
@@ -70,10 +70,10 @@ export const DEFAULT_CONFIDENCE_CONFIG: ConfidenceIndicatorConfig = {
  * 2. renderOverlays(regions)로 모든 영역에 물결선/배경 렌더링
  */
 export class ConfidenceIndicator {
-  private backend: RenderBackend;
+  private backend: Surface;
   private config: ConfidenceIndicatorConfig;
 
-  constructor(backend: RenderBackend, config?: Partial<ConfidenceIndicatorConfig>) {
+  constructor(backend: Surface, config?: Partial<ConfidenceIndicatorConfig>) {
     this.backend = backend;
     this.config = { ...DEFAULT_CONFIDENCE_CONFIG, ...config };
   }

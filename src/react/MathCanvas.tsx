@@ -10,7 +10,7 @@ import type { Box, BoxRenderConfig, HBox } from '../box/types';
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox, hitTest, findBoxBySourceId } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 import { MathEditor, createInitialState } from '../editor';
 import { getSuggestions, getAllSuggestionsForContext, getAllSuggestions } from '../suggestion';
 import type { SuggestionWithAction } from '../suggestion/types';
@@ -112,7 +112,7 @@ export function MathCanvas({
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const editorRef = useRef<MathEditor | null>(null);
   const metricsRef = useRef<CanvasFontMetrics | null>(null);
-  const rendererRef = useRef<BoxRenderer | null>(null);
+  const rendererRef = useRef<Projector | null>(null);
   const boxRef = useRef<Box | null>(null);
   const isComposingRef = useRef(false);
   const onChangeRef = useRef(onChange);
@@ -339,7 +339,7 @@ export function MathCanvas({
 
     // 렌더러 초기화
     if (!rendererRef.current) {
-      rendererRef.current = new BoxRenderer(ctx, config, metricsRef.current);
+      rendererRef.current = new Projector(ctx, config, metricsRef.current);
     } else {
       rendererRef.current.updateConfig(config);
     }

@@ -40,7 +40,7 @@ export {
   findBoxBySourceId,
   getCursorXPosition,
 } from './box-layout';
-export { BoxRenderer } from './box-renderer';
+export { Projector } from './projector';
 export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator';
 export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './confidence-indicator';
 export { buildExplorerMap, explorerHitTest, getBoxBounds } from './explorer-map';

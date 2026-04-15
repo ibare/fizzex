@@ -287,8 +287,8 @@ src/
 │   ├── font-metrics.ts   # Font metrics (LRU cached)
 │   ├── box-builder.ts    # Box creation helpers
 │   ├── box-layout.ts     # Layout calculation
-│   ├── box-renderer.ts   # Canvas rendering
-│   ├── render-backend.ts # Render backend abstraction
+│   ├── projector.ts      # Box → Surface projection
+│   ├── surface.ts        # Projection target abstraction
 │   └── ast-to-box.ts     # AST → Box conversion
 ├── latex/                # LaTeX support
 │   ├── latex-parser.ts   # LaTeX → AST parser

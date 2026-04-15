@@ -1,8 +1,8 @@
 /**
- * Box 렌더러
+ * Projector — Box 트리를 Surface에 투영
  *
- * Box 트리를 Canvas에 렌더링
- * RenderBackend 추상화를 통해 테스트 가능성 향상
+ * Box 트리를 순회하며 Surface 인터페이스를 통해 그리기 명령을 발행한다.
+ * Surface 구현을 교체하면 Canvas, SVG, Skia 등 다양한 대상에 투영 가능.
  */
 
 import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox } from './types';
@@ -10,32 +10,32 @@ import { type CanvasFontMetrics, MathConstants } from './font-metrics';
 import type { CursorPosition } from '../types';
 import { findBoxBySourceId, getCursorXPosition } from './box-layout';
 import { isComplexNodeSlot } from './constants';
-import type { RenderBackend } from './render-backend';
-import { CanvasRenderBackend } from './render-backend';
+import type { Surface } from './surface';
+import { CanvasSurface } from './surface';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
 import type { GlyphPathData } from '../fonts/delimiter-paths';
 import { ConfidenceIndicator } from './confidence-indicator';
 import type { ConfidenceRegion } from './confidence-indicator';
 
-export class BoxRenderer {
-  private backend: RenderBackend;
+export class Projector {
+  private backend: Surface;
   private config: BoxRenderConfig;
   private metrics: CanvasFontMetrics;
 
   /**
-   * BoxRenderer 생성
-   * @param ctxOrBackend Canvas 컨텍스트 또는 RenderBackend 인스턴스
+   * Projector 생성
+   * @param ctxOrBackend Canvas 컨텍스트 또는 Surface 인스턴스
    * @param config 렌더링 설정
    * @param metrics 폰트 메트릭스
    */
   constructor(
-    ctxOrBackend: CanvasRenderingContext2D | RenderBackend,
+    ctxOrBackend: CanvasRenderingContext2D | Surface,
     config: BoxRenderConfig,
     metrics: CanvasFontMetrics
   ) {
-    // Canvas 컨텍스트가 전달되면 CanvasRenderBackend로 래핑 (하위 호환성)
+    // Canvas 컨텍스트가 전달되면 CanvasSurface로 래핑 (하위 호환성)
     if ('canvas' in ctxOrBackend) {
-      this.backend = new CanvasRenderBackend(ctxOrBackend);
+      this.backend = new CanvasSurface(ctxOrBackend);
     } else {
       this.backend = ctxOrBackend;
     }
@@ -98,7 +98,7 @@ export class BoxRenderer {
     // 폰트 스케일이 box-builder.ts에서 이미 적절히 계산되어 있음
 
     // 적분 기호는 기울임 변환 적용
-    if (BoxRenderer.INTEGRAL_CHARS.has(glyph.char)) {
+    if (Projector.INTEGRAL_CHARS.has(glyph.char)) {
       this.backend.save();
       // skewX 변환으로 약 12도 기울임 (tan(12°) ≈ 0.21)
       this.backend.transform(1, 0, -0.21, 1, 0, 0);

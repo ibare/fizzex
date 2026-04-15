@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { MockRenderBackend } from './render-backend';
+import { MockSurface } from './surface';
 
-describe('MockRenderBackend', () => {
-  let backend: MockRenderBackend;
+describe('MockSurface', () => {
+  let backend: MockSurface;
 
   beforeEach(() => {
-    backend = new MockRenderBackend();
+    backend = new MockSurface();
   });
 
   describe('호출 기록', () => {

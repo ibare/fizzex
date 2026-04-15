@@ -1212,7 +1212,7 @@ export function createBoxedBox(
   box.width = totalWidth;
   box.height = totalHeight;
   box.depth = totalDepth;
-  // boxed 마킹: box-renderer에서 감지
+  // boxed 마킹: projector에서 감지
   (box as any).boxed = { padding, ruleThickness };
 
   return box;
@@ -1321,7 +1321,7 @@ function createExtensibleAccentBox(
   // 악센트 영역 높이 (Rule 기반)
   const accentHeight = ruleThickness * 3;
 
-  // 악센트 장식을 마킹한 Rule — box-renderer에서 감지하여 경로 그리기
+  // 악센트 장식을 마킹한 Rule — projector에서 감지하여 경로 그리기
   const accentRule = createRule(content.width, accentHeight);
   (accentRule as any).extensibleAccent = { accentType, width: content.width };
 
@@ -1363,7 +1363,7 @@ export function createOverbraceBox(
   }
   const braceHeight = actualFontSize * (glyphHeight || MathConstants.overbraceBraceHeight);
 
-  // 중괄호 장식 Rule — box-renderer에서 감지하여 글리프 렌더링
+  // 중괄호 장식 Rule — projector에서 감지하여 글리프 렌더링
   const braceRule = createRule(content.width, braceHeight);
   (braceRule as any).brace = { variant, width: content.width };
 
@@ -1426,7 +1426,7 @@ export function createXArrowBox(
   const textWidth = Math.max(aboveBox.width, belowBox ? belowBox.width : 0);
   const arrowWidth = textWidth + padding * 2;
 
-  // 화살표 Rule (box-renderer에서 감지하여 화살표 경로 그리기)
+  // 화살표 Rule (projector에서 감지하여 화살표 경로 그리기)
   const arrowRule = createRule(arrowWidth, ruleThickness);
   (arrowRule as any).xarrow = { direction, width: arrowWidth };
 

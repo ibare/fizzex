@@ -1,14 +1,14 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator';
 import type { ConfidenceRegion } from './confidence-indicator';
-import { MockRenderBackend } from './render-backend';
+import { MockSurface } from './surface';
 
 describe('ConfidenceIndicator', () => {
-  let backend: MockRenderBackend;
+  let backend: MockSurface;
   let indicator: ConfidenceIndicator;
 
   beforeEach(() => {
-    backend = new MockRenderBackend();
+    backend = new MockSurface();
     indicator = new ConfidenceIndicator(backend);
   });
 

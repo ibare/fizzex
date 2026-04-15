@@ -13,7 +13,7 @@ import type { Box, BoxRenderConfig } from '../box/types';
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox, findBoxBySourceId } from '../box/box-layout';
-import { BoxRenderer } from '../box/box-renderer';
+import { Projector } from '../box/projector';
 
 export interface StructureViewerProps {
   /** AST 루트 노드 */
@@ -582,7 +582,7 @@ interface FormulaPreviewProps {
 function FormulaPreview({ ast, selectedSourceId, theme, width, height }: FormulaPreviewProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const metricsRef = useRef<CanvasFontMetrics | null>(null);
-  const rendererRef = useRef<BoxRenderer | null>(null);
+  const rendererRef = useRef<Projector | null>(null);
 
   const config: BoxRenderConfig = {
     baseFontSize: 24,
@@ -624,7 +624,7 @@ function FormulaPreview({ ast, selectedSourceId, theme, width, height }: Formula
 
     // 렌더러 초기화
     if (!rendererRef.current) {
-      rendererRef.current = new BoxRenderer(ctx, config, metricsRef.current);
+      rendererRef.current = new Projector(ctx, config, metricsRef.current);
     } else {
       rendererRef.current.updateConfig(config);
     }
