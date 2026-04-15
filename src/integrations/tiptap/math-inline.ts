@@ -57,6 +57,7 @@ export const MathInline = Node.create<MathInlineOptions>({
       if (currentLatex) {
         renderer.render(currentLatex);
       }
+      renderer.enableExplorer({ dblclick: false, hoverIcon: true });
 
       return {
         dom,

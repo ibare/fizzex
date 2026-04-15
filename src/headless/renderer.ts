@@ -14,6 +14,9 @@ import { parseLatex } from '../latex';
 import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize } from './types';
 import { resolveBoxRenderConfig } from './types';
+import { ExplorerOverlay } from './explorer-overlay';
+import { attachExplorerTrigger } from './explorer-trigger';
+import type { ExplorerTriggerOptions } from './explorer-trigger';
 
 export class DOMRendererView {
   private container: HTMLElement;
@@ -26,6 +29,8 @@ export class DOMRendererView {
   private currentLatex: string | null = null;
   private currentSize: FizzexSize = { width: 0, height: 0, baseline: 0 };
   private destroyed = false;
+  private explorerOverlay: ExplorerOverlay | null = null;
+  private explorerCleanup: (() => void) | null = null;
 
   constructor(container: HTMLElement, config: FizzexConfig = {}) {
     this.container = container;
@@ -125,6 +130,11 @@ export class DOMRendererView {
     return { ...this.currentSize };
   }
 
+  /** Return the current LaTeX string (or null if nothing rendered). */
+  getLatex(): string | null {
+    return this.currentLatex;
+  }
+
   /** Update configuration and re-render if content exists. */
   setConfig(partial: Partial<FizzexConfig>): void {
     Object.assign(this.userConfig, partial);
@@ -137,11 +147,40 @@ export class DOMRendererView {
     }
   }
 
+  /** 수식 탐색 모드를 즉시 연다. */
+  openExplorer(): void {
+    if (!this.currentLatex) return;
+    this.explorerOverlay?.destroy();
+    this.explorerOverlay = new ExplorerOverlay({
+      latex: this.currentLatex,
+      theme: this.userConfig.theme,
+      onClose: () => { this.explorerOverlay = null; },
+    });
+  }
+
+  /** 자동 탐색 트리거를 활성화한다 (더블클릭/호버 아이콘). */
+  enableExplorer(options?: ExplorerTriggerOptions): void {
+    this.disableExplorer();
+    this.explorerCleanup = attachExplorerTrigger(
+      this.container,
+      () => this.openExplorer(),
+      { theme: this.userConfig.theme, ...options },
+    );
+  }
+
+  /** 자동 탐색 트리거를 비활성화한다. */
+  disableExplorer(): void {
+    this.explorerCleanup?.();
+    this.explorerCleanup = null;
+  }
+
   /** Remove the canvas from the DOM and release references. */
   destroy(): void {
     this.destroyed = true;
+    this.disableExplorer();
+    this.explorerOverlay?.destroy();
+    this.explorerOverlay = null;
     this.container.removeChild(this.canvas);
-    // Null-out to help GC / prevent accidental reuse
     (this as Record<string, unknown>).canvas = null;
     (this as Record<string, unknown>).ctx = null;
     (this as Record<string, unknown>).container = null;

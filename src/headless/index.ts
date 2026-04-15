@@ -15,3 +15,7 @@ export { DOMStreamView as FizzexStreamRenderer } from './stream-renderer';
 export type { DOMStreamViewConfig as StreamRendererConfig } from './stream-renderer';
 
 export type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
+
+export { ExplorerOverlay } from './explorer-overlay';
+export type { ExplorerOverlayConfig } from './explorer-overlay';
+export type { ExplorerTriggerOptions } from './explorer-trigger';

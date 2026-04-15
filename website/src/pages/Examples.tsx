@@ -76,7 +76,7 @@ export default function Examples() {
 
                   {rendered.state && (
                     <div style={styles.renderBox}>
-                      <EditorView initialState={rendered.state} readOnly autoSize />
+                      <EditorView initialState={rendered.state} readOnly autoSize showExplorerToggle />
                     </div>
                   )}
 

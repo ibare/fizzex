@@ -18,6 +18,8 @@ import { DEFAULT_CONFIDENCE_CONFIG } from '../box/confidence-indicator';
 import { loadMathFont } from '../fonts';
 import type { FizzexConfig } from './types';
 import { resolveBoxRenderConfig } from './types';
+import { ExplorerOverlay } from './explorer-overlay';
+import type { ExplorerTriggerOptions } from './explorer-trigger';
 
 // =========================================================================
 // 타입 정의
@@ -128,6 +130,8 @@ export class DOMStreamView {
   private fullText = '';
   private destroyed = false;
   private fontReady = false;
+  private explorerOverlay: ExplorerOverlay | null = null;
+  private explorerDblclickHandler: ((e: MouseEvent) => void) | null = null;
 
   constructor(container: HTMLElement, config: DOMStreamViewConfig = {}) {
     this.container = container;
@@ -191,9 +195,42 @@ export class DOMStreamView {
     this.boxConfig = this.resolveConfig();
   }
 
+  /**
+   * 자동 탐색 트리거를 활성화한다.
+   * 컨테이너 레벨 이벤트 위임: 개별 수식 canvas를 더블클릭하면 해당 수식의 탐색 모드 진입.
+   */
+  enableExplorer(options?: Partial<ExplorerTriggerOptions>): void {
+    this.disableExplorer();
+    const theme = options?.theme ?? this.config.theme ?? 'light';
+    this.explorerDblclickHandler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const wrapper = target.closest('.fizzex-stream-math') as HTMLElement | null;
+      if (!wrapper?.dataset.latex) return;
+      e.preventDefault();
+      this.explorerOverlay?.destroy();
+      this.explorerOverlay = new ExplorerOverlay({
+        latex: wrapper.dataset.latex,
+        theme,
+        onClose: () => { this.explorerOverlay = null; },
+      });
+    };
+    this.container.addEventListener('dblclick', this.explorerDblclickHandler);
+  }
+
+  /** 자동 탐색 트리거를 비활성화한다. */
+  disableExplorer(): void {
+    if (this.explorerDblclickHandler) {
+      this.container.removeEventListener('dblclick', this.explorerDblclickHandler);
+      this.explorerDblclickHandler = null;
+    }
+  }
+
   /** 렌더러 정리 — 모든 DOM 요소 및 이벤트 리스너 제거 */
   destroy(): void {
     this.destroyed = true;
+    this.disableExplorer();
+    this.explorerOverlay?.destroy();
+    this.explorerOverlay = null;
     this.clearAllNodes();
     this.pendingNode = null;
     this.fullText = '';
@@ -258,6 +295,7 @@ export class DOMStreamView {
     wrapper.className = 'fizzex-stream-math';
     wrapper.style.display = output.displayMode ? 'block' : 'inline-block';
     wrapper.style.position = 'relative';
+    wrapper.dataset.latex = output.latex;
 
     try {
       const canvas = document.createElement('canvas');

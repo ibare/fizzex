@@ -211,6 +211,10 @@ export { DOMEditorView as FizzexEditor } from './headless';
 export { DOMStreamView as FizzexStreamRenderer } from './headless';
 export type { DOMStreamViewConfig as StreamRendererConfig } from './headless';
 
+// Headless Explorer
+export { ExplorerOverlay } from './headless';
+export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless';
+
 // 타입
 export type {
   MathNode,

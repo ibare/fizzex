@@ -15,6 +15,9 @@ import { MathEditor, createStateFromLatex } from '../editor';
 import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
 import { resolveBoxRenderConfig } from './types';
+import { ExplorerOverlay } from './explorer-overlay';
+import { attachExplorerTrigger } from './explorer-trigger';
+import type { ExplorerTriggerOptions } from './explorer-trigger';
 
 export class DOMEditorView {
   // DOM elements
@@ -45,6 +48,8 @@ export class DOMEditorView {
   // Change handlers
   private changeHandlers = new Set<FizzexChangeHandler>();
   private destroyed = false;
+  private explorerOverlay: ExplorerOverlay | null = null;
+  private explorerCleanup: (() => void) | null = null;
 
   // Bound event handlers (stored for removal in destroy)
   private boundCanvasClick: (e: MouseEvent) => void;
@@ -194,9 +199,39 @@ export class DOMEditorView {
     this.renderFrame();
   }
 
+  /** 수식 탐색 모드를 즉시 연다. */
+  openExplorer(): void {
+    this.explorerOverlay?.destroy();
+    this.explorerOverlay = new ExplorerOverlay({
+      ast: this.editor.getState().ast,
+      theme: this.userConfig.theme,
+      onClose: () => { this.explorerOverlay = null; },
+    });
+  }
+
+  /** 자동 탐색 트리거를 활성화한다 (더블클릭/호버 아이콘). */
+  enableExplorer(options?: ExplorerTriggerOptions): void {
+    this.disableExplorer();
+    this.explorerCleanup = attachExplorerTrigger(
+      this.container,
+      () => this.openExplorer(),
+      { theme: this.userConfig.theme, ...options },
+    );
+  }
+
+  /** 자동 탐색 트리거를 비활성화한다. */
+  disableExplorer(): void {
+    this.explorerCleanup?.();
+    this.explorerCleanup = null;
+  }
+
   /** Tear down all DOM and timers. */
   destroy(): void {
     this.destroyed = true;
+    // Stop explorer
+    this.disableExplorer();
+    this.explorerOverlay?.destroy();
+    this.explorerOverlay = null;
     // Stop cursor blink
     this.stopCursorBlink();
 
