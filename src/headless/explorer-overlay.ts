@@ -1214,8 +1214,8 @@ export class ExplorerOverlay {
     // 화살표
     const arrowStartX = elemCX;
     const arrowStartY = placeAbove ? elemY - 6 : elemY + elemH + 6;
-    const targetY = placeAbove ? canvasH * 0.15 : canvasH * 0.85;
-    const horizReach = Math.min(180, canvasW * 0.15);
+    const targetY = placeAbove ? canvasH * 0.29 : canvasH * 0.71;
+    const horizReach = Math.min(108, canvasW * 0.09);
     let arrowEndX = goRight ? elemCX + horizReach : elemCX - horizReach;
     const arrowEndY = targetY;
 
