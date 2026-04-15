@@ -23,8 +23,5 @@ export type { SuggestionChipsProps } from './SuggestionChips';
 export { SuggestionPopover } from './SuggestionPopover';
 export type { SuggestionPopoverProps } from './SuggestionPopover';
 
-export { StructureViewer } from './StructureViewer';
-export type { StructureViewerProps } from './StructureViewer';
-
 export { ExpressionExplorer } from './ExpressionExplorer';
 export type { ExpressionExplorerProps } from './ExpressionExplorer';

@@ -86,7 +86,6 @@ export type {
 export {
   EditorView,
   StreamView,
-  StructureViewer,
   SuggestionChips,
   SuggestionPopover,
   ExpressionExplorer,
@@ -94,7 +93,6 @@ export {
 export type {
   EditorViewProps,
   StreamViewProps,
-  StructureViewerProps,
   SuggestionChipsProps,
   SuggestionPopoverProps,
   ExpressionExplorerProps,

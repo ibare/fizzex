@@ -79,7 +79,6 @@ export default function Playground() {
                 width={420}
                 height={120}
                 showSuggestions
-                showStructureToggle
                 showExplorerToggle
                 theme="light"
               />

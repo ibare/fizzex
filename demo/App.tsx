@@ -1039,7 +1039,7 @@ export default function App() {
                 theme="light"
                 initialState={example.state}
                 readOnly
-                showStructureToggle
+
               />
             </div>
           </div>
@@ -1093,7 +1093,6 @@ export default function App() {
               onChange={handleStateChange}
               showDebugToggle
               showSuggestions
-              showStructureToggle
             />
             <div className="mt-4 text-sm text-gray-500">
             <p>숫자, 영문자(변수), +, -, *, /, ^, _, =, |, &lt;, &gt;, (, )</p>
@@ -1137,7 +1136,7 @@ export default function App() {
                 initialState={latexState}
                 readOnly
                 showDebugToggle
-                showStructureToggle
+
               />
               <div className="mt-4 text-sm text-gray-500">
                 <strong>LaTeX 출력:</strong>{' '}

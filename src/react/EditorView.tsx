@@ -17,7 +17,6 @@ import type { SuggestionWithAction } from '../suggestion/types';
 import { SuggestionChips } from './SuggestionChips';
 import { useFizzexLabels, useLocalizedSuggestions } from '../i18n';
 import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
-import { StructureViewer } from './StructureViewer';
 import { ExpressionExplorer } from './ExpressionExplorer';
 
 /** 커서 위치 정보 */
@@ -44,8 +43,6 @@ export interface EditorViewProps {
   showDebugToggle?: boolean;
   /** 자동완성 제안 표시 여부 */
   showSuggestions?: boolean;
-  /** 구조 시각화 버튼 표시 여부 */
-  showStructureToggle?: boolean;
   /** 수식 탐색 버튼 표시 여부 */
   showExplorerToggle?: boolean;
   /** 내용에 맞게 자동 크기 조절 (readOnly 시 기본 true) */
@@ -98,7 +95,6 @@ export function EditorView({
   theme = 'light',
   showDebugToggle = false,
   showSuggestions = false,
-  showStructureToggle = false,
   showExplorerToggle = false,
   autoSize,
   minWidth = 40,
@@ -126,7 +122,6 @@ export function EditorView({
   const [placeholderOpacity, setPlaceholderOpacity] = useState(1.0);
   const [computedSize, setComputedSize] = useState<{ width: number; height: number } | null>(null);
   const [fontFamily, setFontFamily] = useState(DEFAULT_FONT_FAMILY);
-  const [showStructure, setShowStructure] = useState(false);
   const [showExplorer, setShowExplorer] = useState(false);
 
   // 실제 사용할 크기 계산
@@ -660,7 +655,7 @@ export function EditorView({
           style={{
             position: 'absolute',
             top: 4,
-            right: 4 + (showStructureToggle ? 28 : 0) + (showExplorerToggle ? 28 : 0),
+            right: 4 + (showExplorerToggle ? 28 : 0),
             width: 24,
             height: 24,
             borderRadius: 4,
@@ -679,33 +674,6 @@ export function EditorView({
           title={labels.debugToggle}
         >
           {debug ? '◼' : '◻'}
-        </button>
-      )}
-
-      {/* 구조 시각화 버튼 */}
-      {showStructureToggle && (
-        <button
-          type="button"
-          onClick={() => setShowStructure(true)}
-          style={{
-            position: 'absolute',
-            top: 4,
-            right: showExplorerToggle ? 32 : 4,
-            width: 24,
-            height: 24,
-            borderRadius: 4,
-            border: 'none',
-            background: theme === 'dark' ? '#404040' : '#e5e5e5',
-            color: theme === 'dark' ? '#999' : '#666',
-            cursor: 'pointer',
-            fontSize: 14,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          title={labels.structureViewer || '수식 구조 보기'}
-        >
-          🌲
         </button>
       )}
 
@@ -734,16 +702,6 @@ export function EditorView({
         >
           🔍
         </button>
-      )}
-
-      {/* 구조 시각화 모달 */}
-      {showStructureToggle && showStructure && (
-        <StructureViewer
-          ast={state.ast}
-          isOpen={showStructure}
-          onClose={() => setShowStructure(false)}
-          theme={theme}
-        />
       )}
 
       {/* 수식 탐색 모달 */}

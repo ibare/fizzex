@@ -85,7 +85,6 @@
   },
   "peerDependencies": {
     "@tiptap/core": ">=2.0.0",
-    "konva": ">=10.0.0",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
   },
@@ -94,9 +93,6 @@
       "optional": true
     },
     "react-dom": {
-      "optional": true
-    },
-    "konva": {
       "optional": true
     },
     "@tiptap/core": {
@@ -117,12 +113,10 @@
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^4.0.17",
     "katex": "^0.16.27",
-    "konva": "^10.0.0",
     "mathjax-full": "^3.2.2",
     "opentype.js": "^1.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-konva": "^19.0.3",
     "tsx": "^4.21.0",
     "typescript": "^5.3.3",
     "vite": "^6.0.7",
