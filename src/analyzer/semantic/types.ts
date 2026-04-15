@@ -66,6 +66,25 @@ export interface CatalogIndexEntry {
   patternType: 'exact' | 'structural';
   /** 구조 시그니처 — 필수 특징 */
   signature: string[];
+  /** 이 수식에 연결된 Visualizer ID */
+  visualizerId?: string;
+}
+
+/** 카탈로그 파라미터 설정 (JSON 직렬화 가능 — compute 함수 없음) */
+export interface CatalogParameterConfig {
+  id: string;
+  name: string;
+  role: string;
+  min: number;
+  max: number;
+  default: number;
+  step: number;
+  unit?: string;
+  scale?: 'linear' | 'log' | string;
+  effects?: Array<{
+    range: number[];
+    description: string;
+  }>;
 }
 
 /** 카탈로그 상세 데이터 (런타임 로드) */
@@ -83,6 +102,8 @@ export interface CatalogDetail {
   }>;
   relatedFormulas?: string[];
   realWorldExamples?: string[];
+  /** Visualizer 파라미터 설정 */
+  parameterConfig?: CatalogParameterConfig[];
 }
 
 /** 카탈로그 매칭 결과 */

@@ -55,14 +55,18 @@ function extractSignature(ast: MathNode): AstSignature {
       case 'func':
         features.add(`func:${node.name}`);
         break;
-      case 'power':
-        if (node.exponent.length === 1 && node.exponent[0].type === 'number') {
-          features.add(`power.exponent:${node.exponent[0].value}`);
-        }
-        if (node.exponent.length > 1 || (node.exponent.length === 1 && node.exponent[0].type === 'row')) {
+      case 'power': {
+        const exp0 = node.exponent.length === 1 ? node.exponent[0] : null;
+        if (exp0?.type === 'number') {
+          features.add(`power.exponent:${exp0.value}`);
+        } else if (exp0?.type === 'row' && exp0.children.length === 1 && exp0.children[0].type === 'number') {
+          // 파서가 단일 숫자 지수를 row로 감싸는 경우 unwrap
+          features.add(`power.exponent:${exp0.children[0].value}`);
+        } else {
           features.add('power.exponent:row');
         }
         break;
+      }
     }
 
     // 노드 타입 자체를 특징으로 추가

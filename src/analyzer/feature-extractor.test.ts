@@ -127,7 +127,7 @@ describe('Feature Extractor', () => {
       expect(viz.numberLine).toBe(true);
     });
 
-    it('recommended 배열이 비어있지 않다', () => {
+    it('시각화 가능 여부 boolean을 반환한다', () => {
       const ast = parseLatex('x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
@@ -137,7 +137,10 @@ describe('Feature Extractor', () => {
 
       const viz = analyzeVisualization(collected, domains, features);
 
-      expect(viz.recommended.length).toBeGreaterThan(0);
+      expect(typeof viz.graphable2D).toBe('boolean');
+      expect(typeof viz.graphable3D).toBe('boolean');
+      expect(typeof viz.geometric).toBe('boolean');
+      expect(typeof viz.numberLine).toBe('boolean');
     });
   });
 

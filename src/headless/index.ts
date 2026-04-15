@@ -19,3 +19,12 @@ export type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
 export { ExplorerOverlay } from './explorer-overlay';
 export type { ExplorerOverlayConfig } from './explorer-overlay';
 export type { ExplorerTriggerOptions } from './explorer-trigger';
+
+export { ExplorerVisualizerController } from './explorer-visualizer';
+export { ExplorerControlsPanel } from './explorer-controls';
+export { ExplorerInlineControls } from './explorer-inline-controls';
+export type { InlineControlCallbacks } from './explorer-inline-controls';
+export { getControlType, buildInlineControlConfig } from './inline-control-types';
+export type { ControlType, InlineControlConfig } from './inline-control-types';
+export { createModificationState, modifyNumberNode, resetNode, resetAll, hasModifications, cloneAst } from './ast-modifier';
+export type { AstModificationState } from './ast-modifier';

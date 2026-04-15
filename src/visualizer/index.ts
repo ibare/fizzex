@@ -1,36 +1,30 @@
 /**
- * Fizzex Visualizer
- *
- * 수식 시각화 모듈
+ * Fizzex Visualizer 프레임워크 — 공개 API
  */
-
-// React 컴포넌트
-export { FunctionGraph } from './FunctionGraph';
-export type { FunctionGraphProps } from './FunctionGraph';
-
-export { UnitCircle } from './UnitCircle';
-export type { UnitCircleProps } from './UnitCircle';
-
-export { NumberLine } from './NumberLine';
-export type { NumberLineProps, NumberLinePoint, NumberLineInterval } from './NumberLine';
-
-export { PolarGraph } from './PolarGraph';
-export type { PolarGraphProps } from './PolarGraph';
-
-export { AutoVisualizer } from './AutoVisualizer';
-export type { AutoVisualizerProps } from './AutoVisualizer';
-
-// 렌더러
-export { GraphRenderer } from './graph-renderer';
-
-// 평가기
-export { calculatePoints, canGraph, latexToEvaluable, evaluateAt } from './evaluator';
 
 // 타입
 export type {
-  GraphConfig,
-  GraphRange,
-  EvaluationPoint,
-  GraphData,
+  ParameterConfig,
+  ParameterValues,
+  DerivedValue,
+  Preset,
+  FizzexVisualizer,
+  VisualizerMountOptions,
+  VisualizerBridge,
 } from './types';
-export { DEFAULT_GRAPH_CONFIG } from './types';
+
+// 레지스트리
+export { registerVisualizer, getVisualizer, getAllVisualizerIds } from './registry';
+
+// 브릿지
+export { VisualizerBridgeImpl } from './bridge';
+
+// 평가 엔진
+export { evaluateAst } from './evaluator';
+export type { EvaluationResult } from './evaluator';
+
+// 파라미터 추출
+export { extractParameters } from './param-extractor';
+
+// 로더
+export { loadVisualizer, getVisualizerForCatalog } from './loader';

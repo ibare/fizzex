@@ -381,7 +381,7 @@
       ],
       "complexity": [
         6,
-        18
+        25
       ],
       "patternType": "structural",
       "signature": [
@@ -390,7 +390,8 @@
         "frac",
         "variable:π",
         "power.exponent:3"
-      ]
+      ],
+      "visualizerId": "kepler-orbit"
     },
     {
       "id": "schwarzschild-radius",

@@ -159,6 +159,15 @@ export function getCatalogIndex(): CatalogIndexEntry[] {
 }
 
 /**
+ * 카탈로그 ID에서 visualizerId를 조회한다.
+ */
+export function getVisualizerIdForCatalog(catalogId: string): string | null {
+  const entries = getCatalogIndex();
+  const entry = entries.find((e) => e.id === catalogId);
+  return entry?.visualizerId ?? null;
+}
+
+/**
  * 카탈로그 상세 데이터를 반환한다 (동기, 번들 포함).
  */
 export function getCatalogDetail(

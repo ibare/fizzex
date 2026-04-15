@@ -30,7 +30,6 @@ import {
   calculateComplexity,
   generateSummary,
 } from './feature-extractor';
-import { matchVisualization } from './visualization-matcher';
 
 /**
  * 수식 분석
@@ -85,33 +84,6 @@ export function analyzeExpression(ast: RootNode): ExpressionAnalysis {
     variables
   );
 
-  // 11. 임시 분석 결과 생성 (시각화 매칭용)
-  const tempAnalysis: ExpressionAnalysis = {
-    form,
-    domains,
-    primaryDomain,
-    variables,
-    variableClassification,
-    constants,
-    functions,
-    polynomial,
-    features,
-    visualization: baseVisualization,
-    complexity,
-    summary,
-  };
-
-  // 12. 시각화 매칭 (파라미터 추출 포함)
-  const vizMatch = matchVisualization(tempAnalysis, ast);
-
-  // 13. 최종 시각화 정보 병합
-  const visualization = {
-    ...baseVisualization,
-    recommended: vizMatch.recommended,
-    bestFit: vizMatch.bestFit,
-    params: vizMatch.params,
-  };
-
   return {
     form,
     domains,
@@ -122,7 +94,7 @@ export function analyzeExpression(ast: RootNode): ExpressionAnalysis {
     functions,
     polynomial,
     features,
-    visualization,
+    visualization: baseVisualization,
     complexity,
     summary,
   };
@@ -137,18 +109,8 @@ export type {
   PolynomialInfo,
   ExpressionFeature,
   VisualizationCapability,
-  VisualizationType,
   VariableClassification,
-  VisualizationParams,
-  NumberLineParams,
-  UnitCircleParams,
-  PolarGraphParams,
-  FunctionGraph2DParams,
 } from './types';
-
-// 시각화 매칭 export
-export { matchVisualization } from './visualization-matcher';
-export type { VisualizationMatch } from './visualization-matcher';
 
 // 구조적 의미 시스템
 export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './semantic-roles';

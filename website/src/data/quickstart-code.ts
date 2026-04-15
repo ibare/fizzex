@@ -29,7 +29,7 @@ const analysis = analyzeExpression(ast);
 
 analysis.primaryDomain;           // 'polynomial'
 analysis.polynomial?.degree;      // 2
-analysis.visualization.bestFit;   // 'function-graph-2d'`,
+analysis.visualization.graphable2D; // true`,
 
   cas: `import { parseLatex, expand, solve, diff } from 'fizzex';
 
@@ -40,16 +40,13 @@ const derivative = diff(ast);     // 2(x+1)
 const eq = parseLatex('x^2 - 4 = 0');
 const solutions = solve(eq);      // x = 2, x = -2`,
 
-  visualization: `import { AutoVisualizer, analyzeExpression, parseLatex } from 'fizzex';
+  visualization: `import { analyzeExpression, parseLatex } from 'fizzex';
 
 const ast = parseLatex('x^2 - 1');
 const analysis = analyzeExpression(ast);
 
-<AutoVisualizer
-  analysis={analysis}
-  latex="x^2 - 1"
-  showSelector
-/>`,
+// Visualizer 프레임워크로 전환 예정
+analysis.visualization.graphable2D; // true`,
 };
 
 export const tabKeys = ['install', 'editor', 'latex', 'analysis', 'cas', 'visualization'] as const;

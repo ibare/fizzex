@@ -92,6 +92,12 @@ export const categories: ExampleCategory[] = [
     ],
   },
   {
+    key: 'astronomy',
+    items: [
+      { label: 'Kepler\'s third law', latex: 'T^2 = \\frac{4\\pi^2}{GM}a^3' },
+    ],
+  },
+  {
     key: 'analysis',
     items: [
       { label: 'Fundamental theorem of calculus', latex: '\\int_a^b f(x) \\, dx = F(b) - F(a)' },

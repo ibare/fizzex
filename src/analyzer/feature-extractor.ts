@@ -7,7 +7,6 @@
 import type {
   ExpressionFeature,
   VisualizationCapability,
-  VisualizationType,
   ASTCollectionResult,
   PolynomialInfo,
   FunctionInfo,
@@ -91,8 +90,6 @@ export function analyzeVisualization(
   domains: MathDomain[],
   features: ExpressionFeature[]
 ): VisualizationCapability {
-  const recommended: VisualizationType[] = [];
-
   // 2D 그래프 가능 여부 (단일 변수 함수)
   const graphable2D =
     features.includes('single-variable') && !features.includes('has-matrix');
@@ -109,29 +106,11 @@ export function analyzeVisualization(
   // 기하 시각화 가능 여부
   const geometric = domains.includes('trigonometric');
 
-  // 권장 시각화 결정
-  if (graphable2D) {
-    recommended.push('function-graph-2d');
-  }
-  if (graphable3D) {
-    recommended.push('function-graph-3d');
-  }
-  if (numberLine) {
-    recommended.push('number-line');
-  }
-  if (domains.includes('trigonometric')) {
-    recommended.push('unit-circle');
-  }
-  if (features.includes('constant') || collected.variables.size <= 1) {
-    recommended.push('table');
-  }
-
   return {
     graphable2D,
     graphable3D,
     geometric,
     numberLine,
-    recommended,
   };
 }
 

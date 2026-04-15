@@ -66,3 +66,10 @@ concerns:
     triggers:
       paths: ["src/box/font-metrics.ts", "src/box/box-builder.ts", "src/box/box-layout.ts", "src/box/ast-to-box.ts", "specs/**"]
       patterns: ["MathConstants", "fizzex-layout-spec"]
+
+  - id: C8
+    file: concerns/C8-catalog-test.md
+    description: 카탈로그 매칭 테스트 필수 (항목 추가 시 catalog-matcher.test.ts에 테스트 케이스 추가)
+    triggers:
+      paths: ["src/analyzer/semantic/data/catalog/**", "src/analyzer/semantic/matchers/catalog-matcher.ts"]
+      patterns: ["CatalogIndexEntry", "matchCatalog"]

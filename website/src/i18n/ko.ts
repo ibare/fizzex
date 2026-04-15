@@ -168,6 +168,7 @@ export const ko: Dictionary = {
       physics: '물리학',
       analysis: '해석학',
       statistics: '통계학',
+      astronomy: '천문학',
       complex: '복잡한 수식',
     },
   },

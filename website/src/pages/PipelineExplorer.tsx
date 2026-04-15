@@ -9,7 +9,6 @@ import {
   solve,
   createStateFromLatex,
   EditorView,
-  AutoVisualizer,
 } from 'fizzex';
 import type { ExpressionAnalysis, RootNode, CASResult } from 'fizzex';
 
@@ -220,9 +219,12 @@ function StepAnalyze({
     [t.playground.analysis.features, analysis.features.join(', ') || '-'],
     [
       t.playground.analysis.visualization,
-      analysis.visualization.recommended.length > 0
-        ? analysis.visualization.recommended.join(', ')
-        : '-',
+      [
+        analysis.visualization.graphable2D && '2D',
+        analysis.visualization.graphable3D && '3D',
+        analysis.visualization.geometric && 'geometric',
+        analysis.visualization.numberLine && 'number-line',
+      ].filter(Boolean).join(', ') || '-',
     ],
     [t.playground.analysis.complexity, String(analysis.complexity)],
   ];
@@ -323,19 +325,20 @@ function StepVisualize({
   analysis: ExpressionAnalysis | null;
   t: ReturnType<typeof useLang>['t'];
 }) {
-  if (!analysis || analysis.visualization.recommended.length === 0) {
+  if (!analysis) {
+    return <p style={styles.muted}>{t.pipelineExplorer.no_viz}</p>;
+  }
+
+  const caps = analysis.visualization;
+  const hasAny = caps.graphable2D || caps.graphable3D || caps.geometric || caps.numberLine;
+  if (!hasAny) {
     return <p style={styles.muted}>{t.pipelineExplorer.no_viz}</p>;
   }
 
   return (
-    <ErrorBoundary fallback={<p style={styles.muted}>{t.pipelineExplorer.no_viz}</p>}>
-      <AutoVisualizer
-        analysis={analysis}
-        latex={latex}
-        width={400}
-        height={300}
-      />
-    </ErrorBoundary>
+    <div style={{ padding: '16px', opacity: 0.6, fontStyle: 'italic' }}>
+      Visualizer 프레임워크로 전환 예정
+    </div>
   );
 }
 

@@ -134,6 +134,7 @@ export interface Dictionary {
       physics: string;
       analysis: string;
       statistics: string;
+      astronomy: string;
       complex: string;
     };
   };

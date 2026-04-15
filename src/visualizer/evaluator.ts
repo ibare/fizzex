@@ -1,155 +1,221 @@
 /**
- * Expression Evaluator
+ * AST 수치 평가 엔진
  *
- * LaTeX 또는 간단한 수식 문자열을 평가하여 y 값 계산
+ * AST를 직접 순회하며 파라미터 값을 넣어 각 노드의 중간값을 계산한다.
+ * Explorer의 값 흐름 표시와 파생값 계산에 사용된다.
  */
 
-import type { EvaluationPoint, GraphRange } from './types';
+import type { MathNode } from '../types';
+import type { ParameterValues } from './types';
 
-/**
- * LaTeX를 평가 가능한 JavaScript 표현식으로 변환
- */
-export function latexToEvaluable(latex: string): string {
-  let expr = latex;
-
-  // 공백 제거
-  expr = expr.replace(/\s+/g, '');
-
-  // \frac{a}{b} → (a)/(b)
-  while (/\\frac\{/.test(expr)) {
-    expr = expr.replace(
-      /\\frac\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g,
-      '(($1)/($2))'
-    );
-  }
-
-  // \sqrt{x} → Math.sqrt(x)
-  expr = expr.replace(/\\sqrt\{([^{}]*)\}/g, 'Math.sqrt($1)');
-
-  // \sqrt[n]{x} → Math.pow(x, 1/n)
-  expr = expr.replace(/\\sqrt\[([^\]]+)\]\{([^{}]*)\}/g, 'Math.pow($2, 1/($1))');
-
-  // x^{n} → Math.pow(x, n)
-  expr = expr.replace(/\^{([^{}]*)}/g, '**($1)');
-  expr = expr.replace(/\^(\d+)/g, '**$1');
-  expr = expr.replace(/\^([a-zA-Z])/g, '**$1');
-
-  // 삼각함수
-  expr = expr.replace(/\\sin/g, 'Math.sin');
-  expr = expr.replace(/\\cos/g, 'Math.cos');
-  expr = expr.replace(/\\tan/g, 'Math.tan');
-  expr = expr.replace(/\\cot/g, '(1/Math.tan');
-  expr = expr.replace(/\\sec/g, '(1/Math.cos');
-  expr = expr.replace(/\\csc/g, '(1/Math.sin');
-
-  // 역삼각함수
-  expr = expr.replace(/\\arcsin/g, 'Math.asin');
-  expr = expr.replace(/\\arccos/g, 'Math.acos');
-  expr = expr.replace(/\\arctan/g, 'Math.atan');
-
-  // 로그/지수
-  expr = expr.replace(/\\ln/g, 'Math.log');
-  expr = expr.replace(/\\log/g, 'Math.log10');
-  expr = expr.replace(/\\exp/g, 'Math.exp');
-
-  // 절댓값
-  expr = expr.replace(/\\left\|/g, 'Math.abs(');
-  expr = expr.replace(/\\right\|/g, ')');
-  expr = expr.replace(/\|([^|]+)\|/g, 'Math.abs($1)');
-
-  // 상수
-  expr = expr.replace(/\\pi/g, 'Math.PI');
-  expr = expr.replace(/\\e(?![a-zA-Z])/g, 'Math.E');
-
-  // 괄호
-  expr = expr.replace(/\\left\(/g, '(');
-  expr = expr.replace(/\\right\)/g, ')');
-  expr = expr.replace(/\\left\[/g, '(');
-  expr = expr.replace(/\\right\]/g, ')');
-
-  // 연산자
-  expr = expr.replace(/\\cdot/g, '*');
-  expr = expr.replace(/\\times/g, '*');
-  expr = expr.replace(/\\div/g, '/');
-
-  // 암묵적 곱셈 처리
-  // 숫자 뒤 변수: 2x → 2*x
-  expr = expr.replace(/(\d)([a-zA-Z])/g, '$1*$2');
-  // 닫는 괄호 뒤 여는 괄호: )(  → )*(
-  expr = expr.replace(/\)\(/g, ')*(');
-  // 닫는 괄호 뒤 변수: )x → )*x
-  expr = expr.replace(/\)([a-zA-Z])/g, ')*$1');
-  // 변수 뒤 여는 괄호: x( → x*(
-  expr = expr.replace(/([a-zA-Z])\(/g, '$1*(');
-
-  // 남은 LaTeX 명령어 제거
-  expr = expr.replace(/\\[a-zA-Z]+/g, '');
-
-  // 중괄호 제거
-  expr = expr.replace(/[{}]/g, '');
-
-  return expr;
+/** 수치 평가 결과 */
+export interface EvaluationResult {
+  /** 각 노드 ID → 계산된 값 */
+  nodeValues: Map<string, number>;
+  /** 최종 결과 (루트 노드의 값) */
+  result: number;
 }
 
-/**
- * 표현식을 주어진 x 값으로 평가
- */
-export function evaluateAt(expression: string, x: number): number | null {
-  try {
-    // 안전한 평가를 위해 Function 생성자 사용
-    const evalFunc = new Function('x', `return ${expression}`);
-    const result = evalFunc(x);
+/** 잘 알려진 수학 상수 */
+const KNOWN_CONSTANTS: Record<string, number> = {
+  'π': Math.PI,
+  'pi': Math.PI,
+  'e': Math.E,
+  'i': NaN, // 허수 — 실수 평가 불가
+};
 
-    // NaN, Infinity 체크
-    if (!Number.isFinite(result)) {
-      return null;
+/** 잘 알려진 함수 */
+const KNOWN_FUNCTIONS: Record<string, (x: number) => number> = {
+  'sin': Math.sin,
+  'cos': Math.cos,
+  'tan': Math.tan,
+  'arcsin': Math.asin,
+  'arccos': Math.acos,
+  'arctan': Math.atan,
+  'ln': Math.log,
+  'log': Math.log10,
+  'exp': Math.exp,
+  'sqrt': Math.sqrt,
+  'abs': Math.abs,
+  'floor': Math.floor,
+  'ceil': Math.ceil,
+};
+
+/**
+ * AST의 각 노드에 대해 수치 평가를 수행한다.
+ *
+ * @param nodes - 루트 노드의 children (또는 임의 노드 배열)
+ * @param params - 파라미터 값 (예: { x: 2, a: 3 })
+ */
+export function evaluateAst(nodes: MathNode[], params: ParameterValues): EvaluationResult {
+  const nodeValues = new Map<string, number>();
+
+  function evalNode(node: MathNode): number {
+    let result: number;
+
+    switch (node.type) {
+      case 'number':
+        result = parseFloat(node.value);
+        break;
+
+      case 'variable':
+        if (node.name in params) {
+          result = params[node.name];
+        } else if (node.name in KNOWN_CONSTANTS) {
+          result = KNOWN_CONSTANTS[node.name];
+        } else {
+          result = NaN;
+        }
+        break;
+
+      case 'frac': {
+        const num = evalNodes(node.numerator);
+        const den = evalNodes(node.denominator);
+        result = num / den;
+        break;
+      }
+
+      case 'power': {
+        const base = evalNodes(node.base);
+        const exp = evalNodes(node.exponent);
+        result = Math.pow(base, exp);
+        break;
+      }
+
+      case 'sqrt': {
+        const content = evalNodes(node.content);
+        if (node.index && node.index.length > 0) {
+          const idx = evalNodes(node.index);
+          result = Math.pow(content, 1 / idx);
+        } else {
+          result = Math.sqrt(content);
+        }
+        break;
+      }
+
+      case 'func': {
+        const fn = KNOWN_FUNCTIONS[node.name];
+        const arg = evalNodes(node.argument);
+        result = fn ? fn(arg) : NaN;
+        break;
+      }
+
+      case 'paren':
+        result = evalNodes(node.content);
+        break;
+
+      case 'abs':
+        result = Math.abs(evalNodes(node.content));
+        break;
+
+      case 'operator':
+        // 연산자 노드 자체는 값이 없음 — row에서 중위 처리
+        result = NaN;
+        break;
+
+      case 'root':
+        result = evalNodes(node.children);
+        break;
+
+      case 'row':
+        result = evalRow(node.children);
+        break;
+
+      default:
+        result = NaN;
+    }
+
+    nodeValues.set(node.id, result);
+    return result;
+  }
+
+  /** 노드 배열을 row처럼 중위 평가 */
+  function evalNodes(nodes: MathNode[]): number {
+    if (nodes.length === 0) return 0;
+    if (nodes.length === 1) return evalNode(nodes[0]);
+    return evalRow(nodes);
+  }
+
+  /** 중위 연산자 기반 행 평가: 곱셈(juxtaposition) → 덧셈/뺄셈 */
+  function evalRow(children: MathNode[]): number {
+    // 1단계: 토큰화 — 값과 연산자 분리
+    const tokens: Array<{ type: 'value'; val: number } | { type: 'op'; op: string }> = [];
+
+    for (const child of children) {
+      if (child.type === 'operator') {
+        tokens.push({ type: 'op', op: normalizeOp(child.operator) });
+      } else {
+        tokens.push({ type: 'value', val: evalNode(child) });
+      }
+    }
+
+    // 2단계: 인접한 value 사이에 암묵적 곱셈 삽입
+    const expanded: typeof tokens = [];
+    for (let i = 0; i < tokens.length; i++) {
+      if (i > 0 && tokens[i].type === 'value' && tokens[i - 1].type === 'value') {
+        expanded.push({ type: 'op', op: '*' });
+      }
+      expanded.push(tokens[i]);
+    }
+
+    // 3단계: 곱셈/나눗셈 먼저
+    const addTerms: Array<{ type: 'value'; val: number } | { type: 'op'; op: string }> = [];
+    let acc: number | null = null;
+
+    for (const tok of expanded) {
+      if (tok.type === 'value') {
+        if (acc === null) {
+          acc = tok.val;
+        } else {
+          // 이전 연산자가 없으면 곱셈
+          acc *= tok.val;
+        }
+      } else if (tok.type === 'op') {
+        if (tok.op === '*' || tok.op === '×') {
+          // 다음 값과 곱
+          continue; // acc에 다음 value가 곱해질 것
+        } else if (tok.op === '/' || tok.op === '÷') {
+          // 다음 값으로 나눔
+          const nextIdx = expanded.indexOf(tok) + 1;
+          if (nextIdx < expanded.length && expanded[nextIdx].type === 'value') {
+            acc = (acc ?? 0) / (expanded[nextIdx] as { val: number }).val;
+            (expanded[nextIdx] as { type: string }).type = 'consumed' as 'value';
+          }
+        } else {
+          // +, - 연산자 → 이전 항 저장
+          if (acc !== null) addTerms.push({ type: 'value', val: acc });
+          addTerms.push(tok);
+          acc = null;
+        }
+      }
+    }
+    if (acc !== null) addTerms.push({ type: 'value', val: acc });
+
+    // 4단계: 덧셈/뺄셈
+    let result = 0;
+    let sign = 1;
+    for (const tok of addTerms) {
+      if (tok.type === 'value') {
+        result += sign * tok.val;
+        sign = 1;
+      } else if (tok.type === 'op') {
+        if (tok.op === '-' || tok.op === '−') sign = -1;
+        else sign = 1;
+      }
     }
 
     return result;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * 범위 내의 점들을 계산
- */
-export function calculatePoints(
-  latex: string,
-  range: GraphRange,
-  numPoints: number = 200
-): EvaluationPoint[] {
-  const evaluable = latexToEvaluable(latex);
-  const points: EvaluationPoint[] = [];
-
-  const step = (range.xMax - range.xMin) / numPoints;
-
-  for (let i = 0; i <= numPoints; i++) {
-    const x = range.xMin + i * step;
-    const y = evaluateAt(evaluable, x);
-
-    points.push({
-      x,
-      y: y ?? 0,
-      valid: y !== null && y >= range.yMin && y <= range.yMax,
-    });
   }
 
-  return points;
+  const finalResult = evalNodes(nodes);
+  return { nodeValues, result: finalResult };
 }
 
-/**
- * 표현식이 그래프로 표현 가능한지 확인
- */
-export function canGraph(latex: string): boolean {
-  try {
-    const evaluable = latexToEvaluable(latex);
-    // 간단한 테스트: x=0, x=1에서 평가
-    const y0 = evaluateAt(evaluable, 0);
-    const y1 = evaluateAt(evaluable, 1);
-    // 적어도 하나는 유효해야 함
-    return y0 !== null || y1 !== null;
-  } catch {
-    return false;
+function normalizeOp(op: string): string {
+  switch (op) {
+    case '\\cdot': case '\\times': case '×': return '*';
+    case '\\div': case '÷': return '/';
+    case '−': return '-';
+    default: return op;
   }
 }

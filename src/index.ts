@@ -109,7 +109,7 @@ export type {
 } from './react';
 
 // 수식 분석기
-export { analyzeExpression, matchVisualization, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer';
+export { analyzeExpression, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer';
 export type {
   ExpressionAnalysis,
   MathDomain,
@@ -118,14 +118,7 @@ export type {
   PolynomialInfo,
   ExpressionFeature,
   VisualizationCapability,
-  VisualizationType,
   VariableClassification,
-  VisualizationParams,
-  NumberLineParams,
-  UnitCircleParams,
-  PolarGraphParams,
-  FunctionGraph2DParams,
-  VisualizationMatch,
   SemanticResult,
   AncestorEntry,
 } from './analyzer';
@@ -149,28 +142,6 @@ export type {
   SolveOptions,
 } from './cas';
 
-// 시각화
-export {
-  FunctionGraph,
-  UnitCircle,
-  NumberLine,
-  PolarGraph,
-  AutoVisualizer,
-  GraphRenderer,
-  calculatePoints,
-  canGraph,
-} from './visualizer';
-export type {
-  FunctionGraphProps,
-  UnitCircleProps,
-  NumberLineProps,
-  NumberLinePoint,
-  NumberLineInterval,
-  PolarGraphProps,
-  AutoVisualizerProps,
-  GraphConfig,
-  GraphRange,
-} from './visualizer';
 
 // Tolerant Parser
 export { determineRenderMode } from './latex/tolerant';
@@ -212,6 +183,25 @@ export type { DOMStreamViewConfig as StreamRendererConfig } from './headless';
 // Headless Explorer
 export { ExplorerOverlay } from './headless';
 export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless';
+export { ExplorerVisualizerController } from './headless';
+export { ExplorerControlsPanel } from './headless';
+
+// Visualizer 프레임워크
+export type {
+  ParameterConfig,
+  ParameterValues,
+  DerivedValue,
+  Preset,
+  FizzexVisualizer,
+  VisualizerMountOptions,
+  VisualizerBridge,
+} from './visualizer';
+export { registerVisualizer, getVisualizer, getAllVisualizerIds } from './visualizer';
+export { VisualizerBridgeImpl } from './visualizer';
+export { loadVisualizer, getVisualizerForCatalog } from './visualizer';
+export { extractParameters } from './visualizer';
+export { evaluateAst } from './visualizer';
+export type { EvaluationResult } from './visualizer';
 
 // 타입
 export type {

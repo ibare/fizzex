@@ -100,7 +100,7 @@ describe('Expression Analyzer (통합)', () => {
       expect(typeof result.visualization.graphable3D).toBe('boolean');
       expect(typeof result.visualization.numberLine).toBe('boolean');
       expect(typeof result.visualization.geometric).toBe('boolean');
-      expect(Array.isArray(result.visualization.recommended)).toBe(true);
+      // recommended 필드는 새 Visualizer 프레임워크로 이전됨
     });
 
     it('빈 AST도 에러 없이 처리한다', () => {

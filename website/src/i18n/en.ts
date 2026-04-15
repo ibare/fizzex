@@ -168,6 +168,7 @@ export const en: Dictionary = {
       physics: 'Physics',
       analysis: 'Analysis',
       statistics: 'Statistics',
+      astronomy: 'Astronomy',
       complex: 'Complex Formulas',
     },
   },
