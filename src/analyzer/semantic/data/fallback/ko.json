@@ -1,5 +1,6 @@
 {
   "roles": {
+    "root": "수식 전체",
     "number": "숫자",
     "variable": "변수",
     "operator": "연산자",
@@ -20,6 +21,7 @@
     "cancel": "취소선"
   },
   "descriptions": {
+    "root": "이 수식의 전체 구조입니다.",
     "number": "숫자 {value}입니다.",
     "variable": "변수 {name}입니다. 값이 변할 수 있습니다.",
     "frac": "분수 — 위(분자)를 아래(분모)로 나눈 값입니다.",

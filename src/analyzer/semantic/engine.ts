@@ -305,12 +305,15 @@ export function buildSemanticMap(
 
   walk(ast);
 
-  // 카탈로그 매칭 정보를 root 노드에 첨부 (배너 표시용)
+  // 카탈로그 매칭 정보를 root 노드에 첨부 (배너 + 주석 표시용)
   if (catalogContext) {
     const rootResult = semanticMap.get(ast.id);
     if (rootResult) {
       semanticMap.set(ast.id, {
         ...rootResult,
+        role: catalogContext.detail.name,
+        description: catalogContext.detail.oneLiner,
+        layer: 'catalog',
         catalogId: catalogContext.match.catalogId,
         catalogCategory: catalogContext.match.category,
         confidence: catalogContext.match.confidence,
