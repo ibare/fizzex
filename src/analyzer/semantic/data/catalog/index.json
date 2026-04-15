@@ -2,213 +2,4224 @@
   "version": "1.0",
   "entries": [
     {
-      "id": "euler-identity",
+      "id": "arithmetic-general",
       "category": "algebra",
-      "requiredVariables": ["e", "i", "π"],
-      "requiredNodeTypes": ["power", "operator", "number"],
-      "complexity": [5, 12],
-      "patternType": "exact",
-      "signature": ["power.exponent:row", "variable:e", "variable:i", "variable:π", "operator:+", "number:1", "number:0"]
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:+",
+        "paren",
+        "operator:-",
+        "number:1"
+      ]
     },
     {
-      "id": "quadratic-formula",
+      "id": "arithmetic-series-sum",
       "category": "algebra",
-      "requiredNodeTypes": ["frac", "sqrt"],
-      "complexity": [10, 30],
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
       "patternType": "structural",
-      "signature": ["frac", "sqrt", "operator:±", "power.exponent:2"]
+      "signature": [
+        "frac",
+        "operator:+",
+        "number:2",
+        "operator:="
+      ]
     },
     {
       "id": "binomial-theorem",
       "category": "algebra",
-      "requiredNodeTypes": ["sum", "frac", "power"],
-      "complexity": [12, 35],
+      "requiredNodeTypes": [
+        "sum",
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        12,
+        35
+      ],
       "patternType": "structural",
-      "signature": ["sum", "frac", "power", "operator:+"]
-    },
-    {
-      "id": "geometric-series",
-      "category": "algebra",
-      "requiredNodeTypes": ["frac"],
-      "complexity": [4, 15],
-      "patternType": "structural",
-      "signature": ["frac", "operator:-", "number:1", "power"]
+      "signature": [
+        "sum",
+        "frac",
+        "power",
+        "operator:+"
+      ]
     },
     {
       "id": "difference-of-squares",
       "category": "algebra",
-      "requiredNodeTypes": ["power", "operator"],
-      "complexity": [4, 10],
+      "requiredNodeTypes": [
+        "power",
+        "operator"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
       "patternType": "structural",
-      "signature": ["power.exponent:2", "operator:-", "power.exponent:2"]
+      "signature": [
+        "power.exponent:2",
+        "operator:-",
+        "power.exponent:2"
+      ]
     },
     {
-      "id": "pythagorean-theorem",
-      "category": "geometry",
-      "requiredNodeTypes": ["power", "operator"],
-      "complexity": [6, 14],
-      "patternType": "structural",
-      "signature": ["power.exponent:2", "operator:+", "power.exponent:2", "operator:=", "power.exponent:2"]
-    },
-    {
-      "id": "heron-formula",
-      "category": "geometry",
-      "requiredNodeTypes": ["sqrt", "operator"],
-      "complexity": [10, 25],
-      "patternType": "structural",
-      "signature": ["sqrt", "operator:-", "paren", "paren", "paren"]
-    },
-    {
-      "id": "circle-area",
-      "category": "geometry",
-      "requiredVariables": ["π"],
-      "requiredNodeTypes": ["power"],
-      "complexity": [3, 8],
-      "patternType": "structural",
-      "signature": ["variable:π", "power.exponent:2", "operator:="]
-    },
-    {
-      "id": "law-of-cosines",
-      "category": "geometry",
-      "requiredNodeTypes": ["power", "func"],
-      "complexity": [10, 20],
-      "patternType": "structural",
-      "signature": ["power.exponent:2", "operator:+", "power.exponent:2", "operator:-", "func:cos"]
-    },
-    {
-      "id": "sphere-volume",
-      "category": "geometry",
-      "requiredVariables": ["π"],
-      "requiredNodeTypes": ["frac", "power"],
-      "complexity": [5, 12],
-      "patternType": "structural",
-      "signature": ["frac", "number:4", "number:3", "variable:π", "power.exponent:3"]
-    },
-    {
-      "id": "mass-energy",
-      "category": "physics",
-      "requiredVariables": ["E", "m", "c"],
-      "requiredNodeTypes": ["power"],
-      "complexity": [4, 10],
+      "id": "euler-identity",
+      "category": "algebra",
+      "requiredVariables": [
+        "e",
+        "i",
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "power",
+        "operator",
+        "number"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
       "patternType": "exact",
-      "signature": ["variable:E", "operator:=", "variable:m", "variable:c", "power.exponent:2"]
+      "signature": [
+        "power.exponent:row",
+        "variable:e",
+        "variable:i",
+        "variable:π",
+        "operator:+",
+        "number:1",
+        "number:0"
+      ]
     },
     {
-      "id": "newton-second",
-      "category": "physics",
-      "requiredVariables": ["F", "m", "a"],
-      "complexity": [3, 6],
+      "id": "exponent-law",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power",
+        "operator:·",
+        "power",
+        "operator:=",
+        "power"
+      ]
+    },
+    {
+      "id": "geometric-general",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "power",
+        "operator:-",
+        "number:1"
+      ]
+    },
+    {
+      "id": "geometric-series",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:-",
+        "number:1",
+        "power"
+      ]
+    },
+    {
+      "id": "geometric-series-sum",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:-",
+        "power",
+        "number:1"
+      ]
+    },
+    {
+      "id": "infinite-geometric",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:-",
+        "number:1",
+        "operator:="
+      ]
+    },
+    {
+      "id": "log-definition",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "func",
+        "power"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func:log",
+        "operator:=",
+        "power"
+      ]
+    },
+    {
+      "id": "log-product-rule",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func:log",
+        "operator:=",
+        "func:log",
+        "operator:+",
+        "func:log"
+      ]
+    },
+    {
+      "id": "perfect-square",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "power",
+        "operator"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "paren",
+        "power.exponent:2",
+        "operator:=",
+        "power.exponent:2",
+        "operator:+",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "quadratic-formula",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "frac",
+        "sqrt"
+      ],
+      "complexity": [
+        10,
+        30
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "sqrt",
+        "operator:±",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "sum-difference-product",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "power",
+        "operator"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "paren",
+        "operator:+",
+        "paren",
+        "operator:-",
+        "operator:=",
+        "power.exponent:2",
+        "operator:-",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "drake-equation",
+      "category": "astronomy",
+      "complexity": [
+        6,
+        14
+      ],
       "patternType": "exact",
-      "signature": ["variable:F", "operator:=", "variable:m", "variable:a"]
+      "signature": [
+        "variable:N",
+        "operator:=",
+        "operator:·",
+        "subscript"
+      ]
     },
     {
-      "id": "universal-gravitation",
-      "category": "physics",
-      "requiredVariables": ["G"],
-      "requiredNodeTypes": ["frac", "power"],
-      "complexity": [6, 15],
+      "id": "escape-velocity",
+      "category": "astronomy",
+      "requiredVariables": [
+        "G"
+      ],
+      "requiredNodeTypes": [
+        "sqrt",
+        "frac"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
       "patternType": "structural",
-      "signature": ["variable:G", "frac", "power.exponent:2"]
+      "signature": [
+        "operator:=",
+        "sqrt",
+        "frac",
+        "number:2",
+        "variable:G"
+      ]
     },
     {
-      "id": "coulomb-law",
-      "category": "physics",
-      "requiredVariables": ["k"],
-      "requiredNodeTypes": ["frac", "power"],
-      "complexity": [6, 15],
+      "id": "gravitational-lensing",
+      "category": "astronomy",
+      "requiredVariables": [
+        "G"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
       "patternType": "structural",
-      "signature": ["frac", "power.exponent:2"]
+      "signature": [
+        "operator:=",
+        "frac",
+        "number:4",
+        "variable:G",
+        "power.exponent:2"
+      ]
     },
     {
-      "id": "kinetic-energy",
-      "category": "physics",
-      "requiredNodeTypes": ["frac", "power"],
-      "complexity": [4, 10],
-      "patternType": "structural",
-      "signature": ["frac", "number:1", "number:2", "power.exponent:2"]
+      "id": "hubble-law",
+      "category": "astronomy",
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:v",
+        "operator:=",
+        "subscript",
+        "variable:d"
+      ]
     },
     {
-      "id": "ftc",
-      "category": "calculus",
-      "requiredNodeTypes": ["integral"],
-      "complexity": [6, 20],
+      "id": "kepler-third",
+      "category": "astronomy",
+      "requiredNodeTypes": [
+        "power",
+        "frac"
+      ],
+      "requiredVariables": [
+        "π"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
       "patternType": "structural",
-      "signature": ["integral", "operator:=", "func"]
+      "signature": [
+        "power.exponent:2",
+        "operator:=",
+        "frac",
+        "variable:π",
+        "power.exponent:3"
+      ]
     },
     {
-      "id": "taylor-series",
-      "category": "calculus",
-      "requiredNodeTypes": ["sum", "frac", "power"],
-      "complexity": [12, 35],
+      "id": "schwarzschild-radius",
+      "category": "astronomy",
+      "requiredVariables": [
+        "G",
+        "c"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
       "patternType": "structural",
-      "signature": ["sum", "frac", "power", "func"]
+      "signature": [
+        "operator:=",
+        "frac",
+        "number:2",
+        "variable:G",
+        "power.exponent:2"
+      ]
     },
     {
-      "id": "gaussian-integral",
-      "category": "calculus",
-      "requiredVariables": ["π"],
-      "requiredNodeTypes": ["integral", "power", "sqrt"],
-      "complexity": [8, 20],
+      "id": "stefan-boltzmann",
+      "category": "astronomy",
+      "requiredVariables": [
+        "π",
+        "σ"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
       "patternType": "structural",
-      "signature": ["integral", "power", "variable:e", "sqrt", "variable:π"]
+      "signature": [
+        "operator:=",
+        "number:4",
+        "variable:π",
+        "variable:σ",
+        "power.exponent:2",
+        "power.exponent:4"
+      ]
     },
     {
-      "id": "derivative-definition",
-      "category": "calculus",
-      "requiredNodeTypes": ["limit", "frac"],
-      "complexity": [8, 25],
+      "id": "wien-displacement",
+      "category": "astronomy",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
       "patternType": "structural",
-      "signature": ["limit", "frac", "func", "operator:+", "operator:-"]
+      "signature": [
+        "operator:=",
+        "frac",
+        "variable:b",
+        "variable:T"
+      ]
+    },
+    {
+      "id": "arithmetic-mean",
+      "category": "basic-statistics",
+      "requiredNodeTypes": [
+        "frac",
+        "sum"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "sum",
+        "operator:="
+      ]
+    },
+    {
+      "id": "coefficient-of-variation",
+      "category": "basic-statistics",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "variable:σ",
+        "operator:="
+      ]
+    },
+    {
+      "id": "std-dev-basic",
+      "category": "basic-statistics",
+      "requiredNodeTypes": [
+        "sqrt",
+        "frac",
+        "sum",
+        "power"
+      ],
+      "complexity": [
+        10,
+        22
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sqrt",
+        "frac",
+        "sum",
+        "power.exponent:2",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "variance-basic",
+      "category": "basic-statistics",
+      "requiredNodeTypes": [
+        "frac",
+        "sum",
+        "power"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "sum",
+        "power.exponent:2",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "weighted-mean",
+      "category": "basic-statistics",
+      "requiredNodeTypes": [
+        "frac",
+        "sum"
+      ],
+      "complexity": [
+        8,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "sum",
+        "sum",
+        "operator:="
+      ]
+    },
+    {
+      "id": "exponential-growth",
+      "category": "biology",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "power",
+        "variable:e",
+        "subscript"
+      ]
+    },
+    {
+      "id": "hardy-weinberg",
+      "category": "biology",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "exact",
+      "signature": [
+        "power.exponent:2",
+        "operator:+",
+        "number:2",
+        "power.exponent:2",
+        "operator:=",
+        "number:1"
+      ]
+    },
+    {
+      "id": "logistic-growth",
+      "category": "biology",
+      "requiredNodeTypes": [
+        "frac",
+        "paren"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "paren",
+        "operator:-",
+        "number:1"
+      ]
+    },
+    {
+      "id": "lotka-volterra",
+      "category": "biology",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "operator:-",
+        "variable:α",
+        "variable:β"
+      ]
+    },
+    {
+      "id": "michaelis-menten",
+      "category": "biology",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac",
+        "operator:+",
+        "subscript"
+      ]
+    },
+    {
+      "id": "sir-model",
+      "category": "biology",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "operator:-",
+        "variable:β",
+        "variable:γ"
+      ]
     },
     {
       "id": "chain-rule",
       "category": "calculus",
-      "requiredNodeTypes": ["frac"],
-      "complexity": [6, 18],
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
       "patternType": "structural",
-      "signature": ["frac", "operator:=", "frac", "operator:·"]
+      "signature": [
+        "frac",
+        "operator:=",
+        "frac",
+        "operator:·"
+      ]
+    },
+    {
+      "id": "derivative-definition",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "limit",
+        "frac"
+      ],
+      "complexity": [
+        8,
+        25
+      ],
+      "patternType": "structural",
+      "signature": [
+        "limit",
+        "frac",
+        "func",
+        "operator:+",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "exp-derivative",
+      "category": "calculus",
+      "requiredVariables": [
+        "e"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "frac",
+        "variable:e",
+        "power",
+        "operator:=",
+        "variable:e",
+        "power"
+      ]
+    },
+    {
+      "id": "ftc",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "integral"
+      ],
+      "complexity": [
+        6,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "operator:=",
+        "func"
+      ]
+    },
+    {
+      "id": "gaussian-integral",
+      "category": "calculus",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "integral",
+        "power",
+        "sqrt"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "power",
+        "variable:e",
+        "sqrt",
+        "variable:π"
+      ]
+    },
+    {
+      "id": "integration-by-parts",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "integral"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "operator:=",
+        "operator:-",
+        "integral"
+      ]
+    },
+    {
+      "id": "lhopital-rule",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "limit",
+        "frac"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "limit",
+        "frac",
+        "operator:=",
+        "limit",
+        "frac"
+      ]
+    },
+    {
+      "id": "log-derivative",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "frac",
+        "func"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "func:log",
+        "operator:=",
+        "frac",
+        "number:1"
+      ]
+    },
+    {
+      "id": "maclaurin-cos",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "sum",
+        "frac",
+        "power",
+        "func"
+      ],
+      "complexity": [
+        10,
+        25
+      ],
+      "patternType": "exact",
+      "signature": [
+        "func:cos",
+        "operator:=",
+        "sum",
+        "frac",
+        "power"
+      ]
+    },
+    {
+      "id": "maclaurin-exp",
+      "category": "calculus",
+      "requiredVariables": [
+        "e"
+      ],
+      "requiredNodeTypes": [
+        "sum",
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        8,
+        22
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:e",
+        "power",
+        "operator:=",
+        "sum",
+        "frac",
+        "power"
+      ]
+    },
+    {
+      "id": "maclaurin-sin",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "sum",
+        "frac",
+        "power",
+        "func"
+      ],
+      "complexity": [
+        10,
+        25
+      ],
+      "patternType": "exact",
+      "signature": [
+        "func:sin",
+        "operator:=",
+        "sum",
+        "frac",
+        "power"
+      ]
+    },
+    {
+      "id": "power-integral",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "integral",
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "power",
+        "operator:=",
+        "frac",
+        "power",
+        "operator:+"
+      ]
+    },
+    {
+      "id": "power-rule",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power",
+        "operator:=",
+        "power"
+      ]
+    },
+    {
+      "id": "product-rule",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "operator:+",
+        "func"
+      ]
+    },
+    {
+      "id": "quotient-rule",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:-",
+        "power.exponent:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "sin-derivative",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "frac",
+        "func:sin",
+        "operator:=",
+        "func:cos"
+      ]
+    },
+    {
+      "id": "taylor-series",
+      "category": "calculus",
+      "requiredNodeTypes": [
+        "sum",
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        12,
+        35
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "frac",
+        "power",
+        "func"
+      ]
+    },
+    {
+      "id": "arrhenius-equation",
+      "category": "chemistry",
+      "requiredNodeTypes": [
+        "power",
+        "frac"
+      ],
+      "complexity": [
+        5,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "power",
+        "variable:e",
+        "frac",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "avogadro-number",
+      "category": "chemistry",
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:N",
+        "operator:=",
+        "variable:n",
+        "subscript"
+      ]
+    },
+    {
+      "id": "boyle-law",
+      "category": "chemistry",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "subscript",
+        "subscript"
+      ]
+    },
+    {
+      "id": "gibbs-free-energy",
+      "category": "chemistry",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:-",
+        "variable:T"
+      ]
+    },
+    {
+      "id": "half-life",
+      "category": "chemistry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac",
+        "func:ln",
+        "number:2"
+      ]
+    },
+    {
+      "id": "nernst-equation",
+      "category": "chemistry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:-",
+        "frac",
+        "func:ln"
+      ]
+    },
+    {
+      "id": "ph-definition",
+      "category": "chemistry",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:-",
+        "func:log"
+      ]
+    },
+    {
+      "id": "boolean-complement",
+      "category": "cs",
+      "complexity": [
+        2,
+        5
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:A",
+        "operator:+",
+        "number:1",
+        "operator:="
+      ],
+      "requiredNodeTypes": [
+        "overline"
+      ]
+    },
+    {
+      "id": "comparison-sort-bound",
+      "category": "cs",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:n",
+        "func:log",
+        "variable:n"
+      ]
+    },
+    {
+      "id": "hamming-distance",
+      "category": "cs",
+      "requiredNodeTypes": [
+        "sum"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "variable:x",
+        "variable:y",
+        "operator:≠"
+      ]
+    },
+    {
+      "id": "handshaking-lemma",
+      "category": "cs",
+      "requiredNodeTypes": [
+        "sum"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "operator:=",
+        "number:2",
+        "abs"
+      ]
+    },
+    {
+      "id": "master-theorem",
+      "category": "cs",
+      "requiredNodeTypes": [
+        "frac",
+        "func"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "func",
+        "frac",
+        "variable:n",
+        "operator:+",
+        "func"
+      ]
+    },
+    {
+      "id": "password-entropy",
+      "category": "cs",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:H",
+        "operator:=",
+        "variable:L",
+        "func:log",
+        "variable:N"
+      ]
+    },
+    {
+      "id": "cobb-douglas",
+      "category": "economics",
+      "requiredVariables": [
+        "A",
+        "L",
+        "K"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:Y",
+        "operator:=",
+        "variable:A",
+        "power",
+        "power"
+      ]
+    },
+    {
+      "id": "consumer-surplus",
+      "category": "economics",
+      "requiredNodeTypes": [
+        "integral"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "func",
+        "operator:-",
+        "variable:p",
+        "operator:="
+      ]
+    },
+    {
+      "id": "elasticity",
+      "category": "economics",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "frac",
+        "operator:=",
+        "variable:E"
+      ]
+    },
+    {
+      "id": "fisher-equation",
+      "category": "economics",
+      "requiredVariables": [
+        "i",
+        "r"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:i",
+        "operator:=",
+        "variable:r",
+        "operator:+",
+        "variable:π"
+      ]
+    },
+    {
+      "id": "gdp-formula",
+      "category": "economics",
+      "requiredVariables": [
+        "Y",
+        "C",
+        "I",
+        "G"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:Y",
+        "operator:=",
+        "variable:C",
+        "operator:+",
+        "variable:I",
+        "variable:G"
+      ]
+    },
+    {
+      "id": "marginal-cost",
+      "category": "economics",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "variable:Q"
+      ]
+    },
+    {
+      "id": "quantity-theory",
+      "category": "economics",
+      "requiredVariables": [
+        "M",
+        "V",
+        "P",
+        "Y"
+      ],
+      "complexity": [
+        4,
+        8
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:M",
+        "variable:V",
+        "operator:=",
+        "variable:P",
+        "variable:Y"
+      ]
+    },
+    {
+      "id": "supply-demand",
+      "category": "economics",
+      "requiredVariables": [
+        "Q",
+        "P"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "exact",
+      "signature": [
+        "subscript",
+        "operator:=",
+        "subscript",
+        "variable:P"
+      ]
+    },
+    {
+      "id": "electric-power",
+      "category": "electrical",
+      "requiredVariables": [
+        "P",
+        "V",
+        "I"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:P",
+        "operator:=",
+        "variable:V",
+        "variable:I"
+      ]
+    },
+    {
+      "id": "impedance",
+      "category": "electrical",
+      "requiredNodeTypes": [
+        "sqrt",
+        "power"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sqrt",
+        "power.exponent:2",
+        "operator:+",
+        "paren",
+        "operator:-",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "kirchhoff-current",
+      "category": "electrical",
+      "requiredNodeTypes": [
+        "sum"
+      ],
+      "complexity": [
+        3,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "variable:I",
+        "operator:=",
+        "number:0"
+      ]
+    },
+    {
+      "id": "kirchhoff-voltage",
+      "category": "electrical",
+      "requiredNodeTypes": [
+        "sum"
+      ],
+      "complexity": [
+        3,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "variable:V",
+        "operator:=",
+        "number:0"
+      ]
+    },
+    {
+      "id": "ohm-law",
+      "category": "electrical",
+      "requiredVariables": [
+        "V",
+        "I",
+        "R"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:V",
+        "operator:=",
+        "variable:I",
+        "variable:R"
+      ]
+    },
+    {
+      "id": "rc-time-constant",
+      "category": "electrical",
+      "requiredVariables": [
+        "R",
+        "C"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:τ",
+        "operator:=",
+        "variable:R",
+        "variable:C"
+      ]
+    },
+    {
+      "id": "resonance-frequency",
+      "category": "electrical",
+      "requiredNodeTypes": [
+        "frac",
+        "sqrt"
+      ],
+      "requiredVariables": [
+        "π"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "variable:π",
+        "sqrt",
+        "variable:L",
+        "variable:C"
+      ]
+    },
+    {
+      "id": "shannon-capacity",
+      "category": "electrical",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "requiredVariables": [
+        "B"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:C",
+        "operator:=",
+        "variable:B",
+        "func:log",
+        "operator:+",
+        "number:1"
+      ]
+    },
+    {
+      "id": "annulus-area",
+      "category": "elementary-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:π",
+        "power.exponent:2",
+        "operator:-",
+        "power.exponent:2",
+        "paren"
+      ]
+    },
+    {
+      "id": "arc-length",
+      "category": "elementary-geometry",
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "variable:θ"
+      ]
+    },
+    {
+      "id": "circle-area-elem",
+      "category": "elementary-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:π",
+        "power.exponent:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "circle-circumference",
+      "category": "elementary-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "number:2",
+        "variable:π",
+        "operator:="
+      ]
+    },
+    {
+      "id": "parallelogram-area",
+      "category": "elementary-geometry",
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:×"
+      ]
+    },
+    {
+      "id": "rectangle-area",
+      "category": "elementary-geometry",
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:×"
+      ]
+    },
+    {
+      "id": "rectangle-perimeter",
+      "category": "elementary-geometry",
+      "complexity": [
+        4,
+        9
+      ],
+      "patternType": "structural",
+      "signature": [
+        "number:2",
+        "paren",
+        "operator:+",
+        "operator:="
+      ]
+    },
+    {
+      "id": "regular-polygon-area",
+      "category": "elementary-geometry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "rhombus-area",
+      "category": "elementary-geometry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "subscript"
+      ]
+    },
+    {
+      "id": "sector-area",
+      "category": "elementary-geometry",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "power.exponent:2",
+        "variable:θ"
+      ]
+    },
+    {
+      "id": "square-area",
+      "category": "elementary-geometry",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "trapezoid-area",
+      "category": "elementary-geometry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "operator:+",
+        "operator:="
+      ]
+    },
+    {
+      "id": "triangle-angle-sum",
+      "category": "elementary-geometry",
+      "complexity": [
+        4,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:+",
+        "operator:+",
+        "operator:=",
+        "number:180"
+      ]
+    },
+    {
+      "id": "triangle-area",
+      "category": "elementary-geometry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "triangle-perimeter",
+      "category": "elementary-geometry",
+      "complexity": [
+        7,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:+",
+        "operator:+",
+        "operator:="
+      ]
+    },
+    {
+      "id": "annuity-pv",
+      "category": "finance",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "operator:-",
+        "power",
+        "operator:+",
+        "variable:r"
+      ]
+    },
+    {
+      "id": "black-scholes",
+      "category": "finance",
+      "requiredVariables": [
+        "S",
+        "K"
+      ],
+      "requiredNodeTypes": [
+        "func",
+        "power"
+      ],
+      "complexity": [
+        15,
+        40
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:S",
+        "func:N",
+        "operator:-",
+        "variable:K",
+        "power",
+        "variable:e",
+        "func:N"
+      ]
+    },
+    {
+      "id": "capm",
+      "category": "finance",
+      "requiredVariables": [
+        "β"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:+",
+        "variable:β",
+        "paren",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "compound-interest",
+      "category": "finance",
+      "requiredVariables": [
+        "P",
+        "r",
+        "n",
+        "t"
+      ],
+      "requiredNodeTypes": [
+        "power",
+        "paren"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:P",
+        "paren",
+        "operator:+",
+        "frac",
+        "variable:r",
+        "variable:n",
+        "power"
+      ]
+    },
+    {
+      "id": "duration",
+      "category": "finance",
+      "requiredNodeTypes": [
+        "sum",
+        "frac"
+      ],
+      "complexity": [
+        8,
+        22
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "sum",
+        "variable:t",
+        "variable:P"
+      ]
+    },
+    {
+      "id": "present-value",
+      "category": "finance",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power",
+        "operator:+",
+        "variable:r",
+        "number:1"
+      ]
+    },
+    {
+      "id": "rule-of-72",
+      "category": "finance",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        2,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "frac",
+        "number:72",
+        "variable:r",
+        "operator:="
+      ]
+    },
+    {
+      "id": "sharpe-ratio",
+      "category": "finance",
+      "requiredVariables": [
+        "σ"
+      ],
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:-",
+        "variable:σ"
+      ]
+    },
+    {
+      "id": "circle-area",
+      "category": "geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:π",
+        "power.exponent:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "circle-equation",
+      "category": "geometry",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "paren",
+        "power.exponent:2",
+        "operator:+",
+        "paren",
+        "power.exponent:2",
+        "operator:=",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "ellipse-equation",
+      "category": "geometry",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power.exponent:2",
+        "operator:+",
+        "frac",
+        "power.exponent:2",
+        "operator:=",
+        "number:1"
+      ]
+    },
+    {
+      "id": "euler-polyhedron",
+      "category": "geometry",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:-",
+        "operator:+",
+        "operator:=",
+        "number:2"
+      ]
+    },
+    {
+      "id": "heron-formula",
+      "category": "geometry",
+      "requiredNodeTypes": [
+        "sqrt",
+        "operator"
+      ],
+      "complexity": [
+        10,
+        25
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sqrt",
+        "operator:-",
+        "paren",
+        "paren",
+        "paren"
+      ]
+    },
+    {
+      "id": "hyperbola-equation",
+      "category": "geometry",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power.exponent:2",
+        "operator:-",
+        "frac",
+        "power.exponent:2",
+        "operator:=",
+        "number:1"
+      ]
+    },
+    {
+      "id": "law-of-cosines",
+      "category": "geometry",
+      "requiredNodeTypes": [
+        "power",
+        "func"
+      ],
+      "complexity": [
+        10,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power.exponent:2",
+        "operator:+",
+        "power.exponent:2",
+        "operator:-",
+        "func:cos"
+      ]
+    },
+    {
+      "id": "pythagorean-theorem",
+      "category": "geometry",
+      "requiredNodeTypes": [
+        "power",
+        "operator"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power.exponent:2",
+        "operator:+",
+        "power.exponent:2",
+        "operator:=",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "sphere-volume",
+      "category": "geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:4",
+        "number:3",
+        "variable:π",
+        "power.exponent:3"
+      ]
+    },
+    {
+      "id": "data-processing-inequality",
+      "category": "information",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func",
+        "operator:≥",
+        "func"
+      ]
+    },
+    {
+      "id": "kl-divergence",
+      "category": "information",
+      "requiredNodeTypes": [
+        "sum",
+        "func"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "variable:p",
+        "func:log",
+        "frac",
+        "variable:q"
+      ]
+    },
+    {
+      "id": "mutual-information",
+      "category": "information",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "func",
+        "operator:-",
+        "func"
+      ]
+    },
+    {
+      "id": "shannon-entropy",
+      "category": "information",
+      "requiredNodeTypes": [
+        "sum",
+        "func"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:-",
+        "sum",
+        "variable:p",
+        "func:log",
+        "variable:p"
+      ]
+    },
+    {
+      "id": "source-coding",
+      "category": "information",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:L",
+        "operator:≥",
+        "func"
+      ]
+    },
+    {
+      "id": "absolute-value-function",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "abs"
+      ],
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "abs"
+      ]
+    },
+    {
+      "id": "discriminant",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power.exponent:2",
+        "operator:-",
+        "number:4",
+        "operator:="
+      ]
+    },
+    {
+      "id": "distance-formula",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "sqrt",
+        "power"
+      ],
+      "complexity": [
+        8,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sqrt",
+        "power.exponent:2",
+        "operator:+",
+        "operator:-",
+        "paren"
+      ]
+    },
+    {
+      "id": "floor-function",
+      "category": "linear-functions",
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "func:floor"
+      ]
+    },
+    {
+      "id": "linear-function",
+      "category": "linear-functions",
+      "complexity": [
+        4,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:+",
+        "operator:×"
+      ]
+    },
+    {
+      "id": "midpoint-formula",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:+",
+        "number:2"
+      ]
+    },
+    {
+      "id": "point-slope-form",
+      "category": "linear-functions",
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:-",
+        "operator:=",
+        "paren",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "quadratic-standard",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "power.exponent:2",
+        "operator:+",
+        "operator:+"
+      ]
+    },
+    {
+      "id": "quadratic-vertex",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "power.exponent:2",
+        "paren",
+        "operator:+"
+      ]
+    },
+    {
+      "id": "slope-formula",
+      "category": "linear-functions",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:-",
+        "operator:-",
+        "subscript"
+      ]
+    },
+    {
+      "id": "combination",
+      "category": "logic",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "frac",
+        "operator:!"
+      ]
+    },
+    {
+      "id": "de-morgan",
+      "category": "logic",
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:¬",
+        "paren",
+        "operator:∧",
+        "operator:=",
+        "operator:¬",
+        "operator:∨",
+        "operator:¬"
+      ]
+    },
+    {
+      "id": "inclusion-exclusion",
+      "category": "logic",
+      "requiredNodeTypes": [
+        "abs"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "abs",
+        "operator:∪",
+        "operator:=",
+        "abs",
+        "operator:+",
+        "abs",
+        "operator:-",
+        "abs"
+      ]
+    },
+    {
+      "id": "permutation",
+      "category": "logic",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "frac",
+        "operator:!"
+      ]
+    },
+    {
+      "id": "power-set",
+      "category": "logic",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "structural",
+      "signature": [
+        "abs",
+        "operator:=",
+        "power.exponent:abs",
+        "number:2"
+      ]
+    },
+    {
+      "id": "bernoulli-equation",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:P",
+        "operator:+",
+        "frac",
+        "power.exponent:2",
+        "operator:+",
+        "variable:ρ",
+        "variable:g"
+      ]
+    },
+    {
+      "id": "euler-buckling",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "requiredVariables": [
+        "π",
+        "E",
+        "I"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "exact",
+      "signature": [
+        "frac",
+        "variable:π",
+        "power.exponent:2",
+        "variable:E",
+        "variable:I",
+        "variable:L"
+      ]
+    },
+    {
+      "id": "heat-conduction",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "requiredVariables": [
+        "k",
+        "A"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:Q",
+        "operator:=",
+        "variable:k",
+        "variable:A",
+        "frac"
+      ]
+    },
+    {
+      "id": "hooke-law",
+      "category": "mechanical",
+      "requiredVariables": [
+        "E"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:σ",
+        "operator:=",
+        "variable:E",
+        "variable:ε"
+      ]
+    },
+    {
+      "id": "navier-stokes",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        15,
+        40
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:ρ",
+        "frac",
+        "operator:=",
+        "operator:-",
+        "operator:+"
+      ]
+    },
+    {
+      "id": "reynolds-number",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "variable:ρ",
+        "variable:v",
+        "variable:L",
+        "variable:μ"
+      ]
+    },
+    {
+      "id": "strain",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:ε",
+        "operator:=",
+        "frac",
+        "variable:L"
+      ]
+    },
+    {
+      "id": "stress",
+      "category": "mechanical",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "requiredVariables": [
+        "F",
+        "A"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:σ",
+        "operator:=",
+        "frac",
+        "variable:F",
+        "variable:A"
+      ]
+    },
+    {
+      "id": "attention-mechanism",
+      "category": "ml",
+      "requiredVariables": [
+        "Q",
+        "K",
+        "V"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "sqrt",
+        "func"
+      ],
+      "complexity": [
+        8,
+        22
+      ],
+      "patternType": "exact",
+      "signature": [
+        "func",
+        "frac",
+        "variable:Q",
+        "variable:K",
+        "sqrt",
+        "variable:V"
+      ]
+    },
+    {
+      "id": "backpropagation",
+      "category": "ml",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "frac",
+        "operator:·",
+        "frac"
+      ]
+    },
+    {
+      "id": "batch-normalization",
+      "category": "ml",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "requiredVariables": [
+        "μ",
+        "σ"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "variable:x",
+        "operator:-",
+        "variable:μ",
+        "variable:σ"
+      ]
+    },
+    {
+      "id": "cross-entropy",
+      "category": "ml",
+      "requiredNodeTypes": [
+        "sum",
+        "func"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:-",
+        "sum",
+        "func:log",
+        "variable:y"
+      ]
+    },
+    {
+      "id": "gradient-descent",
+      "category": "ml",
+      "requiredVariables": [
+        "θ",
+        "α"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:θ",
+        "operator:-",
+        "variable:α",
+        "operator:="
+      ]
+    },
+    {
+      "id": "mse-loss",
+      "category": "ml",
+      "requiredNodeTypes": [
+        "frac",
+        "sum",
+        "power"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "variable:n",
+        "sum",
+        "power.exponent:2",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "sigmoid",
+      "category": "ml",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "operator:+",
+        "power",
+        "variable:e",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "softmax",
+      "category": "ml",
+      "requiredNodeTypes": [
+        "frac",
+        "power",
+        "sum"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power",
+        "variable:e",
+        "sum",
+        "power"
+      ]
+    },
+    {
+      "id": "euclidean-algorithm",
+      "category": "number-theory",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func",
+        "operator:=",
+        "func",
+        "operator:mod"
+      ]
+    },
+    {
+      "id": "euler-theorem",
+      "category": "number-theory",
+      "requiredNodeTypes": [
+        "power",
+        "func"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power",
+        "func",
+        "operator:≡",
+        "number:1"
+      ]
+    },
+    {
+      "id": "fermat-little",
+      "category": "number-theory",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power",
+        "operator:-",
+        "number:1",
+        "operator:≡",
+        "number:1"
+      ]
+    },
+    {
+      "id": "fibonacci-general",
+      "category": "number-theory",
+      "requiredNodeTypes": [
+        "frac",
+        "power",
+        "sqrt"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "sqrt",
+        "number:5",
+        "power",
+        "operator:-",
+        "power"
+      ]
+    },
+    {
+      "id": "goldbach-conjecture",
+      "category": "number-theory",
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:+",
+        "number:2"
+      ]
+    },
+    {
+      "id": "prime-counting",
+      "category": "number-theory",
+      "requiredNodeTypes": [
+        "frac",
+        "func"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func",
+        "operator:~",
+        "frac",
+        "func:log"
+      ]
+    },
+    {
+      "id": "quadratic-reciprocity",
+      "category": "number-theory",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "frac",
+        "operator:=",
+        "power",
+        "operator:-",
+        "number:1"
+      ]
+    },
+    {
+      "id": "boltzmann-dist",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "power",
+        "frac"
+      ],
+      "complexity": [
+        5,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power",
+        "variable:e",
+        "frac",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "coulomb-law",
+      "category": "physics",
+      "requiredVariables": [
+        "k"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "de-broglie",
+      "category": "physics",
+      "requiredVariables": [
+        "h"
+      ],
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:λ",
+        "operator:=",
+        "frac",
+        "variable:h",
+        "variable:p"
+      ]
+    },
+    {
+      "id": "first-law-thermo",
+      "category": "physics",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:-",
+        "variable:Q",
+        "variable:W"
+      ]
+    },
+    {
+      "id": "gauss-law",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac",
+        "variable:ρ",
+        "variable:ε"
+      ]
+    },
+    {
+      "id": "ideal-gas-law",
+      "category": "physics",
+      "requiredVariables": [
+        "R"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:P",
+        "variable:V",
+        "operator:=",
+        "variable:n",
+        "variable:R",
+        "variable:T"
+      ]
+    },
+    {
+      "id": "kinematic-displacement",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:+",
+        "frac",
+        "number:1",
+        "number:2",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "kinetic-energy",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "lorentz-transform",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "paren",
+        "operator:-",
+        "frac",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "mass-energy",
+      "category": "physics",
+      "requiredVariables": [
+        "E",
+        "m",
+        "c"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:E",
+        "operator:=",
+        "variable:m",
+        "variable:c",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "newton-second",
+      "category": "physics",
+      "requiredVariables": [
+        "F",
+        "m",
+        "a"
+      ],
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:F",
+        "operator:=",
+        "variable:m",
+        "variable:a"
+      ]
+    },
+    {
+      "id": "projectile-motion",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "frac",
+        "power",
+        "func"
+      ],
+      "complexity": [
+        10,
+        25
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "func:tan",
+        "func:cos",
+        "power.exponent:2",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "schrodinger-eq",
+      "category": "physics",
+      "requiredVariables": [
+        "i"
+      ],
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:i",
+        "frac",
+        "operator:=",
+        "variable:ψ"
+      ]
+    },
+    {
+      "id": "simple-harmonic",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "func:sin",
+        "operator:+",
+        "paren"
+      ]
+    },
+    {
+      "id": "universal-gravitation",
+      "category": "physics",
+      "requiredVariables": [
+        "G"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:G",
+        "frac",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "velocity-acceleration",
+      "category": "physics",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:+",
+        "subscript"
+      ]
+    },
+    {
+      "id": "velocity-displacement",
+      "category": "physics",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "power.exponent:2",
+        "operator:=",
+        "power.exponent:2",
+        "operator:+",
+        "number:2"
+      ]
+    },
+    {
+      "id": "wave-speed",
+      "category": "physics",
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "variable:f",
+        "variable:λ"
+      ]
+    },
+    {
+      "id": "density-formula",
+      "category": "ratio-proportion",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac",
+        "variable:ρ"
+      ]
+    },
+    {
+      "id": "direct-proportion",
+      "category": "ratio-proportion",
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:×"
+      ]
+    },
+    {
+      "id": "inverse-proportion",
+      "category": "ratio-proportion",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac"
+      ]
+    },
+    {
+      "id": "percentage",
+      "category": "ratio-proportion",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac",
+        "number:100",
+        "operator:×"
+      ]
+    },
+    {
+      "id": "speed-formula",
+      "category": "ratio-proportion",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "frac"
+      ]
+    },
+    {
+      "id": "convolution",
+      "category": "signal",
+      "requiredNodeTypes": [
+        "integral"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "func",
+        "operator:-",
+        "variable:τ"
+      ]
+    },
+    {
+      "id": "fourier-transform",
+      "category": "signal",
+      "requiredNodeTypes": [
+        "integral"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "variable:e",
+        "power",
+        "variable:ω",
+        "variable:t"
+      ]
+    },
+    {
+      "id": "inverse-fourier",
+      "category": "signal",
+      "requiredNodeTypes": [
+        "integral",
+        "frac"
+      ],
+      "complexity": [
+        8,
+        22
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:2",
+        "variable:π",
+        "integral",
+        "variable:e",
+        "power"
+      ]
+    },
+    {
+      "id": "laplace-transform",
+      "category": "signal",
+      "requiredNodeTypes": [
+        "integral"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "structural",
+      "signature": [
+        "integral",
+        "variable:e",
+        "power",
+        "variable:s",
+        "variable:t"
+      ]
+    },
+    {
+      "id": "nyquist-theorem",
+      "category": "signal",
+      "complexity": [
+        3,
+        6
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:f",
+        "operator:≥",
+        "number:2",
+        "subscript"
+      ]
+    },
+    {
+      "id": "sampling",
+      "category": "signal",
+      "complexity": [
+        3,
+        8
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "variable:n",
+        "variable:T"
+      ]
+    },
+    {
+      "id": "transfer-function",
+      "category": "signal",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "variable:Y",
+        "variable:X",
+        "variable:s"
+      ]
+    },
+    {
+      "id": "z-transform",
+      "category": "signal",
+      "requiredNodeTypes": [
+        "sum",
+        "power"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "sum",
+        "variable:z",
+        "power",
+        "operator:-",
+        "variable:n"
+      ]
+    },
+    {
+      "id": "ebbinghaus-curve",
+      "category": "social-science",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:R",
+        "operator:=",
+        "power",
+        "variable:e",
+        "operator:-",
+        "frac"
+      ]
+    },
+    {
+      "id": "elo-rating",
+      "category": "social-science",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "operator:+",
+        "power.exponent:frac",
+        "number:10"
+      ]
+    },
+    {
+      "id": "gini-coefficient",
+      "category": "social-science",
+      "requiredNodeTypes": [
+        "integral",
+        "frac"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "number:1",
+        "operator:-",
+        "number:2",
+        "integral",
+        "func"
+      ]
+    },
+    {
+      "id": "gravity-model",
+      "category": "social-science",
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:k",
+        "frac",
+        "variable:P",
+        "variable:P",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "laffer-curve",
+      "category": "social-science",
+      "complexity": [
+        4,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:t",
+        "operator:-",
+        "power.exponent:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "malthus-population",
+      "category": "social-science",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        3,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "variable:N",
+        "power",
+        "variable:e",
+        "variable:r",
+        "variable:t"
+      ]
+    },
+    {
+      "id": "weber-fechner",
+      "category": "social-science",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        3,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:S",
+        "operator:=",
+        "variable:k",
+        "func:ln",
+        "frac"
+      ]
+    },
+    {
+      "id": "cone-surface",
+      "category": "solid-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:π",
+        "operator:+",
+        "paren"
+      ]
+    },
+    {
+      "id": "cone-volume",
+      "category": "solid-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:3",
+        "variable:π",
+        "power.exponent:2"
+      ]
+    },
+    {
+      "id": "cuboid-surface",
+      "category": "solid-geometry",
+      "complexity": [
+        8,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "number:2",
+        "paren",
+        "operator:+",
+        "operator:+",
+        "operator:="
+      ]
+    },
+    {
+      "id": "cuboid-volume",
+      "category": "solid-geometry",
+      "complexity": [
+        3,
+        7
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "operator:×",
+        "operator:×"
+      ]
+    },
+    {
+      "id": "cylinder-surface",
+      "category": "solid-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "number:2",
+        "variable:π",
+        "paren",
+        "operator:+"
+      ]
+    },
+    {
+      "id": "cylinder-volume",
+      "category": "solid-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:π",
+        "power.exponent:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "pyramid-volume",
+      "category": "solid-geometry",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "number:3",
+        "operator:="
+      ]
+    },
+    {
+      "id": "sphere-surface",
+      "category": "solid-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "number:4",
+        "variable:π",
+        "power.exponent:2",
+        "operator:="
+      ]
+    },
+    {
+      "id": "sphere-volume-solid",
+      "category": "solid-geometry",
+      "requiredVariables": [
+        "π"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:4",
+        "number:3",
+        "variable:π",
+        "power.exponent:3"
+      ]
+    },
+    {
+      "id": "tetrahedron-volume",
+      "category": "solid-geometry",
+      "requiredNodeTypes": [
+        "frac",
+        "sqrt",
+        "power"
+      ],
+      "complexity": [
+        6,
+        14
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "sqrt",
+        "number:2",
+        "number:12",
+        "power.exponent:3"
+      ]
     },
     {
       "id": "bayes-theorem",
       "category": "statistics",
-      "requiredNodeTypes": ["frac"],
-      "complexity": [8, 20],
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
       "patternType": "structural",
-      "signature": ["frac", "operator:=", "func", "operator:|"]
+      "signature": [
+        "frac",
+        "operator:=",
+        "func",
+        "operator:|"
+      ]
     },
     {
-      "id": "normal-distribution",
+      "id": "binomial-dist",
       "category": "statistics",
-      "requiredVariables": ["π", "σ"],
-      "requiredNodeTypes": ["frac", "power", "sqrt"],
-      "complexity": [12, 30],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        8,
+        22
+      ],
       "patternType": "structural",
-      "signature": ["frac", "number:1", "sqrt", "number:2", "variable:π", "variable:σ", "power", "variable:e"]
+      "signature": [
+        "frac",
+        "power",
+        "variable:p",
+        "operator:-",
+        "number:1",
+        "variable:n",
+        "variable:k"
+      ]
     },
     {
-      "id": "standard-deviation",
+      "id": "chi-squared",
       "category": "statistics",
-      "requiredVariables": ["σ"],
-      "requiredNodeTypes": ["sqrt", "frac", "sum"],
-      "complexity": [10, 25],
+      "requiredNodeTypes": [
+        "sum",
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        18
+      ],
       "patternType": "structural",
-      "signature": ["variable:σ", "operator:=", "sqrt", "frac", "sum"]
+      "signature": [
+        "sum",
+        "frac",
+        "power.exponent:2",
+        "operator:-"
+      ]
+    },
+    {
+      "id": "conditional-prob",
+      "category": "statistics",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "operator:=",
+        "func",
+        "operator:|"
+      ]
     },
     {
       "id": "correlation-coefficient",
       "category": "statistics",
-      "requiredNodeTypes": ["frac", "sum", "sqrt"],
-      "complexity": [15, 40],
+      "requiredNodeTypes": [
+        "frac",
+        "sum",
+        "sqrt"
+      ],
+      "complexity": [
+        15,
+        40
+      ],
       "patternType": "structural",
-      "signature": ["frac", "sum", "sqrt"]
+      "signature": [
+        "frac",
+        "sum",
+        "sqrt"
+      ]
+    },
+    {
+      "id": "covariance",
+      "category": "statistics",
+      "requiredNodeTypes": [
+        "func"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func",
+        "operator:=",
+        "operator:-",
+        "variable:X",
+        "variable:Y"
+      ]
     },
     {
       "id": "law-of-large-numbers",
       "category": "statistics",
-      "requiredNodeTypes": ["limit", "frac", "sum"],
-      "complexity": [10, 25],
+      "requiredNodeTypes": [
+        "limit",
+        "frac",
+        "sum"
+      ],
+      "complexity": [
+        10,
+        25
+      ],
       "patternType": "structural",
-      "signature": ["limit", "frac", "number:1", "sum"]
+      "signature": [
+        "limit",
+        "frac",
+        "number:1",
+        "sum"
+      ]
+    },
+    {
+      "id": "normal-distribution",
+      "category": "statistics",
+      "requiredVariables": [
+        "π",
+        "σ"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power",
+        "sqrt"
+      ],
+      "complexity": [
+        12,
+        30
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "number:1",
+        "sqrt",
+        "number:2",
+        "variable:π",
+        "variable:σ",
+        "power",
+        "variable:e"
+      ]
+    },
+    {
+      "id": "poisson-dist",
+      "category": "statistics",
+      "requiredVariables": [
+        "λ"
+      ],
+      "requiredNodeTypes": [
+        "frac",
+        "power"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "power",
+        "variable:λ",
+        "variable:e",
+        "variable:k"
+      ]
+    },
+    {
+      "id": "standard-deviation",
+      "category": "statistics",
+      "requiredVariables": [
+        "σ"
+      ],
+      "requiredNodeTypes": [
+        "sqrt",
+        "frac",
+        "sum"
+      ],
+      "complexity": [
+        10,
+        25
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:σ",
+        "operator:=",
+        "sqrt",
+        "frac",
+        "sum"
+      ]
+    },
+    {
+      "id": "t-test",
+      "category": "statistics",
+      "requiredNodeTypes": [
+        "frac",
+        "sqrt"
+      ],
+      "complexity": [
+        6,
+        15
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:t",
+        "operator:=",
+        "frac",
+        "operator:-",
+        "variable:μ",
+        "sqrt"
+      ]
+    },
+    {
+      "id": "total-probability",
+      "category": "statistics",
+      "requiredNodeTypes": [
+        "sum"
+      ],
+      "complexity": [
+        6,
+        16
+      ],
+      "patternType": "structural",
+      "signature": [
+        "operator:=",
+        "sum",
+        "func",
+        "operator:|"
+      ]
+    },
+    {
+      "id": "cos-definition",
+      "category": "trigonometry-basic",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func:cos",
+        "operator:=",
+        "frac"
+      ]
+    },
+    {
+      "id": "law-of-sines",
+      "category": "trigonometry-basic",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        8,
+        18
+      ],
+      "patternType": "structural",
+      "signature": [
+        "frac",
+        "func:sin",
+        "operator:=",
+        "frac",
+        "func:sin"
+      ]
+    },
+    {
+      "id": "pythagorean-trig",
+      "category": "trigonometry-basic",
+      "requiredNodeTypes": [
+        "power"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func:sin",
+        "func:cos",
+        "power.exponent:2",
+        "operator:+",
+        "number:1",
+        "operator:="
+      ]
+    },
+    {
+      "id": "sin-definition",
+      "category": "trigonometry-basic",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func:sin",
+        "operator:=",
+        "frac"
+      ]
+    },
+    {
+      "id": "tan-definition",
+      "category": "trigonometry-basic",
+      "requiredNodeTypes": [
+        "frac"
+      ],
+      "complexity": [
+        4,
+        10
+      ],
+      "patternType": "structural",
+      "signature": [
+        "func:tan",
+        "operator:=",
+        "frac"
+      ]
     }
   ]
 }

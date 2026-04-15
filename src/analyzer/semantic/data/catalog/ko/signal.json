@@ -1,0 +1,131 @@
+{
+  "fourier-transform": {
+    "name": "푸리에 변환",
+    "oneLiner": "시간 영역의 신호를 주파수 영역으로 변환하는 적분 변환",
+    "description": "푸리에 변환은 시간의 함수인 신호를 주파수의 함수로 분해합니다. 모든 신호는 서로 다른 주파수의 사인파 합으로 표현할 수 있다는 원리에 기반하며, 각 주파수 성분의 크기와 위상 정보를 제공합니다. 신호 처리, 이미지 분석, 양자역학 등 과학과 공학 전반에 걸쳐 사용됩니다.",
+    "discoverer": "조제프 푸리에",
+    "field": "신호처리",
+    "significance": "시간과 주파수 영역의 이중 표현을 가능하게 하여 현대 신호 처리의 이론적 기반을 확립했습니다.",
+    "elementMeanings": {
+      "F(\\omega)": { "role": "주파수 스펙트럼", "description": "입력 신호의 주파수 영역 표현. 각 주파수의 크기와 위상을 담고 있습니다." },
+      "f(t)": { "role": "시간 신호", "description": "시간의 함수로 표현된 원래 신호입니다." },
+      "\\omega": { "role": "각주파수", "description": "2파이f. 주파수를 라디안 단위로 나타낸 것. 단위: rad/s." },
+      "e^{-i\\omega t}": { "role": "복소 지수 함수", "description": "오일러 공식에 의해 코사인과 사인의 조합으로 분해됩니다." },
+      "\\int": { "role": "적분", "description": "시간 전체 범위(-무한대부터 무한대)에 걸친 적분입니다." }
+    },
+    "realWorldExamples": ["음성 신호의 주파수 분석을 통한 음성 인식", "MRI 영상의 주파수 데이터를 공간 이미지로 재구성"],
+    "relatedFormulas": ["inverse-fourier", "laplace-transform", "convolution"]
+  },
+  "inverse-fourier": {
+    "name": "역 푸리에 변환",
+    "oneLiner": "주파수 영역의 스펙트럼을 시간 영역의 신호로 복원하는 적분 변환",
+    "description": "역 푸리에 변환은 푸리에 변환의 역과정으로, 주파수 영역에서 표현된 스펙트럼 정보를 원래의 시간 영역 신호로 복원합니다. 1/(2파이) 정규화 인자가 붙으며, 복소 지수 함수의 부호가 양수로 바뀝니다. 신호의 합성과 복원에 필수적인 도구입니다.",
+    "discoverer": "조제프 푸리에",
+    "field": "신호처리",
+    "significance": "주파수 분석 결과를 원래 신호로 완전히 복원할 수 있음을 보장하여 신호 합성의 이론적 근거를 제공합니다.",
+    "elementMeanings": {
+      "f(t)": { "role": "시간 신호", "description": "복원된 원래 시간 영역 신호입니다." },
+      "F(\\omega)": { "role": "주파수 스펙트럼", "description": "주파수 영역의 입력 데이터입니다." },
+      "\\frac{1}{2\\pi}": { "role": "정규화 인자", "description": "푸리에 변환 쌍의 대칭성을 유지하기 위한 상수입니다." },
+      "e^{i\\omega t}": { "role": "복소 지수 함수", "description": "역변환에서는 지수의 부호가 양수입니다." },
+      "\\int": { "role": "적분", "description": "주파수 전체 범위에 걸친 적분입니다." }
+    },
+    "realWorldExamples": ["필터링 후 처리된 주파수 데이터를 다시 시간 신호로 변환", "압축된 오디오 데이터의 복원 재생"],
+    "relatedFormulas": ["fourier-transform", "laplace-transform", "convolution"]
+  },
+  "laplace-transform": {
+    "name": "라플라스 변환",
+    "oneLiner": "시간 영역의 함수를 복소 주파수 영역으로 변환하는 적분 변환",
+    "description": "라플라스 변환은 시간 함수를 복소수 s의 함수로 변환하여 미분방정식을 대수방정식으로 바꿔 줍니다. 푸리에 변환의 일반화로 볼 수 있으며, 감쇠하는 신호도 다룰 수 있습니다. 제어 시스템 분석, 회로 해석, 시스템 안정성 판별 등에 핵심적으로 사용됩니다.",
+    "discoverer": "피에르시몽 라플라스",
+    "field": "신호처리",
+    "significance": "미분방정식을 대수적으로 풀 수 있게 하여 제어 공학과 시스템 해석의 표준 도구가 되었습니다.",
+    "elementMeanings": {
+      "F(s)": { "role": "라플라스 변환 결과", "description": "복소 주파수 영역에서의 함수 표현입니다." },
+      "f(t)": { "role": "시간 함수", "description": "변환할 원래 시간 영역 함수. t >= 0에서 정의됩니다." },
+      "s": { "role": "복소 주파수", "description": "s = 시그마 + j오메가. 실수부는 감쇠, 허수부는 진동을 나타냅니다." },
+      "e^{-st}": { "role": "감쇠 복소 지수", "description": "시간 함수에 곱해지는 커널 함수입니다." },
+      "\\int_0^{\\infty}": { "role": "단측 적분", "description": "0부터 무한대까지의 적분. 인과적 시스템을 다룹니다." }
+    },
+    "realWorldExamples": ["PID 제어기의 전달함수 설계", "RLC 회로의 과도 응답 해석"],
+    "relatedFormulas": ["fourier-transform", "z-transform", "transfer-function"]
+  },
+  "z-transform": {
+    "name": "Z 변환",
+    "oneLiner": "이산 시간 신호를 복소 z 영역으로 변환하는 수학적 도구",
+    "description": "Z 변환은 라플라스 변환의 이산 시간 버전으로, 이산 시간 신호 x[n]을 복소 변수 z의 함수로 변환합니다. 디지털 필터 설계, 디지털 제어 시스템 분석, 차분 방정식의 해법에 필수적입니다. z = e^(sT) 관계를 통해 라플라스 변환과 연결됩니다.",
+    "discoverer": "비톨트 후레비치",
+    "field": "신호처리",
+    "significance": "이산 시간 시스템 해석의 표준 도구로, 디지털 신호 처리와 디지털 제어의 이론적 기반을 제공합니다.",
+    "elementMeanings": {
+      "X(z)": { "role": "Z 변환 결과", "description": "복소 z 영역에서의 이산 신호 표현입니다." },
+      "x[n]": { "role": "이산 시간 신호", "description": "정수 인덱스 n에서의 샘플 값입니다." },
+      "z": { "role": "복소 변수", "description": "단위 원(|z|=1)이 주파수 영역에 대응하는 복소수입니다." },
+      "z^{-n}": { "role": "지연 연산자", "description": "n 샘플 지연을 나타내는 z의 음의 거듭제곱입니다." },
+      "\\sum": { "role": "급수 합", "description": "n = -무한대부터 무한대(또는 0부터)까지의 합입니다." }
+    },
+    "realWorldExamples": ["디지털 오디오 이퀄라이저의 필터 계수 설계", "로봇 팔의 디지털 위치 제어 시스템"],
+    "relatedFormulas": ["laplace-transform", "sampling", "transfer-function"]
+  },
+  "nyquist-theorem": {
+    "name": "나이퀴스트 정리",
+    "oneLiner": "아날로그 신호를 왜곡 없이 디지털로 변환하기 위한 최소 샘플링 주파수 조건",
+    "description": "나이퀴스트 정리는 대역 제한된 아날로그 신호를 완벽히 복원하려면 신호 최대 주파수의 2배 이상으로 샘플링해야 함을 규정합니다. 이 조건을 만족하지 못하면 앨리어싱이 발생하여 원래 신호를 복원할 수 없습니다. 모든 아날로그-디지털 변환 시스템의 설계 기초입니다.",
+    "discoverer": "해리 나이퀴스트, 클로드 섀넌",
+    "field": "신호처리",
+    "significance": "아날로그와 디지털 세계를 연결하는 근본 조건을 제시하여 디지털 통신과 기록 기술의 기초를 확립했습니다.",
+    "elementMeanings": {
+      "f_s": { "role": "샘플링 주파수", "description": "초당 샘플을 취하는 횟수. 단위: 헤르츠(Hz)." },
+      "f_{max}": { "role": "최대 주파수", "description": "신호에 포함된 가장 높은 주파수 성분. 단위: 헤르츠(Hz)." },
+      "2": { "role": "나이퀴스트 비율", "description": "최소 2배 이상 샘플링해야 앨리어싱을 방지할 수 있습니다." }
+    },
+    "realWorldExamples": ["CD 오디오(44.1kHz)가 인간 청각 범위(20kHz)를 커버하는 원리", "디지털 카메라 센서의 앨리어싱 방지 필터"],
+    "relatedFormulas": ["sampling", "fourier-transform", "shannon-capacity"]
+  },
+  "sampling": {
+    "name": "샘플링",
+    "oneLiner": "연속 시간 신호를 일정 간격으로 추출하여 이산 시간 신호로 변환하는 과정",
+    "description": "샘플링은 연속적인 아날로그 신호 x(t)를 주기 T마다 값을 추출하여 이산 신호 x[n]으로 변환하는 과정입니다. 디지털 신호 처리의 첫 단계이며, 나이퀴스트 조건을 만족해야 원래 신호를 충실히 재현할 수 있습니다. 샘플링 주기 T와 샘플링 주파수 f_s는 역수 관계입니다.",
+    "field": "신호처리",
+    "significance": "아날로그 신호를 디지털로 변환하는 근본 과정으로, 모든 디지털 시스템의 입력 단계를 정의합니다.",
+    "elementMeanings": {
+      "x[n]": { "role": "이산 신호", "description": "n번째 샘플 값. 디지털 신호의 기본 단위입니다." },
+      "x(t)": { "role": "연속 신호", "description": "원래의 아날로그 시간 신호입니다." },
+      "n": { "role": "샘플 인덱스", "description": "정수 값으로, 몇 번째 샘플인지를 나타냅니다." },
+      "T": { "role": "샘플링 주기", "description": "연속 샘플 사이의 시간 간격. 단위: 초(s). T = 1/f_s." }
+    },
+    "realWorldExamples": ["마이크로 입력된 음성을 디지털 데이터로 변환", "심전도(ECG) 장치의 생체 신호 디지털화"],
+    "relatedFormulas": ["nyquist-theorem", "z-transform", "fourier-transform"]
+  },
+  "convolution": {
+    "name": "컨볼루션",
+    "oneLiner": "두 함수를 겹치고 밀면서 적분하여 새로운 함수를 만드는 연산",
+    "description": "컨볼루션은 한 함수를 반전시킨 뒤 다른 함수 위를 이동시키며 겹치는 영역의 적분을 구하는 연산입니다. 선형 시불변(LTI) 시스템에서 입력 신호와 임펄스 응답의 컨볼루션이 출력 신호가 됩니다. 신호 필터링, 이미지 처리, 확률 분포의 합성 등에 광범위하게 사용됩니다.",
+    "field": "신호처리",
+    "significance": "LTI 시스템의 입출력 관계를 완전히 기술하여 신호 처리와 시스템 분석의 핵심 연산이 되었습니다.",
+    "elementMeanings": {
+      "(f*g)(t)": { "role": "컨볼루션 결과", "description": "두 함수 f와 g의 컨볼루션으로 생성된 새로운 함수입니다." },
+      "f(\\tau)": { "role": "첫째 함수", "description": "적분 변수 타우에 대한 첫 번째 함수. 주로 입력 신호입니다." },
+      "g(t-\\tau)": { "role": "반전 이동된 함수", "description": "두 번째 함수를 반전시킨 뒤 t만큼 이동한 것. 주로 임펄스 응답입니다." },
+      "\\tau": { "role": "적분 변수", "description": "두 함수가 겹치는 영역을 순회하는 더미 변수입니다." },
+      "\\int": { "role": "적분", "description": "-무한대부터 무한대까지의 적분으로 전체 겹침 영역을 계산합니다." }
+    },
+    "realWorldExamples": ["카메라 블러 효과의 수학적 모델링", "딥러닝 CNN에서 이미지 특징 추출"],
+    "relatedFormulas": ["fourier-transform", "transfer-function", "inverse-fourier"]
+  },
+  "transfer-function": {
+    "name": "전달함수",
+    "oneLiner": "시스템의 출력과 입력의 라플라스 변환 비로 정의되는 시스템 특성 함수",
+    "description": "전달함수는 LTI 시스템의 입출력 관계를 복소 주파수 영역에서 표현한 것으로, 출력의 라플라스 변환을 입력의 라플라스 변환으로 나눈 비입니다. 시스템의 극점과 영점으로 안정성, 주파수 응답, 과도 응답 특성을 파악할 수 있습니다. 제어 공학의 가장 중요한 분석 도구입니다.",
+    "field": "신호처리",
+    "significance": "시스템의 동적 특성을 하나의 함수로 요약하여 제어 시스템 설계와 안정성 분석의 표준 도구가 되었습니다.",
+    "elementMeanings": {
+      "H(s)": { "role": "전달함수", "description": "복소 주파수 s의 함수로 표현된 시스템 특성입니다." },
+      "Y(s)": { "role": "출력의 라플라스 변환", "description": "시스템 출력 신호의 라플라스 변환 결과입니다." },
+      "X(s)": { "role": "입력의 라플라스 변환", "description": "시스템 입력 신호의 라플라스 변환 결과입니다." },
+      "s": { "role": "복소 주파수", "description": "라플라스 변수. 시스템의 극점과 영점을 분석하는 데 사용됩니다." }
+    },
+    "realWorldExamples": ["자동차 크루즈 컨트롤 시스템의 응답 특성 설계", "오디오 앰프의 주파수 응답 분석"],
+    "relatedFormulas": ["laplace-transform", "z-transform", "convolution"]
+  }
+}

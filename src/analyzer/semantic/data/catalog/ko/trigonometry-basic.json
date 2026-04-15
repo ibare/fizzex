@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "사인 정의",
+    "oneLiner": "직각삼각형에서 한 각의 대변 길이를 빗변 길이로 나눈 비율",
+    "description": "사인(sin)은 직각삼각형에서 특정 각도의 맞은편 변(대변)을 가장 긴 변(빗변)으로 나눈 값입니다. 각도가 정해지면 삼각형 크기에 상관없이 항상 같은 값을 가집니다. 삼각비 중 가장 기본이 되는 비율입니다.",
+    "field": "삼각법",
+    "significance": "직각삼각형의 변과 각의 관계를 나타내는 가장 기본적인 삼각비로, 물리학과 공학의 파동, 진동 분석에 핵심적으로 사용됩니다.",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "사인값", "description": "각도 세타에 대한 사인 비율입니다." },
+      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다. 직각이 아닌 한 각을 가리킵니다." },
+      "\\text{opposite}": { "role": "대변", "description": "기준 각도의 맞은편에 있는 변입니다." },
+      "\\text{hypotenuse}": { "role": "빗변", "description": "직각삼각형에서 가장 긴 변. 직각의 맞은편에 있습니다." }
+    },
+    "realWorldExamples": [
+      "나무 그림자 길이와 태양 각도로 나무 높이 구하기",
+      "비탈길의 경사각을 알 때 수직 높이 계산",
+      "그네가 흔들릴 때 최대 높이 구하기"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "코사인 정의",
+    "oneLiner": "직각삼각형에서 한 각의 인접변 길이를 빗변 길이로 나눈 비율",
+    "description": "코사인(cos)은 직각삼각형에서 기준 각도에 붙어 있는 변(인접변)을 가장 긴 변(빗변)으로 나눈 값입니다. 사인과 마찬가지로 각도가 같으면 삼각형 크기와 무관하게 항상 같은 값을 가집니다.",
+    "field": "삼각법",
+    "significance": "사인과 함께 삼각법의 양대 기둥이며, 벡터의 내적, 신호 처리, 좌표 회전 등에서 필수적으로 사용됩니다.",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "코사인값", "description": "각도 세타에 대한 코사인 비율입니다." },
+      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다." },
+      "\\text{adjacent}": { "role": "인접변", "description": "기준 각도에 붙어 있는 변(빗변 제외)입니다." },
+      "\\text{hypotenuse}": { "role": "빗변", "description": "직각삼각형에서 가장 긴 변입니다." }
+    },
+    "realWorldExamples": [
+      "사다리를 벽에 기대었을 때 바닥에서 벽까지의 수평 거리 계산",
+      "언덕의 경사각을 알 때 수평 이동 거리 구하기",
+      "로봇 팔의 관절 각도로 팔끝 수평 위치 계산"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "탄젠트 정의",
+    "oneLiner": "직각삼각형에서 한 각의 대변 길이를 인접변 길이로 나눈 비율",
+    "description": "탄젠트(tan)는 직각삼각형에서 기준 각도의 맞은편 변(대변)을 붙어 있는 변(인접변)으로 나눈 값입니다. 사인을 코사인으로 나눈 것과 같습니다. 경사도나 기울기를 표현할 때 특히 유용합니다.",
+    "field": "삼각법",
+    "significance": "경사도와 기울기를 직접 나타내는 삼각비로, 측량, 항법, 건축 설계에서 널리 사용됩니다.",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "탄젠트값", "description": "각도 세타에 대한 탄젠트 비율입니다." },
+      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다." },
+      "\\text{opposite}": { "role": "대변", "description": "기준 각도의 맞은편에 있는 변입니다." },
+      "\\text{adjacent}": { "role": "인접변", "description": "기준 각도에 붙어 있는 변(빗변 제외)입니다." }
+    },
+    "realWorldExamples": [
+      "건물에서 일정 거리 떨어진 곳에서 올려다본 각도로 건물 높이 측정",
+      "도로 표지판의 경사도(%) 계산",
+      "산 정상까지의 높이를 수평 거리와 각도로 구하기"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "피타고라스 삼각항등식",
+    "oneLiner": "사인의 제곱과 코사인의 제곱을 더하면 항상 1이 되는 항등식",
+    "description": "피타고라스 삼각항등식은 어떤 각도에서든 sin 제곱 더하기 cos 제곱이 정확히 1이라는 것을 보장합니다. 피타고라스 정리(빗변 제곱 = 두 변 제곱의 합)에서 양변을 빗변 제곱으로 나누면 바로 유도됩니다. 삼각함수의 가장 기본적인 관계식입니다.",
+    "field": "삼각법",
+    "significance": "모든 삼각함수 항등식의 출발점이며, 수식 변환과 증명에서 가장 자주 쓰이는 기본 관계입니다.",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "사인의 제곱", "description": "sin 세타를 제곱한 값입니다." },
+      "\\cos^2\\theta": { "role": "코사인의 제곱", "description": "cos 세타를 제곱한 값입니다." },
+      "\\theta": { "role": "각도", "description": "임의의 각도. 어떤 값이든 항등식이 성립합니다." },
+      "1": { "role": "합", "description": "사인 제곱과 코사인 제곱의 합은 항상 1입니다." }
+    },
+    "realWorldExamples": [
+      "삼각함수 계산에서 sin 값을 알 때 cos 값 바로 구하기",
+      "물리학에서 벡터 성분 분해의 정확성 검증",
+      "컴퓨터 그래픽에서 회전 변환의 길이 보존 확인"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "사인 법칙",
+    "oneLiner": "삼각형에서 각 변의 길이를 맞은편 각의 사인으로 나눈 값이 모두 같다는 법칙",
+    "description": "사인 법칙은 임의의 삼각형(직각이 아니어도 됨)에서 성립하는 관계입니다. 변 a를 각 A의 사인으로 나눈 값, 변 b를 각 B의 사인으로 나눈 값, 변 c를 각 C의 사인으로 나눈 값이 모두 같습니다. 이 비율은 삼각형의 외접원 지름과도 같습니다.",
+    "field": "삼각법",
+    "significance": "직각삼각형이 아닌 일반 삼각형에서도 변과 각의 관계를 구할 수 있게 해 주며, 측량과 항법의 핵심 도구입니다.",
+    "elementMeanings": {
+      "a": { "role": "변 a", "description": "각 A의 맞은편에 있는 변의 길이입니다." },
+      "b": { "role": "변 b", "description": "각 B의 맞은편에 있는 변의 길이입니다." },
+      "c": { "role": "변 c", "description": "각 C의 맞은편에 있는 변의 길이입니다." },
+      "\\sin A": { "role": "각 A의 사인", "description": "삼각형 꼭짓점 A에서의 각도에 대한 사인값입니다." },
+      "\\sin B": { "role": "각 B의 사인", "description": "삼각형 꼭짓점 B에서의 각도에 대한 사인값입니다." },
+      "\\sin C": { "role": "각 C의 사인", "description": "삼각형 꼭짓점 C에서의 각도에 대한 사인값입니다." }
+    },
+    "realWorldExamples": [
+      "강 건너편 건물까지의 거리를 두 지점에서 측정한 각도로 계산",
+      "GPS 없이 삼각측량으로 위치 결정",
+      "항해 중 두 등대 사이 각도로 배의 위치 파악"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "응력",
+    "oneLiner": "단위 면적당 작용하는 내부 힘을 나타내는 물리량",
+    "description": "응력은 외력에 의해 물체 내부에 발생하는 단위 면적당 힘입니다. 인장, 압축, 전단 등 다양한 형태가 있으며, 재료의 파괴 여부를 판단하는 가장 기본적인 지표입니다. 구조물 설계에서 허용 응력 이하로 유지하는 것이 안전의 핵심입니다.",
+    "field": "기계공학",
+    "significance": "재료 역학의 기본 개념으로, 구조물의 안전성 평가와 설계의 출발점을 제공합니다.",
+    "elementMeanings": {
+      "\\sigma": { "role": "응력", "description": "단위 면적당 내부 힘. 단위: 파스칼(Pa) 또는 N/m제곱." },
+      "F": { "role": "힘", "description": "물체에 작용하는 외력. 단위: 뉴턴(N)." },
+      "A": { "role": "단면적", "description": "힘이 작용하는 단면의 면적. 단위: m제곱." }
+    },
+    "realWorldExamples": ["교량 케이블의 인장 응력 계산", "건물 기둥의 압축 응력 검토"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "변형률",
+    "oneLiner": "원래 길이 대비 변형된 길이의 비율",
+    "description": "변형률은 외력에 의해 물체가 변형된 정도를 원래 길이에 대한 비율로 나타낸 무차원 량입니다. 변형률이 작을 때는 탄성 범위 내에서 원래 형태로 복원되지만, 임계값을 넘으면 소성 변형이 발생하여 영구적으로 형태가 바뀝니다.",
+    "field": "기계공학",
+    "significance": "재료의 변형 정도를 정량화하여 탄성과 소성 거동의 분석 기초를 마련합니다.",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "변형률", "description": "길이 변화의 비율. 무차원 량(단위 없음)." },
+      "\\Delta L": { "role": "길이 변화량", "description": "변형 후 길이에서 원래 길이를 뺀 값. 단위: m." },
+      "L": { "role": "원래 길이", "description": "외력 적용 전 물체의 초기 길이. 단위: m." }
+    },
+    "realWorldExamples": ["금속 인장 시험에서 시편의 늘어남 측정", "지진 시 건물 골조의 변형 정도 평가"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "후크 법칙",
+    "oneLiner": "탄성 범위 내에서 응력이 변형률에 비례한다는 법칙",
+    "description": "후크 법칙은 재료에 작용하는 응력이 탄성 계수와 변형률의 곱으로 나타남을 서술합니다. 탄성 한계 내에서만 성립하며, 이를 넘어서면 비선형 거동이 나타납니다. 스프링의 복원력(F=kx)도 이 법칙의 특수한 형태입니다.",
+    "discoverer": "로버트 후크",
+    "field": "기계공학",
+    "significance": "탄성 거동의 선형 관계를 정립하여 구조 해석과 재료 시험의 이론적 기반을 확립했습니다.",
+    "elementMeanings": {
+      "\\sigma": { "role": "응력", "description": "단위 면적당 작용하는 힘. 단위: 파스칼(Pa)." },
+      "E": { "role": "탄성 계수", "description": "영률(Young's modulus). 재료의 강성을 나타내는 고유 상수. 단위: Pa." },
+      "\\varepsilon": { "role": "변형률", "description": "길이 변화의 비율. 무차원입니다." }
+    },
+    "realWorldExamples": ["스프링의 탄성 복원력 계산", "콘크리트 기둥의 하중 하 변형 예측"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "베르누이 방정식",
+    "oneLiner": "비압축성 유체의 흐름에서 압력, 속도, 높이 에너지의 합이 일정하다는 원리",
+    "description": "베르누이 방정식은 정상 상태의 비압축성, 비점성 유체 흐름에서 에너지 보존을 표현합니다. 유속이 빨라지면 압력이 낮아지고, 높이가 올라가면 압력이 낮아지는 관계를 정량적으로 나타냅니다. 항공기 날개의 양력 원리부터 배관 설계까지 폭넓게 적용됩니다.",
+    "discoverer": "다니엘 베르누이",
+    "field": "기계공학",
+    "significance": "유체 역학의 핵심 원리로, 항공, 수력, 배관 등 다양한 공학 분야의 설계 기초를 제공합니다.",
+    "elementMeanings": {
+      "P": { "role": "정압", "description": "유체의 정적 압력. 단위: 파스칼(Pa)." },
+      "\\frac{1}{2}\\rho v^2": { "role": "동압", "description": "유체의 운동에 의한 압력. 속도의 제곱에 비례합니다." },
+      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m제곱." },
+      "v": { "role": "유속", "description": "유체의 흐름 속도. 단위: m/s." },
+      "g": { "role": "중력 가속도", "description": "지표면 근처의 중력 가속도. 약 9.8 m/s제곱." },
+      "h": { "role": "높이", "description": "기준면으로부터의 유체 위치 높이. 단위: m." }
+    },
+    "realWorldExamples": ["항공기 날개 위아래의 압력차에 의한 양력 발생", "정원 호스 끝을 좁히면 물줄기가 빨라지는 현상"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "레이놀즈 수",
+    "oneLiner": "유체 흐름이 층류인지 난류인지를 판별하는 무차원 수",
+    "description": "레이놀즈 수는 관성력과 점성력의 비율을 나타내는 무차원 수입니다. 이 값이 작으면(약 2300 이하) 층류, 크면 난류가 발생합니다. 배관, 항공기, 선박 등 유체와 관련된 모든 공학 시스템에서 흐름 특성을 예측하는 핵심 지표입니다.",
+    "discoverer": "오즈번 레이놀즈",
+    "field": "기계공학",
+    "significance": "유동의 층류-난류 천이를 예측 가능하게 하여 유체 시스템 설계의 핵심 판별 기준을 제공했습니다.",
+    "elementMeanings": {
+      "Re": { "role": "레이놀즈 수", "description": "관성력과 점성력의 비. 무차원 수입니다." },
+      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m제곱." },
+      "v": { "role": "유속", "description": "유체의 평균 흐름 속도. 단위: m/s." },
+      "L": { "role": "특성 길이", "description": "관의 지름 등 흐름의 기하학적 특성을 대표하는 길이. 단위: m." },
+      "\\mu": { "role": "점성 계수", "description": "유체의 동적 점성 계수. 단위: Pa 곱하기 s." }
+    },
+    "realWorldExamples": ["수도관 설계 시 난류 발생 여부 예측", "항공기 날개 표면의 경계층 흐름 분석"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "나비에-스토크스 방정식",
+    "oneLiner": "점성 유체의 운동을 기술하는 기본 편미분 방정식",
+    "description": "나비에-스토크스 방정식은 뉴턴의 제2법칙을 연속 유체에 적용한 것으로, 압력 구배, 점성력, 외력이 유체의 가속도를 결정함을 나타냅니다. 해석적 해가 일반적으로 존재하지 않아 수치 해석(CFD)으로 풀며, 밀레니엄 문제 중 하나로 선정될 만큼 수학적으로도 중요합니다.",
+    "discoverer": "클로드루이 나비에, 조지 가브리엘 스토크스",
+    "field": "기계공학",
+    "significance": "모든 점성 유체 흐름을 기술하는 가장 일반적인 방정식으로, 전산유체역학(CFD)의 기초입니다.",
+    "elementMeanings": {
+      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m제곱." },
+      "\\mathbf{v}": { "role": "속도장", "description": "유체 입자의 속도 벡터. 위치와 시간의 함수입니다." },
+      "p": { "role": "압력", "description": "유체에 작용하는 압력장. 단위: 파스칼(Pa)." },
+      "\\mu": { "role": "점성 계수", "description": "유체의 동적 점성 계수. 단위: Pa 곱하기 s." },
+      "\\mathbf{f}": { "role": "외력", "description": "중력 등 유체에 작용하는 체적력입니다." }
+    },
+    "realWorldExamples": ["자동차 주변 공기 흐름의 전산 시뮬레이션", "혈관 내 혈류 패턴 분석"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "열전도 법칙",
+    "oneLiner": "온도 차이에 의해 물질 내부를 통해 전달되는 열량을 나타내는 법칙",
+    "description": "푸리에 열전도 법칙은 열 전달률이 열전도율, 단면적, 온도 구배의 곱에 비례함을 나타냅니다. 온도가 높은 곳에서 낮은 곳으로 열이 흐르며, 재료의 열전도율이 높을수록 더 빠르게 전달됩니다. 단열재 선택부터 반도체 냉각까지 열 관리 설계의 기본입니다.",
+    "discoverer": "조제프 푸리에",
+    "field": "기계공학",
+    "significance": "열 전달 현상의 정량적 분석을 가능하게 하여 열역학과 열 관리 공학의 기초를 확립했습니다.",
+    "elementMeanings": {
+      "Q": { "role": "열 전달률", "description": "단위 시간당 전달되는 열에너지. 단위: 와트(W)." },
+      "k": { "role": "열전도율", "description": "재료의 열 전달 능력을 나타내는 고유 상수. 단위: W/(m 곱하기 K)." },
+      "A": { "role": "단면적", "description": "열이 통과하는 단면의 면적. 단위: m제곱." },
+      "\\Delta T": { "role": "온도 차이", "description": "열원 쪽과 냉원 쪽의 온도 차이. 단위: K 또는 섭씨도." },
+      "\\Delta x": { "role": "두께", "description": "열이 전달되는 방향의 재료 두께. 단위: m." }
+    },
+    "realWorldExamples": ["건물 벽체의 단열 성능 계산", "노트북 CPU 방열판 설계"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "오일러 좌굴 하중",
+    "oneLiner": "긴 기둥이 압축력에 의해 갑자기 휘어지는 임계 하중",
+    "description": "오일러 좌굴 공식은 양단 힌지로 지지된 긴 기둥이 축방향 압축력을 받을 때 좌굴이 발생하는 임계 하중을 나타냅니다. 탄성 계수, 단면 2차 모멘트에 비례하고 기둥 길이의 제곱에 반비례합니다. 기둥이 길수록 좌굴에 취약하며, 구조물 안전 설계에서 반드시 검토해야 하는 항목입니다.",
+    "discoverer": "레온하르트 오일러",
+    "field": "기계공학",
+    "significance": "압축 부재의 안정성 한계를 이론적으로 예측 가능하게 하여 구조 공학 설계의 필수 검토 기준이 되었습니다.",
+    "elementMeanings": {
+      "P_{cr}": { "role": "임계 좌굴 하중", "description": "좌굴이 시작되는 최소 압축력. 단위: 뉴턴(N)." },
+      "\\pi^2": { "role": "원주율의 제곱", "description": "좌굴 모드의 파형에서 유래하는 상수입니다." },
+      "E": { "role": "탄성 계수", "description": "재료의 강성(영률). 단위: 파스칼(Pa)." },
+      "I": { "role": "단면 2차 모멘트", "description": "단면의 굽힘 저항 능력을 나타내는 기하학적 성질. 단위: m의 4제곱." },
+      "L": { "role": "기둥 길이", "description": "좌굴 길이. 지지 조건에 따라 유효 길이가 달라집니다. 단위: m." }
+    },
+    "realWorldExamples": ["고층 건물 철골 기둥의 좌굴 안전성 검토", "자전거 프레임 튜브의 최소 두께 결정"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

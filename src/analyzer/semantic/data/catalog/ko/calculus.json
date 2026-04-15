@@ -77,5 +77,239 @@
       "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다." }
     },
     "relatedFormulas": ["derivative-definition", "ftc"]
+  },
+  "product-rule": {
+    "name": "곱의 미분법",
+    "oneLiner": "두 함수의 곱을 미분할 때 각각을 번갈아 미분하여 더하는 법칙",
+    "description": "곱의 미분법은 두 함수 f(x)와 g(x)의 곱을 미분하면 f'(x)g(x) + f(x)g'(x)가 된다는 규칙입니다. 도함수의 정의에서 극한을 취하는 과정에서 자연스럽게 유도되며, 세 개 이상의 함수의 곱으로도 확장할 수 있습니다. 미분 계산에서 가장 빈번하게 사용되는 기본 법칙 중 하나입니다.",
+    "discoverer": "고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "곱으로 이루어진 함수의 미분을 체계적으로 처리할 수 있게 하며, 부분적분의 이론적 토대가 됩니다.",
+    "elementMeanings": {
+      "f": { "role": "첫째 함수", "description": "곱의 왼쪽에 위치한 함수입니다." },
+      "g": { "role": "둘째 함수", "description": "곱의 오른쪽에 위치한 함수입니다." },
+      "f'": { "role": "첫째 함수의 도함수", "description": "f를 x에 대해 미분한 결과입니다." },
+      "g'": { "role": "둘째 함수의 도함수", "description": "g를 x에 대해 미분한 결과입니다." }
+    },
+    "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
+    "realWorldExamples": [
+      "물리학에서 운동량 p = mv의 시간 미분: 질량과 속도가 모두 변할 때 힘을 구하는 데 사용",
+      "경제학에서 총수입 R = p(x) * x를 미분하여 한계수입을 계산"
+    ]
+  },
+  "quotient-rule": {
+    "name": "몫의 미분법",
+    "oneLiner": "두 함수의 나눗셈을 미분할 때 분자와 분모의 도함수를 교차 결합하는 법칙",
+    "description": "몫의 미분법은 f(x)/g(x) 꼴의 함수를 미분하면 (f'g - fg')/g^2이 된다는 규칙입니다. 곱의 미분법과 연쇄 법칙으로부터 유도할 수 있으며, 분모가 0이 아닌 구간에서 적용됩니다. 유리함수나 삼각함수의 비 등을 미분할 때 필수적입니다.",
+    "discoverer": "고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "분수 꼴 함수의 미분을 기계적으로 처리할 수 있게 하며, tan x 등 삼각함수 도함수 유도의 핵심입니다.",
+    "elementMeanings": {
+      "f": { "role": "분자 함수", "description": "나눗셈의 분자에 해당하는 함수입니다." },
+      "g": { "role": "분모 함수", "description": "나눗셈의 분모에 해당하는 함수입니다. g(x) != 0이어야 합니다." },
+      "f'": { "role": "분자의 도함수", "description": "f를 x에 대해 미분한 결과입니다." },
+      "g'": { "role": "분모의 도함수", "description": "g를 x에 대해 미분한 결과입니다." },
+      "g^2": { "role": "분모의 제곱", "description": "결과의 분모에 놓이는 g(x)의 제곱입니다." }
+    },
+    "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
+    "realWorldExamples": [
+      "농도 계산에서 용질/용액 비율의 변화율을 구할 때 활용",
+      "전기회로에서 전압/전류 비율의 변화를 분석하여 임피던스 변화를 추적"
+    ]
+  },
+  "power-rule": {
+    "name": "멱함수의 미분법",
+    "oneLiner": "x의 n제곱을 미분하면 지수를 앞으로 내리고 지수를 1 줄이는 법칙",
+    "description": "멱함수의 미분법은 d/dx(x^n) = nx^(n-1)이라는 미분의 가장 기본적인 공식입니다. 자연수 지수에서는 이항정리로, 실수 지수에서는 지수함수와 로그함수를 이용하여 증명됩니다. 거의 모든 다항함수 미분의 출발점이 됩니다.",
+    "discoverer": "아이작 뉴턴",
+    "field": "미적분학",
+    "significance": "미분 학습의 첫 관문이자 가장 빈번하게 사용되는 미분 공식으로, 다항함수 미분의 토대입니다.",
+    "elementMeanings": {
+      "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다." },
+      "n": { "role": "지수", "description": "거듭제곱의 지수. 자연수, 정수, 실수 모두 가능합니다." },
+      "x^n": { "role": "멱함수", "description": "x의 n제곱. 미분 대상입니다." },
+      "nx^{n-1}": { "role": "도함수", "description": "지수 n이 계수로 내려오고, 지수가 n-1로 줄어든 결과입니다." }
+    },
+    "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
+    "realWorldExamples": [
+      "자유낙하 거리 s = (1/2)gt^2를 시간으로 미분하여 속도 v = gt를 구할 때 적용",
+      "원의 넓이 A = pi*r^2를 반지름으로 미분하면 둘레 2*pi*r이 되는 관계"
+    ]
+  },
+  "exp-derivative": {
+    "name": "지수함수의 미분",
+    "oneLiner": "자연지수함수 e^x를 미분하면 자기 자신이 되는 성질",
+    "description": "지수함수의 미분은 d/dx(e^x) = e^x라는 놀라운 성질을 나타냅니다. 자연상수 e는 이 자기복제 성질을 만족하는 유일한 밑으로, 미분방정식과 자연현상 모델링의 핵심입니다. 일반 지수함수 a^x의 도함수는 a^x * ln(a)로 확장됩니다.",
+    "discoverer": "레온하르트 오일러",
+    "field": "미적분학",
+    "significance": "미분해도 형태가 변하지 않는 유일한 함수로, 미분방정식의 기본 해이자 자연현상 모델링의 근간입니다.",
+    "elementMeanings": {
+      "e": { "role": "자연상수", "description": "약 2.71828... 자연로그의 밑이 되는 무리수입니다." },
+      "e^x": { "role": "자연지수함수", "description": "e의 x제곱. 미분해도 자기 자신이 됩니다." },
+      "x": { "role": "독립변수", "description": "지수 위치의 변수입니다." },
+      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다." }
+    },
+    "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
+    "realWorldExamples": [
+      "방사성 붕괴 N(t) = N_0 * e^(-lambda*t)에서 붕괴 속도를 구할 때 활용",
+      "연속복리 계산에서 원금 성장률이 현재 잔액에 비례하는 모델"
+    ]
+  },
+  "log-derivative": {
+    "name": "로그함수의 미분",
+    "oneLiner": "자연로그 ln x를 미분하면 x분의 1이 되는 공식",
+    "description": "로그함수의 미분은 d/dx(ln x) = 1/x라는 간결한 결과를 줍니다. 이는 지수함수 미분의 역함수 관계로부터 유도됩니다. x > 0에서 정의되며, 적분에서는 역으로 1/x의 부정적분이 ln|x| + C가 됩니다.",
+    "discoverer": "레온하르트 오일러",
+    "field": "미적분학",
+    "significance": "1/x의 원시함수를 제공하며, 로그 미분법을 통해 복잡한 곱·멱함수의 미분을 단순화합니다.",
+    "elementMeanings": {
+      "\\ln x": { "role": "자연로그", "description": "밑이 e인 로그함수. x > 0에서 정의됩니다." },
+      "x": { "role": "독립변수", "description": "로그의 진수이자 미분 변수입니다." },
+      "\\frac{1}{x}": { "role": "도함수", "description": "ln x의 도함수. x에 반비례합니다." },
+      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다." }
+    },
+    "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
+    "realWorldExamples": [
+      "정보 이론에서 엔트로피 H = -sum(p * ln p)의 변화율을 분석할 때 사용",
+      "베버-페히너 법칙: 자극의 세기와 감각의 크기가 로그 관계임을 모델링"
+    ]
+  },
+  "sin-derivative": {
+    "name": "삼각함수의 미분 (사인)",
+    "oneLiner": "sin x를 미분하면 cos x가 되는 공식",
+    "description": "삼각함수의 미분에서 가장 기본이 되는 결과로, d/dx(sin x) = cos x입니다. 도함수의 정의에서 lim(h->0) sin(h)/h = 1이라는 극한을 이용하여 증명됩니다. cos x의 미분은 -sin x이므로, 사인과 코사인은 미분을 통해 서로 순환하는 관계를 갖습니다.",
+    "discoverer": "레온하르트 오일러",
+    "field": "미적분학",
+    "significance": "주기 현상의 수학적 서술에 필수적이며, 파동 방정식과 조화 운동 해석의 기초입니다.",
+    "elementMeanings": {
+      "\\sin x": { "role": "사인 함수", "description": "주기가 2파이인 기본 삼각함수입니다." },
+      "\\cos x": { "role": "도함수 (코사인)", "description": "sin x를 미분한 결과. 사인보다 위상이 파이/2만큼 앞섭니다." },
+      "x": { "role": "독립변수", "description": "라디안 단위의 각도 변수입니다." },
+      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다." }
+    },
+    "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
+    "realWorldExamples": [
+      "단진자 운동에서 변위 theta(t) = A*sin(omega*t)를 미분하여 각속도를 구할 때 사용",
+      "교류 전압 V(t) = V_0*sin(omega*t)를 미분하여 전류의 위상 관계를 파악"
+    ]
+  },
+  "power-integral": {
+    "name": "멱함수의 부정적분",
+    "oneLiner": "x의 n제곱을 적분하면 지수를 1 올리고 새 지수로 나누는 공식",
+    "description": "멱함수의 부정적분은 x^n의 적분이 x^(n+1)/(n+1) + C (n != -1)라는 미분의 역과정입니다. 멱함수 미분법을 거꾸로 적용한 것이며, n = -1인 경우는 ln|x| + C로 별도 처리됩니다. 다항함수 적분의 가장 기본적인 공식입니다.",
+    "discoverer": "아이작 뉴턴, 고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "적분 학습의 첫 출발점이자 가장 빈번하게 쓰이는 부정적분 공식입니다.",
+    "elementMeanings": {
+      "x^n": { "role": "피적분함수", "description": "적분하려는 멱함수입니다." },
+      "n": { "role": "지수", "description": "거듭제곱의 지수. n != -1이어야 합니다." },
+      "x^{n+1}": { "role": "적분 결과의 멱", "description": "지수가 1 증가한 거듭제곱입니다." },
+      "n+1": { "role": "새 지수 (분모)", "description": "결과의 분모에 놓여 미분하면 원래 함수를 복원합니다." },
+      "C": { "role": "적분 상수", "description": "부정적분의 임의 상수. 미분하면 사라지는 항입니다." },
+      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타냅니다." }
+    },
+    "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
+    "realWorldExamples": [
+      "속도 v = at를 시간에 대해 적분하여 이동 거리 s = (1/2)at^2를 구할 때 사용",
+      "유체역학에서 압력 분포를 적분하여 전체 힘을 계산"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "부분적분",
+    "oneLiner": "두 함수의 곱을 적분할 때 한쪽을 미분하고 다른 쪽을 적분하여 변환하는 기법",
+    "description": "부분적분은 곱의 미분법을 적분에 적용한 것으로, int(u dv) = uv - int(v du)라는 공식입니다. 직접 적분이 어려운 함수의 곱을 더 다루기 쉬운 형태로 바꿔줍니다. u와 dv를 적절히 선택하는 것이 핵심이며, 반복 적용이나 순환 관계를 이용하기도 합니다.",
+    "discoverer": "브룩 테일러",
+    "field": "미적분학",
+    "significance": "곱의 미분법의 적분 버전으로, ln x, arctan x 등 역함수의 적분과 다양한 초월함수 적분에 필수적입니다.",
+    "elementMeanings": {
+      "u": { "role": "미분할 함수", "description": "적분 과정에서 미분하는 쪽으로 선택된 함수입니다." },
+      "dv": { "role": "적분할 부분", "description": "적분 과정에서 적분하는 쪽으로 선택된 미분형식입니다." },
+      "v": { "role": "dv의 원시함수", "description": "dv를 적분한 결과입니다." },
+      "du": { "role": "u의 미분", "description": "u를 미분한 결과입니다." },
+      "uv": { "role": "경계항", "description": "u와 v의 곱. 정적분에서는 양 끝값을 대입합니다." }
+    },
+    "relatedFormulas": ["product-rule", "ftc", "power-integral"],
+    "realWorldExamples": [
+      "라플라스 변환 L{t*f(t)}를 계산할 때 부분적분으로 변환 공식을 유도",
+      "확률론에서 기댓값 E[X] = int(x * f(x) dx)를 계산할 때 자주 활용"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "지수함수의 매클로린 급수",
+    "oneLiner": "e^x를 x = 0 주위에서 무한 다항식 1 + x + x^2/2! + ...로 전개한 급수",
+    "description": "지수함수의 매클로린 급수는 e^x = sum(x^n / n!, n=0..inf)로, 모든 실수 x에서 수렴합니다. e^x의 모든 차수 도함수가 e^x 자체이고 x=0에서 값이 1이므로, 각 항의 계수가 1/n!이 됩니다. 수치 계산에서 지수함수를 근사하는 가장 기본적인 방법이며, 오일러 공식 유도의 출발점이기도 합니다.",
+    "discoverer": "콜린 매클로린",
+    "field": "미적분학",
+    "significance": "지수함수의 다항식 근사를 제공하며, 오일러 항등식 e^(i*pi) + 1 = 0 유도의 핵심 단계입니다.",
+    "elementMeanings": {
+      "e^x": { "role": "원래 함수", "description": "급수로 전개하려는 자연지수함수입니다." },
+      "x^n": { "role": "거듭제곱 항", "description": "x의 n제곱. n번째 항의 분자입니다." },
+      "n!": { "role": "팩토리얼", "description": "n의 계승. n번째 항의 분모입니다." },
+      "\\sum_{n=0}^{\\infty}": { "role": "무한급수", "description": "n=0부터 무한대까지 모든 항을 더하는 연산입니다." }
+    },
+    "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
+    "realWorldExamples": [
+      "계산기와 컴퓨터가 e^x 값을 계산할 때 이 급수의 유한 항을 사용",
+      "양자역학에서 시간 전개 연산자 e^(-iHt)를 급수 전개하여 근사 계산"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "사인함수의 매클로린 급수",
+    "oneLiner": "sin x를 x = 0 주위에서 x - x^3/3! + x^5/5! - ...로 전개한 급수",
+    "description": "사인함수의 매클로린 급수는 sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf)입니다. 홀수 차수 항만 나타나며 부호가 교대합니다. 모든 실수 x에서 수렴하며, 작은 x에서 sin x 근사 x라는 근사가 첫째 항에 해당합니다.",
+    "discoverer": "콜린 매클로린",
+    "field": "미적분학",
+    "significance": "삼각함수의 다항식 근사를 가능하게 하며, 소각 근사 sin x 근사 x의 수학적 근거를 제공합니다.",
+    "elementMeanings": {
+      "\\sin x": { "role": "원래 함수", "description": "급수로 전개하려는 사인함수입니다." },
+      "(-1)^n": { "role": "부호 교대 인자", "description": "항의 부호를 양·음 교대로 바꿉니다." },
+      "x^{2n+1}": { "role": "홀수 거듭제곱 항", "description": "홀수 차수만 나타나는 것은 사인이 기함수이기 때문입니다." },
+      "(2n+1)!": { "role": "팩토리얼", "description": "각 항의 분모. 급수의 수렴을 보장합니다." }
+    },
+    "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
+    "realWorldExamples": [
+      "물리학에서 소각 근사(sin theta 근사 theta)를 적용하여 단진자 주기 공식을 유도",
+      "디지털 신호 처리에서 사인파를 다항식으로 근사하여 빠르게 계산"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "코사인함수의 매클로린 급수",
+    "oneLiner": "cos x를 x = 0 주위에서 1 - x^2/2! + x^4/4! - ...로 전개한 급수",
+    "description": "코사인함수의 매클로린 급수는 cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf)입니다. 짝수 차수 항만 나타나며 부호가 교대합니다. 사인 급수를 항별 미분하면 코사인 급수가 되어, 두 급수의 관계가 미분을 통해 확인됩니다.",
+    "discoverer": "콜린 매클로린",
+    "field": "미적분학",
+    "significance": "코사인함수의 다항식 근사를 제공하며, 사인 급수와 함께 오일러 공식 유도에 사용됩니다.",
+    "elementMeanings": {
+      "\\cos x": { "role": "원래 함수", "description": "급수로 전개하려는 코사인함수입니다." },
+      "(-1)^n": { "role": "부호 교대 인자", "description": "항의 부호를 양·음 교대로 바꿉니다." },
+      "x^{2n}": { "role": "짝수 거듭제곱 항", "description": "짝수 차수만 나타나는 것은 코사인이 우함수이기 때문입니다." },
+      "(2n)!": { "role": "팩토리얼", "description": "각 항의 분모. 급수의 수렴을 보장합니다." }
+    },
+    "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
+    "realWorldExamples": [
+      "광학에서 cos theta 근사 1 - theta^2/2를 사용하여 렌즈 수차를 근사 계산",
+      "로봇공학에서 회전 행렬의 코사인을 다항식으로 근사하여 실시간 제어에 활용"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "로피탈 정리",
+    "oneLiner": "0/0 또는 무한대/무한대 꼴의 부정형 극한을 분자·분모의 도함수 비로 구하는 정리",
+    "description": "로피탈 정리는 극한값이 0/0이나 무한대/무한대 같은 부정형이 될 때, 분자와 분모를 각각 미분한 뒤 그 비의 극한을 취하면 원래 극한과 같다는 정리입니다. 필요하면 여러 번 반복 적용할 수 있으며, 부정형이 아닌 경우에는 사용할 수 없습니다. 코시의 평균값 정리를 이용하여 엄밀하게 증명됩니다.",
+    "discoverer": "기욤 드 로피탈 (요한 베르누이가 발견)",
+    "field": "미적분학",
+    "significance": "부정형 극한의 계산을 미분 문제로 환원하여, 극한 계산의 강력한 도구를 제공합니다.",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": { "role": "극한 연산", "description": "x를 c에 한없이 가깝게 보내는 연산입니다." },
+      "f(x)": { "role": "분자 함수", "description": "극한에서 분자에 해당하는 함수입니다." },
+      "g(x)": { "role": "분모 함수", "description": "극한에서 분모에 해당하는 함수입니다." },
+      "f'(x)": { "role": "분자의 도함수", "description": "f(x)를 x에 대해 미분한 결과입니다." },
+      "g'(x)": { "role": "분모의 도함수", "description": "g(x)를 x에 대해 미분한 결과입니다." },
+      "\\frac{0}{0}": { "role": "부정형", "description": "분자와 분모가 모두 0으로 가는 부정형입니다." }
+    },
+    "relatedFormulas": ["derivative-definition", "taylor-series"],
+    "realWorldExamples": [
+      "물리학에서 에너지 준위 차이가 0에 접근할 때의 전이 확률 극한을 계산",
+      "경제학에서 한계비용과 한계수입이 동시에 0에 수렴하는 상황의 이윤 분석"
+    ]
   }
 }

@@ -34,6 +34,9 @@ export interface SemanticResult {
 
 /** 카탈로그 분야 */
 export type CatalogCategory =
+  // 초중등
+  | 'elementary-geometry' | 'solid-geometry' | 'linear-functions'
+  | 'ratio-proportion' | 'basic-statistics' | 'trigonometry-basic'
   // 수학 기초
   | 'algebra' | 'calculus' | 'geometry' | 'number-theory' | 'logic'
   // 자연과학
@@ -79,6 +82,7 @@ export interface CatalogDetail {
     description: string;
   }>;
   relatedFormulas?: string[];
+  realWorldExamples?: string[];
 }
 
 /** 카탈로그 매칭 결과 */

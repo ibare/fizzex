@@ -1,0 +1,124 @@
+{
+  "ohm-law": {
+    "name": "옴의 법칙",
+    "oneLiner": "전압이 전류와 저항의 곱과 같다는 전기회로의 기본 법칙",
+    "description": "옴의 법칙은 도체에 흐르는 전류가 양 끝의 전압에 비례하고 저항에 반비례함을 나타냅니다. 전기회로 분석의 가장 기본이 되는 관계식이며, 저항이 일정한 선형 소자에서 성립합니다. 회로 설계와 해석의 출발점입니다.",
+    "discoverer": "게오르크 시몬 옴",
+    "field": "전기공학",
+    "significance": "전압, 전류, 저항의 정량적 관계를 확립하여 전기회로 이론의 토대를 마련했습니다.",
+    "elementMeanings": {
+      "V": { "role": "전압", "description": "도체 양 끝에 걸리는 전위차. 단위: 볼트(V)." },
+      "I": { "role": "전류", "description": "도체를 통해 흐르는 전하의 흐름. 단위: 암페어(A)." },
+      "R": { "role": "저항", "description": "전류 흐름을 방해하는 정도. 단위: 옴(Ohm)." }
+    },
+    "realWorldExamples": ["전구에 걸리는 전압과 밝기의 관계", "가정용 전열기의 소비 전력 계산"],
+    "relatedFormulas": ["electric-power", "kirchhoff-voltage", "impedance"]
+  },
+  "electric-power": {
+    "name": "전력",
+    "oneLiner": "전기 에너지가 단위 시간당 소비되거나 공급되는 비율을 나타내는 공식",
+    "description": "전력은 전압과 전류의 곱으로 정의되며, 전기 에너지의 변환 속도를 나타냅니다. 옴의 법칙과 결합하면 P=I제곱R 또는 P=V제곱/R로도 표현할 수 있습니다. 전기 시스템의 효율과 용량 설계에 핵심적인 물리량입니다.",
+    "discoverer": "제임스 와트",
+    "field": "전기공학",
+    "significance": "전기 에너지의 소비와 공급을 정량화하여 발전, 송전, 배전 시스템 설계의 기초를 제공합니다.",
+    "elementMeanings": {
+      "P": { "role": "전력", "description": "단위 시간당 소비되거나 공급되는 에너지. 단위: 와트(W)." },
+      "I": { "role": "전류", "description": "회로에 흐르는 전류. 단위: 암페어(A)." },
+      "V": { "role": "전압", "description": "회로 양단의 전위차. 단위: 볼트(V)." }
+    },
+    "realWorldExamples": ["가전제품의 소비 전력 표시", "전기요금 산정의 기초"],
+    "relatedFormulas": ["ohm-law", "kirchhoff-voltage", "kirchhoff-current"]
+  },
+  "kirchhoff-voltage": {
+    "name": "키르히호프 전압 법칙",
+    "oneLiner": "폐회로를 따라 한 바퀴 돌 때 전압 강하의 합이 0이 되는 법칙",
+    "description": "키르히호프 전압 법칙(KVL)은 임의의 폐루프를 따라 모든 전압 강하와 전압 상승의 대수적 합이 0임을 나타냅니다. 에너지 보존 법칙의 전기적 표현이며, 복잡한 회로망에서 미지의 전압을 구하는 데 필수적입니다.",
+    "discoverer": "구스타프 키르히호프",
+    "field": "전기공학",
+    "significance": "복잡한 회로망 해석을 체계적으로 가능하게 하여 현대 회로 이론의 기둥 중 하나가 되었습니다.",
+    "elementMeanings": {
+      "\\sum V": { "role": "전압의 합", "description": "폐루프 내 모든 전압 강하와 상승의 대수적 합. 항상 0입니다." },
+      "V_k": { "role": "개별 전압", "description": "루프 내 각 소자에 걸리는 전압. 전원은 양, 저항은 음의 부호를 가집니다." }
+    },
+    "realWorldExamples": ["직렬 회로에서 각 저항의 전압 분배 계산", "전자회로 기판의 전압 레벨 설계"],
+    "relatedFormulas": ["kirchhoff-current", "ohm-law", "impedance"]
+  },
+  "kirchhoff-current": {
+    "name": "키르히호프 전류 법칙",
+    "oneLiner": "회로의 임의의 절점에서 들어오는 전류와 나가는 전류의 합이 0인 법칙",
+    "description": "키르히호프 전류 법칙(KCL)은 회로의 어떤 절점(노드)에서든 유입되는 전류의 총합이 유출되는 전류의 총합과 같음을 나타냅니다. 전하 보존 법칙의 직접적 결과이며, 병렬 회로 분석에 필수적입니다.",
+    "discoverer": "구스타프 키르히호프",
+    "field": "전기공학",
+    "significance": "전하 보존 원리를 회로 해석에 적용하여 노드 해석법의 기초를 확립했습니다.",
+    "elementMeanings": {
+      "\\sum I": { "role": "전류의 합", "description": "한 절점으로 들어오고 나가는 모든 전류의 대수적 합. 항상 0입니다." },
+      "I_k": { "role": "개별 전류", "description": "절점에 연결된 각 가지(branch)를 흐르는 전류입니다." }
+    },
+    "realWorldExamples": ["병렬 저항 회로에서 각 분기 전류 계산", "전력 분배 시스템의 부하 균형 분석"],
+    "relatedFormulas": ["kirchhoff-voltage", "ohm-law", "electric-power"]
+  },
+  "rc-time-constant": {
+    "name": "RC 시정수",
+    "oneLiner": "저항-커패시터 회로에서 충전 또는 방전 속도를 결정하는 시간 상수",
+    "description": "RC 시정수는 저항과 커패시턴스의 곱으로 정의되며, 커패시터가 최종 전압의 약 63.2%까지 충전되는 데 걸리는 시간을 나타냅니다. 필터 설계, 타이밍 회로, 신호 처리 등 다양한 전자회로에서 과도 응답 특성을 결정하는 핵심 파라미터입니다.",
+    "discoverer": "전기공학 공동 발전",
+    "field": "전기공학",
+    "significance": "과도 응답과 주파수 특성을 하나의 파라미터로 요약하여 아날로그 회로 설계의 핵심 도구가 되었습니다.",
+    "elementMeanings": {
+      "\\tau": { "role": "시정수", "description": "회로의 과도 응답 속도를 결정하는 시간 상수. 단위: 초(s)." },
+      "R": { "role": "저항", "description": "회로의 저항값. 단위: 옴(Ohm)." },
+      "C": { "role": "커패시턴스", "description": "커패시터의 전하 저장 용량. 단위: 패럿(F)." }
+    },
+    "realWorldExamples": ["카메라 플래시의 충전 시간 결정", "터치스크린의 터치 감지 회로"],
+    "relatedFormulas": ["ohm-law", "impedance", "resonance-frequency"]
+  },
+  "impedance": {
+    "name": "임피던스",
+    "oneLiner": "교류 회로에서 저항, 유도 리액턴스, 용량 리액턴스를 종합한 총 저항",
+    "description": "임피던스는 교류 회로에서 전류 흐름을 방해하는 총 효과를 나타냅니다. 순수 저항 성분과 리액턴스 성분(유도성과 용량성의 차이)을 피타고라스 정리로 합성한 것입니다. 교류 회로 해석과 전력 전송 효율 최적화에 필수적인 개념입니다.",
+    "discoverer": "올리버 헤비사이드",
+    "field": "전기공학",
+    "significance": "교류 회로의 복잡한 위상 관계를 하나의 물리량으로 통합하여 교류 회로 해석을 체계화했습니다.",
+    "elementMeanings": {
+      "Z": { "role": "임피던스", "description": "교류 회로의 총 저항. 단위: 옴(Ohm)." },
+      "R": { "role": "저항", "description": "순수 저항 성분. 에너지를 소비합니다." },
+      "X_L": { "role": "유도 리액턴스", "description": "인덕터에 의한 리액턴스. X_L = 2파이fL." },
+      "X_C": { "role": "용량 리액턴스", "description": "커패시터에 의한 리액턴스. X_C = 1/(2파이fC)." }
+    },
+    "realWorldExamples": ["스피커 시스템의 주파수별 응답 특성 설계", "송전선의 전력 손실 최소화"],
+    "relatedFormulas": ["ohm-law", "resonance-frequency", "rc-time-constant"]
+  },
+  "resonance-frequency": {
+    "name": "공진 주파수",
+    "oneLiner": "LC 회로에서 유도 리액턴스와 용량 리액턴스가 같아지는 주파수",
+    "description": "공진 주파수는 인덕터와 커패시터로 구성된 회로에서 에너지가 두 소자 사이를 자유롭게 오가는 고유 진동수입니다. 이 주파수에서 임피던스가 최소(직렬) 또는 최대(병렬)가 되며, 라디오 수신기의 주파수 선택부터 무선 충전까지 광범위하게 활용됩니다.",
+    "discoverer": "윌리엄 톰슨 (켈빈 경)",
+    "field": "전기공학",
+    "significance": "주파수 선택 회로의 원리를 제공하여 무선 통신과 필터 설계의 기초를 확립했습니다.",
+    "elementMeanings": {
+      "f_0": { "role": "공진 주파수", "description": "회로가 공진하는 고유 주파수. 단위: 헤르츠(Hz)." },
+      "L": { "role": "인덕턴스", "description": "인덕터의 자기 에너지 저장 능력. 단위: 헨리(H)." },
+      "C": { "role": "커패시턴스", "description": "커패시터의 전기 에너지 저장 능력. 단위: 패럿(F)." },
+      "2\\pi": { "role": "원주율 계수", "description": "각주파수와 일반 주파수 사이의 변환 계수입니다." }
+    },
+    "realWorldExamples": ["라디오 주파수 튜닝", "MRI 장치의 공명 주파수 설정"],
+    "relatedFormulas": ["impedance", "rc-time-constant", "shannon-capacity"]
+  },
+  "shannon-capacity": {
+    "name": "섀넌 채널 용량",
+    "oneLiner": "잡음이 있는 채널에서 오류 없이 전송할 수 있는 최대 정보 전송률",
+    "description": "섀넌 채널 용량 정리는 주어진 대역폭과 신호 대 잡음비(SNR) 조건에서 이론적으로 달성 가능한 최대 데이터 전송률을 정의합니다. 대역폭이 넓을수록, SNR이 높을수록 더 많은 정보를 전송할 수 있음을 정량적으로 보여줍니다. 정보 이론과 현대 통신 시스템 설계의 근본 한계를 제시합니다.",
+    "discoverer": "클로드 섀넌",
+    "field": "전기공학",
+    "significance": "정보 이론의 핵심 결과로, 모든 디지털 통신 시스템 설계의 이론적 상한을 제시했습니다.",
+    "elementMeanings": {
+      "C": { "role": "채널 용량", "description": "오류 없이 전송 가능한 최대 비트율. 단위: 비트/초(bps)." },
+      "B": { "role": "대역폭", "description": "채널이 사용할 수 있는 주파수 범위의 폭. 단위: 헤르츠(Hz)." },
+      "S": { "role": "신호 전력", "description": "수신 신호의 평균 전력입니다." },
+      "N": { "role": "잡음 전력", "description": "채널의 평균 잡음 전력입니다." },
+      "\\log_2": { "role": "밑이 2인 로그", "description": "결과를 비트 단위로 표현하기 위한 로그 함수입니다." }
+    },
+    "realWorldExamples": ["5G 이동통신 시스템의 이론적 최대 전송 속도 계산", "와이파이 채널 설계 시 대역폭 결정"],
+    "relatedFormulas": ["resonance-frequency", "ohm-law"]
+  }
+}

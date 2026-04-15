@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "구의 부피",
+    "oneLiner": "반지름의 세제곱에 원주율과 3분의 4를 곱하여 구의 부피를 구하는 공식",
+    "description": "구의 부피는 반지름을 세 번 곱한 값에 원주율(파이)과 3분의 4를 곱한 것입니다. 농구공처럼 완전히 둥근 물체가 차지하는 공간의 크기를 구할 때 사용합니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "구가 차지하는 공간의 크기입니다." },
+      "\\frac{4}{3}": { "role": "비례 상수", "description": "구의 부피를 결정하는 고정된 계수입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "구의 중심에서 표면까지의 거리입니다." },
+      "r^3": { "role": "반지름의 세제곱", "description": "반지름을 세 번 곱한 값. 부피가 3차원이므로 세제곱합니다." }
+    },
+    "realWorldExamples": ["농구공의 부피 계산", "지구의 부피 어림하기", "구슬의 크기 비교"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "구의 겉넓이",
+    "oneLiner": "반지름의 제곱에 원주율과 4를 곱하여 구의 겉넓이를 구하는 공식",
+    "description": "구의 겉넓이는 반지름의 제곱에 원주율과 4를 곱한 값입니다. 같은 반지름을 가진 원의 넓이의 정확히 4배와 같습니다. 공을 페인트로 칠할 때 필요한 면적이 바로 겉넓이입니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "S": { "role": "겉넓이", "description": "구의 표면 전체의 면적입니다." },
+      "4": { "role": "상수", "description": "구의 겉넓이가 같은 반지름의 원 넓이의 4배라는 뜻입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "구의 중심에서 표면까지의 거리입니다." },
+      "r^2": { "role": "반지름의 제곱", "description": "반지름을 두 번 곱한 값입니다." }
+    },
+    "realWorldExamples": ["축구공 가죽의 총 면적", "지구본 표면에 종이를 붙일 때 필요한 양"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "원기둥의 부피",
+    "oneLiner": "밑면인 원의 넓이에 높이를 곱하여 원기둥의 부피를 구하는 공식",
+    "description": "원기둥의 부피는 밑면의 넓이(원의 넓이)에 높이를 곱한 값입니다. 동그란 밑면이 높이만큼 쌓여 올라간 모양이라고 생각하면 됩니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "원기둥이 차지하는 공간의 크기입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "원기둥 밑면 원의 반지름입니다." },
+      "r^2": { "role": "반지름의 제곱", "description": "반지름을 두 번 곱한 값. 밑면의 넓이를 결정합니다." },
+      "h": { "role": "높이", "description": "원기둥의 위아래 밑면 사이의 거리입니다." }
+    },
+    "realWorldExamples": ["음료수 캔에 들어가는 양 계산", "원통형 물탱크의 용량"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "원기둥의 겉넓이",
+    "oneLiner": "밑면 두 개와 옆면의 넓이를 합하여 원기둥의 겉넓이를 구하는 공식",
+    "description": "원기둥의 겉넓이는 위아래 원 두 개의 넓이와 옆면의 넓이를 합한 값입니다. 옆면을 펼치면 직사각형이 되는데, 가로가 원의 둘레이고 세로가 높이입니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "S": { "role": "겉넓이", "description": "원기둥의 표면 전체 면적입니다." },
+      "2": { "role": "상수", "description": "공통 인수로 묶인 계수입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "원기둥 밑면 원의 반지름입니다." },
+      "h": { "role": "높이", "description": "원기둥의 위아래 밑면 사이의 거리입니다." }
+    },
+    "realWorldExamples": ["음료수 캔의 라벨지 면적 계산", "원통형 선물 상자를 포장지로 감쌀 때 필요한 양"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "원뿔의 부피",
+    "oneLiner": "밑면인 원의 넓이에 높이를 곱한 뒤 3으로 나누어 원뿔의 부피를 구하는 공식",
+    "description": "원뿔의 부피는 밑면의 넓이에 높이를 곱하고 3으로 나눈 값입니다. 같은 밑면과 높이를 가진 원기둥의 정확히 3분의 1입니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "원뿔이 차지하는 공간의 크기입니다." },
+      "\\frac{1}{3}": { "role": "3분의 1", "description": "원뿔의 부피가 같은 밑면·높이 원기둥의 3분의 1이라는 뜻입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "원뿔 밑면 원의 반지름입니다." },
+      "h": { "role": "높이", "description": "원뿔의 꼭짓점에서 밑면까지의 수직 거리입니다." }
+    },
+    "realWorldExamples": ["아이스크림 콘에 들어가는 양 계산", "고깔 모자의 부피"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "원뿔의 겉넓이",
+    "oneLiner": "밑면 원의 넓이와 옆면의 넓이를 합하여 원뿔의 겉넓이를 구하는 공식",
+    "description": "원뿔의 겉넓이는 밑면 원의 넓이와 옆면(부채꼴 모양)의 넓이를 합한 값입니다. 옆면을 펼치면 부채꼴이 되며, 그 넓이는 반지름과 모선(빗면 길이)의 곱에 원주율을 곱한 것입니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "S": { "role": "겉넓이", "description": "원뿔의 표면 전체 면적입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "원뿔 밑면 원의 반지름입니다." },
+      "l": { "role": "모선", "description": "원뿔의 꼭짓점에서 밑면 둘레까지의 빗면 길이입니다." }
+    },
+    "realWorldExamples": ["고깔 모자에 필요한 종이 면적", "원뿔형 천막의 천 넓이 계산"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "직육면체의 부피",
+    "oneLiner": "가로, 세로, 높이를 모두 곱하여 직육면체의 부피를 구하는 공식",
+    "description": "직육면체의 부피는 가로, 세로, 높이를 모두 곱한 값입니다. 밑면인 직사각형의 넓이에 높이를 곱하는 것과 같으며, 상자 안에 단위 정육면체가 몇 개 들어가는지 세는 것과 같습니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "직육면체가 차지하는 공간의 크기입니다." },
+      "l": { "role": "가로", "description": "직육면체의 가로 길이입니다." },
+      "w": { "role": "세로", "description": "직육면체의 세로 길이입니다." },
+      "h": { "role": "높이", "description": "직육면체의 높이입니다." }
+    },
+    "realWorldExamples": ["택배 상자의 부피 계산", "수영장에 들어가는 물의 양", "냉장고 내부 용량 어림"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "직육면체의 겉넓이",
+    "oneLiner": "세 쌍의 면 넓이를 더한 뒤 두 배 하여 직육면체의 겉넓이를 구하는 공식",
+    "description": "직육면체의 겉넓이는 서로 다른 세 면의 넓이를 더하고 2를 곱한 값입니다. 직육면체에는 마주 보는 면이 세 쌍 있고, 같은 쌍의 면끼리 넓이가 같으므로 세 종류의 면을 더해 두 배 합니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "S": { "role": "겉넓이", "description": "직육면체의 표면 전체 면적입니다." },
+      "2": { "role": "상수", "description": "마주 보는 면이 세 쌍이므로 2를 곱합니다." },
+      "l": { "role": "가로", "description": "직육면체의 가로 길이입니다." },
+      "w": { "role": "세로", "description": "직육면체의 세로 길이입니다." },
+      "h": { "role": "높이", "description": "직육면체의 높이입니다." },
+      "lw": { "role": "윗면/아랫면", "description": "가로와 세로를 곱한 면의 넓이입니다." },
+      "lh": { "role": "앞면/뒷면", "description": "가로와 높이를 곱한 면의 넓이입니다." },
+      "wh": { "role": "옆면", "description": "세로와 높이를 곱한 면의 넓이입니다." }
+    },
+    "realWorldExamples": ["선물 상자를 포장지로 감쌀 때 필요한 양", "택배 상자의 겉면 면적 계산"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "정사면체의 부피",
+    "oneLiner": "한 모서리 길이의 세제곱에 루트 2 나누기 12를 곱하여 정사면체의 부피를 구하는 공식",
+    "description": "정사면체의 부피는 한 모서리 길이를 세제곱한 값에 루트 2 나누기 12를 곱한 것입니다. 정사면체는 네 면이 모두 같은 정삼각형인 입체도형으로, 가장 단순한 정다면체입니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "정사면체가 차지하는 공간의 크기입니다." },
+      "\\frac{\\sqrt{2}}{12}": { "role": "비례 상수", "description": "정사면체의 기하학적 구조에서 나오는 고정된 계수입니다." },
+      "a": { "role": "모서리 길이", "description": "정사면체의 한 모서리(변)의 길이입니다. 모든 모서리가 같습니다." },
+      "a^3": { "role": "모서리의 세제곱", "description": "모서리 길이를 세 번 곱한 값입니다." }
+    },
+    "realWorldExamples": ["피라미드 모양 초콜릿의 부피", "정사면체 주사위(D4)의 크기 계산"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "각뿔의 부피",
+    "oneLiner": "밑면의 넓이에 높이를 곱한 뒤 3으로 나누어 각뿔의 부피를 구하는 공식",
+    "description": "각뿔의 부피는 밑면의 넓이에 높이를 곱하고 3으로 나눈 값입니다. 같은 밑면과 높이를 가진 기둥(각기둥)의 정확히 3분의 1입니다. 이집트 피라미드처럼 밑면이 다각형이고 꼭대기가 뾰족한 입체에 사용합니다.",
+    "field": "기하학",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "각뿔이 차지하는 공간의 크기입니다." },
+      "\\frac{1}{3}": { "role": "3분의 1", "description": "각뿔의 부피가 같은 밑면·높이 각기둥의 3분의 1이라는 뜻입니다." },
+      "B": { "role": "밑면의 넓이", "description": "각뿔의 밑면(다각형)의 면적입니다." },
+      "h": { "role": "높이", "description": "각뿔의 꼭짓점에서 밑면까지의 수직 거리입니다." }
+    },
+    "realWorldExamples": ["이집트 피라미드의 부피 어림", "피라미드 모양 텐트의 내부 공간 계산"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}
