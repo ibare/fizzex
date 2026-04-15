@@ -28,6 +28,8 @@ export function ExpressionExplorer({
   theme = 'light',
 }: ExpressionExplorerProps) {
   const overlayRef = useRef<ExplorerOverlay | null>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (!isOpen || ast.children.length === 0) {
@@ -39,14 +41,14 @@ export function ExpressionExplorer({
     overlayRef.current = new ExplorerOverlay({
       ast,
       theme,
-      onClose,
+      onClose: () => onCloseRef.current(),
     });
 
     return () => {
       overlayRef.current?.destroy();
       overlayRef.current = null;
     };
-  }, [isOpen, ast, theme, onClose]);
+  }, [isOpen, ast, theme]);
 
   return null;
 }
