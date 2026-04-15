@@ -2,30 +2,24 @@
   "kepler-third": {
     "name": "케플러 제3법칙",
     "oneLiner": "궤도가 높을수록 공전이 느려진다",
-    "description": "공전 주기의 제곱은 궤도 반지름의 세제곱에 비례합니다. 비례 상수는 중심 천체의 질량에 의해 결정되며, 이를 통해 천체의 질량이나 궤도 크기를 계산할 수 있습니다.",
+    "description": "공전 주기의 제곱은 궤도 반지름의 세제곱에 비례합니다. 행성, 위성, 인공위성 모두 이 법칙을 따릅니다.",
     "discoverer": "요하네스 케플러",
     "field": "천체역학",
     "significance": "행성 운동의 규칙성을 수학적으로 정립하여 뉴턴 역학의 토대를 마련했으며, 외계 행성 및 위성 궤도 분석에 핵심적으로 사용됩니다.",
     "elementMeanings": {
-      "T": { "role": "공전 주기", "description": "위성이 지구를 한 바퀴 도는 데 걸리는 시간" },
-      "T^2": { "role": "공전 주기의 제곱", "description": "궤도 반지름의 세제곱에 비례하는 값입니다" },
-      "a": { "role": "궤도 반지름", "description": "위성과 지구 중심 사이의 거리. a의 세제곱으로 들어가기 때문에 궤도를 조금만 높여도 주기가 급격히 길어진다" },
-      "a^3": { "role": "반지름의 세제곱", "description": "공전 주기의 제곱에 비례하는 값입니다" },
-      "G": { "role": "만유인력 상수", "description": "6.674 곱하기 10의 -11제곱 N 곱하기 m의 제곱 / kg의 제곱. 우주의 모든 질량 사이에 작용하는 중력의 세기를 결정하는 기본 상수" },
-      "M": { "role": "중심 천체의 질량", "description": "지구의 질량 5.972 곱하기 10의 24제곱 kg. 중심 천체가 무거울수록 위성을 더 강하게 당긴다" },
-      "4pi2": { "role": "4 곱하기 파이의 제곱", "description": "원 궤도의 기하학적 성질에서 나오는 상수. 궤도가 원이기 때문에 파이가 등장한다" }
+      "T": { "role": "공전 주기", "kind": "output", "unit": "초", "description": "위성이 지구를 한 바퀴 도는 데 걸리는 시간" },
+      "T^2": { "role": "공전 주기의 제곱", "kind": "output", "unit": "초²", "description": "궤도 반지름의 세제곱에 비례하는 값입니다" },
+      "4pi2": { "role": "4π²", "kind": "constant", "value": 39.478, "description": "원 궤도의 기하학적 성질에서 나오는 상수 ≈ 39.48" },
+      "G": { "role": "만유인력 상수", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "중력의 세기를 결정하는 기본 상수. 이 수가 극도로 작기 때문에 일상에서 중력은 지구처럼 거대한 질량이 있어야 느낄 수 있다" },
+      "M": { "role": "지구의 질량", "kind": "constant", "value": 5.972e24, "unit": "kg", "description": "중심 천체가 무거울수록 위성을 더 강하게 당긴다. 같은 궤도라도 목성 주위를 돌면 주기가 훨씬 짧다" },
+      "a": { "role": "궤도 반지름", "kind": "input", "unit": "km", "description": "위성과 지구 중심 사이의 거리. 세제곱으로 들어가므로 작은 변화도 주기에 큰 영향" },
+      "a^3": { "role": "반지름의 세제곱", "kind": "output", "unit": "km³", "description": "궤도를 조금만 높여도 주기가 급격히 길어지는 이유" }
     },
-    "realWorldExamples": [
-      "지구의 공전 주기와 궤도 반지름으로 태양의 질량 계산",
-      "외계 행성의 공전 주기 관측으로 궤도 크기 추정",
-      "인공위성의 궤도 고도에 따른 공전 주기 설계"
-    ],
-    "relatedFormulas": ["universal-gravitation", "escape-velocity"],
     "parameterConfig": [
       {
         "id": "a",
         "name": "a",
-        "role": "궤도 반지름 (지구 중심에서의 거리)",
+        "role": "궤도 반지름",
         "min": 6500,
         "max": 400000,
         "default": 6771,
@@ -39,7 +33,69 @@
           { "range": [50000, 400000], "description": "고궤도. 달에 가까워지면 지구 중력이 많이 약해집니다. 달은 27일이나 걸려서 한 바퀴 돕니다." }
         ]
       }
-    ]
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "공전 주기",
+        "unit": "시간",
+        "format": "time",
+        "sourceParams": ["a"],
+        "transform": { "type": "custom", "sourceParam": "a" },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "궤도 속도",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": ["a"],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "고도",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": ["a"],
+        "transform": { "type": "subtract", "sourceParam": "a", "operand": 6371 }
+      },
+      {
+        "id": "earthRatio",
+        "label": "지구 반지름 대비",
+        "unit": "배",
+        "format": "number",
+        "sourceParams": ["a"],
+        "transform": { "type": "divide", "sourceParam": "a", "operand": 6371 }
+      }
+    ],
+    "constraints": [
+      { "param": "a", "type": "min", "value": 6371, "severity": "error", "message": "지구 반지름(6,371km)보다 작으면 지구 내부이므로 궤도가 불가능합니다" },
+      { "param": "a", "type": "min", "value": 6571, "severity": "warning", "message": "고도 200km 미만은 대기 저항으로 궤도가 빠르게 감쇠합니다" }
+    ],
+    "milestones": [
+      { "param": "a", "value": 6771, "label": "ISS 궤도", "shortLabel": "ISS", "emoji": "🛸", "description": "고도 400km. 90분에 한 바퀴, 하루에 16번 일출" },
+      { "param": "a", "value": 26560, "label": "GPS 궤도", "shortLabel": "GPS", "emoji": "📡", "description": "고도 20,200km. 정확히 12시간 주기" },
+      { "param": "a", "value": 42164, "label": "정지궤도", "shortLabel": "GEO", "emoji": "📺", "description": "고도 35,786km. 정확히 24시간 — 하늘에 고정되어 보임" },
+      { "param": "a", "value": 384400, "label": "달", "shortLabel": "Moon", "emoji": "🌙", "description": "27.3일 주기. 지구에서 가장 가까운 천체" }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          { "range": [0, 500], "template": "여객기 순항 고도(10km)의 약 {ratio}배", "referenceValue": 10, "referenceLabel": "여객기 순항 고도" },
+          { "range": [500, 5000], "template": "서울~부산 거리({ref}km)의 약 {ratio}배 높이", "referenceValue": 325, "referenceLabel": "서울~부산 거리" },
+          { "range": [5000, 50000], "template": "지구 지름({ref}km)의 약 {ratio}배", "referenceValue": 12742, "referenceLabel": "지구 지름" },
+          { "range": [50000, 400000], "template": "지구~달 거리의 약 {ratio}%", "referenceValue": 384400, "referenceLabel": "지구~달 거리" }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "지구의 공전 주기와 궤도 반지름으로 태양의 질량 계산",
+      "외계 행성의 공전 주기 관측으로 궤도 크기 추정",
+      "인공위성의 궤도 고도에 따른 공전 주기 설계"
+    ],
+    "relatedFormulas": ["universal-gravitation", "escape-velocity"]
   },
   "hubble-law": {
     "name": "허블 법칙",
@@ -49,9 +105,9 @@
     "field": "천문학",
     "significance": "우주가 팽창하고 있음을 관측적으로 입증하여 현대 우주론의 출발점을 마련했습니다.",
     "elementMeanings": {
-      "v": { "role": "후퇴 속도", "description": "은하가 관측자로부터 멀어지는 속도. 단위: km/s." },
-      "H_0": { "role": "허블 상수", "description": "현재 우주의 팽창률. 약 70 km/s/Mpc." },
-      "d": { "role": "거리", "description": "관측자에서 은하까지의 거리. 단위: 메가파섹(Mpc)." }
+      "v": { "role": "후퇴 속도", "kind": "output", "unit": "km/s", "description": "은하가 관측자로부터 멀어지는 속도. 단위: km/s." },
+      "H_0": { "role": "허블 상수", "kind": "constant", "value": 70, "unit": "km/s/Mpc", "description": "현재 우주의 팽창률. 약 70 km/s/Mpc." },
+      "d": { "role": "거리", "kind": "input", "unit": "Mpc", "description": "관측자에서 은하까지의 거리. 단위: 메가파섹(Mpc)." }
     },
     "realWorldExamples": [
       "은하의 적색편이로 거리 추정",
@@ -68,11 +124,11 @@
     "field": "천문학",
     "significance": "블랙홀의 크기를 정량적으로 정의하여 상대론적 천체물리학의 핵심 개념을 확립했습니다.",
     "elementMeanings": {
-      "r_s": { "role": "슈바르츠실트 반지름", "description": "사건의 지평선 반지름. 단위: 미터(m)." },
-      "G": { "role": "중력 상수", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
-      "M": { "role": "질량", "description": "천체의 질량. 단위: kg." },
-      "c": { "role": "광속", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
-      "c^2": { "role": "광속의 제곱", "description": "분모에 위치하여 질량이 클수록 반지름이 커지는 관계를 나타냅니다." }
+      "r_s": { "role": "슈바르츠실트 반지름", "kind": "output", "unit": "m", "description": "사건의 지평선 반지름. 단위: 미터(m)." },
+      "G": { "role": "중력 상수", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
+      "M": { "role": "질량", "kind": "input", "unit": "kg", "description": "천체의 질량. 단위: kg." },
+      "c": { "role": "광속", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
+      "c^2": { "role": "광속의 제곱", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "분모에 위치하여 질량이 클수록 반지름이 커지는 관계를 나타냅니다." }
     },
     "realWorldExamples": [
       "태양의 슈바르츠실트 반지름 계산 (약 3km)",
@@ -89,12 +145,12 @@
     "field": "천문학",
     "significance": "별의 물리적 성질(크기, 온도, 광도) 사이의 관계를 정량화하여 항성 분류와 진화 이론의 기반이 되었습니다.",
     "elementMeanings": {
-      "L": { "role": "광도", "description": "별이 단위 시간당 방출하는 총 에너지. 단위: 와트(W)." },
-      "R": { "role": "별의 반지름", "description": "별의 반지름. 단위: 미터(m)." },
-      "R^2": { "role": "반지름의 제곱", "description": "표면적(4파이R의 제곱)에 비례하는 인자입니다." },
-      "\\sigma": { "role": "스테판-볼츠만 상수", "description": "약 5.67x10의 -8제곱 W/m의 제곱/K의 4제곱." },
-      "T": { "role": "표면 온도", "description": "별 표면의 유효 온도. 단위: 켈빈(K)." },
-      "T^4": { "role": "온도의 네제곱", "description": "온도가 두 배면 광도는 16배. 강한 비선형 관계를 나타냅니다." }
+      "L": { "role": "광도", "kind": "output", "unit": "W", "description": "별이 단위 시간당 방출하는 총 에너지. 단위: 와트(W)." },
+      "R": { "role": "별의 반지름", "kind": "input", "unit": "m", "description": "별의 반지름. 단위: 미터(m)." },
+      "R^2": { "role": "반지름의 제곱", "kind": "structural", "description": "표면적(4파이R의 제곱)에 비례하는 인자입니다." },
+      "\\sigma": { "role": "스테판-볼츠만 상수", "kind": "constant", "value": 5.670e-8, "unit": "W/(m²·K⁴)", "description": "약 5.67x10의 -8제곱 W/m의 제곱/K의 4제곱." },
+      "T": { "role": "표면 온도", "kind": "input", "unit": "K", "description": "별 표면의 유효 온도. 단위: 켈빈(K)." },
+      "T^4": { "role": "온도의 네제곱", "kind": "structural", "description": "온도가 두 배면 광도는 16배. 강한 비선형 관계를 나타냅니다." }
     },
     "realWorldExamples": [
       "별의 표면 온도와 광도로 반지름 추정",
@@ -111,9 +167,9 @@
     "field": "천문학",
     "significance": "별의 색깔과 온도 사이의 정량적 관계를 밝혀 분광학 기반 천체 관측의 기초를 제공했습니다.",
     "elementMeanings": {
-      "\\lambda_{max}": { "role": "최대 복사 파장", "description": "흑체 복사 스펙트럼에서 세기가 최대인 파장. 단위: 미터(m)." },
-      "b": { "role": "비엔 변위 상수", "description": "약 2.898x10의 -3제곱 m K." },
-      "T": { "role": "온도", "description": "흑체의 절대 온도. 단위: 켈빈(K)." }
+      "\\lambda_{max}": { "role": "최대 복사 파장", "kind": "output", "unit": "m", "description": "흑체 복사 스펙트럼에서 세기가 최대인 파장. 단위: 미터(m)." },
+      "b": { "role": "비엔 변위 상수", "kind": "constant", "value": 2.898e-3, "unit": "m·K", "description": "약 2.898x10의 -3제곱 m K." },
+      "T": { "role": "온도", "kind": "input", "unit": "K", "description": "흑체의 절대 온도. 단위: 켈빈(K)." }
     },
     "realWorldExamples": [
       "별의 색깔로 표면 온도 추정 (푸른 별은 뜨겁고, 붉은 별은 차가움)",
@@ -130,14 +186,14 @@
     "field": "천문학",
     "significance": "외계 지적 생명체 탐색 문제를 과학적으로 체계화하여 SETI 연구의 이론적 프레임워크를 제공했습니다.",
     "elementMeanings": {
-      "N": { "role": "교신 가능 문명 수", "description": "은하 내에서 현재 탐지 가능한 신호를 보내는 문명의 수." },
-      "R_*": { "role": "항성 생성률", "description": "은하에서 매년 새로 태어나는 항성의 수." },
-      "f_p": { "role": "행성 보유 비율", "description": "행성계를 가진 항성의 비율." },
-      "n_e": { "role": "거주 가능 행성 수", "description": "행성계당 생명 거주 가능 영역의 행성 수." },
-      "f_l": { "role": "생명 발생 비율", "description": "거주 가능 행성에서 실제로 생명이 탄생할 확률." },
-      "f_i": { "role": "지적 생명 비율", "description": "생명이 지적 존재로 진화할 확률." },
-      "f_c": { "role": "통신 기술 비율", "description": "지적 생명이 탐지 가능한 신호를 보낼 기술을 발전시킬 확률." },
-      "L": { "role": "문명 수명", "description": "교신 가능 문명이 신호를 방출하는 기간. 단위: 년." }
+      "N": { "role": "교신 가능 문명 수", "kind": "output", "description": "은하 내에서 현재 탐지 가능한 신호를 보내는 문명의 수." },
+      "R_*": { "role": "항성 생성률", "kind": "input", "unit": "개/년", "description": "은하에서 매년 새로 태어나는 항성의 수." },
+      "f_p": { "role": "행성 보유 비율", "kind": "input", "description": "행성계를 가진 항성의 비율." },
+      "n_e": { "role": "거주 가능 행성 수", "kind": "input", "description": "행성계당 생명 거주 가능 영역의 행성 수." },
+      "f_l": { "role": "생명 발생 비율", "kind": "input", "description": "거주 가능 행성에서 실제로 생명이 탄생할 확률." },
+      "f_i": { "role": "지적 생명 비율", "kind": "input", "description": "생명이 지적 존재로 진화할 확률." },
+      "f_c": { "role": "통신 기술 비율", "kind": "input", "description": "지적 생명이 탐지 가능한 신호를 보낼 기술을 발전시킬 확률." },
+      "L": { "role": "문명 수명", "kind": "input", "unit": "년", "description": "교신 가능 문명이 신호를 방출하는 기간. 단위: 년." }
     },
     "realWorldExamples": [
       "SETI 프로젝트에서 탐색 전략 수립",
@@ -154,12 +210,12 @@
     "field": "천문학",
     "significance": "일반 상대성이론을 관측적으로 검증한 첫 번째 현상이며, 암흑물질 분포 관측에 핵심 도구로 사용됩니다.",
     "elementMeanings": {
-      "\\theta": { "role": "편향각", "description": "빛이 휘어지는 각도. 단위: 라디안(rad)." },
-      "G": { "role": "중력 상수", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
-      "M": { "role": "렌즈 천체 질량", "description": "빛을 휘게 하는 천체의 질량. 단위: kg." },
-      "c": { "role": "광속", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
-      "c^2": { "role": "광속의 제곱", "description": "상대론적 보정을 반영하는 인자입니다." },
-      "b": { "role": "충돌 매개변수", "description": "빛이 렌즈 천체에 가장 가까이 지나가는 거리. 단위: 미터(m)." }
+      "\\theta": { "role": "편향각", "kind": "output", "unit": "rad", "description": "빛이 휘어지는 각도. 단위: 라디안(rad)." },
+      "G": { "role": "중력 상수", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
+      "M": { "role": "렌즈 천체 질량", "kind": "input", "unit": "kg", "description": "빛을 휘게 하는 천체의 질량. 단위: kg." },
+      "c": { "role": "광속", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
+      "c^2": { "role": "광속의 제곱", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "상대론적 보정을 반영하는 인자입니다." },
+      "b": { "role": "충돌 매개변수", "kind": "input", "unit": "m", "description": "빛이 렌즈 천체에 가장 가까이 지나가는 거리. 단위: 미터(m)." }
     },
     "realWorldExamples": [
       "은하단에 의한 배경 은하의 상 왜곡 관측",
@@ -175,10 +231,10 @@
     "field": "천문학",
     "significance": "로켓 발사, 행성 대기 유지 여부, 블랙홀 형성 조건 등 다양한 천체물리학 문제의 기본이 됩니다.",
     "elementMeanings": {
-      "v_e": { "role": "탈출 속도", "description": "중력권을 벗어나기 위한 최소 속도. 단위: m/s." },
-      "G": { "role": "중력 상수", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
-      "M": { "role": "천체 질량", "description": "탈출하려는 천체의 질량. 단위: kg." },
-      "r": { "role": "반지름", "description": "천체 중심에서 출발점까지의 거리. 단위: 미터(m)." }
+      "v_e": { "role": "탈출 속도", "kind": "output", "unit": "m/s", "description": "중력권을 벗어나기 위한 최소 속도. 단위: m/s." },
+      "G": { "role": "중력 상수", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
+      "M": { "role": "천체 질량", "kind": "input", "unit": "kg", "description": "탈출하려는 천체의 질량. 단위: kg." },
+      "r": { "role": "반지름", "kind": "input", "unit": "m", "description": "천체 중심에서 출발점까지의 거리. 단위: 미터(m)." }
     },
     "realWorldExamples": [
       "지구 탈출 속도 계산 (약 11.2 km/s)",

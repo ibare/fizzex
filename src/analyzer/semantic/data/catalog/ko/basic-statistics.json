@@ -6,10 +6,10 @@
     "field": "통계학",
     "significance": "데이터를 하나의 숫자로 요약하는 가장 기본적인 방법이며, 거의 모든 통계 분석의 출발점입니다.",
     "elementMeanings": {
-      "\\bar{x}": { "role": "산술평균", "description": "데이터 전체의 평균값입니다." },
-      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다." },
-      "n": { "role": "데이터 개수", "description": "데이터가 몇 개인지를 나타냅니다." },
-      "\\sum": { "role": "합산 기호", "description": "모든 데이터 값을 더하라는 뜻입니다." }
+      "\\bar{x}": { "role": "산술평균", "description": "데이터 전체의 평균값입니다.", "kind": "output" },
+      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다.", "kind": "input" },
+      "n": { "role": "데이터 개수", "description": "데이터가 몇 개인지를 나타냅니다.", "kind": "input" },
+      "\\sum": { "role": "합산 기호", "description": "모든 데이터 값을 더하라는 뜻입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "반 학생들의 시험 점수 평균 구하기",
@@ -25,11 +25,11 @@
     "field": "통계학",
     "significance": "데이터의 퍼진 정도를 정량화하는 핵심 척도로, 표준편차와 함께 통계 분석의 기초가 됩니다.",
     "elementMeanings": {
-      "\\sigma^2": { "role": "분산", "description": "모집단 분산. 데이터의 퍼진 정도를 나타냅니다." },
-      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다." },
-      "\\bar{x}": { "role": "평균", "description": "데이터 전체의 산술평균입니다." },
-      "(x_i - \\bar{x})^2": { "role": "편차의 제곱", "description": "각 데이터가 평균에서 얼마나 떨어져 있는지를 제곱한 값입니다." },
-      "n": { "role": "데이터 개수", "description": "전체 데이터의 수입니다." }
+      "\\sigma^2": { "role": "분산", "description": "모집단 분산. 데이터의 퍼진 정도를 나타냅니다.", "kind": "output" },
+      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다.", "kind": "input" },
+      "\\bar{x}": { "role": "평균", "description": "데이터 전체의 산술평균입니다.", "kind": "output" },
+      "(x_i - \\bar{x})^2": { "role": "편차의 제곱", "description": "각 데이터가 평균에서 얼마나 떨어져 있는지를 제곱한 값입니다.", "kind": "structural" },
+      "n": { "role": "데이터 개수", "description": "전체 데이터의 수입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "두 반의 시험 점수가 같은 평균이어도 분산으로 성적 분포 차이 비교",
@@ -45,11 +45,11 @@
     "field": "통계학",
     "significance": "원래 데이터와 같은 단위로 퍼진 정도를 표현하므로 해석이 직관적이며, 정규분포와 함께 가장 널리 쓰이는 산포 척도입니다.",
     "elementMeanings": {
-      "\\sigma": { "role": "표준편차", "description": "모집단 표준편차. 데이터의 퍼진 정도를 원래 단위로 나타냅니다." },
-      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다." },
-      "\\bar{x}": { "role": "평균", "description": "데이터 전체의 산술평균입니다." },
-      "n": { "role": "데이터 개수", "description": "전체 데이터의 수입니다." },
-      "\\sqrt{}": { "role": "제곱근", "description": "분산에 제곱근을 취해 원래 단위로 되돌립니다." }
+      "\\sigma": { "role": "표준편차", "description": "모집단 표준편차. 데이터의 퍼진 정도를 원래 단위로 나타냅니다.", "kind": "output" },
+      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다.", "kind": "input" },
+      "\\bar{x}": { "role": "평균", "description": "데이터 전체의 산술평균입니다.", "kind": "output" },
+      "n": { "role": "데이터 개수", "description": "전체 데이터의 수입니다.", "kind": "input" },
+      "\\sqrt{}": { "role": "제곱근", "description": "분산에 제곱근을 취해 원래 단위로 되돌립니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "학생 키 데이터에서 '평균 165cm, 표준편차 5cm'처럼 퍼짐 정도 표현",
@@ -65,11 +65,11 @@
     "field": "통계학",
     "significance": "데이터마다 중요도가 다를 때 단순 산술평균보다 정확한 대표값을 제공합니다.",
     "elementMeanings": {
-      "\\bar{x}": { "role": "가중평균", "description": "가중치를 반영하여 계산한 평균값입니다." },
-      "w_i": { "role": "가중치", "description": "i번째 데이터의 중요도 또는 비중입니다." },
-      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다." },
-      "\\sum w_i x_i": { "role": "가중합", "description": "각 데이터에 가중치를 곱한 값들의 합입니다." },
-      "\\sum w_i": { "role": "가중치 합", "description": "모든 가중치를 더한 값입니다." }
+      "\\bar{x}": { "role": "가중평균", "description": "가중치를 반영하여 계산한 평균값입니다.", "kind": "output" },
+      "w_i": { "role": "가중치", "description": "i번째 데이터의 중요도 또는 비중입니다.", "kind": "input" },
+      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 값입니다.", "kind": "input" },
+      "\\sum w_i x_i": { "role": "가중합", "description": "각 데이터에 가중치를 곱한 값들의 합입니다.", "kind": "structural" },
+      "\\sum w_i": { "role": "가중치 합", "description": "모든 가중치를 더한 값입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "과목별 학점(가중치)이 다른 대학 성적 평균(GPA) 계산",
@@ -85,9 +85,9 @@
     "field": "통계학",
     "significance": "서로 다른 단위나 규모의 데이터 간 변동성을 비교할 수 있는 무차원 척도입니다.",
     "elementMeanings": {
-      "CV": { "role": "변동계수", "description": "표준편차를 평균으로 나눈 값. 상대적 퍼짐 정도를 나타냅니다." },
-      "\\sigma": { "role": "표준편차", "description": "데이터의 퍼진 정도입니다." },
-      "\\bar{x}": { "role": "평균", "description": "데이터 전체의 산술평균입니다. 0이 아니어야 합니다." }
+      "CV": { "role": "변동계수", "description": "표준편차를 평균으로 나눈 값. 상대적 퍼짐 정도를 나타냅니다.", "kind": "output" },
+      "\\sigma": { "role": "표준편차", "description": "데이터의 퍼진 정도입니다.", "kind": "input" },
+      "\\bar{x}": { "role": "평균", "description": "데이터 전체의 산술평균입니다. 0이 아니어야 합니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "키(cm)와 몸무게(kg)의 퍼짐 정도를 공정하게 비교",

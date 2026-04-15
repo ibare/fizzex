@@ -2,14 +2,14 @@
   "comparison-sort-bound": {
     "name": "비교 정렬 하한",
     "oneLiner": "비교 기반 정렬 알고리즘의 최악 시간 복잡도가 O(n log n) 미만이 될 수 없음을 보장하는 정리",
-    "description": "비교 정렬 하한 정리는 원소 간 비교만으로 정렬하는 알고리즘이 최악의 경우 최소 O(n log n)번의 비교를 수행해야 함을 증명합니다. 결정 트리 모델에서 n! 가지 순열을 구분하려면 높이가 log₂(n!) 이상이어야 하며, 스털링 근사에 의해 이는 O(n log n)입니다.",
+    "description": "비교 정렬 하한 정리는 원소 간 비교만으로 정렬하는 알고리즘이 최악의 경우 최소 O(n log n)번의 비교를 수행해야 함을 증명합니다. 결정 트리 모델에서 n! 가지 순열을 구분하려면 높이가 log2(n!) 이상이어야 하며, 스털링 근사에 의해 이는 O(n log n)입니다.",
     "field": "컴퓨터과학",
     "significance": "병합 정렬, 힙 정렬 등이 점근적으로 최적임을 증명하며, 비교 정렬의 성능 한계를 명확히 규정합니다.",
     "elementMeanings": {
-      "n": { "role": "원소 수", "description": "정렬해야 하는 원소의 총 개수입니다." },
-      "\\log n": { "role": "로그 인수", "description": "결정 트리 높이에서 비롯되는 비교 횟수의 로그 성분입니다." },
-      "n!": { "role": "순열 수", "description": "n개 원소의 가능한 모든 배열 수. 결정 트리의 리프 수 하한입니다." },
-      "\\Omega(n \\log n)": { "role": "하한 표기", "description": "최악의 경우 비교 횟수가 n log n에 비례하는 값 이상임을 나타냅니다." }
+      "n": { "role": "원소 수", "description": "정렬해야 하는 원소의 총 개수입니다.", "kind": "input" },
+      "\\log n": { "role": "로그 인수", "description": "결정 트리 높이에서 비롯되는 비교 횟수의 로그 성분입니다.", "kind": "structural" },
+      "n!": { "role": "순열 수", "description": "n개 원소의 가능한 모든 배열 수. 결정 트리의 리프 수 하한입니다.", "kind": "structural" },
+      "\\Omega(n \\log n)": { "role": "하한 표기", "description": "최악의 경우 비교 횟수가 n log n에 비례하는 값 이상임을 나타냅니다.", "kind": "output" }
     },
     "realWorldExamples": [
       "데이터베이스 인덱스 정렬 시 알고리즘 선택의 이론적 근거",
@@ -26,11 +26,11 @@
     "field": "컴퓨터과학",
     "significance": "분할정복 알고리즘 분석의 핵심 도구이며, 병합 정렬, 이진 탐색, 슈트라센 행렬 곱셈 등의 복잡도를 즉시 판정할 수 있게 합니다.",
     "elementMeanings": {
-      "T(n)": { "role": "시간 함수", "description": "입력 크기 n에 대한 알고리즘의 수행 시간입니다." },
-      "a": { "role": "부분 문제 수", "description": "재귀적으로 나뉘는 부분 문제의 개수입니다. 1 이상의 정수입니다." },
-      "n/b": { "role": "부분 문제 크기", "description": "각 부분 문제의 입력 크기. b는 1보다 큰 상수입니다." },
-      "f(n)": { "role": "결합 비용", "description": "분할과 결합 단계에서 소요되는 비재귀적 비용입니다." },
-      "\\log_b a": { "role": "임계 지수", "description": "f(n)의 다항 차수와 비교하여 세 가지 경우를 판별하는 기준값입니다." }
+      "T(n)": { "role": "시간 함수", "description": "입력 크기 n에 대한 알고리즘의 수행 시간입니다.", "kind": "output" },
+      "a": { "role": "부분 문제 수", "description": "재귀적으로 나뉘는 부분 문제의 개수입니다. 1 이상의 정수입니다.", "kind": "input" },
+      "n/b": { "role": "부분 문제 크기", "description": "각 부분 문제의 입력 크기. b는 1보다 큰 상수입니다.", "kind": "input" },
+      "f(n)": { "role": "결합 비용", "description": "분할과 결합 단계에서 소요되는 비재귀적 비용입니다.", "kind": "input" },
+      "\\log_b a": { "role": "임계 지수", "description": "f(n)의 다항 차수와 비교하여 세 가지 경우를 판별하는 기준값입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "병합 정렬의 T(n) = 2T(n/2) + O(n)에서 O(n log n) 도출",
@@ -47,10 +47,10 @@
     "field": "컴퓨터과학",
     "significance": "오류 정정 부호(해밍 코드)의 설계 기반이며, 통신 시스템, DNA 서열 비교, 유사도 검색 등에서 널리 활용됩니다.",
     "elementMeanings": {
-      "x": { "role": "첫째 문자열", "description": "비교할 두 문자열 중 하나입니다." },
-      "y": { "role": "둘째 문자열", "description": "비교할 두 문자열 중 다른 하나입니다." },
-      "d(x,y)": { "role": "해밍 거리", "description": "x와 y에서 대응 위치가 다른 개수입니다." },
-      "n": { "role": "문자열 길이", "description": "두 문자열의 공통 길이입니다." }
+      "x": { "role": "첫째 문자열", "description": "비교할 두 문자열 중 하나입니다.", "kind": "input" },
+      "y": { "role": "둘째 문자열", "description": "비교할 두 문자열 중 다른 하나입니다.", "kind": "input" },
+      "d(x,y)": { "role": "해밍 거리", "description": "x와 y에서 대응 위치가 다른 개수입니다.", "kind": "output" },
+      "n": { "role": "문자열 길이", "description": "두 문자열의 공통 길이입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "네트워크 통신에서 수신 데이터의 비트 오류 개수 검출",
@@ -67,10 +67,10 @@
     "field": "컴퓨터과학",
     "significance": "디지털 논리 회로 최적화와 논리식 단순화의 출발점이며, 모든 부울 대수 정리의 기초가 됩니다.",
     "elementMeanings": {
-      "A": { "role": "논리 변수", "description": "참(1) 또는 거짓(0)의 값을 가지는 부울 변수입니다." },
-      "A'": { "role": "보수", "description": "A의 부정. A가 1이면 0, A가 0이면 1입니다." },
-      "+": { "role": "논리합(OR)", "description": "부울 대수에서 OR 연산을 나타냅니다." },
-      "1": { "role": "항진값", "description": "항상 참인 값. 논리합의 결과가 반드시 1임을 보여줍니다." }
+      "A": { "role": "논리 변수", "description": "참(1) 또는 거짓(0)의 값을 가지는 부울 변수입니다.", "kind": "input" },
+      "A'": { "role": "보수", "description": "A의 부정. A가 1이면 0, A가 0이면 1입니다.", "kind": "structural" },
+      "+": { "role": "논리합(OR)", "description": "부울 대수에서 OR 연산을 나타냅니다.", "kind": "structural" },
+      "1": { "role": "항진값", "description": "항상 참인 값. 논리합의 결과가 반드시 1임을 보여줍니다.", "kind": "constant", "value": 1 }
     },
     "realWorldExamples": [
       "카르노 맵을 이용한 논리식 최소화에서 보원 법칙 적용",
@@ -87,10 +87,10 @@
     "field": "컴퓨터과학",
     "significance": "그래프 이론의 가장 기본적인 정리이며, 네트워크 분석, 오일러 경로 판정, 그래프 유효성 검증 등의 토대가 됩니다.",
     "elementMeanings": {
-      "\\sum \\deg(v)": { "role": "차수 총합", "description": "그래프의 모든 꼭짓점에 대해 연결된 변의 수를 합한 값입니다." },
-      "2|E|": { "role": "변 수의 두 배", "description": "변의 총 개수에 2를 곱한 값. 각 변이 두 꼭짓점에 기여하므로 차수 총합과 같습니다." },
-      "\\deg(v)": { "role": "꼭짓점 차수", "description": "꼭짓점 v에 연결된 변의 수입니다." },
-      "|E|": { "role": "변의 수", "description": "그래프에 포함된 변(간선)의 총 개수입니다." }
+      "\\sum \\deg(v)": { "role": "차수 총합", "description": "그래프의 모든 꼭짓점에 대해 연결된 변의 수를 합한 값입니다.", "kind": "output" },
+      "2|E|": { "role": "변 수의 두 배", "description": "변의 총 개수에 2를 곱한 값. 각 변이 두 꼭짓점에 기여하므로 차수 총합과 같습니다.", "kind": "output" },
+      "\\deg(v)": { "role": "꼭짓점 차수", "description": "꼭짓점 v에 연결된 변의 수입니다.", "kind": "input" },
+      "|E|": { "role": "변의 수", "description": "그래프에 포함된 변(간선)의 총 개수입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "소셜 네트워크에서 전체 친구 관계 수와 개인별 연결 수의 관계 분석",
@@ -107,11 +107,11 @@
     "field": "컴퓨터과학",
     "significance": "정보 보안에서 비밀번호 강도를 객관적으로 측정하는 표준 척도이며, 보안 정책과 인증 시스템 설계의 정량적 기반을 제공합니다.",
     "elementMeanings": {
-      "H": { "role": "엔트로피", "description": "비트 단위의 정보량. 무차별 대입 시 평균적으로 필요한 시도 횟수의 로그값입니다." },
-      "N": { "role": "문자 집합 크기", "description": "사용 가능한 서로 다른 문자의 종류 수입니다. 소문자만이면 26, 대소문자+숫자+특수문자면 90 이상입니다." },
-      "L": { "role": "비밀번호 길이", "description": "비밀번호를 구성하는 문자 수입니다." },
-      "\\log_2": { "role": "이진 로그", "description": "경우의 수를 비트 단위로 변환하는 함수입니다." },
-      "N^L": { "role": "전체 경우의 수", "description": "가능한 모든 비밀번호 조합의 수입니다." }
+      "H": { "role": "엔트로피", "description": "비트 단위의 정보량. 무차별 대입 시 평균적으로 필요한 시도 횟수의 로그값입니다.", "kind": "output" },
+      "N": { "role": "문자 집합 크기", "description": "사용 가능한 서로 다른 문자의 종류 수입니다. 소문자만이면 26, 대소문자+숫자+특수문자면 90 이상입니다.", "kind": "input" },
+      "L": { "role": "비밀번호 길이", "description": "비밀번호를 구성하는 문자 수입니다.", "kind": "input" },
+      "\\log_2": { "role": "이진 로그", "description": "경우의 수를 비트 단위로 변환하는 함수입니다.", "kind": "structural" },
+      "N^L": { "role": "전체 경우의 수", "description": "가능한 모든 비밀번호 조합의 수입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "웹사이트 회원가입 시 비밀번호 강도 표시기 구현",

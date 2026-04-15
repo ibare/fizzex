@@ -6,9 +6,9 @@
     "field": "대수학",
     "significance": "가장 기본적인 비례 관계를 나타내며, 일차함수의 특수한 경우(y절편이 0)로서 모든 비례 학습의 출발점입니다.",
     "elementMeanings": {
-      "y": { "role": "종속변수", "description": "x에 따라 결정되는 결과값입니다." },
-      "k": { "role": "비례상수", "description": "x와 y 사이의 일정한 비율입니다. k = y/x로 구할 수 있습니다." },
-      "x": { "role": "독립변수", "description": "자유롭게 정하는 입력값입니다." }
+      "y": { "role": "종속변수", "description": "x에 따라 결정되는 결과값입니다.", "kind": "output" },
+      "k": { "role": "비례상수", "description": "x와 y 사이의 일정한 비율입니다. k = y/x로 구할 수 있습니다.", "kind": "input" },
+      "x": { "role": "독립변수", "description": "자유롭게 정하는 입력값입니다.", "kind": "input" }
     },
     "realWorldExamples": ["사과 1개에 500원일 때 개수와 가격의 관계", "같은 속도로 달릴 때 시간과 거리의 관계"],
     "relatedFormulas": ["linear-function", "inverse-proportion"]
@@ -20,9 +20,9 @@
     "field": "대수학",
     "significance": "일정한 곱을 유지하는 관계를 나타내며, 물리학의 보일 법칙, 일과 시간의 관계 등 다양한 현상의 수학적 기초입니다.",
     "elementMeanings": {
-      "y": { "role": "종속변수", "description": "x에 따라 결정되는 결과값입니다." },
-      "k": { "role": "비례상수", "description": "x와 y의 곱이 항상 일정한 값. k = xy로 구할 수 있습니다." },
-      "x": { "role": "독립변수", "description": "0이 아닌 입력값입니다." }
+      "y": { "role": "종속변수", "description": "x에 따라 결정되는 결과값입니다.", "kind": "output" },
+      "k": { "role": "비례상수", "description": "x와 y의 곱이 항상 일정한 값. k = xy로 구할 수 있습니다.", "kind": "input" },
+      "x": { "role": "독립변수", "description": "0이 아닌 입력값입니다.", "kind": "input" }
     },
     "realWorldExamples": ["같은 거리를 갈 때 속도가 빠르면 시간이 짧아지는 관계", "같은 넓이의 직사각형에서 가로가 길면 세로가 짧아지는 관계"],
     "relatedFormulas": ["direct-proportion", "speed-formula"]
@@ -34,9 +34,9 @@
     "field": "산술",
     "significance": "할인율, 이자율, 성적, 통계 등 일상생활 전반에서 가장 널리 쓰이는 비율 표현 방법입니다.",
     "elementMeanings": {
-      "p": { "role": "백분율", "description": "전체를 100으로 보았을 때의 비율값. 단위는 %입니다." },
-      "부분": { "role": "비교하려는 양", "description": "전체 중에서 알고 싶은 부분의 크기입니다." },
-      "전체": { "role": "기준이 되는 양", "description": "100%에 해당하는 전체 크기입니다." }
+      "p": { "role": "백분율", "description": "전체를 100으로 보았을 때의 비율값. 단위는 %입니다.", "kind": "output", "unit": "%" },
+      "부분": { "role": "비교하려는 양", "description": "전체 중에서 알고 싶은 부분의 크기입니다.", "kind": "input" },
+      "전체": { "role": "기준이 되는 양", "description": "100%에 해당하는 전체 크기입니다.", "kind": "input" }
     },
     "realWorldExamples": ["시험에서 맞은 문제 수의 비율(80점 = 80%)", "상품 30% 할인 시 실제 할인 금액 계산"],
     "relatedFormulas": ["direct-proportion"]
@@ -48,9 +48,9 @@
     "field": "물리학",
     "significance": "운동을 설명하는 가장 기초적인 공식이며, 거리-시간-속도 관계를 이해하는 출발점입니다.",
     "elementMeanings": {
-      "v": { "role": "속도", "description": "단위 시간당 이동 거리. 예: 시속 60km는 1시간에 60km를 간다는 뜻입니다." },
-      "d": { "role": "거리", "description": "물체가 실제로 이동한 길이입니다." },
-      "t": { "role": "시간", "description": "이동하는 데 걸린 시간입니다." }
+      "v": { "role": "속도", "description": "단위 시간당 이동 거리. 예: 시속 60km는 1시간에 60km를 간다는 뜻입니다.", "kind": "output", "unit": "m/s" },
+      "d": { "role": "거리", "description": "물체가 실제로 이동한 길이입니다.", "kind": "input", "unit": "m" },
+      "t": { "role": "시간", "description": "이동하는 데 걸린 시간입니다.", "kind": "input", "unit": "s" }
     },
     "realWorldExamples": ["자동차가 2시간에 120km를 갔을 때 시속 구하기", "100m 달리기에서 기록과 평균 속도 계산"],
     "relatedFormulas": ["direct-proportion", "inverse-proportion", "density-formula"]
@@ -62,9 +62,9 @@
     "field": "물리학",
     "significance": "물질의 종류를 구별하고, 물에 뜨는지 가라앉는지를 판단하는 데 사용되는 기본 물리량입니다.",
     "elementMeanings": {
-      "\\rho": { "role": "밀도", "description": "단위 부피당 질량. 단위는 보통 g/cm3 또는 kg/m3입니다." },
-      "m": { "role": "질량", "description": "물체의 양을 나타내는 값. 단위는 g 또는 kg입니다." },
-      "V": { "role": "부피", "description": "물체가 차지하는 공간의 크기. 단위는 cm3 또는 m3입니다." }
+      "\\rho": { "role": "밀도", "description": "단위 부피당 질량. 단위는 보통 g/cm3 또는 kg/m3입니다.", "kind": "output", "unit": "kg/m3" },
+      "m": { "role": "질량", "description": "물체의 양을 나타내는 값. 단위는 g 또는 kg입니다.", "kind": "input", "unit": "kg" },
+      "V": { "role": "부피", "description": "물체가 차지하는 공간의 크기. 단위는 cm3 또는 m3입니다.", "kind": "input", "unit": "m3" }
     },
     "realWorldExamples": ["쇠공은 가라앉고 나무 블록은 물에 뜨는 이유", "금과 가짜 금을 밀도로 구별하는 방법"],
     "relatedFormulas": ["speed-formula"]

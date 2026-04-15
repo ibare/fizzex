@@ -14,4 +14,7 @@ export { containsVariable } from './helpers';
 export { getCatalogDetail } from './loader';
 
 // 타입
-export type { SemanticResult, AncestorEntry, CatalogMatchResult, CatalogDetail, CatalogCategory } from './types';
+export type {
+  SemanticResult, AncestorEntry, CatalogMatchResult, CatalogDetail, CatalogCategory,
+  ElementMeaning, ElementKind, DerivedValueConfig, ConstraintConfig, MilestoneConfig, AnchorConfig,
+} from './types';

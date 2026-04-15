@@ -6,11 +6,11 @@
     "field": "금융",
     "significance": "장기 저축과 투자에서 자산 성장의 핵심 원리이며, 대출 이자 계산, 퇴직 자금 설계, 투자 수익 비교의 기초입니다.",
     "elementMeanings": {
-      "A": { "role": "최종 금액", "description": "일정 기간 후 원금과 이자를 합한 총 금액입니다." },
-      "P": { "role": "원금", "description": "처음 투자하거나 예치한 금액입니다." },
-      "r": { "role": "연이율", "description": "연간 이자율(소수 표현). 예: 5%는 0.05입니다." },
-      "n": { "role": "연간 복리 횟수", "description": "1년에 이자가 계산되는 횟수. 월복리면 12입니다." },
-      "t": { "role": "기간", "description": "투자 기간(연 단위)입니다." }
+      "A": { "role": "최종 금액", "description": "일정 기간 후 원금과 이자를 합한 총 금액입니다.", "kind": "output" },
+      "P": { "role": "원금", "description": "처음 투자하거나 예치한 금액입니다.", "kind": "input" },
+      "r": { "role": "연이율", "description": "연간 이자율(소수 표현). 예: 5%는 0.05입니다.", "kind": "input" },
+      "n": { "role": "연간 복리 횟수", "description": "1년에 이자가 계산되는 횟수. 월복리면 12입니다.", "kind": "input" },
+      "t": { "role": "기간", "description": "투자 기간(연 단위)입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "적금 만기 시 수령 금액 계산",
@@ -26,10 +26,10 @@
     "field": "금융",
     "significance": "서로 다른 시점의 현금흐름을 비교 가능하게 만들어 투자 평가, 기업 가치 산정, 재무 의사결정의 근간을 이룹니다.",
     "elementMeanings": {
-      "PV": { "role": "현재가치", "description": "미래 금액의 현재 시점 등가 가치입니다." },
-      "FV": { "role": "미래가치", "description": "미래 특정 시점에 수령하거나 지급할 금액입니다." },
-      "r": { "role": "할인율", "description": "미래 현금흐름을 현재로 환산할 때 적용하는 이자율입니다." },
-      "n": { "role": "기간", "description": "현재부터 미래 현금흐름이 발생하는 시점까지의 기간 수입니다." }
+      "PV": { "role": "현재가치", "description": "미래 금액의 현재 시점 등가 가치입니다.", "kind": "output" },
+      "FV": { "role": "미래가치", "description": "미래 특정 시점에 수령하거나 지급할 금액입니다.", "kind": "input" },
+      "r": { "role": "할인율", "description": "미래 현금흐름을 현재로 환산할 때 적용하는 이자율입니다.", "kind": "input" },
+      "n": { "role": "기간", "description": "현재부터 미래 현금흐름이 발생하는 시점까지의 기간 수입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "채권의 적정 가격 산출",
@@ -46,14 +46,14 @@
     "field": "금융",
     "significance": "옵션 가격의 이론적 기준을 제시하여 파생상품 시장의 탄생과 발전을 이끌었으며, 1997년 노벨 경제학상을 수상한 공식입니다.",
     "elementMeanings": {
-      "C": { "role": "콜옵션 가격", "description": "유럽형 콜옵션의 이론적 현재 가격입니다." },
-      "S": { "role": "기초자산 현재가", "description": "옵션의 기초가 되는 자산의 현재 시장 가격입니다." },
-      "K": { "role": "행사가격", "description": "옵션 보유자가 기초자산을 매수할 수 있는 약정 가격입니다." },
-      "r": { "role": "무위험이자율", "description": "만기까지의 무위험 수익률입니다." },
-      "T": { "role": "만기까지 기간", "description": "옵션 만기까지 남은 시간(연 단위)입니다." },
-      "N(d)": { "role": "표준정규분포 누적함수", "description": "표준정규분포의 누적분포함수값. 확률적 가중치 역할을 합니다." },
-      "d_1": { "role": "제1 매개변수", "description": "기초자산 가격과 행사가격의 관계를 변동성으로 조정한 값입니다." },
-      "d_2": { "role": "제2 매개변수", "description": "d_1에서 변동성 항을 뺀 값으로, 행사 확률과 관련됩니다." }
+      "C": { "role": "콜옵션 가격", "description": "유럽형 콜옵션의 이론적 현재 가격입니다.", "kind": "output" },
+      "S": { "role": "기초자산 현재가", "description": "옵션의 기초가 되는 자산의 현재 시장 가격입니다.", "kind": "input" },
+      "K": { "role": "행사가격", "description": "옵션 보유자가 기초자산을 매수할 수 있는 약정 가격입니다.", "kind": "input" },
+      "r": { "role": "무위험이자율", "description": "만기까지의 무위험 수익률입니다.", "kind": "input" },
+      "T": { "role": "만기까지 기간", "description": "옵션 만기까지 남은 시간(연 단위)입니다.", "kind": "input" },
+      "N(d)": { "role": "표준정규분포 누적함수", "description": "표준정규분포의 누적분포함수값. 확률적 가중치 역할을 합니다.", "kind": "structural" },
+      "d_1": { "role": "제1 매개변수", "description": "기초자산 가격과 행사가격의 관계를 변동성으로 조정한 값입니다.", "kind": "output" },
+      "d_2": { "role": "제2 매개변수", "description": "d_1에서 변동성 항을 뺀 값으로, 행사 확률과 관련됩니다.", "kind": "output" }
     },
     "realWorldExamples": [
       "주식 콜옵션의 이론적 가격 산출",
@@ -70,11 +70,11 @@
     "field": "금융",
     "significance": "위험과 기대수익의 관계를 정량화하여 자산 가격 결정, 자본비용 추정, 포트폴리오 성과 평가의 표준 프레임워크입니다.",
     "elementMeanings": {
-      "E(R_i)": { "role": "자산의 기대수익률", "description": "개별 자산 i의 기대수익률입니다." },
-      "R_f": { "role": "무위험수익률", "description": "위험이 없는 투자(예: 국채)의 수익률입니다." },
-      "\\beta_i": { "role": "베타", "description": "자산 i의 체계적 위험 지표. 시장 수익률 변동에 대한 민감도입니다." },
-      "E(R_m)": { "role": "시장 기대수익률", "description": "시장 포트폴리오 전체의 기대수익률입니다." },
-      "E(R_m) - R_f": { "role": "시장 위험 프리미엄", "description": "시장 투자로 무위험 대비 추가로 기대되는 수익입니다." }
+      "E(R_i)": { "role": "자산의 기대수익률", "description": "개별 자산 i의 기대수익률입니다.", "kind": "output" },
+      "R_f": { "role": "무위험수익률", "description": "위험이 없는 투자(예: 국채)의 수익률입니다.", "kind": "input" },
+      "\\beta_i": { "role": "베타", "description": "자산 i의 체계적 위험 지표. 시장 수익률 변동에 대한 민감도입니다.", "kind": "input" },
+      "E(R_m)": { "role": "시장 기대수익률", "description": "시장 포트폴리오 전체의 기대수익률입니다.", "kind": "input" },
+      "E(R_m) - R_f": { "role": "시장 위험 프리미엄", "description": "시장 투자로 무위험 대비 추가로 기대되는 수익입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "신규 투자 프로젝트의 할인율(자본비용) 추정",
@@ -91,10 +91,10 @@
     "field": "금융",
     "significance": "투자 성과를 위험 대비로 공정하게 비교할 수 있게 하며, 펀드 평가와 자산 배분 결정에서 표준적으로 사용됩니다.",
     "elementMeanings": {
-      "S": { "role": "샤프 비율", "description": "위험 조정 수익률 지표. 높을수록 효율적인 투자입니다." },
-      "R_p": { "role": "포트폴리오 수익률", "description": "투자 포트폴리오의 실현 또는 기대 수익률입니다." },
-      "R_f": { "role": "무위험수익률", "description": "국채 등 무위험 자산의 수익률입니다." },
-      "\\sigma_p": { "role": "포트폴리오 표준편차", "description": "포트폴리오 수익률의 변동성. 총위험을 나타냅니다." }
+      "S": { "role": "샤프 비율", "description": "위험 조정 수익률 지표. 높을수록 효율적인 투자입니다.", "kind": "output" },
+      "R_p": { "role": "포트폴리오 수익률", "description": "투자 포트폴리오의 실현 또는 기대 수익률입니다.", "kind": "input" },
+      "R_f": { "role": "무위험수익률", "description": "국채 등 무위험 자산의 수익률입니다.", "kind": "input" },
+      "\\sigma_p": { "role": "포트폴리오 표준편차", "description": "포트폴리오 수익률의 변동성. 총위험을 나타냅니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "뮤추얼 펀드 간 성과 비교",
@@ -110,10 +110,10 @@
     "field": "금융",
     "significance": "정기 지급 현금흐름의 가치를 효율적으로 산출하여 대출, 연금, 채권 가치 평가의 실무 표준입니다.",
     "elementMeanings": {
-      "PV": { "role": "현재가치", "description": "연금 전체 지급액의 현재 시점 등가 가치입니다." },
-      "PMT": { "role": "기간별 지급액", "description": "매 기간 고정적으로 지급되는 금액입니다." },
-      "r": { "role": "기간 할인율", "description": "한 기간에 적용되는 할인율입니다." },
-      "n": { "role": "총 기간 수", "description": "연금이 지급되는 전체 기간의 횟수입니다." }
+      "PV": { "role": "현재가치", "description": "연금 전체 지급액의 현재 시점 등가 가치입니다.", "kind": "output" },
+      "PMT": { "role": "기간별 지급액", "description": "매 기간 고정적으로 지급되는 금액입니다.", "kind": "input" },
+      "r": { "role": "기간 할인율", "description": "한 기간에 적용되는 할인율입니다.", "kind": "input" },
+      "n": { "role": "총 기간 수", "description": "연금이 지급되는 전체 기간의 횟수입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "월 주택담보대출 상환액 계산",
@@ -129,9 +129,9 @@
     "field": "금융",
     "significance": "복잡한 복리 계산 없이 투자의 성장 속도를 직관적으로 추정할 수 있게 하는 실용적인 금융 도구입니다.",
     "elementMeanings": {
-      "t": { "role": "두 배 소요 기간", "description": "원금이 두 배가 되는 데 필요한 대략적인 기간(연 단위)입니다." },
-      "r": { "role": "연이율", "description": "연간 수익률(백분율). 예: 연 8%이면 r = 8입니다." },
-      "72": { "role": "상수", "description": "ln(2)와 관련된 근사 상수. 복리 성장의 두 배 기간 추정에 사용됩니다." }
+      "t": { "role": "두 배 소요 기간", "description": "원금이 두 배가 되는 데 필요한 대략적인 기간(연 단위)입니다.", "kind": "output" },
+      "r": { "role": "연이율", "description": "연간 수익률(백분율). 예: 연 8%이면 r = 8입니다.", "kind": "input" },
+      "72": { "role": "상수", "description": "ln(2)와 관련된 근사 상수. 복리 성장의 두 배 기간 추정에 사용됩니다.", "kind": "constant", "value": 72 }
     },
     "realWorldExamples": [
       "연 6% 수익률 투자 시 원금이 약 12년 만에 두 배가 됨을 빠르게 계산",
@@ -148,11 +148,11 @@
     "field": "금융",
     "significance": "금리 위험을 정량화하여 채권 투자 전략 수립, 자산-부채 매칭, 포트폴리오 면역화의 핵심 도구입니다.",
     "elementMeanings": {
-      "D": { "role": "듀레이션", "description": "현금흐름의 현재가치 가중평균 만기(연 단위)입니다." },
-      "t": { "role": "현금흐름 발생 시점", "description": "각 현금흐름이 발생하는 시점(연 단위)입니다." },
-      "PV(CF_t)": { "role": "현금흐름의 현재가치", "description": "시점 t에서 발생하는 현금흐름을 할인한 현재가치입니다." },
-      "P": { "role": "채권 가격", "description": "모든 현금흐름의 현재가치 합. 채권의 시장 가격입니다." },
-      "\\Sigma": { "role": "합산 기호", "description": "모든 현금흐름 시점에 대해 합산하는 연산입니다." }
+      "D": { "role": "듀레이션", "description": "현금흐름의 현재가치 가중평균 만기(연 단위)입니다.", "kind": "output" },
+      "t": { "role": "현금흐름 발생 시점", "description": "각 현금흐름이 발생하는 시점(연 단위)입니다.", "kind": "input" },
+      "PV(CF_t)": { "role": "현금흐름의 현재가치", "description": "시점 t에서 발생하는 현금흐름을 할인한 현재가치입니다.", "kind": "input" },
+      "P": { "role": "채권 가격", "description": "모든 현금흐름의 현재가치 합. 채권의 시장 가격입니다.", "kind": "input" },
+      "\\Sigma": { "role": "합산 기호", "description": "모든 현금흐름 시점에 대해 합산하는 연산입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "금리 인상 시 채권 포트폴리오 손실 예측",

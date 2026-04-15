@@ -7,10 +7,10 @@
     "field": "머신러닝",
     "significance": "신경망의 다중 클래스 분류 문제에서 출력을 해석 가능한 확률로 변환하는 핵심 함수입니다.",
     "elementMeanings": {
-      "P(y_i)": { "role": "클래스 확률", "description": "i번째 클래스에 속할 예측 확률입니다." },
-      "z_i": { "role": "로짓", "description": "i번째 클래스에 대한 신경망의 원시 출력값입니다." },
-      "e^{z_i}": { "role": "지수 변환값", "description": "로짓에 지수 함수를 적용하여 양수로 변환한 값입니다." },
-      "\\sum e^{z_j}": { "role": "정규화 상수", "description": "모든 클래스의 지수 변환값의 합. 확률의 총합을 1로 만드는 역할입니다." }
+      "P(y_i)": { "role": "클래스 확률", "description": "i번째 클래스에 속할 예측 확률입니다.", "kind": "output" },
+      "z_i": { "role": "로짓", "description": "i번째 클래스에 대한 신경망의 원시 출력값입니다.", "kind": "input" },
+      "e^{z_i}": { "role": "지수 변환값", "description": "로짓에 지수 함수를 적용하여 양수로 변환한 값입니다.", "kind": "structural" },
+      "\\sum e^{z_j}": { "role": "정규화 상수", "description": "모든 클래스의 지수 변환값의 합. 확률의 총합을 1로 만드는 역할입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "이미지 분류 모델이 고양이/개/새 중 어떤 클래스인지 확률로 출력할 때",
@@ -26,10 +26,10 @@
     "field": "머신러닝",
     "significance": "분류 모델의 학습에서 표준 손실 함수로 사용되며, 확률적 예측의 품질을 직접 최적화합니다.",
     "elementMeanings": {
-      "H": { "role": "크로스 엔트로피 손실", "description": "실제 분포와 예측 분포 사이의 차이를 나타내는 스칼라 값입니다." },
-      "y_i": { "role": "실제 레이블", "description": "i번째 클래스의 실제 확률. 원-핫 인코딩에서 정답이면 1, 아니면 0입니다." },
-      "\\hat{y}_i": { "role": "예측 확률", "description": "모델이 출력한 i번째 클래스의 예측 확률입니다." },
-      "\\log(\\hat{y}_i)": { "role": "로그 확률", "description": "예측 확률의 로그값. 확률이 0에 가까울수록 음의 무한대로 발산합니다." }
+      "H": { "role": "크로스 엔트로피 손실", "description": "실제 분포와 예측 분포 사이의 차이를 나타내는 스칼라 값입니다.", "kind": "output" },
+      "y_i": { "role": "실제 레이블", "description": "i번째 클래스의 실제 확률. 원-핫 인코딩에서 정답이면 1, 아니면 0입니다.", "kind": "input" },
+      "\\hat{y}_i": { "role": "예측 확률", "description": "모델이 출력한 i번째 클래스의 예측 확률입니다.", "kind": "input" },
+      "\\log(\\hat{y}_i)": { "role": "로그 확률", "description": "예측 확률의 로그값. 확률이 0에 가까울수록 음의 무한대로 발산합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "스팸 메일 분류기를 학습시킬 때 예측 오차를 계산하는 기준",
@@ -44,11 +44,11 @@
     "field": "머신러닝",
     "significance": "회귀 분석과 신경망 학습의 기본 손실 함수로, 최소제곱법의 확장입니다.",
     "elementMeanings": {
-      "L": { "role": "손실값", "description": "모델 전체의 평균 오차를 나타내는 스칼라 값입니다." },
-      "n": { "role": "데이터 수", "description": "전체 데이터 포인트의 개수입니다." },
-      "y_i": { "role": "실제값", "description": "i번째 데이터의 실제 목표값입니다." },
-      "\\hat{y}_i": { "role": "예측값", "description": "모델이 출력한 i번째 데이터의 예측값입니다." },
-      "(y_i - \\hat{y}_i)^2": { "role": "제곱 오차", "description": "개별 오차를 제곱하여 방향성을 제거하고 큰 오차에 가중치를 부여합니다." }
+      "L": { "role": "손실값", "description": "모델 전체의 평균 오차를 나타내는 스칼라 값입니다.", "kind": "output" },
+      "n": { "role": "데이터 수", "description": "전체 데이터 포인트의 개수입니다.", "kind": "input" },
+      "y_i": { "role": "실제값", "description": "i번째 데이터의 실제 목표값입니다.", "kind": "input" },
+      "\\hat{y}_i": { "role": "예측값", "description": "모델이 출력한 i번째 데이터의 예측값입니다.", "kind": "input" },
+      "(y_i - \\hat{y}_i)^2": { "role": "제곱 오차", "description": "개별 오차를 제곱하여 방향성을 제거하고 큰 오차에 가중치를 부여합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "주택 가격 예측 모델의 학습 시 실제 가격과 예측 가격의 차이 계산",
@@ -64,9 +64,9 @@
     "field": "머신러닝",
     "significance": "딥러닝을 포함한 거의 모든 머신러닝 모델 학습의 핵심 최적화 알고리즘입니다.",
     "elementMeanings": {
-      "\\theta": { "role": "매개변수", "description": "모델의 학습 가능한 가중치와 편향을 포괄하는 매개변수 벡터입니다." },
-      "\\alpha": { "role": "학습률", "description": "한 번의 갱신에서 이동하는 보폭의 크기. 너무 크면 발산하고 너무 작으면 수렴이 느립니다." },
-      "\\nabla L": { "role": "손실의 그래디언트", "description": "손실 함수를 각 매개변수로 편미분한 벡터. 손실이 가장 빠르게 증가하는 방향입니다." }
+      "\\theta": { "role": "매개변수", "description": "모델의 학습 가능한 가중치와 편향을 포괄하는 매개변수 벡터입니다.", "kind": "input" },
+      "\\alpha": { "role": "학습률", "description": "한 번의 갱신에서 이동하는 보폭의 크기. 너무 크면 발산하고 너무 작으면 수렴이 느립니다.", "kind": "input" },
+      "\\nabla L": { "role": "손실의 그래디언트", "description": "손실 함수를 각 매개변수로 편미분한 벡터. 손실이 가장 빠르게 증가하는 방향입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "신경망의 수백만 개 가중치를 데이터에 맞게 자동으로 조정하는 과정",
@@ -81,9 +81,9 @@
     "field": "머신러닝",
     "significance": "로지스틱 회귀와 신경망의 기본 활성화 함수로, 비선형성을 도입하는 역할을 합니다.",
     "elementMeanings": {
-      "\\sigma(x)": { "role": "시그모이드 출력", "description": "0과 1 사이의 출력값으로, 확률로 해석될 수 있습니다." },
-      "x": { "role": "입력", "description": "활성화 함수에 전달되는 입력값(가중합 등)입니다." },
-      "e^{-x}": { "role": "음의 지수", "description": "입력이 클수록 0에 가까워져 전체 출력을 1에 근접시킵니다." }
+      "\\sigma(x)": { "role": "시그모이드 출력", "description": "0과 1 사이의 출력값으로, 확률로 해석될 수 있습니다.", "kind": "output" },
+      "x": { "role": "입력", "description": "활성화 함수에 전달되는 입력값(가중합 등)입니다.", "kind": "input" },
+      "e^{-x}": { "role": "음의 지수", "description": "입력이 클수록 0에 가까워져 전체 출력을 1에 근접시킵니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "이메일이 스팸일 확률을 0~1 사이로 출력하는 이진 분류기",
@@ -99,10 +99,10 @@
     "field": "머신러닝",
     "significance": "딥러닝 학습의 안정성과 속도를 획기적으로 개선하여, 현대 신경망 설계의 필수 구성요소가 되었습니다.",
     "elementMeanings": {
-      "\\hat{x}": { "role": "정규화된 입력", "description": "평균 0, 분산 1로 정규화된 입력값입니다." },
-      "x": { "role": "원본 입력", "description": "정규화 전의 층 입력값입니다." },
-      "\\mu": { "role": "배치 평균", "description": "현재 미니배치에서 계산한 입력의 평균입니다." },
-      "\\sigma": { "role": "배치 표준편차", "description": "현재 미니배치에서 계산한 입력의 표준편차입니다." }
+      "\\hat{x}": { "role": "정규화된 입력", "description": "평균 0, 분산 1로 정규화된 입력값입니다.", "kind": "output" },
+      "x": { "role": "원본 입력", "description": "정규화 전의 층 입력값입니다.", "kind": "input" },
+      "\\mu": { "role": "배치 평균", "description": "현재 미니배치에서 계산한 입력의 평균입니다.", "kind": "input" },
+      "\\sigma": { "role": "배치 표준편차", "description": "현재 미니배치에서 계산한 입력의 표준편차입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "깊은 이미지 인식 네트워크(ResNet 등)에서 수백 층의 안정적 학습",
@@ -118,12 +118,12 @@
     "field": "머신러닝",
     "significance": "트랜스포머의 핵심 구성요소로, GPT, BERT 등 현대 대규모 언어 모델의 기반 기술입니다.",
     "elementMeanings": {
-      "Q": { "role": "쿼리 행렬", "description": "현재 위치에서 '무엇을 찾고 있는지'를 나타내는 벡터들의 행렬입니다." },
-      "K": { "role": "키 행렬", "description": "각 위치가 '어떤 정보를 가지고 있는지'를 나타내는 벡터들의 행렬입니다." },
-      "V": { "role": "값 행렬", "description": "실제로 전달할 정보를 담은 벡터들의 행렬입니다." },
-      "K^T": { "role": "키의 전치", "description": "쿼리와의 내적 계산을 위해 전치한 키 행렬입니다." },
-      "\\sqrt{d_k}": { "role": "스케일링 계수", "description": "키 벡터의 차원 수의 제곱근. 내적값이 너무 커지는 것을 방지합니다." },
-      "\\text{softmax}": { "role": "정규화 함수", "description": "유사도 점수를 합이 1인 가중치로 변환합니다." }
+      "Q": { "role": "쿼리 행렬", "description": "현재 위치에서 '무엇을 찾고 있는지'를 나타내는 벡터들의 행렬입니다.", "kind": "input" },
+      "K": { "role": "키 행렬", "description": "각 위치가 '어떤 정보를 가지고 있는지'를 나타내는 벡터들의 행렬입니다.", "kind": "input" },
+      "V": { "role": "값 행렬", "description": "실제로 전달할 정보를 담은 벡터들의 행렬입니다.", "kind": "input" },
+      "K^T": { "role": "키의 전치", "description": "쿼리와의 내적 계산을 위해 전치한 키 행렬입니다.", "kind": "structural" },
+      "\\sqrt{d_k}": { "role": "스케일링 계수", "description": "키 벡터의 차원 수의 제곱근. 내적값이 너무 커지는 것을 방지합니다.", "kind": "structural" },
+      "\\text{softmax}": { "role": "정규화 함수", "description": "유사도 점수를 합이 1인 가중치로 변환합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "기계 번역에서 원문의 관련 단어에 집중하여 번역을 생성하는 과정",
@@ -139,9 +139,9 @@
     "field": "머신러닝",
     "significance": "다층 신경망의 실용적 학습을 가능하게 만든 핵심 알고리즘으로, 딥러닝의 기반을 확립했습니다.",
     "elementMeanings": {
-      "\\partial L / \\partial w": { "role": "가중치에 대한 손실의 기울기", "description": "특정 가중치가 손실에 미치는 영향의 크기와 방향입니다." },
-      "\\partial L / \\partial \\hat{y}": { "role": "출력에 대한 손실의 기울기", "description": "예측값이 변할 때 손실이 얼마나 변하는지를 나타냅니다." },
-      "\\partial \\hat{y} / \\partial w": { "role": "가중치에 대한 출력의 기울기", "description": "가중치가 변할 때 출력이 얼마나 변하는지를 나타냅니다." }
+      "\\partial L / \\partial w": { "role": "가중치에 대한 손실의 기울기", "description": "특정 가중치가 손실에 미치는 영향의 크기와 방향입니다.", "kind": "output" },
+      "\\partial L / \\partial \\hat{y}": { "role": "출력에 대한 손실의 기울기", "description": "예측값이 변할 때 손실이 얼마나 변하는지를 나타냅니다.", "kind": "structural" },
+      "\\partial \\hat{y} / \\partial w": { "role": "가중치에 대한 출력의 기울기", "description": "가중치가 변할 때 출력이 얼마나 변하는지를 나타냅니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "수천만 개의 매개변수를 가진 이미지 인식 모델의 학습",

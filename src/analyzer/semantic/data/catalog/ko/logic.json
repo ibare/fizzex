@@ -7,11 +7,11 @@
     "field": "논리학",
     "significance": "논리 회로 설계, 프로그래밍의 조건문 최적화, 집합론의 기초 증명 등에서 핵심적으로 사용되는 변환 규칙입니다.",
     "elementMeanings": {
-      "A": { "role": "첫째 명제", "description": "논리식을 구성하는 첫 번째 명제 또는 집합입니다." },
-      "B": { "role": "둘째 명제", "description": "논리식을 구성하는 두 번째 명제 또는 집합입니다." },
-      "\\neg": { "role": "부정 연산자", "description": "명제의 참/거짓을 뒤집는 연산자입니다." },
-      "\\wedge": { "role": "논리곱", "description": "두 명제가 모두 참일 때만 참이 되는 연산입니다." },
-      "\\vee": { "role": "논리합", "description": "두 명제 중 하나라도 참이면 참이 되는 연산입니다." }
+      "A": { "role": "첫째 명제", "description": "논리식을 구성하는 첫 번째 명제 또는 집합입니다.", "kind": "input" },
+      "B": { "role": "둘째 명제", "description": "논리식을 구성하는 두 번째 명제 또는 집합입니다.", "kind": "input" },
+      "\\neg": { "role": "부정 연산자", "description": "명제의 참/거짓을 뒤집는 연산자입니다.", "kind": "structural" },
+      "\\wedge": { "role": "논리곱", "description": "두 명제가 모두 참일 때만 참이 되는 연산입니다.", "kind": "structural" },
+      "\\vee": { "role": "논리합", "description": "두 명제 중 하나라도 참이면 참이 되는 연산입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "프로그래밍에서 복잡한 if 조건문의 부정을 단순화",
@@ -27,10 +27,10 @@
     "field": "집합론",
     "significance": "경우의 수 세기의 기본 원리이며, 확률론의 덧셈 정리, 오일러 파이 함수 유도 등 조합론 전반의 토대가 됩니다.",
     "elementMeanings": {
-      "|A \\cup B|": { "role": "합집합 크기", "description": "A 또는 B에 속하는 원소의 총 수입니다." },
-      "|A|": { "role": "A의 크기", "description": "집합 A에 속하는 원소의 수입니다." },
-      "|B|": { "role": "B의 크기", "description": "집합 B에 속하는 원소의 수입니다." },
-      "|A \\cap B|": { "role": "교집합 크기", "description": "A와 B 모두에 속하는 원소의 수. 중복 계산을 보정하기 위해 빼줍니다." }
+      "|A \\cup B|": { "role": "합집합 크기", "description": "A 또는 B에 속하는 원소의 총 수입니다.", "kind": "output" },
+      "|A|": { "role": "A의 크기", "description": "집합 A에 속하는 원소의 수입니다.", "kind": "input" },
+      "|B|": { "role": "B의 크기", "description": "집합 B에 속하는 원소의 수입니다.", "kind": "input" },
+      "|A \\cap B|": { "role": "교집합 크기", "description": "A와 B 모두에 속하는 원소의 수. 중복 계산을 보정하기 위해 빼줍니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "설문조사에서 두 항목 중 하나라도 선택한 응답자 수 계산",
@@ -46,9 +46,9 @@
     "field": "집합론",
     "significance": "조합론과 집합론의 기본 결과이며, 부분집합 열거, 비트마스크 알고리즘, 논리 회로의 상태 공간 분석에 직접 활용됩니다.",
     "elementMeanings": {
-      "|P(S)|": { "role": "멱집합 크기", "description": "집합 S의 모든 부분집합의 개수입니다." },
-      "2": { "role": "선택지 수", "description": "각 원소에 대해 '포함' 또는 '비포함'의 두 가지 선택이 있음을 나타냅니다." },
-      "|S|": { "role": "원소 개수", "description": "원래 집합 S에 속한 원소의 수입니다." }
+      "|P(S)|": { "role": "멱집합 크기", "description": "집합 S의 모든 부분집합의 개수입니다.", "kind": "output" },
+      "2": { "role": "선택지 수", "description": "각 원소에 대해 '포함' 또는 '비포함'의 두 가지 선택이 있음을 나타냅니다.", "kind": "constant", "value": 2 },
+      "|S|": { "role": "원소 개수", "description": "원래 집합 S에 속한 원소의 수입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "메뉴 n개에서 가능한 모든 주문 조합 수 계산",
@@ -64,12 +64,12 @@
     "field": "조합론",
     "significance": "확률 계산, 이항정리, 통계적 표본 추출 등 수학과 과학 전반에서 가장 빈번하게 사용되는 세기 도구입니다.",
     "elementMeanings": {
-      "C(n,k)": { "role": "조합 수", "description": "n개에서 k개를 순서 없이 고르는 경우의 수입니다." },
-      "n": { "role": "전체 원소 수", "description": "선택 대상이 되는 전체 원소의 개수입니다." },
-      "k": { "role": "선택 원소 수", "description": "고르는 원소의 개수입니다." },
-      "n!": { "role": "n의 계승", "description": "1부터 n까지 모든 자연수의 곱입니다." },
-      "k!": { "role": "k의 계승", "description": "선택된 원소들의 순서 배열 수. 중복을 제거하기 위해 나눕니다." },
-      "(n-k)!": { "role": "나머지의 계승", "description": "선택되지 않은 원소들의 배열 수. 역시 중복 제거에 사용됩니다." }
+      "C(n,k)": { "role": "조합 수", "description": "n개에서 k개를 순서 없이 고르는 경우의 수입니다.", "kind": "output" },
+      "n": { "role": "전체 원소 수", "description": "선택 대상이 되는 전체 원소의 개수입니다.", "kind": "input" },
+      "k": { "role": "선택 원소 수", "description": "고르는 원소의 개수입니다.", "kind": "input" },
+      "n!": { "role": "n의 계승", "description": "1부터 n까지 모든 자연수의 곱입니다.", "kind": "structural" },
+      "k!": { "role": "k의 계승", "description": "선택된 원소들의 순서 배열 수. 중복을 제거하기 위해 나눕니다.", "kind": "structural" },
+      "(n-k)!": { "role": "나머지의 계승", "description": "선택되지 않은 원소들의 배열 수. 역시 중복 제거에 사용됩니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "로또 번호 6개를 45개 중에서 뽑는 경우의 수 계산",
@@ -85,11 +85,11 @@
     "field": "조합론",
     "significance": "순서가 의미를 가지는 배열 문제의 기본 도구이며, 암호 해독, 일정 배치, 경우의 수 분석 등에 널리 활용됩니다.",
     "elementMeanings": {
-      "P(n,k)": { "role": "순열 수", "description": "n개에서 k개를 순서 있게 뽑는 경우의 수입니다." },
-      "n": { "role": "전체 원소 수", "description": "선택 대상이 되는 전체 원소의 개수입니다." },
-      "k": { "role": "선택 원소 수", "description": "뽑아서 나열하는 원소의 개수입니다." },
-      "n!": { "role": "n의 계승", "description": "1부터 n까지 모든 자연수의 곱입니다." },
-      "(n-k)!": { "role": "나머지의 계승", "description": "선택되지 않은 원소들의 배열 수. 분모에서 이를 나누어 앞의 k자리만 세게 됩니다." }
+      "P(n,k)": { "role": "순열 수", "description": "n개에서 k개를 순서 있게 뽑는 경우의 수입니다.", "kind": "output" },
+      "n": { "role": "전체 원소 수", "description": "선택 대상이 되는 전체 원소의 개수입니다.", "kind": "input" },
+      "k": { "role": "선택 원소 수", "description": "뽑아서 나열하는 원소의 개수입니다.", "kind": "input" },
+      "n!": { "role": "n의 계승", "description": "1부터 n까지 모든 자연수의 곱입니다.", "kind": "structural" },
+      "(n-k)!": { "role": "나머지의 계승", "description": "선택되지 않은 원소들의 배열 수. 분모에서 이를 나누어 앞의 k자리만 세게 됩니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "4자리 비밀번호에서 숫자가 중복 없이 배열되는 경우의 수",

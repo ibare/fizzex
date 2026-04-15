@@ -5,10 +5,10 @@
     "description": "삼각형의 넓이는 밑변의 길이에 높이를 곱하고 2로 나눈 값입니다. 직사각형을 대각선으로 자르면 삼각형 두 개가 나오는데, 그래서 직사각형 넓이의 절반이 됩니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "삼각형이 차지하는 면적입니다." },
-      "b": { "role": "밑변", "description": "삼각형의 아래쪽 변의 길이입니다." },
-      "h": { "role": "높이", "description": "밑변에서 꼭짓점까지의 수직 거리입니다." },
-      "\\frac{1}{2}": { "role": "반", "description": "직사각형의 절반이라는 뜻입니다." }
+      "A": { "role": "넓이", "description": "삼각형이 차지하는 면적입니다.", "kind": "output" },
+      "b": { "role": "밑변", "description": "삼각형의 아래쪽 변의 길이입니다.", "kind": "input" },
+      "h": { "role": "높이", "description": "밑변에서 꼭짓점까지의 수직 거리입니다.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "반", "description": "직사각형의 절반이라는 뜻입니다.", "kind": "constant", "value": 0.5 }
     },
     "realWorldExamples": ["지붕의 삼각형 면적 구하기", "삼각 깃발의 천 넓이 계산"],
     "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
@@ -19,9 +19,9 @@
     "description": "직사각형의 넓이는 가로 길이와 세로 길이를 곱한 값입니다. 네 각이 모두 직각인 사각형에서, 한 줄에 단위 정사각형이 몇 개 들어가는지 세고 그 줄이 몇 줄인지 곱하는 것과 같습니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "직사각형이 차지하는 면적입니다." },
-      "l": { "role": "가로", "description": "직사각형의 가로 길이입니다." },
-      "w": { "role": "세로", "description": "직사각형의 세로 길이입니다." }
+      "A": { "role": "넓이", "description": "직사각형이 차지하는 면적입니다.", "kind": "output" },
+      "l": { "role": "가로", "description": "직사각형의 가로 길이입니다.", "kind": "input" },
+      "w": { "role": "세로", "description": "직사각형의 세로 길이입니다.", "kind": "input" }
     },
     "realWorldExamples": ["방 바닥 면적 구하기", "칠판의 넓이 계산", "스마트폰 화면 크기 비교"],
     "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
@@ -32,9 +32,9 @@
     "description": "정사각형의 넓이는 한 변의 길이를 자기 자신과 곱한 값입니다. 네 변의 길이가 모두 같으므로, 가로와 세로가 같은 직사각형의 넓이와 같은 원리입니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "정사각형이 차지하는 면적입니다." },
-      "s": { "role": "한 변", "description": "정사각형 한 변의 길이입니다." },
-      "s^2": { "role": "변의 제곱", "description": "한 변의 길이를 두 번 곱한 값입니다." }
+      "A": { "role": "넓이", "description": "정사각형이 차지하는 면적입니다.", "kind": "output" },
+      "s": { "role": "한 변", "description": "정사각형 한 변의 길이입니다.", "kind": "input" },
+      "s^2": { "role": "변의 제곱", "description": "한 변의 길이를 두 번 곱한 값입니다.", "kind": "output" }
     },
     "realWorldExamples": ["타일 한 장의 면적 구하기", "정사각형 액자 크기 계산"],
     "relatedFormulas": ["rectangle-area", "rhombus-area"]
@@ -45,9 +45,9 @@
     "description": "평행사변형의 넓이는 밑변의 길이에 높이를 곱한 값입니다. 평행사변형을 잘라서 옮기면 직사각형이 되기 때문에, 직사각형 넓이 공식과 형태가 같습니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "평행사변형이 차지하는 면적입니다." },
-      "b": { "role": "밑변", "description": "평행사변형의 아래쪽 변의 길이입니다." },
-      "h": { "role": "높이", "description": "두 평행한 변 사이의 수직 거리입니다." }
+      "A": { "role": "넓이", "description": "평행사변형이 차지하는 면적입니다.", "kind": "output" },
+      "b": { "role": "밑변", "description": "평행사변형의 아래쪽 변의 길이입니다.", "kind": "input" },
+      "h": { "role": "높이", "description": "두 평행한 변 사이의 수직 거리입니다.", "kind": "input" }
     },
     "realWorldExamples": ["기울어진 창문 유리의 면적 계산", "평행사변형 모양 책상 덮개 크기"],
     "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
@@ -58,11 +58,11 @@
     "description": "사다리꼴의 넓이는 평행한 두 변(윗변과 아랫변)의 길이를 더한 뒤 높이를 곱하고 2로 나눈 값입니다. 같은 사다리꼴 두 개를 뒤집어 붙이면 평행사변형이 되는데, 그 절반이라서 2로 나눕니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "사다리꼴이 차지하는 면적입니다." },
-      "a": { "role": "윗변", "description": "사다리꼴의 위쪽 평행한 변의 길이입니다." },
-      "b": { "role": "아랫변", "description": "사다리꼴의 아래쪽 평행한 변의 길이입니다." },
-      "h": { "role": "높이", "description": "두 평행한 변 사이의 수직 거리입니다." },
-      "\\frac{1}{2}": { "role": "반", "description": "평행사변형의 절반이라는 뜻입니다." }
+      "A": { "role": "넓이", "description": "사다리꼴이 차지하는 면적입니다.", "kind": "output" },
+      "a": { "role": "윗변", "description": "사다리꼴의 위쪽 평행한 변의 길이입니다.", "kind": "input" },
+      "b": { "role": "아랫변", "description": "사다리꼴의 아래쪽 평행한 변의 길이입니다.", "kind": "input" },
+      "h": { "role": "높이", "description": "두 평행한 변 사이의 수직 거리입니다.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "반", "description": "평행사변형의 절반이라는 뜻입니다.", "kind": "constant", "value": 0.5 }
     },
     "realWorldExamples": ["사다리꼴 모양 화단의 면적 구하기", "사다리꼴 지붕 면적 계산"],
     "relatedFormulas": ["parallelogram-area", "triangle-area"]
@@ -73,10 +73,10 @@
     "description": "마름모의 넓이는 두 대각선 길이의 곱을 2로 나눈 값입니다. 마름모의 두 대각선은 서로 수직으로 만나며, 대각선으로 잘라 재배치하면 직사각형의 절반이 됩니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "마름모가 차지하는 면적입니다." },
-      "d_1": { "role": "대각선 1", "description": "마름모의 한 대각선의 길이입니다." },
-      "d_2": { "role": "대각선 2", "description": "마름모의 다른 대각선의 길이입니다." },
-      "\\frac{1}{2}": { "role": "반", "description": "직사각형의 절반이라는 뜻입니다." }
+      "A": { "role": "넓이", "description": "마름모가 차지하는 면적입니다.", "kind": "output" },
+      "d_1": { "role": "대각선 1", "description": "마름모의 한 대각선의 길이입니다.", "kind": "input" },
+      "d_2": { "role": "대각선 2", "description": "마름모의 다른 대각선의 길이입니다.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "반", "description": "직사각형의 절반이라는 뜻입니다.", "kind": "constant", "value": 0.5 }
     },
     "realWorldExamples": ["마름모 모양 보석의 면적 계산", "연(카이트)의 천 넓이 구하기"],
     "relatedFormulas": ["square-area", "parallelogram-area"]
@@ -87,10 +87,10 @@
     "description": "원의 넓이는 반지름을 제곱한 값에 원주율(파이)을 곱한 것입니다. 원을 아주 얇은 조각으로 잘라 늘어놓으면 직사각형에 가까워지는데, 그 직사각형의 가로가 원둘레의 반, 세로가 반지름이 되어 이 공식이 나옵니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "원이 차지하는 면적입니다." },
-      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
-      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다." },
-      "r^2": { "role": "반지름의 제곱", "description": "반지름을 두 번 곱한 값입니다." }
+      "A": { "role": "넓이", "description": "원이 차지하는 면적입니다.", "kind": "output" },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다.", "kind": "input" },
+      "r^2": { "role": "반지름의 제곱", "description": "반지름을 두 번 곱한 값입니다.", "kind": "input" }
     },
     "realWorldExamples": ["피자의 크기 비교", "원형 시계의 면적 구하기", "동전의 넓이 계산"],
     "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
@@ -101,10 +101,10 @@
     "description": "원의 둘레(원주)는 반지름의 2배, 즉 지름에 원주율(파이)을 곱한 값입니다. 원을 따라 한 바퀴 돈 거리가 바로 원의 둘레입니다.",
     "field": "기하학",
     "elementMeanings": {
-      "C": { "role": "둘레", "description": "원의 바깥 테두리를 따라 잰 총 길이입니다." },
-      "2": { "role": "상수", "description": "반지름을 지름으로 바꾸기 위한 값입니다." },
-      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
-      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다." }
+      "C": { "role": "둘레", "description": "원의 바깥 테두리를 따라 잰 총 길이입니다.", "kind": "output" },
+      "2": { "role": "상수", "description": "반지름을 지름으로 바꾸기 위한 값입니다.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다.", "kind": "input" }
     },
     "realWorldExamples": ["자전거 바퀴가 한 바퀴 굴러간 거리", "원형 트랙의 한 바퀴 길이"],
     "relatedFormulas": ["circle-area-elem", "arc-length"]
@@ -115,11 +115,11 @@
     "description": "부채꼴의 넓이는 반지름의 제곱에 중심각(라디안)을 곱하고 2로 나눈 값입니다. 부채꼴은 원의 일부분이므로, 중심각이 클수록 넓이도 커집니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "부채꼴이 차지하는 면적입니다." },
-      "r": { "role": "반지름", "description": "부채꼴의 반지름 길이입니다." },
-      "r^2": { "role": "반지름의 제곱", "description": "반지름을 두 번 곱한 값입니다." },
-      "\\theta": { "role": "중심각", "description": "부채꼴의 중심에서 벌어진 각도입니다 (라디안 단위)." },
-      "\\frac{1}{2}": { "role": "반", "description": "넓이 공식에서의 계수입니다." }
+      "A": { "role": "넓이", "description": "부채꼴이 차지하는 면적입니다.", "kind": "output" },
+      "r": { "role": "반지름", "description": "부채꼴의 반지름 길이입니다.", "kind": "input" },
+      "r^2": { "role": "반지름의 제곱", "description": "반지름을 두 번 곱한 값입니다.", "kind": "input" },
+      "\\theta": { "role": "중심각", "description": "부채꼴의 중심에서 벌어진 각도입니다 (라디안 단위).", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "반", "description": "넓이 공식에서의 계수입니다.", "kind": "constant", "value": 0.5 }
     },
     "realWorldExamples": ["시계에서 분침이 쓸고 간 영역의 넓이", "피자 한 조각의 면적"],
     "relatedFormulas": ["circle-area-elem", "arc-length"]
@@ -130,9 +130,9 @@
     "description": "호의 길이는 반지름에 중심각(라디안)을 곱한 값입니다. 호는 원둘레의 일부분이며, 중심각이 한 바퀴(2파이)이면 호의 길이가 원의 둘레와 같아집니다.",
     "field": "기하학",
     "elementMeanings": {
-      "l": { "role": "호의 길이", "description": "원의 둘레 중 일부분의 길이입니다." },
-      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다." },
-      "\\theta": { "role": "중심각", "description": "호에 대응하는 중심각입니다 (라디안 단위)." }
+      "l": { "role": "호의 길이", "description": "원의 둘레 중 일부분의 길이입니다.", "kind": "output" },
+      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다.", "kind": "input" },
+      "\\theta": { "role": "중심각", "description": "호에 대응하는 중심각입니다 (라디안 단위).", "kind": "input", "unit": "rad" }
     },
     "realWorldExamples": ["롤러코스터 곡선 구간의 길이", "시계 눈금 사이의 호 길이"],
     "relatedFormulas": ["circle-circumference", "sector-area"]
@@ -143,10 +143,10 @@
     "description": "직사각형의 둘레는 가로와 세로를 더한 뒤 2를 곱한 값입니다. 직사각형의 마주 보는 변끼리 길이가 같으므로, 가로와 세로 한 쌍을 더해서 두 배 하면 네 변의 총 길이가 됩니다.",
     "field": "기하학",
     "elementMeanings": {
-      "P": { "role": "둘레", "description": "직사각형 네 변의 총 길이입니다." },
-      "l": { "role": "가로", "description": "직사각형의 가로 길이입니다." },
-      "w": { "role": "세로", "description": "직사각형의 세로 길이입니다." },
-      "2": { "role": "상수", "description": "마주 보는 두 쌍의 변이 있어 2를 곱합니다." }
+      "P": { "role": "둘레", "description": "직사각형 네 변의 총 길이입니다.", "kind": "output" },
+      "l": { "role": "가로", "description": "직사각형의 가로 길이입니다.", "kind": "input" },
+      "w": { "role": "세로", "description": "직사각형의 세로 길이입니다.", "kind": "input" },
+      "2": { "role": "상수", "description": "마주 보는 두 쌍의 변이 있어 2를 곱합니다.", "kind": "constant", "value": 2 }
     },
     "realWorldExamples": ["액자 테두리의 길이 계산", "운동장 둘레를 따라 달린 거리"],
     "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
@@ -157,10 +157,10 @@
     "description": "삼각형의 둘레는 세 변의 길이를 모두 합한 값입니다. 삼각형의 테두리를 따라 한 바퀴 돈 총 거리와 같습니다.",
     "field": "기하학",
     "elementMeanings": {
-      "P": { "role": "둘레", "description": "삼각형 세 변의 총 길이입니다." },
-      "a": { "role": "첫째 변", "description": "삼각형의 첫 번째 변의 길이입니다." },
-      "b": { "role": "둘째 변", "description": "삼각형의 두 번째 변의 길이입니다." },
-      "c": { "role": "셋째 변", "description": "삼각형의 세 번째 변의 길이입니다." }
+      "P": { "role": "둘레", "description": "삼각형 세 변의 총 길이입니다.", "kind": "output" },
+      "a": { "role": "첫째 변", "description": "삼각형의 첫 번째 변의 길이입니다.", "kind": "input" },
+      "b": { "role": "둘째 변", "description": "삼각형의 두 번째 변의 길이입니다.", "kind": "input" },
+      "c": { "role": "셋째 변", "description": "삼각형의 세 번째 변의 길이입니다.", "kind": "input" }
     },
     "realWorldExamples": ["삼각형 모양 울타리의 총 길이", "삼각 깃발 테두리에 필요한 끈 길이"],
     "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
@@ -171,11 +171,11 @@
     "description": "정다각형의 넓이는 변의 수에 한 변의 길이와 변심거리(중심에서 변까지의 수직 거리)를 곱하고 2로 나눈 값입니다. 정다각형을 중심에서 삼각형들로 나누면, 각 삼각형의 넓이를 모두 합한 것과 같습니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "정다각형이 차지하는 면적입니다." },
-      "n": { "role": "변의 수", "description": "정다각형의 변의 개수입니다." },
-      "s": { "role": "한 변의 길이", "description": "정다각형의 한 변의 길이입니다." },
-      "a": { "role": "변심거리", "description": "중심에서 변의 중점까지의 수직 거리입니다." },
-      "\\frac{1}{2}": { "role": "반", "description": "삼각형 넓이 공식에서 오는 계수입니다." }
+      "A": { "role": "넓이", "description": "정다각형이 차지하는 면적입니다.", "kind": "output" },
+      "n": { "role": "변의 수", "description": "정다각형의 변의 개수입니다.", "kind": "input" },
+      "s": { "role": "한 변의 길이", "description": "정다각형의 한 변의 길이입니다.", "kind": "input" },
+      "a": { "role": "변심거리", "description": "중심에서 변의 중점까지의 수직 거리입니다.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "반", "description": "삼각형 넓이 공식에서 오는 계수입니다.", "kind": "constant", "value": 0.5 }
     },
     "realWorldExamples": ["정육각형 벌집 한 칸의 면적", "정오각형 별 모양 장식의 넓이"],
     "relatedFormulas": ["triangle-area", "circle-area-elem"]
@@ -186,11 +186,11 @@
     "description": "원환(도넛 모양)의 넓이는 바깥 원의 넓이에서 안쪽 원의 넓이를 뺀 값입니다. 큰 반지름의 제곱에서 작은 반지름의 제곱을 빼고 원주율을 곱합니다.",
     "field": "기하학",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "원환(도넛 모양)이 차지하는 면적입니다." },
-      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다." },
-      "R": { "role": "바깥 반지름", "description": "바깥쪽 큰 원의 반지름입니다." },
-      "r": { "role": "안쪽 반지름", "description": "안쪽 작은 원의 반지름입니다." },
-      "R^2 - r^2": { "role": "반지름 제곱의 차", "description": "바깥 반지름의 제곱에서 안쪽 반지름의 제곱을 뺀 값입니다." }
+      "A": { "role": "넓이", "description": "원환(도넛 모양)이 차지하는 면적입니다.", "kind": "output" },
+      "\\pi": { "role": "원주율", "description": "원의 둘레를 지름으로 나눈 값으로, 약 3.14159입니다.", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "바깥 반지름", "description": "바깥쪽 큰 원의 반지름입니다.", "kind": "input" },
+      "r": { "role": "안쪽 반지름", "description": "안쪽 작은 원의 반지름입니다.", "kind": "input" },
+      "R^2 - r^2": { "role": "반지름 제곱의 차", "description": "바깥 반지름의 제곱에서 안쪽 반지름의 제곱을 뺀 값입니다.", "kind": "output" }
     },
     "realWorldExamples": ["도넛의 윗면 면적 구하기", "원형 트랙(달리기 레인)의 면적"],
     "relatedFormulas": ["circle-area-elem"]
@@ -201,10 +201,10 @@
     "description": "삼각형 내각의 합은 세 꼭짓점의 각도를 모두 더하면 항상 180도(반 바퀴)가 된다는 성질입니다. 어떤 삼각형이든 — 예각삼각형, 직각삼각형, 둔각삼각형 — 세 내각의 합은 언제나 180도입니다.",
     "field": "기하학",
     "elementMeanings": {
-      "\\alpha": { "role": "첫째 내각", "description": "삼각형의 첫 번째 꼭짓점에서의 각도입니다." },
-      "\\beta": { "role": "둘째 내각", "description": "삼각형의 두 번째 꼭짓점에서의 각도입니다." },
-      "\\gamma": { "role": "셋째 내각", "description": "삼각형의 세 번째 꼭짓점에서의 각도입니다." },
-      "180°": { "role": "반 바퀴", "description": "일직선이 이루는 각도이며, 삼각형 내각의 합과 같습니다." }
+      "\\alpha": { "role": "첫째 내각", "description": "삼각형의 첫 번째 꼭짓점에서의 각도입니다.", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "둘째 내각", "description": "삼각형의 두 번째 꼭짓점에서의 각도입니다.", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "셋째 내각", "description": "삼각형의 세 번째 꼭짓점에서의 각도입니다.", "kind": "input", "unit": "deg" },
+      "180°": { "role": "반 바퀴", "description": "일직선이 이루는 각도이며, 삼각형 내각의 합과 같습니다.", "kind": "constant", "value": 180, "unit": "deg" }
     },
     "realWorldExamples": ["두 각을 알 때 나머지 한 각 구하기", "건축에서 삼각형 구조물의 각도 맞추기"],
     "relatedFormulas": ["triangle-area", "triangle-perimeter"]

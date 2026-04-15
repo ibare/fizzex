@@ -7,10 +7,10 @@
     "field": "물리학",
     "significance": "질량이 곧 에너지의 한 형태임을 밝혀 현대 물리학의 패러다임을 바꾸었으며, 핵분열과 핵융합의 원리를 설명합니다.",
     "elementMeanings": {
-      "E": { "role": "에너지", "description": "물체가 가진 에너지. 단위: 줄(J)." },
-      "m": { "role": "질량", "description": "물체의 정지 질량. 단위: 킬로그램(kg)." },
-      "c": { "role": "광속", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
-      "c^2": { "role": "광속의 제곱", "description": "약 9x10의 16제곱. 질량-에너지 변환 비율입니다." }
+      "E": { "role": "에너지", "kind": "output", "unit": "J", "description": "물체가 가진 에너지. 단위: 줄(J)." },
+      "m": { "role": "질량", "kind": "input", "unit": "kg", "description": "물체의 정지 질량. 단위: 킬로그램(kg)." },
+      "c": { "role": "광속", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
+      "c^2": { "role": "광속의 제곱", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "약 9x10의 16제곱. 질량-에너지 변환 비율입니다." }
     },
     "relatedFormulas": ["kinetic-energy", "newton-second"]
   },
@@ -22,9 +22,9 @@
     "field": "물리학",
     "significance": "힘, 질량, 가속도의 관계를 정량적으로 확립하여 고전역학의 기초를 세웠습니다.",
     "elementMeanings": {
-      "F": { "role": "힘", "description": "물체에 작용하는 알짜힘. 단위: 뉴턴(N)." },
-      "m": { "role": "질량", "description": "물체의 질량. 관성의 크기를 나타냅니다. 단위: kg." },
-      "a": { "role": "가속도", "description": "속도의 시간당 변화율. 단위: m/s의 제곱." }
+      "F": { "role": "힘", "kind": "output", "unit": "N", "description": "물체에 작용하는 알짜힘. 단위: 뉴턴(N)." },
+      "m": { "role": "질량", "kind": "input", "unit": "kg", "description": "물체의 질량. 관성의 크기를 나타냅니다. 단위: kg." },
+      "a": { "role": "가속도", "kind": "input", "unit": "m/s²", "description": "속도의 시간당 변화율. 단위: m/s의 제곱." }
     },
     "relatedFormulas": ["universal-gravitation", "kinetic-energy", "mass-energy"]
   },
@@ -36,12 +36,12 @@
     "field": "물리학",
     "significance": "천체 운동과 지상 역학을 통합하여 최초의 보편적 물리 법칙을 확립했습니다.",
     "elementMeanings": {
-      "F": { "role": "중력", "description": "두 물체 사이에 작용하는 인력. 단위: 뉴턴(N)." },
-      "G": { "role": "중력 상수", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
-      "m_1": { "role": "첫째 물체의 질량", "description": "상호작용하는 첫 번째 물체의 질량입니다." },
-      "m_2": { "role": "둘째 물체의 질량", "description": "상호작용하는 두 번째 물체의 질량입니다." },
-      "r": { "role": "거리", "description": "두 물체의 질량 중심 사이의 거리입니다." },
-      "r^2": { "role": "거리의 제곱", "description": "역제곱 법칙을 반영. 거리가 두 배면 힘은 1/4이 됩니다." }
+      "F": { "role": "중력", "kind": "output", "unit": "N", "description": "두 물체 사이에 작용하는 인력. 단위: 뉴턴(N)." },
+      "G": { "role": "중력 상수", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
+      "m_1": { "role": "첫째 물체의 질량", "kind": "input", "unit": "kg", "description": "상호작용하는 첫 번째 물체의 질량입니다." },
+      "m_2": { "role": "둘째 물체의 질량", "kind": "input", "unit": "kg", "description": "상호작용하는 두 번째 물체의 질량입니다." },
+      "r": { "role": "거리", "kind": "input", "unit": "m", "description": "두 물체의 질량 중심 사이의 거리입니다." },
+      "r^2": { "role": "거리의 제곱", "kind": "structural", "description": "역제곱 법칙을 반영. 거리가 두 배면 힘은 1/4이 됩니다." }
     },
     "relatedFormulas": ["coulomb-law", "newton-second"]
   },
@@ -53,12 +53,12 @@
     "field": "물리학",
     "significance": "전자기학의 출발점이며, 맥스웰 방정식과 현대 전자기 이론의 기초를 제공합니다.",
     "elementMeanings": {
-      "F": { "role": "전기력", "description": "두 전하 사이에 작용하는 힘. 단위: 뉴턴(N)." },
-      "k_e": { "role": "쿨롱 상수", "description": "약 8.988x10의 9제곱 N m의 제곱/C의 제곱. 전기력의 세기를 결정합니다." },
-      "q_1": { "role": "첫째 전하", "description": "첫 번째 대전체의 전하량. 단위: 쿨롱(C)." },
-      "q_2": { "role": "둘째 전하", "description": "두 번째 대전체의 전하량. 같은 부호면 척력, 다른 부호면 인력입니다." },
-      "r": { "role": "거리", "description": "두 점전하 사이의 거리입니다." },
-      "r^2": { "role": "거리의 제곱", "description": "역제곱 법칙을 반영. 거리가 멀수록 힘이 급격히 약해집니다." }
+      "F": { "role": "전기력", "kind": "output", "unit": "N", "description": "두 전하 사이에 작용하는 힘. 단위: 뉴턴(N)." },
+      "k_e": { "role": "쿨롱 상수", "kind": "constant", "value": 8.988e9, "unit": "N·m²/C²", "description": "약 8.988x10의 9제곱 N m의 제곱/C의 제곱. 전기력의 세기를 결정합니다." },
+      "q_1": { "role": "첫째 전하", "kind": "input", "unit": "C", "description": "첫 번째 대전체의 전하량. 단위: 쿨롱(C)." },
+      "q_2": { "role": "둘째 전하", "kind": "input", "unit": "C", "description": "두 번째 대전체의 전하량. 같은 부호면 척력, 다른 부호면 인력입니다." },
+      "r": { "role": "거리", "kind": "input", "unit": "m", "description": "두 점전하 사이의 거리입니다." },
+      "r^2": { "role": "거리의 제곱", "kind": "structural", "description": "역제곱 법칙을 반영. 거리가 멀수록 힘이 급격히 약해집니다." }
     },
     "relatedFormulas": ["universal-gravitation", "newton-second"]
   },
@@ -69,11 +69,11 @@
     "field": "물리학",
     "significance": "에너지 보존 법칙의 핵심 구성 요소이며, 역학 문제 풀이에서 가장 자주 사용되는 에너지 형태입니다.",
     "elementMeanings": {
-      "K": { "role": "운동 에너지", "description": "물체의 운동으로 인한 에너지. 단위: 줄(J)." },
-      "\\frac{1}{2}": { "role": "비례 상수", "description": "뉴턴의 제2법칙에서 적분으로 유도될 때 나타나는 계수입니다." },
-      "m": { "role": "질량", "description": "움직이는 물체의 질량. 단위: kg." },
-      "v": { "role": "속력", "description": "물체의 이동 속력. 단위: m/s." },
-      "v^2": { "role": "속력의 제곱", "description": "속력이 두 배면 에너지는 네 배. 비선형 관계를 나타냅니다." }
+      "K": { "role": "운동 에너지", "kind": "output", "unit": "J", "description": "물체의 운동으로 인한 에너지. 단위: 줄(J)." },
+      "\\frac{1}{2}": { "role": "비례 상수", "kind": "constant", "value": 0.5, "description": "뉴턴의 제2법칙에서 적분으로 유도될 때 나타나는 계수입니다." },
+      "m": { "role": "질량", "kind": "input", "unit": "kg", "description": "움직이는 물체의 질량. 단위: kg." },
+      "v": { "role": "속력", "kind": "input", "unit": "m/s", "description": "물체의 이동 속력. 단위: m/s." },
+      "v^2": { "role": "속력의 제곱", "kind": "structural", "description": "속력이 두 배면 에너지는 네 배. 비선형 관계를 나타냅니다." }
     },
     "relatedFormulas": ["mass-energy", "newton-second"]
   },
@@ -85,12 +85,12 @@
     "field": "물리학",
     "significance": "등가속도 운동을 정량적으로 기술하는 핵심 운동학 공식이며, 역학 문제의 가장 기본적인 도구입니다.",
     "elementMeanings": {
-      "s": { "role": "변위", "description": "물체가 이동한 거리. 단위: 미터(m)." },
-      "v_0": { "role": "초기 속도", "description": "운동 시작 시점의 속도. 단위: m/s." },
-      "t": { "role": "시간", "description": "운동이 진행된 시간. 단위: 초(s)." },
-      "a": { "role": "가속도", "description": "일정한 가속도. 단위: m/s의 제곱." },
-      "\\frac{1}{2}": { "role": "비례 상수", "description": "적분에서 유도되는 계수. 가속도에 의한 변위의 비례 인자입니다." },
-      "t^2": { "role": "시간의 제곱", "description": "가속도에 의한 변위가 시간의 제곱에 비례함을 나타냅니다." }
+      "s": { "role": "변위", "kind": "output", "unit": "m", "description": "물체가 이동한 거리. 단위: 미터(m)." },
+      "v_0": { "role": "초기 속도", "kind": "input", "unit": "m/s", "description": "운동 시작 시점의 속도. 단위: m/s." },
+      "t": { "role": "시간", "kind": "input", "unit": "s", "description": "운동이 진행된 시간. 단위: 초(s)." },
+      "a": { "role": "가속도", "kind": "input", "unit": "m/s²", "description": "일정한 가속도. 단위: m/s의 제곱." },
+      "\\frac{1}{2}": { "role": "비례 상수", "kind": "constant", "value": 0.5, "description": "적분에서 유도되는 계수. 가속도에 의한 변위의 비례 인자입니다." },
+      "t^2": { "role": "시간의 제곱", "kind": "structural", "description": "가속도에 의한 변위가 시간의 제곱에 비례함을 나타냅니다." }
     },
     "relatedFormulas": ["velocity-acceleration", "velocity-displacement", "newton-second"],
     "realWorldExamples": [
@@ -107,10 +107,10 @@
     "field": "물리학",
     "significance": "가속도 개념을 정량화한 가장 기본적인 운동학 관계식이며, 모든 등가속도 운동 분석의 출발점입니다.",
     "elementMeanings": {
-      "v": { "role": "나중 속도", "description": "시간 t에서의 속도. 단위: m/s." },
-      "v_0": { "role": "초기 속도", "description": "운동 시작 시점의 속도. 단위: m/s." },
-      "a": { "role": "가속도", "description": "일정한 가속도. 단위: m/s의 제곱." },
-      "t": { "role": "시간", "description": "운동이 진행된 시간. 단위: 초(s)." }
+      "v": { "role": "나중 속도", "kind": "output", "unit": "m/s", "description": "시간 t에서의 속도. 단위: m/s." },
+      "v_0": { "role": "초기 속도", "kind": "input", "unit": "m/s", "description": "운동 시작 시점의 속도. 단위: m/s." },
+      "a": { "role": "가속도", "kind": "input", "unit": "m/s²", "description": "일정한 가속도. 단위: m/s의 제곱." },
+      "t": { "role": "시간", "kind": "input", "unit": "s", "description": "운동이 진행된 시간. 단위: 초(s)." }
     },
     "relatedFormulas": ["kinematic-displacement", "velocity-displacement", "newton-second"],
     "realWorldExamples": [
@@ -127,11 +127,11 @@
     "field": "물리학",
     "significance": "시간 없이 속도와 거리의 관계를 직접 구할 수 있어, 역학 문제의 핵심 보조 도구입니다.",
     "elementMeanings": {
-      "v^2": { "role": "나중 속도의 제곱", "description": "최종 속도의 제곱. 단위: (m/s)의 제곱." },
-      "v_0^2": { "role": "초기 속도의 제곱", "description": "초기 속도의 제곱. 단위: (m/s)의 제곱." },
-      "2": { "role": "상수 계수", "description": "운동 방정식 유도 과정에서 나타나는 계수입니다." },
-      "a": { "role": "가속도", "description": "일정한 가속도. 단위: m/s의 제곱." },
-      "s": { "role": "변위", "description": "물체가 이동한 거리. 단위: 미터(m)." }
+      "v^2": { "role": "나중 속도의 제곱", "kind": "output", "unit": "(m/s)²", "description": "최종 속도의 제곱. 단위: (m/s)의 제곱." },
+      "v_0^2": { "role": "초기 속도의 제곱", "kind": "input", "unit": "(m/s)²", "description": "초기 속도의 제곱. 단위: (m/s)의 제곱." },
+      "2": { "role": "상수 계수", "kind": "constant", "value": 2, "description": "운동 방정식 유도 과정에서 나타나는 계수입니다." },
+      "a": { "role": "가속도", "kind": "input", "unit": "m/s²", "description": "일정한 가속도. 단위: m/s의 제곱." },
+      "s": { "role": "변위", "kind": "input", "unit": "m", "description": "물체가 이동한 거리. 단위: 미터(m)." }
     },
     "relatedFormulas": ["kinematic-displacement", "velocity-acceleration", "kinetic-energy"],
     "realWorldExamples": [
@@ -148,13 +148,13 @@
     "field": "물리학",
     "significance": "2차원 운동을 수평/수직으로 분리하여 분석하는 방법론을 확립했으며, 탄도학의 기초입니다.",
     "elementMeanings": {
-      "y": { "role": "수직 위치", "description": "발사점 대비 수직 높이. 단위: 미터(m)." },
-      "x": { "role": "수평 거리", "description": "발사점으로부터의 수평 이동 거리. 단위: 미터(m)." },
-      "\\theta": { "role": "발사각", "description": "수평면과 초기 속도 벡터가 이루는 각도입니다." },
-      "\\tan\\theta": { "role": "발사각의 탄젠트", "description": "초기 궤적의 기울기를 나타냅니다." },
-      "g": { "role": "중력 가속도", "description": "지구 표면 근처에서 약 9.8 m/s의 제곱." },
-      "v_0": { "role": "초기 속력", "description": "발사 시점의 속력. 단위: m/s." },
-      "\\cos^2\\theta": { "role": "발사각 코사인의 제곱", "description": "수평 속도 성분의 제곱을 반영합니다." }
+      "y": { "role": "수직 위치", "kind": "output", "unit": "m", "description": "발사점 대비 수직 높이. 단위: 미터(m)." },
+      "x": { "role": "수평 거리", "kind": "input", "unit": "m", "description": "발사점으로부터의 수평 이동 거리. 단위: 미터(m)." },
+      "\\theta": { "role": "발사각", "kind": "input", "unit": "rad", "description": "수평면과 초기 속도 벡터가 이루는 각도입니다." },
+      "\\tan\\theta": { "role": "발사각의 탄젠트", "kind": "structural", "description": "초기 궤적의 기울기를 나타냅니다." },
+      "g": { "role": "중력 가속도", "kind": "constant", "value": 9.8, "unit": "m/s²", "description": "지구 표면 근처에서 약 9.8 m/s의 제곱." },
+      "v_0": { "role": "초기 속력", "kind": "input", "unit": "m/s", "description": "발사 시점의 속력. 단위: m/s." },
+      "\\cos^2\\theta": { "role": "발사각 코사인의 제곱", "kind": "structural", "description": "수평 속도 성분의 제곱을 반영합니다." }
     },
     "relatedFormulas": ["kinematic-displacement", "velocity-acceleration"],
     "realWorldExamples": [
@@ -170,11 +170,11 @@
     "field": "물리학",
     "significance": "진동과 파동 현상을 기술하는 가장 기본적인 모델이며, 복잡한 주기 운동도 단진동의 중첩으로 분석할 수 있습니다.",
     "elementMeanings": {
-      "x": { "role": "변위", "description": "평형 위치로부터의 이탈 거리. 단위: 미터(m)." },
-      "A": { "role": "진폭", "description": "최대 변위. 진동의 크기를 나타냅니다. 단위: 미터(m)." },
-      "\\omega": { "role": "각진동수", "description": "단위 시간당 위상 변화량. 단위: rad/s. 주기 T와의 관계: 2파이/T." },
-      "t": { "role": "시간", "description": "운동이 진행된 시간. 단위: 초(s)." },
-      "\\varphi": { "role": "초기 위상", "description": "t=0에서의 위상. 초기 조건을 반영합니다." }
+      "x": { "role": "변위", "kind": "output", "unit": "m", "description": "평형 위치로부터의 이탈 거리. 단위: 미터(m)." },
+      "A": { "role": "진폭", "kind": "input", "unit": "m", "description": "최대 변위. 진동의 크기를 나타냅니다. 단위: 미터(m)." },
+      "\\omega": { "role": "각진동수", "kind": "input", "unit": "rad/s", "description": "단위 시간당 위상 변화량. 단위: rad/s. 주기 T와의 관계: 2파이/T." },
+      "t": { "role": "시간", "kind": "input", "unit": "s", "description": "운동이 진행된 시간. 단위: 초(s)." },
+      "\\varphi": { "role": "초기 위상", "kind": "input", "unit": "rad", "description": "t=0에서의 위상. 초기 조건을 반영합니다." }
     },
     "relatedFormulas": ["wave-speed", "kinetic-energy"],
     "realWorldExamples": [
@@ -190,9 +190,9 @@
     "field": "물리학",
     "significance": "모든 파동 현상에 보편적으로 적용되는 기본 관계식이며, 음향학, 광학, 통신 등의 기초입니다.",
     "elementMeanings": {
-      "v": { "role": "파동 속도", "description": "파동이 매질을 통해 전파되는 속도. 단위: m/s." },
-      "f": { "role": "진동수", "description": "단위 시간당 진동 횟수. 단위: 헤르츠(Hz)." },
-      "\\lambda": { "role": "파장", "description": "한 주기에 해당하는 공간적 길이. 단위: 미터(m)." }
+      "v": { "role": "파동 속도", "kind": "output", "unit": "m/s", "description": "파동이 매질을 통해 전파되는 속도. 단위: m/s." },
+      "f": { "role": "진동수", "kind": "input", "unit": "Hz", "description": "단위 시간당 진동 횟수. 단위: 헤르츠(Hz)." },
+      "\\lambda": { "role": "파장", "kind": "input", "unit": "m", "description": "한 주기에 해당하는 공간적 길이. 단위: 미터(m)." }
     },
     "relatedFormulas": ["simple-harmonic", "de-broglie"],
     "realWorldExamples": [
@@ -208,11 +208,11 @@
     "field": "물리학",
     "significance": "열역학과 기체 역학의 기본 방정식이며, 실제 기체의 거동을 근사적으로 이해하는 출발점입니다.",
     "elementMeanings": {
-      "P": { "role": "압력", "description": "기체가 용기 벽에 가하는 힘의 세기. 단위: 파스칼(Pa)." },
-      "V": { "role": "부피", "description": "기체가 차지하는 공간의 크기. 단위: 세제곱미터(m의 3제곱) 또는 리터(L)." },
-      "n": { "role": "물질량", "description": "기체의 양. 단위: 몰(mol)." },
-      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K)." },
-      "T": { "role": "절대 온도", "description": "켈빈 단위의 온도. 0 K는 절대 영도입니다." }
+      "P": { "role": "압력", "kind": "input", "unit": "Pa", "description": "기체가 용기 벽에 가하는 힘의 세기. 단위: 파스칼(Pa)." },
+      "V": { "role": "부피", "kind": "input", "unit": "m³", "description": "기체가 차지하는 공간의 크기. 단위: 세제곱미터(m의 3제곱) 또는 리터(L)." },
+      "n": { "role": "물질량", "kind": "input", "unit": "mol", "description": "기체의 양. 단위: 몰(mol)." },
+      "R": { "role": "기체 상수", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)", "description": "이상기체 상수. 약 8.314 J/(mol K)." },
+      "T": { "role": "절대 온도", "kind": "input", "unit": "K", "description": "켈빈 단위의 온도. 0 K는 절대 영도입니다." }
     },
     "relatedFormulas": ["first-law-thermo", "boltzmann-dist"],
     "realWorldExamples": [
@@ -228,9 +228,9 @@
     "field": "물리학",
     "significance": "열과 일이 에너지의 서로 다른 형태임을 확립하여, 에너지 보존의 보편성을 열역학으로 확장했습니다.",
     "elementMeanings": {
-      "\\Delta U": { "role": "내부 에너지 변화", "description": "계의 내부 에너지 변화량. 분자 운동과 위치 에너지의 총합 변화." },
-      "Q": { "role": "열", "description": "계가 외부로부터 흡수한 열량. 양수면 흡열, 음수면 방열. 단위: 줄(J)." },
-      "W": { "role": "일", "description": "계가 외부에 한 일. 양수면 팽창, 음수면 압축. 단위: 줄(J)." }
+      "\\Delta U": { "role": "내부 에너지 변화", "kind": "output", "unit": "J", "description": "계의 내부 에너지 변화량. 분자 운동과 위치 에너지의 총합 변화." },
+      "Q": { "role": "열", "kind": "input", "unit": "J", "description": "계가 외부로부터 흡수한 열량. 양수면 흡열, 음수면 방열. 단위: 줄(J)." },
+      "W": { "role": "일", "kind": "input", "unit": "J", "description": "계가 외부에 한 일. 양수면 팽창, 음수면 압축. 단위: 줄(J)." }
     },
     "relatedFormulas": ["ideal-gas-law", "kinetic-energy"],
     "realWorldExamples": [
@@ -247,11 +247,11 @@
     "field": "물리학",
     "significance": "양자역학의 기본 운동 방정식으로, 원자 구조, 화학 결합, 반도체 물리 등 현대 과학의 토대를 제공합니다.",
     "elementMeanings": {
-      "i": { "role": "허수 단위", "description": "제곱하면 -1이 되는 수. 파동함수의 위상 변화를 나타냅니다." },
-      "\\hbar": { "role": "환산 플랑크 상수", "description": "플랑크 상수를 2파이로 나눈 값. 약 1.055x10의 -34제곱 J s." },
-      "\\frac{\\partial \\psi}{\\partial t}": { "role": "파동함수의 시간 편미분", "description": "파동함수가 시간에 따라 어떻게 변하는지를 나타냅니다." },
-      "\\hat{H}": { "role": "해밀토니안 연산자", "description": "계의 총 에너지(운동 에너지 + 위치 에너지)에 대응하는 연산자입니다." },
-      "\\psi": { "role": "파동함수", "description": "양자 상태를 기술하는 복소 함수. 절대값 제곱이 확률 밀도입니다." }
+      "i": { "role": "허수 단위", "kind": "structural", "description": "제곱하면 -1이 되는 수. 파동함수의 위상 변화를 나타냅니다." },
+      "\\hbar": { "role": "환산 플랑크 상수", "kind": "constant", "value": 1.055e-34, "unit": "J·s", "description": "플랑크 상수를 2파이로 나눈 값. 약 1.055x10의 -34제곱 J s." },
+      "\\frac{\\partial \\psi}{\\partial t}": { "role": "파동함수의 시간 편미분", "kind": "structural", "description": "파동함수가 시간에 따라 어떻게 변하는지를 나타냅니다." },
+      "\\hat{H}": { "role": "해밀토니안 연산자", "kind": "structural", "description": "계의 총 에너지(운동 에너지 + 위치 에너지)에 대응하는 연산자입니다." },
+      "\\psi": { "role": "파동함수", "kind": "structural", "description": "양자 상태를 기술하는 복소 함수. 절대값 제곱이 확률 밀도입니다." }
     },
     "relatedFormulas": ["de-broglie", "mass-energy"],
     "realWorldExamples": [
@@ -268,9 +268,9 @@
     "field": "물리학",
     "significance": "입자-파동 이중성을 물질로 확장하여 양자역학 탄생의 핵심 계기를 제공했습니다.",
     "elementMeanings": {
-      "\\lambda": { "role": "드브로이 파장", "description": "입자에 대응하는 물질파의 파장. 단위: 미터(m)." },
-      "h": { "role": "플랑크 상수", "description": "약 6.626x10의 -34제곱 J s. 양자역학의 기본 상수입니다." },
-      "p": { "role": "운동량", "description": "입자의 운동량(질량 곱하기 속도). 단위: kg m/s." }
+      "\\lambda": { "role": "드브로이 파장", "kind": "output", "unit": "m", "description": "입자에 대응하는 물질파의 파장. 단위: 미터(m)." },
+      "h": { "role": "플랑크 상수", "kind": "constant", "value": 6.626e-34, "unit": "J·s", "description": "약 6.626x10의 -34제곱 J s. 양자역학의 기본 상수입니다." },
+      "p": { "role": "운동량", "kind": "input", "unit": "kg·m/s", "description": "입자의 운동량(질량 곱하기 속도). 단위: kg m/s." }
     },
     "relatedFormulas": ["schrodinger-eq", "wave-speed", "mass-energy"],
     "realWorldExamples": [
@@ -287,11 +287,11 @@
     "field": "물리학",
     "significance": "통계역학의 근본 원리이며, 거시적 열역학 법칙을 미시적 입자 운동으로 설명하는 다리 역할을 합니다.",
     "elementMeanings": {
-      "P": { "role": "확률", "description": "입자가 특정 에너지 상태에 있을 확률입니다." },
-      "e": { "role": "자연상수", "description": "자연 로그의 밑. 약 2.718." },
-      "E": { "role": "에너지", "description": "해당 상태의 에너지. 단위: 줄(J)." },
-      "k": { "role": "볼츠만 상수", "description": "약 1.381x10의 -23제곱 J/K. 온도와 에너지를 연결하는 상수입니다." },
-      "T": { "role": "절대 온도", "description": "켈빈 단위의 온도. 높을수록 에너지 분산이 커집니다." }
+      "P": { "role": "확률", "kind": "output", "description": "입자가 특정 에너지 상태에 있을 확률입니다." },
+      "e": { "role": "자연상수", "kind": "constant", "value": 2.71828183, "description": "자연 로그의 밑. 약 2.718." },
+      "E": { "role": "에너지", "kind": "input", "unit": "J", "description": "해당 상태의 에너지. 단위: 줄(J)." },
+      "k": { "role": "볼츠만 상수", "kind": "constant", "value": 1.381e-23, "unit": "J/K", "description": "약 1.381x10의 -23제곱 J/K. 온도와 에너지를 연결하는 상수입니다." },
+      "T": { "role": "절대 온도", "kind": "input", "unit": "K", "description": "켈빈 단위의 온도. 높을수록 에너지 분산이 커집니다." }
     },
     "relatedFormulas": ["ideal-gas-law", "first-law-thermo"],
     "realWorldExamples": [
@@ -308,12 +308,12 @@
     "field": "물리학",
     "significance": "갈릴레이 변환을 대체하여 특수 상대성이론의 수학적 기초를 확립했습니다.",
     "elementMeanings": {
-      "t'": { "role": "변환된 시간", "description": "운동하는 관찰자 좌표계에서의 시간 좌표입니다." },
-      "\\gamma": { "role": "로렌츠 인자", "description": "1/루트(1-v의 제곱/c의 제곱). 속도가 광속에 가까울수록 커집니다." },
-      "t": { "role": "원래 시간", "description": "정지 좌표계에서의 시간 좌표입니다." },
-      "v": { "role": "상대 속도", "description": "두 좌표계 사이의 상대 속도. 단위: m/s." },
-      "x": { "role": "공간 좌표", "description": "정지 좌표계에서의 위치. 시간 변환에 공간이 개입함을 보여줍니다." },
-      "c^2": { "role": "광속의 제곱", "description": "시공간 변환의 비례 상수. 시간과 공간의 혼합 비율을 결정합니다." }
+      "t'": { "role": "변환된 시간", "kind": "output", "unit": "s", "description": "운동하는 관찰자 좌표계에서의 시간 좌표입니다." },
+      "\\gamma": { "role": "로렌츠 인자", "kind": "structural", "description": "1/루트(1-v의 제곱/c의 제곱). 속도가 광속에 가까울수록 커집니다." },
+      "t": { "role": "원래 시간", "kind": "input", "unit": "s", "description": "정지 좌표계에서의 시간 좌표입니다." },
+      "v": { "role": "상대 속도", "kind": "input", "unit": "m/s", "description": "두 좌표계 사이의 상대 속도. 단위: m/s." },
+      "x": { "role": "공간 좌표", "kind": "input", "unit": "m", "description": "정지 좌표계에서의 위치. 시간 변환에 공간이 개입함을 보여줍니다." },
+      "c^2": { "role": "광속의 제곱", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "시공간 변환의 비례 상수. 시간과 공간의 혼합 비율을 결정합니다." }
     },
     "relatedFormulas": ["mass-energy", "velocity-acceleration"],
     "realWorldExamples": [
@@ -330,9 +330,9 @@
     "field": "물리학",
     "significance": "전자기학의 4대 기본 방정식(맥스웰 방정식) 중 하나로, 전하와 전기장의 관계를 규정합니다.",
     "elementMeanings": {
-      "\\nabla \\cdot \\mathbf{E}": { "role": "전기장의 발산", "description": "전기장이 한 점에서 얼마나 퍼지거나 모이는지를 나타내는 미분 연산입니다." },
-      "\\rho": { "role": "전하 밀도", "description": "단위 부피당 전하량. 단위: C/m의 3제곱." },
-      "\\varepsilon_0": { "role": "진공 유전율", "description": "약 8.854x10의 -12제곱 F/m. 진공에서 전기장의 세기를 결정하는 상수입니다." }
+      "\\nabla \\cdot \\mathbf{E}": { "role": "전기장의 발산", "kind": "structural", "description": "전기장이 한 점에서 얼마나 퍼지거나 모이는지를 나타내는 미분 연산입니다." },
+      "\\rho": { "role": "전하 밀도", "kind": "input", "unit": "C/m³", "description": "단위 부피당 전하량. 단위: C/m의 3제곱." },
+      "\\varepsilon_0": { "role": "진공 유전율", "kind": "constant", "value": 8.854e-12, "unit": "C²/(N·m²)", "description": "약 8.854x10의 -12제곱 F/m. 진공에서 전기장의 세기를 결정하는 상수입니다." }
     },
     "relatedFormulas": ["coulomb-law"],
     "realWorldExamples": [

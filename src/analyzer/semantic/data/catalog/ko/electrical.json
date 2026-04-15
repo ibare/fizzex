@@ -7,9 +7,9 @@
     "field": "전기공학",
     "significance": "전압, 전류, 저항의 정량적 관계를 확립하여 전기회로 이론의 토대를 마련했습니다.",
     "elementMeanings": {
-      "V": { "role": "전압", "description": "도체 양 끝에 걸리는 전위차. 단위: 볼트(V)." },
-      "I": { "role": "전류", "description": "도체를 통해 흐르는 전하의 흐름. 단위: 암페어(A)." },
-      "R": { "role": "저항", "description": "전류 흐름을 방해하는 정도. 단위: 옴(Ohm)." }
+      "V": { "role": "전압", "description": "도체 양 끝에 걸리는 전위차. 단위: 볼트(V).", "kind": "input" },
+      "I": { "role": "전류", "description": "도체를 통해 흐르는 전하의 흐름. 단위: 암페어(A).", "kind": "input" },
+      "R": { "role": "저항", "description": "전류 흐름을 방해하는 정도. 단위: 옴(Ohm).", "kind": "input" }
     },
     "realWorldExamples": ["전구에 걸리는 전압과 밝기의 관계", "가정용 전열기의 소비 전력 계산"],
     "relatedFormulas": ["electric-power", "kirchhoff-voltage", "impedance"]
@@ -22,9 +22,9 @@
     "field": "전기공학",
     "significance": "전기 에너지의 소비와 공급을 정량화하여 발전, 송전, 배전 시스템 설계의 기초를 제공합니다.",
     "elementMeanings": {
-      "P": { "role": "전력", "description": "단위 시간당 소비되거나 공급되는 에너지. 단위: 와트(W)." },
-      "I": { "role": "전류", "description": "회로에 흐르는 전류. 단위: 암페어(A)." },
-      "V": { "role": "전압", "description": "회로 양단의 전위차. 단위: 볼트(V)." }
+      "P": { "role": "전력", "description": "단위 시간당 소비되거나 공급되는 에너지. 단위: 와트(W).", "kind": "output" },
+      "I": { "role": "전류", "description": "회로에 흐르는 전류. 단위: 암페어(A).", "kind": "input" },
+      "V": { "role": "전압", "description": "회로 양단의 전위차. 단위: 볼트(V).", "kind": "input" }
     },
     "realWorldExamples": ["가전제품의 소비 전력 표시", "전기요금 산정의 기초"],
     "relatedFormulas": ["ohm-law", "kirchhoff-voltage", "kirchhoff-current"]
@@ -37,8 +37,8 @@
     "field": "전기공학",
     "significance": "복잡한 회로망 해석을 체계적으로 가능하게 하여 현대 회로 이론의 기둥 중 하나가 되었습니다.",
     "elementMeanings": {
-      "\\sum V": { "role": "전압의 합", "description": "폐루프 내 모든 전압 강하와 상승의 대수적 합. 항상 0입니다." },
-      "V_k": { "role": "개별 전압", "description": "루프 내 각 소자에 걸리는 전압. 전원은 양, 저항은 음의 부호를 가집니다." }
+      "\\sum V": { "role": "전압의 합", "description": "폐루프 내 모든 전압 강하와 상승의 대수적 합. 항상 0입니다.", "kind": "output" },
+      "V_k": { "role": "개별 전압", "description": "루프 내 각 소자에 걸리는 전압. 전원은 양, 저항은 음의 부호를 가집니다.", "kind": "input" }
     },
     "realWorldExamples": ["직렬 회로에서 각 저항의 전압 분배 계산", "전자회로 기판의 전압 레벨 설계"],
     "relatedFormulas": ["kirchhoff-current", "ohm-law", "impedance"]
@@ -51,8 +51,8 @@
     "field": "전기공학",
     "significance": "전하 보존 원리를 회로 해석에 적용하여 노드 해석법의 기초를 확립했습니다.",
     "elementMeanings": {
-      "\\sum I": { "role": "전류의 합", "description": "한 절점으로 들어오고 나가는 모든 전류의 대수적 합. 항상 0입니다." },
-      "I_k": { "role": "개별 전류", "description": "절점에 연결된 각 가지(branch)를 흐르는 전류입니다." }
+      "\\sum I": { "role": "전류의 합", "description": "한 절점으로 들어오고 나가는 모든 전류의 대수적 합. 항상 0입니다.", "kind": "output" },
+      "I_k": { "role": "개별 전류", "description": "절점에 연결된 각 가지(branch)를 흐르는 전류입니다.", "kind": "input" }
     },
     "realWorldExamples": ["병렬 저항 회로에서 각 분기 전류 계산", "전력 분배 시스템의 부하 균형 분석"],
     "relatedFormulas": ["kirchhoff-voltage", "ohm-law", "electric-power"]
@@ -65,9 +65,9 @@
     "field": "전기공학",
     "significance": "과도 응답과 주파수 특성을 하나의 파라미터로 요약하여 아날로그 회로 설계의 핵심 도구가 되었습니다.",
     "elementMeanings": {
-      "\\tau": { "role": "시정수", "description": "회로의 과도 응답 속도를 결정하는 시간 상수. 단위: 초(s)." },
-      "R": { "role": "저항", "description": "회로의 저항값. 단위: 옴(Ohm)." },
-      "C": { "role": "커패시턴스", "description": "커패시터의 전하 저장 용량. 단위: 패럿(F)." }
+      "\\tau": { "role": "시정수", "description": "회로의 과도 응답 속도를 결정하는 시간 상수. 단위: 초(s).", "kind": "output" },
+      "R": { "role": "저항", "description": "회로의 저항값. 단위: 옴(Ohm).", "kind": "input" },
+      "C": { "role": "커패시턴스", "description": "커패시터의 전하 저장 용량. 단위: 패럿(F).", "kind": "input" }
     },
     "realWorldExamples": ["카메라 플래시의 충전 시간 결정", "터치스크린의 터치 감지 회로"],
     "relatedFormulas": ["ohm-law", "impedance", "resonance-frequency"]
@@ -80,10 +80,10 @@
     "field": "전기공학",
     "significance": "교류 회로의 복잡한 위상 관계를 하나의 물리량으로 통합하여 교류 회로 해석을 체계화했습니다.",
     "elementMeanings": {
-      "Z": { "role": "임피던스", "description": "교류 회로의 총 저항. 단위: 옴(Ohm)." },
-      "R": { "role": "저항", "description": "순수 저항 성분. 에너지를 소비합니다." },
-      "X_L": { "role": "유도 리액턴스", "description": "인덕터에 의한 리액턴스. X_L = 2파이fL." },
-      "X_C": { "role": "용량 리액턴스", "description": "커패시터에 의한 리액턴스. X_C = 1/(2파이fC)." }
+      "Z": { "role": "임피던스", "description": "교류 회로의 총 저항. 단위: 옴(Ohm).", "kind": "output" },
+      "R": { "role": "저항", "description": "순수 저항 성분. 에너지를 소비합니다.", "kind": "input" },
+      "X_L": { "role": "유도 리액턴스", "description": "인덕터에 의한 리액턴스. X_L = 2파이fL.", "kind": "input" },
+      "X_C": { "role": "용량 리액턴스", "description": "커패시터에 의한 리액턴스. X_C = 1/(2파이fC).", "kind": "input" }
     },
     "realWorldExamples": ["스피커 시스템의 주파수별 응답 특성 설계", "송전선의 전력 손실 최소화"],
     "relatedFormulas": ["ohm-law", "resonance-frequency", "rc-time-constant"]
@@ -96,10 +96,10 @@
     "field": "전기공학",
     "significance": "주파수 선택 회로의 원리를 제공하여 무선 통신과 필터 설계의 기초를 확립했습니다.",
     "elementMeanings": {
-      "f_0": { "role": "공진 주파수", "description": "회로가 공진하는 고유 주파수. 단위: 헤르츠(Hz)." },
-      "L": { "role": "인덕턴스", "description": "인덕터의 자기 에너지 저장 능력. 단위: 헨리(H)." },
-      "C": { "role": "커패시턴스", "description": "커패시터의 전기 에너지 저장 능력. 단위: 패럿(F)." },
-      "2\\pi": { "role": "원주율 계수", "description": "각주파수와 일반 주파수 사이의 변환 계수입니다." }
+      "f_0": { "role": "공진 주파수", "description": "회로가 공진하는 고유 주파수. 단위: 헤르츠(Hz).", "kind": "output" },
+      "L": { "role": "인덕턴스", "description": "인덕터의 자기 에너지 저장 능력. 단위: 헨리(H).", "kind": "input" },
+      "C": { "role": "커패시턴스", "description": "커패시터의 전기 에너지 저장 능력. 단위: 패럿(F).", "kind": "input" },
+      "2\\pi": { "role": "원주율 계수", "description": "각주파수와 일반 주파수 사이의 변환 계수입니다.", "kind": "constant", "value": 6.283185307, "unit": "" }
     },
     "realWorldExamples": ["라디오 주파수 튜닝", "MRI 장치의 공명 주파수 설정"],
     "relatedFormulas": ["impedance", "rc-time-constant", "shannon-capacity"]
@@ -112,11 +112,11 @@
     "field": "전기공학",
     "significance": "정보 이론의 핵심 결과로, 모든 디지털 통신 시스템 설계의 이론적 상한을 제시했습니다.",
     "elementMeanings": {
-      "C": { "role": "채널 용량", "description": "오류 없이 전송 가능한 최대 비트율. 단위: 비트/초(bps)." },
-      "B": { "role": "대역폭", "description": "채널이 사용할 수 있는 주파수 범위의 폭. 단위: 헤르츠(Hz)." },
-      "S": { "role": "신호 전력", "description": "수신 신호의 평균 전력입니다." },
-      "N": { "role": "잡음 전력", "description": "채널의 평균 잡음 전력입니다." },
-      "\\log_2": { "role": "밑이 2인 로그", "description": "결과를 비트 단위로 표현하기 위한 로그 함수입니다." }
+      "C": { "role": "채널 용량", "description": "오류 없이 전송 가능한 최대 비트율. 단위: 비트/초(bps).", "kind": "output" },
+      "B": { "role": "대역폭", "description": "채널이 사용할 수 있는 주파수 범위의 폭. 단위: 헤르츠(Hz).", "kind": "input" },
+      "S": { "role": "신호 전력", "description": "수신 신호의 평균 전력입니다.", "kind": "input" },
+      "N": { "role": "잡음 전력", "description": "채널의 평균 잡음 전력입니다.", "kind": "input" },
+      "\\log_2": { "role": "밑이 2인 로그", "description": "결과를 비트 단위로 표현하기 위한 로그 함수입니다.", "kind": "structural" }
     },
     "realWorldExamples": ["5G 이동통신 시스템의 이론적 최대 전송 속도 계산", "와이파이 채널 설계 시 대역폭 결정"],
     "relatedFormulas": ["resonance-frequency", "ohm-law"]

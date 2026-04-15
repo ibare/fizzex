@@ -7,10 +7,10 @@
     "field": "정보이론",
     "significance": "정보이론을 창시한 핵심 개념으로, 데이터 압축, 통신, 암호학, 머신러닝 등 전 분야에 영향을 미쳤습니다.",
     "elementMeanings": {
-      "H(X)": { "role": "엔트로피", "description": "확률 변수 X의 평균 정보량. 단위: 비트(밑이 2일 때) 또는 냇(밑이 e일 때)." },
-      "p(x)": { "role": "확률", "description": "사건 x가 발생할 확률입니다." },
-      "\\log p(x)": { "role": "자기 정보량", "description": "사건 x의 정보량. 확률이 낮을수록 정보량이 높습니다." },
-      "-\\sum": { "role": "음의 기댓값", "description": "자기 정보량의 기댓값에 음부호를 붙여 양수로 만듭니다." }
+      "H(X)": { "role": "엔트로피", "description": "확률 변수 X의 평균 정보량. 단위: 비트(밑이 2일 때) 또는 냇(밑이 e일 때).", "kind": "output" },
+      "p(x)": { "role": "확률", "description": "사건 x가 발생할 확률입니다.", "kind": "input" },
+      "\\log p(x)": { "role": "자기 정보량", "description": "사건 x의 정보량. 확률이 낮을수록 정보량이 높습니다.", "kind": "structural" },
+      "-\\sum": { "role": "음의 기댓값", "description": "자기 정보량의 기댓값에 음부호를 붙여 양수로 만듭니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "동전 던지기의 불확실성: 공정한 동전은 1비트, 편향된 동전은 1비트 미만",
@@ -26,10 +26,10 @@
     "field": "정보이론",
     "significance": "분포 간 차이를 측정하는 기본 도구로, 베이즈 추론, VAE, 강화학습의 정책 최적화 등에 널리 활용됩니다.",
     "elementMeanings": {
-      "D_{KL}(P \\| Q)": { "role": "KL 발산", "description": "P에서 Q로의 정보 손실량입니다." },
-      "p(x)": { "role": "참 분포", "description": "실제(참조) 확률 분포입니다." },
-      "q(x)": { "role": "근사 분포", "description": "참 분포를 근사하려는 모델 분포입니다." },
-      "\\log(p(x)/q(x))": { "role": "로그 확률비", "description": "각 사건에서 두 분포의 확률 비율의 로그값입니다." }
+      "D_{KL}(P \\| Q)": { "role": "KL 발산", "description": "P에서 Q로의 정보 손실량입니다.", "kind": "output" },
+      "p(x)": { "role": "참 분포", "description": "실제(참조) 확률 분포입니다.", "kind": "input" },
+      "q(x)": { "role": "근사 분포", "description": "참 분포를 근사하려는 모델 분포입니다.", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "로그 확률비", "description": "각 사건에서 두 분포의 확률 비율의 로그값입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "변분 오토인코더(VAE)에서 잠재 변수 분포를 정규 분포에 가깝게 유도",
@@ -45,9 +45,9 @@
     "field": "정보이론",
     "significance": "변수 간 의존성을 비선형적으로 측정할 수 있어, 특징 선택, 클러스터링, 신경과학 등 다양한 분야에서 활용됩니다.",
     "elementMeanings": {
-      "I(X;Y)": { "role": "상호정보량", "description": "X와 Y가 공유하는 정보의 양입니다." },
-      "H(X)": { "role": "X의 엔트로피", "description": "X 단독의 불확실성(정보량)입니다." },
-      "H(X|Y)": { "role": "조건부 엔트로피", "description": "Y를 알고 난 뒤에도 남아 있는 X의 불확실성입니다." }
+      "I(X;Y)": { "role": "상호정보량", "description": "X와 Y가 공유하는 정보의 양입니다.", "kind": "output" },
+      "H(X)": { "role": "X의 엔트로피", "description": "X 단독의 불확실성(정보량)입니다.", "kind": "input" },
+      "H(X|Y)": { "role": "조건부 엔트로피", "description": "Y를 알고 난 뒤에도 남아 있는 X의 불확실성입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "유전자 발현 데이터에서 두 유전자 간의 비선형 관계 탐지",
@@ -63,8 +63,8 @@
     "field": "정보이론",
     "significance": "데이터 압축의 근본적 한계를 확립하여, 허프만 코딩, 산술 코딩 등 실용 압축 알고리즘 개발의 이론적 토대를 마련했습니다.",
     "elementMeanings": {
-      "L": { "role": "평균 코드 길이", "description": "심볼 하나를 인코딩하는 데 필요한 평균 비트 수입니다." },
-      "H(X)": { "role": "소스 엔트로피", "description": "정보 소스의 심볼당 평균 정보량. 압축의 이론적 하한입니다." }
+      "L": { "role": "평균 코드 길이", "description": "심볼 하나를 인코딩하는 데 필요한 평균 비트 수입니다.", "kind": "output" },
+      "H(X)": { "role": "소스 엔트로피", "description": "정보 소스의 심볼당 평균 정보량. 압축의 이론적 하한입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "ZIP 파일 압축에서 원본 데이터의 엔트로피가 압축 한계를 결정",
@@ -80,8 +80,8 @@
     "field": "정보이론",
     "significance": "정보 처리의 근본적 한계를 설정하여, 통신 채널 설계와 머신러닝의 표현 학습에 이론적 제약 조건을 제공합니다.",
     "elementMeanings": {
-      "I(X;Y)": { "role": "원본과 중간 단계의 상호정보량", "description": "원본 데이터 X와 중간 처리 결과 Y가 공유하는 정보량입니다." },
-      "I(X;Z)": { "role": "원본과 최종 결과의 상호정보량", "description": "원본 데이터 X와 추가 가공 결과 Z가 공유하는 정보량입니다." }
+      "I(X;Y)": { "role": "원본과 중간 단계의 상호정보량", "description": "원본 데이터 X와 중간 처리 결과 Y가 공유하는 정보량입니다.", "kind": "input" },
+      "I(X;Z)": { "role": "원본과 최종 결과의 상호정보량", "description": "원본 데이터 X와 추가 가공 결과 Z가 공유하는 정보량입니다.", "kind": "output" }
     },
     "realWorldExamples": [
       "이미지를 흑백으로 변환하면 원본 색상 정보를 복원할 수 없는 이유",

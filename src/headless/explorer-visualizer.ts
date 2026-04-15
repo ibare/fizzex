@@ -55,8 +55,9 @@ export class ExplorerVisualizerController {
       initialValues[p.id] = p.default;
     }
 
-    // Bridge 생성
+    // Bridge 생성 + 카탈로그 상수 전달
     this._bridge = new VisualizerBridgeImpl(viz, initialValues);
+    this._bridge.setCatalogDetail(catalogDetail);
 
     // Mount
     const rect = this.container.getBoundingClientRect();

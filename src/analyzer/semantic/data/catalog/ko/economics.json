@@ -7,12 +7,12 @@
     "field": "경제학",
     "significance": "국가 경제 성과를 단일 수치로 요약하여 정책 결정, 국제 비교, 경기 순환 분석의 기준이 됩니다.",
     "elementMeanings": {
-      "Y": { "role": "국내총생산", "description": "일정 기간 동안 국내에서 생산된 모든 최종 재화와 서비스의 시장 가치 총합입니다." },
-      "C": { "role": "소비", "description": "가계의 재화 및 서비스 구매 지출입니다." },
-      "I": { "role": "투자", "description": "기업의 자본재 구입과 재고 변동을 포함하는 총투자입니다." },
-      "G": { "role": "정부지출", "description": "정부가 재화와 서비스를 구매하는 데 쓴 지출입니다." },
-      "X": { "role": "수출", "description": "외국에 판매한 재화와 서비스의 가치입니다." },
-      "M": { "role": "수입", "description": "외국에서 구매한 재화와 서비스의 가치입니다." }
+      "Y": { "role": "국내총생산", "description": "일정 기간 동안 국내에서 생산된 모든 최종 재화와 서비스의 시장 가치 총합입니다.", "kind": "output" },
+      "C": { "role": "소비", "description": "가계의 재화 및 서비스 구매 지출입니다.", "kind": "input" },
+      "I": { "role": "투자", "description": "기업의 자본재 구입과 재고 변동을 포함하는 총투자입니다.", "kind": "input" },
+      "G": { "role": "정부지출", "description": "정부가 재화와 서비스를 구매하는 데 쓴 지출입니다.", "kind": "input" },
+      "X": { "role": "수출", "description": "외국에 판매한 재화와 서비스의 가치입니다.", "kind": "input" },
+      "M": { "role": "수입", "description": "외국에서 구매한 재화와 서비스의 가치입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "한 나라의 연간 경제 성장률 계산",
@@ -29,9 +29,9 @@
     "field": "경제학",
     "significance": "시장 가격 형성 원리를 설명하며, 정부 가격 규제, 조세 효과 분석, 시장 효율성 평가의 이론적 토대를 제공합니다.",
     "elementMeanings": {
-      "Q_d": { "role": "수요량", "description": "주어진 가격에서 소비자가 구매하고자 하는 재화의 양입니다." },
-      "Q_s": { "role": "공급량", "description": "주어진 가격에서 생산자가 판매하고자 하는 재화의 양입니다." },
-      "P": { "role": "가격", "description": "재화 한 단위의 시장 가격. 균형에서 수요량과 공급량을 일치시키는 값입니다." }
+      "Q_d": { "role": "수요량", "description": "주어진 가격에서 소비자가 구매하고자 하는 재화의 양입니다.", "kind": "input" },
+      "Q_s": { "role": "공급량", "description": "주어진 가격에서 생산자가 판매하고자 하는 재화의 양입니다.", "kind": "input" },
+      "P": { "role": "가격", "description": "재화 한 단위의 시장 가격. 균형에서 수요량과 공급량을 일치시키는 값입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "유가 변동에 따른 휘발유 가격 결정",
@@ -48,11 +48,11 @@
     "field": "경제학",
     "significance": "가격 변화가 소비자 행동에 미치는 영향을 정량화하여 기업의 가격 설정, 정부의 조세 정책 설계에 필수적인 도구입니다.",
     "elementMeanings": {
-      "E": { "role": "탄력성", "description": "수요의 가격 탄력성. 가격 변화에 대한 수요량 변화의 상대적 비율입니다." },
-      "\\Delta Q": { "role": "수요량 변화분", "description": "가격 변화로 인한 수요량의 변화입니다." },
-      "Q": { "role": "수요량", "description": "기준 시점의 수요량입니다." },
-      "\\Delta P": { "role": "가격 변화분", "description": "가격의 변화입니다." },
-      "P": { "role": "가격", "description": "기준 시점의 가격입니다." }
+      "E": { "role": "탄력성", "description": "수요의 가격 탄력성. 가격 변화에 대한 수요량 변화의 상대적 비율입니다.", "kind": "output" },
+      "\\Delta Q": { "role": "수요량 변화분", "description": "가격 변화로 인한 수요량의 변화입니다.", "kind": "input" },
+      "Q": { "role": "수요량", "description": "기준 시점의 수요량입니다.", "kind": "input" },
+      "\\Delta P": { "role": "가격 변화분", "description": "가격의 변화입니다.", "kind": "input" },
+      "P": { "role": "가격", "description": "기준 시점의 가격입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "담배세 인상 시 소비 감소 효과 예측",
@@ -69,12 +69,12 @@
     "field": "경제학",
     "significance": "생산 요소 간 대체 가능성과 규모의 경제를 분석하며, 솔로 성장 모형 등 현대 거시경제학의 토대를 이루는 함수입니다.",
     "elementMeanings": {
-      "Y": { "role": "총생산량", "description": "생산 요소 투입으로 얻어지는 총산출입니다." },
-      "A": { "role": "총요소생산성", "description": "기술 수준이나 효율성을 나타내는 상수입니다." },
-      "L": { "role": "노동 투입량", "description": "생산에 투입되는 노동의 양입니다." },
-      "K": { "role": "자본 투입량", "description": "생산에 투입되는 자본(기계, 설비 등)의 양입니다." },
-      "\\alpha": { "role": "노동의 산출 탄력성", "description": "노동 투입이 1% 증가할 때 산출이 몇 % 증가하는지를 나타냅니다." },
-      "\\beta": { "role": "자본의 산출 탄력성", "description": "자본 투입이 1% 증가할 때 산출이 몇 % 증가하는지를 나타냅니다." }
+      "Y": { "role": "총생산량", "description": "생산 요소 투입으로 얻어지는 총산출입니다.", "kind": "output" },
+      "A": { "role": "총요소생산성", "description": "기술 수준이나 효율성을 나타내는 상수입니다.", "kind": "input" },
+      "L": { "role": "노동 투입량", "description": "생산에 투입되는 노동의 양입니다.", "kind": "input" },
+      "K": { "role": "자본 투입량", "description": "생산에 투입되는 자본(기계, 설비 등)의 양입니다.", "kind": "input" },
+      "\\alpha": { "role": "노동의 산출 탄력성", "description": "노동 투입이 1% 증가할 때 산출이 몇 % 증가하는지를 나타냅니다.", "kind": "input" },
+      "\\beta": { "role": "자본의 산출 탄력성", "description": "자본 투입이 1% 증가할 때 산출이 몇 % 증가하는지를 나타냅니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "국가 간 경제 성장률 차이 분석",
@@ -91,9 +91,9 @@
     "field": "경제학",
     "significance": "명목 변수와 실질 변수를 구분하는 고전파 이분법의 핵심이며, 금리 정책과 인플레이션 분석의 기본 틀을 제공합니다.",
     "elementMeanings": {
-      "i": { "role": "명목이자율", "description": "물가 변동을 고려하지 않은 이자율입니다." },
-      "r": { "role": "실질이자율", "description": "인플레이션을 제거한 실제 구매력 기준의 이자율입니다." },
-      "\\pi": { "role": "인플레이션율", "description": "일정 기간 동안의 물가 상승률입니다." }
+      "i": { "role": "명목이자율", "description": "물가 변동을 고려하지 않은 이자율입니다.", "kind": "output" },
+      "r": { "role": "실질이자율", "description": "인플레이션을 제거한 실제 구매력 기준의 이자율입니다.", "kind": "input" },
+      "\\pi": { "role": "인플레이션율", "description": "일정 기간 동안의 물가 상승률입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "예금 실질 수익률 계산",
@@ -110,10 +110,10 @@
     "field": "경제학",
     "significance": "인플레이션의 근본 원인을 통화량 증가로 설명하며, 중앙은행의 통화 정책 수립에 이론적 근거를 제공합니다.",
     "elementMeanings": {
-      "M": { "role": "통화량", "description": "경제에 유통되는 화폐의 총량입니다." },
-      "V": { "role": "화폐 유통속도", "description": "일정 기간 동안 화폐 한 단위가 거래에 사용되는 평균 횟수입니다." },
-      "P": { "role": "물가 수준", "description": "재화와 서비스의 전반적인 가격 수준입니다." },
-      "Y": { "role": "실질 산출량", "description": "물가 변동을 제거한 실질 GDP입니다." }
+      "M": { "role": "통화량", "description": "경제에 유통되는 화폐의 총량입니다.", "kind": "input" },
+      "V": { "role": "화폐 유통속도", "description": "일정 기간 동안 화폐 한 단위가 거래에 사용되는 평균 횟수입니다.", "kind": "input" },
+      "P": { "role": "물가 수준", "description": "재화와 서비스의 전반적인 가격 수준입니다.", "kind": "output" },
+      "Y": { "role": "실질 산출량", "description": "물가 변동을 제거한 실질 GDP입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "양적 완화 정책이 물가에 미치는 영향 분석",
@@ -130,10 +130,10 @@
     "field": "경제학",
     "significance": "시장 효율성과 소비자 복지를 측정하는 기준이 되며, 독점 규제, 조세 부과, 무역 정책의 후생 효과 분석에 사용됩니다.",
     "elementMeanings": {
-      "CS": { "role": "소비자 잉여", "description": "소비자가 얻는 총 순편익. 수요 곡선 아래 면적에서 실제 지출을 뺀 값입니다." },
-      "D(q)": { "role": "수요함수", "description": "수량 q에서 소비자가 지불할 의사가 있는 최대 가격입니다." },
-      "p^*": { "role": "시장 균형 가격", "description": "실제로 소비자가 지불하는 시장 가격입니다." },
-      "q": { "role": "수량", "description": "재화의 거래량. 적분 변수입니다." }
+      "CS": { "role": "소비자 잉여", "description": "소비자가 얻는 총 순편익. 수요 곡선 아래 면적에서 실제 지출을 뺀 값입니다.", "kind": "output" },
+      "D(q)": { "role": "수요함수", "description": "수량 q에서 소비자가 지불할 의사가 있는 최대 가격입니다.", "kind": "structural" },
+      "p^*": { "role": "시장 균형 가격", "description": "실제로 소비자가 지불하는 시장 가격입니다.", "kind": "input" },
+      "q": { "role": "수량", "description": "재화의 거래량. 적분 변수입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "세일 기간 소비자가 얻는 추가 이득 계산",
@@ -150,10 +150,10 @@
     "field": "경제학",
     "significance": "기업의 최적 생산량 결정과 가격 설정의 근거가 되며, 완전 경쟁 시장에서 공급 곡선을 구성하는 핵심 개념입니다.",
     "elementMeanings": {
-      "MC": { "role": "한계비용", "description": "생산량 한 단위 증가에 따른 총비용의 변화분입니다." },
-      "TC": { "role": "총비용", "description": "주어진 생산량을 생산하기 위한 모든 비용의 합계입니다." },
-      "Q": { "role": "생산량", "description": "생산되는 재화의 수량입니다." },
-      "\\frac{d}{dQ}": { "role": "미분 연산자", "description": "생산량에 대한 도함수. 비용의 순간 변화율을 구합니다." }
+      "MC": { "role": "한계비용", "description": "생산량 한 단위 증가에 따른 총비용의 변화분입니다.", "kind": "output" },
+      "TC": { "role": "총비용", "description": "주어진 생산량을 생산하기 위한 모든 비용의 합계입니다.", "kind": "input" },
+      "Q": { "role": "생산량", "description": "생산되는 재화의 수량입니다.", "kind": "input" },
+      "\\frac{d}{dQ}": { "role": "미분 연산자", "description": "생산량에 대한 도함수. 비용의 순간 변화율을 구합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "공장 추가 가동 여부 판단",

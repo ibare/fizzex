@@ -6,6 +6,7 @@
  */
 
 import type { RootNode } from '../types';
+import type { CatalogDetail } from '../analyzer/semantic/types';
 import type {
   FizzexVisualizer,
   ParameterValues,
@@ -21,6 +22,7 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
   private listeners = new Set<(params: ParameterValues, source: string) => void>();
   private derivedDefs: DerivedValue[];
   private ast: RootNode | null = null;
+  private catalogDetail: CatalogDetail | null = null;
   private destroyed = false;
 
   constructor(visualizer: FizzexVisualizer, initialParams: ParameterValues) {
@@ -57,6 +59,11 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     }
   }
 
+  /** 카탈로그 상세 데이터 설정 — 상수 추출에 사용 */
+  setCatalogDetail(detail: CatalogDetail | null): void {
+    this.catalogDetail = detail;
+  }
+
   setAst(ast: RootNode | null): void {
     if (this.destroyed) return;
     this.ast = ast;
@@ -71,7 +78,21 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     // AST가 있으면 방정식 우변을 평가 (상수 + SI 변환된 파라미터)
     let equationValue: number | undefined;
     if (this.ast) {
-      const evalParams: ParameterValues = { ...this.visualizer.constants };
+      // 1) 카탈로그 상수 추출 (kind === 'constant' && value != null)
+      const catalogConstants: ParameterValues = {};
+      if (this.catalogDetail?.elementMeanings) {
+        for (const [key, em] of Object.entries(this.catalogDetail.elementMeanings)) {
+          if ('kind' in em && em.kind === 'constant' && em.value != null) {
+            catalogConstants[key] = em.value;
+          }
+        }
+      }
+
+      // 2) 우선순위: 카탈로그 상수 → Visualizer 상수 → 사용자 파라미터(SI 변환)
+      const evalParams: ParameterValues = {
+        ...catalogConstants,
+        ...this.visualizer.constants,
+      };
       for (const pc of this.visualizer.parameters) {
         const v = this.params[pc.id];
         if (v != null) evalParams[pc.name] = v * (pc.siMultiplier ?? 1);
@@ -102,5 +123,6 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     this.destroyed = true;
     this.listeners.clear();
     this.ast = null;
+    this.catalogDetail = null;
   }
 }

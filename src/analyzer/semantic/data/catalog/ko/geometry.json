@@ -7,11 +7,11 @@
     "field": "기하학",
     "significance": "유클리드 거리의 정의를 제공하며, 삼각법, 해석기하, 벡터 공간 등 현대 수학 전반의 기초입니다.",
     "elementMeanings": {
-      "a": { "role": "직각변", "description": "직각을 끼는 한 변의 길이입니다." },
-      "b": { "role": "직각변", "description": "직각을 끼는 다른 변의 길이입니다." },
-      "c": { "role": "빗변", "description": "직각의 맞은편에 있는 가장 긴 변의 길이입니다." },
-      "a^2+b^2": { "role": "직각변 제곱합", "description": "두 직각변 길이의 제곱을 더한 값입니다." },
-      "c^2": { "role": "빗변의 제곱", "description": "빗변 길이를 제곱한 값. 직각변 제곱합과 같습니다." }
+      "a": { "role": "직각변", "description": "직각을 끼는 한 변의 길이입니다.", "kind": "input" },
+      "b": { "role": "직각변", "description": "직각을 끼는 다른 변의 길이입니다.", "kind": "input" },
+      "c": { "role": "빗변", "description": "직각의 맞은편에 있는 가장 긴 변의 길이입니다.", "kind": "output" },
+      "a^2+b^2": { "role": "직각변 제곱합", "description": "두 직각변 길이의 제곱을 더한 값입니다.", "kind": "output" },
+      "c^2": { "role": "빗변의 제곱", "description": "빗변 길이를 제곱한 값. 직각변 제곱합과 같습니다.", "kind": "output" }
     },
     "relatedFormulas": ["law-of-cosines", "heron-formula"]
   },
@@ -23,11 +23,11 @@
     "field": "기하학",
     "significance": "높이 정보 없이 변의 길이만으로 넓이를 구할 수 있어 측량과 컴퓨터 그래픽스에서 널리 사용됩니다.",
     "elementMeanings": {
-      "a": { "role": "첫째 변", "description": "삼각형의 첫 번째 변의 길이입니다." },
-      "b": { "role": "둘째 변", "description": "삼각형의 두 번째 변의 길이입니다." },
-      "c": { "role": "셋째 변", "description": "삼각형의 세 번째 변의 길이입니다." },
-      "s": { "role": "반둘레", "description": "세 변 합의 절반. s = (a+b+c)/2입니다." },
-      "A": { "role": "넓이", "description": "삼각형의 넓이. 루트(s(s-a)(s-b)(s-c))로 계산됩니다." }
+      "a": { "role": "첫째 변", "description": "삼각형의 첫 번째 변의 길이입니다.", "kind": "input" },
+      "b": { "role": "둘째 변", "description": "삼각형의 두 번째 변의 길이입니다.", "kind": "input" },
+      "c": { "role": "셋째 변", "description": "삼각형의 세 번째 변의 길이입니다.", "kind": "input" },
+      "s": { "role": "반둘레", "description": "세 변 합의 절반. s = (a+b+c)/2입니다.", "kind": "output" },
+      "A": { "role": "넓이", "description": "삼각형의 넓이. 루트(s(s-a)(s-b)(s-c))로 계산됩니다.", "kind": "output" }
     },
     "relatedFormulas": ["pythagorean-theorem", "circle-area"]
   },
@@ -39,10 +39,10 @@
     "field": "기하학",
     "significance": "가장 기본적인 곡선 도형의 면적 공식이며, 적분 개념의 역사적 출발점입니다.",
     "elementMeanings": {
-      "A": { "role": "넓이", "description": "원이 차지하는 면적입니다. 단위: 길이의 제곱." },
-      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다." },
-      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다." },
-      "r^2": { "role": "반지름의 제곱", "description": "반지름을 제곱한 값. 넓이의 크기를 결정합니다." }
+      "A": { "role": "넓이", "description": "원이 차지하는 면적입니다. 단위: 길이의 제곱.", "kind": "output" },
+      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다.", "kind": "input" },
+      "r^2": { "role": "반지름의 제곱", "description": "반지름을 제곱한 값. 넓이의 크기를 결정합니다.", "kind": "input" }
     },
     "relatedFormulas": ["sphere-volume", "pythagorean-theorem"]
   },
@@ -53,11 +53,11 @@
     "field": "기하학",
     "significance": "직각삼각형이 아닌 일반 삼각형에서도 변과 각의 관계를 구할 수 있게 하며, 측량과 내비게이션에 필수적입니다.",
     "elementMeanings": {
-      "a": { "role": "구하려는 변", "description": "코사인 법칙으로 길이를 구하려는 변입니다." },
-      "b": { "role": "알려진 변", "description": "삼각형의 알려진 한 변의 길이입니다." },
-      "c": { "role": "알려진 변", "description": "삼각형의 알려진 다른 변의 길이입니다." },
-      "C": { "role": "끼인각", "description": "변 b와 변 c 사이에 끼인 각도입니다." },
-      "\\cos C": { "role": "끼인각의 코사인", "description": "끼인각 C의 코사인값. 각이 직각이면 0이 됩니다." }
+      "a": { "role": "구하려는 변", "description": "코사인 법칙으로 길이를 구하려는 변입니다.", "kind": "output" },
+      "b": { "role": "알려진 변", "description": "삼각형의 알려진 한 변의 길이입니다.", "kind": "input" },
+      "c": { "role": "알려진 변", "description": "삼각형의 알려진 다른 변의 길이입니다.", "kind": "input" },
+      "C": { "role": "끼인각", "description": "변 b와 변 c 사이에 끼인 각도입니다.", "kind": "input", "unit": "rad" },
+      "\\cos C": { "role": "끼인각의 코사인", "description": "끼인각 C의 코사인값. 각이 직각이면 0이 됩니다.", "kind": "structural" }
     },
     "relatedFormulas": ["pythagorean-theorem", "heron-formula"]
   },
@@ -69,11 +69,11 @@
     "field": "기하학",
     "significance": "3차원 공간에서 가장 기본적인 곡면 입체의 부피 공식이며, 물리학과 공학에서 광범위하게 활용됩니다.",
     "elementMeanings": {
-      "V": { "role": "부피", "description": "구가 차지하는 공간의 크기입니다. 단위: 길이의 세제곱." },
-      "\\frac{4}{3}": { "role": "비례 상수", "description": "구의 부피와 반지름 세제곱 사이의 비례 계수입니다." },
-      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다." },
-      "r": { "role": "반지름", "description": "구의 중심에서 표면까지의 거리입니다." },
-      "r^3": { "role": "반지름의 세제곱", "description": "반지름을 세 번 곱한 값. 부피가 3차원적으로 증가함을 반영합니다." }
+      "V": { "role": "부피", "description": "구가 차지하는 공간의 크기입니다. 단위: 길이의 세제곱.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "비례 상수", "description": "구의 부피와 반지름 세제곱 사이의 비례 계수입니다.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "반지름", "description": "구의 중심에서 표면까지의 거리입니다.", "kind": "input" },
+      "r^3": { "role": "반지름의 세제곱", "description": "반지름을 세 번 곱한 값. 부피가 3차원적으로 증가함을 반영합니다.", "kind": "input" }
     },
     "relatedFormulas": ["circle-area"]
   },
@@ -85,10 +85,10 @@
     "field": "기하학",
     "significance": "기하학적 대상의 위상적 성질을 수량화한 최초의 결과이며, 위상수학과 그래프 이론의 출발점입니다.",
     "elementMeanings": {
-      "V": { "role": "꼭짓점 수", "description": "다면체의 꼭짓점(모서리가 만나는 점)의 총 수입니다." },
-      "E": { "role": "모서리 수", "description": "다면체의 모서리(두 면이 만나는 선분)의 총 수입니다." },
-      "F": { "role": "면의 수", "description": "다면체의 면(평면 다각형)의 총 수입니다." },
-      "2": { "role": "오일러 지표", "description": "볼록 다면체(구와 위상 동형)의 오일러 지표. 항상 2입니다." }
+      "V": { "role": "꼭짓점 수", "description": "다면체의 꼭짓점(모서리가 만나는 점)의 총 수입니다.", "kind": "input" },
+      "E": { "role": "모서리 수", "description": "다면체의 모서리(두 면이 만나는 선분)의 총 수입니다.", "kind": "input" },
+      "F": { "role": "면의 수", "description": "다면체의 면(평면 다각형)의 총 수입니다.", "kind": "input" },
+      "2": { "role": "오일러 지표", "description": "볼록 다면체(구와 위상 동형)의 오일러 지표. 항상 2입니다.", "kind": "constant", "value": 2 }
     },
     "realWorldExamples": [
       "정육면체 검증: 꼭짓점 8 - 모서리 12 + 면 6 = 2",
@@ -103,11 +103,11 @@
     "field": "기하학",
     "significance": "기하학적 도형을 대수적 방정식으로 표현하는 해석기하학의 핵심 사례이며, 원과 직선의 관계 분석에 필수적입니다.",
     "elementMeanings": {
-      "x": { "role": "점의 x좌표", "description": "원 위 임의의 점의 가로 좌표입니다." },
-      "y": { "role": "점의 y좌표", "description": "원 위 임의의 점의 세로 좌표입니다." },
-      "a": { "role": "중심의 x좌표", "description": "원의 중심점의 가로 좌표입니다." },
-      "b": { "role": "중심의 y좌표", "description": "원의 중심점의 세로 좌표입니다." },
-      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다." }
+      "x": { "role": "점의 x좌표", "description": "원 위 임의의 점의 가로 좌표입니다.", "kind": "input" },
+      "y": { "role": "점의 y좌표", "description": "원 위 임의의 점의 세로 좌표입니다.", "kind": "input" },
+      "a": { "role": "중심의 x좌표", "description": "원의 중심점의 가로 좌표입니다.", "kind": "input" },
+      "b": { "role": "중심의 y좌표", "description": "원의 중심점의 세로 좌표입니다.", "kind": "input" },
+      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "GPS 위치 추적에서 특정 기지국으로부터 일정 거리에 있는 가능한 위치들의 집합",
@@ -123,12 +123,12 @@
     "field": "기하학",
     "significance": "행성 궤도의 수학적 모델이며, 광학에서 반사 성질, 건축에서 속삭임 갤러리 등 다양한 응용이 있습니다.",
     "elementMeanings": {
-      "x": { "role": "점의 x좌표", "description": "타원 위 임의의 점의 가로 좌표입니다." },
-      "y": { "role": "점의 y좌표", "description": "타원 위 임의의 점의 세로 좌표입니다." },
-      "a": { "role": "장축 반길이", "description": "타원의 가로축(장축) 반길이입니다. 가장 먼 점까지의 거리." },
-      "b": { "role": "단축 반길이", "description": "타원의 세로축(단축) 반길이입니다. 가장 가까운 점까지의 거리." },
-      "a^2": { "role": "장축 반길이의 제곱", "description": "x 성분의 정규화 분모입니다." },
-      "b^2": { "role": "단축 반길이의 제곱", "description": "y 성분의 정규화 분모입니다." }
+      "x": { "role": "점의 x좌표", "description": "타원 위 임의의 점의 가로 좌표입니다.", "kind": "input" },
+      "y": { "role": "점의 y좌표", "description": "타원 위 임의의 점의 세로 좌표입니다.", "kind": "input" },
+      "a": { "role": "장축 반길이", "description": "타원의 가로축(장축) 반길이입니다. 가장 먼 점까지의 거리.", "kind": "input" },
+      "b": { "role": "단축 반길이", "description": "타원의 세로축(단축) 반길이입니다. 가장 가까운 점까지의 거리.", "kind": "input" },
+      "a^2": { "role": "장축 반길이의 제곱", "description": "x 성분의 정규화 분모입니다.", "kind": "input" },
+      "b^2": { "role": "단축 반길이의 제곱", "description": "y 성분의 정규화 분모입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "케플러 제1법칙: 행성은 태양을 한 초점으로 하는 타원 궤도를 그린다",
@@ -144,12 +144,12 @@
     "field": "기하학",
     "significance": "내비게이션(로란 시스템), 쌍곡선 냉각탑 설계, 특수상대성이론의 시공간 구조 등에 활용됩니다.",
     "elementMeanings": {
-      "x": { "role": "점의 x좌표", "description": "쌍곡선 위 임의의 점의 가로 좌표입니다." },
-      "y": { "role": "점의 y좌표", "description": "쌍곡선 위 임의의 점의 세로 좌표입니다." },
-      "a": { "role": "실축 반길이", "description": "쌍곡선의 꼭짓점에서 중심까지의 거리입니다." },
-      "b": { "role": "허축 반길이", "description": "점근선의 기울기를 결정하는 축의 반길이입니다." },
-      "a^2": { "role": "실축 반길이의 제곱", "description": "x 성분의 정규화 분모입니다." },
-      "b^2": { "role": "허축 반길이의 제곱", "description": "y 성분의 정규화 분모입니다." }
+      "x": { "role": "점의 x좌표", "description": "쌍곡선 위 임의의 점의 가로 좌표입니다.", "kind": "input" },
+      "y": { "role": "점의 y좌표", "description": "쌍곡선 위 임의의 점의 세로 좌표입니다.", "kind": "input" },
+      "a": { "role": "실축 반길이", "description": "쌍곡선의 꼭짓점에서 중심까지의 거리입니다.", "kind": "input" },
+      "b": { "role": "허축 반길이", "description": "점근선의 기울기를 결정하는 축의 반길이입니다.", "kind": "input" },
+      "a^2": { "role": "실축 반길이의 제곱", "description": "x 성분의 정규화 분모입니다.", "kind": "input" },
+      "b^2": { "role": "허축 반길이의 제곱", "description": "y 성분의 정규화 분모입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "로란 내비게이션: 두 기지국에서 수신한 신호의 시간차로 위치를 결정하는 원리",

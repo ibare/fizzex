@@ -38,7 +38,7 @@ export interface InlineControlConfig {
   displayValue?: string;
 }
 
-// ─── 잘 알려진 상수 ───
+// ─── 잘 알려진 상수 (카탈로그 미매칭 시 fallback) ───
 
 const KNOWN_MATH_CONSTANTS = new Set(['π', 'pi', 'e', 'i']);
 
@@ -54,11 +54,13 @@ const KNOWN_CONSTANT_VALUES: Record<string, { value: string; label: string }> = 
 /**
  * AST 노드의 유형에 따라 인라인 컨트롤 종류를 결정한다.
  *
- * - variable + 수학 상수(π, e, i) → readonly
- * - variable (일반) → slider
- * - number → stepper
- * - operator, func, row, root, text, space → none
- * - 그 외 구조 노드 → readonly
+ * 카탈로그 kind 필드 우선:
+ * - constant → readonly (값 표시)
+ * - output → readonly (결과값)
+ * - input → slider
+ * - structural → none
+ *
+ * 카탈로그 미매칭 시 fallback: KNOWN_MATH_CONSTANTS
  */
 export function getControlType(
   node: MathNode,
@@ -68,16 +70,21 @@ export function getControlType(
     case 'variable': {
       const name = (node as { name: string }).name;
 
-      // 수학 상수
-      if (KNOWN_MATH_CONSTANTS.has(name)) return 'readonly';
-
-      // 카탈로그에서 물리 상수로 명시된 경우 (elementMeanings의 description에 "상수" 포함)
-      if (catalogDetail?.elementMeanings?.[name]) {
-        const meaning = catalogDetail.elementMeanings[name];
-        if (meaning.description.includes('상수') && !hasParameterConfig(name, catalogDetail)) {
-          return 'readonly';
+      // 카탈로그 kind 기반 판별 (우선)
+      const meaning = catalogDetail?.elementMeanings?.[name];
+      if (meaning && 'kind' in meaning) {
+        switch (meaning.kind) {
+          case 'constant': return 'readonly';
+          case 'output': return 'readonly';
+          case 'structural': return 'none';
+          case 'input':
+          default:
+            return 'slider';
         }
       }
+
+      // fallback: 잘 알려진 수학 상수
+      if (KNOWN_MATH_CONSTANTS.has(name)) return 'readonly';
 
       return 'slider';
     }
@@ -163,7 +170,17 @@ export function buildInlineControlConfig(
       const name = node.type === 'variable'
         ? (node as { name: string }).name
         : undefined;
-      if (name && KNOWN_CONSTANT_VALUES[name]) {
+
+      // 카탈로그 kind/value 우선
+      const em = name ? catalogDetail?.elementMeanings?.[name] : undefined;
+      if (em && 'kind' in em && em.kind === 'constant' && em.value != null) {
+        const formatted = formatConstantValue(em.value);
+        const unit = em.unit ? ` ${em.unit}` : '';
+        config.displayValue = `${em.role} ${name} = ${formatted}${unit}`;
+      } else if (em && 'kind' in em && em.kind === 'output') {
+        config.displayValue = em.role;
+      } else if (name && KNOWN_CONSTANT_VALUES[name]) {
+        // fallback: 잘 알려진 수학 상수
         const info = KNOWN_CONSTANT_VALUES[name];
         config.displayValue = `${info.label} ${name} ≈ ${info.value}`;
       } else if (semantic) {
@@ -178,8 +195,13 @@ export function buildInlineControlConfig(
 
 // ─── 내부 헬퍼 ───
 
-function hasParameterConfig(varName: string, detail: CatalogDetail): boolean {
-  return !!detail.parameterConfig?.some(
-    (p) => p.id === varName || p.name === varName,
-  );
+/** 상수 값을 읽기 좋은 문자열로 포맷 (과학적 표기법 지원) */
+function formatConstantValue(value: number): string {
+  if (value === 0) return '0';
+  const abs = Math.abs(value);
+  if (abs >= 0.01 && abs < 1e6) {
+    return value.toLocaleString('ko-KR', { maximumSignificantDigits: 6 });
+  }
+  // 과학적 표기법
+  return value.toExponential(3);
 }

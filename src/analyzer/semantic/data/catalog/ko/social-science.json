@@ -7,9 +7,9 @@
     "field": "사회과학",
     "significance": "경제적 불평등을 단일 수치로 압축하여 국제 비교와 정책 수립의 기본 지표가 되었습니다.",
     "elementMeanings": {
-      "G": { "role": "지니 계수", "description": "0(완전 평등)에서 1(완전 불평등) 사이의 불평등 척도입니다." },
-      "L(x)": { "role": "로렌츠 곡선", "description": "인구 비율 x에 대한 누적 소득 비율을 나타내는 곡선입니다." },
-      "\\int L(x) dx": { "role": "로렌츠 곡선 아래 면적", "description": "0에서 1까지 로렌츠 곡선 아래의 면적입니다." }
+      "G": { "role": "지니 계수", "description": "0(완전 평등)에서 1(완전 불평등) 사이의 불평등 척도입니다.", "kind": "output" },
+      "L(x)": { "role": "로렌츠 곡선", "description": "인구 비율 x에 대한 누적 소득 비율을 나타내는 곡선입니다.", "kind": "structural" },
+      "\\int L(x) dx": { "role": "로렌츠 곡선 아래 면적", "description": "0에서 1까지 로렌츠 곡선 아래의 면적입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "세계은행이 각국의 소득 불평등을 비교할 때 사용하는 핵심 지표",
@@ -25,10 +25,10 @@
     "field": "사회과학",
     "significance": "인간 기억의 정량적 연구를 개척하여, 간격 반복 학습법 등 과학적 학습 전략의 토대를 마련했습니다.",
     "elementMeanings": {
-      "R": { "role": "기억 보존률", "description": "학습 내용 중 기억에 남아 있는 비율. 0에서 1 사이의 값입니다." },
-      "t": { "role": "경과 시간", "description": "학습 시점 이후 경과한 시간입니다." },
-      "S": { "role": "기억 강도", "description": "기억의 안정성. 반복 학습으로 증가시킬 수 있으며, 클수록 망각이 느립니다." },
-      "e^{-t/S}": { "role": "지수 감쇠", "description": "시간 대비 기억 강도의 비율에 따른 지수적 감소를 나타냅니다." }
+      "R": { "role": "기억 보존률", "description": "학습 내용 중 기억에 남아 있는 비율. 0에서 1 사이의 값입니다.", "kind": "output" },
+      "t": { "role": "경과 시간", "description": "학습 시점 이후 경과한 시간입니다.", "kind": "input" },
+      "S": { "role": "기억 강도", "description": "기억의 안정성. 반복 학습으로 증가시킬 수 있으며, 클수록 망각이 느립니다.", "kind": "input" },
+      "e^{-t/S}": { "role": "지수 감쇠", "description": "시간 대비 기억 강도의 비율에 따른 지수적 감소를 나타냅니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "Anki 등 간격 반복 앱이 최적의 복습 시점을 계산하는 원리",
@@ -44,11 +44,11 @@
     "field": "사회과학",
     "significance": "인구 과잉과 자원 부족에 대한 학문적 논의를 촉발하여, 인구학과 생태학의 기초를 놓았습니다.",
     "elementMeanings": {
-      "N(t)": { "role": "시간 t에서의 인구", "description": "시간 t에서의 총 인구 수입니다." },
-      "N_0": { "role": "초기 인구", "description": "시간 t=0에서의 인구 수입니다." },
-      "r": { "role": "자연 성장률", "description": "출생률에서 사망률을 뺀 인구의 순 성장률입니다." },
-      "t": { "role": "시간", "description": "초기 시점으로부터 경과한 시간입니다." },
-      "e^{rt}": { "role": "지수 성장 인자", "description": "성장률과 시간의 곱에 따른 기하급수적 증가를 나타냅니다." }
+      "N(t)": { "role": "시간 t에서의 인구", "description": "시간 t에서의 총 인구 수입니다.", "kind": "output" },
+      "N_0": { "role": "초기 인구", "description": "시간 t=0에서의 인구 수입니다.", "kind": "input" },
+      "r": { "role": "자연 성장률", "description": "출생률에서 사망률을 뺀 인구의 순 성장률입니다.", "kind": "input" },
+      "t": { "role": "시간", "description": "초기 시점으로부터 경과한 시간입니다.", "kind": "input" },
+      "e^{rt}": { "role": "지수 성장 인자", "description": "성장률과 시간의 곱에 따른 기하급수적 증가를 나타냅니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "개발도상국에서 단기간의 인구 증가 추세를 예측하는 모형",
@@ -64,11 +64,11 @@
     "field": "사회과학",
     "significance": "심리물리학을 창시하여 주관적 감각을 정량적으로 측정할 수 있는 길을 열었으며, UX 디자인과 음향 공학에도 영향을 미쳤습니다.",
     "elementMeanings": {
-      "S": { "role": "감각의 크기", "description": "인간이 주관적으로 느끼는 자극의 세기입니다." },
-      "k": { "role": "비례 상수", "description": "감각 양식(시각, 청각 등)에 따라 달라지는 상수입니다." },
-      "I": { "role": "자극의 강도", "description": "물리적으로 측정한 자극의 세기입니다." },
-      "I_0": { "role": "역치 자극", "description": "감지할 수 있는 최소한의 자극 강도(절대 역치)입니다." },
-      "\\ln(I/I_0)": { "role": "자극비의 로그", "description": "현재 자극과 역치의 비율에 자연로그를 취한 값입니다." }
+      "S": { "role": "감각의 크기", "description": "인간이 주관적으로 느끼는 자극의 세기입니다.", "kind": "output" },
+      "k": { "role": "비례 상수", "description": "감각 양식(시각, 청각 등)에 따라 달라지는 상수입니다.", "kind": "input" },
+      "I": { "role": "자극의 강도", "description": "물리적으로 측정한 자극의 세기입니다.", "kind": "input" },
+      "I_0": { "role": "역치 자극", "description": "감지할 수 있는 최소한의 자극 강도(절대 역치)입니다.", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "자극비의 로그", "description": "현재 자극과 역치의 비율에 자연로그를 취한 값입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "데시벨(dB) 단위가 로그 스케일인 이유: 소리 에너지가 10배여야 '두 배 시끄럽다'고 느낌",
@@ -84,10 +84,10 @@
     "field": "사회과학",
     "significance": "체스를 시작으로 스포츠, e스포츠, 매칭 시스템 등에서 실력 평가의 국제 표준이 되었습니다.",
     "elementMeanings": {
-      "E_A": { "role": "A의 기대 승률", "description": "경기자 A가 B를 이길 것으로 기대되는 확률입니다." },
-      "R_A": { "role": "A의 레이팅", "description": "경기자 A의 현재 실력 등급입니다." },
-      "R_B": { "role": "B의 레이팅", "description": "경기자 B의 현재 실력 등급입니다." },
-      "10^{(R_B - R_A)/400}": { "role": "레이팅 차이 변환", "description": "두 경기자의 레이팅 차이를 확률 비율로 변환하는 지수 항입니다." }
+      "E_A": { "role": "A의 기대 승률", "description": "경기자 A가 B를 이길 것으로 기대되는 확률입니다.", "kind": "output" },
+      "R_A": { "role": "A의 레이팅", "description": "경기자 A의 현재 실력 등급입니다.", "kind": "input" },
+      "R_B": { "role": "B의 레이팅", "description": "경기자 B의 현재 실력 등급입니다.", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "레이팅 차이 변환", "description": "두 경기자의 레이팅 차이를 확률 비율로 변환하는 지수 항입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "체스 세계 선수권에서 선수들의 공식 등급 산정",
@@ -103,9 +103,9 @@
     "field": "사회과학",
     "significance": "조세 정책 논쟁의 핵심 프레임워크로, 감세를 통한 세수 증대 가능성이라는 공급 중시 경제학의 이론적 근거가 되었습니다.",
     "elementMeanings": {
-      "세율": { "role": "독립변수", "description": "정부가 설정하는 세금의 비율. 0%에서 100% 사이입니다." },
-      "세수": { "role": "종속변수", "description": "정부가 실제로 거둬들이는 세금 총액입니다." },
-      "최적 세율": { "role": "극대점", "description": "세수를 최대화하는 세율. 곡선의 꼭짓점에 해당합니다." }
+      "세율": { "role": "독립변수", "description": "정부가 설정하는 세금의 비율. 0%에서 100% 사이입니다.", "kind": "input" },
+      "세수": { "role": "종속변수", "description": "정부가 실제로 거둬들이는 세금 총액입니다.", "kind": "output" },
+      "최적 세율": { "role": "극대점", "description": "세수를 최대화하는 세율. 곡선의 꼭짓점에 해당합니다.", "kind": "output" }
     },
     "realWorldExamples": [
       "1980년대 미국 레이건 행정부의 감세 정책(레이거노믹스)의 이론적 배경",
@@ -121,12 +121,12 @@
     "field": "사회과학",
     "significance": "국제 무역 분석의 실증적 핵심 모형으로, 무역 협정과 관세 정책의 효과를 추정하는 데 표준적으로 사용됩니다.",
     "elementMeanings": {
-      "T_{ij}": { "role": "교류량", "description": "지역 i와 j 사이의 교류(무역, 이동 등)의 양입니다." },
-      "k": { "role": "비례 상수", "description": "모형의 전체적인 스케일을 조정하는 상수입니다." },
-      "P_i": { "role": "i 지역의 규모", "description": "지역 i의 인구, GDP 등 규모를 나타내는 변수입니다." },
-      "P_j": { "role": "j 지역의 규모", "description": "지역 j의 인구, GDP 등 규모를 나타내는 변수입니다." },
-      "d_{ij}": { "role": "두 지역 간 거리", "description": "지역 i와 j 사이의 지리적 거리입니다." },
-      "d_{ij}^2": { "role": "거리의 제곱", "description": "역제곱 법칙을 반영. 거리가 두 배면 교류량은 1/4로 줄어듭니다." }
+      "T_{ij}": { "role": "교류량", "description": "지역 i와 j 사이의 교류(무역, 이동 등)의 양입니다.", "kind": "output" },
+      "k": { "role": "비례 상수", "description": "모형의 전체적인 스케일을 조정하는 상수입니다.", "kind": "input" },
+      "P_i": { "role": "i 지역의 규모", "description": "지역 i의 인구, GDP 등 규모를 나타내는 변수입니다.", "kind": "input" },
+      "P_j": { "role": "j 지역의 규모", "description": "지역 j의 인구, GDP 등 규모를 나타내는 변수입니다.", "kind": "input" },
+      "d_{ij}": { "role": "두 지역 간 거리", "description": "지역 i와 j 사이의 지리적 거리입니다.", "kind": "input" },
+      "d_{ij}^2": { "role": "거리의 제곱", "description": "역제곱 법칙을 반영. 거리가 두 배면 교류량은 1/4로 줄어듭니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "한국과 일본 간 무역량이 한국-브라질보다 많은 이유를 거리와 경제 규모로 설명",

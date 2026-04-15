@@ -7,11 +7,11 @@
     "field": "미적분학",
     "significance": "미분과 적분이 역관계라는 사실을 확립하여 해석학 전체의 토대를 마련했습니다.",
     "elementMeanings": {
-      "f(x)": { "role": "피적분함수", "description": "적분하려는 연속함수입니다." },
-      "F(x)": { "role": "원시함수", "description": "f(x)의 부정적분. F'(x) = f(x)를 만족합니다." },
-      "a": { "role": "적분 하한", "description": "정적분 구간의 시작점입니다." },
-      "b": { "role": "적분 상한", "description": "정적분 구간의 끝점입니다." },
-      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타내는 미소 변화량입니다." }
+      "f(x)": { "role": "피적분함수", "description": "적분하려는 연속함수입니다.", "kind": "structural" },
+      "F(x)": { "role": "원시함수", "description": "f(x)의 부정적분. F'(x) = f(x)를 만족합니다.", "kind": "structural" },
+      "a": { "role": "적분 하한", "description": "정적분 구간의 시작점입니다.", "kind": "input" },
+      "b": { "role": "적분 상한", "description": "정적분 구간의 끝점입니다.", "kind": "input" },
+      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타내는 미소 변화량입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["derivative-definition", "gaussian-integral"]
   },
@@ -23,11 +23,11 @@
     "field": "미적분학",
     "significance": "삼각함수, 지수함수 등 초월함수를 다항식으로 근사할 수 있게 하며, 수치 해석의 기초입니다.",
     "elementMeanings": {
-      "f(x)": { "role": "원래 함수", "description": "급수로 전개하려는 대상 함수입니다." },
-      "a": { "role": "전개 중심", "description": "급수를 전개하는 기준점. a=0이면 매클로린 급수라 합니다." },
-      "f^{(n)}(a)": { "role": "n차 도함수 값", "description": "점 a에서의 n번째 도함수 값. 각 항의 계수를 결정합니다." },
-      "n!": { "role": "팩토리얼", "description": "n의 계승. 각 항의 분모에 놓여 계수를 조정합니다." },
-      "(x-a)^n": { "role": "거듭제곱 항", "description": "전개 중심 a로부터의 거리의 n제곱입니다." }
+      "f(x)": { "role": "원래 함수", "description": "급수로 전개하려는 대상 함수입니다.", "kind": "structural" },
+      "a": { "role": "전개 중심", "description": "급수를 전개하는 기준점. a=0이면 매클로린 급수라 합니다.", "kind": "input" },
+      "f^{(n)}(a)": { "role": "n차 도함수 값", "description": "점 a에서의 n번째 도함수 값. 각 항의 계수를 결정합니다.", "kind": "structural" },
+      "n!": { "role": "팩토리얼", "description": "n의 계승. 각 항의 분모에 놓여 계수를 조정합니다.", "kind": "structural" },
+      "(x-a)^n": { "role": "거듭제곱 항", "description": "전개 중심 a로부터의 거리의 n제곱입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
   },
@@ -39,10 +39,10 @@
     "field": "미적분학",
     "significance": "정규분포의 정규화 상수를 제공하며, 양자역학과 통계역학의 경로적분에서도 핵심적 역할을 합니다.",
     "elementMeanings": {
-      "e^{-x^2}": { "role": "가우스 함수", "description": "종 모양의 함수. x가 0에서 멀어질수록 급격히 0에 수렴합니다." },
-      "\\int_{-\\infty}^{\\infty}": { "role": "전 구간 적분", "description": "음의 무한대에서 양의 무한대까지의 적분입니다." },
-      "\\sqrt{\\pi}": { "role": "적분 결과", "description": "가우스 적분의 값. 원주율의 제곱근입니다." },
-      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타냅니다." }
+      "e^{-x^2}": { "role": "가우스 함수", "description": "종 모양의 함수. x가 0에서 멀어질수록 급격히 0에 수렴합니다.", "kind": "structural" },
+      "\\int_{-\\infty}^{\\infty}": { "role": "전 구간 적분", "description": "음의 무한대에서 양의 무한대까지의 적분입니다.", "kind": "structural" },
+      "\\sqrt{\\pi}": { "role": "적분 결과", "description": "가우스 적분의 값. 원주율의 제곱근입니다.", "kind": "output" },
+      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타냅니다.", "kind": "structural" }
     },
     "relatedFormulas": ["normal-distribution", "ftc"]
   },
@@ -54,11 +54,11 @@
     "field": "미적분학",
     "significance": "순간 변화율이라는 개념을 엄밀하게 정의하여 미적분학의 논리적 기초를 확립했습니다.",
     "elementMeanings": {
-      "f'(x)": { "role": "도함수", "description": "x에서의 순간 변화율. 그래프의 접선 기울기입니다." },
-      "f(x+h)": { "role": "이동된 함수값", "description": "x에서 h만큼 이동한 점에서의 함수값입니다." },
-      "f(x)": { "role": "원래 함수값", "description": "점 x에서의 함수값입니다." },
-      "h": { "role": "변화량", "description": "x의 미소 증분. 극한에서 0으로 보냅니다." },
-      "\\lim_{h \\to 0}": { "role": "극한 연산", "description": "h를 0에 한없이 가깝게 보내는 연산입니다." }
+      "f'(x)": { "role": "도함수", "description": "x에서의 순간 변화율. 그래프의 접선 기울기입니다.", "kind": "output" },
+      "f(x+h)": { "role": "이동된 함수값", "description": "x에서 h만큼 이동한 점에서의 함수값입니다.", "kind": "structural" },
+      "f(x)": { "role": "원래 함수값", "description": "점 x에서의 함수값입니다.", "kind": "structural" },
+      "h": { "role": "변화량", "description": "x의 미소 증분. 극한에서 0으로 보냅니다.", "kind": "input" },
+      "\\lim_{h \\to 0}": { "role": "극한 연산", "description": "h를 0에 한없이 가깝게 보내는 연산입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
   },
@@ -70,11 +70,11 @@
     "field": "미적분학",
     "significance": "복잡한 합성함수의 미분을 체계적으로 수행할 수 있게 하며, 딥러닝의 역전파 알고리즘의 수학적 토대입니다.",
     "elementMeanings": {
-      "f": { "role": "바깥 함수", "description": "합성의 바깥쪽에 위치한 함수입니다." },
-      "g": { "role": "안쪽 함수", "description": "합성의 안쪽에 위치한 함수입니다." },
-      "f'(g(x))": { "role": "바깥 도함수", "description": "바깥 함수를 g(x)에서 평가한 도함수값입니다." },
-      "g'(x)": { "role": "안쪽 도함수", "description": "안쪽 함수의 x에 대한 도함수입니다." },
-      "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다." }
+      "f": { "role": "바깥 함수", "description": "합성의 바깥쪽에 위치한 함수입니다.", "kind": "structural" },
+      "g": { "role": "안쪽 함수", "description": "합성의 안쪽에 위치한 함수입니다.", "kind": "structural" },
+      "f'(g(x))": { "role": "바깥 도함수", "description": "바깥 함수를 g(x)에서 평가한 도함수값입니다.", "kind": "structural" },
+      "g'(x)": { "role": "안쪽 도함수", "description": "안쪽 함수의 x에 대한 도함수입니다.", "kind": "structural" },
+      "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다.", "kind": "input" }
     },
     "relatedFormulas": ["derivative-definition", "ftc"]
   },
@@ -86,10 +86,10 @@
     "field": "미적분학",
     "significance": "곱으로 이루어진 함수의 미분을 체계적으로 처리할 수 있게 하며, 부분적분의 이론적 토대가 됩니다.",
     "elementMeanings": {
-      "f": { "role": "첫째 함수", "description": "곱의 왼쪽에 위치한 함수입니다." },
-      "g": { "role": "둘째 함수", "description": "곱의 오른쪽에 위치한 함수입니다." },
-      "f'": { "role": "첫째 함수의 도함수", "description": "f를 x에 대해 미분한 결과입니다." },
-      "g'": { "role": "둘째 함수의 도함수", "description": "g를 x에 대해 미분한 결과입니다." }
+      "f": { "role": "첫째 함수", "description": "곱의 왼쪽에 위치한 함수입니다.", "kind": "structural" },
+      "g": { "role": "둘째 함수", "description": "곱의 오른쪽에 위치한 함수입니다.", "kind": "structural" },
+      "f'": { "role": "첫째 함수의 도함수", "description": "f를 x에 대해 미분한 결과입니다.", "kind": "structural" },
+      "g'": { "role": "둘째 함수의 도함수", "description": "g를 x에 대해 미분한 결과입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
     "realWorldExamples": [
@@ -105,11 +105,11 @@
     "field": "미적분학",
     "significance": "분수 꼴 함수의 미분을 기계적으로 처리할 수 있게 하며, tan x 등 삼각함수 도함수 유도의 핵심입니다.",
     "elementMeanings": {
-      "f": { "role": "분자 함수", "description": "나눗셈의 분자에 해당하는 함수입니다." },
-      "g": { "role": "분모 함수", "description": "나눗셈의 분모에 해당하는 함수입니다. g(x) != 0이어야 합니다." },
-      "f'": { "role": "분자의 도함수", "description": "f를 x에 대해 미분한 결과입니다." },
-      "g'": { "role": "분모의 도함수", "description": "g를 x에 대해 미분한 결과입니다." },
-      "g^2": { "role": "분모의 제곱", "description": "결과의 분모에 놓이는 g(x)의 제곱입니다." }
+      "f": { "role": "분자 함수", "description": "나눗셈의 분자에 해당하는 함수입니다.", "kind": "structural" },
+      "g": { "role": "분모 함수", "description": "나눗셈의 분모에 해당하는 함수입니다. g(x) != 0이어야 합니다.", "kind": "structural" },
+      "f'": { "role": "분자의 도함수", "description": "f를 x에 대해 미분한 결과입니다.", "kind": "structural" },
+      "g'": { "role": "분모의 도함수", "description": "g를 x에 대해 미분한 결과입니다.", "kind": "structural" },
+      "g^2": { "role": "분모의 제곱", "description": "결과의 분모에 놓이는 g(x)의 제곱입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
     "realWorldExamples": [
@@ -125,10 +125,10 @@
     "field": "미적분학",
     "significance": "미분 학습의 첫 관문이자 가장 빈번하게 사용되는 미분 공식으로, 다항함수 미분의 토대입니다.",
     "elementMeanings": {
-      "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다." },
-      "n": { "role": "지수", "description": "거듭제곱의 지수. 자연수, 정수, 실수 모두 가능합니다." },
-      "x^n": { "role": "멱함수", "description": "x의 n제곱. 미분 대상입니다." },
-      "nx^{n-1}": { "role": "도함수", "description": "지수 n이 계수로 내려오고, 지수가 n-1로 줄어든 결과입니다." }
+      "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다.", "kind": "input" },
+      "n": { "role": "지수", "description": "거듭제곱의 지수. 자연수, 정수, 실수 모두 가능합니다.", "kind": "input" },
+      "x^n": { "role": "멱함수", "description": "x의 n제곱. 미분 대상입니다.", "kind": "structural" },
+      "nx^{n-1}": { "role": "도함수", "description": "지수 n이 계수로 내려오고, 지수가 n-1로 줄어든 결과입니다.", "kind": "output" }
     },
     "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
     "realWorldExamples": [
@@ -144,10 +144,10 @@
     "field": "미적분학",
     "significance": "미분해도 형태가 변하지 않는 유일한 함수로, 미분방정식의 기본 해이자 자연현상 모델링의 근간입니다.",
     "elementMeanings": {
-      "e": { "role": "자연상수", "description": "약 2.71828... 자연로그의 밑이 되는 무리수입니다." },
-      "e^x": { "role": "자연지수함수", "description": "e의 x제곱. 미분해도 자기 자신이 됩니다." },
-      "x": { "role": "독립변수", "description": "지수 위치의 변수입니다." },
-      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다." }
+      "e": { "role": "자연상수", "description": "약 2.71828... 자연로그의 밑이 되는 무리수입니다.", "kind": "constant", "value": 2.71828183 },
+      "e^x": { "role": "자연지수함수", "description": "e의 x제곱. 미분해도 자기 자신이 됩니다.", "kind": "structural" },
+      "x": { "role": "독립변수", "description": "지수 위치의 변수입니다.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
     "realWorldExamples": [
@@ -163,10 +163,10 @@
     "field": "미적분학",
     "significance": "1/x의 원시함수를 제공하며, 로그 미분법을 통해 복잡한 곱·멱함수의 미분을 단순화합니다.",
     "elementMeanings": {
-      "\\ln x": { "role": "자연로그", "description": "밑이 e인 로그함수. x > 0에서 정의됩니다." },
-      "x": { "role": "독립변수", "description": "로그의 진수이자 미분 변수입니다." },
-      "\\frac{1}{x}": { "role": "도함수", "description": "ln x의 도함수. x에 반비례합니다." },
-      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다." }
+      "\\ln x": { "role": "자연로그", "description": "밑이 e인 로그함수. x > 0에서 정의됩니다.", "kind": "structural" },
+      "x": { "role": "독립변수", "description": "로그의 진수이자 미분 변수입니다.", "kind": "input" },
+      "\\frac{1}{x}": { "role": "도함수", "description": "ln x의 도함수. x에 반비례합니다.", "kind": "output" },
+      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
     "realWorldExamples": [
@@ -182,10 +182,10 @@
     "field": "미적분학",
     "significance": "주기 현상의 수학적 서술에 필수적이며, 파동 방정식과 조화 운동 해석의 기초입니다.",
     "elementMeanings": {
-      "\\sin x": { "role": "사인 함수", "description": "주기가 2파이인 기본 삼각함수입니다." },
-      "\\cos x": { "role": "도함수 (코사인)", "description": "sin x를 미분한 결과. 사인보다 위상이 파이/2만큼 앞섭니다." },
-      "x": { "role": "독립변수", "description": "라디안 단위의 각도 변수입니다." },
-      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다." }
+      "\\sin x": { "role": "사인 함수", "description": "주기가 2파이인 기본 삼각함수입니다.", "kind": "structural" },
+      "\\cos x": { "role": "도함수 (코사인)", "description": "sin x를 미분한 결과. 사인보다 위상이 파이/2만큼 앞섭니다.", "kind": "output" },
+      "x": { "role": "독립변수", "description": "라디안 단위의 각도 변수입니다.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "미분 연산자", "description": "x에 대한 미분을 수행하는 연산자입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
     "realWorldExamples": [
@@ -201,12 +201,12 @@
     "field": "미적분학",
     "significance": "적분 학습의 첫 출발점이자 가장 빈번하게 쓰이는 부정적분 공식입니다.",
     "elementMeanings": {
-      "x^n": { "role": "피적분함수", "description": "적분하려는 멱함수입니다." },
-      "n": { "role": "지수", "description": "거듭제곱의 지수. n != -1이어야 합니다." },
-      "x^{n+1}": { "role": "적분 결과의 멱", "description": "지수가 1 증가한 거듭제곱입니다." },
-      "n+1": { "role": "새 지수 (분모)", "description": "결과의 분모에 놓여 미분하면 원래 함수를 복원합니다." },
-      "C": { "role": "적분 상수", "description": "부정적분의 임의 상수. 미분하면 사라지는 항입니다." },
-      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타냅니다." }
+      "x^n": { "role": "피적분함수", "description": "적분하려는 멱함수입니다.", "kind": "structural" },
+      "n": { "role": "지수", "description": "거듭제곱의 지수. n != -1이어야 합니다.", "kind": "input" },
+      "x^{n+1}": { "role": "적분 결과의 멱", "description": "지수가 1 증가한 거듭제곱입니다.", "kind": "structural" },
+      "n+1": { "role": "새 지수 (분모)", "description": "결과의 분모에 놓여 미분하면 원래 함수를 복원합니다.", "kind": "structural" },
+      "C": { "role": "적분 상수", "description": "부정적분의 임의 상수. 미분하면 사라지는 항입니다.", "kind": "constant" },
+      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타냅니다.", "kind": "structural" }
     },
     "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
     "realWorldExamples": [
@@ -222,11 +222,11 @@
     "field": "미적분학",
     "significance": "곱의 미분법의 적분 버전으로, ln x, arctan x 등 역함수의 적분과 다양한 초월함수 적분에 필수적입니다.",
     "elementMeanings": {
-      "u": { "role": "미분할 함수", "description": "적분 과정에서 미분하는 쪽으로 선택된 함수입니다." },
-      "dv": { "role": "적분할 부분", "description": "적분 과정에서 적분하는 쪽으로 선택된 미분형식입니다." },
-      "v": { "role": "dv의 원시함수", "description": "dv를 적분한 결과입니다." },
-      "du": { "role": "u의 미분", "description": "u를 미분한 결과입니다." },
-      "uv": { "role": "경계항", "description": "u와 v의 곱. 정적분에서는 양 끝값을 대입합니다." }
+      "u": { "role": "미분할 함수", "description": "적분 과정에서 미분하는 쪽으로 선택된 함수입니다.", "kind": "structural" },
+      "dv": { "role": "적분할 부분", "description": "적분 과정에서 적분하는 쪽으로 선택된 미분형식입니다.", "kind": "structural" },
+      "v": { "role": "dv의 원시함수", "description": "dv를 적분한 결과입니다.", "kind": "structural" },
+      "du": { "role": "u의 미분", "description": "u를 미분한 결과입니다.", "kind": "structural" },
+      "uv": { "role": "경계항", "description": "u와 v의 곱. 정적분에서는 양 끝값을 대입합니다.", "kind": "output" }
     },
     "relatedFormulas": ["product-rule", "ftc", "power-integral"],
     "realWorldExamples": [
@@ -242,10 +242,10 @@
     "field": "미적분학",
     "significance": "지수함수의 다항식 근사를 제공하며, 오일러 항등식 e^(i*pi) + 1 = 0 유도의 핵심 단계입니다.",
     "elementMeanings": {
-      "e^x": { "role": "원래 함수", "description": "급수로 전개하려는 자연지수함수입니다." },
-      "x^n": { "role": "거듭제곱 항", "description": "x의 n제곱. n번째 항의 분자입니다." },
-      "n!": { "role": "팩토리얼", "description": "n의 계승. n번째 항의 분모입니다." },
-      "\\sum_{n=0}^{\\infty}": { "role": "무한급수", "description": "n=0부터 무한대까지 모든 항을 더하는 연산입니다." }
+      "e^x": { "role": "원래 함수", "description": "급수로 전개하려는 자연지수함수입니다.", "kind": "structural" },
+      "x^n": { "role": "거듭제곱 항", "description": "x의 n제곱. n번째 항의 분자입니다.", "kind": "structural" },
+      "n!": { "role": "팩토리얼", "description": "n의 계승. n번째 항의 분모입니다.", "kind": "structural" },
+      "\\sum_{n=0}^{\\infty}": { "role": "무한급수", "description": "n=0부터 무한대까지 모든 항을 더하는 연산입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
     "realWorldExamples": [
@@ -261,10 +261,10 @@
     "field": "미적분학",
     "significance": "삼각함수의 다항식 근사를 가능하게 하며, 소각 근사 sin x 근사 x의 수학적 근거를 제공합니다.",
     "elementMeanings": {
-      "\\sin x": { "role": "원래 함수", "description": "급수로 전개하려는 사인함수입니다." },
-      "(-1)^n": { "role": "부호 교대 인자", "description": "항의 부호를 양·음 교대로 바꿉니다." },
-      "x^{2n+1}": { "role": "홀수 거듭제곱 항", "description": "홀수 차수만 나타나는 것은 사인이 기함수이기 때문입니다." },
-      "(2n+1)!": { "role": "팩토리얼", "description": "각 항의 분모. 급수의 수렴을 보장합니다." }
+      "\\sin x": { "role": "원래 함수", "description": "급수로 전개하려는 사인함수입니다.", "kind": "structural" },
+      "(-1)^n": { "role": "부호 교대 인자", "description": "항의 부호를 양·음 교대로 바꿉니다.", "kind": "structural" },
+      "x^{2n+1}": { "role": "홀수 거듭제곱 항", "description": "홀수 차수만 나타나는 것은 사인이 기함수이기 때문입니다.", "kind": "structural" },
+      "(2n+1)!": { "role": "팩토리얼", "description": "각 항의 분모. 급수의 수렴을 보장합니다.", "kind": "structural" }
     },
     "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
     "realWorldExamples": [
@@ -280,10 +280,10 @@
     "field": "미적분학",
     "significance": "코사인함수의 다항식 근사를 제공하며, 사인 급수와 함께 오일러 공식 유도에 사용됩니다.",
     "elementMeanings": {
-      "\\cos x": { "role": "원래 함수", "description": "급수로 전개하려는 코사인함수입니다." },
-      "(-1)^n": { "role": "부호 교대 인자", "description": "항의 부호를 양·음 교대로 바꿉니다." },
-      "x^{2n}": { "role": "짝수 거듭제곱 항", "description": "짝수 차수만 나타나는 것은 코사인이 우함수이기 때문입니다." },
-      "(2n)!": { "role": "팩토리얼", "description": "각 항의 분모. 급수의 수렴을 보장합니다." }
+      "\\cos x": { "role": "원래 함수", "description": "급수로 전개하려는 코사인함수입니다.", "kind": "structural" },
+      "(-1)^n": { "role": "부호 교대 인자", "description": "항의 부호를 양·음 교대로 바꿉니다.", "kind": "structural" },
+      "x^{2n}": { "role": "짝수 거듭제곱 항", "description": "짝수 차수만 나타나는 것은 코사인이 우함수이기 때문입니다.", "kind": "structural" },
+      "(2n)!": { "role": "팩토리얼", "description": "각 항의 분모. 급수의 수렴을 보장합니다.", "kind": "structural" }
     },
     "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
     "realWorldExamples": [
@@ -299,12 +299,12 @@
     "field": "미적분학",
     "significance": "부정형 극한의 계산을 미분 문제로 환원하여, 극한 계산의 강력한 도구를 제공합니다.",
     "elementMeanings": {
-      "\\lim_{x \\to c}": { "role": "극한 연산", "description": "x를 c에 한없이 가깝게 보내는 연산입니다." },
-      "f(x)": { "role": "분자 함수", "description": "극한에서 분자에 해당하는 함수입니다." },
-      "g(x)": { "role": "분모 함수", "description": "극한에서 분모에 해당하는 함수입니다." },
-      "f'(x)": { "role": "분자의 도함수", "description": "f(x)를 x에 대해 미분한 결과입니다." },
-      "g'(x)": { "role": "분모의 도함수", "description": "g(x)를 x에 대해 미분한 결과입니다." },
-      "\\frac{0}{0}": { "role": "부정형", "description": "분자와 분모가 모두 0으로 가는 부정형입니다." }
+      "\\lim_{x \\to c}": { "role": "극한 연산", "description": "x를 c에 한없이 가깝게 보내는 연산입니다.", "kind": "structural" },
+      "f(x)": { "role": "분자 함수", "description": "극한에서 분자에 해당하는 함수입니다.", "kind": "structural" },
+      "g(x)": { "role": "분모 함수", "description": "극한에서 분모에 해당하는 함수입니다.", "kind": "structural" },
+      "f'(x)": { "role": "분자의 도함수", "description": "f(x)를 x에 대해 미분한 결과입니다.", "kind": "structural" },
+      "g'(x)": { "role": "분모의 도함수", "description": "g(x)를 x에 대해 미분한 결과입니다.", "kind": "structural" },
+      "\\frac{0}{0}": { "role": "부정형", "description": "분자와 분모가 모두 0으로 가는 부정형입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["derivative-definition", "taylor-series"],
     "realWorldExamples": [

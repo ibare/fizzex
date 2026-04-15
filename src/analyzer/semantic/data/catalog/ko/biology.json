@@ -7,11 +7,11 @@
     "field": "생물학",
     "significance": "생태학에서 개체군 동태를 예측하는 기본 모델이며, 역학, 경제학, 기술 확산 등 다양한 분야에 응용됩니다.",
     "elementMeanings": {
-      "dN/dt": { "role": "개체수 변화율", "description": "단위 시간당 개체수의 변화량." },
-      "r": { "role": "내재 증가율", "description": "자원 제한이 없을 때 개체군의 최대 증가율." },
-      "N": { "role": "현재 개체수", "description": "특정 시점의 개체군 크기." },
-      "K": { "role": "환경 수용력", "description": "주어진 환경이 지탱할 수 있는 최대 개체수." },
-      "(1 - N/K)": { "role": "성장 억제 인자", "description": "N이 K에 가까워지면 0에 수렴하여 성장을 억제합니다." }
+      "dN/dt": { "role": "개체수 변화율", "description": "단위 시간당 개체수의 변화량.", "kind": "output" },
+      "r": { "role": "내재 증가율", "description": "자원 제한이 없을 때 개체군의 최대 증가율.", "kind": "input" },
+      "N": { "role": "현재 개체수", "description": "특정 시점의 개체군 크기.", "kind": "input" },
+      "K": { "role": "환경 수용력", "description": "주어진 환경이 지탱할 수 있는 최대 개체수.", "kind": "input" },
+      "(1 - N/K)": { "role": "성장 억제 인자", "description": "N이 K에 가까워지면 0에 수렴하여 성장을 억제합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "호수에 방류된 물고기 개체수의 S자 성장 곡선",
@@ -28,11 +28,11 @@
     "field": "생물학",
     "significance": "집단유전학의 기초로, 실제 개체군에서 진화가 일어나고 있는지를 판단하는 기준(귀무가설)을 제공합니다.",
     "elementMeanings": {
-      "p": { "role": "우성 대립유전자 빈도", "description": "개체군에서 우성 대립유전자의 상대적 빈도. 0에서 1 사이." },
-      "q": { "role": "열성 대립유전자 빈도", "description": "개체군에서 열성 대립유전자의 상대적 빈도. p + q = 1." },
-      "p^2": { "role": "우성 동형접합 빈도", "description": "우성 동형접합(AA) 유전자형의 빈도." },
-      "2pq": { "role": "이형접합 빈도", "description": "이형접합(Aa) 유전자형의 빈도." },
-      "q^2": { "role": "열성 동형접합 빈도", "description": "열성 동형접합(aa) 유전자형의 빈도." }
+      "p": { "role": "우성 대립유전자 빈도", "description": "개체군에서 우성 대립유전자의 상대적 빈도. 0에서 1 사이.", "kind": "input" },
+      "q": { "role": "열성 대립유전자 빈도", "description": "개체군에서 열성 대립유전자의 상대적 빈도. p + q = 1.", "kind": "input" },
+      "p^2": { "role": "우성 동형접합 빈도", "description": "우성 동형접합(AA) 유전자형의 빈도.", "kind": "output" },
+      "2pq": { "role": "이형접합 빈도", "description": "이형접합(Aa) 유전자형의 빈도.", "kind": "output" },
+      "q^2": { "role": "열성 동형접합 빈도", "description": "열성 동형접합(aa) 유전자형의 빈도.", "kind": "output" }
     },
     "realWorldExamples": [
       "유전 질환(낫형 적혈구 빈혈 등)의 보인자 빈도 추정",
@@ -49,10 +49,10 @@
     "field": "생물학",
     "significance": "효소 반응 속도론의 기본 모델로, 약물 설계와 대사 공학에서 핵심적으로 활용됩니다.",
     "elementMeanings": {
-      "v": { "role": "반응 속도", "description": "효소 반응의 초기 속도. 단위: mol/(L s) 등." },
-      "V_{max}": { "role": "최대 반응 속도", "description": "모든 효소가 기질과 결합했을 때의 최대 속도." },
-      "[S]": { "role": "기질 농도", "description": "효소에 결합하는 기질의 농도. 단위: mol/L." },
-      "K_m": { "role": "미카엘리스 상수", "description": "반응 속도가 Vmax의 절반일 때의 기질 농도. 효소-기질 친화도의 지표." }
+      "v": { "role": "반응 속도", "description": "효소 반응의 초기 속도. 단위: mol/(L s) 등.", "kind": "output" },
+      "V_{max}": { "role": "최대 반응 속도", "description": "모든 효소가 기질과 결합했을 때의 최대 속도.", "kind": "input" },
+      "[S]": { "role": "기질 농도", "description": "효소에 결합하는 기질의 농도. 단위: mol/L.", "kind": "input" },
+      "K_m": { "role": "미카엘리스 상수", "description": "반응 속도가 Vmax의 절반일 때의 기질 농도. 효소-기질 친화도의 지표.", "kind": "input" }
     },
     "realWorldExamples": [
       "약물이 효소의 Km을 변화시켜 반응을 억제하는 원리",
@@ -68,11 +68,11 @@
     "field": "생물학",
     "significance": "개체군 성장의 가장 기본적인 수학적 모델이며, 로지스틱 모델 등 복잡한 모델의 출발점입니다.",
     "elementMeanings": {
-      "N(t)": { "role": "시간 t에서의 개체수", "description": "시간 t가 경과한 후의 개체군 크기." },
-      "N_0": { "role": "초기 개체수", "description": "시간 t=0일 때의 개체군 크기." },
-      "e": { "role": "자연로그의 밑", "description": "약 2.718. 연속적 성장을 나타내는 수학 상수." },
-      "r": { "role": "내재 증가율", "description": "개체군의 순 증가율. r > 0이면 성장, r < 0이면 감소." },
-      "t": { "role": "시간", "description": "경과 시간. 단위는 상황에 따라 다름 (시간, 일, 년 등)." }
+      "N(t)": { "role": "시간 t에서의 개체수", "description": "시간 t가 경과한 후의 개체군 크기.", "kind": "output" },
+      "N_0": { "role": "초기 개체수", "description": "시간 t=0일 때의 개체군 크기.", "kind": "input" },
+      "e": { "role": "자연로그의 밑", "description": "약 2.718. 연속적 성장을 나타내는 수학 상수.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "r": { "role": "내재 증가율", "description": "개체군의 순 증가율. r > 0이면 성장, r < 0이면 감소.", "kind": "input" },
+      "t": { "role": "시간", "description": "경과 시간. 단위는 상황에 따라 다름 (시간, 일, 년 등).", "kind": "input" }
     },
     "realWorldExamples": [
       "초기 세균 배양에서 대수기의 급격한 증식",
@@ -89,11 +89,11 @@
     "field": "생물학",
     "significance": "전염병 확산을 수학적으로 모델링하는 기초 프레임워크로, 방역 정책과 백신 전략 수립에 핵심적으로 활용됩니다.",
     "elementMeanings": {
-      "dI/dt": { "role": "감염자 수 변화율", "description": "단위 시간당 감염자 수의 변화량." },
-      "\\beta": { "role": "감염률", "description": "감수성자가 감염자와 접촉하여 감염될 확률에 접촉 빈도를 곱한 값." },
-      "S": { "role": "감수성자 수", "description": "아직 감염되지 않아 감염될 수 있는 인구." },
-      "I": { "role": "감염자 수", "description": "현재 감염 상태인 인구." },
-      "\\gamma": { "role": "회복률", "description": "감염자가 단위 시간당 회복하는 비율. 회복까지 평균 기간의 역수." }
+      "dI/dt": { "role": "감염자 수 변화율", "description": "단위 시간당 감염자 수의 변화량.", "kind": "output" },
+      "\\beta": { "role": "감염률", "description": "감수성자가 감염자와 접촉하여 감염될 확률에 접촉 빈도를 곱한 값.", "kind": "input" },
+      "S": { "role": "감수성자 수", "description": "아직 감염되지 않아 감염될 수 있는 인구.", "kind": "input" },
+      "I": { "role": "감염자 수", "description": "현재 감염 상태인 인구.", "kind": "input" },
+      "\\gamma": { "role": "회복률", "description": "감염자가 단위 시간당 회복하는 비율. 회복까지 평균 기간의 역수.", "kind": "input" }
     },
     "realWorldExamples": [
       "코로나19 확산 추세 예측 및 사회적 거리두기 효과 분석",
@@ -110,11 +110,11 @@
     "field": "생물학",
     "significance": "생태학에서 종간 상호작용의 동태를 수학적으로 분석하는 기초 모델이며, 생태계 안정성 연구의 출발점입니다.",
     "elementMeanings": {
-      "dx/dt": { "role": "피식자 개체수 변화율", "description": "단위 시간당 피식자 개체수의 변화량." },
-      "x": { "role": "피식자 개체수", "description": "피식자(먹이) 종의 개체군 크기." },
-      "y": { "role": "포식자 개체수", "description": "포식자 종의 개체군 크기." },
-      "\\alpha": { "role": "피식자 증가율", "description": "포식 압력이 없을 때 피식자의 내재 증가율." },
-      "\\beta": { "role": "포식 계수", "description": "포식자와 피식자의 조우 시 피식자가 감소하는 비율." }
+      "dx/dt": { "role": "피식자 개체수 변화율", "description": "단위 시간당 피식자 개체수의 변화량.", "kind": "output" },
+      "x": { "role": "피식자 개체수", "description": "피식자(먹이) 종의 개체군 크기.", "kind": "input" },
+      "y": { "role": "포식자 개체수", "description": "포식자 종의 개체군 크기.", "kind": "input" },
+      "\\alpha": { "role": "피식자 증가율", "description": "포식 압력이 없을 때 피식자의 내재 증가율.", "kind": "input" },
+      "\\beta": { "role": "포식 계수", "description": "포식자와 피식자의 조우 시 피식자가 감소하는 비율.", "kind": "input" }
     },
     "realWorldExamples": [
       "캐나다 스라소니와 눈토끼 개체수의 약 10년 주기 진동",

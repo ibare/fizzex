@@ -7,12 +7,12 @@
     "field": "화학",
     "significance": "온도와 반응 속도의 관계를 정량화하여 화학 반응 속도론의 핵심 법칙을 확립했습니다.",
     "elementMeanings": {
-      "k": { "role": "반응 속도 상수", "description": "특정 온도에서 반응이 진행되는 속도를 결정하는 상수." },
-      "A": { "role": "빈도 인자", "description": "분자 충돌 빈도와 배향 효과를 반영하는 선지수 인자." },
-      "e": { "role": "자연로그의 밑", "description": "약 2.718. 지수 함수의 밑입니다." },
-      "E_a": { "role": "활성화 에너지", "description": "반응이 일어나기 위해 넘어야 하는 에너지 장벽. 단위: J/mol." },
-      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K)." },
-      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K)." }
+      "k": { "role": "반응 속도 상수", "description": "특정 온도에서 반응이 진행되는 속도를 결정하는 상수.", "kind": "output" },
+      "A": { "role": "빈도 인자", "description": "분자 충돌 빈도와 배향 효과를 반영하는 선지수 인자.", "kind": "input" },
+      "e": { "role": "자연로그의 밑", "description": "약 2.718. 지수 함수의 밑입니다.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "E_a": { "role": "활성화 에너지", "description": "반응이 일어나기 위해 넘어야 하는 에너지 장벽. 단위: J/mol.", "kind": "input" },
+      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K).", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)" },
+      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K).", "kind": "input" }
     },
     "realWorldExamples": [
       "냉장고에서 음식이 천천히 상하는 이유 (온도 낮으면 반응 느림)",
@@ -29,10 +29,10 @@
     "field": "화학",
     "significance": "화학 반응과 상변화의 자발성을 예측하는 열역학의 핵심 판단 기준을 제공합니다.",
     "elementMeanings": {
-      "\\Delta G": { "role": "깁스 자유 에너지 변화", "description": "반응의 자발성 지표. 음수면 자발적. 단위: J 또는 kJ." },
-      "\\Delta H": { "role": "엔탈피 변화", "description": "반응에서 방출하거나 흡수하는 열에너지. 단위: J 또는 kJ." },
-      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K)." },
-      "\\Delta S": { "role": "엔트로피 변화", "description": "반응에 따른 무질서도 변화. 단위: J/K." }
+      "\\Delta G": { "role": "깁스 자유 에너지 변화", "description": "반응의 자발성 지표. 음수면 자발적. 단위: J 또는 kJ.", "kind": "output" },
+      "\\Delta H": { "role": "엔탈피 변화", "description": "반응에서 방출하거나 흡수하는 열에너지. 단위: J 또는 kJ.", "kind": "input" },
+      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K).", "kind": "input" },
+      "\\Delta S": { "role": "엔트로피 변화", "description": "반응에 따른 무질서도 변화. 단위: J/K.", "kind": "input" }
     },
     "realWorldExamples": [
       "물의 어는점에서 고체-액체 상평형 분석",
@@ -49,13 +49,13 @@
     "field": "화학",
     "significance": "전기화학 반응의 전위를 농도 조건에 따라 정밀하게 예측하여 배터리와 전기분해 기술의 이론적 기반을 마련했습니다.",
     "elementMeanings": {
-      "E": { "role": "전지 전위", "description": "비표준 조건에서의 실제 전위. 단위: 볼트(V)." },
-      "E^\\circ": { "role": "표준 전지 전위", "description": "표준 조건(1 M, 1 atm, 25도)에서의 전위. 단위: 볼트(V)." },
-      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K)." },
-      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K)." },
-      "n": { "role": "전자 수", "description": "반응에서 이동하는 전자의 몰수." },
-      "F": { "role": "패러데이 상수", "description": "전자 1몰의 전하량. 약 96,485 C/mol." },
-      "Q": { "role": "반응 지수", "description": "생성물 농도와 반응물 농도의 비. 평형에서는 평형 상수 K와 같아집니다." }
+      "E": { "role": "전지 전위", "description": "비표준 조건에서의 실제 전위. 단위: 볼트(V).", "kind": "output" },
+      "E^\\circ": { "role": "표준 전지 전위", "description": "표준 조건(1 M, 1 atm, 25도)에서의 전위. 단위: 볼트(V).", "kind": "input" },
+      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K).", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)" },
+      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K).", "kind": "input" },
+      "n": { "role": "전자 수", "description": "반응에서 이동하는 전자의 몰수.", "kind": "input" },
+      "F": { "role": "패러데이 상수", "description": "전자 1몰의 전하량. 약 96,485 C/mol.", "kind": "constant", "value": 96485, "unit": "C/mol" },
+      "Q": { "role": "반응 지수", "description": "생성물 농도와 반응물 농도의 비. 평형에서는 평형 상수 K와 같아집니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "리튬 이온 배터리의 충방전 전위 변화 예측",
@@ -71,9 +71,9 @@
     "field": "화학",
     "significance": "방사성 연대 측정, 약물 대사, 핵폐기물 관리 등 시간에 따른 물질 감소를 정량화하는 핵심 개념입니다.",
     "elementMeanings": {
-      "t_{1/2}": { "role": "반감기", "description": "물질의 양이 절반으로 줄어드는 데 걸리는 시간. 단위: 초(s) 등." },
-      "\\ln 2": { "role": "자연로그 2", "description": "약 0.693. '절반'이라는 조건에서 자연스럽게 도출되는 상수입니다." },
-      "k": { "role": "속도 상수", "description": "반응 속도를 결정하는 비례 상수. 단위: 1/s (1차 반응)." }
+      "t_{1/2}": { "role": "반감기", "description": "물질의 양이 절반으로 줄어드는 데 걸리는 시간. 단위: 초(s) 등.", "kind": "output" },
+      "\\ln 2": { "role": "자연로그 2", "description": "약 0.693. '절반'이라는 조건에서 자연스럽게 도출되는 상수입니다.", "kind": "constant", "value": 0.693147, "unit": "" },
+      "k": { "role": "속도 상수", "description": "반응 속도를 결정하는 비례 상수. 단위: 1/s (1차 반응).", "kind": "input" }
     },
     "realWorldExamples": [
       "탄소-14 연대 측정 (반감기 약 5,730년)",
@@ -90,9 +90,9 @@
     "field": "화학",
     "significance": "용액의 산염기 성질을 간편하게 수치화하여 화학, 생물학, 환경과학 등 광범위한 분야에서 활용됩니다.",
     "elementMeanings": {
-      "pH": { "role": "수소 이온 지수", "description": "산성도를 나타내는 무차원 수. 0~14 범위가 일반적." },
-      "[H^+]": { "role": "수소 이온 농도", "description": "용액 내 수소 이온의 몰 농도. 단위: mol/L." },
-      "\\log": { "role": "상용로그", "description": "밑이 10인 로그. 농도의 크기 차이를 압축하여 표현합니다." }
+      "pH": { "role": "수소 이온 지수", "description": "산성도를 나타내는 무차원 수. 0~14 범위가 일반적.", "kind": "output" },
+      "[H^+]": { "role": "수소 이온 농도", "description": "용액 내 수소 이온의 몰 농도. 단위: mol/L.", "kind": "input" },
+      "\\log": { "role": "상용로그", "description": "밑이 10인 로그. 농도의 크기 차이를 압축하여 표현합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "수영장 물의 pH 관리 (약 7.2~7.8 유지)",
@@ -109,10 +109,10 @@
     "field": "화학",
     "significance": "기체 행동에 대한 최초의 정량적 법칙으로, 이상기체 법칙과 기체 분자 운동론의 출발점이 되었습니다.",
     "elementMeanings": {
-      "P_1": { "role": "초기 압력", "description": "변화 전 기체의 압력. 단위: 파스칼(Pa) 또는 기압(atm)." },
-      "V_1": { "role": "초기 부피", "description": "변화 전 기체의 부피. 단위: 리터(L) 또는 m의 세제곱." },
-      "P_2": { "role": "최종 압력", "description": "변화 후 기체의 압력." },
-      "V_2": { "role": "최종 부피", "description": "변화 후 기체의 부피." }
+      "P_1": { "role": "초기 압력", "description": "변화 전 기체의 압력. 단위: 파스칼(Pa) 또는 기압(atm).", "kind": "input" },
+      "V_1": { "role": "초기 부피", "description": "변화 전 기체의 부피. 단위: 리터(L) 또는 m의 세제곱.", "kind": "input" },
+      "P_2": { "role": "최종 압력", "description": "변화 후 기체의 압력.", "kind": "input" },
+      "V_2": { "role": "최종 부피", "description": "변화 후 기체의 부피.", "kind": "input" }
     },
     "realWorldExamples": [
       "주사기를 누르면 내부 기체의 압력이 증가하는 현상",
@@ -129,9 +129,9 @@
     "field": "화학",
     "significance": "원자-분자 수준의 미시 세계와 실험실 규모의 거시 세계를 연결하는 화학의 가장 기본적인 상수입니다.",
     "elementMeanings": {
-      "N_A": { "role": "아보가드로 수", "description": "1몰당 입자 수. 약 6.022x10의 23제곱 /mol." },
-      "n": { "role": "몰수", "description": "물질의 양. 단위: 몰(mol)." },
-      "N": { "role": "입자 수", "description": "실제 입자(원자, 분자 등)의 개수." }
+      "N_A": { "role": "아보가드로 수", "description": "1몰당 입자 수. 약 6.022x10의 23제곱 /mol.", "kind": "constant", "value": 6.022e23, "unit": "mol⁻¹" },
+      "n": { "role": "몰수", "description": "물질의 양. 단위: 몰(mol).", "kind": "input" },
+      "N": { "role": "입자 수", "description": "실제 입자(원자, 분자 등)의 개수.", "kind": "output" }
     },
     "realWorldExamples": [
       "탄소 12g에 포함된 원자 수 계산",

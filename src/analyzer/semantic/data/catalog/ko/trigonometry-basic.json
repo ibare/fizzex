@@ -6,10 +6,10 @@
     "field": "삼각법",
     "significance": "직각삼각형의 변과 각의 관계를 나타내는 가장 기본적인 삼각비로, 물리학과 공학의 파동, 진동 분석에 핵심적으로 사용됩니다.",
     "elementMeanings": {
-      "\\sin\\theta": { "role": "사인값", "description": "각도 세타에 대한 사인 비율입니다." },
-      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다. 직각이 아닌 한 각을 가리킵니다." },
-      "\\text{opposite}": { "role": "대변", "description": "기준 각도의 맞은편에 있는 변입니다." },
-      "\\text{hypotenuse}": { "role": "빗변", "description": "직각삼각형에서 가장 긴 변. 직각의 맞은편에 있습니다." }
+      "\\sin\\theta": { "role": "사인값", "description": "각도 세타에 대한 사인 비율입니다.", "kind": "output" },
+      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다. 직각이 아닌 한 각을 가리킵니다.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "대변", "description": "기준 각도의 맞은편에 있는 변입니다.", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "빗변", "description": "직각삼각형에서 가장 긴 변. 직각의 맞은편에 있습니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "나무 그림자 길이와 태양 각도로 나무 높이 구하기",
@@ -25,10 +25,10 @@
     "field": "삼각법",
     "significance": "사인과 함께 삼각법의 양대 기둥이며, 벡터의 내적, 신호 처리, 좌표 회전 등에서 필수적으로 사용됩니다.",
     "elementMeanings": {
-      "\\cos\\theta": { "role": "코사인값", "description": "각도 세타에 대한 코사인 비율입니다." },
-      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다." },
-      "\\text{adjacent}": { "role": "인접변", "description": "기준 각도에 붙어 있는 변(빗변 제외)입니다." },
-      "\\text{hypotenuse}": { "role": "빗변", "description": "직각삼각형에서 가장 긴 변입니다." }
+      "\\cos\\theta": { "role": "코사인값", "description": "각도 세타에 대한 코사인 비율입니다.", "kind": "output" },
+      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다.", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "인접변", "description": "기준 각도에 붙어 있는 변(빗변 제외)입니다.", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "빗변", "description": "직각삼각형에서 가장 긴 변입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "사다리를 벽에 기대었을 때 바닥에서 벽까지의 수평 거리 계산",
@@ -44,10 +44,10 @@
     "field": "삼각법",
     "significance": "경사도와 기울기를 직접 나타내는 삼각비로, 측량, 항법, 건축 설계에서 널리 사용됩니다.",
     "elementMeanings": {
-      "\\tan\\theta": { "role": "탄젠트값", "description": "각도 세타에 대한 탄젠트 비율입니다." },
-      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다." },
-      "\\text{opposite}": { "role": "대변", "description": "기준 각도의 맞은편에 있는 변입니다." },
-      "\\text{adjacent}": { "role": "인접변", "description": "기준 각도에 붙어 있는 변(빗변 제외)입니다." }
+      "\\tan\\theta": { "role": "탄젠트값", "description": "각도 세타에 대한 탄젠트 비율입니다.", "kind": "output" },
+      "\\theta": { "role": "각도", "description": "직각삼각형에서 기준이 되는 각도입니다.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "대변", "description": "기준 각도의 맞은편에 있는 변입니다.", "kind": "input" },
+      "\\text{adjacent}": { "role": "인접변", "description": "기준 각도에 붙어 있는 변(빗변 제외)입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "건물에서 일정 거리 떨어진 곳에서 올려다본 각도로 건물 높이 측정",
@@ -63,10 +63,10 @@
     "field": "삼각법",
     "significance": "모든 삼각함수 항등식의 출발점이며, 수식 변환과 증명에서 가장 자주 쓰이는 기본 관계입니다.",
     "elementMeanings": {
-      "\\sin^2\\theta": { "role": "사인의 제곱", "description": "sin 세타를 제곱한 값입니다." },
-      "\\cos^2\\theta": { "role": "코사인의 제곱", "description": "cos 세타를 제곱한 값입니다." },
-      "\\theta": { "role": "각도", "description": "임의의 각도. 어떤 값이든 항등식이 성립합니다." },
-      "1": { "role": "합", "description": "사인 제곱과 코사인 제곱의 합은 항상 1입니다." }
+      "\\sin^2\\theta": { "role": "사인의 제곱", "description": "sin 세타를 제곱한 값입니다.", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "코사인의 제곱", "description": "cos 세타를 제곱한 값입니다.", "kind": "structural" },
+      "\\theta": { "role": "각도", "description": "임의의 각도. 어떤 값이든 항등식이 성립합니다.", "kind": "input", "unit": "rad" },
+      "1": { "role": "합", "description": "사인 제곱과 코사인 제곱의 합은 항상 1입니다.", "kind": "constant", "value": 1 }
     },
     "realWorldExamples": [
       "삼각함수 계산에서 sin 값을 알 때 cos 값 바로 구하기",
@@ -82,12 +82,12 @@
     "field": "삼각법",
     "significance": "직각삼각형이 아닌 일반 삼각형에서도 변과 각의 관계를 구할 수 있게 해 주며, 측량과 항법의 핵심 도구입니다.",
     "elementMeanings": {
-      "a": { "role": "변 a", "description": "각 A의 맞은편에 있는 변의 길이입니다." },
-      "b": { "role": "변 b", "description": "각 B의 맞은편에 있는 변의 길이입니다." },
-      "c": { "role": "변 c", "description": "각 C의 맞은편에 있는 변의 길이입니다." },
-      "\\sin A": { "role": "각 A의 사인", "description": "삼각형 꼭짓점 A에서의 각도에 대한 사인값입니다." },
-      "\\sin B": { "role": "각 B의 사인", "description": "삼각형 꼭짓점 B에서의 각도에 대한 사인값입니다." },
-      "\\sin C": { "role": "각 C의 사인", "description": "삼각형 꼭짓점 C에서의 각도에 대한 사인값입니다." }
+      "a": { "role": "변 a", "description": "각 A의 맞은편에 있는 변의 길이입니다.", "kind": "input" },
+      "b": { "role": "변 b", "description": "각 B의 맞은편에 있는 변의 길이입니다.", "kind": "input" },
+      "c": { "role": "변 c", "description": "각 C의 맞은편에 있는 변의 길이입니다.", "kind": "input" },
+      "\\sin A": { "role": "각 A의 사인", "description": "삼각형 꼭짓점 A에서의 각도에 대한 사인값입니다.", "kind": "structural" },
+      "\\sin B": { "role": "각 B의 사인", "description": "삼각형 꼭짓점 B에서의 각도에 대한 사인값입니다.", "kind": "structural" },
+      "\\sin C": { "role": "각 C의 사인", "description": "삼각형 꼭짓점 C에서의 각도에 대한 사인값입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "강 건너편 건물까지의 거리를 두 지점에서 측정한 각도로 계산",

@@ -7,10 +7,10 @@
     "field": "수론",
     "significance": "현대 암호학의 핵심 기반이며, 소수 판정 알고리즘과 모듈러 역원 계산에 필수적으로 사용됩니다.",
     "elementMeanings": {
-      "a": { "role": "밑", "description": "소수 p와 서로소인 정수. 거듭제곱의 밑이 됩니다." },
-      "p": { "role": "소수 모듈러", "description": "나눗셈의 기준이 되는 소수입니다." },
-      "p-1": { "role": "지수", "description": "소수에서 1을 뺀 값으로, 이 지수만큼 거듭제곱하면 나머지가 1이 됩니다." },
-      "\\equiv 1": { "role": "합동 결과", "description": "모듈러 연산의 결과가 1임을 나타냅니다." }
+      "a": { "role": "밑", "description": "소수 p와 서로소인 정수. 거듭제곱의 밑이 됩니다.", "kind": "input" },
+      "p": { "role": "소수 모듈러", "description": "나눗셈의 기준이 되는 소수입니다.", "kind": "input" },
+      "p-1": { "role": "지수", "description": "소수에서 1을 뺀 값으로, 이 지수만큼 거듭제곱하면 나머지가 1이 됩니다.", "kind": "structural" },
+      "\\equiv 1": { "role": "합동 결과", "description": "모듈러 연산의 결과가 1임을 나타냅니다.", "kind": "output" }
     },
     "realWorldExamples": [
       "RSA 암호 체계에서 큰 수의 모듈러 역원 계산",
@@ -27,10 +27,10 @@
     "field": "수론",
     "significance": "페르마 소정리의 일반화로서 RSA 암호의 정당성 증명에 직접 사용되며, 합성수에 대한 모듈러 연산의 기초를 제공합니다.",
     "elementMeanings": {
-      "a": { "role": "밑", "description": "n과 서로소인 정수입니다." },
-      "n": { "role": "모듈러", "description": "나눗셈의 기준이 되는 양의 정수입니다." },
-      "\\varphi(n)": { "role": "오일러 파이 함수", "description": "1부터 n까지의 정수 중 n과 서로소인 수의 개수입니다." },
-      "\\equiv 1": { "role": "합동 결과", "description": "모듈러 연산의 결과가 1임을 나타냅니다." }
+      "a": { "role": "밑", "description": "n과 서로소인 정수입니다.", "kind": "input" },
+      "n": { "role": "모듈러", "description": "나눗셈의 기준이 되는 양의 정수입니다.", "kind": "input" },
+      "\\varphi(n)": { "role": "오일러 파이 함수", "description": "1부터 n까지의 정수 중 n과 서로소인 수의 개수입니다.", "kind": "output" },
+      "\\equiv 1": { "role": "합동 결과", "description": "모듈러 연산의 결과가 1임을 나타냅니다.", "kind": "output" }
     },
     "realWorldExamples": [
       "RSA 암호에서 복호화 지수 계산의 수학적 근거",
@@ -47,10 +47,10 @@
     "field": "수론",
     "significance": "소수의 분포에 대한 가장 기본적인 정리이며, 리만 가설과 직결되는 해석적 수론의 출발점입니다.",
     "elementMeanings": {
-      "\\pi(x)": { "role": "소수 계수 함수", "description": "x 이하의 소수 개수를 세는 함수입니다." },
-      "x": { "role": "상한", "description": "소수를 셀 범위의 상한값입니다." },
-      "\\ln(x)": { "role": "자연로그", "description": "x의 자연로그. 소수 밀도의 감소율을 나타냅니다." },
-      "\\sim": { "role": "점근적 동치", "description": "x가 무한히 커질 때 두 함수의 비가 1에 수렴함을 의미합니다." }
+      "\\pi(x)": { "role": "소수 계수 함수", "description": "x 이하의 소수 개수를 세는 함수입니다.", "kind": "output" },
+      "x": { "role": "상한", "description": "소수를 셀 범위의 상한값입니다.", "kind": "input" },
+      "\\ln(x)": { "role": "자연로그", "description": "x의 자연로그. 소수 밀도의 감소율을 나타냅니다.", "kind": "structural" },
+      "\\sim": { "role": "점근적 동치", "description": "x가 무한히 커질 때 두 함수의 비가 1에 수렴함을 의미합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "암호용 큰 소수 탐색 시 탐색 범위 추정",
@@ -67,10 +67,10 @@
     "field": "수론",
     "significance": "기록된 최초의 알고리즘이며, 분수 약분, 모듈러 역원 계산, RSA 키 생성 등 컴퓨터 과학 전반에서 핵심적으로 사용됩니다.",
     "elementMeanings": {
-      "a": { "role": "첫째 정수", "description": "최대공약수를 구할 두 수 중 하나입니다." },
-      "b": { "role": "둘째 정수", "description": "최대공약수를 구할 두 수 중 다른 하나입니다." },
-      "\\gcd": { "role": "최대공약수 함수", "description": "두 정수의 최대공약수를 반환하는 함수입니다." },
-      "a \\mod b": { "role": "나머지", "description": "a를 b로 나눈 나머지. 이 값이 0이 될 때까지 반복합니다." }
+      "a": { "role": "첫째 정수", "description": "최대공약수를 구할 두 수 중 하나입니다.", "kind": "input" },
+      "b": { "role": "둘째 정수", "description": "최대공약수를 구할 두 수 중 다른 하나입니다.", "kind": "input" },
+      "\\gcd": { "role": "최대공약수 함수", "description": "두 정수의 최대공약수를 반환하는 함수입니다.", "kind": "output" },
+      "a \\mod b": { "role": "나머지", "description": "a를 b로 나눈 나머지. 이 값이 0이 될 때까지 반복합니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "분수의 기약분수 변환 시 분자와 분모의 최대공약수 계산",
@@ -87,10 +87,10 @@
     "field": "수론",
     "significance": "대수적 수론과 류 체 이론의 출발점이며, 이차방정식의 모듈러 해 존재성을 판정하는 핵심 도구입니다.",
     "elementMeanings": {
-      "p": { "role": "첫째 홀수 소수", "description": "상호법칙을 적용할 두 소수 중 하나입니다." },
-      "q": { "role": "둘째 홀수 소수", "description": "상호법칙을 적용할 두 소수 중 다른 하나입니다." },
-      "\\left(\\frac{p}{q}\\right)": { "role": "르장드르 기호", "description": "p가 q의 이차잉여이면 1, 아니면 -1을 반환하는 기호입니다." },
-      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "부호 결정 인자", "description": "두 르장드르 기호의 곱의 부호를 결정하는 항입니다." }
+      "p": { "role": "첫째 홀수 소수", "description": "상호법칙을 적용할 두 소수 중 하나입니다.", "kind": "input" },
+      "q": { "role": "둘째 홀수 소수", "description": "상호법칙을 적용할 두 소수 중 다른 하나입니다.", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "르장드르 기호", "description": "p가 q의 이차잉여이면 1, 아니면 -1을 반환하는 기호입니다.", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "부호 결정 인자", "description": "두 르장드르 기호의 곱의 부호를 결정하는 항입니다.", "kind": "structural" }
     },
     "realWorldExamples": [
       "이차 합동식의 해 존재 여부를 빠르게 판정",
@@ -107,9 +107,9 @@
     "field": "수론",
     "significance": "가산적 수론의 대표적 난제이며, 소수의 덧셈적 성질에 대한 깊은 이해를 요구하는 문제입니다.",
     "elementMeanings": {
-      "2n": { "role": "짝수", "description": "4 이상의 임의의 짝수입니다." },
-      "p": { "role": "첫째 소수", "description": "짝수를 이루는 두 소수 중 하나입니다." },
-      "q": { "role": "둘째 소수", "description": "짝수를 이루는 두 소수 중 다른 하나입니다." }
+      "2n": { "role": "짝수", "description": "4 이상의 임의의 짝수입니다.", "kind": "input" },
+      "p": { "role": "첫째 소수", "description": "짝수를 이루는 두 소수 중 하나입니다.", "kind": "input" },
+      "q": { "role": "둘째 소수", "description": "짝수를 이루는 두 소수 중 다른 하나입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "컴퓨터를 이용한 대규모 수치 검증 프로젝트",
@@ -126,11 +126,11 @@
     "field": "수론",
     "significance": "선형 점화식을 닫힌 형태로 풀 수 있음을 보여주며, 황금비와 피보나치 수열의 깊은 연결을 드러냅니다.",
     "elementMeanings": {
-      "F_n": { "role": "피보나치 수", "description": "수열의 n번째 항입니다." },
-      "\\varphi": { "role": "황금비", "description": "(1+루트5)/2, 약 1.618. 양의 특성근입니다." },
-      "\\psi": { "role": "켤레 황금비", "description": "(1-루트5)/2, 약 -0.618. 음의 특성근입니다." },
-      "\\sqrt{5}": { "role": "정규화 상수", "description": "두 특성근의 차이로, 결과가 정수가 되도록 나누는 역할을 합니다." },
-      "n": { "role": "항 번호", "description": "구하고자 하는 피보나치 수열의 위치입니다." }
+      "F_n": { "role": "피보나치 수", "description": "수열의 n번째 항입니다.", "kind": "output" },
+      "\\varphi": { "role": "황금비", "description": "(1+루트5)/2, 약 1.618. 양의 특성근입니다.", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "켤레 황금비", "description": "(1-루트5)/2, 약 -0.618. 음의 특성근입니다.", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "정규화 상수", "description": "두 특성근의 차이로, 결과가 정수가 되도록 나누는 역할을 합니다.", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "항 번호", "description": "구하고자 하는 피보나치 수열의 위치입니다.", "kind": "input" }
     },
     "realWorldExamples": [
       "알고리즘 분석에서 피보나치 힙의 성능 한계 계산",

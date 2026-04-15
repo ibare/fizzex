@@ -87,6 +87,78 @@ export interface CatalogParameterConfig {
   }>;
 }
 
+// ─── 기호 종류 ───
+
+/** 수식 기호의 종류 */
+export type ElementKind = 'input' | 'constant' | 'output' | 'structural';
+
+/** 수식 기호의 역할과 종류 */
+export interface ElementMeaning {
+  /** 짧은 역할명 (예: "공전 주기", "만유인력 상수") */
+  role: string;
+  /** 설명 문장 */
+  description: string;
+  /** 기호 종류: input(슬라이더), constant(읽기전용), output(결과), structural(구조) */
+  kind: ElementKind;
+  /** constant일 때 실제 값 (예: G = 6.674e-11) */
+  value?: number;
+  /** 단위 (예: "N·m²/kg²", "km", "초") */
+  unit?: string;
+}
+
+// ─── 카탈로그 확장 타입 ───
+
+/** 유도값 설정 (JSON 직렬화 가능) */
+export interface DerivedValueConfig {
+  id: string;
+  label: string;
+  unit?: string;
+  format?: 'number' | 'time' | 'distance' | 'percentage';
+  /** 어떤 수식 노드에서 유도되는가 */
+  sourceParams: string[];
+  /** JavaScript 계산식 (params 변수명 사용) */
+  expression?: string;
+  /** 단순 변환 */
+  transform?: {
+    type: 'sqrt' | 'negate' | 'subtract' | 'divide' | 'multiply' | 'custom';
+    sourceParam: string;
+    operand?: number;
+  };
+}
+
+/** 유효 조건 */
+export interface ConstraintConfig {
+  param: string;
+  type: 'min' | 'max' | 'notEqual' | 'positive' | 'custom';
+  value?: number;
+  severity: 'warning' | 'error';
+  message: string;
+}
+
+/** 이정표 (슬라이더의 의미 있는 지점) */
+export interface MilestoneConfig {
+  param: string;
+  value: number;
+  label: string;
+  shortLabel?: string;
+  description?: string;
+  emoji?: string;
+}
+
+/** 현실 앵커 범위 */
+export interface AnchorRange {
+  range: number[];
+  template: string;
+  referenceValue: number;
+  referenceLabel: string;
+}
+
+/** 현실 앵커 */
+export interface AnchorConfig {
+  param: string;
+  ranges: AnchorRange[];
+}
+
 /** 카탈로그 상세 데이터 (런타임 로드) */
 export interface CatalogDetail {
   name: string;
@@ -96,14 +168,19 @@ export interface CatalogDetail {
   field: string;
   significance?: string;
   /** 각 심볼/부분에 대한 도메인 의미. 키: 변수명 또는 AST 경로 */
-  elementMeanings: Record<string, {
-    role: string;
-    description: string;
-  }>;
+  elementMeanings: Record<string, ElementMeaning>;
   relatedFormulas?: string[];
   realWorldExamples?: string[];
   /** Visualizer 파라미터 설정 */
   parameterConfig?: CatalogParameterConfig[];
+  /** 유도값 설정 */
+  derivedValues?: DerivedValueConfig[];
+  /** 유효 조건 */
+  constraints?: ConstraintConfig[];
+  /** 이정표 */
+  milestones?: MilestoneConfig[];
+  /** 현실 앵커 */
+  anchors?: AnchorConfig[];
 }
 
 /** 카탈로그 매칭 결과 */

@@ -7,10 +7,10 @@
     "field": "통계학",
     "significance": "불확실성 하에서의 추론을 수학적으로 형식화하며, 스팸 필터, 의료 진단, 기계 학습 등 현대 응용 분야의 기초입니다.",
     "elementMeanings": {
-      "P(A|B)": { "role": "사후 확률", "description": "사건 B가 관찰된 후 사건 A가 일어날 확률입니다." },
-      "P(B|A)": { "role": "우도", "description": "사건 A가 참일 때 사건 B가 관찰될 확률입니다." },
-      "P(A)": { "role": "사전 확률", "description": "사건 B를 관찰하기 전에 사건 A에 대해 가진 사전 믿음입니다." },
-      "P(B)": { "role": "증거의 확률", "description": "사건 B가 관찰될 전체 확률. 정규화 상수 역할을 합니다." }
+      "P(A|B)": { "role": "사후 확률", "description": "사건 B가 관찰된 후 사건 A가 일어날 확률입니다.", "kind": "output" },
+      "P(B|A)": { "role": "우도", "description": "사건 A가 참일 때 사건 B가 관찰될 확률입니다.", "kind": "input" },
+      "P(A)": { "role": "사전 확률", "description": "사건 B를 관찰하기 전에 사건 A에 대해 가진 사전 믿음입니다.", "kind": "input" },
+      "P(B)": { "role": "증거의 확률", "description": "사건 B가 관찰될 전체 확률. 정규화 상수 역할을 합니다.", "kind": "input" }
     },
     "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
   },
@@ -22,12 +22,12 @@
     "field": "통계학",
     "significance": "중심극한정리에 의해 거의 모든 통계적 추론의 기초가 되며, 자연과학과 사회과학에서 가장 널리 사용되는 확률분포입니다.",
     "elementMeanings": {
-      "f(x)": { "role": "확률밀도", "description": "점 x에서의 확률밀도값. 직접적인 확률은 아니며 구간 적분으로 확률을 구합니다." },
-      "\\mu": { "role": "평균", "description": "분포의 중심. 종 모양 곡선의 꼭짓점 위치입니다." },
-      "\\sigma": { "role": "표준편차", "description": "분포의 퍼진 정도. 클수록 곡선이 납작해집니다." },
-      "\\sigma^2": { "role": "분산", "description": "표준편차의 제곱. 데이터가 평균에서 얼마나 흩어져 있는지를 나타냅니다." },
-      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "가우스 커널", "description": "평균에서 멀어질수록 급격히 감소하는 지수함수 부분입니다." },
-      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "정규화 상수", "description": "전체 면적이 1이 되도록 하는 계수입니다." }
+      "f(x)": { "role": "확률밀도", "description": "점 x에서의 확률밀도값. 직접적인 확률은 아니며 구간 적분으로 확률을 구합니다.", "kind": "output" },
+      "\\mu": { "role": "평균", "description": "분포의 중심. 종 모양 곡선의 꼭짓점 위치입니다.", "kind": "input" },
+      "\\sigma": { "role": "표준편차", "description": "분포의 퍼진 정도. 클수록 곡선이 납작해집니다.", "kind": "input" },
+      "\\sigma^2": { "role": "분산", "description": "표준편차의 제곱. 데이터가 평균에서 얼마나 흩어져 있는지를 나타냅니다.", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "가우스 커널", "description": "평균에서 멀어질수록 급격히 감소하는 지수함수 부분입니다.", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "정규화 상수", "description": "전체 면적이 1이 되도록 하는 계수입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
   },
@@ -38,12 +38,12 @@
     "field": "통계학",
     "significance": "데이터의 변동성을 원래 단위로 측정할 수 있게 하며, 품질 관리, 금융 리스크 분석 등에서 핵심적으로 사용됩니다.",
     "elementMeanings": {
-      "\\sigma": { "role": "표준편차", "description": "모집단 표준편차. 데이터의 퍼진 정도를 나타냅니다." },
-      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 관측값입니다." },
-      "\\mu": { "role": "모평균", "description": "모집단의 평균값입니다. 표본의 경우 표본평균을 사용합니다." },
-      "(x_i - \\mu)^2": { "role": "편차의 제곱", "description": "각 데이터가 평균에서 얼마나 떨어져 있는지의 제곱값입니다." },
-      "N": { "role": "데이터 개수", "description": "모집단의 전체 데이터 수입니다." },
-      "\\sqrt{}": { "role": "제곱근", "description": "분산에 제곱근을 취하여 원래 데이터와 같은 단위로 만듭니다." }
+      "\\sigma": { "role": "표준편차", "description": "모집단 표준편차. 데이터의 퍼진 정도를 나타냅니다.", "kind": "output" },
+      "x_i": { "role": "개별 데이터값", "description": "데이터 집합에서 i번째 관측값입니다.", "kind": "input" },
+      "\\mu": { "role": "모평균", "description": "모집단의 평균값입니다. 표본의 경우 표본평균을 사용합니다.", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "편차의 제곱", "description": "각 데이터가 평균에서 얼마나 떨어져 있는지의 제곱값입니다.", "kind": "structural" },
+      "N": { "role": "데이터 개수", "description": "모집단의 전체 데이터 수입니다.", "kind": "input" },
+      "\\sqrt{}": { "role": "제곱근", "description": "분산에 제곱근을 취하여 원래 데이터와 같은 단위로 만듭니다.", "kind": "structural" }
     },
     "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
   },
@@ -55,12 +55,12 @@
     "field": "통계학",
     "significance": "변수 간 관계를 단일 숫자로 요약하여 회귀분석, 금융 포트폴리오 이론, 실험 설계 등의 기초를 제공합니다.",
     "elementMeanings": {
-      "r": { "role": "상관계수", "description": "피어슨 상관계수. -1부터 1 사이의 값을 가집니다." },
-      "\\text{Cov}(X,Y)": { "role": "공분산", "description": "X와 Y가 함께 변하는 정도를 측정합니다." },
-      "\\sigma_X": { "role": "X의 표준편차", "description": "변수 X의 퍼진 정도입니다." },
-      "\\sigma_Y": { "role": "Y의 표준편차", "description": "변수 Y의 퍼진 정도입니다." },
-      "X": { "role": "첫째 변수", "description": "상관관계를 분석할 첫 번째 변수입니다." },
-      "Y": { "role": "둘째 변수", "description": "상관관계를 분석할 두 번째 변수입니다." }
+      "r": { "role": "상관계수", "description": "피어슨 상관계수. -1부터 1 사이의 값을 가집니다.", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "공분산", "description": "X와 Y가 함께 변하는 정도를 측정합니다.", "kind": "input" },
+      "\\sigma_X": { "role": "X의 표준편차", "description": "변수 X의 퍼진 정도입니다.", "kind": "input" },
+      "\\sigma_Y": { "role": "Y의 표준편차", "description": "변수 Y의 퍼진 정도입니다.", "kind": "input" },
+      "X": { "role": "첫째 변수", "description": "상관관계를 분석할 첫 번째 변수입니다.", "kind": "input" },
+      "Y": { "role": "둘째 변수", "description": "상관관계를 분석할 두 번째 변수입니다.", "kind": "input" }
     },
     "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
   },
@@ -72,11 +72,11 @@
     "field": "통계학",
     "significance": "표본 조사가 모집단에 대한 유효한 추론을 제공할 수 있음을 수학적으로 보증하며, 보험, 도박, 실험 과학의 이론적 기반입니다.",
     "elementMeanings": {
-      "\\bar{X}_n": { "role": "표본평균", "description": "n개 관측값의 산술평균입니다." },
-      "\\mu": { "role": "모평균", "description": "모집단의 참된 평균값. 표본평균이 수렴하는 목표입니다." },
-      "n": { "role": "표본 크기", "description": "관측 데이터의 개수. 클수록 표본평균이 모평균에 가까워집니다." },
-      "X_i": { "role": "개별 관측값", "description": "i번째 독립 관측값. 모두 같은 분포를 따릅니다." },
-      "\\epsilon": { "role": "오차 한계", "description": "표본평균과 모평균의 차이가 이 값 이내에 들어올 확률이 1에 수렴합니다." }
+      "\\bar{X}_n": { "role": "표본평균", "description": "n개 관측값의 산술평균입니다.", "kind": "output" },
+      "\\mu": { "role": "모평균", "description": "모집단의 참된 평균값. 표본평균이 수렴하는 목표입니다.", "kind": "input" },
+      "n": { "role": "표본 크기", "description": "관측 데이터의 개수. 클수록 표본평균이 모평균에 가까워집니다.", "kind": "input" },
+      "X_i": { "role": "개별 관측값", "description": "i번째 독립 관측값. 모두 같은 분포를 따릅니다.", "kind": "input" },
+      "\\epsilon": { "role": "오차 한계", "description": "표본평균과 모평균의 차이가 이 값 이내에 들어올 확률이 1에 수렴합니다.", "kind": "input" }
     },
     "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
   },
@@ -88,11 +88,11 @@
     "field": "통계학",
     "significance": "소표본 상황에서 모평균에 대한 통계적 추론을 가능하게 하며, 의학, 심리학, 교육학 연구에서 표준적인 검정 방법입니다.",
     "elementMeanings": {
-      "t": { "role": "t-통계량", "description": "표본평균과 모평균의 차이를 표준오차 단위로 나타낸 값입니다." },
-      "\\bar{x}": { "role": "표본평균", "description": "표본 데이터의 산술평균입니다." },
-      "\\mu": { "role": "모평균", "description": "귀무가설에서 가정하는 모집단 평균입니다." },
-      "s": { "role": "표본표준편차", "description": "표본 데이터로부터 추정한 표준편차입니다." },
-      "\\sqrt{n}": { "role": "표본 크기의 제곱근", "description": "표본 크기 n의 제곱근. 표준오차 계산에 사용됩니다." }
+      "t": { "role": "t-통계량", "description": "표본평균과 모평균의 차이를 표준오차 단위로 나타낸 값입니다.", "kind": "output" },
+      "\\bar{x}": { "role": "표본평균", "description": "표본 데이터의 산술평균입니다.", "kind": "input" },
+      "\\mu": { "role": "모평균", "description": "귀무가설에서 가정하는 모집단 평균입니다.", "kind": "input" },
+      "s": { "role": "표본표준편차", "description": "표본 데이터로부터 추정한 표준편차입니다.", "kind": "input" },
+      "\\sqrt{n}": { "role": "표본 크기의 제곱근", "description": "표본 크기 n의 제곱근. 표준오차 계산에 사용됩니다.", "kind": "structural" }
     },
     "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
   },
@@ -104,11 +104,11 @@
     "field": "통계학",
     "significance": "범주형 데이터에 대한 가설검정을 가능하게 하며, 설문 분석, 유전학, 품질 관리에서 핵심적으로 사용됩니다.",
     "elementMeanings": {
-      "\\chi^2": { "role": "카이제곱 통계량", "description": "관측값과 기대값의 차이를 종합한 검정 통계량입니다." },
-      "O": { "role": "관측 빈도", "description": "실제로 관측된 각 범주의 빈도입니다." },
-      "E": { "role": "기대 빈도", "description": "귀무가설이 참일 때 기대되는 각 범주의 빈도입니다." },
-      "(O-E)^2": { "role": "편차의 제곱", "description": "관측값과 기대값 차이의 제곱. 방향에 관계없이 편차를 누적합니다." },
-      "\\Sigma": { "role": "합산 기호", "description": "모든 범주에 대해 합산하는 연산입니다." }
+      "\\chi^2": { "role": "카이제곱 통계량", "description": "관측값과 기대값의 차이를 종합한 검정 통계량입니다.", "kind": "output" },
+      "O": { "role": "관측 빈도", "description": "실제로 관측된 각 범주의 빈도입니다.", "kind": "input" },
+      "E": { "role": "기대 빈도", "description": "귀무가설이 참일 때 기대되는 각 범주의 빈도입니다.", "kind": "input" },
+      "(O-E)^2": { "role": "편차의 제곱", "description": "관측값과 기대값 차이의 제곱. 방향에 관계없이 편차를 누적합니다.", "kind": "structural" },
+      "\\Sigma": { "role": "합산 기호", "description": "모든 범주에 대해 합산하는 연산입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
   },
@@ -120,11 +120,11 @@
     "field": "통계학",
     "significance": "희귀 사건의 발생 패턴을 모형화하여 보험 사고 예측, 통신 트래픽 분석, 품질 관리에서 핵심적으로 활용됩니다.",
     "elementMeanings": {
-      "P(X=k)": { "role": "확률", "description": "사건이 정확히 k번 발생할 확률입니다." },
-      "\\lambda": { "role": "평균 발생률", "description": "단위 시간 또는 공간에서 사건이 발생하는 평균 횟수입니다." },
-      "k": { "role": "발생 횟수", "description": "관심 있는 사건의 발생 횟수(0 이상의 정수)입니다." },
-      "e^{-\\lambda}": { "role": "정규화 인자", "description": "전체 확률의 합이 1이 되도록 하는 지수함수 부분입니다." },
-      "k!": { "role": "k의 계승", "description": "k개 사건의 순서 조합 수를 보정하는 계승 값입니다." }
+      "P(X=k)": { "role": "확률", "description": "사건이 정확히 k번 발생할 확률입니다.", "kind": "output" },
+      "\\lambda": { "role": "평균 발생률", "description": "단위 시간 또는 공간에서 사건이 발생하는 평균 횟수입니다.", "kind": "input" },
+      "k": { "role": "발생 횟수", "description": "관심 있는 사건의 발생 횟수(0 이상의 정수)입니다.", "kind": "input" },
+      "e^{-\\lambda}": { "role": "정규화 인자", "description": "전체 확률의 합이 1이 되도록 하는 지수함수 부분입니다.", "kind": "structural" },
+      "k!": { "role": "k의 계승", "description": "k개 사건의 순서 조합 수를 보정하는 계승 값입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
   },
@@ -136,12 +136,12 @@
     "field": "통계학",
     "significance": "성공-실패 이분형 실험의 기본 모형으로, 품질 검사, 의학 시험, 여론 조사 분석의 이론적 기초입니다.",
     "elementMeanings": {
-      "P(X=k)": { "role": "확률", "description": "n번 시행에서 정확히 k번 성공할 확률입니다." },
-      "C(n,k)": { "role": "조합 수", "description": "n개 중 k개를 선택하는 경우의 수. n!/(k!(n-k)!)입니다." },
-      "p": { "role": "성공 확률", "description": "한 번의 시행에서 성공할 확률입니다." },
-      "1-p": { "role": "실패 확률", "description": "한 번의 시행에서 실패할 확률입니다." },
-      "n": { "role": "시행 횟수", "description": "독립 시행의 전체 횟수입니다." },
-      "k": { "role": "성공 횟수", "description": "관심 있는 성공의 횟수(0부터 n까지)입니다." }
+      "P(X=k)": { "role": "확률", "description": "n번 시행에서 정확히 k번 성공할 확률입니다.", "kind": "output" },
+      "C(n,k)": { "role": "조합 수", "description": "n개 중 k개를 선택하는 경우의 수. n!/(k!(n-k)!)입니다.", "kind": "structural" },
+      "p": { "role": "성공 확률", "description": "한 번의 시행에서 성공할 확률입니다.", "kind": "input" },
+      "1-p": { "role": "실패 확률", "description": "한 번의 시행에서 실패할 확률입니다.", "kind": "input" },
+      "n": { "role": "시행 횟수", "description": "독립 시행의 전체 횟수입니다.", "kind": "input" },
+      "k": { "role": "성공 횟수", "description": "관심 있는 성공의 횟수(0부터 n까지)입니다.", "kind": "input" }
     },
     "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
   },
@@ -152,9 +152,9 @@
     "field": "통계학",
     "significance": "사건 간 의존 관계를 정량적으로 표현하며, 베이즈 추론, 마르코프 체인, 의사 결정 이론의 수학적 기초입니다.",
     "elementMeanings": {
-      "P(A|B)": { "role": "조건부확률", "description": "사건 B가 주어진 조건에서 사건 A가 일어날 확률입니다." },
-      "P(A \\cap B)": { "role": "교집합 확률", "description": "사건 A와 사건 B가 동시에 일어날 확률입니다." },
-      "P(B)": { "role": "조건 사건의 확률", "description": "조건으로 주어진 사건 B의 확률. 0이 아니어야 합니다." }
+      "P(A|B)": { "role": "조건부확률", "description": "사건 B가 주어진 조건에서 사건 A가 일어날 확률입니다.", "kind": "output" },
+      "P(A \\cap B)": { "role": "교집합 확률", "description": "사건 A와 사건 B가 동시에 일어날 확률입니다.", "kind": "input" },
+      "P(B)": { "role": "조건 사건의 확률", "description": "조건으로 주어진 사건 B의 확률. 0이 아니어야 합니다.", "kind": "input" }
     },
     "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
   },
@@ -165,10 +165,10 @@
     "field": "통계학",
     "significance": "복잡한 확률 계산을 체계적으로 분해하는 도구이며, 베이즈 정리와 결합하여 통계적 추론의 핵심 틀을 구성합니다.",
     "elementMeanings": {
-      "P(A)": { "role": "사건 A의 확률", "description": "구하고자 하는 사건 A의 전체 확률입니다." },
-      "P(A|B_i)": { "role": "조건부확률", "description": "사건 B_i가 주어졌을 때 사건 A의 확률입니다." },
-      "P(B_i)": { "role": "분할 사건의 확률", "description": "i번째 분할 사건 B_i의 확률입니다." },
-      "\\Sigma": { "role": "합산 기호", "description": "모든 분할 사건 B_i에 대해 합산하는 연산입니다." }
+      "P(A)": { "role": "사건 A의 확률", "description": "구하고자 하는 사건 A의 전체 확률입니다.", "kind": "output" },
+      "P(A|B_i)": { "role": "조건부확률", "description": "사건 B_i가 주어졌을 때 사건 A의 확률입니다.", "kind": "input" },
+      "P(B_i)": { "role": "분할 사건의 확률", "description": "i번째 분할 사건 B_i의 확률입니다.", "kind": "input" },
+      "\\Sigma": { "role": "합산 기호", "description": "모든 분할 사건 B_i에 대해 합산하는 연산입니다.", "kind": "structural" }
     },
     "relatedFormulas": ["conditional-prob", "bayes-theorem"]
   },
@@ -179,12 +179,12 @@
     "field": "통계학",
     "significance": "변수 간 공동 변동을 측정하여 포트폴리오 분산 계산, 주성분 분석, 다변량 회귀의 기초를 제공합니다.",
     "elementMeanings": {
-      "\\text{Cov}(X,Y)": { "role": "공분산", "description": "X와 Y의 공동 변동 정도를 나타내는 값입니다." },
-      "E": { "role": "기대값 연산자", "description": "확률변수의 기대값(평균)을 구하는 연산입니다." },
-      "X": { "role": "첫째 확률변수", "description": "공분산을 계산할 첫 번째 변수입니다." },
-      "Y": { "role": "둘째 확률변수", "description": "공분산을 계산할 두 번째 변수입니다." },
-      "\\mu_X": { "role": "X의 평균", "description": "확률변수 X의 기대값(평균)입니다." },
-      "\\mu_Y": { "role": "Y의 평균", "description": "확률변수 Y의 기대값(평균)입니다." }
+      "\\text{Cov}(X,Y)": { "role": "공분산", "description": "X와 Y의 공동 변동 정도를 나타내는 값입니다.", "kind": "output" },
+      "E": { "role": "기대값 연산자", "description": "확률변수의 기대값(평균)을 구하는 연산입니다.", "kind": "structural" },
+      "X": { "role": "첫째 확률변수", "description": "공분산을 계산할 첫 번째 변수입니다.", "kind": "input" },
+      "Y": { "role": "둘째 확률변수", "description": "공분산을 계산할 두 번째 변수입니다.", "kind": "input" },
+      "\\mu_X": { "role": "X의 평균", "description": "확률변수 X의 기대값(평균)입니다.", "kind": "input" },
+      "\\mu_Y": { "role": "Y의 평균", "description": "확률변수 Y의 기대값(평균)입니다.", "kind": "input" }
     },
     "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
   }
