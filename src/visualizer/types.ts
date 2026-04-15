@@ -44,6 +44,8 @@ export interface DerivedValue {
   label: string;
   unit?: string;
   format?: 'number' | 'time' | 'distance';
+  /** 이 파생값이 대응하는 수식 변수명 (예: 'T'). 있으면 수식 옆에 값 표시 */
+  formulaElement?: string;
   /** 파라미터 → 계산값 */
   compute: (params: ParameterValues) => number;
 }

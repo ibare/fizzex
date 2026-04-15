@@ -81,9 +81,10 @@ export class ExplorerOverlay {
   private hoveredInfo: ExplorerBoxInfo | null = null;
   private ancestors: ExplorerBoxInfo[] = [];
 
-  // 선택 (클릭)
+  // 선택 (클릭) + 인라인 컨트롤
   private selectedInfo: ExplorerBoxInfo | null = null;
   private inlineControl: ExplorerInlineControls | null = null;
+  private activeControlNodeId: string | null = null;
   private astModState: AstModificationState | null = null;
   private catalogDetail: CatalogDetail | null = null;
   private localParamValues: ParameterValues = {};
@@ -96,6 +97,7 @@ export class ExplorerOverlay {
   private onClose?: () => void;
 
   // Visualizer 통합
+  private valueBadgeUnsub: (() => void) | null = null;
   private vizController: ExplorerVisualizerController | null = null;
   private vizControls: ExplorerControlsPanel | null = null;
   private vizContainer: HTMLDivElement | null = null;
@@ -105,7 +107,7 @@ export class ExplorerOverlay {
   // Bound handler 참조 (destroy 시 제거)
   private boundKeyDown: (e: KeyboardEvent) => void;
   private boundMouseMove: (e: MouseEvent) => void;
-  private boundMouseLeave: () => void;
+  private boundMouseLeave: (e: MouseEvent) => void;
   private boundClick: (e: MouseEvent) => void;
   private boundTouchStart: (e: TouchEvent) => void;
   private boundResize: () => void;
@@ -279,8 +281,11 @@ export class ExplorerOverlay {
     this.bridgeUnsubscribe = null;
     this.inlineControl?.destroy();
     this.inlineControl = null;
+    this.activeControlNodeId = null;
 
     // Visualizer 정리
+    this.valueBadgeUnsub?.();
+    this.valueBadgeUnsub = null;
     this.vizControls?.destroy();
     this.vizController?.destroy();
 
@@ -350,18 +355,21 @@ export class ExplorerOverlay {
     this.updateCatalogBanner();
     this.renderCanvas();
 
-    // 선택된 요소가 있으면 재매핑 (AST 수정으로 explorerInfos가 재구축되었을 수 있음)
-    if (this.selectedInfo) {
-      const nodeId = this.selectedInfo.astNode?.id;
+    // 활성 요소가 있으면 재매핑 (AST 수정으로 explorerInfos가 재구축되었을 수 있음)
+    const activeInfo = this.selectedInfo ?? this.hoveredInfo;
+    if (activeInfo) {
+      const nodeId = activeInfo.astNode?.id;
       if (nodeId) {
         const newInfo = this.explorerInfos.find(
           (info) => info.astNode?.id === nodeId,
         );
         if (newInfo) {
-          this.selectedInfo = newInfo;
+          if (this.selectedInfo) this.selectedInfo = newInfo;
+          if (this.hoveredInfo) this.hoveredInfo = newInfo;
           this.updateInlineControlPosition();
         } else {
-          this.clearSelection();
+          this.selectedInfo = null;
+          this.updateActiveControl();
         }
       }
     }
@@ -455,6 +463,14 @@ export class ExplorerOverlay {
         viz.derivedValues,
         this.isDark ? 'dark' : 'light',
       );
+
+      // 파라미터 변경 시 값 배지 갱신
+      this.valueBadgeUnsub = bridge.subscribe(() => {
+        this.renderCanvas();
+      });
+
+      // 초기 값 배지 표시
+      this.renderCanvas();
     });
   }
 
@@ -606,6 +622,9 @@ export class ExplorerOverlay {
 
     this.ctx.restore();
 
+    // 값 배지 (스크린 좌표계에서 렌더링)
+    this.drawValueBadges();
+
     // 화살표 주석 (스크린 좌표계에서 렌더링)
     this.drawAnnotation();
 
@@ -625,7 +644,8 @@ export class ExplorerOverlay {
   private handleKeyDown(e: KeyboardEvent): void {
     if (e.key === 'Escape') {
       if (this.selectedInfo) {
-        this.clearSelection();
+        this.selectedInfo = null;
+        this.updateActiveControl();
         this.renderCanvas();
       } else {
         this.destroy();
@@ -656,13 +676,19 @@ export class ExplorerOverlay {
       this.ancestors = [];
     }
 
+    this.updateActiveControl();
     this.renderCanvas();
   }
 
-  private handleMouseLeave(): void {
+  private handleMouseLeave(e: MouseEvent): void {
+    // 인라인 컨트롤로 마우스가 이동한 경우 호버 유지
+    if (this.inlineControl && e.relatedTarget instanceof HTMLElement) {
+      if (this.inlineControl.getElement().contains(e.relatedTarget)) return;
+    }
     if (!this.hoveredInfo) return;
     this.hoveredInfo = null;
     this.ancestors = [];
+    this.updateActiveControl();
     this.renderCanvas();
   }
 
@@ -677,18 +703,19 @@ export class ExplorerOverlay {
     const result = explorerHitTest(boxX, boxY, this.explorerInfos);
 
     if (result) {
-      // 같은 요소 클릭 → 토글
+      // 같은 요소 클릭 → 선택 해제 (호버 컨트롤은 유지)
       if (this.selectedInfo && result.hit.box === this.selectedInfo.box) {
-        this.clearSelection();
+        this.selectedInfo = null;
       } else {
+        // 새 요소 클릭 → 선택 고정
         this.selectedInfo = result.hit;
-        this.openInlineControl();
       }
     } else {
       // 빈 곳 클릭 → 선택 해제
-      this.clearSelection();
+      this.selectedInfo = null;
     }
 
+    this.updateActiveControl();
     this.renderCanvas();
   }
 
@@ -707,16 +734,17 @@ export class ExplorerOverlay {
     if (result) {
       e.preventDefault();
       if (this.selectedInfo && result.hit.box === this.selectedInfo.box) {
-        this.clearSelection();
+        this.selectedInfo = null;
       } else {
         this.selectedInfo = result.hit;
         this.hoveredInfo = result.hit;
         this.ancestors = result.ancestors;
-        this.openInlineControl();
       }
+      this.updateActiveControl();
       this.renderCanvas();
     } else if (this.selectedInfo) {
-      this.clearSelection();
+      this.selectedInfo = null;
+      this.updateActiveControl();
       this.renderCanvas();
     }
   }
@@ -734,23 +762,24 @@ export class ExplorerOverlay {
   // 선택 + 인라인 컨트롤
   // ---------------------------------------------------------------------------
 
-  private clearSelection(): void {
-    this.selectedInfo = null;
-    this.inlineControl?.destroy();
-    this.inlineControl = null;
-    this.bridgeUnsubscribe?.();
-    this.bridgeUnsubscribe = null;
-  }
+  /** 활성 요소(선택 ?? 호버)에 맞춰 인라인 컨트롤을 갱신 */
+  private updateActiveControl(): void {
+    const active = this.selectedInfo ?? this.hoveredInfo;
+    const nodeId = active?.astNode?.id ?? null;
 
-  private openInlineControl(): void {
-    const info = this.selectedInfo;
-    if (!info?.astNode) return;
+    // 같은 대상이면 스킵
+    if (nodeId === this.activeControlNodeId) return;
 
     // 기존 컨트롤 제거
     this.inlineControl?.destroy();
     this.inlineControl = null;
+    this.bridgeUnsubscribe?.();
+    this.bridgeUnsubscribe = null;
+    this.activeControlNodeId = null;
 
-    const node = info.astNode;
+    if (!active?.astNode) return;
+
+    const node = active.astNode;
     const semantic = this.semanticMap.get(node.id);
     const bridge = this.vizController?.bridge ?? null;
 
@@ -778,21 +807,20 @@ export class ExplorerOverlay {
       config,
       {
         onValueChange: (id, value) => this.handleInlineValueChange(id, value, config),
-        onReset: (nodeId) => this.handleInlineReset(nodeId),
+        onReset: (nodeId_) => this.handleInlineReset(nodeId_),
       },
       this.isDark,
       showReset,
     );
 
+    this.activeControlNodeId = nodeId;
     this.updateInlineControlPosition();
 
     // Bridge → 인라인 컨트롤 동기화 (Visualizer 드래그/컨트롤 패널 변경 시)
-    this.bridgeUnsubscribe?.();
-    this.bridgeUnsubscribe = null;
     if (bridge && config.controlType === 'slider' && config.paramId) {
       const paramId = config.paramId;
       this.bridgeUnsubscribe = bridge.subscribe((params, source) => {
-        if (source === 'inline') return; // 자기 자신의 변경은 무시
+        if (source === 'inline') return;
         if (paramId in params) {
           this.inlineControl?.updateValue(params[paramId]);
         }
@@ -831,12 +859,13 @@ export class ExplorerOverlay {
   }
 
   private updateInlineControlPosition(): void {
-    if (!this.inlineControl || !this.selectedInfo?.astNode) return;
+    const active = this.selectedInfo ?? this.hoveredInfo;
+    if (!this.inlineControl || !active?.astNode) return;
 
-    const semantic = this.semanticMap.get(this.selectedInfo.astNode.id);
+    const semantic = this.semanticMap.get(active.astNode.id);
     if (!semantic) return;
 
-    const layout = this.getAnnotationLayout(this.selectedInfo, semantic);
+    const layout = this.getAnnotationLayout(active, semantic);
     if (!layout) return;
 
     // 인라인 컨트롤은 주석 텍스트 아래에 위치
@@ -961,6 +990,130 @@ export class ExplorerOverlay {
 
     this.catalogBanner.style.display = 'flex';
     this.catalogBanner.style.pointerEvents = 'auto';
+  }
+
+  // ---------------------------------------------------------------------------
+  // 값 배지 — 수식 변수 옆에 현재 값 표시
+  // ---------------------------------------------------------------------------
+
+  /** 수식 변수 옆에 대응하는 값 배지를 렌더링 */
+  private drawValueBadges(): void {
+    // 값 맵 구축: variableName → { label, value }
+    const valueMap = new Map<string, { label: string; value: string }>();
+
+    const bridge = this.vizController?.bridge;
+    const viz = this.vizController?.viz;
+
+    if (bridge && viz) {
+      const params = bridge.getParams();
+      const derived = bridge.getDerivedValues();
+
+      // 파라미터 → 수식 변수
+      for (const param of viz.parameters) {
+        valueMap.set(param.name, {
+          label: param.role,
+          value: this.formatBadgeValue(params[param.id], param.unit),
+        });
+      }
+      // formulaElement가 있는 파생값 → 수식 변수
+      for (const dv of viz.derivedValues) {
+        if (dv.formulaElement) {
+          valueMap.set(dv.formulaElement, {
+            label: dv.label,
+            value: this.formatBadgeValue(derived[dv.id], dv.unit, dv.format),
+          });
+        }
+      }
+    } else if (this.catalogDetail?.parameterConfig) {
+      // bridge 없으면 카탈로그 기본값 표시
+      for (const pc of this.catalogDetail.parameterConfig) {
+        valueMap.set(pc.name, {
+          label: pc.role,
+          value: this.formatBadgeValue(pc.default, pc.unit),
+        });
+      }
+    }
+
+    if (valueMap.size === 0) return;
+
+    const { offsetX, offsetY, scale } = this.viewport;
+    const drawn = new Set<string>();
+
+    for (const info of this.explorerInfos) {
+      if (!info.astNode || info.astNode.type !== 'variable') continue;
+      const varName = info.astNode.name;
+      if (drawn.has(varName)) continue;
+
+      const entry = valueMap.get(varName);
+      if (!entry) continue;
+      drawn.add(varName);
+
+      // Box 좌표 → 스크린 좌표
+      const sx = info.bounds.x * scale + offsetX;
+      const sy = info.bounds.y * scale + offsetY;
+      const sw = info.bounds.width * scale;
+      const sh = info.bounds.height * scale;
+
+      this.drawValueBadge(sx + sw / 2, sy + sh + 6, `${entry.label}: ${entry.value}`);
+    }
+  }
+
+  /** 값 포맷팅 */
+  private formatBadgeValue(value: number, unit?: string, format?: string): string {
+    let numStr: string;
+    if (format === 'time') {
+      if (value < 60) return `${value.toFixed(1)}초`;
+      if (value < 3600) return `${(value / 60).toFixed(1)}분`;
+      if (value < 86400) return `${(value / 3600).toFixed(1)}시간`;
+      return `${(value / 86400).toFixed(1)}일`;
+    }
+    if (Math.abs(value) >= 1000) {
+      numStr = Math.round(value).toLocaleString();
+    } else if (Math.abs(value) >= 1) {
+      numStr = value.toFixed(1);
+    } else {
+      numStr = value.toPrecision(3);
+    }
+    return unit ? `${numStr} ${unit}` : numStr;
+  }
+
+  /** 단일 값 배지 (pill) 렌더링 */
+  private drawValueBadge(cx: number, y: number, text: string): void {
+    const ctx = this.ctx;
+    const sysFont = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    const fontSize = 13;
+
+    ctx.save();
+    ctx.font = `500 ${fontSize}px ${sysFont}`;
+    const tw = ctx.measureText(text).width;
+    const padX = 7;
+    const padY = 4;
+    const pillW = tw + padX * 2;
+    const pillH = fontSize + padY * 2;
+    const x = cx - pillW / 2;
+
+    // 배경
+    ctx.fillStyle = this.isDark
+      ? 'rgba(96, 165, 250, 0.12)'
+      : 'rgba(59, 130, 246, 0.08)';
+    ctx.beginPath();
+    ctx.roundRect(x, y, pillW, pillH, 4);
+    ctx.fill();
+
+    // 테두리
+    ctx.strokeStyle = this.isDark
+      ? 'rgba(96, 165, 250, 0.25)'
+      : 'rgba(59, 130, 246, 0.15)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+
+    // 텍스트
+    ctx.fillStyle = this.isDark ? '#93c5fd' : '#2563eb';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(text, cx, y + padY);
+
+    ctx.restore();
   }
 
   // ---------------------------------------------------------------------------

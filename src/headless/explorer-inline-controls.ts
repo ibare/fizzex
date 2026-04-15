@@ -71,6 +71,11 @@ export class ExplorerInlineControls {
     parent.appendChild(this.container);
   }
 
+  /** 루트 DOM 요소 참조 (mouseleave 체크용) */
+  getElement(): HTMLDivElement {
+    return this.container;
+  }
+
   /** 컨트롤 위치 업데이트 (스크린 좌표) */
   updatePosition(x: number, y: number): void {
     if (this.destroyed) return;

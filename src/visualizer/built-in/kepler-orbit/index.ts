@@ -52,6 +52,7 @@ const keplerOrbitVisualizer: FizzexVisualizer = {
       id: 'period',
       label: '공전 주기',
       format: 'time',
+      formulaElement: 'T',
       compute: (p: ParameterValues) => calcPeriod(p.a),
     },
     {
