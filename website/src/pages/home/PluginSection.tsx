@@ -2,7 +2,7 @@ import { useLang } from '../../i18n/context';
 import { Link, useParams } from 'react-router-dom';
 import CodeBlock from '../../components/CodeBlock';
 
-const snippet = `const renderer = new FizzexRenderer(container);
+const snippet = `const renderer = new DOMRendererView(container);
 renderer.render('\\\\frac{1}{2} + x^2');`;
 
 const layers = [

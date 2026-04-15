@@ -1,11 +1,11 @@
 export const snippets = {
   install: `npm install fizzex`,
 
-  editor: `import { MathCanvas } from 'fizzex/react';
+  editor: `import { EditorView } from 'fizzex/react';
 
 function App() {
   return (
-    <MathCanvas
+    <EditorView
       width={400}
       height={80}
       theme="light"

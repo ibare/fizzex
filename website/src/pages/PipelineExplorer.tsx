@@ -8,7 +8,7 @@ import {
   factor,
   solve,
   createStateFromLatex,
-  MathCanvas,
+  EditorView,
   AutoVisualizer,
 } from 'fizzex';
 import type { ExpressionAnalysis, RootNode, CASResult } from 'fizzex';
@@ -162,7 +162,7 @@ function StepInput({
         <code>{latex}</code>
       </div>
       {editorState && (
-        <MathCanvas initialState={editorState} readOnly autoSize />
+        <EditorView initialState={editorState} readOnly autoSize />
       )}
     </div>
   );
@@ -306,7 +306,7 @@ function StepCompute({
 function RenderLatex({ latex }: { latex: string }) {
   try {
     const state = createStateFromLatex(latex);
-    return <MathCanvas initialState={state} readOnly autoSize />;
+    return <EditorView initialState={state} readOnly autoSize />;
   } catch {
     return <span style={styles.muted}>{latex}</span>;
   }

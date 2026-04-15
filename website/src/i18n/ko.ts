@@ -242,7 +242,7 @@ export const ko: Dictionary = {
     },
     layer_headless: {
       title: 'Headless Adapter',
-      desc: 'FizzexRenderer & FizzexEditor — 어떤 DOM 요소에든 마운트',
+      desc: 'DOMRendererView & DOMEditorView — 어떤 DOM 요소에든 마운트',
     },
     layer_plugins: {
       title: '호스트 플러그인',
@@ -259,7 +259,7 @@ export const ko: Dictionary = {
       core_title: 'fizzex (코어)',
       core_desc: 'LaTeX 파서, TeX 박스 모델 렌더러, 수식 분석기, CAS 엔진, 시각화 컴포넌트. 프레임워크 무관, DOM 의존성 없음.',
       headless_title: 'fizzex/headless',
-      headless_desc: 'FizzexRenderer(읽기 전용)와 FizzexEditor(편집 가능). DOM 요소를 넘기면 Canvas 설정, HiDPI 스케일링, 폰트 로딩, 렌더링 파이프라인을 모두 처리합니다.',
+      headless_desc: 'DOMRendererView(읽기 전용)와 DOMEditorView(편집 가능). DOM 요소를 넘기면 Canvas 설정, HiDPI 스케일링, 폰트 로딩, 렌더링 파이프라인을 모두 처리합니다.',
       plugins_title: 'fizzex/tiptap, fizzex/slate, ...',
       plugins_desc: 'Headless adapter를 특정 호스트 에디터에 연결하는 얇은 래퍼. 각 플러그인은 보통 20~30줄의 코드입니다.',
       philosophy: 'Headless 레이어가 무거운 작업을 처리하므로 플러그인 개발자는 호스트 전용 연결 코드만 작성하면 됩니다.',
@@ -267,9 +267,9 @@ export const ko: Dictionary = {
     api: {
       title: 'Headless API',
       sub: '두 개의 클래스로 모든 통합 요구를 충족합니다.',
-      renderer_title: 'FizzexRenderer',
+      renderer_title: 'DOMRendererView',
       renderer_desc: '읽기 전용 수식 렌더링. 컨테이너 요소와 LaTeX 문자열을 전달하면 됩니다.',
-      editor_title: 'FizzexEditor',
+      editor_title: 'DOMEditorView',
       editor_desc: '키보드 입력, 커서, IME 지원, 자동완성이 내장된 인터랙티브 수식 에디터.',
       config_title: 'FizzexConfig',
     },
@@ -279,7 +279,7 @@ export const ko: Dictionary = {
       step1_title: '1. 컨테이너 얻기',
       step1_desc: '호스트 에디터가 커스텀 노드 렌더링을 위한 DOM 요소를 제공합니다 (NodeView, Element 등).',
       step2_title: '2. 렌더러 생성',
-      step2_desc: 'FizzexRenderer 또는 FizzexEditor를 컨테이너와 설정으로 인스턴스화합니다.',
+      step2_desc: 'DOMRendererView 또는 DOMEditorView를 컨테이너와 설정으로 인스턴스화합니다.',
       step3_title: '3. 라이프사이클 관리',
       step3_desc: '데이터가 변경되면 render(), 노드가 제거되면 destroy()를 호출합니다.',
       tiptap_example: 'Tiptap 플러그인 — 전체 구현',

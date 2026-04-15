@@ -1,9 +1,8 @@
 /**
- * FizzexRenderer - Read-only math rendering
+ * DOMRendererView — DOM 환경 읽기 전용 수식 렌더러
  *
- * Encapsulates the 9-step Canvas rendering pipeline into a
- * framework-agnostic class. Renders a LaTeX string onto a
- * self-managed <canvas> element.
+ * 9단계 Canvas 렌더링 파이프라인을 캡슐화.
+ * 자체 관리 <canvas> 엘리먼트에 LaTeX 문자열을 렌더링한다.
  */
 
 import { CanvasFontMetrics } from '../box/font-metrics';
@@ -16,7 +15,7 @@ import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize } from './types';
 import { resolveBoxRenderConfig } from './types';
 
-export class FizzexRenderer {
+export class DOMRendererView {
   private container: HTMLElement;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -40,7 +39,7 @@ export class FizzexRenderer {
 
     const ctx = this.canvas.getContext('2d');
     if (!ctx) {
-      throw new Error('FizzexRenderer: failed to get 2d context');
+      throw new Error('DOMRendererView: failed to get 2d context');
     }
     this.ctx = ctx;
 

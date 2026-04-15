@@ -242,7 +242,7 @@ export const en: Dictionary = {
     },
     layer_headless: {
       title: 'Headless Adapter',
-      desc: 'FizzexRenderer & FizzexEditor — mount to any DOM element',
+      desc: 'DOMRendererView & DOMEditorView — mount to any DOM element',
     },
     layer_plugins: {
       title: 'Host Plugins',
@@ -259,7 +259,7 @@ export const en: Dictionary = {
       core_title: 'fizzex (Core)',
       core_desc: 'LaTeX parser, TeX box model renderer, expression analyzer, CAS engine, visualization components. Framework-agnostic, no DOM dependency.',
       headless_title: 'fizzex/headless',
-      headless_desc: 'FizzexRenderer for read-only rendering and FizzexEditor for interactive editing. Give it a DOM element — it handles Canvas setup, HiDPI scaling, font loading, and the full rendering pipeline.',
+      headless_desc: 'DOMRendererView for read-only rendering and DOMEditorView for interactive editing. Give it a DOM element — it handles Canvas setup, HiDPI scaling, font loading, and the full rendering pipeline.',
       plugins_title: 'fizzex/tiptap, fizzex/slate, ...',
       plugins_desc: 'Thin wrappers that connect the headless adapter to a specific host editor. Each plugin is typically 20-30 lines of code.',
       philosophy: 'The headless layer does the heavy lifting so that plugin authors only write host-specific glue code.',
@@ -267,9 +267,9 @@ export const en: Dictionary = {
     api: {
       title: 'Headless API',
       sub: 'Two classes cover all integration needs.',
-      renderer_title: 'FizzexRenderer',
+      renderer_title: 'DOMRendererView',
       renderer_desc: 'Read-only math rendering. Pass a container element and a LaTeX string.',
-      editor_title: 'FizzexEditor',
+      editor_title: 'DOMEditorView',
       editor_desc: 'Interactive math editor with keyboard input, cursor, IME support, and auto-complete.',
       config_title: 'FizzexConfig',
     },
@@ -279,7 +279,7 @@ export const en: Dictionary = {
       step1_title: '1. Get a container',
       step1_desc: 'Your host editor provides a DOM element for custom node rendering (NodeView, Element, etc.).',
       step2_title: '2. Create a renderer',
-      step2_desc: 'Instantiate FizzexRenderer or FizzexEditor with the container and your config.',
+      step2_desc: 'Instantiate DOMRendererView or DOMEditorView with the container and your config.',
       step3_title: '3. Manage lifecycle',
       step3_desc: 'Call render() when data changes, destroy() when the node is removed.',
       tiptap_example: 'Tiptap plugin — complete implementation',

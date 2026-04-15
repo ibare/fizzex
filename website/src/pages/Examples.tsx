@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { parseLatex, createStateFromLatex, analyzeExpression } from 'fizzex';
-import { MathCanvas } from 'fizzex/react';
+import { EditorView } from 'fizzex/react';
 import { useLang } from '../i18n/context';
 import { categories } from '../data/examples-data';
 import type { ExpressionAnalysis, EditorState } from 'fizzex';
@@ -76,7 +76,7 @@ export default function Examples() {
 
                   {rendered.state && (
                     <div style={styles.renderBox}>
-                      <MathCanvas initialState={rendered.state} readOnly autoSize />
+                      <EditorView initialState={rendered.state} readOnly autoSize />
                     </div>
                   )}
 

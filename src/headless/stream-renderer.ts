@@ -1,5 +1,5 @@
 /**
- * FizzexStreamRenderer — Headless 스트리밍 렌더러
+ * DOMStreamView — DOM 환경 스트리밍 수식 렌더러
  *
  * FizzexStreamParser의 출력을 DOM으로 렌더링한다.
  * 텍스트는 <span>, 수식은 인라인 <canvas>, 실패는 원본 텍스트 span으로 표시.
@@ -23,8 +23,8 @@ import { resolveBoxRenderConfig } from './types';
 // 타입 정의
 // =========================================================================
 
-/** 스트리밍 렌더러 설정 */
-export interface StreamRendererConfig extends FizzexConfig {
+/** 스트리밍 뷰 설정 */
+export interface DOMStreamViewConfig extends FizzexConfig {
   /** confidence 오버레이 표시 (기본: true) */
   showConfidence?: boolean;
   /** tooltip 표시 (기본: true) */
@@ -107,7 +107,7 @@ export function buildConfidenceRegions(
 }
 
 // =========================================================================
-// FizzexStreamRenderer 클래스
+// DOMStreamView 클래스
 // =========================================================================
 
 /**
@@ -116,10 +116,10 @@ export function buildConfidenceRegions(
  * LLM 토큰 스트리밍에 최적화. feed(chunk)으로 텍스트를 공급하면
  * 자동으로 텍스트/수식/실패를 구분하여 DOM에 렌더링한다.
  */
-export class FizzexStreamRenderer {
+export class DOMStreamView {
   private container: HTMLElement;
   private parser: FizzexStreamParser;
-  private config: StreamRendererConfig;
+  private config: DOMStreamViewConfig;
   private boxConfig: BoxRenderConfig;
   private padding: number;
 
@@ -129,7 +129,7 @@ export class FizzexStreamRenderer {
   private destroyed = false;
   private fontReady = false;
 
-  constructor(container: HTMLElement, config: StreamRendererConfig = {}) {
+  constructor(container: HTMLElement, config: DOMStreamViewConfig = {}) {
     this.container = container;
     this.config = { showConfidence: true, showTooltip: true, ...config };
     this.padding = config.padding ?? 4;
@@ -183,7 +183,7 @@ export class FizzexStreamRenderer {
   }
 
   /** 설정 변경 */
-  setConfig(partial: Partial<StreamRendererConfig>): void {
+  setConfig(partial: Partial<DOMStreamViewConfig>): void {
     Object.assign(this.config, partial);
     if (partial.padding !== undefined) {
       this.padding = partial.padding;

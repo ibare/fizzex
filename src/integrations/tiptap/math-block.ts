@@ -1,6 +1,6 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { FizzexRenderer } from '../../headless/renderer';
-import { FizzexEditor } from '../../headless/editor-view';
+import { DOMRendererView } from '../../headless/renderer';
+import { DOMEditorView } from '../../headless/editor-view';
 import type { MathBlockOptions } from './types';
 
 export const MathBlock = Node.create<MathBlockOptions>({
@@ -55,13 +55,13 @@ export const MathBlock = Node.create<MathBlockOptions>({
       const renderContainer = document.createElement('div');
       dom.appendChild(renderContainer);
 
-      let renderer = new FizzexRenderer(
+      let renderer = new DOMRendererView(
         renderContainer,
         extensionOptions.fizzexConfig,
       );
       let currentLatex = node.attrs.latex as string;
       let isEditing = false;
-      let fizzexEditor: FizzexEditor | null = null;
+      let fizzexEditor: DOMEditorView | null = null;
 
       if (currentLatex) {
         renderer.render(currentLatex);
@@ -76,7 +76,7 @@ export const MathBlock = Node.create<MathBlockOptions>({
         renderContainer.innerHTML = '';
 
         // Create editor
-        fizzexEditor = new FizzexEditor(
+        fizzexEditor = new DOMEditorView(
           renderContainer,
           extensionOptions.fizzexConfig,
         );
@@ -111,7 +111,7 @@ export const MathBlock = Node.create<MathBlockOptions>({
 
         // Re-render read-only
         currentLatex = finalLatex;
-        renderer = new FizzexRenderer(
+        renderer = new DOMRendererView(
           renderContainer,
           extensionOptions.fizzexConfig,
         );

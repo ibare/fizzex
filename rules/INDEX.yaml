@@ -51,7 +51,7 @@ concerns:
     description: Headless adapter 계약 (API 하위 호환, destroy 정리, silent fail)
     triggers:
       paths: ["src/headless/**", "src/integrations/**"]
-      patterns: ["FizzexRenderer", "FizzexEditor", "FizzexConfig"]
+      patterns: ["DOMRendererView", "DOMEditorView", "DOMStreamView", "FizzexConfig"]
 
   - id: C6
     file: concerns/C6-subpath-exports.md

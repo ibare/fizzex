@@ -27,7 +27,7 @@ interface CursorScreenPosition {
   height: number;
 }
 
-export interface MathCanvasProps {
+export interface EditorViewProps {
   /** 초기 상태 */
   initialState?: EditorState;
   /** 상태 변경 콜백 */
@@ -89,7 +89,7 @@ const createDarkConfig = (fontFamily: string): BoxRenderConfig => ({
   },
 });
 
-export function MathCanvas({
+export function EditorView({
   initialState,
   onChange,
   width: propWidth = 400,
@@ -105,7 +105,7 @@ export function MathCanvas({
   minHeight = 40,
   padding = 20,
   displayMode = 'display',
-}: MathCanvasProps) {
+}: EditorViewProps) {
   // autoSize 기본값: readOnly일 때 true
   const shouldAutoSize = autoSize ?? readOnly;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -773,4 +773,4 @@ export function MathCanvas({
   );
 }
 
-export default MathCanvas;
+export default EditorView;

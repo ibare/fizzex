@@ -52,7 +52,7 @@ Fizzex provides multiple entry points for different use cases:
 |--------|---------|-------------------|
 | `fizzex` | Core: parser, renderer, analysis, CAS | none |
 | `fizzex/headless` | Framework-agnostic renderer & editor | none |
-| `fizzex/react` | React components (MathCanvas, etc.) | `react`, `react-dom` |
+| `fizzex/react` | React components (EditorView, etc.) | `react`, `react-dom` |
 | `fizzex/tiptap` | Tiptap editor extensions | `@tiptap/core` |
 
 All peer dependencies are **optional** — import only what you need.
@@ -62,9 +62,9 @@ All peer dependencies are **optional** — import only what you need.
 ### Headless Rendering (No Framework)
 
 ```typescript
-import { FizzexRenderer } from 'fizzex/headless';
+import { DOMRendererView } from 'fizzex/headless';
 
-const renderer = new FizzexRenderer(container, {
+const renderer = new DOMRendererView(container, {
   baseFontSize: 20,
   theme: 'light',
 });
@@ -74,9 +74,9 @@ renderer.render('\\frac{1}{2} + x^2');
 ### Headless Editor (No Framework)
 
 ```typescript
-import { FizzexEditor } from 'fizzex/headless';
+import { DOMEditorView } from 'fizzex/headless';
 
-const editor = new FizzexEditor(container, {
+const editor = new DOMEditorView(container, {
   baseFontSize: 20,
 });
 editor.setLatex('x^2 + 2x - 3 = 0');
@@ -86,11 +86,11 @@ editor.onChange((latex) => console.log(latex));
 ### React Editor
 
 ```tsx
-import { MathCanvas } from 'fizzex/react';
+import { EditorView } from 'fizzex/react';
 
 function App() {
   return (
-    <MathCanvas
+    <EditorView
       width={400}
       height={80}
       theme="light"
@@ -172,7 +172,7 @@ fizzex (Core)
   │  Parser, renderer, analysis, CAS — framework-agnostic
   │
   ├── fizzex/headless
-  │     FizzexRenderer (read-only) & FizzexEditor (interactive)
+  │     DOMRendererView (read-only) & DOMEditorView (interactive)
   │     Give it a DOM element — it handles everything
   │
   └── fizzex/tiptap, fizzex/slate, ...
@@ -188,7 +188,7 @@ Any editor that supports custom node rendering can integrate Fizzex:
 const container = nodeView.dom;
 
 // 2. Create a renderer
-const renderer = new FizzexRenderer(container, { baseFontSize: 20 });
+const renderer = new DOMRendererView(container, { baseFontSize: 20 });
 
 // 3. Render when data changes
 renderer.render(node.attrs.latex);
@@ -227,7 +227,7 @@ import {
 ### Headless (`fizzex/headless`)
 
 ```typescript
-import { FizzexRenderer, FizzexEditor } from 'fizzex/headless';
+import { DOMRendererView, DOMEditorView } from 'fizzex/headless';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from 'fizzex/headless';
 ```
 
@@ -235,7 +235,7 @@ import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from 'fizzex/headl
 
 ```typescript
 import {
-  MathCanvas, StructureViewer,
+  EditorView, StructureViewer,
   SuggestionChips, SuggestionPopover,
   FunctionGraph, UnitCircle, NumberLine, PolarGraph, AutoVisualizer,
   FizzexI18nProvider,
@@ -276,8 +276,8 @@ src/
 ├── types.ts              # AST type definitions (MathNode, EditorState)
 ├── editor.ts             # Editor logic (keyboard input, node creation)
 ├── headless/             # Headless adapter layer
-│   ├── renderer.ts       # FizzexRenderer — read-only rendering
-│   ├── editor-view.ts    # FizzexEditor — interactive editor
+│   ├── renderer.ts       # DOMRendererView — read-only rendering
+│   ├── editor-view.ts    # DOMEditorView — interactive editor
 │   └── types.ts          # FizzexConfig, FizzexSize
 ├── integrations/         # Host editor plugins
 │   └── tiptap/           # Tiptap extensions (MathInline, MathBlock)

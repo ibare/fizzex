@@ -1,5 +1,5 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { FizzexRenderer } from '../../headless/renderer';
+import { DOMRendererView } from '../../headless/renderer';
 import type { MathInlineOptions } from './types';
 
 export const MathInline = Node.create<MathInlineOptions>({
@@ -52,7 +52,7 @@ export const MathInline = Node.create<MathInlineOptions>({
       dom.style.verticalAlign = 'middle';
       dom.setAttribute('data-math-inline', '');
 
-      const renderer = new FizzexRenderer(dom, this.options.fizzexConfig);
+      const renderer = new DOMRendererView(dom, this.options.fizzexConfig);
       let currentLatex = node.attrs.latex as string;
       if (currentLatex) {
         renderer.render(currentLatex);

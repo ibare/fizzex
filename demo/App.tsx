@@ -5,7 +5,7 @@
  */
 
 import { useState, useMemo, useCallback } from 'react';
-import { MathCanvas } from 'fizzex/react';
+import { EditorView } from 'fizzex/react';
 import {
   createEmptyRoot,
   createNumber,
@@ -526,7 +526,7 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('en');
 
   // CAS 관련 state
-  const [casKey, setCasKey] = useState(0); // MathCanvas 리셋용 키
+  const [casKey, setCasKey] = useState(0); // EditorView 리셋용 키
   const [casInitialState, setCasInitialState] = useState<EditorState | undefined>(undefined);
   const [casLatex, setCasLatex] = useState('');
   const [casAnalysis, setCasAnalysis] = useState<ExpressionAnalysis | null>(null);
@@ -715,7 +715,7 @@ export default function App() {
     }
   };
 
-  // CAS 상태 변경 핸들러 (MathCanvas 내부 변경 시)
+  // CAS 상태 변경 핸들러 (EditorView 내부 변경 시)
   const handleCasStateChange = useCallback((newState: EditorState) => {
     if (newState.ast.children.length > 0) {
       const latex = astToLatex(newState.ast);
@@ -745,7 +745,7 @@ export default function App() {
         cursor: { nodeId: ast.id, offset: ast.children.length },
         selection: null,
       };
-      // 키를 변경하여 MathCanvas 리마운트
+      // 키를 변경하여 EditorView 리마운트
       setCasInitialState(newState);
       setCasKey((k) => k + 1);
       setCasLatex(latex);
@@ -1033,7 +1033,7 @@ export default function App() {
           <div key={i} className="flex items-center gap-4">
             <span className="text-sm text-gray-500 w-36 flex-shrink-0">{example.name}</span>
             <div className="flex-1">
-              <MathCanvas
+              <EditorView
                 width={450}
                 height={70}
                 theme="light"
@@ -1086,7 +1086,7 @@ export default function App() {
           {/* 입력 테스트 - 라이트 테마 */}
           <div className="bg-white rounded-lg shadow p-6 mb-6">
             <h2 className="text-lg font-semibold mb-4">직접 입력해보기</h2>
-            <MathCanvas
+            <EditorView
               width={600}
               height={80}
               theme="light"
@@ -1130,7 +1130,7 @@ export default function App() {
           </div>
           {latexState && (
             <>
-              <MathCanvas
+              <EditorView
                 width={600}
                 height={80}
                 theme="light"
@@ -1161,7 +1161,7 @@ export default function App() {
 
           {/* Fizzex 수식 입력기 */}
           <div className="mb-4">
-            <MathCanvas
+            <EditorView
               key={casKey}
               width={600}
               height={60}
@@ -1249,7 +1249,7 @@ export default function App() {
                     <div className="mt-3">
                       <span className="text-xs text-gray-500">렌더링:</span>
                       <div className="mt-1 bg-white p-2 rounded border">
-                        <MathCanvas
+                        <EditorView
                           width={500}
                           height={60}
                           theme="light"

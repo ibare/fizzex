@@ -82,22 +82,32 @@ export type {
   FontGlyphMapping,
 } from './fonts';
 
-// React 컴포넌트
+// React 컴포넌트 — 새 이름 (primary)
 export {
-  MathCanvas,
+  EditorView,
+  StreamView,
   StructureViewer,
   SuggestionChips,
   SuggestionPopover,
-  StreamingMath,
   ExpressionExplorer,
 } from './react';
 export type {
-  MathCanvasProps,
+  EditorViewProps,
+  StreamViewProps,
   StructureViewerProps,
   SuggestionChipsProps,
   SuggestionPopoverProps,
-  StreamingMathProps,
   ExpressionExplorerProps,
+} from './react';
+
+// React 컴포넌트 — 하위 호환 alias (deprecated)
+export {
+  EditorView as MathCanvas,
+  StreamView as StreamingMath,
+} from './react';
+export type {
+  EditorViewProps as MathCanvasProps,
+  StreamViewProps as StreamingMathProps,
 } from './react';
 
 // 수식 분석기
@@ -189,9 +199,17 @@ export type {
 export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './box';
 export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './box';
 
-// Headless Streaming Renderer
-export { FizzexStreamRenderer, classifyConfidence, buildConfidenceRegions } from './headless/stream-renderer';
-export type { StreamRendererConfig } from './headless/stream-renderer';
+// Headless 어댑터 — 새 이름 (primary)
+export { DOMRendererView } from './headless';
+export { DOMEditorView } from './headless';
+export { DOMStreamView, classifyConfidence, buildConfidenceRegions } from './headless';
+export type { DOMStreamViewConfig } from './headless';
+
+// Headless 어댑터 — 하위 호환 alias (deprecated)
+export { DOMRendererView as FizzexRenderer } from './headless';
+export { DOMEditorView as FizzexEditor } from './headless';
+export { DOMStreamView as FizzexStreamRenderer } from './headless';
+export type { DOMStreamViewConfig as StreamRendererConfig } from './headless';
 
 // 타입
 export type {

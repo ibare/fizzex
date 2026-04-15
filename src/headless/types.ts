@@ -2,7 +2,7 @@
  * Headless adapter types
  *
  * Framework-agnostic configuration and callback types
- * for FizzexRenderer and FizzexEditor.
+ * for DOMRendererView and DOMEditorView.
  */
 
 import type { BoxRenderConfig } from '../box/types';

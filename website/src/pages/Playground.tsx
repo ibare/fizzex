@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useLang } from '../i18n/context';
 import { parseLatex, analyzeExpression, astToLatex, createStateFromLatex } from 'fizzex';
-import { MathCanvas } from 'fizzex/react';
+import { EditorView } from 'fizzex/react';
 import type { ExpressionAnalysis, EditorState } from 'fizzex';
 
 const PRESETS = [
@@ -72,7 +72,7 @@ export default function Playground() {
           <div>
             <label style={styles.label}>{t.playground.input_label}</label>
             <div className="card" style={styles.editorCard}>
-              <MathCanvas
+              <EditorView
                 key={presetState ? JSON.stringify(presetState.ast).slice(0, 50) : 'empty'}
                 initialState={presetState ?? undefined}
                 onChange={handleChange}

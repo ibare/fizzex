@@ -77,7 +77,7 @@ export interface FizzexI18nProviderProps {
  * ```tsx
  * // 호스트 앱에서 한국어 라벨 제공
  * <FizzexI18nProvider labels={koLabels}>
- *   <MathCanvas />
+ *   <EditorView />
  * </FizzexI18nProvider>
  * ```
  */

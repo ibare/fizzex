@@ -1,14 +1,14 @@
-export const rendererExample = `import { FizzexRenderer } from 'fizzex/headless';
+export const rendererExample = `import { DOMRendererView } from 'fizzex/headless';
 
-const renderer = new FizzexRenderer(container, {
+const renderer = new DOMRendererView(container, {
   baseFontSize: 20,
   theme: 'light',
 });
 renderer.render('\\\\frac{1}{2} + x^2');`;
 
-export const editorExample = `import { FizzexEditor } from 'fizzex/headless';
+export const editorExample = `import { DOMEditorView } from 'fizzex/headless';
 
-const editor = new FizzexEditor(container, {
+const editor = new DOMEditorView(container, {
   baseFontSize: 20,
   showSuggestions: true,
 });
@@ -24,7 +24,7 @@ export const configExample = `interface FizzexConfig {
 }`;
 
 export const tiptapPluginExample = `import { Node } from '@tiptap/core';
-import { FizzexRenderer } from 'fizzex/headless';
+import { DOMRendererView } from 'fizzex/headless';
 
 export const MathInline = Node.create({
   name: 'mathInline',
@@ -40,7 +40,7 @@ export const MathInline = Node.create({
     return ({ node }) => {
       const dom = document.createElement('span');
       dom.style.display = 'inline-block';
-      const renderer = new FizzexRenderer(dom, {
+      const renderer = new DOMRendererView(dom, {
         baseFontSize: 18,
       });
       let current = node.attrs.latex;
@@ -64,8 +64,8 @@ export const MathInline = Node.create({
 export const pluginSteps = `// Step 1: Your host editor gives you a DOM element
 const container = nodeView.dom;
 
-// Step 2: Create a FizzexRenderer
-const renderer = new FizzexRenderer(container, {
+// Step 2: Create a DOMRendererView
+const renderer = new DOMRendererView(container, {
   baseFontSize: 20,
 });
 

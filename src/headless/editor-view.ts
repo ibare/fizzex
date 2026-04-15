@@ -1,8 +1,8 @@
 /**
- * FizzexEditor - Interactive math editing
+ * DOMEditorView — DOM 환경 인터랙티브 수식 편집기
  *
- * Wraps MathEditor + Canvas rendering + hidden <input> for keyboard /
- * IME capture. Framework-agnostic: works with any container element.
+ * MathEditor + Canvas 렌더링 + hidden <input> 키보드/IME 캡처를 래핑.
+ * 프레임워크 무관: 임의의 컨테이너 엘리먼트에서 동작한다.
  */
 
 import { CanvasFontMetrics } from '../box/font-metrics';
@@ -16,7 +16,7 @@ import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
 import { resolveBoxRenderConfig } from './types';
 
-export class FizzexEditor {
+export class DOMEditorView {
   // DOM elements
   private container: HTMLElement;
   private wrapper: HTMLDivElement;
@@ -100,7 +100,7 @@ export class FizzexEditor {
     // Canvas context
     const ctx = this.canvas.getContext('2d');
     if (!ctx) {
-      throw new Error('FizzexEditor: failed to get 2d context');
+      throw new Error('DOMEditorView: failed to get 2d context');
     }
     this.ctx = ctx;
 

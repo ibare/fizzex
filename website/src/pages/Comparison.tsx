@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { createStateFromLatex } from 'fizzex';
-import { MathCanvas } from 'fizzex/react';
+import { EditorView } from 'fizzex/react';
 import { useLang } from '../i18n/context';
 import { comparisonCategories } from '../data/comparison-data';
 import { symbolCategories } from '../data/symbol-data';
@@ -179,7 +179,7 @@ export default function Comparison() {
                     <div style={styles.renderRow3}>
                       <div style={styles.renderCell}>
                         {item.fizzexState ? (
-                          <MathCanvas initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
+                          <EditorView initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
                         ) : (
                           <span style={styles.muted}>Error</span>
                         )}
@@ -220,7 +220,7 @@ export default function Comparison() {
                     </div>
                     <div style={styles.renderCell}>
                       {item.fizzexState ? (
-                        <MathCanvas initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
+                        <EditorView initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
                       ) : (
                         <span style={styles.muted}>-</span>
                       )}

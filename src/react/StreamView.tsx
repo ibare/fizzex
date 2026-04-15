@@ -1,16 +1,16 @@
 /**
- * StreamingMath — 스트리밍 LaTeX 렌더링 React 컴포넌트
+ * StreamView — 스트리밍 LaTeX 렌더링 React 컴포넌트
  *
- * FizzexStreamRenderer를 React 라이프사이클에 래핑한다.
+ * DOMStreamView를 React 라이프사이클에 래핑한다.
  * text prop의 변화를 감지하여 delta feed를 수행한다.
  */
 
 import React, { useEffect, useRef } from 'react';
-import { FizzexStreamRenderer } from '../headless/stream-renderer';
-import type { StreamRendererConfig } from '../headless/stream-renderer';
+import { DOMStreamView } from '../headless/stream-renderer';
+import type { DOMStreamViewConfig } from '../headless/stream-renderer';
 import type { StreamParserOptions } from '../latex/streaming';
 
-export interface StreamingMathProps {
+export interface StreamViewProps {
   /** 누적 텍스트 (증가하는 패턴 — delta만 feed) */
   text?: string;
   /** confidence 오버레이 표시 여부 (기본: true) */
@@ -37,10 +37,10 @@ export interface StreamingMathProps {
  * @example
  * ```tsx
  * // LLM 스트리밍 응답
- * <StreamingMath text={llmText} showConfidence isComplete={isDone} />
+ * <StreamView text={llmText} showConfidence isComplete={isDone} />
  * ```
  */
-export function StreamingMath({
+export function StreamView({
   text,
   showConfidence = true,
   showTooltip = true,
@@ -50,16 +50,16 @@ export function StreamingMath({
   isComplete = false,
   className,
   style,
-}: StreamingMathProps) {
+}: StreamViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<FizzexStreamRenderer | null>(null);
+  const rendererRef = useRef<DOMStreamView | null>(null);
   const prevTextLenRef = useRef(0);
 
   // 렌더러 초기화
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const config: StreamRendererConfig = {
+    const config: DOMStreamViewConfig = {
       showConfidence,
       showTooltip,
       theme,
@@ -67,7 +67,7 @@ export function StreamingMath({
       parserOptions,
     };
 
-    rendererRef.current = new FizzexStreamRenderer(containerRef.current, config);
+    rendererRef.current = new DOMStreamView(containerRef.current, config);
     prevTextLenRef.current = 0;
 
     return () => {

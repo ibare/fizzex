@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { FizzexRenderer } from 'fizzex/headless';
+import { DOMRendererView } from 'fizzex/headless';
 
 interface FormulaEntry {
   latex: string;
@@ -95,7 +95,7 @@ const FORMULAS: FormulaEntry[] = [
 
 export default function HeroFormulas() {
   const wrapperRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const renderersRef = useRef<FizzexRenderer[]>([]);
+  const renderersRef = useRef<DOMRendererView[]>([]);
 
   const setRef = useCallback((el: HTMLDivElement | null, idx: number) => {
     wrapperRefs.current[idx] = el;
@@ -110,7 +110,7 @@ export default function HeroFormulas() {
       const el = wrapperRefs.current[i];
       if (!el) return;
 
-      const renderer = new FizzexRenderer(el, {
+      const renderer = new DOMRendererView(el, {
         baseFontSize: f.fontSize,
         color: f.color ?? '#9ca3af',
         padding: 0,

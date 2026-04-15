@@ -15,7 +15,7 @@ declare global {
     };
   }
 }
-import { MathCanvas } from 'fizzex/react';
+import { EditorView } from 'fizzex/react';
 import { parseLatex } from 'fizzex';
 import type { EditorState } from 'fizzex';
 import katex from 'katex';
@@ -555,7 +555,7 @@ function FizzexRenderer({ latex }: { latex: string }) {
   }
 
   return (
-    <MathCanvas
+    <EditorView
       width={300}
       height={60}
       theme="light"
