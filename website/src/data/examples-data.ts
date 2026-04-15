@@ -62,6 +62,56 @@ export const categories: ExampleCategory[] = [
     ],
   },
   {
+    key: 'algebra',
+    items: [
+      { label: 'Euler\'s identity', latex: 'e^{i\\pi} + 1 = 0' },
+      { label: 'Quadratic formula', latex: 'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}' },
+      { label: 'Binomial theorem', latex: '(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k' },
+      { label: 'Geometric series', latex: 'S_n = \\frac{a(1 - r^n)}{1 - r}' },
+      { label: 'Difference of squares', latex: 'a^2 - b^2 = (a + b)(a - b)' },
+    ],
+  },
+  {
+    key: 'geometry',
+    items: [
+      { label: 'Pythagorean theorem', latex: 'a^2 + b^2 = c^2' },
+      { label: 'Heron\'s formula', latex: 'A = \\sqrt{s(s-a)(s-b)(s-c)}' },
+      { label: 'Circle area', latex: 'A = \\pi r^2' },
+      { label: 'Law of cosines', latex: 'a^2 = b^2 + c^2 - 2bc\\cos C' },
+      { label: 'Sphere volume', latex: 'V = \\frac{4}{3}\\pi r^3' },
+    ],
+  },
+  {
+    key: 'physics',
+    items: [
+      { label: 'Mass-energy equivalence', latex: 'E = mc^2' },
+      { label: 'Newton\'s second law', latex: 'F = ma' },
+      { label: 'Universal gravitation', latex: 'F = G\\frac{m_1 m_2}{r^2}' },
+      { label: 'Coulomb\'s law', latex: 'F = k_e \\frac{q_1 q_2}{r^2}' },
+      { label: 'Kinetic energy', latex: 'K = \\frac{1}{2}mv^2' },
+    ],
+  },
+  {
+    key: 'analysis',
+    items: [
+      { label: 'Fundamental theorem of calculus', latex: '\\int_a^b f(x) \\, dx = F(b) - F(a)' },
+      { label: 'Taylor series', latex: 'f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n' },
+      { label: 'Gaussian integral', latex: '\\int_{-\\infty}^{\\infty} e^{-x^2} \\, dx = \\sqrt{\\pi}' },
+      { label: 'Derivative definition', latex: 'f\'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}' },
+      { label: 'Chain rule', latex: '\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}' },
+    ],
+  },
+  {
+    key: 'statistics',
+    items: [
+      { label: 'Bayes\' theorem', latex: 'P(A|B) = \\frac{P(B|A)P(A)}{P(B)}' },
+      { label: 'Normal distribution', latex: 'f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}' },
+      { label: 'Standard deviation', latex: '\\sigma = \\sqrt{\\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2}' },
+      { label: 'Correlation coefficient', latex: 'r = \\frac{\\sum(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum(x_i - \\bar{x})^2 \\sum(y_i - \\bar{y})^2}}' },
+      { label: 'Law of large numbers', latex: '\\lim_{n \\to \\infty} P\\left(|\\bar{X}_n - \\mu| < \\epsilon\\right) = 1' },
+    ],
+  },
+  {
     key: 'complex',
     items: [
       {

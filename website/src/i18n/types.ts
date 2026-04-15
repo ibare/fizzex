@@ -129,6 +129,11 @@ export interface Dictionary {
       inequality: string;
       polar: string;
       structures: string;
+      algebra: string;
+      geometry: string;
+      physics: string;
+      analysis: string;
+      statistics: string;
       complex: string;
     };
   };
