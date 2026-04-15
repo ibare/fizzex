@@ -13,7 +13,6 @@ export default defineConfig({
         'src/**/*.test.ts',
         'src/index.ts',
         'src/react/**',
-        'src/demo/**',
         'src/visualizer/**',
         'src/export/**',
       ],

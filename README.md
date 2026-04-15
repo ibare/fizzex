@@ -319,7 +319,6 @@ src/
 ```bash
 pnpm install
 pnpm dev       # Type watch mode
-pnpm demo      # Run demo app
 ```
 
 ### Test
