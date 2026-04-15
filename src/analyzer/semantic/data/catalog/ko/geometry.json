@@ -1,0 +1,80 @@
+{
+  "pythagorean-theorem": {
+    "name": "피타고라스 정리",
+    "oneLiner": "직각삼각형에서 빗변의 제곱이 나머지 두 변의 제곱합과 같다는 정리",
+    "description": "피타고라스 정리는 직각삼각형의 빗변 길이의 제곱이 다른 두 변 길이의 제곱합과 같다는 것을 밝힙니다. 유클리드 기하학의 가장 기본적인 정리이며, 거리 개념의 토대가 됩니다. 수천 가지 증명이 존재할 만큼 수학사에서 가장 많이 연구된 정리입니다.",
+    "discoverer": "피타고라스 (전통적 귀속)",
+    "field": "기하학",
+    "significance": "유클리드 거리의 정의를 제공하며, 삼각법, 해석기하, 벡터 공간 등 현대 수학 전반의 기초입니다.",
+    "elementMeanings": {
+      "a": { "role": "직각변", "description": "직각을 끼는 한 변의 길이입니다." },
+      "b": { "role": "직각변", "description": "직각을 끼는 다른 변의 길이입니다." },
+      "c": { "role": "빗변", "description": "직각의 맞은편에 있는 가장 긴 변의 길이입니다." },
+      "a^2+b^2": { "role": "직각변 제곱합", "description": "두 직각변 길이의 제곱을 더한 값입니다." },
+      "c^2": { "role": "빗변의 제곱", "description": "빗변 길이를 제곱한 값. 직각변 제곱합과 같습니다." }
+    },
+    "relatedFormulas": ["law-of-cosines", "heron-formula"]
+  },
+  "heron-formula": {
+    "name": "헤론의 공식",
+    "oneLiner": "세 변의 길이만으로 삼각형의 넓이를 구하는 공식",
+    "description": "헤론의 공식은 삼각형의 세 변 a, b, c와 반둘레 s를 이용하여 넓이를 계산합니다. 높이를 따로 구하지 않아도 되므로, 좌표가 주어진 경우나 측량에서 매우 실용적입니다. 넓이의 제곱이 반둘레와 각 변 차이의 곱으로 표현되는 우아한 구조를 가집니다.",
+    "discoverer": "알렉산드리아의 헤론",
+    "field": "기하학",
+    "significance": "높이 정보 없이 변의 길이만으로 넓이를 구할 수 있어 측량과 컴퓨터 그래픽스에서 널리 사용됩니다.",
+    "elementMeanings": {
+      "a": { "role": "첫째 변", "description": "삼각형의 첫 번째 변의 길이입니다." },
+      "b": { "role": "둘째 변", "description": "삼각형의 두 번째 변의 길이입니다." },
+      "c": { "role": "셋째 변", "description": "삼각형의 세 번째 변의 길이입니다." },
+      "s": { "role": "반둘레", "description": "세 변 합의 절반. s = (a+b+c)/2입니다." },
+      "A": { "role": "넓이", "description": "삼각형의 넓이. 루트(s(s-a)(s-b)(s-c))로 계산됩니다." }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "circle-area"]
+  },
+  "circle-area": {
+    "name": "원의 넓이",
+    "oneLiner": "반지름의 제곱에 원주율을 곱하여 원의 넓이를 구하는 공식",
+    "description": "원의 넓이 공식은 반지름 r인 원이 차지하는 면적이 원주율과 반지름 제곱의 곱과 같음을 나타냅니다. 아르키메데스가 원을 무한히 얇은 삼각형으로 분할하여 증명한 이래, 적분의 원형이 된 공식입니다.",
+    "discoverer": "아르키메데스",
+    "field": "기하학",
+    "significance": "가장 기본적인 곡선 도형의 면적 공식이며, 적분 개념의 역사적 출발점입니다.",
+    "elementMeanings": {
+      "A": { "role": "넓이", "description": "원이 차지하는 면적입니다. 단위: 길이의 제곱." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "원의 중심에서 둘레까지의 거리입니다." },
+      "r^2": { "role": "반지름의 제곱", "description": "반지름을 제곱한 값. 넓이의 크기를 결정합니다." }
+    },
+    "relatedFormulas": ["sphere-volume", "pythagorean-theorem"]
+  },
+  "law-of-cosines": {
+    "name": "코사인 법칙",
+    "oneLiner": "임의의 삼각형에서 한 변의 길이를 나머지 두 변과 끼인각으로 구하는 법칙",
+    "description": "코사인 법칙은 삼각형에서 한 변의 제곱이 나머지 두 변의 제곱합에서 두 변과 끼인각의 코사인 곱의 두 배를 뺀 것과 같다는 관계식입니다. 피타고라스 정리의 일반화이며, 끼인각이 직각일 때 코사인이 0이 되어 피타고라스 정리로 환원됩니다.",
+    "field": "기하학",
+    "significance": "직각삼각형이 아닌 일반 삼각형에서도 변과 각의 관계를 구할 수 있게 하며, 측량과 내비게이션에 필수적입니다.",
+    "elementMeanings": {
+      "a": { "role": "구하려는 변", "description": "코사인 법칙으로 길이를 구하려는 변입니다." },
+      "b": { "role": "알려진 변", "description": "삼각형의 알려진 한 변의 길이입니다." },
+      "c": { "role": "알려진 변", "description": "삼각형의 알려진 다른 변의 길이입니다." },
+      "C": { "role": "끼인각", "description": "변 b와 변 c 사이에 끼인 각도입니다." },
+      "\\cos C": { "role": "끼인각의 코사인", "description": "끼인각 C의 코사인값. 각이 직각이면 0이 됩니다." }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "heron-formula"]
+  },
+  "sphere-volume": {
+    "name": "구의 부피",
+    "oneLiner": "반지름의 세제곱에 비례하는 구의 부피 공식",
+    "description": "구의 부피 공식은 반지름 r인 구가 차지하는 공간이 (4/3)과 원주율과 반지름 세제곱의 곱임을 나타냅니다. 아르키메데스가 구를 원기둥에 내접시켜 발견한 이 관계는 적분으로도 유도할 수 있으며, 3차원 기하학의 기본 결과입니다.",
+    "discoverer": "아르키메데스",
+    "field": "기하학",
+    "significance": "3차원 공간에서 가장 기본적인 곡면 입체의 부피 공식이며, 물리학과 공학에서 광범위하게 활용됩니다.",
+    "elementMeanings": {
+      "V": { "role": "부피", "description": "구가 차지하는 공간의 크기입니다. 단위: 길이의 세제곱." },
+      "\\frac{4}{3}": { "role": "비례 상수", "description": "구의 부피와 반지름 세제곱 사이의 비례 계수입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다." },
+      "r": { "role": "반지름", "description": "구의 중심에서 표면까지의 거리입니다." },
+      "r^3": { "role": "반지름의 세제곱", "description": "반지름을 세 번 곱한 값. 부피가 3차원적으로 증가함을 반영합니다." }
+    },
+    "relatedFormulas": ["circle-area"]
+  }
+}

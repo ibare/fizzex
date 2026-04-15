@@ -1,0 +1,150 @@
+{
+  "frac.numerator": {
+    "role": "분자",
+    "description": "분수에서 위쪽 부분. 나누어지는 양입니다.",
+    "refinements": {
+      "containsVariable": "분자에 변수가 포함되어 있어 함수의 영점(f(x)=0)을 결정합니다.",
+      "constantOnly": "분자가 상수이므로 이 분수의 크기가 고정된 비율입니다."
+    }
+  },
+  "frac.denominator": {
+    "role": "분모",
+    "description": "분수에서 아래쪽 부분. 나누는 양입니다. 0이 되면 정의되지 않습니다.",
+    "refinements": {
+      "containsVariable": "분모에 변수가 있어 특정 값에서 정의되지 않을 수 있습니다 (점근선).",
+      "constantOnly": "분모가 상수이므로 전체 식에 고정 비율을 적용합니다."
+    }
+  },
+  "power.base": {
+    "role": "밑",
+    "description": "거듭제곱에서 반복 곱해지는 대상입니다.",
+    "refinements": {
+      "isEulerE": "자연상수 e를 밑으로 하는 지수함수입니다. 성장/감쇠를 나타냅니다.",
+      "isVariable": "변수의 거듭제곱입니다. 지수가 클수록 빠르게 증가합니다."
+    }
+  },
+  "power.exponent": {
+    "role": "지수",
+    "description": "거듭제곱에서 곱하는 횟수입니다.",
+    "refinements": {
+      "isTwo": "제곱 — 결과는 항상 0 이상입니다.",
+      "isNegativeOne": "역수 — 1/밑 과 같습니다.",
+      "isHalf": "제곱근 — 밑의 양의 제곱근입니다.",
+      "containsVariable": "지수에 변수가 포함되어 지수적 성장/감쇠를 나타냅니다."
+    }
+  },
+  "sqrt.content": {
+    "role": "피근호수",
+    "description": "제곱근을 구하는 대상입니다. 실수 범위에서는 음수가 될 수 없습니다."
+  },
+  "sqrt.index": {
+    "role": "근호 차수",
+    "description": "n제곱근의 n입니다. 생략되면 2(제곱근)입니다."
+  },
+  "subscript.base": {
+    "role": "인덱싱 대상",
+    "description": "아래첨자가 붙는 대상입니다."
+  },
+  "subscript.subscript": {
+    "role": "인덱스",
+    "description": "특정 원소나 성분을 지정하는 번호입니다."
+  },
+  "sum.lower": {
+    "role": "합산 시작",
+    "description": "합산이 시작되는 인덱스 값입니다."
+  },
+  "sum.upper": {
+    "role": "합산 끝",
+    "description": "합산이 끝나는 인덱스 값입니다.",
+    "refinements": {
+      "isInfinity": "무한대까지 합산하는 무한급수입니다. 수렴 여부가 중요합니다."
+    }
+  },
+  "sum.body": {
+    "role": "일반항",
+    "description": "각 단계에서 더해지는 양입니다. 인덱스에 따라 값이 달라집니다."
+  },
+  "product.lower": {
+    "role": "곱 시작",
+    "description": "곱셈이 시작되는 인덱스 값입니다."
+  },
+  "product.upper": {
+    "role": "곱 끝",
+    "description": "곱셈이 끝나는 인덱스 값입니다."
+  },
+  "product.body": {
+    "role": "일반항",
+    "description": "각 단계에서 곱해지는 양입니다."
+  },
+  "integral.lower": {
+    "role": "적분 하한",
+    "description": "적분 구간의 시작점입니다."
+  },
+  "integral.upper": {
+    "role": "적분 상한",
+    "description": "적분 구간의 끝점입니다.",
+    "refinements": {
+      "isInfinity": "양의 무한대까지 적분합니다. 수렴 여부를 확인해야 합니다."
+    }
+  },
+  "integral.integrand": {
+    "role": "피적분함수",
+    "description": "적분하는 대상입니다. 이 함수의 곡선 아래 넓이를 구합니다."
+  },
+  "limit.approach": {
+    "role": "접근 값",
+    "description": "변수가 한없이 가까워지는 목표 값입니다."
+  },
+  "limit.body": {
+    "role": "극한 대상",
+    "description": "변수가 접근할 때 이 식의 값이 어디로 수렴하는지 봅니다."
+  },
+  "paren.content": {
+    "role": "묶음",
+    "description": "괄호로 묶여 하나의 단위로 취급되는 식입니다."
+  },
+  "abs.content": {
+    "role": "절댓값 대상",
+    "description": "부호를 무시한 크기입니다. 결과는 항상 0 이상입니다."
+  },
+  "func.argument": {
+    "role": "함수 인자",
+    "description": "함수에 입력되는 값입니다."
+  },
+  "matrix.element": {
+    "role": "행렬 성분",
+    "description": "행렬의 한 원소입니다."
+  },
+  "cases.element": {
+    "role": "조건부 값",
+    "description": "특정 조건이 만족될 때의 함수값입니다."
+  },
+  "accent.content": {
+    "role": "악센트 대상",
+    "description": "악센트가 붙은 기호입니다."
+  },
+  "overline.content": {
+    "role": "평균/켤레",
+    "description": "윗줄은 평균, 복소 켤레, 또는 위상수학에서 폐포를 나타냅니다."
+  },
+  "cancel.content": {
+    "role": "취소된 항",
+    "description": "약분되거나 소거되는 부분입니다."
+  },
+  "overset.base": {
+    "role": "기본 기호",
+    "description": "주석이 붙는 대상 기호입니다."
+  },
+  "overset.annotation": {
+    "role": "주석",
+    "description": "기호 위/아래에 붙는 추가 설명입니다."
+  },
+  "xarrow.above": {
+    "role": "화살표 위 텍스트",
+    "description": "반응이나 변환의 조건을 나타냅니다."
+  },
+  "xarrow.below": {
+    "role": "화살표 아래 텍스트",
+    "description": "반응이나 변환의 부가 조건을 나타냅니다."
+  }
+}

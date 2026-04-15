@@ -1,0 +1,80 @@
+{
+  "mass-energy": {
+    "name": "질량-에너지 등가 원리",
+    "oneLiner": "질량과 에너지가 광속의 제곱을 비율로 상호 변환됨을 나타내는 공식",
+    "description": "아인슈타인의 특수 상대성이론에서 도출된 등식. 질량은 에너지로, 에너지는 질량으로 변환될 수 있으며, 그 변환 비율이 광속의 제곱이라는 것을 보여줍니다. 광속의 제곱이 매우 크기 때문에 작은 질량에서도 막대한 에너지가 나올 수 있습니다.",
+    "discoverer": "알베르트 아인슈타인",
+    "field": "물리학",
+    "significance": "질량이 곧 에너지의 한 형태임을 밝혀 현대 물리학의 패러다임을 바꾸었으며, 핵분열과 핵융합의 원리를 설명합니다.",
+    "elementMeanings": {
+      "E": { "role": "에너지", "description": "물체가 가진 에너지. 단위: 줄(J)." },
+      "m": { "role": "질량", "description": "물체의 정지 질량. 단위: 킬로그램(kg)." },
+      "c": { "role": "광속", "description": "진공에서의 빛의 속도. 약 3x10의 8제곱 m/s." },
+      "c^2": { "role": "광속의 제곱", "description": "약 9x10의 16제곱. 질량-에너지 변환 비율입니다." }
+    },
+    "relatedFormulas": ["kinetic-energy", "newton-second"]
+  },
+  "newton-second": {
+    "name": "뉴턴의 운동 제2법칙",
+    "oneLiner": "물체에 작용하는 힘이 질량과 가속도의 곱과 같다는 법칙",
+    "description": "뉴턴의 제2법칙은 물체에 작용하는 알짜힘이 질량과 가속도의 곱임을 나타냅니다. 같은 힘이라도 질량이 클수록 가속도가 작아지며, 이는 관성의 크기를 질량으로 정량화합니다. 고전역학의 가장 핵심적인 운동 방정식입니다.",
+    "discoverer": "아이작 뉴턴",
+    "field": "물리학",
+    "significance": "힘, 질량, 가속도의 관계를 정량적으로 확립하여 고전역학의 기초를 세웠습니다.",
+    "elementMeanings": {
+      "F": { "role": "힘", "description": "물체에 작용하는 알짜힘. 단위: 뉴턴(N)." },
+      "m": { "role": "질량", "description": "물체의 질량. 관성의 크기를 나타냅니다. 단위: kg." },
+      "a": { "role": "가속도", "description": "속도의 시간당 변화율. 단위: m/s의 제곱." }
+    },
+    "relatedFormulas": ["universal-gravitation", "kinetic-energy", "mass-energy"]
+  },
+  "universal-gravitation": {
+    "name": "만유인력의 법칙",
+    "oneLiner": "두 물체 사이에 질량의 곱에 비례하고 거리의 제곱에 반비례하는 인력이 작용한다는 법칙",
+    "description": "만유인력의 법칙은 질량을 가진 모든 물체가 서로 끌어당기며, 그 힘의 크기가 두 질량의 곱에 비례하고 거리의 제곱에 반비례한다고 서술합니다. 사과의 낙하와 달의 공전을 하나의 원리로 통합한 혁명적 법칙입니다.",
+    "discoverer": "아이작 뉴턴",
+    "field": "물리학",
+    "significance": "천체 운동과 지상 역학을 통합하여 최초의 보편적 물리 법칙을 확립했습니다.",
+    "elementMeanings": {
+      "F": { "role": "중력", "description": "두 물체 사이에 작용하는 인력. 단위: 뉴턴(N)." },
+      "G": { "role": "중력 상수", "description": "만유인력 상수. 약 6.674x10의 -11제곱 N m의 제곱/kg의 제곱." },
+      "m_1": { "role": "첫째 물체의 질량", "description": "상호작용하는 첫 번째 물체의 질량입니다." },
+      "m_2": { "role": "둘째 물체의 질량", "description": "상호작용하는 두 번째 물체의 질량입니다." },
+      "r": { "role": "거리", "description": "두 물체의 질량 중심 사이의 거리입니다." },
+      "r^2": { "role": "거리의 제곱", "description": "역제곱 법칙을 반영. 거리가 두 배면 힘은 1/4이 됩니다." }
+    },
+    "relatedFormulas": ["coulomb-law", "newton-second"]
+  },
+  "coulomb-law": {
+    "name": "쿨롱의 법칙",
+    "oneLiner": "두 전하 사이에 전하량의 곱에 비례하고 거리의 제곱에 반비례하는 전기력이 작용한다는 법칙",
+    "description": "쿨롱의 법칙은 두 점전하 사이의 전기력이 전하량의 곱에 비례하고 거리의 제곱에 반비례함을 나타냅니다. 만유인력과 같은 역제곱 법칙 구조를 가지지만, 전기력은 인력과 척력 모두 가능하다는 차이가 있습니다.",
+    "discoverer": "샤를 오귀스탱 드 쿨롱",
+    "field": "물리학",
+    "significance": "전자기학의 출발점이며, 맥스웰 방정식과 현대 전자기 이론의 기초를 제공합니다.",
+    "elementMeanings": {
+      "F": { "role": "전기력", "description": "두 전하 사이에 작용하는 힘. 단위: 뉴턴(N)." },
+      "k_e": { "role": "쿨롱 상수", "description": "약 8.988x10의 9제곱 N m의 제곱/C의 제곱. 전기력의 세기를 결정합니다." },
+      "q_1": { "role": "첫째 전하", "description": "첫 번째 대전체의 전하량. 단위: 쿨롱(C)." },
+      "q_2": { "role": "둘째 전하", "description": "두 번째 대전체의 전하량. 같은 부호면 척력, 다른 부호면 인력입니다." },
+      "r": { "role": "거리", "description": "두 점전하 사이의 거리입니다." },
+      "r^2": { "role": "거리의 제곱", "description": "역제곱 법칙을 반영. 거리가 멀수록 힘이 급격히 약해집니다." }
+    },
+    "relatedFormulas": ["universal-gravitation", "newton-second"]
+  },
+  "kinetic-energy": {
+    "name": "운동 에너지",
+    "oneLiner": "움직이는 물체가 가진 에너지를 질량과 속력으로 나타내는 공식",
+    "description": "운동 에너지 공식은 질량 m인 물체가 속력 v로 움직일 때 가진 에너지가 (1/2)mv의 제곱임을 나타냅니다. 속력의 제곱에 비례하므로 속력이 두 배면 에너지는 네 배가 됩니다. 일-에너지 정리의 핵심이며, 에너지 보존 법칙의 기본 구성 요소입니다.",
+    "field": "물리학",
+    "significance": "에너지 보존 법칙의 핵심 구성 요소이며, 역학 문제 풀이에서 가장 자주 사용되는 에너지 형태입니다.",
+    "elementMeanings": {
+      "K": { "role": "운동 에너지", "description": "물체의 운동으로 인한 에너지. 단위: 줄(J)." },
+      "\\frac{1}{2}": { "role": "비례 상수", "description": "뉴턴의 제2법칙에서 적분으로 유도될 때 나타나는 계수입니다." },
+      "m": { "role": "질량", "description": "움직이는 물체의 질량. 단위: kg." },
+      "v": { "role": "속력", "description": "물체의 이동 속력. 단위: m/s." },
+      "v^2": { "role": "속력의 제곱", "description": "속력이 두 배면 에너지는 네 배. 비선형 관계를 나타냅니다." }
+    },
+    "relatedFormulas": ["mass-energy", "newton-second"]
+  }
+}

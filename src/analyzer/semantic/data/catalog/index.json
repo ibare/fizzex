@@ -1,0 +1,214 @@
+{
+  "version": "1.0",
+  "entries": [
+    {
+      "id": "euler-identity",
+      "category": "algebra",
+      "requiredVariables": ["e", "i", "π"],
+      "requiredNodeTypes": ["power", "operator", "number"],
+      "complexity": [5, 12],
+      "patternType": "exact",
+      "signature": ["power.exponent:row", "variable:e", "variable:i", "variable:π", "operator:+", "number:1", "number:0"]
+    },
+    {
+      "id": "quadratic-formula",
+      "category": "algebra",
+      "requiredNodeTypes": ["frac", "sqrt"],
+      "complexity": [10, 30],
+      "patternType": "structural",
+      "signature": ["frac", "sqrt", "operator:±", "power.exponent:2"]
+    },
+    {
+      "id": "binomial-theorem",
+      "category": "algebra",
+      "requiredNodeTypes": ["sum", "frac", "power"],
+      "complexity": [12, 35],
+      "patternType": "structural",
+      "signature": ["sum", "frac", "power", "operator:+"]
+    },
+    {
+      "id": "geometric-series",
+      "category": "algebra",
+      "requiredNodeTypes": ["frac"],
+      "complexity": [4, 15],
+      "patternType": "structural",
+      "signature": ["frac", "operator:-", "number:1", "power"]
+    },
+    {
+      "id": "difference-of-squares",
+      "category": "algebra",
+      "requiredNodeTypes": ["power", "operator"],
+      "complexity": [4, 10],
+      "patternType": "structural",
+      "signature": ["power.exponent:2", "operator:-", "power.exponent:2"]
+    },
+    {
+      "id": "pythagorean-theorem",
+      "category": "geometry",
+      "requiredNodeTypes": ["power", "operator"],
+      "complexity": [6, 14],
+      "patternType": "structural",
+      "signature": ["power.exponent:2", "operator:+", "power.exponent:2", "operator:=", "power.exponent:2"]
+    },
+    {
+      "id": "heron-formula",
+      "category": "geometry",
+      "requiredNodeTypes": ["sqrt", "operator"],
+      "complexity": [10, 25],
+      "patternType": "structural",
+      "signature": ["sqrt", "operator:-", "paren", "paren", "paren"]
+    },
+    {
+      "id": "circle-area",
+      "category": "geometry",
+      "requiredVariables": ["π"],
+      "requiredNodeTypes": ["power"],
+      "complexity": [3, 8],
+      "patternType": "structural",
+      "signature": ["variable:π", "power.exponent:2", "operator:="]
+    },
+    {
+      "id": "law-of-cosines",
+      "category": "geometry",
+      "requiredNodeTypes": ["power", "func"],
+      "complexity": [10, 20],
+      "patternType": "structural",
+      "signature": ["power.exponent:2", "operator:+", "power.exponent:2", "operator:-", "func:cos"]
+    },
+    {
+      "id": "sphere-volume",
+      "category": "geometry",
+      "requiredVariables": ["π"],
+      "requiredNodeTypes": ["frac", "power"],
+      "complexity": [5, 12],
+      "patternType": "structural",
+      "signature": ["frac", "number:4", "number:3", "variable:π", "power.exponent:3"]
+    },
+    {
+      "id": "mass-energy",
+      "category": "physics",
+      "requiredVariables": ["E", "m", "c"],
+      "requiredNodeTypes": ["power"],
+      "complexity": [4, 10],
+      "patternType": "exact",
+      "signature": ["variable:E", "operator:=", "variable:m", "variable:c", "power.exponent:2"]
+    },
+    {
+      "id": "newton-second",
+      "category": "physics",
+      "requiredVariables": ["F", "m", "a"],
+      "complexity": [3, 6],
+      "patternType": "exact",
+      "signature": ["variable:F", "operator:=", "variable:m", "variable:a"]
+    },
+    {
+      "id": "universal-gravitation",
+      "category": "physics",
+      "requiredVariables": ["G"],
+      "requiredNodeTypes": ["frac", "power"],
+      "complexity": [6, 15],
+      "patternType": "structural",
+      "signature": ["variable:G", "frac", "power.exponent:2"]
+    },
+    {
+      "id": "coulomb-law",
+      "category": "physics",
+      "requiredVariables": ["k"],
+      "requiredNodeTypes": ["frac", "power"],
+      "complexity": [6, 15],
+      "patternType": "structural",
+      "signature": ["frac", "power.exponent:2"]
+    },
+    {
+      "id": "kinetic-energy",
+      "category": "physics",
+      "requiredNodeTypes": ["frac", "power"],
+      "complexity": [4, 10],
+      "patternType": "structural",
+      "signature": ["frac", "number:1", "number:2", "power.exponent:2"]
+    },
+    {
+      "id": "ftc",
+      "category": "calculus",
+      "requiredNodeTypes": ["integral"],
+      "complexity": [6, 20],
+      "patternType": "structural",
+      "signature": ["integral", "operator:=", "func"]
+    },
+    {
+      "id": "taylor-series",
+      "category": "calculus",
+      "requiredNodeTypes": ["sum", "frac", "power"],
+      "complexity": [12, 35],
+      "patternType": "structural",
+      "signature": ["sum", "frac", "power", "func"]
+    },
+    {
+      "id": "gaussian-integral",
+      "category": "calculus",
+      "requiredVariables": ["π"],
+      "requiredNodeTypes": ["integral", "power", "sqrt"],
+      "complexity": [8, 20],
+      "patternType": "structural",
+      "signature": ["integral", "power", "variable:e", "sqrt", "variable:π"]
+    },
+    {
+      "id": "derivative-definition",
+      "category": "calculus",
+      "requiredNodeTypes": ["limit", "frac"],
+      "complexity": [8, 25],
+      "patternType": "structural",
+      "signature": ["limit", "frac", "func", "operator:+", "operator:-"]
+    },
+    {
+      "id": "chain-rule",
+      "category": "calculus",
+      "requiredNodeTypes": ["frac"],
+      "complexity": [6, 18],
+      "patternType": "structural",
+      "signature": ["frac", "operator:=", "frac", "operator:·"]
+    },
+    {
+      "id": "bayes-theorem",
+      "category": "statistics",
+      "requiredNodeTypes": ["frac"],
+      "complexity": [8, 20],
+      "patternType": "structural",
+      "signature": ["frac", "operator:=", "func", "operator:|"]
+    },
+    {
+      "id": "normal-distribution",
+      "category": "statistics",
+      "requiredVariables": ["π", "σ"],
+      "requiredNodeTypes": ["frac", "power", "sqrt"],
+      "complexity": [12, 30],
+      "patternType": "structural",
+      "signature": ["frac", "number:1", "sqrt", "number:2", "variable:π", "variable:σ", "power", "variable:e"]
+    },
+    {
+      "id": "standard-deviation",
+      "category": "statistics",
+      "requiredVariables": ["σ"],
+      "requiredNodeTypes": ["sqrt", "frac", "sum"],
+      "complexity": [10, 25],
+      "patternType": "structural",
+      "signature": ["variable:σ", "operator:=", "sqrt", "frac", "sum"]
+    },
+    {
+      "id": "correlation-coefficient",
+      "category": "statistics",
+      "requiredNodeTypes": ["frac", "sum", "sqrt"],
+      "complexity": [15, 40],
+      "patternType": "structural",
+      "signature": ["frac", "sum", "sqrt"]
+    },
+    {
+      "id": "law-of-large-numbers",
+      "category": "statistics",
+      "requiredNodeTypes": ["limit", "frac", "sum"],
+      "complexity": [10, 25],
+      "patternType": "structural",
+      "signature": ["limit", "frac", "number:1", "sum"]
+    }
+  ]
+}

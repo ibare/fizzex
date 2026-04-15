@@ -127,7 +127,7 @@ describe('Semantic Roles', () => {
       const result = getSemanticMeaning(varNode, map.get(varNode.id)!);
 
       expect(result.role).toBe('분자');
-      expect(result.layer).toBe(1);
+      expect(result.layer).toBe('layer1');
       // 변수 포함 refinement
       expect(result.description).toContain('변수');
     });
@@ -139,7 +139,7 @@ describe('Semantic Roles', () => {
       const result = getSemanticMeaning(numNode, map.get(numNode.id)!);
 
       expect(result.role).toBe('분모');
-      expect(result.layer).toBe(1);
+      expect(result.layer).toBe('layer1');
       expect(result.description).toContain('상수');
     });
 
@@ -194,7 +194,7 @@ describe('Semantic Roles', () => {
         if (argVar) {
           const result = getSemanticMeaning(argVar, map.get(argVar.id)!);
           // func의 argument 또는 paren의 content
-          expect(result.layer).toBeGreaterThanOrEqual(0);
+          expect(['catalog', 'layer2', 'layer1', 'fallback']).toContain(result.layer);
         }
       }
     });
@@ -215,7 +215,7 @@ describe('Semantic Roles', () => {
             const exp = powerInDenom.exponent[0];
             if (exp) {
               const result = getSemanticMeaning(exp, map.get(exp.id)!);
-              expect(result.layer).toBe(2);
+              expect(result.layer).toBe('layer2');
               expect(result.description).toContain('p-급수');
             }
           }
@@ -234,7 +234,7 @@ describe('Semantic Roles', () => {
           const denomVar = fracInBody.denominator[0];
           if (denomVar) {
             const result = getSemanticMeaning(denomVar, map.get(denomVar.id)!);
-            expect(result.layer).toBe(2);
+            expect(result.layer).toBe('layer2');
             expect(result.description).toContain('급수');
           }
         }
@@ -250,7 +250,7 @@ describe('Semantic Roles', () => {
       const result = getSemanticMeaning(numNode, map.get(numNode.id)!);
 
       expect(result.role).toBe('숫자');
-      expect(result.layer).toBe(0);
+      expect(result.layer).toBe('fallback');
       expect(result.description).toContain('5');
     });
 
@@ -261,7 +261,7 @@ describe('Semantic Roles', () => {
       const result = getSemanticMeaning(varNode, map.get(varNode.id)!);
 
       expect(result.role).toBe('변수');
-      expect(result.layer).toBe(0);
+      expect(result.layer).toBe('fallback');
       expect(result.description).toContain('x');
     });
 
@@ -327,6 +327,99 @@ describe('Semantic Roles', () => {
         expect(typeof result.role).toBe('string');
         expect(typeof result.description).toBe('string');
       }
+    });
+  });
+
+  describe('카탈로그 매칭', () => {
+    it('E=mc^2를 질량-에너지 등가 원리로 인식한다', () => {
+      const ast = parseLatex('E=mc^2');
+      const semanticMap = buildSemanticMap(ast);
+      const rootResult = semanticMap.get(ast.id)!;
+
+      expect(rootResult.catalogId).toBe('mass-energy');
+      expect(rootResult.confidence).toBeGreaterThanOrEqual(0.5);
+    });
+
+    it('F=ma를 뉴턴의 운동 제2법칙으로 인식한다', () => {
+      const ast = parseLatex('F=ma');
+      const semanticMap = buildSemanticMap(ast);
+      const rootResult = semanticMap.get(ast.id)!;
+
+      expect(rootResult.catalogId).toBe('newton-second');
+      expect(rootResult.confidence).toBeGreaterThanOrEqual(0.5);
+    });
+
+    it('단순한 수식 x+1에는 카탈로그 매칭이 없다', () => {
+      const ast = parseLatex('x+1');
+      const semanticMap = buildSemanticMap(ast);
+      const rootResult = semanticMap.get(ast.id)!;
+
+      expect(rootResult.catalogId).toBeUndefined();
+    });
+
+    it('카탈로그 매칭 시 요소에 풍부한 의미를 부여한다', () => {
+      const ast = parseLatex('E=mc^2');
+      const semanticMap = buildSemanticMap(ast);
+
+      // E 변수 → 에너지 역할
+      const eNode = findNode(ast, n => n.type === 'variable' && n.name === 'E');
+      expect(eNode).not.toBeNull();
+      const eSemantic = semanticMap.get(eNode!.id)!;
+      expect(eSemantic.layer).toBe('catalog');
+      expect(eSemantic.role).toBe('에너지');
+
+      // m 변수 → 질량 역할
+      const mNode = findNode(ast, n => n.type === 'variable' && n.name === 'm');
+      expect(mNode).not.toBeNull();
+      const mSemantic = semanticMap.get(mNode!.id)!;
+      expect(mSemantic.layer).toBe('catalog');
+      expect(mSemantic.role).toBe('질량');
+    });
+
+    it('카탈로그 매칭에서 복합 키(power 노드)도 매핑한다', () => {
+      const ast = parseLatex('E=mc^2');
+      const semanticMap = buildSemanticMap(ast);
+
+      // c^2 power 노드 → 광속의 제곱
+      const powerNode = findNode(ast, n => n.type === 'power');
+      expect(powerNode).not.toBeNull();
+      const powerSemantic = semanticMap.get(powerNode!.id)!;
+      expect(powerSemantic.layer).toBe('catalog');
+      expect(powerSemantic.role).toBe('광속의 제곱');
+    });
+
+    it('exact 패턴이 structural 패턴보다 높은 confidence를 가진다', () => {
+      // E=mc^2는 exact 패턴
+      const ast1 = parseLatex('E=mc^2');
+      const map1 = buildSemanticMap(ast1);
+      const root1 = map1.get(ast1.id)!;
+
+      expect(root1.confidence).toBeGreaterThanOrEqual(0.8);
+    });
+
+    it('카탈로그 미매칭 요소는 기존 레이어로 폴백한다', () => {
+      const ast = parseLatex('E=mc^2');
+      const semanticMap = buildSemanticMap(ast);
+
+      // = 연산자는 카탈로그 elementMeanings에 없으므로 폴백
+      const eqNode = findNode(ast, n => n.type === 'operator' && n.operator === '=');
+      expect(eqNode).not.toBeNull();
+      const eqSemantic = semanticMap.get(eqNode!.id)!;
+      expect(eqSemantic.layer).not.toBe('catalog');
+    });
+
+    it('SemanticResult에 catalogId와 confidence가 포함된다', () => {
+      const ast = parseLatex('F=ma');
+      const semanticMap = buildSemanticMap(ast);
+
+      // F 변수 (catalog 레이어)
+      const fNode = findNode(ast, n => n.type === 'variable' && n.name === 'F');
+      expect(fNode).not.toBeNull();
+      const fSemantic = semanticMap.get(fNode!.id)!;
+
+      expect(fSemantic.catalogId).toBe('newton-second');
+      expect(fSemantic.confidence).toBeDefined();
+      expect(typeof fSemantic.confidence).toBe('number');
     });
   });
 

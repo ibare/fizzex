@@ -1,0 +1,81 @@
+{
+  "ftc": {
+    "name": "미적분의 기본정리",
+    "oneLiner": "미분과 적분이 서로 역연산임을 밝히는 정리",
+    "description": "미적분의 기본정리는 연속함수의 정적분이 그 원시함수의 양 끝값 차이와 같다는 것을 보여줍니다. 이 정리 덕분에 넓이를 직접 구하지 않고도 원시함수만으로 정적분을 계산할 수 있습니다. 미분과 적분이 하나의 체계로 통합되는 핵심 근거입니다.",
+    "discoverer": "아이작 뉴턴, 고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "미분과 적분이 역관계라는 사실을 확립하여 해석학 전체의 토대를 마련했습니다.",
+    "elementMeanings": {
+      "f(x)": { "role": "피적분함수", "description": "적분하려는 연속함수입니다." },
+      "F(x)": { "role": "원시함수", "description": "f(x)의 부정적분. F'(x) = f(x)를 만족합니다." },
+      "a": { "role": "적분 하한", "description": "정적분 구간의 시작점입니다." },
+      "b": { "role": "적분 상한", "description": "정적분 구간의 끝점입니다." },
+      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타내는 미소 변화량입니다." }
+    },
+    "relatedFormulas": ["derivative-definition", "gaussian-integral"]
+  },
+  "taylor-series": {
+    "name": "테일러 급수",
+    "oneLiner": "함수를 특정 점 주위의 무한 다항식으로 표현하는 전개",
+    "description": "테일러 급수는 무한번 미분 가능한 함수를 한 점 a에서의 도함수 값들로 이루어진 거듭제곱 급수로 나타냅니다. 각 항은 n차 도함수를 n!로 나눈 계수에 (x-a)의 n제곱을 곱한 형태입니다. 수치 계산과 물리학에서 복잡한 함수를 근사하는 핵심 도구입니다.",
+    "discoverer": "브룩 테일러",
+    "field": "미적분학",
+    "significance": "삼각함수, 지수함수 등 초월함수를 다항식으로 근사할 수 있게 하며, 수치 해석의 기초입니다.",
+    "elementMeanings": {
+      "f(x)": { "role": "원래 함수", "description": "급수로 전개하려는 대상 함수입니다." },
+      "a": { "role": "전개 중심", "description": "급수를 전개하는 기준점. a=0이면 매클로린 급수라 합니다." },
+      "f^{(n)}(a)": { "role": "n차 도함수 값", "description": "점 a에서의 n번째 도함수 값. 각 항의 계수를 결정합니다." },
+      "n!": { "role": "팩토리얼", "description": "n의 계승. 각 항의 분모에 놓여 계수를 조정합니다." },
+      "(x-a)^n": { "role": "거듭제곱 항", "description": "전개 중심 a로부터의 거리의 n제곱입니다." }
+    },
+    "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
+  },
+  "gaussian-integral": {
+    "name": "가우스 적분",
+    "oneLiner": "e의 마이너스 x제곱 꼴 함수의 음의 무한대부터 양의 무한대까지 적분",
+    "description": "가우스 적분은 e의 마이너스 x제곱을 전 구간에서 적분한 값이 루트 파이임을 밝힙니다. 초등함수로는 부정적분이 불가능하지만, 극좌표 변환을 이용한 기발한 방법으로 정적분 값이 구해집니다. 확률론과 통계학에서 정규분포의 근간이 됩니다.",
+    "discoverer": "카를 프리드리히 가우스",
+    "field": "미적분학",
+    "significance": "정규분포의 정규화 상수를 제공하며, 양자역학과 통계역학의 경로적분에서도 핵심적 역할을 합니다.",
+    "elementMeanings": {
+      "e^{-x^2}": { "role": "가우스 함수", "description": "종 모양의 함수. x가 0에서 멀어질수록 급격히 0에 수렴합니다." },
+      "\\int_{-\\infty}^{\\infty}": { "role": "전 구간 적분", "description": "음의 무한대에서 양의 무한대까지의 적분입니다." },
+      "\\sqrt{\\pi}": { "role": "적분 결과", "description": "가우스 적분의 값. 원주율의 제곱근입니다." },
+      "dx": { "role": "적분 변수", "description": "x에 대해 적분함을 나타냅니다." }
+    },
+    "relatedFormulas": ["normal-distribution", "ftc"]
+  },
+  "derivative-definition": {
+    "name": "도함수의 정의",
+    "oneLiner": "함수의 순간 변화율을 극한으로 정의하는 식",
+    "description": "도함수의 정의는 함수값의 변화량을 독립변수의 변화량으로 나눈 비율의 극한입니다. 이 극한이 존재할 때 함수가 그 점에서 미분 가능하다고 하며, 그 값이 접선의 기울기가 됩니다. 미적분학의 가장 근본적인 개념입니다.",
+    "discoverer": "아이작 뉴턴, 고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "순간 변화율이라는 개념을 엄밀하게 정의하여 미적분학의 논리적 기초를 확립했습니다.",
+    "elementMeanings": {
+      "f'(x)": { "role": "도함수", "description": "x에서의 순간 변화율. 그래프의 접선 기울기입니다." },
+      "f(x+h)": { "role": "이동된 함수값", "description": "x에서 h만큼 이동한 점에서의 함수값입니다." },
+      "f(x)": { "role": "원래 함수값", "description": "점 x에서의 함수값입니다." },
+      "h": { "role": "변화량", "description": "x의 미소 증분. 극한에서 0으로 보냅니다." },
+      "\\lim_{h \\to 0}": { "role": "극한 연산", "description": "h를 0에 한없이 가깝게 보내는 연산입니다." }
+    },
+    "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
+  },
+  "chain-rule": {
+    "name": "연쇄 법칙",
+    "oneLiner": "합성함수의 도함수를 바깥 함수와 안쪽 함수의 도함수 곱으로 구하는 법칙",
+    "description": "연쇄 법칙은 합성함수 f(g(x))를 미분할 때, 바깥 함수의 도함수에 안쪽 함수의 도함수를 곱하면 된다는 규칙입니다. 다변수 미적분과 역전파 알고리즘 등 현대 수학과 인공지능의 핵심 기법으로 확장됩니다.",
+    "discoverer": "고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "복잡한 합성함수의 미분을 체계적으로 수행할 수 있게 하며, 딥러닝의 역전파 알고리즘의 수학적 토대입니다.",
+    "elementMeanings": {
+      "f": { "role": "바깥 함수", "description": "합성의 바깥쪽에 위치한 함수입니다." },
+      "g": { "role": "안쪽 함수", "description": "합성의 안쪽에 위치한 함수입니다." },
+      "f'(g(x))": { "role": "바깥 도함수", "description": "바깥 함수를 g(x)에서 평가한 도함수값입니다." },
+      "g'(x)": { "role": "안쪽 도함수", "description": "안쪽 함수의 x에 대한 도함수입니다." },
+      "x": { "role": "독립변수", "description": "미분의 기준이 되는 변수입니다." }
+    },
+    "relatedFormulas": ["derivative-definition", "ftc"]
+  }
+}

@@ -21,7 +21,7 @@ import {
   explorerHitTest,
 } from '../box/explorer-map';
 import type { ExplorerBoxInfo } from '../box/explorer-map';
-import { buildSemanticMap } from '../analyzer/semantic-roles';
+import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
 import type { SemanticResult } from '../analyzer/semantic-roles';
 
 // =========================================================================
@@ -50,6 +50,7 @@ export class ExplorerOverlay {
   private ctx: CanvasRenderingContext2D;
   private closeBtn: HTMLButtonElement;
   private hintBar: HTMLDivElement;
+  private catalogBanner: HTMLDivElement;
 
   // 데이터
   private ast: RootNode;
@@ -168,6 +169,34 @@ export class ExplorerOverlay {
     this.hintBar.appendChild(escHint);
     this.overlay.appendChild(this.hintBar);
 
+    // 카탈로그 배너 (초기 숨김)
+    this.catalogBanner = document.createElement('div');
+    Object.assign(this.catalogBanner.style, {
+      position: 'absolute',
+      top: '20px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      display: 'none',
+      alignItems: 'center',
+      gap: '8px',
+      padding: '8px 18px',
+      borderRadius: '10px',
+      background: this.isDark ? 'rgba(30,30,30,0.85)' : 'rgba(255,255,255,0.85)',
+      backdropFilter: 'blur(8px)',
+      color: this.isDark ? '#e5e5e5' : '#1a1a1a',
+      fontSize: '14px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
+      pointerEvents: 'none',
+      maxWidth: '70%',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      boxShadow: this.isDark
+        ? '0 2px 8px rgba(0,0,0,0.3)'
+        : '0 2px 8px rgba(0,0,0,0.08)',
+    });
+    this.overlay.appendChild(this.catalogBanner);
+
     // ── DOM 삽입 ──
     document.body.appendChild(this.overlay);
 
@@ -228,6 +257,7 @@ export class ExplorerOverlay {
     (this as Record<string, unknown>).overlay = null;
     (this as Record<string, unknown>).canvas = null;
     (this as Record<string, unknown>).ctx = null;
+    (this as Record<string, unknown>).catalogBanner = null;
     (this as Record<string, unknown>).ast = null;
   }
 
@@ -248,6 +278,7 @@ export class ExplorerOverlay {
     this.explorerInfos = buildExplorerMap(box, this.ast);
     this.semanticMap = buildSemanticMap(this.ast);
 
+    this.updateCatalogBanner();
     this.renderCanvas();
   }
 
@@ -406,6 +437,47 @@ export class ExplorerOverlay {
 
   private handleResize(): void {
     this.renderCanvas();
+  }
+
+  // ---------------------------------------------------------------------------
+  // 카탈로그 배너
+  // ---------------------------------------------------------------------------
+
+  /** 카탈로그 매칭 시 상단 배너에 수식명 표시 */
+  private updateCatalogBanner(): void {
+    const rootSemantic = this.semanticMap.get(this.ast.id);
+    if (!rootSemantic?.catalogId || !rootSemantic.catalogCategory) {
+      this.catalogBanner.style.display = 'none';
+      return;
+    }
+
+    const detail = getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory);
+    if (!detail) {
+      this.catalogBanner.style.display = 'none';
+      return;
+    }
+
+    this.catalogBanner.innerHTML = '';
+
+    const confidence = rootSemantic.confidence ?? 0;
+    const isUnsure = confidence < 0.8;
+
+    const nameSpan = document.createElement('span');
+    nameSpan.style.fontWeight = '600';
+    nameSpan.textContent = isUnsure ? `${detail.name}와(과) 유사` : detail.name;
+
+    const sepSpan = document.createElement('span');
+    sepSpan.textContent = ' — ';
+    sepSpan.style.color = this.isDark ? '#6b7280' : '#9ca3af';
+
+    const descSpan = document.createElement('span');
+    descSpan.style.color = this.isDark ? '#9ca3af' : '#6b7280';
+    descSpan.textContent = detail.oneLiner;
+
+    this.catalogBanner.appendChild(nameSpan);
+    this.catalogBanner.appendChild(sepSpan);
+    this.catalogBanner.appendChild(descSpan);
+    this.catalogBanner.style.display = 'flex';
   }
 
   // ---------------------------------------------------------------------------

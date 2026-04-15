@@ -55,7 +55,8 @@
     "corpus:compare": "tsx src/__tests__/corpus/comparison-runner.ts",
     "corpus:pdflatex-filter": "tsx src/__tests__/corpus/pdflatex-filter.ts",
     "corpus:full": "pnpm corpus:build && pnpm corpus:pdflatex-filter && pnpm corpus:report && pnpm corpus:compare",
-    "corpus:open": "open src/__tests__/corpus/report.html"
+    "corpus:open": "open src/__tests__/corpus/report.html",
+    "semantic:validate": "tsx scripts/validate-semantic-data.ts"
   },
   "keywords": [
     "math",

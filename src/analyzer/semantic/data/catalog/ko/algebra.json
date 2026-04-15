@@ -1,0 +1,80 @@
+{
+  "euler-identity": {
+    "name": "오일러 항등식",
+    "oneLiner": "수학의 다섯 가지 근본 상수를 하나의 등식으로 연결하는 공식",
+    "description": "오일러 항등식은 자연상수 e, 허수단위 i, 원주율, 1, 0을 하나의 간결한 등식으로 엮습니다. 오일러 공식에서 각도를 원주율로 놓으면 자연스럽게 유도되며, 수학의 여러 분야를 관통하는 깊은 연결성을 상징합니다.",
+    "discoverer": "레온하르트 오일러",
+    "field": "대수학",
+    "significance": "지수함수, 삼각함수, 복소수가 하나로 이어진다는 사실을 보여주며, 수학사에서 가장 아름다운 등식으로 꼽힙니다.",
+    "elementMeanings": {
+      "e": { "role": "자연상수", "description": "약 2.71828. 자연로그의 밑이며 연속 성장을 나타냅니다." },
+      "i": { "role": "허수단위", "description": "제곱하면 -1이 되는 수. 복소수의 기본 구성 요소입니다." },
+      "\\pi": { "role": "원주율", "description": "원의 둘레와 지름의 비. 약 3.14159입니다." },
+      "1": { "role": "곱셈 항등원", "description": "곱셈의 항등원이자 자연수의 시작입니다." },
+      "0": { "role": "덧셈 항등원", "description": "덧셈의 항등원이며, 등식의 결과값입니다." }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "quadratic-formula": {
+    "name": "이차방정식의 근의 공식",
+    "oneLiner": "이차방정식 ax2+bx+c=0의 해를 계수로 직접 구하는 공식",
+    "description": "이차방정식의 근의 공식은 계수 a, b, c만으로 방정식의 두 근을 정확히 계산합니다. 판별식의 부호에 따라 실근의 개수가 결정되며, 대수학에서 가장 기본이 되는 풀이법입니다.",
+    "field": "대수학",
+    "significance": "모든 이차방정식을 풀 수 있는 보편적 도구이며, 판별식 개념을 통해 근의 존재성을 판단할 수 있게 합니다.",
+    "elementMeanings": {
+      "a": { "role": "이차항 계수", "description": "x의 제곱에 곱해지는 수. 0이 아니어야 이차방정식입니다." },
+      "b": { "role": "일차항 계수", "description": "x에 곱해지는 수. 포물선의 축 위치에 영향을 줍니다." },
+      "c": { "role": "상수항", "description": "변수 없이 더해지는 상수. y절편을 결정합니다." },
+      "b^2-4ac": { "role": "판별식", "description": "근의 개수와 종류를 결정합니다. 양수면 서로 다른 두 실근, 0이면 중근, 음수면 허근입니다." },
+      "\\pm": { "role": "복부호", "description": "덧셈과 뺄셈 두 경우를 동시에 나타내어 두 근을 표현합니다." }
+    },
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem"]
+  },
+  "binomial-theorem": {
+    "name": "이항정리",
+    "oneLiner": "두 항의 합의 거듭제곱을 이항계수로 전개하는 정리",
+    "description": "이항정리는 (a+b)의 n제곱을 이항계수를 이용하여 급수로 전개합니다. 조합론과 대수학을 연결하는 핵심 도구이며, 파스칼의 삼각형과 밀접한 관련이 있습니다.",
+    "discoverer": "아이작 뉴턴 (일반화)",
+    "field": "대수학",
+    "significance": "다항식 전개, 확률론, 조합론 등 수학 전반에서 널리 활용되며, 근사 계산의 기초를 제공합니다.",
+    "elementMeanings": {
+      "a": { "role": "첫째 항", "description": "이항식에서 첫 번째 항. 전개 시 차수가 감소합니다." },
+      "b": { "role": "둘째 항", "description": "이항식에서 두 번째 항. 전개 시 차수가 증가합니다." },
+      "n": { "role": "거듭제곱 지수", "description": "이항식을 몇 번 곱하는지를 나타내는 음이 아닌 정수입니다." },
+      "k": { "role": "전개 인덱스", "description": "각 항에서 b가 곱해지는 횟수를 나타내는 합산 변수입니다." },
+      "\\binom{n}{k}": { "role": "이항계수", "description": "n개에서 k개를 고르는 조합의 수. 파스칼의 삼각형의 각 값에 해당합니다." }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "geometric-series": {
+    "name": "등비급수 합 공식",
+    "oneLiner": "공비가 일정한 급수의 합을 닫힌 형태로 구하는 공식",
+    "description": "등비급수 합 공식은 첫째항 a와 공비 r이 주어졌을 때 급수의 합을 간결하게 계산합니다. 공비의 절댓값이 1보다 작으면 무한급수도 수렴하며, 금융 수학과 물리학에서 광범위하게 활용됩니다.",
+    "field": "대수학",
+    "significance": "수렴하는 무한 과정을 유한한 값으로 표현할 수 있게 하며, 복리 계산, 신호 처리 등 실용적 응용이 매우 넓습니다.",
+    "elementMeanings": {
+      "a": { "role": "첫째항", "description": "급수의 첫 번째 항. 전체 합의 크기를 결정하는 기준값입니다." },
+      "r": { "role": "공비", "description": "연속된 항 사이의 비율. 절댓값이 1보다 작아야 무한급수가 수렴합니다." },
+      "n": { "role": "항의 개수", "description": "유한 급수에서 더할 항의 수입니다." },
+      "S_n": { "role": "부분합", "description": "처음 n개 항까지의 합입니다." },
+      "S_{\\infty}": { "role": "무한급수 합", "description": "공비의 절댓값이 1 미만일 때 a/(1-r)로 수렴하는 값입니다." }
+    },
+    "relatedFormulas": ["taylor-series", "binomial-theorem"]
+  },
+  "difference-of-squares": {
+    "name": "완전제곱 차 공식",
+    "oneLiner": "두 수의 제곱 차이를 합과 차의 곱으로 인수분해하는 공식",
+    "description": "완전제곱 차 공식은 a의 제곱에서 b의 제곱을 뺀 값이 (a+b)(a-b)와 같다는 항등식입니다. 인수분해의 가장 기본적인 패턴이며, 고차 다항식 분해와 암산에도 활용됩니다.",
+    "field": "대수학",
+    "significance": "대수적 인수분해의 출발점이며, 유리화, 극한 계산, 정수론의 소인수분해 등 다양한 분야에서 필수적으로 사용됩니다.",
+    "elementMeanings": {
+      "a": { "role": "첫째 값", "description": "제곱되는 첫 번째 수 또는 식입니다." },
+      "b": { "role": "둘째 값", "description": "제곱되는 두 번째 수 또는 식입니다." },
+      "a^2": { "role": "첫째 제곱", "description": "a를 제곱한 값입니다." },
+      "b^2": { "role": "둘째 제곱", "description": "b를 제곱한 값입니다." },
+      "(a+b)": { "role": "합 인수", "description": "a와 b의 합으로 이루어진 인수입니다." },
+      "(a-b)": { "role": "차 인수", "description": "a에서 b를 뺀 차로 이루어진 인수입니다." }
+    },
+    "relatedFormulas": ["quadratic-formula", "binomial-theorem"]
+  }
+}
