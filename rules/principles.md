@@ -18,7 +18,7 @@ last_verified: 2026-03-26
 - 하위 단계가 상위 단계를 참조하지 않는다
 
 ## 3. 프레임워크 격리
-- core 모듈(box/, latex/, types.ts, editor.ts, analyzer/, cas/, utils/)은 React, Konva 등 프레임워크에 의존하지 않는다
+- core 모듈(box/, latex/, types.ts, editor.ts, analyzer/, cas/, utils/, canvas/)은 React, Konva 등 프레임워크에 의존하지 않는다
 - 프레임워크 의존 코드는 react/, visualizer/, headless/, integrations/ 에만 존재한다
 
 ## 4. 불변 상태

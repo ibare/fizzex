@@ -5,6 +5,7 @@
  */
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { setupHiDPI, CanvasSceneSurface } from '../canvas';
 
 export interface UnitCircleProps {
   /** 초기 각도 (라디안) */
@@ -75,173 +76,166 @@ export function UnitCircle({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = size * dpr;
-    canvas.height = size * dpr;
-    canvas.style.width = `${size}px`;
-    canvas.style.height = `${size}px`;
-    ctx.scale(dpr, dpr);
+    const { ctx } = setupHiDPI(canvas, size, size);
+    const s = new CanvasSceneSurface(ctx);
 
     // 배경
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, size, size);
+    s.setFillStyle('#ffffff');
+    s.fillRect(0, 0, size, size);
 
     // 그리드
-    ctx.strokeStyle = '#e5e7eb';
-    ctx.lineWidth = 0.5;
+    s.setStrokeStyle('#e5e7eb');
+    s.setLineWidth(0.5);
 
     // 세로선
     for (let i = -1; i <= 1; i += 0.5) {
       const x = centerX + i * radius;
-      ctx.beginPath();
-      ctx.moveTo(x, padding);
-      ctx.lineTo(x, size - padding);
-      ctx.stroke();
+      s.beginPath();
+      s.moveTo(x, padding);
+      s.lineTo(x, size - padding);
+      s.stroke();
     }
 
     // 가로선
     for (let i = -1; i <= 1; i += 0.5) {
       const y = centerY - i * radius;
-      ctx.beginPath();
-      ctx.moveTo(padding, y);
-      ctx.lineTo(size - padding, y);
-      ctx.stroke();
+      s.beginPath();
+      s.moveTo(padding, y);
+      s.lineTo(size - padding, y);
+      s.stroke();
     }
 
     // 축
-    ctx.strokeStyle = '#374151';
-    ctx.lineWidth = 1.5;
+    s.setStrokeStyle('#374151');
+    s.setLineWidth(1.5);
 
     // X축
-    ctx.beginPath();
-    ctx.moveTo(padding - 10, centerY);
-    ctx.lineTo(size - padding + 10, centerY);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(padding - 10, centerY);
+    s.lineTo(size - padding + 10, centerY);
+    s.stroke();
 
     // Y축
-    ctx.beginPath();
-    ctx.moveTo(centerX, size - padding + 10);
-    ctx.lineTo(centerX, padding - 10);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(centerX, size - padding + 10);
+    s.lineTo(centerX, padding - 10);
+    s.stroke();
 
     // 축 화살표
-    ctx.beginPath();
-    ctx.moveTo(size - padding + 5, centerY - 5);
-    ctx.lineTo(size - padding + 10, centerY);
-    ctx.lineTo(size - padding + 5, centerY + 5);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(size - padding + 5, centerY - 5);
+    s.lineTo(size - padding + 10, centerY);
+    s.lineTo(size - padding + 5, centerY + 5);
+    s.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(centerX - 5, padding - 5);
-    ctx.lineTo(centerX, padding - 10);
-    ctx.lineTo(centerX + 5, padding - 5);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(centerX - 5, padding - 5);
+    s.lineTo(centerX, padding - 10);
+    s.lineTo(centerX + 5, padding - 5);
+    s.stroke();
 
     // 축 라벨
-    ctx.fillStyle = '#374151';
-    ctx.font = '12px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('1', centerX + radius, centerY + 15);
-    ctx.fillText('-1', centerX - radius, centerY + 15);
-    ctx.textAlign = 'right';
-    ctx.fillText('1', centerX - 5, centerY - radius + 4);
-    ctx.fillText('-1', centerX - 5, centerY + radius + 4);
+    s.setFillStyle('#374151');
+    s.setFont('12px sans-serif');
+    s.setTextAlign('center');
+    s.fillText('1', centerX + radius, centerY + 15);
+    s.fillText('-1', centerX - radius, centerY + 15);
+    s.setTextAlign('right');
+    s.fillText('1', centerX - 5, centerY - radius + 4);
+    s.fillText('-1', centerX - 5, centerY + radius + 4);
 
     // 단위원
-    ctx.strokeStyle = '#9ca3af';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.stroke();
+    s.setStrokeStyle('#9ca3af');
+    s.setLineWidth(2);
+    s.beginPath();
+    s.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    s.stroke();
 
     // 현재 각도에서의 점
     const pointX = centerX + Math.cos(angle) * radius;
     const pointY = centerY - Math.sin(angle) * radius;
 
     // 각도 호
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, radius * 0.2, 0, -angle, angle > 0);
-    ctx.stroke();
+    s.setStrokeStyle(lineColor);
+    s.setLineWidth(2);
+    s.beginPath();
+    s.arc(centerX, centerY, radius * 0.2, 0, -angle, angle > 0);
+    s.stroke();
 
     // 반지름 선
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.lineTo(pointX, pointY);
-    ctx.stroke();
+    s.setStrokeStyle(lineColor);
+    s.setLineWidth(2);
+    s.beginPath();
+    s.moveTo(centerX, centerY);
+    s.lineTo(pointX, pointY);
+    s.stroke();
 
     // cos 선 (x축 투영)
-    ctx.strokeStyle = '#ef4444'; // 빨간색
-    ctx.lineWidth = 2;
-    ctx.setLineDash([5, 3]);
-    ctx.beginPath();
-    ctx.moveTo(pointX, pointY);
-    ctx.lineTo(pointX, centerY);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    s.setStrokeStyle('#ef4444');
+    s.setLineWidth(2);
+    s.setLineDash([5, 3]);
+    s.beginPath();
+    s.moveTo(pointX, pointY);
+    s.lineTo(pointX, centerY);
+    s.stroke();
+    s.setLineDash([]);
 
     // sin 선 (y축 투영)
-    ctx.strokeStyle = '#22c55e'; // 초록색
-    ctx.lineWidth = 2;
-    ctx.setLineDash([5, 3]);
-    ctx.beginPath();
-    ctx.moveTo(pointX, pointY);
-    ctx.lineTo(centerX, pointY);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    s.setStrokeStyle('#22c55e');
+    s.setLineWidth(2);
+    s.setLineDash([5, 3]);
+    s.beginPath();
+    s.moveTo(pointX, pointY);
+    s.lineTo(centerX, pointY);
+    s.stroke();
+    s.setLineDash([]);
 
     // cos 값 표시 (x축)
-    ctx.fillStyle = '#ef4444';
-    ctx.strokeStyle = '#ef4444';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY + 3);
-    ctx.lineTo(pointX, centerY + 3);
-    ctx.stroke();
+    s.setFillStyle('#ef4444');
+    s.setStrokeStyle('#ef4444');
+    s.setLineWidth(3);
+    s.beginPath();
+    s.moveTo(centerX, centerY + 3);
+    s.lineTo(pointX, centerY + 3);
+    s.stroke();
 
     // sin 값 표시 (y축)
-    ctx.fillStyle = '#22c55e';
-    ctx.strokeStyle = '#22c55e';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(centerX - 3, centerY);
-    ctx.lineTo(centerX - 3, pointY);
-    ctx.stroke();
+    s.setFillStyle('#22c55e');
+    s.setStrokeStyle('#22c55e');
+    s.setLineWidth(3);
+    s.beginPath();
+    s.moveTo(centerX - 3, centerY);
+    s.lineTo(centerX - 3, pointY);
+    s.stroke();
 
     // 점
-    ctx.fillStyle = lineColor;
-    ctx.beginPath();
-    ctx.arc(pointX, pointY, 6, 0, Math.PI * 2);
-    ctx.fill();
+    s.setFillStyle(lineColor);
+    s.beginPath();
+    s.arc(pointX, pointY, 6, 0, Math.PI * 2);
+    s.fill();
 
     // 좌표 라벨
-    ctx.fillStyle = '#1f2937';
-    ctx.font = 'bold 11px sans-serif';
-    ctx.textAlign = 'left';
+    s.setFillStyle('#1f2937');
+    s.setFont('bold 11px sans-serif');
+    s.setTextAlign('left');
     const coordText = `(${Math.cos(angle).toFixed(2)}, ${Math.sin(angle).toFixed(2)})`;
     const labelX = pointX + 10;
     const labelY = pointY - 10;
-    ctx.fillText(coordText, labelX, labelY);
+    s.fillText(coordText, labelX, labelY);
 
     // 범례
-    ctx.font = '11px sans-serif';
-    ctx.fillStyle = '#ef4444';
-    ctx.textAlign = 'left';
-    ctx.fillText(`cos(θ) = ${Math.cos(angle).toFixed(3)}`, 10, size - 25);
-    ctx.fillStyle = '#22c55e';
-    ctx.fillText(`sin(θ) = ${Math.sin(angle).toFixed(3)}`, 10, size - 10);
+    s.setFont('11px sans-serif');
+    s.setFillStyle('#ef4444');
+    s.setTextAlign('left');
+    s.fillText(`cos(θ) = ${Math.cos(angle).toFixed(3)}`, 10, size - 25);
+    s.setFillStyle('#22c55e');
+    s.fillText(`sin(θ) = ${Math.sin(angle).toFixed(3)}`, 10, size - 10);
 
     // 각도 표시
-    ctx.fillStyle = lineColor;
-    ctx.textAlign = 'right';
-    ctx.fillText(`θ = ${(angle * 180 / Math.PI).toFixed(1)}°`, size - 10, size - 25);
-    ctx.fillText(`  = ${angle.toFixed(3)} rad`, size - 10, size - 10);
+    s.setFillStyle(lineColor);
+    s.setTextAlign('right');
+    s.fillText(`θ = ${(angle * 180 / Math.PI).toFixed(1)}°`, size - 10, size - 25);
+    s.fillText(`  = ${angle.toFixed(3)} rad`, size - 10, size - 10);
 
   }, [size, angle, lineColor, centerX, centerY, radius]);
 

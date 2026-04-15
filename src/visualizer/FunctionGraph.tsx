@@ -9,6 +9,7 @@ import type { GraphConfig, GraphRange } from './types';
 import { DEFAULT_GRAPH_CONFIG } from './types';
 import { GraphRenderer } from './graph-renderer';
 import { calculatePoints, canGraph } from './evaluator';
+import { setupHiDPI, CanvasSceneSurface } from '../canvas';
 
 export interface FunctionGraphProps {
   /** 함수 표현식 (LaTeX) */
@@ -119,18 +120,10 @@ export function FunctionGraph({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const { ctx } = setupHiDPI(canvas, width, height);
+    const surface = new CanvasSceneSurface(ctx);
 
-    // HiDPI 지원
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    ctx.scale(dpr, dpr);
-
-    const renderer = new GraphRenderer(ctx, config);
+    const renderer = new GraphRenderer(surface, config);
 
     if (isGraphable && points.length > 0) {
       renderer.renderSingle(points);

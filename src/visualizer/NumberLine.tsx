@@ -5,6 +5,8 @@
  */
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { setupHiDPI, CanvasSceneSurface } from '../canvas';
+import type { SceneSurface } from '../canvas';
 
 export interface NumberLinePoint {
   /** 값 */
@@ -124,19 +126,12 @@ export function NumberLine({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = propHeight * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${propHeight}px`;
-    ctx.scale(dpr, dpr);
+    const { ctx } = setupHiDPI(canvas, width, propHeight);
+    const s = new CanvasSceneSurface(ctx);
 
     // 배경
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, width, propHeight);
+    s.setFillStyle('#ffffff');
+    s.fillRect(0, 0, width, propHeight);
 
     // 구간 렌더링
     intervals.forEach((interval) => {
@@ -145,82 +140,82 @@ export function NumberLine({
       const color = interval.color || '#3b82f6';
 
       // 구간 배경
-      ctx.fillStyle = hexToRgba(color, 0.2);
-      ctx.fillRect(startX, lineY - 15, endX - startX, 30);
+      s.setFillStyle(hexToRgba(color, 0.2));
+      s.fillRect(startX, lineY - 15, endX - startX, 30);
 
       // 구간 선
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(startX, lineY);
-      ctx.lineTo(endX, lineY);
-      ctx.stroke();
+      s.setStrokeStyle(color);
+      s.setLineWidth(3);
+      s.beginPath();
+      s.moveTo(startX, lineY);
+      s.lineTo(endX, lineY);
+      s.stroke();
 
       // 끝점 표시
-      drawEndpoint(ctx, startX, lineY, interval.startIncluded !== false, color);
-      drawEndpoint(ctx, endX, lineY, interval.endIncluded !== false, color);
+      drawEndpoint(s, startX, lineY, interval.startIncluded !== false, color);
+      drawEndpoint(s, endX, lineY, interval.endIncluded !== false, color);
 
       // 라벨
       if (interval.label) {
-        ctx.fillStyle = color;
-        ctx.font = '11px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(interval.label, (startX + endX) / 2, lineY - 20);
+        s.setFillStyle(color);
+        s.setFont('11px sans-serif');
+        s.setTextAlign('center');
+        s.fillText(interval.label, (startX + endX) / 2, lineY - 20);
       }
     });
 
     // 수직선 (축)
-    ctx.strokeStyle = '#374151';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(padding - 10, lineY);
-    ctx.lineTo(width - padding + 10, lineY);
-    ctx.stroke();
+    s.setStrokeStyle('#374151');
+    s.setLineWidth(2);
+    s.beginPath();
+    s.moveTo(padding - 10, lineY);
+    s.lineTo(width - padding + 10, lineY);
+    s.stroke();
 
     // 화살표
-    ctx.beginPath();
-    ctx.moveTo(width - padding + 5, lineY - 5);
-    ctx.lineTo(width - padding + 10, lineY);
-    ctx.lineTo(width - padding + 5, lineY + 5);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(width - padding + 5, lineY - 5);
+    s.lineTo(width - padding + 10, lineY);
+    s.lineTo(width - padding + 5, lineY + 5);
+    s.stroke();
 
-    ctx.beginPath();
-    ctx.moveTo(padding - 5, lineY - 5);
-    ctx.lineTo(padding - 10, lineY);
-    ctx.lineTo(padding - 5, lineY + 5);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(padding - 5, lineY - 5);
+    s.lineTo(padding - 10, lineY);
+    s.lineTo(padding - 5, lineY + 5);
+    s.stroke();
 
     // 눈금
-    ctx.strokeStyle = '#9ca3af';
-    ctx.lineWidth = 1;
-    ctx.fillStyle = '#374151';
-    ctx.font = '11px sans-serif';
-    ctx.textAlign = 'center';
+    s.setStrokeStyle('#9ca3af');
+    s.setLineWidth(1);
+    s.setFillStyle('#374151');
+    s.setFont('11px sans-serif');
+    s.setTextAlign('center');
 
     const startTick = Math.ceil(rangeMin / tickInterval) * tickInterval;
     for (let tick = startTick; tick <= rangeMax; tick += tickInterval) {
       const x = valueToX(tick);
 
       // 눈금 선
-      ctx.beginPath();
-      ctx.moveTo(x, lineY - 5);
-      ctx.lineTo(x, lineY + 5);
-      ctx.stroke();
+      s.beginPath();
+      s.moveTo(x, lineY - 5);
+      s.lineTo(x, lineY + 5);
+      s.stroke();
 
       // 눈금 라벨
       const label = Number.isInteger(tick) ? tick.toString() : tick.toFixed(1);
-      ctx.fillText(label, x, lineY + 20);
+      s.fillText(label, x, lineY + 20);
     }
 
     // 0 강조 (범위 내에 있으면)
     if (rangeMin <= 0 && rangeMax >= 0) {
       const zeroX = valueToX(0);
-      ctx.strokeStyle = '#374151';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(zeroX, lineY - 8);
-      ctx.lineTo(zeroX, lineY + 8);
-      ctx.stroke();
+      s.setStrokeStyle('#374151');
+      s.setLineWidth(2);
+      s.beginPath();
+      s.moveTo(zeroX, lineY - 8);
+      s.lineTo(zeroX, lineY + 8);
+      s.stroke();
     }
 
     // 점 렌더링
@@ -229,14 +224,14 @@ export function NumberLine({
       const color = point.color || '#ef4444';
       const included = point.included !== false;
 
-      drawEndpoint(ctx, x, lineY, included, color, 6);
+      drawEndpoint(s, x, lineY, included, color, 6);
 
       // 라벨
       if (point.label) {
-        ctx.fillStyle = color;
-        ctx.font = 'bold 11px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(point.label, x, lineY - 15);
+        s.setFillStyle(color);
+        s.setFont('bold 11px sans-serif');
+        s.setTextAlign('center');
+        s.fillText(point.label, x, lineY - 15);
       }
     });
 
@@ -245,26 +240,26 @@ export function NumberLine({
       const x = valueToX(interactiveValue);
 
       // 수직선
-      ctx.strokeStyle = '#8b5cf6';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 2]);
-      ctx.beginPath();
-      ctx.moveTo(x, lineY - 25);
-      ctx.lineTo(x, lineY + 25);
-      ctx.stroke();
-      ctx.setLineDash([]);
+      s.setStrokeStyle('#8b5cf6');
+      s.setLineWidth(1);
+      s.setLineDash([4, 2]);
+      s.beginPath();
+      s.moveTo(x, lineY - 25);
+      s.lineTo(x, lineY + 25);
+      s.stroke();
+      s.setLineDash([]);
 
       // 점
-      ctx.fillStyle = '#8b5cf6';
-      ctx.beginPath();
-      ctx.arc(x, lineY, 8, 0, Math.PI * 2);
-      ctx.fill();
+      s.setFillStyle('#8b5cf6');
+      s.beginPath();
+      s.arc(x, lineY, 8, 0, Math.PI * 2);
+      s.fill();
 
       // 값 표시
-      ctx.fillStyle = '#8b5cf6';
-      ctx.font = 'bold 12px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(interactiveValue.toFixed(2), x, lineY - 30);
+      s.setFillStyle('#8b5cf6');
+      s.setFont('bold 12px sans-serif');
+      s.setTextAlign('center');
+      s.fillText(interactiveValue.toFixed(2), x, lineY - 30);
     }
 
   }, [width, propHeight, points, intervals, valueToX, rangeMin, rangeMax, tickInterval, interactive, interactiveValue]);
@@ -341,11 +336,11 @@ function calculateRange(points: NumberLinePoint[], intervals: NumberLineInterval
   const min = Math.min(...values);
   const max = Math.max(...values);
   const span = max - min || 1;
-  const padding = span * 0.2;
+  const pad = span * 0.2;
 
   return [
-    Math.floor((min - padding) * 2) / 2,
-    Math.ceil((max + padding) * 2) / 2,
+    Math.floor((min - pad) * 2) / 2,
+    Math.ceil((max + pad) * 2) / 2,
   ];
 }
 
@@ -359,25 +354,25 @@ function calculateTickInterval(rangeSpan: number): number {
 }
 
 function drawEndpoint(
-  ctx: CanvasRenderingContext2D,
+  s: SceneSurface,
   x: number,
   y: number,
   filled: boolean,
   color: string,
   radius: number = 5
 ): void {
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  s.beginPath();
+  s.arc(x, y, radius, 0, Math.PI * 2);
 
   if (filled) {
-    ctx.fillStyle = color;
-    ctx.fill();
+    s.setFillStyle(color);
+    s.fill();
   } else {
-    ctx.fillStyle = '#ffffff';
-    ctx.fill();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    s.setFillStyle('#ffffff');
+    s.fill();
+    s.setStrokeStyle(color);
+    s.setLineWidth(2);
+    s.stroke();
   }
 }
 

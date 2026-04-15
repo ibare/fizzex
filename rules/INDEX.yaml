@@ -36,15 +36,15 @@ concerns:
     file: concerns/C3-framework-isolation.md
     description: 프레임워크 격리 (core 모듈에 React/Konva 금지)
     triggers:
-      paths: ["src/box/**", "src/latex/**", "src/analyzer/**", "src/cas/**", "src/utils/**", "src/headless/**", "src/integrations/**"]
+      paths: ["src/box/**", "src/latex/**", "src/analyzer/**", "src/cas/**", "src/utils/**", "src/headless/**", "src/integrations/**", "src/canvas/**"]
       imports: ["react", "react-dom", "konva", "react-konva"]
 
   - id: C4
     file: concerns/C4-box-model.md
     description: Box 모델 규칙 (baseline 좌표계, HiDPI, context 재생성)
     triggers:
-      paths: ["src/box/**", "src/headless/**", "src/export/**"]
-      patterns: ["Projector", "CanvasFontMetrics", "layoutBox", "astToBox"]
+      paths: ["src/box/**", "src/headless/**", "src/export/**", "src/canvas/**"]
+      patterns: ["Projector", "CanvasFontMetrics", "layoutBox", "astToBox", "setupHiDPI", "SceneSurface"]
 
   - id: C5
     file: concerns/C5-headless-contract.md

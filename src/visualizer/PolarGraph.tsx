@@ -5,7 +5,8 @@
  */
 
 import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react';
-import { latexToEvaluable, evaluateAt } from './evaluator';
+import { latexToEvaluable } from './evaluator';
+import { setupHiDPI, CanvasSceneSurface, drawPolarGrid } from '../canvas';
 
 export interface PolarGraphProps {
   /** 극좌표 함수 표현식 r = f(theta) */
@@ -167,88 +168,65 @@ export function PolarGraph({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = size * dpr;
-    canvas.height = size * dpr;
-    canvas.style.width = `${size}px`;
-    canvas.style.height = `${size}px`;
-    ctx.scale(dpr, dpr);
+    const { ctx } = setupHiDPI(canvas, size, size);
+    const s = new CanvasSceneSurface(ctx);
 
     // 배경
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, size, size);
+    s.setFillStyle('#ffffff');
+    s.fillRect(0, 0, size, size);
 
     if (showGrid) {
-      // 동심원 그리드
-      ctx.strokeStyle = '#e5e7eb';
-      ctx.lineWidth = 0.5;
-
       const numCircles = 5;
       const circleStep = graphRadius / numCircles;
 
-      for (let i = 1; i <= numCircles; i++) {
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, i * circleStep, 0, Math.PI * 2);
-        ctx.stroke();
+      // 극좌표 그리드 (동심원 + 방사형 선)
+      drawPolarGrid(s, centerX, centerY, graphRadius, numCircles, 12);
 
-        // 반지름 라벨
+      // 반지름 라벨 (프리미티브에 포함되지 않는 도메인 라벨)
+      s.setFillStyle('#9ca3af');
+      s.setFont('10px sans-serif');
+      s.setTextAlign('left');
+      for (let i = 1; i <= numCircles; i++) {
         const labelValue = (rSpan / 2 / numCircles) * i;
-        ctx.fillStyle = '#9ca3af';
-        ctx.font = '10px sans-serif';
-        ctx.textAlign = 'left';
-        ctx.fillText(labelValue.toFixed(1), centerX + i * circleStep + 3, centerY - 3);
+        s.fillText(labelValue.toFixed(1), centerX + i * circleStep + 3, centerY - 3);
       }
 
-      // 방사형 선 (각도)
+      // 각도 라벨
       const angles = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
-      ctx.strokeStyle = '#e5e7eb';
-      ctx.lineWidth = 0.5;
+      s.setFillStyle('#9ca3af');
+      s.setFont('10px sans-serif');
+      s.setTextAlign('center');
+      s.setTextBaseline('middle');
 
       angles.forEach((deg) => {
         const rad = (deg * Math.PI) / 180;
-        const endX = centerX + Math.cos(rad) * graphRadius;
-        const endY = centerY - Math.sin(rad) * graphRadius;
-
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-        // 각도 라벨
-        ctx.fillStyle = '#9ca3af';
-        ctx.font = '10px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
         const labelX = centerX + Math.cos(rad) * (graphRadius + 15);
         const labelY = centerY - Math.sin(rad) * (graphRadius + 15);
-        ctx.fillText(`${deg}°`, labelX, labelY);
+        s.fillText(`${deg}°`, labelX, labelY);
       });
     }
 
     // 축
-    ctx.strokeStyle = '#374151';
-    ctx.lineWidth = 1.5;
+    s.setStrokeStyle('#374151');
+    s.setLineWidth(1.5);
 
     // X축
-    ctx.beginPath();
-    ctx.moveTo(padding - 5, centerY);
-    ctx.lineTo(size - padding + 5, centerY);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(padding - 5, centerY);
+    s.lineTo(size - padding + 5, centerY);
+    s.stroke();
 
     // Y축
-    ctx.beginPath();
-    ctx.moveTo(centerX, size - padding + 5);
-    ctx.lineTo(centerX, padding - 5);
-    ctx.stroke();
+    s.beginPath();
+    s.moveTo(centerX, size - padding + 5);
+    s.lineTo(centerX, padding - 5);
+    s.stroke();
 
     // 그래프 렌더링
     if (points.length > 0) {
-      ctx.strokeStyle = lineColor;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
+      s.setStrokeStyle(lineColor);
+      s.setLineWidth(2);
+      s.beginPath();
 
       const visiblePoints = animated
         ? points.filter((p) => p.theta <= animationTheta)
@@ -258,53 +236,53 @@ export function PolarGraph({
         const { cx, cy } = toCanvasCoords(point.x, point.y);
 
         if (index === 0) {
-          ctx.moveTo(cx, cy);
+          s.moveTo(cx, cy);
         } else {
-          ctx.lineTo(cx, cy);
+          s.lineTo(cx, cy);
         }
       });
 
-      ctx.stroke();
+      s.stroke();
 
       // 애니메이션 중일 때 현재 점 표시
       if (animated && visiblePoints.length > 0) {
         const lastPoint = visiblePoints[visiblePoints.length - 1];
         const { cx, cy } = toCanvasCoords(lastPoint.x, lastPoint.y);
 
-        ctx.fillStyle = lineColor;
-        ctx.beginPath();
-        ctx.arc(cx, cy, 5, 0, Math.PI * 2);
-        ctx.fill();
+        s.setFillStyle(lineColor);
+        s.beginPath();
+        s.arc(cx, cy, 5, 0, Math.PI * 2);
+        s.fill();
 
         // 원점에서 현재 점까지 선
-        ctx.strokeStyle = hexToRgba(lineColor, 0.5);
-        ctx.lineWidth = 1;
-        ctx.setLineDash([4, 2]);
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.lineTo(cx, cy);
-        ctx.stroke();
-        ctx.setLineDash([]);
+        s.setStrokeStyle(hexToRgba(lineColor, 0.5));
+        s.setLineWidth(1);
+        s.setLineDash([4, 2]);
+        s.beginPath();
+        s.moveTo(centerX, centerY);
+        s.lineTo(cx, cy);
+        s.stroke();
+        s.setLineDash([]);
 
         // 현재 값 표시
-        ctx.fillStyle = '#1f2937';
-        ctx.font = '11px sans-serif';
-        ctx.textAlign = 'left';
-        ctx.fillText(
+        s.setFillStyle('#1f2937');
+        s.setFont('11px sans-serif');
+        s.setTextAlign('left');
+        s.fillText(
           `θ = ${((lastPoint.theta * 180) / Math.PI).toFixed(0)}° (${lastPoint.theta.toFixed(2)} rad)`,
           10,
           size - 25
         );
-        ctx.fillText(`r = ${lastPoint.r.toFixed(3)}`, 10, size - 10);
+        s.fillText(`r = ${lastPoint.r.toFixed(3)}`, 10, size - 10);
       }
     }
 
     // 표현식이 없거나 유효하지 않을 때
     if (!evaluator || points.length === 0) {
-      ctx.fillStyle = '#9ca3af';
-      ctx.font = '14px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('r = f(θ) 형태의 극좌표 함수를 입력하세요', centerX, centerY);
+      s.setFillStyle('#9ca3af');
+      s.setFont('14px sans-serif');
+      s.setTextAlign('center');
+      s.fillText('r = f(θ) 형태의 극좌표 함수를 입력하세요', centerX, centerY);
     }
 
   }, [

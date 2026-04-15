@@ -1,21 +1,22 @@
 /**
  * Graph Renderer
  *
- * Canvas 기반 2D 함수 그래프 렌더러
+ * SceneSurface 기반 2D 함수 그래프 렌더러
  */
 
-import type { GraphConfig, GraphRange, EvaluationPoint } from './types';
+import type { GraphConfig, EvaluationPoint } from './types';
 import { DEFAULT_GRAPH_CONFIG } from './types';
+import type { SceneSurface } from '../canvas';
 
 /**
  * 그래프 렌더러
  */
 export class GraphRenderer {
-  private ctx: CanvasRenderingContext2D;
+  private surface: SceneSurface;
   private config: GraphConfig;
 
-  constructor(ctx: CanvasRenderingContext2D, config: Partial<GraphConfig> = {}) {
-    this.ctx = ctx;
+  constructor(surface: SceneSurface, config: Partial<GraphConfig> = {}) {
+    this.surface = surface;
     this.config = { ...DEFAULT_GRAPH_CONFIG, ...config };
   }
 
@@ -45,8 +46,8 @@ export class GraphRenderer {
    */
   private drawBackground(): void {
     const { width, height, backgroundColor } = this.config;
-    this.ctx.fillStyle = backgroundColor || '#ffffff';
-    this.ctx.fillRect(0, 0, width, height);
+    this.surface.setFillStyle(backgroundColor || '#ffffff');
+    this.surface.fillRect(0, 0, width, height);
   }
 
   /**
@@ -56,8 +57,8 @@ export class GraphRenderer {
     if (!this.config.showGrid) return;
 
     const { width, height, range, gridColor } = this.config;
-    this.ctx.strokeStyle = gridColor || '#e5e7eb';
-    this.ctx.lineWidth = 0.5;
+    this.surface.setStrokeStyle(gridColor || '#e5e7eb');
+    this.surface.setLineWidth(0.5);
 
     // 적절한 그리드 간격 계산
     const xRange = range.xMax - range.xMin;
@@ -69,20 +70,20 @@ export class GraphRenderer {
     const xStart = Math.ceil(range.xMin / xStep) * xStep;
     for (let x = xStart; x <= range.xMax; x += xStep) {
       const canvasX = this.toCanvasX(x);
-      this.ctx.beginPath();
-      this.ctx.moveTo(canvasX, 0);
-      this.ctx.lineTo(canvasX, height);
-      this.ctx.stroke();
+      this.surface.beginPath();
+      this.surface.moveTo(canvasX, 0);
+      this.surface.lineTo(canvasX, height);
+      this.surface.stroke();
     }
 
     // 가로선 (Y 그리드)
     const yStart = Math.ceil(range.yMin / yStep) * yStep;
     for (let y = yStart; y <= range.yMax; y += yStep) {
       const canvasY = this.toCanvasY(y);
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, canvasY);
-      this.ctx.lineTo(width, canvasY);
-      this.ctx.stroke();
+      this.surface.beginPath();
+      this.surface.moveTo(0, canvasY);
+      this.surface.lineTo(width, canvasY);
+      this.surface.stroke();
     }
   }
 
@@ -93,39 +94,39 @@ export class GraphRenderer {
     if (!this.config.showAxis) return;
 
     const { width, height, range, axisColor } = this.config;
-    this.ctx.strokeStyle = axisColor || '#374151';
-    this.ctx.lineWidth = 1.5;
+    this.surface.setStrokeStyle(axisColor || '#374151');
+    this.surface.setLineWidth(1.5);
 
     // X축 (y=0)
     if (range.yMin <= 0 && range.yMax >= 0) {
       const y0 = this.toCanvasY(0);
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, y0);
-      this.ctx.lineTo(width, y0);
-      this.ctx.stroke();
+      this.surface.beginPath();
+      this.surface.moveTo(0, y0);
+      this.surface.lineTo(width, y0);
+      this.surface.stroke();
 
       // X축 화살표
-      this.ctx.beginPath();
-      this.ctx.moveTo(width - 10, y0 - 5);
-      this.ctx.lineTo(width, y0);
-      this.ctx.lineTo(width - 10, y0 + 5);
-      this.ctx.stroke();
+      this.surface.beginPath();
+      this.surface.moveTo(width - 10, y0 - 5);
+      this.surface.lineTo(width, y0);
+      this.surface.lineTo(width - 10, y0 + 5);
+      this.surface.stroke();
     }
 
     // Y축 (x=0)
     if (range.xMin <= 0 && range.xMax >= 0) {
       const x0 = this.toCanvasX(0);
-      this.ctx.beginPath();
-      this.ctx.moveTo(x0, height);
-      this.ctx.lineTo(x0, 0);
-      this.ctx.stroke();
+      this.surface.beginPath();
+      this.surface.moveTo(x0, height);
+      this.surface.lineTo(x0, 0);
+      this.surface.stroke();
 
       // Y축 화살표
-      this.ctx.beginPath();
-      this.ctx.moveTo(x0 - 5, 10);
-      this.ctx.lineTo(x0, 0);
-      this.ctx.lineTo(x0 + 5, 10);
-      this.ctx.stroke();
+      this.surface.beginPath();
+      this.surface.moveTo(x0 - 5, 10);
+      this.surface.lineTo(x0, 0);
+      this.surface.lineTo(x0 + 5, 10);
+      this.surface.stroke();
     }
   }
 
@@ -136,9 +137,9 @@ export class GraphRenderer {
     if (!this.config.showLabels) return;
 
     const { range, axisColor } = this.config;
-    this.ctx.fillStyle = axisColor || '#374151';
-    this.ctx.font = '12px sans-serif';
-    this.ctx.textAlign = 'center';
+    this.surface.setFillStyle(axisColor || '#374151');
+    this.surface.setFont('12px sans-serif');
+    this.surface.setTextAlign('center');
 
     const xRange = range.xMax - range.xMin;
     const yRange = range.yMax - range.yMin;
@@ -152,19 +153,19 @@ export class GraphRenderer {
       for (let x = xStart; x <= range.xMax; x += xStep) {
         if (Math.abs(x) < 0.001) continue; // 0 스킵
         const canvasX = this.toCanvasX(x);
-        this.ctx.fillText(this.formatNumber(x), canvasX, y0 + 15);
+        this.surface.fillText(this.formatNumber(x), canvasX, y0 + 15);
       }
     }
 
     // Y축 라벨
     if (range.xMin <= 0 && range.xMax >= 0) {
       const x0 = this.toCanvasX(0);
-      this.ctx.textAlign = 'right';
+      this.surface.setTextAlign('right');
       const yStart = Math.ceil(range.yMin / yStep) * yStep;
       for (let y = yStart; y <= range.yMax; y += yStep) {
         if (Math.abs(y) < 0.001) continue; // 0 스킵
         const canvasY = this.toCanvasY(y);
-        this.ctx.fillText(this.formatNumber(y), x0 - 5, canvasY + 4);
+        this.surface.fillText(this.formatNumber(y), x0 - 5, canvasY + 4);
       }
     }
 
@@ -172,8 +173,8 @@ export class GraphRenderer {
     if (range.xMin <= 0 && range.xMax >= 0 && range.yMin <= 0 && range.yMax >= 0) {
       const x0 = this.toCanvasX(0);
       const y0 = this.toCanvasY(0);
-      this.ctx.textAlign = 'right';
-      this.ctx.fillText('O', x0 - 5, y0 + 15);
+      this.surface.setTextAlign('right');
+      this.surface.fillText('O', x0 - 5, y0 + 15);
     }
   }
 
@@ -182,14 +183,14 @@ export class GraphRenderer {
    */
   drawFunction(points: EvaluationPoint[], color?: string): void {
     const { lineColor, lineWidth } = this.config;
-    this.ctx.strokeStyle = color || lineColor || '#3b82f6';
-    this.ctx.lineWidth = lineWidth || 2;
-    this.ctx.lineCap = 'round';
-    this.ctx.lineJoin = 'round';
+    this.surface.setStrokeStyle(color || lineColor || '#3b82f6');
+    this.surface.setLineWidth(lineWidth || 2);
+    this.surface.setLineCap('round');
+    this.surface.setLineJoin('round');
 
     let drawing = false;
 
-    this.ctx.beginPath();
+    this.surface.beginPath();
 
     for (let i = 0; i < points.length; i++) {
       const point = points[i];
@@ -198,23 +199,23 @@ export class GraphRenderer {
 
       if (point.valid) {
         if (!drawing) {
-          this.ctx.moveTo(canvasX, canvasY);
+          this.surface.moveTo(canvasX, canvasY);
           drawing = true;
         } else {
-          this.ctx.lineTo(canvasX, canvasY);
+          this.surface.lineTo(canvasX, canvasY);
         }
       } else {
         // 불연속점에서 새로운 path 시작
         if (drawing) {
-          this.ctx.stroke();
-          this.ctx.beginPath();
+          this.surface.stroke();
+          this.surface.beginPath();
           drawing = false;
         }
       }
     }
 
     if (drawing) {
-      this.ctx.stroke();
+      this.surface.stroke();
     }
   }
 
