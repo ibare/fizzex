@@ -4,6 +4,7 @@ node_modules/
 # Build output
 dist/
 demo-dist/
+*.tsbuildinfo
 
 # Coverage
 coverage/

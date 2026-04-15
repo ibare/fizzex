@@ -101,7 +101,7 @@ export type {
 } from './react';
 
 // 수식 분석기
-export { analyzeExpression, matchVisualization } from './analyzer';
+export { analyzeExpression, matchVisualization, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer';
 export type {
   ExpressionAnalysis,
   MathDomain,
@@ -118,6 +118,8 @@ export type {
   PolarGraphParams,
   FunctionGraph2DParams,
   VisualizationMatch,
+  SemanticResult,
+  AncestorEntry,
 } from './analyzer';
 
 // CAS (Computer Algebra System)

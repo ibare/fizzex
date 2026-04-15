@@ -150,6 +150,10 @@ export type {
 export { matchVisualization } from './visualization-matcher';
 export type { VisualizationMatch } from './visualization-matcher';
 
+// 구조적 의미 시스템
+export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './semantic-roles';
+export type { SemanticResult, AncestorEntry } from './semantic-roles';
+
 // 개별 유틸리티 함수 export (고급 사용자용)
 export { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker';
 export { getFunctionCategory, createFunctionInfoList } from './function-detector';
