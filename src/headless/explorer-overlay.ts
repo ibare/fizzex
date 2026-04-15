@@ -49,9 +49,6 @@ export class ExplorerOverlay {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private closeBtn: HTMLButtonElement;
-  private infoPanel: HTMLDivElement;
-  private roleEl: HTMLDivElement;
-  private descEl: HTMLDivElement;
   private hintBar: HTMLDivElement;
 
   // 데이터
@@ -145,37 +142,6 @@ export class ExplorerOverlay {
       justifyContent: 'center',
     });
     this.overlay.appendChild(this.closeBtn);
-
-    // 호버 Info 패널
-    this.infoPanel = document.createElement('div');
-    Object.assign(this.infoPanel.style, {
-      position: 'absolute',
-      top: '16px',
-      left: '16px',
-      maxWidth: '360px',
-      padding: '10px 14px',
-      borderRadius: '8px',
-      background: this.isDark ? 'rgba(30,30,30,0.95)' : 'rgba(255,255,255,0.95)',
-      color: this.isDark ? '#e5e5e5' : '#1a1a1a',
-      fontSize: '14px',
-      fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-      border: `1px solid ${this.isDark ? '#404040' : '#e5e5e5'}`,
-      pointerEvents: 'none',
-      display: 'none',
-    });
-    this.roleEl = document.createElement('div');
-    this.roleEl.style.fontWeight = '600';
-    this.roleEl.style.marginBottom = '4px';
-    this.descEl = document.createElement('div');
-    Object.assign(this.descEl.style, {
-      fontSize: '13px',
-      color: this.isDark ? '#a0a0a0' : '#555',
-      lineHeight: '1.45',
-    });
-    this.infoPanel.appendChild(this.roleEl);
-    this.infoPanel.appendChild(this.descEl);
-    this.overlay.appendChild(this.infoPanel);
 
     // 조작 힌트
     this.hintBar = document.createElement('div');
@@ -388,6 +354,9 @@ export class ExplorerOverlay {
 
     this.ctx.restore();
 
+    // 화살표 주석 (스크린 좌표계에서 렌더링)
+    this.drawAnnotation();
+
     // 커서 스타일
     this.canvas.style.cursor = this.hoveredInfo ? 'pointer' : 'default';
   }
@@ -426,7 +395,6 @@ export class ExplorerOverlay {
     }
 
     this.renderCanvas();
-    this.updateInfoPanel();
   }
 
   private handleMouseLeave(): void {
@@ -434,7 +402,6 @@ export class ExplorerOverlay {
     this.hoveredInfo = null;
     this.ancestors = [];
     this.renderCanvas();
-    this.updateInfoPanel();
   }
 
   private handleResize(): void {
@@ -442,26 +409,139 @@ export class ExplorerOverlay {
   }
 
   // ---------------------------------------------------------------------------
-  // UI 업데이트
+  // 화살표 주석 렌더링
   // ---------------------------------------------------------------------------
 
-  /** 호버 Info 패널 업데이트 */
-  private updateInfoPanel(): void {
-    if (!this.hoveredInfo?.astNode) {
-      this.infoPanel.style.display = 'none';
-      return;
-    }
+  /**
+   * 판서 스타일 화살표 주석.
+   *
+   * 기본 형태 (위쪽):
+   *   요소에서 출발 → 우상단으로 휘는 곡선 → 끝점에서 우측으로 텍스트
+   *   텍스트 읽기 방향(좌→우)과 화살표 흐름이 일치한다.
+   *
+   * 아래쪽: 거울 반전 (우하단으로 휘고 끝점에서 우측 텍스트).
+   * 우측 공간 부족 시: 좌측으로 휘어진 화살표 + 좌측 정렬 텍스트.
+   */
+  private drawAnnotation(): void {
+    if (!this.hoveredInfo?.astNode) return;
 
     const semantic = this.semanticMap.get(
       (this.hoveredInfo.astNode as MathNode).id,
     );
-    if (!semantic) {
-      this.infoPanel.style.display = 'none';
-      return;
-    }
+    if (!semantic) return;
 
-    this.roleEl.textContent = semantic.role;
-    this.descEl.textContent = semantic.description;
-    this.infoPanel.style.display = 'block';
+    const { offsetX, offsetY, scale } = this.viewport;
+    const bounds = this.hoveredInfo.bounds;
+    const ctx = this.ctx;
+    const canvasW = window.innerWidth;
+    const canvasH = window.innerHeight;
+
+    // ── 요소의 스크린 좌표 ──
+    const elemX = bounds.x * scale + offsetX;
+    const elemY = bounds.y * scale + offsetY;
+    const elemW = bounds.width * scale;
+    const elemH = bounds.height * scale;
+    const elemCX = elemX + elemW / 2;
+    const elemCY = elemY + elemH / 2;
+
+    // ── 색상 ──
+    const accentColor = this.isDark ? '#9ca3af' : '#555555';
+    const roleColor = this.isDark ? '#e5e5e5' : '#1a1a1a';
+    const descColor = this.isDark ? '#9ca3af' : '#6b7280';
+
+    // ── 텍스트 측정 ──
+    const sysFont = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    const roleFontSize = 18;
+    const descFontSize = 15;
+    const lineGap = 6;
+
+    ctx.save();
+
+    ctx.font = `600 ${roleFontSize}px ${sysFont}`;
+    const roleText = semantic.role;
+    const roleW = ctx.measureText(roleText).width;
+
+    ctx.font = `${descFontSize}px ${sysFont}`;
+    const descText = semantic.description;
+    const descW = ctx.measureText(descText).width;
+
+    const textW = Math.max(roleW, descW);
+    const textH = roleFontSize + lineGap + descFontSize;
+
+    // ── 상/하 결정 ──
+    const placeAbove = elemCY <= canvasH / 2;
+
+    // ── 좌/우 결정: 기본은 우측, 공간 부족 시 좌측 ──
+    const rightMargin = 60;
+    const goRight = elemCX + textW + rightMargin < canvasW;
+
+    // ── 화살표: 요소에서 출발 → 여백 영역의 끝점으로 ──
+    const arrowStartX = elemCX;
+    const arrowStartY = placeAbove ? elemY - 6 : elemY + elemH + 6;
+
+    // 끝점: 화면 여백 영역 (상단 15% / 하단 85%)
+    const targetY = placeAbove ? canvasH * 0.15 : canvasH * 0.85;
+    // 수평: 요소에서 우측(또는 좌측)으로 충분히 이동
+    const horizReach = Math.min(180, canvasW * 0.15);
+    let arrowEndX = goRight ? elemCX + horizReach : elemCX - horizReach;
+    const arrowEndY = targetY;
+
+    // 끝점 클램핑
+    const margin = 40;
+    arrowEndX = Math.max(margin, Math.min(canvasW - margin - textW, arrowEndX));
+
+    // ── Bezier 곡선 — 자연스러운 호 ──
+    // 제어점: 요소 바로 위(또는 아래)에서 수직으로 올라간 뒤 수평으로 전환
+    // → (startX, endY): 시작점의 X + 끝점의 Y → 수직 출발 후 우측 스윕
+    const cpX = arrowStartX;
+    const cpY = arrowEndY;
+
+    // ── 곡선 그리기 ──
+    ctx.strokeStyle = accentColor;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(arrowStartX, arrowStartY);
+    ctx.quadraticCurveTo(cpX, cpY, arrowEndX, arrowEndY);
+    ctx.stroke();
+
+    // ── 화살촉 (요소 쪽, 시작점) ──
+    const headLen = 10;
+    const spread = Math.PI / 7;
+    // 접선: 시작점에서의 방향 = 시작점→제어점
+    const tanX = arrowStartX - cpX;
+    const tanY = arrowStartY - cpY;
+    const angle = Math.atan2(tanY, tanX);
+
+    ctx.fillStyle = accentColor;
+    ctx.beginPath();
+    ctx.moveTo(arrowStartX, arrowStartY);
+    ctx.lineTo(
+      arrowStartX - headLen * Math.cos(angle - spread),
+      arrowStartY - headLen * Math.sin(angle - spread),
+    );
+    ctx.lineTo(
+      arrowStartX - headLen * Math.cos(angle + spread),
+      arrowStartY - headLen * Math.sin(angle + spread),
+    );
+    ctx.closePath();
+    ctx.fill();
+
+    // ── 텍스트: 화살표 끝점에서 이어서 렌더링 ──
+    const textX = goRight ? arrowEndX + 8 : arrowEndX - textW - 8;
+    const textBaseY = arrowEndY - roleFontSize / 2 - lineGap / 2;
+
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+
+    ctx.font = `600 ${roleFontSize}px ${sysFont}`;
+    ctx.fillStyle = roleColor;
+    ctx.fillText(roleText, textX, textBaseY);
+
+    ctx.font = `${descFontSize}px ${sysFont}`;
+    ctx.fillStyle = descColor;
+    ctx.fillText(descText, textX, textBaseY + roleFontSize + lineGap);
+
+    ctx.restore();
   }
 }
