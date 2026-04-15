@@ -7,11 +7,12 @@
     "field": "신호처리",
     "significance": "시간과 주파수 영역의 이중 표현을 가능하게 하여 현대 신호 처리의 이론적 기반을 확립했습니다.",
     "elementMeanings": {
-      "F(\\omega)": { "role": "주파수 스펙트럼", "description": "입력 신호의 주파수 영역 표현. 각 주파수의 크기와 위상을 담고 있습니다." },
-      "f(t)": { "role": "시간 신호", "description": "시간의 함수로 표현된 원래 신호입니다." },
-      "\\omega": { "role": "각주파수", "description": "2파이f. 주파수를 라디안 단위로 나타낸 것. 단위: rad/s." },
-      "e^{-i\\omega t}": { "role": "복소 지수 함수", "description": "오일러 공식에 의해 코사인과 사인의 조합으로 분해됩니다." },
-      "\\int": { "role": "적분", "description": "시간 전체 범위(-무한대부터 무한대)에 걸친 적분입니다." }
+      "f": { "role": "함수/신호", "description": "변환할 원래 함수 또는 시간 신호입니다." },
+      "ξ": { "role": "주파수", "description": "일반 주파수 변수입니다. 단위: Hz." },
+      "x": { "role": "독립변수", "description": "원래 함수의 독립변수(시간 등)입니다." },
+      "e": { "role": "자연상수", "description": "복소 지수 함수의 밑입니다." },
+      "i": { "role": "허수 단위", "description": "i² = −1. 복소 지수 함수에서 위상 회전을 나타냅니다." },
+      "π": { "role": "원주율", "description": "정규화 상수 2π의 일부입니다." }
     },
     "realWorldExamples": ["음성 신호의 주파수 분석을 통한 음성 인식", "MRI 영상의 주파수 데이터를 공간 이미지로 재구성"],
     "relatedFormulas": ["inverse-fourier", "laplace-transform", "convolution"]
@@ -19,16 +20,16 @@
   "inverse-fourier": {
     "name": "역 푸리에 변환",
     "oneLiner": "주파수 영역의 스펙트럼을 시간 영역의 신호로 복원하는 적분 변환",
-    "description": "역 푸리에 변환은 푸리에 변환의 역과정으로, 주파수 영역에서 표현된 스펙트럼 정보를 원래의 시간 영역 신호로 복원합니다. 1/(2파이) 정규화 인자가 붙으며, 복소 지수 함수의 부호가 양수로 바뀝니다. 신호의 합성과 복원에 필수적인 도구입니다.",
+    "description": "역 푸리에 변환은 푸리에 변환의 역과정으로, 주파수 영역에서 표현된 스펙트럼 정보를 원래의 시간 영역 신호로 복원합니다. 복소 지수 함수의 부호가 양수로 바뀌며, 일반 주파수 규약에서는 정규화 인자 없이 대칭적인 변환 쌍을 이룹니다.",
     "discoverer": "조제프 푸리에",
     "field": "신호처리",
     "significance": "주파수 분석 결과를 원래 신호로 완전히 복원할 수 있음을 보장하여 신호 합성의 이론적 근거를 제공합니다.",
     "elementMeanings": {
-      "f(t)": { "role": "시간 신호", "description": "복원된 원래 시간 영역 신호입니다." },
-      "F(\\omega)": { "role": "주파수 스펙트럼", "description": "주파수 영역의 입력 데이터입니다." },
-      "\\frac{1}{2\\pi}": { "role": "정규화 인자", "description": "푸리에 변환 쌍의 대칭성을 유지하기 위한 상수입니다." },
-      "e^{i\\omega t}": { "role": "복소 지수 함수", "description": "역변환에서는 지수의 부호가 양수입니다." },
-      "\\int": { "role": "적분", "description": "주파수 전체 범위에 걸친 적분입니다." }
+      "f": { "role": "함수/신호", "description": "복원된 원래 시간 영역 신호입니다." },
+      "ξ": { "role": "주파수", "description": "주파수 영역의 독립변수입니다. 단위: Hz." },
+      "x": { "role": "독립변수", "description": "복원할 함수의 독립변수(시간 등)입니다." },
+      "e": { "role": "자연상수", "description": "복소 지수 함수의 밑입니다." },
+      "π": { "role": "원주율", "description": "정규화 상수 2π의 일부입니다." }
     },
     "realWorldExamples": ["필터링 후 처리된 주파수 데이터를 다시 시간 신호로 변환", "압축된 오디오 데이터의 복원 재생"],
     "relatedFormulas": ["fourier-transform", "laplace-transform", "convolution"]

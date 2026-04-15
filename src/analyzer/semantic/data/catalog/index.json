@@ -3443,16 +3443,16 @@
         "integral",
         "variable:e",
         "power",
-        "variable:ω",
-        "variable:t"
+        "variable:ξ",
+        "variable:x",
+        "variable:π"
       ]
     },
     {
       "id": "inverse-fourier",
       "category": "signal",
       "requiredNodeTypes": [
-        "integral",
-        "frac"
+        "integral"
       ],
       "complexity": [
         8,
@@ -3460,13 +3460,12 @@
       ],
       "patternType": "structural",
       "signature": [
-        "frac",
-        "number:1",
-        "number:2",
-        "variable:π",
         "integral",
         "variable:e",
-        "power"
+        "power",
+        "variable:ξ",
+        "variable:x",
+        "variable:π"
       ]
     },
     {
