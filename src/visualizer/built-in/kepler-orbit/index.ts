@@ -5,33 +5,23 @@
  * 궤도 반지름(a)을 변경하면 공전 주기, 속도, 고도가 실시간으로 변한다.
  */
 
-import type { FizzexVisualizer, ParameterValues } from '../../types';
+import type { FizzexVisualizer, ParameterValues, ComputeContext } from '../../types';
 import { KeplerOrbitRenderer } from './renderer';
 
-// ─── 물리 상수 ───
+// ─── 물리 상수 (AST 평가 + fallback 겸용) ───
 
 const G = 6.674e-11; // 만유인력 상수 (N m^2 / kg^2)
 const M_EARTH = 5.972e24; // 지구 질량 (kg)
 const R_EARTH = 6371; // 지구 반지름 (km)
 const GM = G * M_EARTH;
 
-// ─── 계산 함수 ───
-
-function calcPeriod(a_km: number): number {
-  const a_m = a_km * 1000;
-  return 2 * Math.PI * Math.sqrt((a_m * a_m * a_m) / GM);
-}
-
-function calcVelocity(a_km: number): number {
-  const period = calcPeriod(a_km);
-  return (2 * Math.PI * a_km * 1000) / period; // m/s
-}
-
 // ─── Visualizer 구현체 ───
 
 const keplerOrbitVisualizer: FizzexVisualizer = {
   id: 'kepler-orbit',
   name: '위성 궤도',
+
+  constants: { G, M: M_EARTH },
 
   parameters: [
     {
@@ -44,6 +34,7 @@ const keplerOrbitVisualizer: FizzexVisualizer = {
       step: 1,
       unit: 'km',
       scale: 'log',
+      siMultiplier: 1000, // km → m
     },
   ],
 
@@ -53,13 +44,31 @@ const keplerOrbitVisualizer: FizzexVisualizer = {
       label: '공전 주기',
       format: 'time',
       formulaElement: 'T',
-      compute: (p: ParameterValues) => calcPeriod(p.a),
+      compute: (p: ParameterValues, ctx?: ComputeContext) => {
+        // AST 우선: equationValue = T² (SI, s²)
+        if (ctx?.equationValue != null && !isNaN(ctx.equationValue)) {
+          return Math.sqrt(ctx.equationValue);
+        }
+        // fallback: AST 없을 때 직접 계산
+        const a_m = p.a * 1000;
+        return 2 * Math.PI * Math.sqrt(a_m ** 3 / GM);
+      },
     },
     {
       id: 'velocity',
       label: '궤도 속도',
       unit: 'km/s',
-      compute: (p: ParameterValues) => calcVelocity(p.a) / 1000,
+      compute: (p: ParameterValues, ctx?: ComputeContext) => {
+        // AST 우선: period 파생값 활용
+        const T = ctx?.derived?.['period'];
+        if (T != null && T > 0) {
+          return (2 * Math.PI * p.a * 1000 / T) / 1000;
+        }
+        // fallback
+        const a_m = p.a * 1000;
+        const period = 2 * Math.PI * Math.sqrt(a_m ** 3 / GM);
+        return (2 * Math.PI * a_m / period) / 1000;
+      },
     },
     {
       id: 'altitude',

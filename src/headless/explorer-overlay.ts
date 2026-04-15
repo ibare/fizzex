@@ -455,6 +455,9 @@ export class ExplorerOverlay {
       const viz = this.vizController.viz;
       if (!bridge || !viz) return;
 
+      // Bridge에 현재 AST 전달 (AST 기반 파생값 계산 활성화)
+      bridge.setAst?.(this.ast);
+
       this.vizControls = new ExplorerControlsPanel(
         this.controlsContainer,
         bridge,
@@ -838,9 +841,10 @@ export class ExplorerOverlay {
         this.localParamValues[id] = value;
       }
     } else if (config.controlType === 'stepper' && this.astModState) {
-      // 숫자 스테퍼: AST 수정 → 재렌더링
+      // 숫자 스테퍼: AST 수정 → 재렌더링 + Bridge에 알림
       const modifiedAst = modifyNumberNode(this.astModState, id, value);
       this.buildAndRender(modifiedAst);
+      this.vizController?.bridge?.setAst?.(modifiedAst);
       this.inlineControl?.setResetVisible(true);
     }
   }
@@ -849,6 +853,7 @@ export class ExplorerOverlay {
     if (!this.astModState) return;
     const modifiedAst = resetNode(this.astModState, nodeId);
     this.buildAndRender(modifiedAst);
+    this.vizController?.bridge?.setAst?.(modifiedAst);
     this.inlineControl?.setResetVisible(hasModifications(this.astModState));
 
     // 리셋 후 스테퍼 값도 업데이트

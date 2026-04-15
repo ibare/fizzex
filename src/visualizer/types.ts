@@ -26,6 +26,9 @@ export interface ParameterConfig {
   /** 슬라이더 스케일. log: 넓은 범위에서 균일한 인지적 간격 */
   scale?: 'linear' | 'log';
 
+  /** SI 단위 변환 승수 (예: km→m = 1000). AST 평가 시 적용 */
+  siMultiplier?: number;
+
   /** 파라미터 범위별 인사이트 */
   effects?: Array<{
     range: [number, number];
@@ -38,6 +41,14 @@ export type ParameterValues = Record<string, number>;
 
 // ─── 파생값 ───
 
+/** compute 함수에 전달되는 컨텍스트 */
+export interface ComputeContext {
+  /** AST 방정식 우변의 평가 결과 (= 기준 RHS). AST가 없으면 undefined */
+  equationValue?: number;
+  /** 이전에 계산된 파생값 (순서대로 누적) */
+  derived: Record<string, number>;
+}
+
 /** 수식에서 계산되는 파생값 (중간값 + 결과) */
 export interface DerivedValue {
   id: string;
@@ -46,8 +57,8 @@ export interface DerivedValue {
   format?: 'number' | 'time' | 'distance';
   /** 이 파생값이 대응하는 수식 변수명 (예: 'T'). 있으면 수식 옆에 값 표시 */
   formulaElement?: string;
-  /** 파라미터 → 계산값 */
-  compute: (params: ParameterValues) => number;
+  /** 파라미터 + AST 평가 컨텍스트 → 계산값 */
+  compute: (params: ParameterValues, ctx?: ComputeContext) => number;
 }
 
 // ─── 프리셋 ───
@@ -72,6 +83,8 @@ export interface FizzexVisualizer {
 
   /** 이 Visualizer에 필요한 파라미터 정의 */
   parameters: ParameterConfig[];
+  /** AST 평가용 물리 상수 (변수명 → 값). 수식에는 있지만 사용자가 조절하지 않는 값 */
+  constants?: Record<string, number>;
   /** 파생값 정의 */
   derivedValues: DerivedValue[];
   /** 프리셋 목록 */
@@ -110,6 +123,8 @@ export interface VisualizerBridge {
   setParam(paramId: string, value: number, source: 'slider' | 'preset' | 'visualizer' | 'inline'): void;
   /** 파생값 계산 */
   getDerivedValues(): Record<string, number>;
+  /** 수식 AST 설정 (스테퍼 등으로 수식이 수정되었을 때) */
+  setAst?(ast: import('../types').RootNode | null): void;
   /** 파라미터 변경 구독. 반환: unsubscribe 함수 */
   subscribe(listener: (params: ParameterValues, source: string) => void): () => void;
   /** 정리 */

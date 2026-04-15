@@ -5,7 +5,7 @@
  * Explorer의 값 흐름 표시와 파생값 계산에 사용된다.
  */
 
-import type { MathNode } from '../types';
+import type { MathNode, RootNode } from '../types';
 import type { ParameterValues } from './types';
 
 /** 수치 평가 결과 */
@@ -209,6 +209,29 @@ export function evaluateAst(nodes: MathNode[], params: ParameterValues): Evaluat
 
   const finalResult = evalNodes(nodes);
   return { nodeValues, result: finalResult };
+}
+
+/**
+ * 방정식 AST의 우변을 평가한다.
+ *
+ * `=` 연산자를 기준으로 LHS/RHS를 분할하고, RHS를 evaluateAst로 평가한다.
+ * 등호가 없으면 전체를 평가한다.
+ */
+export function evaluateEquation(
+  ast: RootNode,
+  params: ParameterValues,
+): { rhsValue: number; nodeValues: Map<string, number> } {
+  const children = ast.children;
+
+  // = 연산자 위치 탐색
+  const eqIdx = children.findIndex(
+    (c) => c.type === 'operator' && (c.operator === '=' || c.operator === '\\eq'),
+  );
+
+  const targetNodes = eqIdx >= 0 ? children.slice(eqIdx + 1) : children;
+  const result = evaluateAst(targetNodes, params);
+
+  return { rhsValue: result.result, nodeValues: result.nodeValues };
 }
 
 function normalizeOp(op: string): string {
