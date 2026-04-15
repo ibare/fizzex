@@ -3436,7 +3436,7 @@
       ],
       "complexity": [
         8,
-        20
+        35
       ],
       "patternType": "structural",
       "signature": [
@@ -3456,7 +3456,7 @@
       ],
       "complexity": [
         8,
-        22
+        35
       ],
       "patternType": "structural",
       "signature": [
