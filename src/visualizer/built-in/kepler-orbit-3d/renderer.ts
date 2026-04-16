@@ -103,8 +103,13 @@ export class KeplerOrbit3DRenderer {
     this.theme = options.theme;
     this.presets = presets;
 
-    // WebGL 렌더러
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    // WebGL 렌더러. preserveDrawingBuffer 는 스크린샷(canvas.toBlob) 용도로 필요 —
+    // 기본값 false 면 브라우저가 프레임 후 draw buffer 를 비워 캡처가 빈 이미지가 된다.
+    this.renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: false,
+      preserveDrawingBuffer: true,
+    });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor(this.getBackgroundColor(), 1);
     this.canvas = this.renderer.domElement;

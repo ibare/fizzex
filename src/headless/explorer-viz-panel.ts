@@ -43,10 +43,14 @@ const EDGE_MARGIN = 40; // 화면에 최소 이만큼은 남기도록 clamp
 export class VizPanel {
   readonly root: HTMLDivElement;
   private header: HTMLDivElement;
+  private captureButton!: HTMLButtonElement;
   private closeButton!: HTMLButtonElement;
   private vizContainer: HTMLDivElement;
   private presetsContainer: HTMLDivElement;
   private resizeHandle: HTMLDivElement;
+
+  /** 캡처 피드백 플래시 타이머. destroy 시 정리 대상 */
+  private flashTimer: ReturnType<typeof setTimeout> | null = null;
 
   private controller: ExplorerVisualizerController;
   private presetsBar: ExplorerPresetsBar | null = null;
@@ -139,6 +143,47 @@ export class VizPanel {
       });
       this.header.appendChild(dot);
     }
+
+    // 📷 캡처 버튼 — 헤더 우측, 닫기 버튼 왼쪽.
+    // 클릭 시 vizContainer 의 canvas를 PNG로 클립보드에 복사. 실패 시 다운로드 폴백.
+    this.captureButton = document.createElement('button');
+    this.captureButton.type = 'button';
+    this.captureButton.title = '이미지 복사';
+    this.captureButton.textContent = '\u{1F4F7}'; // 📷
+    Object.assign(this.captureButton.style, {
+      position: 'absolute',
+      right: '26px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      width: '22px',
+      height: '18px',
+      padding: '0',
+      border: 'none',
+      borderRadius: '4px',
+      background: 'transparent',
+      cursor: 'pointer',
+      fontSize: '12px',
+      lineHeight: '18px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: 'auto',
+    });
+    this.captureButton.addEventListener('mouseenter', () => {
+      this.captureButton.style.background = this.isDark
+        ? 'rgba(255,255,255,0.12)'
+        : 'rgba(0,0,0,0.08)';
+    });
+    this.captureButton.addEventListener('mouseleave', () => {
+      this.captureButton.style.background = 'transparent';
+    });
+    this.captureButton.addEventListener('mousedown', (e) => e.stopPropagation());
+    this.captureButton.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+    this.captureButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      void this.handleCapture();
+    });
+    this.header.appendChild(this.captureButton);
 
     // 닫기(X) 버튼 — 헤더 우측. 클릭 시 onCloseCallback을 호출하여
     // ExplorerOverlay가 패널 제거 + 배너 버튼 상태 갱신을 처리하게 한다.
@@ -299,6 +344,11 @@ export class VizPanel {
     if (this.destroyed) return;
     this.destroyed = true;
 
+    if (this.flashTimer !== null) {
+      clearTimeout(this.flashTimer);
+      this.flashTimer = null;
+    }
+
     this.header.removeEventListener('mousedown', this.boundHeaderMouseDown);
     this.header.removeEventListener('touchstart', this.boundHeaderTouchStart);
     this.resizeHandle.removeEventListener('mousedown', this.boundResizeMouseDown);
@@ -318,6 +368,46 @@ export class VizPanel {
   }
 
   // ---- 내부 ----
+
+  /**
+   * vizContainer 내부의 canvas를 PNG로 변환해 클립보드에 복사한다.
+   * 2D/WebGL 모두 동일 경로(canvas.toBlob)로 처리된다.
+   * Clipboard API 가 거부되면 다운로드로 폴백해 사용자가 여전히 이미지를 얻을 수 있도록 한다.
+   */
+  private async handleCapture(): Promise<void> {
+    if (this.destroyed) return;
+    const canvas = this.vizContainer.querySelector<HTMLCanvasElement>('canvas');
+    if (!canvas) return;
+
+    canvas.toBlob(async (blob) => {
+      if (!blob || this.destroyed) return;
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        this.flashCapture('\u2713'); // ✓
+      } catch {
+        // 폴백: HTTPS 비활성/권한 거부 환경에서 다운로드로 대체
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `fizzex-${this.visualizerId}-${Date.now()}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        this.flashCapture('\u2913'); // ⤓ (저장)
+      }
+    }, 'image/png');
+  }
+
+  /** 캡처 버튼 아이콘을 잠시 교체해 시각 피드백을 준다 */
+  private flashCapture(glyph: string): void {
+    if (this.destroyed) return;
+    this.captureButton.textContent = glyph;
+    if (this.flashTimer !== null) clearTimeout(this.flashTimer);
+    this.flashTimer = setTimeout(() => {
+      this.flashTimer = null;
+      if (this.destroyed) return;
+      this.captureButton.textContent = '\u{1F4F7}'; // 📷
+    }, 900);
+  }
 
   private applyBounds(): void {
     this.root.style.left = `${this.bounds.left}px`;
