@@ -2404,6 +2404,15 @@
         "power.exponent:2",
         "operator:+",
         "operator:+"
+      ],
+      "visualizers": [
+        {
+          "id": "quadratic-2d",
+          "name": "이차함수 2D",
+          "description": "다리 아치·농구 궤적·분수에서 포물선 체험",
+          "icon": "🔢",
+          "default": true
+        }
       ]
     },
     {
