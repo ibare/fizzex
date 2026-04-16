@@ -1927,6 +1927,15 @@
         "variable:r",
         "variable:n",
         "power"
+      ],
+      "visualizers": [
+        {
+          "id": "compound-interest-2d",
+          "name": "복리 2D",
+          "description": "예금/주식/적금/인플레이션 — 시간이 돈을 버는 실감",
+          "icon": "💹",
+          "default": true
+        }
       ]
     },
     {
