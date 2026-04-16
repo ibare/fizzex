@@ -62,11 +62,8 @@ export interface VisualizerUpdate {
    * 구조 변경이 없으면 undefined.
    */
   baseline?: { derived: Record<string, number>; equationValue?: number };
-  /**
-   * 현재 식이 카탈로그 원본과 구조적으로 같은가.
-   * 미지정 시 true 로 간주 (후방 호환).
-   */
-  isStandard?: boolean;
+  /** 현재 식이 카탈로그 원본과 구조적으로 같은가. */
+  isStandard: boolean;
 }
 
 // ─── 파생값 ───

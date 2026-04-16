@@ -225,13 +225,12 @@ export function evaluateAst(nodes: MathNode[], params: ParameterValues): Evaluat
  * 발견적 학습: 좌변 number 노드 변경(예: T² → T³)이 ctx.equationValue 에 반영되어
  * derivedValue.compute 가 자동으로 cbrt(rhs) 결과를 받게 된다.
  *
- * @returns rhsValue — **이름은 후방 호환을 위해 유지하나 의미는 "좌변 변수의 풀린 값".**
- *                     LHS 패턴이 풀이 불가일 때만 순수 RHS 값.
+ * @returns equationValue — 좌변 변수의 풀린 값. LHS 패턴이 풀이 불가일 때만 순수 RHS 값.
  */
 export function evaluateEquation(
   ast: RootNode,
   params: ParameterValues,
-): { rhsValue: number; nodeValues: Map<string, number> } {
+): { equationValue: number; nodeValues: Map<string, number> } {
   const children = ast.children;
 
   // = 연산자 위치 탐색
@@ -242,7 +241,7 @@ export function evaluateEquation(
   if (eqIdx < 0) {
     // 등호 없음 — 전체 평가 (기존 동작 유지)
     const r = evaluateAst(children, params);
-    return { rhsValue: r.result, nodeValues: r.nodeValues };
+    return { equationValue: r.result, nodeValues: r.nodeValues };
   }
 
   const lhsNodes = children.slice(0, eqIdx);
@@ -252,7 +251,7 @@ export function evaluateEquation(
   const invert = analyzeLhsInversion(lhsNodes, params);
   const equationValue = invert ? invert(rhsResult.result) : rhsResult.result;
 
-  return { rhsValue: equationValue, nodeValues: rhsResult.nodeValues };
+  return { equationValue, nodeValues: rhsResult.nodeValues };
 }
 
 /**

@@ -156,8 +156,8 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
   ): { equationValue?: number; derived: Record<string, number> } {
     let equationValue: number | undefined;
     if (ast) {
-      const { rhsValue } = evaluateEquation(ast, evalParams);
-      if (!isNaN(rhsValue)) equationValue = rhsValue;
+      const { equationValue: eqVal } = evaluateEquation(ast, evalParams);
+      if (!isNaN(eqVal)) equationValue = eqVal;
     }
     const ctx: ComputeContext = { equationValue, derived: {} };
     const derived: Record<string, number> = {};

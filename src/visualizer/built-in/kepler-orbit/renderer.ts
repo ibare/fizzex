@@ -142,7 +142,7 @@ export class KeplerOrbitRenderer {
     this.currentVelocity = sanitizePositive(derived.velocity);
 
     // baseline (구조 변경 시에만 들어옴)
-    this.isStandard = context.isStandard ?? true;
+    this.isStandard = context.isStandard;
     if (baseline) {
       this.baselinePeriod = sanitizePositive(baseline.derived.period);
       this.baselineVelocity = sanitizePositive(baseline.derived.velocity);

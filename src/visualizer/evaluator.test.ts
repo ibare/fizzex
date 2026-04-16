@@ -18,40 +18,40 @@ describe('evaluateEquation', () => {
   describe('등호 없는 식 — 기존 동작', () => {
     it('전체 식을 평가한다', () => {
       const ast = parseLatex('2 + 3');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBe(5);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBe(5);
     });
 
     it('변수 포함 식을 평가한다', () => {
       const ast = parseLatex('a + b');
-      const { rhsValue } = evaluateEquation(ast, { a: 4, b: 6 });
-      expect(rhsValue).toBe(10);
+      const { equationValue } = evaluateEquation(ast, { a: 4, b: 6 });
+      expect(equationValue).toBe(10);
     });
   });
 
   describe('등호 있는 식 — LHS 풀이', () => {
     it('단일 변수 LHS 는 RHS 그대로 반환 (T = expr)', () => {
       const ast = parseLatex('T = 4 + 2');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBe(6);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBe(6);
     });
 
     it('T^2 = 4 → 2 (sqrt 적용)', () => {
       const ast = parseLatex('T^2 = 4');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBeCloseTo(2);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBeCloseTo(2);
     });
 
     it('T^3 = 8 → 2 (cbrt 적용)', () => {
       const ast = parseLatex('T^3 = 8');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBeCloseTo(2);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBeCloseTo(2);
     });
 
     it('T^2 = 9 → 3', () => {
       const ast = parseLatex('T^2 = 9');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBeCloseTo(3);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBeCloseTo(3);
     });
 
     it('좌변 지수 변경 시 결과가 달라진다 (발견적 학습)', () => {
@@ -60,9 +60,9 @@ describe('evaluateEquation', () => {
       const ast2 = parseLatex('T^2 = R');
       const ast3 = parseLatex('T^3 = R');
       const ast6 = parseLatex('T^6 = R');
-      expect(evaluateEquation(ast2, { R: 64 }).rhsValue).toBeCloseTo(8);  // sqrt(64)
-      expect(evaluateEquation(ast3, { R: 64 }).rhsValue).toBeCloseTo(4);  // cbrt(64)
-      expect(evaluateEquation(ast6, { R: 64 }).rhsValue).toBeCloseTo(2);  // 64^(1/6)
+      expect(evaluateEquation(ast2, { R: 64 }).equationValue).toBeCloseTo(8);  // sqrt(64)
+      expect(evaluateEquation(ast3, { R: 64 }).equationValue).toBeCloseTo(4);  // cbrt(64)
+      expect(evaluateEquation(ast6, { R: 64 }).equationValue).toBeCloseTo(2);  // 64^(1/6)
     });
   });
 
@@ -70,22 +70,22 @@ describe('evaluateEquation', () => {
     it('LHS 가 다항식이면 invert 적용하지 않는다', () => {
       // T + a = 5 → LHS 패턴 매칭 실패 → RHS 그대로 (= 5)
       const ast = parseLatex('T + a = 5');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBe(5);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBe(5);
     });
 
     it('LHS power 의 base 가 단일 변수가 아니면 풀이 불가', () => {
       // (T+1)^2 = 9 → base 가 paren 노드 → null → RHS 그대로 (= 9)
       const ast = parseLatex('(T+1)^2 = 9');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBe(9);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBe(9);
     });
 
     it('LHS power 의 지수가 0 이면 invert 불가 → RHS 그대로', () => {
       // T^0 = 5 → 1/0 = Infinity, 풀이 불가 처리
       const ast = parseLatex('T^0 = 5');
-      const { rhsValue } = evaluateEquation(ast, {});
-      expect(rhsValue).toBe(5);
+      const { equationValue } = evaluateEquation(ast, {});
+      expect(equationValue).toBe(5);
     });
   });
 
@@ -95,20 +95,20 @@ describe('evaluateEquation', () => {
 
     it('표준 케플러: T^2 = 4 a^3, a=1 → T = 2', () => {
       const ast = parseLatex('T^2 = 4 a^3');
-      const { rhsValue } = evaluateEquation(ast, { a: 1 });
-      expect(rhsValue).toBeCloseTo(2);
+      const { equationValue } = evaluateEquation(ast, { a: 1 });
+      expect(equationValue).toBeCloseTo(2);
     });
 
     it('좌변 변형: T^3 = 4 a^3, a=1 → T = cbrt(4) ≈ 1.587', () => {
       const ast = parseLatex('T^3 = 4 a^3');
-      const { rhsValue } = evaluateEquation(ast, { a: 1 });
-      expect(rhsValue).toBeCloseTo(Math.cbrt(4));
+      const { equationValue } = evaluateEquation(ast, { a: 1 });
+      expect(equationValue).toBeCloseTo(Math.cbrt(4));
     });
 
     it('우변 변형: T^2 = 4 a^4, a=2 → RHS=64, T = 8', () => {
       const ast = parseLatex('T^2 = 4 a^4');
-      const { rhsValue } = evaluateEquation(ast, { a: 2 });
-      expect(rhsValue).toBeCloseTo(8);
+      const { equationValue } = evaluateEquation(ast, { a: 2 });
+      expect(equationValue).toBeCloseTo(8);
     });
   });
 });
