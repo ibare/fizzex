@@ -25,7 +25,7 @@ import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
 import type { SemanticResult } from '../analyzer/semantic-roles';
 import { getVisualizerIdForCatalog } from '../analyzer/semantic/loader';
 import { ExplorerVisualizerController } from './explorer-visualizer';
-import { ExplorerControlsPanel } from './explorer-controls';
+import { ExplorerPresetsBar } from './explorer-presets-bar';
 import { getControlType, buildInlineControlConfig } from './inline-control-types';
 import type { InlineControlConfig } from './inline-control-types';
 import { ExplorerInlineControls } from './explorer-inline-controls';
@@ -99,9 +99,8 @@ export class ExplorerOverlay {
   // Visualizer 통합
   private valueBadgeUnsub: (() => void) | null = null;
   private vizController: ExplorerVisualizerController | null = null;
-  private vizControls: ExplorerControlsPanel | null = null;
+  private presetsBar: ExplorerPresetsBar | null = null;
   private vizContainer: HTMLDivElement | null = null;
-  private controlsContainer: HTMLDivElement | null = null;
   private contentWrapper: HTMLDivElement | null = null;
 
   // Bound handler 참조 (destroy 시 제거)
@@ -286,7 +285,7 @@ export class ExplorerOverlay {
     // Visualizer 정리
     this.valueBadgeUnsub?.();
     this.valueBadgeUnsub = null;
-    this.vizControls?.destroy();
+    this.presetsBar?.destroy();
     this.vizController?.destroy();
 
     // 이벤트 제거
@@ -314,9 +313,8 @@ export class ExplorerOverlay {
     this.astModState = null;
     this.catalogDetail = null;
     this.vizController = null;
-    this.vizControls = null;
+    this.presetsBar = null;
     this.vizContainer = null;
-    this.controlsContainer = null;
     this.contentWrapper = null;
     (this as Record<string, unknown>).overlay = null;
     (this as Record<string, unknown>).canvas = null;
@@ -388,7 +386,7 @@ export class ExplorerOverlay {
 
     const detail = getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory);
 
-    // DOM 레이아웃 재구성: 수식 전체화면 + Visualizer 우상단 플로팅 + 하단 컨트롤
+    // DOM 레이아웃 재구성: 수식 전체화면 + Visualizer 카드(우상단 플로팅, 하단 프리셋 바)
     this.contentWrapper = document.createElement('div');
     Object.assign(this.contentWrapper.style, {
       position: 'absolute',
@@ -408,16 +406,17 @@ export class ExplorerOverlay {
     this.canvas.style.inset = '0';
     formulaPane.appendChild(this.canvas);
 
-    // Visualizer 영역: 우상단 플로팅 (30% 크기)
-    this.vizContainer = document.createElement('div');
-    Object.assign(this.vizContainer.style, {
+    // Visualizer 카드 (우상단 플로팅) — 카드 자체가 시각 장식 담당
+    const vizPane = document.createElement('div');
+    Object.assign(vizPane.style, {
       position: 'absolute',
       top: '60px',
       right: '16px',
       width: '30%',
       maxWidth: '400px',
       minWidth: '200px',
-      aspectRatio: '1',
+      display: 'flex',
+      flexDirection: 'column',
       borderRadius: '12px',
       overflow: 'hidden',
       background: this.isDark ? 'rgba(20, 20, 20, 0.9)' : 'rgba(255, 255, 255, 0.9)',
@@ -430,26 +429,32 @@ export class ExplorerOverlay {
         : '1px solid rgba(0,0,0,0.06)',
       zIndex: '1',
     });
-    formulaPane.appendChild(this.vizContainer);
 
-    this.contentWrapper.appendChild(formulaPane);
-
-    // 하단: 컨트롤 패널
-    this.controlsContainer = document.createElement('div');
-    Object.assign(this.controlsContainer.style, {
-      borderTop: this.isDark ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)',
-      maxHeight: '35%',
-      overflowY: 'auto',
+    // 카드 내부: 1) Visualizer 캔버스 영역(정사각형) 2) 프리셋 바
+    this.vizContainer = document.createElement('div');
+    Object.assign(this.vizContainer.style, {
+      width: '100%',
+      aspectRatio: '1',
+      position: 'relative',
     });
-    this.contentWrapper.appendChild(this.controlsContainer);
+    vizPane.appendChild(this.vizContainer);
+
+    const presetsContainer = document.createElement('div');
+    Object.assign(presetsContainer.style, {
+      width: '100%',
+    });
+    vizPane.appendChild(presetsContainer);
+
+    formulaPane.appendChild(vizPane);
+    this.contentWrapper.appendChild(formulaPane);
 
     // 오버레이에 삽입 (기존 요소들 앞에)
     this.overlay.insertBefore(this.contentWrapper, this.overlay.firstChild);
 
-    // Visualizer 컨트롤러 + 컨트롤 패널 생성 (비동기)
+    // Visualizer 컨트롤러 + 프리셋 바 생성 (비동기)
     this.vizController = new ExplorerVisualizerController(this.vizContainer, this.isDark ? 'dark' : 'light');
     this.vizController.init(visualizerId, detail).then((ok) => {
-      if (!ok || this.destroyed || !this.vizController || !this.controlsContainer) return;
+      if (!ok || this.destroyed || !this.vizController) return;
 
       const bridge = this.vizController.bridge;
       const viz = this.vizController.viz;
@@ -458,12 +463,10 @@ export class ExplorerOverlay {
       // Bridge에 현재 AST 전달 (AST 기반 파생값 계산 활성화)
       this.syncAstToBridge(this.ast);
 
-      this.vizControls = new ExplorerControlsPanel(
-        this.controlsContainer,
+      this.presetsBar = new ExplorerPresetsBar(
+        presetsContainer,
         bridge,
-        viz.parameters,
         viz.presets,
-        viz.derivedValues,
         this.isDark ? 'dark' : 'light',
       );
 

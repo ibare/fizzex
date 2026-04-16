@@ -21,7 +21,7 @@ export type { ExplorerOverlayConfig } from './explorer-overlay';
 export type { ExplorerTriggerOptions } from './explorer-trigger';
 
 export { ExplorerVisualizerController } from './explorer-visualizer';
-export { ExplorerControlsPanel } from './explorer-controls';
+export { ExplorerPresetsBar } from './explorer-presets-bar';
 export { ExplorerInlineControls } from './explorer-inline-controls';
 export type { InlineControlCallbacks } from './explorer-inline-controls';
 export { getControlType, buildInlineControlConfig } from './inline-control-types';
