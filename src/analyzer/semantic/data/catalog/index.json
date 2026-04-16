@@ -3141,6 +3141,15 @@
         "number:1",
         "number:2",
         "power.exponent:2"
+      ],
+      "visualizers": [
+        {
+          "id": "freefall-2d",
+          "name": "자유낙하 2D",
+          "description": "행성별 중력 가속도로 떨어지는 물체의 높이-시간 궤적",
+          "icon": "🌍",
+          "default": true
+        }
       ]
     },
     {
