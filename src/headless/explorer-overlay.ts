@@ -74,8 +74,17 @@ export class ExplorerOverlay {
   private explorerInfos: ExplorerBoxInfo[] = [];
   private semanticMap: Map<string, SemanticResult> = new Map();
 
-  // 뷰포트
-  private viewport = { offsetX: 0, offsetY: 0, scale: 1 };
+  // 뷰포트 — userOverridden=true면 renderCanvas의 fit-to-screen 재계산 스킵
+  private viewport = { offsetX: 0, offsetY: 0, scale: 1, userOverridden: false };
+
+  // 팬 상태 — 좌클릭 또는 단일 터치 드래그 중일 때만 non-null
+  private panState: {
+    startX: number;
+    startY: number;
+    origOffsetX: number;
+    origOffsetY: number;
+  } | null = null;
+  private panMoved = false;
 
   // 호버
   private hoveredInfo: ExplorerBoxInfo | null = null;
@@ -108,7 +117,13 @@ export class ExplorerOverlay {
   private boundMouseMove: (e: MouseEvent) => void;
   private boundMouseLeave: (e: MouseEvent) => void;
   private boundClick: (e: MouseEvent) => void;
+  private boundMouseDown: (e: MouseEvent) => void;
+  private boundWheel: (e: WheelEvent) => void;
   private boundTouchStart: (e: TouchEvent) => void;
+  private boundTouchMove: (e: TouchEvent) => void;
+  private boundTouchEnd: (e: TouchEvent) => void;
+  private boundPanMove: (e: MouseEvent) => void;
+  private boundPanEnd: (e: MouseEvent) => void;
   private boundResize: () => void;
   private boundClose: () => void;
 
@@ -241,7 +256,13 @@ export class ExplorerOverlay {
     this.boundMouseMove = this.handleMouseMove.bind(this);
     this.boundMouseLeave = this.handleMouseLeave.bind(this);
     this.boundClick = this.handleClick.bind(this);
+    this.boundMouseDown = this.handleMouseDown.bind(this);
+    this.boundWheel = this.handleWheel.bind(this);
     this.boundTouchStart = this.handleTouchStart.bind(this);
+    this.boundTouchMove = this.handleTouchMove.bind(this);
+    this.boundTouchEnd = this.handleTouchEnd.bind(this);
+    this.boundPanMove = this.handlePanMove.bind(this);
+    this.boundPanEnd = this.handlePanEnd.bind(this);
     this.boundResize = this.handleResize.bind(this);
     this.boundClose = () => this.destroy();
 
@@ -249,7 +270,13 @@ export class ExplorerOverlay {
     this.canvas.addEventListener('mousemove', this.boundMouseMove);
     this.canvas.addEventListener('mouseleave', this.boundMouseLeave);
     this.canvas.addEventListener('click', this.boundClick);
+    this.canvas.addEventListener('mousedown', this.boundMouseDown);
+    this.canvas.addEventListener('wheel', this.boundWheel, { passive: false });
     this.canvas.addEventListener('touchstart', this.boundTouchStart, { passive: false });
+    this.canvas.addEventListener('touchmove', this.boundTouchMove, { passive: false });
+    this.canvas.addEventListener('touchend', this.boundTouchEnd);
+    window.addEventListener('mousemove', this.boundPanMove);
+    window.addEventListener('mouseup', this.boundPanEnd);
     window.addEventListener('resize', this.boundResize);
     this.closeBtn.addEventListener('click', this.boundClose);
 
@@ -293,7 +320,13 @@ export class ExplorerOverlay {
     this.canvas.removeEventListener('mousemove', this.boundMouseMove);
     this.canvas.removeEventListener('mouseleave', this.boundMouseLeave);
     this.canvas.removeEventListener('click', this.boundClick);
+    this.canvas.removeEventListener('mousedown', this.boundMouseDown);
+    this.canvas.removeEventListener('wheel', this.boundWheel);
     this.canvas.removeEventListener('touchstart', this.boundTouchStart);
+    this.canvas.removeEventListener('touchmove', this.boundTouchMove);
+    this.canvas.removeEventListener('touchend', this.boundTouchEnd);
+    window.removeEventListener('mousemove', this.boundPanMove);
+    window.removeEventListener('mouseup', this.boundPanEnd);
     window.removeEventListener('resize', this.boundResize);
     this.closeBtn.removeEventListener('click', this.boundClose);
 
@@ -503,21 +536,25 @@ export class ExplorerOverlay {
     const metrics = new CanvasFontMetrics(this.ctx, this.config);
     const renderer = new Projector(this.ctx, this.config, metrics);
 
-    // Viewport 계산
-    const padding = 80;
-    const availableWidth = width - padding * 2;
-    const availableHeight = height - padding * 2;
-    const boxTotalHeight = box.height + box.depth;
+    // Viewport 계산 — 사용자가 줌/팬으로 override한 상태면 기존 값 유지
+    if (!this.viewport.userOverridden) {
+      const padding = 80;
+      const availableWidth = width - padding * 2;
+      const availableHeight = height - padding * 2;
+      const boxTotalHeight = box.height + box.depth;
 
-    const scaleX = availableWidth / box.width;
-    const scaleY = availableHeight / boxTotalHeight;
-    const scale = Math.min(scaleX, scaleY, 5);
+      const scaleX = availableWidth / box.width;
+      const scaleY = availableHeight / boxTotalHeight;
+      const scale = Math.min(scaleX, scaleY, 5);
 
-    const scaledWidth = box.width * scale;
-    const startX = (width - scaledWidth) / 2;
-    const startY = height / 2 + (box.height - box.depth) * scale / 2;
+      const scaledWidth = box.width * scale;
+      const startX = (width - scaledWidth) / 2;
+      const startY = height / 2 + (box.height - box.depth) * scale / 2;
 
-    this.viewport = { offsetX: startX, offsetY: startY, scale };
+      this.viewport = { offsetX: startX, offsetY: startY, scale, userOverridden: false };
+    }
+
+    const { offsetX: startX, offsetY: startY, scale } = this.viewport;
 
     // 렌더링
     this.ctx.save();
@@ -663,6 +700,7 @@ export class ExplorerOverlay {
   }
 
   private handleMouseMove(e: MouseEvent): void {
+    if (this.panState) return; // 팬 드래그 중엔 호버 갱신 안 함
     if (!this.box || this.explorerInfos.length === 0) return;
 
     const rect = this.canvas.getBoundingClientRect();
@@ -702,6 +740,11 @@ export class ExplorerOverlay {
   }
 
   private handleClick(e: MouseEvent): void {
+    // 드래그 팬 직후 발생한 click은 무시 (선택 동작과 혼동 방지)
+    if (this.panMoved) {
+      this.panMoved = false;
+      return;
+    }
     if (!this.box || this.explorerInfos.length === 0) return;
 
     const rect = this.canvas.getBoundingClientRect();
@@ -751,10 +794,21 @@ export class ExplorerOverlay {
       }
       this.updateActiveControl();
       this.renderCanvas();
-    } else if (this.selectedInfo) {
-      this.selectedInfo = null;
-      this.updateActiveControl();
-      this.renderCanvas();
+    } else {
+      // 히트 없음 → 팬 시작 (터치 디바이스도 마우스와 동일한 모델)
+      e.preventDefault();
+      this.panState = {
+        startX: touch.clientX,
+        startY: touch.clientY,
+        origOffsetX: this.viewport.offsetX,
+        origOffsetY: this.viewport.offsetY,
+      };
+      this.panMoved = false;
+      if (this.selectedInfo) {
+        this.selectedInfo = null;
+        this.updateActiveControl();
+        this.renderCanvas();
+      }
     }
   }
 
@@ -765,6 +819,126 @@ export class ExplorerOverlay {
     }
     this.renderCanvas();
     this.updateInlineControlPosition();
+  }
+
+  // ---------------------------------------------------------------------------
+  // 줌/팬 — 수식 영역만 대상, 부속 UI(배지·주석·인라인 컨트롤)는 screen-fixed
+  // ---------------------------------------------------------------------------
+
+  private static readonly MIN_SCALE = 0.9;
+  private static readonly MAX_SCALE = 8.0;
+  private static readonly PAN_THRESHOLD = 3; // px — 이보다 덜 움직이면 클릭으로 간주
+
+  /** 휠 줌 — 커서 지점을 고정점으로 사용 */
+  private handleWheel(e: WheelEvent): void {
+    if (!this.box) return;
+    e.preventDefault();
+
+    const rect = this.canvas.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+
+    // deltaY 음수(휠 업)=확대, 양수(휠 다운)=축소. 지수형으로 부드럽게.
+    const factor = Math.exp(-e.deltaY * 0.0015);
+    const current = this.viewport.scale;
+    const next = Math.max(
+      ExplorerOverlay.MIN_SCALE,
+      Math.min(ExplorerOverlay.MAX_SCALE, current * factor),
+    );
+    if (next === current) return;
+
+    const ratio = next / current;
+    const offsetX = cx - (cx - this.viewport.offsetX) * ratio;
+    const offsetY = cy - (cy - this.viewport.offsetY) * ratio;
+
+    this.viewport = { offsetX, offsetY, scale: next, userOverridden: true };
+    // 최대 줌 비율 실험용 출력
+    console.log(`[Explorer zoom] ${next.toFixed(3)}×`);
+
+    this.renderCanvas();
+    this.updateInlineControlPosition();
+  }
+
+  /** 좌클릭 mousedown — 히트 요소가 없을 때만 팬 시작 */
+  private handleMouseDown(e: MouseEvent): void {
+    if (e.button !== 0) return; // 좌클릭만
+    if (!this.box || this.explorerInfos.length === 0) return;
+
+    const rect = this.canvas.getBoundingClientRect();
+    const { offsetX, offsetY, scale } = this.viewport;
+    const boxX = (e.clientX - rect.left - offsetX) / scale;
+    const boxY = (e.clientY - rect.top - offsetY) / scale;
+
+    // 히트된 요소가 있으면 팬 대신 기존 선택 동작(click)을 따르게 둔다
+    if (explorerHitTest(boxX, boxY, this.explorerInfos)) return;
+
+    this.panState = {
+      startX: e.clientX,
+      startY: e.clientY,
+      origOffsetX: this.viewport.offsetX,
+      origOffsetY: this.viewport.offsetY,
+    };
+    this.panMoved = false;
+    this.canvas.style.cursor = 'grabbing';
+  }
+
+  /** 전역 mousemove — 팬 드래그 진행 (커서가 캔버스 밖으로 나가도 추적) */
+  private handlePanMove(e: MouseEvent): void {
+    if (!this.panState) return;
+    const dx = e.clientX - this.panState.startX;
+    const dy = e.clientY - this.panState.startY;
+
+    if (!this.panMoved && (Math.abs(dx) >= ExplorerOverlay.PAN_THRESHOLD || Math.abs(dy) >= ExplorerOverlay.PAN_THRESHOLD)) {
+      this.panMoved = true;
+    }
+
+    this.viewport = {
+      offsetX: this.panState.origOffsetX + dx,
+      offsetY: this.panState.origOffsetY + dy,
+      scale: this.viewport.scale,
+      userOverridden: true,
+    };
+
+    this.renderCanvas();
+    this.updateInlineControlPosition();
+  }
+
+  /** 전역 mouseup — 팬 종료. panMoved는 직후 click 핸들러에서 소비 */
+  private handlePanEnd(_e: MouseEvent): void {
+    if (!this.panState) return;
+    this.panState = null;
+    this.canvas.style.cursor = 'default';
+  }
+
+  /** 터치 이동 — 1-finger pan만 처리 */
+  private handleTouchMove(e: TouchEvent): void {
+    if (!this.panState) return;
+    if (e.touches.length !== 1) return;
+    e.preventDefault();
+
+    const touch = e.touches[0];
+    const dx = touch.clientX - this.panState.startX;
+    const dy = touch.clientY - this.panState.startY;
+
+    if (!this.panMoved && (Math.abs(dx) >= ExplorerOverlay.PAN_THRESHOLD || Math.abs(dy) >= ExplorerOverlay.PAN_THRESHOLD)) {
+      this.panMoved = true;
+    }
+
+    this.viewport = {
+      offsetX: this.panState.origOffsetX + dx,
+      offsetY: this.panState.origOffsetY + dy,
+      scale: this.viewport.scale,
+      userOverridden: true,
+    };
+
+    this.renderCanvas();
+    this.updateInlineControlPosition();
+  }
+
+  private handleTouchEnd(_e: TouchEvent): void {
+    if (!this.panState) return;
+    this.panState = null;
+    // panMoved는 그대로 두어 직후 합성 click이 와도 무시되도록. 다음 touchstart에서 리셋됨.
   }
 
   // ---------------------------------------------------------------------------
