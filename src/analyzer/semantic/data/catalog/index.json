@@ -578,7 +578,7 @@
       ],
       "complexity": [
         4,
-        10
+        15
       ],
       "patternType": "structural",
       "signature": [
@@ -1916,7 +1916,7 @@
       ],
       "complexity": [
         6,
-        16
+        20
       ],
       "patternType": "exact",
       "signature": [
@@ -2421,7 +2421,9 @@
         "operator:=",
         "power.exponent:2",
         "operator:+",
-        "operator:+"
+        "operator:+",
+        "variable:x",
+        "variable:y"
       ],
       "visualizers": [
         {
@@ -3158,7 +3160,7 @@
       ],
       "complexity": [
         5,
-        14
+        20
       ],
       "patternType": "structural",
       "signature": [

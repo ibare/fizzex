@@ -121,6 +121,7 @@ export function matchCatalog(
 ): CatalogMatchResult | null {
   const sig = extractSignature(ast);
   let bestMatch: CatalogMatchResult | null = null;
+  let bestSignatureLength = 0;
 
   for (const entry of index) {
     // 1. 사전 필터: complexity 범위
@@ -181,13 +182,18 @@ export function matchCatalog(
       confidence *= 0.9;
     }
 
-    // 6. 임계값 체크 + 최고 매칭 갱신
-    if (confidence >= CONFIDENCE_THRESHOLD && (!bestMatch || confidence > bestMatch.confidence)) {
+    // 6. 임계값 체크 + 최고 매칭 갱신 (동점 시 signature가 긴 쪽을 더 구체적으로 간주)
+    const better =
+      !bestMatch ||
+      confidence > bestMatch.confidence ||
+      (confidence === bestMatch.confidence && entry.signature.length > bestSignatureLength);
+    if (confidence >= CONFIDENCE_THRESHOLD && better) {
       bestMatch = {
         catalogId: entry.id,
         category: entry.category,
         confidence,
       };
+      bestSignatureLength = entry.signature.length;
 
       // 변수 매핑 (exact 패턴)
       if (entry.requiredVariables) {

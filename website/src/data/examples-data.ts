@@ -14,6 +14,7 @@ export const categories: ExampleCategory[] = [
     key: 'polynomial',
     items: [
       { labelKey: 'quadratic_eq', latex: 'x^2 + 2x - 3 = 0' },
+      { labelKey: 'quadratic_function', latex: 'y = ax^2 + bx + c' },
       { labelKey: 'cubic_poly', latex: 'x^3 - 6x^2 + 11x - 6' },
       { labelKey: 'binomial_expansion', latex: '(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3' },
       { labelKey: 'vieta', latex: 'x_1 + x_2 = -\\frac{b}{a}, \\quad x_1 x_2 = \\frac{c}{a}' },
@@ -90,12 +91,26 @@ export const categories: ExampleCategory[] = [
       { labelKey: 'universal_gravitation', latex: 'F = G\\frac{m_1 m_2}{r^2}' },
       { labelKey: 'coulomb', latex: 'F = k_e \\frac{q_1 q_2}{r^2}' },
       { labelKey: 'kinetic_energy', latex: 'K = \\frac{1}{2}mv^2' },
+      { labelKey: 'projectile_motion', latex: 's = v_0 t + \\frac{1}{2}gt^2' },
+      { labelKey: 'simple_harmonic', latex: 'y = A\\sin(\\omega t + \\varphi)' },
     ],
   },
   {
     key: 'astronomy',
     items: [
       { labelKey: 'kepler_third', latex: 'T^2 = \\frac{4\\pi^2}{GM}a^3' },
+    ],
+  },
+  {
+    key: 'biology',
+    items: [
+      { labelKey: 'exponential_decay', latex: 'N = N_0 e^{-\\lambda t}' },
+    ],
+  },
+  {
+    key: 'finance',
+    items: [
+      { labelKey: 'compound_interest', latex: 'A = P\\left(1 + \\frac{r}{n}\\right)^{nt}' },
     ],
   },
   {

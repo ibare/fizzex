@@ -170,11 +170,14 @@ export const ko: Dictionary = {
       analysis: '해석학',
       statistics: '통계학',
       astronomy: '천문학',
+      biology: '생명과학',
+      finance: '금융',
       complex: '복잡한 수식',
     },
     items: {
       // polynomial
       quadratic_eq: '이차방정식',
+      quadratic_function: '이차함수',
       cubic_poly: '삼차다항식',
       binomial_expansion: '이항 전개',
       vieta: '비에타의 공식',
@@ -219,8 +222,14 @@ export const ko: Dictionary = {
       universal_gravitation: '만유인력 법칙',
       coulomb: '쿨롱 법칙',
       kinetic_energy: '운동 에너지',
+      projectile_motion: '포물체 운동',
+      simple_harmonic: '단순 조화 운동',
       // astronomy
       kepler_third: '케플러 제3법칙',
+      // biology
+      exponential_decay: '지수 감소 (반감기)',
+      // finance
+      compound_interest: '복리',
       // analysis
       fundamental_theorem_full: '미적분학의 기본정리',
       taylor_series_full: '테일러 급수',

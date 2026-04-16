@@ -136,6 +136,8 @@ export interface Dictionary {
       analysis: string;
       statistics: string;
       astronomy: string;
+      biology: string;
+      finance: string;
       complex: string;
     };
     /** examples-data.ts의 ExampleItem.labelKey로 참조하는 라벨 사전 */

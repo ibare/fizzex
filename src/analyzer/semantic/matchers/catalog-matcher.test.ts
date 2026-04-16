@@ -56,6 +56,13 @@ const CATALOG_TEST_CASES: CatalogTestCase[] = [
   // ── 전기 ──
   { latex: 'V = IR', expectedId: 'ohm-law' },
   { latex: 'P = IV', expectedId: 'electric-power' },
+
+  // ── Visualizer 연동 대상 ──
+  { latex: 'y = ax^2 + bx + c', expectedId: 'quadratic-standard' },
+  { latex: 's = v_0 t + \\frac{1}{2}gt^2', expectedId: 'kinematic-displacement' },
+  { latex: 'y = A\\sin(\\omega t + \\varphi)', expectedId: 'simple-harmonic' },
+  { latex: 'N = N_0 e^{-\\lambda t}', expectedId: 'exponential-growth' },
+  { latex: 'A = P\\left(1 + \\frac{r}{n}\\right)^{nt}', expectedId: 'compound-interest' },
 ];
 
 describe('카탈로그 매칭', () => {

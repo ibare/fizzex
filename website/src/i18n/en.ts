@@ -170,11 +170,14 @@ export const en: Dictionary = {
       analysis: 'Analysis',
       statistics: 'Statistics',
       astronomy: 'Astronomy',
+      biology: 'Biology',
+      finance: 'Finance',
       complex: 'Complex Formulas',
     },
     items: {
       // polynomial
       quadratic_eq: 'Quadratic equation',
+      quadratic_function: 'Quadratic function',
       cubic_poly: 'Cubic polynomial',
       binomial_expansion: 'Binomial expansion',
       vieta: "Vieta's formulas",
@@ -219,8 +222,14 @@ export const en: Dictionary = {
       universal_gravitation: 'Universal gravitation',
       coulomb: "Coulomb's law",
       kinetic_energy: 'Kinetic energy',
+      projectile_motion: 'Projectile motion',
+      simple_harmonic: 'Simple harmonic motion',
       // astronomy
       kepler_third: "Kepler's third law",
+      // biology
+      exponential_decay: 'Exponential decay (half-life)',
+      // finance
+      compound_interest: 'Compound interest',
       // analysis
       fundamental_theorem_full: 'Fundamental theorem of calculus',
       taylor_series_full: 'Taylor series',
