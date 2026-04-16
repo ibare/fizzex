@@ -5,7 +5,7 @@
  * locale별 접근 인터페이스를 제공한다.
  */
 
-import type { CatalogIndexEntry, CatalogDetail } from './types';
+import type { CatalogIndexEntry, CatalogDetail, VisualizerRef } from './types';
 
 // 번들 포함 (항상 로드) — 한국어 기본
 import koLayer1 from './data/layer1/ko.json';
@@ -159,12 +159,14 @@ export function getCatalogIndex(): CatalogIndexEntry[] {
 }
 
 /**
- * 카탈로그 ID에서 visualizerId를 조회한다.
+ * 카탈로그 ID에서 연결된 Visualizer 참조 목록을 조회한다.
+ * 동일 수식에 여러 시각화 관점이 붙을 수 있으므로 항상 배열로 반환한다.
+ * 등록이 없으면 빈 배열.
  */
-export function getVisualizerIdForCatalog(catalogId: string): string | null {
+export function getVisualizersForCatalog(catalogId: string): VisualizerRef[] {
   const entries = getCatalogIndex();
   const entry = entries.find((e) => e.id === catalogId);
-  return entry?.visualizerId ?? null;
+  return entry?.visualizers ?? [];
 }
 
 /**

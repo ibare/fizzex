@@ -27,4 +27,4 @@ export type { EvaluationResult } from './evaluator';
 export { extractParameters } from './param-extractor';
 
 // 로더
-export { loadVisualizer, getVisualizerForCatalog } from './loader';
+export { loadVisualizer, getVisualizersForCatalogId } from './loader';

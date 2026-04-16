@@ -391,7 +391,21 @@
         "variable:π",
         "power.exponent:3"
       ],
-      "visualizerId": "kepler-orbit"
+      "visualizers": [
+        {
+          "id": "kepler-orbit-2d",
+          "name": "2D 궤도",
+          "description": "위에서 내려다본 원형 궤도",
+          "icon": "🛰️",
+          "default": true
+        },
+        {
+          "id": "kepler-orbit-3d",
+          "name": "3D 궤도",
+          "description": "지구를 회전하며 보는 입체 뷰",
+          "icon": "🌍"
+        }
+      ]
     },
     {
       "id": "schwarzschild-radius",

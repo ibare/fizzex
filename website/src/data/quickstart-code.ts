@@ -40,17 +40,22 @@ const derivative = diff(ast);     // 2(x+1)
 const eq = parseLatex('x^2 - 4 = 0');
 const solutions = solve(eq);      // x = 2, x = -2`,
 
-  visualization: `import { parseLatex, analyzeExpression, getVisualizerForCatalog } from 'fizzex';
+  visualization: `import {
+  parseLatex,
+  buildSemanticMap,
+  getVisualizersForCatalogId,
+  loadVisualizer,
+} from 'fizzex';
 
 const ast = parseLatex('T^2 = \\\\frac{4\\\\pi^2}{GM} a^3');
-const analysis = analyzeExpression(ast);
+const catalogId = buildSemanticMap(ast).get(ast.id)?.catalogId;
 
-// Find the matching catalog visualizer
-const viz = await getVisualizerForCatalog(analysis);
-viz?.name; // "Kepler's Third Law"
+// One formula can map to multiple independent visualizers (2D, 3D, etc.)
+const refs = catalogId ? getVisualizersForCatalogId(catalogId) : [];
+refs.forEach((r) => console.log(r.name)); // "2D 궤도", "3D 궤도"
 
-// analysis.visualization flags available types
-analysis.visualization.graphable2D; // true for y = f(x) expressions`,
+// Load on demand — each visualizer is a separate chunk
+const viz = refs[0] ? await loadVisualizer(refs[0].id) : null;`,
 };
 
 export const tabKeys = ['install', 'editor', 'latex', 'analysis', 'cas', 'visualization'] as const;

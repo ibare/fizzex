@@ -25,6 +25,12 @@ export interface VizPanelConfig {
   bounds: VizPanelBounds;
   visualizerId: string;
   catalogDetail: CatalogDetail | null;
+  /**
+   * 사용자가 패널 헤더의 닫기(✕) 버튼을 눌러 패널을 닫으려 할 때 호출된다.
+   * ExplorerOverlay가 수신해 해당 패널을 배열에서 제거 + destroy + 배너 버튼 상태 갱신을 수행한다.
+   * ExplorerOverlay.destroy()에 의한 일괄 destroy()에서는 호출되지 않는다.
+   */
+  onClose?: () => void;
 }
 
 const HEADER_HEIGHT = 26;
@@ -37,6 +43,7 @@ const EDGE_MARGIN = 40; // 화면에 최소 이만큼은 남기도록 clamp
 export class VizPanel {
   readonly root: HTMLDivElement;
   private header: HTMLDivElement;
+  private closeButton!: HTMLButtonElement;
   private vizContainer: HTMLDivElement;
   private presetsContainer: HTMLDivElement;
   private resizeHandle: HTMLDivElement;
@@ -47,9 +54,11 @@ export class VizPanel {
   private parent: HTMLElement;
   private theme: 'light' | 'dark';
   private isDark: boolean;
-  private visualizerId: string;
+  /** ExplorerOverlay가 id 기반으로 패널을 찾을 수 있도록 공개한다 (읽기 전용 의도) */
+  readonly visualizerId: string;
   private catalogDetail: CatalogDetail | null;
   private bounds: VizPanelBounds;
+  private onCloseCallback: (() => void) | undefined;
 
   private destroyed = false;
 
@@ -82,6 +91,7 @@ export class VizPanel {
     this.visualizerId = cfg.visualizerId;
     this.catalogDetail = cfg.catalogDetail;
     this.bounds = { ...cfg.bounds };
+    this.onCloseCallback = cfg.onClose;
 
     // === DOM 조립 ===
     this.root = document.createElement('div');
@@ -104,6 +114,7 @@ export class VizPanel {
 
     this.header = document.createElement('div');
     Object.assign(this.header.style, {
+      position: 'relative',
       height: `${HEADER_HEIGHT}px`,
       cursor: 'move',
       display: 'flex',
@@ -128,6 +139,50 @@ export class VizPanel {
       });
       this.header.appendChild(dot);
     }
+
+    // 닫기(X) 버튼 — 헤더 우측. 클릭 시 onCloseCallback을 호출하여
+    // ExplorerOverlay가 패널 제거 + 배너 버튼 상태 갱신을 처리하게 한다.
+    this.closeButton = document.createElement('button');
+    this.closeButton.type = 'button';
+    this.closeButton.title = '닫기';
+    this.closeButton.textContent = '\u2715';
+    Object.assign(this.closeButton.style, {
+      position: 'absolute',
+      right: '4px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      width: '18px',
+      height: '18px',
+      padding: '0',
+      border: 'none',
+      borderRadius: '4px',
+      background: 'transparent',
+      color: this.isDark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.45)',
+      cursor: 'pointer',
+      fontSize: '12px',
+      lineHeight: '18px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: 'auto',
+    });
+    this.closeButton.addEventListener('mouseenter', () => {
+      this.closeButton.style.background = this.isDark
+        ? 'rgba(255,255,255,0.12)'
+        : 'rgba(0,0,0,0.08)';
+    });
+    this.closeButton.addEventListener('mouseleave', () => {
+      this.closeButton.style.background = 'transparent';
+    });
+    // mousedown은 헤더 드래그가 먹지 않도록 중단
+    this.closeButton.addEventListener('mousedown', (e) => e.stopPropagation());
+    this.closeButton.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+    this.closeButton.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.onCloseCallback?.();
+    });
+    this.header.appendChild(this.closeButton);
+
     this.root.appendChild(this.header);
 
     this.vizContainer = document.createElement('div');

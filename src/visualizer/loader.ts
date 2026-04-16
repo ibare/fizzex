@@ -1,19 +1,25 @@
 /**
  * Visualizer 런타임 로딩
  *
- * 빌트인 Visualizer는 dynamic import로 코드 스플리팅.
- * 로드된 Visualizer는 캐시하고 레지스트리에 등록.
+ * 빌트인 Visualizer는 dynamic import로 코드 스플리팅된다.
+ * 같은 수식에 대해 서로 다른 Visualizer(2D/3D 등)가 등록될 수 있으며,
+ * 각 Visualizer는 독립 청크로 분리되어 사용자가 실제로 연 것만 로드된다.
  */
 
 import type { FizzexVisualizer } from './types';
+import type { VisualizerRef } from '../analyzer/semantic/types';
 import { registerVisualizer, getVisualizer } from './registry';
-import { getCatalogIndex } from '../analyzer/semantic/loader';
+import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 
 /** 빌트인 Visualizer 로더 매핑 */
 const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer }>> = {
-  'kepler-orbit': () => import(
-    /* webpackChunkName: "viz-kepler-orbit" */
-    './built-in/kepler-orbit'
+  'kepler-orbit-2d': () => import(
+    /* webpackChunkName: "viz-kepler-orbit-2d" */
+    './built-in/kepler-orbit-2d'
+  ),
+  'kepler-orbit-3d': () => import(
+    /* webpackChunkName: "viz-kepler-orbit-3d" */
+    './built-in/kepler-orbit-3d'
   ),
 };
 
@@ -35,12 +41,10 @@ export async function loadVisualizer(id: string): Promise<FizzexVisualizer | nul
   return null;
 }
 
-/** 카탈로그 ID에서 visualizerId를 찾아 로드 */
-export async function getVisualizerForCatalog(
-  catalogId: string,
-): Promise<FizzexVisualizer | null> {
-  const entries = getCatalogIndex();
-  const entry = entries.find((e) => e.id === catalogId);
-  if (!entry?.visualizerId) return null;
-  return loadVisualizer(entry.visualizerId);
+/**
+ * 카탈로그 ID에서 연결된 Visualizer 참조 목록을 얻는다.
+ * 로딩은 참조별 사용자 조작 시점까지 지연된다 (모두 미리 import하지 않음).
+ */
+export function getVisualizersForCatalogId(catalogId: string): VisualizerRef[] {
+  return getVisualizersForCatalog(catalogId);
 }

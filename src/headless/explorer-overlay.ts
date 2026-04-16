@@ -23,7 +23,8 @@ import {
 import type { ExplorerBoxInfo } from '../box/explorer-map';
 import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
 import type { SemanticResult } from '../analyzer/semantic-roles';
-import { getVisualizerIdForCatalog } from '../analyzer/semantic/loader';
+import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
+import type { VisualizerRef } from '../analyzer/semantic/types';
 import { VizPanel } from './explorer-viz-panel';
 import { getControlType, buildInlineControlConfig } from './inline-control-types';
 import type { InlineControlConfig } from './inline-control-types';
@@ -412,86 +413,120 @@ export class ExplorerOverlay {
   }
 
   /**
-   * Visualizer 패널 초기화. 카탈로그 매칭이 있을 때 visualizerId 목록을 얻어
-   * 각 ID마다 독립적인 VizPanel을 생성한다. 현재는 단일 반환이므로 1개만 생성되나
-   * 구조는 N개 대응(동일 수식에 여러 시각화 앱을 띄우는 미래 지원).
+   * 수식 영역을 포함할 formulaPane을 lazy 생성한다.
+   * 첫 Visualizer 패널이 열릴 때 단 1회만 실행되며,
+   * canvas를 formulaPane 안으로 옮겨 절대 위치 오버레이 기반의 패널들이 canvas 위에 올라오게 한다.
    */
-  private initVisualizers(): void {
+  private ensureFormulaPane(): HTMLDivElement {
+    if (this.formulaPane) return this.formulaPane;
+
+    this.contentWrapper = document.createElement('div');
+    Object.assign(this.contentWrapper.style, {
+      position: 'absolute',
+      inset: '0',
+      display: 'flex',
+      flexDirection: 'column',
+    });
+
+    this.formulaPane = document.createElement('div');
+    Object.assign(this.formulaPane.style, {
+      flex: '1',
+      position: 'relative',
+      minHeight: '0',
+    });
+    this.canvas.style.position = 'absolute';
+    this.canvas.style.inset = '0';
+    this.formulaPane.appendChild(this.canvas);
+
+    this.contentWrapper.appendChild(this.formulaPane);
+    this.overlay.insertBefore(this.contentWrapper, this.overlay.firstChild);
+    return this.formulaPane;
+  }
+
+  /**
+   * 특정 Visualizer 패널을 추가한다.
+   * 같은 visualizerId 패널이 이미 열려 있으면 아무 것도 하지 않는다(토글은 호출 측에서 처리).
+   */
+  private openVisualizerPanel(ref: VisualizerRef): void {
     const rootSemantic = this.semanticMap.get(this.ast.id);
     if (!rootSemantic?.catalogId || !rootSemantic.catalogCategory) return;
 
-    // 다중 반환 API로 전환될 때 이 한 줄만 수정하면 된다
-    const id = getVisualizerIdForCatalog(rootSemantic.catalogId);
-    const visualizerIds = id ? [id] : [];
-    if (visualizerIds.length === 0) return;
-
-    // 이미 초기화되었으면 스킵
-    if (this.vizPanels.length > 0) return;
+    if (this.vizPanels.some((p) => p.visualizerId === ref.id)) return;
 
     const detail = getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory);
-
-    // 수식 레이아웃 컨테이너(최초 1회) — 패널들은 formulaPane 자식으로 플로팅
-    if (!this.contentWrapper) {
-      this.contentWrapper = document.createElement('div');
-      Object.assign(this.contentWrapper.style, {
-        position: 'absolute',
-        inset: '0',
-        display: 'flex',
-        flexDirection: 'column',
-      });
-
-      this.formulaPane = document.createElement('div');
-      Object.assign(this.formulaPane.style, {
-        flex: '1',
-        position: 'relative',
-        minHeight: '0',
-      });
-      this.canvas.style.position = 'absolute';
-      this.canvas.style.inset = '0';
-      this.formulaPane.appendChild(this.canvas);
-
-      this.contentWrapper.appendChild(this.formulaPane);
-      this.overlay.insertBefore(this.contentWrapper, this.overlay.firstChild);
-    }
-
-    const formulaPane = this.formulaPane!;
+    const formulaPane = this.ensureFormulaPane();
     const paneRect = formulaPane.getBoundingClientRect();
     const initialWidth = Math.max(200, Math.min(400, paneRect.width * 0.3));
 
-    visualizerIds.forEach((visualizerId, index) => {
-      // Cascading: 두 번째 이상 패널은 기존 우상단에서 (24, 24)씩 오프셋
-      const cascade = index * 24;
-      const rightMargin = 16 + cascade;
-      const top = 60 + cascade;
-      const left = Math.max(0, paneRect.width - initialWidth - rightMargin);
+    // cascading: 패널이 추가될 때마다 (24, 24)씩 내려감
+    const cascade = this.vizPanels.length * 24;
+    const rightMargin = 16 + cascade;
+    const top = 60 + cascade;
+    const left = Math.max(0, paneRect.width - initialWidth - rightMargin);
 
-      const panel = new VizPanel({
-        parent: formulaPane,
-        theme: this.isDark ? 'dark' : 'light',
-        bounds: { left, top, width: initialWidth },
-        visualizerId,
-        catalogDetail: detail,
-      });
-      this.vizPanels.push(panel);
-
-      panel.init().then((ok) => {
-        if (!ok || this.destroyed) return;
-
-        // Primary 패널만 AST/값 배지 bridge와 연결.
-        // (다중 시각화가 실제로 도입되는 시점에 "공유 bridge/브로드캐스트" 구조로 확장)
-        if (index === 0) {
-          this.syncAstToBridge(this.ast);
-          const bridge = panel.bridge;
-          if (bridge) {
-            this.valueBadgeUnsub?.();
-            this.valueBadgeUnsub = bridge.subscribe(() => {
-              this.renderCanvas();
-            });
-          }
-          this.renderCanvas();
-        }
-      });
+    const panel = new VizPanel({
+      parent: formulaPane,
+      theme: this.isDark ? 'dark' : 'light',
+      bounds: { left, top, width: initialWidth },
+      visualizerId: ref.id,
+      catalogDetail: detail,
+      onClose: () => this.closeVisualizerPanel(ref.id),
     });
+    const isFirstPanel = this.vizPanels.length === 0;
+    this.vizPanels.push(panel);
+    this.refreshVisualizerButtons();
+
+    panel.init().then((ok) => {
+      if (!ok || this.destroyed) return;
+      // primary(배열 0번) 패널만 AST/값 배지 bridge와 연결한다.
+      // 추가된 패널이 첫 패널이면 primary이므로 bridge를 연결한다.
+      if (isFirstPanel && this.vizPanels[0] === panel) {
+        this.syncAstToBridge(this.ast);
+        this.valueBadgeUnsub?.();
+        const bridge = panel.bridge;
+        if (bridge) {
+          this.valueBadgeUnsub = bridge.subscribe(() => this.renderCanvas());
+        }
+        this.renderCanvas();
+      } else {
+        // 비-primary 패널도 현재 AST로 동기화 (독립 bridge가 baseline 비교를 수행)
+        panel.setAst(this.ast, this.astModState?.originalAst);
+      }
+    });
+  }
+
+  /**
+   * 특정 Visualizer 패널을 제거한다.
+   * 제거된 패널이 primary였다면 남은 첫 패널을 새 primary로 승격시킨다.
+   */
+  private closeVisualizerPanel(visualizerId: string): void {
+    const idx = this.vizPanels.findIndex((p) => p.visualizerId === visualizerId);
+    if (idx < 0) return;
+    const [removed] = this.vizPanels.splice(idx, 1);
+    const wasPrimary = idx === 0;
+    removed.destroy();
+
+    if (wasPrimary) {
+      this.valueBadgeUnsub?.();
+      this.valueBadgeUnsub = null;
+
+      const newPrimary = this.vizPanels[0];
+      if (newPrimary) {
+        this.syncAstToBridge(this.ast);
+        const bridge = newPrimary.bridge;
+        if (bridge) {
+          this.valueBadgeUnsub = bridge.subscribe(() => this.renderCanvas());
+        }
+      }
+      this.renderCanvas();
+    }
+
+    this.refreshVisualizerButtons();
+  }
+
+  /** 배너의 Visualizer 버튼들을 현재 열림 상태에 맞춰 다시 그린다 */
+  private refreshVisualizerButtons(): void {
+    this.updateCatalogBanner();
   }
 
   /** Canvas 렌더링 — 2-pass 호버 하이라이트 */
@@ -1156,50 +1191,67 @@ export class ExplorerOverlay {
     this.catalogBanner.appendChild(sepSpan);
     this.catalogBanner.appendChild(descSpan);
 
-    // Visualizer 활성화 아이콘 (visualizerId가 있고, 아직 로드 안 됐을 때)
-    const visualizerId = getVisualizerIdForCatalog(rootSemantic.catalogId);
-    if (visualizerId && this.vizPanels.length === 0) {
-      const vizBtn = document.createElement('button');
-      vizBtn.type = 'button';
-      vizBtn.title = '시각화 활성화';
-      vizBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none">'
-        + '<path d="M2 12V4l4 4-4 4zm5-4l4-4v8l-4-4zm5-4v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
-        + '</svg>';
-      Object.assign(vizBtn.style, {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: '10px',
-        padding: '4px 8px',
-        border: 'none',
-        borderRadius: '6px',
-        background: this.isDark ? 'rgba(96,165,250,0.15)' : 'rgba(59,130,246,0.1)',
-        color: this.isDark ? '#60a5fa' : '#3b82f6',
-        cursor: 'pointer',
-        fontSize: '12px',
-        gap: '4px',
-        pointerEvents: 'auto',
-        whiteSpace: 'nowrap',
-      });
-
-      const label = document.createElement('span');
-      label.textContent = '시각화';
-      label.style.fontSize = '12px';
-      vizBtn.appendChild(label);
-
-      vizBtn.addEventListener('click', () => {
-        this.initVisualizers();
-        // 활성화 후 버튼을 "활성" 상태로 변경
-        vizBtn.style.opacity = '0.5';
-        vizBtn.style.pointerEvents = 'none';
-        label.textContent = '로딩…';
-      });
-
-      this.catalogBanner.appendChild(vizBtn);
+    // 시각화 버튼 — 등록된 Visualizer 참조 수만큼 생성.
+    // 각 버튼은 해당 패널을 토글한다(열려 있으면 닫기, 없으면 열기).
+    const refs = getVisualizersForCatalog(rootSemantic.catalogId);
+    for (const ref of refs) {
+      const isOpen = this.vizPanels.some((p) => p.visualizerId === ref.id);
+      this.catalogBanner.appendChild(this.createVisualizerButton(ref, isOpen));
     }
 
     this.catalogBanner.style.display = 'flex';
     this.catalogBanner.style.pointerEvents = 'auto';
+  }
+
+  /** 배너에 들어갈 시각화 토글 버튼을 만든다 */
+  private createVisualizerButton(ref: VisualizerRef, isOpen: boolean): HTMLButtonElement {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.title = isOpen ? `${ref.name} 닫기` : `${ref.name} — ${ref.description}`;
+
+    const activeBg = this.isDark ? 'rgba(96,165,250,0.35)' : 'rgba(59,130,246,0.2)';
+    const activeColor = this.isDark ? '#dbeafe' : '#1d4ed8';
+    const idleBg = this.isDark ? 'rgba(96,165,250,0.12)' : 'rgba(59,130,246,0.08)';
+    const idleColor = this.isDark ? '#60a5fa' : '#3b82f6';
+
+    Object.assign(btn.style, {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: '8px',
+      padding: '4px 10px',
+      border: 'none',
+      borderRadius: '6px',
+      cursor: 'pointer',
+      fontSize: '12px',
+      gap: '4px',
+      pointerEvents: 'auto',
+      whiteSpace: 'nowrap',
+      background: isOpen ? activeBg : idleBg,
+      color: isOpen ? activeColor : idleColor,
+      fontWeight: isOpen ? '600' : '500',
+    });
+
+    if (ref.icon) {
+      const icon = document.createElement('span');
+      icon.textContent = ref.icon;
+      icon.style.fontSize = '12px';
+      btn.appendChild(icon);
+    }
+    const label = document.createElement('span');
+    label.textContent = ref.name;
+    btn.appendChild(label);
+
+    btn.addEventListener('click', () => {
+      const currentlyOpen = this.vizPanels.some((p) => p.visualizerId === ref.id);
+      if (currentlyOpen) {
+        this.closeVisualizerPanel(ref.id);
+      } else {
+        this.openVisualizerPanel(ref);
+      }
+    });
+
+    return btn;
   }
 
   // ---------------------------------------------------------------------------

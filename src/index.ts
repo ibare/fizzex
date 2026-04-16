@@ -182,7 +182,7 @@ export type {
 } from './visualizer';
 export { registerVisualizer, getVisualizer, getAllVisualizerIds } from './visualizer';
 export { VisualizerBridgeImpl } from './visualizer';
-export { loadVisualizer, getVisualizerForCatalog } from './visualizer';
+export { loadVisualizer, getVisualizersForCatalogId } from './visualizer';
 export { extractParameters } from './visualizer';
 export { evaluateAst } from './visualizer';
 export type { EvaluationResult } from './visualizer';

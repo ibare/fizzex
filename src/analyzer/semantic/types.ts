@@ -52,6 +52,23 @@ export type CatalogCategory =
   // 사회과학
   | 'social-science';
 
+/**
+ * 수식에 연결된 Visualizer 참조.
+ * 같은 수식이 서로 독립적인 시각화 앱 여러 개를 가질 수 있도록 배열 형태로 노출한다.
+ */
+export interface VisualizerRef {
+  /** 레지스트리에서 찾을 Visualizer ID (예: "kepler-orbit-2d", "kepler-orbit-3d") */
+  id: string;
+  /** 사용자에게 표시할 이름 (예: "2D 궤도") */
+  name: string;
+  /** 짧은 설명 (예: "위에서 내려다본 원형 궤도") */
+  description: string;
+  /** 이모지 또는 아이콘 기호 */
+  icon?: string;
+  /** 기본 선택 여부 (UI에서 우선 강조할 시각화) */
+  default?: boolean;
+}
+
 /** 카탈로그 인덱스 항목 (번들에 포함, 가벼움) */
 export interface CatalogIndexEntry {
   id: string;
@@ -66,8 +83,8 @@ export interface CatalogIndexEntry {
   patternType: 'exact' | 'structural';
   /** 구조 시그니처 — 필수 특징 */
   signature: string[];
-  /** 이 수식에 연결된 Visualizer ID */
-  visualizerId?: string;
+  /** 이 수식에 연결된 Visualizer 참조 목록 (동일 수식에 여러 시각화 관점이 있을 수 있다) */
+  visualizers?: VisualizerRef[];
 }
 
 /** 카탈로그 파라미터 설정 (JSON 직렬화 가능 — compute 함수 없음) */

@@ -154,15 +154,28 @@ const solutions = solve(equation);         // x = 2, x = -2
 ### Visualization
 
 ```typescript
-import { parseLatex, analyzeExpression, getVisualizerForCatalog } from 'fizzex';
+import {
+  parseLatex,
+  buildSemanticMap,
+  getVisualizersForCatalogId,
+  loadVisualizer,
+} from 'fizzex';
 import { ExplorerOverlay } from 'fizzex/headless';
 
-// Catalog-matched visualizer — automatically finds the right visualizer
+// One formula can have multiple independent visualizers (2D, 3D, etc.)
 const ast = parseLatex('T^2 = \\frac{4\\pi^2}{GM} a^3');
-const analysis = analyzeExpression(ast);
-const visualizer = await getVisualizerForCatalog(analysis);
+const semanticMap = buildSemanticMap(ast);
+const catalogId = semanticMap.get(ast.id)?.catalogId;
 
-// Mount into any DOM container
+// Discover every visualizer linked to this formula
+const refs = catalogId ? getVisualizersForCatalogId(catalogId) : [];
+// refs: [{ id: 'kepler-orbit-2d', name: '2D 궤도', ... },
+//        { id: 'kepler-orbit-3d', name: '3D 궤도', ... }]
+
+// Load on demand (each visualizer is a separate chunk)
+const viz = refs[0] ? await loadVisualizer(refs[0].id) : null;
+
+// Or let ExplorerOverlay surface them as toggleable banner buttons
 const overlay = new ExplorerOverlay(container, { baseFontSize: 20 });
 overlay.setAst(ast);
 ```
@@ -219,7 +232,7 @@ import { analyzeExpression } from 'fizzex';
 import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizzex';
 
 // Visualization
-import { loadVisualizer, getVisualizerForCatalog } from 'fizzex';
+import { loadVisualizer, getVisualizersForCatalogId } from 'fizzex';
 
 // Node creators
 import {

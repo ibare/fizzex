@@ -1,8 +1,9 @@
 /**
- * 케플러 제3법칙 — 위성 궤도 Visualizer
+ * 케플러 제3법칙 — 2D 위성 궤도 Visualizer
  *
  * T^2 = (4pi^2 / GM) * a^3
  * 궤도 반지름(a)을 변경하면 공전 주기, 속도, 고도가 실시간으로 변한다.
+ * 위에서 내려다본 원형 궤도 뷰.
  */
 
 import type { FizzexVisualizer, ParameterValues, ComputeContext } from '../../types';
@@ -18,8 +19,8 @@ const GM = G * M_EARTH;
 // ─── Visualizer 구현체 ───
 
 const keplerOrbitVisualizer: FizzexVisualizer = {
-  id: 'kepler-orbit',
-  name: '위성 궤도',
+  id: 'kepler-orbit-2d',
+  name: '2D 궤도',
 
   constants: { G, M: M_EARTH },
 
