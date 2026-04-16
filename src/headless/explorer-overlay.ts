@@ -24,8 +24,7 @@ import type { ExplorerBoxInfo } from '../box/explorer-map';
 import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
 import type { SemanticResult } from '../analyzer/semantic-roles';
 import { getVisualizerIdForCatalog } from '../analyzer/semantic/loader';
-import { ExplorerVisualizerController } from './explorer-visualizer';
-import { ExplorerPresetsBar } from './explorer-presets-bar';
+import { VizPanel } from './explorer-viz-panel';
 import { getControlType, buildInlineControlConfig } from './inline-control-types';
 import type { InlineControlConfig } from './inline-control-types';
 import { ExplorerInlineControls } from './explorer-inline-controls';
@@ -105,12 +104,20 @@ export class ExplorerOverlay {
   private destroyed = false;
   private onClose?: () => void;
 
-  // Visualizer 통합
+  // Visualizer 통합 — 다중 패널 지원 (현재는 1개 생성, 구조는 N개 대응)
+  private vizPanels: VizPanel[] = [];
   private valueBadgeUnsub: (() => void) | null = null;
-  private vizController: ExplorerVisualizerController | null = null;
-  private presetsBar: ExplorerPresetsBar | null = null;
-  private vizContainer: HTMLDivElement | null = null;
   private contentWrapper: HTMLDivElement | null = null;
+  private formulaPane: HTMLDivElement | null = null;
+
+  /** Inline 컨트롤·값 배지가 참조하는 primary bridge (배열 0번째 패널의 bridge) */
+  private get primaryBridge() {
+    return this.vizPanels[0]?.bridge ?? null;
+  }
+
+  private get primaryViz() {
+    return this.vizPanels[0]?.viz ?? null;
+  }
 
   // Bound handler 참조 (destroy 시 제거)
   private boundKeyDown: (e: KeyboardEvent) => void;
@@ -309,11 +316,11 @@ export class ExplorerOverlay {
     this.inlineControl = null;
     this.activeControlNodeId = null;
 
-    // Visualizer 정리
+    // Visualizer 패널들 정리
     this.valueBadgeUnsub?.();
     this.valueBadgeUnsub = null;
-    this.presetsBar?.destroy();
-    this.vizController?.destroy();
+    for (const panel of this.vizPanels) panel.destroy();
+    this.vizPanels = [];
 
     // 이벤트 제거
     window.removeEventListener('keydown', this.boundKeyDown);
@@ -345,10 +352,8 @@ export class ExplorerOverlay {
     this.selectedInfo = null;
     this.astModState = null;
     this.catalogDetail = null;
-    this.vizController = null;
-    this.presetsBar = null;
-    this.vizContainer = null;
     this.contentWrapper = null;
+    this.formulaPane = null;
     (this as Record<string, unknown>).overlay = null;
     (this as Record<string, unknown>).canvas = null;
     (this as Record<string, unknown>).ctx = null;
@@ -406,110 +411,86 @@ export class ExplorerOverlay {
     }
   }
 
-  /** Visualizer 레이아웃 초기화 (카탈로그 매칭 + visualizerId 있을 때만) */
-  private initVisualizer(): void {
+  /**
+   * Visualizer 패널 초기화. 카탈로그 매칭이 있을 때 visualizerId 목록을 얻어
+   * 각 ID마다 독립적인 VizPanel을 생성한다. 현재는 단일 반환이므로 1개만 생성되나
+   * 구조는 N개 대응(동일 수식에 여러 시각화 앱을 띄우는 미래 지원).
+   */
+  private initVisualizers(): void {
     const rootSemantic = this.semanticMap.get(this.ast.id);
     if (!rootSemantic?.catalogId || !rootSemantic.catalogCategory) return;
 
-    const visualizerId = getVisualizerIdForCatalog(rootSemantic.catalogId);
-    if (!visualizerId) return;
+    // 다중 반환 API로 전환될 때 이 한 줄만 수정하면 된다
+    const id = getVisualizerIdForCatalog(rootSemantic.catalogId);
+    const visualizerIds = id ? [id] : [];
+    if (visualizerIds.length === 0) return;
 
     // 이미 초기화되었으면 스킵
-    if (this.vizController) return;
+    if (this.vizPanels.length > 0) return;
 
     const detail = getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory);
 
-    // DOM 레이아웃 재구성: 수식 전체화면 + Visualizer 카드(우상단 플로팅, 하단 프리셋 바)
-    this.contentWrapper = document.createElement('div');
-    Object.assign(this.contentWrapper.style, {
-      position: 'absolute',
-      inset: '0',
-      display: 'flex',
-      flexDirection: 'column',
-    });
-
-    // 수식 영역 (전체)
-    const formulaPane = document.createElement('div');
-    Object.assign(formulaPane.style, {
-      flex: '1',
-      position: 'relative',
-      minHeight: '0',
-    });
-    this.canvas.style.position = 'absolute';
-    this.canvas.style.inset = '0';
-    formulaPane.appendChild(this.canvas);
-
-    // Visualizer 카드 (우상단 플로팅) — 카드 자체가 시각 장식 담당
-    const vizPane = document.createElement('div');
-    Object.assign(vizPane.style, {
-      position: 'absolute',
-      top: '60px',
-      right: '16px',
-      width: '30%',
-      maxWidth: '400px',
-      minWidth: '200px',
-      display: 'flex',
-      flexDirection: 'column',
-      borderRadius: '12px',
-      overflow: 'hidden',
-      background: this.isDark ? 'rgba(20, 20, 20, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-      backdropFilter: 'blur(8px)',
-      boxShadow: this.isDark
-        ? '0 4px 24px rgba(0,0,0,0.5)'
-        : '0 4px 24px rgba(0,0,0,0.12)',
-      border: this.isDark
-        ? '1px solid rgba(255,255,255,0.08)'
-        : '1px solid rgba(0,0,0,0.06)',
-      zIndex: '1',
-    });
-
-    // 카드 내부: 1) Visualizer 캔버스 영역(정사각형) 2) 프리셋 바
-    this.vizContainer = document.createElement('div');
-    Object.assign(this.vizContainer.style, {
-      width: '100%',
-      aspectRatio: '1',
-      position: 'relative',
-    });
-    vizPane.appendChild(this.vizContainer);
-
-    const presetsContainer = document.createElement('div');
-    Object.assign(presetsContainer.style, {
-      width: '100%',
-    });
-    vizPane.appendChild(presetsContainer);
-
-    formulaPane.appendChild(vizPane);
-    this.contentWrapper.appendChild(formulaPane);
-
-    // 오버레이에 삽입 (기존 요소들 앞에)
-    this.overlay.insertBefore(this.contentWrapper, this.overlay.firstChild);
-
-    // Visualizer 컨트롤러 + 프리셋 바 생성 (비동기)
-    this.vizController = new ExplorerVisualizerController(this.vizContainer, this.isDark ? 'dark' : 'light');
-    this.vizController.init(visualizerId, detail).then((ok) => {
-      if (!ok || this.destroyed || !this.vizController) return;
-
-      const bridge = this.vizController.bridge;
-      const viz = this.vizController.viz;
-      if (!bridge || !viz) return;
-
-      // Bridge에 현재 AST 전달 (AST 기반 파생값 계산 활성화)
-      this.syncAstToBridge(this.ast);
-
-      this.presetsBar = new ExplorerPresetsBar(
-        presetsContainer,
-        bridge,
-        viz.presets,
-        this.isDark ? 'dark' : 'light',
-      );
-
-      // 파라미터 변경 시 값 배지 갱신
-      this.valueBadgeUnsub = bridge.subscribe(() => {
-        this.renderCanvas();
+    // 수식 레이아웃 컨테이너(최초 1회) — 패널들은 formulaPane 자식으로 플로팅
+    if (!this.contentWrapper) {
+      this.contentWrapper = document.createElement('div');
+      Object.assign(this.contentWrapper.style, {
+        position: 'absolute',
+        inset: '0',
+        display: 'flex',
+        flexDirection: 'column',
       });
 
-      // 초기 값 배지 표시
-      this.renderCanvas();
+      this.formulaPane = document.createElement('div');
+      Object.assign(this.formulaPane.style, {
+        flex: '1',
+        position: 'relative',
+        minHeight: '0',
+      });
+      this.canvas.style.position = 'absolute';
+      this.canvas.style.inset = '0';
+      this.formulaPane.appendChild(this.canvas);
+
+      this.contentWrapper.appendChild(this.formulaPane);
+      this.overlay.insertBefore(this.contentWrapper, this.overlay.firstChild);
+    }
+
+    const formulaPane = this.formulaPane!;
+    const paneRect = formulaPane.getBoundingClientRect();
+    const initialWidth = Math.max(200, Math.min(400, paneRect.width * 0.3));
+
+    visualizerIds.forEach((visualizerId, index) => {
+      // Cascading: 두 번째 이상 패널은 기존 우상단에서 (24, 24)씩 오프셋
+      const cascade = index * 24;
+      const rightMargin = 16 + cascade;
+      const top = 60 + cascade;
+      const left = Math.max(0, paneRect.width - initialWidth - rightMargin);
+
+      const panel = new VizPanel({
+        parent: formulaPane,
+        theme: this.isDark ? 'dark' : 'light',
+        bounds: { left, top, width: initialWidth },
+        visualizerId,
+        catalogDetail: detail,
+      });
+      this.vizPanels.push(panel);
+
+      panel.init().then((ok) => {
+        if (!ok || this.destroyed) return;
+
+        // Primary 패널만 AST/값 배지 bridge와 연결.
+        // (다중 시각화가 실제로 도입되는 시점에 "공유 bridge/브로드캐스트" 구조로 확장)
+        if (index === 0) {
+          this.syncAstToBridge(this.ast);
+          const bridge = panel.bridge;
+          if (bridge) {
+            this.valueBadgeUnsub?.();
+            this.valueBadgeUnsub = bridge.subscribe(() => {
+              this.renderCanvas();
+            });
+          }
+          this.renderCanvas();
+        }
+      });
     });
   }
 
@@ -813,10 +794,8 @@ export class ExplorerOverlay {
   }
 
   private handleResize(): void {
-    if (this.vizController && this.vizContainer) {
-      const rect = this.vizContainer.getBoundingClientRect();
-      this.vizController.resize(rect.width, rect.height);
-    }
+    // 각 Visualizer 패널을 화면 경계 안으로 보정(크기 변경 시 viz resize 동반)
+    for (const panel of this.vizPanels) panel.clampToViewport();
     this.renderCanvas();
     this.updateInlineControlPosition();
   }
@@ -964,7 +943,7 @@ export class ExplorerOverlay {
 
     const node = active.astNode;
     const semantic = this.semanticMap.get(node.id);
-    const bridge = this.vizController?.bridge ?? null;
+    const bridge = this.primaryBridge;
 
     const config = buildInlineControlConfig(
       node,
@@ -1014,7 +993,7 @@ export class ExplorerOverlay {
   private handleInlineValueChange(id: string, value: number, config: InlineControlConfig): void {
     if (config.controlType === 'slider') {
       // 변수 슬라이더: bridge 또는 로컬 파라미터 업데이트
-      const bridge = this.vizController?.bridge;
+      const bridge = this.primaryBridge;
       if (bridge) {
         bridge.setParam(id, value, 'inline');
       } else {
@@ -1049,12 +1028,11 @@ export class ExplorerOverlay {
    * 수정이 없거나 astModState가 아직 생성 전이면 working === original 로 간주 (isStandard true).
    */
   private syncAstToBridge(workingAst: RootNode): void {
-    const bridge = this.vizController?.bridge;
-    if (!bridge?.setAst) return;
+    if (this.vizPanels.length === 0) return;
     const original = (this.astModState && hasModifications(this.astModState))
       ? this.astModState.originalAst
       : undefined;
-    bridge.setAst(workingAst, original);
+    for (const panel of this.vizPanels) panel.setAst(workingAst, original);
   }
 
   private updateInlineControlPosition(): void {
@@ -1180,7 +1158,7 @@ export class ExplorerOverlay {
 
     // Visualizer 활성화 아이콘 (visualizerId가 있고, 아직 로드 안 됐을 때)
     const visualizerId = getVisualizerIdForCatalog(rootSemantic.catalogId);
-    if (visualizerId && !this.vizController) {
+    if (visualizerId && this.vizPanels.length === 0) {
       const vizBtn = document.createElement('button');
       vizBtn.type = 'button';
       vizBtn.title = '시각화 활성화';
@@ -1210,7 +1188,7 @@ export class ExplorerOverlay {
       vizBtn.appendChild(label);
 
       vizBtn.addEventListener('click', () => {
-        this.initVisualizer();
+        this.initVisualizers();
         // 활성화 후 버튼을 "활성" 상태로 변경
         vizBtn.style.opacity = '0.5';
         vizBtn.style.pointerEvents = 'none';
@@ -1233,8 +1211,8 @@ export class ExplorerOverlay {
     // 값 맵 구축: variableName → { label, value }
     const valueMap = new Map<string, { label: string; value: string }>();
 
-    const bridge = this.vizController?.bridge;
-    const viz = this.vizController?.viz;
+    const bridge = this.primaryBridge;
+    const viz = this.primaryViz;
 
     if (bridge && viz) {
       const params = bridge.getParams();
