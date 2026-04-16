@@ -212,10 +212,21 @@ export function evaluateAst(nodes: MathNode[], params: ParameterValues): Evaluat
 }
 
 /**
- * 방정식 AST의 우변을 평가한다.
+ * 방정식 AST를 평가하여 "좌변 변수의 값"을 반환한다.
  *
- * `=` 연산자를 기준으로 LHS/RHS를 분할하고, RHS를 evaluateAst로 평가한다.
+ * `=` 기준으로 LHS/RHS를 분할:
+ *   - RHS 를 evaluateAst 로 평가
+ *   - LHS 패턴을 분석해 RHS 값을 좌변 변수의 값으로 풀어낸다 (analyzeLhsInversion)
+ *     - 단일 variable (`T = ...`)        → identity (RHS 그대로)
+ *     - power(variable, n) (`T^n = ...`) → RHS^(1/n)
+ *     - 그 외 패턴 (다항식 등)           → RHS 그대로 (풀이 불가)
  * 등호가 없으면 전체를 평가한다.
+ *
+ * 발견적 학습: 좌변 number 노드 변경(예: T² → T³)이 ctx.equationValue 에 반영되어
+ * derivedValue.compute 가 자동으로 cbrt(rhs) 결과를 받게 된다.
+ *
+ * @returns rhsValue — **이름은 후방 호환을 위해 유지하나 의미는 "좌변 변수의 풀린 값".**
+ *                     LHS 패턴이 풀이 불가일 때만 순수 RHS 값.
  */
 export function evaluateEquation(
   ast: RootNode,
@@ -228,10 +239,60 @@ export function evaluateEquation(
     (c) => c.type === 'operator' && (c.operator === '=' || c.operator === '\\eq'),
   );
 
-  const targetNodes = eqIdx >= 0 ? children.slice(eqIdx + 1) : children;
-  const result = evaluateAst(targetNodes, params);
+  if (eqIdx < 0) {
+    // 등호 없음 — 전체 평가 (기존 동작 유지)
+    const r = evaluateAst(children, params);
+    return { rhsValue: r.result, nodeValues: r.nodeValues };
+  }
 
-  return { rhsValue: result.result, nodeValues: result.nodeValues };
+  const lhsNodes = children.slice(0, eqIdx);
+  const rhsNodes = children.slice(eqIdx + 1);
+
+  const rhsResult = evaluateAst(rhsNodes, params);
+  const invert = analyzeLhsInversion(lhsNodes, params);
+  const equationValue = invert ? invert(rhsResult.result) : rhsResult.result;
+
+  return { rhsValue: equationValue, nodeValues: rhsResult.nodeValues };
+}
+
+/**
+ * LHS 노드 배열을 분석하여 RHS 값을 좌변 변수 값으로 풀어내는 함수를 반환.
+ *
+ * 발견적 학습: 좌변의 number 노드 변경(예: T²의 2 → 3)이 derived 결과에 반영되도록
+ * 양변을 모두 고려해 평가한다.
+ *
+ * 지원 패턴:
+ *   - 단일 `variable` 노드          → identity
+ *   - `power` 노드 (단일 변수 base) → rhs^(1/exponent)
+ *   - 그 외 (다항식, frac 등)       → null (호출자가 RHS 그대로 사용)
+ */
+function analyzeLhsInversion(
+  lhsNodes: MathNode[],
+  params: ParameterValues,
+): ((rhsValue: number) => number) | null {
+  // 공백/텍스트 노드 제거 — 실제 의미 있는 노드만 남긴다
+  const meaningful = lhsNodes.filter((n) => n.type !== 'space' && n.type !== 'text');
+  if (meaningful.length !== 1) return null;
+  const node = meaningful[0];
+
+  // case 1: 단일 변수 — invert 없음 (T = RHS)
+  if (node.type === 'variable') {
+    return (rhs) => rhs;
+  }
+
+  // case 2: 변수의 거듭제곱 — T^n = RHS → T = RHS^(1/n)
+  if (node.type === 'power') {
+    const base = node.base.filter((n) => n.type !== 'space' && n.type !== 'text');
+    if (base.length !== 1 || base[0].type !== 'variable') return null;
+
+    const exponent = evaluateAst(node.exponent, params).result;
+    if (!Number.isFinite(exponent) || exponent === 0) return null;
+
+    const inv = 1 / exponent;
+    return (rhs) => Math.pow(rhs, inv);
+  }
+
+  return null;
 }
 
 function normalizeOp(op: string): string {

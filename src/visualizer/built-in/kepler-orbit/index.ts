@@ -45,9 +45,11 @@ const keplerOrbitVisualizer: FizzexVisualizer = {
       format: 'time',
       formulaElement: 'T',
       compute: (p: ParameterValues, ctx?: ComputeContext) => {
-        // AST 우선: equationValue = T² (SI, s²)
+        // AST 우선: equationValue = T (좌변 invert 완료, SI, s).
+        // evaluateEquation 이 좌변 패턴(T^n)을 분석해 이미 cbrt/sqrt 등을 적용한 결과.
+        // 좌변 지수가 변경되면 자동으로 다른 거듭제곱근이 적용된다.
         if (ctx?.equationValue != null && !isNaN(ctx.equationValue)) {
-          return Math.sqrt(ctx.equationValue);
+          return ctx.equationValue;
         }
         // fallback: AST 없을 때 직접 계산
         const a_m = p.a * 1000;
@@ -123,9 +125,9 @@ const keplerOrbitVisualizer: FizzexVisualizer = {
       new KeplerOrbitRenderer(container, options, this.presets);
   },
 
-  update(params) {
+  update(context) {
     const r = (this as unknown as { _renderer?: KeplerOrbitRenderer })._renderer;
-    r?.update(params);
+    r?.update(context);
   },
 
   resize(width, height) {

@@ -456,7 +456,7 @@ export class ExplorerOverlay {
       if (!bridge || !viz) return;
 
       // Bridge에 현재 AST 전달 (AST 기반 파생값 계산 활성화)
-      bridge.setAst?.(this.ast);
+      this.syncAstToBridge(this.ast);
 
       this.vizControls = new ExplorerControlsPanel(
         this.controlsContainer,
@@ -622,6 +622,9 @@ export class ExplorerOverlay {
     if (!activeInfo) {
       this.drawAdjustableCues(scale);
     }
+
+    // 수정된 number 노드 표식 — 호버/선택과 무관하게 항상 표시 (baseline 모드 신호)
+    this.drawModifiedCues(scale);
 
     this.ctx.restore();
 
@@ -844,7 +847,7 @@ export class ExplorerOverlay {
       // 숫자 스테퍼: AST 수정 → 재렌더링 + Bridge에 알림
       const modifiedAst = modifyNumberNode(this.astModState, id, value);
       this.buildAndRender(modifiedAst);
-      this.vizController?.bridge?.setAst?.(modifiedAst);
+      this.syncAstToBridge(modifiedAst);
       this.inlineControl?.setResetVisible(true);
     }
   }
@@ -853,7 +856,7 @@ export class ExplorerOverlay {
     if (!this.astModState) return;
     const modifiedAst = resetNode(this.astModState, nodeId);
     this.buildAndRender(modifiedAst);
-    this.vizController?.bridge?.setAst?.(modifiedAst);
+    this.syncAstToBridge(modifiedAst);
     this.inlineControl?.setResetVisible(hasModifications(this.astModState));
 
     // 리셋 후 스테퍼 값도 업데이트
@@ -861,6 +864,20 @@ export class ExplorerOverlay {
     if (node?.type === 'number') {
       this.inlineControl?.updateValue(parseFloat(node.value));
     }
+  }
+
+  /**
+   * Bridge에 working AST 전달.
+   * 수정 내역이 있으면 originalAst도 함께 전달하여 baseline 비교 모드 활성화.
+   * 수정이 없거나 astModState가 아직 생성 전이면 working === original 로 간주 (isStandard true).
+   */
+  private syncAstToBridge(workingAst: RootNode): void {
+    const bridge = this.vizController?.bridge;
+    if (!bridge?.setAst) return;
+    const original = (this.astModState && hasModifications(this.astModState))
+      ? this.astModState.originalAst
+      : undefined;
+    bridge.setAst(workingAst, original);
   }
 
   private updateInlineControlPosition(): void {
@@ -904,6 +921,39 @@ export class ExplorerOverlay {
         : 'rgba(59, 130, 246, 0.12)';
       ctx.lineWidth = 1 / scale;
       ctx.setLineDash([2 / scale, 3 / scale]);
+      ctx.beginPath();
+      ctx.moveTo(bounds.x, bottomY + 2 / scale);
+      ctx.lineTo(bounds.x + bounds.width, bottomY + 2 / scale);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /**
+   * 학습자가 수정한 number 노드에 빨간 점선 밑줄을 그린다 (Box 좌표계).
+   * baseline 비교 모드가 켜져 있음을 시각적으로 알린다.
+   * 호버/선택과 무관하게 항상 표시된다.
+   */
+  private drawModifiedCues(scale: number): void {
+    if (!this.astModState || this.astModState.modifications.size === 0) return;
+    if (!this.explorerInfos.length) return;
+
+    const ctx = this.ctx;
+    const modifications = this.astModState.modifications;
+
+    for (const info of this.explorerInfos) {
+      if (!info.astNode) continue;
+      if (!modifications.has(info.astNode.id)) continue;
+
+      const bounds = info.bounds;
+      const bottomY = bounds.y + bounds.height;
+
+      ctx.save();
+      ctx.strokeStyle = this.isDark
+        ? 'rgba(248, 113, 113, 0.85)'
+        : 'rgba(220, 38, 38, 0.8)';
+      ctx.lineWidth = 1.5 / scale;
+      ctx.setLineDash([2 / scale, 2 / scale]);
       ctx.beginPath();
       ctx.moveTo(bounds.x, bottomY + 2 / scale);
       ctx.lineTo(bounds.x + bounds.width, bottomY + 2 / scale);

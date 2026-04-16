@@ -68,8 +68,9 @@ export class ExplorerVisualizerController {
       locale: 'ko',
     });
 
-    // 초기 파라미터 전송
-    viz.update(initialValues);
+    // 초기 컨텍스트 전송 (params + derived + equationValue)
+    // — 케플러처럼 derived(period)에 의존해 애니메이션이 시작되는 Visualizer를 위해 필수
+    viz.update(this._bridge.computeUpdateContext());
 
     return true;
   }

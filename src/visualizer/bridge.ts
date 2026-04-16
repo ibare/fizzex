@@ -13,6 +13,7 @@ import type {
   DerivedValue,
   ComputeContext,
   VisualizerBridge,
+  VisualizerUpdate,
 } from './types';
 import { evaluateEquation } from './evaluator';
 
@@ -22,6 +23,12 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
   private listeners = new Set<(params: ParameterValues, source: string) => void>();
   private derivedDefs: DerivedValue[];
   private ast: RootNode | null = null;
+  /**
+   * 카탈로그 원본 AST. 학습자가 number 노드를 수정해도 이 참조는 유지되어
+   * baseline 비교 시각화의 기준이 된다.
+   * `this.ast === this.originalAst` 일 때 isStandard 로 간주.
+   */
+  private originalAst: RootNode | null = null;
   private catalogDetail: CatalogDetail | null = null;
   private destroyed = false;
 
@@ -48,9 +55,9 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     if (this.destroyed) return;
     this.params[paramId] = value;
 
-    // Visualizer가 변경한 게 아니면 Visualizer에 알린다
+    // Visualizer가 변경한 게 아니면 Visualizer에 알린다 (파생값 + equationValue 포함)
     if (source !== 'visualizer') {
-      this.visualizer.update({ ...this.params });
+      this.visualizer.update(this.computeUpdateContext());
     }
 
     // 모든 구독자에게 알린다 (슬라이더 UI, 값 흐름 등)
@@ -64,9 +71,19 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     this.catalogDetail = detail;
   }
 
-  setAst(ast: RootNode | null): void {
+  /**
+   * 수식 AST 설정.
+   * @param working 현재 평가할 AST (사용자가 수정한 결과)
+   * @param original 카탈로그 원본 AST. 미지정 시 working 과 동일로 간주
+   *   (구조 변경 없음 = isStandard true).
+   */
+  setAst(working: RootNode | null, original?: RootNode | null): void {
     if (this.destroyed) return;
-    this.ast = ast;
+    this.ast = working;
+    this.originalAst = original !== undefined ? original : working;
+
+    // AST 변경 시 Visualizer에 갱신된 파생값 전달
+    this.visualizer.update(this.computeUpdateContext());
 
     // AST 변경 시 구독자에게 알린다 (값 배지 갱신 등)
     for (const listener of this.listeners) {
@@ -75,42 +92,81 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
   }
 
   getDerivedValues(): Record<string, number> {
-    // AST가 있으면 방정식 우변을 평가 (상수 + SI 변환된 파라미터)
-    let equationValue: number | undefined;
-    if (this.ast) {
-      // 1) 카탈로그 상수 추출 (kind === 'constant' && value != null)
-      const catalogConstants: ParameterValues = {};
-      if (this.catalogDetail?.elementMeanings) {
-        for (const [key, em] of Object.entries(this.catalogDetail.elementMeanings)) {
-          if ('kind' in em && em.kind === 'constant' && em.value != null) {
-            catalogConstants[key] = em.value;
-          }
+    return this.computeUpdateContext().derived;
+  }
+
+  /**
+   * Visualizer에 전달할 최신 컨텍스트를 생성한다.
+   * working AST + (구조 변경 시) originalAst 두 트랙을 같은 params 로 평가한다.
+   *
+   * 이 함수가 "AST가 계산의 유일한 원천" 원칙의 실행 경로이다.
+   * Visualizer는 이 결과만 받아 렌더링한다.
+   */
+  computeUpdateContext(): VisualizerUpdate {
+    const evalParams = this.buildEvalParams();
+    const current = this.evaluateAst(this.ast, evalParams);
+
+    // originalAst 가 working 과 다른 객체라면 구조가 변형된 상태 → baseline 평가
+    const isStandard = this.originalAst === this.ast;
+    let baseline: VisualizerUpdate['baseline'];
+    if (!isStandard && this.originalAst) {
+      const base = this.evaluateAst(this.originalAst, evalParams);
+      baseline = { derived: base.derived, equationValue: base.equationValue };
+    }
+
+    return {
+      params: { ...this.params },
+      derived: current.derived,
+      equationValue: current.equationValue,
+      baseline,
+      isStandard,
+    };
+  }
+
+  /**
+   * AST 평가용 파라미터 빌드 (카탈로그 상수 + Visualizer 상수 + SI 변환된 사용자 파라미터).
+   * working 과 baseline 모두 같은 params 로 평가하여 비교축을 고정한다.
+   */
+  private buildEvalParams(): ParameterValues {
+    const catalogConstants: ParameterValues = {};
+    if (this.catalogDetail?.elementMeanings) {
+      for (const [key, em] of Object.entries(this.catalogDetail.elementMeanings)) {
+        if ('kind' in em && em.kind === 'constant' && em.value != null) {
+          catalogConstants[key] = em.value;
         }
       }
+    }
 
-      // 2) 우선순위: 카탈로그 상수 → Visualizer 상수 → 사용자 파라미터(SI 변환)
-      const evalParams: ParameterValues = {
-        ...catalogConstants,
-        ...this.visualizer.constants,
-      };
-      for (const pc of this.visualizer.parameters) {
-        const v = this.params[pc.id];
-        if (v != null) evalParams[pc.name] = v * (pc.siMultiplier ?? 1);
-      }
-      const { rhsValue } = evaluateEquation(this.ast, evalParams);
+    // 우선순위: 카탈로그 상수 → Visualizer 상수 → 사용자 파라미터(SI 변환)
+    const evalParams: ParameterValues = {
+      ...catalogConstants,
+      ...this.visualizer.constants,
+    };
+    for (const pc of this.visualizer.parameters) {
+      const v = this.params[pc.id];
+      if (v != null) evalParams[pc.name] = v * (pc.siMultiplier ?? 1);
+    }
+    return evalParams;
+  }
+
+  /** 단일 AST 트랙 평가 (equationValue + derivedValues). */
+  private evaluateAst(
+    ast: RootNode | null,
+    evalParams: ParameterValues,
+  ): { equationValue?: number; derived: Record<string, number> } {
+    let equationValue: number | undefined;
+    if (ast) {
+      const { rhsValue } = evaluateEquation(ast, evalParams);
       if (!isNaN(rhsValue)) equationValue = rhsValue;
     }
-
     const ctx: ComputeContext = { equationValue, derived: {} };
-    const result: Record<string, number> = {};
-
+    const derived: Record<string, number> = {};
     for (const dv of this.derivedDefs) {
       const val = dv.compute(this.params, ctx);
-      result[dv.id] = val;
+      derived[dv.id] = val;
       ctx.derived[dv.id] = val;
     }
-
-    return result;
+    return { equationValue, derived };
   }
 
   subscribe(listener: (params: ParameterValues, source: string) => void): () => void {
@@ -123,6 +179,7 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     this.destroyed = true;
     this.listeners.clear();
     this.ast = null;
+    this.originalAst = null;
     this.catalogDetail = null;
   }
 }
