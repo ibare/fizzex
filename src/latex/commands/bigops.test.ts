@@ -19,7 +19,7 @@ describe('Big Operator Command Handlers', () => {
 
   describe('적분', () => {
     it('\\int → integral 노드를 생성한다', () => {
-      const result = parseLatex('\\int');
+      const { ast: result } = parseLatex('\\int');
 
       expect(result.children).toHaveLength(1);
       const integral = result.children[0] as IntegralNode;
@@ -28,7 +28,7 @@ describe('Big Operator Command Handlers', () => {
     });
 
     it('\\int_{0}^{1} x dx → 하한/상한/피적분함수를 파싱한다', () => {
-      const result = parseLatex('\\int_{0}^{1} x dx');
+      const { ast: result } = parseLatex('\\int_{0}^{1} x dx');
 
       expect(result.children).toHaveLength(1);
       const integral = result.children[0] as IntegralNode;
@@ -63,7 +63,7 @@ describe('Big Operator Command Handlers', () => {
     });
 
     it('\\iint → integralType이 올바르게 설정된다', () => {
-      const result = parseLatex('\\iint');
+      const { ast: result } = parseLatex('\\iint');
 
       expect(result.children).toHaveLength(1);
       const integral = result.children[0] as IntegralNode;
@@ -72,7 +72,7 @@ describe('Big Operator Command Handlers', () => {
     });
 
     it('\\oint → integralType이 올바르게 설정된다', () => {
-      const result = parseLatex('\\oint');
+      const { ast: result } = parseLatex('\\oint');
 
       expect(result.children).toHaveLength(1);
       const integral = result.children[0] as IntegralNode;
@@ -83,7 +83,7 @@ describe('Big Operator Command Handlers', () => {
 
   describe('시그마', () => {
     it('\\sum → sum 노드를 생성한다', () => {
-      const result = parseLatex('\\sum');
+      const { ast: result } = parseLatex('\\sum');
 
       expect(result.children).toHaveLength(1);
       const sum = result.children[0] as SumNode;
@@ -91,7 +91,7 @@ describe('Big Operator Command Handlers', () => {
     });
 
     it('\\sum_{i=1}^{n} i → 하한/상한/본체를 파싱한다', () => {
-      const result = parseLatex('\\sum_{i=1}^{n} i');
+      const { ast: result } = parseLatex('\\sum_{i=1}^{n} i');
 
       expect(result.children).toHaveLength(1);
       const sum = result.children[0] as SumNode;
@@ -126,7 +126,7 @@ describe('Big Operator Command Handlers', () => {
 
   describe('극한', () => {
     it('\\lim → limit 노드를 생성한다', () => {
-      const result = parseLatex('\\lim');
+      const { ast: result } = parseLatex('\\lim');
 
       expect(result.children).toHaveLength(1);
       const limit = result.children[0] as LimitNode;
@@ -134,7 +134,7 @@ describe('Big Operator Command Handlers', () => {
     });
 
     it('\\lim_{x \\to 0} f(x) → 변수/접근값/본체를 파싱한다', () => {
-      const result = parseLatex('\\lim_{x \\to 0} f(x)');
+      const { ast: result } = parseLatex('\\lim_{x \\to 0} f(x)');
 
       // limHandler는 본체로 단일 토큰(f)만 취하고, (x)는 별도 paren 노드
       expect(result.children).toHaveLength(2);
@@ -167,7 +167,7 @@ describe('Big Operator Command Handlers', () => {
 
   describe('곱', () => {
     it('\\prod → product 노드를 생성한다', () => {
-      const result = parseLatex('\\prod');
+      const { ast: result } = parseLatex('\\prod');
 
       expect(result.children).toHaveLength(1);
       const product = result.children[0] as ProductNode;
@@ -175,7 +175,7 @@ describe('Big Operator Command Handlers', () => {
     });
 
     it('\\prod_{i=1}^{n} i → 하한/상한/본체를 파싱한다', () => {
-      const result = parseLatex('\\prod_{i=1}^{n} i');
+      const { ast: result } = parseLatex('\\prod_{i=1}^{n} i');
 
       expect(result.children).toHaveLength(1);
       const product = result.children[0] as ProductNode;

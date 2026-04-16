@@ -54,21 +54,21 @@ describe('Semantic Roles', () => {
 
   describe('containsVariable', () => {
     it('변수 노드를 감지한다', () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const varNode = findNode(ast, n => n.type === 'variable');
       expect(varNode).not.toBeNull();
       expect(containsVariable(varNode!)).toBe(true);
     });
 
     it('숫자 노드는 변수가 아니다', () => {
-      const ast = parseLatex('42');
+      const { ast } = parseLatex('42');
       const numNode = findNode(ast, n => n.type === 'number');
       expect(numNode).not.toBeNull();
       expect(containsVariable(numNode!)).toBe(false);
     });
 
     it('분수 안의 변수를 감지한다', () => {
-      const ast = parseLatex('\\frac{x}{2}');
+      const { ast } = parseLatex('\\frac{x}{2}');
       const fracNode = findNode(ast, n => n.type === 'frac');
       expect(fracNode).not.toBeNull();
       expect(containsVariable(fracNode!)).toBe(true);
@@ -77,13 +77,13 @@ describe('Semantic Roles', () => {
 
   describe('buildAstAncestorMap', () => {
     it('루트 노드의 조상은 비어있다', () => {
-      const ast = parseLatex('x + 1');
+      const { ast } = parseLatex('x + 1');
       const map = buildAstAncestorMap(ast);
       expect(map.get(ast.id)).toEqual([]);
     });
 
     it('분수의 분자 노드는 조상에 frac(numerator)을 가진다', () => {
-      const ast = parseLatex('\\frac{x}{2}');
+      const { ast } = parseLatex('\\frac{x}{2}');
       const map = buildAstAncestorMap(ast);
       const varNode = findNode(ast, n => n.type === 'variable' && n.name === 'x');
       expect(varNode).not.toBeNull();
@@ -95,7 +95,7 @@ describe('Semantic Roles', () => {
     });
 
     it('분수의 분모 노드는 조상에 frac(denominator)을 가진다', () => {
-      const ast = parseLatex('\\frac{1}{x}');
+      const { ast } = parseLatex('\\frac{1}{x}');
       const map = buildAstAncestorMap(ast);
       const varNode = findNode(ast, n => n.type === 'variable' && n.name === 'x');
       expect(varNode).not.toBeNull();
@@ -107,7 +107,7 @@ describe('Semantic Roles', () => {
     });
 
     it('거듭제곱의 지수 노드는 power(exponent) 조상을 가진다', () => {
-      const ast = parseLatex('x^2');
+      const { ast } = parseLatex('x^2');
       const map = buildAstAncestorMap(ast);
       const numNode = findNode(ast, n => n.type === 'number' && n.value === '2');
       expect(numNode).not.toBeNull();
@@ -121,7 +121,7 @@ describe('Semantic Roles', () => {
 
   describe('getSemanticMeaning — Layer 1', () => {
     it('분수 분자의 의미를 반환한다', () => {
-      const ast = parseLatex('\\frac{x}{2}');
+      const { ast } = parseLatex('\\frac{x}{2}');
       const map = buildAstAncestorMap(ast);
       const varNode = findNode(ast, n => n.type === 'variable' && n.name === 'x')!;
       const result = getSemanticMeaning(varNode, map.get(varNode.id)!);
@@ -133,7 +133,7 @@ describe('Semantic Roles', () => {
     });
 
     it('분수 분모의 의미를 반환한다', () => {
-      const ast = parseLatex('\\frac{1}{2}');
+      const { ast } = parseLatex('\\frac{1}{2}');
       const map = buildAstAncestorMap(ast);
       const numNode = findNode(ast, n => n.type === 'number' && n.value === '2')!;
       const result = getSemanticMeaning(numNode, map.get(numNode.id)!);
@@ -144,7 +144,7 @@ describe('Semantic Roles', () => {
     });
 
     it('거듭제곱 지수 2를 제곱으로 설명한다', () => {
-      const ast = parseLatex('x^2');
+      const { ast } = parseLatex('x^2');
       const map = buildAstAncestorMap(ast);
       const numNode = findNode(ast, n => n.type === 'number' && n.value === '2')!;
       const result = getSemanticMeaning(numNode, map.get(numNode.id)!);
@@ -154,7 +154,7 @@ describe('Semantic Roles', () => {
     });
 
     it('시그마의 일반항 의미를 반환한다', () => {
-      const ast = parseLatex('\\sum_{n=1}^{10} n');
+      const { ast } = parseLatex('\\sum_{n=1}^{10} n');
       const map = buildAstAncestorMap(ast);
       // sum.body에서 변수 n 찾기
       const sumNode = findNode(ast, n => n.type === 'sum');
@@ -169,7 +169,7 @@ describe('Semantic Roles', () => {
     });
 
     it('적분의 피적분함수 의미를 반환한다', () => {
-      const ast = parseLatex('\\int_0^1 x^2 \\, dx');
+      const { ast } = parseLatex('\\int_0^1 x^2 \\, dx');
       const map = buildAstAncestorMap(ast);
       // integral 노드 찾기
       const integralNode = findNode(ast, n => n.type === 'integral');
@@ -185,7 +185,7 @@ describe('Semantic Roles', () => {
     });
 
     it('함수 인자의 의미를 반환한다', () => {
-      const ast = parseLatex('\\sin(x)');
+      const { ast } = parseLatex('\\sin(x)');
       const map = buildAstAncestorMap(ast);
       const funcNode = findNode(ast, n => n.type === 'func');
       expect(funcNode).not.toBeNull();
@@ -202,7 +202,7 @@ describe('Semantic Roles', () => {
 
   describe('getSemanticMeaning — Layer 2', () => {
     it('급수 분모의 거듭제곱 지수를 p-급수로 설명한다', () => {
-      const ast = parseLatex('\\sum_{n=1}^{\\infty} \\frac{1}{n^2}');
+      const { ast } = parseLatex('\\sum_{n=1}^{\\infty} \\frac{1}{n^2}');
       const map = buildAstAncestorMap(ast);
 
       // n^2의 2를 찾기: sum.body > frac.denominator > power.exponent
@@ -224,7 +224,7 @@ describe('Semantic Roles', () => {
     });
 
     it('급수 분모를 조합 의미로 설명한다', () => {
-      const ast = parseLatex('\\sum_{n=1}^{\\infty} \\frac{1}{n}');
+      const { ast } = parseLatex('\\sum_{n=1}^{\\infty} \\frac{1}{n}');
       const map = buildAstAncestorMap(ast);
 
       const sumNode = findNode(ast, n => n.type === 'sum');
@@ -244,7 +244,7 @@ describe('Semantic Roles', () => {
 
   describe('getSemanticMeaning — 폴백', () => {
     it('최상위 숫자 노드에 기본 설명을 반환한다', () => {
-      const ast = parseLatex('5');
+      const { ast } = parseLatex('5');
       const map = buildAstAncestorMap(ast);
       const numNode = findNode(ast, n => n.type === 'number')!;
       const result = getSemanticMeaning(numNode, map.get(numNode.id)!);
@@ -255,7 +255,7 @@ describe('Semantic Roles', () => {
     });
 
     it('최상위 변수 노드에 기본 설명을 반환한다', () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const map = buildAstAncestorMap(ast);
       const varNode = findNode(ast, n => n.type === 'variable')!;
       const result = getSemanticMeaning(varNode, map.get(varNode.id)!);
@@ -266,7 +266,7 @@ describe('Semantic Roles', () => {
     });
 
     it('자연상수 e에 특별 설명을 반환한다', () => {
-      const ast = parseLatex('e');
+      const { ast } = parseLatex('e');
       const map = buildAstAncestorMap(ast);
       const varNode = findNode(ast, n => n.type === 'variable' && n.name === 'e')!;
       const result = getSemanticMeaning(varNode, map.get(varNode.id)!);
@@ -275,7 +275,7 @@ describe('Semantic Roles', () => {
     });
 
     it('연산자에 설명을 반환한다', () => {
-      const ast = parseLatex('x + y');
+      const { ast } = parseLatex('x + y');
       const map = buildAstAncestorMap(ast);
       const opNode = findNode(ast, n => n.type === 'operator' && n.operator === '+')!;
       const result = getSemanticMeaning(opNode, map.get(opNode.id)!);
@@ -285,7 +285,7 @@ describe('Semantic Roles', () => {
     });
 
     it('등호 연산자에 설명을 반환한다', () => {
-      const ast = parseLatex('x = 1');
+      const { ast } = parseLatex('x = 1');
       const map = buildAstAncestorMap(ast);
       const opNode = findNode(ast, n => n.type === 'operator' && n.operator === '=')!;
       const result = getSemanticMeaning(opNode, map.get(opNode.id)!);
@@ -296,7 +296,7 @@ describe('Semantic Roles', () => {
 
   describe('buildSemanticMap', () => {
     it('AST의 모든 노드에 대해 semantic 결과를 생성한다', () => {
-      const ast = parseLatex('\\frac{x}{2}');
+      const { ast } = parseLatex('\\frac{x}{2}');
       const semanticMap = buildSemanticMap(ast);
 
       // 최소한 root, frac, x, 2 노드에 대한 결과가 있어야 함
@@ -313,7 +313,7 @@ describe('Semantic Roles', () => {
     });
 
     it('복잡한 수식에서도 모든 노드를 커버한다', () => {
-      const ast = parseLatex('\\sum_{n=1}^{\\infty} \\frac{1}{n^2}');
+      const { ast } = parseLatex('\\sum_{n=1}^{\\infty} \\frac{1}{n^2}');
       const semanticMap = buildSemanticMap(ast);
 
       // 모든 노드에 대해 결과가 있는지 확인
@@ -332,7 +332,7 @@ describe('Semantic Roles', () => {
 
   describe('카탈로그 매칭', () => {
     it('E=mc^2를 질량-에너지 등가 원리로 인식한다', () => {
-      const ast = parseLatex('E=mc^2');
+      const { ast } = parseLatex('E=mc^2');
       const semanticMap = buildSemanticMap(ast);
       const rootResult = semanticMap.get(ast.id)!;
 
@@ -341,7 +341,7 @@ describe('Semantic Roles', () => {
     });
 
     it('F=ma를 뉴턴의 운동 제2법칙으로 인식한다', () => {
-      const ast = parseLatex('F=ma');
+      const { ast } = parseLatex('F=ma');
       const semanticMap = buildSemanticMap(ast);
       const rootResult = semanticMap.get(ast.id)!;
 
@@ -350,7 +350,7 @@ describe('Semantic Roles', () => {
     });
 
     it('단순한 수식 x+1에는 카탈로그 매칭이 없다', () => {
-      const ast = parseLatex('x+1');
+      const { ast } = parseLatex('x+1');
       const semanticMap = buildSemanticMap(ast);
       const rootResult = semanticMap.get(ast.id)!;
 
@@ -358,7 +358,7 @@ describe('Semantic Roles', () => {
     });
 
     it('카탈로그 매칭 시 요소에 풍부한 의미를 부여한다', () => {
-      const ast = parseLatex('E=mc^2');
+      const { ast } = parseLatex('E=mc^2');
       const semanticMap = buildSemanticMap(ast);
 
       // E 변수 → 에너지 역할
@@ -377,7 +377,7 @@ describe('Semantic Roles', () => {
     });
 
     it('카탈로그 매칭에서 복합 키(power 노드)도 매핑한다', () => {
-      const ast = parseLatex('E=mc^2');
+      const { ast } = parseLatex('E=mc^2');
       const semanticMap = buildSemanticMap(ast);
 
       // c^2 power 노드 → 광속의 제곱
@@ -390,7 +390,7 @@ describe('Semantic Roles', () => {
 
     it('exact 패턴이 structural 패턴보다 높은 confidence를 가진다', () => {
       // E=mc^2는 exact 패턴
-      const ast1 = parseLatex('E=mc^2');
+      const { ast: ast1 } = parseLatex('E=mc^2');
       const map1 = buildSemanticMap(ast1);
       const root1 = map1.get(ast1.id)!;
 
@@ -398,7 +398,7 @@ describe('Semantic Roles', () => {
     });
 
     it('카탈로그 미매칭 요소는 기존 레이어로 폴백한다', () => {
-      const ast = parseLatex('E=mc^2');
+      const { ast } = parseLatex('E=mc^2');
       const semanticMap = buildSemanticMap(ast);
 
       // = 연산자는 카탈로그 elementMeanings에 없으므로 폴백
@@ -409,7 +409,7 @@ describe('Semantic Roles', () => {
     });
 
     it('SemanticResult에 catalogId와 confidence가 포함된다', () => {
-      const ast = parseLatex('F=ma');
+      const { ast } = parseLatex('F=ma');
       const semanticMap = buildSemanticMap(ast);
 
       // F 변수 (catalog 레이어)
@@ -425,7 +425,7 @@ describe('Semantic Roles', () => {
 
   describe('특수 노드 타입', () => {
     it('절댓값 내용에 적절한 역할을 부여한다', () => {
-      const ast = parseLatex('|x|');
+      const { ast } = parseLatex('|x|');
       const map = buildAstAncestorMap(ast);
       const absNode = findNode(ast, n => n.type === 'abs');
       if (absNode && absNode.type === 'abs') {
@@ -438,7 +438,7 @@ describe('Semantic Roles', () => {
     });
 
     it('제곱근 내용에 피근호수 역할을 부여한다', () => {
-      const ast = parseLatex('\\sqrt{x}');
+      const { ast } = parseLatex('\\sqrt{x}');
       const map = buildAstAncestorMap(ast);
       const sqrtNode = findNode(ast, n => n.type === 'sqrt');
       if (sqrtNode && sqrtNode.type === 'sqrt') {
@@ -451,7 +451,7 @@ describe('Semantic Roles', () => {
     });
 
     it('행렬 성분에 적절한 역할을 부여한다', () => {
-      const ast = parseLatex('\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}');
+      const { ast } = parseLatex('\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}');
       const map = buildAstAncestorMap(ast);
       const matrixNode = findNode(ast, n => n.type === 'matrix');
       if (matrixNode && matrixNode.type === 'matrix') {

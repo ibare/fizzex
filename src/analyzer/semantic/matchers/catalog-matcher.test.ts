@@ -69,7 +69,7 @@ describe('카탈로그 매칭', () => {
   test.each(CATALOG_TEST_CASES)(
     '$expectedId — 대표 수식이 올바르게 매칭된다',
     ({ latex, expectedId, minConfidence = 0.6 }) => {
-      const ast = parseLatex(latex);
+      const { ast } = parseLatex(latex);
       const result = matchCatalog(ast, index);
 
       expect(result).not.toBeNull();

@@ -66,12 +66,12 @@ export interface LatexParseResult {
 }
 
 /**
- * LaTeX 문자열을 AST로 변환 (에러 정보 포함)
+ * LaTeX 문자열을 AST로 변환
  *
  * @param latex LaTeX 문자열
  * @returns 파싱 결과 (AST + 에러/경고)
  */
-export function parseLatexWithErrors(latex: string): LatexParseResult {
+export function parseLatex(latex: string): LatexParseResult {
   resetLatexIdCounter();
   const collector = createErrorCollector();
   const trimmed = latex.trim();
@@ -105,17 +105,6 @@ export function parseLatexWithErrors(latex: string): LatexParseResult {
   } finally {
     clearErrorCollector();
   }
-}
-
-/**
- * LaTeX 문자열을 AST로 변환
- *
- * @param latex LaTeX 문자열
- * @returns 파싱된 AST (에러 발생 시에도 부분 결과 반환)
- */
-export function parseLatex(latex: string): RootNode {
-  const result = parseLatexWithErrors(latex);
-  return result.ast;
 }
 
 /** 표현식 파싱 (최상위 레벨) */

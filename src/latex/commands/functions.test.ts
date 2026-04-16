@@ -10,7 +10,7 @@ describe('Function Command Handlers', () => {
 
   describe('삼각함수', () => {
     it('\\sin(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\sin(x)');
+      const { ast: result } = parseLatex('\\sin(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -21,7 +21,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\cos(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\cos(x)');
+      const { ast: result } = parseLatex('\\cos(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -31,7 +31,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\tan(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\tan(x)');
+      const { ast: result } = parseLatex('\\tan(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -40,7 +40,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\cot(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\cot(x)');
+      const { ast: result } = parseLatex('\\cot(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -49,7 +49,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\sec(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\sec(x)');
+      const { ast: result } = parseLatex('\\sec(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -58,7 +58,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\csc(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\csc(x)');
+      const { ast: result } = parseLatex('\\csc(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -69,7 +69,7 @@ describe('Function Command Handlers', () => {
 
   describe('역삼각함수', () => {
     it('\\arcsin(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\arcsin(x)');
+      const { ast: result } = parseLatex('\\arcsin(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -79,7 +79,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\arccos(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\arccos(x)');
+      const { ast: result } = parseLatex('\\arccos(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -90,7 +90,7 @@ describe('Function Command Handlers', () => {
 
   describe('로그/지수 함수', () => {
     it('\\log(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\log(x)');
+      const { ast: result } = parseLatex('\\log(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -100,7 +100,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\ln(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\ln(x)');
+      const { ast: result } = parseLatex('\\ln(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -109,7 +109,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\exp(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\exp(x)');
+      const { ast: result } = parseLatex('\\exp(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -120,7 +120,7 @@ describe('Function Command Handlers', () => {
 
   describe('쌍곡선함수', () => {
     it('\\sinh(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\sinh(x)');
+      const { ast: result } = parseLatex('\\sinh(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -129,7 +129,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('\\cosh(x) → func 노드를 생성한다', () => {
-      const result = parseLatex('\\cosh(x)');
+      const { ast: result } = parseLatex('\\cosh(x)');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;
@@ -140,7 +140,7 @@ describe('Function Command Handlers', () => {
 
   describe('인자 파싱', () => {
     it('괄호 인자를 올바르게 파싱한다', () => {
-      const result = parseLatex('\\sin(x)');
+      const { ast: result } = parseLatex('\\sin(x)');
 
       const func = result.children[0] as FuncNode;
       expect(func.argument).toHaveLength(1);
@@ -154,7 +154,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('중괄호 인자를 올바르게 파싱한다', () => {
-      const result = parseLatex('\\sin{x}');
+      const { ast: result } = parseLatex('\\sin{x}');
 
       const func = result.children[0] as FuncNode;
       expect(func.argument).toHaveLength(1);
@@ -163,7 +163,7 @@ describe('Function Command Handlers', () => {
     });
 
     it('인자 없이 함수 이름만 생성할 수 있다', () => {
-      const result = parseLatex('\\sin');
+      const { ast: result } = parseLatex('\\sin');
 
       expect(result.children).toHaveLength(1);
       const func = result.children[0] as FuncNode;

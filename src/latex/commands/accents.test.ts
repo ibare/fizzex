@@ -10,7 +10,7 @@ describe('Accent Command Handlers', () => {
 
   describe('악센트 명령어', () => {
     it('\\hat{x} → accent(hat) 노드를 생성한다', () => {
-      const result = parseLatex('\\hat{x}');
+      const { ast: result } = parseLatex('\\hat{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -25,7 +25,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\vec{v} → accent(vec) 노드를 생성한다', () => {
-      const result = parseLatex('\\vec{v}');
+      const { ast: result } = parseLatex('\\vec{v}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -37,7 +37,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\dot{x} → accent(dot) 노드를 생성한다', () => {
-      const result = parseLatex('\\dot{x}');
+      const { ast: result } = parseLatex('\\dot{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -49,7 +49,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\ddot{x} → accent(ddot) 노드를 생성한다', () => {
-      const result = parseLatex('\\ddot{x}');
+      const { ast: result } = parseLatex('\\ddot{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -61,7 +61,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\tilde{x} → accent(tilde) 노드를 생성한다', () => {
-      const result = parseLatex('\\tilde{x}');
+      const { ast: result } = parseLatex('\\tilde{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -73,7 +73,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\bar{x} → accent(bar) 노드를 생성한다', () => {
-      const result = parseLatex('\\bar{x}');
+      const { ast: result } = parseLatex('\\bar{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -85,7 +85,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\widehat{AB} → accent(widehat) 노드를 생성한다', () => {
-      const result = parseLatex('\\widehat{AB}');
+      const { ast: result } = parseLatex('\\widehat{AB}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -98,7 +98,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\breve{x} → accent(breve) 노드를 생성한다', () => {
-      const result = parseLatex('\\breve{x}');
+      const { ast: result } = parseLatex('\\breve{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -110,7 +110,7 @@ describe('Accent Command Handlers', () => {
     });
 
     it('\\check{x} → accent(check) 노드를 생성한다', () => {
-      const result = parseLatex('\\check{x}');
+      const { ast: result } = parseLatex('\\check{x}');
 
       expect(result.children).toHaveLength(1);
       const accent = result.children[0] as AccentNode;
@@ -124,7 +124,7 @@ describe('Accent Command Handlers', () => {
 
   describe('overline', () => {
     it('\\overline{AB} → overline 노드를 생성한다', () => {
-      const result = parseLatex('\\overline{AB}');
+      const { ast: result } = parseLatex('\\overline{AB}');
 
       expect(result.children).toHaveLength(1);
       const overline = result.children[0] as OverlineNode;

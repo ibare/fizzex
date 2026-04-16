@@ -164,7 +164,7 @@ export async function renderLatexToPNG(
 ): Promise<MathPNGResult> {
   // LaTeX 파서 동적 임포트 (번들 크기 최적화)
   const { parseLatex } = await import('../latex');
-  const ast = parseLatex(latex);
+  const { ast } = parseLatex(latex);
   return renderAstToPNG(ast, options);
 }
 

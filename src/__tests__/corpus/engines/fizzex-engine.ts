@@ -1,10 +1,10 @@
 /**
  * Fizzex 엔진 래퍼
  *
- * parseLatexWithErrors → astToBox 2단계 검증
+ * parseLatex → astToBox 2단계 검증
  */
 
-import { parseLatexWithErrors } from '../../../latex/latex-parser';
+import { parseLatex } from '../../../latex/latex-parser';
 import { astToBox } from '../../../box/ast-to-box';
 import { createDeterministicMetrics } from '../../layout/deterministic-metrics';
 import type { Engine, EngineResult } from './types';
@@ -21,7 +21,7 @@ export const fizzexEngine: Engine = {
     };
 
     // 파싱 테스트
-    const parseResult = parseLatexWithErrors(latex);
+    const parseResult = parseLatex(latex);
     if (!parseResult.hasErrors) {
       result.parseSuccess = true;
     } else {

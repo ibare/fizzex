@@ -92,12 +92,6 @@ export default function Examples() {
                         <span>{rendered.analysis.variables.join(', ') || 'none'}</span>
                         <span style={styles.analysisKey}>Complexity</span>
                         <span>{rendered.analysis.complexity}/10</span>
-                        {rendered.analysis.visualization.bestFit && (
-                          <>
-                            <span style={styles.analysisKey}>Best Viz</span>
-                            <span>{rendered.analysis.visualization.bestFit}</span>
-                          </>
-                        )}
                       </div>
                     </div>
                   )}

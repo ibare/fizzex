@@ -128,7 +128,7 @@ export const en: Dictionary = {
       domain: 'Domain',
       variables: 'Variables',
       features: 'Features',
-      visualization: 'Recommended Viz',
+      visualization: 'Visualizable',
       complexity: 'Complexity',
       form: 'Form',
     },

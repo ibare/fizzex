@@ -31,7 +31,7 @@ describe('AST to Box', () => {
 
   describe('기본 노드 변환', () => {
     it('root 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('1');
+      const { ast } = parseLatex('1');
       const box = astToBox(ast, metrics);
 
       expect(box.type).toBe('hbox');
@@ -39,7 +39,7 @@ describe('AST to Box', () => {
 
     it('number 노드를 GlyphBox가 포함된 HBox로 변환한다', () => {
       // parseLatex는 "123"을 3개의 개별 number 노드로 파싱한다
-      const ast = parseLatex('123');
+      const { ast } = parseLatex('123');
       const box = astToBox(ast, metrics);
 
       expect(box.type).toBe('hbox');
@@ -56,7 +56,7 @@ describe('AST to Box', () => {
     });
 
     it('variable 노드를 이탤릭 GlyphBox로 변환한다', () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -70,7 +70,7 @@ describe('AST to Box', () => {
     });
 
     it('operator 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('+');
+      const { ast } = parseLatex('+');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -82,7 +82,7 @@ describe('AST to Box', () => {
 
   describe('복합 노드 변환', () => {
     it('frac 노드를 VBox 분수로 변환한다', () => {
-      const ast = parseLatex('\\frac{1}{2}');
+      const { ast } = parseLatex('\\frac{1}{2}');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -97,7 +97,7 @@ describe('AST to Box', () => {
     });
 
     it('power 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('x^2');
+      const { ast } = parseLatex('x^2');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -108,7 +108,7 @@ describe('AST to Box', () => {
     });
 
     it('subscript 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('x_1');
+      const { ast } = parseLatex('x_1');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -118,7 +118,7 @@ describe('AST to Box', () => {
     });
 
     it('sqrt 노드를 SurdBox로 변환한다', () => {
-      const ast = parseLatex('\\sqrt{x}');
+      const { ast } = parseLatex('\\sqrt{x}');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -131,7 +131,7 @@ describe('AST to Box', () => {
     });
 
     it('paren 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('\\left(x\\right)');
+      const { ast } = parseLatex('\\left(x\\right)');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -141,7 +141,7 @@ describe('AST to Box', () => {
     });
 
     it('abs 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('|x|');
+      const { ast } = parseLatex('|x|');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -152,7 +152,7 @@ describe('AST to Box', () => {
     });
 
     it('func 노드를 HBox로 변환한다', () => {
-      const ast = parseLatex('\\sin{x}');
+      const { ast } = parseLatex('\\sin{x}');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -164,7 +164,7 @@ describe('AST to Box', () => {
 
   describe('대형 연산자 변환', () => {
     it('integral 노드를 변환한다', () => {
-      const ast = parseLatex('\\int_0^1 x \\, dx');
+      const { ast } = parseLatex('\\int_0^1 x \\, dx');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -175,7 +175,7 @@ describe('AST to Box', () => {
     });
 
     it('sum 노드를 변환한다', () => {
-      const ast = parseLatex('\\sum_{i=1}^{n} i');
+      const { ast } = parseLatex('\\sum_{i=1}^{n} i');
       const box = astToBox(ast, metrics);
 
       const root = box as HBox;
@@ -187,7 +187,7 @@ describe('AST to Box', () => {
 
   describe('sourceId 전파', () => {
     it('변환된 Box에 원본 노드 id를 sourceId로 설정한다', () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const box = astToBox(ast, metrics);
 
       // root box has sourceId matching ast.id

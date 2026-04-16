@@ -19,7 +19,7 @@ describe('Feature Extractor', () => {
 
   describe('extractFeatures', () => {
     it('상수만 있으면 constant를 포함한다', () => {
-      const ast = parseLatex('42');
+      const { ast } = parseLatex('42');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -30,7 +30,7 @@ describe('Feature Extractor', () => {
     });
 
     it('변수 1개면 single-variable를 포함한다', () => {
-      const ast = parseLatex('x + 1');
+      const { ast } = parseLatex('x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -42,7 +42,7 @@ describe('Feature Extractor', () => {
     });
 
     it('변수 2개 이상이면 multi-variable를 포함한다', () => {
-      const ast = parseLatex('x + y');
+      const { ast } = parseLatex('x + y');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -54,7 +54,7 @@ describe('Feature Extractor', () => {
     });
 
     it('frac이 있으면 has-fraction을 포함한다', () => {
-      const ast = parseLatex('\\frac{1}{2}');
+      const { ast } = parseLatex('\\frac{1}{2}');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -65,7 +65,7 @@ describe('Feature Extractor', () => {
     });
 
     it('power가 있으면 has-power를 포함한다', () => {
-      const ast = parseLatex('x^2');
+      const { ast } = parseLatex('x^2');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -76,7 +76,7 @@ describe('Feature Extractor', () => {
     });
 
     it('sqrt가 있으면 has-sqrt를 포함한다', () => {
-      const ast = parseLatex('\\sqrt{x}');
+      const { ast } = parseLatex('\\sqrt{x}');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -89,7 +89,7 @@ describe('Feature Extractor', () => {
 
   describe('analyzeVisualization', () => {
     it('단일 변수면 graphable2D가 true이다', () => {
-      const ast = parseLatex('x + 1');
+      const { ast } = parseLatex('x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -102,7 +102,7 @@ describe('Feature Extractor', () => {
     });
 
     it('2개 변수면 graphable3D가 true이다', () => {
-      const ast = parseLatex('x + y');
+      const { ast } = parseLatex('x + y');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -115,7 +115,7 @@ describe('Feature Extractor', () => {
     });
 
     it('상수면 numberLine이 true이다', () => {
-      const ast = parseLatex('42');
+      const { ast } = parseLatex('42');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -128,7 +128,7 @@ describe('Feature Extractor', () => {
     });
 
     it('시각화 가능 여부 boolean을 반환한다', () => {
-      const ast = parseLatex('x + 1');
+      const { ast } = parseLatex('x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -146,7 +146,7 @@ describe('Feature Extractor', () => {
 
   describe('calculateComplexity', () => {
     it('간단한 수식은 낮은 점수를 반환한다', () => {
-      const ast = parseLatex('x + 1');
+      const { ast } = parseLatex('x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -157,7 +157,7 @@ describe('Feature Extractor', () => {
     });
 
     it('복잡한 수식은 높은 점수를 반환한다', () => {
-      const ast = parseLatex(
+      const { ast } = parseLatex(
         '\\int_{0}^{\\infty} \\frac{\\sin(x^2 + y^2)}{\\sqrt{x^2 + y^2}} dx'
       );
       const collected = walkAST(ast);
@@ -173,7 +173,7 @@ describe('Feature Extractor', () => {
       const inputs = ['1', 'x', 'x^2 + 2x + 1', '\\frac{x}{y}', '\\sin(x)'];
 
       for (const input of inputs) {
-        const ast = parseLatex(input);
+        const { ast } = parseLatex(input);
         const collected = walkAST(ast);
         const polynomial = analyzePolynomial(ast, collected);
         const functions = createFunctionInfoList(collected.functions);
@@ -188,7 +188,7 @@ describe('Feature Extractor', () => {
 
   describe('generateSummary', () => {
     it('요약 문자열을 생성한다', () => {
-      const ast = parseLatex('x^2 + 2x + 1');
+      const { ast } = parseLatex('x^2 + 2x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);
@@ -209,7 +209,7 @@ describe('Feature Extractor', () => {
     });
 
     it('빈 문자열이 아니다', () => {
-      const ast = parseLatex('42');
+      const { ast } = parseLatex('42');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
       const functions = createFunctionInfoList(collected.functions);

@@ -127,9 +127,14 @@ export default function Playground() {
                   <AnalysisRow
                     label={t.playground.analysis.visualization}
                     value={
-                      analysis.visualization.recommended.length > 0
-                        ? analysis.visualization.recommended.join(', ')
-                        : '-'
+                      [
+                        analysis.visualization.graphable2D && '2D',
+                        analysis.visualization.graphable3D && '3D',
+                        analysis.visualization.geometric && 'geometric',
+                        analysis.visualization.numberLine && 'number-line',
+                      ]
+                        .filter(Boolean)
+                        .join(', ') || '-'
                     }
                   />
                   <AnalysisRow

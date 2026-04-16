@@ -180,7 +180,7 @@ describe('CAS Service', () => {
 
   describe('performOperation', () => {
     it('AST와 operation을 받아 결과를 반환한다', async () => {
-      const ast = parseLatex('x + x');
+      const { ast } = parseLatex('x + x');
       const result = await performOperation(ast, 'simplify');
       expect(result.success).toBe(true);
       expect(result.operation).toBe('simplify');
@@ -188,21 +188,21 @@ describe('CAS Service', () => {
     });
 
     it('expand operation으로 AST를 전개한다', async () => {
-      const ast = parseLatex('(x+1)^{2}');
+      const { ast } = parseLatex('(x+1)^{2}');
       const result = await performOperation(ast, 'expand');
       expect(result.success).toBe(true);
       expect(result.operation).toBe('expand');
     });
 
     it('diff operation으로 AST를 미분한다', async () => {
-      const ast = parseLatex('x^{2}');
+      const { ast } = parseLatex('x^{2}');
       const result = await performOperation(ast, 'diff', { variable: 'x' });
       expect(result.success).toBe(true);
       expect(result.operation).toBe('diff');
     });
 
     it('지원하지 않는 operation에 에러를 반환한다', async () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const result = await performOperation(
         ast,
         'unknown_op' as 'simplify',

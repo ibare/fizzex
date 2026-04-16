@@ -116,7 +116,7 @@ function exprToLatex(expr: NerdamerExpr, nerd: NerdamerAPI): string {
 function parseResultToAst(latex: string): RootNode | undefined {
   try {
     const cleaned = cleanNerdamerLatex(latex);
-    return parseLatex(cleaned);
+    return parseLatex(cleaned).ast;
   } catch {
     return undefined;
   }

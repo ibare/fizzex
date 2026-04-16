@@ -11,7 +11,7 @@ describe('Variable Classifier', () => {
 
   describe('classifyVariables', () => {
     it('변수가 없으면 빈 분류 결과를 반환한다', () => {
-      const ast = parseLatex('123');
+      const { ast } = parseLatex('123');
       const result = classifyVariables(ast, []);
 
       expect(result.mainVariables).toEqual([]);
@@ -20,7 +20,7 @@ describe('Variable Classifier', () => {
     });
 
     it('단일 변수 x를 주 변수로 분류한다', () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const result = classifyVariables(ast, ['x']);
 
       expect(result.mainVariables).toEqual(['x']);
@@ -29,7 +29,7 @@ describe('Variable Classifier', () => {
     });
 
     it('x와 y가 있으면 둘 다 주 변수로 분류한다', () => {
-      const ast = parseLatex('x+y');
+      const { ast } = parseLatex('x+y');
       const collected = walkAST(ast);
       const variables = Array.from(collected.variables);
       const result = classifyVariables(ast, variables);
@@ -39,7 +39,7 @@ describe('Variable Classifier', () => {
     });
 
     it('x^2 + ax + b에서 x를 주 변수로 분류한다', () => {
-      const ast = parseLatex('x^2+ax+b');
+      const { ast } = parseLatex('x^2+ax+b');
       const collected = walkAST(ast);
       const variables = Array.from(collected.variables);
       const result = classifyVariables(ast, variables);
@@ -48,7 +48,7 @@ describe('Variable Classifier', () => {
     });
 
     it('계수(a, b, c)를 coefficients로 분류한다', () => {
-      const ast = parseLatex('ax^2+bx+c');
+      const { ast } = parseLatex('ax^2+bx+c');
       const collected = walkAST(ast);
       const variables = Array.from(collected.variables);
       const result = classifyVariables(ast, variables);
@@ -61,7 +61,7 @@ describe('Variable Classifier', () => {
     });
 
     it('함수 인자로 사용된 변수에 가중치를 부여한다', () => {
-      const ast = parseLatex('a\\sin(x)');
+      const { ast } = parseLatex('a\\sin(x)');
       const collected = walkAST(ast);
       const variables = Array.from(collected.variables);
       const result = classifyVariables(ast, variables);
@@ -71,7 +71,7 @@ describe('Variable Classifier', () => {
     });
 
     it('confidence가 0 이상이다', () => {
-      const ast = parseLatex('x^2+y^2');
+      const { ast } = parseLatex('x^2+y^2');
       const collected = walkAST(ast);
       const variables = Array.from(collected.variables);
       const result = classifyVariables(ast, variables);

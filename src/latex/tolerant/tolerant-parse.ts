@@ -1,7 +1,7 @@
 /**
  * Tolerant Parser — 통합 파이프라인
  *
- * preProcess → parseLatexWithErrors → recoverFromErrors → 진단 변환 → RenderDecision
+ * preProcess → parseLatex → recoverFromErrors → 진단 변환 → RenderDecision
  *
  * 4가지 모드:
  * - strict: 기존 파서만 사용
@@ -18,7 +18,7 @@ import type {
   NormalizationRecord,
   OffsetMap,
 } from './types';
-import { parseLatexWithErrors } from '../latex-parser';
+import { parseLatex } from '../latex-parser';
 import type { LatexParseResult } from '../latex-parser';
 import type { ParseError } from '../parse-errors';
 import { preProcess } from './pre-processor';
@@ -82,7 +82,7 @@ export function tolerantParse(
  * strict 모드: 기존 파서만 사용
  */
 function runStrict(input: string): TolerantParseResult {
-  const result = parseLatexWithErrors(input);
+  const result = parseLatex(input);
   const diagnostics = convertErrorsToDiagnostics(result, identityOffsetMap());
   const renderDecision = determineRenderMode(diagnostics);
 
@@ -105,7 +105,7 @@ function runTolerant(input: string, opts: TolerantParseOptions): TolerantParseRe
   });
 
   // 2. strict 파서 호출
-  const strictResult = parseLatexWithErrors(preResult.normalized);
+  const strictResult = parseLatex(preResult.normalized);
 
   // 3. 에러 복구
   const recovered = recoverFromErrors(preResult.normalized, strictResult);

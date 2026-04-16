@@ -5,7 +5,7 @@
 
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { parseLatexWithErrors } from '../../latex/latex-parser';
+import { parseLatex } from '../../latex/latex-parser';
 import { astToLatex } from '../../latex/ast-to-latex';
 import { astToBox } from '../../box/ast-to-box';
 import { createDeterministicMetrics } from '../layout/deterministic-metrics';
@@ -140,7 +140,7 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
     bySource[entry.source].total++;
 
     // 1. 파싱 테스트 — hasErrors로 판정
-    const parseResult = parseLatexWithErrors(entry.latex);
+    const parseResult = parseLatex(entry.latex);
     const ast = parseResult.ast;
     const hasErrors = parseResult.hasErrors;
     const hasWarnings = parseResult.warnings.length > 0;
@@ -173,7 +173,7 @@ export async function runCorpusTest(corpusPath: string): Promise<CorpusTestRepor
     // 2. 라운드트립 테스트 (파싱 에러 여부와 무관하게 AST 기반으로 시도)
     try {
       const regenerated = astToLatex(ast);
-      const reParsedResult = parseLatexWithErrors(regenerated);
+      const reParsedResult = parseLatex(regenerated);
       const reRegenerated = astToLatex(reParsedResult.ast);
 
       if (regenerated === reRegenerated) {

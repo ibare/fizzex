@@ -203,7 +203,7 @@ describe('AST to LaTeX', () => {
   describe('왕복 변환 검증', () => {
     it('parseLatex -> astToLatex 결과가 의미적으로 동일하다 (단순 수식)', () => {
       const input = 'x + y';
-      const ast = parseLatex(input);
+      const { ast } = parseLatex(input);
       const output = astToLatex(ast);
       // 공백 정규화 후 비교 (파서가 공백을 다르게 처리할 수 있으므로)
       expect(output.replace(/\s+/g, ' ').trim()).toBe('x + y');
@@ -211,7 +211,7 @@ describe('AST to LaTeX', () => {
 
     it('parseLatex -> astToLatex 결과가 의미적으로 동일하다 (분수)', () => {
       const input = '\\frac{1}{2}';
-      const ast = parseLatex(input);
+      const { ast } = parseLatex(input);
       const output = astToLatex(ast);
       expect(output).toBe('\\frac{1}{2}');
     });

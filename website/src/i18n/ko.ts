@@ -128,7 +128,7 @@ export const ko: Dictionary = {
       domain: '도메인',
       variables: '변수',
       features: '특성',
-      visualization: '추천 시각화',
+      visualization: '시각화 가능',
       complexity: '복잡도',
       form: '형태',
     },

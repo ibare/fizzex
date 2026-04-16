@@ -78,7 +78,7 @@ export function createStateFromLatex(latex: string): EditorState {
   }
 
   try {
-    const ast = parseLatex(latex);
+    const { ast } = parseLatex(latex);
     return {
       ast,
       cursor: { nodeId: ast.id, offset: ast.children.length },

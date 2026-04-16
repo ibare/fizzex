@@ -32,7 +32,7 @@ export function measureLayout(
 ): LayoutMeasurement {
   const displayStyle = style === 'display';
   const metrics: any = createDeterministicMetrics(baseFontSize);
-  const ast = parseLatex(latex);
+  const { ast } = parseLatex(latex);
   const box = astToBox(ast, metrics, 1.0, displayStyle);
   layoutBox(box, 0, 0);
 

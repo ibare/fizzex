@@ -7,7 +7,7 @@ import { detectDomains, determinePrimaryDomain } from './domain-detector';
 
 /** parseLatex -> walkAST -> createFunctionInfoList 파이프라인 헬퍼 */
 function analyzeLatex(latex: string) {
-  const ast = parseLatex(latex);
+  const { ast } = parseLatex(latex);
   const collected = walkAST(ast);
   const functions = createFunctionInfoList(collected.functions);
   return { collected, functions };

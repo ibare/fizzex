@@ -16,7 +16,7 @@ import type { MathNode, RootNode, ErrorNode, SourceRange } from '../../types';
 import type { LatexParseResult } from '../latex-parser';
 import type { ParseError } from '../parse-errors';
 import type { Diagnostic, PartialParseResult } from './types';
-import { parseLatexWithErrors } from '../latex-parser';
+import { parseLatex } from '../latex-parser';
 import { generateLatexId, resetLatexIdCounter } from '../../utils/id-generator';
 
 /** 최대 복구 시도 횟수 */
@@ -48,7 +48,7 @@ export function recoverFromErrors(
     // 현재 remaining에 대해 파싱 시도
     const result = attempt === 0
       ? strictResult
-      : parseLatexWithErrors(remaining);
+      : parseLatex(remaining);
 
     if (!result.hasErrors) {
       // 재파싱 성공 → 노드 추가 후 종료
@@ -110,7 +110,7 @@ export function recoverFromErrors(
 
   // 남은 부분이 있으면 마지막 시도
   if (remaining.length > 0) {
-    const finalResult = parseLatexWithErrors(remaining);
+    const finalResult = parseLatex(remaining);
     if (!finalResult.hasErrors) {
       const shifted = shiftSourceRanges(finalResult.ast.children, globalOffset);
       allNodes.push(...shifted);
@@ -125,7 +125,7 @@ export function recoverFromErrors(
     }
   }
 
-  // ID 재할당 (parseLatexWithErrors 재호출로 인한 충돌 해소) — 새 배열 반환
+  // ID 재할당 (parseLatex 재호출로 인한 충돌 해소) — 새 배열 반환
   const finalNodes = reassignIds(allNodes);
 
   // 첫 번째 ErrorNode와 그 전후 노드 추출
@@ -418,7 +418,7 @@ function shiftChildRanges(node: MathNode, offset: number): void {
 
 /**
  * 트리 전체의 ID를 재할당한다 (불변 — 새 노드 배열 반환).
- * parseLatexWithErrors 재호출로 인한 ID 충돌을 해소.
+ * parseLatex 재호출로 인한 ID 충돌을 해소.
  */
 function reassignIds(nodes: MathNode[]): MathNode[] {
   resetLatexIdCounter();

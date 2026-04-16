@@ -121,7 +121,7 @@ export class ExplorerOverlay {
     this.onClose = cfg.onClose;
 
     // AST 확보
-    this.ast = cfg.ast ?? parseLatex(cfg.latex!) as RootNode;
+    this.ast = cfg.ast ?? parseLatex(cfg.latex!).ast;
 
     // BoxRenderConfig
     this.config = {

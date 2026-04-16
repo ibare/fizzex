@@ -81,7 +81,7 @@ export class DOMRendererView {
     // Parse - silently bail on invalid LaTeX
     let ast;
     try {
-      ast = parseLatex(latex);
+      ast = parseLatex(latex).ast;
     } catch {
       return;
     }

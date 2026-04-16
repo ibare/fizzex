@@ -11,7 +11,7 @@ describe('Polynomial Analyzer', () => {
 
   describe('analyzePolynomial', () => {
     it('변수가 없으면 undefined를 반환한다', () => {
-      const ast = parseLatex('123');
+      const { ast } = parseLatex('123');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 
@@ -19,7 +19,7 @@ describe('Polynomial Analyzer', () => {
     });
 
     it('x -> degree 1을 반환한다', () => {
-      const ast = parseLatex('x');
+      const { ast } = parseLatex('x');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 
@@ -29,7 +29,7 @@ describe('Polynomial Analyzer', () => {
     });
 
     it('x^2 -> degree 2를 반환한다', () => {
-      const ast = parseLatex('x^2');
+      const { ast } = parseLatex('x^2');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 
@@ -39,7 +39,7 @@ describe('Polynomial Analyzer', () => {
     });
 
     it('x^3 + x^2 + x -> degree 3을 반환한다', () => {
-      const ast = parseLatex('x^3+x^2+x');
+      const { ast } = parseLatex('x^3+x^2+x');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 
@@ -48,7 +48,7 @@ describe('Polynomial Analyzer', () => {
     });
 
     it('ax^2 + bx + c에서 올바른 차수를 반환한다', () => {
-      const ast = parseLatex('ax^2+bx+c');
+      const { ast } = parseLatex('ax^2+bx+c');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 
@@ -57,7 +57,7 @@ describe('Polynomial Analyzer', () => {
     });
 
     it('mainVariable을 올바르게 결정한다', () => {
-      const ast = parseLatex('x^2+y');
+      const { ast } = parseLatex('x^2+y');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 
@@ -67,7 +67,7 @@ describe('Polynomial Analyzer', () => {
     });
 
     it('variables 배열을 올바르게 포함한다', () => {
-      const ast = parseLatex('x^2+y');
+      const { ast } = parseLatex('x^2+y');
       const collected = walkAST(ast);
       const result = analyzePolynomial(ast, collected);
 

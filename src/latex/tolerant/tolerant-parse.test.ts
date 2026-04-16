@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { tolerantParse } from './tolerant-parse';
-import { parseLatexWithErrors } from '../latex-parser';
+import { parseLatex } from '../latex-parser';
 import { astToLatex } from '../ast-to-latex';
 import { resetLatexIdCounter } from '../../utils/id-generator';
 
@@ -36,7 +36,7 @@ describe('tolerantParse', () => {
     for (const input of validInputs) {
       it(`유효 입력 "${input}"에서 strict와 동일한 AST를 생성한다`, () => {
         resetLatexIdCounter();
-        const strictResult = parseLatexWithErrors(input);
+        const strictResult = parseLatex(input);
 
         resetLatexIdCounter();
         const tolerantResult = tolerantParse(input, { parserMode: 'strict' });

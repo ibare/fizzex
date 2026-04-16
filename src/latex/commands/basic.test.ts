@@ -20,7 +20,7 @@ describe('Basic Command Handlers', () => {
 
   describe('fracHandler', () => {
     it('\\frac{1}{2} → frac 노드를 생성한다', () => {
-      const result = parseLatex('\\frac{1}{2}');
+      const { ast: result } = parseLatex('\\frac{1}{2}');
 
       expect(result.children).toHaveLength(1);
       const frac = result.children[0] as FracNode;
@@ -44,7 +44,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('분자에 여러 항이 있는 분수를 파싱한다', () => {
-      const result = parseLatex('\\frac{a+b}{2}');
+      const { ast: result } = parseLatex('\\frac{a+b}{2}');
 
       expect(result.children).toHaveLength(1);
       const frac = result.children[0] as FracNode;
@@ -61,7 +61,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('분모에 여러 항이 있는 분수를 파싱한다', () => {
-      const result = parseLatex('\\frac{1}{x+y}');
+      const { ast: result } = parseLatex('\\frac{1}{x+y}');
 
       expect(result.children).toHaveLength(1);
       const frac = result.children[0] as FracNode;
@@ -78,7 +78,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('중첩된 분수를 파싱한다', () => {
-      const result = parseLatex('\\frac{\\frac{1}{2}}{3}');
+      const { ast: result } = parseLatex('\\frac{\\frac{1}{2}}{3}');
 
       expect(result.children).toHaveLength(1);
       const outerFrac = result.children[0] as FracNode;
@@ -108,7 +108,7 @@ describe('Basic Command Handlers', () => {
 
   describe('sqrtHandler', () => {
     it('\\sqrt{x} → sqrt 노드를 생성한다', () => {
-      const result = parseLatex('\\sqrt{x}');
+      const { ast: result } = parseLatex('\\sqrt{x}');
 
       expect(result.children).toHaveLength(1);
       const sqrt = result.children[0] as SqrtNode;
@@ -127,7 +127,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('\\sqrt[3]{x} → index가 있는 sqrt를 생성한다', () => {
-      const result = parseLatex('\\sqrt[3]{x}');
+      const { ast: result } = parseLatex('\\sqrt[3]{x}');
 
       expect(result.children).toHaveLength(1);
       const sqrt = result.children[0] as SqrtNode;
@@ -149,7 +149,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('\\sqrt{x+1}의 content를 올바르게 파싱한다', () => {
-      const result = parseLatex('\\sqrt{x+1}');
+      const { ast: result } = parseLatex('\\sqrt{x+1}');
 
       expect(result.children).toHaveLength(1);
       const sqrt = result.children[0] as SqrtNode;
@@ -168,7 +168,7 @@ describe('Basic Command Handlers', () => {
 
   describe('textHandler', () => {
     it('\\text{hello} → text 노드를 생성한다', () => {
-      const result = parseLatex('\\text{hello}');
+      const { ast: result } = parseLatex('\\text{hello}');
 
       expect(result.children).toHaveLength(1);
       const textNode = result.children[0] as TextNode;
@@ -177,7 +177,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('\\text{hello world}의 내용을 올바르게 파싱한다', () => {
-      const result = parseLatex('\\text{hello world}');
+      const { ast: result } = parseLatex('\\text{hello world}');
 
       expect(result.children).toHaveLength(1);
       const textNode = result.children[0] as TextNode;
@@ -188,7 +188,7 @@ describe('Basic Command Handlers', () => {
 
   describe('leftHandler', () => {
     it('\\left(x+1\\right) → paren 노드를 생성한다', () => {
-      const result = parseLatex('\\left(x+1\\right)');
+      const { ast: result } = parseLatex('\\left(x+1\\right)');
 
       expect(result.children).toHaveLength(1);
       const paren = result.children[0] as ParenNode;
@@ -204,7 +204,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('\\left[x\\right] → 대괄호 paren을 생성한다', () => {
-      const result = parseLatex('\\left[x\\right]');
+      const { ast: result } = parseLatex('\\left[x\\right]');
 
       expect(result.children).toHaveLength(1);
       const paren = result.children[0] as ParenNode;
@@ -213,7 +213,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('\\left|x\\right| → abs 노드를 생성한다', () => {
-      const result = parseLatex('\\left|x\\right|');
+      const { ast: result } = parseLatex('\\left|x\\right|');
 
       expect(result.children).toHaveLength(1);
       const abs = result.children[0] as AbsNode;
@@ -226,7 +226,7 @@ describe('Basic Command Handlers', () => {
     });
 
     it('autoSize가 true로 설정된다', () => {
-      const result = parseLatex('\\left(x\\right)');
+      const { ast: result } = parseLatex('\\left(x\\right)');
 
       expect(result.children).toHaveLength(1);
       const paren = result.children[0] as ParenNode;

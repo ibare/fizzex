@@ -80,7 +80,7 @@ describe('Function Detector', () => {
     });
 
     it('등장 횟수를 올바르게 포함한다', () => {
-      const ast = parseLatex('\\sin{x} + \\sin{y} + \\cos{z}');
+      const { ast } = parseLatex('\\sin{x} + \\sin{y} + \\cos{z}');
       const collected = walkAST(ast);
       const result = createFunctionInfoList(collected.functions);
 
