@@ -40,13 +40,17 @@ const derivative = diff(ast);     // 2(x+1)
 const eq = parseLatex('x^2 - 4 = 0');
 const solutions = solve(eq);      // x = 2, x = -2`,
 
-  visualization: `import { analyzeExpression, parseLatex } from 'fizzex';
+  visualization: `import { parseLatex, analyzeExpression, getVisualizerForCatalog } from 'fizzex';
 
-const ast = parseLatex('x^2 - 1');
+const ast = parseLatex('T^2 = \\\\frac{4\\\\pi^2}{GM} a^3');
 const analysis = analyzeExpression(ast);
 
-// Visualizer 프레임워크로 전환 예정
-analysis.visualization.graphable2D; // true`,
+// Find the matching catalog visualizer
+const viz = await getVisualizerForCatalog(analysis);
+viz?.name; // "Kepler's Third Law"
+
+// analysis.visualization flags available types
+analysis.visualization.graphable2D; // true for y = f(x) expressions`,
 };
 
 export const tabKeys = ['install', 'editor', 'latex', 'analysis', 'cas', 'visualization'] as const;
