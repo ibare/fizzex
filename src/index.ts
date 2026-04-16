@@ -98,16 +98,6 @@ export type {
   ExpressionExplorerProps,
 } from './react';
 
-// React 컴포넌트 — 하위 호환 alias (deprecated)
-export {
-  EditorView as MathCanvas,
-  StreamView as StreamingMath,
-} from './react';
-export type {
-  EditorViewProps as MathCanvasProps,
-  StreamViewProps as StreamingMathProps,
-} from './react';
-
 // 수식 분석기
 export { analyzeExpression, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer';
 export type {
@@ -173,12 +163,6 @@ export { DOMRendererView } from './headless';
 export { DOMEditorView } from './headless';
 export { DOMStreamView, classifyConfidence, buildConfidenceRegions } from './headless';
 export type { DOMStreamViewConfig } from './headless';
-
-// Headless 어댑터 — 하위 호환 alias (deprecated)
-export { DOMRendererView as FizzexRenderer } from './headless';
-export { DOMEditorView as FizzexEditor } from './headless';
-export { DOMStreamView as FizzexStreamRenderer } from './headless';
-export type { DOMStreamViewConfig as StreamRendererConfig } from './headless';
 
 // Headless Explorer
 export { ExplorerOverlay } from './headless';
