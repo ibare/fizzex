@@ -108,11 +108,10 @@ export function parseLatexWithErrors(latex: string): LatexParseResult {
 }
 
 /**
- * LaTeX 문자열을 AST로 변환 (하위 호환성)
+ * LaTeX 문자열을 AST로 변환
  *
  * @param latex LaTeX 문자열
  * @returns 파싱된 AST (에러 발생 시에도 부분 결과 반환)
- * @deprecated parseLatexWithErrors 사용 권장
  */
 export function parseLatex(latex: string): RootNode {
   const result = parseLatexWithErrors(latex);
