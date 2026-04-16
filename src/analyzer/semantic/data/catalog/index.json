@@ -2146,7 +2146,7 @@
       ],
       "complexity": [
         6,
-        14
+        20
       ],
       "patternType": "structural",
       "signature": [
@@ -2155,6 +2155,15 @@
         "power.exponent:2",
         "operator:=",
         "power.exponent:2"
+      ],
+      "visualizers": [
+        {
+          "id": "pythagorean-2d",
+          "name": "직각삼각형 2D",
+          "description": "삼각형과 세 정사각형 + 일상 맥락별 장면",
+          "icon": "🔺",
+          "default": true
+        }
       ]
     },
     {

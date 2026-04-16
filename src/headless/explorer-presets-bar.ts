@@ -88,9 +88,7 @@ export class ExplorerPresetsBar {
     });
 
     btn.addEventListener('click', () => {
-      for (const [pid, val] of Object.entries(preset.values)) {
-        this.bridge.setParam(pid, val, 'preset');
-      }
+      this.bridge.applyPreset(preset);
     });
 
     return btn;

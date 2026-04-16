@@ -21,6 +21,10 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-kepler-orbit-3d" */
     './built-in/kepler-orbit-3d'
   ),
+  'pythagorean-2d': () => import(
+    /* webpackChunkName: "viz-pythagorean-2d" */
+    './built-in/pythagorean-2d'
+  ),
 };
 
 /** Visualizer를 ID로 로드 (비동기) */

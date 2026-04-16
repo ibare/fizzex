@@ -44,6 +44,7 @@ const CATALOG_TEST_CASES: CatalogTestCase[] = [
   { latex: 'A = \\sqrt{s(s-a)(s-b)(s-c)}', expectedId: 'heron-formula' },
   { latex: 'A = \\pi r^2', expectedId: 'circle-area-elem' },
   { latex: 'C = 2\\pi r', expectedId: 'circle-circumference' },
+  { latex: 'a^2 + b^2 = c^2', expectedId: 'pythagorean-theorem' },
 
   // ── 물리학 ──
   { latex: 'E = mc^2', expectedId: 'mass-energy' },

@@ -64,6 +64,12 @@ export interface VisualizerUpdate {
   baseline?: { derived: Record<string, number>; equationValue?: number };
   /** 현재 식이 카탈로그 원본과 구조적으로 같은가. */
   isStandard: boolean;
+  /**
+   * 사용자가 마지막으로 명시 선택한 프리셋 ID.
+   * 슬라이더 조작으로는 변하지 않는다 — "프리셋 맥락 내에서 값 탐구"를 지원.
+   * 프리셋을 선택하지 않은 초기 상태에서는 undefined.
+   */
+  activePresetId?: string;
 }
 
 // ─── 파생값 ───
@@ -152,6 +158,11 @@ export interface VisualizerBridge {
   getParams(): ParameterValues;
   /** 파라미터 변경 (양방향) */
   setParam(paramId: string, value: number, source: 'slider' | 'preset' | 'visualizer' | 'inline'): void;
+  /**
+   * 프리셋 적용 — preset.values 를 일괄 반영하고 activePresetId 를 갱신한다.
+   * 여러 파라미터를 한 번의 update 사이클로 전달하여 Visualizer 의 프리셋 전환을 원자적으로 만든다.
+   */
+  applyPreset(preset: Preset): void;
   /** 파생값 계산 */
   getDerivedValues(): Record<string, number>;
   /**

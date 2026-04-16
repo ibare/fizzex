@@ -12,6 +12,7 @@ import type {
   ParameterValues,
   DerivedValue,
   ComputeContext,
+  Preset,
   VisualizerBridge,
   VisualizerUpdate,
 } from './types';
@@ -30,6 +31,11 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
    */
   private originalAst: RootNode | null = null;
   private catalogDetail: CatalogDetail | null = null;
+  /**
+   * 사용자가 명시 선택한 프리셋 ID.
+   * 슬라이더/inline 조작으로는 변하지 않고, applyPreset 호출 시에만 갱신된다.
+   */
+  private activePresetId: string | null = null;
   private destroyed = false;
 
   constructor(visualizer: FizzexVisualizer, initialParams: ParameterValues) {
@@ -63,6 +69,23 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     // 모든 구독자에게 알린다 (슬라이더 UI, 값 흐름 등)
     for (const listener of this.listeners) {
       listener({ ...this.params }, source);
+    }
+  }
+
+  /**
+   * 프리셋 적용 — 여러 파라미터를 한 번의 update 사이클로 반영한다.
+   * activePresetId 가 갱신되어 Visualizer 가 "어떤 장면인지"를 명시적으로 알게 된다.
+   * 이후 슬라이더 조작이 있어도 activePresetId 는 유지되므로 "프리셋 맥락 내 탐구" 가 가능하다.
+   */
+  applyPreset(preset: Preset): void {
+    if (this.destroyed) return;
+    this.activePresetId = preset.id;
+    for (const [key, val] of Object.entries(preset.values)) {
+      this.params[key] = val;
+    }
+    this.visualizer.update(this.computeUpdateContext());
+    for (const listener of this.listeners) {
+      listener({ ...this.params }, 'preset');
     }
   }
 
@@ -120,6 +143,7 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
       equationValue: current.equationValue,
       baseline,
       isStandard,
+      activePresetId: this.activePresetId ?? undefined,
     };
   }
 
@@ -181,5 +205,6 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     this.ast = null;
     this.originalAst = null;
     this.catalogDetail = null;
+    this.activePresetId = null;
   }
 }
