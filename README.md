@@ -30,7 +30,7 @@ Like a sparkling Prosecco, Fizzex is:
 ├─────────────────────────────────────────────────────────────┤
 │  Computation  │  CAS (simplify, expand, factor, solve, ...) │
 ├─────────────────────────────────────────────────────────────┤
-│  Visualization│  FunctionGraph │ UnitCircle │ NumberLine │...│
+│  Visualization│  Catalog-matched interactive visualizers        │
 ├─────────────────────────────────────────────────────────────┤
 │  UX           │  Autocomplete │ Coefficient slider │ i18n   │
 ├─────────────────────────────────────────────────────────────┤
@@ -134,7 +134,7 @@ const analysis = analyzeExpression(ast);
 
 console.log(analysis.primaryDomain);           // 'polynomial'
 console.log(analysis.polynomial?.degree);      // 2
-console.log(analysis.visualization.bestFit);   // 'function-graph-2d'
+console.log(analysis.visualization.graphable2D); // true
 ```
 
 ### CAS (Computer Algebra System)
@@ -153,14 +153,18 @@ const solutions = solve(equation);         // x = 2, x = -2
 
 ### Visualization
 
-```tsx
-import { FunctionGraph, UnitCircle, NumberLine, PolarGraph, AutoVisualizer } from 'fizzex';
+```typescript
+import { parseLatex, analyzeExpression, getVisualizerForCatalog } from 'fizzex';
+import { ExplorerOverlay } from 'fizzex/headless';
 
-<FunctionGraph expression="x^2 - 1" width={400} height={300} interactive />
-<UnitCircle size={300} initialAngle={Math.PI / 4} interactive />
-<NumberLine points={[{ value: 3, label: '3' }]} range={[-5, 8]} />
-<PolarGraph expression="1 + \\cos(\\theta)" size={300} />
-<AutoVisualizer analysis={analysis} latex={latex} showSelector />
+// Catalog-matched visualizer — automatically finds the right visualizer
+const ast = parseLatex('T^2 = \\frac{4\\pi^2}{GM} a^3');
+const analysis = analyzeExpression(ast);
+const visualizer = await getVisualizerForCatalog(analysis);
+
+// Mount into any DOM container
+const overlay = new ExplorerOverlay(container, { baseFontSize: 20 });
+overlay.setAst(ast);
 ```
 
 ## Plugin Architecture
@@ -211,8 +215,11 @@ import { MathEditor, createInitialState, createStateFromLatex } from 'fizzex';
 import { parseLatex, astToLatex } from 'fizzex';
 
 // Analysis & CAS
-import { analyzeExpression, matchVisualization } from 'fizzex';
+import { analyzeExpression } from 'fizzex';
 import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizzex';
+
+// Visualization
+import { loadVisualizer, getVisualizerForCatalog } from 'fizzex';
 
 // Node creators
 import {
@@ -235,10 +242,9 @@ import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from 'fizzex/headl
 
 ```typescript
 import {
-  EditorView, StructureViewer,
+  EditorView, StreamView,
   SuggestionChips, SuggestionPopover,
-  FunctionGraph, UnitCircle, NumberLine, PolarGraph, AutoVisualizer,
-  FizzexI18nProvider,
+  ExpressionExplorer,
 } from 'fizzex/react';
 ```
 
