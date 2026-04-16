@@ -29,6 +29,10 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-freefall-2d" */
     './built-in/freefall-2d'
   ),
+  'sine-wave-2d': () => import(
+    /* webpackChunkName: "viz-sine-wave-2d" */
+    './built-in/sine-wave-2d'
+  ),
 };
 
 /** Visualizer를 ID로 로드 (비동기) */

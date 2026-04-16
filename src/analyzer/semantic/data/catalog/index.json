@@ -3293,6 +3293,15 @@
         "func:sin",
         "operator:+",
         "paren"
+      ],
+      "visualizers": [
+        {
+          "id": "sine-wave-2d",
+          "name": "사인파 2D",
+          "description": "소리·전기·조수·진자를 같은 수식으로 체험",
+          "icon": "🎵",
+          "default": true
+        }
       ]
     },
     {
