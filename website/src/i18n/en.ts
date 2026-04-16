@@ -156,6 +156,7 @@ export const en: Dictionary = {
     collapse_btn: 'Collapse',
     analysis_label: 'Analysis',
     visualization_label: 'Visualization',
+    no_variables: 'none',
     categories: {
       polynomial: 'Polynomial',
       trigonometric: 'Trigonometric',
@@ -170,6 +171,74 @@ export const en: Dictionary = {
       statistics: 'Statistics',
       astronomy: 'Astronomy',
       complex: 'Complex Formulas',
+    },
+    items: {
+      // polynomial
+      quadratic_eq: 'Quadratic equation',
+      cubic_poly: 'Cubic polynomial',
+      binomial_expansion: 'Binomial expansion',
+      vieta: "Vieta's formulas",
+      // trigonometric
+      pythagorean_identity: 'Pythagorean identity',
+      double_angle: 'Double angle',
+      euler_formula: "Euler's formula",
+      tangent: 'Tangent',
+      // calculus
+      definite_integral: 'Definite integral',
+      derivative: 'Derivative',
+      taylor_series_basic: 'Taylor series',
+      fundamental_theorem_basic: 'Fundamental theorem',
+      // inequality
+      abs_value_ineq: 'Absolute value',
+      quadratic_ineq: 'Quadratic inequality',
+      triangle_ineq: 'Triangle inequality',
+      // polar
+      cardioid: 'Cardioid',
+      rose_curve: 'Rose curve',
+      lemniscate: 'Lemniscate',
+      // structures
+      matrix_2x2: '2x2 Matrix',
+      determinant: 'Determinant',
+      piecewise: 'Piecewise function',
+      system_of_equations: 'System of equations',
+      // algebra
+      euler_identity: "Euler's identity",
+      quadratic_formula: 'Quadratic formula',
+      binomial_theorem: 'Binomial theorem',
+      geometric_series: 'Geometric series',
+      diff_of_squares: 'Difference of squares',
+      // geometry
+      pythagorean_theorem: 'Pythagorean theorem',
+      heron_formula: "Heron's formula",
+      circle_area: 'Circle area',
+      law_of_cosines: 'Law of cosines',
+      sphere_volume: 'Sphere volume',
+      // physics
+      mass_energy: 'Mass-energy equivalence',
+      newton_second: "Newton's second law",
+      universal_gravitation: 'Universal gravitation',
+      coulomb: "Coulomb's law",
+      kinetic_energy: 'Kinetic energy',
+      // astronomy
+      kepler_third: "Kepler's third law",
+      // analysis
+      fundamental_theorem_full: 'Fundamental theorem of calculus',
+      taylor_series_full: 'Taylor series',
+      gaussian_integral: 'Gaussian integral',
+      derivative_def: 'Derivative definition',
+      chain_rule: 'Chain rule',
+      // statistics
+      bayes_theorem: "Bayes' theorem",
+      normal_distribution: 'Normal distribution',
+      standard_deviation: 'Standard deviation',
+      correlation_coefficient: 'Correlation coefficient',
+      law_of_large_numbers: 'Law of large numbers',
+      // complex
+      nested_integrals_series: 'Nested integrals + series',
+      matrix_eigenvalue: 'Matrix + exponent + eigenvalue',
+      variational_problem: 'Variational problem',
+      probability_info_theory: 'Probability + information theory',
+      renderer_stress: 'Renderer stress test',
     },
   },
   comparisonPage: {

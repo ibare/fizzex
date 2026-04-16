@@ -56,7 +56,7 @@ export default function PipelineExplorer() {
     let parsed: RootNode | null = null;
     let editorState: ReturnType<typeof createStateFromLatex> | null = null;
     let analysisResult: ExpressionAnalysis | null = null;
-    try { parsed = parseLatex(latex); } catch { /* skip */ }
+    try { parsed = parseLatex(latex).ast; } catch { /* skip */ }
     try { editorState = createStateFromLatex(latex); } catch { /* skip */ }
     if (parsed) {
       try { analysisResult = analyzeExpression(parsed); } catch { /* skip */ }

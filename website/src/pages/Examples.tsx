@@ -25,7 +25,7 @@ export default function Examples() {
       let analysis: ExpressionAnalysis | null = null;
       try {
         state = createStateFromLatex(item.latex);
-        const ast = parseLatex(item.latex);
+        const { ast } = parseLatex(item.latex);
         analysis = analyzeExpression(ast);
       } catch {
         try { state = createStateFromLatex(item.latex); } catch { /* skip */ }
@@ -70,7 +70,7 @@ export default function Examples() {
               return (
                 <div key={`${currentCategory.key}-${i}`} className="card">
                   <div style={styles.itemHeader}>
-                    <div style={styles.itemLabel}>{item.label}</div>
+                    <div style={styles.itemLabel}>{t.examples.items[item.labelKey] ?? item.labelKey}</div>
                     <code style={styles.itemLatex}>{item.latex}</code>
                   </div>
 
@@ -84,13 +84,13 @@ export default function Examples() {
                     <div style={styles.analysisBox}>
                       <div style={styles.analysisTitle}>{t.examples.analysis_label}</div>
                       <div style={styles.analysisGrid}>
-                        <span style={styles.analysisKey}>Domain</span>
+                        <span style={styles.analysisKey}>{t.playground.analysis.domain}</span>
                         <span>{rendered.analysis.primaryDomain}</span>
-                        <span style={styles.analysisKey}>Form</span>
+                        <span style={styles.analysisKey}>{t.playground.analysis.form}</span>
                         <span>{rendered.analysis.form}</span>
-                        <span style={styles.analysisKey}>Variables</span>
-                        <span>{rendered.analysis.variables.join(', ') || 'none'}</span>
-                        <span style={styles.analysisKey}>Complexity</span>
+                        <span style={styles.analysisKey}>{t.playground.analysis.variables}</span>
+                        <span>{rendered.analysis.variables.join(', ') || t.examples.no_variables}</span>
+                        <span style={styles.analysisKey}>{t.playground.analysis.complexity}</span>
                         <span>{rendered.analysis.complexity}/10</span>
                       </div>
                     </div>

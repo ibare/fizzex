@@ -151,11 +151,12 @@ export const ko: Dictionary = {
   },
   examples: {
     title: '예제 갤러리',
-    sub: '수학 도메인별 수식을 탐색하세요. Render를 클릭하면 Fizzex가 작동합니다.',
+    sub: '수학 도메인별 수식을 탐색하세요. 렌더링을 클릭하면 Fizzex가 작동합니다.',
     render_btn: '렌더링',
     collapse_btn: '접기',
     analysis_label: '분석',
     visualization_label: '시각화',
+    no_variables: '없음',
     categories: {
       polynomial: '다항식',
       trigonometric: '삼각함수',
@@ -170,6 +171,74 @@ export const ko: Dictionary = {
       statistics: '통계학',
       astronomy: '천문학',
       complex: '복잡한 수식',
+    },
+    items: {
+      // polynomial
+      quadratic_eq: '이차방정식',
+      cubic_poly: '삼차다항식',
+      binomial_expansion: '이항 전개',
+      vieta: '비에타의 공식',
+      // trigonometric
+      pythagorean_identity: '피타고라스 항등식',
+      double_angle: '배각 공식',
+      euler_formula: '오일러 공식',
+      tangent: '탄젠트',
+      // calculus
+      definite_integral: '정적분',
+      derivative: '도함수',
+      taylor_series_basic: '테일러 급수',
+      fundamental_theorem_basic: '미적분학의 기본정리',
+      // inequality
+      abs_value_ineq: '절댓값 부등식',
+      quadratic_ineq: '이차부등식',
+      triangle_ineq: '삼각부등식',
+      // polar
+      cardioid: '심장형 곡선',
+      rose_curve: '장미 곡선',
+      lemniscate: '연주형 곡선',
+      // structures
+      matrix_2x2: '2x2 행렬',
+      determinant: '행렬식',
+      piecewise: '조각 함수',
+      system_of_equations: '연립방정식',
+      // algebra
+      euler_identity: '오일러 항등식',
+      quadratic_formula: '근의 공식',
+      binomial_theorem: '이항정리',
+      geometric_series: '등비급수',
+      diff_of_squares: '제곱의 차',
+      // geometry
+      pythagorean_theorem: '피타고라스 정리',
+      heron_formula: '헤론의 공식',
+      circle_area: '원의 넓이',
+      law_of_cosines: '코사인 법칙',
+      sphere_volume: '구의 부피',
+      // physics
+      mass_energy: '질량-에너지 등가 원리',
+      newton_second: '뉴턴의 제2법칙',
+      universal_gravitation: '만유인력 법칙',
+      coulomb: '쿨롱 법칙',
+      kinetic_energy: '운동 에너지',
+      // astronomy
+      kepler_third: '케플러 제3법칙',
+      // analysis
+      fundamental_theorem_full: '미적분학의 기본정리',
+      taylor_series_full: '테일러 급수',
+      gaussian_integral: '가우스 적분',
+      derivative_def: '도함수의 정의',
+      chain_rule: '연쇄 법칙',
+      // statistics
+      bayes_theorem: '베이즈 정리',
+      normal_distribution: '정규분포',
+      standard_deviation: '표준편차',
+      correlation_coefficient: '상관계수',
+      law_of_large_numbers: '큰 수의 법칙',
+      // complex
+      nested_integrals_series: '중첩 적분 + 급수',
+      matrix_eigenvalue: '행렬 + 지수 + 고윳값',
+      variational_problem: '변분 문제',
+      probability_info_theory: '확률 + 정보이론',
+      renderer_stress: '렌더러 부하 테스트',
     },
   },
   comparisonPage: {

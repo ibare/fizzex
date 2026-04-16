@@ -122,6 +122,7 @@ export interface Dictionary {
     collapse_btn: string;
     analysis_label: string;
     visualization_label: string;
+    no_variables: string;
     categories: {
       polynomial: string;
       trigonometric: string;
@@ -137,6 +138,8 @@ export interface Dictionary {
       astronomy: string;
       complex: string;
     };
+    /** examples-data.ts의 ExampleItem.labelKey로 참조하는 라벨 사전 */
+    items: Record<string, string>;
   };
   comparisonPage: {
     title: string;
