@@ -37,6 +37,10 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-quadratic-2d" */
     './built-in/quadratic-2d'
   ),
+  'exponential-decay-2d': () => import(
+    /* webpackChunkName: "viz-exponential-decay-2d" */
+    './built-in/exponential-decay-2d'
+  ),
 };
 
 /** Visualizer를 ID로 로드 (비동기) */

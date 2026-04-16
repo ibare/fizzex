@@ -586,6 +586,15 @@
         "power",
         "variable:e",
         "subscript"
+      ],
+      "visualizers": [
+        {
+          "id": "exponential-decay-2d",
+          "name": "지수 감소 2D",
+          "description": "반감기의 불변성 — 카페인·탄소14·약물·배터리",
+          "icon": "☕",
+          "default": true
+        }
       ]
     },
     {
