@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-image": "^3.22.3",
     "mathjax-full": "^3.2.2",
     "nerdamer": "^1.1.13",
     "react": "^19.0.0",
@@ -17,10 +18,10 @@
     "shiki": "^4.0.2"
   },
   "devDependencies": {
-    "@tiptap/core": "^2.0.0",
-    "@tiptap/pm": "^2.0.0",
-    "@tiptap/react": "^2.0.0",
-    "@tiptap/starter-kit": "^2.0.0",
+    "@tiptap/core": "^3.22.3",
+    "@tiptap/pm": "^3.22.3",
+    "@tiptap/react": "^3.22.3",
+    "@tiptap/starter-kit": "^3.22.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",

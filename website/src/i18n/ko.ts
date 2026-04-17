@@ -373,20 +373,58 @@ export const ko: Dictionary = {
       title: 'Tiptap 라이브 데모',
       sub: 'Fizzex가 구동하는 MathInline과 MathBlock 확장이 포함된 실제 Tiptap 에디터입니다.',
       instructions: '실제 Tiptap 에디터입니다. 텍스트를 자유롭게 편집할 수 있습니다. 블록 수식을 더블클릭하면 편집할 수 있습니다.',
-      content: `
+      tabs: { euler: '오일러 항등식', pythagorean: '피타고라스 정리' },
+      contents: {
+        euler: `
         <h2>오일러 항등식 — 가장 아름다운 방정식</h2>
         <p>1748년, 레온하르트 오일러는 수학에서 가장 근본적인 다섯 개의 상수 사이의 깊은 연결을 발견했습니다. 그 결과물이 바로 <strong>오일러 항등식</strong>입니다:</p>
         <div data-math-block data-latex="e^{i\\pi} + 1 = 0">e^{i\\pi} + 1 = 0</div>
-        <p>이 하나의 방정식은 덧셈의 항등원 <span data-math-inline data-latex="0">0</span>, 곱셈의 항등원 <span data-math-inline data-latex="1">1</span>, 자연로그의 밑 <span data-math-inline data-latex="e">e</span>, 허수 단위 <span data-math-inline data-latex="i">i</span>, 그리고 원주율 <span data-math-inline data-latex="\\pi">\\pi</span>를 하나로 연결합니다.</p>
+        <p>이 하나의 방정식은 덧셈의 항등원 <span data-math-inline data-latex="0">0</span>, 곱셈의 항등원 <span data-math-inline data-latex="1">1</span>, 자연로그의 밑 <span data-math-inline data-latex="e">e</span>, 허수 단위 <span data-math-inline data-latex="i">i</span>, 그리고 원주율 <span data-math-inline data-latex="\\pi">\\pi</span>를 하나로 연결합니다. 수학자 벤저민 퍼스는 이 식을 "수학에서 가장 주목할 만한 공식"이라 불렀고, 물리학자 리처드 파인만은 "우리의 보석"이라 칭했습니다.</p>
+
+        <h3>다섯 상수의 의미</h3>
+        <p>이 항등식이 왜 특별한지 이해하려면, 등장하는 다섯 상수 각각이 수학의 전혀 다른 분야에서 독립적으로 태어났다는 사실을 떠올려야 합니다. <span data-math-inline data-latex="0">0</span>과 <span data-math-inline data-latex="1">1</span>은 산술의 기본 단위입니다. <span data-math-inline data-latex="\\pi">\\pi</span>는 기하학에서 — 원의 둘레와 지름의 비율로 — 등장합니다. <span data-math-inline data-latex="e">e</span>는 미적분학에서 자연스럽게 나타나는 수로, 연속 복리 성장의 극한값이기도 합니다. 마지막으로 <span data-math-inline data-latex="i">i</span>는 <span data-math-inline data-latex="i^2 = -1">i^2 = -1</span>을 만족하는 허수 단위로, 대수학의 영역을 복소수로 확장합니다.</p>
+        <p>이 다섯 가지가 하나의 간결한 등식에 모인다는 사실은, 수학의 서로 다른 분야들이 깊은 곳에서 하나로 연결되어 있음을 상징합니다.</p>
+
         <h3>어디서 왔을까?</h3>
         <p>오일러 항등식은 복소 지수함수와 삼각함수를 연결하는 <strong>오일러 공식</strong>의 특수한 경우입니다:</p>
         <div data-math-block data-latex="e^{i\\theta} = \\cos\\theta + i\\sin\\theta">e^{i\\theta} = \\cos\\theta + i\\sin\\theta</div>
+        <p>이 공식은 복소 평면 위의 단위원을 매개변수화합니다. 각도 <span data-math-inline data-latex="\\theta">\\theta</span>가 변하면 <span data-math-inline data-latex="e^{i\\theta}">e^{i\\theta}</span>는 단위원 위를 움직이며, 실수부가 <span data-math-inline data-latex="\\cos\\theta">\\cos\\theta</span>, 허수부가 <span data-math-inline data-latex="\\sin\\theta">\\sin\\theta</span>가 됩니다.</p>
         <p>여기에 <span data-math-inline data-latex="\\theta = \\pi">\\theta = \\pi</span>를 대입하면 <span data-math-inline data-latex="\\cos\\pi = -1">\\cos\\pi = -1</span>이고 <span data-math-inline data-latex="\\sin\\pi = 0">\\sin\\pi = 0</span>이므로:</p>
         <div data-math-block data-latex="e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1">e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1</div>
-        <p>이를 정리하면 항등식을 얻습니다. 오일러 공식 자체는 테일러 급수 전개로부터 유도할 수 있습니다:</p>
+        <p>양변에 <span data-math-inline data-latex="1">1</span>을 더하면 바로 <span data-math-inline data-latex="e^{i\\pi} + 1 = 0">e^{i\\pi} + 1 = 0</span>이 됩니다.</p>
+
+        <h3>테일러 급수로 보는 증명</h3>
+        <p>오일러 공식 자체는 세 함수의 테일러 급수 전개로부터 유도할 수 있습니다:</p>
         <div data-math-block data-latex="e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}, \\quad \\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}, \\quad \\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}">...</div>
-        <p><span data-math-inline data-latex="e^x">e^x</span>의 급수에 <span data-math-inline data-latex="x = i\\theta">x = i\\theta</span>를 대입하고 실수부와 허수부를 분리하면 코사인과 사인 급수가 그대로 나타납니다 — 놀라울 만큼 우아한 증명입니다.</p>
-      `,
+        <p><span data-math-inline data-latex="e^x">e^x</span>의 급수에 <span data-math-inline data-latex="x = i\\theta">x = i\\theta</span>를 대입하면 <span data-math-inline data-latex="i">i</span>의 거듭제곱이 4주기로 순환(<span data-math-inline data-latex="i^0=1,\\; i^1=i,\\; i^2=-1,\\; i^3=-i">i^0=1, i^1=i, i^2=-1, i^3=-i</span>)하므로, 실수부와 허수부를 분리하면 코사인과 사인 급수가 그대로 나타납니다 — 놀라울 만큼 우아한 증명입니다.</p>
+
+        <h3>왜 중요한가?</h3>
+        <p>오일러 항등식은 단순히 아름다운 것을 넘어, 실용적인 의미도 큽니다. 복소 지수를 통해 삼각함수를 다루면 전기공학에서 교류 회로 해석이 훨씬 간결해지고, 양자역학에서 파동함수의 위상을 표현하는 데 필수적입니다. 신호 처리에서 쓰이는 푸리에 변환 역시 오일러 공식이 없으면 성립하지 않습니다. 하나의 항등식이 수학과 물리학, 공학의 거의 모든 분야를 관통하는 셈입니다.</p>
+        `,
+        pythagorean: `
+        <h2>피타고라스 정리 — 기하학의 초석</h2>
+        <p>직각삼각형에서, 빗변의 길이의 제곱은 나머지 두 변의 길이의 제곱의 합과 같습니다. 이것이 바로 <strong>피타고라스 정리</strong>이며, 수학에서 가장 오래되고 가장 널리 사용되는 정리 중 하나입니다:</p>
+        <div data-math-block data-latex="a^2 + b^2 = c^2">a^2 + b^2 = c^2</div>
+        <p>여기서 <span data-math-inline data-latex="a">a</span>와 <span data-math-inline data-latex="b">b</span>는 직각을 끼는 두 변(직각변)이고, <span data-math-inline data-latex="c">c</span>는 직각의 맞은편에 있는 가장 긴 변(빗변)입니다. 이 정리의 이름은 고대 그리스 수학자 피타고라스에게서 왔지만, 실제로는 바빌로니아와 인도의 수학자들이 훨씬 이전부터 이 관계를 알고 있었습니다.</p>
+
+        <h3>시각적 증명: 넓이로 이해하기</h3>
+        <p>피타고라스 정리의 가장 직관적인 증명은 <strong>넓이 비교</strong>입니다. 각 변 위에 정사각형을 그려보면, 두 직각변 위의 정사각형 넓이(<span data-math-inline data-latex="a^2">a^2</span>과 <span data-math-inline data-latex="b^2">b^2</span>)의 합이 빗변 위의 정사각형 넓이(<span data-math-inline data-latex="c^2">c^2</span>)와 정확히 일치합니다. 위의 수식 블록을 더블클릭하여 값을 바꿔보면, 이 관계가 어떻게 변하는지 시각적으로 확인할 수 있습니다.</p>
+        <p>한 변의 길이가 <span data-math-inline data-latex="a + b">a + b</span>인 큰 정사각형 안에 직각삼각형 네 개를 배치하는 방법도 유명합니다. 안쪽에 남는 영역이 한 번은 <span data-math-inline data-latex="c^2">c^2</span>이고, 삼각형을 재배치하면 <span data-math-inline data-latex="a^2 + b^2">a^2 + b^2</span>이 되어 두 넓이가 같음을 보입니다.</p>
+
+        <h3>구체적인 예: 3-4-5 삼각형</h3>
+        <p>가장 유명한 피타고라스 수 세 쌍은 <span data-math-inline data-latex="(3, 4, 5)">3, 4, 5</span>입니다. 실제로 확인해 봅시다:</p>
+        <div data-math-block data-latex="3^2 + 4^2 = 9 + 16 = 25 = 5^2">3^2 + 4^2 = 9 + 16 = 25 = 5^2</div>
+        <p>이 외에도 <span data-math-inline data-latex="(5, 12, 13)">5, 12, 13</span>, <span data-math-inline data-latex="(8, 15, 17)">8, 15, 17</span>, <span data-math-inline data-latex="(7, 24, 25)">7, 24, 25</span> 등 무한히 많은 피타고라스 수가 존재합니다. 일반적으로, 임의의 양의 정수 <span data-math-inline data-latex="m > n">m > n</span>에 대해 <span data-math-inline data-latex="(m^2 - n^2,\\; 2mn,\\; m^2 + n^2)">m^2 - n^2, 2mn, m^2 + n^2</span>는 항상 피타고라스 수를 이룹니다.</p>
+
+        <h3>일상 속의 피타고라스</h3>
+        <p>피타고라스 정리는 교과서 속에만 머물지 않습니다. 건축가는 벽이 직각인지 확인할 때 3-4-5 비율을 사용하고, 내비게이션은 두 지점 사이의 직선 거리를 이 정리로 계산합니다. 컴퓨터 그래픽에서 두 점 사이의 거리 공식도 피타고라스 정리의 확장입니다:</p>
+        <div data-math-block data-latex="d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}">d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}</div>
+        <p>3차원으로 확장하면 <span data-math-inline data-latex="d = \\sqrt{\\Delta x^2 + \\Delta y^2 + \\Delta z^2}">d = \\sqrt{\\Delta x^2 + \\Delta y^2 + \\Delta z^2}</span>가 되며, 이는 게임 엔진부터 천문학의 별 사이 거리 계산까지 광범위하게 쓰입니다.</p>
+
+        <h3>페르마의 마지막 정리와의 연결</h3>
+        <p>피타고라스 정리에서 자연스럽게 떠오르는 질문이 있습니다: 지수를 <span data-math-inline data-latex="2">2</span>보다 크게 올리면 어떻게 될까? 즉, <span data-math-inline data-latex="a^n + b^n = c^n">a^n + b^n = c^n</span>을 만족하는 양의 정수해가 <span data-math-inline data-latex="n \\geq 3">n \\geq 3</span>일 때도 존재할까? 페르마는 1637년에 "해가 없다"고 주장했지만 증명을 남기지 않았고, 이 문제는 358년 뒤인 1995년에 앤드루 와일스에 의해 마침내 증명되었습니다.</p>
+        `,
+      },
     },
   },
 };

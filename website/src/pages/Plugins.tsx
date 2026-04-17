@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { useLang } from '../i18n/context';
 import CodeBlock from '../components/CodeBlock';
 import Card from '../components/Card';
+import TabGroup from '../components/TabGroup';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { MathInline } from 'fizzex/integrations/tiptap/math-inline';
 import { MathBlock } from 'fizzex/integrations/tiptap/math-block';
+import Image from '@tiptap/extension-image';
+import { Extension } from '@tiptap/core';
+import { Plugin } from '@tiptap/pm/state';
 import {
   rendererExample,
   editorExample,
@@ -19,25 +24,93 @@ const proseMirrorStyles = `
 .ProseMirror:focus { outline: none; }
 .ProseMirror h2 { font-size: 1.3em; margin-bottom: 0.5em; }
 .ProseMirror p { margin-bottom: 0.75em; }
+.ProseMirror img { max-width: 100%; height: auto; border-radius: 6px; margin: 0.5em 0; }
+.ProseMirror [data-resize-handle] { width: 10px; height: 10px; background: var(--color-primary, #6c5ce7); border-radius: 2px; opacity: 0; transition: opacity .15s; z-index: 1; }
+.ProseMirror *:hover > [data-resize-handle] { opacity: .7; cursor: nwse-resize; }
 `;
+
+const ClipboardImage = Extension.create({
+  name: 'clipboardImage',
+  addProseMirrorPlugins() {
+    return [
+      new Plugin({
+        props: {
+          handlePaste: (view, event) => {
+            const items = event.clipboardData?.items;
+            if (!items) return false;
+            for (const item of items) {
+              if (!item.type.startsWith('image/')) continue;
+              const file = item.getAsFile();
+              if (!file) continue;
+              event.preventDefault();
+              const reader = new FileReader();
+              reader.onload = () => {
+                const src = reader.result as string;
+                const { tr, selection } = view.state;
+                const node = view.state.schema.nodes.image.create({ src });
+                view.dispatch(tr.replaceWith(selection.from, selection.to, node));
+              };
+              reader.readAsDataURL(file);
+              return true;
+            }
+            return false;
+          },
+          handleDrop: (view, event) => {
+            const files = event.dataTransfer?.files;
+            if (!files?.length) return false;
+            for (const file of files) {
+              if (!file.type.startsWith('image/')) continue;
+              event.preventDefault();
+              const reader = new FileReader();
+              reader.onload = () => {
+                const src = reader.result as string;
+                const pos = view.posAtCoords({ left: event.clientX, top: event.clientY })?.pos ?? view.state.selection.from;
+                const node = view.state.schema.nodes.image.create({ src });
+                view.dispatch(view.state.tr.replaceWith(pos, pos, node));
+              };
+              reader.readAsDataURL(file);
+              return true;
+            }
+            return false;
+          },
+        },
+      }),
+    ];
+  },
+});
+
+const DEMO_KEYS = ['euler', 'pythagorean'] as const;
 
 function TiptapDemo() {
   const { t } = useLang();
   const d = t.pluginsPage.demo;
+  const [tabIndex, setTabIndex] = useState(0);
+  const key = DEMO_KEYS[tabIndex];
 
   const editor = useEditor({
     extensions: [
       StarterKit,
       MathInline.configure({ fizzexConfig: { baseFontSize: 18 } }),
       MathBlock.configure({ fizzexConfig: { baseFontSize: 24 }, editable: true }),
+      Image.configure({
+        inline: true,
+        allowBase64: true,
+        resize: { enabled: true, minWidth: 60, minHeight: 60 },
+      }),
+      ClipboardImage,
     ],
-    content: d.content,
-  }, [d]);
+    content: d.contents[key],
+  }, [key, d]);
+
+  const tabLabels = DEMO_KEYS.map((k) => d.tabs[k]);
 
   return (
-    <div style={demoStyles.editorWrapper}>
-      <EditorContent editor={editor} />
-    </div>
+    <>
+      <TabGroup tabs={tabLabels} activeIndex={tabIndex} onChange={setTabIndex} />
+      <div style={demoStyles.editorWrapper}>
+        <EditorContent editor={editor} />
+      </div>
+    </>
   );
 }
 

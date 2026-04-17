@@ -232,7 +232,8 @@ export interface Dictionary {
       title: string;
       sub: string;
       instructions: string;
-      content: string;
+      tabs: { euler: string; pythagorean: string };
+      contents: { euler: string; pythagorean: string };
     };
   };
 }

@@ -373,20 +373,58 @@ export const en: Dictionary = {
       title: 'Tiptap Live Demo',
       sub: 'A real Tiptap editor with MathInline and MathBlock extensions powered by Fizzex.',
       instructions: 'This is a live Tiptap editor. You can freely edit the text. Double-click any block formula to edit it.',
-      content: `
+      tabs: { euler: "Euler's Identity", pythagorean: 'Pythagorean Theorem' },
+      contents: {
+        euler: `
         <h2>Euler's Identity — The Most Beautiful Equation</h2>
         <p>In 1748, Leonhard Euler discovered a profound connection between the five most fundamental constants in mathematics. The result is known as <strong>Euler's identity</strong>:</p>
         <div data-math-block data-latex="e^{i\\pi} + 1 = 0">e^{i\\pi} + 1 = 0</div>
-        <p>This single equation unifies the additive identity <span data-math-inline data-latex="0">0</span>, the multiplicative identity <span data-math-inline data-latex="1">1</span>, the base of natural logarithms <span data-math-inline data-latex="e">e</span>, the imaginary unit <span data-math-inline data-latex="i">i</span>, and the ratio of a circle's circumference to its diameter <span data-math-inline data-latex="\\pi">\\pi</span>.</p>
+        <p>This single equation unifies the additive identity <span data-math-inline data-latex="0">0</span>, the multiplicative identity <span data-math-inline data-latex="1">1</span>, the base of natural logarithms <span data-math-inline data-latex="e">e</span>, the imaginary unit <span data-math-inline data-latex="i">i</span>, and the ratio of a circle's circumference to its diameter <span data-math-inline data-latex="\\pi">\\pi</span>. Mathematician Benjamin Peirce called it "the most remarkable formula in mathematics," and physicist Richard Feynman described it as "our jewel."</p>
+
+        <h3>The Five Constants</h3>
+        <p>To appreciate why this identity is so special, consider that each of its five constants was born independently in entirely different branches of mathematics. <span data-math-inline data-latex="0">0</span> and <span data-math-inline data-latex="1">1</span> are the fundamental units of arithmetic. <span data-math-inline data-latex="\\pi">\\pi</span> emerges from geometry — as the ratio of a circle's circumference to its diameter. <span data-math-inline data-latex="e">e</span> arises naturally in calculus, as the limiting value of continuous compound growth. And <span data-math-inline data-latex="i">i</span>, satisfying <span data-math-inline data-latex="i^2 = -1">i^2 = -1</span>, extends algebra into the complex numbers.</p>
+        <p>The fact that these five constants come together in a single, concise equation symbolizes the deep interconnectedness of seemingly disparate areas of mathematics.</p>
+
         <h3>Where does it come from?</h3>
         <p>Euler's identity is a special case of <strong>Euler's formula</strong>, which relates complex exponentials to trigonometric functions:</p>
         <div data-math-block data-latex="e^{i\\theta} = \\cos\\theta + i\\sin\\theta">e^{i\\theta} = \\cos\\theta + i\\sin\\theta</div>
+        <p>This formula parameterizes the unit circle in the complex plane. As the angle <span data-math-inline data-latex="\\theta">\\theta</span> varies, <span data-math-inline data-latex="e^{i\\theta}">e^{i\\theta}</span> traces out the unit circle, with the real part equal to <span data-math-inline data-latex="\\cos\\theta">\\cos\\theta</span> and the imaginary part equal to <span data-math-inline data-latex="\\sin\\theta">\\sin\\theta</span>.</p>
         <p>When we substitute <span data-math-inline data-latex="\\theta = \\pi">\\theta = \\pi</span>, we get <span data-math-inline data-latex="\\cos\\pi = -1">\\cos\\pi = -1</span> and <span data-math-inline data-latex="\\sin\\pi = 0">\\sin\\pi = 0</span>, which gives us:</p>
         <div data-math-block data-latex="e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1">e^{i\\pi} = \\cos\\pi + i\\sin\\pi = -1</div>
-        <p>Rearranging yields the identity. Euler's formula itself can be derived from the Taylor series expansions:</p>
+        <p>Adding <span data-math-inline data-latex="1">1</span> to both sides immediately yields <span data-math-inline data-latex="e^{i\\pi} + 1 = 0">e^{i\\pi} + 1 = 0</span>.</p>
+
+        <h3>Proof via Taylor Series</h3>
+        <p>Euler's formula itself can be derived from the Taylor series expansions of the three functions:</p>
         <div data-math-block data-latex="e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}, \\quad \\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}, \\quad \\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}">...</div>
-        <p>Substituting <span data-math-inline data-latex="x = i\\theta">x = i\\theta</span> into the series for <span data-math-inline data-latex="e^x">e^x</span> and separating real and imaginary parts reproduces the cosine and sine series — a remarkably elegant proof.</p>
-      `,
+        <p>Substituting <span data-math-inline data-latex="x = i\\theta">x = i\\theta</span> into the series for <span data-math-inline data-latex="e^x">e^x</span>, the powers of <span data-math-inline data-latex="i">i</span> cycle with period four (<span data-math-inline data-latex="i^0=1,\\; i^1=i,\\; i^2=-1,\\; i^3=-i">i^0=1, i^1=i, i^2=-1, i^3=-i</span>), so separating real and imaginary parts reproduces the cosine and sine series exactly — a remarkably elegant proof.</p>
+
+        <h3>Why does it matter?</h3>
+        <p>Euler's identity is more than beautiful — it is deeply practical. Using complex exponentials to handle trigonometric functions makes AC circuit analysis in electrical engineering far more concise, and is essential for expressing the phase of wave functions in quantum mechanics. The Fourier transform, used throughout signal processing, would not exist without Euler's formula. A single identity that threads through nearly every branch of mathematics, physics, and engineering.</p>
+        `,
+        pythagorean: `
+        <h2>Pythagorean Theorem — The Cornerstone of Geometry</h2>
+        <p>In a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides. This is the <strong>Pythagorean theorem</strong>, one of the oldest and most widely used results in all of mathematics:</p>
+        <div data-math-block data-latex="a^2 + b^2 = c^2">a^2 + b^2 = c^2</div>
+        <p>Here, <span data-math-inline data-latex="a">a</span> and <span data-math-inline data-latex="b">b</span> are the two legs adjacent to the right angle, and <span data-math-inline data-latex="c">c</span> is the hypotenuse — the longest side, opposite the right angle. The theorem is named after the ancient Greek mathematician Pythagoras, though Babylonian and Indian mathematicians knew the relationship long before him.</p>
+
+        <h3>Visual Proof: Thinking in Areas</h3>
+        <p>The most intuitive proof of the Pythagorean theorem uses <strong>area comparison</strong>. Draw a square on each side of the triangle: the areas of the two squares on the legs (<span data-math-inline data-latex="a^2">a^2</span> and <span data-math-inline data-latex="b^2">b^2</span>) sum to exactly the area of the square on the hypotenuse (<span data-math-inline data-latex="c^2">c^2</span>). Try double-clicking the formula block above and changing the values to see how this relationship holds visually.</p>
+        <p>Another famous proof arranges four copies of the right triangle inside a large square of side <span data-math-inline data-latex="a + b">a + b</span>. The remaining inner region is <span data-math-inline data-latex="c^2">c^2</span> in one arrangement and <span data-math-inline data-latex="a^2 + b^2">a^2 + b^2</span> in another, proving the two are equal.</p>
+
+        <h3>A Concrete Example: the 3-4-5 Triangle</h3>
+        <p>The most famous Pythagorean triple is <span data-math-inline data-latex="(3, 4, 5)">3, 4, 5</span>. Let's verify:</p>
+        <div data-math-block data-latex="3^2 + 4^2 = 9 + 16 = 25 = 5^2">3^2 + 4^2 = 9 + 16 = 25 = 5^2</div>
+        <p>Other triples include <span data-math-inline data-latex="(5, 12, 13)">5, 12, 13</span>, <span data-math-inline data-latex="(8, 15, 17)">8, 15, 17</span>, and <span data-math-inline data-latex="(7, 24, 25)">7, 24, 25</span> — infinitely many exist. In general, for any positive integers <span data-math-inline data-latex="m > n">m > n</span>, the triple <span data-math-inline data-latex="(m^2 - n^2,\\; 2mn,\\; m^2 + n^2)">m^2 - n^2, 2mn, m^2 + n^2</span> always produces a valid Pythagorean triple.</p>
+
+        <h3>Pythagoras in Everyday Life</h3>
+        <p>The Pythagorean theorem extends far beyond the textbook. Builders use the 3-4-5 ratio to verify right angles on construction sites. Navigation systems compute straight-line distances between two points using this very theorem. The distance formula in computer graphics is a direct extension of it:</p>
+        <div data-math-block data-latex="d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}">d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}</div>
+        <p>In three dimensions it becomes <span data-math-inline data-latex="d = \\sqrt{\\Delta x^2 + \\Delta y^2 + \\Delta z^2}">d = \\sqrt{\\Delta x^2 + \\Delta y^2 + \\Delta z^2}</span>, used everywhere from game engines to calculating distances between stars in astronomy.</p>
+
+        <h3>Connection to Fermat's Last Theorem</h3>
+        <p>A natural question arises from the Pythagorean theorem: what if we raise the exponent above <span data-math-inline data-latex="2">2</span>? That is, does <span data-math-inline data-latex="a^n + b^n = c^n">a^n + b^n = c^n</span> have positive integer solutions for <span data-math-inline data-latex="n \\geq 3">n \\geq 3</span>? In 1637, Fermat famously claimed it does not, but left no proof. The problem stood unsolved for 358 years until Andrew Wiles finally proved it in 1995.</p>
+        `,
+      },
     },
   },
 };
