@@ -1,13 +1,12 @@
 /**
  * VizPanel — 이동/리사이즈 가능한 Visualizer 패널
  *
- * 단일 Visualizer 인스턴스와 Bridge, Preset Bar를 캡슐화한 플로팅 카드.
+ * 단일 Visualizer 인스턴스와 Bridge를 캡슐화한 플로팅 카드.
  * 헤더 드래그로 이동, 우하단 핸들로 폭 리사이즈(정사각형 aspect 유지).
  * ExplorerOverlay가 배열로 관리하며, 동일 수식에 대해 여러 패널을 띄울 수 있다.
  */
 
 import { ExplorerVisualizerController } from './explorer-visualizer';
-import { ExplorerPresetsBar } from './explorer-presets-bar';
 import type { VisualizerBridgeImpl } from '../visualizer/bridge';
 import type { FizzexVisualizer } from '../visualizer/types';
 import type { CatalogDetail } from '../analyzer/semantic/types';
@@ -46,14 +45,12 @@ export class VizPanel {
   private captureButton!: HTMLButtonElement;
   private closeButton!: HTMLButtonElement;
   private vizContainer: HTMLDivElement;
-  private presetsContainer: HTMLDivElement;
   private resizeHandle: HTMLDivElement;
 
   /** 캡처 피드백 플래시 타이머. destroy 시 정리 대상 */
   private flashTimer: ReturnType<typeof setTimeout> | null = null;
 
   private controller: ExplorerVisualizerController;
-  private presetsBar: ExplorerPresetsBar | null = null;
 
   private parent: HTMLElement;
   private theme: 'light' | 'dark';
@@ -238,12 +235,6 @@ export class VizPanel {
     });
     this.root.appendChild(this.vizContainer);
 
-    this.presetsContainer = document.createElement('div');
-    Object.assign(this.presetsContainer.style, {
-      width: '100%',
-    });
-    this.root.appendChild(this.presetsContainer);
-
     this.resizeHandle = document.createElement('div');
     Object.assign(this.resizeHandle.style, {
       position: 'absolute',
@@ -284,7 +275,7 @@ export class VizPanel {
     window.addEventListener('touchend', this.boundTouchEnd);
   }
 
-  /** 비동기로 Visualizer 로드 → Bridge 준비 → PresetsBar 생성 */
+  /** 비동기로 Visualizer 로드 → Bridge 준비 */
   async init(): Promise<boolean> {
     const ok = await this.controller.init(this.visualizerId, this.catalogDetail);
     if (!ok || this.destroyed) return false;
@@ -293,12 +284,6 @@ export class VizPanel {
     const viz = this.controller.viz;
     if (!bridge || !viz) return false;
 
-    this.presetsBar = new ExplorerPresetsBar(
-      this.presetsContainer,
-      bridge,
-      viz.presets,
-      this.theme,
-    );
     return true;
   }
 
@@ -358,8 +343,6 @@ export class VizPanel {
     window.removeEventListener('touchmove', this.boundTouchMove);
     window.removeEventListener('touchend', this.boundTouchEnd);
 
-    this.presetsBar?.destroy();
-    this.presetsBar = null;
     this.controller.destroy();
 
     if (this.root.parentElement) {

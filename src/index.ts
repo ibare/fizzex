@@ -168,14 +168,12 @@ export type { DOMStreamViewConfig } from './headless';
 export { ExplorerOverlay } from './headless';
 export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless';
 export { ExplorerVisualizerController } from './headless';
-export { ExplorerPresetsBar } from './headless';
 
 // Visualizer 프레임워크
 export type {
   ParameterConfig,
   ParameterValues,
   DerivedValue,
-  Preset,
   FizzexVisualizer,
   VisualizerMountOptions,
   VisualizerBridge,

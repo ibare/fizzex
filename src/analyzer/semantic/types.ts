@@ -57,11 +57,11 @@ export type CatalogCategory =
  * 같은 수식이 서로 독립적인 시각화 앱 여러 개를 가질 수 있도록 배열 형태로 노출한다.
  */
 export interface VisualizerRef {
-  /** 레지스트리에서 찾을 Visualizer ID (예: "kepler-orbit-2d", "kepler-orbit-3d") */
+  /** 레지스트리에서 찾을 Visualizer ID (예: "kepler-orbit-iss-2d", "kepler-orbit-iss-3d") */
   id: string;
-  /** 사용자에게 표시할 이름 (예: "2D 궤도") */
+  /** 사용자에게 표시할 이름 (예: "ISS 궤도") */
   name: string;
-  /** 짧은 설명 (예: "위에서 내려다본 원형 궤도") */
+  /** 짧은 설명 (예: "고도 400km, 90분 주기의 저궤도") */
   description: string;
   /** 이모지 또는 아이콘 기호 */
   icon?: string;

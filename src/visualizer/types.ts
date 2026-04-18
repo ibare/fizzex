@@ -64,12 +64,6 @@ export interface VisualizerUpdate {
   baseline?: { derived: Record<string, number>; equationValue?: number };
   /** 현재 식이 카탈로그 원본과 구조적으로 같은가. */
   isStandard: boolean;
-  /**
-   * 사용자가 마지막으로 명시 선택한 프리셋 ID.
-   * 슬라이더 조작으로는 변하지 않는다 — "프리셋 맥락 내에서 값 탐구"를 지원.
-   * 프리셋을 선택하지 않은 초기 상태에서는 undefined.
-   */
-  activePresetId?: string;
 }
 
 // ─── 파생값 ───
@@ -94,17 +88,6 @@ export interface DerivedValue {
   compute: (params: ParameterValues, ctx?: ComputeContext) => number;
 }
 
-// ─── 프리셋 ───
-
-/** 의미 있는 파라미터 조합 */
-export interface Preset {
-  id: string;
-  name: string;
-  description: string;
-  emoji?: string;
-  values: ParameterValues;
-}
-
 // ─── Visualizer 인터페이스 ───
 
 /** 모든 Visualizer가 구현해야 하는 인터페이스 */
@@ -120,8 +103,6 @@ export interface FizzexVisualizer {
   constants?: Record<string, number>;
   /** 파생값 정의 */
   derivedValues: DerivedValue[];
-  /** 프리셋 목록 */
-  presets: Preset[];
 
   /** 초기화 — 컨테이너 안에 렌더링을 준비 */
   mount(container: HTMLElement, options: VisualizerMountOptions): void;
@@ -157,12 +138,7 @@ export interface VisualizerBridge {
   /** 현재 파라미터 값 */
   getParams(): ParameterValues;
   /** 파라미터 변경 (양방향) */
-  setParam(paramId: string, value: number, source: 'slider' | 'preset' | 'visualizer' | 'inline'): void;
-  /**
-   * 프리셋 적용 — preset.values 를 일괄 반영하고 activePresetId 를 갱신한다.
-   * 여러 파라미터를 한 번의 update 사이클로 전달하여 Visualizer 의 프리셋 전환을 원자적으로 만든다.
-   */
-  applyPreset(preset: Preset): void;
+  setParam(paramId: string, value: number, source: 'slider' | 'visualizer' | 'inline'): void;
   /** 파생값 계산 */
   getDerivedValues(): Record<string, number>;
   /**
