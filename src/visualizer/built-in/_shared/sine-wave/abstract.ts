@@ -6,6 +6,7 @@
  */
 
 import { hexAlpha } from '../../../../graphics/draw';
+import { createTimeValueViewport } from '../../../../graphics/viewport';
 import type { AbstractArgs } from './types';
 
 export function drawAbstract(args: AbstractArgs): void {
@@ -71,8 +72,13 @@ export function drawAbstract(args: AbstractArgs): void {
 
   const periodPix = Math.abs(omega) > 1e-6 ? waveW / 2 : waveW;
   const tStart = t - (waveW / periodPix) * (2 * Math.PI / Math.max(1e-6, Math.abs(omega)));
-  const toWaveX = (tv: number) => waveX0 + ((tv - tStart) / (t - tStart)) * waveW;
-  const toWaveY = (yv: number) => midY - (yv / absA) * circleR;
+  const waveView = createTimeValueViewport({
+    rect: { x: waveX0, y: midY - circleR, w: waveW, h: 2 * circleR },
+    xMin: tStart, xMax: t,
+    yMin: -absA, yMax: absA,
+  });
+  const toWaveX = waveView.tToX;
+  const toWaveY = waveView.valueToY;
 
   ctx.strokeStyle = isDark ? 'rgba(200,210,230,0.35)' : 'rgba(60,70,90,0.4)';
   ctx.lineWidth = 1;

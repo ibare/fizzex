@@ -32,6 +32,7 @@ export class Graphics2D {
   private dpr = 1;
   private animationId = 0;
   private lastTimestamp = 0;
+  private startTimestamp = 0;
   private destroyed = false;
 
   constructor(container: HTMLElement, opts: Graphics2DOptions) {
@@ -54,15 +55,27 @@ export class Graphics2D {
 
     this.applySize();
 
-    this.lastTimestamp = performance.now();
+    this.startTimestamp = performance.now();
+    this.lastTimestamp = this.startTimestamp;
     this.animationId = requestAnimationFrame(this.loop);
+  }
+
+  get isDark(): boolean {
+    return this.theme === 'dark';
   }
 
   private readonly loop = (now: number): void => {
     if (this.destroyed) return;
     const dt = (now - this.lastTimestamp) / 1000;
     this.lastTimestamp = now;
-    this.onFrame(this.ctx, { dt, now, width: this.width, height: this.height });
+    this.onFrame(this.ctx, {
+      dt,
+      now,
+      elapsed: (now - this.startTimestamp) / 1000,
+      width: this.width,
+      height: this.height,
+      isDark: this.theme === 'dark',
+    });
     this.animationId = requestAnimationFrame(this.loop);
   };
 

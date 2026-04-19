@@ -7,6 +7,8 @@
 
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../../types';
 import { Graphics2D } from '../../../../graphics/Graphics2D';
+import type { FrameInfo } from '../../../../graphics/types';
+import { background, divider } from '../../../../graphics/theme';
 import { drawAbstract } from './abstract';
 import { drawCaffeine } from './caffeine';
 import { drawBattery } from './battery';
@@ -38,7 +40,6 @@ export class ExponentialDecayCoreRenderer {
   private rStd = -LN2 / 5;
   private t = 0;
   private isStandard = true;
-  private animT = 0;
   private anchorId = DEFAULT_ANCHOR_ID;
 
   constructor(container: HTMLElement, options: VisualizerMountOptions) {
@@ -46,10 +47,7 @@ export class ExponentialDecayCoreRenderer {
       width: options.width,
       height: options.height,
       theme: options.theme,
-      onFrame: (ctx, frame) => {
-        this.animT += frame.dt;
-        this.render(ctx, frame.width, frame.height);
-      },
+      onFrame: (ctx, frame) => this.render(ctx, frame),
     });
   }
 
@@ -76,11 +74,11 @@ export class ExponentialDecayCoreRenderer {
     this.graphics.destroy();
   }
 
-  private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+  private render(ctx: CanvasRenderingContext2D, frame: FrameInfo): void {
+    const { width: w, height: h, elapsed, isDark } = frame;
     const style = ANCHOR_STYLES[this.anchorId] ?? ANCHOR_STYLES[DEFAULT_ANCHOR_ID];
 
-    ctx.fillStyle = isDark ? '#0b1220' : '#f8fafc';
+    ctx.fillStyle = background(isDark);
     ctx.fillRect(0, 0, w, h);
 
     const topH = Math.floor(h * TOP_RATIO);
@@ -102,7 +100,7 @@ export class ExponentialDecayCoreRenderer {
       color: style.color, isDark, tMax,
     });
 
-    ctx.strokeStyle = isDark ? 'rgba(120,140,170,0.25)' : 'rgba(100,115,140,0.25)';
+    ctx.strokeStyle = divider(isDark);
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 4]);
     ctx.beginPath();
@@ -117,7 +115,7 @@ export class ExponentialDecayCoreRenderer {
       ratio, ratio_std: ratioStd,
       isStandard: this.isStandard,
       halfLife: effectiveHalf,
-      animT: this.animT, color: style.color, isDark,
+      animT: elapsed, color: style.color, isDark,
     });
   }
 }

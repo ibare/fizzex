@@ -19,6 +19,7 @@ const ORBIT_SEGMENTS = 160;
 export class KeplerOrbit3DCoreRenderer {
   private container: HTMLElement;
   private theme: 'light' | 'dark';
+  private get isDark(): boolean { return this.theme === 'dark'; }
 
   private renderer: THREE.WebGLRenderer;
   private canvas: HTMLCanvasElement;
@@ -95,8 +96,8 @@ export class KeplerOrbit3DCoreRenderer {
     this.overlay.style.fontSize = '12px';
     this.overlay.style.lineHeight = '1.6';
     this.overlay.style.textAlign = 'right';
-    this.overlay.style.color = this.theme === 'dark' ? 'rgba(200,210,230,0.8)' : 'rgba(60,70,90,0.8)';
-    this.overlay.style.textShadow = this.theme === 'dark'
+    this.overlay.style.color = this.isDark ? 'rgba(200,210,230,0.8)' : 'rgba(60,70,90,0.8)';
+    this.overlay.style.textShadow = this.isDark
       ? '0 1px 2px rgba(0,0,0,0.8)'
       : '0 1px 2px rgba(255,255,255,0.8)';
     // container는 position: relative여야 overlay가 제 위치에 뜬다.
@@ -135,14 +136,14 @@ export class KeplerOrbit3DCoreRenderer {
   // ─── 씬 구성 ───
 
   private getBackgroundColor(): number {
-    return this.theme === 'dark' ? 0x060818 : 0xe8eef8;
+    return this.isDark ? 0x060818 : 0xe8eef8;
   }
 
   private buildLights(): void {
-    const ambient = new THREE.AmbientLight(0xffffff, this.theme === 'dark' ? 0.35 : 0.6);
+    const ambient = new THREE.AmbientLight(0xffffff, this.isDark ? 0.35 : 0.6);
     this.scene.add(ambient);
 
-    const sun = new THREE.DirectionalLight(0xffffff, this.theme === 'dark' ? 1.1 : 0.9);
+    const sun = new THREE.DirectionalLight(0xffffff, this.isDark ? 1.1 : 0.9);
     sun.position.set(5, 2, 5);
     this.scene.add(sun);
 
@@ -153,7 +154,7 @@ export class KeplerOrbit3DCoreRenderer {
 
   private buildEarth(): void {
     const geom = new THREE.SphereGeometry(EARTH_UNIT, 64, 64);
-    const isDark = this.theme === 'dark';
+    const isDark = this.isDark;
     const mat = new THREE.MeshPhongMaterial({
       color: isDark ? 0x2a5f9e : 0x4a90d9,
       emissive: isDark ? 0x081830 : 0x0a1a35,
@@ -166,7 +167,7 @@ export class KeplerOrbit3DCoreRenderer {
 
   private buildAtmosphere(): void {
     const geom = new THREE.SphereGeometry(EARTH_UNIT * 1.08, 64, 64);
-    const isDark = this.theme === 'dark';
+    const isDark = this.isDark;
     const mat = new THREE.ShaderMaterial({
       uniforms: {
         uColor: { value: new THREE.Color(isDark ? 0x5a90ff : 0x7aaaff) },
@@ -206,7 +207,7 @@ export class KeplerOrbit3DCoreRenderer {
     const positions = new Float32Array((ORBIT_SEGMENTS + 1) * 3);
     const geom = new THREE.BufferGeometry();
     geom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const isDark = this.theme === 'dark';
+    const isDark = this.isDark;
     const mat = new THREE.LineBasicMaterial({
       color: isDark ? 0x82b4ff : 0x3c78dc,
       transparent: true,
@@ -232,7 +233,7 @@ export class KeplerOrbit3DCoreRenderer {
   }
 
   private buildSatellite(): void {
-    const isDark = this.theme === 'dark';
+    const isDark = this.isDark;
     const satGeom = new THREE.SphereGeometry(0.04, 24, 24);
 
     const satMat = new THREE.MeshBasicMaterial({ color: isDark ? 0xffd466 : 0xe8a030 });
@@ -260,7 +261,7 @@ export class KeplerOrbit3DCoreRenderer {
   }
 
   private buildStars(): void {
-    if (this.theme !== 'dark') return;
+    if (!this.isDark) return;
     const count = 800;
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -458,11 +459,11 @@ export class KeplerOrbit3DCoreRenderer {
     const satMat = this.satellite.material as THREE.MeshBasicMaterial;
     const glowMat = this.satelliteGlow.material as THREE.MeshBasicMaterial;
     if (this.isStandard) {
-      satMat.color.setHex(this.theme === 'dark' ? 0xffd466 : 0xe8a030);
-      glowMat.color.setHex(this.theme === 'dark' ? 0xffdc88 : 0xdcaa44);
+      satMat.color.setHex(this.isDark ? 0xffd466 : 0xe8a030);
+      glowMat.color.setHex(this.isDark ? 0xffdc88 : 0xdcaa44);
     } else {
-      satMat.color.setHex(this.theme === 'dark' ? 0xf87171 : 0xdc2626);
-      glowMat.color.setHex(this.theme === 'dark' ? 0xf87171 : 0xdc2626);
+      satMat.color.setHex(this.isDark ? 0xf87171 : 0xdc2626);
+      glowMat.color.setHex(this.isDark ? 0xf87171 : 0xdc2626);
     }
 
     this.renderer.render(this.scene, this.camera);
@@ -485,11 +486,11 @@ export class KeplerOrbit3DCoreRenderer {
 
     if (!this.isStandard) {
       if (this.currentPeriod === 0) {
-        html += `<div style="color:${this.theme === 'dark' ? 'rgba(200,200,210,0.9)' : 'rgba(100,100,110,0.9)'};margin-top:4px;">이 우주에서 존재할 수 없음</div>`;
+        html += `<div style="color:${this.isDark ? 'rgba(200,200,210,0.9)' : 'rgba(100,100,110,0.9)'};margin-top:4px;">이 우주에서 존재할 수 없음</div>`;
       } else if (this.baselinePeriod > 0) {
         const ratio = (this.currentPeriod / this.baselinePeriod) * 100;
         const label = ratio > 100 ? '느림' : ratio < 100 ? '빠름' : '동일';
-        const color = this.theme === 'dark' ? 'rgba(248,113,113,0.9)' : 'rgba(220,38,38,0.85)';
+        const color = this.isDark ? 'rgba(248,113,113,0.9)' : 'rgba(220,38,38,0.85)';
         html += `<div style="color:${color};margin-top:4px;">표준 대비 주기 ${ratio.toFixed(1)}% (${label})</div>`;
       }
     }

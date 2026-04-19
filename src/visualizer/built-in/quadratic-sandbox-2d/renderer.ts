@@ -8,13 +8,10 @@
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, roundRect } from '../../../graphics/draw';
-import {
-  drawParabola,
-  quadRoots,
-  quadVertex,
-  worldToCanvas,
-  type ParabolaView,
-} from '../_shared/quadratic';
+import { axis } from '../../../graphics/theme';
+import { createTimeValueViewport } from '../../../graphics/viewport';
+import { drawFunctionCurve } from '../../../graphics/curves';
+import { quadRoots, quadVertex, quadY } from '../_shared/quadratic';
 
 const BRAND_COLOR = '#6366F1';
 
@@ -57,7 +54,7 @@ export class QuadraticSandboxRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const { a, b, c, xCur, yCur } = this;
 
     ctx.fillStyle = isDark ? '#0f172a' : '#f1f5f9';
@@ -83,7 +80,7 @@ export class QuadraticSandboxRenderer {
     const ys: number[] = [];
     for (let i = 0; i <= samples; i++) {
       const wx = xMin + (i / samples) * (xMax - xMin);
-      ys.push(a * wx * wx + b * wx + c);
+      ys.push(quadY(a, b, c, wx));
     }
     let yMin = Math.min(0, ...ys);
     let yMax = Math.max(0, ...ys);
@@ -91,7 +88,10 @@ export class QuadraticSandboxRenderer {
     yMin -= pad;
     yMax += pad;
 
-    const view: ParabolaView = { xMin, xMax, yMin, yMax, left, top, width, height };
+    const view = createTimeValueViewport({
+      rect: { x: left, y: top, w: width, h: height },
+      xMin, xMax, yMin, yMax,
+    });
 
     ctx.strokeStyle = isDark ? 'rgba(148,163,184,0.12)' : 'rgba(100,116,139,0.18)';
     ctx.lineWidth = 1;
@@ -108,16 +108,16 @@ export class QuadraticSandboxRenderer {
     }
     ctx.stroke();
 
-    ctx.strokeStyle = isDark ? 'rgba(203,213,225,0.55)' : 'rgba(30,41,59,0.55)';
+    ctx.strokeStyle = axis(isDark);
     ctx.lineWidth = 1.2;
     ctx.beginPath();
     if (yMin <= 0 && yMax >= 0) {
-      const { cy } = worldToCanvas(view, 0, 0);
+      const { y: cy } = view.toScreen(0, 0);
       ctx.moveTo(left, cy);
       ctx.lineTo(left + width, cy);
     }
     if (xMin <= 0 && xMax >= 0) {
-      const { cx } = worldToCanvas(view, 0, 0);
+      const { x: cx } = view.toScreen(0, 0);
       ctx.moveTo(cx, top);
       ctx.lineTo(cx, top + height);
     }
@@ -131,21 +131,25 @@ export class QuadraticSandboxRenderer {
     ctx.beginPath();
     for (let i = 0; i <= samples; i++) {
       const wx = xMin + (i / samples) * (xMax - xMin);
-      const wy = a * wx * wx + b * wx + c;
-      const { cx, cy } = worldToCanvas(view, wx, wy);
+      const wy = quadY(a, b, c, wx);
+      const { x: cx, y: cy } = view.toScreen(wx, wy);
       if (i === 0) ctx.moveTo(cx, cy);
       else ctx.lineTo(cx, cy);
     }
-    const baseCy = yMin <= 0 && yMax >= 0 ? worldToCanvas(view, 0, 0).cy : top + height;
-    const { cx: endCx } = worldToCanvas(view, xMax, 0);
-    const { cx: startCx } = worldToCanvas(view, xMin, 0);
+    const baseCy = yMin <= 0 && yMax >= 0 ? view.toScreen(0, 0).y : top + height;
+    const { x: endCx } = view.toScreen(xMax, 0);
+    const { x: startCx } = view.toScreen(xMin, 0);
     ctx.lineTo(endCx, baseCy);
     ctx.lineTo(startCx, baseCy);
     ctx.closePath();
     ctx.fill();
     ctx.restore();
 
-    drawParabola(ctx, view, a, b, c, { strokeStyle: BRAND_COLOR, lineWidth: 2.5 });
+    drawFunctionCurve(ctx, view, (x) => quadY(a, b, c, x), {
+      xMin, xMax,
+      strokeStyle: BRAND_COLOR,
+      lineWidth: 2.5,
+    });
 
     ctx.font = '500 9px -apple-system, sans-serif';
     ctx.fillStyle = isDark ? 'rgba(148,163,184,0.85)' : 'rgba(71,85,105,0.85)';
@@ -154,7 +158,7 @@ export class QuadraticSandboxRenderer {
     const gridStepY = niceStep((yMax - yMin) / 5);
     for (let gy = Math.ceil(yMin / gridStepY) * gridStepY; gy <= yMax; gy += gridStepY) {
       if (Math.abs(gy) < 1e-9) continue;
-      const { cy } = worldToCanvas(view, 0, gy);
+      const { y: cy } = view.toScreen(0, gy);
       ctx.fillText(formatLabel(gy), left - 4, cy);
     }
     ctx.textAlign = 'center';
@@ -162,13 +166,13 @@ export class QuadraticSandboxRenderer {
     const gridStepX = niceStep((xMax - xMin) / 6);
     for (let gx = Math.ceil(xMin / gridStepX) * gridStepX; gx <= xMax; gx += gridStepX) {
       if (Math.abs(gx) < 1e-9) continue;
-      const { cx } = worldToCanvas(view, gx, 0);
+      const { x: cx } = view.toScreen(gx, 0);
       ctx.fillText(formatLabel(gx), cx, top + height + 4);
     }
 
     for (const r of roots) {
       if (r < xMin || r > xMax) continue;
-      const { cx, cy } = worldToCanvas(view, r, 0);
+      const { x: cx, y: cy } = view.toScreen(r, 0);
       ctx.fillStyle = isDark ? '#fbbf24' : '#ea580c';
       ctx.beginPath();
       ctx.arc(cx, cy, 4, 0, Math.PI * 2);
@@ -179,7 +183,7 @@ export class QuadraticSandboxRenderer {
     }
 
     if (vtx.vx >= xMin && vtx.vx <= xMax && vtx.vy >= yMin && vtx.vy <= yMax) {
-      const { cx, cy } = worldToCanvas(view, vtx.vx, vtx.vy);
+      const { x: cx, y: cy } = view.toScreen(vtx.vx, vtx.vy);
       ctx.strokeStyle = hexAlpha(BRAND_COLOR, 0.35);
       ctx.setLineDash([3, 4]);
       ctx.lineWidth = 1;
@@ -203,7 +207,7 @@ export class QuadraticSandboxRenderer {
     }
 
     if (xCur >= xMin && xCur <= xMax && yCur >= yMin && yCur <= yMax) {
-      const { cx, cy } = worldToCanvas(view, xCur, yCur);
+      const { x: cx, y: cy } = view.toScreen(xCur, yCur);
       ctx.fillStyle = isDark ? '#f1f5f9' : '#0b1220';
       ctx.beginPath();
       ctx.arc(cx, cy, 3.6, 0, Math.PI * 2);

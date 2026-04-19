@@ -10,12 +10,15 @@
  *   a² — 아래쪽: (0,0)(a,0)(a,-a)(0,-a)
  *   b² — 왼쪽:   (0,0)(0,b)(-b,b)(-b,0)
  *   c² — 빗변 바깥: (a,0)(0,b)(b,a+b)(a+b,a)
- * Bounding box: x∈[-b, a+b], y∈[-a, b+a]. margin 포함 fit-scale.
+ * Bounding box: x∈[-b, a+b], y∈[-a, b+a]. host의 createBBoxViewport로 fit-scale.
  */
 
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, formatN } from '../../../graphics/draw';
+import { background } from '../../../graphics/theme';
+import { createBBoxViewport } from '../../../graphics/viewport';
+import type { Viewport2D } from '../../../graphics/types';
 
 const BRAND_COLOR = '#0F172A';
 
@@ -52,49 +55,47 @@ export class PythagoreanExploreRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const { a, b, c } = this;
 
-    ctx.fillStyle = isDark ? '#0b1220' : '#f8fafc';
+    ctx.fillStyle = background(isDark);
     ctx.fillRect(0, 0, w, h);
 
     if (!(a > 0) || !(b > 0) || !(c > 0)) return;
 
-    const margin = 22;
-    const bboxW = a + 2 * b;
-    const bboxH = a + b + a;
-    const innerW = Math.max(1, w - margin * 2);
-    const innerH = Math.max(1, h - margin * 2);
-    const scale = Math.min(innerW / bboxW, innerH / bboxH);
+    const view = createBBoxViewport({
+      rect: { x: 0, y: 0, w, h },
+      bbox: { minX: -b, maxX: a + b, minY: -a, maxY: b + a },
+      padding: 22,
+    });
 
-    const bboxMidX = (-b + (a + b)) / 2;
-    const bboxMidY = (-a + (b + a)) / 2;
-    const viewCx = w / 2;
-    const viewCy = h / 2;
-    const toX = (mx: number) => viewCx + (mx - bboxMidX) * scale;
-    const toY = (my: number) => viewCy - (my - bboxMidY) * scale;
-
-    drawSquare(ctx, [[0, 0], [a, 0], [a, -a], [0, -a]], toX, toY, BRAND_COLOR, isDark);
-    drawSquare(ctx, [[0, 0], [0, b], [-b, b], [-b, 0]], toX, toY, BRAND_COLOR, isDark);
-    drawSquare(ctx, [[a, 0], [0, b], [b, a + b], [a + b, a]], toX, toY, BRAND_COLOR, isDark);
+    drawSquare(ctx, [[0, 0], [a, 0], [a, -a], [0, -a]], view, BRAND_COLOR, isDark);
+    drawSquare(ctx, [[0, 0], [0, b], [-b, b], [-b, 0]], view, BRAND_COLOR, isDark);
+    drawSquare(ctx, [[a, 0], [0, b], [b, a + b], [a + b, a]], view, BRAND_COLOR, isDark);
 
     ctx.font = '600 11px -apple-system, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = isDark ? 'rgba(235,240,250,0.9)' : 'rgba(30,40,55,0.92)';
 
-    ctx.fillText(`a² = ${formatN(a * a)}`, toX(a / 2), toY(-a / 2));
-    ctx.fillText(`b² = ${formatN(b * b)}`, toX(-b / 2), toY(b / 2));
-    ctx.fillText(`c² = ${formatN(c * c)}`, toX((a + b) / 2), toY((a + b) / 2));
+    const aSq = view.toScreen(a / 2, -a / 2);
+    ctx.fillText(`a² = ${formatN(a * a)}`, aSq.x, aSq.y);
+    const bSq = view.toScreen(-b / 2, b / 2);
+    ctx.fillText(`b² = ${formatN(b * b)}`, bSq.x, bSq.y);
+    const cSq = view.toScreen((a + b) / 2, (a + b) / 2);
+    ctx.fillText(`c² = ${formatN(c * c)}`, cSq.x, cSq.y);
 
     ctx.strokeStyle = BRAND_COLOR;
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
+    const p0 = view.toScreen(0, 0);
+    const pA = view.toScreen(a, 0);
+    const pB = view.toScreen(0, b);
     ctx.beginPath();
-    ctx.moveTo(toX(0), toY(0));
-    ctx.lineTo(toX(a), toY(0));
-    ctx.lineTo(toX(0), toY(b));
+    ctx.moveTo(p0.x, p0.y);
+    ctx.lineTo(pA.x, pA.y);
+    ctx.lineTo(pB.x, pB.y);
     ctx.closePath();
     ctx.stroke();
 
@@ -102,10 +103,13 @@ export class PythagoreanExploreRenderer {
     if (tickSize > 0) {
       ctx.lineWidth = 1.2;
       ctx.strokeStyle = isDark ? 'rgba(235,240,250,0.7)' : 'rgba(30,40,55,0.7)';
+      const t1 = view.toScreen(tickSize, 0);
+      const t2 = view.toScreen(tickSize, tickSize);
+      const t3 = view.toScreen(0, tickSize);
       ctx.beginPath();
-      ctx.moveTo(toX(tickSize), toY(0));
-      ctx.lineTo(toX(tickSize), toY(tickSize));
-      ctx.lineTo(toX(0), toY(tickSize));
+      ctx.moveTo(t1.x, t1.y);
+      ctx.lineTo(t2.x, t2.y);
+      ctx.lineTo(t3.x, t3.y);
       ctx.stroke();
     }
 
@@ -114,26 +118,30 @@ export class PythagoreanExploreRenderer {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
-    ctx.fillText(`a = ${formatN(a)}`, toX(a / 2), toY(0) - 10);
+    const aMid = view.toScreen(a / 2, 0);
+    ctx.fillText(`a = ${formatN(a)}`, aMid.x, aMid.y - 10);
     ctx.textAlign = 'left';
-    ctx.fillText(`b = ${formatN(b)}`, toX(0) + 6, toY(b / 2));
+    const bMid = view.toScreen(0, b / 2);
+    ctx.fillText(`b = ${formatN(b)}`, bMid.x + 6, bMid.y);
     ctx.textAlign = 'center';
-    ctx.fillText(`c = ${formatN(c)}`, toX(a / 2) - 8, toY(b / 2) - 6);
+    const cMid = view.toScreen(a / 2, b / 2);
+    ctx.fillText(`c = ${formatN(c)}`, cMid.x - 8, cMid.y - 6);
   }
 }
 
 function drawSquare(
   ctx: CanvasRenderingContext2D,
   verts: Array<[number, number]>,
-  toX: (mx: number) => number,
-  toY: (my: number) => number,
+  view: Viewport2D,
   color: string,
   isDark: boolean,
 ): void {
   ctx.beginPath();
-  ctx.moveTo(toX(verts[0][0]), toY(verts[0][1]));
+  const first = view.toScreen(verts[0][0], verts[0][1]);
+  ctx.moveTo(first.x, first.y);
   for (let i = 1; i < verts.length; i++) {
-    ctx.lineTo(toX(verts[i][0]), toY(verts[i][1]));
+    const p = view.toScreen(verts[i][0], verts[i][1]);
+    ctx.lineTo(p.x, p.y);
   }
   ctx.closePath();
   ctx.fillStyle = hexAlpha(color, isDark ? 0.18 : 0.12);

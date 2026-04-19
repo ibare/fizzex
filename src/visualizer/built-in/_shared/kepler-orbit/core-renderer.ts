@@ -27,6 +27,7 @@ export class KeplerOrbitCoreRenderer {
   private ctx: CanvasRenderingContext2D;
   private container: HTMLElement;
   private theme: 'light' | 'dark';
+  private get isDark(): boolean { return this.theme === 'dark'; }
 
   private width = 0;
   private height = 0;
@@ -197,7 +198,7 @@ export class KeplerOrbitCoreRenderer {
 
   private render(): void {
     const { ctx, width, height } = this;
-    const isDark = this.theme === 'dark';
+    const isDark = this.isDark;
     const scale = this.getScale();
 
     drawBackground(ctx, width, height, isDark, this.stars);

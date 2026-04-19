@@ -7,6 +7,8 @@
 
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../../types';
 import { Graphics2D } from '../../../../graphics/Graphics2D';
+import type { FrameInfo } from '../../../../graphics/types';
+import { background, divider } from '../../../../graphics/theme';
 import { drawAbstract } from './abstract';
 import { drawSavings } from './savings';
 import { drawStock } from './stock';
@@ -43,7 +45,6 @@ export class CompoundInterestCoreRenderer {
   private A = 0;
   private AStd = 0;
   private isStandard = true;
-  private animT = 0;
   private anchorId = DEFAULT_ANCHOR_ID;
 
   constructor(container: HTMLElement, options: VisualizerMountOptions) {
@@ -51,10 +52,7 @@ export class CompoundInterestCoreRenderer {
       width: options.width,
       height: options.height,
       theme: options.theme,
-      onFrame: (ctx, frame) => {
-        this.animT += frame.dt;
-        this.render(ctx, frame.width, frame.height);
-      },
+      onFrame: (ctx, frame) => this.render(ctx, frame),
     });
   }
 
@@ -91,11 +89,11 @@ export class CompoundInterestCoreRenderer {
     this.graphics.destroy();
   }
 
-  private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+  private render(ctx: CanvasRenderingContext2D, frame: FrameInfo): void {
+    const { width: w, height: h, elapsed, isDark } = frame;
     const style = ANCHOR_STYLES[this.anchorId] ?? ANCHOR_STYLES[DEFAULT_ANCHOR_ID];
 
-    ctx.fillStyle = isDark ? '#0b1220' : '#f8fafc';
+    ctx.fillStyle = background(isDark);
     ctx.fillRect(0, 0, w, h);
 
     const topH = Math.floor(h * TOP_RATIO);
@@ -110,7 +108,7 @@ export class CompoundInterestCoreRenderer {
       color: style.color, isDark,
     });
 
-    ctx.strokeStyle = isDark ? 'rgba(120,140,170,0.25)' : 'rgba(100,115,140,0.25)';
+    ctx.strokeStyle = divider(isDark);
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 4]);
     ctx.beginPath();
@@ -123,7 +121,7 @@ export class CompoundInterestCoreRenderer {
       ctx, x: 0, y: botY, w, h: botH,
       P: this.P, r: this.r, n: this.n, t: this.t,
       A: this.A, A_std: this.AStd,
-      isStandard: this.isStandard, tMax: style.tMax, animT: this.animT,
+      isStandard: this.isStandard, tMax: style.tMax, animT: elapsed,
       color: style.color, isDark,
     });
   }

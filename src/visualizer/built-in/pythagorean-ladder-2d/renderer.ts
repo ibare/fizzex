@@ -58,7 +58,7 @@ export class PythagoreanLadderRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const { a, b, c } = this;
     if (!(a > 0) || !(b > 0) || !(c > 0)) return;
 

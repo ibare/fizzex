@@ -5,6 +5,8 @@
  */
 
 import { hexAlpha } from '../../../../graphics/draw';
+import { axis, background, gridLine } from '../../../../graphics/theme';
+import { createTimeValueViewport } from '../../../../graphics/viewport';
 import { compoundA, doubleTime, formatKrw, formatShortKrw } from './math';
 import type { AbstractArgs } from './types';
 
@@ -12,7 +14,7 @@ export function drawAbstract(args: AbstractArgs): void {
   const { ctx, x, y, w, h, P, r, n, t, r_std, A, isStandard, tMax, inverse, color, isDark } = args;
 
   ctx.save();
-  ctx.fillStyle = isDark ? '#0b1220' : '#f8fafc';
+  ctx.fillStyle = background(isDark);
   ctx.fillRect(x, y, w, h);
 
   const padL = 46;
@@ -39,10 +41,14 @@ export function drawAbstract(args: AbstractArgs): void {
     return compoundA(P, rate, n, tv);
   };
 
-  const tToX = (tv: number) => left + (tv / tMax) * width;
-  const valueToY = (v: number) => top + height - (v / maxA) * height;
+  const view = createTimeValueViewport({
+    rect: { x: left, y: top, w: width, h: height },
+    xMin: 0, xMax: tMax,
+    yMin: 0, yMax: maxA,
+  });
+  const { tToX, valueToY } = view;
 
-  ctx.strokeStyle = isDark ? 'rgba(148,163,184,0.14)' : 'rgba(100,116,139,0.16)';
+  ctx.strokeStyle = gridLine(isDark);
   ctx.lineWidth = 1;
   ctx.beginPath();
   for (let i = 0; i <= 10; i++) {
@@ -57,7 +63,7 @@ export function drawAbstract(args: AbstractArgs): void {
   }
   ctx.stroke();
 
-  ctx.strokeStyle = isDark ? 'rgba(203,213,225,0.55)' : 'rgba(30,41,59,0.55)';
+  ctx.strokeStyle = axis(isDark);
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(left, top);

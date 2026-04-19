@@ -7,14 +7,11 @@
 
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
+import type { FrameInfo } from '../../../graphics/types';
 import { hexAlpha, roundRect } from '../../../graphics/draw';
-import {
-  drawParabola,
-  quadRoots,
-  quadVertex,
-  worldToCanvas,
-  type ParabolaView,
-} from '../_shared/quadratic';
+import { createTimeValueViewport } from '../../../graphics/viewport';
+import { drawFunctionCurve } from '../../../graphics/curves';
+import { quadRoots, quadVertex, quadY } from '../_shared/quadratic';
 
 const BRAND_COLOR = '#0891B2';
 
@@ -23,17 +20,13 @@ export class QuadraticFountainRenderer {
   private a = -2;
   private b = 4;
   private c = 0;
-  private animT = 0;
 
   constructor(container: HTMLElement, options: VisualizerMountOptions) {
     this.graphics = new Graphics2D(container, {
       width: options.width,
       height: options.height,
       theme: options.theme,
-      onFrame: (ctx, frame) => {
-        this.animT += frame.dt;
-        this.render(ctx, frame.width, frame.height);
-      },
+      onFrame: (ctx, frame) => this.render(ctx, frame),
     });
   }
 
@@ -52,9 +45,9 @@ export class QuadraticFountainRenderer {
     this.graphics.destroy();
   }
 
-  private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
-    const { a, b, c, animT } = this;
+  private render(ctx: CanvasRenderingContext2D, frame: FrameInfo): void {
+    const { width: w, height: h, elapsed: animT, isDark } = frame;
+    const { a, b, c } = this;
     const { vx, vy } = quadVertex(a, b, c);
     const roots = quadRoots(a, b, c);
 
@@ -92,10 +85,13 @@ export class QuadraticFountainRenderer {
     const top = padT;
     const width = Math.max(1, w - padL - padR);
     const height = Math.max(1, h - padT - padB);
-    const view: ParabolaView = { xMin, xMax, yMin, yMax, left, top, width, height };
+    const view = createTimeValueViewport({
+      rect: { x: left, y: top, w: width, h: height },
+      xMin, xMax, yMin, yMax,
+    });
 
-    const { cy: poolY } = worldToCanvas(view, 0, 0);
-    const { cx: centerCx } = worldToCanvas(view, centerX, 0);
+    const { y: poolY } = view.toScreen(0, 0);
+    const { x: centerCx } = view.toScreen(centerX, 0);
     const poolW = Math.min(width * 0.7, Math.max(80, span * (width / (xMax - xMin)) * 1.1));
     const poolH = 18;
     ctx.fillStyle = isDark ? '#334155' : '#94a3b8';
@@ -125,7 +121,8 @@ export class QuadraticFountainRenderer {
       const vyNew = vy / f;
       const b2 = -2 * a2 * vx;
       const c2 = vyNew - a2 * vx * vx - b2 * vx;
-      drawParabola(ctx, view, a2, b2, c2, {
+      drawFunctionCurve(ctx, view, (x) => quadY(a2, b2, c2, x), {
+        xMin, xMax,
         strokeStyle: hexAlpha(BRAND_COLOR, 0.25),
         lineWidth: 1.5,
       });
@@ -139,24 +136,13 @@ export class QuadraticFountainRenderer {
     const grad = ctx.createLinearGradient(0, top, 0, poolY);
     grad.addColorStop(0, isDark ? '#bae6fd' : '#38bdf8');
     grad.addColorStop(1, BRAND_COLOR);
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 3.5;
-    ctx.beginPath();
-    const N = 80;
-    let mainStarted = false;
-    for (let i = 0; i <= N; i++) {
-      const wx = xMin + (i / N) * (xMax - xMin);
-      const wy = a * wx * wx + b * wx + c;
-      if (wy < 0) continue;
-      const { cx, cy } = worldToCanvas(view, wx, wy);
-      if (!mainStarted) {
-        ctx.moveTo(cx, cy);
-        mainStarted = true;
-      } else {
-        ctx.lineTo(cx, cy);
-      }
-    }
-    ctx.stroke();
+    drawFunctionCurve(ctx, view, (x) => quadY(a, b, c, x), {
+      xMin, xMax,
+      segments: 80,
+      strokeStyle: grad,
+      lineWidth: 3.5,
+      skip: (_, wy) => wy < 0,
+    });
     ctx.restore();
 
     ctx.fillStyle = hexAlpha(isDark ? '#bae6fd' : '#38bdf8', 0.7);
@@ -164,17 +150,17 @@ export class QuadraticFountainRenderer {
     for (let i = 0; i < dropCount; i++) {
       const progress = (i / dropCount + animT * 0.3) % 1;
       const wx = launchX + progress * (landX - launchX);
-      const baseY = a * wx * wx + b * wx + c;
+      const baseY = quadY(a, b, c, wx);
       const wy = Math.max(0, baseY - progress * 0.3);
       if (wy < 0) continue;
-      const { cx, cy } = worldToCanvas(view, wx, wy);
+      const { x: cx, y: cy } = view.toScreen(wx, wy);
       ctx.beginPath();
       ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
       ctx.fill();
     }
 
     if (vy > 0) {
-      const { cx, cy } = worldToCanvas(view, vx, vy);
+      const { x: cx, y: cy } = view.toScreen(vx, vy);
       ctx.fillStyle = isDark ? '#e0f2fe' : '#0369a1';
       ctx.beginPath();
       ctx.arc(cx, cy, 4, 0, Math.PI * 2);

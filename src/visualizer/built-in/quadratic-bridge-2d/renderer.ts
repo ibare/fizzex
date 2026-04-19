@@ -8,12 +8,9 @@
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, roundRect } from '../../../graphics/draw';
-import {
-  quadRoots,
-  quadVertex,
-  worldToCanvas,
-  type ParabolaView,
-} from '../_shared/quadratic';
+import { createTimeValueViewport } from '../../../graphics/viewport';
+import { drawFunctionCurve } from '../../../graphics/curves';
+import { quadRoots, quadVertex, quadY } from '../_shared/quadratic';
 
 const BRAND_COLOR = '#0EA5E9';
 
@@ -48,7 +45,7 @@ export class QuadraticBridgeRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const { a, b, c } = this;
     const { vx, vy } = quadVertex(a, b, c);
     const roots = quadRoots(a, b, c);
@@ -82,9 +79,12 @@ export class QuadraticBridgeRenderer {
     const top = padT;
     const width = Math.max(1, w - padL - padR);
     const height = Math.max(1, h - padT - padB);
-    const view: ParabolaView = { xMin, xMax, yMin, yMax, left, top, width, height };
+    const view = createTimeValueViewport({
+      rect: { x: left, y: top, w: width, h: height },
+      xMin, xMax, yMin, yMax,
+    });
 
-    const { cy: waterCy } = worldToCanvas(view, 0, waterLevel);
+    const { y: waterCy } = view.toScreen(0, waterLevel);
     const waterY = Math.min(h, Math.max(top, waterCy));
     const seaGrad = ctx.createLinearGradient(0, waterY, 0, h);
     seaGrad.addColorStop(0, isDark ? '#1e3a8a' : '#3b82f6');
@@ -103,29 +103,19 @@ export class QuadraticBridgeRenderer {
     ctx.rect(0, waterY, w, h - waterY);
     ctx.clip();
     ctx.globalAlpha = 0.25;
-    ctx.strokeStyle = BRAND_COLOR;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
     const N = 80;
-    let started = false;
-    for (let i = 0; i <= N; i++) {
-      const wx = xMin + (i / N) * (xMax - xMin);
-      const wy = a * wx * wx + b * wx + c;
-      if (wy < 0) continue;
-      const { cx, cy } = worldToCanvas(view, wx, -wy);
-      if (!started) {
-        ctx.moveTo(cx, cy);
-        started = true;
-      } else {
-        ctx.lineTo(cx, cy);
-      }
-    }
-    ctx.stroke();
+    drawFunctionCurve(ctx, view, (x) => -quadY(a, b, c, x), {
+      xMin, xMax,
+      segments: N,
+      skip: (x) => quadY(a, b, c, x) < 0,
+      strokeStyle: BRAND_COLOR,
+      lineWidth: 2,
+    });
     ctx.restore();
 
     if (roots.length === 2) {
       for (const r of roots) {
-        const { cx } = worldToCanvas(view, r, 0);
+        const { x: cx } = view.toScreen(r, 0);
         const colW = 14;
         ctx.fillStyle = isDark ? '#475569' : '#64748b';
         ctx.fillRect(cx - colW / 2, waterY, colW, h - waterY);
@@ -142,39 +132,29 @@ export class QuadraticBridgeRenderer {
     ctx.beginPath();
     for (let i = 0; i <= N; i++) {
       const wx = xMin + (i / N) * (xMax - xMin);
-      const wy = a * wx * wx + b * wx + c;
-      const { cx, cy } = worldToCanvas(view, wx, Math.max(waterLevel, wy));
+      const wy = quadY(a, b, c, wx);
+      const { x: cx, y: cy } = view.toScreen(wx, Math.max(waterLevel, wy));
       if (i === 0) ctx.moveTo(cx, cy);
       else ctx.lineTo(cx, cy);
     }
-    const { cx: endCx } = worldToCanvas(view, xMax, waterLevel);
-    const { cx: startCx } = worldToCanvas(view, xMin, waterLevel);
+    const { x: endCx } = view.toScreen(xMax, waterLevel);
+    const { x: startCx } = view.toScreen(xMin, waterLevel);
     ctx.lineTo(endCx, waterY);
     ctx.lineTo(startCx, waterY);
     ctx.closePath();
     ctx.fill();
 
-    ctx.strokeStyle = BRAND_COLOR;
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    let archStarted = false;
-    for (let i = 0; i <= N; i++) {
-      const wx = xMin + (i / N) * (xMax - xMin);
-      const wy = a * wx * wx + b * wx + c;
-      if (wy < waterLevel) continue;
-      const { cx, cy } = worldToCanvas(view, wx, wy);
-      if (!archStarted) {
-        ctx.moveTo(cx, cy);
-        archStarted = true;
-      } else {
-        ctx.lineTo(cx, cy);
-      }
-    }
-    ctx.stroke();
+    drawFunctionCurve(ctx, view, (x) => quadY(a, b, c, x), {
+      xMin, xMax,
+      segments: N,
+      skip: (_, wy) => wy < waterLevel,
+      strokeStyle: BRAND_COLOR,
+      lineWidth: 2.5,
+    });
     ctx.restore();
 
     if (vy > waterLevel) {
-      const { cx, cy } = worldToCanvas(view, vx, vy);
+      const { x: cx, y: cy } = view.toScreen(vx, vy);
       ctx.fillStyle = BRAND_COLOR;
       ctx.beginPath();
       ctx.arc(cx, cy, 5, 0, Math.PI * 2);

@@ -7,6 +7,8 @@
 
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../../types';
 import { Graphics2D } from '../../../../graphics/Graphics2D';
+import type { FrameInfo } from '../../../../graphics/types';
+import { background, divider } from '../../../../graphics/theme';
 import { drawAbstract } from './abstract';
 import { drawSpeaker } from './speaker';
 import { drawPendulum } from './pendulum';
@@ -40,7 +42,6 @@ export class SineWaveCoreRenderer {
   private yCur = 0;
   private yStd = 0;
   private isStandard = true;
-  private animT = 0;
   private userDrivenT = false;
   private anchorId = DEFAULT_ANCHOR_ID;
 
@@ -50,10 +51,9 @@ export class SineWaveCoreRenderer {
       height: options.height,
       theme: options.theme,
       onFrame: (ctx, frame) => {
-        this.animT += frame.dt;
         this.tickAutoPlay(frame.dt);
         this.yCur = this.A * Math.sin(this.omega * this.t + this.phi);
-        this.render(ctx, frame.width, frame.height);
+        this.render(ctx, frame);
       },
     });
   }
@@ -97,11 +97,11 @@ export class SineWaveCoreRenderer {
     if (this.t > AUTO_PLAY_SECONDS) this.t = 0;
   }
 
-  private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+  private render(ctx: CanvasRenderingContext2D, frame: FrameInfo): void {
+    const { width: w, height: h, elapsed, isDark } = frame;
     const style = ANCHOR_STYLES[this.anchorId] ?? ANCHOR_STYLES[DEFAULT_ANCHOR_ID];
 
-    ctx.fillStyle = isDark ? '#0b1220' : '#f8fafc';
+    ctx.fillStyle = background(isDark);
     ctx.fillRect(0, 0, w, h);
 
     const topH = Math.floor(h * TOP_RATIO);
@@ -115,7 +115,7 @@ export class SineWaveCoreRenderer {
       color: style.color, isDark, isStandard: this.isStandard,
     });
 
-    ctx.strokeStyle = isDark ? 'rgba(120,140,170,0.25)' : 'rgba(100,115,140,0.25)';
+    ctx.strokeStyle = divider(isDark);
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 4]);
     ctx.beginPath();
@@ -129,7 +129,7 @@ export class SineWaveCoreRenderer {
     style.draw({
       ctx, x: 0, y: botY, w, h: botH,
       A: this.A, y0: this.yCur, yNorm,
-      animT: this.animT, color: style.color, isDark,
+      animT: elapsed, color: style.color, isDark,
     });
   }
 }

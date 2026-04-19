@@ -8,13 +8,9 @@
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, roundRect } from '../../../graphics/draw';
-import {
-  drawParabola,
-  quadRoots,
-  quadVertex,
-  worldToCanvas,
-  type ParabolaView,
-} from '../_shared/quadratic';
+import { createTimeValueViewport } from '../../../graphics/viewport';
+import { drawFunctionCurve } from '../../../graphics/curves';
+import { quadRoots, quadVertex, quadY } from '../_shared/quadratic';
 
 const BRAND_COLOR = '#EA580C';
 
@@ -57,7 +53,7 @@ export class QuadraticBasketballRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const { a, b, c, xCur, yCur } = this;
     const { vx, vy } = quadVertex(a, b, c);
     const roots = quadRoots(a, b, c);
@@ -84,9 +80,12 @@ export class QuadraticBasketballRenderer {
     const top = padT;
     const width = Math.max(1, w - padL - padR);
     const height = Math.max(1, h - padT - padB);
-    const view: ParabolaView = { xMin, xMax, yMin, yMax, left, top, width, height };
+    const view = createTimeValueViewport({
+      rect: { x: left, y: top, w: width, h: height },
+      xMin, xMax, yMin, yMax,
+    });
 
-    const { cy: floorCy } = worldToCanvas(view, 0, 0);
+    const { y: floorCy } = view.toScreen(0, 0);
     ctx.fillStyle = isDark ? '#78350f' : '#a16207';
     ctx.fillRect(0, floorCy, w, h - floorCy);
     ctx.strokeStyle = isDark ? '#fbbf24' : '#7c2d12';
@@ -109,24 +108,25 @@ export class QuadraticBasketballRenderer {
     ctx.beginPath();
     ctx.rect(left, top, width, floorCy - top);
     ctx.clip();
-    drawParabola(ctx, view, a, b, c, {
+    drawFunctionCurve(ctx, view, (x) => quadY(a, b, c, x), {
+      xMin, xMax,
       strokeStyle: hexAlpha(BRAND_COLOR, 0.35),
       lineWidth: 2,
       dash: [4, 3],
     });
     ctx.restore();
 
-    const { cx: playerCx } = worldToCanvas(view, launchX, 0);
-    const { cy: releaseCy } = worldToCanvas(view, launchX, c);
+    const { x: playerCx } = view.toScreen(launchX, 0);
+    const { y: releaseCy } = view.toScreen(launchX, c);
     drawPlayer(ctx, playerCx, floorCy, Math.max(36, floorCy - releaseCy + 12), isDark);
 
     if (roots.length === 2 || landX > 0) {
-      const { cx: hoopCx } = worldToCanvas(view, landX, 0);
+      const { x: hoopCx } = view.toScreen(landX, 0);
       drawHoop(ctx, hoopCx, floorCy, isDark);
     }
 
     if (vy > 0 && vx > 0 && vx < xMax) {
-      const { cx, cy } = worldToCanvas(view, vx, vy);
+      const { x: cx, y: cy } = view.toScreen(vx, vy);
       ctx.fillStyle = hexAlpha(BRAND_COLOR, 0.25);
       ctx.beginPath();
       ctx.arc(cx, cy, 10, 0, Math.PI * 2);
@@ -148,7 +148,7 @@ export class QuadraticBasketballRenderer {
 
     if (xCur >= xMin && xCur <= xMax) {
       const ballY = Math.max(0, yCur);
-      const { cx, cy } = worldToCanvas(view, xCur, ballY);
+      const { x: cx, y: cy } = view.toScreen(xCur, ballY);
       drawBall(ctx, cx, cy, 10);
     }
 

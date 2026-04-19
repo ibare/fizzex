@@ -8,6 +8,7 @@
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, roundRect } from '../../../graphics/draw';
+import { background } from '../../../graphics/theme';
 
 const BRAND_COLOR = '#0E7490';
 
@@ -44,11 +45,11 @@ export class PythagoreanShortcutRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const { a, b, c } = this;
     if (!(a > 0) || !(b > 0) || !(c > 0)) return;
 
-    ctx.fillStyle = isDark ? '#0b1220' : '#f8fafc';
+    ctx.fillStyle = background(isDark);
     ctx.fillRect(0, 0, w, h);
 
     const padX = 20;

@@ -1,9 +1,9 @@
 /**
- * quadratic-* Visualizer 공용 수학·뷰 유틸.
+ * quadratic-* Visualizer 공용 수학 유틸.
  *
- * y = a x² + b x + c 수학(극값/근/값)과 포물선을 Canvas 좌표계에 투영해 그리는
- * 작은 뷰 헬퍼를 모은다. 각 Visualizer 렌더러(sandbox/bridge/basketball/fountain)가
- * 동일 수학을 중복 구현하지 않도록 한 곳에 두었다.
+ * y = a x² + b x + c의 값·꼭짓점·실수근만 제공한다.
+ * 화면 좌표 매핑과 곡선 그리기는 graphics 호스트(createTimeValueViewport,
+ * drawFunctionCurve)가 담당하므로 여기엔 두지 않는다.
  */
 
 /** y = a x² + b x + c 값 */
@@ -30,49 +30,4 @@ export function quadRoots(a: number, b: number, c: number): number[] {
   if (D === 0) return [-b / (2 * a)];
   const sq = Math.sqrt(D);
   return [(-b - sq) / (2 * a), (-b + sq) / (2 * a)];
-}
-
-/** 월드 좌표 → Canvas 좌표 매핑에 필요한 뷰 정의 */
-export interface ParabolaView {
-  xMin: number;
-  xMax: number;
-  yMin: number;
-  yMax: number;
-  left: number;
-  top: number;
-  width: number;
-  height: number;
-}
-
-export function worldToCanvas(view: ParabolaView, wx: number, wy: number): { cx: number; cy: number } {
-  const cx = view.left + ((wx - view.xMin) / (view.xMax - view.xMin)) * view.width;
-  const cy = view.top + view.height - ((wy - view.yMin) / (view.yMax - view.yMin)) * view.height;
-  return { cx, cy };
-}
-
-/** 포물선을 96분할로 그린다. stroke 색·두께·점선 지정 가능. */
-export function drawParabola(
-  ctx: CanvasRenderingContext2D,
-  view: ParabolaView,
-  a: number,
-  b: number,
-  c: number,
-  opts: { strokeStyle: string; lineWidth: number; dash?: number[] },
-): void {
-  ctx.save();
-  ctx.strokeStyle = opts.strokeStyle;
-  ctx.lineWidth = opts.lineWidth;
-  if (opts.dash) ctx.setLineDash(opts.dash);
-  ctx.beginPath();
-  const N = 96;
-  for (let i = 0; i <= N; i++) {
-    const wx = view.xMin + (i / N) * (view.xMax - view.xMin);
-    const wy = quadY(a, b, c, wx);
-    const { cx, cy } = worldToCanvas(view, wx, wy);
-    if (i === 0) ctx.moveTo(cx, cy);
-    else ctx.lineTo(cx, cy);
-  }
-  ctx.stroke();
-  if (opts.dash) ctx.setLineDash([]);
-  ctx.restore();
 }

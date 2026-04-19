@@ -20,5 +20,6 @@ export type {
 export * as theme from './theme';
 export * from './viewport';
 export * from './draw';
+export * from './curves';
 
 export type { Theme, FrameInfo, Viewport2D } from './types';

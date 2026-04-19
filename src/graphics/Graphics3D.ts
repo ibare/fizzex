@@ -64,7 +64,12 @@ export class Graphics3D {
   private height: number;
   private animationId = 0;
   private lastTimestamp = 0;
+  private startTimestamp = 0;
   private destroyed = false;
+
+  get isDark(): boolean {
+    return this.theme === 'dark';
+  }
 
   constructor(container: HTMLElement, opts: Graphics3DOptions) {
     this.container = container;
@@ -102,7 +107,8 @@ export class Graphics3D {
 
     opts.setup(this.buildContext());
 
-    this.lastTimestamp = performance.now();
+    this.startTimestamp = performance.now();
+    this.lastTimestamp = this.startTimestamp;
     this.animationId = requestAnimationFrame(this.loop);
   }
 
@@ -124,7 +130,14 @@ export class Graphics3D {
     const dt = (now - this.lastTimestamp) / 1000;
     this.lastTimestamp = now;
     const g = this.buildContext();
-    this.onFrame(g, { dt, now, width: this.width, height: this.height });
+    this.onFrame(g, {
+      dt,
+      now,
+      elapsed: (now - this.startTimestamp) / 1000,
+      width: this.width,
+      height: this.height,
+      isDark: this.theme === 'dark',
+    });
     this.renderer.render(this.scene, this.camera);
     this.animationId = requestAnimationFrame(this.loop);
   };

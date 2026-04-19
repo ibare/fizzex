@@ -80,7 +80,7 @@ export class FreefallCoreRenderer {
   }
 
   private render(ctx: CanvasRenderingContext2D, w: number, h: number): void {
-    const isDark = this.graphics.theme === 'dark';
+    const isDark = this.graphics.isDark;
     const draw = ANCHOR_SCENES[this.anchorId] ?? ANCHOR_SCENES[DEFAULT_ANCHOR_ID];
     draw({ ctx, w, h, v0: this.v0, a: this.a, t: this.t, hCur: this.hCur, isDark });
   }

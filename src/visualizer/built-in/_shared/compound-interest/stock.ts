@@ -5,6 +5,7 @@
  */
 
 import { hexAlpha } from '../../../../graphics/draw';
+import { axis, gridLine } from '../../../../graphics/theme';
 import { compoundA, formatKrw } from './math';
 import type { SceneDrawArgs } from './types';
 
@@ -33,7 +34,7 @@ export function drawStock(args: SceneDrawArgs): void {
   const maxA = compoundA(P, r, n, tEnd);
   const scaleMax = Math.max(maxA, P * 2);
 
-  ctx.strokeStyle = isDark ? 'rgba(148,163,184,0.14)' : 'rgba(100,116,139,0.16)';
+  ctx.strokeStyle = gridLine(isDark);
   ctx.lineWidth = 1;
   ctx.beginPath();
   for (let j = 0; j <= 5; j++) {
@@ -99,7 +100,7 @@ export function drawStock(args: SceneDrawArgs): void {
     }
   }
 
-  ctx.strokeStyle = isDark ? 'rgba(203,213,225,0.55)' : 'rgba(30,41,59,0.55)';
+  ctx.strokeStyle = axis(isDark);
   ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(left, top + height);
