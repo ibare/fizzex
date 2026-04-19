@@ -18,6 +18,8 @@ export type {
   BBox,
   BBoxRect,
   BBoxPadding,
+  BBoxAlign,
+  BBoxAnchor,
 } from './bbox';
 
 export { createPolarViewport } from './polar';

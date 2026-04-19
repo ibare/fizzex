@@ -12,6 +12,7 @@
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, roundRect, formatN } from '../../../graphics/draw';
+import { createBBoxViewport } from '../../../graphics/viewport';
 
 const BRAND_COLOR = '#DC4C2C';
 
@@ -70,27 +71,24 @@ export class PythagoreanLadderRenderer {
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
-    const wallX = 0;
     const wallRight = 0.4;
-    const floorY = 0;
     const bboxW = Math.max(a + 1, 5);
     const bboxH = Math.max(b + 1, 6);
     const padL = 28;
     const padR = 18;
     const padT = 22;
     const padB = 34;
-    const scaleX = (w - padL - padR) / bboxW;
-    const scaleY = (h - padT - padB) / bboxH;
-    const s = Math.min(scaleX, scaleY);
+    const s = Math.min((w - padL - padR) / bboxW, (h - padT - padB) / bboxH);
 
-    const sceneW = a * s;
-    const targetOriginX = w / 3;
-    const minOriginX = padL;
-    const maxOriginX = w - padR - sceneW;
-    const originX = Math.max(minOriginX, Math.min(maxOriginX, targetOriginX));
-    const originY = h - padB;
-    const toX = (mx: number) => originX + (mx - wallX) * s;
-    const toY = (my: number) => originY - (my - floorY) * s;
+    const view = createBBoxViewport({
+      rect: { x: 0, y: 0, w, h },
+      bbox: { minX: 0, maxX: bboxW, minY: 0, maxY: bboxH },
+      padding: { top: padT, right: padR, bottom: padB, left: padL },
+      hAlign: { kind: 'anchor', target: w / 3, max: w - padR - a * s },
+      vAlign: 'end',
+    });
+    const toX = (mx: number) => view.toScreen(mx, 0).x;
+    const toY = (my: number) => view.toScreen(0, my).y;
 
     const groundY = toY(0);
     ctx.strokeStyle = isDark ? 'rgba(200,210,230,0.35)' : 'rgba(60,70,90,0.4)';
@@ -111,8 +109,8 @@ export class PythagoreanLadderRenderer {
       ctx.stroke();
     }
 
-    const wallLeftPx = toX(wallX) - wallRight * s;
-    const wallRightPx = toX(wallX);
+    const wallLeftPx = toX(0) - wallRight * s;
+    const wallRightPx = toX(0);
     const wallTopPx = toY(bboxH);
     const wallBotPx = groundY;
 

@@ -8,6 +8,7 @@
 import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { roundRect, formatN } from '../../../graphics/draw';
+import { createBBoxViewport } from '../../../graphics/viewport';
 
 const BRAND_COLOR = '#7C3AED';
 
@@ -51,30 +52,31 @@ export class PythagoreanTvRenderer {
     ctx.fillStyle = isDark ? '#0b1220' : '#f1f5f9';
     ctx.fillRect(0, 0, w, h);
 
-    const bezel = 0.04;
-    const standH = 0.14;
     const measureMargin = 36;
     const padT = 14;
     const padX = 20;
-    const innerW = Math.max(1, w - padX * 2);
-    const innerH = Math.max(1, h - padT - measureMargin);
-    const ratio = a / b;
-    let screenW = innerW * (1 - bezel * 2);
-    let screenH = screenW / ratio;
-    const maxScreenH = innerH * (1 - bezel * 2 - standH);
-    if (screenH > maxScreenH) {
-      screenH = maxScreenH;
-      screenW = screenH * ratio;
-    }
-    const bezelPx = screenW * bezel;
-    const standHPx = screenH * standH;
+    const bezelPx = Math.min(w, h) * 0.05;
+    const standHPx = Math.min(w, h) * 0.1;
 
+    const view = createBBoxViewport({
+      rect: {
+        x: padX + bezelPx,
+        y: padT + bezelPx,
+        w: Math.max(1, w - padX * 2 - bezelPx * 2),
+        h: Math.max(1, h - padT - measureMargin - bezelPx * 2 - standHPx),
+      },
+      bbox: { minX: 0, maxX: a, minY: 0, maxY: b },
+      yUp: false,
+      vAlign: 'start',
+    });
+    const screenW = a * view.scale;
+    const screenH = b * view.scale;
+    const screenX = view.toScreen(0, 0).x;
+    const screenY = view.toScreen(0, 0).y;
     const tvW = screenW + bezelPx * 2;
     const tvH = screenH + bezelPx * 2;
-    const tvX = (w - tvW) / 2;
-    const tvY = padT;
-    const screenX = tvX + bezelPx;
-    const screenY = tvY + bezelPx;
+    const tvX = screenX - bezelPx;
+    const tvY = screenY - bezelPx;
 
     ctx.fillStyle = isDark ? '#1f2937' : '#1e293b';
     roundRect(ctx, tvX, tvY, tvW, tvH, 6);
