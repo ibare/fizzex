@@ -169,8 +169,8 @@ const catalogId = semanticMap.get(ast.id)?.catalogId;
 
 // Discover every visualizer linked to this formula
 const refs = catalogId ? getVisualizersForCatalogId(catalogId) : [];
-// refs: [{ id: 'kepler-orbit-iss-2d', name: 'ISS 궤도', ... },
-//        { id: 'kepler-orbit-gps-2d', name: 'GPS 궤도', ... }, ...]
+// refs: [{ id: 'kepler-orbit-2d', name: '지구 궤도 — 2D', ... },
+//        { id: 'kepler-orbit-3d', name: '지구 궤도 — 3D', ... }]
 
 // Load on demand (each visualizer is a separate chunk)
 const viz = refs[0] ? await loadVisualizer(refs[0].id) : null;

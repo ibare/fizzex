@@ -393,53 +393,17 @@
       ],
       "visualizers": [
         {
-          "id": "kepler-orbit-iss-2d",
-          "name": "ISS 궤도",
-          "description": "고도 400km, 90분 주기의 저궤도",
+          "id": "kepler-orbit-2d",
+          "name": "지구 궤도 — 2D",
+          "description": "ISS·GPS·정지궤도·달을 앵커로 전환하며 관찰하는 2D 조감 뷰",
           "icon": "🛸",
           "default": true
         },
         {
-          "id": "kepler-orbit-gps-2d",
-          "name": "GPS 위성 궤도",
-          "description": "고도 20,200km, 12시간 주기의 중궤도",
-          "icon": "📡"
-        },
-        {
-          "id": "kepler-orbit-geo-2d",
-          "name": "정지궤도",
-          "description": "고도 35,786km, 정확히 24시간 주기",
-          "icon": "📺"
-        },
-        {
-          "id": "kepler-orbit-moon-2d",
-          "name": "달 궤도",
-          "description": "384,400km, 27.3일 주기",
-          "icon": "🌙"
-        },
-        {
-          "id": "kepler-orbit-iss-3d",
-          "name": "ISS 3D 궤도",
-          "description": "지구를 회전하며 보는 저궤도 입체 뷰",
+          "id": "kepler-orbit-3d",
+          "name": "지구 궤도 — 3D",
+          "description": "같은 앵커를 3D 공간에서 회전시키며 거리 감각을 얻는 입체 뷰",
           "icon": "🌍"
-        },
-        {
-          "id": "kepler-orbit-gps-3d",
-          "name": "GPS 3D 궤도",
-          "description": "12시간 주기 중궤도 입체 뷰",
-          "icon": "🛰️"
-        },
-        {
-          "id": "kepler-orbit-geo-3d",
-          "name": "정지궤도 3D",
-          "description": "24시간 주기 정지궤도 입체 뷰",
-          "icon": "🗼"
-        },
-        {
-          "id": "kepler-orbit-moon-3d",
-          "name": "달 3D 궤도",
-          "description": "27.3일 주기 달 궤도 입체 뷰",
-          "icon": "🌕"
         }
       ]
     },
@@ -625,29 +589,11 @@
       ],
       "visualizers": [
         {
-          "id": "exponential-decay-caffeine-2d",
-          "name": "지수 감소 — 카페인",
-          "description": "커피 카페인 대사 (반감기 ≈ 5시간)",
-          "icon": "☕",
+          "id": "exponential-decay-2d",
+          "name": "지수 감소 — 2D",
+          "description": "카페인·배터리·탄소-14·약물을 앵커로 전환하며 반감기 체감",
+          "icon": "📉",
           "default": true
-        },
-        {
-          "id": "exponential-decay-carbon14-2d",
-          "name": "지수 감소 — 탄소-14",
-          "description": "고대 유물 연대 측정 (반감기 5,730년)",
-          "icon": "⚛️"
-        },
-        {
-          "id": "exponential-decay-drug-2d",
-          "name": "지수 감소 — 약물",
-          "description": "진통제 혈중 농도 (반감기 ≈ 2시간)",
-          "icon": "💊"
-        },
-        {
-          "id": "exponential-decay-battery-2d",
-          "name": "지수 감소 — 배터리",
-          "description": "스마트폰 방전 (반감기 ≈ 3시간, 교육적 근사)",
-          "icon": "🔋"
         }
       ]
     },
@@ -1984,29 +1930,11 @@
       ],
       "visualizers": [
         {
-          "id": "compound-interest-savings-2d",
-          "name": "복리 — 예금",
-          "description": "안정적인 연 3% 예금, 동전 스택이 쌓임",
-          "icon": "🏦",
+          "id": "compound-interest-2d",
+          "name": "복리 — 2D",
+          "description": "예금·주식·적금·인플레이션 앵커로 전환하며 복리 성장 체감",
+          "icon": "📈",
           "default": true
-        },
-        {
-          "id": "compound-interest-stock-2d",
-          "name": "복리 — 주식 장기투자",
-          "description": "연 7% 장기 투자, 5년 단위 바 차트 + ×2/×4/×8 이정표",
-          "icon": "📈"
-        },
-        {
-          "id": "compound-interest-deposit-2d",
-          "name": "복리 — 고금리 적금",
-          "description": "소액 5% 적금, 저금통 크기로 원리금 시각화",
-          "icon": "💰"
-        },
-        {
-          "id": "compound-interest-inflation-2d",
-          "name": "복리 — 인플레이션",
-          "description": "연 3% 인플레이션, 장바구니 구매력(P²/A) 감소",
-          "icon": "📉"
         }
       ]
     },
@@ -3281,29 +3209,11 @@
       ],
       "visualizers": [
         {
-          "id": "freefall-earth-2d",
-          "name": "지구 자유낙하",
-          "description": "건물 측면 이정표로 보는 g = 9.8 m/s²",
+          "id": "freefall-2d",
+          "name": "자유낙하 — 2D",
+          "description": "지구·달·화성·목성 앵커로 행성별 중력가속도 체감",
           "icon": "🌍",
           "default": true
-        },
-        {
-          "id": "freefall-moon-2d",
-          "name": "달 자유낙하",
-          "description": "크레이터 지평선, 지구의 1/6 중력",
-          "icon": "🌙"
-        },
-        {
-          "id": "freefall-mars-2d",
-          "name": "화성 자유낙하",
-          "description": "붉은 지형과 탐사 로버, ~38% 중력",
-          "icon": "🔴"
-        },
-        {
-          "id": "freefall-jupiter-2d",
-          "name": "목성 자유낙하",
-          "description": "가스 행성 대기, 지구의 2.5배 중력",
-          "icon": "🟠"
         }
       ]
     },
@@ -3451,29 +3361,11 @@
       ],
       "visualizers": [
         {
-          "id": "sine-wave-speaker-2d",
-          "name": "사인파 — 스피커",
-          "description": "진동판이 공기를 밀어 소리가 되는 장면",
+          "id": "sine-wave-2d",
+          "name": "사인파 — 2D",
+          "description": "스피커·진자·조수·전압계 앵커로 진폭·주기·위상 역할 체감",
           "icon": "🎵",
           "default": true
-        },
-        {
-          "id": "sine-wave-voltmeter-2d",
-          "name": "사인파 — 전압계",
-          "description": "가정용 교류 전압의 바늘 왕복",
-          "icon": "⚡"
-        },
-        {
-          "id": "sine-wave-tide-2d",
-          "name": "사인파 — 조수",
-          "description": "해수면 수위와 함께 뜨는 배",
-          "icon": "🌊"
-        },
-        {
-          "id": "sine-wave-pendulum-2d",
-          "name": "사인파 — 진자",
-          "description": "줄에 매달린 추의 각도 흔들림",
-          "icon": "🔔"
         }
       ]
     },

@@ -40,6 +40,26 @@ export interface ParameterConfig {
 export type ParameterValues = Record<string, number>;
 
 /**
+ * 현실 비유 앵커.
+ *
+ * 같은 수식 시각화 안에서 학습자가 익숙한 실제 사례(ISS 궤도, 커피 카페인 반감기 등)로
+ * 점프할 수 있는 파라미터 스냅포인트. 앵커가 활성화되면 Visualizer는
+ * 해당 파라미터 값으로 상태를 맞추고, 원한다면 앵커 ID에 따라 일러스트를 전환한다.
+ */
+export interface AnchorConfig {
+  /** 앵커 고유 ID (예: "iss", "gps", "caffeine") */
+  id: string;
+  /** 표시 이름 (예: "ISS 궤도") */
+  name: string;
+  /** 선택용 아이콘/이모지 */
+  icon?: string;
+  /** 한 줄 부연 설명 */
+  description?: string;
+  /** 이 앵커가 대표하는 파라미터 값 (카탈로그 단위 기준) */
+  params: ParameterValues;
+}
+
+/**
  * 프레임워크 → Visualizer 업데이트 컨텍스트.
  *
  * Visualizer는 자체 계산 로직을 가지지 않는다.
@@ -64,6 +84,11 @@ export interface VisualizerUpdate {
   baseline?: { derived: Record<string, number>; equationValue?: number };
   /** 현재 식이 카탈로그 원본과 구조적으로 같은가. */
   isStandard: boolean;
+  /**
+   * 현재 활성화된 앵커 ID. 사용자가 파라미터를 직접 조정해 앵커와
+   * 일치하지 않게 되면 undefined. Visualizer는 이 값으로 일러스트를 분기할 수 있다.
+   */
+  activeAnchorId?: string;
 }
 
 // ─── 파생값 ───
@@ -103,6 +128,12 @@ export interface FizzexVisualizer {
   constants?: Record<string, number>;
   /** 파생값 정의 */
   derivedValues: DerivedValue[];
+
+  /**
+   * 현실 비유 앵커 목록. 정의되면 UI가 칩 버튼으로 렌더링한다.
+   * 첫 번째 앵커가 마운트 직후의 초기 상태로 적용된다.
+   */
+  anchors?: AnchorConfig[];
 
   /** 초기화 — 컨테이너 안에 렌더링을 준비 */
   mount(container: HTMLElement, options: VisualizerMountOptions): void;
@@ -153,6 +184,14 @@ export interface VisualizerBridge {
   ): void;
   /** 파라미터 변경 구독. 반환: unsubscribe 함수 */
   subscribe(listener: (params: ParameterValues, source: string) => void): () => void;
+
+  /** 현재 활성 앵커 ID (없으면 null) */
+  getActiveAnchorId(): string | null;
+  /** 앵커 선택 — 해당 앵커 params로 파라미터를 일괄 적용한다 */
+  setActiveAnchor(anchorId: string): void;
+  /** 앵커 상태 변경 구독 */
+  subscribeAnchor(listener: (anchorId: string | null) => void): () => void;
+
   /** 정리 */
   destroy(): void;
 }

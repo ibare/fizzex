@@ -7,6 +7,7 @@
  */
 
 import { ExplorerVisualizerController } from './explorer-visualizer';
+import { ExplorerAnchorChips } from './explorer-anchor-chips';
 import type { VisualizerBridgeImpl } from '../visualizer/bridge';
 import type { FizzexVisualizer } from '../visualizer/types';
 import type { CatalogDetail } from '../analyzer/semantic/types';
@@ -51,6 +52,7 @@ export class VizPanel {
   private flashTimer: ReturnType<typeof setTimeout> | null = null;
 
   private controller: ExplorerVisualizerController;
+  private anchorChips: ExplorerAnchorChips | null = null;
 
   private parent: HTMLElement;
   private theme: 'light' | 'dark';
@@ -284,6 +286,17 @@ export class VizPanel {
     const viz = this.controller.viz;
     if (!bridge || !viz) return false;
 
+    // 앵커가 정의되어 있으면 캔버스 위에 칩 UI 부착
+    if (viz.anchors && viz.anchors.length > 0) {
+      this.anchorChips = new ExplorerAnchorChips(this.root, {
+        anchors: viz.anchors,
+        bridge,
+        theme: this.theme,
+      });
+      // 헤더 바로 아래에 위치시키기 위해 헤더 다음 형제로 삽입
+      this.root.insertBefore(this.anchorChips.root, this.vizContainer);
+    }
+
     return true;
   }
 
@@ -343,6 +356,8 @@ export class VizPanel {
     window.removeEventListener('touchmove', this.boundTouchMove);
     window.removeEventListener('touchend', this.boundTouchEnd);
 
+    this.anchorChips?.destroy();
+    this.anchorChips = null;
     this.controller.destroy();
 
     if (this.root.parentElement) {

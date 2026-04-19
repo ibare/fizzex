@@ -7,6 +7,7 @@ export type {
   ParameterConfig,
   ParameterValues,
   DerivedValue,
+  AnchorConfig,
   FizzexVisualizer,
   VisualizerMountOptions,
   VisualizerBridge,

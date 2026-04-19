@@ -14,6 +14,13 @@ const PRESETS = [
   '|x - 1| < 3',
   'E = mc^2',
   '\\hat{f}(\\xi) = \\int_{-\\infty}^{\\infty} f(x) e^{-2\\pi i x \\xi} \\, dx',
+  'y = ax^2 + bx + c',
+  'a^2 + b^2 = c^2',
+  's = v_0 t + \\frac{1}{2}gt^2',
+  'y = A\\sin(\\omega t + \\varphi)',
+  'T^2 = \\frac{4\\pi^2}{GM}a^3',
+  'N = N_0 e^{-\\lambda t}',
+  'A = P\\left(1 + \\frac{r}{n}\\right)^{nt}',
 ];
 
 export default function Playground() {

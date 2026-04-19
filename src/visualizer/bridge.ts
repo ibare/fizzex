@@ -8,6 +8,7 @@
 import type { RootNode } from '../types';
 import type { CatalogDetail } from '../analyzer/semantic/types';
 import type {
+  AnchorConfig,
   FizzexVisualizer,
   ParameterValues,
   DerivedValue,
@@ -17,10 +18,25 @@ import type {
 } from './types';
 import { evaluateEquation } from './evaluator';
 
+/** params가 앵커 params와 모든 키에서 일치하는가 (부동소수점 tolerance) */
+function paramsMatchAnchor(
+  params: ParameterValues,
+  anchor: AnchorConfig,
+): boolean {
+  for (const [key, anchorVal] of Object.entries(anchor.params)) {
+    const cur = params[key];
+    if (cur == null) return false;
+    const tol = Math.max(Math.abs(anchorVal), 1) * 1e-9;
+    if (Math.abs(cur - anchorVal) > tol) return false;
+  }
+  return true;
+}
+
 export class VisualizerBridgeImpl implements VisualizerBridge {
   private params: ParameterValues;
   private visualizer: FizzexVisualizer;
   private listeners = new Set<(params: ParameterValues, source: string) => void>();
+  private anchorListeners = new Set<(anchorId: string | null) => void>();
   private derivedDefs: DerivedValue[];
   private ast: RootNode | null = null;
   /**
@@ -30,12 +46,20 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
    */
   private originalAst: RootNode | null = null;
   private catalogDetail: CatalogDetail | null = null;
+  private activeAnchorId: string | null = null;
   private destroyed = false;
 
   constructor(visualizer: FizzexVisualizer, initialParams: ParameterValues) {
     this.params = { ...initialParams };
     this.visualizer = visualizer;
     this.derivedDefs = visualizer.derivedValues;
+
+    // 초기 활성 앵커: params가 이미 어느 앵커와 일치하면 그 ID, 아니면 null
+    const anchors = visualizer.anchors;
+    if (anchors && anchors.length > 0) {
+      const match = anchors.find((a) => paramsMatchAnchor(this.params, a));
+      this.activeAnchorId = match?.id ?? null;
+    }
 
     // Visualizer → 프레임워크 콜백 등록
     if (visualizer.onParameterChange) {
@@ -55,6 +79,9 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     if (this.destroyed) return;
     this.params[paramId] = value;
 
+    // 수동 조정(slider/visualizer/inline) 시 현재 params가 활성 앵커와 더 이상 일치하지 않으면 해제한다.
+    this.reconcileActiveAnchor();
+
     // Visualizer가 변경한 게 아니면 Visualizer에 알린다 (파생값 + equationValue 포함)
     if (source !== 'visualizer') {
       this.visualizer.update(this.computeUpdateContext());
@@ -63,6 +90,56 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     // 모든 구독자에게 알린다 (슬라이더 UI, 값 흐름 등)
     for (const listener of this.listeners) {
       listener({ ...this.params }, source);
+    }
+  }
+
+  getActiveAnchorId(): string | null {
+    return this.activeAnchorId;
+  }
+
+  setActiveAnchor(anchorId: string): void {
+    if (this.destroyed) return;
+    const anchor = this.visualizer.anchors?.find((a) => a.id === anchorId);
+    if (!anchor) return;
+
+    // 앵커 params로 일괄 적용
+    for (const [key, val] of Object.entries(anchor.params)) {
+      this.params[key] = val;
+    }
+    this.activeAnchorId = anchor.id;
+
+    this.visualizer.update(this.computeUpdateContext());
+
+    for (const listener of this.listeners) {
+      listener({ ...this.params }, 'slider');
+    }
+    for (const listener of this.anchorListeners) {
+      listener(this.activeAnchorId);
+    }
+  }
+
+  subscribeAnchor(listener: (anchorId: string | null) => void): () => void {
+    this.anchorListeners.add(listener);
+    return () => { this.anchorListeners.delete(listener); };
+  }
+
+  /**
+   * 현재 params 기준으로 activeAnchorId를 재평가한다.
+   * 일치하는 앵커가 있으면 그 ID, 없으면 null.
+   */
+  private reconcileActiveAnchor(): void {
+    const anchors = this.visualizer.anchors;
+    const prev = this.activeAnchorId;
+    let next: string | null = null;
+    if (anchors && anchors.length > 0) {
+      const match = anchors.find((a) => paramsMatchAnchor(this.params, a));
+      next = match?.id ?? null;
+    }
+    if (next !== prev) {
+      this.activeAnchorId = next;
+      for (const listener of this.anchorListeners) {
+        listener(this.activeAnchorId);
+      }
     }
   }
 
@@ -120,6 +197,7 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
       equationValue: current.equationValue,
       baseline,
       isStandard,
+      activeAnchorId: this.activeAnchorId ?? undefined,
     };
   }
 
@@ -178,6 +256,7 @@ export class VisualizerBridgeImpl implements VisualizerBridge {
     if (this.destroyed) return;
     this.destroyed = true;
     this.listeners.clear();
+    this.anchorListeners.clear();
     this.ast = null;
     this.originalAst = null;
     this.catalogDetail = null;
