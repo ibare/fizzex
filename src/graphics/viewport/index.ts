@@ -12,7 +12,13 @@ export type {
 } from './time-value';
 
 export { createBBoxViewport } from './bbox';
-export type { BBoxViewport, BBoxViewportOptions, BBox, BBoxRect } from './bbox';
+export type {
+  BBoxViewport,
+  BBoxViewportOptions,
+  BBox,
+  BBoxRect,
+  BBoxPadding,
+} from './bbox';
 
 export { createPolarViewport } from './polar';
 export type { PolarViewport, PolarViewportOptions, PolarCenter } from './polar';

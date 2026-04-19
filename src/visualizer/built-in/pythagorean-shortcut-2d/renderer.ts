@@ -9,6 +9,7 @@ import type { VisualizerMountOptions, VisualizerUpdate } from '../../types';
 import { Graphics2D } from '../../../graphics/Graphics2D';
 import { hexAlpha, roundRect } from '../../../graphics/draw';
 import { background } from '../../../graphics/theme';
+import { createBBoxViewport } from '../../../graphics/viewport';
 
 const BRAND_COLOR = '#0E7490';
 
@@ -52,20 +53,17 @@ export class PythagoreanShortcutRenderer {
     ctx.fillStyle = background(isDark);
     ctx.fillRect(0, 0, w, h);
 
-    const padX = 20;
-    const padT = 40;
-    const padB = 20;
-    const innerW = Math.max(1, w - padX * 2);
-    const innerH = Math.max(1, h - padT - padB);
-    const ratio = a / b;
-    let blkW = innerW;
-    let blkH = blkW / ratio;
-    if (blkH > innerH) {
-      blkH = innerH;
-      blkW = blkH * ratio;
-    }
-    const blkX = (w - blkW) / 2;
-    const blkY = padT + (innerH - blkH) / 2;
+    const view = createBBoxViewport({
+      rect: { x: 0, y: 0, w, h },
+      bbox: { minX: 0, maxX: a, minY: 0, maxY: b },
+      padding: { top: 40, right: 20, bottom: 20, left: 20 },
+    });
+    const topLeft = view.toScreen(0, b);
+    const bottomRight = view.toScreen(a, 0);
+    const blkX = topLeft.x;
+    const blkY = topLeft.y;
+    const blkW = bottomRight.x - topLeft.x;
+    const blkH = bottomRight.y - topLeft.y;
 
     ctx.fillStyle = isDark ? '#1a3d2a' : '#86efac';
     ctx.fillRect(blkX, blkY, blkW, blkH);
