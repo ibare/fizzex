@@ -1,0 +1,701 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "exponential-decay-2d",
+  "catalog": "exponential-functions/exponential-decay",
+
+  "name": { "en": "Exponential Decay — 2D", "ko": "지수 감소 — 2D" },
+  "description": {
+    "en": "N = N_0 e^(rt). Caffeine, battery, carbon-14, and drug scenes illustrate constant half-life.",
+    "ko": "N = N₀ e^(rt). 카페인·배터리·탄소-14·약물 장면으로 반감기의 일정성을 보인다."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "caffeine",
+      "name": { "en": "Caffeine", "ko": "카페인" },
+      "description": {
+        "en": "Half-life ≈ 5 h.",
+        "ko": "커피 한 잔의 카페인 — 반감기 ≈ 5시간."
+      },
+      "style": { "color": "#92400E", "icon": "☕" },
+      "params": { "N_0": 95, "r": -0.1386294361 }
+    },
+    {
+      "id": "battery",
+      "name": { "en": "Battery", "ko": "배터리" },
+      "description": {
+        "en": "Half-life ≈ 3 h.",
+        "ko": "스마트폰 방전 근사 — 반감기 ≈ 3시간."
+      },
+      "style": { "color": "#0EA5E9", "icon": "🔋" },
+      "params": { "N_0": 100, "r": -0.2310490602 }
+    },
+    {
+      "id": "carbon14",
+      "name": { "en": "Carbon-14", "ko": "탄소-14" },
+      "description": {
+        "en": "Unit time ≈ 5,730 yr.",
+        "ko": "연대 측정 — 단위 시간 ≈ 5,730년."
+      },
+      "style": { "color": "#7C3AED", "icon": "⚛️" },
+      "params": { "N_0": 100, "r": -0.0866433975 }
+    },
+    {
+      "id": "drug",
+      "name": { "en": "Drug", "ko": "약물" },
+      "description": {
+        "en": "Half-life ≈ 2 h.",
+        "ko": "진통제 혈중 농도 — 반감기 ≈ 2시간."
+      },
+      "style": { "color": "#DC2626", "icon": "💊" },
+      "params": { "N_0": 400, "r": -0.3465735902 }
+    }
+  ],
+
+  "viewports": {
+    "decay": {
+      "kind": "time-value",
+      "rect": {
+        "x": "38",
+        "y": "14",
+        "w": "max(1, frame.width - 94)",
+        "h": "max(1, floor(frame.height * 0.42) - 36)"
+      },
+      "xMin": "0",
+      "xMax": "max(10, if(r >= 0, 10, log(2) / (-r) * 3.5))",
+      "yMin": "0",
+      "yMax": "1"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "color": "scene.style.color",
+      "halfLife": "if(r >= 0, 1e9, log(2) / (-r))",
+      "tMax": "halfLife * 3.5",
+      "ratio": "clamp(exp(r * t), 0, 1)",
+      "topH": "floor(frame.height * 0.42)",
+      "padL": "38", "padR": "56", "padT": "14", "padB": "22",
+      "left": "padL",
+      "top": "padT",
+      "areaW": "max(1, frame.width - padL - padR)",
+      "areaH": "max(1, topH - padT - padB)",
+      "sxT": "areaW / tMax",
+      "botY": "topH",
+      "botH": "frame.height - topH"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": { "fill": "if(frame.isDark, '#0b1220', '#ffffff')" }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 11] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "left + (i / 10) * areaW",
+            "y1": "top",
+            "x2": "left + (i / 10) * areaW",
+            "y2": "top + areaH",
+            "style": { "stroke": "if(frame.isDark, 'rgba(71,85,105,0.3)', 'rgba(203,213,225,0.6)')", "lineWidth": 1 }
+          }
+        ]
+      },
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 6] },
+        "as": "j",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "left",
+            "y1": "top + (j / 5) * areaH",
+            "x2": "left + areaW",
+            "y2": "top + (j / 5) * areaH",
+            "style": { "stroke": "if(frame.isDark, 'rgba(71,85,105,0.3)', 'rgba(203,213,225,0.6)')", "lineWidth": 1 }
+          }
+        ]
+      },
+      {
+        "kind": "line",
+        "x1": "left",
+        "y1": "top",
+        "x2": "left",
+        "y2": "top + areaH",
+        "style": { "stroke": "if(frame.isDark, 'rgba(148,163,184,0.8)', 'rgba(71,85,105,0.8)')", "lineWidth": 1 }
+      },
+      {
+        "kind": "line",
+        "x1": "left",
+        "y1": "top + areaH",
+        "x2": "left + areaW",
+        "y2": "top + areaH",
+        "style": { "stroke": "if(frame.isDark, 'rgba(148,163,184,0.8)', 'rgba(71,85,105,0.8)')", "lineWidth": 1 }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "items": "[0, 0.25, 0.5, 0.75, 1]" },
+        "as": "rt",
+        "children": [
+          {
+            "kind": "text",
+            "x": "left - 4",
+            "y": "top + areaH - rt * areaH",
+            "text": "format('{}', formatN(rt))",
+            "style": {
+              "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
+              "font": "500 9px -apple-system, sans-serif",
+              "textAlign": "right",
+              "textBaseline": "middle"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "text",
+        "x": "left - 34",
+        "y": "top - 2",
+        "text": "'N/N₀'",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
+          "font": "500 9px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 6] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "text",
+            "x": "left + (i / 5) * areaW",
+            "y": "top + areaH + 3",
+            "text": "format('{}', formatN((i / 5) * tMax))",
+            "style": {
+              "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
+              "font": "500 9px -apple-system, sans-serif",
+              "textAlign": "center",
+              "textBaseline": "top"
+            }
+          }
+        ]
+      },
+
+      {
+        "kind": "if",
+        "cond": "halfLife > 0 && halfLife < 1e9",
+        "then": {
+          "kind": "repeat",
+          "of": { "items": "[{k:1,rt:0.5,suf:'½'},{k:2,rt:0.25,suf:'¼'},{k:3,rt:0.125,suf:'⅛'}]" },
+          "as": "m",
+          "children": [
+            {
+              "kind": "if",
+              "cond": "halfLife * m.k <= tMax",
+              "then": {
+                "kind": "group",
+                "let": {
+                  "cy": "top + areaH - m.rt * areaH",
+                  "cx": "left + halfLife * m.k * sxT"
+                },
+                "children": [
+                  {
+                    "kind": "line",
+                    "x1": "left", "y1": "cy", "x2": "cx", "y2": "cy",
+                    "style": { "stroke": "hexAlpha(color, 0.35)", "lineWidth": 1, "lineDash": [4, 4] }
+                  },
+                  {
+                    "kind": "line",
+                    "x1": "cx", "y1": "cy", "x2": "cx", "y2": "top + areaH",
+                    "style": { "stroke": "hexAlpha(color, 0.35)", "lineWidth": 1, "lineDash": [4, 4] }
+                  },
+                  {
+                    "kind": "text",
+                    "x": "cx",
+                    "y": "top + 3",
+                    "text": "m.suf",
+                    "style": {
+                      "fill": "hexAlpha(color, 0.9)",
+                      "font": "600 10px -apple-system, sans-serif",
+                      "textAlign": "center",
+                      "textBaseline": "top"
+                    }
+                  }
+                ]
+              },
+              "else": { "kind": "group", "children": [] }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "decay",
+        "fn": "clamp(exp(r * x), 0, 1)",
+        "xMin": "0",
+        "xMax": "tMax",
+        "samples": 128,
+        "style": { "stroke": "color", "lineWidth": 2.5, "lineCap": "round" }
+      },
+
+      {
+        "kind": "if",
+        "cond": "t >= 0 && t <= tMax",
+        "then": {
+          "kind": "group",
+          "let": {
+            "markerCx": "left + t * sxT",
+            "markerCy": "top + areaH - ratio * areaH"
+          },
+          "children": [
+            {
+              "kind": "line",
+              "x1": "markerCx", "y1": "top",
+              "x2": "markerCx", "y2": "top + areaH",
+              "style": { "stroke": "hexAlpha(color, 0.4)", "lineWidth": 1, "lineDash": [2, 3] }
+            },
+            {
+              "kind": "circle",
+              "cx": "markerCx",
+              "cy": "markerCy",
+              "r": 5,
+              "style": {
+                "fill": "color",
+                "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                "lineWidth": 1.5
+              }
+            },
+            {
+              "kind": "roundRect",
+              "x": "min(left + areaW - 52, markerCx + 8)",
+              "y": "max(top + 4, markerCy - 22)",
+              "w": 48,
+              "h": 18,
+              "r": 4,
+              "style": {
+                "fill": "if(frame.isDark, 'rgba(15,23,42,0.88)', 'rgba(255,255,255,0.92)')",
+                "stroke": "hexAlpha(color, 0.7)",
+                "lineWidth": 1.2
+              }
+            },
+            {
+              "kind": "text",
+              "x": "min(left + areaW - 52, markerCx + 8) + 24",
+              "y": "max(top + 4, markerCy - 22) + 9",
+              "text": "format('{}%', formatN(ratio * 100))",
+              "style": {
+                "fill": "color",
+                "font": "600 11px ui-monospace, Menlo, monospace",
+                "textAlign": "center",
+                "textBaseline": "middle"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "if",
+        "cond": "halfLife > 0 && halfLife < 1e9",
+        "then": {
+          "kind": "group",
+          "children": [
+            {
+              "kind": "roundRect",
+              "x": "frame.width - 100",
+              "y": 6,
+              "w": 90,
+              "h": 20,
+              "r": 5,
+              "style": {
+                "fill": "hexAlpha(color, 0.18)",
+                "stroke": "hexAlpha(color, 0.6)",
+                "lineWidth": 1
+              }
+            },
+            {
+              "kind": "text",
+              "x": "frame.width - 55",
+              "y": 16,
+              "text": "format('반감기 {}', formatN(halfLife))",
+              "style": {
+                "fill": "color",
+                "font": "600 10px -apple-system, sans-serif",
+                "textAlign": "center",
+                "textBaseline": "middle"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "line",
+        "x1": 10, "y1": "topH",
+        "x2": "frame.width - 10", "y2": "topH",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(148,163,184,0.4)', 'rgba(203,213,225,0.6)')",
+          "lineWidth": 1,
+          "lineDash": [3, 4]
+        }
+      },
+
+      {
+        "kind": "match",
+        "on": "scene.id",
+        "cases": {
+          "caffeine": {
+            "kind": "group",
+            "let": {
+              "cupCx": "frame.width * 0.32",
+              "cupW": 110,
+              "cupH": "min(botH - 60, 140)",
+              "cupTop": "botY + botH - 30 - cupH",
+              "cupBottom": "botY + botH - 30",
+              "fillH": "max(0, cupH * ratio)",
+              "fillY": "cupBottom - fillH",
+              "mg": "N_0 * ratio"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY",
+                "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#1c1917', '#fef3c7')"],
+                      [1, "if(frame.isDark, '#0c0a09', '#fde68a')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "polygon",
+                "points": "[[cupCx - cupW/2, cupTop], [cupCx + cupW/2, cupTop], [cupCx + cupW/2 - 10, cupBottom], [cupCx - cupW/2 + 10, cupBottom]]",
+                "style": {
+                  "fill": "if(frame.isDark, '#fafaf9', '#ffffff')",
+                  "stroke": "if(frame.isDark, '#78716c', '#44403c')",
+                  "lineWidth": 2
+                }
+              },
+              {
+                "kind": "rect",
+                "x": "cupCx - cupW/2 + 2",
+                "y": "fillY",
+                "w": "cupW - 4",
+                "h": "cupBottom - fillY - 2",
+                "style": { "fill": "'#92400e'" }
+              },
+              {
+                "kind": "text",
+                "x": "cupCx",
+                "y": "cupTop + cupH / 2",
+                "text": "format('{} mg', formatN(mg))",
+                "style": {
+                  "fill": "if(frame.isDark, '#fbbf24', '#78350f')",
+                  "font": "600 12px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              },
+              {
+                "kind": "text",
+                "x": "frame.width / 2",
+                "y": "botY + botH - 8",
+                "text": "'아침 커피는 밤까지 남는다'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(254,243,199,0.85)', 'rgba(120,53,15,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              }
+            ]
+          },
+
+          "battery": {
+            "kind": "group",
+            "let": {
+              "battCx": "frame.width * 0.5",
+              "battCy": "botY + botH * 0.5",
+              "battW": "min(80, frame.width * 0.2)",
+              "battH": "min(botH - 60, 160)",
+              "battLeft": "battCx - battW / 2",
+              "battTop": "battCy - battH / 2",
+              "fillH": "max(0, min(battH - 6, battH * ratio))",
+              "fillY": "battTop + battH - 3 - fillH",
+              "pct": "ratio * 100",
+              "bColor": "if(ratio >= 0.5, '#22c55e', if(ratio >= 0.2, '#eab308', '#ef4444'))"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY",
+                "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#020617', '#e0f2fe')"],
+                      [1, "if(frame.isDark, '#0f172a', '#bae6fd')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "rect",
+                "x": "battCx - battW * 0.25",
+                "y": "battTop - 6",
+                "w": "battW * 0.5",
+                "h": 6,
+                "style": { "fill": "if(frame.isDark, '#475569', '#1e293b')" }
+              },
+              {
+                "kind": "roundRect",
+                "x": "battLeft",
+                "y": "battTop",
+                "w": "battW",
+                "h": "battH",
+                "r": 10,
+                "style": {
+                  "fill": "if(frame.isDark, '#0f172a', '#ffffff')",
+                  "stroke": "if(frame.isDark, '#94a3b8', '#1e293b')",
+                  "lineWidth": 3
+                }
+              },
+              {
+                "kind": "rect",
+                "x": "battLeft + 3",
+                "y": "fillY",
+                "w": "battW - 6",
+                "h": "fillH",
+                "style": { "fill": "bColor" }
+              },
+              {
+                "kind": "text",
+                "x": "battCx",
+                "y": "battCy",
+                "text": "format('{}%', formatN(pct))",
+                "style": {
+                  "fill": "if(frame.isDark, '#ffffff', '#0b1220')",
+                  "font": "700 22px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              },
+              {
+                "kind": "text",
+                "x": "frame.width / 2",
+                "y": "botY + botH - 8",
+                "text": "'배터리 방전: 초록 → 노랑 → 빨강 (교육적 근사)'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(226,232,240,0.85)', 'rgba(30,41,59,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              }
+            ]
+          },
+
+          "carbon14": {
+            "kind": "group",
+            "let": {
+              "gridX": "frame.width * 0.5 - 100",
+              "gridY": "botY + 20",
+              "gridW": "min(frame.width - (frame.width * 0.5 - 100) - 20, 200)",
+              "gridH": "min(botH - 60, gridW)",
+              "cell": "min(gridW / 10, gridH / 10)",
+              "activeCount": "max(0, min(100, round(100 * ratio)))"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY",
+                "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#1c1917', '#f5f5f4')"],
+                      [1, "if(frame.isDark, '#0c0a09', '#d6d3d1')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [0, 100] },
+                "as": "i",
+                "children": [
+                  {
+                    "kind": "circle",
+                    "cx": "gridX + mod(i, 10) * cell + cell / 2",
+                    "cy": "gridY + floor(i / 10) * cell + cell / 2",
+                    "r": "if(i < activeCount, cell * 0.32, cell * 0.22)",
+                    "style": {
+                      "fill": "if(i < activeCount, color, if(frame.isDark, 'rgba(87,83,78,0.4)', 'rgba(168,162,158,0.5)'))"
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "text",
+                "x": "gridX + gridW / 2",
+                "y": "gridY + gridH + 4",
+                "text": "format('{} / 100', formatN(activeCount))",
+                "style": {
+                  "fill": "color",
+                  "font": "700 12px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              },
+              {
+                "kind": "text",
+                "x": "frame.width / 2",
+                "y": "botY + botH - 8",
+                "text": "'¹⁴C 원자가 하나씩 사라진다 (반감기 5,730년)'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(214,211,209,0.85)', 'rgba(68,64,60,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              }
+            ]
+          },
+
+          "drug": {
+            "kind": "group",
+            "let": {
+              "bodyCx": "frame.width * 0.5",
+              "bodyTopY": "botY + 20",
+              "bodyH": "min(botH - 50, 160)",
+              "headR": "bodyH * 0.08",
+              "torsoW": "bodyH * 0.25",
+              "torsoH": "bodyH * 0.52",
+              "legH": "bodyH * 0.3",
+              "alpha": "max(0.08, ratio)",
+              "mg": "N_0 * ratio"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY",
+                "w": "frame.width", "h": "botH",
+                "style": { "fill": "if(frame.isDark, '#0f172a', '#f8fafc')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "bodyCx",
+                "cy": "bodyTopY + headR",
+                "r": "headR",
+                "style": {
+                  "fill": "hexAlpha(color, alpha)",
+                  "stroke": "if(frame.isDark, 'rgba(203,213,225,0.6)', 'rgba(30,41,59,0.7)')",
+                  "lineWidth": 1.2
+                }
+              },
+              {
+                "kind": "polygon",
+                "points": "[[bodyCx - torsoW/2, bodyTopY + headR*2], [bodyCx + torsoW/2, bodyTopY + headR*2], [bodyCx + torsoW/2 - 4, bodyTopY + headR*2 + torsoH], [bodyCx - torsoW/2 + 4, bodyTopY + headR*2 + torsoH]]",
+                "style": {
+                  "fill": "hexAlpha(color, alpha)",
+                  "stroke": "if(frame.isDark, 'rgba(203,213,225,0.6)', 'rgba(30,41,59,0.7)')",
+                  "lineWidth": 1.2
+                }
+              },
+              {
+                "kind": "rect",
+                "x": "bodyCx - torsoW/2 + 4",
+                "y": "bodyTopY + headR*2 + torsoH",
+                "w": "torsoW/2 - 6",
+                "h": "legH",
+                "style": {
+                  "fill": "hexAlpha(color, alpha)",
+                  "stroke": "if(frame.isDark, 'rgba(203,213,225,0.6)', 'rgba(30,41,59,0.7)')",
+                  "lineWidth": 1.2
+                }
+              },
+              {
+                "kind": "rect",
+                "x": "bodyCx + 2",
+                "y": "bodyTopY + headR*2 + torsoH",
+                "w": "torsoW/2 - 6",
+                "h": "legH",
+                "style": {
+                  "fill": "hexAlpha(color, alpha)",
+                  "stroke": "if(frame.isDark, 'rgba(203,213,225,0.6)', 'rgba(30,41,59,0.7)')",
+                  "lineWidth": 1.2
+                }
+              },
+              {
+                "kind": "text",
+                "x": "bodyCx",
+                "y": "botY + botH - 22",
+                "text": "format('{} mg', formatN(mg))",
+                "style": {
+                  "fill": "if(frame.isDark, '#fca5a5', '#dc2626')",
+                  "font": "700 12px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              },
+              {
+                "kind": "text",
+                "x": "frame.width / 2",
+                "y": "botY + botH - 8",
+                "text": "'혈중 농도 = 색 진하기'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(200,210,230,0.85)', 'rgba(30,41,59,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "N = ", "ko": "N = " },
+        "value": "N_0 * exp(r * t)",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "t½ = ", "ko": "반감기 t½ = " },
+        "value": "if(r >= 0, 0, log(2) / (-r))",
+        "format": ".3f"
+      }
+    ]
+  }
+}
