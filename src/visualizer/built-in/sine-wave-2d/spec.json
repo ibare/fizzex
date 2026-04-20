@@ -1,0 +1,306 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "sine-wave-2d",
+  "catalog": "trigonometry-basic/sine-wave",
+
+  "name": { "en": "Sine Wave — 2D", "ko": "사인파 — 2D" },
+  "description": {
+    "en": "y = A sin(omega t + phi). Speaker, pendulum, tide, voltmeter scenes.",
+    "ko": "y = A sin(ωt + φ). 스피커·진자·조수·전압계 장면."
+  },
+  "renderer": "2d",
+
+  "displayOptions": ["timeScale"],
+
+  "scenes": [
+    {
+      "id": "speaker",
+      "name": { "en": "Speaker", "ko": "스피커" },
+      "description": {
+        "en": "Diaphragm oscillation as a sine wave.",
+        "ko": "진동판 운동을 사인파로 시각화."
+      },
+      "style": { "color": "#7C3AED", "icon": "🔊" },
+      "params": { "A": 1, "\\omega": 4.5, "\\varphi": 0 }
+    },
+    {
+      "id": "pendulum",
+      "name": { "en": "Pendulum", "ko": "진자" },
+      "description": { "en": "Small-angle swing.", "ko": "작은 각도의 왕복 운동." },
+      "style": { "color": "#C2410C", "icon": "⚖️" },
+      "params": { "A": 1, "\\omega": 2, "\\varphi": 0 }
+    },
+    {
+      "id": "tide",
+      "name": { "en": "Tide", "ko": "조수" },
+      "description": {
+        "en": "Slow rise-and-fall of sea level.",
+        "ko": "해수면의 느린 상승·하강."
+      },
+      "style": { "color": "#0284C7", "icon": "🌊" },
+      "params": { "A": 1, "\\omega": 1, "\\varphi": 0 }
+    },
+    {
+      "id": "voltmeter",
+      "name": { "en": "Voltmeter", "ko": "전압계" },
+      "description": {
+        "en": "AC voltage needle deflection.",
+        "ko": "교류 전압에 따른 바늘 편향."
+      },
+      "style": { "color": "#0891B2", "icon": "⚡" },
+      "params": { "A": 1, "\\omega": 3, "\\varphi": 0 }
+    }
+  ],
+
+  "state": [
+    { "id": "autoT", "type": "number", "default": 0 },
+    { "id": "userDrivenT", "type": "bool", "default": false, "onParamChange": "t" }
+  ],
+
+  "animation": {
+    "onFrame": [
+      {
+        "set": "state.autoT",
+        "to": "if(state.userDrivenT, state.autoT, mod(state.autoT + frame.dt, 20))"
+      },
+      { "set": "state.userDrivenT", "to": "false" }
+    ]
+  },
+
+  "viewports": {
+    "abstractWave": {
+      "kind": "time-value",
+      "rect": { "x": "10", "y": "10", "w": "frame.width - 20", "h": "frame.height * 0.42 - 20" },
+      "xMin": "state.autoT - 6",
+      "xMax": "state.autoT",
+      "yMin": "-max(0.000001, abs(A))",
+      "yMax": "max(0.000001, abs(A))"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "children": [
+      {
+        "kind": "rect",
+        "x": "0",
+        "y": "0",
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": { "fill": "if(frame.isDark, '#0f172a', '#f8fafc')" }
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "abstractWave",
+        "fn": "A * sin(\\omega * x + \\varphi)",
+        "style": { "stroke": "scene.style.color", "lineWidth": 2 }
+      },
+
+      {
+        "kind": "circle",
+        "viewport": "abstractWave",
+        "cx": "state.autoT",
+        "cy": "A * sin(\\omega * state.autoT + \\varphi)",
+        "r": 4,
+        "style": { "fill": "scene.style.color" }
+      },
+
+      {
+        "kind": "line",
+        "x1": "10",
+        "y1": "frame.height * 0.42",
+        "x2": "frame.width - 10",
+        "y2": "frame.height * 0.42",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(148,163,184,0.5)', 'rgba(100,116,139,0.4)')",
+          "lineWidth": 1,
+          "lineDash": [3, 4]
+        }
+      },
+
+      {
+        "kind": "match",
+        "on": "scene.id",
+        "cases": {
+          "speaker": {
+            "kind": "group",
+            "let": {
+              "cy": "frame.height * 0.71",
+              "bodyX": "frame.width * 0.28",
+              "bodyW": 82,
+              "bodyH": "min(frame.height * 0.58 - 40, 120)",
+              "yNorm": "clamp((A * sin(\\omega * state.autoT + \\varphi)) / max(0.000001, abs(A)), -1, 1)",
+              "dispX": "bodyX + yNorm * 14",
+              "diaphR": "min(bodyH * 0.35, 32)",
+              "color": "scene.style.color"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": "bodyX - bodyW",
+                "y": "cy - bodyH / 2",
+                "w": "bodyW",
+                "h": "bodyH",
+                "style": { "fill": "if(frame.isDark, '#1e293b', '#475569')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "dispX",
+                "cy": "cy",
+                "r": "diaphR",
+                "style": {
+                  "fill": "if(frame.isDark, '#cbd5e1', '#e2e8f0')",
+                  "stroke": "color",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "circle",
+                "cx": "dispX",
+                "cy": "cy",
+                "r": "diaphR * 0.3",
+                "style": { "fill": "color" }
+              }
+            ]
+          },
+
+          "pendulum": {
+            "kind": "group",
+            "let": {
+              "pivotX": "frame.width / 2",
+              "pivotY": "frame.height * 0.46",
+              "length": "min(frame.height * 0.40, 180)",
+              "theta": "clamp((A * sin(\\omega * state.autoT + \\varphi)) / max(0.000001, abs(A)), -1, 1) * (PI / 4)",
+              "bobX": "pivotX + length * sin(theta)",
+              "bobY": "pivotY + length * cos(theta)",
+              "color": "scene.style.color"
+            },
+            "children": [
+              {
+                "kind": "line",
+                "x1": "pivotX",
+                "y1": "pivotY",
+                "x2": "bobX",
+                "y2": "bobY",
+                "style": {
+                  "stroke": "if(frame.isDark, '#94a3b8', '#475569')",
+                  "lineWidth": 2
+                }
+              },
+              {
+                "kind": "circle",
+                "cx": "bobX",
+                "cy": "bobY",
+                "r": 14,
+                "style": { "fill": "color", "stroke": "color", "lineWidth": 1 }
+              },
+              {
+                "kind": "circle",
+                "cx": "pivotX",
+                "cy": "pivotY",
+                "r": 3,
+                "style": { "fill": "if(frame.isDark, '#cbd5e1', '#334155')" }
+              }
+            ]
+          },
+
+          "tide": {
+            "kind": "group",
+            "let": {
+              "baseY": "frame.height * 0.71",
+              "range": 60,
+              "surfaceY": "baseY - (A * sin(\\omega * state.autoT + \\varphi)) / max(0.000001, abs(A)) * range",
+              "left": "frame.width * 0.15",
+              "right": "frame.width * 0.85",
+              "color": "scene.style.color"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": "left",
+                "y": "surfaceY",
+                "w": "right - left",
+                "h": "frame.height * 0.58 - (surfaceY - frame.height * 0.42)",
+                "style": { "fill": "color", "opacity": 0.45 }
+              },
+              {
+                "kind": "line",
+                "x1": "left",
+                "y1": "surfaceY",
+                "x2": "right",
+                "y2": "surfaceY",
+                "style": { "stroke": "color", "lineWidth": 2 }
+              },
+              {
+                "kind": "line",
+                "x1": "left",
+                "y1": "baseY",
+                "x2": "right",
+                "y2": "baseY",
+                "style": {
+                  "stroke": "if(frame.isDark, 'rgba(148,163,184,0.4)', 'rgba(100,116,139,0.4)')",
+                  "lineWidth": 1,
+                  "lineDash": [4, 4]
+                }
+              }
+            ]
+          },
+
+          "voltmeter": {
+            "kind": "group",
+            "let": {
+              "cx": "frame.width / 2",
+              "cy": "frame.height * 0.82",
+              "radius": "min(frame.height * 0.28, 120)",
+              "yNorm": "clamp((A * sin(\\omega * state.autoT + \\varphi)) / max(0.000001, abs(A)), -1, 1)",
+              "angle": "PI + (0.5 + yNorm * 0.5) * PI",
+              "needleX": "cx + radius * cos(angle)",
+              "needleY": "cy + radius * sin(angle)",
+              "color": "scene.style.color"
+            },
+            "children": [
+              {
+                "kind": "arc",
+                "cx": "cx",
+                "cy": "cy",
+                "r": "radius",
+                "startAngle": "PI",
+                "endAngle": "2 * PI",
+                "style": {
+                  "stroke": "if(frame.isDark, '#94a3b8', '#475569')",
+                  "lineWidth": 2
+                }
+              },
+              {
+                "kind": "line",
+                "x1": "cx",
+                "y1": "cy",
+                "x2": "needleX",
+                "y2": "needleY",
+                "style": { "stroke": "color", "lineWidth": 3 }
+              },
+              {
+                "kind": "circle",
+                "cx": "cx",
+                "cy": "cy",
+                "r": 6,
+                "style": { "fill": "color" }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "y = ", "ko": "y = " },
+        "value": "A * sin(\\omega * state.autoT + \\varphi)",
+        "format": ".3f"
+      }
+    ]
+  }
+}
