@@ -14,6 +14,15 @@ import type { Mount3DOptions, Visualizer3DInstance } from './mount-3d';
 import { mount3d } from './mount-3d';
 import { compileSpec, type CompiledVisualizer } from './compile';
 
+export {
+  loadVisualizerSpec,
+  hasBuiltInSpec,
+  listBuiltInVisualizerIds,
+} from './spec-loader';
+export { compileSpec, type CompiledVisualizer } from './compile';
+export type { Visualizer2DInstance } from './mount-2d';
+export type { Visualizer3DInstance } from './mount-3d';
+
 export type CreateVisualizerOptions = Omit<Mount2DOptions, 'catalogDefaults'>;
 
 export type CreatedVisualizerInstance = Visualizer2DInstance | Visualizer3DInstance;

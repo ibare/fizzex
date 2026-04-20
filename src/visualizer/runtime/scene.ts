@@ -59,6 +59,6 @@ export function createSceneController(
 function applyParamsPreset(scene: SceneSpec, store: StateStore): void {
   if (!scene.params) return;
   for (const [id, value] of Object.entries(scene.params)) {
-    store.setParam(id, value);
+    store.setParam(id, value, 'scene');
   }
 }

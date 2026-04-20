@@ -148,7 +148,7 @@ function runActions(
       if (typeof v !== 'number') {
         throw new TypeError(`interaction: setParam ${a.setParam} value must be number`);
       }
-      store.setParam(a.setParam, v);
+      store.setParam(a.setParam, v, 'interaction');
       if (onParam) onParam(a.setParam, v);
       continue;
     }

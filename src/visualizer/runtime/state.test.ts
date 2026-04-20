@@ -69,6 +69,42 @@ describe('createStateStore', () => {
     expect(s.getParam('A')).toBe(1);
   });
 
+  it('subscribeParams → setParam 시 listener 호출, source 전달', () => {
+    const s = createStateStore({ initialParams: { A: 1 } });
+    const events: Array<{ A: number; src: string }> = [];
+    s.subscribeParams((p, src) => events.push({ A: p.A, src }));
+    s.setParam('A', 2);
+    s.setParam('A', 3, 'interaction');
+    s.setParam('A', 4, 'scene');
+    expect(events).toEqual([
+      { A: 2, src: 'external' },
+      { A: 3, src: 'interaction' },
+      { A: 4, src: 'scene' },
+    ]);
+  });
+
+  it('subscribeParams 반환값으로 unsubscribe', () => {
+    const s = createStateStore({ initialParams: { A: 0 } });
+    let count = 0;
+    const off = s.subscribeParams(() => count++);
+    s.setParam('A', 1);
+    off();
+    s.setParam('A', 2);
+    expect(count).toBe(1);
+  });
+
+  it('subscribeParams listener에 전달되는 params는 snapshot copy', () => {
+    const s = createStateStore({ initialParams: { A: 0 } });
+    let captured: Record<string, number> | null = null;
+    s.subscribeParams((p) => {
+      captured = p;
+    });
+    s.setParam('A', 5);
+    expect(captured).toEqual({ A: 5 });
+    captured!.A = 999;
+    expect(s.getParam('A')).toBe(5);
+  });
+
   it('여러 파라미터 독립 pulse', () => {
     const decls: StateDecl[] = [
       { id: 'pulseA', type: 'bool', default: false, onParamChange: 'A' },
