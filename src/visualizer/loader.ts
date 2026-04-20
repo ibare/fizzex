@@ -29,10 +29,6 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-sine-wave-2d" */
     './built-in/sine-wave-2d'
   ),
-  'quadratic-basketball-2d': () => import(
-    /* webpackChunkName: "viz-quadratic-basketball-2d" */
-    './built-in/quadratic-basketball-2d'
-  ),
   'quadratic-fountain-2d': () => import(
     /* webpackChunkName: "viz-quadratic-fountain-2d" */
     './built-in/quadratic-fountain-2d'
