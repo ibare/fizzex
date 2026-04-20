@@ -43,19 +43,23 @@ const solutions = solve(eq);      // x = 2, x = -2`,
   visualization: `import {
   parseLatex,
   buildSemanticMap,
-  getVisualizersForCatalogId,
-  loadVisualizer,
+  getVisualizersForCatalog,
+  loadVisualizerSpec,
+  createVisualizerFromSpec,
 } from 'fizzex';
 
 const ast = parseLatex('T^2 = \\\\frac{4\\\\pi^2}{GM} a^3');
 const catalogId = buildSemanticMap(ast).get(ast.id)?.catalogId;
 
 // One formula can map to multiple independent visualizers (2D, 3D, etc.)
-const refs = catalogId ? getVisualizersForCatalogId(catalogId) : [];
+const refs = catalogId ? getVisualizersForCatalog(catalogId) : [];
 refs.forEach((r) => console.log(r.name)); // "2D 궤도", "3D 궤도"
 
-// Load on demand — each visualizer is a separate chunk
-const viz = refs[0] ? await loadVisualizer(refs[0].id) : null;`,
+// Load + mount on demand — each spec is a separate JSON chunk
+const raw = refs[0] ? await loadVisualizerSpec(refs[0].id) : null;
+const instance = raw
+  ? createVisualizerFromSpec(container, raw, { width: 400, height: 400 })
+  : null;`,
 };
 
 export const tabKeys = ['install', 'editor', 'latex', 'analysis', 'cas', 'visualization'] as const;

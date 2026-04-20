@@ -2,7 +2,7 @@
  * Graphics Host 공통 타입.
  *
  * Canvas 2D·Three.js 3D 두 호스트가 공유하는 소형 원시 타입만 모은다.
- * Visualizer 쪽 타입(FizzexVisualizer 등)과는 독립.
+ * Visualizer 런타임(VisualizerSpec 등)과는 독립.
  */
 
 export type Theme = 'light' | 'dark';

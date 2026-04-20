@@ -1,30 +1,24 @@
 /**
- * Fizzex Visualizer 프레임워크 — 공개 API
+ * Fizzex Visualizer 프레임워크 — 공개 API (JSON spec 기반 런타임)
  */
 
-// 타입
+export {
+  createVisualizerFromSpec,
+  loadVisualizerSpec,
+  hasBuiltInSpec,
+  listBuiltInVisualizerIds,
+  compileSpec,
+} from './runtime/public-api';
 export type {
-  ParameterConfig,
-  ParameterValues,
-  DerivedValue,
-  AnchorConfig,
-  FizzexVisualizer,
-  VisualizerMountOptions,
-  VisualizerBridge,
-} from './types';
+  CreateVisualizerOptions,
+  CreatedVisualizer,
+  CreatedVisualizerInstance,
+  CompiledVisualizer,
+  Visualizer2DInstance,
+  Visualizer3DInstance,
+} from './runtime/public-api';
 
-// 레지스트리
-export { registerVisualizer, getVisualizer, getAllVisualizerIds } from './registry';
-
-// 브릿지
-export { VisualizerBridgeImpl } from './bridge';
-
-// 평가 엔진
-export { evaluateAst } from './evaluator';
-export type { EvaluationResult } from './evaluator';
-
-// 파라미터 추출
-export { extractParameters } from './param-extractor';
-
-// 로더
-export { loadVisualizer, getVisualizersForCatalogId } from './loader';
+export type { VisualizerSpec } from './runtime/types/spec';
+export type { SceneSpec, SceneStyle } from './runtime/types/scene';
+export type { I18nText } from './runtime/types/i18n';
+export { resolveI18n } from './runtime/types/i18n';

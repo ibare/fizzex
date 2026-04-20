@@ -169,22 +169,29 @@ export { ExplorerOverlay } from './headless';
 export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless';
 export { ExplorerVisualizerController } from './headless';
 
-// Visualizer 프레임워크
-export type {
-  ParameterConfig,
-  ParameterValues,
-  DerivedValue,
-  AnchorConfig,
-  FizzexVisualizer,
-  VisualizerMountOptions,
-  VisualizerBridge,
+// Visualizer 프레임워크 — JSON spec 기반 런타임
+export {
+  createVisualizerFromSpec,
+  loadVisualizerSpec,
+  hasBuiltInSpec,
+  listBuiltInVisualizerIds,
+  compileSpec,
 } from './visualizer';
-export { registerVisualizer, getVisualizer, getAllVisualizerIds } from './visualizer';
-export { VisualizerBridgeImpl } from './visualizer';
-export { loadVisualizer, getVisualizersForCatalogId } from './visualizer';
-export { extractParameters } from './visualizer';
-export { evaluateAst } from './visualizer';
-export type { EvaluationResult } from './visualizer';
+export type {
+  CreateVisualizerOptions,
+  CreatedVisualizer,
+  CreatedVisualizerInstance,
+  CompiledVisualizer,
+  Visualizer2DInstance,
+  Visualizer3DInstance,
+  VisualizerSpec,
+  SceneSpec,
+  SceneStyle,
+  I18nText,
+} from './visualizer';
+export { resolveI18n } from './visualizer';
+export { getVisualizersForCatalog } from './analyzer/semantic/loader';
+export type { VisualizerRef } from './analyzer/semantic/types';
 
 // 타입
 export type {
