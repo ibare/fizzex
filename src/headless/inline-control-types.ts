@@ -8,7 +8,7 @@
 import type { MathNode } from '../types';
 import type { CatalogDetail } from '../analyzer/semantic/types';
 import type { SemanticResult } from '../analyzer/semantic-roles';
-import type { VisualizerBridge, ParameterValues } from '../visualizer/types';
+import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api';
 
 // ─── 타입 ───
 
@@ -112,8 +112,7 @@ export function buildInlineControlConfig(
   node: MathNode,
   semantic: SemanticResult | undefined,
   catalogDetail?: CatalogDetail | null,
-  bridge?: VisualizerBridge | null,
-  paramValues?: ParameterValues,
+  instance?: CreatedVisualizerInstance | null,
 ): InlineControlConfig {
   const controlType = getControlType(node, catalogDetail);
   const config: InlineControlConfig = {
@@ -146,12 +145,10 @@ export function buildInlineControlConfig(
         config.scale = 'linear';
       }
 
-      // 현재 값: bridge > paramValues > default
-      if (bridge) {
-        const params = bridge.getParams();
-        config.currentValue = params[varName] ?? paramCfg?.default ?? 1;
-      } else if (paramValues && varName in paramValues) {
-        config.currentValue = paramValues[varName];
+      // 현재 값: instance.store > default
+      if (instance) {
+        const snap = instance.store.snapshot();
+        config.currentValue = snap.params[varName] ?? paramCfg?.default ?? 1;
       } else {
         config.currentValue = paramCfg?.default ?? 1;
       }

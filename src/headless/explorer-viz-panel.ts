@@ -1,17 +1,14 @@
 /**
  * VizPanel — 이동/리사이즈 가능한 Visualizer 패널
  *
- * 단일 Visualizer 인스턴스와 Bridge를 캡슐화한 플로팅 카드.
+ * 단일 Visualizer 인스턴스를 캡슐화한 플로팅 카드.
  * 헤더 드래그로 이동, 우하단 핸들로 폭 리사이즈(정사각형 aspect 유지).
  * ExplorerOverlay가 배열로 관리하며, 동일 수식에 대해 여러 패널을 띄울 수 있다.
  */
 
 import { ExplorerVisualizerController } from './explorer-visualizer';
-import { ExplorerAnchorChips } from './explorer-anchor-chips';
-import type { VisualizerBridgeImpl } from '../visualizer/bridge';
-import type { FizzexVisualizer } from '../visualizer/types';
-import type { CatalogDetail } from '../analyzer/semantic/types';
-import type { RootNode } from '../types';
+import { ExplorerSceneChips } from './explorer-scene-chips';
+import type { CreatedVisualizer } from '../visualizer/runtime/public-api';
 
 export interface VizPanelBounds {
   left: number;
@@ -24,7 +21,6 @@ export interface VizPanelConfig {
   theme: 'light' | 'dark';
   bounds: VizPanelBounds;
   visualizerId: string;
-  catalogDetail: CatalogDetail | null;
   /**
    * 사용자가 패널 헤더의 닫기(✕) 버튼을 눌러 패널을 닫으려 할 때 호출된다.
    * ExplorerOverlay가 수신해 해당 패널을 배열에서 제거 + destroy + 배너 버튼 상태 갱신을 수행한다.
@@ -52,14 +48,13 @@ export class VizPanel {
   private flashTimer: ReturnType<typeof setTimeout> | null = null;
 
   private controller: ExplorerVisualizerController;
-  private anchorChips: ExplorerAnchorChips | null = null;
+  private sceneChips: ExplorerSceneChips | null = null;
 
   private parent: HTMLElement;
   private theme: 'light' | 'dark';
   private isDark: boolean;
   /** ExplorerOverlay가 id 기반으로 패널을 찾을 수 있도록 공개한다 (읽기 전용 의도) */
   readonly visualizerId: string;
-  private catalogDetail: CatalogDetail | null;
   private bounds: VizPanelBounds;
   private onCloseCallback: (() => void) | undefined;
 
@@ -92,7 +87,6 @@ export class VizPanel {
     this.theme = cfg.theme;
     this.isDark = cfg.theme === 'dark';
     this.visualizerId = cfg.visualizerId;
-    this.catalogDetail = cfg.catalogDetail;
     this.bounds = { ...cfg.bounds };
     this.onCloseCallback = cfg.onClose;
 
@@ -277,42 +271,31 @@ export class VizPanel {
     window.addEventListener('touchend', this.boundTouchEnd);
   }
 
-  /** 비동기로 Visualizer 로드 → Bridge 준비 */
+  /** 비동기로 Visualizer 스펙 로드 → 인스턴스 마운트 + SceneChips 부착 */
   async init(): Promise<boolean> {
-    const ok = await this.controller.init(this.visualizerId, this.catalogDetail);
+    const ok = await this.controller.init(this.visualizerId);
     if (!ok || this.destroyed) return false;
 
-    const bridge = this.controller.bridge;
-    const viz = this.controller.viz;
-    if (!bridge || !viz) return false;
+    const inst = this.controller.instance;
+    if (!inst) return false;
 
-    // 앵커가 정의되어 있으면 캔버스 위에 칩 UI 부착
-    if (viz.anchors && viz.anchors.length > 0) {
-      this.anchorChips = new ExplorerAnchorChips(this.root, {
-        anchors: viz.anchors,
-        bridge,
+    // 2개 이상의 scene이 정의되어 있을 때만 전환 칩 UI 부착
+    const scenes = inst.compiled.spec.scenes;
+    if (scenes.length > 1) {
+      this.sceneChips = new ExplorerSceneChips(this.root, {
+        scenes,
+        instance: inst,
         theme: this.theme,
       });
-      // 헤더 바로 아래에 위치시키기 위해 헤더 다음 형제로 삽입
-      this.root.insertBefore(this.anchorChips.root, this.vizContainer);
+      // 헤더 바로 아래에 위치시키기 위해 vizContainer 앞에 삽입
+      this.root.insertBefore(this.sceneChips.root, this.vizContainer);
     }
 
     return true;
   }
 
-  get bridge(): VisualizerBridgeImpl | null {
-    return this.controller.bridge;
-  }
-
-  get viz(): FizzexVisualizer | null {
-    return this.controller.viz;
-  }
-
-  /** working AST + optional original AST를 bridge에 전달 (baseline 비교용) */
-  setAst(working: RootNode, original?: RootNode): void {
-    const b = this.controller.bridge;
-    if (!b?.setAst) return;
-    b.setAst(working, original);
+  get instance(): CreatedVisualizer | null {
+    return this.controller.instance;
   }
 
   /** 창 리사이즈 시 패널 위치/크기를 화면 경계 안으로 보정 */
@@ -356,8 +339,8 @@ export class VizPanel {
     window.removeEventListener('touchmove', this.boundTouchMove);
     window.removeEventListener('touchend', this.boundTouchEnd);
 
-    this.anchorChips?.destroy();
-    this.anchorChips = null;
+    this.sceneChips?.destroy();
+    this.sceneChips = null;
     this.controller.destroy();
 
     if (this.root.parentElement) {

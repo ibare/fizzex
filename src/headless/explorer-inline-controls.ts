@@ -83,7 +83,7 @@ export class ExplorerInlineControls {
     this.container.style.top = `${y}px`;
   }
 
-  /** 외부에서 값 업데이트 (bridge 동기화 등) */
+  /** 외부에서 값 업데이트 (Visualizer store 동기화 등) */
   updateValue(value: number): void {
     if (this.destroyed) return;
 

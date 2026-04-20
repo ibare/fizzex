@@ -37,8 +37,7 @@ import {
 } from './ast-modifier';
 import type { AstModificationState } from './ast-modifier';
 import type { CatalogDetail } from '../analyzer/semantic/types';
-import type { ParameterValues } from '../visualizer/types';
-import { evaluateAst } from '../visualizer/evaluator';
+import type { CreatedVisualizer } from '../visualizer/runtime/public-api';
 
 // =========================================================================
 // 타입
@@ -96,8 +95,8 @@ export class ExplorerOverlay {
   private activeControlNodeId: string | null = null;
   private astModState: AstModificationState | null = null;
   private catalogDetail: CatalogDetail | null = null;
-  private localParamValues: ParameterValues = {};
-  private bridgeUnsubscribe: (() => void) | null = null;
+  private localParamValues: Record<string, number> = {};
+  private paramsUnsubscribe: (() => void) | null = null;
 
   // 설정
   private config: BoxRenderConfig;
@@ -111,13 +110,9 @@ export class ExplorerOverlay {
   private contentWrapper: HTMLDivElement | null = null;
   private formulaPane: HTMLDivElement | null = null;
 
-  /** Inline 컨트롤·값 배지가 참조하는 primary bridge (배열 0번째 패널의 bridge) */
-  private get primaryBridge() {
-    return this.vizPanels[0]?.bridge ?? null;
-  }
-
-  private get primaryViz() {
-    return this.vizPanels[0]?.viz ?? null;
+  /** Inline 컨트롤·값 배지가 참조하는 primary instance (배열 0번째 패널) */
+  private get primaryInstance(): CreatedVisualizer | null {
+    return this.vizPanels[0]?.instance ?? null;
   }
 
   // Bound handler 참조 (destroy 시 제거)
@@ -311,8 +306,8 @@ export class ExplorerOverlay {
     this.destroyed = true;
 
     // 인라인 컨트롤 정리
-    this.bridgeUnsubscribe?.();
-    this.bridgeUnsubscribe = null;
+    this.paramsUnsubscribe?.();
+    this.paramsUnsubscribe = null;
     this.inlineControl?.destroy();
     this.inlineControl = null;
     this.activeControlNodeId = null;
@@ -469,28 +464,24 @@ export class ExplorerOverlay {
       theme: this.isDark ? 'dark' : 'light',
       bounds: { left, top, width: initialWidth },
       visualizerId: ref.id,
-      catalogDetail: detail,
       onClose: () => this.closeVisualizerPanel(ref.id),
     });
     const isFirstPanel = this.vizPanels.length === 0;
     this.vizPanels.push(panel);
     this.refreshVisualizerButtons();
+    // detail은 현재 UI 경로에서 더 이상 패널 쪽으로 전달하지 않는다 (spec.catalog가 자체 해결).
+    void detail;
 
     panel.init().then((ok) => {
       if (!ok || this.destroyed) return;
-      // primary(배열 0번) 패널만 AST/값 배지 bridge와 연결한다.
-      // 추가된 패널이 첫 패널이면 primary이므로 bridge를 연결한다.
+      // primary(배열 0번) 패널만 값 배지 갱신용 subscribe와 연결한다.
       if (isFirstPanel && this.vizPanels[0] === panel) {
-        this.syncAstToBridge(this.ast);
         this.valueBadgeUnsub?.();
-        const bridge = panel.bridge;
-        if (bridge) {
-          this.valueBadgeUnsub = bridge.subscribe(() => this.renderCanvas());
+        const inst = panel.instance;
+        if (inst) {
+          this.valueBadgeUnsub = inst.store.subscribeParams(() => this.renderCanvas());
         }
         this.renderCanvas();
-      } else {
-        // 비-primary 패널도 현재 AST로 동기화 (독립 bridge가 baseline 비교를 수행)
-        panel.setAst(this.ast, this.astModState?.originalAst);
       }
     });
   }
@@ -512,10 +503,9 @@ export class ExplorerOverlay {
 
       const newPrimary = this.vizPanels[0];
       if (newPrimary) {
-        this.syncAstToBridge(this.ast);
-        const bridge = newPrimary.bridge;
-        if (bridge) {
-          this.valueBadgeUnsub = bridge.subscribe(() => this.renderCanvas());
+        const inst = newPrimary.instance;
+        if (inst) {
+          this.valueBadgeUnsub = inst.store.subscribeParams(() => this.renderCanvas());
         }
       }
       this.renderCanvas();
@@ -970,22 +960,21 @@ export class ExplorerOverlay {
     // 기존 컨트롤 제거
     this.inlineControl?.destroy();
     this.inlineControl = null;
-    this.bridgeUnsubscribe?.();
-    this.bridgeUnsubscribe = null;
+    this.paramsUnsubscribe?.();
+    this.paramsUnsubscribe = null;
     this.activeControlNodeId = null;
 
     if (!active?.astNode) return;
 
     const node = active.astNode;
     const semantic = this.semanticMap.get(node.id);
-    const bridge = this.primaryBridge;
+    const inst = this.primaryInstance;
 
     const config = buildInlineControlConfig(
       node,
       semantic,
       this.catalogDetail,
-      bridge,
-      this.localParamValues,
+      inst,
     );
 
     // 'none' 타입이면 컨트롤 없음
@@ -1013,11 +1002,12 @@ export class ExplorerOverlay {
     this.activeControlNodeId = nodeId;
     this.updateInlineControlPosition();
 
-    // Bridge → 인라인 컨트롤 동기화 (Visualizer 드래그/컨트롤 패널 변경 시)
-    if (bridge && config.controlType === 'slider' && config.paramId) {
+    // Store → 인라인 컨트롤 동기화 (Visualizer 드래그/Scene 전환 시)
+    // external 소스(인라인 컨트롤 자신)은 무시해 순환 갱신을 막는다.
+    if (inst && config.controlType === 'slider' && config.paramId) {
       const paramId = config.paramId;
-      this.bridgeUnsubscribe = bridge.subscribe((params, source) => {
-        if (source === 'inline') return;
+      this.paramsUnsubscribe = inst.store.subscribeParams((params, source) => {
+        if (source === 'external') return;
         if (paramId in params) {
           this.inlineControl?.updateValue(params[paramId]);
         }
@@ -1027,18 +1017,17 @@ export class ExplorerOverlay {
 
   private handleInlineValueChange(id: string, value: number, config: InlineControlConfig): void {
     if (config.controlType === 'slider') {
-      // 변수 슬라이더: bridge 또는 로컬 파라미터 업데이트
-      const bridge = this.primaryBridge;
-      if (bridge) {
-        bridge.setParam(id, value, 'inline');
+      // 변수 슬라이더: instance에 setParam, 없으면 로컬 파라미터 업데이트
+      const inst = this.primaryInstance;
+      if (inst) {
+        inst.setParam(id, value);
       } else {
         this.localParamValues[id] = value;
       }
     } else if (config.controlType === 'stepper' && this.astModState) {
-      // 숫자 스테퍼: AST 수정 → 재렌더링 + Bridge에 알림
+      // 숫자 스테퍼: AST 수정 → 재렌더링 (새 아키텍처에서 Visualizer로의 AST 동기화는 없음)
       const modifiedAst = modifyNumberNode(this.astModState, id, value);
       this.buildAndRender(modifiedAst);
-      this.syncAstToBridge(modifiedAst);
       this.inlineControl?.setResetVisible(true);
     }
   }
@@ -1047,7 +1036,6 @@ export class ExplorerOverlay {
     if (!this.astModState) return;
     const modifiedAst = resetNode(this.astModState, nodeId);
     this.buildAndRender(modifiedAst);
-    this.syncAstToBridge(modifiedAst);
     this.inlineControl?.setResetVisible(hasModifications(this.astModState));
 
     // 리셋 후 스테퍼 값도 업데이트
@@ -1055,19 +1043,6 @@ export class ExplorerOverlay {
     if (node?.type === 'number') {
       this.inlineControl?.updateValue(parseFloat(node.value));
     }
-  }
-
-  /**
-   * Bridge에 working AST 전달.
-   * 수정 내역이 있으면 originalAst도 함께 전달하여 baseline 비교 모드 활성화.
-   * 수정이 없거나 astModState가 아직 생성 전이면 working === original 로 간주 (isStandard true).
-   */
-  private syncAstToBridge(workingAst: RootNode): void {
-    if (this.vizPanels.length === 0) return;
-    const original = (this.astModState && hasModifications(this.astModState))
-      ? this.astModState.originalAst
-      : undefined;
-    for (const panel of this.vizPanels) panel.setAst(workingAst, original);
   }
 
   private updateInlineControlPosition(): void {
@@ -1263,35 +1238,17 @@ export class ExplorerOverlay {
     // 값 맵 구축: variableName → { label, value }
     const valueMap = new Map<string, { label: string; value: string }>();
 
-    const bridge = this.primaryBridge;
-    const viz = this.primaryViz;
+    const inst = this.primaryInstance;
+    const params = inst?.store.snapshot().params;
+    const parameterConfig = inst?.compiled.catalog.parameterConfig
+      ?? this.catalogDetail?.parameterConfig;
 
-    if (bridge && viz) {
-      const params = bridge.getParams();
-      const derived = bridge.getDerivedValues();
-
-      // 파라미터 → 수식 변수
-      for (const param of viz.parameters) {
-        valueMap.set(param.name, {
-          label: param.role,
-          value: this.formatBadgeValue(params[param.id], param.unit),
-        });
-      }
-      // formulaElement가 있는 파생값 → 수식 변수
-      for (const dv of viz.derivedValues) {
-        if (dv.formulaElement) {
-          valueMap.set(dv.formulaElement, {
-            label: dv.label,
-            value: this.formatBadgeValue(derived[dv.id], dv.unit, dv.format),
-          });
-        }
-      }
-    } else if (this.catalogDetail?.parameterConfig) {
-      // bridge 없으면 카탈로그 기본값 표시
-      for (const pc of this.catalogDetail.parameterConfig) {
+    if (parameterConfig) {
+      for (const pc of parameterConfig) {
+        const value = params?.[pc.id] ?? pc.default;
         valueMap.set(pc.name, {
           label: pc.role,
-          value: this.formatBadgeValue(pc.default, pc.unit),
+          value: this.formatBadgeValue(value, pc.unit),
         });
       }
     }
