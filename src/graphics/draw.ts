@@ -48,3 +48,187 @@ export function formatN(n: number, digits = 2): string {
   if (abs >= 10) return n.toFixed(1);
   return n.toFixed(digits);
 }
+
+// ──────────────────────────────────────────────────────────────────────────
+// 2D 프리미티브 (Phase 2, JSON Visualizer 런타임 어댑터용).
+// 모두 "경로만 쌓는다" 규칙을 따른다. fill/stroke 는 호출자 책임.
+// ──────────────────────────────────────────────────────────────────────────
+
+export interface Point2D {
+  x: number;
+  y: number;
+}
+
+/** 원 경로. */
+export function drawCircle(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number): void {
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.closePath();
+}
+
+/** 타원 경로. rotation은 라디안. */
+export function drawEllipse(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  rotation = 0,
+): void {
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, rx, ry, rotation, 0, Math.PI * 2);
+  ctx.closePath();
+}
+
+/** 호 (열린 선). stroke를 호출하면 그려진다. */
+export function drawArc(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  r: number,
+  startRad: number,
+  endRad: number,
+): void {
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, startRad, endRad);
+}
+
+/** 쐐기(wedge) 경로 — 중심점 → 호 → 중심점. fill용. */
+export function drawFilledArc(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  r: number,
+  startRad: number,
+  endRad: number,
+): void {
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.arc(cx, cy, r, startRad, endRad);
+  ctx.closePath();
+}
+
+/** 단일 선분. */
+export function drawLine(
+  ctx: CanvasRenderingContext2D,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+): void {
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+}
+
+/** 열린 꺾은선. 2점 미만이면 no-op. */
+export function drawPolyline(ctx: CanvasRenderingContext2D, points: readonly Point2D[]): void {
+  if (points.length < 2) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+}
+
+/** 닫힌 다각형. 3점 미만이면 no-op. */
+export function drawPolygon(ctx: CanvasRenderingContext2D, points: readonly Point2D[]): void {
+  if (points.length < 3) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+  ctx.closePath();
+}
+
+/**
+ * SVG path `d` 서브셋 파서. 지원 커맨드: M, L, C, Q, Z (대소문자 공용 = 절대좌표만).
+ * 그 외 커맨드는 무시하지 않고 throw한다 (조용한 실패 금지).
+ */
+export function drawPath(ctx: CanvasRenderingContext2D, d: string): void {
+  const tokens = d.match(/[MLCQZmlcqz]|-?\d*\.?\d+(?:e[-+]?\d+)?/g);
+  if (!tokens) return;
+  ctx.beginPath();
+  let i = 0;
+  const num = (): number => {
+    const t = tokens[i++];
+    const n = Number(t);
+    if (!Number.isFinite(n)) throw new Error(`drawPath: expected number, got "${t}"`);
+    return n;
+  };
+  while (i < tokens.length) {
+    const cmd = tokens[i++];
+    switch (cmd) {
+      case 'M':
+      case 'm':
+        ctx.moveTo(num(), num());
+        break;
+      case 'L':
+      case 'l':
+        ctx.lineTo(num(), num());
+        break;
+      case 'C':
+      case 'c':
+        ctx.bezierCurveTo(num(), num(), num(), num(), num(), num());
+        break;
+      case 'Q':
+      case 'q':
+        ctx.quadraticCurveTo(num(), num(), num(), num());
+        break;
+      case 'Z':
+      case 'z':
+        ctx.closePath();
+        break;
+      default:
+        throw new Error(`drawPath: unsupported command "${cmd}"`);
+    }
+  }
+}
+
+/**
+ * 이미지 드로잉 (동기). img는 로드가 완료된 상태여야 한다(호출 측 책임).
+ * dw/dh 생략 시 원본 크기.
+ */
+export function drawImage(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement | HTMLCanvasElement,
+  dx: number,
+  dy: number,
+  dw?: number,
+  dh?: number,
+): void {
+  if (dw === undefined || dh === undefined) {
+    ctx.drawImage(img, dx, dy);
+  } else {
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+}
+
+export interface GradientStop {
+  offset: number;
+  color: string;
+}
+
+/** 선형 그라디언트 생성. caller가 ctx.fillStyle/strokeStyle 에 할당한다. */
+export function createLinearGradientFill(
+  ctx: CanvasRenderingContext2D,
+  x0: number,
+  y0: number,
+  x1: number,
+  y1: number,
+  stops: readonly GradientStop[],
+): CanvasGradient {
+  const g = ctx.createLinearGradient(x0, y0, x1, y1);
+  for (const s of stops) g.addColorStop(s.offset, s.color);
+  return g;
+}
+
+/** 원형 그라디언트 생성 (중심 공유, inner r=0). */
+export function createRadialGradientFill(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  r: number,
+  stops: readonly GradientStop[],
+): CanvasGradient {
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+  for (const s of stops) g.addColorStop(s.offset, s.color);
+  return g;
+}

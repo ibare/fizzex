@@ -24,3 +24,8 @@ export function text(isDark: boolean): string {
 export function divider(isDark: boolean): string {
   return isDark ? 'rgba(120,140,170,0.25)' : 'rgba(100,115,140,0.25)';
 }
+
+/** 강조 색 (Fizzex 브랜드 — 보라 계열). 2D·3D 공통 하이라이트. */
+export function brand(isDark: boolean): string {
+  return isDark ? '#a78bfa' : '#7c3aed';
+}

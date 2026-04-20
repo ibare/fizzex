@@ -1,0 +1,51 @@
+/**
+ * 최상위 VisualizerSpec (설계 §2).
+ *
+ * 세 계층 합성:
+ *   1. `catalog` 참조 → 수식 정체성·parameters·derivedValues
+ *   2. spec 고유 → scenes · localFormulas · state · root · interaction · overlay
+ *   3. `displayOptions` → 호스트 opt-in
+ */
+
+import type { ElementNode } from './element';
+import type { I18nText } from './i18n';
+import type { LocalFormula } from './formula';
+import type { SceneSpec } from './scene';
+import type { StateDecl, AnimationSpec } from './state';
+import type { InteractionSpec } from './interaction';
+import type { OverlaySpec } from './overlay';
+import type { ViewportSpec } from './viewport';
+import type { ThemeSpec } from './theme';
+import type { DisplayOptionId } from './display-options';
+
+export type RendererKind = '2d' | '3d';
+
+export interface VisualizerSpec {
+  $schema: `fizzex-visualizer/${string}`;
+  id: string;
+  /** `"<category>/<id>"` 슬래시 참조 (설계 §14.1). 버전 훅 금지. */
+  catalog: string;
+  name: I18nText;
+  description: I18nText;
+  renderer: RendererKind;
+
+  displayOptions?: DisplayOptionId[];
+
+  scenes: SceneSpec[];
+
+  localFormulas?: LocalFormula[];
+
+  state?: StateDecl[];
+
+  animation?: AnimationSpec;
+
+  viewports: Record<string, ViewportSpec>;
+
+  root: ElementNode;
+
+  overlay?: OverlaySpec;
+
+  interaction?: InteractionSpec;
+
+  theme?: ThemeSpec;
+}
