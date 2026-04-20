@@ -1,0 +1,295 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "quadratic-fountain-2d",
+  "catalog": "linear-functions/quadratic-standard",
+
+  "name": { "en": "Quadratic — Fountain", "ko": "분수 — 이차함수" },
+  "description": {
+    "en": "Parabola as a fountain jet. Smaller |a| rises higher.",
+    "ko": "a<0 포물선 = 하나의 물줄기. |a|가 작을수록 더 높이 솟는다."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "fountain",
+      "name": { "en": "Fountain", "ko": "분수" },
+      "description": {
+        "en": "a<0 opens downward for a single jet.",
+        "ko": "a<0 이면 하나의 물줄기."
+      },
+      "style": { "color": "#0891B2", "icon": "⛲" },
+      "params": { "a": -2, "b": 4, "c": 0 }
+    }
+  ],
+
+  "viewports": {
+    "main": {
+      "kind": "time-value",
+      "rect": { "x": "10", "y": "44", "w": "max(1, frame.width - 20)", "h": "max(1, frame.height - 88)" },
+      "xMin": "((if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, min((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), 0)) + (if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, max((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), max(if(abs(a) < 1e-9, 4, -b/a), 4)))) / 2 - ((if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, max((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), max(if(abs(a) < 1e-9, 4, -b/a), 4))) - (if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, min((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), 0))) * 1.2",
+      "xMax": "((if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, min((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), 0)) + (if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, max((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), max(if(abs(a) < 1e-9, 4, -b/a), 4)))) / 2 + ((if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, max((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), max(if(abs(a) < 1e-9, 4, -b/a), 4))) - (if(b*b - 4*a*c >= 0 && abs(a) > 1e-9, min((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)), 0))) * 1.2",
+      "yMin": "-0.5",
+      "yMax": "max(2, (c - b*b/(4*a)) * 1.3)"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "brand": "'#0891B2'",
+      "D": "b*b - 4*a*c",
+      "hasTwoRoots": "D >= 0 && abs(a) > 1e-9",
+      "sqD": "if(hasTwoRoots, sqrt(D), 0)",
+      "r1": "if(hasTwoRoots, (-b - sqD) / (2*a), 0)",
+      "r2": "if(hasTwoRoots, (-b + sqD) / (2*a), 0)",
+      "vx": "if(abs(a) < 1e-9, 0, -b/(2*a))",
+      "vy": "c - b*b/(4*a)",
+      "launchX": "if(hasTwoRoots, min(r1, r2), 0)",
+      "landX": "if(hasTwoRoots, max(r1, r2), max(vx * 2, 4))",
+      "span": "landX - launchX",
+      "centerX": "(launchX + landX) / 2",
+      "xMinV": "centerX - span * 1.2",
+      "xMaxV": "centerX + span * 1.2",
+      "yMinV": "-0.5",
+      "yMaxV": "max(2, vy * 1.3)",
+      "areaLeft": "10",
+      "areaTop": "44",
+      "areaW": "max(1, frame.width - 20)",
+      "areaH": "max(1, frame.height - 88)",
+      "sxX": "areaW / (xMaxV - xMinV)",
+      "sxY": "areaH / (yMaxV - yMinV)",
+      "poolY": "areaTop + (yMaxV - 0) * sxY",
+      "centerCx": "areaLeft + (centerX - xMinV) * sxX",
+      "poolW": "min(areaW * 0.7, max(80, span * sxX * 1.1))",
+      "poolH": "18",
+      "vertexCx": "areaLeft + (vx - xMinV) * sxX",
+      "vertexCy": "areaTop + (yMaxV - vy) * sxY"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": {
+          "fill": {
+            "kind": "linear",
+            "x0": "0", "y0": "0", "x1": "0", "y1": "frame.height",
+            "stops": [
+              [0, "if(frame.isDark, '#0f172a', '#dbeafe')"],
+              [1, "if(frame.isDark, '#020617', '#93c5fd')"]
+            ]
+          }
+        }
+      },
+
+      {
+        "kind": "if",
+        "cond": "frame.isDark",
+        "then": {
+          "kind": "repeat",
+          "of": { "range": [0, 30] },
+          "as": "i",
+          "children": [
+            {
+              "kind": "circle",
+              "cx": "mod(i * 73, frame.width)",
+              "cy": "mod(i * 137, frame.height * 0.5)",
+              "r": 0.8,
+              "style": { "fill": "'rgba(255,255,255,0.6)'" }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "ellipse",
+        "cx": "centerCx",
+        "cy": "poolY + poolH / 2",
+        "rx": "poolW / 2",
+        "ry": "poolH / 2",
+        "style": { "fill": "if(frame.isDark, '#334155', '#94a3b8')" }
+      },
+      {
+        "kind": "ellipse",
+        "cx": "centerCx",
+        "cy": "poolY + 3",
+        "rx": "poolW / 2 - 6",
+        "ry": "(poolH - 6) / 2",
+        "style": { "fill": "hexAlpha(brand, 0.35)" }
+      },
+      {
+        "kind": "ellipse",
+        "cx": "centerCx",
+        "cy": "poolY + poolH / 2",
+        "rx": "poolW / 2",
+        "ry": "poolH / 2",
+        "style": {
+          "stroke": "if(frame.isDark, '#1e293b', '#475569')",
+          "lineWidth": 1.5
+        }
+      },
+      {
+        "kind": "rect",
+        "x": "centerCx - poolW / 2 - 8",
+        "y": "poolY + poolH",
+        "w": "poolW + 16",
+        "h": "frame.height - (poolY + poolH)",
+        "style": { "fill": "if(frame.isDark, '#1e293b', '#64748b')" }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "items": "[0.6, 0.8, 1.2, 1.4]" },
+        "as": "f",
+        "children": [
+          {
+            "kind": "functionCurve",
+            "viewport": "main",
+            "fn": "(a*f)*x*x + (-2*(a*f)*vx)*x + ((vy/f) - (a*f)*vx*vx - (-2*(a*f)*vx)*vx)",
+            "xMin": "xMinV",
+            "xMax": "xMaxV",
+            "samples": 64,
+            "style": {
+              "stroke": "hexAlpha(brand, 0.25)",
+              "lineWidth": 1.5
+            }
+          }
+        ]
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "main",
+        "fn": "a*x*x + b*x + c",
+        "xMin": "xMinV",
+        "xMax": "xMaxV",
+        "samples": 80,
+        "style": {
+          "stroke": {
+            "kind": "linear",
+            "x0": "0", "y0": "areaTop", "x1": "0", "y1": "poolY",
+            "stops": [
+              [0, "if(frame.isDark, '#bae6fd', '#38bdf8')"],
+              [1, "brand"]
+            ]
+          },
+          "lineWidth": 3.5
+        }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 12] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "group",
+            "let": {
+              "progress": "mod(i / 12 + frame.elapsed * 0.3, 1)",
+              "wx": "launchX + progress * (landX - launchX)",
+              "baseY": "a*wx*wx + b*wx + c",
+              "wy": "max(0, baseY - progress * 0.3)"
+            },
+            "children": [
+              {
+                "kind": "if",
+                "cond": "wy > 0 && wx >= xMinV && wx <= xMaxV",
+                "then": {
+                  "kind": "circle",
+                  "cx": "areaLeft + (wx - xMinV) * sxX",
+                  "cy": "areaTop + (yMaxV - wy) * sxY",
+                  "r": 1.5,
+                  "style": { "fill": "hexAlpha(if(frame.isDark, '#bae6fd', '#38bdf8'), 0.7)" }
+                },
+                "else": { "kind": "group", "children": [] }
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "kind": "if",
+        "cond": "vy > 0",
+        "then": {
+          "kind": "group",
+          "children": [
+            {
+              "kind": "circle",
+              "cx": "vertexCx",
+              "cy": "vertexCy",
+              "r": 4,
+              "style": { "fill": "if(frame.isDark, '#e0f2fe', '#0369a1')" }
+            },
+            {
+              "kind": "text",
+              "x": "vertexCx",
+              "y": "vertexCy - 8",
+              "text": "format('{}m', formatN(vy))",
+              "style": {
+                "fill": "if(frame.isDark, '#f0f9ff', '#0c4a6e')",
+                "font": "600 10px -apple-system, sans-serif",
+                "textAlign": "center",
+                "textBaseline": "bottom"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": 12,
+        "y": 12,
+        "w": 140,
+        "h": 22,
+        "r": 6,
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(15,23,42,0.85)', 'rgba(255,255,255,0.92)')",
+          "stroke": "hexAlpha(brand, 0.7)",
+          "lineWidth": 1.5
+        }
+      },
+      {
+        "kind": "text",
+        "x": 82,
+        "y": 23,
+        "text": "format('최대 높이 {}m', formatN(vy))",
+        "style": {
+          "fill": "brand",
+          "font": "600 11px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "text",
+        "x": "frame.width / 2",
+        "y": "frame.height - 8",
+        "text": "'|a|가 작을수록 더 높이 솟는다'",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(200,210,230,0.85)', 'rgba(30,41,59,0.85)')",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "bottom"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "y = ", "ko": "y = " },
+        "value": "a*x*x + b*x + c",
+        "format": ".3f"
+      }
+    ]
+  }
+}
