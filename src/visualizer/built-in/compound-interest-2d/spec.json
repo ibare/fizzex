@@ -1,0 +1,930 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "compound-interest-2d",
+  "catalog": "finance/compound-interest",
+
+  "name": { "en": "Compound Interest — 2D", "ko": "복리 — 2D" },
+  "description": {
+    "en": "A = P(1 + r/n)^(n·t). Four anchors illustrate savings, stocks, deposits, and inflation.",
+    "ko": "A = P(1 + r/n)^(n·t). 예금·주식·적금·인플레이션 앵커로 복리 가속을 체감한다."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "savings",
+      "name": { "en": "Savings", "ko": "예금" },
+      "description": {
+        "en": "3% annual savings.",
+        "ko": "연 3% 일반 예금 — 시간이 돈을 번다."
+      },
+      "style": { "color": "#059669", "icon": "🏦" },
+      "params": { "P": 1000, "r": 0.03, "n": 1, "t": 10 }
+    },
+    {
+      "id": "stock",
+      "name": { "en": "Stocks", "ko": "주식 장기투자" },
+      "description": {
+        "en": "7% long-term investing.",
+        "ko": "연평균 7% 장기 투자 — 기하급수적 성장."
+      },
+      "style": { "color": "#2563EB", "icon": "📈" },
+      "params": { "P": 1000, "r": 0.07, "n": 1, "t": 10 }
+    },
+    {
+      "id": "deposit",
+      "name": { "en": "High-rate deposit", "ko": "고금리 적금" },
+      "description": {
+        "en": "5% deposit — doubles in ~14 yr.",
+        "ko": "연 5% 적금 — 72법칙 약 14년."
+      },
+      "style": { "color": "#D97706", "icon": "💰" },
+      "params": { "P": 100, "r": 0.05, "n": 1, "t": 5 }
+    },
+    {
+      "id": "inflation",
+      "name": { "en": "Inflation", "ko": "인플레이션" },
+      "description": {
+        "en": "3% inflation — purchasing power erodes.",
+        "ko": "연 3% 인플레이션 — 구매력 감소."
+      },
+      "style": { "color": "#DC2626", "icon": "🛒" },
+      "params": { "P": 1000, "r": 0.03, "n": 1, "t": 20 }
+    }
+  ],
+
+  "viewports": {
+    "growth": {
+      "kind": "time-value",
+      "rect": {
+        "x": "46",
+        "y": "14",
+        "w": "max(1, frame.width - 106)",
+        "h": "max(1, floor(frame.height * 0.42) - 36)"
+      },
+      "xMin": "0",
+      "xMax": "if(scene.id == 'stock', 40, if(scene.id == 'deposit', 20, 30))",
+      "yMin": "0",
+      "yMax": "if(scene.id == 'inflation', P, max(P * pow(1 + max(r, 0) / max(n, 1), max(n, 1) * if(scene.id == 'stock', 40, if(scene.id == 'deposit', 20, 30))), P * 1.1))"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "color": "scene.style.color",
+      "inverse": "scene.id == 'inflation'",
+      "tMax": "if(scene.id == 'stock', 40, if(scene.id == 'deposit', 20, 30))",
+      "nSafe": "max(n, 1)",
+      "A": "P * pow(1 + r / nSafe, nSafe * t)",
+      "powerNow": "if(A > 0, P * P / A, 0)",
+      "vNow": "if(inverse, powerNow, A)",
+      "tDouble": "if(r > 0, log(2) / log(1 + r), 1e9)",
+      "maxA": "if(inverse, P, max(P * pow(1 + max(r, 0) / nSafe, nSafe * tMax), P * 1.1))",
+
+      "topH": "floor(frame.height * 0.42)",
+      "padL": "46", "padR": "60", "padT": "14", "padB": "22",
+      "left": "padL",
+      "top": "padT",
+      "areaW": "max(1, frame.width - padL - padR)",
+      "areaH": "max(1, topH - padT - padB)",
+      "sxT": "areaW / tMax",
+      "syV": "areaH / maxA",
+
+      "botY": "topH",
+      "botH": "max(1, frame.height - topH)"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0, "y": 0,
+        "w": "frame.width", "h": "frame.height",
+        "style": { "fill": "if(frame.isDark, '#0b1220', '#ffffff')" }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 11] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "left + (i / 10) * areaW",
+            "y1": "top",
+            "x2": "left + (i / 10) * areaW",
+            "y2": "top + areaH",
+            "style": { "stroke": "if(frame.isDark, 'rgba(71,85,105,0.3)', 'rgba(203,213,225,0.6)')", "lineWidth": 1 }
+          }
+        ]
+      },
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 6] },
+        "as": "j",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "left",
+            "y1": "top + (j / 5) * areaH",
+            "x2": "left + areaW",
+            "y2": "top + (j / 5) * areaH",
+            "style": { "stroke": "if(frame.isDark, 'rgba(71,85,105,0.3)', 'rgba(203,213,225,0.6)')", "lineWidth": 1 }
+          }
+        ]
+      },
+
+      {
+        "kind": "line",
+        "x1": "left", "y1": "top",
+        "x2": "left", "y2": "top + areaH",
+        "style": { "stroke": "if(frame.isDark, 'rgba(148,163,184,0.8)', 'rgba(71,85,105,0.8)')", "lineWidth": 1 }
+      },
+      {
+        "kind": "line",
+        "x1": "left", "y1": "top + areaH",
+        "x2": "left + areaW", "y2": "top + areaH",
+        "style": { "stroke": "if(frame.isDark, 'rgba(148,163,184,0.8)', 'rgba(71,85,105,0.8)')", "lineWidth": 1 }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "items": "[0, 0.25, 0.5, 0.75, 1]" },
+        "as": "rt",
+        "children": [
+          {
+            "kind": "text",
+            "x": "left - 4",
+            "y": "top + areaH - rt * areaH",
+            "text": "format('{}', toLocaleInt(rt * maxA))",
+            "style": {
+              "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
+              "font": "500 9px -apple-system, sans-serif",
+              "textAlign": "right",
+              "textBaseline": "middle"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "text",
+        "x": "left - 40",
+        "y": "top - 2",
+        "text": "if(inverse, '구매력', 'A(만원)')",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
+          "font": "500 9px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [0, 6] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "text",
+            "x": "left + (i / 5) * areaW",
+            "y": "top + areaH + 3",
+            "text": "format('{}년', toLocaleInt((i / 5) * tMax))",
+            "style": {
+              "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
+              "font": "500 9px -apple-system, sans-serif",
+              "textAlign": "center",
+              "textBaseline": "top"
+            }
+          }
+        ]
+      },
+
+      {
+        "kind": "if",
+        "cond": "!inverse && P >= 0 && P <= maxA",
+        "then": {
+          "kind": "group",
+          "let": { "py": "top + areaH - P * syV" },
+          "children": [
+            {
+              "kind": "line",
+              "x1": "left", "y1": "py",
+              "x2": "left + areaW", "y2": "py",
+              "style": {
+                "stroke": "if(frame.isDark, 'rgba(148,163,184,0.8)', 'rgba(71,85,105,0.7)')",
+                "lineWidth": 1.2,
+                "lineDash": [6, 4]
+              }
+            },
+            {
+              "kind": "text",
+              "x": "left + 4",
+              "y": "py - 2",
+              "text": "format('원금 {}', toLocaleInt(P))",
+              "style": {
+                "fill": "if(frame.isDark, 'rgba(203,213,225,0.9)', 'rgba(51,65,85,0.9)')",
+                "font": "600 9px -apple-system, sans-serif",
+                "textAlign": "left",
+                "textBaseline": "bottom"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "if",
+        "cond": "!inverse && tDouble > 0 && tDouble <= tMax && 2 * P <= maxA",
+        "then": {
+          "kind": "group",
+          "let": {
+            "cxD": "left + tDouble * sxT",
+            "cyD": "top + areaH - 2 * P * syV"
+          },
+          "children": [
+            {
+              "kind": "line",
+              "x1": "cxD", "y1": "top + areaH",
+              "x2": "cxD", "y2": "cyD",
+              "style": { "stroke": "hexAlpha(color, 0.6)", "lineWidth": 1, "lineDash": [3, 3] }
+            },
+            {
+              "kind": "line",
+              "x1": "cxD", "y1": "cyD",
+              "x2": "left", "y2": "cyD",
+              "style": { "stroke": "hexAlpha(color, 0.6)", "lineWidth": 1, "lineDash": [3, 3] }
+            },
+            {
+              "kind": "text",
+              "x": "cxD",
+              "y": "cyD - 4",
+              "text": "'×2'",
+              "style": {
+                "fill": "hexAlpha(color, 0.9)",
+                "font": "700 10px -apple-system, sans-serif",
+                "textAlign": "center",
+                "textBaseline": "bottom"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "growth",
+        "fn": "if(inverse, if(P * pow(1 + r / nSafe, nSafe * x) > 0, P * P / (P * pow(1 + r / nSafe, nSafe * x)), 0), min(maxA, P * pow(1 + r / nSafe, nSafe * x)))",
+        "xMin": "0",
+        "xMax": "tMax",
+        "samples": 128,
+        "style": { "stroke": "color", "lineWidth": 2.5, "lineCap": "round" }
+      },
+
+      {
+        "kind": "if",
+        "cond": "t >= 0 && t <= tMax",
+        "then": {
+          "kind": "group",
+          "let": {
+            "mkCx": "left + t * sxT",
+            "mkCy": "top + areaH - min(maxA, max(0, vNow)) * syV",
+            "badgeW": 92,
+            "bgx": "min(left + areaW - badgeW, mkCx + 8)",
+            "bgy": "max(top + 4, mkCy - 22)"
+          },
+          "children": [
+            {
+              "kind": "line",
+              "x1": "mkCx", "y1": "top",
+              "x2": "mkCx", "y2": "top + areaH",
+              "style": { "stroke": "hexAlpha(color, 0.4)", "lineWidth": 1, "lineDash": [2, 3] }
+            },
+            {
+              "kind": "circle",
+              "cx": "mkCx", "cy": "mkCy", "r": 5,
+              "style": {
+                "fill": "color",
+                "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                "lineWidth": 1.5
+              }
+            },
+            {
+              "kind": "roundRect",
+              "x": "bgx", "y": "bgy",
+              "w": "badgeW", "h": 18,
+              "r": 4,
+              "style": {
+                "fill": "if(frame.isDark, 'rgba(15,23,42,0.88)', 'rgba(255,255,255,0.92)')",
+                "stroke": "hexAlpha(color, 0.7)",
+                "lineWidth": 1.2
+              }
+            },
+            {
+              "kind": "text",
+              "x": "bgx + badgeW / 2",
+              "y": "bgy + 9",
+              "text": "format('{}만원', toLocaleInt(vNow))",
+              "style": {
+                "fill": "color",
+                "font": "600 11px ui-monospace, Menlo, monospace",
+                "textAlign": "center",
+                "textBaseline": "middle"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": "frame.width - 150",
+        "y": 6,
+        "w": 140,
+        "h": 20,
+        "r": 5,
+        "style": {
+          "fill": "hexAlpha(color, 0.18)",
+          "stroke": "hexAlpha(color, 0.6)",
+          "lineWidth": 1
+        }
+      },
+      {
+        "kind": "text",
+        "x": "frame.width - 80",
+        "y": 16,
+        "text": "if(tDouble < 1e9, format('{:.1f}% · {:.0f}년 후 2배', r * 100, tDouble), format('{:.1f}%', r * 100))",
+        "style": {
+          "fill": "color",
+          "font": "600 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "line",
+        "x1": 10, "y1": "topH",
+        "x2": "frame.width - 10", "y2": "topH",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(148,163,184,0.4)', 'rgba(203,213,225,0.6)')",
+          "lineWidth": 1,
+          "lineDash": [3, 4]
+        }
+      },
+
+      {
+        "kind": "match",
+        "on": "scene.id",
+        "cases": {
+          "savings": {
+            "kind": "group",
+            "let": {
+              "floorY": "botY + botH - 28",
+              "leftCx": "frame.width * 0.28",
+              "rightCx": "frame.width * 0.58",
+              "stackW": "min(72, frame.width * 0.18)",
+              "maxStackH": "min(botH - 80, 140)",
+              "unitH": "maxStackH / max(A / P, 2.2)",
+              "leftH": "unitH",
+              "rightH": "max(0, (A / P) * unitH)",
+              "coinH": 10,
+              "leftCoins": "max(1, floor(leftH / coinH))",
+              "rightCoins": "max(1, floor(rightH / coinH))"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY", "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#0f172a', '#ecfdf5')"],
+                      [1, "if(frame.isDark, '#042f2e', '#d1fae5')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "line",
+                "x1": "8", "y1": "floorY",
+                "x2": "frame.width - 8", "y2": "floorY",
+                "style": { "stroke": "if(frame.isDark, '#134e4a', '#047857')", "lineWidth": 2 }
+              },
+
+              {
+                "kind": "repeat",
+                "of": { "range": [0, "leftCoins"] },
+                "as": "ci",
+                "children": [
+                  {
+                    "kind": "ellipse",
+                    "cx": "leftCx",
+                    "cy": "floorY - (ci + 0.5) * coinH",
+                    "rx": "stackW / 2",
+                    "ry": "coinH * 0.55",
+                    "style": {
+                      "fill": "hexAlpha('#9ca3af', 0.9)",
+                      "stroke": "if(frame.isDark, 'rgba(0,0,0,0.4)', 'rgba(0,0,0,0.25)')",
+                      "lineWidth": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "text",
+                "x": "leftCx",
+                "y": "floorY - leftH - 6",
+                "text": "format('{}만원', toLocaleInt(P))",
+                "style": {
+                  "fill": "'#475569'",
+                  "font": "600 11px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              },
+
+              {
+                "kind": "repeat",
+                "of": { "range": [0, "rightCoins"] },
+                "as": "ci",
+                "children": [
+                  {
+                    "kind": "ellipse",
+                    "cx": "rightCx",
+                    "cy": "floorY - (ci + 0.5) * coinH",
+                    "rx": "stackW / 2",
+                    "ry": "coinH * 0.55",
+                    "style": {
+                      "fill": "hexAlpha(color, 0.9)",
+                      "stroke": "if(frame.isDark, 'rgba(0,0,0,0.4)', 'rgba(0,0,0,0.25)')",
+                      "lineWidth": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "text",
+                "x": "rightCx",
+                "y": "floorY - rightH - 6",
+                "text": "format('{}만원', toLocaleInt(A))",
+                "style": {
+                  "fill": "color",
+                  "font": "600 11px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              },
+
+              {
+                "kind": "text",
+                "x": "frame.width / 2",
+                "y": "botY + 10",
+                "text": "'시간이 돈을 번다'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(167,243,208,0.85)', 'rgba(6,78,59,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              }
+            ]
+          },
+
+          "stock": {
+            "kind": "group",
+            "let": {
+              "sPadL": 34, "sPadR": 18, "sPadT": 24, "sPadB": 32,
+              "sLeft": "sPadL",
+              "sTop": "botY + sPadT",
+              "sW": "max(1, frame.width - sPadL - sPadR)",
+              "sH": "max(1, botH - sPadT - sPadB)",
+              "step": 5,
+              "nBars": "max(1, floor(tMax / step))",
+              "tEnd": "nBars * step",
+              "barGap": 4,
+              "barW": "max(1, (sW - barGap * (nBars - 1)) / nBars)",
+              "finalA": "P * pow(1 + r / nSafe, nSafe * tEnd)",
+              "scaleMax": "max(finalA, P * 2)",
+              "baseY": "sTop + sH - (P / scaleMax) * sH"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY", "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#0b1e3a', '#eff6ff')"],
+                      [1, "if(frame.isDark, '#0a0f2c', '#dbeafe')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [0, 6] },
+                "as": "jj",
+                "children": [
+                  {
+                    "kind": "line",
+                    "x1": "sLeft", "y1": "sTop + (jj / 5) * sH",
+                    "x2": "sLeft + sW", "y2": "sTop + (jj / 5) * sH",
+                    "style": { "stroke": "if(frame.isDark, 'rgba(71,85,105,0.3)', 'rgba(203,213,225,0.6)')", "lineWidth": 1 }
+                  }
+                ]
+              },
+
+              {
+                "kind": "line",
+                "x1": "sLeft", "y1": "baseY",
+                "x2": "sLeft + sW", "y2": "baseY",
+                "style": {
+                  "stroke": "if(frame.isDark, 'rgba(148,163,184,0.7)', 'rgba(71,85,105,0.6)')",
+                  "lineWidth": 1.2,
+                  "lineDash": [5, 4]
+                }
+              },
+              {
+                "kind": "text",
+                "x": "sLeft + 4", "y": "baseY - 2",
+                "text": "format('원금 {}만원', toLocaleInt(P))",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(203,213,225,0.9)', 'rgba(51,65,85,0.85)')",
+                  "font": "600 9px -apple-system, sans-serif",
+                  "textAlign": "left",
+                  "textBaseline": "bottom"
+                }
+              },
+
+              {
+                "kind": "repeat",
+                "of": { "range": [0, "nBars"] },
+                "as": "bi",
+                "children": [
+                  {
+                    "kind": "group",
+                    "let": {
+                      "tEndBar": "(bi + 1) * step",
+                      "aBar": "P * pow(1 + r / nSafe, nSafe * tEndBar)",
+                      "reached": "clamp((t - bi * step) / step, 0, 1)",
+                      "displayA": "P + (aBar - P) * reached",
+                      "barH": "max(0, (displayA / scaleMax) * sH)",
+                      "bx": "sLeft + bi * (barW + barGap)",
+                      "by": "sTop + sH - barH"
+                    },
+                    "children": [
+                      {
+                        "kind": "roundRect",
+                        "x": "bx", "y": "by", "w": "barW", "h": "barH", "r": 3,
+                        "style": {
+                          "fill": {
+                            "kind": "linear",
+                            "x0": "0", "y0": "by", "x1": "0", "y1": "sTop + sH",
+                            "stops": [[0, "hexAlpha(color, 0.95)"], [1, "hexAlpha(color, 0.5)"]]
+                          },
+                          "stroke": "hexAlpha(color, 0.9)",
+                          "lineWidth": 1
+                        }
+                      },
+                      {
+                        "kind": "if",
+                        "cond": "barH > 26 && reached > 0",
+                        "then": {
+                          "kind": "text",
+                          "x": "bx + barW / 2",
+                          "y": "by - 2",
+                          "text": "format('{}만원', toLocaleInt(displayA))",
+                          "style": {
+                            "fill": "if(frame.isDark, '#e2e8f0', '#0f172a')",
+                            "font": "600 9px ui-monospace, Menlo, monospace",
+                            "textAlign": "center",
+                            "textBaseline": "bottom"
+                          }
+                        },
+                        "else": { "kind": "group", "children": [] }
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              {
+                "kind": "repeat",
+                "of": { "items": "[10, 20, 30]" },
+                "as": "yr",
+                "children": [
+                  {
+                    "kind": "if",
+                    "cond": "yr <= tEnd",
+                    "then": {
+                      "kind": "group",
+                      "let": {
+                        "mcx": "sLeft + (yr / tEnd) * sW",
+                        "mlabel": "if(yr == 10, '×2', if(yr == 20, '×4', '×8'))"
+                      },
+                      "children": [
+                        {
+                          "kind": "line",
+                          "x1": "mcx", "y1": "sTop",
+                          "x2": "mcx", "y2": "sTop + sH",
+                          "style": { "stroke": "hexAlpha(color, 0.5)", "lineWidth": 1, "lineDash": [3, 3] }
+                        },
+                        {
+                          "kind": "roundRect",
+                          "x": "mcx - 14", "y": "sTop - 2",
+                          "w": 28, "h": 14, "r": 3,
+                          "style": { "fill": "hexAlpha(color, 0.85)" }
+                        },
+                        {
+                          "kind": "text",
+                          "x": "mcx", "y": "sTop + 5",
+                          "text": "mlabel",
+                          "style": {
+                            "fill": "'#ffffff'",
+                            "font": "700 9px -apple-system, sans-serif",
+                            "textAlign": "center",
+                            "textBaseline": "middle"
+                          }
+                        }
+                      ]
+                    },
+                    "else": { "kind": "group", "children": [] }
+                  }
+                ]
+              },
+
+              {
+                "kind": "if",
+                "cond": "t >= 0 && t <= tEnd",
+                "then": {
+                  "kind": "circle",
+                  "cx": "sLeft + (t / tEnd) * sW",
+                  "cy": "sTop + sH - (A / scaleMax) * sH",
+                  "r": "4 + sin(frame.elapsed * 6) * 1.5",
+                  "style": {
+                    "fill": "color",
+                    "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                    "lineWidth": 1.5
+                  }
+                },
+                "else": { "kind": "group", "children": [] }
+              },
+
+              {
+                "kind": "text",
+                "x": "sLeft", "y": "botY + 6",
+                "text": "'기하급수로 커지는 복리'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(191,219,254,0.85)', 'rgba(30,58,138,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "left",
+                  "textBaseline": "top"
+                }
+              }
+            ]
+          },
+
+          "deposit": {
+            "kind": "group",
+            "let": {
+              "floorY": "botY + botH - 28",
+              "leftCx": "frame.width * 0.30",
+              "rightCx": "frame.width * 0.60",
+              "ratioAP": "A / P",
+              "baseR": "min(34, min(botH * 0.2, frame.width * 0.1))",
+              "scaleCur": "sqrt(max(ratioAP, 0))",
+              "maxScale": "max(scaleCur, sqrt(2))",
+              "sizeFit": "min(1, min((botH * 0.55) / (baseR * 2 * maxScale + 0.0001), (frame.width * 0.25) / (baseR * 2 * maxScale + 0.0001)))",
+              "curR": "baseR * scaleCur * sizeFit",
+              "stdR": "baseR * sizeFit",
+              "breathe": "1 + sin(frame.elapsed * 2.5) * 0.02"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY", "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#27272a', '#fff7ed')"],
+                      [1, "if(frame.isDark, '#18181b', '#fed7aa')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "line",
+                "x1": "8", "y1": "floorY",
+                "x2": "frame.width - 8", "y2": "floorY",
+                "style": { "stroke": "if(frame.isDark, '#57534e', '#b45309')", "lineWidth": 2 }
+              },
+
+              {
+                "kind": "ellipse",
+                "cx": "leftCx",
+                "cy": "floorY - stdR",
+                "rx": "stdR * 1.2",
+                "ry": "stdR",
+                "style": {
+                  "fill": "'#a1a1aa'",
+                  "stroke": "if(frame.isDark, 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.22)')",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "leftCx", "y": "floorY + 4",
+                "text": "format('원금 {}만원', toLocaleInt(P))",
+                "style": {
+                  "fill": "if(frame.isDark, '#e2e8f0', '#1e293b')",
+                  "font": "600 10px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              },
+
+              {
+                "kind": "ellipse",
+                "cx": "rightCx",
+                "cy": "floorY - curR",
+                "rx": "curR * 1.2",
+                "ry": "curR * breathe",
+                "style": {
+                  "fill": "hexAlpha(color, 0.9)",
+                  "stroke": "if(frame.isDark, 'rgba(0,0,0,0.45)', 'rgba(0,0,0,0.22)')",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "rightCx", "y": "floorY + 4",
+                "text": "format('{}만원', toLocaleInt(A))",
+                "style": {
+                  "fill": "color",
+                  "font": "600 10px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              },
+
+              {
+                "kind": "text",
+                "x": "frame.width / 2", "y": "botY + 8",
+                "text": "'작은 돈도 꾸준히 쌓이면'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(253,230,138,0.85)', 'rgba(120,53,15,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              }
+            ]
+          },
+
+          "inflation": {
+            "kind": "group",
+            "let": {
+              "floorY": "botY + botH - 28",
+              "leftCx": "frame.width * 0.3",
+              "rightCx": "frame.width * 0.62",
+              "baseSize": "min(90, min(frame.width * 0.22, botH * 0.55))",
+              "loss": "P - powerNow",
+              "shrink": "clamp(powerNow / P, 0.15, 1)"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": "botY", "w": "frame.width", "h": "botH",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "botY", "x1": "0", "y1": "botY + botH",
+                    "stops": [
+                      [0, "if(frame.isDark, '#1c1917', '#fef2f2')"],
+                      [1, "if(frame.isDark, '#0c0a09', '#fee2e2')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "line",
+                "x1": "8", "y1": "floorY",
+                "x2": "frame.width - 8", "y2": "floorY",
+                "style": { "stroke": "if(frame.isDark, '#78716c', '#991b1b')", "lineWidth": 2 }
+              },
+
+              {
+                "kind": "polygon",
+                "points": "[[leftCx - baseSize * 0.55, floorY - baseSize], [leftCx + baseSize * 0.55, floorY - baseSize], [leftCx + baseSize * 0.43, floorY], [leftCx - baseSize * 0.43, floorY]]",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "leftCx", "y0": "floorY - baseSize", "x1": "leftCx", "y1": "floorY",
+                    "stops": [
+                      [0, "if(frame.isDark, '#57534e', '#e7e5e4')"],
+                      [1, "if(frame.isDark, '#292524', '#a8a29e')"]
+                    ]
+                  },
+                  "stroke": "if(frame.isDark, '#44403c', '#57534e')",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "leftCx", "y": "floorY + 4",
+                "text": "format('오늘 {}만원', toLocaleInt(P))",
+                "style": {
+                  "fill": "if(frame.isDark, '#e2e8f0', '#1e293b')",
+                  "font": "600 10px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              },
+
+              {
+                "kind": "polygon",
+                "points": "[[rightCx - baseSize * shrink * 0.55, floorY - baseSize * shrink], [rightCx + baseSize * shrink * 0.55, floorY - baseSize * shrink], [rightCx + baseSize * shrink * 0.43, floorY], [rightCx - baseSize * shrink * 0.43, floorY]]",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "rightCx", "y0": "floorY - baseSize * shrink", "x1": "rightCx", "y1": "floorY",
+                    "stops": [
+                      [0, "if(frame.isDark, '#57534e', '#e7e5e4')"],
+                      [1, "if(frame.isDark, '#292524', '#a8a29e')"]
+                    ]
+                  },
+                  "stroke": "hexAlpha(color, 0.7)",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "rightCx", "y": "floorY + 4",
+                "text": "format('미래 {}만원', toLocaleInt(powerNow))",
+                "style": {
+                  "fill": "color",
+                  "font": "600 10px ui-monospace, Menlo, monospace",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              },
+
+              {
+                "kind": "if",
+                "cond": "powerNow < P * 0.99",
+                "then": {
+                  "kind": "text",
+                  "x": "(leftCx + rightCx) / 2",
+                  "y": "floorY - baseSize - 10",
+                  "text": "format('−{}만원', toLocaleInt(loss))",
+                  "style": {
+                    "fill": "color",
+                    "font": "600 10px ui-monospace, Menlo, monospace",
+                    "textAlign": "center",
+                    "textBaseline": "bottom"
+                  }
+                },
+                "else": { "kind": "group", "children": [] }
+              },
+
+              {
+                "kind": "text",
+                "x": "frame.width / 2", "y": "botY + 8",
+                "text": "'같은 돈으로 살 수 있는 게 줄어든다'",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(254,202,202,0.85)', 'rgba(127,29,29,0.85)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "center",
+                  "textBaseline": "top"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "A = ", "ko": "A = " },
+        "value": "P * pow(1 + r / max(n, 1), max(n, 1) * t)",
+        "format": ".2f"
+      },
+      {
+        "label": { "en": "t×2 = ", "ko": "2배 주기 = " },
+        "value": "if(r > 0, log(2) / log(1 + r), 0)",
+        "format": ".2f"
+      }
+    ]
+  }
+}

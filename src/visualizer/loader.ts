@@ -29,10 +29,6 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-sine-wave-2d" */
     './built-in/sine-wave-2d'
   ),
-  'compound-interest-2d': () => import(
-    /* webpackChunkName: "viz-compound-interest-2d" */
-    './built-in/compound-interest-2d'
-  ),
 };
 
 /** Visualizer를 ID로 로드 (비동기) */
