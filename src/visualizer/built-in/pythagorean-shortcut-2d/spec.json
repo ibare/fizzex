@@ -1,0 +1,159 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "pythagorean-shortcut-2d",
+  "catalog": "geometry/pythagorean-theorem",
+
+  "name": { "en": "Pythagorean — Shortcut", "ko": "지름길 — 피타고라스" },
+  "description": {
+    "en": "Walk around the block (a + b) or cross diagonally (c). How much do you save?",
+    "ko": "블록을 돌아가면 a+b, 가로지르면 c. 얼마나 절약될까?"
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "shortcut",
+      "name": { "en": "Shortcut", "ko": "지름길" },
+      "description": {
+        "en": "Integer sides (e.g. 80, 60, 100).",
+        "ko": "정수 세 변(예: 80, 60, 100)."
+      },
+      "style": { "color": "#0E7490", "icon": "🚶" },
+      "params": { "a": 80, "b": 60 }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "brand": "'#0E7490'",
+      "bg": "if(frame.isDark, '#0b1220', '#f8fafc')",
+      "c": "sqrt(a * a + b * b)",
+      "sum": "a + b",
+      "saved": "sum - c",
+      "pct": "if(sum > 0, saved / sum * 100, 0)",
+      "innerW": "frame.width - 40",
+      "innerH": "frame.height - 60",
+      "scale": "min(innerW / a, innerH / b)",
+      "blkW": "a * scale",
+      "blkH": "b * scale",
+      "blkX": "20 + (innerW - blkW) / 2",
+      "blkY": "40 + (innerH - blkH) / 2",
+      "p0x": "blkX",
+      "p0y": "blkY + blkH",
+      "pCx": "blkX + blkW",
+      "pCy": "blkY + blkH",
+      "p1x": "blkX + blkW",
+      "p1y": "blkY",
+      "grassStroke": "if(frame.isDark, 'rgba(80,140,100,0.35)', 'rgba(34,107,60,0.32)')",
+      "borderStroke": "if(frame.isDark, 'rgba(220,230,255,0.4)', 'rgba(60,70,90,0.5)')",
+      "lPathStroke": "if(frame.isDark, 'rgba(200,210,230,0.75)', 'rgba(60,70,90,0.75)')",
+      "startFill": "if(frame.isDark, '#f1f5f9', '#0f172a')",
+      "badgeFill": "hexAlpha(brand, if(frame.isDark, 0.26, 0.16))"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": "0",
+        "y": "0",
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": { "fill": "bg" }
+      },
+
+      {
+        "kind": "rect",
+        "x": "blkX",
+        "y": "blkY",
+        "w": "blkW",
+        "h": "blkH",
+        "style": { "fill": "if(frame.isDark, '#1a3d2a', '#86efac')" }
+      },
+
+      {
+        "kind": "rect",
+        "x": "blkX",
+        "y": "blkY",
+        "w": "blkW",
+        "h": "blkH",
+        "style": { "stroke": "borderStroke", "lineWidth": 1.5 }
+      },
+
+      {
+        "kind": "polyline",
+        "points": "[[p0x, p0y], [pCx, pCy], [p1x, p1y]]",
+        "style": {
+          "stroke": "lPathStroke",
+          "lineWidth": 2,
+          "lineDash": [6, 5]
+        }
+      },
+
+      {
+        "kind": "line",
+        "x1": "p0x",
+        "y1": "p0y",
+        "x2": "p1x",
+        "y2": "p1y",
+        "style": {
+          "stroke": "brand",
+          "lineWidth": 3,
+          "lineCap": "round"
+        }
+      },
+
+      {
+        "kind": "circle",
+        "cx": "p0x",
+        "cy": "p0y",
+        "r": 5,
+        "style": { "fill": "startFill" }
+      },
+      {
+        "kind": "circle",
+        "cx": "p1x",
+        "cy": "p1y",
+        "r": 5,
+        "style": { "fill": "brand" }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": 10,
+        "y": 10,
+        "w": "min(frame.width - 20, 260)",
+        "h": 22,
+        "r": 11,
+        "style": {
+          "fill": "badgeFill",
+          "stroke": "brand",
+          "lineWidth": 1.2
+        }
+      },
+      {
+        "kind": "text",
+        "x": 18,
+        "y": 22,
+        "text": "format('돌아가면 {}m · 가로지르면 {}m · {}% 절약', formatN(sum), formatN(c), formatN(pct))",
+        "style": {
+          "fill": "brand",
+          "font": "600 11px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "c = ", "ko": "c = " },
+        "value": "sqrt(a * a + b * b)",
+        "format": ".3f"
+      }
+    ]
+  }
+}

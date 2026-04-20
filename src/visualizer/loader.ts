@@ -29,10 +29,6 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-pythagorean-tv-2d" */
     './built-in/pythagorean-tv-2d'
   ),
-  'pythagorean-shortcut-2d': () => import(
-    /* webpackChunkName: "viz-pythagorean-shortcut-2d" */
-    './built-in/pythagorean-shortcut-2d'
-  ),
   'freefall-2d': () => import(
     /* webpackChunkName: "viz-freefall-2d" */
     './built-in/freefall-2d'
