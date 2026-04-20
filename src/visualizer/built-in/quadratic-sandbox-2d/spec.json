@@ -1,0 +1,225 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "quadratic-sandbox-2d",
+  "catalog": "linear-functions/quadratic-standard",
+
+  "name": { "en": "Quadratic — Sandbox 2D", "ko": "자유 탐구 — 이차함수" },
+  "description": {
+    "en": "Explore y = a x² + b x + c by varying a, b, c. Vertex and real roots markers adapt to the current coefficients.",
+    "ko": "y = a x² + b x + c의 a·b·c를 바꾸며 포물선 변화를 관찰. 꼭짓점·실근이 현재 계수에 맞춰 갱신된다."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "sandbox",
+      "name": { "en": "Sandbox", "ko": "자유 탐구" },
+      "description": {
+        "en": "Free exploration of a, b, c.",
+        "ko": "a·b·c를 자유롭게 탐색."
+      },
+      "style": { "color": "#6366F1", "icon": "🔢" },
+      "params": { "a": 1, "b": 0, "c": 0, "x": 0 }
+    }
+  ],
+
+  "state": [
+    { "id": "vx", "type": "number", "default": 0 },
+    { "id": "vy", "type": "number", "default": 0 },
+    { "id": "halfSpan", "type": "number", "default": 6 },
+    { "id": "yLow", "type": "number", "default": -1 },
+    { "id": "yHigh", "type": "number", "default": 1 },
+    { "id": "yPad", "type": "number", "default": 1 }
+  ],
+
+  "animation": {
+    "onFrame": [
+      { "set": "state.vx", "to": "if(abs(a) < 0.000000001, 0, -b / (2 * a))" },
+      { "set": "state.vy", "to": "a * state.vx * state.vx + b * state.vx + c" },
+      { "set": "state.halfSpan", "to": "max(12, abs(state.vy) * 0.5) / 2" },
+      { "set": "state.yLow", "to": "min(0, min(state.vy, a * state.halfSpan * state.halfSpan + state.vy))" },
+      { "set": "state.yHigh", "to": "max(0, max(state.vy, a * state.halfSpan * state.halfSpan + state.vy))" },
+      { "set": "state.yPad", "to": "max((state.yHigh - state.yLow) * 0.15, 1)" }
+    ]
+  },
+
+  "viewports": {
+    "plot": {
+      "kind": "time-value",
+      "rect": {
+        "x": "36",
+        "y": "52",
+        "w": "frame.width - 56",
+        "h": "frame.height - 80"
+      },
+      "xMin": "state.vx - state.halfSpan",
+      "xMax": "state.vx + state.halfSpan",
+      "yMin": "state.yLow - state.yPad",
+      "yMax": "state.yHigh + state.yPad"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "color": "scene.style.color",
+      "bg": "if(frame.isDark, '#0f172a', '#f1f5f9')",
+      "axisColor": "if(frame.isDark, 'rgba(148,163,184,0.6)', 'rgba(71,85,105,0.6)')",
+      "markerColor": "if(frame.isDark, '#fbbf24', '#ea580c')",
+      "markerStroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+      "hintColor": "if(frame.isDark, 'rgba(200,210,230,0.75)', 'rgba(60,70,90,0.78)')",
+      "cursorColor": "if(frame.isDark, '#f1f5f9', '#0b1220')",
+      "D": "b * b - 4 * a * c",
+      "hasRoots": "D >= 0 && abs(a) > 0.000000001",
+      "hasTwoRoots": "D > 0.000001 && abs(a) > 0.000000001",
+      "sqD": "if(D >= 0, sqrt(D), 0)",
+      "r1": "if(hasRoots, (-b - sqD) / (2 * a), 0)",
+      "r2": "if(hasRoots, (-b + sqD) / (2 * a), 0)",
+      "yCur": "a * x * x + b * x + c",
+      "badge": "format('y = {:.2f}x² + {:.2f}x + {:.2f}', a, b, c)"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": "0",
+        "y": "0",
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": { "fill": "bg" }
+      },
+
+      {
+        "kind": "line",
+        "viewport": "plot",
+        "x1": "state.vx - state.halfSpan",
+        "y1": "0",
+        "x2": "state.vx + state.halfSpan",
+        "y2": "0",
+        "style": { "stroke": "axisColor", "lineWidth": 1.2 }
+      },
+      {
+        "kind": "line",
+        "viewport": "plot",
+        "x1": "0",
+        "y1": "state.yLow - state.yPad",
+        "x2": "0",
+        "y2": "state.yHigh + state.yPad",
+        "style": { "stroke": "axisColor", "lineWidth": 1.2 }
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "plot",
+        "fn": "a * x * x + b * x + c",
+        "xMin": "state.vx - state.halfSpan",
+        "xMax": "state.vx + state.halfSpan",
+        "samples": 128,
+        "style": { "stroke": "color", "lineWidth": 2.5 }
+      },
+
+      {
+        "kind": "if",
+        "cond": "hasRoots",
+        "then": {
+          "kind": "group",
+          "children": [
+            {
+              "kind": "circle",
+              "viewport": "plot",
+              "cx": "r1",
+              "cy": "0",
+              "r": 5,
+              "style": {
+                "fill": "markerColor",
+                "stroke": "markerStroke",
+                "lineWidth": 1.2
+              }
+            },
+            {
+              "kind": "if",
+              "cond": "hasTwoRoots",
+              "then": {
+                "kind": "circle",
+                "viewport": "plot",
+                "cx": "r2",
+                "cy": "0",
+                "r": 5,
+                "style": {
+                  "fill": "markerColor",
+                  "stroke": "markerStroke",
+                  "lineWidth": 1.2
+                }
+              }
+            }
+          ]
+        }
+      },
+
+      {
+        "kind": "line",
+        "viewport": "plot",
+        "x1": "state.vx",
+        "y1": "state.yLow - state.yPad",
+        "x2": "state.vx",
+        "y2": "state.yHigh + state.yPad",
+        "style": {
+          "stroke": "hexAlpha(color, 0.35)",
+          "lineWidth": 1,
+          "lineDash": [3, 4]
+        }
+      },
+      {
+        "kind": "circle",
+        "viewport": "plot",
+        "cx": "state.vx",
+        "cy": "state.vy",
+        "r": 6,
+        "style": { "fill": "color", "stroke": "markerStroke", "lineWidth": 2 }
+      },
+
+      {
+        "kind": "circle",
+        "viewport": "plot",
+        "cx": "x",
+        "cy": "yCur",
+        "r": 3.6,
+        "style": { "fill": "cursorColor" }
+      },
+
+      {
+        "kind": "text",
+        "x": "16",
+        "y": "26",
+        "text": "badge",
+        "style": {
+          "fill": "color",
+          "font": "600 12px ui-monospace, Menlo, monospace",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      },
+      {
+        "kind": "text",
+        "x": "frame.width / 2",
+        "y": "frame.height - 10",
+        "text": "'a·b·c를 바꾸며 포물선의 변화 관찰'",
+        "style": {
+          "fill": "hintColor",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "bottom"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "y = ", "ko": "y = " },
+        "value": "a * x * x + b * x + c",
+        "format": ".3f"
+      }
+    ]
+  }
+}
