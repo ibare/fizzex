@@ -1,0 +1,541 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "freefall-2d",
+  "catalog": "physics/kinematic-displacement",
+
+  "name": { "en": "Free-fall — 2D", "ko": "자유낙하 — 2D" },
+  "description": {
+    "en": "s = v₀·t + ½·a·t². Earth, Moon, Mars, and Jupiter scenes show gravity's effect on distance.",
+    "ko": "s = v₀·t + ½·a·t². 지구·달·화성·목성 앵커로 중력가속도 차이를 체감한다."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "earth",
+      "name": { "en": "Earth", "ko": "지구" },
+      "description": {
+        "en": "g ≈ 9.807 m/s².",
+        "ko": "지구 중력 g ≈ 9.807 m/s² — 건물 이정표 기준."
+      },
+      "style": { "color": "#0E7490", "icon": "🌍" },
+      "params": { "v_0": 0, "a": 9.807, "t": 1.5 }
+    },
+    {
+      "id": "moon",
+      "name": { "en": "Moon", "ko": "달" },
+      "description": {
+        "en": "g ≈ 1.625 m/s² — 1/6 of Earth.",
+        "ko": "달 중력 g ≈ 1.625 m/s² — 지구의 1/6."
+      },
+      "style": { "color": "#64748B", "icon": "🌙" },
+      "params": { "v_0": 0, "a": 1.625, "t": 3 }
+    },
+    {
+      "id": "mars",
+      "name": { "en": "Mars", "ko": "화성" },
+      "description": {
+        "en": "g ≈ 3.721 m/s² — ~38% of Earth.",
+        "ko": "화성 중력 g ≈ 3.721 m/s² — 지구의 ~38%."
+      },
+      "style": { "color": "#C2410C", "icon": "🔴" },
+      "params": { "v_0": 0, "a": 3.721, "t": 2.5 }
+    },
+    {
+      "id": "jupiter",
+      "name": { "en": "Jupiter", "ko": "목성" },
+      "description": {
+        "en": "g ≈ 24.79 m/s² — 2.5× Earth.",
+        "ko": "목성 중력 g ≈ 24.79 m/s² — 지구의 2.5배."
+      },
+      "style": { "color": "#B45309", "icon": "🪐" },
+      "params": { "v_0": 0, "a": 24.79, "t": 1 }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "color": "scene.style.color",
+      "hCur": "max(0, v_0 * t + 0.5 * a * t * t)",
+      "hView": "max(hCur * 1.15, if(scene.id == 'earth', 50, 30))",
+      "padT": "44",
+      "padB": "if(scene.id == 'earth' || scene.id == 'jupiter', 28, 56)",
+      "plotH": "max(1, frame.height - padT - padB)",
+      "sy": "plotH / hView",
+      "groundY": "padT + plotH",
+      "ballY": "padT + min(hCur, hView) * sy",
+      "dropX": "if(scene.id == 'earth', frame.width * 0.45 + min(80, frame.width * 0.25) + 4, if(scene.id == 'jupiter', frame.width * 0.35, frame.width * 0.6))",
+      "ballR": "7",
+      "badgeText": "if(scene.id == 'earth', format('지구 · g = {:.1f} m/s² · t = {:.2f}s', a, t), if(scene.id == 'moon', format('달 · g = {:.2f} m/s² · t = {:.2f}s', a, t), if(scene.id == 'mars', format('화성 · g = {:.2f} m/s² · t = {:.2f}s', a, t), format('목성 · g = {:.2f} m/s² · t = {:.2f}s', a, t))))"
+    },
+    "children": [
+      {
+        "kind": "match",
+        "on": "scene.id",
+        "cases": {
+          "earth": {
+            "kind": "group",
+            "let": {
+              "buildingX": "frame.width * 0.45",
+              "buildingW": "min(80, frame.width * 0.25)",
+              "buildingH": "groundY - padT",
+              "scaleX": "buildingX - 44",
+              "step": "if(hView > 400, 100, if(hView > 100, 25, if(hView > 30, 10, 5)))",
+              "steps": "max(1, floor(hView / step))",
+              "windowRows": "max(3, floor(buildingH / 14))"
+            },
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": 0,
+                "w": "frame.width", "h": "frame.height",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "0", "x1": "0", "y1": "frame.height",
+                    "stops": [
+                      [0, "if(frame.isDark, '#0b1220', '#dbeafe')"],
+                      [1, "if(frame.isDark, '#1e293b', '#f0f9ff')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "rect",
+                "x": 0, "y": "groundY",
+                "w": "frame.width", "h": "frame.height - groundY",
+                "style": { "fill": "if(frame.isDark, '#1e293b', '#a8a29e')" }
+              },
+              {
+                "kind": "rect",
+                "x": "buildingX", "y": "padT",
+                "w": "buildingW", "h": "buildingH",
+                "style": {
+                  "fill": "if(frame.isDark, '#334155', '#94a3b8')",
+                  "stroke": "if(frame.isDark, '#0f172a', '#475569')",
+                  "lineWidth": 1
+                }
+              },
+
+              {
+                "kind": "repeat",
+                "of": { "range": [0, "windowRows"] },
+                "as": "rw",
+                "children": [
+                  {
+                    "kind": "repeat",
+                    "of": { "range": [0, 3] },
+                    "as": "cw",
+                    "children": [
+                      {
+                        "kind": "rect",
+                        "x": "buildingX + 6 + cw * ((buildingW - 12) / 3)",
+                        "y": "padT + 6 + rw * ((buildingH - 12) / windowRows)",
+                        "w": "(buildingW - 12) / 3 - 2",
+                        "h": "(buildingH - 12) / windowRows - 3",
+                        "style": { "fill": "if(frame.isDark, 'rgba(250,230,150,0.55)', 'rgba(250,220,120,0.85)')" }
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              {
+                "kind": "line",
+                "x1": "scaleX + 10", "y1": "padT",
+                "x2": "scaleX + 10", "y2": "groundY",
+                "style": { "stroke": "if(frame.isDark, 'rgba(200,210,230,0.5)', 'rgba(60,70,90,0.55)')", "lineWidth": 1 }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [0, "steps + 1"] },
+                "as": "si",
+                "children": [
+                  {
+                    "kind": "group",
+                    "let": { "hv": "si * step", "yp": "padT + (hv / hView) * plotH" },
+                    "children": [
+                      {
+                        "kind": "line",
+                        "x1": "scaleX + 6", "y1": "yp",
+                        "x2": "scaleX + 10", "y2": "yp",
+                        "style": { "stroke": "if(frame.isDark, 'rgba(200,210,230,0.5)', 'rgba(60,70,90,0.55)')", "lineWidth": 1 }
+                      },
+                      {
+                        "kind": "text",
+                        "x": "scaleX + 3", "y": "yp",
+                        "text": "format('{}m', toLocaleInt(hv))",
+                        "style": {
+                          "fill": "if(frame.isDark, 'rgba(220,230,245,0.85)', 'rgba(40,50,70,0.85)')",
+                          "font": "500 9px -apple-system, sans-serif",
+                          "textAlign": "right",
+                          "textBaseline": "middle"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              {
+                "kind": "repeat",
+                "of": { "items": "[{h:10,label:'3층'},{h:50,label:'아파트'},{h:274,label:'63빌딩'},{h:555,label:'롯데월드타워'}]" },
+                "as": "mk",
+                "children": [
+                  {
+                    "kind": "if",
+                    "cond": "mk.h <= hView",
+                    "then": {
+                      "kind": "group",
+                      "let": { "yp": "padT + (mk.h / hView) * plotH" },
+                      "children": [
+                        {
+                          "kind": "line",
+                          "x1": "buildingX + buildingW",
+                          "y1": "yp",
+                          "x2": "buildingX + buildingW + 12",
+                          "y2": "yp",
+                          "style": {
+                            "stroke": "if(frame.isDark, 'rgba(220,200,130,0.5)', 'rgba(180,140,40,0.55)')",
+                            "lineWidth": 1,
+                            "lineDash": [3, 3]
+                          }
+                        },
+                        {
+                          "kind": "text",
+                          "x": "buildingX + buildingW + 14",
+                          "y": "yp",
+                          "text": "mk.label",
+                          "style": {
+                            "fill": "if(frame.isDark, 'rgba(230,200,120,0.95)', 'rgba(120,90,20,0.9)')",
+                            "font": "500 9px -apple-system, sans-serif",
+                            "textAlign": "left",
+                            "textBaseline": "middle"
+                          }
+                        }
+                      ]
+                    },
+                    "else": { "kind": "group", "children": [] }
+                  }
+                ]
+              },
+
+              {
+                "kind": "circle",
+                "cx": "dropX + 1", "cy": "ballY + 2",
+                "r": "ballR",
+                "style": { "fill": "hexAlpha(color, 0.28)" }
+              },
+              {
+                "kind": "circle",
+                "cx": "dropX", "cy": "ballY",
+                "r": "ballR",
+                "style": {
+                  "fill": "color",
+                  "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                  "lineWidth": 1.5
+                }
+              }
+            ]
+          },
+
+          "moon": {
+            "kind": "group",
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": 0,
+                "w": "frame.width", "h": "frame.height",
+                "style": { "fill": "if(frame.isDark, '#020617', '#0f172a')" }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [0, 40] },
+                "as": "si",
+                "children": [
+                  {
+                    "kind": "rect",
+                    "x": "mod(7 * (si + 1) * 13, max(1, frame.width))",
+                    "y": "mod(7 * (si + 1) * 7, max(1, frame.height * 0.65))",
+                    "w": "if(mod(si * 3, 2) == 1, 0.6, 1)",
+                    "h": "if(mod(si * 3, 2) == 1, 0.6, 1)",
+                    "style": { "fill": "'rgba(255,255,255,0.75)'" }
+                  }
+                ]
+              },
+              {
+                "kind": "rect",
+                "x": 0, "y": "groundY",
+                "w": "frame.width", "h": "frame.height - groundY",
+                "style": { "fill": "if(frame.isDark, '#475569', '#94a3b8')" }
+              },
+
+              {
+                "kind": "rect",
+                "x": "frame.width * 0.2 - 6",
+                "y": "groundY - 22",
+                "w": 12, "h": 18,
+                "style": { "fill": "if(frame.isDark, '#e2e8f0', '#f8fafc')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "frame.width * 0.2",
+                "cy": "groundY - 28",
+                "r": 7,
+                "style": { "fill": "if(frame.isDark, '#e2e8f0', '#f8fafc')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "frame.width * 0.2",
+                "cy": "groundY - 28",
+                "r": 5,
+                "style": { "fill": "if(frame.isDark, '#0369a1', '#1e3a8a')" }
+              },
+
+              {
+                "kind": "line",
+                "x1": "dropX", "y1": "groundY",
+                "x2": "dropX", "y2": "ballY",
+                "style": { "stroke": "hexAlpha(color, 0.5)", "lineWidth": 1, "lineDash": [2, 4] }
+              },
+              {
+                "kind": "circle",
+                "cx": "dropX", "cy": "ballY",
+                "r": "ballR",
+                "style": {
+                  "fill": "'#cbd5e1'",
+                  "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "dropX + ballR + 6",
+                "y": "ballY",
+                "text": "format('{:.2f} m', hCur)",
+                "style": {
+                  "fill": "'rgba(230,240,255,0.9)'",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "left",
+                  "textBaseline": "middle"
+                }
+              }
+            ]
+          },
+
+          "mars": {
+            "kind": "group",
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": 0,
+                "w": "frame.width", "h": "frame.height",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "0", "x1": "0", "y1": "frame.height",
+                    "stops": [
+                      [0, "if(frame.isDark, '#3c1412', '#fecaca')"],
+                      [1, "if(frame.isDark, '#7c2d12', '#fed7aa')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "rect",
+                "x": 0, "y": "groundY",
+                "w": "frame.width", "h": "frame.height - groundY",
+                "style": { "fill": "if(frame.isDark, '#991b1b', '#b45309')" }
+              },
+
+              {
+                "kind": "rect",
+                "x": "frame.width * 0.18 - 12",
+                "y": "groundY - 10",
+                "w": 24, "h": 8,
+                "style": { "fill": "if(frame.isDark, '#e2e8f0', '#f5f5f4')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "frame.width * 0.18 - 8",
+                "cy": "groundY - 1",
+                "r": 3,
+                "style": { "fill": "if(frame.isDark, '#0f172a', '#1f2937')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "frame.width * 0.18",
+                "cy": "groundY - 1",
+                "r": 3,
+                "style": { "fill": "if(frame.isDark, '#0f172a', '#1f2937')" }
+              },
+              {
+                "kind": "circle",
+                "cx": "frame.width * 0.18 + 8",
+                "cy": "groundY - 1",
+                "r": 3,
+                "style": { "fill": "if(frame.isDark, '#0f172a', '#1f2937')" }
+              },
+
+              {
+                "kind": "line",
+                "x1": "dropX", "y1": "groundY",
+                "x2": "dropX", "y2": "ballY",
+                "style": { "stroke": "hexAlpha(color, 0.35)", "lineWidth": 1, "lineDash": [2, 4] }
+              },
+              {
+                "kind": "circle",
+                "cx": "dropX", "cy": "ballY",
+                "r": "ballR",
+                "style": {
+                  "fill": "color",
+                  "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "dropX + ballR + 6",
+                "y": "ballY",
+                "text": "format('{:.2f} m', hCur)",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(254,240,215,0.95)', 'rgba(50,20,10,0.92)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "left",
+                  "textBaseline": "middle"
+                }
+              }
+            ]
+          },
+
+          "jupiter": {
+            "kind": "group",
+            "children": [
+              {
+                "kind": "rect",
+                "x": 0, "y": 0,
+                "w": "frame.width", "h": "frame.height",
+                "style": {
+                  "fill": {
+                    "kind": "linear",
+                    "x0": "0", "y0": "0", "x1": "0", "y1": "frame.height",
+                    "stops": [
+                      [0, "if(frame.isDark, '#422006', '#fef3c7')"],
+                      [0.2, "if(frame.isDark, '#78350f', '#fde68a')"],
+                      [0.4, "if(frame.isDark, '#92400e', '#fbbf24')"],
+                      [0.6, "if(frame.isDark, '#a16207', '#f59e0b')"],
+                      [0.8, "if(frame.isDark, '#7c2d12', '#d97706')"],
+                      [1, "if(frame.isDark, '#451a03', '#b45309')"]
+                    ]
+                  }
+                }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [0, 7] },
+                "as": "bi",
+                "children": [
+                  {
+                    "kind": "line",
+                    "x1": 0,
+                    "y1": "(bi / 7) * frame.height + 6 + sin(bi * 1.7) * 4",
+                    "x2": "frame.width",
+                    "y2": "(bi / 7) * frame.height + 6 + sin(bi * 1.7) * 4",
+                    "style": {
+                      "stroke": "if(frame.isDark, 'rgba(0,0,0,0.18)', 'rgba(120,60,20,0.2)')",
+                      "lineWidth": 1.5
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "ellipse",
+                "cx": "frame.width * 0.72",
+                "cy": "frame.height * 0.62",
+                "rx": 28,
+                "ry": 14,
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(180,40,20,0.6)', 'rgba(185,80,50,0.55)')",
+                  "stroke": "if(frame.isDark, 'rgba(140,20,10,0.7)', 'rgba(120,40,20,0.5)')",
+                  "lineWidth": 1
+                }
+              },
+              {
+                "kind": "line",
+                "x1": 0, "y1": "groundY",
+                "x2": "frame.width", "y2": "groundY",
+                "style": { "stroke": "'rgba(0,0,0,0.35)'", "lineWidth": 1, "lineDash": [4, 4] }
+              },
+
+              {
+                "kind": "line",
+                "x1": "dropX", "y1": "groundY",
+                "x2": "dropX", "y2": "ballY",
+                "style": { "stroke": "hexAlpha(color, 0.55)", "lineWidth": 2 }
+              },
+              {
+                "kind": "circle",
+                "cx": "dropX", "cy": "ballY",
+                "r": "ballR",
+                "style": {
+                  "fill": "color",
+                  "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                  "lineWidth": 1.5
+                }
+              },
+              {
+                "kind": "text",
+                "x": "dropX + ballR + 6",
+                "y": "ballY",
+                "text": "format('{:.2f} m', hCur)",
+                "style": {
+                  "fill": "if(frame.isDark, 'rgba(254,240,215,0.95)', 'rgba(60,30,0,0.92)')",
+                  "font": "500 10px -apple-system, sans-serif",
+                  "textAlign": "left",
+                  "textBaseline": "middle"
+                }
+              }
+            ]
+          }
+        }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": 12, "y": 12,
+        "w": "min(frame.width - 24, 260)",
+        "h": 22,
+        "r": 11,
+        "style": {
+          "fill": "hexAlpha(color, if(frame.isDark, 0.3, 0.16))",
+          "stroke": "color",
+          "lineWidth": 1.2
+        }
+      },
+      {
+        "kind": "text",
+        "x": 22, "y": "12 + 11",
+        "text": "badgeText",
+        "style": {
+          "fill": "if(scene.id == 'moon', 'rgba(240,245,255,0.95)', color)",
+          "font": "600 11px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "s = ", "ko": "s = " },
+        "value": "v_0 * t + 0.5 * a * t * t",
+        "format": ".2f"
+      }
+    ]
+  }
+}

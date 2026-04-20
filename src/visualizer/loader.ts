@@ -21,10 +21,6 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-kepler-orbit-3d" */
     './built-in/kepler-orbit-3d'
   ),
-  'freefall-2d': () => import(
-    /* webpackChunkName: "viz-freefall-2d" */
-    './built-in/freefall-2d'
-  ),
   'sine-wave-2d': () => import(
     /* webpackChunkName: "viz-sine-wave-2d" */
     './built-in/sine-wave-2d'
