@@ -10,7 +10,7 @@ describe('exponential-decay-2d spec.json', () => {
   it('핵심 필드 보존', () => {
     const parsed = validateSpec(spec);
     expect(parsed.id).toBe('exponential-decay-2d');
-    expect(parsed.catalog).toBe('exponential-functions/exponential-decay');
+    expect(parsed.catalog).toBe('biology/exponential-growth');
     expect(parsed.renderer).toBe('2d');
     expect(parsed.scenes).toHaveLength(4);
     expect(parsed.scenes.map((s) => s.id)).toEqual(['caffeine', 'battery', 'carbon14', 'drug']);

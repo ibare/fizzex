@@ -157,8 +157,9 @@ const solutions = solve(equation);         // x = 2, x = -2
 import {
   parseLatex,
   buildSemanticMap,
-  getVisualizersForCatalogId,
-  loadVisualizer,
+  getVisualizersForCatalog,
+  loadVisualizerSpec,
+  createVisualizerFromSpec,
 } from 'fizzex';
 import { ExplorerOverlay } from 'fizzex/headless';
 
@@ -168,16 +169,18 @@ const semanticMap = buildSemanticMap(ast);
 const catalogId = semanticMap.get(ast.id)?.catalogId;
 
 // Discover every visualizer linked to this formula
-const refs = catalogId ? getVisualizersForCatalogId(catalogId) : [];
+const refs = catalogId ? getVisualizersForCatalog(catalogId) : [];
 // refs: [{ id: 'kepler-orbit-2d', name: '지구 궤도 — 2D', ... },
 //        { id: 'kepler-orbit-3d', name: '지구 궤도 — 3D', ... }]
 
-// Load on demand (each visualizer is a separate chunk)
-const viz = refs[0] ? await loadVisualizer(refs[0].id) : null;
+// Load spec + mount (each spec is a separate JSON chunk)
+const raw = refs[0] ? await loadVisualizerSpec(refs[0].id) : null;
+const instance = raw
+  ? createVisualizerFromSpec(container, raw, { width: 400, height: 400 })
+  : null;
 
 // Or let ExplorerOverlay surface them as toggleable banner buttons
-const overlay = new ExplorerOverlay(container, { baseFontSize: 20 });
-overlay.setAst(ast);
+const overlay = new ExplorerOverlay({ ast, theme: 'light' });
 ```
 
 ## Plugin Architecture
@@ -232,7 +235,11 @@ import { analyzeExpression } from 'fizzex';
 import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizzex';
 
 // Visualization
-import { loadVisualizer, getVisualizersForCatalogId } from 'fizzex';
+import {
+  createVisualizerFromSpec,
+  loadVisualizerSpec,
+  getVisualizersForCatalog,
+} from 'fizzex';
 
 // Node creators
 import {

@@ -1,7 +1,7 @@
 {
   "$schema": "fizzex-visualizer/v1",
   "id": "exponential-decay-2d",
-  "catalog": "exponential-functions/exponential-decay",
+  "catalog": "biology/exponential-growth",
 
   "name": { "en": "Exponential Decay — 2D", "ko": "지수 감소 — 2D" },
   "description": {
