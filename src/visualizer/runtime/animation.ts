@@ -10,15 +10,14 @@
  * store 내부 레코드를 exprCtx에 그대로 바인딩한다 (live view).
  */
 
-import { evalExpr } from './adapter2d/render-context';
-import type { RenderContext } from './adapter2d/render-context';
+import { evalExpr, type EvalContext } from './expr/eval-context';
 import type { AnimationSpec } from './types/state';
 import type { StateStore } from './state';
 
 export function runAnimationFrame(
   spec: AnimationSpec | undefined,
   store: StateStore,
-  rc: RenderContext,
+  rc: EvalContext,
 ): void {
   if (!spec?.onFrame || spec.onFrame.length === 0) return;
 

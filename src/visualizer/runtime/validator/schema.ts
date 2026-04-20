@@ -151,6 +151,25 @@ const themeSchema = z
   })
   .partial();
 
+const cameraTargetSchema = z.tuple([
+  z.union([exprString, z.number()]),
+  z.union([exprString, z.number()]),
+  z.union([exprString, z.number()]),
+]);
+
+const cameraSchema = z.object({
+  kind: z.literal('perspective'),
+  fov: z.number().positive().optional(),
+  near: z.number().positive().optional(),
+  far: z.number().positive().optional(),
+  state: z.object({
+    theta: z.string().min(1),
+    phi: z.string().min(1),
+    distance: z.string().min(1),
+    target: cameraTargetSchema.optional(),
+  }),
+});
+
 const catalogRefRegex = /^[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*$/;
 
 export const visualizerSpecSchema = z
@@ -171,6 +190,7 @@ export const visualizerSpecSchema = z
     state: z.array(stateDeclSchema).optional(),
     animation: animationSchema.optional(),
     viewports: z.record(z.string(), viewportSchema),
+    camera: cameraSchema.optional(),
     root: elementSchema,
     overlay: overlaySchema.optional(),
     interaction: interactionSchema.optional(),
@@ -214,6 +234,35 @@ export const visualizerSpecSchema = z
           });
         }
         stateIds.add(s.id);
+      }
+    }
+
+    if (spec.renderer === '3d' && !spec.camera) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['camera'],
+        message: 'camera is required when renderer === "3d"',
+      });
+    }
+    if (spec.renderer === '2d' && spec.camera) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['camera'],
+        message: 'camera must not be set when renderer === "2d"',
+      });
+    }
+    if (spec.camera) {
+      const stateIds = new Set((spec.state ?? []).map((s) => s.id));
+      const refs = spec.camera.state;
+      for (const key of ['theta', 'phi', 'distance'] as const) {
+        const ref = refs[key];
+        if (!stateIds.has(ref)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['camera', 'state', key],
+            message: `camera.state.${key} references unknown state id "${ref}"`,
+          });
+        }
       }
     }
   });

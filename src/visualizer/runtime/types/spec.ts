@@ -17,6 +17,7 @@ import type { OverlaySpec } from './overlay';
 import type { ViewportSpec } from './viewport';
 import type { ThemeSpec } from './theme';
 import type { DisplayOptionId } from './display-options';
+import type { CameraSpec } from './camera';
 
 export type RendererKind = '2d' | '3d';
 
@@ -40,6 +41,9 @@ export interface VisualizerSpec {
   animation?: AnimationSpec;
 
   viewports: Record<string, ViewportSpec>;
+
+  /** renderer === '3d' 일 때 필수. §12.1 */
+  camera?: CameraSpec;
 
   root: ElementNode;
 

@@ -9,13 +9,12 @@
  * 고급 포맷(sci/percent 등)은 Expression 내 `format()` 호출을 권장.
  */
 
-import { evalExpr } from './adapter2d/render-context';
-import type { RenderContext } from './adapter2d/render-context';
+import { evalExpr, type EvalContext } from './expr/eval-context';
 import { resolveI18n } from './types/i18n';
 import type { OverlaySpec, OverlayLine } from './types/overlay';
 
 export interface OverlayController {
-  renderFrame(rc: RenderContext): void;
+  renderFrame(rc: EvalContext): void;
   detach(): void;
 }
 

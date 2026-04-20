@@ -9,11 +9,15 @@
  * 이벤트별 Expression 로컬: `event.x`, `event.y`, `event.deltaY`.
  */
 
-import { evalExpr, evalBoolOr, evalNumOr, extendRenderContext } from './adapter2d/render-context';
-import type { RenderContext } from './adapter2d/render-context';
+import {
+  evalExpr,
+  evalBoolOr,
+  evalNumOr,
+  extendEvalContext,
+  type EvalContext,
+} from './expr/eval-context';
 import type {
   InteractionSpec,
-  GestureSpec,
   GestureKind,
   HitTestSpec,
   InteractionAction,
@@ -30,7 +34,7 @@ export function attachInteraction(
   canvas: HTMLCanvasElement,
   spec: InteractionSpec | undefined,
   store: StateStore,
-  rcProvider: () => RenderContext,
+  rcProvider: () => EvalContext,
   onParam?: ParamSetter,
 ): InteractionController {
   if (!spec?.gestures || spec.gestures.length === 0) {
@@ -47,7 +51,7 @@ export function attachInteraction(
     const local = toLocal(e);
     const deltaY = e instanceof WheelEvent ? e.deltaY : 0;
     const eventLocals = { event: { x: local.x, y: local.y, deltaY } };
-    const rc = extendRenderContext(rcProvider(), eventLocals);
+    const rc = extendEvalContext(rcProvider(), eventLocals);
 
     for (const g of gestures) {
       if (g.kind !== kind) continue;
@@ -101,7 +105,7 @@ export function attachInteraction(
 function hitTestPass(
   hit: HitTestSpec,
   local: { x: number; y: number },
-  rc: RenderContext,
+  rc: EvalContext,
 ): boolean {
   if ('ref' in hit) {
     // Element id 참조 테이블은 Phase 5 compile에서 구체화. MVP에선 미지원.
@@ -135,7 +139,7 @@ function hitTestPass(
 function runActions(
   actions: readonly InteractionAction[],
   store: StateStore,
-  rc: RenderContext,
+  rc: EvalContext,
   onParam: ParamSetter | undefined,
 ): void {
   for (const a of actions) {

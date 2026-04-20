@@ -109,3 +109,47 @@ describe('validateSpec — invalid inputs', () => {
     expect(() => validateSpec(bad)).toThrow(VisualizerSpecValidationError);
   });
 });
+
+describe('validateSpec — camera (3D)', () => {
+  const spec3d = {
+    ...baseValidSpec,
+    id: 'kepler-orbit-3d',
+    renderer: '3d' as const,
+    state: [
+      { id: 'camTheta', type: 'number' as const, default: 0 },
+      { id: 'camPhi', type: 'number' as const, default: 1 },
+      { id: 'camDistance', type: 'number' as const, default: 5 },
+    ],
+    camera: {
+      kind: 'perspective' as const,
+      fov: 50,
+      near: 0.1,
+      far: 2000,
+      state: { theta: 'camTheta', phi: 'camPhi', distance: 'camDistance' },
+    },
+  };
+
+  it('accepts valid 3D spec with camera + state', () => {
+    const spec = validateSpec(spec3d);
+    expect(spec.camera?.kind).toBe('perspective');
+  });
+
+  it('3D without camera → error', () => {
+    const { camera: _c, ...rest } = spec3d;
+    void _c;
+    expect(() => validateSpec(rest)).toThrow(/camera is required/);
+  });
+
+  it('2D with camera → error', () => {
+    const bad = { ...spec3d, renderer: '2d' as const };
+    expect(() => validateSpec(bad)).toThrow(/camera must not be set/);
+  });
+
+  it('camera.state.theta 참조가 state[]에 없으면 error', () => {
+    const bad = {
+      ...spec3d,
+      camera: { ...spec3d.camera, state: { ...spec3d.camera.state, theta: 'wrongId' } },
+    };
+    expect(() => validateSpec(bad)).toThrow(/unknown state id "wrongId"/);
+  });
+});
