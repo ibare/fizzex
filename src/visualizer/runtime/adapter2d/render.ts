@@ -27,11 +27,9 @@ export function renderRoot(ctx: CanvasRenderingContext2D, node: ElementNode, rc:
   let active: RenderContext = rc;
 
   if (node.let) {
-    const scope: Record<string, unknown> = {};
     for (const [k, expr] of Object.entries(node.let)) {
-      scope[k] = evalExpr(expr, active);
+      active = extendRenderContext(active, { [k]: evalExpr(expr, active) });
     }
-    active = extendRenderContext(active, scope);
   }
 
   if (node.viewport) {

@@ -94,6 +94,8 @@
         "kind": "functionCurve",
         "viewport": "abstractWave",
         "fn": "A * sin(\\omega * x + \\varphi)",
+        "xMin": "state.autoT - 6",
+        "xMax": "state.autoT",
         "style": { "stroke": "scene.style.color", "lineWidth": 2 }
       },
 
@@ -128,7 +130,7 @@
             "let": {
               "cy": "frame.height * 0.71",
               "bodyX": "frame.width * 0.28",
-              "bodyW": 82,
+              "bodyW": "82",
               "bodyH": "min(frame.height * 0.58 - 40, 120)",
               "yNorm": "clamp((A * sin(\\omega * state.autoT + \\varphi)) / max(0.000001, abs(A)), -1, 1)",
               "dispX": "bodyX + yNorm * 14",
@@ -209,7 +211,7 @@
             "kind": "group",
             "let": {
               "baseY": "frame.height * 0.71",
-              "range": 60,
+              "range": "60",
               "surfaceY": "baseY - (A * sin(\\omega * state.autoT + \\varphi)) / max(0.000001, abs(A)) * range",
               "left": "frame.width * 0.15",
               "right": "frame.width * 0.85",
