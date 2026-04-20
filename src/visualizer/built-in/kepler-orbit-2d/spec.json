@@ -1,0 +1,276 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "kepler-orbit-2d",
+  "catalog": "astronomy/kepler-third",
+
+  "name": { "en": "Earth orbit — 2D", "ko": "지구 궤도 — 2D" },
+  "description": {
+    "en": "T² = (4π²/GM)·a³. ISS·GPS·GEO·Moon anchors show how orbital period scales with radius.",
+    "ko": "T² = (4π²/GM)·a³. ISS·GPS·정지궤도·달 앵커로 궤도 반지름과 주기 관계를 체감한다."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "iss",
+      "name": { "en": "ISS", "ko": "ISS" },
+      "description": {
+        "en": "International Space Station — altitude ~400 km, ~90 min period.",
+        "ko": "국제우주정거장 — 고도 ≈ 400 km, 약 90분 주기."
+      },
+      "style": { "color": "#ffd466", "icon": "🛰️" },
+      "params": { "a": 6771 }
+    },
+    {
+      "id": "gps",
+      "name": { "en": "GPS", "ko": "GPS" },
+      "description": {
+        "en": "GPS satellite — altitude ~20,200 km, ~12 h period.",
+        "ko": "GPS 위성 — 고도 ≈ 20,200 km, 약 12시간 주기."
+      },
+      "style": { "color": "#60a5fa", "icon": "📡" },
+      "params": { "a": 26560 }
+    },
+    {
+      "id": "geo",
+      "name": { "en": "Geostationary", "ko": "정지궤도" },
+      "description": {
+        "en": "Geostationary orbit — altitude ~35,786 km, exactly 24 h.",
+        "ko": "정지궤도 — 고도 ≈ 35,786 km, 정확히 24시간."
+      },
+      "style": { "color": "#a78bfa", "icon": "🌐" },
+      "params": { "a": 42164 }
+    },
+    {
+      "id": "moon",
+      "name": { "en": "Moon", "ko": "달" },
+      "description": {
+        "en": "The Moon — ~27.3 day period.",
+        "ko": "달 — 약 27.3일 주기."
+      },
+      "style": { "color": "#e2e8f0", "icon": "🌙" },
+      "params": { "a": 384400 }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "color": "scene.style.color",
+      "icon": "scene.style.icon",
+
+      "rEarth": "6371",
+      "padding": "40",
+      "minSide": "min(frame.width, frame.height)",
+      "maxOrbit": "max(a, 2 * rEarth)",
+      "scale": "(minSide - padding) / (2 * maxOrbit)",
+
+      "cx": "frame.width / 2",
+      "cy": "frame.height / 2",
+      "earthPx": "rEarth * scale",
+      "orbitPx": "a * scale",
+
+      "GM": "3.98574e14",
+      "T": "2 * pi * sqrt(pow(a * 1000, 3) / GM)",
+      "angle": "mod(frame.elapsed * 2 * pi * 600 / max(T, 0.001), 2 * pi)",
+      "satX": "cx + orbitPx * cos(angle)",
+      "satY": "cy + orbitPx * sin(angle)",
+
+      "altitude": "a - rEarth",
+      "vel": "if(T > 0, 2 * pi * a / T, 0)",
+
+      "showAlt": "orbitPx - earthPx > 15"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0, "y": 0,
+        "w": "frame.width", "h": "frame.height",
+        "style": { "fill": "if(frame.isDark, '#0a0a1a', '#f0f4f8')" }
+      },
+
+      {
+        "kind": "if",
+        "cond": "frame.isDark",
+        "then": {
+          "kind": "repeat",
+          "of": { "range": [0, 120] },
+          "as": "i",
+          "children": [
+            {
+              "kind": "circle",
+              "cx": "frame.width * mod(sin((i + 1) * 12.9898) * 43758.5453, 1)",
+              "cy": "frame.height * mod(sin((i + 1) * 78.233) * 43758.5453, 1)",
+              "r": "0.5 + 1.5 * mod(sin((i + 1) * 45.164) * 12345.6789, 1)",
+              "style": {
+                "fill": "hexAlpha('#ffffff', (0.5 + 0.5 * mod(sin((i + 1) * 4.137) * 7777.7777, 1)) * 0.6)"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "circle",
+        "cx": "cx", "cy": "cy", "r": "orbitPx",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(130,180,255,0.5)', 'rgba(60,120,220,0.4)')",
+          "lineWidth": 1.5,
+          "lineDash": [6, 4]
+        }
+      },
+
+      {
+        "kind": "circle",
+        "cx": "cx", "cy": "cy", "r": "earthPx + 3",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(100,160,255,0.25)', 'rgba(70,130,220,0.2)')",
+          "lineWidth": 4
+        }
+      },
+
+      {
+        "kind": "circle",
+        "cx": "cx", "cy": "cy", "r": "earthPx",
+        "style": {
+          "fill": {
+            "kind": "radial",
+            "cx0": "cx - earthPx * 0.3", "cy0": "cy - earthPx * 0.3", "r0": 0,
+            "cx1": "cx", "cy1": "cy", "r1": "earthPx",
+            "stops": [
+              [0, "if(frame.isDark, '#4a90d9', '#6bb5ff')"],
+              [0.7, "if(frame.isDark, '#2a5f9e', '#4a90d9')"],
+              [1, "if(frame.isDark, '#1a3a6e', '#2a6fc0')"]
+            ]
+          }
+        }
+      },
+
+      {
+        "kind": "if",
+        "cond": "showAlt",
+        "then": {
+          "kind": "group",
+          "let": {
+            "surfY": "cy + earthPx",
+            "orbitY": "cy + orbitPx",
+            "midY": "(surfY + orbitY) / 2"
+          },
+          "children": [
+            {
+              "kind": "line",
+              "x1": "cx", "y1": "surfY",
+              "x2": "cx", "y2": "orbitY",
+              "style": {
+                "stroke": "if(frame.isDark, 'rgba(255,200,100,0.4)', 'rgba(200,150,50,0.35)')",
+                "lineWidth": 1,
+                "lineDash": [3, 3]
+              }
+            },
+            {
+              "kind": "text",
+              "x": "cx + 8", "y": "midY",
+              "text": "format('{} km', toLocaleInt(altitude))",
+              "style": {
+                "fill": "if(frame.isDark, 'rgba(255,220,140,0.8)', 'rgba(180,130,50,0.8)')",
+                "font": "500 11px -apple-system, sans-serif",
+                "textAlign": "left",
+                "textBaseline": "middle"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [1, 13] },
+        "as": "ti",
+        "children": [
+          {
+            "kind": "circle",
+            "cx": "cx + orbitPx * cos(angle - ti * 0.08)",
+            "cy": "cy + orbitPx * sin(angle - ti * 0.08)",
+            "r": "2 * (1 - ti / 12)",
+            "style": { "fill": "hexAlpha(color, (1 - ti / 12) * 0.3)" }
+          }
+        ]
+      },
+
+      {
+        "kind": "circle",
+        "cx": "satX", "cy": "satY", "r": 8,
+        "style": { "fill": "hexAlpha(color, 0.22)" }
+      },
+      {
+        "kind": "circle",
+        "cx": "satX", "cy": "satY", "r": 4,
+        "style": {
+          "fill": "color",
+          "stroke": "if(frame.isDark, '#0a0a1a', '#f0f4f8')",
+          "lineWidth": 1
+        }
+      },
+
+      {
+        "kind": "text",
+        "x": 16, "y": 22,
+        "text": "icon",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(226,232,240,0.95)', 'rgba(30,41,59,0.95)')",
+          "font": "600 20px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "top"
+        }
+      },
+
+      {
+        "kind": "text",
+        "x": "frame.width - 16", "y": 18,
+        "text": "if(T < 3600, format('주기: {:.1f}분', T / 60), if(T < 86400, format('주기: {:.1f}시간', T / 3600), format('주기: {:.1f}일', T / 86400)))",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(200,210,230,0.9)', 'rgba(60,70,90,0.9)')",
+          "font": "500 12px -apple-system, sans-serif",
+          "textAlign": "right",
+          "textBaseline": "top"
+        }
+      },
+      {
+        "kind": "text",
+        "x": "frame.width - 16", "y": 36,
+        "text": "format('속도: {:.2f} km/s', vel)",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(200,210,230,0.9)', 'rgba(60,70,90,0.9)')",
+          "font": "500 12px -apple-system, sans-serif",
+          "textAlign": "right",
+          "textBaseline": "top"
+        }
+      },
+      {
+        "kind": "text",
+        "x": "frame.width - 16", "y": 54,
+        "text": "format('반지름: {} km', toLocaleInt(a))",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(200,210,230,0.9)', 'rgba(60,70,90,0.9)')",
+          "font": "500 12px -apple-system, sans-serif",
+          "textAlign": "right",
+          "textBaseline": "top"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "T = ", "ko": "T = " },
+        "value": "2 * pi * sqrt(pow(a * 1000, 3) / 3.98574e14)",
+        "format": ".2f"
+      }
+    ]
+  }
+}

@@ -13,10 +13,6 @@ import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 
 /** 빌트인 Visualizer 로더 매핑 */
 const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer }>> = {
-  'kepler-orbit-2d': () => import(
-    /* webpackChunkName: "viz-kepler-orbit-2d" */
-    './built-in/kepler-orbit-2d'
-  ),
   'kepler-orbit-3d': () => import(
     /* webpackChunkName: "viz-kepler-orbit-3d" */
     './built-in/kepler-orbit-3d'
