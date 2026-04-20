@@ -1,0 +1,199 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "pythagorean-tv-2d",
+  "catalog": "geometry/pythagorean-theorem",
+
+  "name": { "en": "Pythagorean — TV", "ko": "TV 화면 — 피타고라스" },
+  "description": {
+    "en": "TV screen width·height → diagonal (inch). 55\" 16:9 ≈ 1.218m × 0.685m.",
+    "ko": "TV 가로·세로(m) → 대각선(인치). 55\" 16:9 ≈ 1.218m × 0.685m."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "tv",
+      "name": { "en": "TV", "ko": "TV" },
+      "description": {
+        "en": "inch = c * 39.3701",
+        "ko": "inch = c * 39.3701"
+      },
+      "style": { "color": "#7C3AED", "icon": "📺" },
+      "params": { "a": 1.218, "b": 0.685 }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "brand": "'#7C3AED'",
+      "bg": "if(frame.isDark, '#0b1220', '#f1f5f9')",
+      "c": "sqrt(a * a + b * b)",
+      "inch": "c * 39.3701",
+      "padX": "20",
+      "padT": "14",
+      "measureMargin": "36",
+      "bezelPx": "min(frame.width, frame.height) * 0.05",
+      "standHPx": "min(frame.width, frame.height) * 0.1",
+      "areaW": "max(1, frame.width - padX * 2 - bezelPx * 2)",
+      "areaH": "max(1, frame.height - padT - measureMargin - bezelPx * 2 - standHPx)",
+      "scale": "min(areaW / a, areaH / b)",
+      "screenW": "a * scale",
+      "screenH": "b * scale",
+      "screenX": "(frame.width - screenW) / 2",
+      "screenY": "padT + bezelPx",
+      "tvX": "screenX - bezelPx",
+      "tvY": "screenY - bezelPx",
+      "tvW": "screenW + bezelPx * 2",
+      "tvH": "screenH + bezelPx * 2",
+      "standW": "tvW * 0.35",
+      "standNeckW": "tvW * 0.08",
+      "standX": "tvX + (tvW - standW) / 2",
+      "standY": "tvY + tvH",
+      "dimColor": "if(frame.isDark, 'rgba(235,240,250,0.85)', 'rgba(30,40,55,0.85)')",
+      "dimStroke": "if(frame.isDark, 'rgba(235,240,250,0.6)', 'rgba(30,40,55,0.55)')",
+      "badgeBg": "if(frame.isDark, 'rgba(124,58,237,0.2)', 'rgba(124,58,237,0.14)')",
+      "bezelColor": "if(frame.isDark, '#1f2937', '#1e293b')"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": { "fill": "bg" }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": "tvX",
+        "y": "tvY",
+        "w": "tvW",
+        "h": "tvH",
+        "r": 6,
+        "style": { "fill": "bezelColor" }
+      },
+
+      {
+        "kind": "rect",
+        "x": "screenX",
+        "y": "screenY",
+        "w": "screenW",
+        "h": "screenH",
+        "style": {
+          "fill": {
+            "kind": "linear",
+            "x0": "screenX",
+            "y0": "screenY",
+            "x1": "screenX",
+            "y1": "screenY + screenH",
+            "stops": [
+              [0, "if(frame.isDark, '#1e293b', '#334155')"],
+              [1, "if(frame.isDark, '#0f172a', '#1e293b')"]
+            ]
+          }
+        }
+      },
+
+      {
+        "kind": "line",
+        "x1": "screenX",
+        "y1": "screenY + screenH",
+        "x2": "screenX + screenW",
+        "y2": "screenY",
+        "style": { "stroke": "brand", "lineWidth": 2, "lineDash": [6, 4] }
+      },
+
+      {
+        "kind": "text",
+        "x": "screenX + screenW / 2",
+        "y": "screenY + screenH / 2",
+        "text": "format('{}\"', formatN(inch))",
+        "style": {
+          "fill": "'rgba(245,248,255,0.9)'",
+          "font": "format('600 {}px -apple-system, sans-serif', formatN(min(42, screenH * 0.35)))",
+          "textAlign": "center",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "rect",
+        "x": "tvX + (tvW - standNeckW) / 2",
+        "y": "standY",
+        "w": "standNeckW",
+        "h": "standHPx * 0.5",
+        "style": { "fill": "if(frame.isDark, '#1f2937', '#334155')" }
+      },
+      {
+        "kind": "roundRect",
+        "x": "standX",
+        "y": "standY + standHPx * 0.5",
+        "w": "standW",
+        "h": "standHPx * 0.5",
+        "r": 3,
+        "style": { "fill": "if(frame.isDark, '#1f2937', '#334155')" }
+      },
+
+      {
+        "kind": "text",
+        "x": "screenX + screenW / 2",
+        "y": "frame.height - 20",
+        "text": "format('{}cm', formatN(a * 100))",
+        "style": {
+          "fill": "dimColor",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "bottom"
+        }
+      },
+      {
+        "kind": "text",
+        "x": "min(screenX + screenW + 22, frame.width - 6)",
+        "y": "screenY + screenH / 2",
+        "text": "format('{}cm', formatN(b * 100))",
+        "style": {
+          "fill": "dimColor",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": 10,
+        "y": 10,
+        "w": 110,
+        "h": 20,
+        "r": 10,
+        "style": { "fill": "badgeBg", "stroke": "brand", "lineWidth": 1.2 }
+      },
+      {
+        "kind": "text",
+        "x": 18,
+        "y": 20,
+        "text": "format('c = {}m', formatN(c))",
+        "style": {
+          "fill": "brand",
+          "font": "600 11px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "c = ", "ko": "c = " },
+        "value": "sqrt(a * a + b * b)",
+        "format": ".3f"
+      }
+    ]
+  }
+}
