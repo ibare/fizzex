@@ -12,12 +12,7 @@ import { registerVisualizer, getVisualizer } from './registry';
 import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 
 /** 빌트인 Visualizer 로더 매핑 */
-const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer }>> = {
-  'sine-wave-2d': () => import(
-    /* webpackChunkName: "viz-sine-wave-2d" */
-    './built-in/sine-wave-2d'
-  ),
-};
+const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer }>> = {};
 
 /** Visualizer를 ID로 로드 (비동기) */
 export async function loadVisualizer(id: string): Promise<FizzexVisualizer | null> {
