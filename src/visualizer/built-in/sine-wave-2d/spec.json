@@ -1,7 +1,7 @@
 {
   "$schema": "fizzex-visualizer/v1",
   "id": "sine-wave-2d",
-  "catalog": "trigonometry-basic/sine-wave",
+  "catalog": "physics/simple-harmonic",
 
   "name": { "en": "Sine Wave — 2D", "ko": "사인파 — 2D" },
   "description": {

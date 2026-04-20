@@ -36,6 +36,14 @@ export interface Mount2DOptions {
   theme?: Theme;
   locale?: string;
   initialSceneId?: string;
+  /** 카탈로그에서 추출된 parameter 기본값. scene preset과 머지된다 (scene 우선). */
+  catalogDefaults?: Readonly<Record<string, number>>;
+  /**
+   * 재생 배속 승수. displayOptions에 `timeScale`이 포함된 경우에만 효과.
+   * frame.dt에 곱해져 animation·viewport 등 시간 기반 계산에 적용.
+   * 기본 1. 편집기 UI 슬라이더로 외부에서 갱신 가능 (setTimeScale).
+   */
+  timeScale?: number;
 }
 
 export interface Visualizer2DInstance {
@@ -45,6 +53,7 @@ export interface Visualizer2DInstance {
   setActiveScene(id: string): void;
   setParam(id: string, value: number): void;
   setTheme(theme: Theme): void;
+  setTimeScale(scale: number): void;
   resize(width: number, height: number): void;
   destroy(): void;
 }
@@ -64,7 +73,10 @@ export function mount2d(
 
   const initialSceneId = opts.initialSceneId ?? spec.scenes[0].id;
   const initialScene = findScene(spec.scenes, initialSceneId);
-  const baseline = createBaselineSnapshot(initialScene.params ?? {}, {}, {});
+  const catalogDefaults = { ...(opts.catalogDefaults ?? {}) };
+  const baseline = createBaselineSnapshot(initialScene.params ?? {}, catalogDefaults, {});
+  const timeScaleEnabled = (spec.displayOptions ?? []).includes('timeScale');
+  const timeScale = { current: opts.timeScale ?? 1 };
 
   const store = createStateStore({
     stateDecls: spec.state,
@@ -82,7 +94,12 @@ export function mount2d(
     height: opts.height,
     theme: theme.current,
     onFrame: (ctx, frame) => {
-      const frameInfo: FrameInfo = { ...frame, isDark: theme.current === 'dark' };
+      const scaledDt = timeScaleEnabled ? frame.dt * timeScale.current : frame.dt;
+      const frameInfo: FrameInfo = {
+        ...frame,
+        dt: scaledDt,
+        isDark: theme.current === 'dark',
+      };
       const rc = buildFrameContext(spec, store, sceneCtrl, frameInfo);
       currentRc = rc;
 
@@ -137,6 +154,12 @@ export function mount2d(
     setTheme(next) {
       theme.current = next;
       graphics.theme = next;
+    },
+    setTimeScale(scale) {
+      if (!Number.isFinite(scale) || scale < 0) {
+        throw new RangeError(`setTimeScale: scale must be a non-negative finite number, got ${scale}`);
+      }
+      timeScale.current = scale;
     },
     resize(w, h) {
       graphics.resize(w, h);
