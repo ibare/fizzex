@@ -1,0 +1,249 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "quadratic-bridge-2d",
+  "catalog": "linear-functions/quadratic-standard",
+
+  "name": { "en": "Quadratic — Bridge Arch", "ko": "다리 아치 — 이차함수" },
+  "description": {
+    "en": "Parabola as a bridge arch. Roots = pillars, vertex = arch apex.",
+    "ko": "포물선을 다리 아치로. 근 = 교각 위치, 꼭짓점 = 정점 높이."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "bridge",
+      "name": { "en": "Bridge", "ko": "다리" },
+      "description": {
+        "en": "a<0 opens downward for an arch shape.",
+        "ko": "a<0 이면 위로 볼록한 아치."
+      },
+      "style": { "color": "#0EA5E9", "icon": "🌉" },
+      "params": { "a": -0.05, "b": 0, "c": 5 }
+    }
+  ],
+
+  "viewports": {
+    "main": {
+      "kind": "time-value",
+      "rect": { "x": "20", "y": "44", "w": "frame.width - 40", "h": "frame.height - 72" },
+      "xMin": "if(abs(a) < 1e-9, -50, if(b*b - 4*a*c >= 0, min((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)) - abs((-b + sqrt(b*b - 4*a*c)) / (2*a) - (-b - sqrt(b*b - 4*a*c)) / (2*a)) * 0.25, -b/(2*a) - 50))",
+      "xMax": "if(abs(a) < 1e-9, 50, if(b*b - 4*a*c >= 0, max((-b - sqrt(b*b - 4*a*c)) / (2*a), (-b + sqrt(b*b - 4*a*c)) / (2*a)) + abs((-b + sqrt(b*b - 4*a*c)) / (2*a) - (-b - sqrt(b*b - 4*a*c)) / (2*a)) * 0.25, -b/(2*a) + 50))",
+      "yMin": "min(-4, (c - b*b/(4*a)) - abs(c - b*b/(4*a)) * 0.1)",
+      "yMax": "max(2, (c - b*b/(4*a)) + abs(c - b*b/(4*a)) * 0.25)"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "brand": "'#0EA5E9'",
+      "D": "b*b - 4*a*c",
+      "hasRoots": "D >= 0 && abs(a) > 1e-9",
+      "sqD": "if(hasRoots, sqrt(D), 0)",
+      "r1": "if(hasRoots, (-b - sqD) / (2*a), 0)",
+      "r2": "if(hasRoots, (-b + sqD) / (2*a), 0)",
+      "rLow": "min(r1, r2)",
+      "rHigh": "max(r1, r2)",
+      "span": "if(hasRoots, rHigh - rLow, 0)",
+      "vx": "if(abs(a) < 1e-9, 0, -b/(2*a))",
+      "vy": "c - b*b/(4*a)",
+      "waterLevel": "0",
+      "xMinV": "if(abs(a) < 1e-9, -50, if(hasRoots, rLow - span * 0.25, vx - 50))",
+      "xMaxV": "if(abs(a) < 1e-9, 50, if(hasRoots, rHigh + span * 0.25, vx + 50))",
+      "yMinV": "min(-4, vy - abs(vy) * 0.1)",
+      "yMaxV": "max(2, vy + abs(vy) * 0.25)",
+      "areaLeft": "20",
+      "areaTop": "44",
+      "areaW": "frame.width - 40",
+      "areaH": "frame.height - 72",
+      "sxX": "areaW / (xMaxV - xMinV)",
+      "sxY": "areaH / (yMaxV - yMinV)",
+      "waterY": "areaTop + (yMaxV - waterLevel) * sxY"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": {
+          "fill": {
+            "kind": "linear",
+            "x0": "0", "y0": "0", "x1": "0", "y1": "frame.height * 0.7",
+            "stops": [
+              [0, "if(frame.isDark, '#0f172a', '#bfdbfe')"],
+              [1, "if(frame.isDark, '#1e3a8a', '#e0f2fe')"]
+            ]
+          }
+        }
+      },
+
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": "waterY",
+        "w": "frame.width",
+        "h": "frame.height - waterY",
+        "style": {
+          "fill": {
+            "kind": "linear",
+            "x0": "0", "y0": "waterY", "x1": "0", "y1": "frame.height",
+            "stops": [
+              [0, "if(frame.isDark, '#1e3a8a', '#3b82f6')"],
+              [1, "if(frame.isDark, '#0c4a6e', '#1e40af')"]
+            ]
+          }
+        }
+      },
+      {
+        "kind": "line",
+        "x1": 0,
+        "y1": "waterY",
+        "x2": "frame.width",
+        "y2": "waterY",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(191,219,254,0.45)', 'rgba(255,255,255,0.65)')",
+          "lineWidth": 1
+        }
+      },
+
+      {
+        "kind": "if",
+        "cond": "hasRoots",
+        "then": {
+          "kind": "group",
+          "children": [
+            {
+              "kind": "rect",
+              "x": "areaLeft + (rLow - xMinV) * sxX - 7",
+              "y": "waterY",
+              "w": 14,
+              "h": "frame.height - waterY",
+              "style": { "fill": "if(frame.isDark, '#475569', '#64748b')" }
+            },
+            {
+              "kind": "rect",
+              "x": "areaLeft + (rLow - xMinV) * sxX - 11",
+              "y": "frame.height - 10",
+              "w": 22,
+              "h": 10,
+              "style": { "fill": "if(frame.isDark, '#1e293b', '#334155')" }
+            },
+            {
+              "kind": "rect",
+              "x": "areaLeft + (rHigh - xMinV) * sxX - 7",
+              "y": "waterY",
+              "w": 14,
+              "h": "frame.height - waterY",
+              "style": { "fill": "if(frame.isDark, '#475569', '#64748b')" }
+            },
+            {
+              "kind": "rect",
+              "x": "areaLeft + (rHigh - xMinV) * sxX - 11",
+              "y": "frame.height - 10",
+              "w": 22,
+              "h": 10,
+              "style": { "fill": "if(frame.isDark, '#1e293b', '#334155')" }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "main",
+        "fn": "a*x*x + b*x + c",
+        "xMin": "xMinV",
+        "xMax": "xMaxV",
+        "samples": 96,
+        "style": { "stroke": "brand", "lineWidth": 2.5 }
+      },
+
+      {
+        "kind": "if",
+        "cond": "vy > waterLevel",
+        "then": {
+          "kind": "group",
+          "children": [
+            {
+              "kind": "circle",
+              "cx": "areaLeft + (vx - xMinV) * sxX",
+              "cy": "areaTop + (yMaxV - vy) * sxY",
+              "r": 5,
+              "style": {
+                "fill": "brand",
+                "stroke": "if(frame.isDark, '#0b1220', '#ffffff')",
+                "lineWidth": 1.5
+              }
+            },
+            {
+              "kind": "text",
+              "x": "areaLeft + (vx - xMinV) * sxX",
+              "y": "areaTop + (yMaxV - vy) * sxY - 10",
+              "text": "format('{}m', formatN(vy))",
+              "style": {
+                "fill": "if(frame.isDark, '#ffffff', '#1e293b')",
+                "font": "600 10px -apple-system, sans-serif",
+                "textAlign": "center",
+                "textBaseline": "bottom"
+              }
+            }
+          ]
+        },
+        "else": { "kind": "group", "children": [] }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": 12,
+        "y": 12,
+        "w": 180,
+        "h": 22,
+        "r": 6,
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(15,23,42,0.85)', 'rgba(255,255,255,0.92)')",
+          "stroke": "hexAlpha(brand, 0.7)",
+          "lineWidth": 1.5
+        }
+      },
+      {
+        "kind": "text",
+        "x": 102,
+        "y": 23,
+        "text": "if(hasRoots, format('높이 {}m · 경간 {}m', formatN(vy), formatN(span)), format('높이 {}m', formatN(vy)))",
+        "style": {
+          "fill": "brand",
+          "font": "600 11px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "text",
+        "x": "frame.width / 2",
+        "y": "frame.height - 8",
+        "text": "'교각 위치 = 근 · 아치 정점 = 꼭짓점'",
+        "style": {
+          "fill": "if(frame.isDark, 'rgba(200,210,230,0.85)', 'rgba(30,41,59,0.85)')",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "bottom"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "y = ", "ko": "y = " },
+        "value": "a*x*x + b*x + c",
+        "format": ".3f"
+      }
+    ]
+  }
+}
