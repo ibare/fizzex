@@ -114,19 +114,21 @@
       },
       {
         "kind": "repeat",
-        "count": 8,
-        "index": "i",
-        "body": {
-          "kind": "line",
-          "x1": "(i / 8) * frame.width",
-          "y1": "floorCy",
-          "x2": "(i / 8) * frame.width",
-          "y2": "frame.height",
-          "style": {
-            "stroke": "if(frame.isDark, 'rgba(251,191,36,0.25)', 'rgba(120,53,15,0.35)')",
-            "lineWidth": 1
+        "of": { "range": [0, 8] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "(i / 8) * frame.width",
+            "y1": "floorCy",
+            "x2": "(i / 8) * frame.width",
+            "y2": "frame.height",
+            "style": {
+              "stroke": "if(frame.isDark, 'rgba(251,191,36,0.25)', 'rgba(120,53,15,0.35)')",
+              "lineWidth": 1
+            }
           }
-        }
+        ]
       },
 
       {
@@ -202,19 +204,21 @@
       },
       {
         "kind": "repeat",
-        "count": 5,
-        "index": "i",
-        "body": {
-          "kind": "line",
-          "x1": "hoopCx - 10 + i * 2",
-          "y1": "ringTopY",
-          "x2": "hoopCx - 10 + i * 2 - 1 + i * 0.3",
-          "y2": "ringTopY + 8",
-          "style": {
-            "stroke": "hexAlpha(brand, 0.5)",
-            "lineWidth": 1
+        "of": { "range": [0, 5] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "hoopCx - 10 + i * 2",
+            "y1": "ringTopY",
+            "x2": "hoopCx - 10 + i * 2 - 1 + i * 0.3",
+            "y2": "ringTopY + 8",
+            "style": {
+              "stroke": "hexAlpha(brand, 0.5)",
+              "lineWidth": 1
+            }
           }
-        }
+        ]
       },
 
       {
