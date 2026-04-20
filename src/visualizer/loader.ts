@@ -21,10 +21,6 @@ const BUILT_IN_LOADERS: Record<string, () => Promise<{ default: FizzexVisualizer
     /* webpackChunkName: "viz-kepler-orbit-3d" */
     './built-in/kepler-orbit-3d'
   ),
-  'pythagorean-ladder-2d': () => import(
-    /* webpackChunkName: "viz-pythagorean-ladder-2d" */
-    './built-in/pythagorean-ladder-2d'
-  ),
   'pythagorean-tv-2d': () => import(
     /* webpackChunkName: "viz-pythagorean-tv-2d" */
     './built-in/pythagorean-tv-2d'

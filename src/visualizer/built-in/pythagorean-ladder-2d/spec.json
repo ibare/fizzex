@@ -1,0 +1,223 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "pythagorean-ladder-2d",
+  "catalog": "geometry/pythagorean-theorem",
+
+  "name": { "en": "Pythagorean — Ladder", "ko": "사다리 — 피타고라스" },
+  "description": {
+    "en": "Ladder on a wall. a (ground), b (height), c (length). Safe at 70–80°.",
+    "ko": "벽에 기댄 사다리. a(바닥), b(높이), c(길이). 바닥각 70~80°가 안전."
+  },
+  "renderer": "2d",
+
+  "scenes": [
+    {
+      "id": "ladder",
+      "name": { "en": "Ladder", "ko": "사다리" },
+      "description": {
+        "en": "Safety angle = atan(b/a).",
+        "ko": "안전각 = atan(b/a)."
+      },
+      "style": { "color": "#DC4C2C", "icon": "🪜" },
+      "params": { "a": 1.2, "b": 4.8 }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "brand": "'#DC4C2C'",
+      "c": "sqrt(a * a + b * b)",
+      "angleDeg": "atan2(b, a) * 180 / PI",
+      "safetyColor": "if(angleDeg >= 70 && angleDeg <= 80, '#16a34a', if((angleDeg >= 60 && angleDeg < 70) || (angleDeg > 80 && angleDeg <= 85), '#eab308', '#dc2626'))",
+      "safetyLabel": "if(angleDeg >= 70 && angleDeg <= 80, '안전', if((angleDeg >= 60 && angleDeg < 70) || (angleDeg > 80 && angleDeg <= 85), '주의', '위험'))",
+      "bboxW": "max(a + 1, 5)",
+      "bboxH": "max(b + 1, 6)",
+      "padL": "28",
+      "padR": "18",
+      "padT": "22",
+      "padB": "34",
+      "s": "min((frame.width - 46) / bboxW, (frame.height - 56) / bboxH)",
+      "x0": "padL",
+      "groundY": "frame.height - padB",
+      "footX": "x0 + a * s",
+      "topX": "x0",
+      "topY": "groundY - b * s",
+      "dxPx": "topX - footX",
+      "dyPx": "topY - groundY",
+      "lenPx": "sqrt(dxPx * dxPx + dyPx * dyPx)",
+      "nx": "if(lenPx > 0, -dyPx / lenPx, 0)",
+      "ny": "if(lenPx > 0, dxPx / lenPx, 0)",
+      "rail1Fx": "footX + nx * 6",
+      "rail1Fy": "groundY + ny * 6",
+      "rail1Tx": "topX + nx * 6",
+      "rail1Ty": "topY + ny * 6",
+      "rail2Fx": "footX - nx * 6",
+      "rail2Fy": "groundY - ny * 6",
+      "rail2Tx": "topX - nx * 6",
+      "rail2Ty": "topY - ny * 6",
+      "wallLeft": "x0 - 0.4 * s",
+      "wallTop": "groundY - bboxH * s",
+      "cLabelX": "(footX + topX) / 2 + nx * 18",
+      "cLabelY": "(groundY + topY) / 2 + ny * 18",
+      "groundColor": "if(frame.isDark, 'rgba(200,210,230,0.35)', 'rgba(60,70,90,0.4)')",
+      "dimColor": "if(frame.isDark, 'rgba(235,240,250,0.85)', 'rgba(30,40,55,0.85)')",
+      "badgeBg": "hexAlpha(safetyColor, if(frame.isDark, 0.28, 0.18))",
+      "cBadgeBg": "if(frame.isDark, 'rgba(20,28,40,0.9)', 'rgba(255,255,255,0.92)')"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": 0,
+        "y": 0,
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": {
+          "fill": {
+            "kind": "linear",
+            "x0": "0",
+            "y0": "0",
+            "x1": "0",
+            "y1": "frame.height",
+            "stops": [
+              [0, "if(frame.isDark, '#0b1220', '#eff6ff')"],
+              [1, "if(frame.isDark, '#111a2e', '#dbeafe')"]
+            ]
+          }
+        }
+      },
+
+      {
+        "kind": "rect",
+        "x": "wallLeft",
+        "y": "wallTop",
+        "w": "x0 - wallLeft",
+        "h": "groundY - wallTop",
+        "style": { "fill": "if(frame.isDark, '#4a3829', '#d4a574')" }
+      },
+
+      {
+        "kind": "line",
+        "x1": 8,
+        "y1": "groundY",
+        "x2": "frame.width - 8",
+        "y2": "groundY",
+        "style": { "stroke": "groundColor", "lineWidth": 1.5 }
+      },
+
+      {
+        "kind": "line",
+        "x1": "rail1Fx",
+        "y1": "rail1Fy",
+        "x2": "rail1Tx",
+        "y2": "rail1Ty",
+        "style": { "stroke": "brand", "lineWidth": 3, "lineCap": "round" }
+      },
+      {
+        "kind": "line",
+        "x1": "rail2Fx",
+        "y1": "rail2Fy",
+        "x2": "rail2Tx",
+        "y2": "rail2Ty",
+        "style": { "stroke": "brand", "lineWidth": 3, "lineCap": "round" }
+      },
+
+      {
+        "kind": "repeat",
+        "of": { "range": [1, "min(8, max(3, floor(c * 1.2)))"] },
+        "as": "i",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "rail1Fx + (rail1Tx - rail1Fx) * i / 8",
+            "y1": "rail1Fy + (rail1Ty - rail1Fy) * i / 8",
+            "x2": "rail2Fx + (rail2Tx - rail2Fx) * i / 8",
+            "y2": "rail2Fy + (rail2Ty - rail2Fy) * i / 8",
+            "style": { "stroke": "brand", "lineWidth": 2, "lineCap": "round" }
+          }
+        ]
+      },
+
+      {
+        "kind": "text",
+        "x": "(x0 + footX) / 2",
+        "y": "groundY + 24",
+        "text": "format('a = {}m', formatN(a))",
+        "style": {
+          "fill": "dimColor",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "top"
+        }
+      },
+      {
+        "kind": "text",
+        "x": "wallLeft - 12",
+        "y": "(groundY + topY) / 2",
+        "text": "format('b = {}m', formatN(b))",
+        "style": {
+          "fill": "dimColor",
+          "font": "500 10px -apple-system, sans-serif",
+          "textAlign": "right",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": "cLabelX - 30",
+        "y": "cLabelY - 8",
+        "w": 60,
+        "h": 16,
+        "r": 4,
+        "style": { "fill": "cBadgeBg", "stroke": "hexAlpha(brand, 0.7)", "lineWidth": 1 }
+      },
+      {
+        "kind": "text",
+        "x": "cLabelX",
+        "y": "cLabelY",
+        "text": "format('c = {}m', formatN(c))",
+        "style": {
+          "fill": "brand",
+          "font": "600 10px -apple-system, sans-serif",
+          "textAlign": "center",
+          "textBaseline": "middle"
+        }
+      },
+
+      {
+        "kind": "roundRect",
+        "x": 10,
+        "y": 10,
+        "w": 110,
+        "h": 20,
+        "r": 10,
+        "style": { "fill": "badgeBg", "stroke": "safetyColor", "lineWidth": 1.2 }
+      },
+      {
+        "kind": "text",
+        "x": 19,
+        "y": 20,
+        "text": "format('{} · {}°', safetyLabel, formatN(angleDeg))",
+        "style": {
+          "fill": "safetyColor",
+          "font": "600 11px -apple-system, sans-serif",
+          "textAlign": "left",
+          "textBaseline": "middle"
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "c = ", "ko": "c = " },
+        "value": "sqrt(a * a + b * b)",
+        "format": ".3f"
+      }
+    ]
+  }
+}
