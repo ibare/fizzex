@@ -4,13 +4,16 @@
  * mount-2d의 3D 대응. Graphics3D 호스트에 setup/onFrame/onDispose를 꽂아
  * Element AST를 매 프레임 재구축한다 (D2 보수적 diff, full rebuild MVP).
  *
+ * 카메라 pose는 setup에서 1회 평가(evaluateInitialCameraPose)해 camera.position +
+ * controls.target으로 세팅. 이후 줌·회전·팬은 Graphics3D의 OrbitControls가 관장하며
+ * 매 프레임 덮어쓰지 않는다.
+ *
  * 프레임 파이프라인 (rAF 1 tick):
  *   1. runAnimationFrame(spec.animation)
  *   2. buildFrameContext (state/scene/frame 네임스페이스)
- *   3. syncCamera — 구면좌표 → position + lookAt
- *   4. disposeChildren(scene) → renderRoot3d(scene, root)
- *   5. overlay.renderFrame
- *   6. store.consumePulses()
+ *   3. disposeChildren(scene) → renderRoot3d(scene, root)
+ *   4. overlay.renderFrame
+ *   5. store.consumePulses()
  */
 
 import * as THREE from 'three';
@@ -26,8 +29,8 @@ import { attachOverlay, type OverlayController } from './overlay';
 import {
   createRenderContext3D,
   disposeChildren,
+  evaluateInitialCameraPose,
   renderRoot3d,
-  syncCamera,
   type RenderContext3D,
 } from './adapter3d';
 import { rootContext } from './expr/context';
@@ -98,8 +101,22 @@ export function mount3d(
       near: spec.camera.near,
       far: spec.camera.far,
     },
-    setup: () => {
-      // 비워둠 — 모든 객체는 onFrame의 renderRoot3d에서 재생성.
+    controls: spec.camera.controls,
+    setup: (g) => {
+      if (!spec.camera) throw new Error('spec.camera missing after validation');
+      const seedFrame: FrameInfo = {
+        dt: 0,
+        now: performance.now(),
+        elapsed: 0,
+        width: opts.width,
+        height: opts.height,
+        isDark: theme.current === 'dark',
+      };
+      const seedRc = buildFrameContext(store, sceneCtrl, seedFrame);
+      const pose = evaluateInitialCameraPose(spec.camera, seedRc);
+      g.camera.position.set(pose.position[0], pose.position[1], pose.position[2]);
+      g.controls.target.set(pose.target[0], pose.target[1], pose.target[2]);
+      g.controls.update();
     },
     onFrame: (g, frame) => {
       const scaledDt = timeScaleEnabled ? frame.dt * timeScale.current : frame.dt;
@@ -120,13 +137,6 @@ export function mount3d(
 
       const rcAfter = buildFrameContext(store, sceneCtrl, frameInfo);
       currentRc = rcAfter;
-
-      try {
-        if (!spec.camera) throw new Error('spec.camera missing after validation');
-        syncCamera(g.camera, spec.camera, store, rcAfter);
-      } catch (err) {
-        warnOnce('camera', err);
-      }
 
       try {
         disposeChildren(g.scene);

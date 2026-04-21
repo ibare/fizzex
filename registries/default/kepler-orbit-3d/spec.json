@@ -53,28 +53,19 @@
     }
   ],
 
-  "state": [
-    { "id": "camTheta", "type": "number", "default": 1.0472 },
-    { "id": "camPhi", "type": "number", "default": 1.0472 },
-    { "id": "camDistance", "type": "number", "default": 4 }
-  ],
-
-  "animation": {
-    "onFrame": [
-      { "set": "state.camTheta", "to": "mod(state.camTheta + frame.dt * 0.15, 2 * pi)" },
-      { "set": "state.camDistance", "to": "max((a / 6371) * 1.8, 2.5)" }
-    ]
-  },
-
   "camera": {
     "kind": "perspective",
     "fov": 50,
     "near": 0.05,
     "far": 2000,
-    "state": {
-      "theta": "camTheta",
-      "phi": "camPhi",
-      "distance": "camDistance"
+    "distance": "max((a / 6371) * 1.8, 2.5)",
+    "theta": 1.0472,
+    "phi": 1.0472,
+    "controls": {
+      "autoRotate": true,
+      "autoRotateSpeed": 1.5,
+      "minDistance": 1.2,
+      "maxDistance": 200
     }
   },
 

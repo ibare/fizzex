@@ -151,23 +151,35 @@ const themeSchema = z
   })
   .partial();
 
-const cameraTargetSchema = z.tuple([
+const cameraLookAtSchema = z.tuple([
   z.union([exprString, z.number()]),
   z.union([exprString, z.number()]),
   z.union([exprString, z.number()]),
 ]);
+
+const cameraControlsSchema = z
+  .object({
+    autoRotate: z.boolean().optional(),
+    autoRotateSpeed: z.number().optional(),
+    minDistance: z.number().positive().optional(),
+    maxDistance: z.number().positive().optional(),
+    enableZoom: z.boolean().optional(),
+    enableRotate: z.boolean().optional(),
+    enablePan: z.boolean().optional(),
+    dampingFactor: z.number().min(0).max(1).optional(),
+  })
+  .strict();
 
 const cameraSchema = z.object({
   kind: z.literal('perspective'),
   fov: z.number().positive().optional(),
   near: z.number().positive().optional(),
   far: z.number().positive().optional(),
-  state: z.object({
-    theta: z.string().min(1),
-    phi: z.string().min(1),
-    distance: z.string().min(1),
-    target: cameraTargetSchema.optional(),
-  }),
+  distance: z.union([exprString, z.number()]),
+  theta: z.union([exprString, z.number()]),
+  phi: z.union([exprString, z.number()]),
+  lookAt: cameraLookAtSchema.optional(),
+  controls: cameraControlsSchema.optional(),
 });
 
 const catalogRefRegex = /^[a-z][a-z0-9-]*\/[a-z][a-z0-9-]*$/;
@@ -250,19 +262,5 @@ export const visualizerSpecSchema = z
         path: ['camera'],
         message: 'camera must not be set when renderer === "2d"',
       });
-    }
-    if (spec.camera) {
-      const stateIds = new Set((spec.state ?? []).map((s) => s.id));
-      const refs = spec.camera.state;
-      for (const key of ['theta', 'phi', 'distance'] as const) {
-        const ref = refs[key];
-        if (!stateIds.has(ref)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            path: ['camera', 'state', key],
-            message: `camera.state.${key} references unknown state id "${ref}"`,
-          });
-        }
-      }
     }
   });

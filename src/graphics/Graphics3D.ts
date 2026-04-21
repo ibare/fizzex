@@ -1,24 +1,26 @@
 /**
  * 3D Three.js 호스트.
  *
- * Scene·PerspectiveCamera·WebGLRenderer 기본 라이프사이클을 흡수한다.
- * Visualizer는 setup(g)에서 Mesh/Light를 한 번 구성하고,
- * onFrame(g, { dt, now })에서 매 프레임 업데이트(카메라 위치, 애니메이션 등)만 한다.
- * Host는 onFrame 반환 후 renderer.render(scene, camera)를 호출한다.
+ * Scene·PerspectiveCamera·WebGLRenderer·OrbitControls 라이프사이클을 흡수한다.
+ * Visualizer는 setup(g)에서 Mesh/Light를 한 번 구성하고 초기 카메라 pose를
+ * g.camera.position + g.controls.target으로 지정한다. 이후 줌·회전·팬은 호스트가
+ * OrbitControls로 관장한다. onFrame은 매 프레임 씬 갱신만 수행하며, Host는
+ * onFrame 반환 후 controls.update() → renderer.render(scene, camera)를 호출한다.
  *
- * Mesh/Geometry/Material 생성은 Visualizer의 책임이며,
- * dispose는 onDispose(g) 훅에서 직접 수행한다. 이후 Host가 renderer.dispose()와 DOM 제거를 맡는다.
- *
- * 카메라 제어(OrbitControls 류)는 Host에 포함하지 않는다 — Visualizer가 자체 구현.
+ * Mesh/Geometry/Material 생성은 Visualizer의 책임이며, dispose는 onDispose(g)
+ * 훅에서 직접 수행한다. 이후 Host가 controls.dispose()·renderer.dispose()·DOM
+ * 제거를 맡는다.
  */
 
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import type { FrameInfo, Theme } from './types';
 import { background as themeBackground } from './theme';
 
 export interface Graphics3DContext {
   readonly scene: THREE.Scene;
   readonly camera: THREE.PerspectiveCamera;
+  readonly controls: OrbitControls;
   readonly renderer: THREE.WebGLRenderer;
   readonly THREE: typeof THREE;
 }
@@ -27,6 +29,17 @@ export interface Graphics3DCameraOptions {
   fov?: number;
   near?: number;
   far?: number;
+}
+
+export interface Graphics3DControlsOptions {
+  autoRotate?: boolean;
+  autoRotateSpeed?: number;
+  minDistance?: number;
+  maxDistance?: number;
+  enableZoom?: boolean;
+  enableRotate?: boolean;
+  enablePan?: boolean;
+  dampingFactor?: number;
 }
 
 export interface Graphics3DRendererOptions {
@@ -41,10 +54,11 @@ export interface Graphics3DOptions {
   height: number;
   theme: Theme;
   camera?: Graphics3DCameraOptions;
+  controls?: Graphics3DControlsOptions;
   renderer?: Graphics3DRendererOptions;
-  /** 최초 1회 씬 구성. Mesh/Light 추가 지점. */
+  /** 최초 1회 씬 구성. Mesh/Light 추가 + 초기 camera pose 지정 지점. */
   setup: (g: Graphics3DContext) => void;
-  /** 매 프레임 업데이트. Host가 이후 scene/camera를 렌더한다. */
+  /** 매 프레임 업데이트. Host가 이후 controls.update + scene 렌더를 수행한다. */
   onFrame: (g: Graphics3DContext, frame: FrameInfo) => void;
   /** Visualizer가 생성한 Geometry/Material/Texture를 dispose할 기회. */
   onDispose?: (g: Graphics3DContext) => void;
@@ -53,6 +67,7 @@ export interface Graphics3DOptions {
 export class Graphics3D {
   readonly scene: THREE.Scene;
   readonly camera: THREE.PerspectiveCamera;
+  readonly controls: OrbitControls;
   readonly renderer: THREE.WebGLRenderer;
   readonly canvas: HTMLCanvasElement;
   theme: Theme;
@@ -105,6 +120,11 @@ export class Graphics3D {
     this.canvas.style.touchAction = 'none';
     container.appendChild(this.canvas);
 
+    this.controls = new OrbitControls(this.camera, this.canvas);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.08;
+    applyControlsOptions(this.controls, opts.controls);
+
     opts.setup(this.buildContext());
 
     this.startTimestamp = performance.now();
@@ -120,6 +140,7 @@ export class Graphics3D {
     return {
       scene: this.scene,
       camera: this.camera,
+      controls: this.controls,
       renderer: this.renderer,
       THREE,
     };
@@ -138,6 +159,7 @@ export class Graphics3D {
       height: this.height,
       isDark: this.theme === 'dark',
     });
+    this.controls.update();
     this.renderer.render(this.scene, this.camera);
     this.animationId = requestAnimationFrame(this.loop);
   };
@@ -156,9 +178,25 @@ export class Graphics3D {
     this.destroyed = true;
     cancelAnimationFrame(this.animationId);
     if (this.onDispose) this.onDispose(this.buildContext());
+    this.controls.dispose();
     this.renderer.dispose();
     if (this.canvas.parentNode === this.container) {
       this.container.removeChild(this.canvas);
     }
   }
+}
+
+function applyControlsOptions(
+  controls: OrbitControls,
+  opts: Graphics3DControlsOptions | undefined,
+): void {
+  if (!opts) return;
+  if (opts.autoRotate !== undefined) controls.autoRotate = opts.autoRotate;
+  if (opts.autoRotateSpeed !== undefined) controls.autoRotateSpeed = opts.autoRotateSpeed;
+  if (opts.minDistance !== undefined) controls.minDistance = opts.minDistance;
+  if (opts.maxDistance !== undefined) controls.maxDistance = opts.maxDistance;
+  if (opts.enableZoom !== undefined) controls.enableZoom = opts.enableZoom;
+  if (opts.enableRotate !== undefined) controls.enableRotate = opts.enableRotate;
+  if (opts.enablePan !== undefined) controls.enablePan = opts.enablePan;
+  if (opts.dampingFactor !== undefined) controls.dampingFactor = opts.dampingFactor;
 }

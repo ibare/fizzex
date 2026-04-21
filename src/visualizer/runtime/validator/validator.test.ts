@@ -115,23 +115,48 @@ describe('validateSpec — camera (3D)', () => {
     ...baseValidSpec,
     id: 'kepler-orbit-3d',
     renderer: '3d' as const,
-    state: [
-      { id: 'camTheta', type: 'number' as const, default: 0 },
-      { id: 'camPhi', type: 'number' as const, default: 1 },
-      { id: 'camDistance', type: 'number' as const, default: 5 },
-    ],
     camera: {
       kind: 'perspective' as const,
       fov: 50,
       near: 0.1,
       far: 2000,
-      state: { theta: 'camTheta', phi: 'camPhi', distance: 'camDistance' },
+      distance: 5,
+      theta: 1.0472,
+      phi: 1.0472,
+      controls: {
+        autoRotate: true,
+        autoRotateSpeed: 1.5,
+        minDistance: 1,
+        maxDistance: 100,
+      },
     },
   };
 
-  it('accepts valid 3D spec with camera + state', () => {
+  it('accepts valid 3D spec with camera', () => {
     const spec = validateSpec(spec3d);
     expect(spec.camera?.kind).toBe('perspective');
+    if (spec.camera?.kind === 'perspective') {
+      expect(spec.camera.distance).toBe(5);
+      expect(spec.camera.controls?.autoRotate).toBe(true);
+    }
+  });
+
+  it('accepts ExprString for distance/theta/phi', () => {
+    const spec = validateSpec({
+      ...spec3d,
+      camera: { ...spec3d.camera, distance: 'max(a/6371*1.8, 2.5)', theta: 'pi/3', phi: 'pi/3' },
+    });
+    expect(spec.camera?.kind).toBe('perspective');
+  });
+
+  it('accepts lookAt tuple', () => {
+    const spec = validateSpec({
+      ...spec3d,
+      camera: { ...spec3d.camera, lookAt: [0, 1, 2] as const },
+    });
+    if (spec.camera?.kind === 'perspective') {
+      expect(spec.camera.lookAt).toEqual([0, 1, 2]);
+    }
   });
 
   it('3D without camera → error', () => {
@@ -145,11 +170,11 @@ describe('validateSpec — camera (3D)', () => {
     expect(() => validateSpec(bad)).toThrow(/camera must not be set/);
   });
 
-  it('camera.state.theta 참조가 state[]에 없으면 error', () => {
+  it('unknown controls field → error (strict)', () => {
     const bad = {
       ...spec3d,
-      camera: { ...spec3d.camera, state: { ...spec3d.camera.state, theta: 'wrongId' } },
+      camera: { ...spec3d.camera, controls: { autoRotate: true, bogus: 1 } },
     };
-    expect(() => validateSpec(bad)).toThrow(/unknown state id "wrongId"/);
+    expect(() => validateSpec(bad)).toThrow();
   });
 });
