@@ -193,7 +193,7 @@
         "text": "badge",
         "style": {
           "fill": "color",
-          "font": "600 12px ui-monospace, Menlo, monospace",
+          "font": "'600 12px ui-monospace, Menlo, monospace'",
           "textAlign": "left",
           "textBaseline": "middle"
         }
@@ -205,7 +205,7 @@
         "text": "'a·b·c를 바꾸며 포물선의 변화 관찰'",
         "style": {
           "fill": "hintColor",
-          "font": "500 10px -apple-system, sans-serif",
+          "font": "'500 10px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "bottom"
         }

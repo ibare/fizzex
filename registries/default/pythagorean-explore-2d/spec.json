@@ -111,7 +111,7 @@
         "text": "format('a² = {}', formatN(a * a))",
         "style": {
           "fill": "labelColor",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -124,7 +124,7 @@
         "text": "format('b² = {}', formatN(b * b))",
         "style": {
           "fill": "labelColor",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -137,7 +137,7 @@
         "text": "format('c² = {}', formatN(c * c))",
         "style": {
           "fill": "labelColor",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -151,7 +151,7 @@
         "text": "format('a = {}', formatN(a))",
         "style": {
           "fill": "brand",
-          "font": "500 11px -apple-system, sans-serif",
+          "font": "'500 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "bottom"
         }
@@ -164,7 +164,7 @@
         "text": "format('b = {}', formatN(b))",
         "style": {
           "fill": "brand",
-          "font": "500 11px -apple-system, sans-serif",
+          "font": "'500 11px -apple-system, sans-serif'",
           "textAlign": "left",
           "textBaseline": "middle"
         }
@@ -177,7 +177,7 @@
         "text": "format('c = {}', formatN(c))",
         "style": {
           "fill": "brand",
-          "font": "500 11px -apple-system, sans-serif",
+          "font": "'500 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "bottom"
         }

@@ -253,7 +253,7 @@
               "text": "format('최고점 {}m', formatN(vy))",
               "style": {
                 "fill": "brand",
-                "font": "600 10px -apple-system, sans-serif",
+                "font": "'600 10px -apple-system, sans-serif'",
                 "textAlign": "center",
                 "textBaseline": "bottom"
               }
@@ -340,7 +340,7 @@
         "text": "if(landX > 0, format('최고점 {}m · 비거리 {}m', formatN(vy), formatN(landX)), format('최고점 {}m', formatN(vy)))",
         "style": {
           "fill": "brand",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -353,7 +353,7 @@
         "text": "'슛의 궤적은 언제나 포물선'",
         "style": {
           "fill": "if(frame.isDark, 'rgba(254,243,199,0.85)', 'rgba(120,53,15,0.9)')",
-          "font": "500 10px -apple-system, sans-serif",
+          "font": "'500 10px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "bottom"
         }

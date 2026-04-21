@@ -155,7 +155,7 @@
             "text": "format('{}', formatN(rt))",
             "style": {
               "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
-              "font": "500 9px -apple-system, sans-serif",
+              "font": "'500 9px -apple-system, sans-serif'",
               "textAlign": "right",
               "textBaseline": "middle"
             }
@@ -169,7 +169,7 @@
         "text": "'N/N₀'",
         "style": {
           "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
-          "font": "500 9px -apple-system, sans-serif",
+          "font": "'500 9px -apple-system, sans-serif'",
           "textAlign": "left",
           "textBaseline": "middle"
         }
@@ -187,7 +187,7 @@
             "text": "format('{}', formatN((i / 5) * tMax))",
             "style": {
               "fill": "if(frame.isDark, 'rgba(148,163,184,0.85)', 'rgba(71,85,105,0.85)')",
-              "font": "500 9px -apple-system, sans-serif",
+              "font": "'500 9px -apple-system, sans-serif'",
               "textAlign": "center",
               "textBaseline": "top"
             }
@@ -230,7 +230,7 @@
                     "text": "m.suf",
                     "style": {
                       "fill": "hexAlpha(color, 0.9)",
-                      "font": "600 10px -apple-system, sans-serif",
+                      "font": "'600 10px -apple-system, sans-serif'",
                       "textAlign": "center",
                       "textBaseline": "top"
                     }
@@ -301,7 +301,7 @@
               "text": "format('{}%', formatN(ratio * 100))",
               "style": {
                 "fill": "color",
-                "font": "600 11px ui-monospace, Menlo, monospace",
+                "font": "'600 11px ui-monospace, Menlo, monospace'",
                 "textAlign": "center",
                 "textBaseline": "middle"
               }
@@ -337,7 +337,7 @@
               "text": "format('반감기 {}', formatN(halfLife))",
               "style": {
                 "fill": "color",
-                "font": "600 10px -apple-system, sans-serif",
+                "font": "'600 10px -apple-system, sans-serif'",
                 "textAlign": "center",
                 "textBaseline": "middle"
               }
@@ -414,7 +414,7 @@
                 "text": "format('{} mg', formatN(mg))",
                 "style": {
                   "fill": "if(frame.isDark, '#fbbf24', '#78350f')",
-                  "font": "600 12px ui-monospace, Menlo, monospace",
+                  "font": "'600 12px ui-monospace, Menlo, monospace'",
                   "textAlign": "center",
                   "textBaseline": "middle"
                 }
@@ -426,7 +426,7 @@
                 "text": "'아침 커피는 밤까지 남는다'",
                 "style": {
                   "fill": "if(frame.isDark, 'rgba(254,243,199,0.85)', 'rgba(120,53,15,0.85)')",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "center",
                   "textBaseline": "bottom"
                 }
@@ -500,7 +500,7 @@
                 "text": "format('{}%', formatN(pct))",
                 "style": {
                   "fill": "if(frame.isDark, '#ffffff', '#0b1220')",
-                  "font": "700 22px ui-monospace, Menlo, monospace",
+                  "font": "'700 22px ui-monospace, Menlo, monospace'",
                   "textAlign": "center",
                   "textBaseline": "middle"
                 }
@@ -512,7 +512,7 @@
                 "text": "'배터리 방전: 초록 → 노랑 → 빨강 (교육적 근사)'",
                 "style": {
                   "fill": "if(frame.isDark, 'rgba(226,232,240,0.85)', 'rgba(30,41,59,0.85)')",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "center",
                   "textBaseline": "bottom"
                 }
@@ -569,7 +569,7 @@
                 "text": "format('{} / 100', formatN(activeCount))",
                 "style": {
                   "fill": "color",
-                  "font": "700 12px ui-monospace, Menlo, monospace",
+                  "font": "'700 12px ui-monospace, Menlo, monospace'",
                   "textAlign": "center",
                   "textBaseline": "top"
                 }
@@ -581,7 +581,7 @@
                 "text": "'¹⁴C 원자가 하나씩 사라진다 (반감기 5,730년)'",
                 "style": {
                   "fill": "if(frame.isDark, 'rgba(214,211,209,0.85)', 'rgba(68,64,60,0.85)')",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "center",
                   "textBaseline": "bottom"
                 }
@@ -660,7 +660,7 @@
                 "text": "format('{} mg', formatN(mg))",
                 "style": {
                   "fill": "if(frame.isDark, '#fca5a5', '#dc2626')",
-                  "font": "700 12px ui-monospace, Menlo, monospace",
+                  "font": "'700 12px ui-monospace, Menlo, monospace'",
                   "textAlign": "center",
                   "textBaseline": "top"
                 }
@@ -672,7 +672,7 @@
                 "text": "'혈중 농도 = 색 진하기'",
                 "style": {
                   "fill": "if(frame.isDark, 'rgba(200,210,230,0.85)', 'rgba(30,41,59,0.85)')",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "center",
                   "textBaseline": "bottom"
                 }

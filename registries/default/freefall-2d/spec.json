@@ -170,7 +170,7 @@
                         "text": "format('{}m', toLocaleInt(hv))",
                         "style": {
                           "fill": "if(frame.isDark, 'rgba(220,230,245,0.85)', 'rgba(40,50,70,0.85)')",
-                          "font": "500 9px -apple-system, sans-serif",
+                          "font": "'500 9px -apple-system, sans-serif'",
                           "textAlign": "right",
                           "textBaseline": "middle"
                         }
@@ -211,7 +211,7 @@
                           "text": "mk.label",
                           "style": {
                             "fill": "if(frame.isDark, 'rgba(230,200,120,0.95)', 'rgba(120,90,20,0.9)')",
-                            "font": "500 9px -apple-system, sans-serif",
+                            "font": "'500 9px -apple-system, sans-serif'",
                             "textAlign": "left",
                             "textBaseline": "middle"
                           }
@@ -318,7 +318,7 @@
                 "text": "format('{:.2f} m', hCur)",
                 "style": {
                   "fill": "'rgba(230,240,255,0.9)'",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "left",
                   "textBaseline": "middle"
                 }
@@ -403,7 +403,7 @@
                 "text": "format('{:.2f} m', hCur)",
                 "style": {
                   "fill": "if(frame.isDark, 'rgba(254,240,215,0.95)', 'rgba(50,20,10,0.92)')",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "left",
                   "textBaseline": "middle"
                 }
@@ -493,7 +493,7 @@
                 "text": "format('{:.2f} m', hCur)",
                 "style": {
                   "fill": "if(frame.isDark, 'rgba(254,240,215,0.95)', 'rgba(60,30,0,0.92)')",
-                  "font": "500 10px -apple-system, sans-serif",
+                  "font": "'500 10px -apple-system, sans-serif'",
                   "textAlign": "left",
                   "textBaseline": "middle"
                 }
@@ -521,7 +521,7 @@
         "text": "badgeText",
         "style": {
           "fill": "if(scene.id == 'moon', 'rgba(240,245,255,0.95)', color)",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "left",
           "textBaseline": "middle"
         }

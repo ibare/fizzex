@@ -186,7 +186,7 @@
               "text": "format('{}m', formatN(vy))",
               "style": {
                 "fill": "if(frame.isDark, '#ffffff', '#1e293b')",
-                "font": "600 10px -apple-system, sans-serif",
+                "font": "'600 10px -apple-system, sans-serif'",
                 "textAlign": "center",
                 "textBaseline": "bottom"
               }
@@ -216,7 +216,7 @@
         "text": "if(hasRoots, format('높이 {}m · 경간 {}m', formatN(vy), formatN(span)), format('높이 {}m', formatN(vy)))",
         "style": {
           "fill": "brand",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -229,7 +229,7 @@
         "text": "'교각 위치 = 근 · 아치 정점 = 꼭짓점'",
         "style": {
           "fill": "if(frame.isDark, 'rgba(200,210,230,0.85)', 'rgba(30,41,59,0.85)')",
-          "font": "500 10px -apple-system, sans-serif",
+          "font": "'500 10px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "bottom"
         }

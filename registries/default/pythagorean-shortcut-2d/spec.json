@@ -139,7 +139,7 @@
         "text": "format('돌아가면 {}m · 가로지르면 {}m · {}% 절약', formatN(sum), formatN(c), formatN(pct))",
         "style": {
           "fill": "brand",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "left",
           "textBaseline": "middle"
         }

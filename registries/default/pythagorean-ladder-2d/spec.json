@@ -147,7 +147,7 @@
         "text": "format('a = {}m', formatN(a))",
         "style": {
           "fill": "dimColor",
-          "font": "500 10px -apple-system, sans-serif",
+          "font": "'500 10px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "top"
         }
@@ -159,7 +159,7 @@
         "text": "format('b = {}m', formatN(b))",
         "style": {
           "fill": "dimColor",
-          "font": "500 10px -apple-system, sans-serif",
+          "font": "'500 10px -apple-system, sans-serif'",
           "textAlign": "right",
           "textBaseline": "middle"
         }
@@ -181,7 +181,7 @@
         "text": "format('c = {}m', formatN(c))",
         "style": {
           "fill": "brand",
-          "font": "600 10px -apple-system, sans-serif",
+          "font": "'600 10px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -203,7 +203,7 @@
         "text": "format('{} · {}°', safetyLabel, formatN(angleDeg))",
         "style": {
           "fill": "safetyColor",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "left",
           "textBaseline": "middle"
         }

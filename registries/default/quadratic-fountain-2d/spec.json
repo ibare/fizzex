@@ -232,7 +232,7 @@
               "text": "format('{}m', formatN(vy))",
               "style": {
                 "fill": "if(frame.isDark, '#f0f9ff', '#0c4a6e')",
-                "font": "600 10px -apple-system, sans-serif",
+                "font": "'600 10px -apple-system, sans-serif'",
                 "textAlign": "center",
                 "textBaseline": "bottom"
               }
@@ -262,7 +262,7 @@
         "text": "format('최대 높이 {}m', formatN(vy))",
         "style": {
           "fill": "brand",
-          "font": "600 11px -apple-system, sans-serif",
+          "font": "'600 11px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "middle"
         }
@@ -275,7 +275,7 @@
         "text": "'|a|가 작을수록 더 높이 솟는다'",
         "style": {
           "fill": "if(frame.isDark, 'rgba(200,210,230,0.85)', 'rgba(30,41,59,0.85)')",
-          "font": "500 10px -apple-system, sans-serif",
+          "font": "'500 10px -apple-system, sans-serif'",
           "textAlign": "center",
           "textBaseline": "bottom"
         }
