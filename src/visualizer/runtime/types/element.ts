@@ -13,7 +13,7 @@ interface ElementBase {
   transform?: TransformSpec;
   style?: StyleSpec;
   viewport?: string;
-  let?: Record<string, ExprString>;
+  let?: Record<string, ExprString | number | boolean>;
 }
 
 // ─── 2D 기하 Shape ───

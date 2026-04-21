@@ -40,6 +40,18 @@ describe('validateSpec — valid inputs', () => {
     expect(spec.displayOptions).toEqual(['timeScale']);
   });
 
+  it('accepts let with number and boolean primitives', () => {
+    const spec = validateSpec({
+      ...baseValidSpec,
+      root: {
+        kind: 'group',
+        let: { w: 110, active: true, expr: 'a + 1' },
+        children: [],
+      },
+    });
+    expect(spec.root).toBeDefined();
+  });
+
   it('accepts localFormulas', () => {
     const spec = validateSpec({
       ...baseValidSpec,

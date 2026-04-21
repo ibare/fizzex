@@ -30,7 +30,8 @@ export function renderRoot(ctx: CanvasRenderingContext2D, node: ElementNode, rc:
 
   if (node.let) {
     for (const [k, expr] of Object.entries(node.let)) {
-      active = extendRenderContext(active, { [k]: evalExpr(expr, active) });
+      const value = typeof expr === 'string' ? evalExpr(expr, active) : expr;
+      active = extendRenderContext(active, { [k]: value });
     }
   }
 

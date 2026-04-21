@@ -411,6 +411,22 @@ describe('renderRoot — 공통 전처리', () => {
     );
     expect(calls.find((c) => c[0] === 'rect')?.[1]).toEqual([0, 0, 10, 10]);
   });
+  it('let 바인딩: 숫자·불리언 원시값은 ExprString 평가를 건너뛴다', () => {
+    const { ctx, calls } = makeCtx();
+    renderRoot(
+      ctx,
+      {
+        kind: 'rect',
+        let: { w: 42, flag: true },
+        x: '0',
+        y: '0',
+        w: 'w',
+        h: 'if(flag, 7, 3)',
+      },
+      makeRc(),
+    );
+    expect(calls.find((c) => c[0] === 'rect')?.[1]).toEqual([0, 0, 42, 7]);
+  });
   it('save/restore 쌍', () => {
     const { ctx, calls } = makeCtx();
     renderRoot(ctx, { kind: 'rect', x: '0', y: '0', w: '1', h: '1' }, makeRc());

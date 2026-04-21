@@ -62,7 +62,7 @@ const elementSchema: ElementSchemaType = z.lazy(() =>
     transform: transformSchema.optional(),
     style: styleSchema.optional(),
     viewport: z.string().optional(),
-    let: z.record(z.string(), exprString).optional(),
+    let: z.record(z.string(), z.union([exprString, z.number(), z.boolean()])).optional(),
   }).catchall(z.unknown()),
 );
 

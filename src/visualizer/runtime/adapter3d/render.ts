@@ -43,7 +43,8 @@ export function renderRoot3d(
   let active = rc;
   if (node.let) {
     for (const [k, expr] of Object.entries(node.let)) {
-      active = extendRenderContext3D(active, { [k]: evalExpr3D(expr, active) });
+      const value = typeof expr === 'string' ? evalExpr3D(expr, active) : expr;
+      active = extendRenderContext3D(active, { [k]: value });
     }
   }
 
