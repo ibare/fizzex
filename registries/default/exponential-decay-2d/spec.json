@@ -53,6 +53,19 @@
     }
   ],
 
+  "state": [
+    { "id": "autoT", "type": "number", "default": 0 }
+  ],
+
+  "animation": {
+    "onFrame": [
+      {
+        "set": "state.autoT",
+        "to": "if(r < 0 && state.autoT > log(2) / max(1e-9, -r) * 3.5, 0, state.autoT + frame.dt)"
+      }
+    ]
+  },
+
   "viewports": {
     "decay": {
       "kind": "time-value",
@@ -75,6 +88,7 @@
       "color": "scene.style.color",
       "halfLife": "if(r >= 0, 1e9, log(2) / (-r))",
       "tMax": "halfLife * 3.5",
+      "t": "state.autoT",
       "ratio": "clamp(exp(r * t), 0, 1)",
       "topH": "floor(frame.height * 0.42)",
       "padL": "38", "padR": "56", "padT": "14", "padB": "22",
@@ -688,7 +702,7 @@
     "lines": [
       {
         "label": { "en": "N = ", "ko": "N = " },
-        "value": "N_0 * exp(r * t)",
+        "value": "N_0 * exp(r * state.autoT)",
         "format": ".3f"
       },
       {
