@@ -46,10 +46,10 @@ function strokeOrFill(ctx: CanvasRenderingContext2D, node: { style?: { stroke?: 
 }
 
 export function drawRect(ctx: CanvasRenderingContext2D, node: RectEl, rc: RenderContext): void {
-  const x = evalNum(node.x, rc);
-  const y = evalNum(node.y, rc);
-  const w = evalNum(node.w, rc);
-  const h = evalNum(node.h, rc);
+  const x = evalNumOr(node.x, rc);
+  const y = evalNumOr(node.y, rc);
+  const w = evalNumOr(node.w, rc);
+  const h = evalNumOr(node.h, rc);
   ctx.beginPath();
   ctx.rect(x, y, w, h);
   strokeOrFill(ctx, node);
@@ -58,31 +58,31 @@ export function drawRect(ctx: CanvasRenderingContext2D, node: RectEl, rc: Render
 export function drawRoundRect(ctx: CanvasRenderingContext2D, node: RoundRectEl, rc: RenderContext): void {
   roundRect(
     ctx,
-    evalNum(node.x, rc),
-    evalNum(node.y, rc),
-    evalNum(node.w, rc),
-    evalNum(node.h, rc),
+    evalNumOr(node.x, rc),
+    evalNumOr(node.y, rc),
+    evalNumOr(node.w, rc),
+    evalNumOr(node.h, rc),
     evalNumOr(node.r, rc),
   );
   strokeOrFill(ctx, node);
 }
 
 export function drawCircleEl(ctx: CanvasRenderingContext2D, node: CircleEl, rc: RenderContext): void {
-  drawCircle(ctx, evalNum(node.cx, rc), evalNum(node.cy, rc), evalNumOr(node.r, rc));
+  drawCircle(ctx, evalNumOr(node.cx, rc), evalNumOr(node.cy, rc), evalNumOr(node.r, rc));
   strokeOrFill(ctx, node);
 }
 
 export function drawEllipseEl(ctx: CanvasRenderingContext2D, node: EllipseEl, rc: RenderContext): void {
   const rot = node.rotation === undefined ? 0 : evalNumOr(node.rotation, rc);
-  drawEllipse(ctx, evalNum(node.cx, rc), evalNum(node.cy, rc), evalNumOr(node.rx, rc), evalNumOr(node.ry, rc), rot);
+  drawEllipse(ctx, evalNumOr(node.cx, rc), evalNumOr(node.cy, rc), evalNumOr(node.rx, rc), evalNumOr(node.ry, rc), rot);
   strokeOrFill(ctx, node);
 }
 
 export function drawArcEl(ctx: CanvasRenderingContext2D, node: ArcEl, rc: RenderContext): void {
   drawArc(
     ctx,
-    evalNum(node.cx, rc),
-    evalNum(node.cy, rc),
+    evalNumOr(node.cx, rc),
+    evalNumOr(node.cy, rc),
     evalNumOr(node.r, rc),
     evalNumOr(node.startAngle, rc),
     evalNumOr(node.endAngle, rc),
@@ -93,8 +93,8 @@ export function drawArcEl(ctx: CanvasRenderingContext2D, node: ArcEl, rc: Render
 export function drawFilledArcEl(ctx: CanvasRenderingContext2D, node: FilledArcEl, rc: RenderContext): void {
   drawFilledArc(
     ctx,
-    evalNum(node.cx, rc),
-    evalNum(node.cy, rc),
+    evalNumOr(node.cx, rc),
+    evalNumOr(node.cy, rc),
     evalNumOr(node.r, rc),
     evalNumOr(node.startAngle, rc),
     evalNumOr(node.endAngle, rc),
@@ -103,7 +103,7 @@ export function drawFilledArcEl(ctx: CanvasRenderingContext2D, node: FilledArcEl
 }
 
 export function drawLineEl(ctx: CanvasRenderingContext2D, node: LineEl, rc: RenderContext): void {
-  drawLine(ctx, evalNum(node.x1, rc), evalNum(node.y1, rc), evalNum(node.x2, rc), evalNum(node.y2, rc));
+  drawLine(ctx, evalNumOr(node.x1, rc), evalNumOr(node.y1, rc), evalNumOr(node.x2, rc), evalNumOr(node.y2, rc));
   if (node.style?.stroke !== undefined) ctx.stroke();
 }
 
@@ -146,8 +146,8 @@ export function drawPathEl(ctx: CanvasRenderingContext2D, node: PathEl, rc: Rend
 }
 
 export function drawTextEl(ctx: CanvasRenderingContext2D, node: TextEl, rc: RenderContext): void {
-  const x = evalNum(node.x, rc);
-  const y = evalNum(node.y, rc);
+  const x = evalNumOr(node.x, rc);
+  const y = evalNumOr(node.y, rc);
   const raw = evalExpr(node.text, rc);
   const text = typeof raw === 'string' ? raw : String(raw);
   if (node.style?.fill !== undefined) ctx.fillText(text, x, y);
@@ -161,7 +161,7 @@ export function drawTextEl(ctx: CanvasRenderingContext2D, node: TextEl, rc: Rend
 export function drawImageEl(ctx: CanvasRenderingContext2D, node: ImageEl, rc: RenderContext): void {
   const img = ensureImage(node.src, rc);
   if (!img.complete || img.naturalWidth === 0) return; // 로드 대기 중: skip.
-  drawImage(ctx, img, evalNum(node.x, rc), evalNum(node.y, rc), evalNum(node.w, rc), evalNum(node.h, rc));
+  drawImage(ctx, img, evalNumOr(node.x, rc), evalNumOr(node.y, rc), evalNumOr(node.w, rc), evalNumOr(node.h, rc));
 }
 
 function ensureImage(src: string, rc: RenderContext): HTMLImageElement {

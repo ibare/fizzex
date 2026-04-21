@@ -230,6 +230,8 @@ export class VizPanel {
       width: '100%',
       aspectRatio: '1',
       position: 'relative',
+      minHeight: '0',
+      overflow: 'hidden',
     });
     this.root.appendChild(this.vizContainer);
 

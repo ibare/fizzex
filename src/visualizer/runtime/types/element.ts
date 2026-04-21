@@ -20,32 +20,32 @@ interface ElementBase {
 
 export interface RectEl extends ElementBase {
   kind: 'rect';
-  x: ExprString;
-  y: ExprString;
-  w: ExprString;
-  h: ExprString;
+  x: ExprString | number;
+  y: ExprString | number;
+  w: ExprString | number;
+  h: ExprString | number;
 }
 
 export interface RoundRectEl extends ElementBase {
   kind: 'roundRect';
-  x: ExprString;
-  y: ExprString;
-  w: ExprString;
-  h: ExprString;
+  x: ExprString | number;
+  y: ExprString | number;
+  w: ExprString | number;
+  h: ExprString | number;
   r: ExprString | number;
 }
 
 export interface CircleEl extends ElementBase {
   kind: 'circle';
-  cx: ExprString;
-  cy: ExprString;
+  cx: ExprString | number;
+  cy: ExprString | number;
   r: ExprString | number;
 }
 
 export interface EllipseEl extends ElementBase {
   kind: 'ellipse';
-  cx: ExprString;
-  cy: ExprString;
+  cx: ExprString | number;
+  cy: ExprString | number;
   rx: ExprString | number;
   ry: ExprString | number;
   rotation?: ExprString | number;
@@ -55,8 +55,8 @@ export interface EllipseEl extends ElementBase {
 
 export interface ArcEl extends ElementBase {
   kind: 'arc';
-  cx: ExprString;
-  cy: ExprString;
+  cx: ExprString | number;
+  cy: ExprString | number;
   r: ExprString | number;
   startAngle: ExprString | number;
   endAngle: ExprString | number;
@@ -64,8 +64,8 @@ export interface ArcEl extends ElementBase {
 
 export interface FilledArcEl extends ElementBase {
   kind: 'filledArc';
-  cx: ExprString;
-  cy: ExprString;
+  cx: ExprString | number;
+  cy: ExprString | number;
   r: ExprString | number;
   startAngle: ExprString | number;
   endAngle: ExprString | number;
@@ -73,10 +73,10 @@ export interface FilledArcEl extends ElementBase {
 
 export interface LineEl extends ElementBase {
   kind: 'line';
-  x1: ExprString;
-  y1: ExprString;
-  x2: ExprString;
-  y2: ExprString;
+  x1: ExprString | number;
+  y1: ExprString | number;
+  x2: ExprString | number;
+  y2: ExprString | number;
 }
 
 export interface PolylineEl extends ElementBase {
@@ -97,17 +97,17 @@ export interface PathEl extends ElementBase {
 
 export interface TextEl extends ElementBase {
   kind: 'text';
-  x: ExprString;
-  y: ExprString;
+  x: ExprString | number;
+  y: ExprString | number;
   text: ExprString; // Expression으로 평가. format 포함 가능
 }
 
 export interface ImageEl extends ElementBase {
   kind: 'image';
-  x: ExprString;
-  y: ExprString;
-  w: ExprString;
-  h: ExprString;
+  x: ExprString | number;
+  y: ExprString | number;
+  w: ExprString | number;
+  h: ExprString | number;
   src: string;
 }
 

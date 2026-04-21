@@ -83,8 +83,6 @@ export class Graphics2D {
     this.dpr = window.devicePixelRatio || 1;
     this.canvas.width = Math.max(1, Math.floor(this.width * this.dpr));
     this.canvas.height = Math.max(1, Math.floor(this.height * this.dpr));
-    this.canvas.style.width = `${this.width}px`;
-    this.canvas.style.height = `${this.height}px`;
     this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
   }
 
