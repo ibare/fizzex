@@ -70,7 +70,7 @@
   "viewports": {
     "abstractWave": {
       "kind": "time-value",
-      "rect": { "x": "10", "y": "10", "w": "frame.width - 20", "h": "frame.height * 0.42 - 20" },
+      "rect": { "x": "10", "y": "10", "w": "frame.width - 110", "h": "frame.height * 0.42 - 20" },
       "xMin": "state.autoT - 6",
       "xMax": "state.autoT",
       "yMin": "-max(0.000001, abs(A))",
@@ -106,6 +106,51 @@
         "cy": "A * sin(\\omega * state.autoT + \\varphi)",
         "r": 4,
         "style": { "fill": "scene.style.color" }
+      },
+
+      {
+        "kind": "group",
+        "let": {
+          "ucx": "frame.width - 50",
+          "ucy": "frame.height * 0.21",
+          "ur": "min(frame.height * 0.14, 34)",
+          "uAngle": "\\omega * state.autoT + \\varphi",
+          "uDotX": "ucx + ur * cos(uAngle)",
+          "uDotY": "ucy - ur * sin(uAngle)",
+          "uColor": "scene.style.color"
+        },
+        "children": [
+          {
+            "kind": "circle",
+            "cx": "ucx", "cy": "ucy", "r": "ur",
+            "style": {
+              "stroke": "if(frame.isDark, 'rgba(148,163,184,0.6)', 'rgba(100,116,139,0.5)')",
+              "lineWidth": 1
+            }
+          },
+          {
+            "kind": "line",
+            "x1": "ucx", "y1": "ucy",
+            "x2": "uDotX", "y2": "uDotY",
+            "style": { "stroke": "uColor", "lineWidth": 1.5 }
+          },
+          {
+            "kind": "circle",
+            "cx": "uDotX", "cy": "uDotY", "r": 4,
+            "style": { "fill": "uColor" }
+          },
+          {
+            "kind": "line",
+            "x1": "uDotX", "y1": "uDotY",
+            "x2": "frame.width - 110",
+            "y2": "uDotY",
+            "style": {
+              "stroke": "hexAlpha(uColor, 0.35)",
+              "lineWidth": 1,
+              "lineDash": [3, 3]
+            }
+          }
+        ]
       },
 
       {
@@ -163,6 +208,25 @@
                 "cy": "cy",
                 "r": "diaphR * 0.3",
                 "style": { "fill": "color" }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [1, 5] },
+                "as": "w",
+                "children": [
+                  {
+                    "kind": "arc",
+                    "cx": "dispX",
+                    "cy": "cy",
+                    "r": "diaphR + w * 16",
+                    "startAngle": "-PI * 0.3",
+                    "endAngle": "PI * 0.3",
+                    "style": {
+                      "stroke": "hexAlpha(color, max(0, abs(yNorm) * (1 - w * 0.22)))",
+                      "lineWidth": 2
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -227,12 +291,19 @@
                 "style": { "fill": "color", "opacity": 0.45 }
               },
               {
-                "kind": "line",
-                "x1": "left",
-                "y1": "surfaceY",
-                "x2": "right",
-                "y2": "surfaceY",
-                "style": { "stroke": "color", "lineWidth": 2 }
+                "kind": "repeat",
+                "of": { "range": [0, 40] },
+                "as": "s",
+                "children": [
+                  {
+                    "kind": "line",
+                    "x1": "left + (s / 40) * (right - left)",
+                    "y1": "surfaceY - 8 * sin((s / 40) * 4 * PI + \\omega * state.autoT)",
+                    "x2": "left + ((s + 1) / 40) * (right - left)",
+                    "y2": "surfaceY - 8 * sin(((s + 1) / 40) * 4 * PI + \\omega * state.autoT)",
+                    "style": { "stroke": "color", "lineWidth": 2 }
+                  }
+                ]
               },
               {
                 "kind": "line",
@@ -272,6 +343,60 @@
                 "style": {
                   "stroke": "if(frame.isDark, '#94a3b8', '#475569')",
                   "lineWidth": 2
+                }
+              },
+              {
+                "kind": "repeat",
+                "of": { "range": [0, 9] },
+                "as": "k",
+                "children": [
+                  {
+                    "kind": "line",
+                    "x1": "cx + (radius - 6) * cos(PI + (k / 8) * PI)",
+                    "y1": "cy + (radius - 6) * sin(PI + (k / 8) * PI)",
+                    "x2": "cx + radius * cos(PI + (k / 8) * PI)",
+                    "y2": "cy + radius * sin(PI + (k / 8) * PI)",
+                    "style": {
+                      "stroke": "if(frame.isDark, '#94a3b8', '#475569')",
+                      "lineWidth": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "kind": "text",
+                "x": "cx - radius - 4",
+                "y": "cy + 4",
+                "text": "'-V'",
+                "style": {
+                  "fill": "if(frame.isDark, '#cbd5e1', '#475569')",
+                  "font": "'500 10px -apple-system, sans-serif'",
+                  "textAlign": "right",
+                  "textBaseline": "middle"
+                }
+              },
+              {
+                "kind": "text",
+                "x": "cx",
+                "y": "cy - radius - 4",
+                "text": "'0'",
+                "style": {
+                  "fill": "if(frame.isDark, '#cbd5e1', '#475569')",
+                  "font": "'500 10px -apple-system, sans-serif'",
+                  "textAlign": "center",
+                  "textBaseline": "bottom"
+                }
+              },
+              {
+                "kind": "text",
+                "x": "cx + radius + 4",
+                "y": "cy + 4",
+                "text": "'+V'",
+                "style": {
+                  "fill": "if(frame.isDark, '#cbd5e1', '#475569')",
+                  "font": "'500 10px -apple-system, sans-serif'",
+                  "textAlign": "left",
+                  "textBaseline": "middle"
                 }
               },
               {
