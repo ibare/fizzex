@@ -25,8 +25,9 @@ import {
   extendRenderContext3D,
 } from './render-context';
 import { applyTransform3D } from './transform-apply';
-import { buildBufferLine, buildLight, buildPoints, buildSphere } from './shape-builders';
 import { applyShaderMaterial } from './shader-apply';
+import { lookupPrimitive3D } from './primitive-registry';
+import './built-in-primitives';
 
 type ShaderDeferred = { el: Extract<ElementNode, { kind: 'shaderMaterial' }>; rc: RenderContext3D };
 
@@ -65,15 +66,10 @@ function dispatchKind(
   parent: Object3D,
   deferred: ShaderDeferred[],
 ): Object3D | null {
+  const primitive = lookupPrimitive3D(node.kind);
+  if (primitive) return primitive.build(node, rc);
+
   switch (node.kind) {
-    case 'sphere':
-      return buildSphere(node, rc);
-    case 'bufferLine':
-      return buildBufferLine(node, rc);
-    case 'points':
-      return buildPoints(node, rc);
-    case 'light':
-      return buildLight(node, rc);
     case 'shaderMaterial':
       deferred.push({ el: node, rc });
       return null;
@@ -122,10 +118,8 @@ function dispatchKind(
     case 'image':
     case 'functionCurve':
       throw new Error(`adapter3d: 2D shape "${node.kind}" cannot be rendered in 3D`);
-    default: {
-      const never: never = node;
-      throw new Error(`adapter3d: unhandled element kind ${(never as { kind: string }).kind}`);
-    }
+    default:
+      throw new Error(`adapter3d: unhandled element kind "${(node as { kind: string }).kind}"`);
   }
 }
 

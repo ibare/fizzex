@@ -21,7 +21,7 @@ import { renderRoot } from './adapter2d/render';
 import { rootContext } from './expr/context';
 import type { FrameInfo } from '../../graphics/types';
 import type { VisualizerSpec } from './types/spec';
-import sineWaveSpec from '../built-in/sine-wave-2d/spec.json';
+import sineWaveSpec from '../../../registries/default/sine-wave-2d/spec.json';
 
 function makeFrame(over?: Partial<FrameInfo>): FrameInfo {
   return {

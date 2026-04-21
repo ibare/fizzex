@@ -25,6 +25,7 @@ import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
 import type { SemanticResult } from '../analyzer/semantic-roles';
 import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 import type { VisualizerRef } from '../analyzer/semantic/types';
+import type { VisualizerRegistry } from '../visualizer';
 import { VizPanel } from './explorer-viz-panel';
 import { getControlType, buildInlineControlConfig } from './inline-control-types';
 import type { InlineControlConfig } from './inline-control-types';
@@ -52,6 +53,11 @@ export interface ExplorerOverlayConfig {
   theme?: 'light' | 'dark';
   /** 오버레이 닫힐 때 콜백 */
   onClose?: () => void;
+  /**
+   * 시각화 패널용 registry. 주입 시 탐색 배너에 시각화 버튼이 렌더된다.
+   * 미주입 시 탐색 UX(호버·선택·값 편집)는 그대로 동작하되 시각화 버튼은 숨김.
+   */
+  visualizerRegistry?: VisualizerRegistry;
 }
 
 // =========================================================================
@@ -103,6 +109,7 @@ export class ExplorerOverlay {
   private isDark: boolean;
   private destroyed = false;
   private onClose?: () => void;
+  private visualizerRegistry: VisualizerRegistry | null;
 
   // Visualizer 통합 — 다중 패널 지원 (현재는 1개 생성, 구조는 N개 대응)
   private vizPanels: VizPanel[] = [];
@@ -137,6 +144,7 @@ export class ExplorerOverlay {
 
     this.isDark = (cfg.theme ?? 'light') === 'dark';
     this.onClose = cfg.onClose;
+    this.visualizerRegistry = cfg.visualizerRegistry ?? null;
 
     // AST 확보
     this.ast = cfg.ast ?? parseLatex(cfg.latex!).ast;
@@ -445,6 +453,7 @@ export class ExplorerOverlay {
   private openVisualizerPanel(ref: VisualizerRef): void {
     const rootSemantic = this.semanticMap.get(this.ast.id);
     if (!rootSemantic?.catalogId || !rootSemantic.catalogCategory) return;
+    if (!this.visualizerRegistry) return;
 
     if (this.vizPanels.some((p) => p.visualizerId === ref.id)) return;
 
@@ -464,6 +473,7 @@ export class ExplorerOverlay {
       theme: this.isDark ? 'dark' : 'light',
       bounds: { left, top, width: initialWidth },
       visualizerId: ref.id,
+      registry: this.visualizerRegistry,
       onClose: () => this.closeVisualizerPanel(ref.id),
     });
     const isFirstPanel = this.vizPanels.length === 0;
@@ -1166,12 +1176,14 @@ export class ExplorerOverlay {
     this.catalogBanner.appendChild(sepSpan);
     this.catalogBanner.appendChild(descSpan);
 
-    // 시각화 버튼 — 등록된 Visualizer 참조 수만큼 생성.
+    // 시각화 버튼 — 호스트가 VisualizerRegistry를 주입한 경우에만 렌더.
     // 각 버튼은 해당 패널을 토글한다(열려 있으면 닫기, 없으면 열기).
-    const refs = getVisualizersForCatalog(rootSemantic.catalogId);
-    for (const ref of refs) {
-      const isOpen = this.vizPanels.some((p) => p.visualizerId === ref.id);
-      this.catalogBanner.appendChild(this.createVisualizerButton(ref, isOpen));
+    if (this.visualizerRegistry) {
+      const refs = getVisualizersForCatalog(rootSemantic.catalogId);
+      for (const ref of refs) {
+        const isOpen = this.vizPanels.some((p) => p.visualizerId === ref.id);
+        this.catalogBanner.appendChild(this.createVisualizerButton(ref, isOpen));
+      }
     }
 
     this.catalogBanner.style.display = 'flex';

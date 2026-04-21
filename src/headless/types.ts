@@ -7,6 +7,7 @@
 
 import type { BoxRenderConfig } from '../box/types';
 import { NEW_CM_MATH_CONFIG } from '../fonts';
+import type { VisualizerRegistry } from '../visualizer';
 
 export interface FizzexConfig {
   baseFontSize?: number;      // default 20
@@ -15,6 +16,11 @@ export interface FizzexConfig {
   theme?: 'light' | 'dark';  // default 'light'
   padding?: number;           // default 8
   displayMode?: 'display' | 'inline';  // default 'display'
+  /**
+   * 수식 탐색 모드에서 시각화 패널을 켜려면 호스트가 VisualizerRegistry를 주입해야 한다.
+   * 미주입 시 탐색 배너의 시각화 버튼이 렌더되지 않는다 (탐색 자체는 정상 동작).
+   */
+  visualizerRegistry?: VisualizerRegistry;
 }
 
 export interface FizzexSize {

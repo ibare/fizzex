@@ -11,6 +11,7 @@ import {
   EditorView,
 } from 'fizzex';
 import type { ExpressionAnalysis, RootNode, CASResult } from 'fizzex';
+import { visualizerRegistry } from '../visualizer-registry';
 
 /* ── Presets ── */
 
@@ -161,7 +162,13 @@ function StepInput({
         <code>{latex}</code>
       </div>
       {editorState && (
-        <EditorView initialState={editorState} readOnly autoSize />
+        <EditorView
+          initialState={editorState}
+          readOnly
+          autoSize
+          showExplorerToggle
+          visualizerRegistry={visualizerRegistry}
+        />
       )}
     </div>
   );
@@ -308,7 +315,15 @@ function StepCompute({
 function RenderLatex({ latex }: { latex: string }) {
   try {
     const state = createStateFromLatex(latex);
-    return <EditorView initialState={state} readOnly autoSize />;
+    return (
+      <EditorView
+        initialState={state}
+        readOnly
+        autoSize
+        showExplorerToggle
+        visualizerRegistry={visualizerRegistry}
+      />
+    );
   } catch {
     return <span style={styles.muted}>{latex}</span>;
   }

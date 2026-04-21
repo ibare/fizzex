@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { createStateFromLatex } from 'fizzex';
 import { EditorView } from 'fizzex/react';
 import { useLang } from '../i18n/context';
+import { visualizerRegistry } from '../visualizer-registry';
 import { comparisonCategories } from '../data/comparison-data';
 import { symbolCategories } from '../data/symbol-data';
 import katex from 'katex';
@@ -179,7 +180,14 @@ export default function Comparison() {
                     <div style={styles.renderRow3}>
                       <div style={styles.renderCell}>
                         {item.fizzexState ? (
-                          <EditorView initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
+                          <EditorView
+                            initialState={item.fizzexState}
+                            readOnly
+                            autoSize
+                            displayMode={displayMode}
+                            showExplorerToggle
+                            visualizerRegistry={visualizerRegistry}
+                          />
                         ) : (
                           <span style={styles.muted}>Error</span>
                         )}
@@ -220,7 +228,14 @@ export default function Comparison() {
                     </div>
                     <div style={styles.renderCell}>
                       {item.fizzexState ? (
-                        <EditorView initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
+                        <EditorView
+                          initialState={item.fizzexState}
+                          readOnly
+                          autoSize
+                          displayMode={displayMode}
+                          showExplorerToggle
+                          visualizerRegistry={visualizerRegistry}
+                        />
                       ) : (
                         <span style={styles.muted}>-</span>
                       )}

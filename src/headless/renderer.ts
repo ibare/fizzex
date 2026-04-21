@@ -154,6 +154,7 @@ export class DOMRendererView {
     this.explorerOverlay = new ExplorerOverlay({
       latex: this.currentLatex,
       theme: this.userConfig.theme,
+      visualizerRegistry: this.userConfig.visualizerRegistry,
       onClose: () => { this.explorerOverlay = null; },
     });
   }

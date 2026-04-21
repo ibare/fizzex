@@ -1,0 +1,19 @@
+{
+  "version": "1",
+  "visualizers": {
+    "compound-interest-2d": { "spec": "compound-interest-2d/spec.json", "renderer": "2d" },
+    "exponential-decay-2d": { "spec": "exponential-decay-2d/spec.json", "renderer": "2d" },
+    "freefall-2d": { "spec": "freefall-2d/spec.json", "renderer": "2d" },
+    "kepler-orbit-2d": { "spec": "kepler-orbit-2d/spec.json", "renderer": "2d" },
+    "kepler-orbit-3d": { "spec": "kepler-orbit-3d/spec.json", "renderer": "3d" },
+    "pythagorean-explore-2d": { "spec": "pythagorean-explore-2d/spec.json", "renderer": "2d" },
+    "pythagorean-ladder-2d": { "spec": "pythagorean-ladder-2d/spec.json", "renderer": "2d" },
+    "pythagorean-shortcut-2d": { "spec": "pythagorean-shortcut-2d/spec.json", "renderer": "2d" },
+    "pythagorean-tv-2d": { "spec": "pythagorean-tv-2d/spec.json", "renderer": "2d" },
+    "quadratic-basketball-2d": { "spec": "quadratic-basketball-2d/spec.json", "renderer": "2d" },
+    "quadratic-bridge-2d": { "spec": "quadratic-bridge-2d/spec.json", "renderer": "2d" },
+    "quadratic-fountain-2d": { "spec": "quadratic-fountain-2d/spec.json", "renderer": "2d" },
+    "quadratic-sandbox-2d": { "spec": "quadratic-sandbox-2d/spec.json", "renderer": "2d" },
+    "sine-wave-2d": { "spec": "sine-wave-2d/spec.json", "renderer": "2d" }
+  }
+}

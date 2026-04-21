@@ -158,10 +158,16 @@ import {
   parseLatex,
   buildSemanticMap,
   getVisualizersForCatalog,
-  loadVisualizerSpec,
-  createVisualizerFromSpec,
+  createVisualizer,
+  createVisualizerRegistry,
 } from 'fizzex';
 import { ExplorerOverlay } from 'fizzex/headless';
+
+// The host supplies the visualizer registry — Fizzex does not ship a default CDN.
+// Point `baseUrl` at wherever your host publishes manifest.json + spec files.
+const registry = createVisualizerRegistry({
+  baseUrl: 'https://cdn.example.com/fizzex-visualizers/',
+});
 
 // One formula can have multiple independent visualizers (2D, 3D, etc.)
 const ast = parseLatex('T^2 = \\frac{4\\pi^2}{GM} a^3');
@@ -173,14 +179,18 @@ const refs = catalogId ? getVisualizersForCatalog(catalogId) : [];
 // refs: [{ id: 'kepler-orbit-2d', name: '지구 궤도 — 2D', ... },
 //        { id: 'kepler-orbit-3d', name: '지구 궤도 — 3D', ... }]
 
-// Load spec + mount (each spec is a separate JSON chunk)
-const raw = refs[0] ? await loadVisualizerSpec(refs[0].id) : null;
-const instance = raw
-  ? createVisualizerFromSpec(container, raw, { width: 400, height: 400 })
+// Mount on demand — registry fetches the spec JSON and picks the renderer chunk.
+const instance = refs[0]
+  ? await createVisualizer(container, {
+      registry,
+      id: refs[0].id,
+      width: 400,
+      height: 400,
+    })
   : null;
 
 // Or let ExplorerOverlay surface them as toggleable banner buttons
-const overlay = new ExplorerOverlay({ ast, theme: 'light' });
+const overlay = new ExplorerOverlay({ ast, theme: 'light', visualizerRegistry: registry });
 ```
 
 ## Plugin Architecture
@@ -236,8 +246,8 @@ import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizz
 
 // Visualization
 import {
-  createVisualizerFromSpec,
-  loadVisualizerSpec,
+  createVisualizer,
+  createVisualizerRegistry,
   getVisualizersForCatalog,
 } from 'fizzex';
 

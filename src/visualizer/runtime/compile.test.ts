@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { compileSpec } from './compile';
-import sineWaveSpec from '../built-in/sine-wave-2d/spec.json';
+import sineWaveSpec from '../../../registries/default/sine-wave-2d/spec.json';
 
 describe('compileSpec', () => {
   it('sine-wave-2d 스펙 + 카탈로그 병합 성공', () => {

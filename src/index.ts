@@ -171,19 +171,25 @@ export { ExplorerVisualizerController } from './headless';
 
 // Visualizer 프레임워크 — JSON spec 기반 런타임
 export {
-  createVisualizerFromSpec,
-  loadVisualizerSpec,
-  hasBuiltInSpec,
-  listBuiltInVisualizerIds,
+  createVisualizer,
+  createVisualizerRegistry,
   compileSpec,
 } from './visualizer';
 export type {
   CreateVisualizerOptions,
+  CreateVisualizerBaseOptions,
+  CreateVisualizerFromRegistryOptions,
+  CreateVisualizerFromSpecOptions,
   CreatedVisualizer,
   CreatedVisualizerInstance,
   CompiledVisualizer,
   Visualizer2DInstance,
   Visualizer3DInstance,
+  VisualizerRegistry,
+  VisualizerRegistryOptions,
+  VisualizerRegistryManifest,
+  VisualizerRegistryManifestEntry,
+  VisualizerRegistryLoadOptions,
   VisualizerSpec,
   SceneSpec,
   SceneStyle,

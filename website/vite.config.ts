@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { visualizersPlugin } from './vite.plugin.visualizers';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), visualizersPlugin()],
   base: '/fizzex/',
   resolve: {
     alias: {

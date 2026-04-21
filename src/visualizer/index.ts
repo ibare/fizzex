@@ -3,19 +3,25 @@
  */
 
 export {
-  createVisualizerFromSpec,
-  loadVisualizerSpec,
-  hasBuiltInSpec,
-  listBuiltInVisualizerIds,
+  createVisualizer,
+  createVisualizerRegistry,
   compileSpec,
 } from './runtime/public-api';
 export type {
   CreateVisualizerOptions,
+  CreateVisualizerBaseOptions,
+  CreateVisualizerFromRegistryOptions,
+  CreateVisualizerFromSpecOptions,
   CreatedVisualizer,
   CreatedVisualizerInstance,
   CompiledVisualizer,
   Visualizer2DInstance,
   Visualizer3DInstance,
+  VisualizerRegistry,
+  VisualizerRegistryOptions,
+  VisualizerRegistryManifest,
+  VisualizerRegistryManifestEntry,
+  VisualizerRegistryLoadOptions,
 } from './runtime/public-api';
 
 export type { VisualizerSpec } from './runtime/types/spec';

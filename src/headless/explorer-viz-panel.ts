@@ -8,7 +8,7 @@
 
 import { ExplorerVisualizerController } from './explorer-visualizer';
 import { ExplorerSceneChips } from './explorer-scene-chips';
-import type { CreatedVisualizer } from '../visualizer/runtime/public-api';
+import type { CreatedVisualizer, VisualizerRegistry } from '../visualizer/runtime/public-api';
 
 export interface VizPanelBounds {
   left: number;
@@ -21,6 +21,8 @@ export interface VizPanelConfig {
   theme: 'light' | 'dark';
   bounds: VizPanelBounds;
   visualizerId: string;
+  /** 호스트 주입 VisualizerRegistry — spec을 id로 해석·fetch한다. */
+  registry: VisualizerRegistry;
   /**
    * 사용자가 패널 헤더의 닫기(✕) 버튼을 눌러 패널을 닫으려 할 때 호출된다.
    * ExplorerOverlay가 수신해 해당 패널을 배열에서 제거 + destroy + 배너 버튼 상태 갱신을 수행한다.
@@ -249,7 +251,7 @@ export class VizPanel {
     this.parent.appendChild(this.root);
 
     // === 컨트롤러 생성 (init은 비동기) ===
-    this.controller = new ExplorerVisualizerController(this.vizContainer, this.theme);
+    this.controller = new ExplorerVisualizerController(this.vizContainer, this.theme, cfg.registry);
 
     // === 이벤트 바인딩 ===
     this.boundHeaderMouseDown = this.handleHeaderMouseDown.bind(this);

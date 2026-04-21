@@ -211,6 +211,7 @@ export class DOMStreamView {
       this.explorerOverlay = new ExplorerOverlay({
         latex: wrapper.dataset.latex,
         theme,
+        visualizerRegistry: this.config.visualizerRegistry,
         onClose: () => { this.explorerOverlay = null; },
       });
     };

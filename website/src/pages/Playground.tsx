@@ -3,6 +3,7 @@ import { useLang } from '../i18n/context';
 import { parseLatex, analyzeExpression, astToLatex, createStateFromLatex } from 'fizzex';
 import { EditorView } from 'fizzex/react';
 import type { ExpressionAnalysis, EditorState } from 'fizzex';
+import { visualizerRegistry } from '../visualizer-registry';
 
 const PRESETS = [
   'x^2 + 2x - 3 = 0',
@@ -87,6 +88,7 @@ export default function Playground() {
                 height={120}
                 showSuggestions
                 showExplorerToggle
+                visualizerRegistry={visualizerRegistry}
                 theme="light"
               />
             </div>

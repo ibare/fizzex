@@ -18,6 +18,7 @@ import { SuggestionChips } from './SuggestionChips';
 import { useFizzexLabels, useLocalizedSuggestions } from '../i18n';
 import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
 import { ExpressionExplorer } from './ExpressionExplorer';
+import type { VisualizerRegistry } from '../visualizer';
 
 /** 커서 위치 정보 */
 interface CursorScreenPosition {
@@ -45,6 +46,8 @@ export interface EditorViewProps {
   showSuggestions?: boolean;
   /** 수식 탐색 버튼 표시 여부 */
   showExplorerToggle?: boolean;
+  /** 시각화 registry — 호스트가 주입. 없으면 탐색 모드에서 시각화 버튼이 노출되지 않는다. */
+  visualizerRegistry?: VisualizerRegistry;
   /** 내용에 맞게 자동 크기 조절 (readOnly 시 기본 true) */
   autoSize?: boolean;
   /** 자동 크기 조절 시 최소 너비 */
@@ -96,6 +99,7 @@ export function EditorView({
   showDebugToggle = false,
   showSuggestions = false,
   showExplorerToggle = false,
+  visualizerRegistry,
   autoSize,
   minWidth = 40,
   minHeight = 40,
@@ -711,6 +715,7 @@ export function EditorView({
           isOpen={showExplorer}
           onClose={() => setShowExplorer(false)}
           theme={theme}
+          visualizerRegistry={visualizerRegistry}
         />
       )}
 

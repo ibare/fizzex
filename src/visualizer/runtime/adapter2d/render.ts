@@ -19,7 +19,9 @@ import {
   extendRenderContext,
   type RenderContext,
 } from './render-context';
-import { SHAPE_RENDERERS, CONTAINER_RENDERERS, KIND_3D } from './dispatch';
+import { CONTAINER_RENDERERS, KIND_3D } from './dispatch';
+import { lookupPrimitive2D } from './primitive-registry';
+import './built-in-primitives';
 
 export function renderRoot(ctx: CanvasRenderingContext2D, node: ElementNode, rc: RenderContext): void {
   if (node.visible !== undefined && !evalBool(node.visible, rc)) return;
@@ -47,9 +49,9 @@ export function renderRoot(ctx: CanvasRenderingContext2D, node: ElementNode, rc:
     applyTransform(ctx, node.transform, active);
     applyStyle(ctx, node.style, active);
 
-    const shape = SHAPE_RENDERERS[node.kind];
-    if (shape) {
-      shape(ctx, node, active);
+    const primitive = lookupPrimitive2D(node.kind);
+    if (primitive) {
+      primitive.draw(ctx, node, active);
       return;
     }
     const container = CONTAINER_RENDERERS[node.kind];

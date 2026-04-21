@@ -44,9 +44,14 @@ const solutions = solve(eq);      // x = 2, x = -2`,
   parseLatex,
   buildSemanticMap,
   getVisualizersForCatalog,
-  loadVisualizerSpec,
-  createVisualizerFromSpec,
+  createVisualizer,
+  createVisualizerRegistry,
 } from 'fizzex';
+
+// Host supplies the registry — Fizzex does not ship a default CDN.
+const registry = createVisualizerRegistry({
+  baseUrl: 'https://cdn.example.com/fizzex-visualizers/',
+});
 
 const ast = parseLatex('T^2 = \\\\frac{4\\\\pi^2}{GM} a^3');
 const catalogId = buildSemanticMap(ast).get(ast.id)?.catalogId;
@@ -55,10 +60,14 @@ const catalogId = buildSemanticMap(ast).get(ast.id)?.catalogId;
 const refs = catalogId ? getVisualizersForCatalog(catalogId) : [];
 refs.forEach((r) => console.log(r.name)); // "2D 궤도", "3D 궤도"
 
-// Load + mount on demand — each spec is a separate JSON chunk
-const raw = refs[0] ? await loadVisualizerSpec(refs[0].id) : null;
-const instance = raw
-  ? createVisualizerFromSpec(container, raw, { width: 400, height: 400 })
+// Mount on demand — registry fetches the spec JSON and picks the renderer chunk.
+const instance = refs[0]
+  ? await createVisualizer(container, {
+      registry,
+      id: refs[0].id,
+      width: 400,
+      height: 400,
+    })
   : null;`,
 };
 

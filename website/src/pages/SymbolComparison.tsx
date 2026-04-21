@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { createStateFromLatex } from 'fizzex';
 import { EditorView } from 'fizzex/react';
 import { useLang } from '../i18n/context';
+import { visualizerRegistry } from '../visualizer-registry';
 import { symbolCategories } from '../data/symbol-data';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
@@ -101,7 +102,14 @@ export default function SymbolComparison() {
                 </div>
                 <div style={styles.renderCell}>
                   {item.fizzexState ? (
-                    <EditorView initialState={item.fizzexState} readOnly autoSize displayMode={displayMode} />
+                    <EditorView
+                      initialState={item.fizzexState}
+                      readOnly
+                      autoSize
+                      displayMode={displayMode}
+                      showExplorerToggle
+                      visualizerRegistry={visualizerRegistry}
+                    />
                   ) : (
                     <span style={styles.errorText}>-</span>
                   )}

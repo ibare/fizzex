@@ -205,6 +205,7 @@ export class DOMEditorView {
     this.explorerOverlay = new ExplorerOverlay({
       ast: this.editor.getState().ast,
       theme: this.userConfig.theme,
+      visualizerRegistry: this.userConfig.visualizerRegistry,
       onClose: () => { this.explorerOverlay = null; },
     });
   }
