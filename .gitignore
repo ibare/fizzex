@@ -5,6 +5,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 
+# Pack output
+/pack/
+
 # Coverage
 coverage/
 

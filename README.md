@@ -164,9 +164,12 @@ import {
 import { ExplorerOverlay } from 'fizzex/headless';
 
 // The host supplies the visualizer registry — Fizzex does not ship a default CDN.
-// Point `baseUrl` at wherever your host publishes manifest.json + spec files.
+// Two options:
+//   (a) Point `baseUrl` at the bundled spec assets shipped inside the package
+//       (`fizzex/visualizers/manifest.json` + spec.json files). No external hosting required.
+//   (b) Point `baseUrl` at wherever your host publishes manifest.json + spec files.
 const registry = createVisualizerRegistry({
-  baseUrl: 'https://cdn.example.com/fizzex-visualizers/',
+  baseUrl: new URL('fizzex/visualizers/', import.meta.url).href,
 });
 
 // One formula can have multiple independent visualizers (2D, 3D, etc.)

@@ -21,7 +21,8 @@
     "./tiptap": {
       "types": "./dist/integrations/tiptap/index.d.ts",
       "import": "./dist/integrations/tiptap/index.js"
-    }
+    },
+    "./visualizers/*": "./dist/visualizers/*"
   },
   "files": [
     "dist",
@@ -29,7 +30,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && vite build -c vite.lib.config.ts",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && vite build -c vite.lib.config.ts && cp -R registries/default dist/visualizers && find dist/visualizers -name '*.test.*' -delete",
+    "pack:tgz": "pnpm pack --pack-destination pack",
     "build:types": "tsc -p tsconfig.build.json",
     "build:browser": "vite build -c vite.lib.config.ts",
     "dev": "tsc -p tsconfig.build.json --watch",
