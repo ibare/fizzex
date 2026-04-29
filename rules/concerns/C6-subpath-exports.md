@@ -22,3 +22,4 @@ package.json의 exports를 변경하거나, 새 subpath를 추가할 때.
 ## PREFER
 - tree-shaking이 가능하도록 sideEffects: false를 유지한다
 - 각 subpath의 index.ts는 명시적 re-export만 포함한다 (export * 지양)
+- 정적 자산은 와일드카드 매핑(`./<자산명>/*: ./dist/<자산명>/*`)으로 노출하고, 호스트가 `new URL('fizzex/<자산명>/', import.meta.url).href`로 baseUrl을 잡는 패턴을 가이드한다 — source layout이 아닌 dist 산출물 경로를 안정 인터페이스로 유지

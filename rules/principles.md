@@ -18,11 +18,11 @@ last_verified: 2026-03-26
 - 하위 단계가 상위 단계를 참조하지 않는다
 
 ## 3. 프레임워크 격리
-- core 모듈(box/, latex/, types.ts, editor.ts, analyzer/, cas/, utils/, canvas/)은 React, Konva 등 프레임워크에 의존하지 않는다
+- core 모듈(box/, latex/, types.ts, editor.ts, analyzer/, cas/, utils/, canvas/)은 React 등 프레임워크에 의존하지 않는다
 - 프레임워크 의존 코드는 react/, visualizer/, headless/, integrations/ 에만 존재한다
 
 ## 4. 불변 상태
-- EditorState, AST 노드는 불변이다
+- EditorState, AST 노드, VisualizerSpec/SceneSpec/CatalogIndexEntry 등 spec 객체는 불변이다
 - 상태 변경은 새 객체를 생성하여 반환한다
 - 원본 객체를 직접 수정하지 않는다
 
@@ -33,5 +33,5 @@ last_verified: 2026-03-26
 
 ## 6. 최소 영향 변경
 - 수정은 필요한 범위로 최소화한다
-- 기존 public API를 변경할 때는 하위 호환성을 고려한다
+- 기존 public API 변경 시 호출 측을 일괄 갱신하고 옛 식별자를 즉시 제거한다 (deprecated alias·legacy 분기·shim 도입 금지)
 - 부수효과 없는 변경을 우선한다

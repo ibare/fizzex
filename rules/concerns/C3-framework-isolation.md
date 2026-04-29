@@ -15,7 +15,7 @@ core 모듈(box/, latex/, types.ts, editor.ts, analyzer/, cas/, utils/, canvas/)
 - core 모듈의 함수는 순수 함수이거나 주입된 의존성만 사용한다
 
 ## MUST NOT
-- `box/`, `latex/`, `types.ts`, `editor.ts`, `analyzer/`, `cas/`, `utils/`, `canvas/`에서 `react`, `react-dom`, `konva`, `react-konva`를 import하지 않는다
+- `box/`, `latex/`, `types.ts`, `editor.ts`, `analyzer/`, `cas/`, `utils/`, `canvas/`에서 `react`, `react-dom`을 import하지 않는다
 - `headless/`에서 `react`를 import하지 않는다 (headless는 프레임워크 무관)
 - `integrations/tiptap/`에서 `react`를 import하지 않는다 (vanilla DOM NodeView)
 

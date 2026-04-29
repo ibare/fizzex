@@ -2,7 +2,7 @@
 
 ### 기본 정보
 - 언어: TypeScript (strict mode)
-- 주요 프레임워크/라이브러리: React 19, Konva, Nerdamer, Tiptap
+- 주요 프레임워크/라이브러리: React 19, Nerdamer, Tiptap
 - 모노레포 여부: 아니오 (단일 패키지 + website)
 - 모듈/패키지 목록: 13개 모듈 (box, latex, analyzer, cas, visualizer, react, headless, integrations, suggestion, fonts, i18n, export, utils)
 - 빌드 시스템: tsc + Vite

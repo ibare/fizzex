@@ -34,10 +34,10 @@ concerns:
 
   - id: C3
     file: concerns/C3-framework-isolation.md
-    description: 프레임워크 격리 (core 모듈에 React/Konva 금지)
+    description: 프레임워크 격리 (core 모듈에 React 등 프레임워크 import 금지)
     triggers:
       paths: ["src/box/**", "src/latex/**", "src/analyzer/**", "src/cas/**", "src/utils/**", "src/headless/**", "src/integrations/**", "src/canvas/**"]
-      imports: ["react", "react-dom", "konva", "react-konva"]
+      imports: ["react", "react-dom"]
 
   - id: C4
     file: concerns/C4-box-model.md
@@ -48,7 +48,7 @@ concerns:
 
   - id: C5
     file: concerns/C5-headless-contract.md
-    description: Headless adapter 계약 (API 하위 호환, destroy 정리, silent fail)
+    description: Headless adapter 계약 (destroy 정리, silent fail, alias·shim 도입 금지)
     triggers:
       paths: ["src/headless/**", "src/integrations/**"]
       patterns: ["DOMRendererView", "DOMEditorView", "DOMStreamView", "FizzexConfig"]
@@ -73,3 +73,24 @@ concerns:
     triggers:
       paths: ["src/analyzer/semantic/data/catalog/**", "src/analyzer/semantic/matchers/catalog-matcher.ts"]
       patterns: ["CatalogIndexEntry", "matchCatalog"]
+
+  - id: C9
+    file: concerns/C9-visualizer-spec-first.md
+    description: Visualizer Spec-First (registries/default가 단일 진실의 원천, 코드 기반 viz 금지, 단일 런타임 해석)
+    triggers:
+      paths: ["src/visualizer/**", "registries/default/**"]
+      patterns: ["VisualizerSpec", "SceneSpec", "createVisualizer", "createVisualizerRegistry", "BUILT_IN_LOADERS"]
+
+  - id: C10
+    file: concerns/C10-build-artifact-cleanliness.md
+    description: 빌드 산출물 청결성 (prebuild clean, dist 단일 artifact, source layout 비노출, tarball 위치 분리)
+    triggers:
+      paths: ["package.json", "tsconfig.build.json", "vite.lib.config.ts"]
+      patterns: ["files", "exports", "outDir", "pack-destination", "rm -rf dist"]
+
+  - id: C11
+    file: concerns/C11-visualizer-manifest-test.md
+    description: Visualizer manifest·spec 정합성 및 검증 테스트 (manifest↔spec 양방향 정합, spec-validation 회귀 케이스)
+    triggers:
+      paths: ["registries/default/**", "src/visualizer/runtime/registry.ts"]
+      patterns: ["VisualizerRegistryManifest", "spec-validation", "manifest.json"]
