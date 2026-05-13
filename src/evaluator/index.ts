@@ -5,6 +5,7 @@
  */
 export { evaluateSync, evaluate } from './evaluate';
 export { analyzeBindings, analyzeEvaluability } from './analyze';
+export { evaluateMatrixSync, evaluateMatrix } from './matrix';
 export type {
   BindingAnalysis,
   EvaluabilityAnalysis,
@@ -15,3 +16,4 @@ export type {
   EvalStatus,
   EvalDetail,
 } from './types';
+export type { Matrix, MatrixValue, MatrixResult } from './matrix';
