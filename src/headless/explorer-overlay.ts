@@ -23,6 +23,8 @@ import {
 import type { ExplorerBoxInfo } from '../box/explorer-map';
 import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
 import type { SemanticResult } from '../analyzer/semantic-roles';
+import { analyzeBindings } from '../evaluator/analyze';
+import type { BindingAnalysis } from '../evaluator/analyze';
 import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 import type { VisualizerRef } from '../analyzer/semantic/types';
 import type { VisualizerRegistry } from '../visualizer';
@@ -75,6 +77,8 @@ export class ExplorerOverlay {
 
   // 데이터
   private ast: RootNode;
+  /** AST 의 자유변수(required) 와 수학 상수(constants) 분류. constructor 에서 1회 계산. */
+  private bindingAnalysis: BindingAnalysis;
   private box: Box | null = null;
   private explorerInfos: ExplorerBoxInfo[] = [];
   private semanticMap: Map<string, SemanticResult> = new Map();
@@ -148,6 +152,9 @@ export class ExplorerOverlay {
 
     // AST 확보
     this.ast = cfg.ast ?? parseLatex(cfg.latex!).ast;
+
+    // 자유변수/상수 자동 분류 — 슬라이더 후보 도출의 단일 진실 출처
+    this.bindingAnalysis = analyzeBindings(this.ast);
 
     // BoxRenderConfig
     this.config = {

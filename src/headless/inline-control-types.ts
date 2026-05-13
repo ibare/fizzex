@@ -9,6 +9,8 @@ import type { MathNode } from '../types';
 import type { CatalogDetail } from '../analyzer/semantic/types';
 import type { SemanticResult } from '../analyzer/semantic-roles';
 import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api';
+import { normalizeVarName } from '../evaluator/normalize';
+import { isMathConstantName } from '../evaluator/constants';
 
 // ─── 타입 ───
 
@@ -39,14 +41,13 @@ export interface InlineControlConfig {
 }
 
 // ─── 잘 알려진 상수 (카탈로그 미매칭 시 fallback) ───
-
-const KNOWN_MATH_CONSTANTS = new Set(['π', 'pi', 'e', 'i']);
+//
+// 키는 evaluator/normalize.normalizeVarName 의 정규형(유니코드)이다.
+// `\pi` 같은 raw LaTeX 토큰은 호출부에서 정규화 후 lookup 한다.
 
 const KNOWN_CONSTANT_VALUES: Record<string, { value: string; label: string }> = {
   'π': { value: '3.14159…', label: '원주율' },
-  'pi': { value: '3.14159…', label: '원주율' },
   'e': { value: '2.71828…', label: '자연 상수' },
-  'i': { value: '√(−1)', label: '허수 단위' },
 };
 
 // ─── 함수 ───
@@ -60,7 +61,7 @@ const KNOWN_CONSTANT_VALUES: Record<string, { value: string; label: string }> = 
  * - input → slider
  * - structural → none
  *
- * 카탈로그 미매칭 시 fallback: KNOWN_MATH_CONSTANTS
+ * 카탈로그 미매칭 시 fallback: isMathConstantName (evaluator/constants)
  */
 export function getControlType(
   node: MathNode,
@@ -83,8 +84,8 @@ export function getControlType(
         }
       }
 
-      // fallback: 잘 알려진 수학 상수
-      if (KNOWN_MATH_CONSTANTS.has(name)) return 'readonly';
+      // fallback: evaluator 의 수학 상수 집합 (단일 진실의 원천)
+      if (isMathConstantName(normalizeVarName(name))) return 'readonly';
 
       return 'slider';
     }
@@ -124,7 +125,8 @@ export function buildInlineControlConfig(
 
   switch (controlType) {
     case 'slider': {
-      const varName = (node as { name: string }).name;
+      const rawName = (node as { name: string }).name;
+      const varName = normalizeVarName(rawName);
       config.paramId = varName;
 
       // 카탈로그 parameterConfig에서 매칭 파라미터 검색
@@ -164,22 +166,23 @@ export function buildInlineControlConfig(
     }
 
     case 'readonly': {
-      const name = node.type === 'variable'
+      const rawName = node.type === 'variable'
         ? (node as { name: string }).name
         : undefined;
+      const canonical = rawName ? normalizeVarName(rawName) : undefined;
 
-      // 카탈로그 kind/value 우선
-      const em = name ? catalogDetail?.elementMeanings?.[name] : undefined;
+      // 카탈로그 kind/value 우선 (카탈로그 키는 raw name 기준)
+      const em = rawName ? catalogDetail?.elementMeanings?.[rawName] : undefined;
       if (em && 'kind' in em && em.kind === 'constant' && em.value != null) {
         const formatted = formatConstantValue(em.value);
         const unit = em.unit ? ` ${em.unit}` : '';
-        config.displayValue = `${em.role} ${name} = ${formatted}${unit}`;
+        config.displayValue = `${em.role} ${rawName} = ${formatted}${unit}`;
       } else if (em && 'kind' in em && em.kind === 'output') {
         config.displayValue = em.role;
-      } else if (name && KNOWN_CONSTANT_VALUES[name]) {
-        // fallback: 잘 알려진 수학 상수
-        const info = KNOWN_CONSTANT_VALUES[name];
-        config.displayValue = `${info.label} ${name} ≈ ${info.value}`;
+      } else if (canonical && KNOWN_CONSTANT_VALUES[canonical]) {
+        // fallback: 정규형 키 기반 잘 알려진 수학 상수
+        const info = KNOWN_CONSTANT_VALUES[canonical];
+        config.displayValue = `${info.label} ${canonical} ≈ ${info.value}`;
       } else if (semantic) {
         config.displayValue = semantic.description;
       }
