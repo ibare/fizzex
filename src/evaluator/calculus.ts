@@ -1,20 +1,22 @@
 /**
- * E6 미적분 평가자 — 정적분 수치 평가 (adaptive Simpson)
+ * E6/E7 미적분 + 유한 합/곱 평가자
  *
- * 본 단계는 1차원 정적분 \int_a^b f(x) dx 만 지원한다.
- * - 부정적분, 다중적분 (iint/iiint), 선적분 (oint) 은 unsupported.
- * - 적분 변수 differential 이 비어있으면 unsupported.
+ * 본 모듈은 "반복 평가 기반 수치 평가자" 들을 응집한다:
+ *   - 정적분 (adaptive Simpson 1/3)
+ *   - 유한 합 / 곱 (인덱스 변수 반복 바인딩)
  *
- * 알고리즘: adaptive Simpson 1/3 재귀.
- * - 정밀도 eps = 1e-9, 최대 재귀 깊이 maxDepth = 20.
- * - 분할 [a,b] 의 Simpson 추정 S1 과 [a,m]+[m,b] 의 합 S2 가 |S2-S1|/15 < eps 이면 수렴.
- * - 깊이 초과 시 divergent.
- * - 피적분 평가 실패는 그대로 전파 (도메인/언바운드/미지원).
+ * 도메인 정책:
+ *   - 정적분만 지원, 부정적분·다중적분·선적분 → unsupported
+ *   - 합/곱: 인덱스 = 시작값 ≤ 종료값 (둘 다 정수). 위반 시 domain
+ *   - 합/곱 항 수 > 1e6 → unsupported (메모리·시간 가드)
+ *   - 피적분/피합/피곱 평가 실패는 그대로 전파
  */
-import type { MathNode, IntegralNode } from '../types';
+import type { MathNode, IntegralNode, SumNode, ProductNode, OperatorNode, VariableNode, RowNode } from '../types';
 import { register } from './registry';
 import { value, fail, type EvalContext, type EvalOutcome } from './types';
 import { evalChildSequence } from './arithmetic';
+
+const TERM_COUNT_LIMIT = 1_000_000;
 
 const EPS = 1e-9;
 const MAX_DEPTH = 20;
@@ -127,10 +129,115 @@ function evalIntegral(node: MathNode, ctx: EvalContext): EvalOutcome {
   return integrate(f, lo.value, hi.value);
 }
 
+/**
+ * 합/곱의 하한 패턴 `i = start` 를 인식한다.
+ * SumNode.lower 는 [RowNode { children: [Variable, Operator('='), ...startSeq] }] 구조.
+ */
+type IndexAssignment =
+  | { ok: true; variable: string; startSeq: MathNode[] }
+  | { ok: false; outcome: EvalOutcome };
+
+function parseIndexAssignment(lower: MathNode[], hostNodeType: 'sum' | 'product'): IndexAssignment {
+  const malformed = (reason: string): IndexAssignment => ({
+    ok: false,
+    outcome: fail('unsupported', { nodeType: hostNodeType, reason }),
+  });
+  if (lower.length !== 1) return malformed('lower-not-singleton');
+  const head = lower[0];
+  if (head.type !== 'row') return malformed('lower-not-row');
+  const cells = (head as RowNode).children;
+  if (cells.length < 3) return malformed('lower-too-short');
+  const first = cells[0];
+  const second = cells[1];
+  if (first.type !== 'variable') return malformed('lower-no-variable');
+  if (second.type !== 'operator' || (second as OperatorNode).operator !== '=') {
+    return malformed('lower-missing-equals');
+  }
+  return {
+    ok: true,
+    variable: (first as VariableNode).name,
+    startSeq: cells.slice(2),
+  };
+}
+
+interface RangeResolution {
+  ok: true;
+  variable: string;
+  start: number;
+  end: number;
+}
+interface RangeFail {
+  ok: false;
+  outcome: EvalOutcome;
+}
+
+function resolveRange(
+  lower: MathNode[],
+  upper: MathNode[],
+  ctx: EvalContext,
+  hostNodeType: 'sum' | 'product',
+): RangeResolution | RangeFail {
+  const idx = parseIndexAssignment(lower, hostNodeType);
+  if (!idx.ok) return idx;
+  const startOut = evalChildSequence(idx.startSeq, ctx);
+  if (startOut.kind === 'fail') return { ok: false, outcome: startOut };
+  const endOut = evalChildSequence(upper, ctx);
+  if (endOut.kind === 'fail') return { ok: false, outcome: endOut };
+  if (!Number.isInteger(startOut.value) || !Number.isInteger(endOut.value)) {
+    return {
+      ok: false,
+      outcome: fail('domain', { nodeType: hostNodeType, reason: 'non-integer-bound' }),
+    };
+  }
+  if (startOut.value > endOut.value) {
+    return {
+      ok: false,
+      outcome: fail('domain', { nodeType: hostNodeType, reason: 'empty-range' }),
+    };
+  }
+  if (endOut.value - startOut.value + 1 > TERM_COUNT_LIMIT) {
+    return {
+      ok: false,
+      outcome: fail('unsupported', { nodeType: hostNodeType, reason: 'term-count-exceeds-limit' }),
+    };
+  }
+  return { ok: true, variable: idx.variable, start: startOut.value, end: endOut.value };
+}
+
+function evalSum(node: MathNode, ctx: EvalContext): EvalOutcome {
+  const n = node as SumNode;
+  const r = resolveRange(n.lower, n.upper, ctx, 'sum');
+  if (!r.ok) return r.outcome;
+  let acc = 0;
+  for (let k = r.start; k <= r.end; k++) {
+    const inner = ctx.withBinding(r.variable, k);
+    const term = evalChildSequence(n.body, inner);
+    if (term.kind === 'fail') return term;
+    acc += term.value;
+  }
+  return value(acc);
+}
+
+function evalProduct(node: MathNode, ctx: EvalContext): EvalOutcome {
+  const n = node as ProductNode;
+  const r = resolveRange(n.lower, n.upper, ctx, 'product');
+  if (!r.ok) return r.outcome;
+  let acc = 1;
+  for (let k = r.start; k <= r.end; k++) {
+    const inner = ctx.withBinding(r.variable, k);
+    const term = evalChildSequence(n.body, inner);
+    if (term.kind === 'fail') return term;
+    acc *= term.value;
+  }
+  return value(acc);
+}
+
 let installed = false;
 
 export function installCalculusHandlers(): void {
   if (installed) return;
   installed = true;
   register('integral', evalIntegral);
+  register('sum', evalSum);
+  register('product', evalProduct);
 }

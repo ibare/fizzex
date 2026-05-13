@@ -95,32 +95,26 @@ describe('E4 — analyzeEvaluability: 등록 노드', () => {
 });
 
 describe('E4 — analyzeEvaluability: 미등록 노드', () => {
-  it('\\sum → evaluable=false, unsupported 에 sum', () => {
-    const { ast } = parseLatex('\\sum_{i=1}^{n} i');
-    const a = analyzeEvaluability(ast);
-    expect(a.evaluable).toBe(false);
-    expect(a.unsupported).toContain('sum');
-  });
-
-  it('\\lim → evaluable=false', () => {
+  it('\\lim → evaluable=false, unsupported 에 limit', () => {
     const { ast } = parseLatex('\\lim_{x \\to 0} \\frac{\\sin(x)}{x}');
     const a = analyzeEvaluability(ast);
     expect(a.evaluable).toBe(false);
+    expect(a.unsupported).toContain('limit');
   });
 
   it('unsupported 정렬·dedupe: 같은 미등록 타입 중복 제거', () => {
-    const { ast } = parseLatex('\\sum_{i=1}^{3} i + \\sum_{j=1}^{2} j');
+    const { ast } = parseLatex('\\lim_{x \\to 0} x + \\lim_{y \\to 1} y');
     const a = analyzeEvaluability(ast);
-    expect(a.unsupported.filter((t) => t === 'sum').length).toBe(1);
+    expect(a.unsupported.filter((t) => t === 'limit').length).toBe(1);
   });
 });
 
 describe('E4 — 합성 시나리오', () => {
   it('미등록 노드 안에 자유변수가 있어도 변수 수집은 정상 작동', () => {
-    const { ast } = parseLatex('\\sum_{i=1}^{n} a_i');
+    const { ast } = parseLatex('\\lim_{x \\to a} x');
     const b = analyzeBindings(ast);
-    // n 은 자유변수
-    expect(b.required).toContain('n');
+    // a 는 자유변수
+    expect(b.required).toContain('a');
   });
 
   it('분석은 부작용 없음 (반복 호출 시 결과 동일)', () => {
