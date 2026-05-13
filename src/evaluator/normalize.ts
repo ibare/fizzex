@@ -29,7 +29,7 @@ const LATEX_TO_UNICODE: Readonly<Record<string, string>> = {
   '\\varsigma': 'σ',
   '\\tau': 'τ',
   '\\upsilon': 'υ',
-  '\\phi': 'φ',
+  '\\phi': 'ϕ',
   '\\varphi': 'φ',
   '\\chi': 'χ',
   '\\psi': 'ψ',

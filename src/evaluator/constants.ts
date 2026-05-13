@@ -11,6 +11,7 @@ export const MATH_CONSTANT_NAMES: ReadonlySet<string> = new Set([
   'e',
   'γ',
   'φ',
+  'ϕ',
   '∞',
   'τ',
 ]);
