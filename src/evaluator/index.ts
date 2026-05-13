@@ -7,6 +7,7 @@ export { evaluateSync, evaluate } from './evaluate';
 export { analyzeBindings, analyzeEvaluability } from './analyze';
 export { evaluateMatrixSync, evaluateMatrix } from './matrix';
 export { differentiateAt, differentiate } from './autodiff';
+export { evaluateComplexSync, evaluateComplex } from './complex';
 export type {
   BindingAnalysis,
   EvaluabilityAnalysis,
@@ -19,3 +20,4 @@ export type {
 } from './types';
 export type { Matrix, MatrixValue, MatrixResult } from './matrix';
 export type { Dual, DiffResult } from './autodiff';
+export type { Complex, ComplexResult } from './complex';
