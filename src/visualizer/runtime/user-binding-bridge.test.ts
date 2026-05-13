@@ -262,3 +262,118 @@ describe('applyUserBindings — 혼합 dispatch (V3)', () => {
     expect(store.getBinding('M')).toBeUndefined();
   });
 });
+
+describe('applyUserBindings — derivatives (V4)', () => {
+  it('도함수 평가 후 store.bindings 에 주입', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
+      derivatives: [{ source: 'f', variable: 'x', order: 1, binding: 'fPrime' }],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { f: 0, x: 3 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { f: 0, x: 3 } });
+    const r = applyUserBindings(spec, { f: latexAst('x^{2}') }, store);
+    expect(r.derivatives).toEqual([
+      { source: 'f', variable: 'x', binding: 'fPrime', value: 6 },
+    ]);
+    expect(r.skippedDerivatives).toEqual([]);
+    expect(store.getBinding('fPrime')).toBe(6);
+  });
+
+  it('source 입력 누락 → unbound 로 skip + 이전 binding 제거', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
+      derivatives: [{ source: 'f', variable: 'x', order: 1, binding: 'fPrime' }],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { f: 0, x: 1 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { f: 0, x: 1 } });
+    store.setBinding('fPrime', 999);
+    const r = applyUserBindings(spec, {}, store);
+    expect(r.derivatives).toEqual([]);
+    expect(r.skippedDerivatives).toEqual([
+      { source: 'f', variable: 'x', binding: 'fPrime', reason: 'unbound' },
+    ]);
+    expect(store.getBinding('fPrime')).toBeUndefined();
+  });
+
+  it('source 평가 실패 → source-skipped', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
+      derivatives: [{ source: 'f', variable: 'x', order: 1, binding: 'fPrime' }],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { f: 0, x: 1 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { f: 0, x: 1 } });
+    const r = applyUserBindings(spec, { f: latexAst('1 / 0') }, store);
+    expect(r.applied).toEqual([]);
+    expect(r.skipped).toHaveLength(1);
+    expect(r.derivatives).toEqual([]);
+    expect(r.skippedDerivatives).toEqual([
+      { source: 'f', variable: 'x', binding: 'fPrime', reason: 'source-skipped' },
+    ]);
+    expect(store.getBinding('fPrime')).toBeUndefined();
+  });
+
+  it('미분 자체가 정의 불가 → eval-failed', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
+      derivatives: [{ source: 'f', variable: 'x', order: 1, binding: 'fPrime' }],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { f: 0, x: 0 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { f: 0, x: 0 } });
+    const r = applyUserBindings(spec, { f: latexAst('|x|') }, store);
+    expect(r.applied).toHaveLength(1);
+    expect(r.derivatives).toEqual([]);
+    expect(r.skippedDerivatives).toEqual([
+      { source: 'f', variable: 'x', binding: 'fPrime', reason: 'eval-failed' },
+    ]);
+    expect(store.getBinding('fPrime')).toBeUndefined();
+  });
+
+  it('다중 derivatives — 서로 다른 변수로 미분', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
+      derivatives: [
+        { source: 'f', variable: 'x', order: 1, binding: 'dfdx' },
+        { source: 'f', variable: 'y', order: 1, binding: 'dfdy' },
+      ],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { f: 0, x: 3, y: 5 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { f: 0, x: 3, y: 5 } });
+    const r = applyUserBindings(spec, { f: latexAst('x^{2} + y^{3}') }, store);
+    expect(r.derivatives).toEqual([
+      { source: 'f', variable: 'x', binding: 'dfdx', value: 6 },
+      { source: 'f', variable: 'y', binding: 'dfdy', value: 75 },
+    ]);
+    expect(store.getBinding('dfdx')).toBe(6);
+    expect(store.getBinding('dfdy')).toBe(75);
+  });
+});

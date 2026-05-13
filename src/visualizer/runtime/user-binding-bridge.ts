@@ -29,7 +29,7 @@
  * 의 경우 이전 binding 값이 남는 것을 막기 위해 명시적 `clearBinding`.
  */
 
-import { evaluate, evaluateMatrix, evaluateComplex } from '../../evaluator';
+import { evaluate, evaluateMatrix, evaluateComplex, differentiateAt } from '../../evaluator';
 import type { EvalStatus, Matrix, MatrixValue, Complex } from '../../evaluator';
 import type { MathNode, NumberNode } from '../../types';
 import type { VisualizerSpec } from './types/spec';
@@ -78,9 +78,27 @@ export interface SkippedBinding {
   detail?: string;
 }
 
+export interface AppliedDerivative {
+  source: string;
+  variable: string;
+  binding: string;
+  value: number;
+}
+
+export type DerivativeSkipReason = 'unbound' | 'source-skipped' | 'eval-failed';
+
+export interface SkippedDerivative {
+  source: string;
+  variable: string;
+  binding: string;
+  reason: DerivativeSkipReason;
+}
+
 export interface ApplyUserBindingsResult {
   applied: AppliedBinding[];
   skipped: SkippedBinding[];
+  derivatives: AppliedDerivative[];
+  skippedDerivatives: SkippedDerivative[];
 }
 
 /**
@@ -98,6 +116,8 @@ export function applyUserBindings(
 ): ApplyUserBindingsResult {
   const applied: AppliedBinding[] = [];
   const skipped: SkippedBinding[] = [];
+  const derivatives: AppliedDerivative[] = [];
+  const skippedDerivatives: SkippedDerivative[] = [];
   const userBindings = spec.userBindings ?? [];
 
   for (const binding of userBindings) {
@@ -116,9 +136,10 @@ export function applyUserBindings(
 
     const node = toNode(binding.name, raw);
 
+    const evalBindings = store.snapshot().params;
     switch (binding.outputKind) {
       case 'scalar': {
-        const result = evaluate(node, {});
+        const result = evaluate(node, evalBindings);
         if (result.ok) {
           store.setParam(binding.name, result.value, 'external');
           applied.push({ name: binding.name, outputKind: 'scalar', value: result.value });
@@ -134,7 +155,7 @@ export function applyUserBindings(
         break;
       }
       case 'matrix': {
-        const result = evaluateMatrix(node, {});
+        const result = evaluateMatrix(node, evalBindings);
         if (result.ok) {
           const value: MatrixValue = result.value;
           store.setBinding(binding.name, value);
@@ -152,7 +173,7 @@ export function applyUserBindings(
         break;
       }
       case 'complex': {
-        const result = evaluateComplex(node, {});
+        const result = evaluateComplex(node, evalBindings);
         if (result.ok) {
           store.setBinding(binding.name, result.value);
           applied.push({ name: binding.name, outputKind: 'complex', value: result.value });
@@ -182,7 +203,48 @@ export function applyUserBindings(
     }
   }
 
-  return { applied, skipped };
+  const appliedScalars = new Map<string, MathNode>();
+  for (const a of applied) {
+    if (a.outputKind !== 'scalar') continue;
+    const raw = inputs[a.name];
+    if (raw === undefined) continue;
+    appliedScalars.set(a.name, toNode(a.name, raw));
+  }
+
+  for (const d of spec.derivatives ?? []) {
+    const sourceNode = appliedScalars.get(d.source);
+    if (!sourceNode) {
+      store.clearBinding(d.binding);
+      skippedDerivatives.push({
+        source: d.source,
+        variable: d.variable,
+        binding: d.binding,
+        reason: inputs[d.source] === undefined ? 'unbound' : 'source-skipped',
+      });
+      continue;
+    }
+    const evalBindings = store.snapshot().params;
+    const value = differentiateAt(sourceNode, d.variable, evalBindings);
+    if (typeof value !== 'number') {
+      store.clearBinding(d.binding);
+      skippedDerivatives.push({
+        source: d.source,
+        variable: d.variable,
+        binding: d.binding,
+        reason: 'eval-failed',
+      });
+      continue;
+    }
+    store.setBinding(d.binding, value);
+    derivatives.push({
+      source: d.source,
+      variable: d.variable,
+      binding: d.binding,
+      value,
+    });
+  }
+
+  return { applied, skipped, derivatives, skippedDerivatives };
 }
 
 /**
