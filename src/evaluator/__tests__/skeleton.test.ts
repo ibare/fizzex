@@ -50,7 +50,7 @@ describe('E0 — 핫패스 evaluateSync', () => {
   });
 
   it('throw 하지 않는다 — 미지원 노드도 undefined 로 흡수', () => {
-    const { ast } = parseLatex('\\frac{1}{2}');
+    const { ast } = parseLatex('\\sum_{i=1}^{10} i');
     expect(() => evaluateSync(ast)).not.toThrow();
     expect(evaluateSync(ast)).toBeUndefined();
   });
@@ -73,13 +73,13 @@ describe('E0 — 콜드패스 evaluate', () => {
     }
   });
 
-  it('미지원 노드(frac) → { ok: false, status: "unsupported", detail.nodeType }', () => {
-    const { ast } = parseLatex('\\frac{1}{2}');
+  it('registry 미등록 노드(integral) → { ok: false, status: "unsupported", detail.nodeType }', () => {
+    const { ast } = parseLatex('\\int_0^1 x \\, dx');
     const r = evaluate(ast);
     expect(r.ok).toBe(false);
     if (!r.ok) {
       expect(r.status).toBe('unsupported');
-      expect(r.detail?.nodeType).toBe('frac');
+      expect(r.detail?.nodeType).toBe('integral');
     }
   });
 
@@ -137,18 +137,18 @@ describe('E0 — analyzeEvaluability', () => {
     expect(r.evaluable).toBe(true);
   });
 
-  it('frac 포함 식 → evaluable=false, unsupported 에 "frac" 포함 (E0 시점)', () => {
-    const { ast } = parseLatex('\\frac{1}{2}');
+  it('integral 포함 식 → evaluable=false, unsupported 에 "integral" 포함', () => {
+    const { ast } = parseLatex('\\int_0^1 x \\, dx');
     const r = analyzeEvaluability(ast);
     expect(r.evaluable).toBe(false);
-    expect(r.unsupported).toContain('frac');
+    expect(r.unsupported).toContain('integral');
   });
 
-  it('operator 포함 식 → unsupported 에 "operator" 포함 (E0 시점)', () => {
-    const { ast } = parseLatex('x + y');
+  it('sum 포함 식 → unsupported 에 "sum" 포함', () => {
+    const { ast } = parseLatex('\\sum_{i=1}^{10} i');
     const r = analyzeEvaluability(ast);
     expect(r.evaluable).toBe(false);
-    expect(r.unsupported).toContain('operator');
+    expect(r.unsupported).toContain('sum');
   });
 });
 

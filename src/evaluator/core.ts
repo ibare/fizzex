@@ -9,6 +9,19 @@ import { register } from './registry';
 import { value, fail, type EvalContext, type EvalOutcome } from './types';
 import { normalizeVarName } from './normalize';
 
+/**
+ * 다중 자식 시퀀스 평가 hook.
+ *
+ * E0 시점에는 미설정 (단일 자식만 의미). E1 산수 평가자가
+ * shunting-yard 기반 시퀀스 평가를 등록한다.
+ */
+type SequenceEvalFn = (children: MathNode[], ctx: EvalContext) => EvalOutcome;
+let sequenceEval: SequenceEvalFn | null = null;
+
+export function setSequenceEvaluator(fn: SequenceEvalFn): void {
+  sequenceEval = fn;
+}
+
 function evalContainer(node: MathNode, ctx: EvalContext): EvalOutcome {
   const children = (node as RootNode | RowNode).children;
   if (children.length === 0) {
@@ -16,6 +29,9 @@ function evalContainer(node: MathNode, ctx: EvalContext): EvalOutcome {
   }
   if (children.length === 1) {
     return ctx.evaluate(children[0]);
+  }
+  if (sequenceEval) {
+    return sequenceEval(children, ctx);
   }
   return fail('unsupported', { nodeType: node.type, reason: 'multi-child-not-registered' });
 }
