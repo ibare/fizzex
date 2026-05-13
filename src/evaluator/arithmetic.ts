@@ -169,7 +169,8 @@ function evalSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
   return evalRPN(toRPN(tokens), ctx);
 }
 
-function evalChildSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
+/** 자식 시퀀스 평가 — 단일 자식은 dispatch, 다중은 shunting-yard. */
+export function evalChildSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
   if (children.length === 0) return fail('unsupported', { reason: 'empty-sequence' });
   if (children.length === 1) return ctx.evaluate(children[0]);
   return evalSequence(children, ctx);

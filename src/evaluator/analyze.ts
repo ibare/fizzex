@@ -10,6 +10,7 @@ import type { MathNode, MathNodeType, VariableNode } from '../types';
 import { registeredTypes } from './registry';
 import { installCoreHandlers } from './core';
 import { installArithmeticHandlers } from './arithmetic';
+import { installFunctionHandlers } from './functions';
 import { normalizeVarName } from './normalize';
 import { isMathConstantName } from './constants';
 
@@ -72,6 +73,7 @@ export function analyzeBindings(node: MathNode): BindingAnalysis {
 export function analyzeEvaluability(node: MathNode): EvaluabilityAnalysis {
   installCoreHandlers();
   installArithmeticHandlers();
+  installFunctionHandlers();
   const registered = registeredTypes();
   const unsupported = new Set<MathNodeType>();
   walk(node, (n) => {
