@@ -125,14 +125,14 @@ function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
     }
     if (t.kind === 'unaryMinus') {
       const x = stack.pop();
-      if (x === undefined) return fail('unsupported', { reason: 'malformed-sequence' });
+      if (x === undefined) return fail('unsupported', { nodeType: 'row', reason: 'malformed-sequence' });
       stack.push(-x);
       continue;
     }
     const b = stack.pop();
     const a = stack.pop();
     if (a === undefined || b === undefined) {
-      return fail('unsupported', { reason: 'malformed-sequence' });
+      return fail('unsupported', { nodeType: 'row', reason: 'malformed-sequence' });
     }
     switch (t.op) {
       case '+':
@@ -146,12 +146,12 @@ function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
         stack.push(a * b);
         break;
       case '÷':
-        if (b === 0) return fail('domain', { reason: 'division-by-zero' });
+        if (b === 0) return fail('domain', { nodeType: 'operator', reason: 'division-by-zero' });
         stack.push(a / b);
         break;
     }
   }
-  if (stack.length !== 1) return fail('unsupported', { reason: 'malformed-sequence' });
+  if (stack.length !== 1) return fail('unsupported', { nodeType: 'row', reason: 'malformed-sequence' });
   return value(stack[0]);
 }
 
@@ -161,17 +161,17 @@ function evalSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
     if (tokens.error === 'unsupported-operator') {
       return fail('unsupported', { nodeType: 'operator', reason: tokens.operator });
     }
-    return fail('unsupported', { reason: tokens.error });
+    return fail('unsupported', { nodeType: 'row', reason: tokens.error });
   }
   if (tokens.length === 0) {
-    return fail('unsupported', { reason: 'empty-sequence' });
+    return fail('unsupported', { nodeType: 'row', reason: 'empty-sequence' });
   }
   return evalRPN(toRPN(tokens), ctx);
 }
 
 /** 자식 시퀀스 평가 — 단일 자식은 dispatch, 다중은 shunting-yard. */
 export function evalChildSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
-  if (children.length === 0) return fail('unsupported', { reason: 'empty-sequence' });
+  if (children.length === 0) return fail('unsupported', { nodeType: 'row', reason: 'empty-sequence' });
   if (children.length === 1) return ctx.evaluate(children[0]);
   return evalSequence(children, ctx);
 }
@@ -185,7 +185,7 @@ function evalFrac(node: MathNode, ctx: EvalContext): EvalOutcome {
   if (num.kind === 'fail') return num;
   const den = evalChildSequence(n.denominator, ctx);
   if (den.kind === 'fail') return den;
-  if (den.value === 0) return fail('domain', { reason: 'division-by-zero' });
+  if (den.value === 0) return fail('domain', { nodeType: 'frac', reason: 'division-by-zero' });
   return value(num.value / den.value);
 }
 
@@ -196,10 +196,10 @@ function evalPower(node: MathNode, ctx: EvalContext): EvalOutcome {
   const exp = evalChildSequence(n.exponent, ctx);
   if (exp.kind === 'fail') return exp;
   if (base.value === 0 && exp.value <= 0) {
-    return fail('domain', { reason: 'zero-base-non-positive-exp' });
+    return fail('domain', { nodeType: 'power', reason: 'zero-base-non-positive-exp' });
   }
   if (base.value < 0 && !Number.isInteger(exp.value)) {
-    return fail('domain', { reason: 'negative-base-fractional-exp' });
+    return fail('domain', { nodeType: 'power', reason: 'negative-base-fractional-exp' });
   }
   return value(Math.pow(base.value, exp.value));
 }
@@ -212,12 +212,12 @@ function evalSqrt(node: MathNode, ctx: EvalContext): EvalOutcome {
   if (n.index && n.index.length > 0) {
     const idx = evalChildSequence(n.index, ctx);
     if (idx.kind === 'fail') return idx;
-    if (idx.value === 0) return fail('domain', { reason: 'zero-degree-root' });
+    if (idx.value === 0) return fail('domain', { nodeType: 'sqrt', reason: 'zero-degree-root' });
     degree = idx.value;
   }
   if (content.value < 0) {
     if (!Number.isInteger(degree) || degree % 2 === 0) {
-      return fail('domain', { reason: 'even-root-of-negative' });
+      return fail('domain', { nodeType: 'sqrt', reason: 'even-root-of-negative' });
     }
     return value(-Math.pow(-content.value, 1 / degree));
   }

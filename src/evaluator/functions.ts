@@ -27,7 +27,7 @@ function pure(fn: (x: number) => number): UnaryFn {
 function gated(domain: (x: number) => string | null, fn: (x: number) => number): UnaryFn {
   return (x) => {
     const err = domain(x);
-    if (err) return fail('domain', { reason: err });
+    if (err) return fail('domain', { nodeType: 'func', reason: err });
     return value(fn(x));
   };
 }

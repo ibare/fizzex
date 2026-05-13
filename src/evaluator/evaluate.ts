@@ -22,7 +22,7 @@ function dispatch(node: MathNode, ctx: EvalContext): EvalOutcome {
   }
   const out = fn(node, ctx);
   if (out.kind === 'value' && !Number.isFinite(out.value)) {
-    return { kind: 'fail', status: 'divergent', detail: { nodeType: node.type } };
+    return { kind: 'fail', status: 'divergent', detail: { nodeType: node.type, reason: 'non-finite-result' } };
   }
   return out;
 }
@@ -46,15 +46,23 @@ export function evaluateSync(node: MathNode, bindings: Bindings = EMPTY_BINDINGS
   installCoreHandlers();
   installArithmeticHandlers();
   installFunctionHandlers();
-  const out = dispatch(node, makeContext(bindings));
-  return out.kind === 'value' ? out.value : undefined;
+  try {
+    const out = dispatch(node, makeContext(bindings));
+    return out.kind === 'value' ? out.value : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 export function evaluate(node: MathNode, bindings: Bindings = EMPTY_BINDINGS): EvalResult {
   installCoreHandlers();
   installArithmeticHandlers();
   installFunctionHandlers();
-  const out = dispatch(node, makeContext(bindings));
-  if (out.kind === 'value') return { ok: true, value: out.value };
-  return { ok: false, status: out.status, detail: out.detail };
+  try {
+    const out = dispatch(node, makeContext(bindings));
+    if (out.kind === 'value') return { ok: true, value: out.value };
+    return { ok: false, status: out.status, detail: out.detail };
+  } catch {
+    return { ok: false, status: 'divergent', detail: { reason: 'internal-error' } };
+  }
 }
