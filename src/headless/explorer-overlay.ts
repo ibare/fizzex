@@ -27,7 +27,7 @@ import { analyzeBindings } from '../evaluator/analyze';
 import type { BindingAnalysis } from '../evaluator/analyze';
 import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 import type { VisualizerRef } from '../analyzer/semantic/types';
-import type { VisualizerRegistry } from '../visualizer';
+import type { UserBindingInputs, VisualizerRegistry } from '../visualizer';
 import { VizPanel } from './explorer-viz-panel';
 import { getControlType, buildInlineControlConfig } from './inline-control-types';
 import type { InlineControlConfig } from './inline-control-types';
@@ -60,6 +60,12 @@ export interface ExplorerOverlayConfig {
    * 미주입 시 탐색 UX(호버·선택·값 편집)는 그대로 동작하되 시각화 버튼은 숨김.
    */
   visualizerRegistry?: VisualizerRegistry;
+  /**
+   * spec.userBindings 슬롯에 매핑되는 사용자 LaTeX AST(혹은 즉시 number) 묶음.
+   * 마운트 직후 1회 주입되며, 슬라이더 변동 시 동일 입력으로 브리지를 재호출해
+   * derivatives 가 새 params 로 재평가되도록 한다 (V5-S3).
+   */
+  userBindings?: UserBindingInputs;
 }
 
 // =========================================================================
@@ -112,6 +118,12 @@ export class ExplorerOverlay {
   private config: BoxRenderConfig;
   private isDark: boolean;
   private destroyed = false;
+
+  /**
+   * 마운트된 visualizer 의 spec.userBindings 슬롯으로 흘려보낼 입력 묶음.
+   * 슬라이더 변동 시 동일 입력으로 브리지를 재호출해 derivatives 를 새로 평가한다.
+   */
+  private userBindingInputs: UserBindingInputs;
   private onClose?: () => void;
   private visualizerRegistry: VisualizerRegistry | null;
 
@@ -149,6 +161,7 @@ export class ExplorerOverlay {
     this.isDark = (cfg.theme ?? 'light') === 'dark';
     this.onClose = cfg.onClose;
     this.visualizerRegistry = cfg.visualizerRegistry ?? null;
+    this.userBindingInputs = cfg.userBindings ?? {};
 
     // AST 확보
     this.ast = cfg.ast ?? parseLatex(cfg.latex!).ast;
@@ -491,6 +504,8 @@ export class ExplorerOverlay {
 
     panel.init().then((ok) => {
       if (!ok || this.destroyed) return;
+      // 초기 userBindings 주입 — derivatives 가 비어 있지 않도록 (V5-S3).
+      panel.instance?.applyUserBindings(this.userBindingInputs);
       // primary(배열 0번) 패널만 값 배지 갱신용 subscribe와 연결한다.
       if (isFirstPanel && this.vizPanels[0] === panel) {
         this.valueBadgeUnsub?.();
@@ -1034,10 +1049,13 @@ export class ExplorerOverlay {
 
   private handleInlineValueChange(id: string, value: number, config: InlineControlConfig): void {
     if (config.controlType === 'slider') {
-      // 변수 슬라이더: instance에 setParam, 없으면 로컬 파라미터 업데이트
+      // 변수 슬라이더: instance에 setParam 후 브리지로 derivatives 재평가 (V5-S3).
+      // userBindingInputs 가 비어 있으면 브리지는 no-op 에 가깝다(스펙에 userBindings 가
+      // 없는 단순 카탈로그에서도 안전). 인스턴스가 없으면 로컬 파라미터만 업데이트.
       const inst = this.primaryInstance;
       if (inst) {
         inst.setParam(id, value);
+        inst.applyUserBindings(this.userBindingInputs);
       } else {
         this.localParamValues[id] = value;
       }
