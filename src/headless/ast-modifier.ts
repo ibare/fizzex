@@ -30,28 +30,27 @@ export function createModificationState(ast: RootNode): AstModificationState {
   };
 }
 
-/** number 노드의 값을 변경하고 수정된 workingAst를 반환 */
+/** number 노드의 값을 변경하고 새로 재구성된 workingAst를 반환 */
 export function modifyNumberNode(
   state: AstModificationState,
   nodeId: string,
   newValue: number,
 ): RootNode {
-  const node = findNodeById(state.workingAst, nodeId);
-  if (!node || node.type !== 'number') return state.workingAst;
+  const origNode = findNodeById(state.originalAst, nodeId);
+  if (!origNode || origNode.type !== 'number') return state.workingAst;
 
   const newValueStr = formatNumber(newValue);
-
-  // 최초 수정 시 원본 값 기록
-  if (!state.modifications.has(nodeId)) {
+  const existing = state.modifications.get(nodeId);
+  if (existing) {
+    existing.currentValue = newValueStr;
+  } else {
     state.modifications.set(nodeId, {
-      originalValue: node.value,
+      originalValue: origNode.value,
       currentValue: newValueStr,
     });
-  } else {
-    state.modifications.get(nodeId)!.currentValue = newValueStr;
   }
 
-  node.value = newValueStr;
+  state.workingAst = rebuildWorking(state.originalAst, state.modifications);
   return state.workingAst;
 }
 
@@ -60,23 +59,33 @@ export function resetNode(
   state: AstModificationState,
   nodeId: string,
 ): RootNode {
-  const mod = state.modifications.get(nodeId);
-  if (!mod) return state.workingAst;
-
-  const node = findNodeById(state.workingAst, nodeId);
-  if (node && node.type === 'number') {
-    node.value = mod.originalValue;
-  }
-
+  if (!state.modifications.has(nodeId)) return state.workingAst;
   state.modifications.delete(nodeId);
+  state.workingAst = rebuildWorking(state.originalAst, state.modifications);
   return state.workingAst;
 }
 
 /** 모든 수정을 원래대로 복원 */
 export function resetAll(state: AstModificationState): RootNode {
-  state.workingAst = cloneAst(state.originalAst) as RootNode;
   state.modifications.clear();
+  state.workingAst = rebuildWorking(state.originalAst, state.modifications);
   return state.workingAst;
+}
+
+/** original 의 새 deep clone 위에 modifications 의 currentValue 만 적용한다. */
+function rebuildWorking(
+  original: RootNode,
+  modifications: AstModificationState['modifications'],
+): RootNode {
+  const clone = cloneAst(original) as RootNode;
+  if (modifications.size === 0) return clone;
+  for (const [nodeId, mod] of modifications) {
+    const target = findNodeById(clone, nodeId);
+    if (target && target.type === 'number') {
+      target.value = mod.currentValue;
+    }
+  }
+  return clone;
 }
 
 /** 수정이 있는지 확인 */
