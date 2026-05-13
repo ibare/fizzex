@@ -272,3 +272,82 @@ describe('validateSpec — userBindings', () => {
     ).toThrow();
   });
 });
+
+describe('validateSpec — derivatives', () => {
+  const withScalarBinding = {
+    ...baseValidSpec,
+    userBindings: [
+      { name: 'A', outputKind: 'scalar' as const, required: true },
+    ],
+  };
+
+  it('accepts derivatives referencing scalar userBinding', () => {
+    const spec = validateSpec({
+      ...withScalarBinding,
+      derivatives: [
+        { source: 'A', variable: 'x', order: 1, binding: 'Aprime' },
+      ],
+    });
+    expect(spec.derivatives?.[0].binding).toBe('Aprime');
+  });
+
+  it('rejects derivatives.source not in userBindings', () => {
+    expect(() =>
+      validateSpec({
+        ...withScalarBinding,
+        derivatives: [
+          { source: 'B', variable: 'x', order: 1, binding: 'Bprime' },
+        ],
+      }),
+    ).toThrow(/unknown userBindings\.source: B/);
+  });
+
+  it('rejects derivatives.source with non-scalar outputKind', () => {
+    expect(() =>
+      validateSpec({
+        ...baseValidSpec,
+        userBindings: [
+          { name: 'A', outputKind: 'scalar', required: true },
+          { name: 'M', outputKind: 'matrix', required: true },
+        ],
+        derivatives: [
+          { source: 'M', variable: 'x', order: 1, binding: 'Mprime' },
+        ],
+      }),
+    ).toThrow(/derivative source "M" must be scalar/);
+  });
+
+  it('rejects derivatives.binding colliding with userBindings.name', () => {
+    expect(() =>
+      validateSpec({
+        ...withScalarBinding,
+        derivatives: [
+          { source: 'A', variable: 'x', order: 1, binding: 'A' },
+        ],
+      }),
+    ).toThrow(/derivative binding "A" collides with userBindings\.name/);
+  });
+
+  it('rejects duplicate derivatives.binding', () => {
+    expect(() =>
+      validateSpec({
+        ...withScalarBinding,
+        derivatives: [
+          { source: 'A', variable: 'x', order: 1, binding: 'Aprime' },
+          { source: 'A', variable: 'y', order: 1, binding: 'Aprime' },
+        ],
+      }),
+    ).toThrow(/duplicate derivative binding: Aprime/);
+  });
+
+  it('rejects derivatives.order other than 1', () => {
+    expect(() =>
+      validateSpec({
+        ...withScalarBinding,
+        derivatives: [
+          { source: 'A', variable: 'x', order: 2, binding: 'Apprime' },
+        ],
+      }),
+    ).toThrow();
+  });
+});

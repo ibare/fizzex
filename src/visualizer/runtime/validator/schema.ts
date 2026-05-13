@@ -149,6 +149,13 @@ const userBindingSchema = z.object({
   required: z.boolean(),
 });
 
+const derivativeSchema = z.object({
+  source: z.string().min(1),
+  variable: z.string().min(1),
+  order: z.literal(1),
+  binding: z.string().min(1),
+});
+
 const themeSchema = z
   .object({
     brand: exprString.optional(),
@@ -207,6 +214,7 @@ export const visualizerSpecSchema = z
       .array(z.enum(DISPLAY_OPTION_IDS as [typeof DISPLAY_OPTION_IDS[number], ...typeof DISPLAY_OPTION_IDS[number][]]))
       .optional(),
     userBindings: z.array(userBindingSchema).optional(),
+    derivatives: z.array(derivativeSchema).optional(),
     scenes: z.array(sceneSchema).min(1, 'at least one scene required'),
     localFormulas: z.array(localFormulaSchema).optional(),
     state: z.array(stateDeclSchema).optional(),
@@ -288,6 +296,48 @@ export const visualizerSpecSchema = z
             });
           }
         }
+      }
+    }
+
+    if (spec.derivatives) {
+      const bindingByName = new Map<string, z.infer<typeof userBindingSchema>>();
+      for (const b of spec.userBindings ?? []) bindingByName.set(b.name, b);
+
+      const userBindingNames = new Set(bindingByName.keys());
+      const derivativeBindings = new Set<string>();
+
+      for (const [i, d] of spec.derivatives.entries()) {
+        const source = bindingByName.get(d.source);
+        if (!source) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['derivatives', i, 'source'],
+            message: `unknown userBindings.source: ${d.source}`,
+          });
+        } else if (source.outputKind !== 'scalar') {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['derivatives', i, 'source'],
+            message: `derivative source "${d.source}" must be scalar (got ${source.outputKind})`,
+          });
+        }
+
+        if (userBindingNames.has(d.binding)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['derivatives', i, 'binding'],
+            message: `derivative binding "${d.binding}" collides with userBindings.name`,
+          });
+        }
+
+        if (derivativeBindings.has(d.binding)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['derivatives', i, 'binding'],
+            message: `duplicate derivative binding: ${d.binding}`,
+          });
+        }
+        derivativeBindings.add(d.binding);
       }
     }
 

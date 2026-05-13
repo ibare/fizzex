@@ -19,6 +19,7 @@ import type { ThemeSpec } from './theme';
 import type { DisplayOptionId } from './display-options';
 import type { CameraSpec } from './camera';
 import type { UserBindingSpec } from './user-binding';
+import type { DerivativeSpec } from './derivative';
 
 export type RendererKind = '2d' | '3d';
 
@@ -38,6 +39,12 @@ export interface VisualizerSpec {
    * 각 항목은 scenes[].params 의 키 하나에 대응한다.
    */
   userBindings?: UserBindingSpec[];
+
+  /**
+   * 사용자 수식의 도함수 슬롯 (V4). bridge 가 `differentiateAt` 으로 평가해
+   * StateStore 의 bindings 에 결과를 주입한다.
+   */
+  derivatives?: DerivativeSpec[];
 
   scenes: SceneSpec[];
 

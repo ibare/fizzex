@@ -62,4 +62,5 @@ export type {
 export type { LocalFormula } from './formula';
 export type { ThemeSpec } from './theme';
 export type { UserBindingSpec, OutputKind } from './user-binding';
+export type { DerivativeSpec } from './derivative';
 export type { VisualizerSpec, RendererKind } from './spec';
