@@ -11,10 +11,11 @@
  *   - 합/곱 항 수 > 1e6 → unsupported (메모리·시간 가드)
  *   - 피적분/피합/피곱 평가 실패는 그대로 전파
  */
-import type { MathNode, IntegralNode, SumNode, ProductNode, OperatorNode, VariableNode, RowNode } from '../types';
+import type { MathNode, IntegralNode, SumNode, ProductNode, LimitNode, OperatorNode, VariableNode, RowNode } from '../types';
 import { register } from './registry';
 import { value, fail, type EvalContext, type EvalOutcome } from './types';
 import { evalChildSequence } from './arithmetic';
+import { normalizeVarName } from './normalize';
 
 const TERM_COUNT_LIMIT = 1_000_000;
 
@@ -232,6 +233,124 @@ function evalProduct(node: MathNode, ctx: EvalContext): EvalOutcome {
   return value(acc);
 }
 
+/**
+ * E8 — 수치 극한
+ *
+ * 양극한 (좌·우 동시 수렴) 만 지원. 일방향 극한·진동·발산 → divergent.
+ * approach 가 ±∞ 변수 패턴이면 무한 극한으로 분기. 그 외엔 유한 극한.
+ */
+const FINITE_LIMIT_H = [1e-2, 1e-3, 1e-4, 1e-5, 1e-6, 1e-7];
+const INFINITE_LIMIT_X = [1e2, 1e3, 1e4, 1e5, 1e6, 1e7];
+const LIMIT_TOLERANCE = 1e-4;
+
+type InfinityDirection = 'pos' | 'neg' | null;
+
+/**
+ * approach 가 '∞' 또는 '-∞' 단순 패턴인지 식별.
+ * - [Variable('∞')]                       → 'pos'
+ * - [Operator('-'), Variable('∞')]        → 'neg'
+ */
+function detectInfinity(approach: MathNode[]): InfinityDirection {
+  // 파서는 approach 를 [RowNode] 로 감싼다. row wrapper 1단을 풀어낸다.
+  let nodes = approach;
+  if (nodes.length === 1 && nodes[0].type === 'row') {
+    nodes = (nodes[0] as RowNode).children;
+  }
+  if (nodes.length === 1) {
+    const n = nodes[0];
+    if (n.type === 'variable' && normalizeVarName((n as VariableNode).name) === '∞') return 'pos';
+    return null;
+  }
+  if (nodes.length === 2) {
+    const op = nodes[0];
+    const v = nodes[1];
+    if (
+      op.type === 'operator' &&
+      (op as OperatorNode).operator === '-' &&
+      v.type === 'variable' &&
+      normalizeVarName((v as VariableNode).name) === '∞'
+    ) {
+      return 'neg';
+    }
+  }
+  return null;
+}
+
+type LimitSampler = (x: number) => EvalOutcome;
+
+function sampleLimit(f: LimitSampler, x: number): { ok: true; value: number } | { ok: false; outcome: EvalOutcome } {
+  const out = f(x);
+  if (out.kind === 'fail') return { ok: false, outcome: out };
+  if (!Number.isFinite(out.value)) {
+    return {
+      ok: false,
+      outcome: fail('divergent', { nodeType: 'limit', reason: 'sample-non-finite' }),
+    };
+  }
+  return { ok: true, value: out.value };
+}
+
+function limitFinite(f: LimitSampler, a: number): EvalOutcome {
+  let lastLeft = 0;
+  let lastRight = 0;
+  for (const h of FINITE_LIMIT_H) {
+    const lo = sampleLimit(f, a - h);
+    if (!lo.ok) return lo.outcome;
+    const ro = sampleLimit(f, a + h);
+    if (!ro.ok) return ro.outcome;
+    lastLeft = lo.value;
+    lastRight = ro.value;
+  }
+  const scale = Math.max(Math.abs(lastLeft), Math.abs(lastRight), 1);
+  if (Math.abs(lastLeft - lastRight) > LIMIT_TOLERANCE * scale) {
+    return fail('divergent', { nodeType: 'limit', reason: 'left-right-mismatch' });
+  }
+  return value((lastLeft + lastRight) / 2);
+}
+
+function limitInfinite(f: LimitSampler, sign: 1 | -1): EvalOutcome {
+  let prev = 0;
+  let curr = 0;
+  for (let i = 0; i < INFINITE_LIMIT_X.length; i++) {
+    const x = sign * INFINITE_LIMIT_X[i];
+    const out = sampleLimit(f, x);
+    if (!out.ok) return out.outcome;
+    prev = curr;
+    curr = out.value;
+  }
+  const scale = Math.max(Math.abs(curr), 1);
+  if (Math.abs(curr - prev) > LIMIT_TOLERANCE * scale) {
+    return fail('divergent', { nodeType: 'limit', reason: 'no-convergence-at-infinity' });
+  }
+  return value(curr);
+}
+
+function evalLimit(node: MathNode, ctx: EvalContext): EvalOutcome {
+  const n = node as LimitNode;
+  if (!n.variable) {
+    return fail('unsupported', { nodeType: 'limit', reason: 'missing-variable' });
+  }
+  if (!n.approach || n.approach.length === 0) {
+    return fail('unsupported', { nodeType: 'limit', reason: 'missing-approach' });
+  }
+  if (!n.body || n.body.length === 0) {
+    return fail('unsupported', { nodeType: 'limit', reason: 'missing-body' });
+  }
+  const sampler: LimitSampler = (x) => {
+    const inner = ctx.withBinding(n.variable, x);
+    return evalChildSequence(n.body, inner);
+  };
+  const infDir = detectInfinity(n.approach);
+  if (infDir === 'pos') return limitInfinite(sampler, 1);
+  if (infDir === 'neg') return limitInfinite(sampler, -1);
+  const approachOut = evalChildSequence(n.approach, ctx);
+  if (approachOut.kind === 'fail') return approachOut;
+  if (!Number.isFinite(approachOut.value)) {
+    return fail('divergent', { nodeType: 'limit', reason: 'approach-non-finite' });
+  }
+  return limitFinite(sampler, approachOut.value);
+}
+
 let installed = false;
 
 export function installCalculusHandlers(): void {
@@ -240,4 +359,5 @@ export function installCalculusHandlers(): void {
   register('integral', evalIntegral);
   register('sum', evalSum);
   register('product', evalProduct);
+  register('limit', evalLimit);
 }

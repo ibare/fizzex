@@ -50,7 +50,7 @@ describe('E0 — 핫패스 evaluateSync', () => {
   });
 
   it('throw 하지 않는다 — 미지원 노드도 undefined 로 흡수', () => {
-    const { ast } = parseLatex('\\lim_{x \\to 0} x');
+    const { ast } = parseLatex('\\overline{1}');
     expect(() => evaluateSync(ast)).not.toThrow();
     expect(evaluateSync(ast)).toBeUndefined();
   });
@@ -73,13 +73,13 @@ describe('E0 — 콜드패스 evaluate', () => {
     }
   });
 
-  it('registry 미등록 노드(limit) → { ok: false, status: "unsupported", detail.nodeType }', () => {
-    const { ast } = parseLatex('\\lim_{x \\to 0} x');
+  it('registry 미등록 노드(overline) → { ok: false, status: "unsupported", detail.nodeType }', () => {
+    const { ast } = parseLatex('\\overline{1}');
     const r = evaluate(ast);
     expect(r.ok).toBe(false);
     if (!r.ok) {
       expect(r.status).toBe('unsupported');
-      expect(r.detail?.nodeType).toBe('limit');
+      expect(r.detail?.nodeType).toBe('overline');
     }
   });
 
@@ -137,11 +137,11 @@ describe('E0 — analyzeEvaluability', () => {
     expect(r.evaluable).toBe(true);
   });
 
-  it('limit 포함 식 → unsupported 에 "limit" 포함', () => {
-    const { ast } = parseLatex('\\lim_{x \\to 0} x');
+  it('overline 포함 식 → unsupported 에 "overline" 포함', () => {
+    const { ast } = parseLatex('\\overline{1}');
     const r = analyzeEvaluability(ast);
     expect(r.evaluable).toBe(false);
-    expect(r.unsupported).toContain('limit');
+    expect(r.unsupported).toContain('overline');
   });
 });
 
