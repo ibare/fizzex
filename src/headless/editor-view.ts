@@ -11,7 +11,7 @@ import { layoutBox, hitTest } from '../box/box-layout';
 import { Projector } from '../box/projector';
 import type { BoxRenderConfig, Box, HBox } from '../box/types';
 import { astToLatex } from '../latex/ast-to-latex';
-import { MathEditor, createStateFromLatex } from '../editor';
+import { MathEditor, createStateFromLatex, keyToInputAction } from '../editor';
 import { boundary } from '../types';
 import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
@@ -347,29 +347,15 @@ export class DOMEditorView {
     // During IME composition, let the browser handle everything
     if (this.isComposing) return;
 
-    const { key } = e;
+    // 숫자/영문 단일 문자는 hidden input의 `input` 이벤트가 처리한다 (IME 호환).
+    // 키→액션 매핑이 있으면서 단일 문자(숫자/변수)에 해당하지 않는 키만 위임.
+    const action = keyToInputAction(e.key);
+    if (!action) return;
+    if (action.type === 'insertNumber' || action.type === 'insertVariable') return;
 
-    // Keys that MathEditor handles via handleKeyDown
-    const specialKeys = [
-      'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
-      'Backspace', 'Delete',
-      '/', '^', '_', '|',
-      '(', ')', '[', ']', '{', '}',
-      '+', '-', '*', '=', '<', '>',
-    ];
-
-    if (specialKeys.includes(key)) {
-      e.preventDefault();
-      this.editor.handleKeyDown(e);
-      this.cursorVisible = true;
-      return;
-    }
-
-    // Single printable characters that are not whitespace
-    // Numbers and letters go through the `input` event for IME compatibility,
-    // but we also handle direct single-char keys here when the browser fires
-    // keydown before input (non-IME path).
-    // We let the input event handle these to avoid double insertion.
+    e.preventDefault();
+    this.editor.handleKeyDown(e);
+    this.cursorVisible = true;
   }
 
   private handleInput(e: Event): void {

@@ -12,7 +12,7 @@ import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
 import { layoutBox, hitTest, findBoxBySourceId } from '../box/box-layout';
 import { Projector } from '../box/projector';
-import { MathEditor, createInitialState } from '../editor';
+import { MathEditor, createInitialState, keyToInputAction } from '../editor';
 import { getSuggestions, getAllSuggestionsForContext, getAllSuggestions } from '../suggestion';
 import type { SuggestionWithAction } from '../suggestion/types';
 import { SuggestionChips } from './SuggestionChips';
@@ -398,27 +398,15 @@ export function EditorView({
     // IME 조합 중에는 기본 동작 허용
     if (isComposingRef.current) return;
 
-    const { key } = e;
+    // 숫자/변수 단일 문자는 hidden input의 onChange로 처리 (IME 지원).
+    // 키→액션 매핑이 있으면서 그 외에 해당하는 키만 editor에 위임.
+    const action = keyToInputAction(e.key);
+    if (!action) return;
+    if (action.type === 'insertNumber' || action.type === 'insertVariable') return;
 
-    // 특수 키 처리 (화살표, 백스페이스, 분수, 거듭제곱, 괄호 등)
-    const specialKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Backspace', 'Delete', '/', '^', '(', ')', '[', ']', '{', '}'];
-
-    if (specialKeys.includes(key)) {
-      e.preventDefault();
-      editorRef.current.handleKeyDown(e.nativeEvent);
-      setCursorVisible(true);
-      return;
-    }
-
-    // 연산자
-    if (['+', '-', '*', '='].includes(key)) {
-      e.preventDefault();
-      editorRef.current.handleKeyDown(e.nativeEvent);
-      setCursorVisible(true);
-      return;
-    }
-
-    // 일반 문자는 input의 기본 동작으로 처리 (IME 지원)
+    e.preventDefault();
+    editorRef.current.handleKeyDown(e.nativeEvent);
+    setCursorVisible(true);
   }, [readOnly]);
 
   // 숨겨진 input 입력 이벤트 (일반 문자 입력)

@@ -103,6 +103,60 @@ export function createVariable(name: string): VariableNode {
 /** 연산자 타입 (createOperator의 허용 값) */
 type OperatorSymbol = '+' | '-' | '×' | '÷' | '=' | '·' | '<' | '>' | '≤' | '≥' | '≠';
 
+/**
+ * 키보드 입력으로 발화되는 편집 액션의 디스크리미네이트 유니온.
+ * 키→액션 매핑(`keyToInputAction`)이 단일 진실이고, MathEditor 내부 dispatcher가
+ * 이를 받아 AST 변경 메서드로 위임한다.
+ */
+export type InputAction =
+  | { type: 'insertNumber'; char: string }
+  | { type: 'insertVariable'; name: string }
+  | { type: 'insertOperator'; op: OperatorSymbol }
+  | { type: 'insertFraction' }
+  | { type: 'insertPower' }
+  | { type: 'insertSubscript' }
+  | { type: 'insertAbs' }
+  | { type: 'insertParen'; paren: '(' | '[' | '{' }
+  | { type: 'exitParen' }
+  | { type: 'deleteBackward' }
+  | { type: 'moveLeft' }
+  | { type: 'moveRight' };
+
+/**
+ * 키 → InputAction 매핑. 매핑이 없으면 null.
+ * editor.ts와 headless 어댑터가 공통으로 이 함수만 참조하도록 한다.
+ */
+export function keyToInputAction(key: string): InputAction | null {
+  if (/^[0-9.]$/.test(key)) return { type: 'insertNumber', char: key };
+  switch (key) {
+    case '+': return { type: 'insertOperator', op: '+' };
+    case '-': return { type: 'insertOperator', op: '-' };
+    case '*': return { type: 'insertOperator', op: '×' };
+    case '=': return { type: 'insertOperator', op: '=' };
+    case '<': return { type: 'insertOperator', op: '<' };
+    case '>': return { type: 'insertOperator', op: '>' };
+    case '/': return { type: 'insertFraction' };
+    case '^': return { type: 'insertPower' };
+    case '_': return { type: 'insertSubscript' };
+    case '|': return { type: 'insertAbs' };
+    case '(':
+    case '[':
+    case '{':
+      return { type: 'insertParen', paren: key };
+    case ')':
+    case ']':
+    case '}':
+      return { type: 'exitParen' };
+    case 'Backspace': return { type: 'deleteBackward' };
+    case 'ArrowLeft': return { type: 'moveLeft' };
+    case 'ArrowRight': return { type: 'moveRight' };
+  }
+  if (key.length === 1 && !/\s/.test(key)) {
+    return { type: 'insertVariable', name: key };
+  }
+  return null;
+}
+
 export function createOperator(op: OperatorSymbol): OperatorNode {
   return { id: generateId(), type: 'operator', operator: op };
 }
@@ -468,117 +522,30 @@ export class MathEditor {
     }
   }
 
-  /** 키 입력 처리 */
+  /** 키 입력 처리 — keyToInputAction 매핑 → dispatchInputAction 위임 */
   handleKeyDown(e: KeyboardEvent): void {
-    const { key } = e;
-
-    // IME 조합 중이면 무시
     if (e.isComposing) return;
+    const action = keyToInputAction(e.key);
+    if (!action) return;
+    e.preventDefault();
+    this.dispatchInputAction(action);
+  }
 
-    // 숫자
-    if (/^[0-9.]$/.test(key)) {
-      e.preventDefault();
-      this.insertNumber(key);
-      return;
-    }
-
-    // 연산자
-    if (key === '+') {
-      e.preventDefault();
-      this.insertOperator('+');
-      return;
-    }
-    if (key === '-') {
-      e.preventDefault();
-      this.insertOperator('-');
-      return;
-    }
-    if (key === '*') {
-      e.preventDefault();
-      this.insertOperator('×');
-      return;
-    }
-    if (key === '/') {
-      e.preventDefault();
-      this.insertFraction();
-      return;
-    }
-    if (key === '=') {
-      e.preventDefault();
-      this.insertOperator('=');
-      return;
-    }
-
-    // 거듭제곱
-    if (key === '^') {
-      e.preventDefault();
-      this.insertPower();
-      return;
-    }
-
-    // 아래첨자
-    if (key === '_') {
-      e.preventDefault();
-      this.insertSubscript();
-      return;
-    }
-
-    // 부등호
-    if (key === '<') {
-      e.preventDefault();
-      this.insertOperator('<');
-      return;
-    }
-    if (key === '>') {
-      e.preventDefault();
-      this.insertOperator('>');
-      return;
-    }
-
-    // 절댓값
-    if (key === '|') {
-      e.preventDefault();
-      this.insertAbs();
-      return;
-    }
-
-    // 괄호
-    if (key === '(' || key === '[' || key === '{') {
-      e.preventDefault();
-      this.insertParen(key as '(' | '[' | '{');
-      return;
-    }
-    // 닫는 괄호는 괄호 밖으로 이동
-    if (key === ')' || key === ']' || key === '}') {
-      e.preventDefault();
-      this.exitParen();
-      return;
-    }
-
-    // 백스페이스
-    if (key === 'Backspace') {
-      e.preventDefault();
-      this.deleteBackward();
-      return;
-    }
-
-    // 커서 이동
-    if (key === 'ArrowLeft') {
-      e.preventDefault();
-      this.moveCursorLeft();
-      return;
-    }
-    if (key === 'ArrowRight') {
-      e.preventDefault();
-      this.moveCursorRight();
-      return;
-    }
-
-    // 기타 단일 문자는 모두 변수로 (한글, 그리스문자, 특수문자 등)
-    if (key.length === 1 && !/[\s]/.test(key)) {
-      e.preventDefault();
-      this.insertVariable(key);
-      return;
+  /** InputAction 실행. dispatcher는 exhaustive switch로 타입 안전성 보장. */
+  dispatchInputAction(action: InputAction): void {
+    switch (action.type) {
+      case 'insertNumber': this.insertNumber(action.char); return;
+      case 'insertVariable': this.insertVariable(action.name); return;
+      case 'insertOperator': this.insertOperator(action.op); return;
+      case 'insertFraction': this.insertFraction(); return;
+      case 'insertPower': this.insertPower(); return;
+      case 'insertSubscript': this.insertSubscript(); return;
+      case 'insertAbs': this.insertAbs(); return;
+      case 'insertParen': this.insertParen(action.paren); return;
+      case 'exitParen': this.exitParen(); return;
+      case 'deleteBackward': this.deleteBackward(); return;
+      case 'moveLeft': this.moveCursorLeft(); return;
+      case 'moveRight': this.moveCursorRight(); return;
     }
   }
 
