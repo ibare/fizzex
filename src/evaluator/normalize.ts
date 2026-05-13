@@ -1,0 +1,65 @@
+/**
+ * 변수명 정규화
+ *
+ * 파서가 그리스 문자/특수 기호를 `\pi`, `\theta` 같은 LaTeX 토큰으로 산출하든
+ * `π`, `θ` 같은 유니코드로 산출하든, 평가/분석에서는 단일한 정규형(유니코드)으로 다룬다.
+ */
+const LATEX_TO_UNICODE: Readonly<Record<string, string>> = {
+  '\\alpha': 'α',
+  '\\beta': 'β',
+  '\\gamma': 'γ',
+  '\\delta': 'δ',
+  '\\epsilon': 'ε',
+  '\\varepsilon': 'ε',
+  '\\zeta': 'ζ',
+  '\\eta': 'η',
+  '\\theta': 'θ',
+  '\\vartheta': 'θ',
+  '\\iota': 'ι',
+  '\\kappa': 'κ',
+  '\\lambda': 'λ',
+  '\\mu': 'μ',
+  '\\nu': 'ν',
+  '\\xi': 'ξ',
+  '\\pi': 'π',
+  '\\varpi': 'π',
+  '\\rho': 'ρ',
+  '\\varrho': 'ρ',
+  '\\sigma': 'σ',
+  '\\varsigma': 'σ',
+  '\\tau': 'τ',
+  '\\upsilon': 'υ',
+  '\\phi': 'φ',
+  '\\varphi': 'φ',
+  '\\chi': 'χ',
+  '\\psi': 'ψ',
+  '\\omega': 'ω',
+  '\\Alpha': 'Α',
+  '\\Beta': 'Β',
+  '\\Gamma': 'Γ',
+  '\\Delta': 'Δ',
+  '\\Epsilon': 'Ε',
+  '\\Zeta': 'Ζ',
+  '\\Eta': 'Η',
+  '\\Theta': 'Θ',
+  '\\Iota': 'Ι',
+  '\\Kappa': 'Κ',
+  '\\Lambda': 'Λ',
+  '\\Mu': 'Μ',
+  '\\Nu': 'Ν',
+  '\\Xi': 'Ξ',
+  '\\Pi': 'Π',
+  '\\Rho': 'Ρ',
+  '\\Sigma': 'Σ',
+  '\\Tau': 'Τ',
+  '\\Upsilon': 'Υ',
+  '\\Phi': 'Φ',
+  '\\Chi': 'Χ',
+  '\\Psi': 'Ψ',
+  '\\Omega': 'Ω',
+  '\\infty': '∞',
+};
+
+export function normalizeVarName(raw: string): string {
+  return LATEX_TO_UNICODE[raw] ?? raw;
+}
