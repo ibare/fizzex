@@ -17,6 +17,7 @@ import type { MathNode, FuncNode } from '../types';
 import { register } from './registry';
 import { value, fail, type EvalContext, type EvalOutcome } from './types';
 import { evalChildSequence } from './arithmetic';
+import { isDistributionFunction, evalDistributionCall } from './stats';
 
 type UnaryFn = (x: number) => EvalOutcome;
 
@@ -117,6 +118,9 @@ const FUNCTIONS: Readonly<Record<string, UnaryFn>> = {
 
 function evalFunc(node: MathNode, ctx: EvalContext): EvalOutcome {
   const n = node as FuncNode;
+  if (isDistributionFunction(n.name)) {
+    return evalDistributionCall(n, ctx);
+  }
   const fn = FUNCTIONS[n.name];
   if (!fn) {
     return fail('unsupported', { nodeType: 'func', reason: n.name });

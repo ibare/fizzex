@@ -24,6 +24,7 @@ import type {
   SqrtNode,
   ParenNode,
   AbsNode,
+  FuncNode,
 } from '../types';
 import { register } from './registry';
 import { setSequenceEvaluator } from './core';
@@ -49,7 +50,23 @@ const UNARY_PREC = 3;
 function tokenize(children: MathNode[]): SeqToken[] | { error: string; operator?: string } {
   const tokens: SeqToken[] = [];
   let prevWasOperand = false;
-  for (const c of children) {
+  for (let i = 0; i < children.length; i++) {
+    const c = children[i];
+    // `\operatorname{name}` 등은 parser 에서 FuncNode(argument=[]) 로 산출되고
+    // 인자 paren 은 별개 자식으로 따라온다. 평가 시점에 합성한다.
+    if (c.type === 'func' && (c as FuncNode).argument.length === 0) {
+      const next = children[i + 1];
+      if (next && next.type === 'paren') {
+        const synthesized: FuncNode = { ...(c as FuncNode), argument: [next] };
+        if (prevWasOperand) {
+          tokens.push({ kind: 'binop', op: '×', prec: PREC['×'] });
+        }
+        tokens.push({ kind: 'operand', node: synthesized });
+        prevWasOperand = true;
+        i += 1; // paren 자식 소비
+        continue;
+      }
+    }
     if (c.type === 'operator') {
       const op = (c as OperatorNode).operator;
       if (op === '+') {
