@@ -28,7 +28,7 @@ Like a sparkling Prosecco, Fizzex is:
 ├─────────────────────────────────────────────────────────────┤
 │  Analysis     │  AST → Analyzer → Domain/Variable/Viz       │
 ├─────────────────────────────────────────────────────────────┤
-│  Computation  │  CAS (simplify, expand, factor, solve, ...) │
+│  Computation  │  Evaluator (scalar/matrix/complex/autodiff)  │
 ├─────────────────────────────────────────────────────────────┤
 │  Visualization│  Catalog-matched interactive visualizers        │
 ├─────────────────────────────────────────────────────────────┤
@@ -50,7 +50,7 @@ Fizzex provides multiple entry points for different use cases:
 
 | Import | Purpose | Peer Dependencies |
 |--------|---------|-------------------|
-| `fizzex` | Core: parser, renderer, analysis, CAS | none |
+| `fizzex` | Core: parser, renderer, analysis, evaluator | none |
 | `fizzex/headless` | Framework-agnostic renderer & editor | none |
 | `fizzex/react` | React components (EditorView, etc.) | `react`, `react-dom` |
 | `fizzex/tiptap` | Tiptap editor extensions | `@tiptap/core` |
@@ -137,18 +137,32 @@ console.log(analysis.polynomial?.degree);      // 2
 console.log(analysis.visualization.graphable2D); // true
 ```
 
-### CAS (Computer Algebra System)
+### Numeric Evaluator
 
 ```typescript
-import { parseLatex, simplify, expand, factor, solve, diff, integrate } from 'fizzex';
+import {
+  parseLatex,
+  evaluateSync,
+  evaluateMatrixSync,
+  evaluateComplexSync,
+  differentiateAt,
+} from 'fizzex';
 
-const ast = parseLatex('(x+1)^2');
+// Scalar evaluation
+const { ast } = parseLatex('x^2 + 2x - 3');
+evaluateSync(ast, { x: 2 });            // 5
 
-const expanded = expand(ast);              // x^2 + 2x + 1
-const derivative = diff(ast);             // 2(x+1) = 2x + 2
+// Automatic differentiation (forward-mode dual numbers)
+differentiateAt(ast, 'x', { x: 2 });     // 6 — d/dx(x² + 2x - 3) at x=2
 
-const equation = parseLatex('x^2 - 4 = 0');
-const solutions = solve(equation);         // x = 2, x = -2
+// Complex number evaluation
+const euler = parseLatex('e^{i \\pi}').ast;
+evaluateComplexSync(euler, { e: Math.E, '\\pi': Math.PI });
+// { re: -1, im: 0 } (Euler's identity)
+
+// Matrix evaluation
+const m = parseLatex('\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}').ast;
+evaluateMatrixSync(m, {});               // { rows: 2, cols: 2, data: [[1,2],[3,4]] }
 ```
 
 ### Visualization
@@ -202,7 +216,7 @@ Fizzex uses a three-layer architecture that makes it easy to integrate into any 
 
 ```
 fizzex (Core)
-  │  Parser, renderer, analysis, CAS — framework-agnostic
+  │  Parser, renderer, analysis, evaluator — framework-agnostic
   │
   ├── fizzex/headless
   │     DOMRendererView (read-only) & DOMEditorView (interactive)
@@ -243,9 +257,14 @@ import { MathEditor, createInitialState, createStateFromLatex } from 'fizzex';
 // LaTeX
 import { parseLatex, astToLatex } from 'fizzex';
 
-// Analysis & CAS
-import { analyzeExpression } from 'fizzex';
-import { simplify, expand, factor, solve, diff, integrate, evaluate } from 'fizzex';
+// Analysis & Evaluator
+import { analyzeExpression, analyzeBindings, analyzeEvaluability } from 'fizzex';
+import {
+  evaluateSync, evaluate,
+  evaluateMatrixSync, evaluateMatrix,
+  differentiateAt, differentiate,
+  evaluateComplexSync, evaluateComplex,
+} from 'fizzex';
 
 // Visualization
 import {
@@ -301,8 +320,12 @@ import type {
   EditorState, CursorPosition,
   // Analysis
   ExpressionAnalysis, VariableClassification, VisualizationType,
-  // CAS
-  CASResult, CASOperation,
+  // Evaluator
+  Bindings, EvalResult, EvalStatus, EvalDetail,
+  Matrix, MatrixValue, MatrixResult,
+  Dual, DiffResult,
+  Complex, ComplexResult,
+  BindingAnalysis, EvaluabilityAnalysis,
   // Visualization
   GraphConfig, GraphRange,
 } from 'fizzex';
@@ -337,7 +360,7 @@ src/
 │   └── commands/         # Modularized command handlers
 ├── suggestion/           # Context-aware autocomplete
 ├── analyzer/             # Expression analysis (9 modules)
-├── cas/                  # Computer Algebra System (Nerdamer)
+├── evaluator/            # Numeric evaluator (scalar/matrix/complex/autodiff)
 ├── visualizer/           # Visualization components
 ├── fonts/                # New Computer Modern Math font management
 ├── i18n/                 # Internationalization

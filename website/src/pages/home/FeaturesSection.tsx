@@ -8,7 +8,7 @@ export default function FeaturesSection() {
     t.features.editor,
     t.features.latex,
     t.features.analysis,
-    t.features.cas,
+    t.features.evaluator,
     t.features.visualization,
     t.features.autocomplete,
   ];

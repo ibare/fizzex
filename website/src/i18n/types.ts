@@ -47,7 +47,7 @@ export interface Dictionary {
     editor: FeatureItem;
     latex: FeatureItem;
     analysis: FeatureItem;
-    cas: FeatureItem;
+    evaluator: FeatureItem;
     visualization: FeatureItem;
     autocomplete: FeatureItem;
   };
@@ -67,7 +67,7 @@ export interface Dictionary {
       editor: string;
       latex: string;
       analysis: string;
-      cas: string;
+      evaluator: string;
       visualization: string;
     };
   };
@@ -111,9 +111,12 @@ export interface Dictionary {
       visualize: { title: string; desc: string };
     };
     click_to_expand: string;
-    no_cas: string;
+    no_compute: string;
     no_viz: string;
     loading: string;
+    compute_form: string;
+    compute_free_vars: string;
+    compute_value: string;
   };
   examples: {
     title: string;

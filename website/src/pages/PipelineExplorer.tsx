@@ -1,16 +1,15 @@
-import { useState, useEffect, useCallback, useMemo, Component } from 'react';
+import { useState, useMemo, Component } from 'react';
 import type { ReactNode } from 'react';
 import { useLang } from '../i18n/context';
 import {
   parseLatex,
   analyzeExpression,
-  simplify,
-  factor,
-  solve,
+  evaluate,
+  analyzeBindings,
   createStateFromLatex,
   EditorView,
 } from 'fizzex';
-import type { ExpressionAnalysis, RootNode, CASResult } from 'fizzex';
+import type { ExpressionAnalysis, RootNode } from 'fizzex';
 import { visualizerRegistry } from '../visualizer-registry';
 
 /* ── Presets ── */
@@ -259,74 +258,69 @@ function StepCompute({
   analysis: ExpressionAnalysis | null;
   t: ReturnType<typeof useLang>['t'];
 }) {
-  const [results, setResults] = useState<CASResult[]>([]);
-  const [loading, setLoading] = useState(true);
+  const rows = useMemo(() => {
+    try {
+      const { ast } = parseLatex(latex);
+      const bindingAnalysis = analyzeBindings(ast);
+      const evalResult = evaluate(ast, {});
+      const items: { label: string; value: string }[] = [];
 
-  const runCAS = useCallback(async () => {
-    setLoading(true);
-    const ops: CASResult[] = [];
-    try {
-      const s = await simplify(latex);
-      if (s.success) ops.push(s);
-    } catch { /* skip */ }
-    try {
-      const f = await factor(latex);
-      if (f.success) ops.push(f);
-    } catch { /* skip */ }
-    if (analysis?.form === 'equation') {
-      try {
-        const sv = await solve(latex);
-        if (sv.success) ops.push(sv);
-      } catch { /* skip */ }
+      items.push({
+        label: t.pipelineExplorer.compute_free_vars,
+        value:
+          bindingAnalysis.required.length === 0
+            ? '∅'
+            : bindingAnalysis.required.join(', '),
+      });
+
+      if (evalResult.ok) {
+        items.push({
+          label: t.pipelineExplorer.compute_value,
+          value: Number.isFinite(evalResult.value)
+            ? String(evalResult.value)
+            : String(evalResult.value),
+        });
+      } else if (evalResult.status === 'unbound') {
+        items.push({
+          label: t.pipelineExplorer.compute_value,
+          value: `unbound: ${evalResult.detail?.variable ?? '?'}`,
+        });
+      } else {
+        items.push({
+          label: t.pipelineExplorer.compute_value,
+          value: evalResult.status,
+        });
+      }
+
+      return items;
+    } catch {
+      return null;
     }
-    setResults(ops);
-    setLoading(false);
-  }, [latex, analysis?.form]);
+  }, [latex, t.pipelineExplorer.compute_free_vars, t.pipelineExplorer.compute_value]);
 
-  useEffect(() => {
-    runCAS();
-  }, [runCAS]);
-
-  if (loading) return <p style={styles.muted}>{t.pipelineExplorer.loading}</p>;
-
-  if (results.length === 0) {
-    return <p style={styles.muted}>{t.pipelineExplorer.no_cas}</p>;
+  if (!rows) {
+    return <p style={styles.muted}>{t.pipelineExplorer.no_compute}</p>;
   }
+
+  // analysis 는 form 표시용으로만 사용
+  const formLabel = analysis?.form ?? '-';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75em' }}>
-      {results.map((r) => (
-        <div key={r.operation} className="card">
-          <div style={styles.kvRow}>
-            <span style={styles.kvLabel}>{r.operation}</span>
-            <span style={styles.kvValue}>{r.resultLatex ?? '-'}</span>
-          </div>
-          {r.resultLatex && (
-            <div style={{ marginTop: '0.5em' }}>
-              <RenderLatex latex={r.resultLatex} />
-            </div>
-          )}
+      <div className="card">
+        <div style={styles.kvRow}>
+          <span style={styles.kvLabel}>{t.pipelineExplorer.compute_form}</span>
+          <span style={styles.kvValue}>{formLabel}</span>
         </div>
-      ))}
+        {rows.map((r) => (
+          <div key={r.label} style={styles.kvRow}>
+            <span style={styles.kvLabel}>{r.label}</span>
+            <span style={styles.kvValue}>{r.value}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
-
-function RenderLatex({ latex }: { latex: string }) {
-  try {
-    const state = createStateFromLatex(latex);
-    return (
-      <EditorView
-        initialState={state}
-        readOnly
-        autoSize
-        showExplorerToggle
-        visualizerRegistry={visualizerRegistry}
-      />
-    );
-  } catch {
-    return <span style={styles.muted}>{latex}</span>;
-  }
 }
 
 /* ── Step 5: Visualize ── */

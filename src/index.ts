@@ -113,28 +113,16 @@ export type {
   AncestorEntry,
 } from './analyzer';
 
-// CAS (Computer Algebra System) — 심볼릭 콜드패스 도구만 잔존. 수치 평가는 evaluator 표면 사용
-export {
-  simplify,
-  expand,
-  factor,
-  solve,
-  diff,
-  integrate,
-  performOperation,
-} from './cas';
-export type {
-  CASResult,
-  CASOperation,
-  DiffOptions,
-  IntegrateOptions,
-  SolveOptions,
-} from './cas';
-
-// Evaluator — 동기 AST 수치 평가 표준 표면
+// Evaluator — 동기 AST 수치 평가 표준 표면 (scalar / matrix / complex / autodiff)
 export {
   evaluateSync,
   evaluate,
+  evaluateMatrixSync,
+  evaluateMatrix,
+  differentiateAt,
+  differentiate,
+  evaluateComplexSync,
+  evaluateComplex,
   analyzeBindings,
   analyzeEvaluability,
 } from './evaluator';
@@ -145,6 +133,13 @@ export type {
   EvalDetail,
   BindingAnalysis,
   EvaluabilityAnalysis,
+  Matrix,
+  MatrixValue,
+  MatrixResult,
+  Dual,
+  DiffResult,
+  Complex,
+  ComplexResult,
 } from './evaluator';
 
 

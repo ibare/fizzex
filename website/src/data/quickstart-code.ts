@@ -31,16 +31,27 @@ analysis.primaryDomain;           // 'polynomial'
 analysis.polynomial?.degree;      // 2
 analysis.visualization.graphable2D; // true`,
 
-  cas: `import { parseLatex, expand, solve, diff } from 'fizzex';
+  evaluator: `import {
+  parseLatex,
+  evaluateSync,
+  evaluateComplexSync,
+  differentiateAt,
+} from 'fizzex';
 
-const ast = parseLatex('(x+1)^2');
-const expanded = expand(ast);     // x² + 2x + 1
-const derivative = diff(ast);     // 2(x+1)
+const { ast } = parseLatex('x^2 + 2x - 3');
 
-const eq = parseLatex('x^2 - 4 = 0');
-const solutions = solve(eq);      // x = 2, x = -2`,
+// Scalar evaluation with bindings
+evaluateSync(ast, { x: 2 });       // 5
 
-  visualization: `import {
+// Complex number evaluation
+const c = parseLatex('e^{i \\\\pi}').ast;
+evaluateComplexSync(c, { e: Math.E, '\\\\pi': Math.PI });
+// { re: -1, im: 0 } (Euler's identity)
+
+// Automatic differentiation (forward-mode)
+differentiateAt(ast, 'x', { x: 2 }); // 6 — d/dx(x² + 2x - 3) at x=2`,
+
+  visualization:`import {
   parseLatex,
   buildSemanticMap,
   getVisualizersForCatalog,
@@ -71,4 +82,4 @@ const instance = refs[0]
   : null;`,
 };
 
-export const tabKeys = ['install', 'editor', 'latex', 'analysis', 'cas', 'visualization'] as const;
+export const tabKeys = ['install', 'editor', 'latex', 'analysis', 'evaluator', 'visualization'] as const;
