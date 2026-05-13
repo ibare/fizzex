@@ -95,13 +95,6 @@ describe('E4 — analyzeEvaluability: 등록 노드', () => {
 });
 
 describe('E4 — analyzeEvaluability: 미등록 노드', () => {
-  it('\\int → evaluable=false, unsupported 에 integral', () => {
-    const { ast } = parseLatex('\\int_0^1 x \\, dx');
-    const a = analyzeEvaluability(ast);
-    expect(a.evaluable).toBe(false);
-    expect(a.unsupported).toContain('integral');
-  });
-
   it('\\sum → evaluable=false, unsupported 에 sum', () => {
     const { ast } = parseLatex('\\sum_{i=1}^{n} i');
     const a = analyzeEvaluability(ast);

@@ -14,6 +14,7 @@ import { lookup } from './registry';
 import { installCoreHandlers } from './core';
 import { installArithmeticHandlers } from './arithmetic';
 import { installFunctionHandlers } from './functions';
+import { installCalculusHandlers } from './calculus';
 
 function dispatch(node: MathNode, ctx: EvalContext): EvalOutcome {
   const fn = lookup(node.type);
@@ -46,6 +47,7 @@ export function evaluateSync(node: MathNode, bindings: Bindings = EMPTY_BINDINGS
   installCoreHandlers();
   installArithmeticHandlers();
   installFunctionHandlers();
+  installCalculusHandlers();
   try {
     const out = dispatch(node, makeContext(bindings));
     return out.kind === 'value' ? out.value : undefined;
@@ -58,6 +60,7 @@ export function evaluate(node: MathNode, bindings: Bindings = EMPTY_BINDINGS): E
   installCoreHandlers();
   installArithmeticHandlers();
   installFunctionHandlers();
+  installCalculusHandlers();
   try {
     const out = dispatch(node, makeContext(bindings));
     if (out.kind === 'value') return { ok: true, value: out.value };

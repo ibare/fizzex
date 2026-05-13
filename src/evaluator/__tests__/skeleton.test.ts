@@ -73,13 +73,13 @@ describe('E0 — 콜드패스 evaluate', () => {
     }
   });
 
-  it('registry 미등록 노드(integral) → { ok: false, status: "unsupported", detail.nodeType }', () => {
-    const { ast } = parseLatex('\\int_0^1 x \\, dx');
+  it('registry 미등록 노드(sum) → { ok: false, status: "unsupported", detail.nodeType }', () => {
+    const { ast } = parseLatex('\\sum_{i=1}^{n} i');
     const r = evaluate(ast);
     expect(r.ok).toBe(false);
     if (!r.ok) {
       expect(r.status).toBe('unsupported');
-      expect(r.detail?.nodeType).toBe('integral');
+      expect(r.detail?.nodeType).toBe('sum');
     }
   });
 
@@ -135,13 +135,6 @@ describe('E0 — analyzeEvaluability', () => {
     const { ast } = parseLatex('x');
     const r = analyzeEvaluability(ast);
     expect(r.evaluable).toBe(true);
-  });
-
-  it('integral 포함 식 → evaluable=false, unsupported 에 "integral" 포함', () => {
-    const { ast } = parseLatex('\\int_0^1 x \\, dx');
-    const r = analyzeEvaluability(ast);
-    expect(r.evaluable).toBe(false);
-    expect(r.unsupported).toContain('integral');
   });
 
   it('sum 포함 식 → unsupported 에 "sum" 포함', () => {

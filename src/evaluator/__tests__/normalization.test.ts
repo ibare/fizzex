@@ -157,8 +157,8 @@ describe('E3 — silent-drop 금지 (실패 분류 정확성)', () => {
     }
   });
 
-  it('미등록 노드 타입은 unsupported (적분 등)', () => {
-    const { ast } = parseLatex('\\int_0^1 x \\, dx');
+  it('미등록 노드 타입은 unsupported (합/극한 등)', () => {
+    const { ast } = parseLatex('\\sum_{i=1}^{n} i');
     const r = evaluate(ast);
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.status).toBe('unsupported');
