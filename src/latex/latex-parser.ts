@@ -43,6 +43,20 @@ import {
   reportWarning,
 } from './parse-errors';
 import { isStandardUnimplemented, getPackageName } from './known-commands';
+import { tokenize, type Token } from './lexer';
+
+/**
+ * 현재 위치의 atom 토큰(NUMBER/IDENT/OP)을 lexer로부터 받아옴.
+ * 구조 토큰(LBRACE, CARET 등)이나 토큰이 아닌 경우 null 반환 — 호출자가 char-level 처리.
+ */
+function lexAtomAt(latex: string, pos: number): Token | null {
+  const result = tokenize(latex.slice(pos));
+  if (result.tokens.length === 0) return null;
+  const first = result.tokens[0];
+  if (first.kind !== 'NUMBER' && first.kind !== 'IDENT' && first.kind !== 'OP') return null;
+  if (first.start !== 0) return null;
+  return { ...first, start: pos, end: pos + first.end };
+}
 
 /** generateId를 generateLatexId로 매핑 (하위 호환성) */
 const generateId = generateLatexId;
@@ -168,18 +182,24 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
       break;
     }
 
-    // 숫자
-    if (/[0-9.]/.test(latex[pos])) {
-      const numResult = parseNumber(latex, pos);
-      nodes.push(...numResult.nodes);
-      pos = numResult.consumed;
-      continue;
-    }
-
-    // 변수 (단일 영문자)
-    if (/[a-zA-Z]/.test(latex[pos]) && latex[pos] !== '\\') {
-      nodes.push(createVariable(latex[pos], { start: pos, end: pos + 1 }));
-      pos++;
+    // Atom 토큰: NUMBER / IDENT / OP — lexer가 정책 결정의 단일 거점
+    const atomTok = lexAtomAt(latex, pos);
+    if (atomTok) {
+      const range = { start: atomTok.start, end: atomTok.end };
+      if (atomTok.kind === 'NUMBER') {
+        // 다자릿수 리터럴 전체가 단일 NumberNode
+        nodes.push(createNumber(atomTok.value, range));
+      } else if (atomTok.kind === 'IDENT') {
+        nodes.push(createVariable(atomTok.value, range));
+      } else {
+        // OP: 콤마/세미콜론은 upright 렌더링을 위해 NumberNode로 처리 (관습 유지)
+        if (atomTok.value === ',' || atomTok.value === ';') {
+          nodes.push(createNumber(atomTok.value, range));
+        } else {
+          nodes.push(createOperator(atomTok.value, range));
+        }
+      }
+      pos = atomTok.end;
       continue;
     }
 
@@ -188,27 +208,6 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
       const cmdResult = parseCommand(latex, pos);
       nodes.push(...cmdResult.nodes);
       pos = cmdResult.consumed;
-      continue;
-    }
-
-    // 연산자
-    if ('+-=<>:/'.includes(latex[pos])) {
-      nodes.push(createOperator(latex[pos], { start: pos, end: pos + 1 }));
-      pos++;
-      continue;
-    }
-
-    // 팩토리얼 (!) - 후위 연산자, 간격 없이 정체로 렌더링
-    if (latex[pos] === '!') {
-      nodes.push(createOperator('!', { start: pos, end: pos + 1 }));
-      pos++;
-      continue;
-    }
-
-    // 구두점 (콤마, 세미콜론 등) - 정체로 렌더링 (숫자처럼 처리)
-    if (',;'.includes(latex[pos])) {
-      nodes.push(createNumber(latex[pos], { start: pos, end: pos + 1 }));
-      pos++;
       continue;
     }
 
@@ -273,24 +272,33 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
       continue;
     }
 
-    // 알 수 없는 문자는 스킵
+    // 알 수 없는 문자 — 진단 후 스킵 (이전엔 silent skip이었음)
+    reportWarning(
+      'unknown_command',
+      `인식되지 않은 문자: '${latex[pos]}'`,
+      pos,
+      latex,
+      latex[pos],
+    );
     pos++;
   }
 
   return { nodes, consumed: pos };
 }
 
-/** 숫자 파싱 (각 자릿수를 별도 노드로) */
+/**
+ * 숫자 파싱 — lexer를 경유해 다자릿수 리터럴을 단일 NumberNode로 반환.
+ * parseCommand context의 호환을 위해 시그니처 유지.
+ */
 function parseNumber(latex: string, start: number): ParseResult {
-  const nodes: MathNode[] = [];
-  let pos = start;
-
-  while (pos < latex.length && /[0-9.]/.test(latex[pos])) {
-    nodes.push(createNumber(latex[pos], { start: pos, end: pos + 1 }));
-    pos++;
+  const tok = lexAtomAt(latex, start);
+  if (tok && tok.kind === 'NUMBER') {
+    return {
+      nodes: [createNumber(tok.value, { start: tok.start, end: tok.end })],
+      consumed: tok.end,
+    };
   }
-
-  return { nodes, consumed: pos };
+  return { nodes: [], consumed: start };
 }
 
 /** 그룹 파싱 ({...}, (...) 또는 단일 문자) */

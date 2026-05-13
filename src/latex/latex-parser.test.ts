@@ -22,10 +22,18 @@ describe('LaTeX Parser', () => {
       expect((result.children[0] as NumberNode).value).toBe('1');
     });
 
-    it('여러 자리 숫자를 파싱한다', () => {
+    it('여러 자리 숫자를 단일 NumberNode로 파싱한다', () => {
       const { ast: result } = parseLatex('123');
-      // 각 자릿수가 개별 노드로 파싱됨
-      expect(result.children.length).toBeGreaterThanOrEqual(1);
+      expect(result.children).toHaveLength(1);
+      expect(result.children[0].type).toBe('number');
+      expect((result.children[0] as NumberNode).value).toBe('123');
+    });
+
+    it('소수를 단일 NumberNode로 파싱한다', () => {
+      const { ast: result } = parseLatex('3.14');
+      expect(result.children).toHaveLength(1);
+      expect(result.children[0].type).toBe('number');
+      expect((result.children[0] as NumberNode).value).toBe('3.14');
     });
 
     it('변수를 파싱한다', () => {
@@ -179,11 +187,10 @@ describe('LaTeX Parser', () => {
       expect(result.ast.children[2].sourceRange).toEqual({ start: 2, end: 3 }); // y
     });
 
-    it('숫자 123의 각 자릿수 sourceRange가 정확하다', () => {
+    it('숫자 123의 sourceRange가 리터럴 전체를 덮는다', () => {
       const result = parseLatex('123');
-      expect(result.ast.children[0].sourceRange).toEqual({ start: 0, end: 1 }); // 1
-      expect(result.ast.children[1].sourceRange).toEqual({ start: 1, end: 2 }); // 2
-      expect(result.ast.children[2].sourceRange).toEqual({ start: 2, end: 3 }); // 3
+      expect(result.ast.children).toHaveLength(1);
+      expect(result.ast.children[0].sourceRange).toEqual({ start: 0, end: 3 });
     });
 
     it('\\frac{1}{2}의 sourceRange가 전체 명령어를 포함한다', () => {

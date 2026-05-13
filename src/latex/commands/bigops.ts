@@ -74,7 +74,7 @@ function integralHandler(integralType: 'int' | 'iint' | 'iiint' | 'oint'): Comma
         }
       }
 
-      if (/[0-9.]/.test(ctx.latex[pos])) {
+      if (/[0-9]/.test(ctx.latex[pos])) {
         const numResult = ctx.parseNumber(ctx.latex, pos);
         integrandNodes.push(...numResult.nodes);
         pos = numResult.consumed;

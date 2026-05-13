@@ -33,21 +33,22 @@ function shape(node: MathNode): unknown {
 }
 
 describe('P0 골든 — 숫자 리터럴', () => {
-  it('[BUG] 두 자리 정수가 자릿수별 노드로 분리됨 (P2 후: 단일 NumberNode("10"))', () => {
+  it('[OK] 두 자리 정수는 단일 NumberNode("10")', () => {
     const { ast } = parseLatex('10');
-    expect(ast.children.length).toBe(2);
-    expect(shape(ast.children[0])).toEqual({ type: 'number', value: '1' });
-    expect(shape(ast.children[1])).toEqual({ type: 'number', value: '0' });
+    expect(ast.children.length).toBe(1);
+    expect(shape(ast.children[0])).toEqual({ type: 'number', value: '10' });
   });
 
-  it('[BUG] 세 자리 정수도 자릿수별로 분리됨 (P2 후: 단일 NumberNode("123"))', () => {
+  it('[OK] 세 자리 정수는 단일 NumberNode("123")', () => {
     const { ast } = parseLatex('123');
-    expect(ast.children.length).toBe(3);
+    expect(ast.children.length).toBe(1);
+    expect(shape(ast.children[0])).toEqual({ type: 'number', value: '123' });
   });
 
-  it('[BUG] 소수 3.14가 점 포함 4개 노드로 분리됨 (P2 후: 단일 NumberNode("3.14"))', () => {
+  it('[OK] 소수 3.14는 단일 NumberNode("3.14")', () => {
     const { ast } = parseLatex('3.14');
-    expect(ast.children.length).toBe(4);
+    expect(ast.children.length).toBe(1);
+    expect(shape(ast.children[0])).toEqual({ type: 'number', value: '3.14' });
   });
 
   it('[OK] 단일 자릿수는 단일 NumberNode', () => {
@@ -58,16 +59,22 @@ describe('P0 골든 — 숫자 리터럴', () => {
 });
 
 describe('P0 골든 — 곱셈 ASCII *', () => {
-  it('[BUG] a*b*c 입력 시 *이 silent skip (P2 후: [var,×,var,×,var])', () => {
+  it('[OK] a*b*c 입력은 [var,×,var,×,var]로 파싱됨 (lexer가 ASCII *을 ×로 인지)', () => {
     const { ast } = parseLatex('a*b*c');
-    expect(ast.children.length).toBe(3);
-    expect(ast.children.every((c) => c.type === 'variable')).toBe(true);
+    expect(ast.children.length).toBe(5);
+    expect(shape(ast.children[0])).toEqual({ type: 'variable', name: 'a' });
+    expect(shape(ast.children[1])).toEqual({ type: 'operator', operator: '×' });
+    expect(shape(ast.children[2])).toEqual({ type: 'variable', name: 'b' });
+    expect(shape(ast.children[3])).toEqual({ type: 'operator', operator: '×' });
+    expect(shape(ast.children[4])).toEqual({ type: 'variable', name: 'c' });
   });
 
-  it('[BUG] 2*3 입력 시 *이 silent skip하여 숫자 두 개만 (P2 후: [num 2, ×, num 3])', () => {
+  it('[OK] 2*3 입력은 [num 2, ×, num 3]으로 파싱됨', () => {
     const { ast } = parseLatex('2*3');
-    expect(ast.children.length).toBe(2);
-    expect(ast.children.every((c) => c.type === 'number')).toBe(true);
+    expect(ast.children.length).toBe(3);
+    expect(shape(ast.children[0])).toEqual({ type: 'number', value: '2' });
+    expect(shape(ast.children[1])).toEqual({ type: 'operator', operator: '×' });
+    expect(shape(ast.children[2])).toEqual({ type: 'number', value: '3' });
   });
 
   it('[OK] \\times 명령어는 × 연산자로 정확히 파싱', () => {
@@ -98,10 +105,16 @@ describe('P0 골든 — 기본 식 구조 (모두 OK, 전 구간 유지)', () =>
     expect(ast.children[0].type).toBe('power');
   });
 
-  it('[BUG] x^{12} 지수가 자릿수 분리되어 차수 분석이 깨짐 (P2 후: 단일 NumberNode("12") 지수)', () => {
+  it('[OK] x^{12} 지수는 단일 NumberNode("12")로 파싱됨', () => {
     const { ast } = parseLatex('x^{12}');
     expect(ast.children.length).toBe(1);
     expect(ast.children[0].type).toBe('power');
+    const power = ast.children[0] as { exponent: MathNode[] };
+    expect(power.exponent.length).toBe(1);
+    expect(shape(power.exponent[0])).toEqual({
+      type: 'row',
+      children: [{ type: 'number', value: '12' }],
+    });
   });
 
   it('[OK] \\frac{1}{2}', () => {
@@ -141,10 +154,12 @@ describe('P0 골든 — 라운드트립 (전 구간 불변)', () => {
   });
 });
 
-describe('P0 골든 — silent skip 진단 부재 (P2에서 개선됨)', () => {
-  it('[BUG] *를 만난 파서가 경고/에러 없이 진행함 (P2 후: lexer가 OP×로 인지 또는 진단)', () => {
+describe('P0 골든 — ASCII * 정상 인지 (P2 lexer)', () => {
+  it('[OK] *를 OP×로 인지하여 경고/에러 없이 정상 파싱함', () => {
     const result = parseLatex('a*b');
     expect(result.errors).toHaveLength(0);
     expect(result.warnings).toHaveLength(0);
+    expect(result.ast.children.length).toBe(3);
+    expect((result.ast.children[1] as { operator: string }).operator).toBe('×');
   });
 });

@@ -38,20 +38,17 @@ describe('AST to Box', () => {
     });
 
     it('number 노드를 GlyphBox가 포함된 HBox로 변환한다', () => {
-      // parseLatex는 "123"을 3개의 개별 number 노드로 파싱한다
       const { ast } = parseLatex('123');
       const box = astToBox(ast, metrics);
 
       expect(box.type).toBe('hbox');
       const root = box as HBox;
-      // root에 3개의 number HBox가 자식으로 들어감
-      expect(root.children.length).toBe(3);
-      for (const numBox of root.children) {
-        expect(numBox.type).toBe('hbox');
-        const hb = numBox as HBox;
-        // 각 number 노드는 단일 문자 → GlyphBox 1개
-        expect(hb.children.length).toBe(1);
-        expect(hb.children[0].type).toBe('glyph');
+      expect(root.children.length).toBe(1);
+      const numBox = root.children[0] as HBox;
+      expect(numBox.type).toBe('hbox');
+      expect(numBox.children.length).toBe(3);
+      for (const glyph of numBox.children) {
+        expect(glyph.type).toBe('glyph');
       }
     });
 
