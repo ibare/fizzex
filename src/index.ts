@@ -208,8 +208,11 @@ export type {
   OutputKind,
   ApplyUserBindingsResult,
   AppliedBinding,
+  AppliedBindingValue,
   SkippedBinding,
   SkipReason,
+  UserBindingInput,
+  UserBindingInputs,
 } from './visualizer';
 export { resolveI18n, applyUserBindings } from './visualizer';
 export { getVisualizersForCatalog } from './analyzer/semantic/loader';

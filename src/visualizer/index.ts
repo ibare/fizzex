@@ -33,6 +33,9 @@ export { applyUserBindings } from './runtime/user-binding-bridge';
 export type {
   ApplyUserBindingsResult,
   AppliedBinding,
+  AppliedBindingValue,
   SkippedBinding,
   SkipReason,
+  UserBindingInput,
+  UserBindingInputs,
 } from './runtime/user-binding-bridge';

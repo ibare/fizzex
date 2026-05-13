@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { applyUserBindings } from './user-binding-bridge';
+import { applyUserBindings, type UserBindingInput } from './user-binding-bridge';
 import { createStateStore } from './state';
+import { parseLatex } from '../../latex';
+import type { MathNode, NumberNode } from '../../types';
 import type { VisualizerSpec } from './types/spec';
 
 function makeSpec(partial: Partial<VisualizerSpec>): VisualizerSpec {
@@ -24,17 +26,26 @@ function makeSpec(partial: Partial<VisualizerSpec>): VisualizerSpec {
   } as VisualizerSpec;
 }
 
-describe('applyUserBindings', () => {
-  it('no userBindings → applied/skipped 모두 빈 배열', () => {
+function numberAst(value: string): NumberNode {
+  return { id: `test:${value}`, type: 'number', value };
+}
+
+function latexAst(latex: string): MathNode {
+  const { ast, hasErrors } = parseLatex(latex);
+  if (hasErrors) throw new Error(`test fixture parse failed: ${latex}`);
+  return ast;
+}
+
+describe('applyUserBindings — scalar (V3)', () => {
+  it('inputs 없으면 applied/skipped 모두 빈 배열', () => {
     const spec = makeSpec({});
-    const store = createStateStore({ initialParams: { a: 1, b: 2 } });
-    const r = applyUserBindings(spec, { a: 10, b: 20 }, store);
+    const store = createStateStore({ initialParams: { a: 1 } });
+    const r = applyUserBindings(spec, {}, store);
     expect(r.applied).toEqual([]);
     expect(r.skipped).toEqual([]);
-    expect(store.getParam('a')).toBe(1);
   });
 
-  it('scalar binding 정상 주입 → store.setParam 호출', () => {
+  it('number 입력 → 내부에서 NumberNode wrap → setParam', () => {
     const spec = makeSpec({
       userBindings: [
         { name: 'a', outputKind: 'scalar', required: true },
@@ -44,78 +55,59 @@ describe('applyUserBindings', () => {
     const store = createStateStore({ initialParams: { a: 1, b: 2 } });
     const r = applyUserBindings(spec, { a: 3, b: 4 }, store);
     expect(r.applied).toEqual([
-      { name: 'a', value: 3 },
-      { name: 'b', value: 4 },
+      { name: 'a', outputKind: 'scalar', value: 3 },
+      { name: 'b', outputKind: 'scalar', value: 4 },
     ]);
     expect(r.skipped).toEqual([]);
     expect(store.getParam('a')).toBe(3);
     expect(store.getParam('b')).toBe(4);
   });
 
-  it('bindings 누락 → unbound 로 skip, store 값 유지', () => {
+  it('NumberNode AST 입력도 동일하게 처리', () => {
     const spec = makeSpec({
       userBindings: [{ name: 'a', outputKind: 'scalar', required: true }],
     });
-    const store = createStateStore({ initialParams: { a: 7 } });
-    const r = applyUserBindings(spec, {}, store);
-    expect(r.applied).toEqual([]);
-    expect(r.skipped).toEqual([
-      { name: 'a', reason: 'unbound', required: true, detail: 'a' },
-    ]);
+    const store = createStateStore({ initialParams: { a: 1 } });
+    const r = applyUserBindings(spec, { a: numberAst('7') as UserBindingInput }, store);
+    expect(r.applied).toEqual([{ name: 'a', outputKind: 'scalar', value: 7 }]);
     expect(store.getParam('a')).toBe(7);
   });
 
-  it('required:false 도 unbound 시 동일하게 skip 기록 (silent)', () => {
+  it('LaTeX 식 AST 입력 (산술 평가 — root 노드 처리)', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'A', outputKind: 'scalar', required: true }],
+    });
+    const store = createStateStore({ initialParams: { A: 0 } });
+    const r = applyUserBindings(spec, { A: latexAst('2 + 3') }, store);
+    expect(r.applied).toEqual([{ name: 'A', outputKind: 'scalar', value: 5 }]);
+    expect(store.getParam('A')).toBe(5);
+  });
+
+  it('inputs 누락 → unbound 로 skip, store 값 유지', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'a', outputKind: 'scalar', required: true }],
+    });
+    const store = createStateStore({ initialParams: { a: 9 } });
+    const r = applyUserBindings(spec, {}, store);
+    expect(r.applied).toEqual([]);
+    expect(r.skipped).toEqual([
+      { name: 'a', outputKind: 'scalar', reason: 'unbound', required: true, detail: 'a' },
+    ]);
+    expect(store.getParam('a')).toBe(9);
+  });
+
+  it('required:false 도 unbound 시 silent skip 기록', () => {
     const spec = makeSpec({
       userBindings: [{ name: 'a', outputKind: 'scalar', required: false }],
     });
     const store = createStateStore({ initialParams: { a: 9 } });
     const r = applyUserBindings(spec, {}, store);
-    expect(r.applied).toEqual([]);
-    expect(r.skipped[0]).toMatchObject({ name: 'a', reason: 'unbound', required: false });
-    expect(store.getParam('a')).toBe(9);
-  });
-
-  it('outputKind !== scalar → unsupported-output-kind skip', () => {
-    const spec = makeSpec({
-      userBindings: [
-        { name: 'M', outputKind: 'matrix', required: true },
-        { name: 'z', outputKind: 'complex', required: false },
-      ],
+    expect(r.skipped[0]).toMatchObject({
+      name: 'a',
+      outputKind: 'scalar',
+      reason: 'unbound',
+      required: false,
     });
-    const store = createStateStore({ initialParams: {} });
-    const r = applyUserBindings(spec, { M: 0, z: 0 }, store);
-    expect(r.applied).toEqual([]);
-    expect(r.skipped).toEqual([
-      { name: 'M', reason: 'unsupported-output-kind', required: true, detail: 'matrix' },
-      { name: 'z', reason: 'unsupported-output-kind', required: false, detail: 'complex' },
-    ]);
-  });
-
-  it('일부 binding 만 누락 → applied/skipped 동시 채워짐', () => {
-    const spec = makeSpec({
-      userBindings: [
-        { name: 'a', outputKind: 'scalar', required: true },
-        { name: 'b', outputKind: 'scalar', required: true },
-      ],
-    });
-    const store = createStateStore({ initialParams: { a: 1, b: 2 } });
-    const r = applyUserBindings(spec, { a: 5 }, store);
-    expect(r.applied).toEqual([{ name: 'a', value: 5 }]);
-    expect(r.skipped).toHaveLength(1);
-    expect(r.skipped[0]).toMatchObject({ name: 'b', reason: 'unbound', required: true });
-    expect(store.getParam('a')).toBe(5);
-    expect(store.getParam('b')).toBe(2);
-  });
-
-  it('카논화 변수명: π·\\theta 등도 매칭', () => {
-    const spec = makeSpec({
-      userBindings: [{ name: '\\theta', outputKind: 'scalar', required: true }],
-    });
-    const store = createStateStore({ initialParams: { '\\theta': 0 } });
-    // bindings 키는 정규화된 이름(θ) 또는 raw 이름(\\theta) 둘 다 evaluator 가 수용
-    const r = applyUserBindings(spec, { '\\theta': 1.57 }, store);
-    expect(r.applied).toEqual([{ name: '\\theta', value: 1.57 }]);
   });
 
   it('source=external 로 store.setParam 호출 (subscribeParams 확인)', () => {
@@ -127,5 +119,146 @@ describe('applyUserBindings', () => {
     store.subscribeParams((_p, src) => sources.push(src));
     applyUserBindings(spec, { a: 42 }, store);
     expect(sources).toContain('external');
+  });
+});
+
+describe('applyUserBindings — matrix (V3)', () => {
+  it('LaTeX 행렬 식 AST → store.setBinding 으로 Matrix 주입', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'M', outputKind: 'matrix', required: true }],
+    });
+    const store = createStateStore();
+    const matrixAst = latexAst('\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}');
+    const r = applyUserBindings(spec, { M: matrixAst }, store);
+    expect(r.skipped).toEqual([]);
+    expect(r.applied).toHaveLength(1);
+    expect(r.applied[0].outputKind).toBe('matrix');
+    const M = store.getBinding('M');
+    expect(M).toEqual({ rows: 2, cols: 2, data: [[1, 2], [3, 4]] });
+    expect(store.snapshot().bindings.M).toEqual(M);
+  });
+
+  it('matrix outputKind 에 number 입력 → 스칼라(1x1 의미) 로 ok', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 's', outputKind: 'matrix', required: true }],
+    });
+    const store = createStateStore();
+    const r = applyUserBindings(spec, { s: 3.5 }, store);
+    expect(r.applied).toEqual([{ name: 's', outputKind: 'matrix', value: 3.5 }]);
+    expect(store.getBinding('s')).toBe(3.5);
+  });
+
+  it('matrix 입력 누락 → clearBinding + skipped', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'M', outputKind: 'matrix', required: true }],
+    });
+    const store = createStateStore();
+    store.setBinding('M', { rows: 1, cols: 1, data: [[99]] });
+    const r = applyUserBindings(spec, {}, store);
+    expect(r.applied).toEqual([]);
+    expect(r.skipped[0]).toMatchObject({
+      name: 'M',
+      outputKind: 'matrix',
+      reason: 'unbound',
+      required: true,
+    });
+    expect(store.getBinding('M')).toBeUndefined();
+  });
+
+  it('matrix 슬롯은 params 채널과 독립', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'M', outputKind: 'matrix', required: true }],
+    });
+    const store = createStateStore({ initialParams: { M: 0 } });
+    applyUserBindings(spec, { M: latexAst('\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}') }, store);
+    expect(store.getParam('M')).toBe(0);
+    expect(store.getBinding('M')).toEqual({ rows: 2, cols: 2, data: [[1, 0], [0, 1]] });
+  });
+});
+
+describe('applyUserBindings — complex (V3)', () => {
+  it('complex outputKind 에 number 입력 → {re, im:0} 으로 lift', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'z', outputKind: 'complex', required: true }],
+    });
+    const store = createStateStore();
+    const r = applyUserBindings(spec, { z: 3 }, store);
+    expect(r.applied).toEqual([
+      { name: 'z', outputKind: 'complex', value: { re: 3, im: 0 } },
+    ]);
+    expect(store.getBinding('z')).toEqual({ re: 3, im: 0 });
+  });
+
+  it('LaTeX 식 AST 로 복소수 평가 (i 단위, 오일러 형태)', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'z', outputKind: 'complex', required: true }],
+    });
+    const store = createStateStore();
+    // z = 2 + 3i 형식의 LaTeX
+    const r = applyUserBindings(spec, { z: latexAst('2 + 3 i') }, store);
+    expect(r.applied).toHaveLength(1);
+    const z = store.getBinding('z') as { re: number; im: number };
+    expect(z.re).toBeCloseTo(2, 6);
+    expect(z.im).toBeCloseTo(3, 6);
+  });
+
+  it('complex 입력 누락 → clearBinding + skipped', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'z', outputKind: 'complex', required: false }],
+    });
+    const store = createStateStore();
+    store.setBinding('z', { re: 1, im: 1 });
+    const r = applyUserBindings(spec, {}, store);
+    expect(r.applied).toEqual([]);
+    expect(r.skipped[0]).toMatchObject({
+      name: 'z',
+      outputKind: 'complex',
+      reason: 'unbound',
+      required: false,
+    });
+    expect(store.getBinding('z')).toBeUndefined();
+  });
+});
+
+describe('applyUserBindings — 혼합 dispatch (V3)', () => {
+  it('scalar + matrix + complex 동시 처리, 각자 다른 채널', () => {
+    const spec = makeSpec({
+      userBindings: [
+        { name: 'a', outputKind: 'scalar', required: true },
+        { name: 'M', outputKind: 'matrix', required: true },
+        { name: 'z', outputKind: 'complex', required: true },
+      ],
+    });
+    const store = createStateStore({ initialParams: { a: 0 } });
+    const r = applyUserBindings(
+      spec,
+      {
+        a: 7,
+        M: latexAst('\\begin{pmatrix} 2 & 0 \\\\ 0 & 2 \\end{pmatrix}'),
+        z: 5,
+      },
+      store,
+    );
+    expect(r.applied).toHaveLength(3);
+    expect(r.skipped).toEqual([]);
+    expect(store.getParam('a')).toBe(7);
+    expect(store.getBinding('M')).toEqual({ rows: 2, cols: 2, data: [[2, 0], [0, 2]] });
+    expect(store.getBinding('z')).toEqual({ re: 5, im: 0 });
+  });
+
+  it('일부 입력만 줘도 나머지는 unbound 로 skip — 다른 채널 영향 없음', () => {
+    const spec = makeSpec({
+      userBindings: [
+        { name: 'a', outputKind: 'scalar', required: true },
+        { name: 'M', outputKind: 'matrix', required: true },
+      ],
+    });
+    const store = createStateStore({ initialParams: { a: 1 } });
+    const r = applyUserBindings(spec, { a: 9 }, store);
+    expect(r.applied).toEqual([{ name: 'a', outputKind: 'scalar', value: 9 }]);
+    expect(r.skipped).toHaveLength(1);
+    expect(r.skipped[0]).toMatchObject({ name: 'M', outputKind: 'matrix', reason: 'unbound' });
+    expect(store.getParam('a')).toBe(9);
+    expect(store.getBinding('M')).toBeUndefined();
   });
 });

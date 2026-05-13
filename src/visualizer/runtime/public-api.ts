@@ -16,7 +16,7 @@ import type { Mount2DOptions, Visualizer2DInstance } from './mount-2d';
 import type { Mount3DOptions, Visualizer3DInstance } from './mount-3d';
 import { compileSpec, type CompiledVisualizer } from './compile';
 import type { VisualizerRegistry, VisualizerRegistryLoadOptions } from './registry';
-import type { Bindings } from '../../evaluator';
+import type { UserBindingInputs } from './user-binding-bridge';
 
 export {
   createVisualizerRegistry,
@@ -38,8 +38,12 @@ export interface CreateVisualizerBaseOptions {
   readonly locale?: string;
   readonly initialSceneId?: string;
   readonly timeScale?: number;
-  /** 사용자 LaTeX 수식 변수 값 — V2 user-binding-bridge 가 spec.userBindings 와 결합해 주입. */
-  readonly userBindings?: Bindings;
+  /**
+   * 사용자 LaTeX 식 입력 — spec.userBindings 의 각 슬롯에 매핑되는 AST(혹은
+   * 즉시 number). V3 user-binding-bridge 가 outputKind 에 따라 scalar/matrix/
+   * complex 채널로 분기 주입한다.
+   */
+  readonly userBindings?: UserBindingInputs;
 }
 
 export interface CreateVisualizerFromRegistryOptions extends CreateVisualizerBaseOptions {

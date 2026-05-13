@@ -35,8 +35,11 @@ import {
 } from './adapter3d';
 import { rootContext } from './expr/context';
 import { validateSpec } from './validator';
-import { applyUserBindings, type ApplyUserBindingsResult } from './user-binding-bridge';
-import type { Bindings } from '../../evaluator';
+import {
+  applyUserBindings,
+  type ApplyUserBindingsResult,
+  type UserBindingInputs,
+} from './user-binding-bridge';
 
 export interface Mount3DOptions {
   width: number;
@@ -45,8 +48,8 @@ export interface Mount3DOptions {
   locale?: string;
   initialSceneId?: string;
   catalogDefaults?: Readonly<Record<string, number>>;
-  /** 사용자 LaTeX 수식 변수 값. spec.userBindings 와 결합해 mount 직후 자동 주입 (V2). */
-  userBindings?: Bindings;
+  /** 사용자 LaTeX 식 입력 — AST 또는 즉시 number. mount 직후 자동 주입 (V3). */
+  userBindings?: UserBindingInputs;
   timeScale?: number;
 }
 
@@ -58,8 +61,8 @@ export interface Visualizer3DInstance {
   setParam(id: string, value: number): void;
   setTheme(theme: Theme): void;
   setTimeScale(scale: number): void;
-  /** 사용자 LaTeX 변수 값을 spec.userBindings 슬롯으로 흘려보낸다 (V2). */
-  applyUserBindings(bindings: Bindings): ApplyUserBindingsResult;
+  /** 사용자 LaTeX 식(AST 또는 number)을 spec.userBindings 슬롯으로 흘려보낸다 (V3). */
+  applyUserBindings(inputs: UserBindingInputs): ApplyUserBindingsResult;
   resize(width: number, height: number): void;
   destroy(): void;
 }
@@ -200,8 +203,8 @@ export function mount3d(
       }
       timeScale.current = scale;
     },
-    applyUserBindings(bindings) {
-      return applyUserBindings(spec, bindings, store);
+    applyUserBindings(inputs) {
+      return applyUserBindings(spec, inputs, store);
     },
     resize(w, h) {
       graphics.resize(w, h);
