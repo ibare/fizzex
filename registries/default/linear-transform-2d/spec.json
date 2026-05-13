@@ -1,0 +1,231 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "linear-transform-2d",
+  "catalog": "algebra/linear-transform-2x2",
+
+  "name": { "en": "Linear Transform — 2D", "ko": "선형변환 — 2D" },
+  "description": {
+    "en": "2x2 matrix M acting on basis, unit square, and a grid.",
+    "ko": "2×2 행렬 M의 기저·단위 정사각형·격자 변환."
+  },
+  "renderer": "2d",
+
+  "userBindings": [
+    { "name": "M", "outputKind": "matrix", "required": true }
+  ],
+
+  "scenes": [
+    {
+      "id": "basis",
+      "name": { "en": "Basis Vectors", "ko": "기저벡터" },
+      "description": {
+        "en": "e1, e2 mapped to columns of M.",
+        "ko": "e1·e2 가 M 의 열로 이동."
+      },
+      "style": { "color": "#7C3AED", "icon": "📐" }
+    },
+    {
+      "id": "square",
+      "name": { "en": "Unit Square", "ko": "단위 정사각형" },
+      "description": {
+        "en": "Unit square sheared/rotated/scaled by M.",
+        "ko": "단위 정사각형의 변환 결과 평행사변형."
+      },
+      "style": { "color": "#0EA5E9", "icon": "🟦" }
+    },
+    {
+      "id": "grid",
+      "name": { "en": "Grid", "ko": "격자" },
+      "description": {
+        "en": "Integer-lattice grid transformed by M.",
+        "ko": "정수 격자가 M 으로 변환된 모습."
+      },
+      "style": { "color": "#F59E0B", "icon": "🔲" }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "m00": "bindings.M ? bindings.M.data[0][0] : 1",
+      "m01": "bindings.M ? bindings.M.data[0][1] : 0",
+      "m10": "bindings.M ? bindings.M.data[1][0] : 0",
+      "m11": "bindings.M ? bindings.M.data[1][1] : 1",
+      "det": "(bindings.M ? bindings.M.data[0][0] : 1) * (bindings.M ? bindings.M.data[1][1] : 1) - (bindings.M ? bindings.M.data[0][1] : 0) * (bindings.M ? bindings.M.data[1][0] : 0)",
+      "scale": "(min(frame.width, frame.height) - 32) / 6",
+      "ox": "frame.width / 2",
+      "oy": "frame.height / 2",
+      "color": "scene.style.color",
+      "axisColor": "if(frame.isDark, 'rgba(148,163,184,0.7)', 'rgba(100,116,139,0.6)')",
+      "gridColor": "if(frame.isDark, 'rgba(148,163,184,0.25)', 'rgba(100,116,139,0.2)')"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": "0", "y": "0",
+        "w": "frame.width", "h": "frame.height",
+        "style": { "fill": "if(frame.isDark, '#0f172a', '#f8fafc')" }
+      },
+      {
+        "kind": "repeat",
+        "of": { "range": [-3, 4] },
+        "as": "k",
+        "children": [
+          {
+            "kind": "line",
+            "x1": "ox + k * scale", "y1": "oy - 3 * scale",
+            "x2": "ox + k * scale", "y2": "oy + 3 * scale",
+            "style": { "stroke": "gridColor", "lineWidth": 1 }
+          },
+          {
+            "kind": "line",
+            "x1": "ox - 3 * scale", "y1": "oy + k * scale",
+            "x2": "ox + 3 * scale", "y2": "oy + k * scale",
+            "style": { "stroke": "gridColor", "lineWidth": 1 }
+          }
+        ]
+      },
+      {
+        "kind": "line",
+        "x1": "ox - 3 * scale", "y1": "oy",
+        "x2": "ox + 3 * scale", "y2": "oy",
+        "style": { "stroke": "axisColor", "lineWidth": 1.5 }
+      },
+      {
+        "kind": "line",
+        "x1": "ox", "y1": "oy - 3 * scale",
+        "x2": "ox", "y2": "oy + 3 * scale",
+        "style": { "stroke": "axisColor", "lineWidth": 1.5 }
+      },
+      {
+        "kind": "match",
+        "on": "scene.id",
+        "cases": {
+          "basis": {
+            "kind": "group",
+            "children": [
+              {
+                "kind": "line",
+                "x1": "ox", "y1": "oy",
+                "x2": "ox + scale", "y2": "oy",
+                "style": {
+                  "stroke": "hexAlpha(color, 0.35)",
+                  "lineWidth": 2,
+                  "lineDash": [4, 4]
+                }
+              },
+              {
+                "kind": "line",
+                "x1": "ox", "y1": "oy",
+                "x2": "ox", "y2": "oy - scale",
+                "style": {
+                  "stroke": "hexAlpha(color, 0.35)",
+                  "lineWidth": 2,
+                  "lineDash": [4, 4]
+                }
+              },
+              {
+                "kind": "line",
+                "x1": "ox", "y1": "oy",
+                "x2": "ox + m00 * scale", "y2": "oy - m10 * scale",
+                "style": { "stroke": "color", "lineWidth": 3 }
+              },
+              {
+                "kind": "circle",
+                "cx": "ox + m00 * scale", "cy": "oy - m10 * scale", "r": "5",
+                "style": { "fill": "color" }
+              },
+              {
+                "kind": "line",
+                "x1": "ox", "y1": "oy",
+                "x2": "ox + m01 * scale", "y2": "oy - m11 * scale",
+                "style": { "stroke": "color", "lineWidth": 3 }
+              },
+              {
+                "kind": "circle",
+                "cx": "ox + m01 * scale", "cy": "oy - m11 * scale", "r": "5",
+                "style": { "fill": "color" }
+              }
+            ]
+          },
+          "square": {
+            "kind": "group",
+            "children": [
+              {
+                "kind": "polygon",
+                "points": "[[ox, oy], [ox + scale, oy], [ox + scale, oy - scale], [ox, oy - scale]]",
+                "style": {
+                  "stroke": "hexAlpha(color, 0.35)",
+                  "lineWidth": 1.5,
+                  "lineDash": [4, 4]
+                }
+              },
+              {
+                "kind": "polygon",
+                "points": "[[ox, oy], [ox + m00 * scale, oy - m10 * scale], [ox + (m00 + m01) * scale, oy - (m10 + m11) * scale], [ox + m01 * scale, oy - m11 * scale]]",
+                "style": {
+                  "fill": "hexAlpha(color, 0.25)",
+                  "stroke": "color",
+                  "lineWidth": 2
+                }
+              }
+            ]
+          },
+          "grid": {
+            "kind": "repeat",
+            "of": { "range": [-2, 3] },
+            "as": "gi",
+            "children": [
+              {
+                "kind": "repeat",
+                "of": { "range": [-2, 3] },
+                "as": "gj",
+                "children": [
+                  {
+                    "kind": "circle",
+                    "cx": "ox + (m00 * gi + m01 * gj) * scale",
+                    "cy": "oy - (m10 * gi + m11 * gj) * scale",
+                    "r": "3",
+                    "style": { "fill": "color" }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "M[0][0] = ", "ko": "M[0][0] = " },
+        "value": "bindings.M ? bindings.M.data[0][0] : 1",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "M[0][1] = ", "ko": "M[0][1] = " },
+        "value": "bindings.M ? bindings.M.data[0][1] : 0",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "M[1][0] = ", "ko": "M[1][0] = " },
+        "value": "bindings.M ? bindings.M.data[1][0] : 0",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "M[1][1] = ", "ko": "M[1][1] = " },
+        "value": "bindings.M ? bindings.M.data[1][1] : 1",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "det(M) = ", "ko": "det(M) = " },
+        "value": "(bindings.M ? bindings.M.data[0][0] : 1) * (bindings.M ? bindings.M.data[1][1] : 1) - (bindings.M ? bindings.M.data[0][1] : 0) * (bindings.M ? bindings.M.data[1][0] : 0)",
+        "format": ".3f"
+      }
+    ]
+  }
+}

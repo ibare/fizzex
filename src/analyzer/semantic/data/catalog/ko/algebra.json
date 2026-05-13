@@ -264,5 +264,44 @@
       "정보 이론에서 독립 사건의 결합 정보량을 각 정보량의 합으로 계산"
     ],
     "relatedFormulas": ["log-definition", "exponent-law"]
+  },
+  "complex-plane": {
+    "name": "복소평면",
+    "oneLiner": "복소수 z = a + bi를 (a, b) 좌표의 점으로 시각화하는 평면",
+    "description": "복소평면(Argand 평면)은 복소수를 가로축의 실수부와 세로축의 허수부로 표현하는 2차원 좌표계입니다. 각 복소수는 평면 위 한 점, 혹은 원점에서 출발하는 벡터로 대응되며, 절댓값 |z|는 원점과의 거리, 편각 arg(z)는 양의 실수축과 이루는 각이 됩니다. 극형식과 오일러 공식을 통해 회전·확대 같은 기하학적 의미가 자연스럽게 드러납니다.",
+    "field": "대수학",
+    "significance": "복소수의 추상적 정의를 기하학적 직관과 연결하여, 복소함수와 회전 변환을 시각적으로 이해할 수 있게 합니다.",
+    "elementMeanings": {
+      "z": { "role": "복소수", "description": "실수부와 허수부로 이루어진 평면 위의 점입니다.", "kind": "input" },
+      "a": { "role": "실수부", "description": "z의 가로축 좌표, Re(z) 입니다.", "kind": "structural" },
+      "b": { "role": "허수부", "description": "z의 세로축 좌표, Im(z) 입니다.", "kind": "structural" },
+      "|z|": { "role": "절댓값", "description": "원점에서 z까지의 거리. sqrt(a^2 + b^2) 입니다.", "kind": "output" },
+      "\\arg(z)": { "role": "편각", "description": "양의 실수축과 원점→z 벡터가 이루는 각. atan2(b, a) 입니다.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "교류 전기 회로의 임피던스를 복소평면 벡터로 표현해 위상 차이를 시각화",
+      "신호 처리의 푸리에 변환 결과를 복소평면의 크기·위상으로 분석"
+    ],
+    "relatedFormulas": ["euler-identity"]
+  },
+  "linear-transform-2x2": {
+    "name": "2×2 선형변환",
+    "oneLiner": "2×2 행렬 M이 평면의 벡터를 다른 벡터로 보내는 1차 변환",
+    "description": "2×2 선형변환은 행렬 M = [[a, b], [c, d]] 가 평면 위 모든 점 (x, y) 를 (ax + by, cx + dy) 로 보내는 함수입니다. 기저벡터 e1, e2가 M의 열벡터로 이동하며, 단위 정사각형은 평행사변형으로, 격자는 변환된 격자로 바뀝니다. 행렬식 det(M) 은 면적의 변화율과 방향성을 나타내며, 0이면 차원이 붕괴됩니다.",
+    "field": "대수학",
+    "significance": "회전·반사·확대·전단 같은 평면의 기하 변환을 단일 행렬로 통합 표현하여, 컴퓨터 그래픽과 선형대수의 기초가 됩니다.",
+    "elementMeanings": {
+      "M": { "role": "변환 행렬", "description": "2×2 실수 행렬. 평면의 1차 변환을 결정합니다.", "kind": "input" },
+      "a": { "role": "M[0][0]", "description": "기저 e1의 가로 성분이 변환 후 가지는 가로 좌표입니다.", "kind": "structural" },
+      "b": { "role": "M[0][1]", "description": "기저 e2의 가로 성분이 변환 후 가지는 가로 좌표입니다.", "kind": "structural" },
+      "c": { "role": "M[1][0]", "description": "기저 e1의 세로 성분이 변환 후 가지는 세로 좌표입니다.", "kind": "structural" },
+      "d": { "role": "M[1][1]", "description": "기저 e2의 세로 성분이 변환 후 가지는 세로 좌표입니다.", "kind": "structural" },
+      "\\det(M)": { "role": "행렬식", "description": "ad - bc. 변환 후 단위 면적의 배율과 방향(부호) 입니다.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "2D 그래픽 엔진이 회전·확대·전단을 단일 2×2 행렬 곱으로 처리",
+      "주성분 분석(PCA) 이 데이터의 분산 방향을 2×2 공분산 행렬의 고유벡터로 추출"
+    ],
+    "relatedFormulas": []
   }
 }

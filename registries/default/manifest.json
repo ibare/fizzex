@@ -1,11 +1,13 @@
 {
   "version": "1",
   "visualizers": {
+    "complex-plane-2d": { "spec": "complex-plane-2d/spec.json", "renderer": "2d" },
     "compound-interest-2d": { "spec": "compound-interest-2d/spec.json", "renderer": "2d" },
     "exponential-decay-2d": { "spec": "exponential-decay-2d/spec.json", "renderer": "2d" },
     "freefall-2d": { "spec": "freefall-2d/spec.json", "renderer": "2d" },
     "kepler-orbit-2d": { "spec": "kepler-orbit-2d/spec.json", "renderer": "2d" },
     "kepler-orbit-3d": { "spec": "kepler-orbit-3d/spec.json", "renderer": "3d" },
+    "linear-transform-2d": { "spec": "linear-transform-2d/spec.json", "renderer": "2d" },
     "pythagorean-explore-2d": { "spec": "pythagorean-explore-2d/spec.json", "renderer": "2d" },
     "pythagorean-ladder-2d": { "spec": "pythagorean-ladder-2d/spec.json", "renderer": "2d" },
     "pythagorean-shortcut-2d": { "spec": "pythagorean-shortcut-2d/spec.json", "renderer": "2d" },

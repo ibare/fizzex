@@ -1,0 +1,158 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "complex-plane-2d",
+  "catalog": "algebra/complex-plane",
+
+  "name": { "en": "Complex Plane — 2D", "ko": "복소평면 — 2D" },
+  "description": {
+    "en": "z on the Argand plane: point, vector, |z|, arg(z).",
+    "ko": "Argand 평면 위 z: 점·벡터·절댓값·편각."
+  },
+  "renderer": "2d",
+
+  "userBindings": [
+    { "name": "z", "outputKind": "complex", "required": true }
+  ],
+
+  "scenes": [
+    {
+      "id": "argand",
+      "name": { "en": "Argand", "ko": "Argand" },
+      "description": {
+        "en": "z as a point on the complex plane with origin vector.",
+        "ko": "복소평면 위 점과 원점→z 벡터."
+      },
+      "style": { "color": "#7C3AED", "icon": "🔵" }
+    },
+    {
+      "id": "polar",
+      "name": { "en": "Polar", "ko": "극형식" },
+      "description": {
+        "en": "Emphasize r = |z| and theta = arg(z).",
+        "ko": "r=|z|·θ=arg(z) 극형식 강조."
+      },
+      "style": { "color": "#0EA5E9", "icon": "🧭" }
+    },
+    {
+      "id": "euler",
+      "name": { "en": "Euler", "ko": "오일러" },
+      "description": {
+        "en": "Unit circle reference e^{i theta}.",
+        "ko": "단위원 e^{iθ} 기준 좌표."
+      },
+      "style": { "color": "#F59E0B", "icon": "🌀" }
+    }
+  ],
+
+  "viewports": {},
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "zRe": "bindings.z ? bindings.z.re : 1",
+      "zIm": "bindings.z ? bindings.z.im : 0",
+      "zMag": "sqrt((bindings.z ? bindings.z.re : 1) * (bindings.z ? bindings.z.re : 1) + (bindings.z ? bindings.z.im : 0) * (bindings.z ? bindings.z.im : 0))",
+      "zArg": "atan2(bindings.z ? bindings.z.im : 0, bindings.z ? bindings.z.re : 1)",
+      "scale": "(min(frame.width, frame.height) - 32) / 4.4",
+      "ox": "frame.width / 2",
+      "oy": "frame.height / 2",
+      "color": "scene.style.color"
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": "0", "y": "0",
+        "w": "frame.width", "h": "frame.height",
+        "style": { "fill": "if(frame.isDark, '#0f172a', '#f8fafc')" }
+      },
+      {
+        "kind": "line",
+        "x1": "ox - 2.2 * scale", "y1": "oy",
+        "x2": "ox + 2.2 * scale", "y2": "oy",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(148,163,184,0.7)', 'rgba(100,116,139,0.6)')",
+          "lineWidth": 1
+        }
+      },
+      {
+        "kind": "line",
+        "x1": "ox", "y1": "oy - 2.2 * scale",
+        "x2": "ox", "y2": "oy + 2.2 * scale",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(148,163,184,0.7)', 'rgba(100,116,139,0.6)')",
+          "lineWidth": 1
+        }
+      },
+      {
+        "kind": "circle",
+        "cx": "ox", "cy": "oy", "r": "scale",
+        "style": {
+          "stroke": "if(frame.isDark, 'rgba(148,163,184,0.45)', 'rgba(100,116,139,0.4)')",
+          "lineWidth": 1,
+          "lineDash": [4, 4]
+        }
+      },
+      {
+        "kind": "if",
+        "cond": "scene.id === 'polar'",
+        "then": {
+          "kind": "circle",
+          "cx": "ox", "cy": "oy", "r": "max(zMag * scale, 1)",
+          "style": {
+            "stroke": "hexAlpha(color, 0.35)",
+            "lineWidth": 1,
+            "lineDash": [3, 3]
+          }
+        }
+      },
+      {
+        "kind": "if",
+        "cond": "scene.id === 'polar'",
+        "then": {
+          "kind": "filledArc",
+          "cx": "ox", "cy": "oy",
+          "r": "min(scale * 0.35, max(zMag * scale * 0.3, 12))",
+          "startAngle": "-max(0, zArg)",
+          "endAngle": "-min(0, zArg)",
+          "style": { "fill": "hexAlpha(color, 0.25)" }
+        }
+      },
+      {
+        "kind": "line",
+        "x1": "ox", "y1": "oy",
+        "x2": "ox + zRe * scale", "y2": "oy - zIm * scale",
+        "style": { "stroke": "color", "lineWidth": 2 }
+      },
+      {
+        "kind": "circle",
+        "cx": "ox + zRe * scale", "cy": "oy - zIm * scale", "r": "5",
+        "style": { "fill": "color" }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "Re(z) = ", "ko": "Re(z) = " },
+        "value": "bindings.z ? bindings.z.re : 1",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "Im(z) = ", "ko": "Im(z) = " },
+        "value": "bindings.z ? bindings.z.im : 0",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "|z| = ", "ko": "|z| = " },
+        "value": "sqrt((bindings.z ? bindings.z.re : 1) * (bindings.z ? bindings.z.re : 1) + (bindings.z ? bindings.z.im : 0) * (bindings.z ? bindings.z.im : 0))",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "arg(z) = ", "ko": "arg(z) = " },
+        "value": "atan2(bindings.z ? bindings.z.im : 0, bindings.z ? bindings.z.re : 1)",
+        "format": ".3f"
+      }
+    ]
+  }
+}
