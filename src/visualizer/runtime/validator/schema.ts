@@ -272,16 +272,19 @@ export const visualizerSpecSchema = z
         bindingNames.add(b.name);
       }
 
-      // required: true 인 binding 의 name 은 모든 scene 의 params 에 존재해야 한다
+      // scalar 의 required binding 만 scenes[].params 에 fallback 기본값이 있어야 한다.
+      // matrix·complex 는 호스트가 LaTeX AST 채널로 주입되며 scene preset (Record<string,number>)
+      // 으로는 표현할 수 없으므로 검증 대상에서 제외 (V3).
       for (const [bi, b] of spec.userBindings.entries()) {
         if (!b.required) continue;
+        if (b.outputKind !== 'scalar') continue;
         for (const [si, scene] of spec.scenes.entries()) {
           const params = (scene.params ?? {}) as Record<string, number>;
           if (!(b.name in params)) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               path: ['userBindings', bi, 'name'],
-              message: `required userBinding "${b.name}" missing in scenes[${si}].params (id: ${scene.id})`,
+              message: `required scalar userBinding "${b.name}" missing in scenes[${si}].params (id: ${scene.id})`,
             });
           }
         }

@@ -225,7 +225,7 @@ describe('validateSpec — userBindings', () => {
     ).toThrow(/duplicate userBindings\.name/);
   });
 
-  it('rejects required binding name missing in scenes[].params', () => {
+  it('rejects required scalar binding name missing in scenes[].params', () => {
     expect(() =>
       validateSpec({
         ...baseValidSpec,
@@ -234,7 +234,31 @@ describe('validateSpec — userBindings', () => {
           { name: 'omega', outputKind: 'scalar', required: true },
         ],
       }),
-    ).toThrow(/required userBinding "omega" missing/);
+    ).toThrow(/required scalar userBinding "omega" missing/);
+  });
+
+  it('accepts required matrix binding even when missing in scenes[].params (V3)', () => {
+    expect(() =>
+      validateSpec({
+        ...baseValidSpec,
+        userBindings: [
+          { name: 'A', outputKind: 'scalar', required: true },
+          { name: 'M', outputKind: 'matrix', required: true },
+        ],
+      }),
+    ).not.toThrow();
+  });
+
+  it('accepts required complex binding even when missing in scenes[].params (V3)', () => {
+    expect(() =>
+      validateSpec({
+        ...baseValidSpec,
+        userBindings: [
+          { name: 'A', outputKind: 'scalar', required: true },
+          { name: 'z', outputKind: 'complex', required: true },
+        ],
+      }),
+    ).not.toThrow();
   });
 
   it('rejects invalid outputKind', () => {
