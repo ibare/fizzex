@@ -34,7 +34,7 @@ function makeRc(withViewport: boolean): RenderContext {
   const viewports = new Map<string, Viewport2D>();
   if (withViewport) viewports.set('vp', offsetViewport);
   return createRenderContext({
-    exprCtx: rootContext(),
+    exprCtx: rootContext({}),
     frame: makeFrame(),
     viewports,
     currentViewportId: withViewport ? 'vp' : undefined,

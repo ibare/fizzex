@@ -33,6 +33,7 @@ import type {
   ArrayNode,
   TextNode,
 } from './types';
+import { boundary, intra } from './types';
 import { parseLatex } from './latex/latex-parser';
 import { generateEditorId, deriveId, deriveCellId } from './utils/id-generator';
 import {
@@ -66,7 +67,7 @@ export function createInitialState(): EditorState {
   const root = createEmptyRoot();
   return {
     ast: root,
-    cursor: { nodeId: root.id, offset: 0 },
+    cursor: boundary(root.id, 0),
     selection: null,
   };
 }
@@ -81,7 +82,7 @@ export function createStateFromLatex(latex: string): EditorState {
     const { ast } = parseLatex(latex);
     return {
       ast,
-      cursor: { nodeId: ast.id, offset: ast.children.length },
+      cursor: boundary(ast.id, ast.children.length),
       selection: null,
     };
   } catch {
@@ -371,47 +372,92 @@ export class MathEditor {
     this.onChange(this.state);
   }
 
+  /**
+   * intra 커서를 boundary로 강제 전환한다. intra가 NumberNode 내부 어딘가를
+   * 가리키면 그 지점에서 노드를 두 NumberNode로 분할하고, 분할 경계의 boundary
+   * 커서로 state를 갱신한다. charOffset이 0 또는 value.length이면 분할 없이
+   * 인접 boundary로만 이동.
+   */
+  private splitIntraIntoBoundary(): void {
+    const c = this.state.cursor;
+    if (c.kind === 'boundary') return;
+    const numNode = findNodeById(this.state.ast, c.nodeId);
+    if (!numNode || numNode.type !== 'number') {
+      this.state = freezeState(buildNewState(this.state.ast, boundary(this.state.ast.id, 0)));
+      return;
+    }
+    const parentInfo = findParent(this.state.ast, c.nodeId);
+    if (!parentInfo) return;
+    const { parent, childKey, index: nodeIndex } = parentInfo;
+    if (c.charOffset === 0) {
+      this.state = freezeState(buildNewState(this.state.ast, boundary(parent.id, nodeIndex)));
+      return;
+    }
+    if (c.charOffset >= numNode.value.length) {
+      this.state = freezeState(buildNewState(this.state.ast, boundary(parent.id, nodeIndex + 1)));
+      return;
+    }
+    const left = createNumber(numNode.value.slice(0, c.charOffset));
+    const right = createNumber(numNode.value.slice(c.charOffset));
+    const siblings = getNodeChildArray(parent, childKey);
+    const newSiblings = spliceChildren(siblings, nodeIndex, 1, left, right);
+    const newAst = rebuildAstWithNewChildren(this.state.ast, parent.id, childKey, newSiblings);
+    this.state = freezeState(buildNewState(newAst, boundary(parent.id, nodeIndex + 1)));
+  }
+
+  /** 현재 커서를 boundary로 normalize 후 반환 (intra 시 split 부수효과 발생) */
+  private requireBoundary(): { parentId: string; index: number } {
+    if (this.state.cursor.kind !== 'boundary') {
+      this.splitIntraIntoBoundary();
+    }
+    const c = this.state.cursor;
+    if (c.kind !== 'boundary') {
+      throw new Error('cursor normalize failed');
+    }
+    return { parentId: c.parentId, index: c.index };
+  }
+
   /** 커서 위치에 노드를 불변적으로 삽입하는 공유 헬퍼 */
   private insertNodeAtCursor(newNode: MathNode): void {
-    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!targetNode) return;
 
     const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
     const children = getNodeChildArray(targetNode, childKey);
-    const offset = this.state.cursor.offset;
+    const offset = this.requireBoundary().index;
     const newChildren = spliceChildren(children, offset, 0, newNode);
     const newAst = rebuildAstWithNewChildren(
       this.state.ast,
-      this.state.cursor.nodeId,
+      this.requireBoundary().parentId,
       childKey,
       newChildren,
     );
 
-    this.state = freezeState(buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset + 1 }));
+    this.state = freezeState(buildNewState(newAst, boundary(this.requireBoundary().parentId, offset + 1)));
     this.onChange(this.state);
   }
 
   /** 구조 노드를 커서 위치에 삽입하고 커서를 내부로 이동하는 공유 헬퍼 */
   private insertStructureAtCursor(newNode: MathNode, cursorTargetId: string): void {
-    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!targetNode) return;
 
     const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
     const children = getNodeChildArray(targetNode, childKey);
-    const offset = this.state.cursor.offset;
+    const offset = this.requireBoundary().index;
     const newChildren = spliceChildren(children, offset, 0, newNode);
     const newAst = rebuildAstWithNewChildren(
       this.state.ast,
-      this.state.cursor.nodeId,
+      this.requireBoundary().parentId,
       childKey,
       newChildren,
     );
 
-    this.state = freezeState(buildNewState(newAst, { nodeId: cursorTargetId, offset: 0 }));
+    this.state = freezeState(buildNewState(newAst, boundary(cursorTargetId, 0)));
     this.onChange(this.state);
   }
 
@@ -538,6 +584,24 @@ export class MathEditor {
 
   /** 숫자 삽입 */
   insertNumber(digit: string): void {
+    const c = this.state.cursor;
+    if (c.kind === 'intra') {
+      const numNode = findNodeById(this.state.ast, c.nodeId);
+      if (numNode && numNode.type === 'number') {
+        const newValue = numNode.value.slice(0, c.charOffset) + digit + numNode.value.slice(c.charOffset);
+        const parentInfo = findParent(this.state.ast, numNode.id);
+        if (parentInfo) {
+          const { parent, childKey, index } = parentInfo;
+          const siblings = getNodeChildArray(parent, childKey);
+          const updated: NumberNode = { ...numNode, value: newValue };
+          const newSiblings = spliceChildren(siblings, index, 1, updated);
+          const newAst = rebuildAstWithNewChildren(this.state.ast, parent.id, childKey, newSiblings);
+          this.state = freezeState(buildNewState(newAst, intra(numNode.id, c.charOffset + 1)));
+          this.onChange(this.state);
+          return;
+        }
+      }
+    }
     this.insertNodeAtCursor(createNumber(digit));
   }
 
@@ -557,7 +621,7 @@ export class MathEditor {
 
   /** 복합 노드(지수, 분자/분모, 괄호 내부, 아래첨자, 적분, 시그마, 극한) 안에 있으면 밖으로 이동 */
   private exitComplexNodeIfNeeded(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const node = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!node) return;
 
     // row 노드의 ID가 특정 접미사로 끝나면 복합 노드 내부
@@ -581,20 +645,20 @@ export class MathEditor {
     // 복합 노드 다음 위치로 커서 이동 (불변: 새 state 생성)
     this.state = freezeState(buildNewState(
       this.state.ast,
-      { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 },
+      boundary(grandParentInfo.parent.id, grandParentInfo.index + 1),
     ));
   }
 
   /** 분수 삽입 */
   insertFraction(): void {
-    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!targetNode) return;
 
     const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
     const children = getNodeChildArray(targetNode, childKey);
-    const offset = this.state.cursor.offset;
+    const offset = this.requireBoundary().index;
 
     // 커서 앞의 연속된 숫자/변수/괄호를 분자로 (연산자 전까지)
     const numerator = this.collectPrecedingTerm(children, offset);
@@ -612,9 +676,9 @@ export class MathEditor {
     newChildren = spliceChildren(newChildren, insertOffset, 0, fracNode);
 
     const newAst = rebuildAstWithNewChildren(
-      this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+      this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
     );
-    this.state = freezeState(buildNewState(newAst, { nodeId: deriveId(fracNode.id, '_den'), offset: 0 }));
+    this.state = freezeState(buildNewState(newAst, boundary(deriveId(fracNode.id, '_den'), 0)));
     this.onChange(this.state);
   }
 
@@ -639,14 +703,14 @@ export class MathEditor {
 
   /** 거듭제곱 삽입 */
   insertPower(): void {
-    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!targetNode) return;
 
     const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
     const children = getNodeChildArray(targetNode, childKey);
-    const offset = this.state.cursor.offset;
+    const offset = this.requireBoundary().index;
 
     const base = this.collectPrecedingTerm(children, offset);
     const removeCount = base.length;
@@ -662,22 +726,22 @@ export class MathEditor {
     newChildren = spliceChildren(newChildren, insertOffset, 0, powerNode);
 
     const newAst = rebuildAstWithNewChildren(
-      this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+      this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
     );
-    this.state = freezeState(buildNewState(newAst, { nodeId: deriveId(powerNode.id, '_exp'), offset: 0 }));
+    this.state = freezeState(buildNewState(newAst, boundary(deriveId(powerNode.id, '_exp'), 0)));
     this.onChange(this.state);
   }
 
   /** 아래첨자 삽입 */
   insertSubscript(): void {
-    const targetNode = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!targetNode) return;
 
     const childKey = getChildKeys(targetNode)[0];
     if (!childKey) return;
 
     const children = getNodeChildArray(targetNode, childKey);
-    const offset = this.state.cursor.offset;
+    const offset = this.requireBoundary().index;
 
     const base = this.collectPrecedingTerm(children, offset);
     const removeCount = base.length;
@@ -693,9 +757,9 @@ export class MathEditor {
     newChildren = spliceChildren(newChildren, insertOffset, 0, subscriptNode);
 
     const newAst = rebuildAstWithNewChildren(
-      this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+      this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
     );
-    this.state = freezeState(buildNewState(newAst, { nodeId: deriveId(subscriptNode.id, '_sub'), offset: 0 }));
+    this.state = freezeState(buildNewState(newAst, boundary(deriveId(subscriptNode.id, '_sub'), 0)));
     this.onChange(this.state);
   }
 
@@ -754,7 +818,7 @@ export class MathEditor {
 
   /** 괄호 밖으로 이동 */
   private exitParen(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const node = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!node) return;
 
     const parentInfo = findParent(this.state.ast, node.id);
@@ -763,7 +827,7 @@ export class MathEditor {
       if (grandParentInfo) {
         this.state = freezeState(buildNewState(
           this.state.ast,
-          { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index + 1 },
+          boundary(grandParentInfo.parent.id, grandParentInfo.index + 1),
         ));
         this.onChange(this.state);
       }
@@ -772,22 +836,44 @@ export class MathEditor {
 
   /** 뒤로 삭제 */
   private deleteBackward(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const c = this.state.cursor;
+    if (c.kind === 'intra') {
+      const numNode = findNodeById(this.state.ast, c.nodeId);
+      if (numNode && numNode.type === 'number' && c.charOffset > 0) {
+        const newValue = numNode.value.slice(0, c.charOffset - 1) + numNode.value.slice(c.charOffset);
+        const parentInfo = findParent(this.state.ast, numNode.id);
+        if (parentInfo) {
+          const { parent, childKey, index } = parentInfo;
+          const siblings = getNodeChildArray(parent, childKey);
+          const updated: NumberNode = { ...numNode, value: newValue };
+          const newSiblings = spliceChildren(siblings, index, 1, updated);
+          const newAst = rebuildAstWithNewChildren(this.state.ast, parent.id, childKey, newSiblings);
+          const nextCursor = newValue.length >= 2
+            ? intra(numNode.id, c.charOffset - 1)
+            : boundary(parent.id, index + 1);
+          this.state = freezeState(buildNewState(newAst, nextCursor));
+          this.onChange(this.state);
+          return;
+        }
+      }
+    }
+
+    const node = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!node) return;
 
     const childKey = getChildKeys(node)[0];
     if (!childKey) return;
 
     const children = getNodeChildArray(node, childKey);
-    const offset = this.state.cursor.offset;
+    const offset = this.requireBoundary().index;
 
     if (offset > 0) {
       // 커서 앞 노드 삭제 (불변)
       const newChildren = spliceChildren(children, offset - 1, 1);
       const newAst = rebuildAstWithNewChildren(
-        this.state.ast, this.state.cursor.nodeId, childKey, newChildren,
+        this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
       );
-      this.state = freezeState(buildNewState(newAst, { nodeId: this.state.cursor.nodeId, offset: offset - 1 }));
+      this.state = freezeState(buildNewState(newAst, boundary(this.requireBoundary().parentId, offset - 1)));
       this.onChange(this.state);
     } else {
       // offset이 0일 때: 부모로 이동하거나 복합 노드 삭제
@@ -806,11 +892,11 @@ export class MathEditor {
           const newAst = rebuildAstWithNewChildren(
             this.state.ast, grandParentInfo.parent.id, grandParentInfo.childKey, newGrandChildren,
           );
-          this.state = freezeState(buildNewState(newAst, { nodeId: grandParentInfo.parent.id, offset: grandParentInfo.index }));
+          this.state = freezeState(buildNewState(newAst, boundary(grandParentInfo.parent.id, grandParentInfo.index)));
         }
       } else {
         // 일반적인 경우: 부모로 이동 (AST 불변, 커서만 변경)
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parent.id, offset: parentInfo.index }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(parent.id, parentInfo.index)));
       }
 
       this.onChange(this.state);
@@ -819,14 +905,32 @@ export class MathEditor {
 
   /** 커서 왼쪽 이동 */
   private moveCursorLeft(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const c = this.state.cursor;
+    if (c.kind === 'intra') {
+      const numNode = findNodeById(this.state.ast, c.nodeId);
+      if (numNode && numNode.type === 'number') {
+        if (c.charOffset > 1) {
+          this.state = freezeState(buildNewState(this.state.ast, intra(numNode.id, c.charOffset - 1)));
+          this.onChange(this.state);
+          return;
+        }
+        const parentInfo = findParent(this.state.ast, numNode.id);
+        if (parentInfo) {
+          this.state = freezeState(buildNewState(this.state.ast, boundary(parentInfo.parent.id, parentInfo.index)));
+          this.onChange(this.state);
+          return;
+        }
+      }
+    }
+
+    const node = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!node) return;
 
     const childKey = getChildKeys(node)[0];
     if (!childKey) {
-      const parentInfo = findParent(this.state.ast, this.state.cursor.nodeId);
+      const parentInfo = findParent(this.state.ast, this.requireBoundary().parentId);
       if (parentInfo) {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(parentInfo.parent.id, parentInfo.index)));
         this.onChange(this.state);
       }
       return;
@@ -834,20 +938,22 @@ export class MathEditor {
 
     const children = getNodeChildArray(node, childKey);
 
-    if (this.state.cursor.offset > 0) {
-      const leftNode = children[this.state.cursor.offset - 1];
+    if (this.requireBoundary().index > 0) {
+      const leftNode = children[this.requireBoundary().index - 1];
       const enterableChild = this.getEnterableChild(leftNode, 'end');
 
       if (enterableChild) {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: enterableChild.length }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(enterableChild.id, enterableChild.length)));
+      } else if (leftNode.type === 'number' && leftNode.value.length >= 2) {
+        this.state = freezeState(buildNewState(this.state.ast, intra(leftNode.id, leftNode.value.length - 1)));
       } else {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset - 1 }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(this.requireBoundary().parentId, this.requireBoundary().index - 1)));
       }
       this.onChange(this.state);
     } else {
-      const parentInfo = findParent(this.state.ast, this.state.cursor.nodeId);
+      const parentInfo = findParent(this.state.ast, this.requireBoundary().parentId);
       if (parentInfo) {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(parentInfo.parent.id, parentInfo.index)));
         this.onChange(this.state);
       }
     }
@@ -855,14 +961,32 @@ export class MathEditor {
 
   /** 커서 오른쪽 이동 */
   private moveCursorRight(): void {
-    const node = findNodeById(this.state.ast, this.state.cursor.nodeId);
+    const c = this.state.cursor;
+    if (c.kind === 'intra') {
+      const numNode = findNodeById(this.state.ast, c.nodeId);
+      if (numNode && numNode.type === 'number') {
+        if (c.charOffset < numNode.value.length - 1) {
+          this.state = freezeState(buildNewState(this.state.ast, intra(numNode.id, c.charOffset + 1)));
+          this.onChange(this.state);
+          return;
+        }
+        const parentInfo = findParent(this.state.ast, numNode.id);
+        if (parentInfo) {
+          this.state = freezeState(buildNewState(this.state.ast, boundary(parentInfo.parent.id, parentInfo.index + 1)));
+          this.onChange(this.state);
+          return;
+        }
+      }
+    }
+
+    const node = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!node) return;
 
     const childKey = getChildKeys(node)[0];
     if (!childKey) {
       const parentInfo = findParent(this.state.ast, node.id);
       if (parentInfo) {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(parentInfo.parent.id, parentInfo.index + 1)));
         this.onChange(this.state);
       }
       return;
@@ -870,20 +994,22 @@ export class MathEditor {
 
     const children = getNodeChildArray(node, childKey);
 
-    if (this.state.cursor.offset < children.length) {
-      const rightNode = children[this.state.cursor.offset];
+    if (this.requireBoundary().index < children.length) {
+      const rightNode = children[this.requireBoundary().index];
       const enterableChild = this.getEnterableChild(rightNode, 'start');
 
       if (enterableChild) {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: enterableChild.id, offset: 0 }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(enterableChild.id, 0)));
+      } else if (rightNode.type === 'number' && rightNode.value.length >= 2) {
+        this.state = freezeState(buildNewState(this.state.ast, intra(rightNode.id, 1)));
       } else {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: this.state.cursor.nodeId, offset: this.state.cursor.offset + 1 }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(this.requireBoundary().parentId, this.requireBoundary().index + 1)));
       }
       this.onChange(this.state);
     } else {
       const parentInfo = findParent(this.state.ast, node.id);
       if (parentInfo) {
-        this.state = freezeState(buildNewState(this.state.ast, { nodeId: parentInfo.parent.id, offset: parentInfo.index + 1 }));
+        this.state = freezeState(buildNewState(this.state.ast, boundary(parentInfo.parent.id, parentInfo.index + 1)));
         this.onChange(this.state);
       }
     }

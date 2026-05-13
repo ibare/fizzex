@@ -352,12 +352,30 @@ export interface LayoutBox {
   baseline: number; // 기준선 (y 좌표 기준)
 }
 
-/** 커서 위치 */
-export interface CursorPosition {
-  /** 현재 위치한 노드의 ID */
-  nodeId: string;
-  /** 노드 내에서의 위치 (0 = 노드 앞, children.length = 노드 끝) */
-  offset: number;
+/**
+ * 커서 위치
+ *
+ * - `boundary`: 부모 노드의 자식 배열 경계에 위치한 커서. parentId의 children
+ *   배열에서 index 위치 (0 = 맨 앞, children.length = 맨 뒤).
+ * - `intra`: 다자릿수 NumberNode 내부 문자 사이에 위치한 커서. nodeId는 해당
+ *   NumberNode의 id, charOffset은 value 문자열 내 위치 (0 = 첫 문자 앞,
+ *   value.length = 마지막 문자 뒤).
+ *
+ * Invariant: `intra` 커서는 오직 value.length >= 2인 NumberNode에 한해 존재.
+ * value 길이가 2 → 1로 감소하는 모든 경로에서 boundary로 강제 전환된다.
+ */
+export type BoundaryCursor = { kind: 'boundary'; parentId: string; index: number };
+export type IntraCursor = { kind: 'intra'; nodeId: string; charOffset: number };
+export type CursorPosition = BoundaryCursor | IntraCursor;
+
+/** boundary 커서 생성 헬퍼 */
+export function boundary(parentId: string, index: number): BoundaryCursor {
+  return { kind: 'boundary', parentId, index };
+}
+
+/** intra 커서 생성 헬퍼 (다자릿수 NumberNode 내부) */
+export function intra(nodeId: string, charOffset: number): IntraCursor {
+  return { kind: 'intra', nodeId, charOffset };
 }
 
 /** 렌더링 설정 */
@@ -373,5 +391,5 @@ export interface RenderConfig {
 export interface EditorState {
   ast: RootNode;
   cursor: CursorPosition;
-  selection: { start: CursorPosition; end: CursorPosition } | null;
+  selection: { start: BoundaryCursor; end: BoundaryCursor } | null;
 }

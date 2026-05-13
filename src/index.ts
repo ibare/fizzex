@@ -228,8 +228,11 @@ export type {
   ErrorNode,
   OpaqueNode,
   CursorPosition,
+  BoundaryCursor,
+  IntraCursor,
   EditorState,
 } from './types';
+export { boundary, intra } from './types';
 
 // PNG 익스포터
 export {

@@ -20,7 +20,14 @@ import type {
   OverlineNode,
   MatrixNode,
   TextNode,
+  BoundaryCursor,
+  CursorPosition,
 } from './types';
+
+function bc(c: CursorPosition): BoundaryCursor {
+  if (c.kind !== 'boundary') throw new Error('expected boundary cursor');
+  return c;
+}
 import {
   createEmptyRoot,
   createInitialState,
@@ -272,8 +279,8 @@ describe('Editor', () => {
       const state = createInitialState();
       expect(state.ast.type).toBe('root');
       expect(state.ast.children).toEqual([]);
-      expect(state.cursor.offset).toBe(0);
-      expect(state.cursor.nodeId).toBe(state.ast.id);
+      expect(bc(state.cursor).index).toBe(0);
+      expect(bc(state.cursor).parentId).toBe(state.ast.id);
     });
 
     it('selection이 null이다', () => {
@@ -301,15 +308,15 @@ describe('Editor', () => {
 
     it('커서를 마지막 위치에 놓는다', () => {
       const state = createStateFromLatex('x+1');
-      expect(state.cursor.nodeId).toBe(state.ast.id);
-      expect(state.cursor.offset).toBe(state.ast.children.length);
+      expect(bc(state.cursor).parentId).toBe(state.ast.id);
+      expect(bc(state.cursor).index).toBe(state.ast.children.length);
     });
 
     it('빈 문자열이면 초기 상태와 유사한 상태를 반환한다', () => {
       const state = createStateFromLatex('');
       expect(state.ast.type).toBe('root');
       expect(state.ast.children).toEqual([]);
-      expect(state.cursor.offset).toBe(0);
+      expect(bc(state.cursor).index).toBe(0);
       expect(state.selection).toBeNull();
     });
   });
@@ -323,7 +330,7 @@ describe('Editor', () => {
 
         expect(state.ast.type).toBe('root');
         expect(state.ast.children).toEqual([]);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).index).toBe(0);
         expect(state.selection).toBeNull();
       });
 
@@ -365,7 +372,7 @@ describe('Editor', () => {
         editor.insertNumber('3');
 
         const state = editor.getState();
-        expect(state.cursor.offset).toBe(1);
+        expect(bc(state.cursor).index).toBe(1);
       });
 
       it('연속 insertNumber로 여러 숫자를 삽입한다', () => {
@@ -380,7 +387,7 @@ describe('Editor', () => {
         expect((state.ast.children[0] as NumberNode).value).toBe('1');
         expect((state.ast.children[1] as NumberNode).value).toBe('2');
         expect((state.ast.children[2] as NumberNode).value).toBe('3');
-        expect(state.cursor.offset).toBe(3);
+        expect(bc(state.cursor).index).toBe(3);
       });
 
       it('insertVariable: 변수 노드를 삽입한다', () => {
@@ -419,8 +426,8 @@ describe('Editor', () => {
         expect(fracNode.type).toBe('frac');
         // 커서가 분모(denominator) row에 위치
         const denRow = fracNode.denominator[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(denRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(denRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertPower: 거듭제곱을 삽입하고 커서를 지수로 이동한다', () => {
@@ -434,8 +441,8 @@ describe('Editor', () => {
         expect(powerNode.type).toBe('power');
         // 커서가 exponent row에 위치
         const expRow = powerNode.exponent[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(expRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(expRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertSubscript: 아래첨자를 삽입하고 커서를 subscript로 이동한다', () => {
@@ -448,8 +455,8 @@ describe('Editor', () => {
         const subNode = state.ast.children[0] as SubscriptNode;
         expect(subNode.type).toBe('subscript');
         const subRow = subNode.subscript[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(subRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(subRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertParen: 괄호를 삽입하고 커서를 내부로 이동한다', () => {
@@ -463,8 +470,8 @@ describe('Editor', () => {
         expect(parenNode.type).toBe('paren');
         expect(parenNode.parenType).toBe('(');
         const contentRow = parenNode.content[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(contentRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(contentRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertAbs: 절댓값을 삽입하고 커서를 내부로 이동한다', () => {
@@ -477,8 +484,8 @@ describe('Editor', () => {
         const absNode = state.ast.children[0] as AbsNode;
         expect(absNode.type).toBe('abs');
         const contentRow = absNode.content[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(contentRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(contentRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertSqrt: 제곱근을 삽입하고 커서를 내부로 이동한다', () => {
@@ -491,8 +498,8 @@ describe('Editor', () => {
         const sqrtNode = state.ast.children[0] as SqrtNode;
         expect(sqrtNode.type).toBe('sqrt');
         const contentRow = sqrtNode.content[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(contentRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(contentRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertFunc: 함수를 삽입하고 커서를 인자로 이동한다', () => {
@@ -506,8 +513,8 @@ describe('Editor', () => {
         expect(funcNode.type).toBe('func');
         expect(funcNode.name).toBe('cos');
         const argRow = funcNode.argument[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(argRow.id);
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).parentId).toBe(argRow.id);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('insertIntegral: 적분을 삽입한다', () => {
@@ -522,7 +529,7 @@ describe('Editor', () => {
         expect(integralNode.differential).toBe('t');
         // 커서가 integrand row에 위치
         const integrandRow = integralNode.integrand[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(integrandRow.id);
+        expect(bc(state.cursor).parentId).toBe(integrandRow.id);
       });
 
       it('insertSum: 시그마를 삽입한다', () => {
@@ -536,7 +543,7 @@ describe('Editor', () => {
         expect(sumNode.type).toBe('sum');
         // 커서가 lower row에 위치
         const lowerRow = sumNode.lower[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(lowerRow.id);
+        expect(bc(state.cursor).parentId).toBe(lowerRow.id);
       });
 
       it('insertLimit: 극한을 삽입한다', () => {
@@ -551,7 +558,7 @@ describe('Editor', () => {
         expect(limitNode.variable).toBe('n');
         // 커서가 approach row에 위치
         const approachRow = limitNode.approach[0] as RowNode;
-        expect(state.cursor.nodeId).toBe(approachRow.id);
+        expect(bc(state.cursor).parentId).toBe(approachRow.id);
       });
 
       it('insertMatrix: 행렬을 삽입한다', () => {
@@ -573,7 +580,7 @@ describe('Editor', () => {
           expect(matrixNode.rows[0]).toHaveLength(2);
           // 커서가 첫 번째 셀에 위치
           const firstCell = matrixNode.rows[0][0] as RowNode;
-          expect(state.cursor.nodeId).toBe(firstCell.id);
+          expect(bc(state.cursor).parentId).toBe(firstCell.id);
         } finally {
           process.env.NODE_ENV = origEnv;
         }
@@ -603,7 +610,7 @@ describe('Editor', () => {
 
         editor.handleKeyDown(createKeyEvent('Backspace'));
         const state = editor.getState();
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).index).toBe(0);
         expect(state.ast.children).toHaveLength(0);
       });
 
@@ -628,7 +635,7 @@ describe('Editor', () => {
         editor.handleKeyDown(createKeyEvent('ArrowLeft'));
         // 오른쪽 노드가 number이므로 복합 노드가 아님 -> offset-1
         const state = editor.getState();
-        expect(state.cursor.offset).toBe(1);
+        expect(bc(state.cursor).index).toBe(1);
       });
 
       it('왼쪽 이동: offset 0에서 더 이동하지 않는다 (또는 부모로 이동)', () => {
@@ -639,7 +646,7 @@ describe('Editor', () => {
 
         const state = editor.getState();
         // root에서 부모가 없으므로 offset 유지 또는 변화 없음
-        expect(state.cursor.offset).toBe(0);
+        expect(bc(state.cursor).index).toBe(0);
       });
 
       it('오른쪽 이동: offset을 1 증가시킨다', () => {
@@ -654,7 +661,7 @@ describe('Editor', () => {
 
         editor.handleKeyDown(createKeyEvent('ArrowRight'));
         const state = editor.getState();
-        expect(state.cursor.offset).toBe(1);
+        expect(bc(state.cursor).index).toBe(1);
       });
 
       it('오른쪽 이동: 끝에서 더 이동하지 않는다 (또는 부모로 이동)', () => {
@@ -666,7 +673,7 @@ describe('Editor', () => {
         editor.handleKeyDown(createKeyEvent('ArrowRight'));
         const state = editor.getState();
         // root에서 부모가 없으므로 offset 유지
-        expect(state.cursor.offset).toBe(1);
+        expect(bc(state.cursor).index).toBe(1);
       });
     });
 
@@ -770,7 +777,7 @@ describe('Editor', () => {
         editor.handleKeyDown(event);
 
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(editor.getState().cursor.offset).toBe(0);
+        expect(bc(editor.getState().cursor).index).toBe(0);
       });
 
       it('ArrowRight로 커서를 이동한다', () => {
@@ -784,7 +791,7 @@ describe('Editor', () => {
         editor.handleKeyDown(event);
 
         expect(event.preventDefault).toHaveBeenCalled();
-        expect(editor.getState().cursor.offset).toBe(1);
+        expect(bc(editor.getState().cursor).index).toBe(1);
       });
 
       it('일반 문자를 변수로 삽입한다', () => {
@@ -809,13 +816,13 @@ describe('Editor', () => {
 
         const stateBefore = editor.getState();
         const childrenBefore = stateBefore.ast.children.length;
-        const cursorBefore = stateBefore.cursor.offset;
+        const cursorBefore = bc(stateBefore.cursor).index;
 
         editor.insertNumber('2');
 
         // 이전 상태가 변경되지 않았다
         expect(stateBefore.ast.children.length).toBe(childrenBefore);
-        expect(stateBefore.cursor.offset).toBe(cursorBefore);
+        expect(bc(stateBefore.cursor).index).toBe(cursorBefore);
 
         // 새 상태는 다르다
         const stateAfter = editor.getState();
@@ -832,6 +839,68 @@ describe('Editor', () => {
         expect(Object.isFrozen(state)).toBe(true);
         expect(Object.isFrozen(state.cursor)).toBe(true);
         expect(Object.isFrozen(state.ast)).toBe(true);
+      });
+    });
+
+    describe('intra 커서 (NumberNode 내부 탐색)', () => {
+      function makeEditor(latex: string): MathEditor {
+        const editor = new MathEditor(vi.fn());
+        editor.setState(createStateFromLatex(latex));
+        return editor;
+      }
+
+      it('두 자리 숫자에서 ArrowLeft 시 intra 진입', () => {
+        const editor = makeEditor('12');
+        // 초기 커서: [12]| (boundary, root 끝)
+        editor.handleKeyDown(createKeyEvent('ArrowLeft'));
+        const cursor = editor.getState().cursor;
+        expect(cursor.kind).toBe('intra');
+        if (cursor.kind === 'intra') {
+          expect(cursor.charOffset).toBe(1);
+        }
+      });
+
+      it('intra 상태에서 숫자 삽입 시 NumberNode value에 문자가 추가된다', () => {
+        const editor = makeEditor('13');
+        editor.handleKeyDown(createKeyEvent('ArrowLeft'));
+        // 커서: 1|3 (intra, offset 1)
+        editor.insertNumber('2');
+        const state = editor.getState();
+        expect(state.ast.children).toHaveLength(1);
+        expect((state.ast.children[0] as NumberNode).value).toBe('123');
+        expect(state.cursor.kind).toBe('intra');
+        if (state.cursor.kind === 'intra') {
+          expect(state.cursor.charOffset).toBe(2);
+        }
+      });
+
+      it('intra 상태에서 Backspace 시 한 글자 제거', () => {
+        const editor = makeEditor('123');
+        editor.handleKeyDown(createKeyEvent('ArrowLeft'));
+        // 커서: 12|3
+        editor.handleKeyDown(createKeyEvent('Backspace'));
+        const state = editor.getState();
+        expect((state.ast.children[0] as NumberNode).value).toBe('13');
+      });
+
+      it('intra 상태에서 한 글자만 남으면 boundary로 정규화', () => {
+        const editor = makeEditor('12');
+        editor.handleKeyDown(createKeyEvent('ArrowLeft'));
+        // 커서: 1|2
+        editor.handleKeyDown(createKeyEvent('Backspace'));
+        const state = editor.getState();
+        expect(state.cursor.kind).toBe('boundary');
+        expect((state.ast.children[0] as NumberNode).value).toBe('2');
+      });
+
+      it('ArrowRight로 intra 끝에 도달하면 boundary로 빠져나감', () => {
+        const editor = makeEditor('12');
+        editor.handleKeyDown(createKeyEvent('ArrowLeft'));
+        // 커서: 1|2 (intra, offset 1, value.length 2 → length-1)
+        editor.handleKeyDown(createKeyEvent('ArrowRight'));
+        const state = editor.getState();
+        expect(state.cursor.kind).toBe('boundary');
+        expect(bc(state.cursor).index).toBe(1);
       });
     });
   });

@@ -6,6 +6,7 @@
 
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import type { EditorState } from '../types';
+import { boundary } from '../types';
 import type { Box, BoxRenderConfig, HBox } from '../box/types';
 import { CanvasFontMetrics } from '../box/font-metrics';
 import { astToBox } from '../box/ast-to-box';
@@ -570,11 +571,11 @@ export function EditorView({
       // 커서 이동
       setState((prev) => ({
         ...prev,
-        cursor: { nodeId: hitBox.sourceId!, offset },
+        cursor: boundary(hitBox.sourceId!, offset),
       }));
       editorRef.current.setState({
         ...editorRef.current.getState(),
-        cursor: { nodeId: hitBox.sourceId!, offset },
+        cursor: boundary(hitBox.sourceId!, offset),
       });
       setCursorVisible(true);
     }

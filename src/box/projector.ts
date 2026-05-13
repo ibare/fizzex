@@ -557,8 +557,8 @@ export class Projector {
 
   /** 커서 위치 계산 */
   getCursorPosition(rootBox: Box, cursor: CursorPosition): { x: number; y: number; height: number } | null {
-    // 커서가 위치한 Box 찾기
-    const targetBox = findBoxBySourceId(rootBox, cursor.nodeId);
+    const lookupId = cursor.kind === 'boundary' ? cursor.parentId : cursor.nodeId;
+    const targetBox = findBoxBySourceId(rootBox, lookupId);
     if (!targetBox) return null;
 
     let cursorX: number;
@@ -570,8 +570,9 @@ export class Projector {
     const defaultDepth = this.config.baseFontSize * 0.25;
 
     if (targetBox.type === 'hbox') {
-      // HBox 내에서 offset 위치의 x 좌표
-      cursorX = getCursorXPosition(targetBox, cursor.offset);
+      // intra는 NumberNode HBox 내 GlyphBox children 사이 위치, boundary는 부모 children 사이 위치 — 둘 다 동일 헬퍼 사용
+      const offset = cursor.kind === 'boundary' ? cursor.index : cursor.charOffset;
+      cursorX = getCursorXPosition(targetBox, offset);
       // 빈 HBox인 경우 기본 높이 사용
       const height = targetBox.height > 0 ? targetBox.height : defaultHeight;
       const depth = targetBox.depth > 0 ? targetBox.depth : defaultDepth;

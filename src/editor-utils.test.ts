@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { RootNode, RowNode, NumberNode, FracNode, MathNode } from './types';
+import { boundary } from './types';
 import {
   findNodePath,
   findNodeByIdReadonly,
@@ -187,7 +188,7 @@ describe('rebuildAstWithNewChildren', () => {
 describe('buildNewState', () => {
   it('새 EditorState 객체 생성', () => {
     const ast = createTestAst();
-    const cursor = { nodeId: 'root', offset: 0 };
+    const cursor = boundary('root', 0);
 
     const state = buildNewState(ast, cursor);
 
@@ -198,10 +199,10 @@ describe('buildNewState', () => {
 
   it('selection 포함하여 생성', () => {
     const ast = createTestAst();
-    const cursor = { nodeId: 'root', offset: 0 };
+    const cursor = boundary('root', 0);
     const selection = {
-      start: { nodeId: 'root', offset: 0 },
-      end: { nodeId: 'root', offset: 1 },
+      start: boundary('root', 0),
+      end: boundary('root', 1),
     };
 
     const state = buildNewState(ast, cursor, selection);
@@ -213,16 +214,16 @@ describe('buildNewState', () => {
 describe('freezeState', () => {
   it('freeze된 state의 cursor 변경 시 예외 발생', () => {
     const ast = createTestAst();
-    const state = freezeState(buildNewState(ast, { nodeId: 'root', offset: 0 }));
+    const state = freezeState(buildNewState(ast, boundary('root', 0)));
 
     expect(() => {
-      (state as { cursor: { offset: number } }).cursor.offset = 999;
+      (state as { cursor: { index: number } }).cursor.index = 999;
     }).toThrow();
   });
 
   it('freeze된 state의 ast children 변경 시 예외 발생', () => {
     const ast = createTestAst();
-    const state = freezeState(buildNewState(ast, { nodeId: 'root', offset: 0 }));
+    const state = freezeState(buildNewState(ast, boundary('root', 0)));
 
     expect(() => {
       (state.ast.children as MathNode[]).push({ id: 'x', type: 'number', value: '0' } as NumberNode);
@@ -239,7 +240,7 @@ describe('freezeState', () => {
     expect(capturedState).not.toBeNull();
 
     expect(() => {
-      capturedState!.cursor.offset = 999;
+      (capturedState!.cursor as { index: number }).index = 999;
     }).toThrow();
   });
 });

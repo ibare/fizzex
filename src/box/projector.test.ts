@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Projector } from './projector';
 import { MockSurface } from './surface';
 import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, BoxRenderConfig } from './types';
+import { boundary } from '../types';
 
 function createMockMetrics(): any {
   return {
@@ -207,7 +208,7 @@ describe('Projector', () => {
       const glyph = makeGlyph('x', { x: 10, y: 20 });
       const rootBox = makeHBox([glyph], { sourceId: 'root_1', x: 0, y: 20 });
 
-      const pos = renderer.getCursorPosition(rootBox, { nodeId: 'root_1', offset: 0 });
+      const pos = renderer.getCursorPosition(rootBox, boundary('root_1', 0));
 
       expect(pos).not.toBeNull();
       expect(pos).toHaveProperty('x');

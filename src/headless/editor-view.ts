@@ -12,6 +12,7 @@ import { Projector } from '../box/projector';
 import type { BoxRenderConfig, Box, HBox } from '../box/types';
 import { astToLatex } from '../latex/ast-to-latex';
 import { MathEditor, createStateFromLatex } from '../editor';
+import { boundary } from '../types';
 import { loadMathFont } from '../fonts';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
 import { resolveBoxRenderConfig } from './types';
@@ -335,7 +336,7 @@ export class DOMEditorView {
       const state = this.editor.getState();
       this.editor.setState({
         ...state,
-        cursor: { nodeId: hitBox.sourceId, offset },
+        cursor: boundary(hitBox.sourceId, offset),
       });
       this.cursorVisible = true;
       this.renderFrame();

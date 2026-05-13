@@ -612,15 +612,18 @@ function findNodeById(node: MathNode, id: string): MathNode | null {
 /** 커서 위치의 이전 노드 가져오기 */
 function getPreviousNode(state: EditorState): MathNode | null {
   const { ast, cursor } = state;
-  const parentNode = findNodeById(ast, cursor.nodeId);
+  if (cursor.kind === 'intra') {
+    return findNodeById(ast, cursor.nodeId);
+  }
+  const parentNode = findNodeById(ast, cursor.parentId);
 
   if (!parentNode) return null;
 
   // row/root 타입에서 children 확인
   if (parentNode.type === 'root' || parentNode.type === 'row') {
     const rowNode = parentNode as RootNode | RowNode;
-    if (cursor.offset > 0 && cursor.offset <= rowNode.children.length) {
-      return rowNode.children[cursor.offset - 1];
+    if (cursor.index > 0 && cursor.index <= rowNode.children.length) {
+      return rowNode.children[cursor.index - 1];
     }
   }
 
@@ -630,7 +633,10 @@ function getPreviousNode(state: EditorState): MathNode | null {
 /** 커서 컨텍스트 분석 */
 export function analyzeCursorContext(state: EditorState): CursorContext {
   const { ast, cursor } = state;
-  const parentNode = findNodeById(ast, cursor.nodeId);
+  if (cursor.kind === 'intra') {
+    return 'after_number';
+  }
+  const parentNode = findNodeById(ast, cursor.parentId);
 
   if (!parentNode) return 'empty';
 
@@ -639,7 +645,7 @@ export function analyzeCursorContext(state: EditorState): CursorContext {
     const rowNode = parentNode as RootNode | RowNode;
 
     // 빈 상태 또는 시작 위치
-    if (rowNode.children.length === 0 || cursor.offset === 0) {
+    if (rowNode.children.length === 0 || cursor.index === 0) {
       // root가 아닌 row면 구조 내부
       if (parentNode.type === 'row') {
         return 'start_of_row';
@@ -648,7 +654,7 @@ export function analyzeCursorContext(state: EditorState): CursorContext {
     }
 
     // 이전 노드 확인
-    const prevNode = rowNode.children[cursor.offset - 1];
+    const prevNode = rowNode.children[cursor.index - 1];
     if (!prevNode) return 'empty';
 
     switch (prevNode.type) {
