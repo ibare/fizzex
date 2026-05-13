@@ -19,8 +19,13 @@ import { buildViewport } from './adapter2d/viewport-build';
 import { createRenderContext } from './adapter2d/render-context';
 import { renderRoot } from './adapter2d/render';
 import { rootContext } from './expr/context';
+import { evalExpr } from './expr/eval-context';
+import { applyUserBindings } from './user-binding-bridge';
+import { evaluateSync } from '../../evaluator';
+import { parseLatex } from '../../latex';
 import type { FrameInfo } from '../../graphics/types';
 import type { VisualizerSpec } from './types/spec';
+import type { MathNode } from '../../types';
 import sineWaveSpec from '../../../registries/default/sine-wave-2d/spec.json';
 
 function makeFrame(over?: Partial<FrameInfo>): FrameInfo {
@@ -173,5 +178,135 @@ describe('sine-wave-2d 런타임 통합 (MVP)', () => {
 
   it('renderer가 2d임을 확인', () => {
     expect(spec.renderer).toBe('2d');
+  });
+});
+
+/**
+ * V4-S3b: mount-2d 가 보장해야 할 evalUser 호스트 함수 계약을 단위 수준에서 검증.
+ * 실제 mount2d 는 Graphics2D / DOM 에 의존하므로 여기서는 동일한 클로저 패턴을
+ * 재구성하여 (userAstsCache + store + evalUser) 표현식 평가가 작동하는지 확인한다.
+ */
+describe('mount-2d evalUser 호스트 함수 (V4-S3b)', () => {
+  function parseAst(latex: string): MathNode {
+    const { ast, hasErrors } = parseLatex(latex);
+    if (hasErrors) throw new Error(`fixture parse failed: ${latex}`);
+    return ast;
+  }
+
+  const makeMiniSpec = (): VisualizerSpec =>
+    validateSpec({
+      $schema: 'fizzex-visualizer/v1',
+      id: 'mini',
+      catalog: 'test/mini',
+      name: { en: 'mini', ko: 'mini' },
+      description: { en: 'mini', ko: 'mini' },
+      renderer: '2d',
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'default' },
+          params: { f: 0, x: 0 },
+        },
+      ],
+      viewports: {
+        plot: { kind: 'time-value', xMin: '0', xMax: '1', yMin: '-1', yMax: '1' },
+      },
+      userBindings: [
+        { name: 'f', outputKind: 'scalar', required: true },
+      ],
+      root: { kind: 'group', children: [] },
+    });
+
+  it('applyUserBindings 결과의 userAsts 를 캐시에 받아 evalUser 로 재평가', () => {
+    const spec = makeMiniSpec();
+    const store = createStateStore({
+      stateDecls: spec.state,
+      initialParams: { f: 0, x: 0 },
+    });
+
+    let userAstsCache: Readonly<Record<string, MathNode>> = {};
+    const evalUser = (name: string, variable: string, value: number): number | undefined => {
+      const ast = userAstsCache[name];
+      if (!ast) return undefined;
+      return evaluateSync(ast, { ...store.snapshot().params, [variable]: value });
+    };
+
+    const result = applyUserBindings(spec, { f: parseAst('x^2') }, store);
+    userAstsCache = result.userAsts;
+
+    expect(evalUser('f', 'x', 0)).toBe(0);
+    expect(evalUser('f', 'x', 3)).toBe(9);
+    expect(evalUser('f', 'x', -2)).toBe(4);
+  });
+
+  it('표현식 컨텍스트에서 evalUser 호출 가능 (functionCurve fn 시뮬레이션)', () => {
+    const spec = makeMiniSpec();
+    const store = createStateStore({
+      stateDecls: spec.state,
+      initialParams: { f: 0, x: 0 },
+    });
+
+    let userAstsCache: Readonly<Record<string, MathNode>> = {};
+    const evalUser = (name: string, variable: string, value: number): number | undefined => {
+      const ast = userAstsCache[name];
+      if (!ast) return undefined;
+      return evaluateSync(ast, { ...store.snapshot().params, [variable]: value });
+    };
+
+    const result = applyUserBindings(spec, { f: parseAst('x^2 + 1') }, store);
+    userAstsCache = result.userAsts;
+
+    const snap = store.snapshot();
+    const frame: FrameInfo = makeFrame();
+    const locals: Record<string, unknown> = {
+      ...snap.params,
+      ...snap.bindings,
+      evalUser,
+      params: snap.params,
+      state: snap.state,
+      bindings: snap.bindings,
+      frame,
+    };
+    const rc = createRenderContext({ exprCtx: rootContext(locals), frame });
+
+    expect(evalExpr('evalUser("f", "x", 2)', rc)).toBe(5);
+    expect(evalExpr('evalUser("f", "x", 0)', rc)).toBe(1);
+  });
+
+  it('handle.applyUserBindings 재호출 시 캐시가 새 AST 로 교체', () => {
+    const spec = makeMiniSpec();
+    const store = createStateStore({
+      stateDecls: spec.state,
+      initialParams: { f: 0, x: 0 },
+    });
+
+    let userAstsCache: Readonly<Record<string, MathNode>> = {};
+    const evalUser = (name: string, variable: string, value: number): number | undefined => {
+      const ast = userAstsCache[name];
+      if (!ast) return undefined;
+      return evaluateSync(ast, { ...store.snapshot().params, [variable]: value });
+    };
+
+    userAstsCache = applyUserBindings(spec, { f: parseAst('x^2') }, store).userAsts;
+    expect(evalUser('f', 'x', 3)).toBe(9);
+
+    userAstsCache = applyUserBindings(spec, { f: parseAst('2*x + 1') }, store).userAsts;
+    expect(evalUser('f', 'x', 3)).toBe(7);
+  });
+
+  it('알 수 없는 binding 이름 → undefined', () => {
+    const spec = makeMiniSpec();
+    const store = createStateStore({
+      stateDecls: spec.state,
+      initialParams: { f: 0, x: 0 },
+    });
+    let userAstsCache: Readonly<Record<string, MathNode>> = {};
+    const evalUser = (name: string, variable: string, value: number): number | undefined => {
+      const ast = userAstsCache[name];
+      if (!ast) return undefined;
+      return evaluateSync(ast, { ...store.snapshot().params, [variable]: value });
+    };
+    userAstsCache = applyUserBindings(spec, { f: parseAst('x^2') }, store).userAsts;
+    expect(evalUser('g', 'x', 1)).toBeUndefined();
   });
 });

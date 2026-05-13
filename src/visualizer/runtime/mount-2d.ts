@@ -16,8 +16,10 @@
 import type { VisualizerSpec } from './types/spec';
 import type { RendererKind } from './types/spec';
 import type { SceneSpec } from './types/scene';
+import type { MathNode } from '../../types';
 import type { FrameInfo, Theme, Viewport2D } from '../../graphics/types';
 import { Graphics2D } from '../../graphics/Graphics2D';
+import { evaluateSync } from '../../evaluator';
 import { createStateStore, type StateStore } from './state';
 import { createSceneController, type SceneController } from './scene';
 import { createBaselineSnapshot } from './baseline';
@@ -96,9 +98,24 @@ export function mount2d(
     initialParams: baseline.params,
   });
 
+  // 사용자 LaTeX AST 캐시 — derivatives / evalUser 가 매 프레임 재평가하기 위한 진리.
+  // applyUserBindings 가 반환하는 userAsts 를 통째로 교체 (V4-S3a).
+  let userAstsCache: Readonly<Record<string, MathNode>> = {};
+
   if (opts.userBindings) {
-    applyUserBindings(spec, opts.userBindings, store);
+    const result = applyUserBindings(spec, opts.userBindings, store);
+    userAstsCache = result.userAsts;
   }
+
+  // evalUser(name, variable, value) — 카탈로그 fn 표현식에서 사용자 식을 도메인
+  // 전체에 대해 재평가하기 위한 호스트 함수. 캐시된 AST 를 슬라이더 컨텍스트
+  // (store.params) 위에 `[variable]: value` 를 덮어쓴 bindings 로 evaluateSync (V4-S3b).
+  const evalUser = (name: string, variable: string, value: number): number | undefined => {
+    const ast = userAstsCache[name];
+    if (!ast) return undefined;
+    return evaluateSync(ast, { ...store.snapshot().params, [variable]: value });
+  };
+  const extraLocals: Record<string, unknown> = { evalUser };
 
   const sceneCtrl = createSceneController(spec.scenes, store, initialSceneId);
 
@@ -117,7 +134,7 @@ export function mount2d(
         dt: scaledDt,
         isDark: theme.current === 'dark',
       };
-      const rc = buildFrameContext(spec, store, sceneCtrl, frameInfo);
+      const rc = buildFrameContext(spec, store, sceneCtrl, frameInfo, extraLocals);
       currentRc = rc;
 
       try {
@@ -127,7 +144,7 @@ export function mount2d(
         return;
       }
 
-      const rcAfter = buildFrameContext(spec, store, sceneCtrl, frameInfo);
+      const rcAfter = buildFrameContext(spec, store, sceneCtrl, frameInfo, extraLocals);
       currentRc = rcAfter;
 
       try {
@@ -179,7 +196,9 @@ export function mount2d(
       timeScale.current = scale;
     },
     applyUserBindings(inputs) {
-      return applyUserBindings(spec, inputs, store);
+      const result = applyUserBindings(spec, inputs, store);
+      userAstsCache = result.userAsts;
+      return result;
     },
     resize(w, h) {
       graphics.resize(w, h);
@@ -203,6 +222,7 @@ function buildFrameContext(
   store: StateStore,
   sceneCtrl: SceneController,
   frame: FrameInfo,
+  extraLocals: Record<string, unknown>,
 ): RenderContext {
   const snap = store.snapshot();
   const activeScene = sceneCtrl.getActiveScene();
@@ -211,6 +231,7 @@ function buildFrameContext(
     // bindings 가 params 위에 덮어쓴다 (V3): user 가 명시한 LaTeX 바인딩이
     // scene preset 보다 우선. 평면 머지로 `\omega` 등 카논화된 변수명을 직접 참조.
     ...snap.bindings,
+    ...extraLocals,
     params: snap.params,
     state: snap.state,
     bindings: snap.bindings,
