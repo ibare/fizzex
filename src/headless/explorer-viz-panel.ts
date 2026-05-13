@@ -49,6 +49,14 @@ export class VizPanel {
   /** 캡처 피드백 플래시 타이머. destroy 시 정리 대상 */
   private flashTimer: ReturnType<typeof setTimeout> | null = null;
 
+  /**
+   * 도메인 가드 시각언어 오버레이.
+   * 사용자 바인딩 평가가 실패(domain/divergent/unsupported/eval-failed)했을 때만
+   * 표시되며, 정상 복귀 시 hide 한다. lazy 생성 — 한 번도 invalid 가 안 떴으면 만들지 않는다.
+   */
+  private invalidOverlay: HTMLDivElement | null = null;
+  private invalidLabel: HTMLDivElement | null = null;
+
   private controller: ExplorerVisualizerController;
   private sceneChips: ExplorerSceneChips | null = null;
 
@@ -300,6 +308,63 @@ export class VizPanel {
 
   get instance(): CreatedVisualizer | null {
     return this.controller.instance;
+  }
+
+  /**
+   * 도메인 가드 시각언어를 설정한다.
+   *
+   * - reason 이 null 이면 오버레이 숨김 (정상 상태).
+   * - reason 이 문자열이면 점선 빨간 테두리 + 음영 + 하단 라벨로 invalid 상태를 알린다.
+   *
+   * 마지막 유효 프레임을 stale 표시 없이 그대로 둔다 — Visualizer 는 직전 상태를 계속 보여주고,
+   * 이 오버레이가 "지금 보이는 그림은 새 입력 기준이 아니라 마지막 유효 입력 기준" 임을 명시한다.
+   */
+  setInvalidStatus(reason: string | null): void {
+    if (this.destroyed) return;
+
+    if (reason === null) {
+      if (this.invalidOverlay) this.invalidOverlay.style.display = 'none';
+      return;
+    }
+
+    if (!this.invalidOverlay) {
+      this.invalidOverlay = document.createElement('div');
+      Object.assign(this.invalidOverlay.style, {
+        position: 'absolute',
+        inset: '0',
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        padding: '10px',
+        pointerEvents: 'none',
+        boxSizing: 'border-box',
+        border: '2px dashed rgba(220, 38, 38, 0.55)',
+        background: this.isDark
+          ? 'rgba(127, 29, 29, 0.10)'
+          : 'rgba(254, 226, 226, 0.30)',
+      });
+      this.invalidLabel = document.createElement('div');
+      Object.assign(this.invalidLabel.style, {
+        padding: '5px 10px',
+        borderRadius: '6px',
+        background: this.isDark
+          ? 'rgba(127, 29, 29, 0.88)'
+          : 'rgba(220, 38, 38, 0.88)',
+        color: '#fff',
+        fontSize: '12px',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        maxWidth: '92%',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
+      });
+      this.invalidOverlay.appendChild(this.invalidLabel);
+      this.vizContainer.appendChild(this.invalidOverlay);
+    }
+
+    this.invalidOverlay.style.display = 'flex';
+    if (this.invalidLabel) this.invalidLabel.textContent = `도메인 가드: ${reason}`;
   }
 
   /** 창 리사이즈 시 패널 위치/크기를 화면 경계 안으로 보정 */

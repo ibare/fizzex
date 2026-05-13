@@ -27,7 +27,12 @@ import { analyzeBindings } from '../evaluator/analyze';
 import type { BindingAnalysis } from '../evaluator/analyze';
 import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
 import type { VisualizerRef } from '../analyzer/semantic/types';
-import type { UserBindingInputs, VisualizerRegistry } from '../visualizer';
+import type {
+  ApplyUserBindingsResult,
+  SkipReason,
+  UserBindingInputs,
+  VisualizerRegistry,
+} from '../visualizer';
 import { VizPanel } from './explorer-viz-panel';
 import { getControlType, buildInlineControlConfig } from './inline-control-types';
 import type { InlineControlConfig } from './inline-control-types';
@@ -505,7 +510,9 @@ export class ExplorerOverlay {
     panel.init().then((ok) => {
       if (!ok || this.destroyed) return;
       // 초기 userBindings 주입 — derivatives 가 비어 있지 않도록 (V5-S3).
-      panel.instance?.applyUserBindings(this.userBindingInputs);
+      // 평가 결과를 받아 도메인 가드 시각언어를 동기화 (V5-S4).
+      const result = panel.instance?.applyUserBindings(this.userBindingInputs);
+      panel.setInvalidStatus(result ? formatBindingFault(result) : null);
       // primary(배열 0번) 패널만 값 배지 갱신용 subscribe와 연결한다.
       if (isFirstPanel && this.vizPanels[0] === panel) {
         this.valueBadgeUnsub?.();
@@ -1055,7 +1062,9 @@ export class ExplorerOverlay {
       const inst = this.primaryInstance;
       if (inst) {
         inst.setParam(id, value);
-        inst.applyUserBindings(this.userBindingInputs);
+        // 슬라이더 이동 시 derivatives 재평가. 결과로 도메인 가드 시각언어를 갱신한다 (V5-S4).
+        const result = inst.applyUserBindings(this.userBindingInputs);
+        this.vizPanels[0]?.setInvalidStatus(formatBindingFault(result));
       } else {
         this.localParamValues[id] = value;
       }
@@ -1564,5 +1573,46 @@ export class ExplorerOverlay {
     }
 
     ctx.restore();
+  }
+}
+
+// ===========================================================================
+// 도메인 가드 시각언어 — 사용자 바인딩 평가 실패를 사람이 읽을 메시지로 변환
+// ===========================================================================
+
+/**
+ * applyUserBindings 결과를 도메인 가드 메시지로 환산한다.
+ *
+ * 평가 실패가 없거나 미바인딩(unbound) 만 있으면 null (정상).
+ * unbound 는 "사용자가 아직 이 슬롯에 식을 매핑하지 않음" 일 뿐이라 실패가 아니다.
+ * 의미 있는 실패(domain/divergent/unsupported/eval-failed)만 메시지로 노출한다.
+ *
+ * 여러 슬롯이 동시에 실패하면 첫 항목만 표시한다 — 사용자가 슬라이더를 움직이는 동안
+ * 다중 메시지로 가독성을 해치지 않는 편이 낫다.
+ */
+function formatBindingFault(result: ApplyUserBindingsResult): string | null {
+  const meaningful = result.skipped.filter((s) => s.reason !== 'unbound');
+  if (meaningful.length > 0) {
+    return formatSkipReason(meaningful[0].name, meaningful[0].reason);
+  }
+  const derivIssue = result.skippedDerivatives.find((d) => d.reason === 'eval-failed');
+  if (derivIssue) return `${derivIssue.binding} 도함수 평가 실패`;
+  return null;
+}
+
+function formatSkipReason(name: string, reason: SkipReason): string {
+  switch (reason) {
+    case 'domain': return `${name} 값이 정의역을 벗어남`;
+    case 'divergent': return `${name} 값이 발산`;
+    case 'unsupported': return `${name} 의 형식이 시각화에서 지원되지 않음`;
+    case 'eval-failed': return `${name} 평가 실패`;
+    // 'unbound' 는 formatBindingFault 에서 사전 필터되어 도달하지 않는다.
+    // 새 SkipReason 이 추가되면 컴파일 에러로 알려주기 위해 exhaustive switch.
+    case 'unbound': return `${name} 미바인딩`;
+    default: {
+      const _exhaustive: never = reason;
+      void _exhaustive;
+      return `${name} 평가 불가`;
+    }
   }
 }
