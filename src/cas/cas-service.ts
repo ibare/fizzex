@@ -314,41 +314,6 @@ export async function integrate(
 }
 
 /**
- * 수치 계산 (변수 값 대입)
- *
- * @example
- * evaluate('x^2 + 1', { x: 3 }) → '10'
- */
-export async function evaluate(
-  latex: string,
-  variables: Record<string, number> = {}
-): Promise<CASResult> {
-  const result = createResult('evaluate', latex);
-
-  try {
-    const nerd = await ensureNerdamer();
-    const expr = latexToNerdamer(latex);
-
-    // 변수 값 대입
-    const subs: Record<string, string> = {};
-    for (const [key, value] of Object.entries(variables)) {
-      subs[key] = String(value);
-    }
-
-    const evaluated = nerd(expr, subs).evaluate();
-    const resultLatex = exprToLatex(evaluated, nerd);
-
-    result.success = true;
-    result.resultLatex = resultLatex;
-    result.resultAst = parseResultToAst(resultLatex);
-  } catch (error) {
-    result.error = error instanceof Error ? error.message : '계산 실패';
-  }
-
-  return result;
-}
-
-/**
  * 주 변수 자동 감지
  * x, y, z, t 순서로 우선 탐지
  */
@@ -404,8 +369,6 @@ export async function performOperation(
       return diff(latex, options as DiffOptions);
     case 'integrate':
       return integrate(latex, options as IntegrateOptions);
-    case 'evaluate':
-      return evaluate(latex);
     default:
       return createResult(operation, latex, {
         error: `지원하지 않는 연산: ${operation}`,

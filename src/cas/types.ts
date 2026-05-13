@@ -13,8 +13,7 @@ export type CASOperation =
   | 'factor' // 인수분해
   | 'solve' // 방정식 풀이
   | 'diff' // 미분
-  | 'integrate' // 적분
-  | 'evaluate'; // 수치 계산
+  | 'integrate'; // 적분
 
 /**
  * CAS 연산 결과
@@ -93,7 +92,4 @@ export interface CASService {
 
   /** 적분 */
   integrate(latex: string, options?: IntegrateOptions): CASResult;
-
-  /** 수치 계산 */
-  evaluate(latex: string, variables?: Record<string, number>): CASResult;
 }

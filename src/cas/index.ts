@@ -37,7 +37,6 @@ export {
   solve,
   diff,
   integrate,
-  evaluate,
   performOperation,
 } from './cas-service';
 

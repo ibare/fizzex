@@ -6,7 +6,6 @@ import {
   solve,
   diff,
   integrate,
-  evaluate,
   performOperation,
 } from './cas-service';
 import { parseLatex } from '../latex';
@@ -150,31 +149,6 @@ describe('CAS Service', () => {
     it('operation이 integrate이다', async () => {
       const result = await integrate('x');
       expect(result.operation).toBe('integrate');
-    });
-  });
-
-  describe('evaluate', () => {
-    it('변수 값을 대입하여 계산한다', async () => {
-      const result = await evaluate('x^{2} + 1', { x: 3 });
-      expect(result.success).toBe(true);
-      expect(result.resultLatex).toBeDefined();
-    });
-
-    it('여러 변수를 대입할 수 있다', async () => {
-      const result = await evaluate('x + y', { x: 2, y: 3 });
-      expect(result.success).toBe(true);
-      expect(result.resultLatex).toBeDefined();
-    });
-
-    it('변수 없이 수식을 계산할 수 있다', async () => {
-      const result = await evaluate('2 + 3');
-      expect(result.success).toBe(true);
-      expect(result.resultLatex).toBeDefined();
-    });
-
-    it('operation이 evaluate이다', async () => {
-      const result = await evaluate('x', { x: 1 });
-      expect(result.operation).toBe('evaluate');
     });
   });
 
