@@ -569,6 +569,25 @@ export class MathEditor {
         }
       }
     }
+    // 좌측 sibling이 NumberNode면 그 value에 머지 (페르소나: 연속 키 입력은 하나의 숫자)
+    if (c.kind === 'boundary' && c.index > 0) {
+      const parent = findNodeById(this.state.ast, c.parentId);
+      if (parent) {
+        const childKey = getChildKeys(parent)[0];
+        if (childKey) {
+          const siblings = getNodeChildArray(parent, childKey);
+          const leftNode = siblings[c.index - 1];
+          if (leftNode && leftNode.type === 'number') {
+            const updated: NumberNode = { ...leftNode, value: leftNode.value + digit };
+            const newSiblings = spliceChildren(siblings, c.index - 1, 1, updated);
+            const newAst = rebuildAstWithNewChildren(this.state.ast, parent.id, childKey, newSiblings);
+            this.state = freezeState(buildNewState(newAst, boundary(parent.id, c.index)));
+            this.onChange(this.state);
+            return;
+          }
+        }
+      }
+    }
     this.insertNodeAtCursor(createNumber(digit));
   }
 

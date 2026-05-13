@@ -375,7 +375,7 @@ describe('Editor', () => {
         expect(bc(state.cursor).index).toBe(1);
       });
 
-      it('연속 insertNumber로 여러 숫자를 삽입한다', () => {
+      it('연속 insertNumber는 단일 NumberNode로 머지된다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
         editor.insertNumber('1');
@@ -383,11 +383,9 @@ describe('Editor', () => {
         editor.insertNumber('3');
 
         const state = editor.getState();
-        expect(state.ast.children).toHaveLength(3);
-        expect((state.ast.children[0] as NumberNode).value).toBe('1');
-        expect((state.ast.children[1] as NumberNode).value).toBe('2');
-        expect((state.ast.children[2] as NumberNode).value).toBe('3');
-        expect(bc(state.cursor).index).toBe(3);
+        expect(state.ast.children).toHaveLength(1);
+        expect((state.ast.children[0] as NumberNode).value).toBe('123');
+        expect(bc(state.cursor).index).toBe(1);
       });
 
       it('insertVariable: 변수 노드를 삽입한다', () => {
@@ -591,15 +589,15 @@ describe('Editor', () => {
       it('커서 앞 일반 노드를 삭제한다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
-        editor.insertNumber('1');
-        editor.insertNumber('2');
-        // '1', '2' 삽입 후 커서 offset=2
+        editor.insertVariable('x');
+        editor.insertOperator('+');
+        // 'x','+' 삽입 후 커서 offset=2
 
         editor.handleKeyDown(createKeyEvent('Backspace'));
 
         const state = editor.getState();
         expect(state.ast.children).toHaveLength(1);
-        expect((state.ast.children[0] as NumberNode).value).toBe('1');
+        expect(state.ast.children[0].type).toBe('variable');
       });
 
       it('삭제 후 커서가 왼쪽으로 이동한다', () => {
@@ -628,12 +626,12 @@ describe('Editor', () => {
       it('왼쪽 이동: offset을 1 감소시킨다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
-        editor.insertNumber('1');
-        editor.insertNumber('2');
+        editor.insertVariable('x');
+        editor.insertVariable('y');
         // offset=2
 
         editor.handleKeyDown(createKeyEvent('ArrowLeft'));
-        // 오른쪽 노드가 number이므로 복합 노드가 아님 -> offset-1
+        // 오른쪽 노드가 variable(단일 문자)이므로 복합 노드가 아님 -> offset-1
         const state = editor.getState();
         expect(bc(state.cursor).index).toBe(1);
       });
@@ -652,8 +650,8 @@ describe('Editor', () => {
       it('오른쪽 이동: offset을 1 증가시킨다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
-        editor.insertNumber('1');
-        editor.insertNumber('2');
+        editor.insertVariable('x');
+        editor.insertVariable('y');
         // offset=2, 커서를 맨 앞으로 이동
         editor.handleKeyDown(createKeyEvent('ArrowLeft'));
         editor.handleKeyDown(createKeyEvent('ArrowLeft'));
@@ -812,13 +810,13 @@ describe('Editor', () => {
       it('편집 후 이전 상태가 변경되지 않는다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
-        editor.insertNumber('1');
+        editor.insertVariable('x');
 
         const stateBefore = editor.getState();
         const childrenBefore = stateBefore.ast.children.length;
         const cursorBefore = bc(stateBefore.cursor).index;
 
-        editor.insertNumber('2');
+        editor.insertVariable('y');
 
         // 이전 상태가 변경되지 않았다
         expect(stateBefore.ast.children.length).toBe(childrenBefore);

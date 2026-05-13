@@ -2,8 +2,8 @@
  * P0 골든 마스터 — 편집기 키 시퀀스 현재 동작 스냅샷
  *
  * 키 입력 → AST 변환의 현 동작을 캡처.
- * [BUG] 표시는 P2~P4에서 의도적으로 변경될 동작.
- * [OK]  표시는 전 구간 유지되어야 하는 불변.
+ * [OK] 표시는 전 구간 유지되어야 하는 불변.
+ * (P6에서 NumberNode 머지 도입으로 [BUG] 항목들이 [OK]로 전환됨.)
  */
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { MathEditor } from '../../editor';
@@ -33,20 +33,22 @@ function topLevel(editor: MathEditor): MathNode[] {
 }
 
 describe('P0 골든 — 편집기 키 입력: 숫자', () => {
-  it('[BUG] "1","0" 연속 입력이 NumberNode 두 개 (P3 이후: 단일 NumberNode("10"))', () => {
+  it('[OK] "1","0" 연속 입력은 단일 NumberNode("10")으로 머지된다', () => {
     const editor = new MathEditor(() => undefined);
     press(editor, ['1', '0']);
     const c = topLevel(editor);
-    expect(c.length).toBe(2);
+    expect(c.length).toBe(1);
     expect(c[0].type).toBe('number');
-    expect((c[0] as MathNode & { value: string }).value).toBe('1');
-    expect((c[1] as MathNode & { value: string }).value).toBe('0');
+    expect((c[0] as MathNode & { value: string }).value).toBe('10');
   });
 
-  it('[BUG] "3",".","1","4" 입력이 4개 노드 (P3 이후: 단일 NumberNode("3.14"))', () => {
+  it('[OK] "3",".","1","4" 입력은 단일 NumberNode("3.14")로 머지된다', () => {
     const editor = new MathEditor(() => undefined);
     press(editor, ['3', '.', '1', '4']);
-    expect(topLevel(editor).length).toBe(4);
+    const c = topLevel(editor);
+    expect(c.length).toBe(1);
+    expect(c[0].type).toBe('number');
+    expect((c[0] as MathNode & { value: string }).value).toBe('3.14');
   });
 });
 
