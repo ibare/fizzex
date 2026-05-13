@@ -190,3 +190,61 @@ describe('validateSpec — camera (3D)', () => {
     expect(() => validateSpec(bad)).toThrow();
   });
 });
+
+describe('validateSpec — userBindings', () => {
+  it('accepts userBindings with scalar bindings matching scene params', () => {
+    const spec = validateSpec({
+      ...baseValidSpec,
+      userBindings: [
+        { name: 'A', outputKind: 'scalar', required: true },
+      ],
+    });
+    expect(spec.userBindings?.[0].name).toBe('A');
+  });
+
+  it('accepts optional binding even when missing in scene params', () => {
+    const spec = validateSpec({
+      ...baseValidSpec,
+      userBindings: [
+        { name: 'A', outputKind: 'scalar', required: true },
+        { name: 'phi', outputKind: 'scalar', required: false },
+      ],
+    });
+    expect(spec.userBindings?.length).toBe(2);
+  });
+
+  it('rejects duplicate userBindings.name', () => {
+    expect(() =>
+      validateSpec({
+        ...baseValidSpec,
+        userBindings: [
+          { name: 'A', outputKind: 'scalar', required: true },
+          { name: 'A', outputKind: 'scalar', required: true },
+        ],
+      }),
+    ).toThrow(/duplicate userBindings\.name/);
+  });
+
+  it('rejects required binding name missing in scenes[].params', () => {
+    expect(() =>
+      validateSpec({
+        ...baseValidSpec,
+        userBindings: [
+          { name: 'A', outputKind: 'scalar', required: true },
+          { name: 'omega', outputKind: 'scalar', required: true },
+        ],
+      }),
+    ).toThrow(/required userBinding "omega" missing/);
+  });
+
+  it('rejects invalid outputKind', () => {
+    expect(() =>
+      validateSpec({
+        ...baseValidSpec,
+        userBindings: [
+          { name: 'A', outputKind: 'bogus', required: true },
+        ],
+      }),
+    ).toThrow();
+  });
+});

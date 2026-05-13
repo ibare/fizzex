@@ -10,6 +10,13 @@
   },
   "renderer": "2d",
 
+  "userBindings": [
+    { "name": "P", "outputKind": "scalar", "required": true },
+    { "name": "r", "outputKind": "scalar", "required": true },
+    { "name": "n", "outputKind": "scalar", "required": true },
+    { "name": "t", "outputKind": "scalar", "required": true }
+  ],
+
   "scenes": [
     {
       "id": "savings",

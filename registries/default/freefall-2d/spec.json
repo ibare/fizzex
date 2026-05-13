@@ -10,6 +10,12 @@
   },
   "renderer": "2d",
 
+  "userBindings": [
+    { "name": "v_0", "outputKind": "scalar", "required": true },
+    { "name": "a", "outputKind": "scalar", "required": true },
+    { "name": "t", "outputKind": "scalar", "required": true }
+  ],
+
   "scenes": [
     {
       "id": "earth",

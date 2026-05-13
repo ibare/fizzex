@@ -18,6 +18,7 @@ import type { ViewportSpec } from './viewport';
 import type { ThemeSpec } from './theme';
 import type { DisplayOptionId } from './display-options';
 import type { CameraSpec } from './camera';
+import type { UserBindingSpec } from './user-binding';
 
 export type RendererKind = '2d' | '3d';
 
@@ -31,6 +32,12 @@ export interface VisualizerSpec {
   renderer: RendererKind;
 
   displayOptions?: DisplayOptionId[];
+
+  /**
+   * 사용자 LaTeX 수식 변수 → 카탈로그 슬롯 매핑 (설계 §14.5, V1).
+   * 각 항목은 scenes[].params 의 키 하나에 대응한다.
+   */
+  userBindings?: UserBindingSpec[];
 
   scenes: SceneSpec[];
 

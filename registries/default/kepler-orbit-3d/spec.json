@@ -10,6 +10,10 @@
   },
   "renderer": "3d",
 
+  "userBindings": [
+    { "name": "a", "outputKind": "scalar", "required": true }
+  ],
+
   "scenes": [
     {
       "id": "iss",

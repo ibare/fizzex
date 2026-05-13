@@ -140,6 +140,15 @@ const localFormulaSchema = z.object({
   expr: exprString,
 });
 
+const outputKindSchema = z.enum(['scalar', 'matrix', 'complex']);
+
+const userBindingSchema = z.object({
+  name: z.string().min(1),
+  description: i18nTextSchema.optional(),
+  outputKind: outputKindSchema,
+  required: z.boolean(),
+});
+
 const themeSchema = z
   .object({
     brand: exprString.optional(),
@@ -197,6 +206,7 @@ export const visualizerSpecSchema = z
     displayOptions: z
       .array(z.enum(DISPLAY_OPTION_IDS as [typeof DISPLAY_OPTION_IDS[number], ...typeof DISPLAY_OPTION_IDS[number][]]))
       .optional(),
+    userBindings: z.array(userBindingSchema).optional(),
     scenes: z.array(sceneSchema).min(1, 'at least one scene required'),
     localFormulas: z.array(localFormulaSchema).optional(),
     state: z.array(stateDeclSchema).optional(),
@@ -246,6 +256,35 @@ export const visualizerSpecSchema = z
           });
         }
         stateIds.add(s.id);
+      }
+    }
+
+    if (spec.userBindings) {
+      const bindingNames = new Set<string>();
+      for (const [i, b] of spec.userBindings.entries()) {
+        if (bindingNames.has(b.name)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['userBindings', i, 'name'],
+            message: `duplicate userBindings.name: ${b.name}`,
+          });
+        }
+        bindingNames.add(b.name);
+      }
+
+      // required: true 인 binding 의 name 은 모든 scene 의 params 에 존재해야 한다
+      for (const [bi, b] of spec.userBindings.entries()) {
+        if (!b.required) continue;
+        for (const [si, scene] of spec.scenes.entries()) {
+          const params = (scene.params ?? {}) as Record<string, number>;
+          if (!(b.name in params)) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              path: ['userBindings', bi, 'name'],
+              message: `required userBinding "${b.name}" missing in scenes[${si}].params (id: ${scene.id})`,
+            });
+          }
+        }
       }
     }
 

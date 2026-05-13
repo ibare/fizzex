@@ -10,6 +10,11 @@
   },
   "renderer": "2d",
 
+  "userBindings": [
+    { "name": "a", "outputKind": "scalar", "required": true },
+    { "name": "b", "outputKind": "scalar", "required": true }
+  ],
+
   "scenes": [
     {
       "id": "explore",

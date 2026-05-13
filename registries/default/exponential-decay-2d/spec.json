@@ -10,6 +10,11 @@
   },
   "renderer": "2d",
 
+  "userBindings": [
+    { "name": "N_0", "outputKind": "scalar", "required": true },
+    { "name": "r", "outputKind": "scalar", "required": true }
+  ],
+
   "scenes": [
     {
       "id": "caffeine",

@@ -10,6 +10,12 @@
   },
   "renderer": "2d",
 
+  "userBindings": [
+    { "name": "A", "outputKind": "scalar", "required": true },
+    { "name": "\\omega", "outputKind": "scalar", "required": true },
+    { "name": "\\varphi", "outputKind": "scalar", "required": true }
+  ],
+
   "displayOptions": ["timeScale"],
 
   "scenes": [
