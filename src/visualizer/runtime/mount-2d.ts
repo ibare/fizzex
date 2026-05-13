@@ -29,6 +29,8 @@ import { buildViewport } from './adapter2d/viewport-build';
 import { createRenderContext, type RenderContext } from './adapter2d/render-context';
 import { rootContext } from './expr/context';
 import { validateSpec } from './validator';
+import { applyUserBindings, type ApplyUserBindingsResult } from './user-binding-bridge';
+import type { Bindings } from '../../evaluator';
 
 export interface Mount2DOptions {
   width: number;
@@ -38,6 +40,11 @@ export interface Mount2DOptions {
   initialSceneId?: string;
   /** 카탈로그에서 추출된 parameter 기본값. scene preset과 머지된다 (scene 우선). */
   catalogDefaults?: Readonly<Record<string, number>>;
+  /**
+   * 사용자 LaTeX 수식 변수 값. spec.userBindings 와 결합해 mount 직후
+   * 자동 주입된다 (설계 통합 V2). 슬라이더 갱신 시 `applyUserBindings()` 로 재호출.
+   */
+  userBindings?: Bindings;
   /**
    * 재생 배속 승수. displayOptions에 `timeScale`이 포함된 경우에만 효과.
    * frame.dt에 곱해져 animation·viewport 등 시간 기반 계산에 적용.
@@ -54,6 +61,8 @@ export interface Visualizer2DInstance {
   setParam(id: string, value: number): void;
   setTheme(theme: Theme): void;
   setTimeScale(scale: number): void;
+  /** 사용자 LaTeX 변수 값을 spec.userBindings 슬롯으로 흘려보낸다 (V2). */
+  applyUserBindings(bindings: Bindings): ApplyUserBindingsResult;
   resize(width: number, height: number): void;
   destroy(): void;
 }
@@ -82,6 +91,10 @@ export function mount2d(
     stateDecls: spec.state,
     initialParams: baseline.params,
   });
+
+  if (opts.userBindings) {
+    applyUserBindings(spec, opts.userBindings, store);
+  }
 
   const sceneCtrl = createSceneController(spec.scenes, store, initialSceneId);
 
@@ -160,6 +173,9 @@ export function mount2d(
         throw new RangeError(`setTimeScale: scale must be a non-negative finite number, got ${scale}`);
       }
       timeScale.current = scale;
+    },
+    applyUserBindings(bindings) {
+      return applyUserBindings(spec, bindings, store);
     },
     resize(w, h) {
       graphics.resize(w, h);

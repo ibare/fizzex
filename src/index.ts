@@ -204,8 +204,14 @@ export type {
   SceneSpec,
   SceneStyle,
   I18nText,
+  UserBindingSpec,
+  OutputKind,
+  ApplyUserBindingsResult,
+  AppliedBinding,
+  SkippedBinding,
+  SkipReason,
 } from './visualizer';
-export { resolveI18n } from './visualizer';
+export { resolveI18n, applyUserBindings } from './visualizer';
 export { getVisualizersForCatalog } from './analyzer/semantic/loader';
 export type { VisualizerRef } from './analyzer/semantic/types';
 

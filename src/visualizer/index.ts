@@ -28,3 +28,11 @@ export type { VisualizerSpec } from './runtime/types/spec';
 export type { SceneSpec, SceneStyle } from './runtime/types/scene';
 export type { I18nText } from './runtime/types/i18n';
 export { resolveI18n } from './runtime/types/i18n';
+export type { UserBindingSpec, OutputKind } from './runtime/types/user-binding';
+export { applyUserBindings } from './runtime/user-binding-bridge';
+export type {
+  ApplyUserBindingsResult,
+  AppliedBinding,
+  SkippedBinding,
+  SkipReason,
+} from './runtime/user-binding-bridge';

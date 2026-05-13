@@ -16,6 +16,7 @@ import type { Mount2DOptions, Visualizer2DInstance } from './mount-2d';
 import type { Mount3DOptions, Visualizer3DInstance } from './mount-3d';
 import { compileSpec, type CompiledVisualizer } from './compile';
 import type { VisualizerRegistry, VisualizerRegistryLoadOptions } from './registry';
+import type { Bindings } from '../../evaluator';
 
 export {
   createVisualizerRegistry,
@@ -37,6 +38,8 @@ export interface CreateVisualizerBaseOptions {
   readonly locale?: string;
   readonly initialSceneId?: string;
   readonly timeScale?: number;
+  /** 사용자 LaTeX 수식 변수 값 — V2 user-binding-bridge 가 spec.userBindings 와 결합해 주입. */
+  readonly userBindings?: Bindings;
 }
 
 export interface CreateVisualizerFromRegistryOptions extends CreateVisualizerBaseOptions {
@@ -73,6 +76,7 @@ export async function createVisualizer(
     locale: opts.locale,
     initialSceneId: opts.initialSceneId,
     timeScale: opts.timeScale,
+    userBindings: opts.userBindings,
   };
 
   if (renderer === '2d') {
