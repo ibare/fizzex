@@ -1035,6 +1035,38 @@
       ]
     },
     {
+      "id": "tangent",
+      "category": "calculus",
+      "requiredVariables": [
+        "y",
+        "x",
+        "f"
+      ],
+      "complexity": [
+        12,
+        28
+      ],
+      "patternType": "structural",
+      "signature": [
+        "variable:y",
+        "variable:f",
+        "variable:x",
+        "variable:a",
+        "operator:=",
+        "operator:-",
+        "paren"
+      ],
+      "visualizers": [
+        {
+          "id": "tangent-explore-2d",
+          "name": "접선 탐험 — 2D",
+          "description": "곡선 y=f(x) 와 점 x 에서의 접선을 함께 보여주는 인터랙티브 뷰",
+          "icon": "📈",
+          "default": true
+        }
+      ]
+    },
+    {
       "id": "arrhenius-equation",
       "category": "chemistry",
       "requiredNodeTypes": [

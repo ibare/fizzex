@@ -39,6 +39,7 @@ const CATALOG_TEST_CASES: CatalogTestCase[] = [
   // ── 미적분 ──
   { latex: '\\int_{-\\infty}^{\\infty} e^{-x^2} \\, dx = \\sqrt{\\pi}', expectedId: 'gaussian-integral' },
   { latex: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}", expectedId: 'derivative-definition', minConfidence: 0.7 },
+  { latex: "y - f(a) = f'(a)(x - a)", expectedId: 'tangent', minConfidence: 0.6 },
 
   // ── 기하학 ──
   { latex: 'A = \\sqrt{s(s-a)(s-b)(s-c)}', expectedId: 'heron-formula' },

@@ -1,0 +1,152 @@
+{
+  "$schema": "fizzex-visualizer/v1",
+  "id": "tangent-explore-2d",
+  "catalog": "calculus/tangent",
+
+  "name": { "en": "Tangent Explorer — 2D", "ko": "접선 탐험 — 2D" },
+  "description": {
+    "en": "Curve y = f(x) and its tangent line at point x.",
+    "ko": "곡선 y=f(x) 와 점 x 에서의 접선."
+  },
+  "renderer": "2d",
+
+  "userBindings": [
+    { "name": "f", "outputKind": "scalar", "required": true }
+  ],
+  "derivatives": [
+    { "source": "f", "variable": "x", "order": 1, "binding": "fPrime" }
+  ],
+
+  "scenes": [
+    {
+      "id": "default",
+      "name": { "en": "Tangent", "ko": "접선" },
+      "description": {
+        "en": "Drag x to slide the tangent along the curve.",
+        "ko": "x 를 조절해 접선이 곡선 위를 따라가게 한다."
+      },
+      "style": { "color": "#0EA5E9", "icon": "📈" },
+      "params": { "f": 0, "x": 1 }
+    },
+    {
+      "id": "compare",
+      "name": { "en": "Compare", "ko": "대조" },
+      "description": {
+        "en": "Inspect curve and tangent at a different point.",
+        "ko": "다른 점에서 곡선과 접선을 비교."
+      },
+      "style": { "color": "#F59E0B", "icon": "🔍" },
+      "params": { "f": 0, "x": -1 }
+    }
+  ],
+
+  "viewports": {
+    "plot": {
+      "kind": "time-value",
+      "rect": {
+        "x": "36",
+        "y": "32",
+        "w": "frame.width - 56",
+        "h": "frame.height - 64"
+      },
+      "xMin": "-4",
+      "xMax": "4",
+      "yMin": "-4",
+      "yMax": "4"
+    }
+  },
+
+  "root": {
+    "kind": "group",
+    "let": {
+      "color": "scene.style.color",
+      "bg": "if(frame.isDark, '#0f172a', '#f8fafc')",
+      "axisColor": "if(frame.isDark, 'rgba(148,163,184,0.6)', 'rgba(71,85,105,0.6)')",
+      "gridColor": "if(frame.isDark, 'rgba(148,163,184,0.18)', 'rgba(100,116,139,0.18)')",
+      "tangentColor": "if(frame.isDark, '#fbbf24', '#ea580c')",
+      "y0": "f",
+      "slope": "bindings.fPrime",
+      "dx": 3
+    },
+    "children": [
+      {
+        "kind": "rect",
+        "x": "0",
+        "y": "0",
+        "w": "frame.width",
+        "h": "frame.height",
+        "style": { "fill": "bg" }
+      },
+
+      {
+        "kind": "line",
+        "viewport": "plot",
+        "x1": "-4",
+        "y1": "0",
+        "x2": "4",
+        "y2": "0",
+        "style": { "stroke": "axisColor", "lineWidth": 1.2 }
+      },
+      {
+        "kind": "line",
+        "viewport": "plot",
+        "x1": "0",
+        "y1": "-4",
+        "x2": "0",
+        "y2": "4",
+        "style": { "stroke": "axisColor", "lineWidth": 1.2 }
+      },
+
+      {
+        "kind": "functionCurve",
+        "viewport": "plot",
+        "fn": "evalUser('f', 'x', x)",
+        "xMin": "-4",
+        "xMax": "4",
+        "samples": 128,
+        "style": { "stroke": "color", "lineWidth": 2.5 }
+      },
+
+      {
+        "kind": "line",
+        "viewport": "plot",
+        "visible": "isFinite(slope) && isFinite(y0)",
+        "x1": "x - dx",
+        "y1": "y0 - slope * dx",
+        "x2": "x + dx",
+        "y2": "y0 + slope * dx",
+        "style": { "stroke": "tangentColor", "lineWidth": 2, "lineDash": [6, 4] }
+      },
+
+      {
+        "kind": "circle",
+        "viewport": "plot",
+        "visible": "isFinite(y0)",
+        "cx": "x",
+        "cy": "y0",
+        "r": 5,
+        "style": { "fill": "tangentColor" }
+      }
+    ]
+  },
+
+  "overlay": {
+    "lines": [
+      {
+        "label": { "en": "x = ", "ko": "x = " },
+        "value": "x",
+        "format": ".2f"
+      },
+      {
+        "label": { "en": "f(x) = ", "ko": "f(x) = " },
+        "value": "y0",
+        "format": ".3f"
+      },
+      {
+        "label": { "en": "f'(x) = ", "ko": "f'(x) = " },
+        "value": "slope",
+        "format": ".3f"
+      }
+    ]
+  }
+}

@@ -311,5 +311,20 @@
       "물리학에서 에너지 준위 차이가 0에 접근할 때의 전이 확률 극한을 계산",
       "경제학에서 한계비용과 한계수입이 동시에 0에 수렴하는 상황의 이윤 분석"
     ]
+  },
+  "tangent": {
+    "name": "접선",
+    "oneLiner": "곡선 위 한 점에서 그 점을 지나며 곡선과 같은 기울기를 가지는 직선",
+    "description": "접선은 곡선 y=f(x)의 점 (a, f(a))에서 도함수 값 f'(a)를 기울기로 하는 직선 y - f(a) = f'(a)(x - a) 입니다. 점 부근에서 곡선을 가장 잘 근사하는 일차 함수이며, 한 점에서의 순간 변화율을 기하학적으로 드러냅니다. 미분의 가장 직관적인 의미가 곡선 위에서 시각화됩니다.",
+    "discoverer": "피에르 드 페르마, 아이작 뉴턴, 고트프리트 라이프니츠",
+    "field": "미적분학",
+    "significance": "도함수의 기하학적 의미를 곡선 위 직선으로 보여주어, 미분 개념을 시각적 직관과 연결하는 학습의 출발점입니다.",
+    "elementMeanings": {
+      "f(x)": { "role": "곡선", "description": "접선을 그릴 대상 함수입니다.", "kind": "input" },
+      "x": { "role": "접점의 x 좌표", "description": "곡선 위 어디에 접선을 놓을지 결정하는 점입니다.", "kind": "input" },
+      "f'(x)": { "role": "접선 기울기", "description": "점 x에서의 도함수 값. 접선의 기울기를 결정합니다.", "kind": "output" },
+      "y - f(x) = f'(x)(X - x)": { "role": "접선 방정식", "description": "점 (x, f(x))을 지나고 기울기가 f'(x) 인 직선입니다.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "chain-rule", "taylor-series"]
   }
 }
