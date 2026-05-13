@@ -99,6 +99,12 @@ export interface ApplyUserBindingsResult {
   skipped: SkippedBinding[];
   derivatives: AppliedDerivative[];
   skippedDerivatives: SkippedDerivative[];
+  /**
+   * 성공적으로 평가된 userBindings 의 원본/래핑 AST 노드 (V4-S3a).
+   * mount 호스트 함수가 도메인 전체에서 사용자 식을 재평가하기 위한 채널.
+   * skipped 된 binding 은 포함하지 않는다. derivatives 결과는 별도 슬롯이므로 포함하지 않는다.
+   */
+  userAsts: Readonly<Record<string, MathNode>>;
 }
 
 /**
@@ -118,6 +124,7 @@ export function applyUserBindings(
   const skipped: SkippedBinding[] = [];
   const derivatives: AppliedDerivative[] = [];
   const skippedDerivatives: SkippedDerivative[] = [];
+  const userAsts: Record<string, MathNode> = {};
   const userBindings = spec.userBindings ?? [];
 
   for (const binding of userBindings) {
@@ -143,6 +150,7 @@ export function applyUserBindings(
         if (result.ok) {
           store.setParam(binding.name, result.value, 'external');
           applied.push({ name: binding.name, outputKind: 'scalar', value: result.value });
+          userAsts[binding.name] = node;
         } else {
           skipped.push({
             name: binding.name,
@@ -160,6 +168,7 @@ export function applyUserBindings(
           const value: MatrixValue = result.value;
           store.setBinding(binding.name, value);
           applied.push({ name: binding.name, outputKind: 'matrix', value });
+          userAsts[binding.name] = node;
         } else {
           store.clearBinding(binding.name);
           skipped.push({
@@ -177,6 +186,7 @@ export function applyUserBindings(
         if (result.ok) {
           store.setBinding(binding.name, result.value);
           applied.push({ name: binding.name, outputKind: 'complex', value: result.value });
+          userAsts[binding.name] = node;
         } else {
           store.clearBinding(binding.name);
           skipped.push({
@@ -203,16 +213,8 @@ export function applyUserBindings(
     }
   }
 
-  const appliedScalars = new Map<string, MathNode>();
-  for (const a of applied) {
-    if (a.outputKind !== 'scalar') continue;
-    const raw = inputs[a.name];
-    if (raw === undefined) continue;
-    appliedScalars.set(a.name, toNode(a.name, raw));
-  }
-
   for (const d of spec.derivatives ?? []) {
-    const sourceNode = appliedScalars.get(d.source);
+    const sourceNode = userAsts[d.source];
     if (!sourceNode) {
       store.clearBinding(d.binding);
       skippedDerivatives.push({
@@ -244,7 +246,7 @@ export function applyUserBindings(
     });
   }
 
-  return { applied, skipped, derivatives, skippedDerivatives };
+  return { applied, skipped, derivatives, skippedDerivatives, userAsts };
 }
 
 /**

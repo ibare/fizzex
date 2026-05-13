@@ -352,6 +352,47 @@ describe('applyUserBindings — derivatives (V4)', () => {
     expect(store.getBinding('fPrime')).toBeUndefined();
   });
 
+  it('성공한 binding 의 AST 를 userAsts 에 노출', () => {
+    const spec = makeSpec({
+      userBindings: [
+        { name: 'a', outputKind: 'scalar', required: true },
+        { name: 'f', outputKind: 'scalar', required: true },
+        { name: 'g', outputKind: 'scalar', required: false },
+      ],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { a: 0, f: 0, x: 2 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { a: 0, f: 0, x: 2 } });
+    const fAst = latexAst('x^{2}');
+    const r = applyUserBindings(spec, { a: 5, f: fAst }, store);
+    expect(Object.keys(r.userAsts).sort()).toEqual(['a', 'f']);
+    expect(r.userAsts.f).toBe(fAst);
+    expect((r.userAsts.a as NumberNode).type).toBe('number');
+    expect((r.userAsts.a as NumberNode).value).toBe('5');
+  });
+
+  it('skip 된 binding 은 userAsts 에서 제외', () => {
+    const spec = makeSpec({
+      userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
+      scenes: [
+        {
+          id: 'default',
+          name: { en: 'Default' },
+          params: { f: 0 },
+        },
+      ],
+    });
+    const store = createStateStore({ initialParams: { f: 0 } });
+    const r = applyUserBindings(spec, { f: latexAst('1 / 0') }, store);
+    expect(r.skipped).toHaveLength(1);
+    expect(r.userAsts).toEqual({});
+  });
+
   it('다중 derivatives — 서로 다른 변수로 미분', () => {
     const spec = makeSpec({
       userBindings: [{ name: 'f', outputKind: 'scalar', required: true }],
