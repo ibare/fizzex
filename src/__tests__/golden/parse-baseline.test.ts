@@ -2,8 +2,8 @@
  * P0 골든 마스터 — parseLatex 현재 동작 스냅샷
  *
  * 이 파일은 lexer 도입(P1) 및 NumberNode 원자화(P2)의 회귀 베이스라인이다.
- * 테스트 이름의 [BUG] 표시는 P2에서 의도적으로 변경될 동작을 가리킨다.
- * 테스트 이름의 [OK]  표시는 P1~P7 전 구간에서 유지되어야 하는 불변이다.
+ * 테스트 이름의 [OK] 표시는 P1 이후 전 구간에서 유지되어야 하는 불변이다.
+ * (P2 시점의 [BUG] 항목들은 원자화 도입과 함께 [OK]로 전환되어 잔존하지 않는다.)
  */
 import { describe, it, expect, beforeEach } from 'vitest';
 import { parseLatex } from '../../latex/latex-parser';
