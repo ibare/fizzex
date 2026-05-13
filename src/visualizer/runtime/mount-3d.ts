@@ -229,8 +229,11 @@ function buildFrameContext(
   const activeScene = sceneCtrl.getActiveScene();
   const locals: Record<string, unknown> = {
     ...snap.params,
+    // bindings 가 params 위에 덮어쓴다 (V3): user 명시 LaTeX 바인딩 우선.
+    ...snap.bindings,
     params: snap.params,
     state: snap.state,
+    bindings: snap.bindings,
     scene: activeScene,
     frame,
   };

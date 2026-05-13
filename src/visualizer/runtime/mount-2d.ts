@@ -204,8 +204,12 @@ function buildFrameContext(
   const activeScene = sceneCtrl.getActiveScene();
   const locals: Record<string, unknown> = {
     ...snap.params,
+    // bindings 가 params 위에 덮어쓴다 (V3): user 가 명시한 LaTeX 바인딩이
+    // scene preset 보다 우선. 평면 머지로 `\omega` 등 카논화된 변수명을 직접 참조.
+    ...snap.bindings,
     params: snap.params,
     state: snap.state,
+    bindings: snap.bindings,
     scene: activeScene,
     frame,
   };
