@@ -718,7 +718,6 @@ export function EditorView({
           position={suggestionPosition}
           onSelect={handleSuggestionSelect}
           theme={theme}
-          maxWidth={width - 20}
         />
       )}
     </div>
