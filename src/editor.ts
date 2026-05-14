@@ -42,6 +42,7 @@ import {
   buildNewState,
   freezeState,
 } from './editor-utils';
+import { getSlotPolicyByParent } from './cursor-policy';
 
 /** MathNode에서 문자열 키로 자식 배열을 안전하게 접근하는 헬퍼 */
 function getNodeChildArray(node: MathNode, key: string): MathNode[] {
@@ -598,40 +599,35 @@ export class MathEditor {
 
   /** 연산자 삽입 */
   insertOperator(op: OperatorSymbol | string): void {
-    // 복합 노드(지수, 분자, 분모 등) 안에 있으면 먼저 밖으로 나감
-    this.exitComplexNodeIfNeeded();
+    // 현재 슬롯의 정책이 autoExitOnBinop 이면 컨테이너 밖으로 먼저 나간다
+    this.exitSlotForBinaryOperator();
 
     const newNode: OperatorNode = { id: generateId(), type: 'operator', operator: op };
     this.insertNodeAtCursor(newNode);
   }
 
-  /** 복합 노드(지수, 분자/분모, 괄호 내부, 아래첨자, 적분, 시그마, 극한) 안에 있으면 밖으로 이동 */
-  private exitComplexNodeIfNeeded(): void {
-    const node = findNodeById(this.state.ast, this.requireBoundary().parentId);
-    if (!node) return;
-
-    // row 노드의 ID가 특정 접미사로 끝나면 복합 노드 내부
-    const nodeId = node.id;
-    const complexSuffixes = [
-      '_exp', '_num', '_den', '_content', '_sub',  // 기존
-      '_lower', '_upper', '_integrand', '_body', '_approach'  // Phase 2
-    ];
-    const isInComplexNode = complexSuffixes.some(suffix => nodeId.endsWith(suffix));
-
-    if (!isInComplexNode) return;
-
-    // 부모(power, frac, paren)를 찾고, 그 부모의 부모로 커서 이동
-    const parentInfo = findParent(this.state.ast, node.id);
+  /**
+   * 현재 커서가 속한 슬롯의 정책이 이항 연산자에 자동 종료되는 slot 이면
+   * 컨테이너 바로 다음 위치로 커서를 이동한다.
+   *
+   * 정책 조회는 `cursor-policy.ts` 의 (parentType, slotName) 정책표가 단일 진실의
+   * 원천. row id 접미사 휴리스틱은 사용하지 않는다.
+   */
+  private exitSlotForBinaryOperator(): void {
+    const rowId = this.requireBoundary().parentId;
+    const parentInfo = findParent(this.state.ast, rowId);
     if (!parentInfo) return;
 
-    const complexNode = parentInfo.parent;  // power, frac, paren
-    const grandParentInfo = findParent(this.state.ast, complexNode.id);
-    if (!grandParentInfo) return;
+    const policy = getSlotPolicyByParent(parentInfo.parent.type, parentInfo.childKey);
+    if (!policy?.autoExitOnBinop) return;
 
-    // 복합 노드 다음 위치로 커서 이동 (불변: 새 state 생성)
+    // 컨테이너 노드(예: power, frac) 다음 위치로 커서 이동
+    const containerInfo = findParent(this.state.ast, parentInfo.parent.id);
+    if (!containerInfo) return;
+
     this.state = freezeState(buildNewState(
       this.state.ast,
-      boundary(grandParentInfo.parent.id, grandParentInfo.index + 1),
+      boundary(containerInfo.parent.id, containerInfo.index + 1),
     ));
   }
 
