@@ -102,8 +102,8 @@ const EXPLICIT_CLOSE: SlotPolicy = { autoExitOnBinop: false, hasExplicitClose: t
  *   - 단일/명명 슬롯: types.ts 의 인터페이스 필드명 그대로 (e.g. `numerator`,
  *     `content`, `lower`, `body`)
  *   - 컬렉션 슬롯: 합성명 — matrix·align·cases·array 는 `cell`, gather 는 `row`,
- *     opaque 는 `arg`. row id 에서 슬롯명을 도출하는 책임은 S2 `resolveRowSlot`
- *     가 진다.
+ *     opaque 는 `arg`. AST 필드명(`rows`/`args`) 에서 합성 슬롯명으로의 변환은
+ *     하단 `canonicalSlotName` 가 담당한다.
  */
 export const CONTAINER_POLICY: {
   readonly [K in ContainerNodeType]: { readonly [slot: string]: SlotPolicy };
@@ -224,4 +224,39 @@ export function getSlotPolicy(
   if (!isContainerNodeType(parentType)) return null;
   const slots = CONTAINER_POLICY[parentType];
   return slots[slotName] ?? null;
+}
+
+/**
+ * AST 인터페이스 필드명(`childKey`)을 정책표가 사용하는 정규 슬롯명으로 변환한다.
+ *
+ * 컬렉션 노드는 AST 상 `rows`/`args` 같은 단일 필드에 셀/요소들이 모이는 구조이므로,
+ * 정책표의 합성 슬롯명(`cell`/`row`/`arg`) 으로 매핑해야 한다.
+ * 단일/명명 슬롯은 필드명 그대로 정책 키가 된다.
+ */
+export function canonicalSlotName(
+  parentType: MathNode['type'],
+  childKey: string,
+): string {
+  if (childKey === 'rows') {
+    return parentType === 'gather' ? 'row' : 'cell';
+  }
+  if (childKey === 'args' && parentType === 'opaque') {
+    return 'arg';
+  }
+  return childKey;
+}
+
+/**
+ * 부모 컨테이너의 타입과 AST 필드명(`childKey`) 으로 슬롯 정책을 조회한다.
+ *
+ * editor.ts 의 `findParent` 가 반환하는 `{ parent.type, childKey }` 쌍을 그대로
+ * 받아 정책을 얻는 호출 시점용 API. 합성 슬롯명 매핑은 내부에서 처리된다.
+ *
+ * 컨테이너가 아니거나 정책표에 등록되지 않은 슬롯이면 null.
+ */
+export function getSlotPolicyByParent(
+  parentType: MathNode['type'],
+  childKey: string,
+): SlotPolicy | null {
+  return getSlotPolicy(parentType, canonicalSlotName(parentType, childKey));
 }
