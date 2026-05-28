@@ -3,23 +3,14 @@ name: Release
 on:
   push:
     branches: [main]
-  # 첫 publish 전용 수동 트리거. `initial-publish: true`로 실행하면
-  # changeset 없이 현재 버전 그대로 npm에 publish한다.
-  # 첫 0.1.0이 등록된 이후로는 사용하지 말 것 (재실행 시 npm이 409로 거부).
   workflow_dispatch:
-    inputs:
-      initial-publish:
-        description: '첫 publish 모드 (changeset 없이 현재 버전 publish)'
-        type: boolean
-        default: false
 
 concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
   id-token: write  # npm provenance용 OIDC 토큰
 
 jobs:
@@ -29,8 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -47,26 +36,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check if version already published
+        id: check
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if npm view "fizzex@$VERSION" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::fizzex@$VERSION is already published — skipping"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build
+        if: steps.check.outputs.exists == 'false'
         run: pnpm build
 
-      # ----- 첫 publish 전용 (workflow_dispatch + initial-publish=true) -----
-      - name: Initial Publish
-        if: github.event_name == 'workflow_dispatch' && inputs.initial-publish
+      - name: Publish
+        if: steps.check.outputs.exists == 'false'
         run: pnpm publish --access public --provenance --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # ----- 일반 자동화 (main push에서 changeset 기반) -----
-      - name: Create Release PR or Publish
-        if: github.event_name == 'push'
-        uses: changesets/action@v1
-        with:
-          version: pnpm version-packages
-          publish: pnpm release
-          commit: "chore: 릴리스"
-          title: "chore: 릴리스"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
