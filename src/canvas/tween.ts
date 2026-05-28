@@ -5,8 +5,8 @@
  * DisplayObject의 x, y, scaleX, scaleY, alpha 등을 애니메이션할 때 사용.
  */
 
-import type { EasingFn } from './easing';
-import { Easing } from './easing';
+import type { EasingFn } from './easing.js';
+import { Easing } from './easing.js';
 
 export interface TweenConfig<T> {
   target: T;

@@ -5,21 +5,21 @@
  * 텍스트는 <span>, 수식은 인라인 <canvas>, 실패는 원본 텍스트 span으로 표시.
  */
 
-import { FizzexStreamParser } from '../latex/streaming';
-import type { StreamOutput, StreamParserOptions } from '../latex/streaming';
-import type { Diagnostic, RenderDecision } from '../latex/tolerant/types';
-import { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox, collectBoxPositions } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import type { BoxRenderConfig, Box } from '../box/types';
-import type { ConfidenceRegion, ConfidenceLevel } from '../box/confidence-indicator';
-import { DEFAULT_CONFIDENCE_CONFIG } from '../box/confidence-indicator';
-import { loadMathFont } from '../fonts';
-import type { FizzexConfig } from './types';
-import { resolveBoxRenderConfig } from './types';
-import { ExplorerOverlay } from './explorer-overlay';
-import type { ExplorerTriggerOptions } from './explorer-trigger';
+import { FizzexStreamParser } from '../latex/streaming/index.js';
+import type { StreamOutput, StreamParserOptions } from '../latex/streaming/index.js';
+import type { Diagnostic, RenderDecision } from '../latex/tolerant/types.js';
+import { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox, collectBoxPositions } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import type { BoxRenderConfig, Box } from '../box/types.js';
+import type { ConfidenceRegion, ConfidenceLevel } from '../box/confidence-indicator.js';
+import { DEFAULT_CONFIDENCE_CONFIG } from '../box/confidence-indicator.js';
+import { loadMathFont } from '../fonts/index.js';
+import type { FizzexConfig } from './types.js';
+import { resolveBoxRenderConfig } from './types.js';
+import { ExplorerOverlay } from './explorer-overlay.js';
+import type { ExplorerTriggerOptions } from './explorer-trigger.js';
 
 // =========================================================================
 // 타입 정의

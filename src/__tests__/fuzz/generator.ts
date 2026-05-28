@@ -7,7 +7,7 @@
 
 import { writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { GRAMMAR, TERMINALS, RECURSIVE_RULES, isInFizzex } from './grammar';
+import { GRAMMAR, TERMINALS, RECURSIVE_RULES, isInFizzex } from './grammar.js';
 
 // --- 시드 기반 PRNG (Mulberry32) ---
 

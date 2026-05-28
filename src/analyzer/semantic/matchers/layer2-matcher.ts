@@ -4,9 +4,9 @@
  * 규칙 로직 (조건 함수 + 경로 패턴)과 텍스트 데이터 (JSON)를 매핑한다.
  */
 
-import type { MathNode } from '../../../types';
-import type { Layer2TextEntry } from '../loader';
-import { isInfinity, matchesPathPattern } from '../helpers';
+import type { MathNode } from '../../../types.js';
+import type { Layer2TextEntry } from '../loader.js';
+import { isInfinity, matchesPathPattern } from '../helpers.js';
 
 // ─── 규칙 정의 (로직만, 텍스트 없음) ───
 

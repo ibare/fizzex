@@ -13,7 +13,7 @@ import {
   createVisualizer,
   type CreatedVisualizer,
   type VisualizerRegistry,
-} from '../visualizer/runtime/public-api';
+} from '../visualizer/runtime/public-api.js';
 
 export class ExplorerVisualizerController {
   private container: HTMLElement;

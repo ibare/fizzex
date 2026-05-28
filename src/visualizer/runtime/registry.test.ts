@@ -11,8 +11,8 @@ import { describe, it, expect, vi } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve as resolvePath } from 'node:path';
-import { createVisualizerRegistry, type VisualizerRegistryManifest } from './registry';
-import { compileSpec } from './compile';
+import { createVisualizerRegistry, type VisualizerRegistryManifest } from './registry.js';
+import { compileSpec } from './compile.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const defaultRegistryDir = resolvePath(here, '../../../registries/default');

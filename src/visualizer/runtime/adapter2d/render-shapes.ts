@@ -20,7 +20,7 @@ import type {
   TextEl,
   ImageEl,
   FunctionCurveEl,
-} from '../types/element';
+} from '../types/element.js';
 import {
   drawArc,
   drawCircle,
@@ -33,8 +33,8 @@ import {
   drawPolyline,
   roundRect,
   type Point2D,
-} from '../../../graphics/draw';
-import { drawFunctionCurve } from '../../../graphics/curves';
+} from '../../../graphics/draw.js';
+import { drawFunctionCurve } from '../../../graphics/curves.js';
 import {
   currentViewport,
   evalExpr,
@@ -43,7 +43,7 @@ import {
   evalStr,
   extendRenderContext,
   type RenderContext,
-} from './render-context';
+} from './render-context.js';
 
 /** stroke/fill 결정. 각 shape 공용. */
 function strokeOrFill(ctx: CanvasRenderingContext2D, node: { style?: { stroke?: unknown; fill?: unknown } }): void {

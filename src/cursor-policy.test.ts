@@ -20,7 +20,7 @@ import type {
   PowerNode,
   SubscriptNode,
   NumberNode,
-} from './types';
+} from './types.js';
 import {
   CONTAINER_POLICY,
   canonicalSlotName,
@@ -28,8 +28,8 @@ import {
   getSlotPolicyByParent,
   isContainerNodeType,
   type ContainerNodeType,
-} from './cursor-policy';
-import { MathEditor, keyToInputAction } from './editor';
+} from './cursor-policy.js';
+import { MathEditor, keyToInputAction } from './editor.js';
 
 function bc(c: CursorPosition): BoundaryCursor {
   if (c.kind !== 'boundary') throw new Error('expected boundary cursor');

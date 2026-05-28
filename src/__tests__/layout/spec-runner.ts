@@ -4,13 +4,13 @@
  * fizzex-layout-spec.json을 읽어서 전체 검증을 수행하고 결과를 집계한다.
  */
 
-import { measureLayout } from './measurer';
+import { measureLayout } from './measurer.js';
 import {
   evaluateAssertion,
   type AssertionResult,
   type SpecVerificationCase,
   type ParameterMap,
-} from './assertions';
+} from './assertions.js';
 
 export interface CategoryResult {
   name: string;

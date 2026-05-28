@@ -27,9 +27,9 @@ import type {
   FuncNode,
   RootNode,
   RowNode,
-} from '../types';
-import type { Bindings, EvalDetail, EvalStatus } from './types';
-import { normalizeVarName } from './normalize';
+} from '../types.js';
+import type { Bindings, EvalDetail, EvalStatus } from './types.js';
+import { normalizeVarName } from './normalize.js';
 
 export interface Complex {
   readonly re: number;

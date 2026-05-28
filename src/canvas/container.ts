@@ -5,8 +5,8 @@
  * draw() 시 자식들을 순서대로 렌더링한다.
  */
 
-import { DisplayObject } from './display-object';
-import type { SceneSurface } from './scene-surface';
+import { DisplayObject } from './display-object.js';
+import type { SceneSurface } from './scene-surface.js';
 
 export class Container extends DisplayObject {
   readonly children: DisplayObject[] = [];

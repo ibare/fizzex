@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { astToBox } from './ast-to-box';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { layoutBox } from './box-layout';
-import type { Box, HBox, VBox, SurdBox } from './types';
+import { astToBox } from './ast-to-box.js';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { layoutBox } from './box-layout.js';
+import type { Box, HBox, VBox, SurdBox } from './types.js';
 
 function createMockMetrics(): any {
   return {

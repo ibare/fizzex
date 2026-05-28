@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { LRUCache } from './lru-cache';
+import { LRUCache } from './lru-cache.js';
 
 describe('LRUCache', () => {
   describe('기본 동작', () => {

@@ -7,8 +7,8 @@
 
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import type { SuggestionWithAction } from '../suggestion/types';
-import { useFizzexLabels } from '../i18n';
+import type { SuggestionWithAction } from '../suggestion/types.js';
+import { useFizzexLabels } from '../i18n/index.js';
 
 export interface SuggestionChipsProps {
   /** 제안 목록 (우선순위 필터링된) */

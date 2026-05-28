@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { createStateStore } from './state';
-import type { StateDecl } from './types/state';
+import { createStateStore } from './state.js';
+import type { StateDecl } from './types/state.js';
 
 describe('createStateStore', () => {
   it('initialParams 반영', () => {

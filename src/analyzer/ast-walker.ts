@@ -27,8 +27,8 @@ import type {
   ArrayNode,
   RowNode,
   OperatorNode,
-} from '../types';
-import type { ASTCollectionResult } from './types';
+} from '../types.js';
+import type { ASTCollectionResult } from './types.js';
 
 /** 특수 상수 목록 */
 const SPECIAL_CONSTANTS = new Set([
@@ -373,7 +373,7 @@ export function findNodes<T extends MathNode>(
         break;
       }
       case 'opaque':
-        (node as import('../types').OpaqueNode).args.forEach(arg => arg.forEach(search));
+        (node as import('../types.js').OpaqueNode).args.forEach(arg => arg.forEach(search));
         break;
     }
   }

@@ -29,12 +29,12 @@
  * 의 경우 이전 binding 값이 남는 것을 막기 위해 명시적 `clearBinding`.
  */
 
-import { evaluate, evaluateMatrix, evaluateComplex, differentiateAt } from '../../evaluator';
-import type { EvalStatus, Matrix, MatrixValue, Complex } from '../../evaluator';
-import type { MathNode, NumberNode } from '../../types';
-import type { VisualizerSpec } from './types/spec';
-import type { StateStore } from './state';
-import type { OutputKind } from './types/user-binding';
+import { evaluate, evaluateMatrix, evaluateComplex, differentiateAt } from '../../evaluator/index.js';
+import type { EvalStatus, Matrix, MatrixValue, Complex } from '../../evaluator/index.js';
+import type { MathNode, NumberNode } from '../../types.js';
+import type { VisualizerSpec } from './types/spec.js';
+import type { StateStore } from './state.js';
+import type { OutputKind } from './types/user-binding.js';
 
 /**
  * 호스트가 binding 하나당 줄 수 있는 입력 형태:

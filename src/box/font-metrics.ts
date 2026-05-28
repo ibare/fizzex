@@ -4,14 +4,14 @@
  * Canvas를 사용하여 문자의 실제 크기를 측정
  */
 
-import type { FontMetrics, BoxRenderConfig } from './types';
+import type { FontMetrics, BoxRenderConfig } from './types.js';
 import {
   getDelimiterGlyphs,
   selectGlyphForHeight,
   type DelimiterGlyphs,
   type ExtensibleGlyph,
-} from '../fonts/glyph-mappings';
-import { LRUCache } from '../utils/lru-cache';
+} from '../fonts/glyph-mappings.js';
+import { LRUCache } from '../utils/lru-cache.js';
 
 /** 폰트 메트릭스 캐시 기본 크기 */
 const DEFAULT_CACHE_SIZE = 1000;

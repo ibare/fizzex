@@ -13,10 +13,10 @@ import type {
   LightEl,
   PointsEl,
   SphereEl,
-} from '../types/element';
-import type { RenderContext3D } from './render-context';
-import { evalExpr3D, evalNum3D, evalNumOr3D } from './render-context';
-import { parseColorSpec } from './color';
+} from '../types/element.js';
+import type { RenderContext3D } from './render-context.js';
+import { evalExpr3D, evalNum3D, evalNumOr3D } from './render-context.js';
+import { parseColorSpec } from './color.js';
 
 export function buildSphere(el: SphereEl, rc: RenderContext3D): THREE.Mesh {
   const cx = evalNum3D(el.cx, rc);

@@ -1,4 +1,4 @@
-import type { ExprString } from './expr';
+import type { ExprString } from './expr.js';
 
 /**
  * 좌표계 선언 (설계 §8). 현재 호스트가 지원하는 3종.

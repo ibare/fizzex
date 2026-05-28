@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createBaselineSnapshot } from './baseline';
+import { createBaselineSnapshot } from './baseline.js';
 
 describe('createBaselineSnapshot', () => {
   it('scene preset이 catalog default를 덮어씀', () => {

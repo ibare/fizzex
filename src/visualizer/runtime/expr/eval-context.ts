@@ -10,10 +10,10 @@
  * 최소 인터페이스만 소비해 렌더러 독립성을 유지한다.
  */
 
-import type { ExprString } from '../types/expr';
-import type { Context } from './context';
-import { parseExpr, type ExprAst } from './parse';
-import { evalNode } from './eval';
+import type { ExprString } from '../types/expr.js';
+import type { Context } from './context.js';
+import { parseExpr, type ExprAst } from './parse.js';
+import { evalNode } from './eval.js';
 
 export interface EvalContext {
   exprCtx: Context;

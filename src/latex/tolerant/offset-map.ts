@@ -5,7 +5,7 @@
  * 정규화 후 오프셋 ↔ 원본 오프셋 양방향 변환을 제공한다.
  */
 
-import type { OffsetMap } from './types';
+import type { OffsetMap } from './types.js';
 
 /** 원본↔정규화 구간 매핑 쌍 */
 export interface SpanPair {

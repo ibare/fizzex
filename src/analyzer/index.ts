@@ -17,19 +17,19 @@
  * ```
  */
 
-import type { RootNode } from '../types';
-import type { ExpressionAnalysis } from './types';
-import { walkAST, hasEquality, hasInequality } from './ast-walker';
-import { createFunctionInfoList } from './function-detector';
-import { detectDomains, determinePrimaryDomain } from './domain-detector';
-import { analyzePolynomial } from './polynomial-analyzer';
-import { classifyVariables } from './variable-classifier';
+import type { RootNode } from '../types.js';
+import type { ExpressionAnalysis } from './types.js';
+import { walkAST, hasEquality, hasInequality } from './ast-walker.js';
+import { createFunctionInfoList } from './function-detector.js';
+import { detectDomains, determinePrimaryDomain } from './domain-detector.js';
+import { analyzePolynomial } from './polynomial-analyzer.js';
+import { classifyVariables } from './variable-classifier.js';
 import {
   extractFeatures,
   analyzeVisualization,
   calculateComplexity,
   generateSummary,
-} from './feature-extractor';
+} from './feature-extractor.js';
 
 /**
  * 수식 분석
@@ -110,21 +110,21 @@ export type {
   ExpressionFeature,
   VisualizationCapability,
   VariableClassification,
-} from './types';
+} from './types.js';
 
 // 구조적 의미 시스템
-export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './semantic-roles';
-export type { SemanticResult, AncestorEntry } from './semantic-roles';
+export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './semantic-roles.js';
+export type { SemanticResult, AncestorEntry } from './semantic-roles.js';
 
 // 개별 유틸리티 함수 export (고급 사용자용)
-export { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker';
-export { getFunctionCategory, createFunctionInfoList } from './function-detector';
-export { detectDomains, determinePrimaryDomain } from './domain-detector';
-export { analyzePolynomial, getDegreeLabel, setDebugAnalyzer } from './polynomial-analyzer';
-export { classifyVariables } from './variable-classifier';
+export { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker.js';
+export { getFunctionCategory, createFunctionInfoList } from './function-detector.js';
+export { detectDomains, determinePrimaryDomain } from './domain-detector.js';
+export { analyzePolynomial, getDegreeLabel, setDebugAnalyzer } from './polynomial-analyzer.js';
+export { classifyVariables } from './variable-classifier.js';
 export {
   extractFeatures,
   analyzeVisualization,
   calculateComplexity,
   generateSummary,
-} from './feature-extractor';
+} from './feature-extractor.js';

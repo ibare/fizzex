@@ -15,19 +15,19 @@
  */
 
 import type { Object3D } from 'three';
-import type { ElementNode, RepeatEl } from '../types/element';
-import type { RenderContext3D } from './render-context';
+import type { ElementNode, RepeatEl } from '../types/element.js';
+import type { RenderContext3D } from './render-context.js';
 import {
   evalBool3D,
   evalExpr3D,
   evalNum3D,
   evalNumOr3D,
   extendRenderContext3D,
-} from './render-context';
-import { applyTransform3D } from './transform-apply';
-import { applyShaderMaterial } from './shader-apply';
-import { lookupPrimitive3D } from './primitive-registry';
-import './built-in-primitives';
+} from './render-context.js';
+import { applyTransform3D } from './transform-apply.js';
+import { applyShaderMaterial } from './shader-apply.js';
+import { lookupPrimitive3D } from './primitive-registry.js';
+import './built-in-primitives.js';
 
 type ShaderDeferred = { el: Extract<ElementNode, { kind: 'shaderMaterial' }>; rc: RenderContext3D };
 

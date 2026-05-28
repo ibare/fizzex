@@ -5,8 +5,8 @@
  */
 
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
-import type { FizzexLabels, PartialFizzexLabels } from './types';
-import { defaultLabels } from './default-labels';
+import type { FizzexLabels, PartialFizzexLabels } from './types.js';
+import { defaultLabels } from './default-labels.js';
 
 /** Context */
 const FizzexI18nContext = createContext<FizzexLabels>(defaultLabels);

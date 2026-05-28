@@ -5,9 +5,9 @@
  * 도메인/미지원 으로 정직하게 분류한다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateSync, evaluate } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateSync, evaluate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

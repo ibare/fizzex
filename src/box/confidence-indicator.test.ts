@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator';
-import type { ConfidenceRegion } from './confidence-indicator';
-import { MockSurface } from './surface';
+import { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator.js';
+import type { ConfidenceRegion } from './confidence-indicator.js';
+import { MockSurface } from './surface.js';
 
 describe('ConfidenceIndicator', () => {
   let backend: MockSurface;

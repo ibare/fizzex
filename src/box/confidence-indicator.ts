@@ -5,7 +5,7 @@
  * src/latex/ 타입에 의존하지 않음 — 호출자가 ConfidenceRegion을 변환하여 전달.
  */
 
-import type { Surface } from './surface';
+import type { Surface } from './surface.js';
 
 // =========================================================================
 // 타입 정의

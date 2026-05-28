@@ -5,7 +5,7 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { runCorpusTest } from './corpus-runner';
+import { runCorpusTest } from './corpus-runner.js';
 
 const BASE_DIR = dirname(new URL(import.meta.url).pathname);
 

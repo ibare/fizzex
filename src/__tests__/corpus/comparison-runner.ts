@@ -16,11 +16,11 @@ function resolveCorpusPath(baseDir: string): string {
   if (existsSync(verified)) return verified;
   return resolve(baseDir, 'combined-corpus.json');
 }
-import { categorizeError } from './corpus-runner';
-import { fizzexEngine } from './engines/fizzex-engine';
-import { katexEngine } from './engines/katex-engine';
-import { mathjaxEngine } from './engines/mathjax-engine';
-import type { Engine, EngineResult } from './engines/types';
+import { categorizeError } from './corpus-runner.js';
+import { fizzexEngine } from './engines/fizzex-engine.js';
+import { katexEngine } from './engines/katex-engine.js';
+import { mathjaxEngine } from './engines/mathjax-engine.js';
+import type { Engine, EngineResult } from './engines/types.js';
 
 const BASE_DIR = dirname(new URL(import.meta.url).pathname);
 

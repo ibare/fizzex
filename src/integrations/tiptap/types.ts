@@ -1,4 +1,4 @@
-import type { FizzexConfig } from '../../headless/types';
+import type { FizzexConfig } from '../../headless/types.js';
 
 export interface MathInlineOptions {
   fizzexConfig?: FizzexConfig;

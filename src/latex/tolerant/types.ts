@@ -5,7 +5,7 @@
  * AST 구조와 분리된 품질/에러 정보를 관리한다.
  */
 
-import type { MathNode, RootNode, ErrorNode, ParseStatus, SourceRange } from '../../types';
+import type { MathNode, RootNode, ErrorNode, ParseStatus, SourceRange } from '../../types.js';
 
 /** 축 2: 의미 보존 여부 */
 export type SemanticSafety =

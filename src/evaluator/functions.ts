@@ -13,11 +13,11 @@
  *
  * 미지원 함수명은 `unsupported` 로 정직 신호 — silent-drop 금지.
  */
-import type { MathNode, FuncNode } from '../types';
-import { register } from './registry';
-import { value, fail, type EvalContext, type EvalOutcome } from './types';
-import { evalChildSequence } from './arithmetic';
-import { isDistributionFunction, evalDistributionCall } from './stats';
+import type { MathNode, FuncNode } from '../types.js';
+import { register } from './registry.js';
+import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
+import { evalChildSequence } from './arithmetic.js';
+import { isDistributionFunction, evalDistributionCall } from './stats.js';
 
 type UnaryFn = (x: number) => EvalOutcome;
 

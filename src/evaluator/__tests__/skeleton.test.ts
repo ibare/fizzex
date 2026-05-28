@@ -5,14 +5,14 @@
  * 후속 단계가 등록 노드를 늘려도, 본 테스트가 검증하는 신호 의미는 유지되어야 한다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
 import {
   evaluateSync,
   evaluate,
   analyzeBindings,
   analyzeEvaluability,
-} from '..';
+} from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

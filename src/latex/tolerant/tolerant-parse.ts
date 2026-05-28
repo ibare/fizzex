@@ -10,21 +10,21 @@
  * - auto: 입력 패턴으로 모드 자동 결정
  */
 
-import type { RootNode, MathNode, ParseStatus, SourceRange } from '../../types';
+import type { RootNode, MathNode, ParseStatus, SourceRange } from '../../types.js';
 import type {
   TolerantParseOptions,
   TolerantParseResult,
   Diagnostic,
   NormalizationRecord,
   OffsetMap,
-} from './types';
-import { parseLatex } from '../latex-parser';
-import type { LatexParseResult } from '../latex-parser';
-import type { ParseError } from '../parse-errors';
-import { preProcess } from './pre-processor';
-import { recoverFromErrors } from './error-recovery';
-import { determineRenderMode } from './determine-render-mode';
-import { identityOffsetMap } from './offset-map';
+} from './types.js';
+import { parseLatex } from '../latex-parser.js';
+import type { LatexParseResult } from '../latex-parser.js';
+import type { ParseError } from '../parse-errors.js';
+import { preProcess } from './pre-processor.js';
+import { recoverFromErrors } from './error-recovery.js';
+import { determineRenderMode } from './determine-render-mode.js';
+import { identityOffsetMap } from './offset-map.js';
 
 /** 기본 옵션 */
 const DEFAULT_OPTIONS: TolerantParseOptions = {

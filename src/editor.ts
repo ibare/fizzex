@@ -32,17 +32,17 @@ import type {
   GatherNode,
   ArrayNode,
   TextNode,
-} from './types';
-import { boundary, intra } from './types';
-import { parseLatex } from './latex/latex-parser';
-import { generateEditorId, deriveId, deriveCellId } from './utils/id-generator';
+} from './types.js';
+import { boundary, intra } from './types.js';
+import { parseLatex } from './latex/latex-parser.js';
+import { generateEditorId, deriveId, deriveCellId } from './utils/id-generator.js';
 import {
   spliceChildren,
   rebuildAstWithNewChildren,
   buildNewState,
   freezeState,
-} from './editor-utils';
-import { getSlotPolicyByParent } from './cursor-policy';
+} from './editor-utils.js';
+import { getSlotPolicyByParent } from './cursor-policy.js';
 
 /** MathNode에서 문자열 키로 자식 배열을 안전하게 접근하는 헬퍼 */
 function getNodeChildArray(node: MathNode, key: string): MathNode[] {

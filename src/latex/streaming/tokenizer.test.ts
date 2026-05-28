@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { StreamTokenizer } from './tokenizer';
-import type { StreamToken } from './types';
+import { StreamTokenizer } from './tokenizer.js';
+import type { StreamToken } from './types.js';
 
 describe('StreamTokenizer', () => {
   let tokenizer: StreamTokenizer;

@@ -9,8 +9,8 @@
  */
 
 import type { Object3D } from 'three';
-import type { ElementNode } from '../types/element';
-import type { RenderContext3D } from './render-context';
+import type { ElementNode } from '../types/element.js';
+import type { RenderContext3D } from './render-context.js';
 
 export type Primitive3DBuild = (node: ElementNode, rc: RenderContext3D) => Object3D;
 

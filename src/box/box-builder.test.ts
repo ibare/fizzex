@@ -26,8 +26,8 @@ import {
   createGatherBox,
   createArrayBox,
   createSurd,
-} from './box-builder';
-import type { Box, GlyphBox, HBox, KernBox } from './types';
+} from './box-builder.js';
+import type { Box, GlyphBox, HBox, KernBox } from './types.js';
 
 function createMockMetrics(): any {
   return {

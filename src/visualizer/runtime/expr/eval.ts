@@ -11,9 +11,9 @@
  */
 
 import type jsep from 'jsep';
-import type { Context } from './context';
-import { BUILTINS, CONSTANTS } from './builtins';
-import type { ExprAst } from './parse';
+import type { Context } from './context.js';
+import { BUILTINS, CONSTANTS } from './builtins.js';
+import type { ExprAst } from './parse.js';
 
 export class ExprEvalError extends Error {
   constructor(message: string, public readonly source?: string) {

@@ -1,5 +1,5 @@
-import type { ExprString } from './expr';
-import type { StyleSpec, TransformSpec } from './style';
+import type { ExprString } from './expr.js';
+import type { StyleSpec, TransformSpec } from './style.js';
 
 /**
  * 2D Shape Element + 제어 구조 + 3D Element의 discriminated union (설계 §4, §5, §12).

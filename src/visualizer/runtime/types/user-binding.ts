@@ -8,7 +8,7 @@
  * V1: 모든 binding 의 outputKind 는 'scalar'. matrix/complex 는 V3 에서 활성화.
  */
 
-import type { I18nText } from './i18n';
+import type { I18nText } from './i18n.js';
 
 export type OutputKind = 'scalar' | 'matrix' | 'complex';
 

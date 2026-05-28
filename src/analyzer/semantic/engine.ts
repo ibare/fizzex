@@ -5,14 +5,14 @@
  * 텍스트 데이터는 JSON에서 로드, 조건 함수는 matchers에서 실행.
  */
 
-import type { MathNode } from '../../types';
-import type { AncestorEntry, SemanticResult, CatalogMatchResult, CatalogDetail } from './types';
-import { getChildArrays, getSemanticForAccent } from './helpers';
-import { getSemanticTexts, getCatalogIndex, getCatalogDetail } from './loader';
-import { matchLayer1, getLayer1RoleFromTexts } from './matchers/layer1-matcher';
-import { matchLayer2 } from './matchers/layer2-matcher';
-import { matchCatalog } from './matchers/catalog-matcher';
-import { getDefaultRoleFromTexts, getDefaultDescriptionFromTexts } from './fallback';
+import type { MathNode } from '../../types.js';
+import type { AncestorEntry, SemanticResult, CatalogMatchResult, CatalogDetail } from './types.js';
+import { getChildArrays, getSemanticForAccent } from './helpers.js';
+import { getSemanticTexts, getCatalogIndex, getCatalogDetail } from './loader.js';
+import { matchLayer1, getLayer1RoleFromTexts } from './matchers/layer1-matcher.js';
+import { matchLayer2 } from './matchers/layer2-matcher.js';
+import { matchCatalog } from './matchers/catalog-matcher.js';
+import { getDefaultRoleFromTexts, getDefaultDescriptionFromTexts } from './fallback.js';
 
 /** row 래핑을 벗겨 단일 자식 노드를 반환. 단일 노드가 아니면 null. */
 function unwrapRow(nodes: MathNode[]): MathNode | null {

@@ -11,10 +11,10 @@
  */
 
 import * as THREE from 'three';
-import type { ShaderMaterialEl } from '../types/element';
-import type { RenderContext3D } from './render-context';
-import { evalExpr3D } from './render-context';
-import { parseColorSpec } from './color';
+import type { ShaderMaterialEl } from '../types/element.js';
+import type { RenderContext3D } from './render-context.js';
+import { evalExpr3D } from './render-context.js';
+import { parseColorSpec } from './color.js';
 
 export function applyShaderMaterial(el: ShaderMaterialEl, rc: RenderContext3D): void {
   if (!el.attachTo) {

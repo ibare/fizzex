@@ -2,8 +2,8 @@
  * 연산자 명령어 핸들러
  */
 
-import type { CommandHandler } from './types';
-import { createOperator, createVariable } from './helpers';
+import type { CommandHandler } from './types.js';
+import { createOperator, createVariable } from './helpers.js';
 
 /** 단순 연산자 반환 핸들러 생성 */
 function operatorHandler(symbol: string): CommandHandler {

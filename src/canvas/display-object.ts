@@ -5,7 +5,7 @@
  * 렌더링 단위. 모든 씬 요소의 기반 클래스.
  */
 
-import type { SceneSurface } from './scene-surface';
+import type { SceneSurface } from './scene-surface.js';
 
 export abstract class DisplayObject {
   x = 0;

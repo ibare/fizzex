@@ -2,8 +2,8 @@
  * 그리스 문자 명령어 핸들러
  */
 
-import type { CommandHandler } from './types';
-import { createVariable } from './helpers';
+import type { CommandHandler } from './types.js';
+import { createVariable } from './helpers.js';
 
 /** 단순 변수 반환 핸들러 생성 */
 function variableHandler(symbol: string): CommandHandler {

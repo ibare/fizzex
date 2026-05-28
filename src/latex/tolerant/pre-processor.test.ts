@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { preProcess } from './pre-processor';
+import { preProcess } from './pre-processor.js';
 
 describe('preProcess', () => {
   describe('항등 변환', () => {

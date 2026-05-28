@@ -13,29 +13,29 @@
  *   5. store.consumePulses() — onParamChange 플래그 정리
  */
 
-import type { VisualizerSpec } from './types/spec';
-import type { RendererKind } from './types/spec';
-import type { SceneSpec } from './types/scene';
-import type { MathNode } from '../../types';
-import type { FrameInfo, Theme, Viewport2D } from '../../graphics/types';
-import { Graphics2D } from '../../graphics/Graphics2D';
-import { evaluateSync } from '../../evaluator';
-import { createStateStore, type StateStore } from './state';
-import { createSceneController, type SceneController } from './scene';
-import { createBaselineSnapshot } from './baseline';
-import { runAnimationFrame } from './animation';
-import { attachInteraction, type InteractionController } from './interaction';
-import { attachOverlay, type OverlayController } from './overlay';
-import { renderRoot } from './adapter2d/render';
-import { buildViewport } from './adapter2d/viewport-build';
-import { createRenderContext, type RenderContext } from './adapter2d/render-context';
-import { rootContext } from './expr/context';
-import { validateSpec } from './validator';
+import type { VisualizerSpec } from './types/spec.js';
+import type { RendererKind } from './types/spec.js';
+import type { SceneSpec } from './types/scene.js';
+import type { MathNode } from '../../types.js';
+import type { FrameInfo, Theme, Viewport2D } from '../../graphics/types.js';
+import { Graphics2D } from '../../graphics/Graphics2D.js';
+import { evaluateSync } from '../../evaluator/index.js';
+import { createStateStore, type StateStore } from './state.js';
+import { createSceneController, type SceneController } from './scene.js';
+import { createBaselineSnapshot } from './baseline.js';
+import { runAnimationFrame } from './animation.js';
+import { attachInteraction, type InteractionController } from './interaction.js';
+import { attachOverlay, type OverlayController } from './overlay.js';
+import { renderRoot } from './adapter2d/render.js';
+import { buildViewport } from './adapter2d/viewport-build.js';
+import { createRenderContext, type RenderContext } from './adapter2d/render-context.js';
+import { rootContext } from './expr/context.js';
+import { validateSpec } from './validator/index.js';
 import {
   applyUserBindings,
   type ApplyUserBindingsResult,
   type UserBindingInputs,
-} from './user-binding-bridge';
+} from './user-binding-bridge.js';
 
 export interface Mount2DOptions {
   width: number;

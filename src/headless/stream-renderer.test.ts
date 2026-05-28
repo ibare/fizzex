@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { classifyConfidence, buildConfidenceRegions } from './stream-renderer';
-import type { Diagnostic } from '../latex/tolerant/types';
-import type { Box } from '../box/types';
+import { classifyConfidence, buildConfidenceRegions } from './stream-renderer.js';
+import type { Diagnostic } from '../latex/tolerant/types.js';
+import type { Box } from '../box/types.js';
 
 /** 테스트용 Diagnostic 생성 헬퍼 */
 function makeDiag(overrides: Partial<Diagnostic> = {}): Diagnostic {

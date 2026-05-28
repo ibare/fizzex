@@ -1,4 +1,4 @@
-import type { I18nText } from './i18n';
+import type { I18nText } from './i18n.js';
 
 /**
  * Scene — spec이 소유. 같은 수식의 시각적 해석 묶음 (설계 §2.5).

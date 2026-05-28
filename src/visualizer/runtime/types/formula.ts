@@ -1,5 +1,5 @@
-import type { ExprString } from './expr';
-import type { I18nText } from './i18n';
+import type { ExprString } from './expr.js';
+import type { I18nText } from './i18n.js';
 
 /**
  * spec 전용 지역 파생 식 (설계 §2.3).

@@ -8,14 +8,14 @@
  * 분자/분모/지수 등을 개별적으로 이동/애니메이션할 수 있다.
  */
 
-import type { RootNode } from '../types';
-import type { Box, BoxRenderConfig } from '../box/types';
-import type { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox, findBoxBySourceId } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import { DisplayObject } from './display-object';
-import type { SceneSurface } from './scene-surface';
+import type { RootNode } from '../types.js';
+import type { Box, BoxRenderConfig } from '../box/types.js';
+import type { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox, findBoxBySourceId } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import { DisplayObject } from './display-object.js';
+import type { SceneSurface } from './scene-surface.js';
 
 export interface MathFormulaConfig {
   ast: RootNode;

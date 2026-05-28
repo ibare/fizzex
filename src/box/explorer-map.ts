@@ -7,8 +7,8 @@
  * React/DOM 의존 없는 순수 유틸리티.
  */
 
-import type { Box } from './types';
-import type { MathNode } from '../types';
+import type { Box } from './types.js';
+import type { MathNode } from '../types.js';
 
 /** Box 좌표를 화면 좌표계 사각형으로 변환한 결과 */
 export interface BoxBounds {

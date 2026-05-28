@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
+import { parseLatex } from '../latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
 import type {
   FracNode,
   SqrtNode,
@@ -11,7 +11,7 @@ import type {
   NumberNode,
   VariableNode,
   OperatorNode,
-} from '../../types';
+} from '../../types.js';
 
 describe('Basic Command Handlers', () => {
   beforeEach(() => {

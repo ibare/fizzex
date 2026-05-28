@@ -5,7 +5,7 @@
  * 모든 함수는 SceneSurface를 통해 그리므로 MockSceneSurface로 테스트 가능.
  */
 
-import type { SceneSurface } from './scene-surface';
+import type { SceneSurface } from './scene-surface.js';
 
 // ── 스타일 타입 ──
 

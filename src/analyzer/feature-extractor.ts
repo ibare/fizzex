@@ -11,8 +11,8 @@ import type {
   PolynomialInfo,
   FunctionInfo,
   MathDomain,
-} from './types';
-import { hasTrigonometric } from './function-detector';
+} from './types.js';
+import { hasTrigonometric } from './function-detector.js';
 
 /**
  * 수식 특성 추출

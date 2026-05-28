@@ -12,11 +12,11 @@
  * 반환 인스턴스는 2D/3D 공통 Visualizer 형태(canvas·store·scene·setter들).
  */
 
-import type { Mount2DOptions, Visualizer2DInstance } from './mount-2d';
-import type { Mount3DOptions, Visualizer3DInstance } from './mount-3d';
-import { compileSpec, type CompiledVisualizer } from './compile';
-import type { VisualizerRegistry, VisualizerRegistryLoadOptions } from './registry';
-import type { UserBindingInputs } from './user-binding-bridge';
+import type { Mount2DOptions, Visualizer2DInstance } from './mount-2d.js';
+import type { Mount3DOptions, Visualizer3DInstance } from './mount-3d.js';
+import { compileSpec, type CompiledVisualizer } from './compile.js';
+import type { VisualizerRegistry, VisualizerRegistryLoadOptions } from './registry.js';
+import type { UserBindingInputs } from './user-binding-bridge.js';
 
 export {
   createVisualizerRegistry,
@@ -25,10 +25,10 @@ export {
   type VisualizerRegistryManifest,
   type VisualizerRegistryManifestEntry,
   type VisualizerRegistryLoadOptions,
-} from './registry';
-export { compileSpec, type CompiledVisualizer } from './compile';
-export type { Visualizer2DInstance } from './mount-2d';
-export type { Visualizer3DInstance } from './mount-3d';
+} from './registry.js';
+export { compileSpec, type CompiledVisualizer } from './compile.js';
+export type { Visualizer2DInstance } from './mount-2d.js';
+export type { Visualizer3DInstance } from './mount-3d.js';
 
 /** 공통 mount 옵션 — mount-2d / mount-3d의 교집합. */
 export interface CreateVisualizerBaseOptions {
@@ -84,7 +84,7 @@ export async function createVisualizer(
   };
 
   if (renderer === '2d') {
-    const { mount2d } = await import('./mount-2d');
+    const { mount2d } = await import('./mount-2d.js');
     const instance = mount2d(container, compiled.spec, {
       ...base,
       catalogDefaults: compiled.catalogDefaults,
@@ -92,7 +92,7 @@ export async function createVisualizer(
     return Object.assign(instance, { compiled });
   }
   if (renderer === '3d') {
-    const { mount3d } = await import('./mount-3d');
+    const { mount3d } = await import('./mount-3d.js');
     const instance = mount3d(container, compiled.spec, {
       ...base,
       catalogDefaults: compiled.catalogDefaults,

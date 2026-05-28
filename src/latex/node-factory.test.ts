@@ -30,8 +30,8 @@ import {
   isAnyNodeType,
   isContainerNode,
   hasChildren,
-} from './node-factory';
-import { resetLatexIdCounter } from '../utils/id-generator';
+} from './node-factory.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
 
 describe('Node Factory', () => {
   beforeEach(() => {

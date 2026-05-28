@@ -1,4 +1,4 @@
-import type { ExprString } from './expr';
+import type { ExprString } from './expr.js';
 
 /**
  * 내부 상태 변수 선언 (설계 §2.4).

@@ -4,7 +4,7 @@ import {
   hasCommand,
   getCommandNames,
   commandStats,
-} from './command-registry';
+} from './command-registry.js';
 
 describe('Command Registry', () => {
   describe('getCommandHandler', () => {

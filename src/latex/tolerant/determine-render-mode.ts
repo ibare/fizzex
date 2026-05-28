@@ -7,8 +7,8 @@
  * - none: 치명적 에러 → 전체를 원본 텍스트로 표시
  */
 
-import type { SourceRange } from '../../types';
-import type { Diagnostic, RenderDecision } from './types';
+import type { SourceRange } from '../../types.js';
+import type { Diagnostic, RenderDecision } from './types.js';
 
 /**
  * 진단 배열 기반으로 렌더링 모드를 결정한다.

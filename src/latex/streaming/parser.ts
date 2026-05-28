@@ -15,10 +15,10 @@ import type {
   StreamOutput,
   StreamParserOptions,
   StreamParserState,
-} from './types';
-import type { TolerantParseOptions } from '../tolerant/types';
-import { StreamTokenizer } from './tokenizer';
-import { tolerantParse } from '../tolerant';
+} from './types.js';
+import type { TolerantParseOptions } from '../tolerant/types.js';
+import { StreamTokenizer } from './tokenizer.js';
+import { tolerantParse } from '../tolerant/index.js';
 
 /** 기본 옵션 */
 const DEFAULT_OPTIONS: StreamParserOptions = {

@@ -1,15 +1,15 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { walkAST } from './ast-walker';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { walkAST } from './ast-walker.js';
 import {
   getFunctionCategory,
   createFunctionInfoList,
   hasTrigonometric,
   hasLogarithmic,
   hasExponential,
-} from './function-detector';
-import type { FunctionInfo } from './types';
+} from './function-detector.js';
+import type { FunctionInfo } from './types.js';
 
 describe('Function Detector', () => {
   beforeEach(() => {

@@ -11,14 +11,14 @@
  * scene.params에 있어도 허용(scene은 추가 파생 param 선언 용도 — 미래 확장).
  */
 
-import type { VisualizerSpec } from './types/spec';
-import type { CatalogDetail } from '../../analyzer/semantic/types';
-import { validateSpec } from './validator';
+import type { VisualizerSpec } from './types/spec.js';
+import type { CatalogDetail } from '../../analyzer/semantic/types.js';
+import { validateSpec } from './validator/index.js';
 import {
   resolveCatalog,
   extractCatalogDefaults,
-} from './catalog-resolve';
-import { isDisplayOptionId } from './types/display-options';
+} from './catalog-resolve.js';
+import { isDisplayOptionId } from './types/display-options.js';
 
 export interface CompiledVisualizer {
   readonly spec: VisualizerSpec;

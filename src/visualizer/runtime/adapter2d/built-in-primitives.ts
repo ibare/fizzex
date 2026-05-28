@@ -6,9 +6,9 @@
  * 여기 없다 — render.ts가 직접 분기한다.
  */
 
-import type { ElementNode } from '../types/element';
-import { registerPrimitive2D } from './primitive-registry';
-import * as shapes from './render-shapes';
+import type { ElementNode } from '../types/element.js';
+import { registerPrimitive2D } from './primitive-registry.js';
+import * as shapes from './render-shapes.js';
 
 type NarrowFor<K extends string> = Extract<ElementNode, { kind: K }>;
 

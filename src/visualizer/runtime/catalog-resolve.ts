@@ -9,8 +9,8 @@
  * baseline.ts의 머지 로직에 투입된다.
  */
 
-import { getCatalogDetail } from '../../analyzer/semantic-roles';
-import type { CatalogDetail, CatalogParameterConfig } from '../../analyzer/semantic/types';
+import { getCatalogDetail } from '../../analyzer/semantic-roles.js';
+import type { CatalogDetail, CatalogParameterConfig } from '../../analyzer/semantic/types.js';
 
 export interface CatalogRef {
   category: string;

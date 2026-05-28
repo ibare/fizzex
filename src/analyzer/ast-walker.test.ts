@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker';
-import type { OperatorNode, FuncNode, VariableNode } from '../types';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker.js';
+import type { OperatorNode, FuncNode, VariableNode } from '../types.js';
 
 describe('AST Walker', () => {
   beforeEach(() => {

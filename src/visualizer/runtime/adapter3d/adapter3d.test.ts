@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
-import type { ElementNode } from '../types/element';
-import { rootContext } from '../expr/context';
+import type { ElementNode } from '../types/element.js';
+import { rootContext } from '../expr/context.js';
 import {
   createRenderContext3D,
   renderRoot3d,
   disposeChildren,
   parseColorSpec,
   evaluateInitialCameraPose,
-} from './index';
+} from './index.js';
 
 function mkRc(locals: Record<string, unknown> = {}): ReturnType<typeof createRenderContext3D> {
   return createRenderContext3D({

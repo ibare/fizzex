@@ -25,9 +25,9 @@ import type {
   AbsNode,
   OperatorNode,
   VariableNode,
-} from '../types';
-import { evaluate as evaluateScalar } from './evaluate';
-import type { Bindings, EvalDetail, EvalStatus } from './types';
+} from '../types.js';
+import { evaluate as evaluateScalar } from './evaluate.js';
+import type { Bindings, EvalDetail, EvalStatus } from './types.js';
 
 export interface Matrix {
   readonly rows: number;

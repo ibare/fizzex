@@ -7,10 +7,10 @@
  * 3D-only kind(sphere 등)는 `render.ts`에서 skip 처리한다.
  */
 
-import type { ElementNode } from '../types/element';
-import * as containers from './render-containers';
-import type { RenderRootFn } from './render-containers';
-import type { RenderContext } from './render-context';
+import type { ElementNode } from '../types/element.js';
+import * as containers from './render-containers.js';
+import type { RenderRootFn } from './render-containers.js';
+import type { RenderContext } from './render-context.js';
 
 export type Container2DRenderer = (
   ctx: CanvasRenderingContext2D,

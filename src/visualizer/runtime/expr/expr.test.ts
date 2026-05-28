@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseExpr, evalNode, evalNumber, rootContext, ExprEvalError, ExprParseError } from './index';
+import { parseExpr, evalNode, evalNumber, rootContext, ExprEvalError, ExprParseError } from './index.js';
 
 function evalStr(source: string, locals: Record<string, unknown> = {}): unknown {
   return evalNode(parseExpr(source), rootContext(locals));

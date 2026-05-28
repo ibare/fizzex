@@ -5,8 +5,8 @@
  * pnpm test:layout:report 로 실행.
  */
 
-import { runLayoutSpec, type SpecRunResult, type LayoutSpec } from './spec-runner';
-import spec from '../../../specs/fizzex-layout-spec.json';
+import { runLayoutSpec, type SpecRunResult, type LayoutSpec } from './spec-runner.js';
+import spec from '../../../specs/fizzex-layout-spec.json' with { type: 'json' };
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';

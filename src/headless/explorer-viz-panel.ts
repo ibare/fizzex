@@ -6,9 +6,9 @@
  * ExplorerOverlay가 배열로 관리하며, 동일 수식에 대해 여러 패널을 띄울 수 있다.
  */
 
-import { ExplorerVisualizerController } from './explorer-visualizer';
-import { ExplorerSceneChips } from './explorer-scene-chips';
-import type { CreatedVisualizer, VisualizerRegistry } from '../visualizer/runtime/public-api';
+import { ExplorerVisualizerController } from './explorer-visualizer.js';
+import { ExplorerSceneChips } from './explorer-scene-chips.js';
+import type { CreatedVisualizer, VisualizerRegistry } from '../visualizer/runtime/public-api.js';
 
 export interface VizPanelBounds {
   left: number;

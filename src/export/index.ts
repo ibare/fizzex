@@ -11,9 +11,9 @@ export {
   renderAstToPNGWithCanvas,
   calculateVerticalAlign,
   ensureFontsLoaded,
-} from './png-renderer';
+} from './png-renderer.js';
 
 export type {
   MathPNGResult,
   MathPNGOptions,
-} from './png-renderer';
+} from './png-renderer.js';

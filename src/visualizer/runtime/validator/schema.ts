@@ -4,7 +4,7 @@
  */
 
 import { z } from 'zod';
-import { DISPLAY_OPTION_IDS } from '../types/display-options';
+import { DISPLAY_OPTION_IDS } from '../types/display-options.js';
 
 const exprString = z.string().min(1);
 

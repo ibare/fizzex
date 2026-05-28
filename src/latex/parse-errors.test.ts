@@ -6,7 +6,7 @@ import {
   clearErrorCollector,
   reportError,
   reportWarning,
-} from './parse-errors';
+} from './parse-errors.js';
 
 describe('Parse Errors', () => {
   describe('ParseErrorCollector', () => {

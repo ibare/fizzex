@@ -5,50 +5,50 @@
  * locale별 접근 인터페이스를 제공한다.
  */
 
-import type { CatalogIndexEntry, CatalogDetail, VisualizerRef } from './types';
+import type { CatalogIndexEntry, CatalogDetail, VisualizerRef } from './types.js';
 
 // 번들 포함 (항상 로드) — 한국어 기본
-import koLayer1 from './data/layer1/ko.json';
-import koLayer2 from './data/layer2/ko.json';
-import koFallback from './data/fallback/ko.json';
+import koLayer1 from './data/layer1/ko.json' with { type: 'json' };
+import koLayer2 from './data/layer2/ko.json' with { type: 'json' };
+import koFallback from './data/fallback/ko.json' with { type: 'json' };
 
 // 카탈로그 인덱스 (번들 포함)
-import catalogIndex from './data/catalog/index.json';
+import catalogIndex from './data/catalog/index.json' with { type: 'json' };
 
 // 카탈로그 상세 (번들 포함 — 25분야)
 // 초중등
-import koElementaryGeometry from './data/catalog/ko/elementary-geometry.json';
-import koSolidGeometry from './data/catalog/ko/solid-geometry.json';
-import koLinearFunctions from './data/catalog/ko/linear-functions.json';
-import koRatioProportion from './data/catalog/ko/ratio-proportion.json';
-import koBasicStatistics from './data/catalog/ko/basic-statistics.json';
-import koTrigonometryBasic from './data/catalog/ko/trigonometry-basic.json';
+import koElementaryGeometry from './data/catalog/ko/elementary-geometry.json' with { type: 'json' };
+import koSolidGeometry from './data/catalog/ko/solid-geometry.json' with { type: 'json' };
+import koLinearFunctions from './data/catalog/ko/linear-functions.json' with { type: 'json' };
+import koRatioProportion from './data/catalog/ko/ratio-proportion.json' with { type: 'json' };
+import koBasicStatistics from './data/catalog/ko/basic-statistics.json' with { type: 'json' };
+import koTrigonometryBasic from './data/catalog/ko/trigonometry-basic.json' with { type: 'json' };
 // 수학 기초
-import koAlgebra from './data/catalog/ko/algebra.json';
-import koCalculus from './data/catalog/ko/calculus.json';
-import koGeometry from './data/catalog/ko/geometry.json';
-import koNumberTheory from './data/catalog/ko/number-theory.json';
-import koLogic from './data/catalog/ko/logic.json';
+import koAlgebra from './data/catalog/ko/algebra.json' with { type: 'json' };
+import koCalculus from './data/catalog/ko/calculus.json' with { type: 'json' };
+import koGeometry from './data/catalog/ko/geometry.json' with { type: 'json' };
+import koNumberTheory from './data/catalog/ko/number-theory.json' with { type: 'json' };
+import koLogic from './data/catalog/ko/logic.json' with { type: 'json' };
 // 자연과학
-import koPhysics from './data/catalog/ko/physics.json';
-import koAstronomy from './data/catalog/ko/astronomy.json';
-import koChemistry from './data/catalog/ko/chemistry.json';
-import koBiology from './data/catalog/ko/biology.json';
+import koPhysics from './data/catalog/ko/physics.json' with { type: 'json' };
+import koAstronomy from './data/catalog/ko/astronomy.json' with { type: 'json' };
+import koChemistry from './data/catalog/ko/chemistry.json' with { type: 'json' };
+import koBiology from './data/catalog/ko/biology.json' with { type: 'json' };
 // 공학
-import koElectrical from './data/catalog/ko/electrical.json';
-import koMechanical from './data/catalog/ko/mechanical.json';
-import koSignal from './data/catalog/ko/signal.json';
+import koElectrical from './data/catalog/ko/electrical.json' with { type: 'json' };
+import koMechanical from './data/catalog/ko/mechanical.json' with { type: 'json' };
+import koSignal from './data/catalog/ko/signal.json' with { type: 'json' };
 // 경제/금융
-import koEconomics from './data/catalog/ko/economics.json';
-import koFinance from './data/catalog/ko/finance.json';
+import koEconomics from './data/catalog/ko/economics.json' with { type: 'json' };
+import koFinance from './data/catalog/ko/finance.json' with { type: 'json' };
 // 통계/확률
-import koStatistics from './data/catalog/ko/statistics.json';
+import koStatistics from './data/catalog/ko/statistics.json' with { type: 'json' };
 // 정보/AI
-import koCs from './data/catalog/ko/cs.json';
-import koMl from './data/catalog/ko/ml.json';
-import koInformation from './data/catalog/ko/information.json';
+import koCs from './data/catalog/ko/cs.json' with { type: 'json' };
+import koMl from './data/catalog/ko/ml.json' with { type: 'json' };
+import koInformation from './data/catalog/ko/information.json' with { type: 'json' };
 // 사회과학
-import koSocialScience from './data/catalog/ko/social-science.json';
+import koSocialScience from './data/catalog/ko/social-science.json' with { type: 'json' };
 
 // ─── 타입 ───
 

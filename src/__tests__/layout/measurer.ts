@@ -5,11 +5,11 @@
  * 렌더링 없이 Box model 단계까지만 실행.
  */
 
-import { parseLatex } from '../../latex';
-import { astToBox, layoutBox, collectBoxPositions } from '../../box';
-import type { Box, HBox, VBox, SurdBox, RuleBox } from '../../box/types';
-import { MathConstants } from '../../box/font-metrics';
-import { createDeterministicMetrics } from './deterministic-metrics';
+import { parseLatex } from '../../latex/index.js';
+import { astToBox, layoutBox, collectBoxPositions } from '../../box/index.js';
+import type { Box, HBox, VBox, SurdBox, RuleBox } from '../../box/types.js';
+import { MathConstants } from '../../box/font-metrics.js';
+import { createDeterministicMetrics } from './deterministic-metrics.js';
 
 export interface LayoutMeasurement {
   latex: string;
@@ -358,7 +358,7 @@ function findGlyphsIn(box: Box): Array<{ fontSize: number; char: string }> {
   const glyphs: Array<{ fontSize: number; char: string }> = [];
   visitBox(box, (b) => {
     if (b.type === 'glyph') {
-      const g = b as import('../../box/types').GlyphBox;
+      const g = b as import('../../box/types.js').GlyphBox;
       glyphs.push({ fontSize: g.fontSize, char: g.char });
     }
   });

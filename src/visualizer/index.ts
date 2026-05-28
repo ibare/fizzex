@@ -6,7 +6,7 @@ export {
   createVisualizer,
   createVisualizerRegistry,
   compileSpec,
-} from './runtime/public-api';
+} from './runtime/public-api.js';
 export type {
   CreateVisualizerOptions,
   CreateVisualizerBaseOptions,
@@ -22,14 +22,14 @@ export type {
   VisualizerRegistryManifest,
   VisualizerRegistryManifestEntry,
   VisualizerRegistryLoadOptions,
-} from './runtime/public-api';
+} from './runtime/public-api.js';
 
-export type { VisualizerSpec } from './runtime/types/spec';
-export type { SceneSpec, SceneStyle } from './runtime/types/scene';
-export type { I18nText } from './runtime/types/i18n';
-export { resolveI18n } from './runtime/types/i18n';
-export type { UserBindingSpec, OutputKind } from './runtime/types/user-binding';
-export { applyUserBindings } from './runtime/user-binding-bridge';
+export type { VisualizerSpec } from './runtime/types/spec.js';
+export type { SceneSpec, SceneStyle } from './runtime/types/scene.js';
+export type { I18nText } from './runtime/types/i18n.js';
+export { resolveI18n } from './runtime/types/i18n.js';
+export type { UserBindingSpec, OutputKind } from './runtime/types/user-binding.js';
+export { applyUserBindings } from './runtime/user-binding-bridge.js';
 export type {
   ApplyUserBindingsResult,
   AppliedBinding,
@@ -38,4 +38,4 @@ export type {
   SkipReason,
   UserBindingInput,
   UserBindingInputs,
-} from './runtime/user-binding-bridge';
+} from './runtime/user-binding-bridge.js';

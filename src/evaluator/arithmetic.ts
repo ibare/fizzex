@@ -25,10 +25,10 @@ import type {
   ParenNode,
   AbsNode,
   FuncNode,
-} from '../types';
-import { register } from './registry';
-import { setSequenceEvaluator } from './core';
-import { value, fail, type EvalContext, type EvalOutcome } from './types';
+} from '../types.js';
+import { register } from './registry.js';
+import { setSequenceEvaluator } from './core.js';
+import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
 
 type BinaryOp = '+' | '-' | '×' | '÷' | '·';
 

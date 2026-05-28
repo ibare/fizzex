@@ -32,18 +32,18 @@ import type {
   TextNode,
   SpaceNode,
   SourceRange,
-} from '../types';
-import { generateLatexId, resetLatexIdCounter, deriveId, deriveCellId } from '../utils/id-generator';
-import { getCommandHandler, type CommandContext } from './command-registry';
+} from '../types.js';
+import { generateLatexId, resetLatexIdCounter, deriveId, deriveCellId } from '../utils/id-generator.js';
+import { getCommandHandler, type CommandContext } from './command-registry.js';
 import {
   type ParseError,
   createErrorCollector,
   clearErrorCollector,
   reportError,
   reportWarning,
-} from './parse-errors';
-import { isStandardUnimplemented, getPackageName } from './known-commands';
-import { tokenize, type Token } from './lexer';
+} from './parse-errors.js';
+import { isStandardUnimplemented, getPackageName } from './known-commands.js';
+import { tokenize, type Token } from './lexer.js';
 
 /**
  * 현재 위치의 atom 토큰(NUMBER/IDENT/OP)을 lexer로부터 받아옴.

@@ -6,9 +6,9 @@
  * 아니므로 여기 없다 — render.ts가 직접 분기한다.
  */
 
-import type { ElementNode } from '../types/element';
-import { registerPrimitive3D } from './primitive-registry';
-import { buildBufferLine, buildLight, buildPoints, buildSphere } from './shape-builders';
+import type { ElementNode } from '../types/element.js';
+import { registerPrimitive3D } from './primitive-registry.js';
+import { buildBufferLine, buildLight, buildPoints, buildSphere } from './shape-builders.js';
 
 type NarrowFor<K extends string> = Extract<ElementNode, { kind: K }>;
 

@@ -4,7 +4,7 @@ import {
   resolveCatalog,
   extractCatalogDefaults,
   extractCatalogParameters,
-} from './catalog-resolve';
+} from './catalog-resolve.js';
 
 describe('splitCatalogRef', () => {
   it('category/id 분리', () => {

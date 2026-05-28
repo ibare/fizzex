@@ -7,7 +7,7 @@
  * 간단한 predicate로 표현할 수 있다.
  */
 
-import type { Viewport2D } from './types';
+import type { Viewport2D } from './types.js';
 
 export interface FunctionCurveOptions {
   xMin: number;

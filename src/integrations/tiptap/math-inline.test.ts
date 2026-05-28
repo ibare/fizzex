@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { MathInline } from './math-inline';
+import { MathInline } from './math-inline.js';
 
 describe('MathInline Extension', () => {
   it('MathInline이 정의되어 있다', () => {

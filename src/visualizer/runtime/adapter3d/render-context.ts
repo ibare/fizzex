@@ -11,11 +11,11 @@
  */
 
 import type * as THREE from 'three';
-import type { FrameInfo } from '../../../graphics/types';
-import type { ExprString } from '../types/expr';
-import type { Context } from '../expr/context';
-import { parseExpr, type ExprAst } from '../expr/parse';
-import { evalNode } from '../expr/eval';
+import type { FrameInfo } from '../../../graphics/types.js';
+import type { ExprString } from '../types/expr.js';
+import type { Context } from '../expr/context.js';
+import { parseExpr, type ExprAst } from '../expr/parse.js';
+import { evalNode } from '../expr/eval.js';
 
 export interface RenderContext3D {
   THREE: typeof THREE;

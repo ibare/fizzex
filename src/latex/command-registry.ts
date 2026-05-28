@@ -24,4 +24,4 @@ export {
   type CommandHandler,
   type CommandContext,
   type CommandResult,
-} from './commands';
+} from './commands/index.js';

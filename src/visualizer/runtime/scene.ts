@@ -9,8 +9,8 @@
  * 같은 id로 setActive 호출 시에도 프리셋을 재적용한다(Scene "리셋" 용도로 호환).
  */
 
-import type { SceneSpec } from './types/scene';
-import type { StateStore } from './state';
+import type { SceneSpec } from './types/scene.js';
+import type { StateStore } from './state.js';
 
 export interface SceneController {
   getActiveId(): string;

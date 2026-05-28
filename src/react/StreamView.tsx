@@ -6,9 +6,9 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { DOMStreamView } from '../headless/stream-renderer';
-import type { DOMStreamViewConfig } from '../headless/stream-renderer';
-import type { StreamParserOptions } from '../latex/streaming';
+import { DOMStreamView } from '../headless/stream-renderer.js';
+import type { DOMStreamViewConfig } from '../headless/stream-renderer.js';
+import type { StreamParserOptions } from '../latex/streaming/index.js';
 
 export interface StreamViewProps {
   /** 누적 텍스트 (증가하는 패턴 — delta만 feed) */

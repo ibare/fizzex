@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { recoverFromErrors } from './error-recovery';
-import { parseLatex } from '../latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
+import { recoverFromErrors } from './error-recovery.js';
+import { parseLatex } from '../latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
 
 beforeEach(() => {
   resetLatexIdCounter();
@@ -107,7 +107,7 @@ describe('recoverFromErrors', () => {
         ...recovered.remainingNodes,
       ];
 
-      function collectIds(nodes: import('../../types').MathNode[]): void {
+      function collectIds(nodes: import('../../types.js').MathNode[]): void {
         for (const node of nodes) {
           expect(allIds.has(node.id)).toBe(false);
           allIds.add(node.id);

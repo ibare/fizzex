@@ -8,44 +8,44 @@
  *                 → Projector 2-pass 렌더링 + 호버 하이라이트
  */
 
-import type { RootNode, MathNode } from '../types';
-import type { Box, BoxRenderConfig } from '../box/types';
-import { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import { loadMathFont } from '../fonts';
-import { parseLatex } from '../latex';
+import type { RootNode, MathNode } from '../types.js';
+import type { Box, BoxRenderConfig } from '../box/types.js';
+import { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import { loadMathFont } from '../fonts/index.js';
+import { parseLatex } from '../latex/index.js';
 import {
   buildExplorerMap,
   explorerHitTest,
-} from '../box/explorer-map';
-import type { ExplorerBoxInfo } from '../box/explorer-map';
-import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles';
-import type { SemanticResult } from '../analyzer/semantic-roles';
-import { analyzeBindings } from '../evaluator/analyze';
-import type { BindingAnalysis } from '../evaluator/analyze';
-import { getVisualizersForCatalog } from '../analyzer/semantic/loader';
-import type { VisualizerRef } from '../analyzer/semantic/types';
+} from '../box/explorer-map.js';
+import type { ExplorerBoxInfo } from '../box/explorer-map.js';
+import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles.js';
+import type { SemanticResult } from '../analyzer/semantic-roles.js';
+import { analyzeBindings } from '../evaluator/analyze.js';
+import type { BindingAnalysis } from '../evaluator/analyze.js';
+import { getVisualizersForCatalog } from '../analyzer/semantic/loader.js';
+import type { VisualizerRef } from '../analyzer/semantic/types.js';
 import type {
   ApplyUserBindingsResult,
   SkipReason,
   UserBindingInputs,
   VisualizerRegistry,
-} from '../visualizer';
-import { VizPanel } from './explorer-viz-panel';
-import { getControlType, buildInlineControlConfig } from './inline-control-types';
-import type { InlineControlConfig } from './inline-control-types';
-import { ExplorerInlineControls } from './explorer-inline-controls';
+} from '../visualizer/index.js';
+import { VizPanel } from './explorer-viz-panel.js';
+import { getControlType, buildInlineControlConfig } from './inline-control-types.js';
+import type { InlineControlConfig } from './inline-control-types.js';
+import { ExplorerInlineControls } from './explorer-inline-controls.js';
 import {
   createModificationState,
   modifyNumberNode,
   resetNode,
   hasModifications,
-} from './ast-modifier';
-import type { AstModificationState } from './ast-modifier';
-import type { CatalogDetail } from '../analyzer/semantic/types';
-import type { CreatedVisualizer } from '../visualizer/runtime/public-api';
+} from './ast-modifier.js';
+import type { AstModificationState } from './ast-modifier.js';
+import type { CatalogDetail } from '../analyzer/semantic/types.js';
+import type { CreatedVisualizer } from '../visualizer/runtime/public-api.js';
 
 // =========================================================================
 // 타입

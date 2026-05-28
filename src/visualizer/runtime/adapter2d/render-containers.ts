@@ -14,8 +14,8 @@ import type {
   LayoutEl,
   ViewportScopeEl,
   ClipEl,
-} from '../types/element';
-import { evalBool, evalExpr, evalNumOr, extendRenderContext, type RenderContext } from './render-context';
+} from '../types/element.js';
+import { evalBool, evalExpr, evalNumOr, extendRenderContext, type RenderContext } from './render-context.js';
 
 export type RenderRootFn = (ctx: CanvasRenderingContext2D, node: ElementNode, rc: RenderContext) => void;
 

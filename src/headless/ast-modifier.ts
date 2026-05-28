@@ -5,7 +5,7 @@
  * 원본 AST를 보존하고 작업 사본을 별도로 관리한다.
  */
 
-import type { MathNode, RootNode } from '../types';
+import type { MathNode, RootNode } from '../types.js';
 
 // ─── 타입 ───
 

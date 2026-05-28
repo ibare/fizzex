@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import type { VisualizerSpec } from '../types/spec';
-import { visualizerSpecSchema } from './schema';
+import type { VisualizerSpec } from '../types/spec.js';
+import { visualizerSpecSchema } from './schema.js';
 
 export class VisualizerSpecValidationError extends Error {
   constructor(public readonly issues: z.core.$ZodIssue[]) {
@@ -24,4 +24,4 @@ export function validateSpec(input: unknown): VisualizerSpec {
   return result.data as VisualizerSpec;
 }
 
-export { visualizerSpecSchema } from './schema';
+export { visualizerSpecSchema } from './schema.js';

@@ -4,12 +4,12 @@
  * 다양한 Box를 쉽게 생성하기 위한 빌더 함수들
  */
 
-import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox } from './types';
-import type { CanvasFontMetrics } from './font-metrics';
-import { MathConstants } from './font-metrics';
-import { MathStyle, isDisplay, isCramped } from './math-style';
-import { isComplexNodeSlot } from './constants';
-import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
+import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox } from './types.js';
+import type { CanvasFontMetrics } from './font-metrics.js';
+import { MathConstants } from './font-metrics.js';
+import { MathStyle, isDisplay, isCramped } from './math-style.js';
+import { isComplexNodeSlot } from './constants.js';
+import { DELIMITER_PATHS } from '../fonts/delimiter-paths.js';
 
 /**
  * ASCII 문자를 수학 이탤릭 유니코드 코드포인트로 변환.
@@ -1241,7 +1241,7 @@ export function createCancelBox(
  */
 export function createAccentBox(
   content: Box,
-  accentType: import('../types').AccentNode['accentType'],
+  accentType: import('../types.js').AccentNode['accentType'],
   metrics: CanvasFontMetrics,
   fontSize: number = 1.0,
   sourceId?: string

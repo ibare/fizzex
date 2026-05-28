@@ -5,11 +5,11 @@
 
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { parseLatex } from '../../latex/latex-parser';
-import { astToLatex } from '../../latex/ast-to-latex';
-import { astToBox } from '../../box/ast-to-box';
-import { createDeterministicMetrics } from '../layout/deterministic-metrics';
-import { isStandardUnimplemented, getPackageName } from '../../latex/known-commands';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { astToLatex } from '../../latex/ast-to-latex.js';
+import { astToBox } from '../../box/ast-to-box.js';
+import { createDeterministicMetrics } from '../layout/deterministic-metrics.js';
+import { isStandardUnimplemented, getPackageName } from '../../latex/known-commands.js';
 
 interface CorpusEntry {
   id: string;

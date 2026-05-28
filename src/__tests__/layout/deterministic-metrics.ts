@@ -5,11 +5,11 @@
  * 실제 Canvas 측정 대신 New Computer Modern Math 폰트의 비율 기반 고정값 반환.
  */
 
-import type { BoxRenderConfig } from '../../box/types';
+import type { BoxRenderConfig } from '../../box/types.js';
 import {
   getDelimiterGlyphs,
   selectGlyphForHeight,
-} from '../../fonts/glyph-mappings';
+} from '../../fonts/glyph-mappings.js';
 
 const DEFAULT_BASE_FONT_SIZE = 20;
 

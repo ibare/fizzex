@@ -1,6 +1,6 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { DOMRendererView } from '../../headless/renderer';
-import type { MathInlineOptions } from './types';
+import { DOMRendererView } from '../../headless/renderer.js';
+import type { MathInlineOptions } from './types.js';
 
 export const MathInline = Node.create<MathInlineOptions>({
   name: 'mathInline',

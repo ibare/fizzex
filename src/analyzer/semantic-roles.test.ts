@@ -1,13 +1,13 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
 import {
   getSemanticMeaning,
   buildAstAncestorMap,
   buildSemanticMap,
   containsVariable,
-} from './semantic-roles';
-import type { MathNode } from '../types';
+} from './semantic-roles.js';
+import type { MathNode } from '../types.js';
 
 /** ID로 AST 노드 찾기 */
 function findNode(node: MathNode, predicate: (n: MathNode) => boolean): MathNode | null {

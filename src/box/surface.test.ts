@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { MockSurface } from './surface';
+import { MockSurface } from './surface.js';
 
 describe('MockSurface', () => {
   let backend: MockSurface;

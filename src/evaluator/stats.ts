@@ -19,9 +19,9 @@
  *   필드에 ParenNode 한 개를 넣어준다. 본 모듈은 그 paren content 안의
  *   콤마로 인자를 split 한다.
  */
-import type { MathNode, FuncNode, ParenNode, RowNode, NumberNode } from '../types';
-import { value, fail, type EvalContext, type EvalOutcome } from './types';
-import { evalChildSequence } from './arithmetic';
+import type { MathNode, FuncNode, ParenNode, RowNode, NumberNode } from '../types.js';
+import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
+import { evalChildSequence } from './arithmetic.js';
 
 const DISTRIBUTION_NAMES: ReadonlySet<string> = new Set([
   'normpdf', 'normcdf', 'norminv',

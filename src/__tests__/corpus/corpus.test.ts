@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { runCorpusTest, type CorpusTestReport } from './corpus-runner';
+import { runCorpusTest, type CorpusTestReport } from './corpus-runner.js';
 
 describe('Corpus Test Suite', () => {
   let report: CorpusTestReport;

@@ -10,11 +10,11 @@
  * - `imageCache`: `image` Element가 매 프레임 Image 객체를 새로 만들지 않도록 공유 캐시
  */
 
-import type { FrameInfo, Viewport2D } from '../../../graphics/types';
-import type { ExprString } from '../types/expr';
-import type { Context } from '../expr/context';
-import { parseExpr, type ExprAst } from '../expr/parse';
-import { evalNode } from '../expr/eval';
+import type { FrameInfo, Viewport2D } from '../../../graphics/types.js';
+import type { ExprString } from '../types/expr.js';
+import type { Context } from '../expr/context.js';
+import { parseExpr, type ExprAst } from '../expr/parse.js';
+import { evalNode } from '../expr/eval.js';
 
 export interface RenderContext {
   exprCtx: Context;

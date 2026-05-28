@@ -4,7 +4,7 @@
  * MathNode AST를 LaTeX 문자열로 직렬화
  */
 
-import type { MathNode } from '../types';
+import type { MathNode } from '../types.js';
 
 /** AST를 LaTeX 문자열로 변환 */
 export function astToLatex(node: MathNode): string {

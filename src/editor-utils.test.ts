@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import type { RootNode, RowNode, NumberNode, FracNode, MathNode } from './types';
-import { boundary } from './types';
+import type { RootNode, RowNode, NumberNode, FracNode, MathNode } from './types.js';
+import { boundary } from './types.js';
 import {
   findNodePath,
   findNodeByIdReadonly,
@@ -8,7 +8,7 @@ import {
   rebuildAstWithNewChildren,
   buildNewState,
   freezeState,
-} from './editor-utils';
+} from './editor-utils.js';
 
 /** 테스트용 간단한 AST 생성 */
 function createTestAst(): RootNode {
@@ -231,7 +231,7 @@ describe('freezeState', () => {
   });
 
   it('MathEditor에서 반환된 state가 freeze되어 있는지 확인', async () => {
-    const { MathEditor } = await import('./editor');
+    const { MathEditor } = await import('./editor.js');
 
     let capturedState: ReturnType<typeof buildNewState> | null = null;
     const editor = new MathEditor((state) => { capturedState = state; });

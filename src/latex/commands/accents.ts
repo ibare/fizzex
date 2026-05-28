@@ -2,9 +2,9 @@
  * 악센트 명령어 핸들러
  */
 
-import type { AccentNode } from '../../types';
-import type { CommandHandler } from './types';
-import { createAccent, createOverline, createUnderline, createOverbrace, createXArrow } from './helpers';
+import type { AccentNode } from '../../types.js';
+import type { CommandHandler } from './types.js';
+import { createAccent, createOverline, createUnderline, createOverbrace, createXArrow } from './helpers.js';
 
 /** 악센트 핸들러 생성 */
 function accentHandler(accentType: AccentNode['accentType']): CommandHandler {
@@ -43,7 +43,7 @@ function xarrowHandler(direction: 'left' | 'right' | 'both'): CommandHandler {
     let pos = ctx.pos;
 
     // 선택적 아래 텍스트: [below]
-    let below: import('../../types').MathNode[] | undefined;
+    let below: import('../../types.js').MathNode[] | undefined;
     if (ctx.latex[pos] === '[') {
       pos++; // skip '['
       const belowResult = ctx.parseExpression(ctx.latex, pos, [']']);

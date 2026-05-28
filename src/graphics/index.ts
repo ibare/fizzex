@@ -6,20 +6,20 @@
  * (Explorer 등 상위 프레임워크)에서 쓴다.
  */
 
-export { Graphics2D } from './Graphics2D';
-export type { Graphics2DOptions } from './Graphics2D';
+export { Graphics2D } from './Graphics2D.js';
+export type { Graphics2DOptions } from './Graphics2D.js';
 
-export { Graphics3D } from './Graphics3D';
+export { Graphics3D } from './Graphics3D.js';
 export type {
   Graphics3DOptions,
   Graphics3DContext,
   Graphics3DCameraOptions,
   Graphics3DRendererOptions,
-} from './Graphics3D';
+} from './Graphics3D.js';
 
-export * as theme from './theme';
-export * from './viewport';
-export * from './draw';
-export * from './curves';
+export * as theme from './theme.js';
+export * from './viewport/index.js';
+export * from './draw.js';
+export * from './curves.js';
 
-export type { Theme, FrameInfo, Viewport2D } from './types';
+export type { Theme, FrameInfo, Viewport2D } from './types.js';

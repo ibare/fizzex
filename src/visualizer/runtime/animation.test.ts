@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { runAnimationFrame } from './animation';
-import { createStateStore } from './state';
-import { createRenderContext } from './adapter2d/render-context';
-import { rootContext } from './expr/context';
-import type { AnimationSpec, StateDecl } from './types/state';
-import type { FrameInfo } from '../../graphics/types';
+import { runAnimationFrame } from './animation.js';
+import { createStateStore } from './state.js';
+import { createRenderContext } from './adapter2d/render-context.js';
+import { rootContext } from './expr/context.js';
+import type { AnimationSpec, StateDecl } from './types/state.js';
+import type { FrameInfo } from '../../graphics/types.js';
 
 function makeFrame(over?: Partial<FrameInfo>): FrameInfo {
   return { dt: 0.016, now: 0, elapsed: 0, width: 400, height: 300, isDark: false, ...over };

@@ -10,18 +10,18 @@
  * 3D Element를 만나면 현재는 skip (Phase 6 어댑터 도입 전).
  */
 
-import type { ElementNode } from '../types/element';
-import { applyStyle, applyTransform } from './style-apply';
+import type { ElementNode } from '../types/element.js';
+import { applyStyle, applyTransform } from './style-apply.js';
 import {
   evalBool,
   evalExpr,
   evalNumOr,
   extendRenderContext,
   type RenderContext,
-} from './render-context';
-import { CONTAINER_RENDERERS, KIND_3D } from './dispatch';
-import { lookupPrimitive2D } from './primitive-registry';
-import './built-in-primitives';
+} from './render-context.js';
+import { CONTAINER_RENDERERS, KIND_3D } from './dispatch.js';
+import { lookupPrimitive2D } from './primitive-registry.js';
+import './built-in-primitives.js';
 
 export function renderRoot(ctx: CanvasRenderingContext2D, node: ElementNode, rc: RenderContext): void {
   if (node.visible !== undefined && !evalBool(node.visible, rc)) return;

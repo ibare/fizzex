@@ -4,9 +4,9 @@
  * 메인 evaluator 표면에 통합. 인자는 paren content 안에서 콤마로 split 된다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateSync, evaluate } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateSync, evaluate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

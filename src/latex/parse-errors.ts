@@ -2,7 +2,7 @@
  * LaTeX 파싱 에러 타입 정의
  */
 
-import type { MathNode } from '../types';
+import type { MathNode } from '../types.js';
 
 /** 에러 심각도 */
 export type ParseErrorSeverity = 'error' | 'warning' | 'info';

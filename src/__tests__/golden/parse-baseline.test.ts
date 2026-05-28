@@ -6,10 +6,10 @@
  * (P2 시점의 [BUG] 항목들은 원자화 도입과 함께 [OK]로 전환되어 잔존하지 않는다.)
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { astToLatex } from '../../latex/ast-to-latex';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import type { MathNode } from '../../types';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { astToLatex } from '../../latex/ast-to-latex.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import type { MathNode } from '../../types.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

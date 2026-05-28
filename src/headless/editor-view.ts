@@ -5,20 +5,20 @@
  * 프레임워크 무관: 임의의 컨테이너 엘리먼트에서 동작한다.
  */
 
-import { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox, hitTest } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import type { BoxRenderConfig, Box, HBox } from '../box/types';
-import { astToLatex } from '../latex/ast-to-latex';
-import { MathEditor, createStateFromLatex, keyToInputAction } from '../editor';
-import { boundary } from '../types';
-import { loadMathFont } from '../fonts';
-import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types';
-import { resolveBoxRenderConfig } from './types';
-import { ExplorerOverlay } from './explorer-overlay';
-import { attachExplorerTrigger } from './explorer-trigger';
-import type { ExplorerTriggerOptions } from './explorer-trigger';
+import { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox, hitTest } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import type { BoxRenderConfig, Box, HBox } from '../box/types.js';
+import { astToLatex } from '../latex/ast-to-latex.js';
+import { MathEditor, createStateFromLatex, keyToInputAction } from '../editor.js';
+import { boundary } from '../types.js';
+import { loadMathFont } from '../fonts/index.js';
+import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types.js';
+import { resolveBoxRenderConfig } from './types.js';
+import { ExplorerOverlay } from './explorer-overlay.js';
+import { attachExplorerTrigger } from './explorer-trigger.js';
+import type { ExplorerTriggerOptions } from './explorer-trigger.js';
 
 export class DOMEditorView {
   // DOM elements

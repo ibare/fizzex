@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { rootContext } from '../expr/context';
+import { rootContext } from '../expr/context.js';
 import {
   createRenderContext,
   extendRenderContext,
@@ -11,12 +11,12 @@ import {
   evalBoolOr,
   currentViewport,
   type RenderContext,
-} from './render-context';
-import { buildViewport } from './viewport-build';
-import { applyStyle, applyTransform, resolveFill } from './style-apply';
-import { renderRoot } from './render';
-import type { ElementNode } from '../types/element';
-import type { FrameInfo } from '../../../graphics/types';
+} from './render-context.js';
+import { buildViewport } from './viewport-build.js';
+import { applyStyle, applyTransform, resolveFill } from './style-apply.js';
+import { renderRoot } from './render.js';
+import type { ElementNode } from '../types/element.js';
+import type { FrameInfo } from '../../../graphics/types.js';
 
 function makeFrame(over?: Partial<FrameInfo>): FrameInfo {
   return {

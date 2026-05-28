@@ -5,13 +5,13 @@
  * 서버 사이드 렌더링 및 프린트/PDF 출력용
  */
 
-import type { RootNode, EditorState } from '../types';
-import type { Box, BoxRenderConfig } from '../box/types';
-import { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
+import type { RootNode, EditorState } from '../types.js';
+import type { Box, BoxRenderConfig } from '../box/types.js';
+import { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts/index.js';
 
 /** PNG 렌더링 결과 */
 export interface MathPNGResult {
@@ -163,7 +163,7 @@ export async function renderLatexToPNG(
   options?: MathPNGOptions
 ): Promise<MathPNGResult> {
   // LaTeX 파서 동적 임포트 (번들 크기 최적화)
-  const { parseLatex } = await import('../latex');
+  const { parseLatex } = await import('../latex/index.js');
   const { ast } = parseLatex(latex);
   return renderAstToPNG(ast, options);
 }

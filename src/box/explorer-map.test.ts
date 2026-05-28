@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { getBoxBounds, buildExplorerMap, explorerHitTest } from './explorer-map';
-import type { GlyphBox, HBox, VBox, SurdBox, Box } from './types';
-import type { RootNode, NumberNode, FracNode, MathNode, VariableNode } from '../types';
-import { layoutBox } from './box-layout';
+import { getBoxBounds, buildExplorerMap, explorerHitTest } from './explorer-map.js';
+import type { GlyphBox, HBox, VBox, SurdBox, Box } from './types.js';
+import type { RootNode, NumberNode, FracNode, MathNode, VariableNode } from '../types.js';
+import { layoutBox } from './box-layout.js';
 
 // ── 테스트 헬퍼 ──
 

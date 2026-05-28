@@ -10,9 +10,9 @@
  * 3. exact 패턴은 변수명까지 일치해야 높은 confidence
  */
 
-import type { MathNode } from '../../../types';
-import type { CatalogIndexEntry, CatalogMatchResult } from '../types';
-import { getChildArrays } from '../helpers';
+import type { MathNode } from '../../../types.js';
+import type { CatalogIndexEntry, CatalogMatchResult } from '../types.js';
+import { getChildArrays } from '../helpers.js';
 
 // ─── AST 시그니처 추출 ───
 

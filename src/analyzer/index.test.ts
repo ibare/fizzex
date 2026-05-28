@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { analyzeExpression } from './index';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { analyzeExpression } from './index.js';
 
 describe('Expression Analyzer (통합)', () => {
   beforeEach(() => {

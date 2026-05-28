@@ -12,7 +12,7 @@
  * 이 모듈은 노드를 생성하거나 AST 를 변경하지 않는다. 순수 정책 조회.
  */
 
-import type { MathNode } from './types';
+import type { MathNode } from './types.js';
 
 // ─── 타입 ───
 

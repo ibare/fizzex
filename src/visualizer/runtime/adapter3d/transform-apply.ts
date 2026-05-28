@@ -11,9 +11,9 @@
  */
 
 import type { Object3D } from 'three';
-import type { TransformSpec } from '../types/style';
-import type { RenderContext3D } from './render-context';
-import { evalNumOr3D } from './render-context';
+import type { TransformSpec } from '../types/style.js';
+import type { RenderContext3D } from './render-context.js';
+import { evalNumOr3D } from './render-context.js';
 
 export function applyTransform3D(
   obj: Object3D,

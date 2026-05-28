@@ -5,7 +5,7 @@
  * P4 원칙 준수: 상태 변경은 항상 새 객체를 생성하여 반환한다.
  */
 
-import type { MathNode, RootNode, CursorPosition, EditorState } from './types';
+import type { MathNode, RootNode, CursorPosition, EditorState } from './types.js';
 
 /** AST 트리에서 루트→타겟까지의 경로 세그먼트 */
 export interface NodePathSegment {

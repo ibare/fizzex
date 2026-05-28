@@ -5,7 +5,7 @@
  */
 
 import katex, { __parse } from 'katex';
-import type { Engine, EngineResult } from './types';
+import type { Engine, EngineResult } from './types.js';
 
 export const katexEngine: Engine = {
   name: 'katex',

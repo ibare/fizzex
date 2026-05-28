@@ -5,9 +5,9 @@
  * MatrixNode 가 포함된 식을 인식하고 행렬 산술을 수행한다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateMatrixSync, evaluateMatrix, type Matrix, type MatrixValue } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateMatrixSync, evaluateMatrix, type Matrix, type MatrixValue } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

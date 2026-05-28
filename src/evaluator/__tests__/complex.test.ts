@@ -5,9 +5,9 @@
  * `i` 는 imaginary unit 으로 자동 인식되며, bindings 에 명시 시 사용자 값이 우선한다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateComplexSync, evaluateComplex, type Complex } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateComplexSync, evaluateComplex, type Complex } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

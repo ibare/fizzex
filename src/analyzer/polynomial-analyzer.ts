@@ -4,9 +4,9 @@
  * 다항식의 차수, 주 변수 등을 분석
  */
 
-import type { RootNode, MathNode, PowerNode, VariableNode } from '../types';
-import type { PolynomialInfo, ASTCollectionResult } from './types';
-import { findNodes } from './ast-walker';
+import type { RootNode, MathNode, PowerNode, VariableNode } from '../types.js';
+import type { PolynomialInfo, ASTCollectionResult } from './types.js';
+import { findNodes } from './ast-walker.js';
 
 /** 디버그 로깅 플래그 (window 전역 의존 없이 모듈 레벨로 관리) */
 let debugEnabled = false;
@@ -157,7 +157,7 @@ function extractDegree(exponent: MathNode[]): number {
 
     // RowNode로 감싸진 경우 재귀적으로 탐색
     if (node.type === 'row') {
-      const rowNode = node as import('../types').RowNode;
+      const rowNode = node as import('../types.js').RowNode;
       return extractDegree(rowNode.children);
     }
 
@@ -173,7 +173,7 @@ function extractDegree(exponent: MathNode[]): number {
       return parseFloat(node.value);
     }
     if (node.type === 'row') {
-      const rowNode = node as import('../types').RowNode;
+      const rowNode = node as import('../types.js').RowNode;
       const result = extractDegree(rowNode.children);
       if (result > 1) return result;
     }
@@ -327,7 +327,7 @@ function getChildren(node: MathNode): MathNode[] {
       return [...xarrow.above, ...(xarrow.below || [])];
     }
     case 'opaque':
-      return (node as import('../types').OpaqueNode).args.flat();
+      return (node as import('../types.js').OpaqueNode).args.flat();
     default:
       return [];
   }

@@ -2,8 +2,8 @@
  * 수학 함수 명령어 핸들러
  */
 
-import type { CommandHandler } from './types';
-import { createFunc, createVariable, createParen } from './helpers';
+import type { CommandHandler } from './types.js';
+import { createFunc, createVariable, createParen } from './helpers.js';
 
 /** 수학 함수 핸들러 생성 */
 function mathFunctionHandler(funcName: string): CommandHandler {

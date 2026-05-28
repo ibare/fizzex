@@ -10,9 +10,9 @@
  * store 내부 레코드를 exprCtx에 그대로 바인딩한다 (live view).
  */
 
-import { evalExpr, type EvalContext } from './expr/eval-context';
-import type { AnimationSpec } from './types/state';
-import type { StateStore } from './state';
+import { evalExpr, type EvalContext } from './expr/eval-context.js';
+import type { AnimationSpec } from './types/state.js';
+import type { StateStore } from './state.js';
 
 export function runAnimationFrame(
   spec: AnimationSpec | undefined,

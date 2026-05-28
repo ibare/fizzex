@@ -8,13 +8,13 @@
  * - NaN/±Infinity 는 핫패스로 새지 않게 정규화 (E3 에서 dispatch 게이트 강화).
  * - 결정적·순수·재진입 가능.
  */
-import type { MathNode } from '../types';
-import type { Bindings, EvalContext, EvalOutcome, EvalResult } from './types';
-import { lookup } from './registry';
-import { installCoreHandlers } from './core';
-import { installArithmeticHandlers } from './arithmetic';
-import { installFunctionHandlers } from './functions';
-import { installCalculusHandlers } from './calculus';
+import type { MathNode } from '../types.js';
+import type { Bindings, EvalContext, EvalOutcome, EvalResult } from './types.js';
+import { lookup } from './registry.js';
+import { installCoreHandlers } from './core.js';
+import { installArithmeticHandlers } from './arithmetic.js';
+import { installFunctionHandlers } from './functions.js';
+import { installCalculusHandlers } from './calculus.js';
 
 function dispatch(node: MathNode, ctx: EvalContext): EvalOutcome {
   const fn = lookup(node.type);

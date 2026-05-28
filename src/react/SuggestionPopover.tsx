@@ -3,8 +3,8 @@
  */
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import type { SuggestionWithAction, SuggestionCategory } from '../suggestion/types';
-import { useFizzexLabels } from '../i18n';
+import type { SuggestionWithAction, SuggestionCategory } from '../suggestion/types.js';
+import { useFizzexLabels } from '../i18n/index.js';
 
 export interface SuggestionPopoverProps {
   /** 제안 목록 */

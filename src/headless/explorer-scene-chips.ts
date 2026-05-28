@@ -6,9 +6,9 @@
  * scene.params 프리셋에서 drift 되었는지(사용자 조정 후) 감지해 active 표시를 해제한다.
  */
 
-import type { SceneSpec } from '../visualizer/runtime/types/scene';
-import { resolveI18n } from '../visualizer/runtime/types/i18n';
-import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api';
+import type { SceneSpec } from '../visualizer/runtime/types/scene.js';
+import { resolveI18n } from '../visualizer/runtime/types/i18n.js';
+import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api.js';
 
 export interface SceneChipsConfig {
   scenes: readonly SceneSpec[];

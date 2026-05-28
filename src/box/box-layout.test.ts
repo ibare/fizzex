@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { layoutBox, collectBoxPositions, hitTest, findBoxBySourceId, getCursorXPosition } from './box-layout';
-import type { GlyphBox, HBox, VBox, RuleBox, KernBox, Box } from './types';
+import { layoutBox, collectBoxPositions, hitTest, findBoxBySourceId, getCursorXPosition } from './box-layout.js';
+import type { GlyphBox, HBox, VBox, RuleBox, KernBox, Box } from './types.js';
 
 function createTestGlyph(opts?: Partial<GlyphBox>): GlyphBox {
   return {

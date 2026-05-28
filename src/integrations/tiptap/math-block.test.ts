@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { MathBlock } from './math-block';
+import { MathBlock } from './math-block.js';
 
 describe('MathBlock Extension', () => {
   it('MathBlock이 정의되어 있다', () => {

@@ -7,8 +7,8 @@
  * SceneSurface extends Surface이므로 기존 Projector에 그대로 전달 가능.
  */
 
-import type { Surface, SurfaceCall } from '../box/surface';
-import { CanvasSurface, MockSurface } from '../box/surface';
+import type { Surface, SurfaceCall } from '../box/surface.js';
+import { CanvasSurface, MockSurface } from '../box/surface.js';
 
 // ── 인터페이스 ──
 

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { CanvasFontMetrics, MathConstants } from './font-metrics';
-import type { BoxRenderConfig } from './types';
+import { CanvasFontMetrics, MathConstants } from './font-metrics.js';
+import type { BoxRenderConfig } from './types.js';
 
 describe('Font Metrics', () => {
   describe('MathConstants', () => {

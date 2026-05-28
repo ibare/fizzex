@@ -4,14 +4,14 @@
  * 각 카테고리별 핸들러를 통합하여 단일 레지스트리 제공
  */
 
-import type { CommandHandler, CommandContext, CommandResult } from './types';
-import { greekHandlers } from './greek';
-import { operatorHandlers } from './operators';
-import { functionHandlers } from './functions';
-import { basicHandlers } from './basic';
-import { bigOpHandlers } from './bigops';
-import { accentHandlers } from './accents';
-import { spaceHandlers } from './spaces';
+import type { CommandHandler, CommandContext, CommandResult } from './types.js';
+import { greekHandlers } from './greek.js';
+import { operatorHandlers } from './operators.js';
+import { functionHandlers } from './functions.js';
+import { basicHandlers } from './basic.js';
+import { bigOpHandlers } from './bigops.js';
+import { accentHandlers } from './accents.js';
+import { spaceHandlers } from './spaces.js';
 
 // 타입 재export
 export type { CommandHandler, CommandContext, CommandResult };

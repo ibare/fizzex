@@ -11,7 +11,7 @@ import {
   fracDenominatorStyle,
   crampedStyle,
   fontSizeForStyle,
-} from './math-style';
+} from './math-style.js';
 
 describe('MathStyle 판별 함수', () => {
   it('isCramped는 홀수 스타일에서 true', () => {

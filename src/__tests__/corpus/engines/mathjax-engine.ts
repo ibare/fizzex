@@ -10,7 +10,7 @@ import { SVG } from 'mathjax-full/js/output/svg.js';
 import { liteAdaptor } from 'mathjax-full/js/adaptors/liteAdaptor.js';
 import { RegisterHTMLHandler } from 'mathjax-full/js/handlers/html.js';
 import { AllPackages } from 'mathjax-full/js/input/tex/AllPackages.js';
-import type { Engine, EngineResult } from './types';
+import type { Engine, EngineResult } from './types.js';
 
 // noerrors 패키지 제외 — merror 감지 정확도 확보
 const packages = AllPackages.filter((p: string) => p !== 'noerrors' && p !== 'noundefined');

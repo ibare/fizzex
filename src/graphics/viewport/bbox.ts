@@ -7,7 +7,7 @@
  * 화면 앵커(특정 스크린 좌표를 목표 지점으로, plot 범위 안에서 clamp) 정렬을 지정할 수 있다.
  */
 
-import type { Viewport2D } from '../types';
+import type { Viewport2D } from '../types.js';
 
 export interface BBox {
   minX: number;

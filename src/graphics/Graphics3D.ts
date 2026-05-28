@@ -14,8 +14,8 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import type { FrameInfo, Theme } from './types';
-import { background as themeBackground } from './theme';
+import type { FrameInfo, Theme } from './types.js';
+import { background as themeBackground } from './theme.js';
 
 export interface Graphics3DContext {
   readonly scene: THREE.Scene;

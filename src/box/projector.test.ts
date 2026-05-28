@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { Projector } from './projector';
-import { MockSurface } from './surface';
-import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, BoxRenderConfig } from './types';
-import { boundary } from '../types';
+import { Projector } from './projector.js';
+import { MockSurface } from './surface.js';
+import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, BoxRenderConfig } from './types.js';
+import { boundary } from '../types.js';
 
 function createMockMetrics(): any {
   return {

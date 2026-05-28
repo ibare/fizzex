@@ -4,10 +4,10 @@
  * 다중 자식 row/root (예: `x + y`)는 E1 의 산수 평가자가 등록되면서 확장된다.
  * E0 시점에서는 단일 자식 컨테이너만 의미를 가진다.
  */
-import type { MathNode, NumberNode, VariableNode, RootNode, RowNode } from '../types';
-import { register } from './registry';
-import { value, fail, type EvalContext, type EvalOutcome } from './types';
-import { normalizeVarName } from './normalize';
+import type { MathNode, NumberNode, VariableNode, RootNode, RowNode } from '../types.js';
+import { register } from './registry.js';
+import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
+import { normalizeVarName } from './normalize.js';
 
 /**
  * 다중 자식 시퀀스 평가 hook.

@@ -2,7 +2,7 @@
  * 명령어 핸들러 타입 정의
  */
 
-import type { MathNode } from '../../types';
+import type { MathNode } from '../../types.js';
 
 /** 명령어 파싱 결과 */
 export interface CommandResult {

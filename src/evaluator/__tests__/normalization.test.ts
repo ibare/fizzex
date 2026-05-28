@@ -6,9 +6,9 @@
  *           divergent 는 reason: 'non-finite-result' 또는 'internal-error' 로 식별 가능
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateSync, evaluate } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateSync, evaluate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

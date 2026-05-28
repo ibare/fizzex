@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { walkAST } from './ast-walker';
-import { classifyVariables } from './variable-classifier';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { walkAST } from './ast-walker.js';
+import { classifyVariables } from './variable-classifier.js';
 
 describe('Variable Classifier', () => {
   beforeEach(() => {

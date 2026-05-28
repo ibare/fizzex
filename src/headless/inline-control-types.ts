@@ -5,12 +5,12 @@
  * 어떤 컨트롤을 표시할지 결정하는 로직.
  */
 
-import type { MathNode } from '../types';
-import type { CatalogDetail } from '../analyzer/semantic/types';
-import type { SemanticResult } from '../analyzer/semantic-roles';
-import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api';
-import { normalizeVarName } from '../evaluator/normalize';
-import { isMathConstantName } from '../evaluator/constants';
+import type { MathNode } from '../types.js';
+import type { CatalogDetail } from '../analyzer/semantic/types.js';
+import type { SemanticResult } from '../analyzer/semantic-roles.js';
+import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api.js';
+import { normalizeVarName } from '../evaluator/normalize.js';
+import { isMathConstantName } from '../evaluator/constants.js';
 
 // ─── 타입 ───
 

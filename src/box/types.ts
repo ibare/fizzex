@@ -1,4 +1,4 @@
-import type { ConfidenceIndicatorConfig } from './confidence-indicator';
+import type { ConfidenceIndicatorConfig } from './confidence-indicator.js';
 
 /**
  * Box 모델 타입 정의

@@ -2,8 +2,8 @@
  * Box 모델 모듈
  */
 
-export * from './types';
-export { CanvasFontMetrics, MathConstants } from './font-metrics';
+export * from './types.js';
+export { CanvasFontMetrics, MathConstants } from './font-metrics.js';
 export {
   createGlyph,
   createGlyphString,
@@ -31,17 +31,17 @@ export {
   createSingleDelimiter,
   createMatrixBox,
   createTextBox,
-} from './box-builder';
-export { astToBox } from './ast-to-box';
+} from './box-builder.js';
+export { astToBox } from './ast-to-box.js';
 export {
   layoutBox,
   collectBoxPositions,
   hitTest,
   findBoxBySourceId,
   getCursorXPosition,
-} from './box-layout';
-export { Projector } from './projector';
-export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator';
-export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './confidence-indicator';
-export { buildExplorerMap, explorerHitTest, getBoxBounds } from './explorer-map';
-export type { ExplorerBoxInfo, BoxBounds, ExplorerHitResult } from './explorer-map';
+} from './box-layout.js';
+export { Projector } from './projector.js';
+export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './confidence-indicator.js';
+export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './confidence-indicator.js';
+export { buildExplorerMap, explorerHitTest, getBoxBounds } from './explorer-map.js';
+export type { ExplorerBoxInfo, BoxBounds, ExplorerHitResult } from './explorer-map.js';

@@ -2,7 +2,7 @@
  * 의미 해석 시스템 타입 정의
  */
 
-import type { MathNode } from '../../types';
+import type { MathNode } from '../../types.js';
 
 // ─── 결과 타입 ───
 

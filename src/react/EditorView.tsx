@@ -5,21 +5,21 @@
  */
 
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
-import type { EditorState } from '../types';
-import { boundary } from '../types';
-import type { Box, BoxRenderConfig, HBox } from '../box/types';
-import { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox, hitTest, findBoxBySourceId } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import { MathEditor, createInitialState, keyToInputAction } from '../editor';
-import { getSuggestions, getAllSuggestionsForContext, getAllSuggestions } from '../suggestion';
-import type { SuggestionWithAction } from '../suggestion/types';
-import { SuggestionChips } from './SuggestionChips';
-import { useFizzexLabels, useLocalizedSuggestions } from '../i18n';
-import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts';
-import { ExpressionExplorer } from './ExpressionExplorer';
-import type { VisualizerRegistry } from '../visualizer';
+import type { EditorState } from '../types.js';
+import { boundary } from '../types.js';
+import type { Box, BoxRenderConfig, HBox } from '../box/types.js';
+import { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox, hitTest, findBoxBySourceId } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import { MathEditor, createInitialState, keyToInputAction } from '../editor.js';
+import { getSuggestions, getAllSuggestionsForContext, getAllSuggestions } from '../suggestion/index.js';
+import type { SuggestionWithAction } from '../suggestion/types.js';
+import { SuggestionChips } from './SuggestionChips.js';
+import { useFizzexLabels, useLocalizedSuggestions } from '../i18n/index.js';
+import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts/index.js';
+import { ExpressionExplorer } from './ExpressionExplorer.js';
+import type { VisualizerRegistry } from '../visualizer/index.js';
 
 /** 커서 위치 정보 */
 interface CursorScreenPosition {

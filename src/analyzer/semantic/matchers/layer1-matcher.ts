@@ -5,10 +5,10 @@
  * 조건 함수는 conditionId로 식별되며, JSON의 refinements 키와 대응한다.
  */
 
-import type { MathNode } from '../../../types';
-import type { AncestorEntry, SemanticResult } from '../types';
-import type { Layer1TextEntry } from '../loader';
-import { containsVariable, isConstantOnly, isInfinity, isEulerE, isNumberValue } from '../helpers';
+import type { MathNode } from '../../../types.js';
+import type { AncestorEntry, SemanticResult } from '../types.js';
+import type { Layer1TextEntry } from '../loader.js';
+import { containsVariable, isConstantOnly, isInfinity, isEulerE, isNumberValue } from '../helpers.js';
 
 // ─── 조건 함수 레지스트리 ───
 

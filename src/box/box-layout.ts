@@ -5,8 +5,8 @@
  * y는 baseline 위치
  */
 
-import type { Box, HBox, VBox, SurdBox } from './types';
-import { MathConstants } from './font-metrics';
+import type { Box, HBox, VBox, SurdBox } from './types.js';
+import { MathConstants } from './font-metrics.js';
 
 /**
  * Box 트리 레이아웃 계산

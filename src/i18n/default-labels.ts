@@ -4,7 +4,7 @@
  * 호스트에서 제공하지 않은 키는 이 값으로 fallback
  */
 
-import type { FizzexLabels } from './types';
+import type { FizzexLabels } from './types.js';
 
 export const defaultLabels: FizzexLabels = {
   placeholder: 'Enter formula...',

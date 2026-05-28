@@ -5,11 +5,11 @@
  * viewport를 거쳐 스크린 좌표로 변환되어 ctx에 전달되어야 한다. 설정되지 않으면 원 좌표 그대로.
  */
 import { describe, it, expect } from 'vitest';
-import { rootContext } from '../expr/context';
+import { rootContext } from '../expr/context.js';
 import {
   createRenderContext,
   type RenderContext,
-} from './render-context';
+} from './render-context.js';
 import {
   drawRect,
   drawCircleEl,
@@ -17,8 +17,8 @@ import {
   drawPolygonEl,
   drawTextEl,
   drawImageEl,
-} from './render-shapes';
-import type { FrameInfo, Viewport2D } from '../../../graphics/types';
+} from './render-shapes.js';
+import type { FrameInfo, Viewport2D } from '../../../graphics/types.js';
 
 function makeFrame(): FrameInfo {
   return { dt: 0.016, now: 0, elapsed: 0, width: 400, height: 300, isDark: false };

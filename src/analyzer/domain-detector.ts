@@ -4,12 +4,12 @@
  * 수식이 속하는 수학 분야를 판별
  */
 
-import type { MathDomain, FunctionInfo, ASTCollectionResult } from './types';
+import type { MathDomain, FunctionInfo, ASTCollectionResult } from './types.js';
 import {
   hasTrigonometric,
   hasLogarithmic,
   hasExponential,
-} from './function-detector';
+} from './function-detector.js';
 
 /**
  * 수집된 AST 정보에서 수학 도메인 감지

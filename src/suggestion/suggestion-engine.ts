@@ -4,8 +4,8 @@
  * 커서 상태를 분석하여 적절한 제안 목록을 생성
  */
 
-import type { EditorState, MathNode, RootNode, RowNode } from '../types';
-import type { CursorContext, SuggestionWithAction } from './types';
+import type { EditorState, MathNode, RootNode, RowNode } from '../types.js';
+import type { CursorContext, SuggestionWithAction } from './types.js';
 
 /** 모든 제안 항목 정의 (priority: 높을수록 먼저 표시) */
 const ALL_SUGGESTIONS: SuggestionWithAction[] = [

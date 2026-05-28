@@ -7,7 +7,7 @@
  *
  * EvalOutcome 은 registry 내부 표현이며, 외부에 노출되지 않는다.
  */
-import type { MathNode, MathNodeType } from '../types';
+import type { MathNode, MathNodeType } from '../types.js';
 
 /** 변수 바인딩. 키는 정규화된 변수명 (예: 'x', 'π'). */
 export type Bindings = Readonly<Record<string, number>>;

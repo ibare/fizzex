@@ -5,9 +5,9 @@
  * 도메인 위배(0 나눔, 음수 + 짝수근, 음수 밑 + 비정수 지수) 는 cold path 에서 'domain' 으로 신호.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateSync, evaluate } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateSync, evaluate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

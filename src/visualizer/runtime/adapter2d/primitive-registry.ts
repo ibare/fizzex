@@ -8,8 +8,8 @@
  * 호스트 확장 primitive 등록 공개 API는 후속 phase에서 설계 확정 후 export한다.
  */
 
-import type { ElementNode } from '../types/element';
-import type { RenderContext } from './render-context';
+import type { ElementNode } from '../types/element.js';
+import type { RenderContext } from './render-context.js';
 
 export type Primitive2DDraw = (
   ctx: CanvasRenderingContext2D,

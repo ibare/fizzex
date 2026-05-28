@@ -5,9 +5,9 @@
  * 본 테스트는 그 신호 의미가 후속 단계에서도 유지됨을 보장한다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { analyzeBindings, analyzeEvaluability } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { analyzeBindings, analyzeEvaluability } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

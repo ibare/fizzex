@@ -5,7 +5,7 @@
  * Explorer 전체화면 모드에서 수식 요소를 클릭했을 때 의미 설명 아래에 나타난다.
  */
 
-import type { InlineControlConfig } from './inline-control-types';
+import type { InlineControlConfig } from './inline-control-types.js';
 
 // ─── 콜백 타입 ───
 

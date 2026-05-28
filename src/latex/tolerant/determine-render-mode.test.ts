@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { determineRenderMode } from './determine-render-mode';
-import type { Diagnostic } from './types';
+import { determineRenderMode } from './determine-render-mode.js';
+import type { Diagnostic } from './types.js';
 
 /** 테스트용 진단 헬퍼 */
 function makeDiag(overrides: Partial<Diagnostic> = {}): Diagnostic {

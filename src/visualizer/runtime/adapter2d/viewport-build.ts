@@ -6,11 +6,11 @@
  * `polar`는 Viewport2D 공통 계약과 시그니처가 달라 Phase 7(kepler)에서 별도 도입 예정.
  */
 
-import type { Viewport2D } from '../../../graphics/types';
-import { createTimeValueViewport } from '../../../graphics/viewport/time-value';
-import { createBBoxViewport } from '../../../graphics/viewport/bbox';
-import type { ViewportSpec, RectSpec, EdgePadding } from '../types/viewport';
-import { evalNum, evalNumOr, type RenderContext } from './render-context';
+import type { Viewport2D } from '../../../graphics/types.js';
+import { createTimeValueViewport } from '../../../graphics/viewport/time-value.js';
+import { createBBoxViewport } from '../../../graphics/viewport/bbox.js';
+import type { ViewportSpec, RectSpec, EdgePadding } from '../types/viewport.js';
+import { evalNum, evalNumOr, type RenderContext } from './render-context.js';
 
 export interface FrameBox {
   x: number;

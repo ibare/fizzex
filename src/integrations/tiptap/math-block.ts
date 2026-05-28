@@ -1,7 +1,7 @@
 import { Node, mergeAttributes } from '@tiptap/core';
-import { DOMRendererView } from '../../headless/renderer';
-import { DOMEditorView } from '../../headless/editor-view';
-import type { MathBlockOptions } from './types';
+import { DOMRendererView } from '../../headless/renderer.js';
+import { DOMEditorView } from '../../headless/editor-view.js';
+import type { MathBlockOptions } from './types.js';
 
 export const MathBlock = Node.create<MathBlockOptions>({
   name: 'mathBlock',

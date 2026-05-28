@@ -10,23 +10,23 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { validateSpec } from './validator';
-import { createStateStore } from './state';
-import { createSceneController } from './scene';
-import { createBaselineSnapshot } from './baseline';
-import { runAnimationFrame } from './animation';
-import { buildViewport } from './adapter2d/viewport-build';
-import { createRenderContext } from './adapter2d/render-context';
-import { renderRoot } from './adapter2d/render';
-import { rootContext } from './expr/context';
-import { evalExpr } from './expr/eval-context';
-import { applyUserBindings } from './user-binding-bridge';
-import { evaluateSync } from '../../evaluator';
-import { parseLatex } from '../../latex';
-import type { FrameInfo } from '../../graphics/types';
-import type { VisualizerSpec } from './types/spec';
-import type { MathNode } from '../../types';
-import sineWaveSpec from '../../../registries/default/sine-wave-2d/spec.json';
+import { validateSpec } from './validator/index.js';
+import { createStateStore } from './state.js';
+import { createSceneController } from './scene.js';
+import { createBaselineSnapshot } from './baseline.js';
+import { runAnimationFrame } from './animation.js';
+import { buildViewport } from './adapter2d/viewport-build.js';
+import { createRenderContext } from './adapter2d/render-context.js';
+import { renderRoot } from './adapter2d/render.js';
+import { rootContext } from './expr/context.js';
+import { evalExpr } from './expr/eval-context.js';
+import { applyUserBindings } from './user-binding-bridge.js';
+import { evaluateSync } from '../../evaluator/index.js';
+import { parseLatex } from '../../latex/index.js';
+import type { FrameInfo } from '../../graphics/types.js';
+import type { VisualizerSpec } from './types/spec.js';
+import type { MathNode } from '../../types.js';
+import sineWaveSpec from '../../../registries/default/sine-wave-2d/spec.json' with { type: 'json' };
 
 function makeFrame(over?: Partial<FrameInfo>): FrameInfo {
   return {

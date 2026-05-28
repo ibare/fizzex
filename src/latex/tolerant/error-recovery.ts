@@ -12,12 +12,12 @@
  * - 금지: 중괄호 삽입, 누락 인자 채움, 커맨드 대체
  */
 
-import type { MathNode, RootNode, ErrorNode, SourceRange } from '../../types';
-import type { LatexParseResult } from '../latex-parser';
-import type { ParseError } from '../parse-errors';
-import type { Diagnostic, PartialParseResult } from './types';
-import { parseLatex } from '../latex-parser';
-import { generateLatexId, resetLatexIdCounter } from '../../utils/id-generator';
+import type { MathNode, RootNode, ErrorNode, SourceRange } from '../../types.js';
+import type { LatexParseResult } from '../latex-parser.js';
+import type { ParseError } from '../parse-errors.js';
+import type { Diagnostic, PartialParseResult } from './types.js';
+import { parseLatex } from '../latex-parser.js';
+import { generateLatexId, resetLatexIdCounter } from '../../utils/id-generator.js';
 
 /** 최대 복구 시도 횟수 */
 const MAX_RECOVERY_ATTEMPTS = 3;

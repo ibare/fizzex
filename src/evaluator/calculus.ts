@@ -11,11 +11,11 @@
  *   - 합/곱 항 수 > 1e6 → unsupported (메모리·시간 가드)
  *   - 피적분/피합/피곱 평가 실패는 그대로 전파
  */
-import type { MathNode, IntegralNode, SumNode, ProductNode, LimitNode, OperatorNode, VariableNode, RowNode } from '../types';
-import { register } from './registry';
-import { value, fail, type EvalContext, type EvalOutcome } from './types';
-import { evalChildSequence } from './arithmetic';
-import { normalizeVarName } from './normalize';
+import type { MathNode, IntegralNode, SumNode, ProductNode, LimitNode, OperatorNode, VariableNode, RowNode } from '../types.js';
+import { register } from './registry.js';
+import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
+import { evalChildSequence } from './arithmetic.js';
+import { normalizeVarName } from './normalize.js';
 
 const TERM_COUNT_LIMIT = 1_000_000;
 

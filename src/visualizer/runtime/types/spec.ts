@@ -7,19 +7,19 @@
  *   3. `displayOptions` → 호스트 opt-in
  */
 
-import type { ElementNode } from './element';
-import type { I18nText } from './i18n';
-import type { LocalFormula } from './formula';
-import type { SceneSpec } from './scene';
-import type { StateDecl, AnimationSpec } from './state';
-import type { InteractionSpec } from './interaction';
-import type { OverlaySpec } from './overlay';
-import type { ViewportSpec } from './viewport';
-import type { ThemeSpec } from './theme';
-import type { DisplayOptionId } from './display-options';
-import type { CameraSpec } from './camera';
-import type { UserBindingSpec } from './user-binding';
-import type { DerivativeSpec } from './derivative';
+import type { ElementNode } from './element.js';
+import type { I18nText } from './i18n.js';
+import type { LocalFormula } from './formula.js';
+import type { SceneSpec } from './scene.js';
+import type { StateDecl, AnimationSpec } from './state.js';
+import type { InteractionSpec } from './interaction.js';
+import type { OverlaySpec } from './overlay.js';
+import type { ViewportSpec } from './viewport.js';
+import type { ThemeSpec } from './theme.js';
+import type { DisplayOptionId } from './display-options.js';
+import type { CameraSpec } from './camera.js';
+import type { UserBindingSpec } from './user-binding.js';
+import type { DerivativeSpec } from './derivative.js';
 
 export type RendererKind = '2d' | '3d';
 

@@ -7,7 +7,7 @@
  * @see The TeXbook, Appendix G: Generating Boxes from Formulas
  */
 
-import { MathConstants } from './font-metrics';
+import { MathConstants } from './font-metrics.js';
 
 // ── Enum ──
 

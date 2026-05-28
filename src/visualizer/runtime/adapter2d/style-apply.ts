@@ -5,13 +5,13 @@
  * `resolveFill`은 단색 문자열 또는 CanvasGradient 중 하나를 반환.
  */
 
-import type { StyleSpec, TransformSpec, FillSpec, LinearGradient, RadialGradient } from '../types/style';
+import type { StyleSpec, TransformSpec, FillSpec, LinearGradient, RadialGradient } from '../types/style.js';
 import {
   createLinearGradientFill,
   createRadialGradientFill,
   type GradientStop,
-} from '../../../graphics/draw';
-import { evalNum, evalNumOr, evalStr, type RenderContext } from './render-context';
+} from '../../../graphics/draw.js';
+import { evalNum, evalNumOr, evalStr, type RenderContext } from './render-context.js';
 
 export function applyTransform(
   ctx: CanvasRenderingContext2D,

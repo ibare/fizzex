@@ -4,9 +4,9 @@
  * 본 단계는 1차원 정적분만 지원. 부정적분·다중적분은 unsupported.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { evaluateSync, evaluate } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { evaluateSync, evaluate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

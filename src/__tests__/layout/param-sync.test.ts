@@ -8,8 +8,8 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { MathConstants } from '../../box/font-metrics';
-import spec from '../../../specs/fizzex-layout-spec.json';
+import { MathConstants } from '../../box/font-metrics.js';
+import spec from '../../../specs/fizzex-layout-spec.json' with { type: 'json' };
 
 // ── 매핑 테이블 ──
 

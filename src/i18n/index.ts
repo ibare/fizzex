@@ -9,18 +9,18 @@ export type {
   SuggestionLabels,
   CategoryLabels,
   KeyboardHintLabels,
-} from './types';
+} from './types.js';
 
-export { defaultLabels } from './default-labels';
+export { defaultLabels } from './default-labels.js';
 
 export {
   FizzexI18nProvider,
   useFizzexLabels,
   useSuggestionLabel,
   type FizzexI18nProviderProps,
-} from './context';
+} from './context.js';
 
 export {
   useLocalizedSuggestions,
   useCategoryLabel,
-} from './use-localized-suggestions';
+} from './use-localized-suggestions.js';

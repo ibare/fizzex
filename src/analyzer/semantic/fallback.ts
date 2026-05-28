@@ -4,9 +4,9 @@
  * 노드 타입별 기본 역할명과 설명을 JSON에서 가져온다.
  */
 
-import type { MathNode } from '../../types';
-import type { FallbackTexts } from './loader';
-import { isInfinity, isEulerE } from './helpers';
+import type { MathNode } from '../../types.js';
+import type { FallbackTexts } from './loader.js';
+import { isInfinity, isEulerE } from './helpers.js';
 
 /**
  * JSON 기반 기본 역할명 조회

@@ -5,9 +5,9 @@
  * differentiateAt(ast, variable, bindings) 가 partial 미분값을 산출한다.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../../latex/latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import { differentiateAt, differentiate } from '..';
+import { parseLatex } from '../../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import { differentiateAt, differentiate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

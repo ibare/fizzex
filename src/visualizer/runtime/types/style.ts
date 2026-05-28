@@ -1,4 +1,4 @@
-import type { ExprString } from './expr';
+import type { ExprString } from './expr.js';
 
 /**
  * Shape 공용 스타일. 각 필드는 Expression으로 평가될 수 있다 (설계 §7).

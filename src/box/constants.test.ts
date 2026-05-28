@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { COMPLEX_NODE_SUFFIXES, isComplexNodeSlot } from './constants';
+import { COMPLEX_NODE_SUFFIXES, isComplexNodeSlot } from './constants.js';
 
 describe('Box Constants', () => {
   describe('COMPLEX_NODE_SUFFIXES', () => {

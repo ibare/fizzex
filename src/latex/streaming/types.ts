@@ -4,13 +4,13 @@
  * StreamTokenizer와 FizzexStreamParser에서 사용하는 모든 타입.
  */
 
-import type { SourceRange, RootNode } from '../../types';
+import type { SourceRange, RootNode } from '../../types.js';
 import type {
   TolerantParseOptions,
   Diagnostic,
   RenderDecision,
   DelimiterDetection,
-} from '../tolerant/types';
+} from '../tolerant/types.js';
 
 // ============================================================================
 // Stream Tokenizer 타입

@@ -22,7 +22,7 @@ import type {
   TextNode,
   BoundaryCursor,
   CursorPosition,
-} from './types';
+} from './types.js';
 
 function bc(c: CursorPosition): BoundaryCursor {
   if (c.kind !== 'boundary') throw new Error('expected boundary cursor');
@@ -48,8 +48,8 @@ import {
   createMatrix,
   createText,
   MathEditor,
-} from './editor';
-import { resetLatexIdCounter, resetEditorIdCounter } from './utils/id-generator';
+} from './editor.js';
+import { resetLatexIdCounter, resetEditorIdCounter } from './utils/id-generator.js';
 
 /** KeyboardEvent mock 헬퍼 */
 function createKeyEvent(key: string, opts?: Partial<KeyboardEvent>): KeyboardEvent {

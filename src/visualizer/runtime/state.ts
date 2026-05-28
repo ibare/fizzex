@@ -17,7 +17,7 @@
  * bindings 는 외부 일괄 주입 채널이라 별도 listener 를 두지 않는다.
  */
 
-import type { StateDecl } from './types/state';
+import type { StateDecl } from './types/state.js';
 
 export type StatePrimitive = number | boolean | string;
 

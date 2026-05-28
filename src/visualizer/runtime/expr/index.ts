@@ -1,6 +1,6 @@
-export { parseExpr, ExprParseError } from './parse';
-export type { ExprAst } from './parse';
-export { Context, rootContext } from './context';
-export type { Scope } from './context';
-export { evalNode, evalNumber, ExprEvalError } from './eval';
-export { BUILTINS, CONSTANTS } from './builtins';
+export { parseExpr, ExprParseError } from './parse.js';
+export type { ExprAst } from './parse.js';
+export { Context, rootContext } from './context.js';
+export type { Scope } from './context.js';
+export { evalNode, evalNumber, ExprEvalError } from './eval.js';
+export { BUILTINS, CONSTANTS } from './builtins.js';

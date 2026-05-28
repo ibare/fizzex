@@ -11,6 +11,6 @@ export {
   buildAstAncestorMap,
   containsVariable,
   getCatalogDetail,
-} from './semantic';
+} from './semantic/index.js';
 
-export type { SemanticResult, AncestorEntry } from './semantic';
+export type { SemanticResult, AncestorEntry } from './semantic/index.js';

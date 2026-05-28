@@ -2,15 +2,15 @@
  * 기본 명령어 핸들러 (frac, sqrt, text 등)
  */
 
-import type { CommandHandler } from './types';
+import type { CommandHandler } from './types.js';
 import {
   createFrac, createBinom, createSqrt, createText, createParen, createAbs,
   createSpace, createStyledRow, createOverset, createUnderset, createBoxed,
   createCancel, createFunc, createOperator, mapMathFont,
   generateId as generateLatexId, deriveId,
-} from './helpers';
-import type { MathFontStyle } from './helpers';
-import { reportError } from '../parse-errors';
+} from './helpers.js';
+import type { MathFontStyle } from './helpers.js';
+import { reportError } from '../parse-errors.js';
 
 /** \frac{num}{den}, \dfrac, \tfrac, \cfrac */
 export const fracHandler: CommandHandler = (ctx) => {
@@ -31,7 +31,7 @@ export const fracHandler: CommandHandler = (ctx) => {
 /** \sqrt[n]{x} 또는 \sqrt{x} */
 export const sqrtHandler: CommandHandler = (ctx) => {
   let pos = ctx.pos;
-  let index: import('../../types').MathNode[] | undefined;
+  let index: import('../../types.js').MathNode[] | undefined;
   if (ctx.latex[pos] === '[') {
     const indexResult = ctx.parseExpression(ctx.latex, pos + 1, [']']);
     index = indexResult.nodes;
@@ -418,7 +418,7 @@ function createBigDelimHandler(size: 'big' | 'Big' | 'bigg' | 'Bigg'): CommandHa
     pos = delim.consumed;
     // 단일 구분자를 OperatorNode로 표현 (ParenNode는 항상 쌍으로 렌더링되므로 부적합)
     const node = createOperator(delim.char);
-    (node as import('../../types').OperatorNode).delimiterSize = size;
+    (node as import('../../types.js').OperatorNode).delimiterSize = size;
     return { nodes: [node], consumed: pos };
   };
 }

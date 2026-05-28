@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateSpec, VisualizerSpecValidationError } from './index';
+import { validateSpec, VisualizerSpecValidationError } from './index.js';
 
 const baseValidSpec = {
   $schema: 'fizzex-visualizer/v1',

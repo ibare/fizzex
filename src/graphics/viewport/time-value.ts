@@ -6,7 +6,7 @@
  * yUp=true면 수학 좌표계(위로 증가), false면 Canvas 자연(아래로 증가).
  */
 
-import type { Viewport2D } from '../types';
+import type { Viewport2D } from '../types.js';
 
 export interface TimeValueRect {
   x: number;

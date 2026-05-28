@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { astToLatex } from './ast-to-latex';
-import { parseLatex } from './latex-parser';
+import { astToLatex } from './ast-to-latex.js';
+import { parseLatex } from './latex-parser.js';
 import {
   num,
   variable,
@@ -26,8 +26,8 @@ import {
   literal,
   error,
   opaque,
-} from './node-factory';
-import { resetLatexIdCounter } from '../utils/id-generator';
+} from './node-factory.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
 
 describe('AST to LaTeX', () => {
   beforeEach(() => {

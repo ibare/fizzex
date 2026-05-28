@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { operatorHandlers } from './operators';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import type { CommandContext } from './types';
+import { operatorHandlers } from './operators.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import type { CommandContext } from './types.js';
 
 function createMockContext(pos: number): CommandContext {
   return {

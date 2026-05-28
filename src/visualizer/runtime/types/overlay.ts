@@ -1,5 +1,5 @@
-import type { ExprString } from './expr';
-import type { I18nText } from './i18n';
+import type { ExprString } from './expr.js';
+import type { I18nText } from './i18n.js';
 
 /**
  * HUD overlay (설계 §11). 기본은 HTML 레이어(결정 D3).

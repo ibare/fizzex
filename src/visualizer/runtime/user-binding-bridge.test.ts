@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { applyUserBindings, type UserBindingInput } from './user-binding-bridge';
-import { createStateStore } from './state';
-import { parseLatex } from '../../latex';
-import type { MathNode, NumberNode } from '../../types';
-import type { VisualizerSpec } from './types/spec';
+import { applyUserBindings, type UserBindingInput } from './user-binding-bridge.js';
+import { createStateStore } from './state.js';
+import { parseLatex } from '../../latex/index.js';
+import type { MathNode, NumberNode } from '../../types.js';
+import type { VisualizerSpec } from './types/spec.js';
 
 function makeSpec(partial: Partial<VisualizerSpec>): VisualizerSpec {
   return {

@@ -6,9 +6,9 @@
  * (P6 머지 분기 도입 이후 유지되어야 할 페르소나 불변.)
  */
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { MathEditor } from '../../editor';
-import { resetLatexIdCounter, resetEditorIdCounter } from '../../utils/id-generator';
-import type { MathNode, NumberNode } from '../../types';
+import { MathEditor } from '../../editor.js';
+import { resetLatexIdCounter, resetEditorIdCounter } from '../../utils/id-generator.js';
+import type { MathNode, NumberNode } from '../../types.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
-import { createSceneController } from './scene';
-import { createStateStore } from './state';
-import type { SceneSpec } from './types/scene';
+import { createSceneController } from './scene.js';
+import { createStateStore } from './state.js';
+import type { SceneSpec } from './types/scene.js';
 
 const sceneA: SceneSpec = { id: 'a', name: { ko: '에이', en: 'A' }, params: { A: 1 } };
 const sceneB: SceneSpec = { id: 'b', name: { ko: '비', en: 'B' }, params: { A: 2, omega: 3 } };

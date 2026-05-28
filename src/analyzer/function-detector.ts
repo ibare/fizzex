@@ -4,7 +4,7 @@
  * AST에서 사용된 함수들을 감지하고 분류
  */
 
-import type { FunctionInfo, FunctionCategory } from './types';
+import type { FunctionInfo, FunctionCategory } from './types.js';
 
 /** 삼각함수 목록 */
 const TRIG_FUNCTIONS = new Set([

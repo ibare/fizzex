@@ -5,9 +5,9 @@
  * for DOMRendererView and DOMEditorView.
  */
 
-import type { BoxRenderConfig } from '../box/types';
-import { NEW_CM_MATH_CONFIG } from '../fonts';
-import type { VisualizerRegistry } from '../visualizer';
+import type { BoxRenderConfig } from '../box/types.js';
+import { NEW_CM_MATH_CONFIG } from '../fonts/index.js';
+import type { VisualizerRegistry } from '../visualizer/index.js';
 
 export interface FizzexConfig {
   baseFontSize?: number;      // default 20

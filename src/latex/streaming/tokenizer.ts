@@ -16,7 +16,7 @@ import type {
   TokenizerOptions,
   StreamToken,
   LexicalContext,
-} from './types';
+} from './types.js';
 
 /** 텍스트 모드 커맨드 — 내부에서 구분자 감지를 건너뛴다 */
 const TEXT_MODE_COMMANDS = new Set([

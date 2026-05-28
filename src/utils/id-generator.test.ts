@@ -5,7 +5,7 @@ import {
   resetLatexIdCounter,
   deriveId,
   deriveCellId,
-} from './id-generator';
+} from './id-generator.js';
 
 describe('ID Generator', () => {
   beforeEach(() => {

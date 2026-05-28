@@ -5,9 +5,9 @@
  * 복합 휴리스틱 기반 점수 계산
  */
 
-import type { RootNode, MathNode, PowerNode, SubscriptNode, IntegralNode, SumNode, LimitNode, ProductNode } from '../types';
-import type { VariableClassification, VariableScore } from './types';
-import { findNodes } from './ast-walker';
+import type { RootNode, MathNode, PowerNode, SubscriptNode, IntegralNode, SumNode, LimitNode, ProductNode } from '../types.js';
+import type { VariableClassification, VariableScore } from './types.js';
+import { findNodes } from './ast-walker.js';
 
 /**
  * 일반적인 주 변수 이름 (높은 점수)
@@ -451,7 +451,7 @@ function getNodeChildren(node: MathNode): MathNode[] {
     case 'gather':
       return (node as { rows: MathNode[] }).rows;
     case 'opaque':
-      return (node as import('../types').OpaqueNode).args.flat();
+      return (node as import('../types.js').OpaqueNode).args.flat();
     default:
       return [];
   }

@@ -4,9 +4,9 @@
  * AST 검사, 경로 매칭, 폴백 설명 생성 등 순수 유틸리티.
  */
 
-import type { MathNode } from '../../types';
-import type { AncestorEntry, SemanticResult } from './types';
-import type { FallbackTexts } from './loader';
+import type { MathNode } from '../../types.js';
+import type { AncestorEntry, SemanticResult } from './types.js';
+import type { FallbackTexts } from './loader.js';
 
 // ─── AST 검사 헬퍼 ───
 

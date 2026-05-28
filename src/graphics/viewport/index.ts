@@ -3,15 +3,15 @@
  * Visualizer는 필요한 종류만 import해서 쓴다.
  */
 
-export { createTimeValueViewport } from './time-value';
+export { createTimeValueViewport } from './time-value.js';
 export type {
   TimeValueViewport,
   TimeValueViewportOptions,
   TimeValueRect,
   TimeValuePadding,
-} from './time-value';
+} from './time-value.js';
 
-export { createBBoxViewport } from './bbox';
+export { createBBoxViewport } from './bbox.js';
 export type {
   BBoxViewport,
   BBoxViewportOptions,
@@ -20,7 +20,7 @@ export type {
   BBoxPadding,
   BBoxAlign,
   BBoxAnchor,
-} from './bbox';
+} from './bbox.js';
 
-export { createPolarViewport } from './polar';
-export type { PolarViewport, PolarViewportOptions, PolarCenter } from './polar';
+export { createPolarViewport } from './polar.js';
+export type { PolarViewport, PolarViewportOptions, PolarCenter } from './polar.js';

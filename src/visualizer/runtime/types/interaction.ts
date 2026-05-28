@@ -1,4 +1,4 @@
-import type { ExprString } from './expr';
+import type { ExprString } from './expr.js';
 
 /**
  * 제스처 + hitTest + do-list 기반 인터랙션 (설계 §10).

@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { tolerantParse } from './tolerant-parse';
-import { parseLatex } from '../latex-parser';
-import { astToLatex } from '../ast-to-latex';
-import { resetLatexIdCounter } from '../../utils/id-generator';
+import { tolerantParse } from './tolerant-parse.js';
+import { parseLatex } from '../latex-parser.js';
+import { astToLatex } from '../ast-to-latex.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

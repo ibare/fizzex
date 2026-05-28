@@ -4,11 +4,11 @@
  * 수식 AST를 Box 트리로 변환
  */
 
-import type { MathNode } from '../types';
-import type { Box, HBox, PathBox, SurdBox } from './types';
-import type { CanvasFontMetrics } from './font-metrics';
-import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
-import { MathConstants } from './font-metrics';
+import type { MathNode } from '../types.js';
+import type { Box, HBox, PathBox, SurdBox } from './types.js';
+import type { CanvasFontMetrics } from './font-metrics.js';
+import { DELIMITER_PATHS } from '../fonts/delimiter-paths.js';
+import { MathConstants } from './font-metrics.js';
 import {
   MathStyle,
   isDisplay,
@@ -18,7 +18,7 @@ import {
   fracDenominatorStyle,
   crampedStyle,
   fontSizeForStyle,
-} from './math-style';
+} from './math-style.js';
 import {
   createGlyph,
   createGlyphString,
@@ -53,7 +53,7 @@ import {
   createOverbraceBox,
   createXArrowBox,
   createSingleDelimiter,
-} from './box-builder';
+} from './box-builder.js';
 
 /** AST를 Box로 변환 (외부 API — displayStyle boolean 유지) */
 export function astToBox(
@@ -554,7 +554,7 @@ function convertOverline(
 
 /** 악센트 노드 변환 */
 function convertAccent(
-  node: MathNode & { content: MathNode[]; accentType: import('../types').AccentNode['accentType'] },
+  node: MathNode & { content: MathNode[]; accentType: import('../types.js').AccentNode['accentType'] },
   metrics: CanvasFontMetrics,
   fontSize: number,
   style: MathStyle

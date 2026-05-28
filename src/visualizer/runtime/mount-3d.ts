@@ -17,29 +17,29 @@
  */
 
 import * as THREE from 'three';
-import type { SceneSpec } from './types/scene';
-import type { FrameInfo, Theme } from '../../graphics/types';
-import { Graphics3D } from '../../graphics/Graphics3D';
-import { createStateStore, type StateStore } from './state';
-import { createSceneController, type SceneController } from './scene';
-import { createBaselineSnapshot } from './baseline';
-import { runAnimationFrame } from './animation';
-import { attachInteraction, type InteractionController } from './interaction';
-import { attachOverlay, type OverlayController } from './overlay';
+import type { SceneSpec } from './types/scene.js';
+import type { FrameInfo, Theme } from '../../graphics/types.js';
+import { Graphics3D } from '../../graphics/Graphics3D.js';
+import { createStateStore, type StateStore } from './state.js';
+import { createSceneController, type SceneController } from './scene.js';
+import { createBaselineSnapshot } from './baseline.js';
+import { runAnimationFrame } from './animation.js';
+import { attachInteraction, type InteractionController } from './interaction.js';
+import { attachOverlay, type OverlayController } from './overlay.js';
 import {
   createRenderContext3D,
   disposeChildren,
   evaluateInitialCameraPose,
   renderRoot3d,
   type RenderContext3D,
-} from './adapter3d';
-import { rootContext } from './expr/context';
-import { validateSpec } from './validator';
+} from './adapter3d/index.js';
+import { rootContext } from './expr/context.js';
+import { validateSpec } from './validator/index.js';
 import {
   applyUserBindings,
   type ApplyUserBindingsResult,
   type UserBindingInputs,
-} from './user-binding-bridge';
+} from './user-binding-bridge.js';
 
 export interface Mount3DOptions {
   width: number;

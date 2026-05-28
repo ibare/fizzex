@@ -13,7 +13,7 @@
  * (y-up, theta는 수평각, phi는 수직각; 둘 다 radian)
  */
 
-import type { ExprString } from './expr';
+import type { ExprString } from './expr.js';
 
 export interface CameraControlsSpec {
   /** 자동 회전 여부 (OrbitControls.autoRotate). */

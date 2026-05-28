@@ -4,10 +4,10 @@
  * parseLatex → astToBox 2단계 검증
  */
 
-import { parseLatex } from '../../../latex/latex-parser';
-import { astToBox } from '../../../box/ast-to-box';
-import { createDeterministicMetrics } from '../../layout/deterministic-metrics';
-import type { Engine, EngineResult } from './types';
+import { parseLatex } from '../../../latex/latex-parser.js';
+import { astToBox } from '../../../box/ast-to-box.js';
+import { createDeterministicMetrics } from '../../layout/deterministic-metrics.js';
+import type { Engine, EngineResult } from './types.js';
 
 const metrics = createDeterministicMetrics();
 

@@ -2,8 +2,8 @@
  * 명령어 핸들러용 노드 생성 헬퍼 함수
  */
 
-import type { MathNode, RowNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types';
-import { generateLatexId, deriveId } from '../../utils/id-generator';
+import type { MathNode, RowNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
+import { generateLatexId, deriveId } from '../../utils/id-generator.js';
 
 /** ID 생성 (내부용 alias) */
 export const generateId = generateLatexId;

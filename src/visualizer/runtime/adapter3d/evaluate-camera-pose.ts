@@ -12,9 +12,9 @@
  *   z = target.z + distance * sin(phi) * sin(theta)
  */
 
-import type { CameraSpec } from '../types/camera';
-import type { RenderContext3D } from './render-context';
-import { evalNumOr3D } from './render-context';
+import type { CameraSpec } from '../types/camera.js';
+import type { RenderContext3D } from './render-context.js';
+import { evalNumOr3D } from './render-context.js';
 
 export interface CameraPose {
   position: readonly [number, number, number];

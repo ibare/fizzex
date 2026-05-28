@@ -5,17 +5,17 @@
  * Surface 구현을 교체하면 Canvas, SVG, Skia 등 다양한 대상에 투영 가능.
  */
 
-import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox } from './types';
-import { type CanvasFontMetrics, MathConstants } from './font-metrics';
-import type { CursorPosition } from '../types';
-import { findBoxBySourceId, getCursorXPosition } from './box-layout';
-import { isComplexNodeSlot } from './constants';
-import type { Surface } from './surface';
-import { CanvasSurface } from './surface';
-import { DELIMITER_PATHS } from '../fonts/delimiter-paths';
-import type { GlyphPathData } from '../fonts/delimiter-paths';
-import { ConfidenceIndicator } from './confidence-indicator';
-import type { ConfidenceRegion } from './confidence-indicator';
+import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox } from './types.js';
+import { type CanvasFontMetrics, MathConstants } from './font-metrics.js';
+import type { CursorPosition } from '../types.js';
+import { findBoxBySourceId, getCursorXPosition } from './box-layout.js';
+import { isComplexNodeSlot } from './constants.js';
+import type { Surface } from './surface.js';
+import { CanvasSurface } from './surface.js';
+import { DELIMITER_PATHS } from '../fonts/delimiter-paths.js';
+import type { GlyphPathData } from '../fonts/delimiter-paths.js';
+import { ConfidenceIndicator } from './confidence-indicator.js';
+import type { ConfidenceRegion } from './confidence-indicator.js';
 
 export class Projector {
   private backend: Surface;

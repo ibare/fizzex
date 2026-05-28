@@ -6,9 +6,9 @@
  * (P6에서 NumberNode 머지 도입으로 [BUG] 항목들이 [OK]로 전환됨.)
  */
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { MathEditor } from '../../editor';
-import { resetLatexIdCounter, resetEditorIdCounter } from '../../utils/id-generator';
-import type { MathNode } from '../../types';
+import { MathEditor } from '../../editor.js';
+import { resetLatexIdCounter, resetEditorIdCounter } from '../../utils/id-generator.js';
+import type { MathNode } from '../../types.js';
 
 beforeEach(() => {
   resetLatexIdCounter();

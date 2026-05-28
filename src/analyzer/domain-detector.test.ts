@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { walkAST } from './ast-walker';
-import { createFunctionInfoList } from './function-detector';
-import { detectDomains, determinePrimaryDomain } from './domain-detector';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { walkAST } from './ast-walker.js';
+import { createFunctionInfoList } from './function-detector.js';
+import { detectDomains, determinePrimaryDomain } from './domain-detector.js';
 
 /** parseLatex -> walkAST -> createFunctionInfoList 파이프라인 헬퍼 */
 function analyzeLatex(latex: string) {

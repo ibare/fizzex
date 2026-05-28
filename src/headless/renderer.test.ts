@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { resolveBoxRenderConfig } from './types';
-import type { FizzexConfig } from './types';
+import { resolveBoxRenderConfig } from './types.js';
+import type { FizzexConfig } from './types.js';
 
 describe('Headless Types', () => {
   describe('resolveBoxRenderConfig', () => {

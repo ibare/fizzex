@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import * as draw from './draw';
-import * as theme from './theme';
+import * as draw from './draw.js';
+import * as theme from './theme.js';
 
 /**
  * Node 환경에서 CanvasRenderingContext2D 타입 전체를 만족시키는 mock은

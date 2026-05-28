@@ -6,14 +6,14 @@
  *
  * 호스트는 식 노드 생성 시 1회 호출하여 입력 슬롯/배지 UX 를 결정한다.
  */
-import type { MathNode, MathNodeType, VariableNode } from '../types';
-import { registeredTypes } from './registry';
-import { installCoreHandlers } from './core';
-import { installArithmeticHandlers } from './arithmetic';
-import { installFunctionHandlers } from './functions';
-import { installCalculusHandlers } from './calculus';
-import { normalizeVarName } from './normalize';
-import { isMathConstantName } from './constants';
+import type { MathNode, MathNodeType, VariableNode } from '../types.js';
+import { registeredTypes } from './registry.js';
+import { installCoreHandlers } from './core.js';
+import { installArithmeticHandlers } from './arithmetic.js';
+import { installFunctionHandlers } from './functions.js';
+import { installCalculusHandlers } from './calculus.js';
+import { normalizeVarName } from './normalize.js';
+import { isMathConstantName } from './constants.js';
 
 export interface BindingAnalysis {
   /** 호스트가 공급해야 하는 자유변수 (정규화된 이름, 정렬·중복 제거) */

@@ -6,8 +6,8 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
-import { runLayoutSpec, type SpecRunResult, type LayoutSpec } from './spec-runner';
-import spec from '../../../specs/fizzex-layout-spec.json';
+import { runLayoutSpec, type SpecRunResult, type LayoutSpec } from './spec-runner.js';
+import spec from '../../../specs/fizzex-layout-spec.json' with { type: 'json' };
 
 describe('Layout Spec Compliance', () => {
   let result: SpecRunResult;

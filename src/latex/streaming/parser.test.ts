@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { FizzexStreamParser } from './parser';
-import type { StreamOutput } from './types';
-import { resetLatexIdCounter } from '../../utils/id-generator';
+import { FizzexStreamParser } from './parser.js';
+import type { StreamOutput } from './types.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
 
 describe('FizzexStreamParser', () => {
   let parser: FizzexStreamParser;

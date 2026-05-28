@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex-parser';
-import { resetLatexIdCounter } from '../../utils/id-generator';
-import type { FuncNode, VariableNode, ParenNode } from '../../types';
+import { parseLatex } from '../latex-parser.js';
+import { resetLatexIdCounter } from '../../utils/id-generator.js';
+import type { FuncNode, VariableNode, ParenNode } from '../../types.js';
 
 describe('Function Command Handlers', () => {
   beforeEach(() => {

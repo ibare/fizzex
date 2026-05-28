@@ -5,18 +5,18 @@
  * 자체 관리 <canvas> 엘리먼트에 LaTeX 문자열을 렌더링한다.
  */
 
-import { CanvasFontMetrics } from '../box/font-metrics';
-import { astToBox } from '../box/ast-to-box';
-import { layoutBox } from '../box/box-layout';
-import { Projector } from '../box/projector';
-import type { BoxRenderConfig } from '../box/types';
-import { parseLatex } from '../latex';
-import { loadMathFont } from '../fonts';
-import type { FizzexConfig, FizzexSize } from './types';
-import { resolveBoxRenderConfig } from './types';
-import { ExplorerOverlay } from './explorer-overlay';
-import { attachExplorerTrigger } from './explorer-trigger';
-import type { ExplorerTriggerOptions } from './explorer-trigger';
+import { CanvasFontMetrics } from '../box/font-metrics.js';
+import { astToBox } from '../box/ast-to-box.js';
+import { layoutBox } from '../box/box-layout.js';
+import { Projector } from '../box/projector.js';
+import type { BoxRenderConfig } from '../box/types.js';
+import { parseLatex } from '../latex/index.js';
+import { loadMathFont } from '../fonts/index.js';
+import type { FizzexConfig, FizzexSize } from './types.js';
+import { resolveBoxRenderConfig } from './types.js';
+import { ExplorerOverlay } from './explorer-overlay.js';
+import { attachExplorerTrigger } from './explorer-trigger.js';
+import type { ExplorerTriggerOptions } from './explorer-trigger.js';
 
 export class DOMRendererView {
   private container: HTMLElement;

@@ -9,9 +9,9 @@
  * 고급 포맷(sci/percent 등)은 Expression 내 `format()` 호출을 권장.
  */
 
-import { evalExpr, type EvalContext } from './expr/eval-context';
-import { resolveI18n } from './types/i18n';
-import type { OverlaySpec, OverlayLine } from './types/overlay';
+import { evalExpr, type EvalContext } from './expr/eval-context.js';
+import { resolveI18n } from './types/i18n.js';
+import type { OverlaySpec, OverlayLine } from './types/overlay.js';
 
 export interface OverlayController {
   renderFrame(rc: EvalContext): void;

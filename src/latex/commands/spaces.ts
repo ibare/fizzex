@@ -2,8 +2,8 @@
  * 공백 명령어 핸들러
  */
 
-import type { CommandHandler } from './types';
-import { createSpace } from './helpers';
+import type { CommandHandler } from './types.js';
+import { createSpace } from './helpers.js';
 
 /** 공백 핸들러 생성 */
 function spaceHandler(width: number): CommandHandler {

@@ -5,12 +5,12 @@
  * 씬 그래프 렌더링, Tween/Timeline 업데이트를 담당한다.
  */
 
-import { CanvasSceneSurface } from './scene-surface';
-import type { SceneSurface } from './scene-surface';
-import { Container } from './container';
-import { Tween } from './tween';
-import type { TweenConfig } from './tween';
-import { Timeline } from './timeline';
+import { CanvasSceneSurface } from './scene-surface.js';
+import type { SceneSurface } from './scene-surface.js';
+import { Container } from './container.js';
+import { Tween } from './tween.js';
+import type { TweenConfig } from './tween.js';
+import { Timeline } from './timeline.js';
 
 export interface StageConfig {
   canvas: HTMLCanvasElement;

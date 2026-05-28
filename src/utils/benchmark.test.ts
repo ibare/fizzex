@@ -4,10 +4,10 @@ import {
   formatBenchmarkResult,
   compareBenchmarks,
   BenchmarkSuite,
-} from './benchmark';
-import { parseLatex } from '../latex/latex-parser';
-import { LRUCache } from './lru-cache';
-import { resetLatexIdCounter } from './id-generator';
+} from './benchmark.js';
+import { parseLatex } from '../latex/latex-parser.js';
+import { LRUCache } from './lru-cache.js';
+import { resetLatexIdCounter } from './id-generator.js';
 
 describe('Benchmark Utility', () => {
   describe('benchmark()', () => {

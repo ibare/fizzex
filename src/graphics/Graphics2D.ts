@@ -10,7 +10,7 @@
  * 등록한 리스너는 Visualizer의 unmount 훅에서 본인이 정리한다.
  */
 
-import type { FrameInfo, Theme } from './types';
+import type { FrameInfo, Theme } from './types.js';
 
 export interface Graphics2DOptions {
   width: number;

@@ -2,8 +2,8 @@
  * 대형 연산자 핸들러 (적분, 시그마, 극한, 곱)
  */
 
-import type { MathNode } from '../../types';
-import type { CommandHandler } from './types';
+import type { MathNode } from '../../types.js';
+import type { CommandHandler } from './types.js';
 import {
   createIntegral,
   createSum,
@@ -14,7 +14,7 @@ import {
   createParen,
   createPower,
   createSubscript,
-} from './helpers';
+} from './helpers.js';
 
 /** 적분 핸들러 생성 */
 function integralHandler(integralType: 'int' | 'iint' | 'iiint' | 'oint'): CommandHandler {

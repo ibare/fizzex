@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from './latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import type { NumberNode, VariableNode, OperatorNode, FracNode, SqrtNode, FuncNode } from '../types';
+import { parseLatex } from './latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import type { NumberNode, VariableNode, OperatorNode, FracNode, SqrtNode, FuncNode } from '../types.js';
 
 describe('LaTeX Parser', () => {
   beforeEach(() => {

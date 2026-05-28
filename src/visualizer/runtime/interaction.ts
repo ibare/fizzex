@@ -15,14 +15,14 @@ import {
   evalNumOr,
   extendEvalContext,
   type EvalContext,
-} from './expr/eval-context';
+} from './expr/eval-context.js';
 import type {
   InteractionSpec,
   GestureKind,
   HitTestSpec,
   InteractionAction,
-} from './types/interaction';
-import type { StateStore } from './state';
+} from './types/interaction.js';
+import type { StateStore } from './state.js';
 
 export interface InteractionController {
   detach(): void;

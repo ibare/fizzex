@@ -39,8 +39,8 @@ import type {
   LiteralNode,
   ErrorNode,
   OpaqueNode,
-} from '../types';
-import { generateLatexId } from '../utils/id-generator';
+} from '../types.js';
+import { generateLatexId } from '../utils/id-generator.js';
 
 /**
  * 노드 타입 → 노드 인터페이스 매핑

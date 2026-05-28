@@ -25,13 +25,13 @@ export {
   createOverline,
   createMatrix,
   createText,
-} from './editor';
+} from './editor.js';
 
 // Box 모델 (레이아웃 시스템)
-export * from './box';
+export * from './box/index.js';
 
 // LaTeX 지원
-export { parseLatex, astToLatex } from './latex';
+export { parseLatex, astToLatex } from './latex/index.js';
 
 // 자동완성 제안
 export {
@@ -40,14 +40,14 @@ export {
   getAllSuggestionsForContext,
   searchSuggestions,
   analyzeCursorContext,
-} from './suggestion';
+} from './suggestion/index.js';
 export type {
   Suggestion,
   SuggestionWithAction,
   SuggestionAction,
   SuggestionCategory,
   CursorContext,
-} from './suggestion';
+} from './suggestion/index.js';
 
 // i18n
 export {
@@ -57,12 +57,12 @@ export {
   useLocalizedSuggestions,
   useCategoryLabel,
   defaultLabels,
-} from './i18n';
+} from './i18n/index.js';
 export type {
   FizzexLabels,
   PartialFizzexLabels,
   FizzexI18nProviderProps,
-} from './i18n';
+} from './i18n/index.js';
 
 // 폰트
 export {
@@ -74,13 +74,13 @@ export {
   setFontMapping,
   getFontMapping,
   getFontFamily,
-} from './fonts';
+} from './fonts/index.js';
 export type {
   FontLoadStatus,
   FontLoadResult,
   MathFontConfig,
   FontGlyphMapping,
-} from './fonts';
+} from './fonts/index.js';
 
 // React 컴포넌트 — 새 이름 (primary)
 export {
@@ -89,17 +89,17 @@ export {
   SuggestionChips,
   SuggestionPopover,
   ExpressionExplorer,
-} from './react';
+} from './react/index.js';
 export type {
   EditorViewProps,
   StreamViewProps,
   SuggestionChipsProps,
   SuggestionPopoverProps,
   ExpressionExplorerProps,
-} from './react';
+} from './react/index.js';
 
 // 수식 분석기
-export { analyzeExpression, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer';
+export { analyzeExpression, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer/index.js';
 export type {
   ExpressionAnalysis,
   MathDomain,
@@ -111,7 +111,7 @@ export type {
   VariableClassification,
   SemanticResult,
   AncestorEntry,
-} from './analyzer';
+} from './analyzer/index.js';
 
 // Evaluator — 동기 AST 수치 평가 표준 표면 (scalar / matrix / complex / autodiff)
 export {
@@ -125,7 +125,7 @@ export {
   evaluateComplex,
   analyzeBindings,
   analyzeEvaluability,
-} from './evaluator';
+} from './evaluator/index.js';
 export type {
   Bindings,
   EvalResult,
@@ -140,21 +140,21 @@ export type {
   DiffResult,
   Complex,
   ComplexResult,
-} from './evaluator';
+} from './evaluator/index.js';
 
 
 // Tolerant Parser
-export { determineRenderMode } from './latex/tolerant';
+export { determineRenderMode } from './latex/tolerant/index.js';
 export type {
   SemanticSafety,
   NormalizationRecord,
   Diagnostic,
   RenderMode,
   RenderDecision,
-} from './latex/tolerant';
+} from './latex/tolerant/index.js';
 
 // Streaming Parser
-export { StreamTokenizer, FizzexStreamParser } from './latex/streaming';
+export { StreamTokenizer, FizzexStreamParser } from './latex/streaming/index.js';
 export type {
   StreamToken,
   StreamOutput,
@@ -162,29 +162,29 @@ export type {
   StreamParserState,
   TokenizerState,
   TokenizerOptions,
-} from './latex/streaming';
+} from './latex/streaming/index.js';
 
 // Confidence Indicator
-export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './box';
-export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './box';
+export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './box/index.js';
+export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './box/index.js';
 
 // Headless 어댑터 — 새 이름 (primary)
-export { DOMRendererView } from './headless';
-export { DOMEditorView } from './headless';
-export { DOMStreamView, classifyConfidence, buildConfidenceRegions } from './headless';
-export type { DOMStreamViewConfig } from './headless';
+export { DOMRendererView } from './headless/index.js';
+export { DOMEditorView } from './headless/index.js';
+export { DOMStreamView, classifyConfidence, buildConfidenceRegions } from './headless/index.js';
+export type { DOMStreamViewConfig } from './headless/index.js';
 
 // Headless Explorer
-export { ExplorerOverlay } from './headless';
-export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless';
-export { ExplorerVisualizerController } from './headless';
+export { ExplorerOverlay } from './headless/index.js';
+export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless/index.js';
+export { ExplorerVisualizerController } from './headless/index.js';
 
 // Visualizer 프레임워크 — JSON spec 기반 런타임
 export {
   createVisualizer,
   createVisualizerRegistry,
   compileSpec,
-} from './visualizer';
+} from './visualizer/index.js';
 export type {
   CreateVisualizerOptions,
   CreateVisualizerBaseOptions,
@@ -213,10 +213,10 @@ export type {
   SkipReason,
   UserBindingInput,
   UserBindingInputs,
-} from './visualizer';
-export { resolveI18n, applyUserBindings } from './visualizer';
-export { getVisualizersForCatalog } from './analyzer/semantic/loader';
-export type { VisualizerRef } from './analyzer/semantic/types';
+} from './visualizer/index.js';
+export { resolveI18n, applyUserBindings } from './visualizer/index.js';
+export { getVisualizersForCatalog } from './analyzer/semantic/loader.js';
+export type { VisualizerRef } from './analyzer/semantic/types.js';
 
 // 타입
 export type {
@@ -250,8 +250,8 @@ export type {
   BoundaryCursor,
   IntraCursor,
   EditorState,
-} from './types';
-export { boundary, intra } from './types';
+} from './types.js';
+export { boundary, intra } from './types.js';
 
 // PNG 익스포터
 export {
@@ -261,8 +261,8 @@ export {
   renderAstToPNGWithCanvas,
   calculateVerticalAlign,
   ensureFontsLoaded,
-} from './export';
+} from './export/index.js';
 export type {
   MathPNGResult,
   MathPNGOptions,
-} from './export';
+} from './export/index.js';

@@ -6,10 +6,10 @@
  */
 
 import { describe, test, expect } from 'vitest';
-import { parseLatex } from '../../../latex';
-import type { CatalogIndexEntry } from '../types';
-import { matchCatalog } from './catalog-matcher';
-import catalogData from '../data/catalog/index.json';
+import { parseLatex } from '../../../latex/index.js';
+import type { CatalogIndexEntry } from '../types.js';
+import { matchCatalog } from './catalog-matcher.js';
+import catalogData from '../data/catalog/index.json' with { type: 'json' };
 
 interface CatalogTestCase {
   /** 대표 LaTeX 수식 */

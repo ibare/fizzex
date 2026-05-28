@@ -5,16 +5,16 @@
  */
 
 // 엔진
-export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './engine';
+export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './engine.js';
 
 // 헬퍼 (public)
-export { containsVariable } from './helpers';
+export { containsVariable } from './helpers.js';
 
 // 카탈로그 조회
-export { getCatalogDetail } from './loader';
+export { getCatalogDetail } from './loader.js';
 
 // 타입
 export type {
   SemanticResult, AncestorEntry, CatalogMatchResult, CatalogDetail, CatalogCategory,
   ElementMeaning, ElementKind, DerivedValueConfig, ConstraintConfig, MilestoneConfig, AnchorConfig,
-} from './types';
+} from './types.js';

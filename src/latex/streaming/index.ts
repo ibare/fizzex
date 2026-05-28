@@ -16,7 +16,7 @@ export type {
   StreamOutputMathFailed,
   StreamOutputAmbiguousDelimiter,
   StreamParserState,
-} from './types';
+} from './types.js';
 
-export { StreamTokenizer } from './tokenizer';
-export { FizzexStreamParser } from './parser';
+export { StreamTokenizer } from './tokenizer.js';
+export { FizzexStreamParser } from './parser.js';

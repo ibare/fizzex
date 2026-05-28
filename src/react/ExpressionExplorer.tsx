@@ -6,9 +6,9 @@
  */
 
 import { useEffect, useRef } from 'react';
-import type { RootNode } from '../types';
-import { ExplorerOverlay } from '../headless/explorer-overlay';
-import type { VisualizerRegistry } from '../visualizer';
+import type { RootNode } from '../types.js';
+import { ExplorerOverlay } from '../headless/explorer-overlay.js';
+import type { VisualizerRegistry } from '../visualizer/index.js';
 
 export interface ExpressionExplorerProps {
   /** AST 루트 노드 */

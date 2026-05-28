@@ -16,9 +16,9 @@ export type {
   TolerantParseOptions,
   PartialParseResult,
   TolerantParseResult,
-} from './types';
+} from './types.js';
 
-export { determineRenderMode } from './determine-render-mode';
-export { tolerantParse } from './tolerant-parse';
-export { preProcess } from './pre-processor';
-export { recoverFromErrors } from './error-recovery';
+export { determineRenderMode } from './determine-render-mode.js';
+export { tolerantParse } from './tolerant-parse.js';
+export { preProcess } from './pre-processor.js';
+export { recoverFromErrors } from './error-recovery.js';

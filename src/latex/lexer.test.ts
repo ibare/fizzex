@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { tokenize, asciiToOperator, isNumericStart, isIdentChar } from './lexer';
-import type { Token } from './lexer';
+import { tokenize, asciiToOperator, isNumericStart, isIdentChar } from './lexer.js';
+import type { Token } from './lexer.js';
 
 /** 토큰 결과를 [kind, value] 튜플 리스트로 단순화 */
 function toPairs(tokens: Token[]): Array<[string, string]> {

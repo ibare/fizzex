@@ -5,8 +5,8 @@
  * 복합 애니메이션을 구성한다.
  */
 
-import { Tween } from './tween';
-import type { TweenConfig } from './tween';
+import { Tween } from './tween.js';
+import type { TweenConfig } from './tween.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface TimelineEntry {

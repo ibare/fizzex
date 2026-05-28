@@ -10,9 +10,9 @@
  * 3. \text{} 내부: 정규화 건너뛰기
  */
 
-import type { NormalizationRecord, PreProcessResult, DelimiterDetection } from './types';
-import { createOffsetMap, identityOffsetMap } from './offset-map';
-import type { SpanPair } from './offset-map';
+import type { NormalizationRecord, PreProcessResult, DelimiterDetection } from './types.js';
+import { createOffsetMap, identityOffsetMap } from './offset-map.js';
+import type { SpanPair } from './offset-map.js';
 
 /** 텍스트 모드 커맨드 — 내부에서 정규화를 건너뛴다 */
 const TEXT_MODE_COMMANDS = new Set([

@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { parseLatex } from '../latex/latex-parser';
-import { resetLatexIdCounter } from '../utils/id-generator';
-import { walkAST } from './ast-walker';
-import { analyzePolynomial } from './polynomial-analyzer';
-import { createFunctionInfoList } from './function-detector';
-import { detectDomains } from './domain-detector';
+import { parseLatex } from '../latex/latex-parser.js';
+import { resetLatexIdCounter } from '../utils/id-generator.js';
+import { walkAST } from './ast-walker.js';
+import { analyzePolynomial } from './polynomial-analyzer.js';
+import { createFunctionInfoList } from './function-detector.js';
+import { detectDomains } from './domain-detector.js';
 import {
   extractFeatures,
   analyzeVisualization,
   calculateComplexity,
   generateSummary,
-} from './feature-extractor';
+} from './feature-extractor.js';
 
 describe('Feature Extractor', () => {
   beforeEach(() => {
