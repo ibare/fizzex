@@ -58,7 +58,8 @@
     "corpus:pdflatex-filter": "tsx src/__tests__/corpus/pdflatex-filter.ts",
     "corpus:full": "pnpm corpus:build && pnpm corpus:pdflatex-filter && pnpm corpus:report && pnpm corpus:compare",
     "corpus:open": "open src/__tests__/corpus/report.html",
-    "semantic:validate": "tsx scripts/validate-semantic-data.ts"
+    "semantic:validate": "tsx scripts/validate-semantic-data.ts",
+    "prepublishOnly": "pnpm build"
   },
   "keywords": [
     "math",
@@ -81,6 +82,12 @@
     "url": "https://github.com/ibare/fizzex/issues"
   },
   "sideEffects": false,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
