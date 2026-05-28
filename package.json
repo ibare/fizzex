@@ -59,7 +59,10 @@
     "corpus:full": "pnpm corpus:build && pnpm corpus:pdflatex-filter && pnpm corpus:report && pnpm corpus:compare",
     "corpus:open": "open src/__tests__/corpus/report.html",
     "semantic:validate": "tsx scripts/validate-semantic-data.ts",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "keywords": [
     "math",
@@ -116,6 +119,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@tiptap/core": "^3.22.3",
     "@tiptap/pm": "^3.22.3",
     "@types/katex": "^0.16.7",
