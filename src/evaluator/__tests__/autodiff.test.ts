@@ -192,3 +192,19 @@ describe('E10 — throw 금지', () => {
     }
   });
 });
+
+describe('E10 — 공유 토크나이저 계약', () => {
+  it('\\operatorname{sin}(x) 를 함수 호출로 합성', () => {
+    expect(dAt('\\operatorname{sin}(x)', 'x', { x: 0 })).toBeCloseTo(1);
+  });
+
+  it('관계 연산자는 피연산자 평가보다 먼저 거부된다', () => {
+    const r = dCold('x = 1', 'x', {});
+    expect(r.ok).toBe(false);
+    if (!r.ok) {
+      expect(r.status).toBe('unsupported');
+      expect(r.detail?.nodeType).toBe('operator');
+      expect(r.detail?.reason).toBe('=');
+    }
+  });
+});

@@ -30,6 +30,7 @@ import type {
   RowNode,
 } from '../types.js';
 import type { Bindings, EvalDetail, EvalStatus } from './types.js';
+import { type SeqToken, tokenizeSequence, toRPN } from './sequence.js';
 import { normalizeVarName } from './normalize.js';
 
 export interface Dual {
@@ -385,91 +386,12 @@ function evalFunc(n: FuncNode, ctx: AutoCtx): DualOutcome {
 
 /* ─────────────────── 시퀀스 평가 (shunting-yard) ─────────────────── */
 
-type BinaryOp = '+' | '-' | '×' | '÷' | '·';
-
-type SeqToken =
-  | { kind: 'operand'; node: MathNode }
-  | { kind: 'binop'; op: BinaryOp; prec: number }
-  | { kind: 'unaryMinus' };
-
-const PREC: Record<BinaryOp, number> = {
-  '+': 1,
-  '-': 1,
-  '×': 2,
-  '·': 2,
-  '÷': 2,
-};
-const UNARY_PREC = 3;
-
-function tokenize(children: MathNode[]): SeqToken[] | { error: string; operator?: string } {
-  const tokens: SeqToken[] = [];
-  let prevWasOperand = false;
-  for (const c of children) {
-    if (c.type === 'operator') {
-      const op = (c as OperatorNode).operator;
-      if (op === '+') {
-        if (!prevWasOperand) continue;
-        tokens.push({ kind: 'binop', op: '+', prec: PREC['+'] });
-        prevWasOperand = false;
-        continue;
-      }
-      if (op === '-') {
-        if (!prevWasOperand) {
-          tokens.push({ kind: 'unaryMinus' });
-        } else {
-          tokens.push({ kind: 'binop', op: '-', prec: PREC['-'] });
-          prevWasOperand = false;
-        }
-        continue;
-      }
-      if (op === '×' || op === '·' || op === '÷') {
-        if (!prevWasOperand) {
-          return { error: 'malformed-sequence', operator: op };
-        }
-        tokens.push({ kind: 'binop', op, prec: PREC[op] });
-        prevWasOperand = false;
-        continue;
-      }
-      return { error: 'unsupported-operator', operator: op };
-    }
-    if (prevWasOperand) {
-      tokens.push({ kind: 'binop', op: '×', prec: PREC['×'] });
-    }
-    tokens.push({ kind: 'operand', node: c });
-    prevWasOperand = true;
-  }
-  return tokens;
-}
-
-function toRPN(tokens: SeqToken[]): SeqToken[] {
-  const output: SeqToken[] = [];
-  const stack: SeqToken[] = [];
-  const precOf = (t: SeqToken): number => {
-    if (t.kind === 'unaryMinus') return UNARY_PREC;
-    if (t.kind === 'binop') return t.prec;
-    return 0;
-  };
-  for (const t of tokens) {
-    if (t.kind === 'operand') {
-      output.push(t);
-      continue;
-    }
-    if (t.kind === 'unaryMinus') {
-      stack.push(t);
-      continue;
-    }
-    while (stack.length > 0 && precOf(stack[stack.length - 1]) >= t.prec) {
-      output.push(stack.pop()!);
-    }
-    stack.push(t);
-  }
-  while (stack.length > 0) output.push(stack.pop()!);
-  return output;
-}
-
 function evalRPN(rpn: SeqToken[], ctx: AutoCtx): DualOutcome {
   const stack: Dual[] = [];
   for (const t of rpn) {
+    if (t.kind === 'rel') {
+      return fail('unsupported', { nodeType: 'operator', reason: t.op });
+    }
     if (t.kind === 'operand') {
       const out = dispatch(t.node, ctx);
       if (out.kind === 'fail') return out;
@@ -511,7 +433,7 @@ function evalRPN(rpn: SeqToken[], ctx: AutoCtx): DualOutcome {
 function evalSequence(children: MathNode[], ctx: AutoCtx): DualOutcome {
   if (children.length === 0) return fail('unsupported', { nodeType: 'row', reason: 'empty-sequence' });
   if (children.length === 1) return dispatch(children[0], ctx);
-  const tokens = tokenize(children);
+  const tokens = tokenizeSequence(children);
   if (!Array.isArray(tokens)) {
     if (tokens.error === 'unsupported-operator') {
       return fail('unsupported', { nodeType: 'operator', reason: tokens.operator });
@@ -519,6 +441,12 @@ function evalSequence(children: MathNode[], ctx: AutoCtx): DualOutcome {
     return fail('unsupported', { nodeType: 'row', reason: tokens.error });
   }
   if (tokens.length === 0) return fail('unsupported', { nodeType: 'row', reason: 'empty-sequence' });
+  // 관계 연산자는 평가 대상이 아니다. 피연산자 평가보다 먼저 거부해야
+  // detail.nodeType 이 'operator' 로 보존된다.
+  const rel = tokens.find((t) => t.kind === 'rel');
+  if (rel && rel.kind === 'rel') {
+    return fail('unsupported', { nodeType: 'operator', reason: rel.op });
+  }
   return evalRPN(toRPN(tokens), ctx);
 }
 

@@ -168,3 +168,27 @@ describe('E12 — throw 금지', () => {
     }
   });
 });
+
+describe('E12 — 공유 토크나이저 계약', () => {
+  // \operatorname{f}(x) 는 파서가 func(argument=[]) 와 paren 을 별개 자식으로 내놓는다.
+  // 공유 토크나이저가 이를 합성하므로 세 평가자가 같은 산출물을 같게 해석한다.
+  it('\\operatorname{conj}(z) 를 함수 호출로 합성', () => {
+    expect(evC('\\operatorname{conj}(z)', { z: 2 })).toEqual({ re: 2, im: -0 });
+  });
+
+  it('미등재 함수명은 여전히 unsupported', () => {
+    const r = evCCold('\\operatorname{nope}(z)', { z: 2 });
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.detail?.nodeType).toBe('func');
+  });
+
+  it('관계 연산자는 피연산자 평가보다 먼저 거부된다', () => {
+    const r = evCCold('z = 1', {});
+    expect(r.ok).toBe(false);
+    if (!r.ok) {
+      expect(r.status).toBe('unsupported');
+      expect(r.detail?.nodeType).toBe('operator');
+      expect(r.detail?.reason).toBe('=');
+    }
+  });
+});
