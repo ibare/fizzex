@@ -13,12 +13,14 @@ import type { BoxRenderConfig, Box, HBox } from '../box/types.js';
 import { astToLatex } from '../latex/ast-to-latex.js';
 import { MathEditor, createStateFromLatex, keyToInputAction } from '../editor.js';
 import { boundary } from '../types.js';
+import type { MathNode } from '../types.js';
 import { loadMathFont } from '../fonts/index.js';
 import type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types.js';
 import { resolveBoxRenderConfig } from './types.js';
 import { ExplorerOverlay } from './explorer-overlay.js';
 import { attachExplorerTrigger } from './explorer-trigger.js';
-import type { ExplorerTriggerOptions } from './explorer-trigger.js';
+import type { ExplorerTriggerOptions, ExplorerTriggerHandle } from './explorer-trigger.js';
+import { judgeExplorable } from './explorability.js';
 
 export class DOMEditorView {
   // DOM elements
@@ -50,7 +52,10 @@ export class DOMEditorView {
   private changeHandlers = new Set<FizzexChangeHandler>();
   private destroyed = false;
   private explorerOverlay: ExplorerOverlay | null = null;
-  private explorerCleanup: (() => void) | null = null;
+  private explorerTrigger: ExplorerTriggerHandle | null = null;
+  private explorable = false;
+  /** 마지막으로 판정한 AST. 커서 깜빡임 등 AST 가 그대로인 재렌더를 걸러낸다. */
+  private judgedAst: MathNode | null = null;
 
   // Bound event handlers (stored for removal in destroy)
   private boundCanvasClick: (e: MouseEvent) => void;
@@ -214,17 +219,28 @@ export class DOMEditorView {
   /** 자동 탐색 트리거를 활성화한다 (더블클릭/호버 아이콘). */
   enableExplorer(options?: ExplorerTriggerOptions): void {
     this.disableExplorer();
-    this.explorerCleanup = attachExplorerTrigger(
+    this.explorerTrigger = attachExplorerTrigger(
       this.container,
       () => this.openExplorer(),
       { theme: this.userConfig.theme, ...options },
     );
+    // 호출 측이 첫 렌더 뒤에 부를 수 있으므로 현재 판정을 곧바로 밀어넣는다.
+    this.explorerTrigger.setAvailable(this.explorable);
   }
 
   /** 자동 탐색 트리거를 비활성화한다. */
   disableExplorer(): void {
-    this.explorerCleanup?.();
-    this.explorerCleanup = null;
+    this.explorerTrigger?.destroy();
+    this.explorerTrigger = null;
+  }
+
+  /**
+   * 현재 수식이 탐색 진입 자격을 갖는가.
+   *
+   * 판정은 renderFrame() 이 AST 에서 파생하며, 외부에서 덮어쓸 수 없다.
+   */
+  isExplorable(): boolean {
+    return this.explorable;
   }
 
   /** Tear down all DOM and timers. */
@@ -258,6 +274,7 @@ export class DOMEditorView {
     (this as Record<string, unknown>).container = null;
     (this as Record<string, unknown>).editor = null;
     (this as Record<string, unknown>).currentBox = null;
+    this.judgedAst = null;
   }
 
   // ---------------------------------------------------------------------------
@@ -267,6 +284,13 @@ export class DOMEditorView {
   private renderFrame(): void {
     const state = this.editor.getState();
     const { ast } = state;
+
+    // 탐색 진입 자격은 AST 에서만 파생한다. AST 는 불변이라 참조가 그대로면
+    // 판정도 그대로다 — 커서 깜빡임이 부르는 재렌더에서는 건너뛴다.
+    if (ast !== this.judgedAst) {
+      this.judgedAst = ast;
+      this.setExplorable(judgeExplorable(ast));
+    }
 
     // Parse the AST into a Box tree
     // (astToBox works directly from a MathNode, no parseLatex needed here
@@ -430,6 +454,12 @@ export class DOMEditorView {
   // ---------------------------------------------------------------------------
   // Helpers
   // ---------------------------------------------------------------------------
+
+  /** 판정 결과를 보관하고 트리거에 즉시 반영한다. */
+  private setExplorable(next: boolean): void {
+    this.explorable = next;
+    this.explorerTrigger?.setAvailable(next);
+  }
 
   private notifyChange(): void {
     if (this.changeHandlers.size === 0) return;

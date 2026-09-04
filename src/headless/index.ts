@@ -12,7 +12,12 @@ export type { FizzexConfig, FizzexSize, FizzexChangeHandler } from './types.js';
 
 export { ExplorerOverlay } from './explorer-overlay.js';
 export type { ExplorerOverlayConfig } from './explorer-overlay.js';
-export type { ExplorerTriggerOptions } from './explorer-trigger.js';
+export type { ExplorerTriggerOptions, ExplorerTriggerHandle } from './explorer-trigger.js';
+
+// 탐색 진입 자격 판정. 호스트가 문서의 어떤 수식이 탐색 가능한지 물어볼 때 쓴다.
+// 술어 `isExplorable(root)` 는 매칭 결과를 이미 손에 쥔 내부 소비자용이라
+// 배럴에 싣지 않는다 — 외부는 AST 만 가지므로 judgeExplorable 로 충분하다.
+export { judgeExplorable } from './explorability.js';
 
 export { ExplorerVisualizerController } from './explorer-visualizer.js';
 export { ExplorerSceneChips } from './explorer-scene-chips.js';

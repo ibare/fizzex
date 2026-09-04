@@ -36,6 +36,7 @@ import type {
 import { VizPanel } from './explorer-viz-panel.js';
 import { getControlType, buildInlineControlConfig } from './inline-control-types.js';
 import type { InlineControlConfig } from './inline-control-types.js';
+import { isExplorable } from './explorability.js';
 import { ExplorerInlineControls } from './explorer-inline-controls.js';
 import {
   createModificationState,
@@ -420,7 +421,7 @@ export class ExplorerOverlay {
     {
       const rootSemantic = this.semanticMap.get(ast.id);
       this.catalogDetail =
-        rootSemantic?.tier === 'confirmed' && rootSemantic.catalogId && rootSemantic.catalogCategory
+        isExplorable(rootSemantic) && rootSemantic?.catalogId && rootSemantic.catalogCategory
           ? getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory) ?? null
           : null;
     }
@@ -1201,7 +1202,7 @@ export class ExplorerOverlay {
 
     // 형식 유니피케이션으로 확정된 매칭만 정식 이름을 쓴다.
     // 폴백 스코어러 매칭은 언제나 "~와(과) 유사" 다.
-    const confirmed = rootSemantic.tier === 'confirmed';
+    const confirmed = isExplorable(rootSemantic);
 
     const nameSpan = document.createElement('span');
     nameSpan.style.fontWeight = '600';

@@ -16,7 +16,8 @@ import type { FizzexConfig, FizzexSize } from './types.js';
 import { resolveBoxRenderConfig } from './types.js';
 import { ExplorerOverlay } from './explorer-overlay.js';
 import { attachExplorerTrigger } from './explorer-trigger.js';
-import type { ExplorerTriggerOptions } from './explorer-trigger.js';
+import type { ExplorerTriggerOptions, ExplorerTriggerHandle } from './explorer-trigger.js';
+import { judgeExplorable } from './explorability.js';
 
 export class DOMRendererView {
   private container: HTMLElement;
@@ -30,7 +31,8 @@ export class DOMRendererView {
   private currentSize: FizzexSize = { width: 0, height: 0, baseline: 0 };
   private destroyed = false;
   private explorerOverlay: ExplorerOverlay | null = null;
-  private explorerCleanup: (() => void) | null = null;
+  private explorerTrigger: ExplorerTriggerHandle | null = null;
+  private explorable = false;
 
   constructor(container: HTMLElement, config: FizzexConfig = {}) {
     this.container = container;
@@ -75,6 +77,7 @@ export class DOMRendererView {
     if (!latex) {
       this.clearCanvas();
       this.currentSize = { width: 0, height: 0, baseline: 0 };
+      this.setExplorable(false);
       return;
     }
 
@@ -83,8 +86,14 @@ export class DOMRendererView {
     try {
       ast = parseLatex(latex).ast;
     } catch {
+      this.setExplorable(false);
       return;
     }
+
+    // 탐색 진입 자격은 렌더 산출물의 일부다. 방금 얻은 AST 를 그대로 쓰므로
+    // 추가 파싱이 없고, LaTeX 가 바뀌면 render() 가 다시 불려 자동으로
+    // 갱신된다 — 따로 캐시를 두고 무효화를 관리할 이유가 없다.
+    this.setExplorable(judgeExplorable(ast));
 
     // Fresh metrics (context state is reset on canvas resize)
     const metrics = new CanvasFontMetrics(this.ctx, this.boxConfig);
@@ -162,17 +171,30 @@ export class DOMRendererView {
   /** 자동 탐색 트리거를 활성화한다 (더블클릭/호버 아이콘). */
   enableExplorer(options?: ExplorerTriggerOptions): void {
     this.disableExplorer();
-    this.explorerCleanup = attachExplorerTrigger(
+    this.explorerTrigger = attachExplorerTrigger(
       this.container,
       () => this.openExplorer(),
       { theme: this.userConfig.theme, ...options },
     );
+    // 호출 측은 render() 뒤에 이 메서드를 부른다. 현재 판정을 곧바로
+    // 밀어넣지 않으면 첫 표시가 자격 없음으로 굳는다.
+    this.explorerTrigger.setAvailable(this.explorable);
   }
 
   /** 자동 탐색 트리거를 비활성화한다. */
   disableExplorer(): void {
-    this.explorerCleanup?.();
-    this.explorerCleanup = null;
+    this.explorerTrigger?.destroy();
+    this.explorerTrigger = null;
+  }
+
+  /**
+   * 현재 수식이 탐색 진입 자격을 갖는가.
+   *
+   * 호스트가 문서 전체의 탐색 가능 수식을 파악하는 데 쓸 수 있다.
+   * 판정은 render() 가 AST 에서 파생하며, 외부에서 덮어쓸 수 없다.
+   */
+  isExplorable(): boolean {
+    return this.explorable;
   }
 
   /** Remove the canvas from the DOM and release references. */
@@ -190,6 +212,12 @@ export class DOMRendererView {
   // ---------------------------------------------------------------------------
   // Internal helpers
   // ---------------------------------------------------------------------------
+
+  /** 판정 결과를 보관하고 트리거에 즉시 반영한다. */
+  private setExplorable(next: boolean): void {
+    this.explorable = next;
+    this.explorerTrigger?.setAvailable(next);
+  }
 
   private clearCanvas(): void {
     const dpr = window.devicePixelRatio || 1;

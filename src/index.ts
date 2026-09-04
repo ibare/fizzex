@@ -176,7 +176,8 @@ export type { DOMStreamViewConfig } from './headless/index.js';
 
 // Headless Explorer
 export { ExplorerOverlay } from './headless/index.js';
-export type { ExplorerOverlayConfig, ExplorerTriggerOptions } from './headless/index.js';
+export type { ExplorerOverlayConfig, ExplorerTriggerOptions, ExplorerTriggerHandle } from './headless/index.js';
+export { judgeExplorable } from './headless/index.js';
 export { ExplorerVisualizerController } from './headless/index.js';
 
 // Visualizer 프레임워크 — JSON spec 기반 런타임
