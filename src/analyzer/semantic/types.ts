@@ -213,6 +213,68 @@ export interface CatalogDetail {
   anchors?: AnchorConfig[];
 }
 
+// ─── 형식(form) ───
+
+/** 슬롯을 채우는 출처. formula = 수식에서 읽는다, viewer = 사용자가 움직인다. */
+export type FormSlotSource = 'formula' | 'viewer';
+
+export interface FormSlotRange {
+  min: number;
+  max: number;
+  step: number;
+  default: number;
+}
+
+export interface FormSlot {
+  /** spec.userBindings.name 과 문자열이 정확히 같아야 한다 (`\omega`, `v_0` 등). */
+  name: string;
+  outputKind: 'scalar' | 'matrix' | 'complex';
+  source: FormSlotSource;
+  /** 대응 항이 없어도 되는 슬롯. 곱셈 자리는 1, 덧셈 자리는 0 으로 파생된다. */
+  optional?: boolean;
+  range: FormSlotRange;
+}
+
+export interface FormShape {
+  /** 메타변수 sigil 없는 정상 LaTeX. slots·free 밖의 토큰은 전부 리터럴이다. */
+  latex: string;
+  slots: string[];
+  free: string[];
+}
+
+export interface FormExample {
+  latex: string;
+  /** 슬롯 이름 → 기대 바인딩(LaTeX). 자가 증식 테스트의 유일한 저작물이다. */
+  slots: Record<string, string>;
+}
+
+/** 형식 — 시각화가 붙는 단위. 카탈로그 항목은 이름을 소유하고 형식을 참조한다. */
+export interface FormEntry {
+  id: string;
+  slots: FormSlot[];
+  shapes: FormShape[];
+  visualizers: FormVisualizerRef[];
+  examples: FormExample[];
+  counterExamples: string[];
+}
+
+export interface FormVisualizerRef {
+  id: string;
+  icon?: string;
+  default?: boolean;
+}
+
+export interface FormSlotText {
+  role: string;
+  description: string;
+}
+
+export interface FormText {
+  name: string;
+  oneLiner: string;
+  slots: Record<string, FormSlotText>;
+}
+
 /** 카탈로그 매칭 결과 */
 export interface CatalogMatchResult {
   catalogId: string;

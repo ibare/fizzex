@@ -1,0 +1,172 @@
+{
+  "version": "1",
+  "forms": [
+    {
+      "id": "quadratic-expression",
+      "slots": [
+        { "name": "a", "outputKind": "scalar", "source": "formula", "range": { "min": -5, "max": 5, "step": 0.1, "default": 1 } },
+        { "name": "b", "outputKind": "scalar", "source": "formula", "optional": true, "range": { "min": -10, "max": 10, "step": 0.1, "default": 0 } },
+        { "name": "c", "outputKind": "scalar", "source": "formula", "optional": true, "range": { "min": -10, "max": 10, "step": 0.1, "default": 0 } },
+        { "name": "x", "outputKind": "scalar", "source": "viewer", "range": { "min": -10, "max": 10, "step": 0.1, "default": 0 } }
+      ],
+      "shapes": [
+        { "latex": "y = a x^{2} + b x + c", "slots": ["a", "b", "c"], "free": ["x", "y"] },
+        { "latex": "a x^{2} + b x + c = 0", "slots": ["a", "b", "c"], "free": ["x"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "y = ax^2 + bx + c", "slots": { "a": "a", "b": "b", "c": "c" } },
+        { "latex": "x^2 + 2x - 3 = 0", "slots": { "a": "1", "b": "2", "c": "-3" } },
+        { "latex": "y = -2x^2 + 5", "slots": { "a": "-2", "b": "0", "c": "5" } }
+      ],
+      "counterExamples": [
+        "a^2 + b^2 = c^2",
+        "y = 3x + 1",
+        "s = v_0 t + \\frac{1}{2}gt^2"
+      ]
+    },
+    {
+      "id": "sum-of-two-squares",
+      "slots": [
+        { "name": "a", "outputKind": "scalar", "source": "formula", "range": { "min": 0.1, "max": 200, "step": 0.1, "default": 3 } },
+        { "name": "b", "outputKind": "scalar", "source": "formula", "range": { "min": 0.1, "max": 200, "step": 0.1, "default": 4 } },
+        { "name": "c", "outputKind": "scalar", "source": "formula", "range": { "min": 0.1, "max": 300, "step": 0.1, "default": 5 } }
+      ],
+      "shapes": [
+        { "latex": "a^{2} + b^{2} = c^{2}", "slots": ["a", "b", "c"], "free": [] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "a^2 + b^2 = c^2", "slots": { "a": "a", "b": "b", "c": "c" } },
+        { "latex": "p^2 + q^2 = r^2", "slots": { "a": "p", "b": "q", "c": "r" } },
+        { "latex": "x^2 + y^2 = z^2", "slots": { "a": "x", "b": "y", "c": "z" } }
+      ],
+      "counterExamples": [
+        "\\sin^2\\theta + \\cos^2\\theta = 1",
+        "x^2 + 2x - 3 = 0",
+        "a^2 - b^2 = c^2"
+      ]
+    },
+    {
+      "id": "exponential-change",
+      "slots": [
+        { "name": "N_0", "outputKind": "scalar", "source": "formula", "range": { "min": 0, "max": 1000, "step": 1, "default": 100 } },
+        { "name": "r", "outputKind": "scalar", "source": "formula", "range": { "min": -2, "max": 2, "step": 0.01, "default": -0.5 } }
+      ],
+      "shapes": [
+        { "latex": "N = N_0 e^{r t}", "slots": ["N_0", "r"], "free": ["N", "t"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "N = N_0 e^{rt}", "slots": { "N_0": "N_0", "r": "r" } },
+        { "latex": "N = N_0 e^{-\\lambda t}", "slots": { "N_0": "N_0", "r": "-\\lambda" } },
+        { "latex": "A = A_0 e^{kt}", "slots": { "N_0": "A_0", "r": "k" } }
+      ],
+      "counterExamples": [
+        "y = ax^2 + bx + c",
+        "A = P\\left(1 + \\frac{r}{n}\\right)^{nt}"
+      ]
+    },
+    {
+      "id": "compound-growth",
+      "slots": [
+        { "name": "P", "outputKind": "scalar", "source": "formula", "range": { "min": 0, "max": 100000, "step": 100, "default": 1000 } },
+        { "name": "r", "outputKind": "scalar", "source": "formula", "range": { "min": 0, "max": 1, "step": 0.001, "default": 0.05 } },
+        { "name": "n", "outputKind": "scalar", "source": "formula", "range": { "min": 1, "max": 365, "step": 1, "default": 12 } },
+        { "name": "t", "outputKind": "scalar", "source": "formula", "range": { "min": 0, "max": 50, "step": 0.5, "default": 10 } }
+      ],
+      "shapes": [
+        { "latex": "A = P\\left(1 + \\frac{r}{n}\\right)^{n t}", "slots": ["P", "r", "n", "t"], "free": ["A"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "A = P\\left(1 + \\frac{r}{n}\\right)^{nt}", "slots": { "P": "P", "r": "r", "n": "n", "t": "t" } },
+        { "latex": "S = C\\left(1 + \\frac{i}{m}\\right)^{mk}", "slots": { "P": "C", "r": "i", "n": "m", "t": "k" } }
+      ],
+      "counterExamples": [
+        "N = N_0 e^{rt}",
+        "y = ax^2 + bx + c"
+      ]
+    },
+    {
+      "id": "constant-acceleration-displacement",
+      "slots": [
+        { "name": "v_0", "outputKind": "scalar", "source": "formula", "range": { "min": -100, "max": 100, "step": 0.5, "default": 0 } },
+        { "name": "a", "outputKind": "scalar", "source": "formula", "range": { "min": -20, "max": 20, "step": 0.1, "default": -9.8 } },
+        { "name": "t", "outputKind": "scalar", "source": "viewer", "range": { "min": 0, "max": 20, "step": 0.1, "default": 0 } }
+      ],
+      "shapes": [
+        { "latex": "s = v_0 t + \\frac{1}{2} a t^{2}", "slots": ["v_0", "a"], "free": ["s", "t"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "s = v_0 t + \\frac{1}{2}at^2", "slots": { "v_0": "v_0", "a": "a" } },
+        { "latex": "y = v_0 t + \\frac{1}{2}gt^2", "slots": { "v_0": "v_0", "a": "g" } },
+        { "latex": "h = u t + \\frac{1}{2}at^2", "slots": { "v_0": "u", "a": "a" } }
+      ],
+      "counterExamples": [
+        "y = ax^2 + bx + c",
+        "x^2 + 2x - 3 = 0"
+      ]
+    },
+    {
+      "id": "sinusoid",
+      "slots": [
+        { "name": "A", "outputKind": "scalar", "source": "formula", "range": { "min": 0, "max": 10, "step": 0.1, "default": 1 } },
+        { "name": "\\omega", "outputKind": "scalar", "source": "formula", "range": { "min": 0, "max": 20, "step": 0.1, "default": 1 } },
+        { "name": "\\varphi", "outputKind": "scalar", "source": "formula", "range": { "min": -3.15, "max": 3.15, "step": 0.01, "default": 0 } },
+        { "name": "t", "outputKind": "scalar", "source": "viewer", "range": { "min": 0, "max": 20, "step": 0.1, "default": 0 } }
+      ],
+      "shapes": [
+        { "latex": "y = A\\sin(\\omega t + \\varphi)", "slots": ["A", "\\omega", "\\varphi"], "free": ["y", "t"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "y = A\\sin(\\omega t + \\varphi)", "slots": { "A": "A", "\\omega": "\\omega", "\\varphi": "\\varphi" } },
+        { "latex": "x = B\\sin(kt + \\phi)", "slots": { "A": "B", "\\omega": "k", "\\varphi": "\\phi" } }
+      ],
+      "counterExamples": [
+        "y = A\\cos(\\omega t + \\varphi)",
+        "y = ax^2 + bx + c"
+      ]
+    },
+    {
+      "id": "orbit-period-radius",
+      "slots": [
+        { "name": "M", "outputKind": "scalar", "source": "formula", "range": { "min": 1e20, "max": 1e31, "step": 1e20, "default": 5.972e24 } },
+        { "name": "a", "outputKind": "scalar", "source": "formula", "range": { "min": 6771, "max": 400000, "step": 1, "default": 6771 } }
+      ],
+      "shapes": [
+        { "latex": "T^{2} = \\frac{4\\pi^{2}}{G M} a^{3}", "slots": ["M", "a"], "free": ["T"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "T^2 = \\frac{4\\pi^2}{GM}a^3", "slots": { "M": "M", "a": "a" } },
+        { "latex": "P^2 = \\frac{4\\pi^2}{GM_s}r^3", "slots": { "M": "M_s", "a": "r" } }
+      ],
+      "counterExamples": [
+        "a^2 + b^2 = c^2",
+        "y = ax^2 + bx + c"
+      ]
+    },
+    {
+      "id": "tangent-line",
+      "slots": [
+        { "name": "f", "outputKind": "scalar", "source": "formula", "range": { "min": -10, "max": 10, "step": 0.1, "default": 0 } },
+        { "name": "x", "outputKind": "scalar", "source": "viewer", "range": { "min": -10, "max": 10, "step": 0.1, "default": 0 } }
+      ],
+      "shapes": [
+        { "latex": "y - f(a) = f'(a)(x - a)", "slots": ["f"], "free": ["y", "x", "a"] }
+      ],
+      "visualizers": [],
+      "examples": [
+        { "latex": "y - f(a) = f'(a)(x - a)", "slots": { "f": "f" } },
+        { "latex": "y - g(c) = g'(c)(x - c)", "slots": { "f": "g" } }
+      ],
+      "counterExamples": [
+        "y = ax^2 + bx + c",
+        "a^2 + b^2 = c^2"
+      ]
+    }
+  ]
+}

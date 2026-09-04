@@ -5,7 +5,10 @@
  * locale별 접근 인터페이스를 제공한다.
  */
 
-import type { CatalogIndexEntry, CatalogDetail, VisualizerRef } from './types.js';
+import type { CatalogIndexEntry, CatalogDetail, VisualizerRef,
+  FormEntry,
+  FormText,
+} from './types.js';
 
 // 번들 포함 (항상 로드) — 한국어 기본
 import koLayer1 from './data/layer1/ko.json' with { type: 'json' };
@@ -14,6 +17,8 @@ import koFallback from './data/fallback/ko.json' with { type: 'json' };
 
 // 카탈로그 인덱스 (번들 포함)
 import catalogIndex from './data/catalog/index.json' with { type: 'json' };
+import formIndex from './data/form/index.json' with { type: 'json' };
+import formKo from './data/form/ko.json' with { type: 'json' };
 
 // 카탈로그 상세 (번들 포함 — 25분야)
 // 초중등
@@ -163,6 +168,20 @@ export function getCatalogIndex(): CatalogIndexEntry[] {
  * 동일 수식에 여러 시각화 관점이 붙을 수 있으므로 항상 배열로 반환한다.
  * 등록이 없으면 빈 배열.
  */
+/**
+ * 형식 목록. 번들에 정적으로 박히며 런타임 검증은 하지 않는다
+ * (`validator/` 는 빌드·테스트 시점 전용).
+ */
+export function getFormIndex(): FormEntry[] {
+  return formIndex.forms as FormEntry[];
+}
+
+/** 형식 텍스트 (로케일별). */
+export function getFormText(locale = 'ko'): Record<string, FormText> {
+  void locale;
+  return formKo as Record<string, FormText>;
+}
+
 export function getVisualizersForCatalog(catalogId: string): VisualizerRef[] {
   const entries = getCatalogIndex();
   const entry = entries.find((e) => e.id === catalogId);

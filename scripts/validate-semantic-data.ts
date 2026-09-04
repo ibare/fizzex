@@ -5,6 +5,7 @@
  * 1. Layer 1 규칙 ID ↔ ko.json 키 일치
  * 2. Layer 2 규칙 ID ↔ ko.json 키 일치
  * 3. 카탈로그 index.json / 상세 JSON zod 스키마 + 양방향 키 일치
+ * 4. 형식(form) 스키마 + 템플릿 ↔ 선언 슬롯 양방향 일치
  *
  * 실행: pnpm semantic:validate
  */
@@ -15,6 +16,12 @@ import {
   validateCatalogDetailFile,
   CatalogValidationError,
 } from '../src/analyzer/semantic/validator/index.js';
+import { formIndexSchema, formTextSchema } from '../src/analyzer/semantic/validator/form-schema.js';
+import { parseLatex } from '../src/latex/latex-parser.js';
+import { normalizeAst } from '../src/analyzer/canonical/from-ast.js';
+import { childrenOfExpr, type ExprNode } from '../src/analyzer/canonical/expr.js';
+import { symKey } from '../src/analyzer/canonical/polynomial.js';
+import { normalizeVarName } from '../src/evaluator/normalize.js';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -176,6 +183,110 @@ function validateCatalog(): void {
   ok(`${entries.length}개 항목, ${detailCache.size}개 분야 검증 완료`);
 }
 
+// ─── 형식(form) 검증 ───
+
+/** 슬롯·free 이름을 IR 심볼 키로 옮긴다. `\\omega` → `ω`, `N_0` → `N_0`. */
+function declaredKey(name: string): string {
+  const m = /^(.+?)_(.+)$/.exec(name);
+  if (m) return symKey(normalizeVarName(m[1]), m[2]);
+  return symKey(normalizeVarName(name));
+}
+
+function collectSymKeys(e: ExprNode, out: Set<string>): void {
+  if (e.kind === 'sym') out.add(symKey(e.name, e.sub));
+  for (const c of childrenOfExpr(e)) collectSymKeys(c, out);
+}
+
+function validateForms(): void {
+  console.log('\n[형식] 스키마 + 템플릿 ↔ 선언 슬롯 검증');
+
+  const formDir = resolve(dataDir, 'form');
+  const indexParsed = formIndexSchema.safeParse(loadJson<unknown>(resolve(formDir, 'index.json')));
+  if (!indexParsed.success) {
+    for (const i of indexParsed.error.issues) error(`form/index.json: ${i.path.join('.')}: ${i.message}`);
+    return;
+  }
+  const textParsed = formTextSchema.safeParse(loadJson<unknown>(resolve(formDir, 'ko.json')));
+  if (!textParsed.success) {
+    for (const i of textParsed.error.issues) error(`form/ko.json: ${i.path.join('.')}: ${i.message}`);
+    return;
+  }
+
+  const forms = indexParsed.data.forms;
+  const texts = textParsed.data;
+
+  for (const form of forms) {
+    // 텍스트 ↔ 구조 양방향
+    const text = texts[form.id];
+    if (!text) {
+      error(`형식 "${form.id}" 의 ko.json 텍스트가 없다`);
+    } else {
+      for (const slot of form.slots) {
+        if (!text.slots[slot.name]) error(`"${form.id}" 슬롯 "${slot.name}" 의 텍스트가 없다`);
+      }
+      for (const key of Object.keys(text.slots)) {
+        if (!form.slots.some((s) => s.name === key)) {
+          error(`"${form.id}" ko.json 의 고아 슬롯 텍스트 "${key}"`);
+        }
+      }
+    }
+
+    // 템플릿이 파싱·정규화되는가, 그리고 선언한 이름이 실제로 등장하는가.
+    // 슬롯 이름은 spec.userBindings 를 따라 `\omega`/`N_0` 형태인데 IR 은
+    // `ω`/`sym{N, sub:0}` 이므로, 이 대조가 없으면 이름 불일치가 매처까지 간다.
+    form.shapes.forEach((shape, i) => {
+      const where = `"${form.id}" shape[${i}]`;
+      let normalized;
+      try {
+        normalized = normalizeAst(parseLatex(shape.latex).ast);
+      } catch (e) {
+        error(`${where} 템플릿 파싱 실패: ${String(e)}`);
+        return;
+      }
+      if (!normalized.ok) {
+        error(`${where} 템플릿이 완전히 정규화되지 않는다: ${shape.latex}`);
+        return;
+      }
+      const present = new Set<string>();
+      collectSymKeys(normalized.root, present);
+
+      for (const name of [...shape.slots, ...shape.free]) {
+        if (!present.has(declaredKey(name))) {
+          error(`${where} 선언한 "${name}"(→${declaredKey(name)})이 템플릿에 없다`);
+        }
+      }
+      const declared = new Set([...shape.slots, ...shape.free].map(declaredKey));
+      for (const key of present) {
+        if (!declared.has(key)) {
+          warn(`${where} 템플릿의 "${key}" 가 slots/free 어디에도 없다 — 리터럴로 취급된다`);
+        }
+      }
+    });
+
+    // examples·counterExamples 가 파싱되는가
+    for (const ex of form.examples) {
+      try {
+        parseLatex(ex.latex);
+      } catch {
+        error(`"${form.id}" example 파싱 실패: ${ex.latex}`);
+      }
+    }
+    for (const ce of form.counterExamples) {
+      try {
+        parseLatex(ce);
+      } catch {
+        error(`"${form.id}" counterExample 파싱 실패: ${ce}`);
+      }
+    }
+  }
+
+  for (const id of Object.keys(texts)) {
+    if (!forms.some((f) => f.id === id)) error(`ko.json 의 고아 형식 텍스트 "${id}"`);
+  }
+
+  ok(`${forms.length}개 형식 검증 완료`);
+}
+
 // ─── 메인 ───
 
 console.log('=== 의미 데이터 무결성 검증 ===');
@@ -190,6 +301,7 @@ const l2Errors = errors - prevErrors2;
 
 const prevErrors3 = errors;
 validateCatalog();
+validateForms();
 const catalogErrors = errors - prevErrors3;
 
 console.log('\n--- 결과 ---');

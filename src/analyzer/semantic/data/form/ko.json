@@ -1,0 +1,74 @@
+{
+  "quadratic-expression": {
+    "name": "이차식 꼴",
+    "oneLiner": "x의 제곱이 들어간 식 — 그래프는 포물선",
+    "slots": {
+      "a": { "role": "이차항 계수", "description": "포물선의 방향과 폭을 정한다" },
+      "b": { "role": "일차항 계수", "description": "축의 좌우 위치를 옮긴다" },
+      "c": { "role": "상수항", "description": "y축과 만나는 높이" },
+      "x": { "role": "관찰 지점", "description": "그래프 위에서 살펴볼 x 값" }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "두 제곱의 합 꼴",
+    "oneLiner": "두 값의 제곱을 더한 것이 나머지 하나의 제곱과 같은 관계",
+    "slots": {
+      "a": { "role": "첫째 변", "description": "직각을 끼는 한 변" },
+      "b": { "role": "둘째 변", "description": "직각을 끼는 다른 변" },
+      "c": { "role": "빗변", "description": "직각의 맞은편, 가장 긴 변" }
+    }
+  },
+  "exponential-change": {
+    "name": "지수 변화 꼴",
+    "oneLiner": "변화율이 현재 양에 비례해 기하급수적으로 늘거나 주는 꼴",
+    "slots": {
+      "N_0": { "role": "초깃값", "description": "시간이 0일 때의 양" },
+      "r": { "role": "변화율", "description": "양수면 성장, 음수면 감쇠" }
+    }
+  },
+  "compound-growth": {
+    "name": "복리 꼴",
+    "oneLiner": "이자에 다시 이자가 붙어 원금이 불어나는 꼴",
+    "slots": {
+      "P": { "role": "원금", "description": "처음 넣은 금액" },
+      "r": { "role": "연이율", "description": "1년 기준 이자율" },
+      "n": { "role": "연 복리 횟수", "description": "1년에 이자를 몇 번 붙이는가" },
+      "t": { "role": "기간", "description": "맡기는 햇수" }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "등가속도 변위 꼴",
+    "oneLiner": "일정한 가속도로 움직인 거리 — 시간의 제곱에 비례하는 항이 붙는다",
+    "slots": {
+      "v_0": { "role": "초기 속도", "description": "출발할 때의 속도" },
+      "a": { "role": "가속도", "description": "일정하게 유지되는 가속도" },
+      "t": { "role": "경과 시간", "description": "관찰 시점" }
+    }
+  },
+  "sinusoid": {
+    "name": "사인파 꼴",
+    "oneLiner": "같은 모양이 일정 주기로 반복되는 파형",
+    "slots": {
+      "A": { "role": "진폭", "description": "중심에서 마루까지의 높이" },
+      "\\omega": { "role": "각진동수", "description": "얼마나 빠르게 반복하는가" },
+      "\\varphi": { "role": "위상", "description": "파형을 좌우로 밀어낸 정도" },
+      "t": { "role": "관찰 시각", "description": "파형 위에서 살펴볼 시점" }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "궤도 주기 꼴",
+    "oneLiner": "궤도가 클수록 한 바퀴 도는 데 오래 걸리는 관계",
+    "slots": {
+      "M": { "role": "중심 천체 질량", "description": "공전의 중심이 되는 천체의 질량" },
+      "a": { "role": "궤도 긴반지름", "description": "타원 궤도의 긴 쪽 반지름" }
+    }
+  },
+  "tangent-line": {
+    "name": "접선 꼴",
+    "oneLiner": "곡선 위 한 점에서 같은 기울기로 스치는 직선",
+    "slots": {
+      "f": { "role": "곡선", "description": "접선을 그을 대상 함수" },
+      "x": { "role": "관찰 지점", "description": "접점을 옮겨볼 x 값" }
+    }
+  }
+}
