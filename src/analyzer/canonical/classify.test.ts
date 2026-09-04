@@ -77,6 +77,12 @@ describe('다항식 프로파일 — 계수 추출', () => {
     expect(numericCoeffs(c.poly?.coefficients)).toEqual({ 2: 1, 0: -4 });
   });
 
+  it('음수 계수를 정확히 뽑는다', () => {
+    // 부호가 별도 노드로 남으면 이 항들이 곱셈 패턴에 붙지 않는다.
+    expect(numericCoeffs(cls('x^2 - 2x - 3 = 0').poly?.coefficients)).toEqual({ 2: 1, 1: -2, 0: -3 });
+    expect(numericCoeffs(cls('-x^2 + 4 = 0').poly?.coefficients)).toEqual({ 2: -1, 0: 4 });
+  });
+
   it('기호 계수도 자리를 지킨다', () => {
     const c = cls('y = ax^2 + bx + c');
     const coeffs = c.poly?.coefficients;

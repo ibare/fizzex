@@ -10,7 +10,7 @@
 import { isMathConstantName } from '../../evaluator/constants.js';
 import { COEFFICIENT_NAMES, MAIN_VARIABLE_NAMES } from '../variable-classifier.js';
 import { type ExprNode, type RelOp, app } from './expr.js';
-import type { NormalizedExpr } from './from-ast.js';
+import { type NormalizedExpr, negate } from './from-ast.js';
 import { type PolyProfile, symKey, toPolynomial } from './polynomial.js';
 
 export type ExprShape =
@@ -189,7 +189,7 @@ export function classifyExpr(n: NormalizedExpr): ExprClass {
   }
 
   // 일반 등식 — 한쪽으로 모아 다항식으로 읽는다.
-  const canonicalSide = app('add', [lhs, app('neg', [rhs], rhs.src)], n.root.src);
+  const canonicalSide = app('add', [lhs, negate(rhs, rhs.src)], n.root.src);
   const { main, params } = partitionSymbols(acc.syms);
   const poly = toPolynomial(canonicalSide, new Set(main)) ?? undefined;
   return {

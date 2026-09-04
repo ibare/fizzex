@@ -18,8 +18,15 @@ import type { RelOp } from '../../evaluator/sequence.js';
 
 export type { RelOp };
 
-/** 모델링하는 연산. `sub` 는 없다 — `a - b` 는 `add(a, neg(b))` 로 정규화된다. */
-export type AppOp = 'add' | 'mul' | 'pow' | 'div' | 'neg' | 'abs' | 'root';
+/**
+ * 모델링하는 연산.
+ *
+ * `sub` 도 `neg` 도 없다 — `a - b` 는 `add(a, mul(-1, b))` 로 정규화된다.
+ * 부호를 곱셈으로 흡수하지 않으면 `-x^2` 와 `(-1)x^2` 가 다른 키를 갖고,
+ * `x^2 - 2x` 의 `-2x` 항이 `mul` 이 아니라 별도 노드가 되어 곱셈 패턴에
+ * 붙지 않는다.
+ */
+export type AppOp = 'add' | 'mul' | 'pow' | 'div' | 'abs' | 'root';
 
 /** 이 노드를 만든 원본 MathNode id 목록. 바인딩 → 노드 역추적용. */
 export type Provenance = readonly string[];

@@ -224,10 +224,6 @@ function coeffsOf(
           }
           return acc;
         }
-        case 'neg': {
-          const c = e.args.length === 1 ? coeffsOf(bg, e.args[0], vars, depth + 1) : null;
-          return c ? negCoeffs(bg, c) : null;
-        }
         case 'pow': {
           if (e.args.length !== 2) return null;
           const [base, exp] = e.args;

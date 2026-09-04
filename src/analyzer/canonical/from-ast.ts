@@ -165,24 +165,50 @@ const provOf = (node: MathNode): Provenance => [node.id];
 
 // ─── 대수 정규형 ───
 
-function negate(e: ExprNode, src: Provenance): ExprNode {
+/**
+ * 부호 반전 — 곱셈으로 흡수한다.
+ *
+ * 별도 `neg` 노드로 두면 `-x^2` 와 `(-1)x^2`, `x - 2x` 와 `x + (-2)x` 가 서로
+ * 다른 키를 갖는다. 곱셈 문맥의 패턴에도 붙지 않는다.
+ */
+export function negate(e: ExprNode, src: Provenance): ExprNode {
   // 상수는 부호를 값으로 흡수한다. 그래야 상수항이 `num` 으로 남아
   // 정렬 규칙(상수 뒤로)이 적용된다.
   if (e.kind === 'num') return num(-e.value, e.src.length > 0 ? e.src : src);
-  if (e.kind === 'app' && e.op === 'neg' && e.args.length === 1) return e.args[0];
-  return app('neg', [e], src);
+  return assoc('mul', [num(-1, src), e], src);
 }
 
-/** n-ary 평탄화 + 정준 정렬. 인자가 하나면 그대로 반환한다. */
+/**
+ * n-ary 평탄화 + 상수 폴딩 + 정준 정렬.
+ *
+ * 상수를 접지 않으면 `x - 2x` 가 `mul(x, -1, 2)` 로 남아 `x + (-2)x` 의
+ * `mul(x, -2)` 와 다른 키가 된다.
+ */
 function assoc(op: 'add' | 'mul', parts: readonly ExprNode[], src: Provenance): ExprNode {
   const flat: ExprNode[] = [];
   for (const p of parts) {
     if (p.kind === 'app' && p.op === op) flat.push(...p.args);
     else flat.push(p);
   }
-  if (flat.length === 1) return flat[0];
-  const sorted = [...flat].sort(compareCanonical);
-  return app(op, sorted, src);
+
+  const identity = op === 'add' ? 0 : 1;
+  let acc = identity;
+  const rest: ExprNode[] = [];
+  const numSrc: string[] = [];
+  for (const f of flat) {
+    if (f.kind === 'num') {
+      acc = op === 'add' ? acc + f.value : acc * f.value;
+      for (const id of f.src) if (!numSrc.includes(id)) numSrc.push(id);
+      continue;
+    }
+    rest.push(f);
+  }
+
+  if (op === 'mul' && acc === 0) return num(0, numSrc.length > 0 ? numSrc : src);
+  if (rest.length === 0) return num(acc, numSrc.length > 0 ? numSrc : src);
+  const merged = acc === identity ? rest : [...rest, num(acc, numSrc.length > 0 ? numSrc : src)];
+  if (merged.length === 1) return merged[0];
+  return app(op, [...merged].sort(compareCanonical), src);
 }
 
 // ─── 시퀀스 폴드 ───

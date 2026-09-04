@@ -35,9 +35,23 @@ describe('정규화 IR — 식 트리 구축', () => {
     );
   });
 
-  it('뺄셈을 add + neg 로 정규화하고 상수는 부호를 값으로 흡수한다', () => {
+  it('뺄셈을 add + 곱셈으로 정규화하고 상수는 부호를 값으로 흡수한다', () => {
     expect(key('x - 3')).toBe('add(sym:x,num:-3)');
-    expect(key('x - y')).toBe('add(neg(sym:y),sym:x)');
+    expect(key('x - y')).toBe('add(mul(sym:y,num:-1),sym:x)');
+  });
+
+  it('부호를 곱셈으로 흡수해 표기 차이를 없앤다', () => {
+    // 별도 neg 노드로 두면 -x^2 와 (-1)x^2 가 다른 키가 되고,
+    // x^2 - 2x 의 -2x 항이 mul 이 아니라 별도 노드가 되어 곱셈 패턴에 안 붙는다.
+    expect(key('-2x')).toBe(key('(-2)x'));
+    expect(key('-x^2 + 3')).toBe(key('(-1)x^2 + 3'));
+    expect(key('x - 2x')).toBe(key('x + (-2)x'));
+    expect(key('x^2 - 2x - 3')).toBe('add(mul(sym:x,num:-2),pow(sym:x,num:2),num:-3)');
+  });
+
+  it('교환법칙 위치의 상수를 접는다', () => {
+    expect(key('2 + 3 + x')).toBe('add(sym:x,num:5)');
+    expect(key('2 \\cdot 3 \\cdot x')).toBe('mul(sym:x,num:6)');
   });
 
   it('교환법칙 피연산자는 정준 순서로 정렬된다', () => {
