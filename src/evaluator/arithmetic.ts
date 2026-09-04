@@ -11,10 +11,9 @@
  *   짝수근의 음수                      → domain (홀수근은 정상 -∛|x|)
  *
  * 시퀀스 처리:
- *   - 토큰화: 피연산자 / 이항 연산자 / 단항 마이너스
- *   - 인접 피연산자 사이에 암묵적 곱(×) 삽입
- *   - shunting-yard 로 RPN 변환, 평가
- *   - 미지원 OperatorNode (=, <, > 등) 는 unsupported 로 정직 신호
+ *   - 토큰화·우선순위 파싱은 ./sequence.ts 가 담당 (analyzer 와 공유)
+ *   - RPN 을 수치로 폴드
+ *   - 관계 연산자 (=, <, > 등) 는 평가 이전에 unsupported 로 정직 신호
  */
 import type {
   MathNode,
@@ -24,116 +23,22 @@ import type {
   SqrtNode,
   ParenNode,
   AbsNode,
-  FuncNode,
 } from '../types.js';
 import { register } from './registry.js';
+import {
+  type SeqToken,
+  tokenizeSequence,
+  toRPN,
+} from './sequence.js';
 import { setSequenceEvaluator } from './core.js';
 import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
-
-type BinaryOp = '+' | '-' | '×' | '÷' | '·';
-
-type SeqToken =
-  | { kind: 'operand'; node: MathNode }
-  | { kind: 'binop'; op: BinaryOp; prec: number }
-  | { kind: 'unaryMinus' };
-
-const PREC: Record<BinaryOp, number> = {
-  '+': 1,
-  '-': 1,
-  '×': 2,
-  '·': 2,
-  '÷': 2,
-};
-
-const UNARY_PREC = 3;
-
-function tokenize(children: MathNode[]): SeqToken[] | { error: string; operator?: string } {
-  const tokens: SeqToken[] = [];
-  let prevWasOperand = false;
-  for (let i = 0; i < children.length; i++) {
-    const c = children[i];
-    // `\operatorname{name}` 등은 parser 에서 FuncNode(argument=[]) 로 산출되고
-    // 인자 paren 은 별개 자식으로 따라온다. 평가 시점에 합성한다.
-    if (c.type === 'func' && (c as FuncNode).argument.length === 0) {
-      const next = children[i + 1];
-      if (next && next.type === 'paren') {
-        const synthesized: FuncNode = { ...(c as FuncNode), argument: [next] };
-        if (prevWasOperand) {
-          tokens.push({ kind: 'binop', op: '×', prec: PREC['×'] });
-        }
-        tokens.push({ kind: 'operand', node: synthesized });
-        prevWasOperand = true;
-        i += 1; // paren 자식 소비
-        continue;
-      }
-    }
-    if (c.type === 'operator') {
-      const op = (c as OperatorNode).operator;
-      if (op === '+') {
-        if (!prevWasOperand) continue;
-        tokens.push({ kind: 'binop', op: '+', prec: PREC['+'] });
-        prevWasOperand = false;
-        continue;
-      }
-      if (op === '-') {
-        if (!prevWasOperand) {
-          tokens.push({ kind: 'unaryMinus' });
-        } else {
-          tokens.push({ kind: 'binop', op: '-', prec: PREC['-'] });
-          prevWasOperand = false;
-        }
-        continue;
-      }
-      if (op === '×' || op === '·' || op === '÷') {
-        if (!prevWasOperand) {
-          return { error: 'malformed-sequence', operator: op };
-        }
-        tokens.push({ kind: 'binop', op, prec: PREC[op] });
-        prevWasOperand = false;
-        continue;
-      }
-      return { error: 'unsupported-operator', operator: op };
-    }
-    if (prevWasOperand) {
-      tokens.push({ kind: 'binop', op: '×', prec: PREC['×'] });
-    }
-    tokens.push({ kind: 'operand', node: c });
-    prevWasOperand = true;
-  }
-  return tokens;
-}
-
-function toRPN(tokens: SeqToken[]): SeqToken[] {
-  const output: SeqToken[] = [];
-  const stack: SeqToken[] = [];
-  const precOf = (t: SeqToken): number => {
-    if (t.kind === 'unaryMinus') return UNARY_PREC;
-    if (t.kind === 'binop') return t.prec;
-    return 0;
-  };
-  for (const t of tokens) {
-    if (t.kind === 'operand') {
-      output.push(t);
-      continue;
-    }
-    if (t.kind === 'unaryMinus') {
-      // 우결합: 다른 unary 와 동등 prec 일 때 pop 하지 않고 그냥 push
-      stack.push(t);
-      continue;
-    }
-    // binop: 좌결합
-    while (stack.length > 0 && precOf(stack[stack.length - 1]) >= t.prec) {
-      output.push(stack.pop()!);
-    }
-    stack.push(t);
-  }
-  while (stack.length > 0) output.push(stack.pop()!);
-  return output;
-}
 
 function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
   const stack: number[] = [];
   for (const t of rpn) {
+    if (t.kind === 'rel') {
+      return fail('unsupported', { nodeType: 'operator', reason: t.op });
+    }
     if (t.kind === 'operand') {
       const out = ctx.evaluate(t.node);
       if (out.kind === 'fail') return out;
@@ -173,7 +78,7 @@ function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
 }
 
 function evalSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
-  const tokens = tokenize(children);
+  const tokens = tokenizeSequence(children);
   if (!Array.isArray(tokens)) {
     if (tokens.error === 'unsupported-operator') {
       return fail('unsupported', { nodeType: 'operator', reason: tokens.operator });
@@ -182,6 +87,12 @@ function evalSequence(children: MathNode[], ctx: EvalContext): EvalOutcome {
   }
   if (tokens.length === 0) {
     return fail('unsupported', { nodeType: 'row', reason: 'empty-sequence' });
+  }
+  // 관계 연산자는 산수 평가 대상이 아니다. 피연산자 평가보다 먼저 거부해야
+  // detail.nodeType 이 'operator' 로 보존된다.
+  const rel = tokens.find((t) => t.kind === 'rel');
+  if (rel && rel.kind === 'rel') {
+    return fail('unsupported', { nodeType: 'operator', reason: rel.op });
   }
   return evalRPN(toRPN(tokens), ctx);
 }
