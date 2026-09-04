@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { validateSpec } from '../../runtime/validator';
-import spec from './spec.json';
+import { validateSpec } from '../../../src/visualizer/runtime/validator/index.js';
+import spec from './spec.json' with { type: 'json' };
 
 describe('linear-transform-2d spec.json', () => {
   it('validateSpec 통과', () => {

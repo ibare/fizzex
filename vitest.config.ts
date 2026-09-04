@@ -4,7 +4,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['src/**/*.test.ts'],
+    // registries/ 의 spec 검증 테스트도 기본 실행에 포함한다 (C11: 필수 필드 누락 시 실패)
+    include: ['src/**/*.test.ts', 'registries/**/*.test.ts'],
     exclude: ['src/__tests__/corpus/**'],
     coverage: {
       provider: 'v8',

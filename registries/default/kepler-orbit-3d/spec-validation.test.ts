@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { validateSpec } from '../../runtime/validator';
-import spec from './spec.json';
+import { validateSpec } from '../../../src/visualizer/runtime/validator/index.js';
+import spec from './spec.json' with { type: 'json' };
 
 describe('kepler-orbit-3d spec.json', () => {
   it('validateSpec 통과', () => {
@@ -24,22 +24,22 @@ describe('kepler-orbit-3d spec.json', () => {
     expect(parsed.scenes[3].params?.a).toBe(384400);
   });
 
-  it('camera·state 선언', () => {
+  // 카메라 조작은 호스트(Graphics3D의 OrbitControls)가 소유한다 — spec은 초기 pose와
+  // controls 옵션만 선언한다. 8289910 refactor(3d) 참조.
+  it('camera는 초기 pose와 controls 옵션만 선언', () => {
     const parsed = validateSpec(spec);
     expect(parsed.camera?.kind).toBe('perspective');
-    expect(parsed.camera?.state.theta).toBe('camTheta');
-    expect(parsed.camera?.state.phi).toBe('camPhi');
-    expect(parsed.camera?.state.distance).toBe('camDistance');
-    const stateIds = (parsed.state ?? []).map((s) => s.id);
-    expect(stateIds).toEqual(['camTheta', 'camPhi', 'camDistance']);
+    expect(parsed.camera?.theta).toBe(1.0472);
+    expect(parsed.camera?.phi).toBe(1.0472);
+    expect(parsed.camera?.distance).toBe('max((a / 6371) * 1.8, 2.5)');
+    expect(parsed.camera?.controls?.autoRotate).toBe(true);
+    expect(parsed.camera?.controls?.autoRotateSpeed).toBe(1.5);
   });
 
-  it('animation.onFrame에 카메라 자동회전·거리 맞춤', () => {
+  it('카메라 제어용 state·animation을 spec이 소유하지 않는다', () => {
     const parsed = validateSpec(spec);
-    const steps = parsed.animation?.onFrame ?? [];
-    expect(steps).toHaveLength(2);
-    expect(steps[0].set).toBe('state.camTheta');
-    expect(steps[1].set).toBe('state.camDistance');
+    expect(parsed.state).toBeUndefined();
+    expect(parsed.animation).toBeUndefined();
   });
 
   it('overlay에 T·v 라인', () => {

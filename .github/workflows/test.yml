@@ -27,6 +27,9 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Semantic data integrity
+        run: pnpm semantic:validate
+
       - name: Unit tests
         run: pnpm test
 
