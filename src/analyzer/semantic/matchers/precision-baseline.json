@@ -1,12 +1,21 @@
 {
   "note": "코퍼스 오탐률 래칫 기준선. 낮추는 방향으로만 갱신한다 — 개선한 커밋은 같은 커밋에서 이 값을 낮춰야 테스트가 통과한다. 낡은 기준선 뒤에 숨는 경로를 막기 위함이다. 비율이 아니라 건수로 적는다: 반올림 오차로 래칫이 헛돌지 않게.",
   "measuredOn": "2026-09-04",
-  "corpus": "combined-corpus-verified.json",
-  "totalFormulas": 9919,
-  "banner": 278,
+  "corpus": "sources/{arxiv,textbook,wikipedia}-formulas-clean.json",
+  "corpusNote": "combined-corpus-verified.json 은 .gitignore 대상이라 clean checkout 에서 해소되지 않는다. 추적되는 소스만 쓴다.",
+  "totalFormulas": 8209,
+  "banner": 146,
   "chips": 1,
-  "maxSingleIdCount": 198,
+  "maxSingleIdCount": 36,
+  "maxSingleIdNote": "분포 가드라 '개선 시 함께 낮추기' 조항은 걸지 않는다 — 총량이 아니라 쏠림을 본다.",
   "history": [
-    { "at": "재설계 이전", "banner": 3066, "chips": 137, "topId": "boyle-law", "topCount": 910 }
+    {
+      "at": "재설계 이전",
+      "corpus": "combined-corpus-verified.json (fuzz 포함 9919건, 현재는 미추적)",
+      "banner": 3066,
+      "chips": 137,
+      "topId": "boyle-law",
+      "topCount": 910
+    }
   ]
 }

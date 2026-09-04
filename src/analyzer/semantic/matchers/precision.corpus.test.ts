@@ -1,7 +1,7 @@
 /**
  * 코퍼스 오탐률 래칫.
  *
- * 실제 수식 9,919건(대부분 fuzz 생성 난수식)에 대해 배너·칩이 얼마나 붙는지를
+ * arXiv·교과서·위키백과에서 수집한 실제 수식에 배너·칩이 얼마나 붙는지를
  * 측정한다. 유명 수식은 극소수이므로 이 비율이 곧 오탐률의 상한 추정이다.
  *
  * 단조 조항 둘을 함께 건다.
@@ -9,11 +9,17 @@
  *   2. 기준선 − 측정값 ≤ 0.1pp — 개선한 커밋은 **같은 커밋에서 기준선을
  *      낮춰야** 통과한다. 낡은 기준선 뒤에 숨는 경로가 막힌다.
  *
- * 기존 `corpus.test.ts` 는 박스 레이아웃까지 돌려 분 단위라 기본 실행에서
- * 제외돼 있다. 이 테스트는 파싱 + 정규화 + 매칭만 하므로 0.5초면 끝난다.
+ * 기존 `corpus.test.ts` 가 기본 실행에서 제외된 이유는 두 가지다 — 박스
+ * 레이아웃까지 돌려 분 단위인 것과, 입력이 .gitignore 대상이라 CI 에서 항상
+ * ENOENT 인 것. 이 테스트는 추적되는 소스만 쓰고 파싱·정규화·매칭만 한다.
  */
 import { describe, it, expect } from 'vitest';
-import corpusData from '../../../__tests__/corpus/combined-corpus-verified.json' with { type: 'json' };
+// 추적되는 소스만 쓴다. `corpus/*.json` 은 .gitignore 대상이라 clean checkout
+// 에서 해소되지 않는다 — 기존 corpus.test.ts 가 기본 실행에서 제외된 이유가
+// 속도가 아니라 이것이다(ef2bac5).
+import arxiv from '../../../__tests__/corpus/sources/arxiv-formulas-clean.json' with { type: 'json' };
+import textbook from '../../../__tests__/corpus/sources/textbook-formulas-clean.json' with { type: 'json' };
+import wikipedia from '../../../__tests__/corpus/sources/wikipedia-formulas-clean.json' with { type: 'json' };
 import baseline from './precision-baseline.json' with { type: 'json' };
 import { parseLatex } from '../../../latex/latex-parser.js';
 import { buildSemanticMap } from '../engine.js';
@@ -30,7 +36,9 @@ interface Measured {
 }
 
 function measure(): Measured {
-  const formulas = (corpusData as { formulas: Array<{ latex: string }> }).formulas;
+  const formulas = [arxiv, textbook, wikipedia].flatMap(
+    (d) => (d as { formulas: Array<{ latex: string }> }).formulas,
+  );
   const byId = new Map<string, number>();
   let parsed = 0;
   let parseFailures = 0;
