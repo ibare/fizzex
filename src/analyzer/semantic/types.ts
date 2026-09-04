@@ -253,6 +253,8 @@ export interface FormEntry {
   id: string;
   slots: FormSlot[];
   shapes: FormShape[];
+  /** 이 형식이 일반화하는 형식들 — 진짜 포함관계일 때만. */
+  subsumes?: string[];
   visualizers: FormVisualizerRef[];
   examples: FormExample[];
   counterExamples: string[];

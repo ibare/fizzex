@@ -64,6 +64,8 @@ const formSchema = z
     id: z.string().regex(idRegex, 'form id 는 소문자·숫자·하이픈'),
     slots: z.array(slotSchema).min(1),
     shapes: z.array(shapeSchema).min(1),
+    /** 이 형식이 일반화하는 형식들. 진짜 포함관계일 때만 선언한다. */
+    subsumes: z.array(z.string()).optional(),
     visualizers: z.array(visualizerRefSchema),
     examples: z.array(exampleSchema).min(1),
     counterExamples: z.array(z.string().min(1)).min(1),
@@ -158,6 +160,21 @@ export const formIndexSchema = z
     forms: z.array(formSchema).min(1),
   })
   .superRefine((index, ctx) => {
+    const ids = new Set(index.forms.map((f) => f.id));
+    index.forms.forEach((form, i) => {
+      for (const sub of form.subsumes ?? []) {
+        if (!ids.has(sub)) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['forms', i, 'subsumes'],
+            message: `존재하지 않는 형식 "${sub}"`,
+          });
+        }
+        if (sub === form.id) {
+          ctx.addIssue({ code: 'custom', path: ['forms', i, 'subsumes'], message: '자기 자신' });
+        }
+      }
+    });
     const seen = new Set<string>();
     const vizSeen = new Map<string, string>();
     index.forms.forEach((form, i) => {
