@@ -32,25 +32,32 @@ export interface SemanticResult {
 
 // ─── 카탈로그 타입 ───
 
-/** 카탈로그 분야 */
-export type CatalogCategory =
+/**
+ * 카탈로그 분야 목록.
+ * 타입과 zod 스키마가 이 배열 하나에서 파생된다 — 이중 관리 금지.
+ */
+export const CATALOG_CATEGORY_IDS = [
   // 초중등
-  | 'elementary-geometry' | 'solid-geometry' | 'linear-functions'
-  | 'ratio-proportion' | 'basic-statistics' | 'trigonometry-basic'
+  'elementary-geometry', 'solid-geometry', 'linear-functions',
+  'ratio-proportion', 'basic-statistics', 'trigonometry-basic',
   // 수학 기초
-  | 'algebra' | 'calculus' | 'geometry' | 'number-theory' | 'logic'
+  'algebra', 'calculus', 'geometry', 'number-theory', 'logic',
   // 자연과학
-  | 'physics' | 'astronomy' | 'chemistry' | 'biology'
+  'physics', 'astronomy', 'chemistry', 'biology',
   // 공학
-  | 'electrical' | 'mechanical' | 'signal'
+  'electrical', 'mechanical', 'signal',
   // 경제/금융
-  | 'economics' | 'finance'
+  'economics', 'finance',
   // 통계/확률
-  | 'statistics' | 'probability'
+  'statistics', 'probability',
   // 정보/AI
-  | 'cs' | 'ml' | 'information'
+  'cs', 'ml', 'information',
   // 사회과학
-  | 'social-science';
+  'social-science',
+] as const;
+
+/** 카탈로그 분야 */
+export type CatalogCategory = (typeof CATALOG_CATEGORY_IDS)[number];
 
 /**
  * 수식에 연결된 Visualizer 참조.
@@ -107,7 +114,13 @@ export interface CatalogParameterConfig {
 // ─── 기호 종류 ───
 
 /** 수식 기호의 종류 */
-export type ElementKind = 'input' | 'constant' | 'output' | 'structural';
+/**
+ * 기호 종류 목록.
+ * 타입과 zod 스키마가 이 배열 하나에서 파생된다 — 이중 관리 금지.
+ */
+export const ELEMENT_KIND_IDS = ['input', 'constant', 'output', 'structural'] as const;
+
+export type ElementKind = (typeof ELEMENT_KIND_IDS)[number];
 
 /** 수식 기호의 역할과 종류 */
 export interface ElementMeaning {

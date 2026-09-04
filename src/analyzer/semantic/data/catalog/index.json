@@ -56,6 +56,31 @@
       ]
     },
     {
+      "id": "complex-plane",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "operator",
+        "variable"
+      ],
+      "requiredVariables": [
+        "z",
+        "i"
+      ],
+      "complexity": [
+        5,
+        12
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:z",
+        "operator:=",
+        "variable:a",
+        "operator:+",
+        "variable:b",
+        "variable:i"
+      ]
+    },
+    {
       "id": "difference-of-squares",
       "category": "algebra",
       "requiredNodeTypes": [
@@ -191,6 +216,30 @@
         "operator:-",
         "number:1",
         "operator:="
+      ]
+    },
+    {
+      "id": "linear-transform-2x2",
+      "category": "algebra",
+      "requiredNodeTypes": [
+        "matrix"
+      ],
+      "requiredVariables": [
+        "M"
+      ],
+      "complexity": [
+        8,
+        20
+      ],
+      "patternType": "exact",
+      "signature": [
+        "variable:M",
+        "operator:=",
+        "matrix",
+        "variable:a",
+        "variable:b",
+        "variable:c",
+        "variable:d"
       ]
     },
     {

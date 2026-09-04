@@ -4,12 +4,17 @@
  * 검증 항목:
  * 1. Layer 1 규칙 ID ↔ ko.json 키 일치
  * 2. Layer 2 규칙 ID ↔ ko.json 키 일치
- * 3. 카탈로그 index.json ID ↔ 상세 JSON 키 일치
+ * 3. 카탈로그 index.json / 상세 JSON zod 스키마 + 양방향 키 일치
  *
  * 실행: pnpm semantic:validate
  */
 
 import { readFileSync } from 'node:fs';
+import {
+  validateCatalogIndex,
+  validateCatalogDetailFile,
+  CatalogValidationError,
+} from '../src/analyzer/semantic/validator/index.js';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -117,71 +122,58 @@ function validateLayer2(): void {
 
 // ─── 카탈로그 검증 ───
 
-interface CatalogIndex {
-  entries: Array<{ id: string; category: string }>;
-}
-
-interface CatalogDetail {
-  name: string;
-  oneLiner: string;
-  elementMeanings: Record<string, unknown>;
-}
-
 function validateCatalog(): void {
-  console.log('\n[카탈로그] index.json ↔ 상세 JSON 키 검증');
+  console.log('\n[카탈로그] zod 스키마 + index.json ↔ 상세 JSON 양방향 검증');
 
   const catalogDir = resolve(dataDir, 'catalog');
-  const index = loadJson<CatalogIndex>(resolve(catalogDir, 'index.json'));
 
-  // 카테고리별 상세 데이터 로드
-  const detailCache = new Map<string, Record<string, CatalogDetail>>();
+  let entries;
+  try {
+    entries = validateCatalogIndex(loadJson<unknown>(resolve(catalogDir, 'index.json')));
+  } catch (e) {
+    if (e instanceof CatalogValidationError) {
+      for (const issue of e.issues) error(`index.json: ${issue.path.join('.')}: ${issue.message}`);
+    } else {
+      error(`index.json 로드 실패: ${String(e)}`);
+    }
+    return;
+  }
 
-  for (const entry of index.entries) {
-    const { id, category } = entry;
+  // 카테고리별 상세 JSON 로드 + 스키마 검증
+  const detailCache = new Map<string, Record<string, unknown>>();
+  const categories = [...new Set(entries.map((e) => e.category))].sort();
 
-    // 상세 JSON 로드 (카테고리별 캐시)
-    if (!detailCache.has(category)) {
-      try {
-        const detail = loadJson<Record<string, CatalogDetail>>(
-          resolve(catalogDir, `ko/${category}.json`),
-        );
-        detailCache.set(category, detail);
-      } catch {
-        error(`카테고리 "${category}" 상세 JSON 파일 없음: ko/${category}.json`);
-        continue;
+  for (const category of categories) {
+    const path = resolve(catalogDir, `ko/${category}.json`);
+    try {
+      detailCache.set(category, validateCatalogDetailFile(`ko/${category}.json`, loadJson<unknown>(path)));
+    } catch (e) {
+      if (e instanceof CatalogValidationError) {
+        for (const issue of e.issues) error(`ko/${category}.json: ${issue.path.join('.')}: ${issue.message}`);
+      } else {
+        error(`카테고리 "${category}" 상세 JSON 로드 실패: ko/${category}.json`);
       }
-    }
-
-    const categoryData = detailCache.get(category)!;
-
-    // index ID가 상세 JSON에 있는지
-    if (!categoryData[id]) {
-      error(`index ID "${id}" (${category})가 ko/${category}.json에 없음`);
-      continue;
-    }
-
-    // 필수 필드 확인
-    const detail = categoryData[id];
-    if (!detail.name) error(`"${id}": name 필드 없음`);
-    if (!detail.oneLiner) error(`"${id}": oneLiner 필드 없음`);
-    if (!detail.elementMeanings || Object.keys(detail.elementMeanings).length === 0) {
-      error(`"${id}": elementMeanings가 비어있음`);
     }
   }
 
-  // 상세 JSON에 있지만 index에 없는 항목
-  const indexIds = new Set(index.entries.map(e => `${e.category}:${e.id}`));
+  // index → 상세
+  for (const { id, category } of entries) {
+    const categoryData = detailCache.get(category);
+    if (!categoryData) continue; // 위에서 이미 error 보고됨
+    if (!categoryData[id]) error(`index ID "${id}" (${category})가 ko/${category}.json에 없음`);
+  }
+
+  // 상세 → index (미참조 항목은 매칭 풀에 들어가지 못해 영원히 노출되지 않는다 → error)
+  const indexIds = new Set(entries.map((e) => `${e.category}:${e.id}`));
   for (const [category, data] of detailCache) {
     for (const id of Object.keys(data)) {
       if (!indexIds.has(`${category}:${id}`)) {
-        warn(`ko/${category}.json의 "${id}"가 index.json에 없음 (미참조 항목)`);
+        error(`ko/${category}.json의 "${id}"가 index.json에 없음 — 매칭 대상이 되지 못한다`);
       }
     }
   }
 
-  const totalEntries = index.entries.length;
-  const totalCategories = detailCache.size;
-  ok(`${totalEntries}개 항목, ${totalCategories}개 분야 검증 완료`);
+  ok(`${entries.length}개 항목, ${detailCache.size}개 분야 검증 완료`);
 }
 
 // ─── 메인 ───

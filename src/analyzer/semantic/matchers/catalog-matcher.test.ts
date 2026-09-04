@@ -29,6 +29,11 @@ interface CatalogTestCase {
 const CATALOG_TEST_CASES: CatalogTestCase[] = [
   // ── 대수학 ──
   { latex: 'e^{i\\pi} + 1 = 0', expectedId: 'euler-identity' },
+  { latex: 'z = a + bi', expectedId: 'complex-plane' },
+  {
+    latex: 'M = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}',
+    expectedId: 'linear-transform-2x2',
+  },
   { latex: 'x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}', expectedId: 'quadratic-formula' },
   { latex: '(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k', expectedId: 'binomial-theorem' },
 
