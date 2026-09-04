@@ -10,8 +10,10 @@ last_verified: 2026-04-29
 
 ## MUST
 - 새 viz spec 추가 시 해당 디렉터리의 `spec-validation.test.ts`에 회귀 테스트 케이스를 추가한다 (자연스러운 입력 + 기대 출력)
+- 새 viz spec 추가 시 그 viz를 소유할 **형식**(`src/analyzer/semantic/data/form/**`)의 `examples`도 함께 채운다 — 형식이 없으면 spec의 `form` 참조가 해소되지 않아 `compileSpec`이 실패한다 (C8 참조)
 - `manifest.json`에 등록된 모든 viz id는 대응 `<id>/spec.json`이 존재해야 한다
 - `<id>/spec.json`이 존재하는 모든 디렉터리는 `manifest.json`에 등록되어야 한다 (고아 spec 금지)
+- `spec.json`의 `form` 필드는 실재하는 형식 id를 가리켜야 한다
 - spec scene·viewport·state·localFormulas의 필수 필드가 누락된 경우 빌드/테스트가 실패해야 한다
 
 ## MUST NOT

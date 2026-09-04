@@ -69,10 +69,13 @@ concerns:
 
   - id: C8
     file: concerns/C8-catalog-test.md
-    description: 카탈로그 매칭 테스트 필수 (항목 추가 시 catalog-matcher.test.ts에 테스트 케이스 추가)
+    description: 카탈로그·형식 매칭 테스트 필수 (항목·형식 추가 시 케이스 추가, 형식 케이스는 생성 테스트가 유도)
     triggers:
-      paths: ["src/analyzer/semantic/data/catalog/**", "src/analyzer/semantic/matchers/catalog-matcher.ts"]
-      patterns: ["CatalogIndexEntry", "matchCatalog"]
+      paths:
+        - "src/analyzer/semantic/data/catalog/**"
+        - "src/analyzer/semantic/data/form/**"
+        - "src/analyzer/semantic/matchers/**"
+      patterns: ["CatalogIndexEntry", "matchCatalog", "FormEntry", "matchForm"]
 
   - id: C9
     file: concerns/C9-visualizer-spec-first.md
