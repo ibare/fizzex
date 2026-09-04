@@ -389,6 +389,15 @@
             "n": "m",
             "t": "k"
           }
+        },
+        {
+          "latex": "V = K\\left(1 + \\frac{j}{p}\\right)^{pq}",
+          "slots": {
+            "P": "K",
+            "r": "j",
+            "n": "p",
+            "t": "q"
+          }
         }
       ],
       "counterExamples": [
@@ -566,6 +575,14 @@
             "\\omega": "k",
             "\\varphi": "\\phi"
           }
+        },
+        {
+          "latex": "h = C\\sin(\\lambda u + \\theta)",
+          "slots": {
+            "A": "C",
+            "\\omega": "\\lambda",
+            "\\varphi": "\\theta"
+          }
         }
       ],
       "counterExamples": [
@@ -636,6 +653,13 @@
             "M": "M_s",
             "a": "r"
           }
+        },
+        {
+          "latex": "T^2 = \\frac{4\\pi^2}{GM}r^3",
+          "slots": {
+            "M": "M",
+            "a": "r"
+          }
         }
       ],
       "counterExamples": [
@@ -701,6 +725,12 @@
           "slots": {
             "f": "g"
           }
+        },
+        {
+          "latex": "y - h(p) = h'(p)(x - p)",
+          "slots": {
+            "f": "h"
+          }
         }
       ],
       "counterExamples": [
@@ -760,6 +790,13 @@
           "slots": {
             "a": "p",
             "b": "q"
+          }
+        },
+        {
+          "latex": "w = 2 + 3i",
+          "slots": {
+            "a": "2",
+            "b": "3"
           }
         }
       ],
@@ -848,6 +885,15 @@
             "b": "2",
             "c": "3",
             "d": "4"
+          }
+        },
+        {
+          "latex": "T = \\begin{pmatrix} 2 & 0 \\\\ 0 & 3 \\end{pmatrix}",
+          "slots": {
+            "a": "2",
+            "b": "0",
+            "c": "0",
+            "d": "3"
           }
         }
       ],

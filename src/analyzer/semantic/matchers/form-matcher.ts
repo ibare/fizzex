@@ -133,12 +133,6 @@ const cloneCtx = (c: Ctx): Ctx => ({
   defaulted: new Set(c.defaulted),
 });
 
-const adoptCtx = (dst: Ctx, src: Ctx): void => {
-  dst.bindings = src.bindings;
-  dst.freeBind = src.freeBind;
-  dst.defaulted = src.defaulted;
-};
-
 /** 패턴 안의 슬롯 이름들. */
 function slotsIn(p: ExprNode, ctx: Ctx, out: Set<string>): void {
   if (p.kind === 'sym') {
@@ -188,59 +182,80 @@ function bindSlot(ctx: Ctx, slot: string, value: ExprNode): boolean {
   return true;
 }
 
-function unify(pat: ExprNode, tgt: ExprNode, ctx: Ctx): boolean {
+/**
+ * 계속(continuation) — 이 지점까지의 바인딩을 받아 나머지를 시도한다.
+ *
+ * 불리언만 주고받으면 형제 인자 사이를 되짚을 수 없다. `y - f(a) = f'(a)(x-a)`
+ * 처럼 교환법칙 자리에 미지수가 둘 있고 올바른 짝이 식의 다른 곳에서만
+ * 결정되는 경우, 좌변에서 잘못 묶고 우변에서 실패해도 좌변을 다시 시도해야
+ * 한다.
+ */
+type Cont = (ctx: Ctx) => boolean;
+
+/** 인자 목록을 순서대로 맞추되, 뒤에서 실패하면 앞으로 되짚는다. */
+function unifySeq(
+  pats: readonly ExprNode[],
+  tgts: readonly ExprNode[],
+  i: number,
+  ctx: Ctx,
+  k: Cont,
+): boolean {
+  if (i >= pats.length) return k(ctx);
+  return unify(pats[i], tgts[i], ctx, (c) => unifySeq(pats, tgts, i + 1, c, k));
+}
+
+function unify(pat: ExprNode, tgt: ExprNode, ctx: Ctx, k: Cont): boolean {
   switch (pat.kind) {
     case 'sym': {
-      const k = symKey(pat.name, pat.sub);
-      const slot = ctx.slotOf.get(k);
-      if (slot) return bindSlot(ctx, slot, tgt);
-      if (ctx.freeKeys.has(k)) {
+      const key = symKey(pat.name, pat.sub);
+      const slot = ctx.slotOf.get(key);
+      if (slot) {
+        const trial = cloneCtx(ctx);
+        if (!bindSlot(trial, slot, tgt)) return false;
+        return k(trial);
+      }
+      if (ctx.freeKeys.has(key)) {
         // 자유 기호는 **심볼에만** 묶인다. 임의 서브트리를 받으면
         // `y = (t+1)^2` 가 x=(t+1) 로 이차식에 매칭된다.
         if (tgt.kind !== 'sym') return false;
-        const prev = ctx.freeBind.get(k);
-        if (prev) return canonicalKey(prev) === canonicalKey(tgt);
-        ctx.freeBind.set(k, tgt);
-        return true;
+        const prev = ctx.freeBind.get(key);
+        if (prev) return canonicalKey(prev) === canonicalKey(tgt) ? k(ctx) : false;
+        const trial = cloneCtx(ctx);
+        trial.freeBind.set(key, tgt);
+        return k(trial);
       }
-      return tgt.kind === 'sym' && symKey(tgt.name, tgt.sub) === k;
+      return tgt.kind === 'sym' && symKey(tgt.name, tgt.sub) === key ? k(ctx) : false;
     }
 
     case 'num':
-      return tgt.kind === 'num' && tgt.value === pat.value;
+      return tgt.kind === 'num' && tgt.value === pat.value ? k(ctx) : false;
 
     case 'rel':
-      return (
-        tgt.kind === 'rel' &&
-        tgt.op === pat.op &&
-        unify(pat.lhs, tgt.lhs, ctx) &&
-        unify(pat.rhs, tgt.rhs, ctx)
-      );
+      if (tgt.kind !== 'rel' || tgt.op !== pat.op) return false;
+      return unify(pat.lhs, tgt.lhs, ctx, (c) => unify(pat.rhs, tgt.rhs, c, k));
 
     case 'call':
-      return (
-        tgt.kind === 'call' &&
-        tgt.fn === pat.fn &&
-        tgt.args.length === pat.args.length &&
-        pat.args.every((a, i) => unify(a, tgt.args[i], ctx))
-      );
+      if (tgt.kind !== 'call' || tgt.fn !== pat.fn || tgt.args.length !== pat.args.length) {
+        return false;
+      }
+      return unifySeq(pat.args, tgt.args, 0, ctx, k);
 
     case 'opaque':
-      return (
-        tgt.kind === 'opaque' &&
-        tgt.tag === pat.tag &&
-        tgt.children.length === pat.children.length &&
-        pat.children.every((c, i) => unify(c, tgt.children[i], ctx))
-      );
+      if (
+        tgt.kind !== 'opaque' ||
+        tgt.tag !== pat.tag ||
+        tgt.children.length !== pat.children.length
+      ) {
+        return false;
+      }
+      return unifySeq(pat.children, tgt.children, 0, ctx, k);
 
     case 'app': {
-      if (pat.op === 'add' || pat.op === 'mul') return unifyAC(pat.op, pat.args, tgt, ctx);
-      return (
-        tgt.kind === 'app' &&
-        tgt.op === pat.op &&
-        tgt.args.length === pat.args.length &&
-        pat.args.every((a, i) => unify(a, tgt.args[i], ctx))
-      );
+      if (pat.op === 'add' || pat.op === 'mul') return unifyAC(pat.op, pat.args, tgt, ctx, k);
+      if (tgt.kind !== 'app' || tgt.op !== pat.op || tgt.args.length !== pat.args.length) {
+        return false;
+      }
+      return unifySeq(pat.args, tgt.args, 0, ctx, k);
     }
 
     default: {
@@ -264,22 +279,83 @@ function unifyAC(
   patArgs: readonly ExprNode[],
   tgt: ExprNode,
   ctx: Ctx,
+  k: Cont,
 ): boolean {
   const tgtArgs = tgt.kind === 'app' && tgt.op === op ? tgt.args : [tgt];
   if (patArgs.length > MAX_AC_ARGS || tgtArgs.length > MAX_AC_ARGS) return false;
 
-  const used = new Array<boolean>(tgtArgs.length).fill(false);
-  const pending: ExprNode[] = [];
+  /** 남은 패턴 항을 기본값으로 채우고 잉여 대상 항을 처리한다. */
+  const finish = (c: Ctx, used: readonly boolean[], pending: readonly ExprNode[]): boolean => {
+    const cur = cloneCtx(c);
+    const leftover = tgtArgs.filter((_, i) => !used[i]);
+    const stillPending = [...pending];
 
-  const assign = (pi: number, c: Ctx): boolean => {
-    if (pi >= patArgs.length) return finish(c);
+    // 잉여 대상 항 먼저 — 미배정 맨 슬롯이 흡수한다. 기본값 채우기보다 앞서야
+    // 한다. `e^{-\lambda t}` 의 지수는 `mul(λ,t,-1)` 인데 패턴은 `mul(r,t)` 라,
+    // r 을 1 로 먼저 채우면 λ·-1 을 받을 슬롯이 사라진다.
+    // 덧셈에서는 흡수를 허용하지 않는다 — `y = ax^2+bx+c+dx^3` 가 c 에 dx^3 를
+    // 흡수시켜 통과한다.
+    if (leftover.length > 0) {
+      if (op !== 'mul') return false;
+      const idx = stillPending.findIndex((p) => {
+        const sl = bareSlot(p, cur);
+        return sl !== null && !cur.bindings.has(sl);
+      });
+      if (idx < 0) return false;
+      const slot = bareSlot(stillPending[idx], cur)!;
+      stillPending.splice(idx, 1);
+      const value =
+        leftover.length === 1
+          ? leftover[0]
+          : { kind: 'app' as const, op: 'mul' as const, args: leftover, src: [] };
+      if (!bindSlot(cur, slot, value)) return false;
+    }
+
+    for (const p of stillPending) {
+      const slots = new Set<string>();
+      slotsIn(p, cur, slots);
+      if (slots.size === 0) return false;
+
+      if (op === 'mul') {
+        // 곱셈 자리의 누락은 언제나 1이다 — `x^2` 는 `a·x^2` 에서 a=1 이다.
+        // optional 과 무관하다.
+        const slot = bareSlot(p, cur);
+        if (!slot) return false;
+        if (!bindSlot(cur, slot, num(1))) return false;
+        cur.defaulted.add(slot);
+        continue;
+      }
+
+      // 덧셈 자리의 누락은 항이 통째로 없다는 뜻이라 optional 이어야 한다.
+      if (![...slots].every((sl) => cur.optionalSlots.has(sl))) return false;
+      // 구조를 가진 항은 건너뛸 수 없다.
+      if (!isTrivialTerm(p, cur)) return false;
+      for (const sl of slots) {
+        if (!bindSlot(cur, sl, num(0))) return false;
+        cur.defaulted.add(sl);
+      }
+    }
+
+    return k(cur);
+  };
+
+  /**
+   * 패턴 항을 대상 항에 배정한다. `used`/`pending` 을 인자로 넘겨 분기마다
+   * 독립시킨다 — 클로저로 공유하면 되짚을 때 상태가 새어 나간다.
+   */
+  const assign = (
+    pi: number,
+    c: Ctx,
+    used: readonly boolean[],
+    pending: readonly ExprNode[],
+  ): boolean => {
+    if (pi >= patArgs.length) return finish(c, used, pending);
     const p = patArgs[pi];
     // 구조가 똑같은 후보를 먼저 시도한다. `mul(자유t, 슬롯ω)` 대 `mul(k, t)` 는
-    // 해가 둘인데(t↔k·ω↔t 또는 t↔t·ω↔k), 사용자가 같은 기호를 썼다면 그것이
-    // 의도한 대응이다. 이 순서가 없으면 결과가 임의로 갈린다.
+    // 해가 둘인데, 사용자가 같은 기호를 썼다면 그것이 의도한 대응이다.
     const pk = canonicalKey(p);
     const order = tgtArgs
-      .map((t, i) => i)
+      .map((_, i) => i)
       .sort((x, y) => {
         const dx = canonicalKey(tgtArgs[x]) === pk ? 0 : 1;
         const dy = canonicalKey(tgtArgs[y]) === pk ? 0 : 1;
@@ -287,81 +363,15 @@ function unifyAC(
       });
     for (const ti of order) {
       if (used[ti]) continue;
-      const trial = cloneCtx(c);
-      if (!unify(p, tgtArgs[ti], trial)) continue;
-      used[ti] = true;
-      if (assign(pi + 1, trial)) {
-        adoptCtx(c, trial);
-        return true;
-      }
-      used[ti] = false;
+      const nextUsed = [...used];
+      nextUsed[ti] = true;
+      if (unify(p, tgtArgs[ti], c, (c2) => assign(pi + 1, c2, nextUsed, pending))) return true;
     }
-    // 짝을 못 찾았다 — 기본값으로 건너뛸 수 있는가.
-    pending.push(p);
-    if (assign(pi + 1, c)) return true;
-    pending.pop();
-    return false;
+    // 짝을 못 찾았다 — 기본값으로 건너뛸 수 있는지는 finish 가 판정한다.
+    return assign(pi + 1, c, used, [...pending, p]);
   };
 
-  const finish = (c: Ctx): boolean => {
-    const leftover = tgtArgs.filter((_, i) => !used[i]);
-    const stillPending = [...pending];
-
-    // 잉여 대상 항 먼저 — 미배정 맨 슬롯이 흡수한다.
-    // 기본값 채우기보다 앞서야 한다. `e^{-\lambda t}` 의 지수는 `mul(λ,t,-1)`
-    // 인데 패턴은 `mul(r,t)` 라, r 을 1 로 먼저 채우면 λ·-1 을 받을 슬롯이
-    // 사라진다.
-    // 덧셈에서는 흡수를 허용하지 않는다 — `y = ax^2+bx+c+dx^3` 가 c 에 dx^3 를
-    // 흡수시켜 통과한다.
-    if (leftover.length > 0) {
-      if (op !== 'mul') return false;
-      const idx = stillPending.findIndex((p) => {
-        const sl = bareSlot(p, c);
-        return sl !== null && !c.bindings.has(sl);
-      });
-      if (idx < 0) return false;
-      const slot = bareSlot(stillPending[idx], c)!;
-      stillPending.splice(idx, 1);
-      const value =
-        leftover.length === 1
-          ? leftover[0]
-          : { kind: 'app' as const, op: 'mul' as const, args: leftover, src: [] };
-      if (!bindSlot(c, slot, value)) return false;
-    }
-
-    // 남은 패턴 항을 기본값으로 채운다.
-    for (const p of stillPending) {
-      const slots = new Set<string>();
-      slotsIn(p, c, slots);
-      if (slots.size === 0) return false;
-
-      if (op === 'mul') {
-        // 곱셈 자리의 누락은 언제나 1이다 — `x^2` 는 `a·x^2` 에서 a=1 이다.
-        // optional 과 무관하다.
-        const slot = bareSlot(p, c);
-        if (!slot) return false;
-        if (!bindSlot(c, slot, num(1))) return false;
-        c.defaulted.add(slot);
-        continue;
-      }
-
-      // 덧셈 자리의 누락은 항이 통째로 없다는 뜻이라 optional 이어야 한다.
-      if (![...slots].every((s) => c.optionalSlots.has(s))) return false;
-      // 구조를 가진 항은 건너뛸 수 없다.
-      if (!isTrivialTerm(p, c)) return false;
-      for (const s of slots) {
-        if (!bindSlot(c, s, num(0))) return false;
-        c.defaulted.add(s);
-      }
-    }
-
-    return true;
-  };
-
-  const root = cloneCtx(ctx);
-  if (!assign(0, root)) return false;
-  adoptCtx(ctx, root);
-  return true;
+  return assign(0, ctx, new Array<boolean>(tgtArgs.length).fill(false), []);
 }
 
 // ─── 진입점 ───
@@ -392,17 +402,23 @@ function matchShape(
     freeBind: new Map(),
     defaulted: new Set(),
   };
-  if (!unify(shape.pattern, target, ctx)) return null;
+  let result: Ctx | null = null;
+  unify(shape.pattern, target, ctx, (c) => {
+    result = c;
+    return true;
+  });
+  if (!result) return null;
+  const done: Ctx = result;
 
   // 선언한 자유 기호가 전부 묶여야 한다. `y = 5` 가 이차식에 걸리는 것을 막는
   // 마지막 가드다.
-  for (const k of shape.freeKeys) if (!ctx.freeBind.has(k)) return null;
+  for (const key of shape.freeKeys) if (!done.freeBind.has(key)) return null;
   // 이 shape 이 요구하는 슬롯이 전부 채워져야 한다.
-  for (const slot of shape.slotOf.values()) if (!ctx.bindings.has(slot)) return null;
+  for (const slot of shape.slotOf.values()) if (!done.bindings.has(slot)) return null;
   // 기본값만으로 성립한 매칭은 거부한다.
-  if (ctx.defaulted.size === ctx.bindings.size) return null;
+  if (done.defaulted.size === done.bindings.size) return null;
 
-  return { bindings: ctx.bindings, defaulted: [...ctx.defaulted].sort() };
+  return { bindings: done.bindings, defaulted: [...done.defaulted].sort() };
 }
 
 /**
