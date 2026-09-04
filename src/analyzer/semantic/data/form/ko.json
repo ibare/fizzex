@@ -3,72 +3,256 @@
     "name": "이차식 꼴",
     "oneLiner": "x의 제곱이 들어간 식 — 그래프는 포물선",
     "slots": {
-      "a": { "role": "이차항 계수", "description": "포물선의 방향과 폭을 정한다" },
-      "b": { "role": "일차항 계수", "description": "축의 좌우 위치를 옮긴다" },
-      "c": { "role": "상수항", "description": "y축과 만나는 높이" },
-      "x": { "role": "관찰 지점", "description": "그래프 위에서 살펴볼 x 값" }
+      "a": {
+        "role": "이차항 계수",
+        "description": "포물선의 방향과 폭을 정한다"
+      },
+      "b": {
+        "role": "일차항 계수",
+        "description": "축의 좌우 위치를 옮긴다"
+      },
+      "c": {
+        "role": "상수항",
+        "description": "y축과 만나는 높이"
+      },
+      "x": {
+        "role": "관찰 지점",
+        "description": "그래프 위에서 살펴볼 x 값"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "자유 탐구 — 이차함수",
+        "description": "좌표평면 위에서 a·b·c 변화 관찰"
+      },
+      "quadratic-bridge-2d": {
+        "name": "다리 아치 — 이차함수",
+        "description": "교각·아치·반사로 보는 포물선"
+      },
+      "quadratic-basketball-2d": {
+        "name": "농구 자유투 — 이차함수",
+        "description": "발사 높이·최고점·착지의 궤적"
+      },
+      "quadratic-fountain-2d": {
+        "name": "분수 — 이차함수",
+        "description": "물줄기 최고점이 곧 꼭짓점"
+      }
     }
   },
   "sum-of-two-squares": {
     "name": "두 제곱의 합 꼴",
     "oneLiner": "두 값의 제곱을 더한 것이 나머지 하나의 제곱과 같은 관계",
     "slots": {
-      "a": { "role": "첫째 변", "description": "직각을 끼는 한 변" },
-      "b": { "role": "둘째 변", "description": "직각을 끼는 다른 변" },
-      "c": { "role": "빗변", "description": "직각의 맞은편, 가장 긴 변" }
+      "a": {
+        "role": "첫째 변",
+        "description": "직각을 끼는 한 변"
+      },
+      "b": {
+        "role": "둘째 변",
+        "description": "직각을 끼는 다른 변"
+      },
+      "c": {
+        "role": "빗변",
+        "description": "직각의 맞은편, 가장 긴 변"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "자유탐구",
+        "description": "직각삼각형과 세 변 위의 정사각형으로 본 피타고라스 정리"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "사다리",
+        "description": "벽에 기댄 사다리의 각도와 안전성"
+      },
+      "pythagorean-tv-2d": {
+        "name": "TV 화면",
+        "description": "화면 가로·세로에서 대각선 인치 환산"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "지름길",
+        "description": "블록을 돌아가기 vs 가로지르기의 거리 비교"
+      }
     }
   },
   "exponential-change": {
     "name": "지수 변화 꼴",
     "oneLiner": "변화율이 현재 양에 비례해 기하급수적으로 늘거나 주는 꼴",
     "slots": {
-      "N_0": { "role": "초깃값", "description": "시간이 0일 때의 양" },
-      "r": { "role": "변화율", "description": "양수면 성장, 음수면 감쇠" }
+      "N_0": {
+        "role": "초깃값",
+        "description": "시간이 0일 때의 양"
+      },
+      "r": {
+        "role": "변화율",
+        "description": "양수면 성장, 음수면 감쇠"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "지수 감소 — 2D",
+        "description": "카페인·배터리·탄소-14·약물을 앵커로 전환하며 반감기 체감"
+      }
     }
   },
   "compound-growth": {
     "name": "복리 꼴",
     "oneLiner": "이자에 다시 이자가 붙어 원금이 불어나는 꼴",
     "slots": {
-      "P": { "role": "원금", "description": "처음 넣은 금액" },
-      "r": { "role": "연이율", "description": "1년 기준 이자율" },
-      "n": { "role": "연 복리 횟수", "description": "1년에 이자를 몇 번 붙이는가" },
-      "t": { "role": "기간", "description": "맡기는 햇수" }
+      "P": {
+        "role": "원금",
+        "description": "처음 넣은 금액"
+      },
+      "r": {
+        "role": "연이율",
+        "description": "1년 기준 이자율"
+      },
+      "n": {
+        "role": "연 복리 횟수",
+        "description": "1년에 이자를 몇 번 붙이는가"
+      },
+      "t": {
+        "role": "기간",
+        "description": "맡기는 햇수"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "복리 — 2D",
+        "description": "예금·주식·적금·인플레이션 앵커로 전환하며 복리 성장 체감"
+      }
     }
   },
   "constant-acceleration-displacement": {
     "name": "등가속도 변위 꼴",
     "oneLiner": "일정한 가속도로 움직인 거리 — 시간의 제곱에 비례하는 항이 붙는다",
     "slots": {
-      "v_0": { "role": "초기 속도", "description": "출발할 때의 속도" },
-      "a": { "role": "가속도", "description": "일정하게 유지되는 가속도" },
-      "t": { "role": "경과 시간", "description": "관찰 시점" }
+      "v_0": {
+        "role": "초기 속도",
+        "description": "출발할 때의 속도"
+      },
+      "a": {
+        "role": "가속도",
+        "description": "일정하게 유지되는 가속도"
+      },
+      "t": {
+        "role": "경과 시간",
+        "description": "관찰 시점"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "자유낙하 — 2D",
+        "description": "지구·달·화성·목성 앵커로 행성별 중력가속도 체감"
+      }
     }
   },
   "sinusoid": {
     "name": "사인파 꼴",
     "oneLiner": "같은 모양이 일정 주기로 반복되는 파형",
     "slots": {
-      "A": { "role": "진폭", "description": "중심에서 마루까지의 높이" },
-      "\\omega": { "role": "각진동수", "description": "얼마나 빠르게 반복하는가" },
-      "\\varphi": { "role": "위상", "description": "파형을 좌우로 밀어낸 정도" },
-      "t": { "role": "관찰 시각", "description": "파형 위에서 살펴볼 시점" }
+      "A": {
+        "role": "진폭",
+        "description": "중심에서 마루까지의 높이"
+      },
+      "\\omega": {
+        "role": "각진동수",
+        "description": "얼마나 빠르게 반복하는가"
+      },
+      "\\varphi": {
+        "role": "위상",
+        "description": "파형을 좌우로 밀어낸 정도"
+      },
+      "t": {
+        "role": "관찰 시각",
+        "description": "파형 위에서 살펴볼 시점"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "사인파 — 2D",
+        "description": "스피커·진자·조수·전압계 앵커로 진폭·주기·위상 역할 체감"
+      }
     }
   },
   "orbit-period-radius": {
     "name": "궤도 주기 꼴",
     "oneLiner": "궤도가 클수록 한 바퀴 도는 데 오래 걸리는 관계",
     "slots": {
-      "M": { "role": "중심 천체 질량", "description": "공전의 중심이 되는 천체의 질량" },
-      "a": { "role": "궤도 긴반지름", "description": "타원 궤도의 긴 쪽 반지름" }
+      "M": {
+        "role": "중심 천체 질량",
+        "description": "공전의 중심이 되는 천체의 질량"
+      },
+      "a": {
+        "role": "궤도 긴반지름",
+        "description": "타원 궤도의 긴 쪽 반지름"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "지구 궤도 — 2D",
+        "description": "ISS·GPS·정지궤도·달을 앵커로 전환하며 관찰하는 2D 조감 뷰"
+      },
+      "kepler-orbit-3d": {
+        "name": "지구 궤도 — 3D",
+        "description": "같은 앵커를 3D 공간에서 회전시키며 거리 감각을 얻는 입체 뷰"
+      }
     }
   },
   "tangent-line": {
     "name": "접선 꼴",
     "oneLiner": "곡선 위 한 점에서 같은 기울기로 스치는 직선",
     "slots": {
-      "f": { "role": "곡선", "description": "접선을 그을 대상 함수" },
-      "x": { "role": "관찰 지점", "description": "접점을 옮겨볼 x 값" }
+      "f": {
+        "role": "곡선",
+        "description": "접선을 그을 대상 함수"
+      },
+      "x": {
+        "role": "관찰 지점",
+        "description": "접점을 옮겨볼 x 값"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "접선 탐험 — 2D",
+        "description": "곡선 y=f(x) 와 점 x 에서의 접선을 함께 보여주는 인터랙티브 뷰"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "복소수 꼴",
+    "oneLiner": "실수부와 허수부로 이루어진 수 — 평면 위의 한 점",
+    "slots": {
+      "a": {
+        "role": "실수부",
+        "description": "가로축 좌표"
+      },
+      "b": {
+        "role": "허수부",
+        "description": "세로축 좌표"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "2×2 변환 꼴",
+    "oneLiner": "평면의 벡터를 다른 벡터로 보내는 1차 변환",
+    "slots": {
+      "a": {
+        "role": "1행 1열",
+        "description": "x축 상이 가로로 얼마나 늘어나는가"
+      },
+      "b": {
+        "role": "1행 2열",
+        "description": "y축 상이 가로로 얼마나 기우는가"
+      },
+      "c": {
+        "role": "2행 1열",
+        "description": "x축 상이 세로로 얼마나 기우는가"
+      },
+      "d": {
+        "role": "2행 2열",
+        "description": "y축 상이 세로로 얼마나 늘어나는가"
+      }
     }
   }
 }

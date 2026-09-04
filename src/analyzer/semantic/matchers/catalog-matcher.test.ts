@@ -16,8 +16,8 @@ interface CatalogTestCase {
   latex: string;
   /** 기대하는 카탈로그 ID */
   expectedId: string;
-  /** 최소 confidence (기본 0.6) */
-  minConfidence?: number;
+  /** 최소 점수 (기본 0.6) */
+  minScore?: number;
 }
 
 /**
@@ -43,8 +43,8 @@ const CATALOG_TEST_CASES: CatalogTestCase[] = [
 
   // ── 미적분 ──
   { latex: '\\int_{-\\infty}^{\\infty} e^{-x^2} \\, dx = \\sqrt{\\pi}', expectedId: 'gaussian-integral' },
-  { latex: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}", expectedId: 'derivative-definition', minConfidence: 0.7 },
-  { latex: "y - f(a) = f'(a)(x - a)", expectedId: 'tangent', minConfidence: 0.6 },
+  { latex: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}", expectedId: 'derivative-definition', minScore: 0.7 },
+  { latex: "y - f(a) = f'(a)(x - a)", expectedId: 'tangent', minScore: 0.6 },
 
   // ── 기하학 ──
   { latex: 'A = \\sqrt{s(s-a)(s-b)(s-c)}', expectedId: 'heron-formula' },
@@ -82,13 +82,15 @@ describe('카탈로그 매칭', () => {
 
   test.each(CATALOG_TEST_CASES)(
     '$expectedId — 대표 수식이 올바르게 매칭된다',
-    ({ latex, expectedId, minConfidence = 0.6 }) => {
+    ({ latex, expectedId, minScore = 0.6 }) => {
       const { ast } = parseLatex(latex);
       const result = matchCatalog(ast, index);
 
       expect(result).not.toBeNull();
       expect(result!.catalogId).toBe(expectedId);
-      expect(result!.confidence).toBeGreaterThanOrEqual(minConfidence);
+      expect(result!.score).toBeGreaterThanOrEqual(minScore);
+      // 폴백 경로는 구조적으로 확정을 만들 수 없다 — 칩은 형식 매칭에서만 나온다.
+      expect(result!.tier).toBe('approximate');
     },
   );
 });

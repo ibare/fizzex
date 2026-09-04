@@ -1,0 +1,36 @@
+{
+  "note": "커밋 7·8 이전의 catalog→viz 간선. 이 집합이 catalog→form→viz 합성으로 보존되어야 한다 (C9 MUST NOT: 카탈로그 매핑 파괴 금지). 이 파일과 대응 테스트는 삭제 금지.",
+  "edges": {
+    "kepler-third": [
+      "kepler-orbit-2d",
+      "kepler-orbit-3d"
+    ],
+    "exponential-growth": [
+      "exponential-decay-2d"
+    ],
+    "tangent": [
+      "tangent-explore-2d"
+    ],
+    "compound-interest": [
+      "compound-interest-2d"
+    ],
+    "pythagorean-theorem": [
+      "pythagorean-explore-2d",
+      "pythagorean-ladder-2d",
+      "pythagorean-tv-2d",
+      "pythagorean-shortcut-2d"
+    ],
+    "quadratic-standard": [
+      "quadratic-sandbox-2d",
+      "quadratic-bridge-2d",
+      "quadratic-basketball-2d",
+      "quadratic-fountain-2d"
+    ],
+    "kinematic-displacement": [
+      "freefall-2d"
+    ],
+    "simple-harmonic": [
+      "sine-wave-2d"
+    ]
+  }
+}

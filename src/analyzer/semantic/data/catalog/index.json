@@ -70,6 +70,7 @@
         5,
         12
       ],
+      "form": "complex-number",
       "patternType": "exact",
       "signature": [
         "variable:z",
@@ -231,6 +232,7 @@
         8,
         20
       ],
+      "form": "linear-map-2x2",
       "patternType": "exact",
       "signature": [
         "variable:M",
@@ -432,6 +434,7 @@
         6,
         25
       ],
+      "form": "orbit-period-radius",
       "patternType": "structural",
       "signature": [
         "power.exponent:2",
@@ -439,21 +442,6 @@
         "frac",
         "variable:π",
         "power.exponent:3"
-      ],
-      "visualizers": [
-        {
-          "id": "kepler-orbit-2d",
-          "name": "지구 궤도 — 2D",
-          "description": "ISS·GPS·정지궤도·달을 앵커로 전환하며 관찰하는 2D 조감 뷰",
-          "icon": "🛸",
-          "default": true
-        },
-        {
-          "id": "kepler-orbit-3d",
-          "name": "지구 궤도 — 3D",
-          "description": "같은 앵커를 3D 공간에서 회전시키며 거리 감각을 얻는 입체 뷰",
-          "icon": "🌍"
-        }
       ]
     },
     {
@@ -629,21 +617,13 @@
         4,
         15
       ],
+      "form": "exponential-change",
       "patternType": "structural",
       "signature": [
         "operator:=",
         "power",
         "variable:e",
         "subscript"
-      ],
-      "visualizers": [
-        {
-          "id": "exponential-decay-2d",
-          "name": "지수 감소 — 2D",
-          "description": "카페인·배터리·탄소-14·약물을 앵커로 전환하며 반감기 체감",
-          "icon": "📉",
-          "default": true
-        }
       ]
     },
     {
@@ -1095,6 +1075,7 @@
         12,
         28
       ],
+      "form": "tangent-line",
       "patternType": "structural",
       "signature": [
         "variable:y",
@@ -1104,15 +1085,6 @@
         "operator:=",
         "operator:-",
         "paren"
-      ],
-      "visualizers": [
-        {
-          "id": "tangent-explore-2d",
-          "name": "접선 탐험 — 2D",
-          "description": "곡선 y=f(x) 와 점 x 에서의 접선을 함께 보여주는 인터랙티브 뷰",
-          "icon": "📈",
-          "default": true
-        }
       ]
     },
     {
@@ -1999,6 +1971,7 @@
         6,
         20
       ],
+      "form": "compound-growth",
       "patternType": "exact",
       "signature": [
         "variable:P",
@@ -2008,15 +1981,6 @@
         "variable:r",
         "variable:n",
         "power"
-      ],
-      "visualizers": [
-        {
-          "id": "compound-interest-2d",
-          "name": "복리 — 2D",
-          "description": "예금·주식·적금·인플레이션 앵커로 전환하며 복리 성장 체감",
-          "icon": "📈",
-          "default": true
-        }
       ]
     },
     {
@@ -2247,6 +2211,7 @@
         6,
         20
       ],
+      "form": "sum-of-two-squares",
       "patternType": "structural",
       "signature": [
         "power.exponent:2",
@@ -2254,33 +2219,6 @@
         "power.exponent:2",
         "operator:=",
         "power.exponent:2"
-      ],
-      "visualizers": [
-        {
-          "id": "pythagorean-explore-2d",
-          "name": "자유탐구",
-          "description": "직각삼각형과 세 변 위의 정사각형으로 본 피타고라스 정리",
-          "icon": "🔺",
-          "default": true
-        },
-        {
-          "id": "pythagorean-ladder-2d",
-          "name": "사다리",
-          "description": "벽에 기댄 사다리의 각도와 안전성",
-          "icon": "🪜"
-        },
-        {
-          "id": "pythagorean-tv-2d",
-          "name": "TV 화면",
-          "description": "화면 가로·세로에서 대각선 인치 환산",
-          "icon": "📺"
-        },
-        {
-          "id": "pythagorean-shortcut-2d",
-          "name": "지름길",
-          "description": "블록을 돌아가기 vs 가로지르기의 거리 비교",
-          "icon": "🚶"
-        }
       ]
     },
     {
@@ -2515,6 +2453,7 @@
         6,
         14
       ],
+      "form": "quadratic-expression",
       "patternType": "structural",
       "signature": [
         "operator:=",
@@ -2523,33 +2462,6 @@
         "operator:+",
         "variable:x",
         "variable:y"
-      ],
-      "visualizers": [
-        {
-          "id": "quadratic-sandbox-2d",
-          "name": "자유 탐구 — 이차함수",
-          "description": "좌표평면 위에서 a·b·c 변화 관찰",
-          "icon": "🔢",
-          "default": true
-        },
-        {
-          "id": "quadratic-bridge-2d",
-          "name": "다리 아치 — 이차함수",
-          "description": "교각·아치·반사로 보는 포물선",
-          "icon": "🌉"
-        },
-        {
-          "id": "quadratic-basketball-2d",
-          "name": "농구 자유투 — 이차함수",
-          "description": "발사 높이·최고점·착지의 궤적",
-          "icon": "🏀"
-        },
-        {
-          "id": "quadratic-fountain-2d",
-          "name": "분수 — 이차함수",
-          "description": "물줄기 최고점이 곧 꼭짓점",
-          "icon": "⛲"
-        }
       ]
     },
     {
@@ -3279,6 +3191,7 @@
         5,
         20
       ],
+      "form": "constant-acceleration-displacement",
       "patternType": "structural",
       "signature": [
         "operator:=",
@@ -3287,15 +3200,6 @@
         "number:1",
         "number:2",
         "power.exponent:2"
-      ],
-      "visualizers": [
-        {
-          "id": "freefall-2d",
-          "name": "자유낙하 — 2D",
-          "description": "지구·달·화성·목성 앵커로 행성별 중력가속도 체감",
-          "icon": "🌍",
-          "default": true
-        }
       ]
     },
     {
@@ -3433,21 +3337,13 @@
         4,
         12
       ],
+      "form": "sinusoid",
       "patternType": "structural",
       "signature": [
         "operator:=",
         "func:sin",
         "operator:+",
         "paren"
-      ],
-      "visualizers": [
-        {
-          "id": "sine-wave-2d",
-          "name": "사인파 — 2D",
-          "description": "스피커·진자·조수·전압계 앵커로 진폭·주기·위상 역할 체감",
-          "icon": "🎵",
-          "default": true
-        }
       ]
     },
     {

@@ -208,5 +208,7 @@ export const formTextSchema = z.record(
     name: z.string().min(1),
     oneLiner: z.string().min(1),
     slots: z.record(z.string(), slotTextSchema),
+    /** 칩 라벨. 구조(id·icon)와 텍스트를 갈라 두면 index.json 에 한국어가 남지 않는다. */
+    visualizers: z.record(z.string(), slotTextSchema.extend({ role: z.string().optional() })).optional(),
   }),
 );

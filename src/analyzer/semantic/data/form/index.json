@@ -79,7 +79,25 @@
       "subsumes": [
         "constant-acceleration-displacement"
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "quadratic-sandbox-2d",
+          "icon": "🔢",
+          "default": true
+        },
+        {
+          "id": "quadratic-bridge-2d",
+          "icon": "🌉"
+        },
+        {
+          "id": "quadratic-basketball-2d",
+          "icon": "🏀"
+        },
+        {
+          "id": "quadratic-fountain-2d",
+          "icon": "⛲"
+        }
+      ],
       "examples": [
         {
           "latex": "y = ax^2 + bx + c",
@@ -159,7 +177,25 @@
           "free": []
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "pythagorean-explore-2d",
+          "icon": "🔺",
+          "default": true
+        },
+        {
+          "id": "pythagorean-ladder-2d",
+          "icon": "🪜"
+        },
+        {
+          "id": "pythagorean-tv-2d",
+          "icon": "📺"
+        },
+        {
+          "id": "pythagorean-shortcut-2d",
+          "icon": "🚶"
+        }
+      ],
       "examples": [
         {
           "latex": "a^2 + b^2 = c^2",
@@ -231,7 +267,13 @@
           ]
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "exponential-decay-2d",
+          "icon": "📉",
+          "default": true
+        }
+      ],
       "examples": [
         {
           "latex": "N = N_0 e^{rt}",
@@ -322,7 +364,13 @@
           ]
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "compound-interest-2d",
+          "icon": "📈",
+          "default": true
+        }
+      ],
       "examples": [
         {
           "latex": "A = P\\left(1 + \\frac{r}{n}\\right)^{nt}",
@@ -398,7 +446,13 @@
           ]
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "freefall-2d",
+          "icon": "🌍",
+          "default": true
+        }
+      ],
       "examples": [
         {
           "latex": "s = v_0 t + \\frac{1}{2}at^2",
@@ -489,7 +543,13 @@
           ]
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "sine-wave-2d",
+          "icon": "🎵",
+          "default": true
+        }
+      ],
       "examples": [
         {
           "latex": "y = A\\sin(\\omega t + \\varphi)",
@@ -551,7 +611,17 @@
           ]
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "kepler-orbit-2d",
+          "icon": "🛸",
+          "default": true
+        },
+        {
+          "id": "kepler-orbit-3d",
+          "icon": "🌍"
+        }
+      ],
       "examples": [
         {
           "latex": "T^2 = \\frac{4\\pi^2}{GM}a^3",
@@ -612,7 +682,13 @@
           ]
         }
       ],
-      "visualizers": [],
+      "visualizers": [
+        {
+          "id": "tangent-explore-2d",
+          "icon": "📈",
+          "default": true
+        }
+      ],
       "examples": [
         {
           "latex": "y - f(a) = f'(a)(x - a)",
@@ -630,6 +706,154 @@
       "counterExamples": [
         "y = ax^2 + bx + c",
         "a^2 + b^2 = c^2"
+      ]
+    },
+    {
+      "id": "complex-number",
+      "slots": [
+        {
+          "name": "a",
+          "outputKind": "scalar",
+          "source": "formula",
+          "range": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1,
+            "default": 0
+          }
+        },
+        {
+          "name": "b",
+          "outputKind": "scalar",
+          "source": "formula",
+          "range": {
+            "min": -10,
+            "max": 10,
+            "step": 0.1,
+            "default": 0
+          }
+        }
+      ],
+      "shapes": [
+        {
+          "latex": "z = a + b i",
+          "slots": [
+            "a",
+            "b"
+          ],
+          "free": [
+            "z"
+          ]
+        }
+      ],
+      "visualizers": [],
+      "examples": [
+        {
+          "latex": "z = a + bi",
+          "slots": {
+            "a": "a",
+            "b": "b"
+          }
+        },
+        {
+          "latex": "w = p + qi",
+          "slots": {
+            "a": "p",
+            "b": "q"
+          }
+        }
+      ],
+      "counterExamples": [
+        "y = ax^2 + bx + c",
+        "a^2 + b^2 = c^2"
+      ]
+    },
+    {
+      "id": "linear-map-2x2",
+      "slots": [
+        {
+          "name": "a",
+          "outputKind": "scalar",
+          "source": "formula",
+          "range": {
+            "min": -5,
+            "max": 5,
+            "step": 0.1,
+            "default": 1
+          }
+        },
+        {
+          "name": "b",
+          "outputKind": "scalar",
+          "source": "formula",
+          "range": {
+            "min": -5,
+            "max": 5,
+            "step": 0.1,
+            "default": 0
+          }
+        },
+        {
+          "name": "c",
+          "outputKind": "scalar",
+          "source": "formula",
+          "range": {
+            "min": -5,
+            "max": 5,
+            "step": 0.1,
+            "default": 0
+          }
+        },
+        {
+          "name": "d",
+          "outputKind": "scalar",
+          "source": "formula",
+          "range": {
+            "min": -5,
+            "max": 5,
+            "step": 0.1,
+            "default": 1
+          }
+        }
+      ],
+      "shapes": [
+        {
+          "latex": "M = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}",
+          "slots": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "free": [
+            "M"
+          ]
+        }
+      ],
+      "visualizers": [],
+      "examples": [
+        {
+          "latex": "M = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}",
+          "slots": {
+            "a": "a",
+            "b": "b",
+            "c": "c",
+            "d": "d"
+          }
+        },
+        {
+          "latex": "A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}",
+          "slots": {
+            "a": "1",
+            "b": "2",
+            "c": "3",
+            "d": "4"
+          }
+        }
+      ],
+      "counterExamples": [
+        "y = ax^2 + bx + c",
+        "z = a + bi"
       ]
     }
   ]

@@ -215,7 +215,7 @@ export type {
   UserBindingInputs,
 } from './visualizer/index.js';
 export { resolveI18n, applyUserBindings } from './visualizer/index.js';
-export { getVisualizersForCatalog } from './analyzer/semantic/loader.js';
+export { getVisualizersForForm } from './analyzer/semantic/loader.js';
 export type { VisualizerRef } from './analyzer/semantic/types.js';
 
 // 타입

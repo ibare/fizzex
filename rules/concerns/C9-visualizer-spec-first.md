@@ -24,7 +24,9 @@ src/visualizer/runtime (단일 런타임이 spec을 해석)
 - 새 visualizer는 `registries/default/<id>/spec.json` 작성 + `registries/default/manifest.json` 등록만으로 추가한다
 - 모든 visualizer는 `src/visualizer/runtime`의 단일 런타임이 해석한다 (`createVisualizer`, `createVisualizerRegistry`, `compileSpec`)
 - `registries/default/`는 viz spec의 단일 진실의 원천이다 — `dist/visualizers/`는 빌드 산출물이며 직접 편집하지 않는다
-- `manifest.json`의 visualizer id는 카탈로그(`src/analyzer/semantic/data/catalog/**`)의 참조 id와 일치해야 한다 (Formula Immutability)
+- `manifest.json`의 visualizer id는 형식(`src/analyzer/semantic/data/form/**`)의 `visualizers[].id`와 일치해야 한다 (Formula Immutability)
+- 하나의 viz는 정확히 하나의 형식에만 속한다 — 두 형식이 같은 viz id를 참조하면 스키마가 거부한다
+- 카탈로그 항목(`src/analyzer/semantic/data/catalog/**`)은 `form` 필드로 형식을 참조할 뿐 viz를 직접 소유하지 않는다. viz id와 수식 id는 여전히 불변이며, 간선의 종점만 `catalog→viz`에서 `catalog→form→viz`로 바뀌었다
 - viz spec 객체(VisualizerSpec, SceneSpec)는 불변이다 — 런타임에서 새 객체를 생성해 반환
 
 ## MUST NOT

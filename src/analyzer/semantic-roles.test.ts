@@ -337,7 +337,7 @@ describe('Semantic Roles', () => {
       const rootResult = semanticMap.get(ast.id)!;
 
       expect(rootResult.catalogId).toBe('mass-energy');
-      expect(rootResult.confidence).toBeGreaterThanOrEqual(0.5);
+      expect(rootResult.score).toBeGreaterThanOrEqual(0.75);
     });
 
     it('F=ma를 뉴턴의 운동 제2법칙으로 인식한다', () => {
@@ -346,7 +346,7 @@ describe('Semantic Roles', () => {
       const rootResult = semanticMap.get(ast.id)!;
 
       expect(rootResult.catalogId).toBe('newton-second');
-      expect(rootResult.confidence).toBeGreaterThanOrEqual(0.5);
+      expect(rootResult.score).toBeGreaterThanOrEqual(0.75);
     });
 
     it('단순한 수식 x+1에는 카탈로그 매칭이 없다', () => {
@@ -388,13 +388,15 @@ describe('Semantic Roles', () => {
       expect(powerSemantic.role).toBe('광속의 제곱');
     });
 
-    it('exact 패턴이 structural 패턴보다 높은 confidence를 가진다', () => {
-      // E=mc^2는 exact 패턴
+    it('시그니처를 온전히 채우는 수식은 높은 점수를 받는다', () => {
+      // patternType 계수(exact ×1.2 / structural ×0.9)는 제거했다 — 데이터와
+      // 어긋나 exact 인데 requiredVariables 가 없는 10건에 특혜를 줬다.
+      // 변별력은 멀티셋 카운트와 requiredVariables 사전 필터가 낸다.
       const { ast: ast1 } = parseLatex('E=mc^2');
       const map1 = buildSemanticMap(ast1);
       const root1 = map1.get(ast1.id)!;
 
-      expect(root1.confidence).toBeGreaterThanOrEqual(0.8);
+      expect(root1.score).toBeGreaterThanOrEqual(0.8);
     });
 
     it('카탈로그 미매칭 요소는 기존 레이어로 폴백한다', () => {
@@ -408,7 +410,7 @@ describe('Semantic Roles', () => {
       expect(eqSemantic.layer).not.toBe('catalog');
     });
 
-    it('SemanticResult에 catalogId와 confidence가 포함된다', () => {
+    it('SemanticResult에 catalogId와 tier가 포함된다', () => {
       const { ast } = parseLatex('F=ma');
       const semanticMap = buildSemanticMap(ast);
 
@@ -418,8 +420,8 @@ describe('Semantic Roles', () => {
       const fSemantic = semanticMap.get(fNode!.id)!;
 
       expect(fSemantic.catalogId).toBe('newton-second');
-      expect(fSemantic.confidence).toBeDefined();
-      expect(typeof fSemantic.confidence).toBe('number');
+      expect(fSemantic.tier).toBe('approximate');
+      expect(typeof fSemantic.score).toBe('number');
     });
   });
 

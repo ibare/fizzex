@@ -5,9 +5,12 @@
  * locale별 접근 인터페이스를 제공한다.
  */
 
-import type { CatalogIndexEntry, CatalogDetail, VisualizerRef,
+import type {
+  CatalogIndexEntry,
+  CatalogDetail,
   FormEntry,
   FormText,
+  FormVisualizerRef,
 } from './types.js';
 
 // 번들 포함 (항상 로드) — 한국어 기본
@@ -182,10 +185,18 @@ export function getFormText(locale = 'ko'): Record<string, FormText> {
   return formKo as Record<string, FormText>;
 }
 
-export function getVisualizersForCatalog(catalogId: string): VisualizerRef[] {
-  const entries = getCatalogIndex();
-  const entry = entries.find((e) => e.id === catalogId);
-  return entry?.visualizers ?? [];
+/**
+ * 형식이 소유한 시각화 참조.
+ * 카탈로그 항목이 아니라 **형식**이 시각화의 앵커다 — 이름 없는 사례도
+ * 형식 사례이면 같은 시각화를 받는다.
+ */
+export function getVisualizersForForm(formId: string): FormVisualizerRef[] {
+  return getFormIndex().find((f) => f.id === formId)?.visualizers ?? [];
+}
+
+/** 형식 텍스트 한 건. */
+export function getFormEntry(formId: string): FormEntry | null {
+  return getFormIndex().find((f) => f.id === formId) ?? null;
 }
 
 /**

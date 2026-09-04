@@ -137,7 +137,7 @@ evaluateMatrixSync(m, {});
 import {
   parseLatex,
   buildSemanticMap,
-  getVisualizersForCatalog,
+  getVisualizersForForm,
   createVisualizer,
   createVisualizerRegistry,
 } from 'fizzex';
@@ -152,8 +152,8 @@ const registry = createVisualizerRegistry({
 });
 
 const { ast } = parseLatex('T^2 = \\frac{4\\pi^2}{GM} a^3');
-const catalogId = buildSemanticMap(ast).get(ast.id)?.catalogId;
-const refs = catalogId ? getVisualizersForCatalog(catalogId) : [];
+const formId = buildSemanticMap(ast).get(ast.id)?.formId;
+const refs = formId ? getVisualizersForForm(formId) : [];
 
 const instance = refs[0]
   ? await createVisualizer(container, {
@@ -173,7 +173,7 @@ const instance = refs[0]
 - **Editor primitives** — `MathEditor`, `createInitialState`, `createStateFromLatex`, node creators (`createNumber`, `createFrac`, `createIntegral`, `createMatrix`, …)
 - **Analyzer** — `analyzeExpression`, `analyzeBindings`, `analyzeEvaluability`, `buildSemanticMap`
 - **Evaluator** — `evaluateSync` / `evaluate`, `evaluateMatrixSync` / `evaluateMatrix`, `evaluateComplexSync` / `evaluateComplex`, `differentiateAt` / `differentiate`
-- **Visualization** — `createVisualizer`, `createVisualizerRegistry`, `getVisualizersForCatalog`
+- **Visualization** — `createVisualizer`, `createVisualizerRegistry`, `getVisualizersForForm`
 - **Types** — `MathNode`, `EditorState`, `ExpressionAnalysis`, `Bindings`, `EvalResult`, `Matrix`, `Complex`, `Dual`, …
 
 ### `fizzex/headless`

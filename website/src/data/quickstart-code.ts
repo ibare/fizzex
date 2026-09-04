@@ -54,7 +54,7 @@ differentiateAt(ast, 'x', { x: 2 }); // 6 — d/dx(x² + 2x - 3) at x=2`,
   visualization:`import {
   parseLatex,
   buildSemanticMap,
-  getVisualizersForCatalog,
+  getVisualizersForForm,
   createVisualizer,
   createVisualizerRegistry,
 } from 'fizzex';
@@ -65,11 +65,11 @@ const registry = createVisualizerRegistry({
 });
 
 const ast = parseLatex('T^2 = \\\\frac{4\\\\pi^2}{GM} a^3');
-const catalogId = buildSemanticMap(ast).get(ast.id)?.catalogId;
-
-// One formula can map to multiple independent visualizers (2D, 3D, etc.)
-const refs = catalogId ? getVisualizersForCatalog(catalogId) : [];
-refs.forEach((r) => console.log(r.name)); // "2D 궤도", "3D 궤도"
+// Visualizations are anchored to the *form*, not the named formula —
+// an unnamed instance of the same form gets the same visualizations.
+const formId = buildSemanticMap(ast).get(ast.id)?.formId;
+const refs = formId ? getVisualizersForForm(formId) : [];
+refs.forEach((r) => console.log(r.id)); // "kepler-orbit-2d", "kepler-orbit-3d"
 
 // Mount on demand — registry fetches the spec JSON and picks the renderer chunk.
 const instance = refs[0]

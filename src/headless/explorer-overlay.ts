@@ -25,7 +25,7 @@ import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles.j
 import type { SemanticResult } from '../analyzer/semantic-roles.js';
 import { analyzeBindings } from '../evaluator/analyze.js';
 import type { BindingAnalysis } from '../evaluator/analyze.js';
-import { getVisualizersForCatalog } from '../analyzer/semantic/loader.js';
+import { getVisualizersForForm, getFormText } from '../analyzer/semantic/loader.js';
 import type { VisualizerRef } from '../analyzer/semantic/types.js';
 import type {
   ApplyUserBindingsResult,
@@ -410,11 +410,14 @@ export class ExplorerOverlay {
     this.semanticMap = buildSemanticMap(ast);
 
     // 카탈로그 상세 캐싱
-    if (!this.catalogDetail) {
+    // 수식이 바뀌면 상세도 다시 구해야 한다. 1회 캐싱하면 이전 수식의
+    // parameterConfig 가 새 수식의 슬라이더 범위에 계속 적용된다.
+    {
       const rootSemantic = this.semanticMap.get(ast.id);
-      if (rootSemantic?.catalogId && rootSemantic.catalogCategory) {
-        this.catalogDetail = getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory) ?? null;
-      }
+      this.catalogDetail =
+        rootSemantic?.catalogId && rootSemantic.catalogCategory
+          ? getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory) ?? null
+          : null;
     }
 
     this.updateCatalogBanner();
@@ -1191,12 +1194,13 @@ export class ExplorerOverlay {
 
     this.catalogBanner.innerHTML = '';
 
-    const confidence = rootSemantic.confidence ?? 0;
-    const isUnsure = confidence < 0.8;
+    // 형식 유니피케이션으로 확정된 매칭만 정식 이름을 쓴다.
+    // 폴백 스코어러 매칭은 언제나 "~와(과) 유사" 다.
+    const confirmed = rootSemantic.tier === 'confirmed';
 
     const nameSpan = document.createElement('span');
     nameSpan.style.fontWeight = '600';
-    nameSpan.textContent = isUnsure ? `${detail.name}와(과) 유사` : detail.name;
+    nameSpan.textContent = confirmed ? detail.name : `${detail.name}와(과) 유사`;
 
     const sepSpan = document.createElement('span');
     sepSpan.textContent = ' — ';
@@ -1210,13 +1214,22 @@ export class ExplorerOverlay {
     this.catalogBanner.appendChild(sepSpan);
     this.catalogBanner.appendChild(descSpan);
 
-    // 시각화 버튼 — 호스트가 VisualizerRegistry를 주입한 경우에만 렌더.
-    // 각 버튼은 해당 패널을 토글한다(열려 있으면 닫기, 없으면 열기).
-    if (this.visualizerRegistry) {
-      const refs = getVisualizersForCatalog(rootSemantic.catalogId);
+    // 시각화 버튼 — 호스트가 VisualizerRegistry 를 주입했고 **매칭이 확정된**
+    // 경우에만 렌더. 폴백 스코어러 매칭에는 칩을 붙이지 않는다. 원래 버그가
+    // 정확히 "스코어러 매칭에 칩이 붙어서" 생겼다.
+    if (this.visualizerRegistry && confirmed && rootSemantic.formId) {
+      const refs = getVisualizersForForm(rootSemantic.formId);
+      const text = getFormText()[rootSemantic.formId]?.visualizers ?? {};
       for (const ref of refs) {
+        const label = text[ref.id];
+        if (!label) continue; // 텍스트 없는 칩은 렌더하지 않는다
         const isOpen = this.vizPanels.some((p) => p.visualizerId === ref.id);
-        this.catalogBanner.appendChild(this.createVisualizerButton(ref, isOpen));
+        this.catalogBanner.appendChild(
+          this.createVisualizerButton(
+            { id: ref.id, name: label.name, description: label.description, icon: ref.icon, default: ref.default },
+            isOpen,
+          ),
+        );
       }
     }
 

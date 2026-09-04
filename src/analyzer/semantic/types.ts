@@ -3,6 +3,7 @@
  */
 
 import type { MathNode } from '../../types.js';
+import type { ExprNode } from '../canonical/expr.js';
 
 // ─── 결과 타입 ───
 
@@ -24,8 +25,12 @@ export interface SemanticResult {
   layer: 'catalog' | 'layer2' | 'layer1' | 'fallback';
   /** 카탈로그 매칭 시 수식 ID */
   catalogId?: string;
-  /** 카탈로그 매칭 confidence (0~1) */
-  confidence?: number;
+  /** 매칭 확정도. `layer === 'catalog'` 일 때 존재한다. */
+  tier?: MatchTier;
+  /** 형식 매칭일 때의 형식 id — 시각화 조회의 키다. */
+  formId?: string;
+  /** 폴백 경로의 점수. `tier === 'approximate'` 일 때만. */
+  score?: number;
   /** 카탈로그 분야 */
   catalogCategory?: CatalogCategory;
 }
@@ -90,8 +95,11 @@ export interface CatalogIndexEntry {
   patternType: 'exact' | 'structural';
   /** 구조 시그니처 — 필수 특징 */
   signature: string[];
-  /** 이 수식에 연결된 Visualizer 참조 목록 (동일 수식에 여러 시각화 관점이 있을 수 있다) */
-  visualizers?: VisualizerRef[];
+  /**
+   * 이 수식이 사례가 되는 형식 id. 없는 것이 정상이다.
+   * 시각화는 형식이 소유한다 — 카탈로그 항목은 이름과 설명만 갖는다.
+   */
+  form?: string;
 }
 
 /** 카탈로그 파라미터 설정 (JSON 직렬화 가능 — compute 함수 없음) */
@@ -271,19 +279,44 @@ export interface FormSlotText {
   description: string;
 }
 
+export interface FormVisualizerText {
+  name: string;
+  description: string;
+}
+
 export interface FormText {
   name: string;
   oneLiner: string;
   slots: Record<string, FormSlotText>;
+  /** 칩 라벨. 구조와 텍스트를 갈라 index.json 에서 한국어를 없앤다. */
+  visualizers?: Record<string, FormVisualizerText>;
 }
+
+/**
+ * 매칭 확정도 — **파생값이지 저작 필드가 아니다.**
+ *
+ * `confirmed` 는 형식 유니피케이션이 성공하고 필수 슬롯이 전부 바인딩된
+ * 경우에만 나온다. 폴백 스코어러는 구조적으로 `approximate` 만 만들 수 있다.
+ * 손으로 켜는 플래그를 두면 첫 압박에서 거짓말이 된다.
+ */
+export type MatchTier = 'confirmed' | 'approximate';
 
 /** 카탈로그 매칭 결과 */
 export interface CatalogMatchResult {
   catalogId: string;
   category: CatalogCategory;
-  confidence: number;
-  /** 실제 변수 → 카탈로그 역할 매핑 */
-  variableMapping?: Record<string, string>;
+  tier: MatchTier;
+  /** 폴백 경로의 점수. `confirmed` 에는 점수가 존재하지 않는다. */
+  score?: number;
+  /**
+   * 시그니처를 남김없이 채웠고 형식을 참조하지 않는 항목인가.
+   * 이름만 가진 수식(`E=mc^2` 등)이 일반 형식에 삼켜지는 것을 막는 데 쓴다.
+   */
+  exhaustive?: boolean;
+  /** 형식 매칭일 때의 형식 id. */
+  formId?: string;
+  /** 형식 매칭일 때 슬롯 이름 → 바인딩된 부분식. */
+  bindings?: ReadonlyMap<string, ExprNode>;
 }
 
 // ─── 규칙 타입 ───
