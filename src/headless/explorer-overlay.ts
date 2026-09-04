@@ -412,10 +412,15 @@ export class ExplorerOverlay {
     // 카탈로그 상세 캐싱
     // 수식이 바뀌면 상세도 다시 구해야 한다. 1회 캐싱하면 이전 수식의
     // parameterConfig 가 새 수식의 슬라이더 범위에 계속 적용된다.
+    //
+    // **확정 매칭에서만 상세를 채운다.** 배너는 "~와(과) 유사" 라고 말하는데
+    // 슬라이더 범위·값 배지·조정 가능 단서가 엉뚱한 수식의 parameterConfig 를
+    // 쓰면 배너 오탐보다 나쁘다 — 사용자가 만지는 값이 오염된다.
+    // 배너 자체는 별도로 getCatalogDetail 을 부르므로 이름은 그대로 뜬다.
     {
       const rootSemantic = this.semanticMap.get(ast.id);
       this.catalogDetail =
-        rootSemantic?.catalogId && rootSemantic.catalogCategory
+        rootSemantic?.tier === 'confirmed' && rootSemantic.catalogId && rootSemantic.catalogCategory
           ? getCatalogDetail(rootSemantic.catalogId, rootSemantic.catalogCategory) ?? null
           : null;
     }
