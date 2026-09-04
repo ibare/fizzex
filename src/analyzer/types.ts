@@ -52,8 +52,8 @@ export interface PolynomialInfo {
   mainVariable: string;
   /** 포함된 모든 변수 */
   variables: string[];
-  /** 계수 정보 (변수별 최고차항) */
-  leadingCoefficients: Record<string, number>;
+  /** 변수별 최고 지수 (계수 값이 아니다 — 계수는 canonical/polynomial.ts 가 산출한다) */
+  degreesByVariable: Record<string, number>;
 }
 
 /**

@@ -60,7 +60,7 @@ export function analyzePolynomial(
     degree: maxDegree,
     mainVariable,
     variables,
-    leadingCoefficients: Object.fromEntries(degrees),
+    degreesByVariable: Object.fromEntries(degrees),
   };
 }
 

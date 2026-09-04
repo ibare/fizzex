@@ -13,13 +13,13 @@ import { findNodes } from './ast-walker.js';
  * 일반적인 주 변수 이름 (높은 점수)
  * x, y, z는 전통적으로 미지수/변수로 사용
  */
-const MAIN_VARIABLE_NAMES = new Set(['x', 'y', 'z', 't', 'u', 'v', 'w']);
+export const MAIN_VARIABLE_NAMES = new Set(['x', 'y', 'z', 't', 'u', 'v', 'w']);
 
 /**
  * 일반적인 계수/파라미터 이름 (낮은 점수)
  * a, b, c, d는 전통적으로 계수/상수로 사용
  */
-const COEFFICIENT_NAMES = new Set([
+export const COEFFICIENT_NAMES = new Set([
   'a',
   'b',
   'c',
