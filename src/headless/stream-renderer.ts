@@ -199,7 +199,7 @@ export class DOMStreamView {
    * 자동 탐색 트리거를 활성화한다.
    * 컨테이너 레벨 이벤트 위임: 개별 수식 canvas를 더블클릭하면 해당 수식의 탐색 모드 진입.
    */
-  enableExplorer(options?: Partial<ExplorerTriggerOptions>): void {
+  enableExplorer(options?: Pick<ExplorerTriggerOptions, 'theme'>): void {
     this.disableExplorer();
     const theme = options?.theme ?? this.config.theme ?? 'light';
     this.explorerDblclickHandler = (e: MouseEvent) => {

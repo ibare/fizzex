@@ -8,8 +8,18 @@
 export interface ExplorerTriggerOptions {
   /** 더블클릭으로 탐색 진입 (기본 true) */
   dblclick?: boolean;
-  /** 호버 시 탐색 아이콘 표시 (기본 false) */
-  hoverIcon?: boolean;
+  /**
+   * 탐색 아이콘 표시 정책 (기본 `'none'`).
+   *
+   * - `'none'` — 아이콘을 만들지 않는다.
+   * - `'hover'` — 호버 중에만 띄운다. 본문에 섞이는 인라인 수식용 — 아이콘이
+   *   상시 떠 있으면 읽던 글자를 가린다.
+   * - `'always'` — 자격이 있으면 상시 띄운다. 쇼케이스·편집기용. 호버가 없는
+   *   터치 기기와 키보드 사용자가 도달할 수 있는 유일한 정책이다.
+   *
+   * 어느 정책이든 자격(`setAvailable`)이 없으면 아이콘은 뜨지 않는다.
+   */
+  visibility?: 'none' | 'hover' | 'always';
   /** 테마 — 아이콘 스타일에 영향 */
   theme?: 'light' | 'dark';
 }
@@ -47,7 +57,7 @@ export function attachExplorerTrigger(
   openFn: () => void,
   options: ExplorerTriggerOptions = {},
 ): ExplorerTriggerHandle {
-  const { dblclick = true, hoverIcon = false, theme = 'light' } = options;
+  const { dblclick = true, visibility = 'none', theme = 'light' } = options;
   const cleanups: (() => void)[] = [];
 
   let available = false;
@@ -65,8 +75,8 @@ export function attachExplorerTrigger(
     cleanups.push(() => container.removeEventListener('dblclick', handleDblclick));
   }
 
-  // ── 호버 아이콘 트리거 ──
-  if (hoverIcon) {
+  // ── 아이콘 트리거 ──
+  if (visibility !== 'none') {
     const isDark = theme === 'dark';
 
     // 아이콘 요소 생성
@@ -74,6 +84,7 @@ export function attachExplorerTrigger(
     icon.type = 'button';
     icon.textContent = '\uD83D\uDD0D'; // 돋보기
     icon.title = '수식 탐색';
+    icon.setAttribute('aria-label', '수식 탐색');
     Object.assign(icon.style, {
       position: 'absolute',
       top: '4px',
@@ -101,19 +112,26 @@ export function attachExplorerTrigger(
     }
     container.appendChild(icon);
 
-    // 아이콘은 "호버 중" 과 "자격 있음" 이 동시에 참일 때만 보인다.
+    // 자격이 표시의 필요조건이고, 호버는 'hover' 정책에서만 추가로 요구된다.
     // 두 조건을 한 함수에 모아 두면 자격이 렌더 중에 바뀌어도 — 마우스가
     // 이미 안에 있는 채로 수식이 갈아끼워져도 — 표시가 어긋나지 않는다.
     let hovering = false;
     syncIcon = () => {
-      icon.style.display = hovering && available ? 'flex' : 'none';
+      const visible = available && (visibility === 'always' || hovering);
+      icon.style.display = visible ? 'flex' : 'none';
     };
 
-    const handleEnter = () => { hovering = true; syncIcon?.(); };
-    const handleLeave = () => { hovering = false; syncIcon?.(); };
+    if (visibility === 'hover') {
+      const handleEnter = () => { hovering = true; syncIcon?.(); };
+      const handleLeave = () => { hovering = false; syncIcon?.(); };
 
-    container.addEventListener('mouseenter', handleEnter);
-    container.addEventListener('mouseleave', handleLeave);
+      container.addEventListener('mouseenter', handleEnter);
+      container.addEventListener('mouseleave', handleLeave);
+      cleanups.push(() => {
+        container.removeEventListener('mouseenter', handleEnter);
+        container.removeEventListener('mouseleave', handleLeave);
+      });
+    }
 
     icon.addEventListener('click', (e) => {
       e.preventDefault();
@@ -122,8 +140,6 @@ export function attachExplorerTrigger(
     });
 
     cleanups.push(() => {
-      container.removeEventListener('mouseenter', handleEnter);
-      container.removeEventListener('mouseleave', handleLeave);
       icon.remove();
       // position 복원
       if (!originalPosition || originalPosition === 'static') {

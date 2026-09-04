@@ -19,6 +19,9 @@ import { SuggestionChips } from './SuggestionChips.js';
 import { useFizzexLabels, useLocalizedSuggestions } from '../i18n/index.js';
 import { loadMathFont, NEW_CM_MATH_CONFIG } from '../fonts/index.js';
 import { ExpressionExplorer } from './ExpressionExplorer.js';
+import { attachExplorerTrigger } from '../headless/explorer-trigger.js';
+import type { ExplorerTriggerHandle } from '../headless/explorer-trigger.js';
+import { judgeExplorable } from '../headless/explorability.js';
 import type { VisualizerRegistry } from '../visualizer/index.js';
 
 /** 커서 위치 정보 */
@@ -109,6 +112,7 @@ export function EditorView({
 }: EditorViewProps) {
   // autoSize 기본값: readOnly일 때 true
   const shouldAutoSize = autoSize ?? readOnly;
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const editorRef = useRef<MathEditor | null>(null);
@@ -128,6 +132,47 @@ export function EditorView({
   const [computedSize, setComputedSize] = useState<{ width: number; height: number } | null>(null);
   const [fontFamily, setFontFamily] = useState(DEFAULT_FONT_FAMILY);
   const [showExplorer, setShowExplorer] = useState(false);
+
+  // ── 수식 탐색 진입점 ──
+  // 아이콘 DOM·스타일·자격 판정은 headless 트리거 한 벌에서 온다. React 는
+  // 표시 정책('always')만 고르고, 여는 것은 아래 ExpressionExplorer 가 계속
+  // 맡는다 — 오버레이 생명주기를 React 가 쥐고 있어야 언마운트에서 샐 일이 없다.
+  const explorerTriggerRef = useRef<ExplorerTriggerHandle | null>(null);
+  const openExplorerRef = useRef<() => void>(() => {});
+  openExplorerRef.current = () => setShowExplorer(true);
+
+  // AST 참조가 그대로면 판정도 그대로다. 표 형태 페이지가 셀 수십 개를
+  // 동시에 리렌더해도 재판정은 AST 가 실제로 바뀐 것에만 걸린다.
+  const explorable = useMemo(() => judgeExplorable(state.ast), [state.ast]);
+  const explorableRef = useRef(explorable);
+  explorableRef.current = explorable;
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !showExplorerToggle) return;
+
+    const handle = attachExplorerTrigger(
+      container,
+      () => openExplorerRef.current(),
+      // 읽기 전용일 때만 더블클릭을 연다. 자격 미달이라 아이콘이 없는 수식도
+      // 들여다볼 수는 있어야 한다 — 광고하지 않는 것과 진입을 막는 것은 다르다.
+      // 편집 모드에서는 더블클릭이 커서 조작이라 열지 않는다.
+      { dblclick: readOnly, visibility: 'always', theme },
+    );
+    handle.setAvailable(explorableRef.current);
+    explorerTriggerRef.current = handle;
+
+    return () => {
+      handle.destroy();
+      explorerTriggerRef.current = null;
+    };
+    // 자격은 아래 effect 가 따로 밀어넣는다. 여기에 explorable 을 넣으면
+    // 판정이 바뀔 때마다 아이콘이 떼였다 붙는다.
+  }, [showExplorerToggle, theme, readOnly]);
+
+  useEffect(() => {
+    explorerTriggerRef.current?.setAvailable(explorable);
+  }, [explorable]);
 
   // 실제 사용할 크기 계산
   const width = shouldAutoSize && computedSize ? computedSize.width : propWidth;
@@ -593,7 +638,7 @@ export function EditorView({
   };
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div ref={containerRef} style={{ position: 'relative', display: 'inline-block' }}>
       {/* IME 입력용 input (조합 중일 때만 보임) */}
       {!readOnly && (
         <input
@@ -648,7 +693,7 @@ export function EditorView({
           style={{
             position: 'absolute',
             top: 4,
-            right: 4 + (showExplorerToggle ? 28 : 0),
+            right: 4 + (showExplorerToggle && explorable ? 28 : 0),
             width: 24,
             height: 24,
             borderRadius: 4,
@@ -667,33 +712,6 @@ export function EditorView({
           title={labels.debugToggle}
         >
           {debug ? '◼' : '◻'}
-        </button>
-      )}
-
-      {/* 수식 탐색 버튼 */}
-      {showExplorerToggle && (
-        <button
-          type="button"
-          onClick={() => setShowExplorer(true)}
-          style={{
-            position: 'absolute',
-            top: 4,
-            right: 4,
-            width: 24,
-            height: 24,
-            borderRadius: 4,
-            border: 'none',
-            background: theme === 'dark' ? '#404040' : '#e5e5e5',
-            color: theme === 'dark' ? '#999' : '#666',
-            cursor: 'pointer',
-            fontSize: 14,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          title="수식 탐색"
-        >
-          🔍
         </button>
       )}
 

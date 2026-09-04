@@ -66,7 +66,7 @@ export const MathBlock = Node.create<MathBlockOptions>({
       if (currentLatex) {
         renderer.render(currentLatex);
       }
-      renderer.enableExplorer({ dblclick: false, hoverIcon: true });
+      renderer.enableExplorer({ dblclick: false, visibility: 'hover' });
 
       function enterEditMode() {
         if (!extensionOptions.editable || isEditing) return;
@@ -117,7 +117,7 @@ export const MathBlock = Node.create<MathBlockOptions>({
           extensionOptions.fizzexConfig,
         );
         renderer.render(currentLatex);
-        renderer.enableExplorer({ dblclick: false, hoverIcon: true });
+        renderer.enableExplorer({ dblclick: false, visibility: 'hover' });
       }
 
       // Double-click to edit
