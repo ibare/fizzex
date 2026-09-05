@@ -5,6 +5,7 @@
  */
 export { evaluateSync, evaluate } from './evaluate.js';
 export { analyzeBindings, analyzeEvaluability } from './analyze.js';
+export { MATH_CONSTANT_NAMES, MATH_CONSTANT_VALUES, isMathConstantName } from './constants.js';
 export { evaluateMatrixSync, evaluateMatrix } from './matrix.js';
 export { differentiateAt, differentiate } from './autodiff.js';
 export { evaluateComplexSync, evaluateComplex } from './complex.js';
@@ -12,6 +13,7 @@ export type {
   BindingAnalysis,
   EvaluabilityAnalysis,
 } from './analyze.js';
+export type { MathConstantValues } from './constants.js';
 export type {
   Bindings,
   EvalResult,

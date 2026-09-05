@@ -125,7 +125,11 @@ export {
   evaluateComplex,
   analyzeBindings,
   analyzeEvaluability,
+  MATH_CONSTANT_NAMES,
+  MATH_CONSTANT_VALUES,
+  isMathConstantName,
 } from './evaluator/index.js';
+export type { MathConstantValues } from './evaluator/index.js';
 export type {
   Bindings,
   EvalResult,

@@ -88,6 +88,20 @@ const { ast } = parseLatex('\\frac{1}{2} + x^2');
 const latex = astToLatex(ast);
 ```
 
+The parser is tolerant — it keeps going past input it does not recognize so that
+partial input stays renderable while the user types. It reports what it skipped
+in `warnings`, so **check them**; an unknown command produces an empty node
+rather than an error:
+
+```ts
+const r = parseLatex('\\e');
+r.ast.children;   // []  ← nothing was produced
+r.hasErrors;      // false
+r.warnings;       // [{ type: 'unknown_command', severity: 'warning', position: 0,
+                  //    message: '알 수 없는 명령어: \\e',  // diagnostics are Korean
+                  //    context: '\\e\\n^', token: 'e' }]
+```
+
 ### Expression analysis
 
 ```ts
@@ -101,12 +115,40 @@ analysis.polynomial?.degree;        // 2
 analysis.visualization.graphable2D; // true
 ```
 
+Two analyses answer different questions, and it is easy to mistake one for the
+other:
+
+```ts
+import { analyzeEvaluability, analyzeBindings } from 'fizzex';
+
+const { ast } = parseLatex('\\pi \\cdot x');
+
+analyzeEvaluability(ast);  // { evaluable: true, unsupported: [] }
+analyzeBindings(ast);      // { required: ['x'], constants: ['π'] }
+```
+
+`evaluable: true` means **every node type is supported by the evaluator** — not
+that a value will come out. The expression above is `evaluable` while still
+needing two symbols supplied. A matrix, by contrast, reports
+`{ evaluable: false, unsupported: ['matrix'] }`.
+
+Use `analyzeEvaluability` to decide whether evaluation is worth attempting, and
+`analyzeBindings` to decide what to ask the user for.
+
 ### Numeric evaluation
+
+> **The host supplies every symbol — including mathematical constants.**
+> `evaluateSync` does not auto-bind `π` or `e`. Ask `analyzeBindings` what a
+> given expression needs, then supply it. This is deliberate: constants must be
+> editable so a learner can ask "what if π were 3?".
 
 ```ts
 import {
   parseLatex,
   evaluateSync,
+  evaluate,
+  analyzeBindings,
+  MATH_CONSTANT_VALUES,
   evaluateMatrixSync,
   evaluateComplexSync,
   differentiateAt,
@@ -115,6 +157,33 @@ import {
 // Scalar
 const { ast } = parseLatex('x^2 + 2x - 3');
 evaluateSync(ast, { x: 2 });              // 5
+
+// Constants are symbols too — unbound ones yield no value
+const pie = parseLatex('\\pi \\cdot e').ast;
+analyzeBindings(pie);                     // { required: [], constants: ['e', 'π'] }
+evaluateSync(pie);                        // undefined  ← nothing was supplied
+evaluateSync(pie, { 'π': Math.PI, e: Math.E });   // 8.539734222673566
+
+// `evaluate` tells you *why* it failed; `evaluateSync` only returns undefined
+evaluate(pie);
+// { ok: false, status: 'unbound', detail: { variable: 'π' } }
+//   ^ reports the first unbound symbol it reaches; check `status`, not the name
+
+// MATH_CONSTANT_VALUES holds the standard values, keyed by normalized name.
+// Pick the ones you mean — do NOT spread the whole map: φ, ϕ and γ are commonly
+// free variables (angle, phase, Lorentz factor), and blanket-binding them turns
+// a user's angle φ into the golden ratio silently.
+// Lookups are `number | undefined`: ∞ has no usable value, so filter.
+const circle = parseLatex('\\pi \\cdot r^2').ast;
+const { required, constants } = analyzeBindings(circle);  // ['r'], ['π']
+
+const supplied: Record<string, number> = {};
+for (const name of constants) {
+  const v = MATH_CONSTANT_VALUES[name];
+  if (v !== undefined) supplied[name] = v;
+}
+
+evaluateSync(circle, { ...supplied, r: 2 });   // 12.566370614359172
 
 // Automatic differentiation (forward-mode dual numbers)
 differentiateAt(ast, 'x', { x: 2 });       // 6
