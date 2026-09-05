@@ -100,6 +100,12 @@ export type {
 
 // 수식 분석기
 export { analyzeExpression, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer/index.js';
+export { analyzePolynomialProfile } from './analyzer/index.js';
+export type {
+  PolynomialProfile,
+  PolynomialShape,
+  PolynomialCoefficient,
+} from './analyzer/index.js';
 export type {
   ExpressionAnalysis,
   MathDomain,

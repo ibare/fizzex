@@ -121,6 +121,14 @@ export { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker.js'
 export { getFunctionCategory, createFunctionInfoList } from './function-detector.js';
 export { detectDomains, determinePrimaryDomain } from './domain-detector.js';
 export { analyzePolynomial, getDegreeLabel, setDebugAnalyzer } from './polynomial-analyzer.js';
+
+// 정규화 IR 기반 다항식 프로파일 — analyzePolynomial 의 오판을 대체하는 정확한 판정
+export { analyzePolynomialProfile } from './polynomial-profile.js';
+export type {
+  PolynomialProfile,
+  PolynomialShape,
+  PolynomialCoefficient,
+} from './polynomial-profile.js';
 export { classifyVariables } from './variable-classifier.js';
 export {
   extractFeatures,

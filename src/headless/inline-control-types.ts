@@ -10,7 +10,6 @@ import type { CatalogDetail } from '../analyzer/semantic/types.js';
 import type { SemanticResult } from '../analyzer/semantic-roles.js';
 import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api.js';
 import { normalizeVarName } from '../evaluator/normalize.js';
-import { isMathConstantName } from '../evaluator/constants.js';
 
 // ─── 타입 ───
 
@@ -40,16 +39,6 @@ export interface InlineControlConfig {
   displayValue?: string;
 }
 
-// ─── 잘 알려진 상수 (카탈로그 미매칭 시 fallback) ───
-//
-// 키는 evaluator/normalize.normalizeVarName 의 정규형(유니코드)이다.
-// `\pi` 같은 raw LaTeX 토큰은 호출부에서 정규화 후 lookup 한다.
-
-const KNOWN_CONSTANT_VALUES: Record<string, { value: string; label: string }> = {
-  'π': { value: '3.14159…', label: '원주율' },
-  'e': { value: '2.71828…', label: '자연 상수' },
-};
-
 // ─── 함수 ───
 
 /**
@@ -61,7 +50,8 @@ const KNOWN_CONSTANT_VALUES: Record<string, { value: string; label: string }> = 
  * - input → slider
  * - structural → none
  *
- * 카탈로그 미매칭 시 fallback: isMathConstantName (evaluator/constants)
+ * 카탈로그가 말이 없으면 조절 가능한 값으로 본다. 이름이 수학 상수와 겹친다는
+ * 이유만으로 편집을 막지 않는다 — `∞` 만 예외다.
  */
 export function getControlType(
   node: MathNode,
@@ -84,8 +74,13 @@ export function getControlType(
         }
       }
 
-      // fallback: evaluator 의 수학 상수 집합 (단일 진실의 원천)
-      if (isMathConstantName(normalizeVarName(name))) return 'readonly';
+      // 이름만 보고 상수라 단정해 편집을 막지 않는다. `φ` 는 황금비이기도 하고
+      // 각도이기도 하며, `γ` 는 로런츠 인자로 쓰인다. 어느 쪽인지는 카탈로그
+      // 저작자가 `kind: 'constant'` 로 말해줄 때만 안다. 말이 없으면 조절 가능한
+      // 값으로 둔다 — π 를 3 으로 바꿔 보는 것이 이 편집기의 목적이다.
+      //
+      // `∞` 만 예외다. 슬라이더로 무한대를 조절한다는 것이 성립하지 않는다.
+      if (normalizeVarName(name) === '∞') return 'readonly';
 
       return 'slider';
     }
@@ -147,7 +142,17 @@ export function buildInlineControlConfig(
         config.scale = 'linear';
       }
 
-      // 현재 값: instance.store > default
+      // 현재 값: instance.store > 카탈로그 default > 1
+      //
+      // 이름으로 상수 표준값을 시드하지 않는다. 바로 위 getControlType 이
+      // "φ 는 각도일 수도 있다" 며 이름 단정을 거부해 놓고 여기서 값을 단정하면
+      // 앞뒤가 맞지 않고, 실제로 틀린다 — γ 를 로런츠 인자로 쓴 사용자에게
+      // 0.577 을 보여주게 된다(로런츠 인자는 정의상 1 이상이다).
+      // `evaluator/constants.ts` 가 이 사용법을 직접 금지한다.
+      //
+      // π·e 는 fallback 의 `specialVariables` 가 "원주율 파이 (약 3.14159)입니다"
+      // 처럼 원래 값을 설명에 실어 준다. γ·τ·φ·ϕ 는 그 목록에 없어 일반 변수
+      // 설명으로 떨어진다 — 값을 알려주려면 카탈로그가 말해야 한다.
       if (instance) {
         const snap = instance.store.snapshot();
         config.currentValue = snap.params[varName] ?? paramCfg?.default ?? 1;
@@ -169,8 +174,6 @@ export function buildInlineControlConfig(
       const rawName = node.type === 'variable'
         ? (node as { name: string }).name
         : undefined;
-      const canonical = rawName ? normalizeVarName(rawName) : undefined;
-
       // 카탈로그 kind/value 우선 (카탈로그 키는 raw name 기준)
       const em = rawName ? catalogDetail?.elementMeanings?.[rawName] : undefined;
       if (em && 'kind' in em && em.kind === 'constant' && em.value != null) {
@@ -179,10 +182,6 @@ export function buildInlineControlConfig(
         config.displayValue = `${em.role} ${rawName} = ${formatted}${unit}`;
       } else if (em && 'kind' in em && em.kind === 'output') {
         config.displayValue = em.role;
-      } else if (canonical && KNOWN_CONSTANT_VALUES[canonical]) {
-        // fallback: 정규형 키 기반 잘 알려진 수학 상수
-        const info = KNOWN_CONSTANT_VALUES[canonical];
-        config.displayValue = `${info.label} ${canonical} ≈ ${info.value}`;
       } else if (semantic) {
         config.displayValue = semantic.description;
       }
