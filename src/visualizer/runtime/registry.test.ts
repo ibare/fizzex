@@ -5,10 +5,11 @@
  * 2. `registries/default/manifest.json`과 실제 spec 파일들의 정합성:
  *    - manifest에 선언된 모든 id가 spec 파일을 갖고
  *    - spec 파일이 compileSpec을 통과하며 id/renderer가 manifest와 일치
+ *    - 반대로 spec.json 을 가진 모든 디렉터리가 manifest 에 등재되어 있음
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve as resolvePath } from 'node:path';
 import { createVisualizerRegistry, type VisualizerRegistryManifest } from './registry.js';
@@ -125,5 +126,24 @@ describe('registries/default manifest 무결성', () => {
       expect(compiled.spec.id, `id mismatch for ${id}`).toBe(id);
       expect(compiled.spec.renderer, `renderer mismatch for ${id}`).toBe(entry.renderer);
     }
+  });
+
+  // 역방향. manifest 만 순회하면 등재를 빠뜨린 spec 디렉터리가 조용히 남는다 —
+  // 그 시각화는 어떤 경로로도 도달할 수 없는데 테스트는 초록이다 (C11).
+  it('spec.json을 가진 모든 디렉터리가 manifest.json에 등재되어 있다 (고아 spec 금지)', async () => {
+    const manifest = (await readJson(resolvePath(defaultRegistryDir, 'manifest.json'))) as VisualizerRegistryManifest;
+    const declared = new Set(Object.keys(manifest.visualizers));
+
+    const entries = await readdir(defaultRegistryDir, { withFileTypes: true });
+    const onDisk: string[] = [];
+    for (const dirent of entries) {
+      if (!dirent.isDirectory()) continue;
+      const files = await readdir(resolvePath(defaultRegistryDir, dirent.name));
+      if (files.includes('spec.json')) onDisk.push(dirent.name);
+    }
+
+    expect(onDisk.length).toBeGreaterThan(0);
+    const orphans = onDisk.filter((id) => !declared.has(id));
+    expect(orphans, `manifest에 없는 spec 디렉터리: ${orphans.join(', ')}`).toEqual([]);
   });
 });

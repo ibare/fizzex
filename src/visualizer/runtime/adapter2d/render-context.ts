@@ -2,9 +2,11 @@
  * 2D 어댑터 공용 RenderContext (설계 §5·§7·§8).
  *
  * 한 프레임의 렌더링에 필요한 주입 의존을 묶는다. 이 구조체는 **어댑터 내부**에서만 사용.
- * - `exprCtx`: Expression 평가용 Context 체인 (`params`/`formulas`/`state`/`scene`/`theme`/`viewport`/`frame` 네임스페이스가 locals로 들어온다)
- * - `frame`: rAF 프레임 정보
- * - `theme`: 현재 활성 테마 (dark/light 판정)
+ * - `exprCtx`: Expression 평가용 Context 체인. locals 는 `params`/`state`/`scene`/`frame`/
+ *   `bindings` 와 params·bindings 의 bare 이름, 그리고 2D 전용 호스트 함수 `evalUser`.
+ *   `formulas`/`theme`/`viewport` 는 주입되지 않는다 — 참조하면 `undefined identifier` 로
+ *   throw 한다.
+ * - `frame`: rAF 프레임 정보. 테마 판정은 여기 `isDark` 로 흐른다
  * - `viewports`: 스펙이 선언한 모든 viewport의 즉시 평가 구현체 (id → Viewport2D)
  * - `currentViewportId`: `viewport` Element로 스코프된 현재 기본 viewport (Element가 자기 `viewport` 필드로 오버라이드 가능)
  * - `imageCache`: `image` Element가 매 프레임 Image 객체를 새로 만들지 않도록 공유 캐시

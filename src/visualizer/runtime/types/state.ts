@@ -17,7 +17,7 @@ export interface StateDecl {
 
 /**
  * 단일 animation.onFrame 스텝 (설계 §9).
- * set: 대입 대상 경로(`state.<id>` 또는 `vars.<name>`), to: Expression.
+ * set: 대입 대상 경로(`state.<id>` 만 지원 — 그 외 네임스페이스는 throw), to: Expression.
  */
 export interface AnimationStep {
   set: string;

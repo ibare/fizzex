@@ -58,7 +58,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 서브에이전트 하나당 하나의 작업만 — 집중 실행을 위해
 
 ### 3. 자기개선 루프
-- 사용자에게 수정을 받을 때마다: 해당 패턴을 `tasks/lessons.md`에 기록
+- 사용자에게 수정을 받을 때마다: 해당 패턴을 `docs/lessons.md`에 기록
 - 같은 실수를 반복하지 않도록 스스로 규칙을 작성
 - 실수율이 낮아질 때까지 이 교훈들을 반복해서 다듬을 것
 - 세션 시작 시 해당 프로젝트의 교훈 목록을 먼저 검토
