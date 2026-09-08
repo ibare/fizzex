@@ -6,7 +6,7 @@ import {
   buildAstAncestorMap,
   buildSemanticMap,
   containsVariable,
-} from './semantic-roles.js';
+} from './semantic/index.js';
 import type { MathNode } from '../types.js';
 
 /** ID로 AST 노드 찾기 */

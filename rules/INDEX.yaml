@@ -36,7 +36,7 @@ concerns:
     file: concerns/C3-framework-isolation.md
     description: 프레임워크 격리 (core 모듈에 React 등 프레임워크 import 금지)
     triggers:
-      paths: ["src/box/**", "src/latex/**", "src/analyzer/**", "src/cas/**", "src/utils/**", "src/headless/**", "src/integrations/**", "src/canvas/**"]
+      paths: ["src/box/**", "src/latex/**", "src/analyzer/**", "src/cas/**", "src/utils/**", "src/headless/**", "src/integrations/**", "src/canvas/**", "src/compute/**", "src/semantic/**"]
       imports: ["react", "react-dom"]
 
   - id: C4
@@ -57,7 +57,7 @@ concerns:
     file: concerns/C6-subpath-exports.md
     description: Subpath export 규칙 (격리, optional peer, 하위 호환)
     triggers:
-      paths: ["package.json"]
+      paths: ["package.json", "src/index.ts", "src/compute/**", "src/semantic/**", "src/headless/index.ts", "src/react/index.ts", "src/integrations/tiptap/index.ts", "src/__tests__/subpath-isolation.test.ts"]
       patterns: ["exports", "peerDependencies", "peerDependenciesMeta"]
 
   - id: C7

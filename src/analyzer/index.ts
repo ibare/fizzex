@@ -112,10 +112,6 @@ export type {
   VariableClassification,
 } from './types.js';
 
-// 구조적 의미 시스템
-export { getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './semantic-roles.js';
-export type { SemanticResult, AncestorEntry } from './semantic-roles.js';
-
 // 개별 유틸리티 함수 export (고급 사용자용)
 export { walkAST, findNodes, hasEquality, hasInequality } from './ast-walker.js';
 export { getFunctionCategory, createFunctionInfoList } from './function-detector.js';

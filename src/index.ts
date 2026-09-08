@@ -30,8 +30,161 @@ export {
 // Box 모델 (레이아웃 시스템)
 export * from './box/index.js';
 
-// LaTeX 지원
-export { parseLatex, astToLatex } from './latex/index.js';
+// 계산 표면 — 파싱 / 평가 / 분석
+// 정의 지점은 './compute/index.js' 하나다. 새 계산 API 는 그쪽에 추가한다.
+export {
+  // LaTeX ↔ AST
+  parseLatex,
+  astToLatex,
+  // 관대 파싱
+  tolerantParse,
+  determineRenderMode,
+  // 스트리밍 파싱
+  StreamTokenizer,
+  FizzexStreamParser,
+  // 수치 평가
+  evaluateSync,
+  evaluate,
+  evaluateMatrixSync,
+  evaluateMatrix,
+  differentiateAt,
+  differentiate,
+  evaluateComplexSync,
+  evaluateComplex,
+  analyzeBindings,
+  analyzeEvaluability,
+  MATH_CONSTANT_NAMES,
+  MATH_CONSTANT_VALUES,
+  isMathConstantName,
+  // 수식 분석
+  analyzeExpression,
+  analyzePolynomialProfile,
+  analyzePolynomial,
+  getDegreeLabel,
+  classifyVariables,
+  detectDomains,
+  determinePrimaryDomain,
+  getFunctionCategory,
+  createFunctionInfoList,
+  findNodes,
+  hasEquality,
+  hasInequality,
+} from './compute/index.js';
+export type {
+  LatexParseResult,
+  ParseError,
+  ParseErrorType,
+  ParseErrorSeverity,
+  TolerantParseOptions,
+  TolerantParseResult,
+  ParserMode,
+  DelimiterDetection,
+  UnknownCommandPolicy,
+  Diagnostic,
+  SemanticSafety,
+  NormalizationRecord,
+  OffsetMap,
+  RenderMode,
+  RenderDecision,
+  StreamToken,
+  StreamTokenType,
+  StreamOutput,
+  StreamOutputText,
+  StreamOutputMathComplete,
+  StreamOutputMathPending,
+  StreamOutputMathFailed,
+  StreamOutputAmbiguousDelimiter,
+  StreamParserOptions,
+  StreamParserState,
+  TokenizerState,
+  TokenizerOptions,
+  LexicalContext,
+  Bindings,
+  EvalResult,
+  EvalStatus,
+  EvalDetail,
+  BindingAnalysis,
+  EvaluabilityAnalysis,
+  MathConstantValues,
+  Matrix,
+  MatrixValue,
+  MatrixResult,
+  Dual,
+  DiffResult,
+  Complex,
+  ComplexResult,
+  ExpressionAnalysis,
+  MathDomain,
+  FunctionInfo,
+  FunctionCategory,
+  PolynomialInfo,
+  ExpressionFeature,
+  VisualizationCapability,
+  VariableClassification,
+  PolynomialProfile,
+  PolynomialShape,
+  PolynomialCoefficient,
+  MathNode,
+  MathNodeType,
+  MathNodeBase,
+  ParseStatus,
+  SourceRange,
+  RootNode,
+  RowNode,
+  NumberNode,
+  VariableNode,
+  OperatorNode,
+  FracNode,
+  PowerNode,
+  SubscriptNode,
+  SqrtNode,
+  ParenNode,
+  AbsNode,
+  FuncNode,
+  IntegralNode,
+  SumNode,
+  LimitNode,
+  ProductNode,
+  OverlineNode,
+  AccentNode,
+  OversetNode,
+  CancelNode,
+  XArrowNode,
+  MatrixNode,
+  AlignNode,
+  CasesNode,
+  GatherNode,
+  ArrayNode,
+  TextNode,
+  SpaceNode,
+  LiteralNode,
+  ErrorNode,
+  OpaqueNode,
+} from './compute/index.js';
+
+// 구조적 의미 — 카탈로그 데이터가 함께 실린다 ('fizzex/semantic')
+export {
+  getSemanticMeaning,
+  buildSemanticMap,
+  buildAstAncestorMap,
+  getCatalogDetail,
+  containsVariable,
+  getVisualizersForForm,
+} from './semantic/index.js';
+export type {
+  SemanticResult,
+  AncestorEntry,
+  CatalogMatchResult,
+  CatalogDetail,
+  CatalogCategory,
+  ElementMeaning,
+  ElementKind,
+  DerivedValueConfig,
+  ConstraintConfig,
+  MilestoneConfig,
+  AnchorConfig,
+  VisualizerRef,
+} from './semantic/index.js';
 
 // 자동완성 제안
 export {
@@ -98,82 +251,6 @@ export type {
   ExpressionExplorerProps,
 } from './react/index.js';
 
-// 수식 분석기
-export { analyzeExpression, getSemanticMeaning, buildSemanticMap, buildAstAncestorMap } from './analyzer/index.js';
-export { analyzePolynomialProfile } from './analyzer/index.js';
-export type {
-  PolynomialProfile,
-  PolynomialShape,
-  PolynomialCoefficient,
-} from './analyzer/index.js';
-export type {
-  ExpressionAnalysis,
-  MathDomain,
-  FunctionInfo,
-  FunctionCategory,
-  PolynomialInfo,
-  ExpressionFeature,
-  VisualizationCapability,
-  VariableClassification,
-  SemanticResult,
-  AncestorEntry,
-} from './analyzer/index.js';
-
-// Evaluator — 동기 AST 수치 평가 표준 표면 (scalar / matrix / complex / autodiff)
-export {
-  evaluateSync,
-  evaluate,
-  evaluateMatrixSync,
-  evaluateMatrix,
-  differentiateAt,
-  differentiate,
-  evaluateComplexSync,
-  evaluateComplex,
-  analyzeBindings,
-  analyzeEvaluability,
-  MATH_CONSTANT_NAMES,
-  MATH_CONSTANT_VALUES,
-  isMathConstantName,
-} from './evaluator/index.js';
-export type { MathConstantValues } from './evaluator/index.js';
-export type {
-  Bindings,
-  EvalResult,
-  EvalStatus,
-  EvalDetail,
-  BindingAnalysis,
-  EvaluabilityAnalysis,
-  Matrix,
-  MatrixValue,
-  MatrixResult,
-  Dual,
-  DiffResult,
-  Complex,
-  ComplexResult,
-} from './evaluator/index.js';
-
-
-// Tolerant Parser
-export { determineRenderMode } from './latex/tolerant/index.js';
-export type {
-  SemanticSafety,
-  NormalizationRecord,
-  Diagnostic,
-  RenderMode,
-  RenderDecision,
-} from './latex/tolerant/index.js';
-
-// Streaming Parser
-export { StreamTokenizer, FizzexStreamParser } from './latex/streaming/index.js';
-export type {
-  StreamToken,
-  StreamOutput,
-  StreamParserOptions,
-  StreamParserState,
-  TokenizerState,
-  TokenizerOptions,
-} from './latex/streaming/index.js';
-
 // Confidence Indicator
 export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './box/index.js';
 export type { ConfidenceLevel, ConfidenceRegion, ConfidenceIndicatorConfig } from './box/index.js';
@@ -226,37 +303,8 @@ export type {
   UserBindingInputs,
 } from './visualizer/index.js';
 export { resolveI18n, applyUserBindings } from './visualizer/index.js';
-export { getVisualizersForForm } from './analyzer/semantic/loader.js';
-export type { VisualizerRef } from './analyzer/semantic/types.js';
-
-// 타입
+// 에디터 상태·커서 타입 — AST 노드 타입은 위 './compute/index.js' 블록이 재수출한다
 export type {
-  MathNode,
-  MathNodeType,
-  ParseStatus,
-  SourceRange,
-  RootNode,
-  NumberNode,
-  VariableNode,
-  OperatorNode,
-  FracNode,
-  PowerNode,
-  SubscriptNode,
-  SqrtNode,
-  ParenNode,
-  AbsNode,
-  FuncNode,
-  IntegralNode,
-  SumNode,
-  LimitNode,
-  ProductNode,
-  OverlineNode,
-  MatrixNode,
-  TextNode,
-  RowNode,
-  LiteralNode,
-  ErrorNode,
-  OpaqueNode,
   CursorPosition,
   BoundaryCursor,
   IntraCursor,

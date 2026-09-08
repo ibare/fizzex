@@ -18,6 +18,14 @@
       "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.js"
     },
+    "./compute": {
+      "types": "./dist/compute/index.d.ts",
+      "import": "./dist/compute/index.js"
+    },
+    "./semantic": {
+      "types": "./dist/semantic/index.d.ts",
+      "import": "./dist/semantic/index.js"
+    },
     "./tiptap": {
       "types": "./dist/integrations/tiptap/index.d.ts",
       "import": "./dist/integrations/tiptap/index.js"

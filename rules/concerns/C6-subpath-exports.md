@@ -1,19 +1,26 @@
 ---
-version: 1
-last_verified: 2026-03-26
+version: 2
+last_verified: 2026-09-08
 ---
 
 # Subpath Export 규칙 (C6)
 
 ## When to Apply
-package.json의 exports를 변경하거나, 새 subpath를 추가할 때.
+package.json의 exports를 변경하거나, 새 subpath를 추가하거나, subpath 배럴(src/index.ts, src/compute/index.ts, src/semantic/index.ts, src/headless/index.ts, src/react/index.ts, src/integrations/tiptap/index.ts)을 수정할 때.
 
 ## MUST
-- 각 subpath export는 독립적으로 import 가능해야 한다 (다른 subpath를 암묵적으로 로드하지 않음)
+- 각 subpath export는 독립적으로 import 가능해야 한다
+  - 루트(`.`)는 전체 표면을 집약하는 자리이므로 하위 subpath 배럴을 재수출해도 된다
+  - 그 반대는 금지 — 루트를 제외한 어떤 subpath도 자기보다 무거운 다른 subpath를 로드하지 않는다
+- `fizzex/compute`는 React, DOM/Canvas API, three, 그리고 semantic 카탈로그를 포함하지 않는다
+  (`analyzer/semantic` 의 설명 JSON 은 500KB 를 넘는다 — 계산만 하는 워커가 물 비용이 아니다)
+- `fizzex/semantic`은 `fizzex/compute` 배럴을 경유하지 않는다
 - `fizzex/headless`는 React, Tiptap 코드를 포함하지 않는다
 - `fizzex/tiptap`는 React 코드를 포함하지 않는다
 - `fizzex/react`는 Tiptap 코드를 포함하지 않는다
 - 새 optional peerDependency 추가 시 `peerDependenciesMeta`에 `optional: true`를 명시한다
+- 위 격리 계약은 `src/__tests__/subpath-isolation.test.ts` 가 import 그래프를 정적으로 훑어 강제한다.
+  새 subpath를 추가하면 이 테스트에도 등재한다
 
 ## MUST NOT
 - 기존 subpath export 경로를 변경하거나 제거하지 않는다 (추가만 허용)

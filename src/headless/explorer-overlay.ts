@@ -21,8 +21,8 @@ import {
   explorerHitTest,
 } from '../box/explorer-map.js';
 import type { ExplorerBoxInfo } from '../box/explorer-map.js';
-import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic-roles.js';
-import type { SemanticResult } from '../analyzer/semantic-roles.js';
+import { buildSemanticMap, getCatalogDetail } from '../analyzer/semantic/index.js';
+import type { SemanticResult } from '../analyzer/semantic/index.js';
 import { analyzeBindings } from '../evaluator/analyze.js';
 import type { BindingAnalysis } from '../evaluator/analyze.js';
 import { getVisualizersForForm, getFormText } from '../analyzer/semantic/loader.js';

@@ -7,7 +7,7 @@
 
 import type { MathNode } from '../types.js';
 import type { CatalogDetail } from '../analyzer/semantic/types.js';
-import type { SemanticResult } from '../analyzer/semantic-roles.js';
+import type { SemanticResult } from '../analyzer/semantic/index.js';
 import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api.js';
 import { normalizeVarName } from '../evaluator/normalize.js';
 

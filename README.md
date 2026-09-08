@@ -17,6 +17,8 @@ npm install fizzex
 | Import | Purpose | Peer dependencies |
 |---|---|---|
 | `fizzex` | Core — parser, renderer, analyzer, evaluator | – |
+| `fizzex/compute` | Parsing, evaluation & analysis with no DOM — for Node workers and other headless contexts | – |
+| `fizzex/semantic` | Structural meaning of an expression, with its description catalog | – |
 | `fizzex/headless` | Framework-agnostic renderer & editor | – |
 | `fizzex/react` | React components | `react`, `react-dom` |
 | `fizzex/tiptap` | Tiptap extensions | `@tiptap/core` |
@@ -244,6 +246,44 @@ const instance = refs[0]
 - **Evaluator** — `evaluateSync` / `evaluate`, `evaluateMatrixSync` / `evaluateMatrix`, `evaluateComplexSync` / `evaluateComplex`, `differentiateAt` / `differentiate`
 - **Visualization** — `createVisualizer`, `createVisualizerRegistry`, `getVisualizersForForm`
 - **Types** — `MathNode`, `EditorState`, `ExpressionAnalysis`, `Bindings`, `EvalResult`, `Matrix`, `Complex`, `Dual`, …
+
+### `fizzex/compute`
+
+Everything here runs without a DOM, a canvas, or a framework — import it from a Node worker
+where `react` is not installed.
+
+- **Parser** — `parseLatex`, `astToLatex`, plus `LatexParseResult` / `ParseError` types
+- **Tolerant parser** — `tolerantParse`, `determineRenderMode` — parses incomplete input into a partial AST
+- **Streaming parser** — `StreamTokenizer`, `FizzexStreamParser` — for LaTeX arriving in chunks
+- **Evaluator** — `evaluateSync` / `evaluate`, `evaluateMatrixSync` / `evaluateMatrix`, `evaluateComplexSync` / `evaluateComplex`, `differentiateAt` / `differentiate`, `analyzeBindings`, `analyzeEvaluability`
+- **Analyzer** — `analyzeExpression`, `analyzePolynomialProfile`, `classifyVariables`, `detectDomains`, `findNodes`
+- **Types** — every `MathNode` union member, so consumers walking the AST can name each branch
+
+```js
+import { parseLatex, evaluateSync, differentiateAt } from 'fizzex/compute';
+
+const { ast, hasErrors } = parseLatex('x^2 + 3x - 1');
+evaluateSync(ast, { x: 2 });          // 9
+differentiateAt(ast, 'x', { x: 2 });  // 7
+```
+
+One thing to know before sending results across a worker boundary:
+
+**Node ids are only unique within one AST.** `parseLatex()` resets the id counter on every
+call, so nodes parsed from two different expressions collide (`x^2+2x-3=0` and `y=mx+b` share
+seven ids). Key your own state by expression, not by node id alone.
+
+Results themselves travel fine: every return value is a plain object or a finite `number`,
+so `structuredClone` — and `postMessage` with it — accepts them. Non-finite results never
+escape; `evaluateSync` returns `undefined` and `evaluate` reports `{ ok: false, status:
+'divergent' }` instead.
+
+### `fizzex/semantic`
+
+- `getSemanticMeaning`, `buildSemanticMap`, `buildAstAncestorMap`, `getCatalogDetail`, `getVisualizersForForm`
+
+Split out from `fizzex/compute` because it carries the description catalog — around 500 KB of
+JSON that a worker doing arithmetic has no reason to load.
 
 ### `fizzex/headless`
 
