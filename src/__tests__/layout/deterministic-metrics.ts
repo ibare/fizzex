@@ -5,15 +5,16 @@
  * 실제 Canvas 측정 대신 New Computer Modern Math 폰트의 비율 기반 고정값 반환.
  */
 
-import type { BoxRenderConfig } from '../../box/types.js';
+import type { BoxRenderConfig, FontMetrics } from '../../box/types.js';
 import {
   getDelimiterGlyphs,
   selectGlyphForHeight,
+  type ExtensibleGlyph,
 } from '../../fonts/glyph-mappings.js';
 
 const DEFAULT_BASE_FONT_SIZE = 20;
 
-export class DeterministicFontMetrics {
+export class DeterministicFontMetrics implements FontMetrics {
   private config: BoxRenderConfig;
 
   constructor(baseFontSize: number = DEFAULT_BASE_FONT_SIZE) {
@@ -88,7 +89,7 @@ export class DeterministicFontMetrics {
     type: '(' | '[' | '{' | '|',
     isOpen: boolean,
     heightEm: number
-  ): { type: 'single'; char: string } | { type: 'extensible'; parts: unknown } {
+  ): { type: 'single'; char: string } | { type: 'extensible'; parts: ExtensibleGlyph } {
     const pair = getDelimiterGlyphs(type);
     const glyphs = isOpen ? pair.open : pair.close;
     return selectGlyphForHeight(glyphs, heightEm);

@@ -4,8 +4,7 @@
  * 다양한 Box를 쉽게 생성하기 위한 빌더 함수들
  */
 
-import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox } from './types.js';
-import type { CanvasFontMetrics } from './font-metrics.js';
+import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox, FontMetrics } from './types.js';
 import { MathConstants } from './font-metrics.js';
 import { MathStyle, isDisplay, isCramped } from './math-style.js';
 import { isComplexNodeSlot } from './constants.js';
@@ -33,7 +32,7 @@ export function toMathItalic(char: string): string | null {
 /** Glyph Box 생성 */
 export function createGlyph(
   char: string,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   italic: boolean = false,
   sourceId?: string
@@ -70,7 +69,7 @@ export function createGlyph(
 /** 문자열을 Glyph들의 HBox로 변환 */
 export function createGlyphString(
   str: string,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   italic: boolean = false,
   sourceId?: string
@@ -253,7 +252,7 @@ export function createKern(width: number): KernBox {
 export function createFraction(
   numerator: Box,
   denominator: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display
@@ -325,7 +324,7 @@ export function createFraction(
 export function createBinomBox(
   numerator: Box,
   denominator: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display
@@ -371,7 +370,7 @@ export function createBinomBox(
 export function createPower(
   base: Box,
   exponent: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display
@@ -460,7 +459,7 @@ function createPathBox(
 export function createParenthesized(
   content: Box,
   parenType: '(' | '[' | '{',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   autoSize: boolean = false,
@@ -593,7 +592,7 @@ export function createParenthesized(
 export function createSingleDelimiter(
   char: string,
   delimiterSize: 'big' | 'Big' | 'bigg' | 'Bigg',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -644,7 +643,7 @@ const POSTFIX_OPERATORS = new Set(['!']);
 /** 연산자 Box 생성 (좌우 간격 포함, 후위 연산자는 간격 없음) */
 export function createOperator(
   op: string,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -669,7 +668,7 @@ export function createOperator(
 export function createSubscript(
   base: Box,
   subscript: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -700,7 +699,7 @@ export function createSubscript(
 /** 절댓값 Box 생성 */
 export function createAbsoluteValue(
   content: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -737,7 +736,7 @@ export function createIntegralBox(
   upper: Box,
   integrand: Box,
   differential: string,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   integralType: 'int' | 'iint' | 'iiint' | 'oint' = 'int',
@@ -892,7 +891,7 @@ export function createSumBox(
   lower: Box,
   upper: Box,
   body: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display,
@@ -965,7 +964,7 @@ export function createLimitBox(
   variable: string,
   approach: Box,
   body: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display
@@ -1028,7 +1027,7 @@ export function createProductBox(
   lower: Box,
   upper: Box,
   body: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display
@@ -1097,7 +1096,7 @@ export function createProductBox(
 /** 윗줄(Overline) Box 생성 */
 export function createOverlineBox(
   content: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): VBox {
@@ -1131,7 +1130,7 @@ export function createOverlineBox(
 /** 밑줄(Underline) Box 생성 */
 export function createUnderlineBox(
   content: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): VBox {
@@ -1166,7 +1165,7 @@ export function createOversetBox(
   base: Box,
   annotation: Box,
   position: 'above' | 'below',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): VBox {
@@ -1189,7 +1188,7 @@ export function createOversetBox(
 /** Boxed Box 생성 (\boxed) */
 export function createBoxedBox(
   content: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1222,7 +1221,7 @@ export function createBoxedBox(
 export function createCancelBox(
   content: Box,
   cancelType: 'cancel' | 'bcancel' | 'xcancel',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1242,7 +1241,7 @@ export function createCancelBox(
 export function createAccentBox(
   content: Box,
   accentType: import('../types.js').AccentNode['accentType'],
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1310,7 +1309,7 @@ export function createAccentBox(
 function createExtensibleAccentBox(
   content: Box,
   accentType: string,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   sourceId?: string
 ): HBox {
@@ -1340,7 +1339,7 @@ function createExtensibleAccentBox(
 export function createOverbraceBox(
   content: Box,
   variant: 'overbrace' | 'underbrace',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   annotation?: Box
@@ -1413,7 +1412,7 @@ export function createXArrowBox(
   aboveBox: Box,
   belowBox: Box | undefined,
   direction: 'left' | 'right' | 'both',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1458,7 +1457,7 @@ export function createXArrowBox(
 export function createMatrixBox(
   cells: Box[][],
   bracketType: '(' | '[' | '{' | '|' | '‖' | 'none',
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1583,7 +1582,7 @@ export function createMatrixBox(
 /** 텍스트(Text) Box 생성 */
 export function createTextBox(
   text: string,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1600,7 +1599,7 @@ export function createTextBox(
  */
 export function createAlignBox(
   rows: Box[][],
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): VBox {
@@ -1679,7 +1678,7 @@ export function createAlignBox(
  */
 export function createCasesBox(
   rows: Box[][],
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): HBox {
@@ -1756,7 +1755,7 @@ export function createCasesBox(
  */
 export function createGatherBox(
   rows: Box[],
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): VBox {
@@ -1806,7 +1805,7 @@ export function createArrayBox(
   colAlign: ('l' | 'c' | 'r')[],
   colLines: boolean[],
   rowLines: boolean[],
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string
 ): VBox {
@@ -2012,7 +2011,7 @@ export function createArrayBox(
 /** Surd(제곱근) Box 생성 */
 export function createSurd(
   content: Box,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   index?: Box

@@ -7,7 +7,7 @@
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import type { EditorState } from '../types.js';
 import { boundary } from '../types.js';
-import type { Box, BoxRenderConfig, HBox } from '../box/types.js';
+import type { Box, BoxRenderConfig, HBox, FontMetrics } from '../box/types.js';
 import { CanvasFontMetrics } from '../box/font-metrics.js';
 import { astToBox } from '../box/ast-to-box.js';
 import { layoutBox, hitTest, findBoxBySourceId } from '../box/box-layout.js';
@@ -116,7 +116,7 @@ export function EditorView({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hiddenInputRef = useRef<HTMLInputElement>(null);
   const editorRef = useRef<MathEditor | null>(null);
-  const metricsRef = useRef<CanvasFontMetrics | null>(null);
+  const metricsRef = useRef<FontMetrics | null>(null);
   const rendererRef = useRef<Projector | null>(null);
   const boxRef = useRef<Box | null>(null);
   const isComposingRef = useRef(false);

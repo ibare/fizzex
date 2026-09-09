@@ -1,4 +1,5 @@
 import type { ConfidenceIndicatorConfig } from './confidence-indicator.js';
+import type { ExtensibleGlyph } from '../fonts/glyph-mappings.js';
 
 /**
  * Box 모델 타입 정의
@@ -164,12 +165,35 @@ export interface TextMeasurer {
   measureText(text: string): { width: number };
 }
 
-/** 폰트 메트릭스 (문자 측정용) */
+/**
+ * 조판이 폰트에 요구하는 것 전부.
+ *
+ * Box 생성·레이아웃·투영은 이 계약만 알면 되고, 폭을 무엇으로 재는지는 모른다.
+ * 그래서 Canvas 든 폰트 파일이든 같은 자리에 끼울 수 있다.
+ *
+ * 여기 있는 것은 실제로 호출되는 메서드뿐이다 — 계약이 넓어질수록 구현체가 지는
+ * 부담도 같이 커진다. `CanvasFontMetrics` 가 더 갖고 있는 메서드(`getDelimiterPair`)는
+ * 조판 경로에서 쓰이지 않아 계약에 넣지 않았다.
+ */
 export interface FontMetrics {
   /** 문자 너비 측정 */
   measureWidth(char: string, fontSize: number, italic: boolean): number;
+  /** 문자열 너비 측정 */
+  measureStringWidth(str: string, fontSize: number, italic: boolean): number;
   /** 폰트의 height (baseline 위) */
   getHeight(fontSize: number): number;
   /** 폰트의 depth (baseline 아래) */
   getDepth(fontSize: number): number;
+  /** CSS font 축약형 — 투영 표면이 글자를 그릴 때 쓴다 */
+  getFont(fontSize: number, italic: boolean): string;
+  /** 상대 배율을 실제 px 로 환산 */
+  getActualFontSize(fontSize: number): number;
+  /** 필요한 높이에 맞는 구분자 글리프 선택 */
+  getDelimiterGlyph(
+    type: '(' | '[' | '{' | '|',
+    isOpen: boolean,
+    heightEm: number
+  ): { type: 'single'; char: string } | { type: 'extensible'; parts: ExtensibleGlyph };
+  /** 설정 갱신 (캐시는 무효화된다) */
+  updateConfig(config: BoxRenderConfig): void;
 }

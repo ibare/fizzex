@@ -5,8 +5,7 @@
  */
 
 import type { MathNode } from '../types.js';
-import type { Box, HBox, PathBox, SurdBox } from './types.js';
-import type { CanvasFontMetrics } from './font-metrics.js';
+import type { Box, HBox, PathBox, SurdBox, FontMetrics } from './types.js';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths.js';
 import { MathConstants } from './font-metrics.js';
 import {
@@ -58,7 +57,7 @@ import {
 /** AST를 Box로 변환 (외부 API — displayStyle boolean 유지) */
 export function astToBox(
   node: MathNode,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number = 1.0,
   displayStyle: boolean = true
 ): Box {
@@ -69,7 +68,7 @@ export function astToBox(
 /** 내부 변환 (MathStyle 기반) */
 function astToBoxInternal(
   node: MathNode,
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -183,7 +182,7 @@ function styleHintToMathStyle(hint: 'display' | 'text' | 'script' | 'scriptscrip
 /** Row/Root 노드 변환 */
 function convertRow(
   node: MathNode & { children: MathNode[]; styleHint?: 'display' | 'text' | 'script' | 'scriptscript' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): HBox {
@@ -197,7 +196,7 @@ function convertRow(
 /** 숫자 노드 변환 */
 function convertNumber(
   node: MathNode & { value: string },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number
 ): HBox {
   return createGlyphString(node.value, metrics, fontSize, false, node.id);
@@ -209,7 +208,7 @@ const UPRIGHT_CHARS = new Set('ΓΔΘΛΞΠΣΥΦΨΩϝℶℷℸ∞∂∇′∅�
 /** 변수 노드 변환 */
 function convertVariable(
   node: MathNode & { name: string },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number
 ): Box {
   // path 기반 글리프 오버라이드 (폰트 cv01 대체 글리프 등)
@@ -234,7 +233,7 @@ function convertVariable(
 /** 연산자 노드 변환 */
 function convertOperatorNode(
   node: MathNode & { operator: string; delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number
 ): HBox {
   // \big( 등 고정 크기 단일 구분자
@@ -247,7 +246,7 @@ function convertOperatorNode(
 /** 분수 노드 변환 */
 function convertFrac(
   node: MathNode & { numerator: MathNode[]; denominator: MathNode[]; variant?: 'binom'; styleOverride?: 'display' | 'text' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -278,7 +277,7 @@ function convertFrac(
 /** 거듭제곱 노드 변환 */
 function convertPowerNode(
   node: MathNode & { base: MathNode[]; exponent: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -311,7 +310,7 @@ function convertPowerNode(
 /** 아래첨자 노드 변환 */
 function convertSubscriptNode(
   node: MathNode & { base: MathNode[]; subscript: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -342,7 +341,7 @@ function convertSubscriptNode(
 /** 절댓값 노드 변환 */
 function convertAbs(
   node: MathNode & { content: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -356,7 +355,7 @@ function convertAbs(
 /** 제곱근 노드 변환 */
 function convertSqrt(
   node: MathNode & { content: MathNode[]; index?: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): SurdBox {
@@ -380,7 +379,7 @@ function convertSqrt(
 /** 괄호 노드 변환 */
 function convertParen(
   node: MathNode & { content: MathNode[]; parenType: '(' | '[' | '{'; autoSize?: boolean; delimiterSize?: 'big' | 'Big' | 'bigg' | 'Bigg' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -402,7 +401,7 @@ function convertParen(
 /** 함수 노드 변환 */
 function convertFunc(
   node: MathNode & { name: string; argument: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): HBox {
@@ -428,7 +427,7 @@ function convertFunc(
 /** 적분 노드 변환 */
 function convertIntegral(
   node: MathNode & { lower?: MathNode[]; upper?: MathNode[]; integrand: MathNode[]; differential: string; integralType?: 'int' | 'iint' | 'iiint' | 'oint' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -462,7 +461,7 @@ function convertIntegral(
 /** 시그마/합 노드 변환 */
 function convertSum(
   node: MathNode & { lower: MathNode[]; upper: MathNode[]; body: MathNode[]; symbol?: string },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -486,7 +485,7 @@ function convertSum(
 /** 극한 노드 변환 */
 function convertLimit(
   node: MathNode & { variable: string; approach: MathNode[]; body: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -508,7 +507,7 @@ function convertLimit(
 /** 곱 노드 변환 */
 function convertProduct(
   node: MathNode & { lower: MathNode[]; upper: MathNode[]; body: MathNode[] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -532,7 +531,7 @@ function convertProduct(
 /** 윗줄/밑줄 노드 변환 */
 function convertOverline(
   node: MathNode & { content: MathNode[]; variant?: 'underline' | 'boxed' | 'overbrace' | 'underbrace' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -555,7 +554,7 @@ function convertOverline(
 /** 악센트 노드 변환 */
 function convertAccent(
   node: MathNode & { content: MathNode[]; accentType: import('../types.js').AccentNode['accentType'] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -569,7 +568,7 @@ function convertAccent(
 /** 확장 화살표 노드 변환 */
 function convertXArrow(
   node: MathNode & { above: MathNode[]; below?: MathNode[]; direction: 'left' | 'right' | 'both' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -588,7 +587,7 @@ function convertXArrow(
 /** 행렬 노드 변환 */
 function convertMatrix(
   node: MathNode & { rows: MathNode[][]; bracketType: '(' | '[' | '{' | '|' | '‖' | 'none'; small?: boolean },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -606,7 +605,7 @@ function convertMatrix(
 /** 텍스트 노드 변환 */
 function convertText(
   node: MathNode & { content: string },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number
 ): Box {
   return createTextBox(node.content, metrics, fontSize, node.id);
@@ -615,7 +614,7 @@ function convertText(
 /** 수식 공백 노드 변환 */
 function convertSpace(
   node: MathNode & { width: number },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number
 ): Box {
   const actualFontSize = metrics.getActualFontSize(fontSize);
@@ -629,7 +628,7 @@ function convertSpace(
 /** align 환경 노드 변환 */
 function convertAlign(
   node: MathNode & { rows: MathNode[][]; starred: boolean; isInline: boolean },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -644,7 +643,7 @@ function convertAlign(
 /** cases 환경 노드 변환 */
 function convertCases(
   node: MathNode & { rows: MathNode[][] },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -659,7 +658,7 @@ function convertCases(
 /** gather 환경 노드 변환 */
 function convertGather(
   node: MathNode & { rows: MathNode[]; starred: boolean; isInline: boolean },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -677,7 +676,7 @@ function convertArray(
     colLines: boolean[];
     rowLines: boolean[];
   },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -700,7 +699,7 @@ function convertArray(
 /** Overset/Underset 노드 변환 */
 function convertOverset(
   node: MathNode & { base: MathNode[]; annotation: MathNode[]; position: 'above' | 'below' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
@@ -718,7 +717,7 @@ function convertOverset(
 /** Cancel 노드 변환 */
 function convertCancel(
   node: MathNode & { content: MathNode[]; cancelType: 'cancel' | 'bcancel' | 'xcancel' },
-  metrics: CanvasFontMetrics,
+  metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {

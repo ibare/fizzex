@@ -9,8 +9,7 @@
  */
 
 import type { RootNode } from '../types.js';
-import type { Box, BoxRenderConfig } from '../box/types.js';
-import type { CanvasFontMetrics } from '../box/font-metrics.js';
+import type { Box, BoxRenderConfig, FontMetrics } from '../box/types.js';
 import { astToBox } from '../box/ast-to-box.js';
 import { layoutBox, findBoxBySourceId } from '../box/box-layout.js';
 import { Projector } from '../box/projector.js';
@@ -26,7 +25,7 @@ export interface MathFormulaConfig {
 
 export class MathFormulaObject extends DisplayObject {
   private box: Box | null = null;
-  private metrics: CanvasFontMetrics | null = null;
+  private metrics: FontMetrics | null = null;
   private readonly ast: RootNode;
   private readonly renderConfig: BoxRenderConfig;
   private readonly subtreeNodeId?: string;
@@ -54,7 +53,7 @@ export class MathFormulaObject extends DisplayObject {
    * Canvas 크기 변경 시 CanvasFontMetrics가 리셋되므로
    * 새 metrics를 전달하여 재빌드해야 한다 (C4).
    */
-  rebuild(metrics: CanvasFontMetrics): void {
+  rebuild(metrics: FontMetrics): void {
     this.metrics = metrics;
     const fullBox = astToBox(this.ast, metrics, 1.0, true);
     layoutBox(fullBox, 0, 0);

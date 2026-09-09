@@ -5,8 +5,8 @@
  * Surface 구현을 교체하면 Canvas, SVG, Skia 등 다양한 대상에 투영 가능.
  */
 
-import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox } from './types.js';
-import { type CanvasFontMetrics, MathConstants } from './font-metrics.js';
+import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox, FontMetrics } from './types.js';
+import { MathConstants } from './font-metrics.js';
 import type { CursorPosition } from '../types.js';
 import { findBoxBySourceId, getCursorXPosition } from './box-layout.js';
 import { isComplexNodeSlot } from './constants.js';
@@ -20,7 +20,7 @@ import type { ConfidenceRegion } from './confidence-indicator.js';
 export class Projector {
   private backend: Surface;
   private config: BoxRenderConfig;
-  private metrics: CanvasFontMetrics;
+  private metrics: FontMetrics;
 
   /**
    * Projector 생성
@@ -31,7 +31,7 @@ export class Projector {
   constructor(
     ctxOrBackend: CanvasRenderingContext2D | Surface,
     config: BoxRenderConfig,
-    metrics: CanvasFontMetrics
+    metrics: FontMetrics
   ) {
     // Canvas 컨텍스트가 전달되면 CanvasSurface로 래핑 (하위 호환성)
     if ('canvas' in ctxOrBackend) {
