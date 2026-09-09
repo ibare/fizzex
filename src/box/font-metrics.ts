@@ -1,10 +1,13 @@
 /**
  * 폰트 메트릭스
  *
- * Canvas를 사용하여 문자의 실제 크기를 측정
+ * 문자의 실제 크기를 측정한다. 폭은 주입된 `TextMeasurer` 에서 얻고, 나머지 값은
+ * 폰트 상수와 TeX 조판 규칙으로 계산한다. 브라우저는 Canvas 2D context 를 그대로
+ * 넘기고(구조적으로 `TextMeasurer` 를 만족한다), Node 는 폰트 파일 기반 측정자를
+ * 끼운다 — 그래서 이 클래스는 두 환경에서 같은 레이아웃을 낸다.
  */
 
-import type { FontMetrics, BoxRenderConfig } from './types.js';
+import type { FontMetrics, TextMeasurer, BoxRenderConfig } from './types.js';
 import {
   getDelimiterGlyphs,
   selectGlyphForHeight,
@@ -16,14 +19,30 @@ import { LRUCache } from '../utils/lru-cache.js';
 /** 폰트 메트릭스 캐시 기본 크기 */
 const DEFAULT_CACHE_SIZE = 1000;
 
-/** Canvas 기반 폰트 메트릭스 */
+/**
+ * `CanvasFontMetrics.getFont` 가 만든 CSS font 축약형을 되읽는다.
+ *
+ * Canvas 는 이 문자열을 ctx.font 에 넣으면 알아서 해석하지만, Canvas 가 아닌
+ * 백엔드(SVG 등)는 직접 크기를 꺼내 글리프를 스케일해야 한다. 포맷의 원천인
+ * `getFont` 와 같은 파일에 둔다 — 떨어뜨려 놓으면 포맷이 바뀔 때 한쪽만 조용히
+ * 틀어진다.
+ */
+export function parseFontString(font: string): { fontSizePx: number; italic: boolean } {
+  const size = /(\d+(?:\.\d+)?)px/.exec(font);
+  return {
+    fontSizePx: size === null ? 0 : Number(size[1]),
+    italic: font.includes('italic'),
+  };
+}
+
+/** 폰트 메트릭스 — 폭 측정자를 주입받는다 */
 export class CanvasFontMetrics implements FontMetrics {
-  private ctx: CanvasRenderingContext2D;
+  private ctx: TextMeasurer;
   private config: BoxRenderConfig;
   private cache: LRUCache<string, number>;
 
   constructor(
-    ctx: CanvasRenderingContext2D,
+    ctx: TextMeasurer,
     config: BoxRenderConfig,
     cacheSize: number = DEFAULT_CACHE_SIZE
   ) {

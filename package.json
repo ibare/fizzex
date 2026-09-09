@@ -30,6 +30,10 @@
       "types": "./dist/integrations/tiptap/index.d.ts",
       "import": "./dist/integrations/tiptap/index.js"
     },
+    "./svg": {
+      "types": "./dist/svg/index.d.ts",
+      "import": "./dist/svg/index.js"
+    },
     "./browser": "./dist/browser/fizzex-export.js",
     "./visualizers/*": "./dist/visualizers/*",
     "./webfonts/*": "./dist/webfonts/*"

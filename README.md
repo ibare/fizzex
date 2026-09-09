@@ -22,6 +22,9 @@ npm install fizzex
 | `fizzex/headless` | Framework-agnostic renderer & editor | – |
 | `fizzex/react` | React components | `react`, `react-dom` |
 | `fizzex/tiptap` | Tiptap extensions | `@tiptap/core` |
+| `fizzex/svg` | Vector typesetting with no DOM — for PDF/print servers | – (the font is passed in) |
+| `fizzex/browser` | IIFE bundle of the PNG exporter, for injection into a headless browser | – |
+| `fizzex/webfonts/*` | The math font files themselves (`.otf`, `.woff2`) | – |
 
 All peer dependencies are optional — import only what you need.
 
@@ -202,6 +205,58 @@ evaluateMatrixSync(m, {});
 // { rows: 2, cols: 2, data: [[1,2],[3,4]] }
 ```
 
+### Server-side rendering (SVG)
+
+Typesets to vector SVG with no DOM, Canvas or headless browser — so it runs in a Node server.
+Glyphs are emitted as outline `<path>` data, which means the output carries no font reference:
+nothing to embed, nothing for the recipient to install.
+
+The font is injected rather than discovered, so you choose the loader and the file. The math
+font ships with the package under `fizzex/webfonts/`.
+
+```ts
+import { fileURLToPath } from 'node:url';
+import opentype from 'opentype.js';
+import { renderLatexToSVG } from 'fizzex/svg';
+
+const font = opentype.loadSync(
+  fileURLToPath(import.meta.resolve('fizzex/webfonts/NewCMMath-Regular.otf')),
+);
+
+const { svg, width, height, baseline } = renderLatexToSVG('\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}', {
+  font,
+  fontSize: 22,
+});
+```
+
+`baseline` is measured upward from the bottom edge — use it to sit the formula on a text
+baseline when placing it inline.
+
+`renderAstToSVG(ast, options)` takes an AST directly if you have already parsed it.
+
+Any font object works as long as it exposes `unitsPerEm` and `charToGlyph()`; opentype.js's
+`Font` satisfies this structurally. Fizzex does not depend on opentype.js — it is not a declared
+peer, and you may use any loader that produces a compatible object. Note that opentype.js cannot
+read `.woff2`, so use the `.otf` on the server and keep the `.woff2` for browsers.
+
+### Rendering to PNG in a headless browser
+
+If you need a raster image instead, `fizzex/browser` is an IIFE bundle you inject into a page
+(Playwright, Puppeteer). Because such a page has no origin to resolve the default font URL
+against, point it at a font you serve yourself:
+
+```ts
+const bundle = fileURLToPath(import.meta.resolve('fizzex/browser'));
+await page.addScriptTag({ content: readFileSync(bundle, 'utf8') });
+await page.evaluate(async (fontUrl) => {
+  window.FizzexExport.setMathFontUrl(fontUrl);
+  await window.FizzexExport.ensureFontsLoaded();
+}, myServedFontUrl);
+```
+
+Prefer `fizzex/svg` when the destination is print or PDF — it is vector, needs no browser, and
+the text stays sharp at any scale.
+
 ### Visualization
 
 ```ts
@@ -299,11 +354,19 @@ JSON that a worker doing arithmetic has no reason to load.
 
 - `MathInline`, `MathBlock`
 
+### `fizzex/svg`
+
+- `renderLatexToSVG`, `renderAstToSVG` — typeset to vector SVG
+- `SvgSurface` — the `Surface` implementation, if you drive `Projector` yourself
+- `createFontMeasurer` — width measurement backed by a font file instead of Canvas
+- Types: `MathFont`, `FontGlyph`, `FontGlyphPath`, `SvgRenderOptions`, `SvgRenderResult`
+
 ## Compatibility
 
 - Node.js **20+**
 - React **19+** (for `fizzex/react`)
 - Modern browsers with Canvas 2D and ES2020 support
+- `fizzex/svg` and `fizzex/compute` need neither a DOM nor Canvas
 
 ## Links
 

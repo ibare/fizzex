@@ -1,12 +1,12 @@
 ---
-version: 2
-last_verified: 2026-09-08
+version: 3
+last_verified: 2026-09-09
 ---
 
 # Subpath Export 규칙 (C6)
 
 ## When to Apply
-package.json의 exports를 변경하거나, 새 subpath를 추가하거나, subpath 배럴(src/index.ts, src/compute/index.ts, src/semantic/index.ts, src/headless/index.ts, src/react/index.ts, src/integrations/tiptap/index.ts)을 수정할 때.
+package.json의 exports를 변경하거나, 새 subpath를 추가하거나, subpath 배럴(src/index.ts, src/compute/index.ts, src/semantic/index.ts, src/svg/index.ts, src/headless/index.ts, src/react/index.ts, src/integrations/tiptap/index.ts)을 수정할 때.
 
 ## MUST
 - 각 subpath export는 독립적으로 import 가능해야 한다
@@ -15,6 +15,8 @@ package.json의 exports를 변경하거나, 새 subpath를 추가하거나, subp
 - `fizzex/compute`는 React, DOM/Canvas API, three, 그리고 semantic 카탈로그를 포함하지 않는다
   (`analyzer/semantic` 의 설명 JSON 은 500KB 를 넘는다 — 계산만 하는 워커가 물 비용이 아니다)
 - `fizzex/semantic`은 `fizzex/compute` 배럴을 경유하지 않는다
+- `fizzex/svg`는 DOM·Canvas·프레임워크를 포함하지 않고, 외부 패키지에도 의존하지 않는다
+  (폰트는 구조적 타입으로 주입받는다 — 호스트가 쓰는 폰트 라이브러리를 강제하지 않는다)
 - `fizzex/headless`는 React, Tiptap 코드를 포함하지 않는다
 - `fizzex/tiptap`는 React 코드를 포함하지 않는다
 - `fizzex/react`는 Tiptap 코드를 포함하지 않는다

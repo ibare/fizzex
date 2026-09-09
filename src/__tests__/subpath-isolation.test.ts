@@ -267,6 +267,50 @@ describe('fizzex/browser 격리 (C6)', () => {
   });
 });
 
+/**
+ * `fizzex/svg` — Node 서버에서 도는 벡터 조판 표면(C6).
+ *
+ * 이 표면의 존재 이유가 "DOM 없이 돈다" 이므로, 브라우저 전역이 클로저에 하나라도
+ * 들어오면 계약이 무너진다. `src/fonts/index.ts` 배럴이 `font-loader.ts` 를
+ * 재수출하고 그 안에서 `document.fonts` 를 쓰기 때문에, 개별 파일 import 를
+ * 유지하는지도 여기서 고정된다.
+ */
+describe('fizzex/svg 격리 (C6)', () => {
+  const closure = collectClosure(resolvePath(srcDir, 'svg/index.ts'));
+
+  it('외부 패키지에 의존하지 않는다', () => {
+    // 폰트는 호스트가 주입한다 — opentype.js 를 물지 않는 것이 설계의 핵심이다.
+    expect(closure.externals).toEqual([]);
+  });
+
+  it('브라우저 전역을 참조하지 않는다', () => {
+    const offenders = closure.files.filter((f) => {
+      const source = readFileSync(resolvePath(srcDir, f), 'utf8');
+      const stripped = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+      return /\b(?:document|window|navigator)\s*\./.test(stripped);
+    });
+    expect(offenders).toEqual([]);
+  });
+
+  it('react·tiptap·시각화·semantic 카탈로그를 끌어오지 않는다', () => {
+    expect(
+      closure.externals.filter(
+        (e) => e === 'react' || e === 'react-dom' || e === 'three' || e.startsWith('@tiptap/'),
+      ),
+    ).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('react/'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('integrations/'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('visualizer/'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('analyzer/semantic'))).toEqual([]);
+  });
+
+  it('다른 subpath 배럴을 경유하지 않는다', () => {
+    // 배럴을 물면 그 subpath 전체가 딸려와 독립 import 계약이 깨진다.
+    const barrels = ['index.ts', 'compute/index.ts', 'semantic/index.ts', 'headless/index.ts', 'react/index.ts', 'integrations/tiptap/index.ts', 'export/index.ts', 'fonts/index.ts'];
+    expect(closure.files.filter((f) => barrels.includes(f))).toEqual([]);
+  });
+});
+
 describe('배송 계약이 빌드 산출물과 일치한다 (C6/C10)', () => {
   const pkg = JSON.parse(
     readFileSync(resolvePath(srcDir, '..', 'package.json'), 'utf8'),

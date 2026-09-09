@@ -149,6 +149,21 @@ export interface BoxRenderConfig {
   confidence?: Partial<ConfidenceIndicatorConfig>;
 }
 
+/**
+ * 문자 폭 측정자 — `CanvasFontMetrics` 가 폭을 알아내는 유일한 통로.
+ *
+ * `CanvasRenderingContext2D` 가 구조적으로 이 형태를 만족하므로 브라우저는 ctx 를
+ * 그대로 넘기고, Canvas 가 없는 곳(Node)은 폰트 파일에서 advance width 를 읽는
+ * 구현을 끼운다. 측정 대상의 크기·이탤릭은 인자가 아니라 `font` 프로퍼티 대입으로
+ * 전달되므로(`CanvasFontMetrics.measureWidth` 참고) 구현은 반드시 이 값을 읽어
+ * 반영해야 한다 — 무시하면 분수·지수처럼 축소된 글자의 폭이 전부 틀어진다.
+ */
+export interface TextMeasurer {
+  /** CSS font 축약형. 대입되며, 이후 measureText 가 이 값을 따라야 한다 */
+  font: string;
+  measureText(text: string): { width: number };
+}
+
 /** 폰트 메트릭스 (문자 측정용) */
 export interface FontMetrics {
   /** 문자 너비 측정 */
