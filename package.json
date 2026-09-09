@@ -30,7 +30,9 @@
       "types": "./dist/integrations/tiptap/index.d.ts",
       "import": "./dist/integrations/tiptap/index.js"
     },
-    "./visualizers/*": "./dist/visualizers/*"
+    "./browser": "./dist/browser/fizzex-export.js",
+    "./visualizers/*": "./dist/visualizers/*",
+    "./webfonts/*": "./dist/webfonts/*"
   },
   "files": [
     "dist",
@@ -38,7 +40,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && vite build -c vite.lib.config.ts && cp -R registries/default dist/visualizers && find dist/visualizers -name '*.test.*' -delete",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && vite build -c vite.lib.config.ts && cp -R registries/default dist/visualizers && find dist/visualizers -name '*.test.*' -delete && mkdir -p dist/webfonts && cp fonts/NewCMMath-Regular.woff2 fonts/NewCMMath-Regular.otf dist/webfonts/",
     "pack:tgz": "pnpm pack --pack-destination pack",
     "build:types": "tsc -p tsconfig.build.json",
     "build:browser": "vite build -c vite.lib.config.ts",
@@ -93,7 +95,7 @@
   "bugs": {
     "url": "https://github.com/ibare/fizzex/issues"
   },
-  "sideEffects": false,
+  "sideEffects": ["./dist/browser/fizzex-export.js"],
   "engines": {
     "node": ">=20.0.0"
   },

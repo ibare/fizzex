@@ -223,3 +223,77 @@ describe('계산 결과는 워커 경계를 넘을 수 있다', () => {
     }
   });
 });
+
+/**
+ * `fizzex/browser` — Playwright 등 헤드리스 브라우저에 주입하는 IIFE 번들(C6).
+ *
+ * 이 표면은 dist 산출물이 존재해야 확인되는 부분과 소스만으로 확인되는 부분이 갈린다.
+ * CI 는 `pnpm build` 를 돌리지 않으므로(.github/workflows/test.yml) dist 파일 존재는
+ * 단언하지 않는다. 대신 번들이 무엇을 끌어오는지와, 배송 계약이 빌드 산출물 경로와
+ * 어긋나지 않는지를 소스·설정 수준에서 고정한다.
+ *
+ * 실제로 한 번 어긋났던 계약이다 — 번들은 매 빌드마다 나오는데 `exports` 에 없어서
+ * 호스트가 Node 캡슐화에 막혔다.
+ */
+describe('fizzex/browser 격리 (C6)', () => {
+  const closure = collectClosure(resolvePath(srcDir, 'export/index.ts'));
+
+  it('react 와 tiptap 을 끌어오지 않는다', () => {
+    expect(
+      closure.externals.filter(
+        (e) => e === 'react' || e === 'react-dom' || e.startsWith('@tiptap/'),
+      ),
+    ).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('react/'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('integrations/'))).toEqual([]);
+  });
+
+  it('외부 패키지에 의존하지 않는다', () => {
+    // 브라우저에 통째로 주입하는 번들이라 외부 의존이 붙으면 그대로 페이로드가 된다.
+    expect(closure.externals).toEqual([]);
+  });
+
+  it('semantic 카탈로그와 visualizer 를 끌어오지 않는다', () => {
+    // 설명 JSON 500KB 와 three 기반 시각화는 PNG 조판에 필요 없다.
+    expect(closure.files.filter((f) => f.startsWith('analyzer/semantic'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('visualizer/'))).toEqual([]);
+  });
+
+  it('폰트 URL 주입 지점을 번들 표면에 내보낸다', () => {
+    // 호스트가 about:blank 에 번들을 주입하면 기본값 `/fonts/...` 를 못 받는다.
+    // 이 export 가 빠지면 폰트를 물릴 방법이 사라져 fallback 으로 조판된다.
+    const entry = resolvePath(srcDir, 'export/index.ts');
+    expect(moduleExports([entry]).get(entry)).toContain('setMathFontUrl');
+  });
+});
+
+describe('배송 계약이 빌드 산출물과 일치한다 (C6/C10)', () => {
+  const pkg = JSON.parse(
+    readFileSync(resolvePath(srcDir, '..', 'package.json'), 'utf8'),
+  ) as { exports: Record<string, unknown>; scripts: Record<string, string> };
+
+  it('exports 의 모든 타깃이 dist 하위를 가리킨다', () => {
+    const targets: string[] = [];
+    for (const value of Object.values(pkg.exports)) {
+      if (typeof value === 'string') targets.push(value);
+      else targets.push(...Object.values(value as Record<string, string>));
+    }
+    expect(targets.filter((t) => !t.startsWith('./dist/'))).toEqual([]);
+  });
+
+  it('./browser 가 vite 번들의 실제 출력 경로를 가리킨다', () => {
+    // vite.lib.config.ts 의 outDir·fileName 이 바뀌면 exports 도 따라가야 한다.
+    const viteConfig = readFileSync(resolvePath(srcDir, '..', 'vite.lib.config.ts'), 'utf8');
+    const outDir = /outDir:\s*'([^']+)'/.exec(viteConfig)?.[1];
+    const fileName = /fileName:\s*\(\)\s*=>\s*'([^']+)'/.exec(viteConfig)?.[1];
+    expect(outDir).toBeDefined();
+    expect(fileName).toBeDefined();
+    expect(pkg.exports['./browser']).toBe(`./${outDir}/${fileName}`);
+  });
+
+  it('./webfonts/* 가 build 스크립트가 만드는 디렉터리를 가리킨다', () => {
+    // 폰트는 tsc 산출물이 아니라 build 스크립트의 복사 단계로만 생긴다.
+    expect(pkg.scripts.build).toContain('dist/webfonts');
+    expect(pkg.exports['./webfonts/*']).toBe('./dist/webfonts/*');
+  });
+});
