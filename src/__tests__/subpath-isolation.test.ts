@@ -316,13 +316,54 @@ describe('배송 계약이 빌드 산출물과 일치한다 (C6/C10)', () => {
     readFileSync(resolvePath(srcDir, '..', 'package.json'), 'utf8'),
   ) as { exports: Record<string, unknown>; scripts: Record<string, string> };
 
-  it('exports 의 모든 타깃이 dist 하위를 가리킨다', () => {
-    const targets: string[] = [];
-    for (const value of Object.values(pkg.exports)) {
-      if (typeof value === 'string') targets.push(value);
-      else targets.push(...Object.values(value as Record<string, string>));
+  /** 조건 객체가 몇 겹이든 끝의 파일 경로만 모은다 (import/require × types/default) */
+  function collectTargets(node: unknown, out: string[] = []): string[] {
+    if (typeof node === 'string') out.push(node);
+    else if (node !== null && typeof node === 'object') {
+      for (const value of Object.values(node)) collectTargets(value, out);
     }
+    return out;
+  }
+
+  it('exports 의 모든 타깃이 dist 하위를 가리킨다', () => {
+    const targets = collectTargets(pkg.exports);
+    expect(targets.length).toBeGreaterThan(0);
     expect(targets.filter((t) => !t.startsWith('./dist/'))).toEqual([]);
+  });
+
+  it('조건 객체인 subpath 는 ESM·CJS 양쪽을 모두 제공한다', () => {
+    // 서버 호스트가 CommonJS 인 경우 require 조건이 없으면
+    // ERR_PACKAGE_PATH_NOT_EXPORTED 로 하드 실패한다.
+    // 정적 자산 매핑(./browser, ./visualizers/*, ./webfonts/*)은 문자열 직접
+    // 매핑이라 조건과 무관하게 양쪽에서 해석된다 — 짝을 요구하지 않는다.
+    const conditional = Object.entries(pkg.exports).filter(
+      ([, value]) => typeof value !== 'string',
+    );
+    expect(conditional.length).toBeGreaterThan(0);
+
+    const missing = conditional.filter(([, value]) => {
+      const conditions = value as Record<string, unknown>;
+      return conditions.import === undefined || conditions.require === undefined;
+    });
+    expect(missing.map(([key]) => key)).toEqual([]);
+  });
+
+  it('CJS 타깃은 dist/cjs 아래를 가리킨다', () => {
+    // dist/cjs 에는 {"type":"commonjs"} 마커가 함께 생성된다. 이 경로를 벗어나면
+    // 패키지 최상위 "type": "module" 이 적용돼 require 가 깨진다.
+    for (const [key, value] of Object.entries(pkg.exports)) {
+      if (typeof value === 'string') continue;
+      const req = (value as Record<string, Record<string, string>>).require;
+      expect(collectTargets(req).filter((t) => !t.startsWith('./dist/cjs/')), key).toEqual([]);
+    }
+  });
+
+  it('build 스크립트가 CJS 산출물과 포맷 마커를 만든다', () => {
+    expect(pkg.scripts.build).toContain('--module commonjs');
+    expect(pkg.scripts.build).toContain('--outDir dist/cjs');
+    // 마커가 없으면 최상위 "type": "module" 이 dist/cjs 에도 적용돼 require 가 깨진다.
+    // 두 조건을 따로 본다 — 'commonjs' 한 단어만 찾으면 마커가 사라져도 통과한다.
+    expect(pkg.scripts.build).toContain('dist/cjs/package.json');
   });
 
   it('./browser 가 vite 번들의 실제 출력 경로를 가리킨다', () => {

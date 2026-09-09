@@ -365,6 +365,8 @@ JSON that a worker doing arithmetic has no reason to load.
 - React **19+** (for `fizzex/react`)
 - Modern browsers with Canvas 2D and ES2020 support
 - `fizzex/svg` and `fizzex/compute` need neither a DOM nor Canvas
+- **ESM and CommonJS** — every entry point resolves under both `import` and `require`.
+  Bundlers take the ESM build, so the CommonJS output never reaches a browser bundle.
 
 ## Links
 

@@ -3,36 +3,78 @@
   "version": "0.3.0",
   "description": "Fizzex - Canvas-based mathematical expression editor. Light and easy formula input.",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/cjs/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
     },
     "./headless": {
-      "types": "./dist/headless/index.d.ts",
-      "import": "./dist/headless/index.js"
+      "import": {
+        "types": "./dist/headless/index.d.ts",
+        "default": "./dist/headless/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/headless/index.d.ts",
+        "default": "./dist/cjs/headless/index.js"
+      }
     },
     "./react": {
-      "types": "./dist/react/index.d.ts",
-      "import": "./dist/react/index.js"
+      "import": {
+        "types": "./dist/react/index.d.ts",
+        "default": "./dist/react/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/react/index.d.ts",
+        "default": "./dist/cjs/react/index.js"
+      }
     },
     "./compute": {
-      "types": "./dist/compute/index.d.ts",
-      "import": "./dist/compute/index.js"
+      "import": {
+        "types": "./dist/compute/index.d.ts",
+        "default": "./dist/compute/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/compute/index.d.ts",
+        "default": "./dist/cjs/compute/index.js"
+      }
     },
     "./semantic": {
-      "types": "./dist/semantic/index.d.ts",
-      "import": "./dist/semantic/index.js"
+      "import": {
+        "types": "./dist/semantic/index.d.ts",
+        "default": "./dist/semantic/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/semantic/index.d.ts",
+        "default": "./dist/cjs/semantic/index.js"
+      }
     },
     "./tiptap": {
-      "types": "./dist/integrations/tiptap/index.d.ts",
-      "import": "./dist/integrations/tiptap/index.js"
+      "import": {
+        "types": "./dist/integrations/tiptap/index.d.ts",
+        "default": "./dist/integrations/tiptap/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/integrations/tiptap/index.d.ts",
+        "default": "./dist/cjs/integrations/tiptap/index.js"
+      }
     },
     "./svg": {
-      "types": "./dist/svg/index.d.ts",
-      "import": "./dist/svg/index.js"
+      "import": {
+        "types": "./dist/svg/index.d.ts",
+        "default": "./dist/svg/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/svg/index.d.ts",
+        "default": "./dist/cjs/svg/index.js"
+      }
     },
     "./browser": "./dist/browser/fizzex-export.js",
     "./visualizers/*": "./dist/visualizers/*",
@@ -44,7 +86,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && vite build -c vite.lib.config.ts && cp -R registries/default dist/visualizers && find dist/visualizers -name '*.test.*' -delete && mkdir -p dist/webfonts && cp fonts/NewCMMath-Regular.woff2 fonts/NewCMMath-Regular.otf dist/webfonts/",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && tsc -p tsconfig.build.json --module commonjs --moduleResolution node10 --outDir dist/cjs --noCheck && node -e \"require('fs').writeFileSync('dist/cjs/package.json','{\\\"type\\\":\\\"commonjs\\\"}\\n')\" && vite build -c vite.lib.config.ts && cp -R registries/default dist/visualizers && find dist/visualizers -name '*.test.*' -delete && mkdir -p dist/webfonts && cp fonts/NewCMMath-Regular.woff2 fonts/NewCMMath-Regular.otf dist/webfonts/",
     "pack:tgz": "pnpm pack --pack-destination pack",
     "build:types": "tsc -p tsconfig.build.json",
     "build:browser": "vite build -c vite.lib.config.ts",
@@ -99,7 +141,9 @@
   "bugs": {
     "url": "https://github.com/ibare/fizzex/issues"
   },
-  "sideEffects": ["./dist/browser/fizzex-export.js"],
+  "sideEffects": [
+    "./dist/browser/fizzex-export.js"
+  ],
   "engines": {
     "node": ">=20.0.0"
   },
