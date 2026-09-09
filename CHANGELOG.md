@@ -1,5 +1,55 @@
 # fizzex
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: 서버에서 수식을 그릴 수 있게 한다 — `fizzex/svg`, 폰트 배송, CommonJS 지원
+
+  PDF 프린트 서버가 fizzex 를 부를 수 없었다. 세 가지가 겹쳐 있었다.
+
+  - **CommonJS 에서 require 가 막혔다.** 패키지가 ESM 전용이라 `require('fizzex')` 가
+    `ERR_PACKAGE_PATH_NOT_EXPORTED` 로 하드 실패했다. 이제 subpath 7개가 `import` 와
+    `require` 양쪽에서 해석된다. 키와 기존 ESM 타깃은 한 글자도 바뀌지 않았다 — `require`
+    는 실패하던 자리라 순수 추가다. 번들러는 `import` 조건만 보므로 CJS 산출물이 브라우저
+    번들에 들어가지 않는다
+  - **폰트가 배송되지 않았다.** tarball 에 폰트 파일이 한 개도 없었고, 브라우저 번들은
+    `/fonts/NewCMMath-Regular.woff2` 라는 절대 URL 을 하드코딩 참조했다. 이제
+    `fizzex/webfonts/*` 로 나가고(브라우저용 woff2, 서버용 otf), `fizzex/browser` 로
+    Playwright 주입용 IIFE 번들에 접근할 수 있다. 번들 표면에 `setMathFontUrl` 을 노출해
+    about:blank 호스트도 폰트를 물릴 수 있다
+  - **서버 렌더 경로가 없었다.** `renderLatexToPNG` 는 `document.createElement('canvas')` 에
+    의존해 Node 에서 죽는다
+
+  ### `fizzex/svg` — DOM 없이 도는 벡터 조판
+
+  ```ts
+  import opentype from "opentype.js";
+  import { renderLatexToSVG } from "fizzex/svg";
+
+  const font = opentype.loadSync(/* fizzex/webfonts/NewCMMath-Regular.otf */);
+  const { svg, width, height, baseline } = renderLatexToSVG("\\frac{a}{b}", {
+    font,
+  });
+  ```
+
+  글자를 `<text>` 가 아니라 글리프 윤곽선 `<path>` 로 내보낸다. 출력 SVG 에 폰트 참조가
+  남지 않아 PDF 임베딩도, 수신자의 폰트 설치도 필요 없다. 폰트는 주입받으므로 fizzex 는
+  opentype.js 에 의존하지 않는다 — `unitsPerEm` 과 `charToGlyph()` 를 가진 객체면 된다.
+
+  조판 로직은 새로 쓰지 않았다. `Projector` 가 이미 `Surface` 로만 그리고 있어서
+  `SvgSurface` 구현체 하나를 끼우는 것으로 분수·근호·구분자·행렬이 그대로 나온다.
+
+  ### `FontMetrics` 가 실제 계약이 되었다
+
+  인터페이스가 메서드 3개뿐이라 아무도 타입으로 쓰지 못하고 구상 클래스
+  `CanvasFontMetrics` 가 그 자리를 대신 채우고 있었다(64건). 실사용 표면 8개로 넓혀
+  되돌렸다. 이제 호스트가 자기 `FontMetrics` 구현으로 `astToBox` 를 부를 수 있다.
+
+  `CanvasFontMetrics` 생성자는 Canvas 2D context 대신 `TextMeasurer`(폭 측정자)를 받는다.
+  `CanvasRenderingContext2D` 가 구조적으로 이를 만족하므로 기존 브라우저 코드는 그대로
+  동작하고, 덤으로 `OffscreenCanvasRenderingContext2D` 도 넘길 수 있게 됐다.
+
 ## 0.3.0
 
 ### Minor Changes
