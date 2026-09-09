@@ -357,8 +357,6 @@ JSON that a worker doing arithmetic has no reason to load.
 ### `fizzex/svg`
 
 - `renderLatexToSVG`, `renderAstToSVG` — typeset to vector SVG
-- `SvgSurface` — the `Surface` implementation, if you drive `Projector` yourself
-- `createFontMeasurer` — width measurement backed by a font file instead of Canvas
 - Types: `MathFont`, `FontGlyph`, `FontGlyphPath`, `SvgRenderOptions`, `SvgRenderResult`
 
 ## Compatibility
