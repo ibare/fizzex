@@ -21,8 +21,9 @@ expect(result.complianceScore).toBeGreaterThanOrEqual(0);
 그래서 조판 회귀의 실효 방어는 지금까지도 단위 테스트(`src/box/*.test.ts`)가 맡아
 왔다. spec 은 준수율을 **보고**할 뿐 아무것도 **막지** 못한다.
 
-이 사실은 다른 기록 하나를 무효로 만든다. `\ce{}` 작업 계획서(Phase 0)에 "known_fail
-을 뒤집는 순간 fail 로 잡힌다" 고 적혀 있는데 성립하지 않는다.
+그래서 "known_fail 을 뒤집으면 fail 로 잡힌다" 는 통념이 성립하지 않는다.
+`known_fail: true` 를 `false` 로 바꿔도, 새 assertion 을 넣어도, 스위트는 여전히
+초록이다. 조판 회귀를 막고 싶으면 단위 테스트를 함께 써야 한다.
 
 ## 현재 수치
 
@@ -92,7 +93,10 @@ expect(result.complianceScore).toBeGreaterThanOrEqual(0);
 `*_is_cramped`, `delimiter_covers_content`)은 `values` 가 아니라 `flags` 로 낸다.
 
 `space_around_*` 는 일반 수식의 atom 분류(8×8 spacing table)가 선행돼야 한다.
-`\ce{}` 작업에서 chem 스코프 전용으로만 만든 그 표다 — 계획서 후속 3번.
+`\ce{}` 작업에서는 화학식 안에만 쓰려고 최소한만 만들었다 —
+`src/box/ast-to-box.ts` 의 `chemAtomClass` + `chemGapEm` 이 화살표(rel) 주변에만
+간격을 넣고 나머지는 0 을 돌려준다. 표라기보다 조건 두 줄이고, 일반 수식의
+atom 분류는 아직 없다.
 
 구현하면 15건이 pass 또는 **진짜 fail** 로 갈린다. 지금은 어느 쪽인지 아무도 모른다.
 
@@ -121,5 +125,8 @@ placeholder 가 원래 그 자리다.
   위첨자 x 1.700 은 사람이 표준과 대조해 확인한 값일 뿐 어느 테스트에도
   고정돼 있지 않다. 단위 테스트는 상대 관계만 본다. 다만 spec 에 넣어도
   3단계 전에는 게이트가 되지 못한다.
-- `docs/layout-compliance-report.md` 는 스위트가 생성하는 산출물이다.
-  손으로 고치지 말 것.
+- `docs/layout-compliance-report.md` 는 **`pnpm test:layout:report` 가 생성하는**
+  산출물이다. `pnpm test:layout` 은 이 파일을 쓰지 않는다 — 테스트를 돌리면
+  자동으로 갱신된다고 오해하면 낡은 수치가 저장소에 남는다. 실제로 그렇게
+  68% 시절 수치와 지금은 없는 assertion type 이름을 담은 채 남아 있었다.
+  손으로 고치지 말고 스크립트로 다시 낼 것.
