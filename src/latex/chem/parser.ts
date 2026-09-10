@@ -27,6 +27,7 @@ import { createChemTokenizer } from './tokenizer.js';
 import type { ChemToken, ChemTokenizer } from './tokenizer.js';
 import {
   GAS_MARK,
+  CHEM_BOND_MARKS,
   HYDRATE_MARK,
   MINUS_SIGN,
   PRECIPITATE_MARK,
@@ -112,6 +113,20 @@ function consumeScriptToken(
       const result = ctx.parseExpression(latex, tok.end, ['$']);
       out.push(...result.nodes);
       tk.seek(latex[result.consumed] === '$' ? result.consumed + 1 : result.consumed);
+      return true;
+    }
+    case 'stray': {
+      // 첨자 안에서도 본문과 같은 규칙이다. default 로 흘려보내면 슬롯이 그 자리에서
+      // 끊겨 `^{N#N}` 이 `^{N}N` 이 된다.
+      const bondMark = CHEM_BOND_MARKS.get(tok.value);
+      if (bondMark === undefined) return false;
+      reportWarning(
+        'unsupported',
+        `화학 결합 표기(${tok.value})는 아직 지원하지 않습니다`,
+        tok.start,
+        latex
+      );
+      out.push(createText(bondMark));
       return true;
     }
     default:
@@ -393,15 +408,17 @@ function consumeBodyToken(
 
     case 'stray': {
       tk.next('body');
-      if (peeked.value === '-') {
-        // 결합 표기(C6H5-CHO)는 아직 지원하지 않는다. 내용은 버리지 않고 남긴다.
+      const bondMark = CHEM_BOND_MARKS.get(peeked.value);
+      if (bondMark !== undefined) {
+        // 결합 표기(C6H5-CHO, O=C=O, N#N)는 아직 결합선으로 조판하지 않는다.
+        // 그래도 내용은 버리지 않는다 — 버리면 다른 화학식이 되어 버린다.
         reportWarning(
           'unsupported',
-          '화학 결합 표기(-)는 아직 지원하지 않습니다',
+          `화학 결합 표기(${peeked.value})는 아직 지원하지 않습니다`,
           peeked.start,
           latex
         );
-        out.push(createText(MINUS_SIGN));
+        out.push(createText(bondMark));
       } else {
         reportWarning('syntax', `화학식에서 해석할 수 없는 문자: ${peeked.value}`, peeked.start, latex);
       }

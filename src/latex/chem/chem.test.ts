@@ -122,6 +122,29 @@ describe('화학식 파싱', () => {
     expect(shapeOf('\\ce{O^2-_4}')).toBe(shapeOf('\\ce{O_4^2-}'));
   });
 
+  it('결합 표기는 조판하지 않아도 버리지 않는다', () => {
+    // 버리면 O=C=O 가 OCO 가 되어 다른 화학식이 된다.
+    // 단일·이중·삼중 셋을 같은 규칙으로 다룬다 — 예전엔 `-` 만 남았다.
+    for (const latex of ['\\ce{H-H}', '\\ce{O=C=O}', '\\ce{N#N}', '\\ce{C6H5-CHO}']) {
+      const { ast, warnings } = parseLatex(latex);
+      expect(astToLatex(ast)).toBe(latex);
+      expect(warnings.every((w) => w.type === 'unsupported')).toBe(true);
+      expect(warnings.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('첨자 안의 결합도 같은 규칙을 따른다', () => {
+    // 슬롯 파싱이 그 자리에서 끊기면 `^{N#N}` 이 `^{N}N` 이 된다
+    expect(astToLatex(parseLatex('\\ce{X^{N#N}}').ast)).toBe('\\ce{X^{N#N}}');
+  });
+
+  it('전하와 화살표의 부호는 결합으로 읽지 않는다', () => {
+    for (const latex of ['\\ce{SO4^2-}', '\\ce{A -> B}', '\\ce{Ca^2+}']) {
+      const { warnings } = parseLatex(latex);
+      expect(warnings).toHaveLength(0);
+    }
+  });
+
   it('동위원소의 앞첨자를 읽는다 (^{227}_{90}Th)', () => {
     const children = chemChildren('\\ce{^{227}_{90}Th}');
     const scripts = children[0] as ScriptsNode;
