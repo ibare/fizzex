@@ -3,6 +3,7 @@ import { astToBox } from './ast-to-box.js';
 import { parseLatex } from '../latex/latex-parser.js';
 import { resetLatexIdCounter } from '../utils/id-generator.js';
 import { layoutBox } from './box-layout.js';
+import { MathConstants } from './font-metrics.js';
 import type { Box, HBox, VBox, SurdBox } from './types.js';
 
 function createMockMetrics(): any {
@@ -276,6 +277,49 @@ describe('AST to Box', () => {
       walk(box);
       expect(rules).toHaveLength(1);
       expect(rules[0].xarrow.width).toBeGreaterThanOrEqual(20 * 1.0);
+    });
+
+    it('라벨이 붙어도 화살표는 축 높이에 머무른다', () => {
+      // vbox 전체의 중앙을 축에 맞추면 라벨이 붙은 만큼 화살표가 아래로 밀린다.
+      // 축에 놓여야 하는 것은 화살표 자신이다.
+      const arrowY = (latex: string): number => {
+        const box = boxOf(latex);
+        layoutBox(box, 0, 0);
+        let found: any = null;
+        const walk = (b: Box): void => {
+          if (b.type === 'rule' && (b as any).xarrow) found = b;
+          const kids = (b as HBox).children;
+          if (Array.isArray(kids)) for (const c of kids) walk(c);
+        };
+        walk(box);
+        return found.y;
+      };
+
+      const em = metrics.getActualFontSize(1.0);
+      const expected = -em * MathConstants.axisHeight;
+      expect(arrowY('\\ce{A -> B}')).toBeCloseTo(expected, 6);
+      expect(arrowY('\\ce{A ->[Fe] B}')).toBeCloseTo(expected, 6);
+    });
+
+    it('라벨과 화살표 사이를 띄운다', () => {
+      // kern 은 폭만 있고 세로가 0 이라 VBox 안에서 간격을 만들지 못한다.
+      // 그것을 모르면 값만 바꾸고 붙어 있는 채로 둔다.
+      const box = boxOf('\\ce{A ->[Fe] B}');
+      layoutBox(box, 0, 0);
+
+      let rule: any = null;
+      const glyphs: any[] = [];
+      const walk = (b: Box): void => {
+        if (b.type === 'rule' && (b as any).xarrow) rule = b;
+        if (b.type === 'glyph' && (b as any).char === 'F') glyphs.push(b);
+        const kids = (b as HBox).children;
+        if (Array.isArray(kids)) for (const c of kids) walk(c);
+      };
+      walk(box);
+
+      const labelBottom = glyphs[0].y + glyphs[0].depth;
+      const arrowTop = rule.y - rule.height;
+      expect(arrowTop - labelBottom).toBeGreaterThan(0);
     });
 
     it('가역 화살표는 두 선을 담을 세로 여유를 갖는다', () => {

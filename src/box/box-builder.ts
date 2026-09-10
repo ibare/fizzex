@@ -1513,8 +1513,23 @@ export function createXArrowBox(
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const padding = actualFontSize * MathConstants.xarrowPadding;
-  const gap = actualFontSize * 0.08;
   const ruleThickness = actualFontSize * MathConstants.fractionRuleThickness;
+
+  /**
+   * 라벨과 화살표 사이 세로 간격.
+   *
+   * kern 은 폭만 있고 height/depth 가 0 이라 VBox 안에서는 아무 간격도 만들지
+   * 않는다 — VBox 는 자식의 height+depth 로만 세로로 진행한다. 크기를 직접 준다.
+   *
+   * 값은 큰 연산자의 limit 간격을 쓴다. `\xrightarrow` 는 TeX 에서 연산자 위아래에
+   * limit 을 붙이는 배치이므로 같은 규칙이다.
+   */
+  const verticalGap = (amount: number): Box => {
+    const box = createKern(0);
+    box.height = actualFontSize * amount;
+    box.depth = 0;
+    return box;
+  };
 
   // 화살표 너비 = max(위 텍스트, 아래 텍스트) + 좌우 패딩
   const textWidth = Math.max(aboveBox.width, belowBox ? belowBox.width : 0);
@@ -1535,21 +1550,29 @@ export function createXArrowBox(
   const aboveRow = createHBox([createKern(aboveOffset), aboveBox]);
 
   // VBox 구성: [위 텍스트] [gap] [화살표] [gap] [아래 텍스트]
-  const elements: Box[] = [aboveRow, createKern(gap), arrowRule];
+  const upperGap = verticalGap(MathConstants.upperLimitGap);
+  const elements: Box[] = [aboveRow, upperGap, arrowRule];
 
   if (belowBox) {
     const belowOffset = (arrowWidth - belowBox.width) / 2;
     const belowRow = createHBox([createKern(belowOffset), belowBox]);
-    elements.push(createKern(gap), belowRow);
+    elements.push(verticalGap(MathConstants.lowerLimitGap), belowRow);
   }
 
   const vbox = createVBox(elements, 'top');
 
-  // 수직 중앙을 axis 높이에 맞춤
+  // 화살표를 axis 높이에 맞춘다.
+  //
+  // vbox 전체의 중앙을 맞추면 라벨이 붙은 만큼 화살표가 아래로 밀린다 — 라벨이
+  // 없을 때만 우연히 맞았다. 축에 놓여야 하는 것은 화살표 자신이다.
+  // vbox 상단에서 화살표 중심까지의 거리를 재서 그 지점이 축에 오게 한다.
+  const above = aboveRow.height + aboveRow.depth + upperGap.height + upperGap.depth;
+  const distanceToArrowCenter = above + arrowRule.height;
+
   const totalHeight = vbox.height + vbox.depth;
   const axisOffset = actualFontSize * MathConstants.axisHeight;
-  vbox.height = totalHeight / 2 + axisOffset;
-  vbox.depth = totalHeight / 2 - axisOffset;
+  vbox.height = distanceToArrowCenter + axisOffset;
+  vbox.depth = totalHeight - vbox.height;
 
   return createHBox([vbox], sourceId);
 }
