@@ -15,9 +15,9 @@ import { join } from 'node:path';
 const DATA = 'src/analyzer/semantic/data';
 const SOURCE_LOCALE = 'ko';
 
-/** 번역 대상 언어 — 이 목록이 지원 언어의 단일 진실이다 */
-export const LOCALES = ['ko', 'en', 'ja', 'zh', 'ar', 'es', 'fr', 'hi', 'id', 'pt'] as const;
-export type Locale = (typeof LOCALES)[number];
+// 지원 언어의 단일 진실은 src 에 있다 — 여기 다시 적으면 갈린다
+export { LOCALES } from '../src/locales/types.js';
+import { LOCALES } from '../src/locales/types.js';
 
 type Json = string | number | boolean | null | Json[] | { [k: string]: Json };
 
@@ -32,10 +32,19 @@ interface Problem {
 function isIdentifierValue(value: Json, path: string): boolean {
   if (typeof value === 'number' || typeof value === 'boolean' || value === null) return true;
   if (typeof value !== 'string') return false;
-  // 마지막 경로 조각이 식별자 필드인 경우
-  const leaf = path.split('.').pop() ?? '';
-  if (['kind', 'id', 'category', 'form', 'unit', 'latex', 'symbol', 'viz', 'type'].includes(leaf))
-    return true;
+  // 마지막 경로 조각이 식별자 필드인 경우.
+  // 배열 원소는 경로가 `relatedFormulas[0]` 이라 인덱스를 떼고 봐야 한다 —
+  // 떼지 않으면 배열에 담긴 식별자가 통째로 검사망을 빠져나간다.
+  const leaf = (path.split('.').pop() ?? '').replace(/\[\d+\]$/, '');
+  const IDENTIFIER_FIELDS = [
+    // 노드·항목을 가리키는 이름
+    'kind', 'id', 'category', 'form', 'type', 'viz', 'symbol', 'latex',
+    // 다른 카탈로그 항목을 가리키는 참조
+    'relatedFormulas',
+    // 언어와 무관한 표기·설정
+    'unit', 'expression', 'sourceParam', 'sourceParams', 'severity', 'format', 'scale', 'emoji',
+  ];
+  if (IDENTIFIER_FIELDS.includes(leaf)) return true;
   // 값 자체가 LaTeX 토큰이거나 수식 조각
   if (/^[\\$]/.test(value)) return true;
   return false;
