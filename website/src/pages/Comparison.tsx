@@ -8,6 +8,9 @@ import { comparisonCategories } from '../data/comparison-data';
 import { symbolCategories } from '../data/symbol-data';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+// \ce{} 는 KaTeX 에서 확장이다. MathJax 는 AllPackages 라 이미 켜져 있고
+// fizzex 는 코어가 지원하므로, 이 한 줄이 없으면 KaTeX 열만 비어 보인다.
+import 'katex/contrib/mhchem';
 import { renderMathJax } from '../utils/mathjax';
 import type { EditorState } from 'fizzex';
 

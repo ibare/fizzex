@@ -73,6 +73,29 @@ export const en: Dictionary = {
       desc: 'Context-aware suggestions based on cursor position. Knows when to suggest calculus, symbols, or structure.',
     },
   },
+  chemistrySection: {
+    title: 'Chemistry runs on the same engine',
+    sub: 'Write mhchem notation as-is. It renders, edits and analyses exactly like any other formula.',
+    items: [
+      {
+        title: 'Reactions and coefficients',
+        desc: 'Arrows split the two sides, and the leading numbers are coefficients — not multiplication.',
+      },
+      {
+        title: 'Charges',
+        desc: 'A superscript on an ion is a charge, not an exponent. Fizzex reads it that way.',
+      },
+      {
+        title: 'Isotopes',
+        desc: 'Mass number and atomic number sit to the left of the symbol, stacked properly.',
+      },
+      {
+        title: 'Equilibrium and catalysts',
+        desc: 'Reversible arrows draw as two lines, and labels above the arrow carry the conditions.',
+      },
+    ],
+    cta: 'See more chemistry examples',
+  },
   underTheHood: {
     title: 'Built on TeX foundations',
     sub: 'Not just the look — the structure follows TeX from the ground up.',
@@ -237,7 +260,7 @@ export const en: Dictionary = {
       ammonia_synthesis: 'Ammonia synthesis (Haber process)',
       thorium_isotope: 'Thorium-227 isotope',
       copper_sulfate_hydrate: 'Copper sulfate pentahydrate',
-      barium_sulfate_precipitate: 'Barium sulfate precipitate',
+      barium_sulfate_precipitate: 'Barium sulfate precipitation',
       // astronomy
       kepler_third: "Kepler's third law",
       // biology
@@ -289,6 +312,7 @@ export const en: Dictionary = {
       algebra: 'Algebra Functions',
       sets: 'Sets & Logic',
       operators: 'Operators',
+      chem: 'Chemistry',
       complex: 'Complex Formulas',
       'sym-greek': 'Greek Letters',
       'sym-binary': 'Binary Operators',

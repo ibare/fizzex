@@ -130,6 +130,20 @@ export const comparisonCategories: ComparisonCategory[] = [
     ],
   },
   {
+    key: 'chem',
+    items: [
+      '\\ce{H2O}',
+      '\\ce{SO4^2-}',
+      '\\ce{Ca(OH)2}',
+      '\\ce{2H2 + O2 -> 2H2O}',
+      '\\ce{CO2 + H2O <=> H2CO3}',
+      '\\ce{N2 + 3H2 <=>[Fe] 2NH3}',
+      '\\ce{^{227}_{90}Th}',
+      '\\ce{CuSO4 * 5H2O}',
+      '\\ce{BaCl2 + Na2SO4 -> BaSO4 v + 2NaCl}',
+    ],
+  },
+  {
     key: 'complex',
     items: [
       'e^{i\\pi} + 1 = 0',

@@ -51,6 +51,13 @@ export interface Dictionary {
     visualization: FeatureItem;
     autocomplete: FeatureItem;
   };
+  chemistrySection: {
+    title: string;
+    sub: string;
+    /** 화학식 카드의 캡션 — 각 예가 무엇을 보여주는지. 순서는 ChemistrySection 의 상수와 맞춘다 */
+    items: FeatureItem[];
+    cta: string;
+  };
   underTheHood: {
     title: string;
     sub: string;

@@ -73,6 +73,29 @@ export const ko: Dictionary = {
       desc: '커서 위치 기반 컨텍스트 인식 제안. 미적분, 기호, 구조를 적재적소에 추천.',
     },
   },
+  chemistrySection: {
+    title: '화학식도 같은 엔진으로',
+    sub: 'mhchem 표기를 그대로 씁니다. 렌더도 편집도 분석도 다른 수식과 똑같이 동작합니다.',
+    items: [
+      {
+        title: '반응식과 계수',
+        desc: '화살표가 좌우를 가르고, 앞의 숫자는 곱셈이 아니라 계수로 읽힙니다.',
+      },
+      {
+        title: '전하',
+        desc: '이온에 붙은 위첨자는 지수가 아니라 전하입니다. Fizzex 도 그렇게 읽습니다.',
+      },
+      {
+        title: '동위원소',
+        desc: '질량수와 원자 번호가 기호 왼쪽에 위아래로 제대로 쌓입니다.',
+      },
+      {
+        title: '평형과 촉매',
+        desc: '가역 화살표는 두 줄로 그려지고, 화살표 위 라벨이 반응 조건을 담습니다.',
+      },
+    ],
+    cta: '화학식 예제 더 보기',
+  },
   underTheHood: {
     title: 'TeX의 기반 위에 구축',
     sub: '겉모습뿐 아니라 구조부터 TeX을 따릅니다.',
@@ -237,7 +260,7 @@ export const ko: Dictionary = {
       ammonia_synthesis: '암모니아 합성 (하버법)',
       thorium_isotope: '토륨-227 동위원소',
       copper_sulfate_hydrate: '황산구리 오수화물',
-      barium_sulfate_precipitate: '황산바륨 침전',
+      barium_sulfate_precipitate: '황산바륨의 침전',
       // astronomy
       kepler_third: '케플러 제3법칙',
       // biology
@@ -289,6 +312,7 @@ export const ko: Dictionary = {
       algebra: '대수 함수',
       sets: '집합 & 논리',
       operators: '연산자',
+      chem: '화학식',
       complex: '복잡한 수식',
       'sym-greek': '그리스 문자',
       'sym-binary': '이항 연산자',

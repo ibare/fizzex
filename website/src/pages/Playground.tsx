@@ -22,6 +22,11 @@ const PRESETS = [
   'T^2 = \\frac{4\\pi^2}{GM}a^3',
   'N = N_0 e^{-\\lambda t}',
   'A = P\\left(1 + \\frac{r}{n}\\right)^{nt}',
+  // 화학식 — 버튼 라벨이 LaTeX 원문이라 표기 자체가 사용법 안내가 된다
+  '\\ce{H2O}',
+  '\\ce{SO4^2-}',
+  '\\ce{2H2 + O2 -> 2H2O}',
+  '\\ce{N2 + 3H2 <=>[Fe] 2NH3}',
 ];
 
 export default function Playground() {

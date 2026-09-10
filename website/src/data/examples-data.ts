@@ -106,7 +106,7 @@ export const categories: ExampleCategory[] = [
       { labelKey: 'ammonia_synthesis', latex: '\\ce{N2 + 3H2 <=>[Fe] 2NH3}' },
       { labelKey: 'thorium_isotope', latex: '\\ce{^{227}_{90}Th}' },
       { labelKey: 'copper_sulfate_hydrate', latex: '\\ce{CuSO4 * 5H2O}' },
-      { labelKey: 'barium_sulfate_precipitate', latex: '\\ce{BaSO4 v}' },
+      { labelKey: 'barium_sulfate_precipitate', latex: '\\ce{BaCl2 + Na2SO4 -> BaSO4 v + 2NaCl}' },
     ],
   },
   {
