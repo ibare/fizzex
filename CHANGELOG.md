@@ -4,21 +4,23 @@
 
 ### Minor Changes
 
-- a34533d: feat: 설명을 열 개 언어로 제공한다
+- a34533d: feat: descriptions in ten languages
 
-  **공개 표면이 바뀐다.**
+  **Breaking.**
 
-  | 없어진 것 | 대신 |
+  | Gone | Instead |
   | --- | --- |
-  | `ExpressionAnalysis.summary: string` | `summary: AnalysisSummary` (사실만 담는 구조체) |
-  | 한국어 기본 | `en` 기본 + `loadLocale(코드)` |
+  | `ExpressionAnalysis.summary: string` | `summary: AnalysisSummary` (facts, not a sentence) |
+  | Korean by default | `en` by default + `loadLocale(code)` |
 
   ---
 
-  **언어.** `en` `ko` `ja` `zh` `ar` `es` `fr` `hi` `id` `pt` — 기본은 영어, `ar` 은 RTL.
+  **Languages.** `en` `ko` `ja` `zh` `ar` `es` `fr` `hi` `id` `pt` — English by
+  default, `ar` is RTL.
 
-  수식 각 부분의 역할·설명, 화학 원소 118개의 이름, 카탈로그 237항목, 형식 설명,
-  탐색 패널 UI, 분석 요약까지 언어당 6,093개 문자열이다.
+  Roles and descriptions for every part of a formula, the names of all 118
+  chemical elements, 237 catalog entries, form descriptions, the explorer UI, and
+  analysis summaries — 6,093 strings per language.
 
   ```tsx
   <FizzexI18nProvider locale="ja">
@@ -26,92 +28,82 @@
   </FizzexI18nProvider>
   ```
 
-  headless 는 직접 부른다. 부르지 않으면 설명이 비어 나가고, 크래시하지는 않는다.
+  Outside React, load it yourself. Skip this and descriptions come back empty
+  rather than throwing — the lookups are synchronous, so they cannot wait.
 
   ```ts
   await loadLocale('ja');
   setLocale('ja');
   ```
 
-  **번들에는 언어가 실리지 않는다.** 로케일 하나가 570KB 라 열 개를 정적으로 넣으면
-  5.7MB 가 되고 영어만 쓰는 호스트도 전부 내려받는다. `loadLocale` 이 동적 import 로
-  필요한 언어만 가져오므로 번들러가 언어별 청크를 만들고 실행 시 하나만 받는다.
-  예외는 UI 문구 영어본 2KB 뿐이다 — 아무 언어도 받지 않은 상태에서도 버튼은 나와야 한다.
+  **No language ships in the bundle.** One locale is about 570KB; ten would be
+  5.7MB that an English-only host still pays for. `loadLocale` pulls one through
+  a dynamic import, so your bundler emits a chunk per language and downloads the
+  one you ask for. Rendering a formula costs 96KB gzipped and no locale at all;
+  adding descriptions costs about 97KB more.
 
-  카탈로그 매칭은 로케일과 무관한 인덱스만 보므로 **어느 언어에서든 같은 수식이 같은
-  항목에 매칭된다.** 언어는 표시에만 관여한다.
+  Catalog matching reads only the locale-independent index, so the same formula
+  matches the same entry in every language. Language affects display alone.
 
-  ***
+  ---
 
-  **진단은 영어로 고정한다.** 파서 경고, 스키마 메시지, throw 64건이 한국어였다.
-  사용자에게 보이지 않는 말은 번역 대상이 아니라고 정하고 영어로 옮겼다.
+  **Diagnostics are English from now on.** Parser warnings, schema messages and
+  thrown errors — 64 of them — used to be Korean. They are not written for the
+  reader of a formula, so they are not translation targets.
 
-  **분석 요약이 문장 대신 사실을 낸다.** `generateSummary` 가 "변수 x의 2차 다항식"
-  같은 한국어를 조립하고 있었다. 계산 계층은 언어를 모르는 것이 맞으므로
-  `AnalysisSummary`(변수·차수·함수·도메인, 화학식이면 반응 여부)를 내고 문장은
-  `formatSummary` 가 로케일을 보고 만든다.
+  **Analysis summaries carry facts instead of a sentence.** `generateSummary`
+  used to assemble Korean prose, which meant the names of ten domains and five
+  degrees lived inside computation code. Now it returns `AnalysisSummary`
+  (variables, degree, functions, domains; reaction flags for chemistry) and
+  `formatSummary` turns it into prose in whichever language you loaded.
 
   ```ts
-  analysis.summary;            // { variables: ['x'], degree: 2, functions: [], domains: ['polynomial'] }
-  formatSummary(analysis.summary);  // 로드한 언어로
+  analysis.summary;                 // { variables: ['x'], degree: 2, functions: [], domains: ['polynomial'] }
+  formatSummary(analysis.summary);  // in the loaded language
   ```
 
-  `AnalysisSummary` 와 로케일 API(`loadLocale` `setLocale` `getLocale` `registerLocale`
-  `getLoadedLocales` `formatSummary` `getUiTexts` `LOCALES` `DEFAULT_LOCALE` `isRtl` …)가
-  루트와 `fizzex/semantic` 양쪽에서 나간다.
+  `AnalysisSummary` and the locale API (`loadLocale` `setLocale` `getLocale`
+  `registerLocale` `getLoadedLocales` `formatSummary` `getUiTexts` `LOCALES`
+  `DEFAULT_LOCALE` `isRtl` …) are exported from the root and from
+  `fizzex/semantic`.
 
-- f87a292: feat: 화학식을 지원한다 — `\ce{}`, 첨자 조판 통합
+- f87a292: feat: chemical notation — `\ce{}`, unified script typesetting
 
-  **공개 표면이 바뀐다.** `x^2` 와 `x_i` 가 각각 다른 노드였던 것을 `scripts` 한
-  노드로 합쳤다. AST 를 직접 다루는 쪽은 아래를 바꿔야 한다.
+  **Breaking.** `x^2` and `x_i` used to be separate nodes; they are now one
+  `scripts` node. Code that touches the AST directly needs these changes.
 
-  | 없어진 것                        | 대신                             |
-  | -------------------------------- | -------------------------------- |
-  | `PowerNode`, `SubscriptNode`     | `ScriptsNode` (`base` + 네 슬롯) |
-  | `createPower`, `createSubscript` | `createScripts(base, slots)`     |
+  | Gone | Instead |
+  | --- | --- |
+  | `PowerNode`, `SubscriptNode` | `ScriptsNode` (`base` + four slots) |
+  | `createPower`, `createSubscript` | `createScripts(base, slots)` |
 
-  `ChemNode` 가 새로 나간다.
+  `ChemNode` is new.
 
-  ***
+  ---
 
-  **화학식.** `\ce{}` 로 mhchem 표기를 쓴다.
+  **Chemistry.** Write mhchem notation inside `\ce{}`.
 
   ```
   \ce{2H2 + O2 -> 2H2O}      \ce{SO4^2-}        \ce{^{227}_{90}Th}
   \ce{N2 + 3H2 <=>[Fe] 2NH3}  \ce{CuSO4 * 5H2O}  \ce{BaSO4 v}
   ```
 
-  화합물·계수·전하·상태·동위원소·수화물·침전·기체, 화살표 6종과 조건 라벨,
-  착이온, `$...$` 수식 삽입까지 파싱·조판·왕복이 닫혀 있다. 왕복은 문자 동일이
-  아니라 정규형 수렴이다 — `\ce{H_2O}` 는 `\ce{H2O}` 가 되고 그 뒤로는 멱등이다.
+  Compounds, coefficients, charges, states, isotopes, hydrates, precipitate and
+  gas marks, all six arrow forms with condition labels, complex ions, and `$...$`
+  math spans — parsing, typesetting and round-tripping are closed over all of it.
+  Round-tripping converges on a normal form rather than preserving characters
+  exactly: `\ce{H_2O}` becomes `\ce{H2O}` and is idempotent from there.
 
-  화학식 안에서는 기호를 화학의 말로 읽는다. `SO4^2-` 의 위첨자는 지수가 아니라
-  전하이고, `+` 는 덧셈이 아니라 화학종 구분이며, 앞첨자는 질량수와 원자 번호다.
-  원소 기호는 이름으로 부른다 — 118개 전부에 이름·원자 번호·한 줄 설명이 있다.
-  대표 화학식·반응식 14건을 카탈로그에 올려 이름과 설명이 뜬다.
+  Inside a formula, symbols are read as chemistry. The superscript in `SO4^2-` is
+  a charge, not an exponent; `+` separates species rather than adding them; left
+  scripts are mass number and atomic number. Element symbols are called by name —
+  all 118 carry a name, atomic number and one-line description. Fourteen
+  representative formulas and equations are in the catalog.
 
-  `analyzeExpression` 은 화학식을 화학으로 분류한다. `primaryDomain: 'chemistry'`,
-  `form: 'chemical-formula' | 'chemical-equation'`, 그리고 반응·가역·동위원소·전하
-  특징이 나온다. 예전에는 화학식의 `+` 를 덧셈으로 세어 `arithmetic` 이 나왔다.
-
-  **첨자 조판이 근본에서 고쳐졌다.** 위아래 첨자가 동시에 붙으면 서로 겹치고
-  있었다 — 두 첨자 사이 간격이 −0.087em, 즉 위첨자 하단이 아래첨자 상단보다
-  아래였다. TeX Rule 18a~18e 를 구현해 0.16em(`4·xi8`)이 됐다. `x_i^2` 같은
-  평범한 수식도 함께 고쳐진다. 좌측 첨자(`{}^{227}_{90}Th`)도 새로 된다.
-
-  **표준과 어긋나던 렌더 세 곳을 고쳤다.** KaTeX·MathJax 와 대조해 확인했다.
-
-  - 전하가 아래첨자와 같은 x 에 세로로 쌓이던 것 — `SO4^2-` 의 `2-` 는 O 의
-    지수가 아니라 화학종 전체의 전하다. 표준도 첨자마다 원자를 따로 만든다
-  - 앞첨자가 왼쪽 정렬이라 좁은 쪽이 원소 기호에서 떨어져 보이던 것
-  - `\xrightarrow` 계열 화살표가 축이 아니라 baseline 근처에 있고 라벨이 화살표에
-    붙어 있던 것. 라벨 간격은 0 이었다
-
-  지원하지 않는 표기라도 입력은 버리지 않는다. 결합(`-` `=` `#`)은 아직 결합선으로
-  조판하지 않지만 경고를 내고 글자는 남긴다 — 버리면 `O=C=O` 가 `OCO` 가 되어
-  다른 화학식이다.
-
-  무엇이 되고 무엇이 왜 안 되는지는 `docs/chemistry-support.md` 에 있다.
+  `analyzeExpression` classifies chemistry as chemistry: `primaryDomain:
+  'chemistry'`, `form: 'chemical-formula' | 'chemical-equation'`, plus reaction,
+  reversible, isotope and charge features. It used to count the `+` in a reaction
+  as addition and report `arithmetic`.
 
 ## 0.4.0
 
