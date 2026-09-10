@@ -144,7 +144,10 @@ function keyFor(node: MathNode, parent: AncestorEntry): ChemTextKey | null {
       return 'condition';
 
     case 'paren':
-      return isStateLabel(parent.node) ? 'state' : bodyKey(node);
+      if (isStateLabel(parent.node)) return 'state';
+      // 괄호 안을 감싼 row 는 괄호 자신의 뜻을 물려받는다. 그러지 않으면
+      // 화학식 안인데도 layer1 의 "묶음" 같은 수학 어휘가 샌다.
+      return node.type === 'row' ? 'group' : bodyKey(node);
 
     case 'chem':
       // 본문을 감싼 row 는 화학식 본문 그 자체다
@@ -190,11 +193,11 @@ function hasArrow(nodes: MathNode[]): boolean {
  */
 function result(key: ChemTextKey, node: MathNode, texts: SemanticTexts): SemanticResult {
   if (key === 'element' && node.type === 'text') {
-    const element = texts.elements.bySymbol[node.content];
+    const element = texts.chemicalElements.bySymbol[node.content];
     if (element) {
       return {
         role: element.name,
-        description: texts.elements.descriptionFormat
+        description: texts.chemicalElements.descriptionFormat
           .replace('{z}', String(element.z))
           .replace('{desc}', element.desc),
         layer: 'layer1',

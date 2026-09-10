@@ -149,14 +149,24 @@ export interface CatalogParameterConfig {
 
 // ─── 기호 종류 ───
 
-/** 수식 기호의 종류 */
 /**
  * 기호 종류 목록.
  * 타입과 zod 스키마가 이 배열 하나에서 파생된다 — 이중 관리 금지.
+ *
+ * 여기서 말하는 element 는 **수식의 기호**(변수·상수·출력)다. 화학의 원소는
+ * `CHEMICAL_ELEMENT_COUNT` 쪽이며 서로 다른 말이다.
  */
 export const ELEMENT_KIND_IDS = ['input', 'constant', 'output', 'structural'] as const;
 
 export type ElementKind = (typeof ELEMENT_KIND_IDS)[number];
+
+/**
+ * 알려진 화학 원소의 수 — 주기율표가 여기까지 채워져 있다.
+ *
+ * 위의 `ELEMENT_KIND_IDS`(수식 기호의 종류)와 이름이 겹쳐 보이지만 다른 말이다.
+ * 이쪽은 수소·산소 같은 **화학 원소**를 센다.
+ */
+export const CHEMICAL_ELEMENT_COUNT = 118;
 
 /** 수식 기호의 역할과 종류 */
 export interface ElementMeaning {

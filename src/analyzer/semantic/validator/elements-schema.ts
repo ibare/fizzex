@@ -6,17 +6,15 @@
  */
 
 import { z } from 'zod';
-
-/** 알려진 원소의 수 — 주기율표가 여기까지 채워져 있다 */
-export const ELEMENT_COUNT = 118;
+import { CHEMICAL_ELEMENT_COUNT } from '../types.js';
 
 const elementEntrySchema = z.object({
   name: z.string().min(1),
-  z: z.number().int().min(1).max(ELEMENT_COUNT),
+  z: z.number().int().min(1).max(CHEMICAL_ELEMENT_COUNT),
   desc: z.string().min(1),
 });
 
-export const elementsSchema = z
+export const chemicalElementsSchema = z
   .object({
     // `{z}` 와 `{desc}` 는 치환 자리다. 하나라도 빠지면 그 정보가 화면에서 사라진다.
     descriptionFormat: z.string().includes('{z}').includes('{desc}'),
@@ -28,11 +26,11 @@ export const elementsSchema = z
   .superRefine((data, ctx) => {
     const entries = Object.entries(data.bySymbol);
 
-    if (entries.length !== ELEMENT_COUNT) {
+    if (entries.length !== CHEMICAL_ELEMENT_COUNT) {
       ctx.addIssue({
         code: 'custom',
         path: ['bySymbol'],
-        message: `원소가 ${entries.length}개다 — ${ELEMENT_COUNT}개여야 한다`,
+        message: `원소가 ${entries.length}개다 — ${CHEMICAL_ELEMENT_COUNT}개여야 한다`,
       });
     }
 
@@ -49,7 +47,7 @@ export const elementsSchema = z
       }
       seen.set(entry.z, symbol);
     }
-    for (let z = 1; z <= ELEMENT_COUNT; z++) {
+    for (let z = 1; z <= CHEMICAL_ELEMENT_COUNT; z++) {
       if (!seen.has(z)) {
         ctx.addIssue({
           code: 'custom',

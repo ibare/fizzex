@@ -7,9 +7,9 @@
 
 import type { z } from 'zod';
 import type { CatalogIndexEntry, CatalogDetail } from '../types.js';
-import type { ElementTexts } from '../loader.js';
+import type { ChemicalElementTexts } from '../loader.js';
 import { catalogIndexSchema, catalogDetailFileSchema } from './catalog-schema.js';
-import { elementsSchema } from './elements-schema.js';
+import { chemicalElementsSchema } from './elements-schema.js';
 
 export class CatalogValidationError extends Error {
   constructor(
@@ -45,14 +45,17 @@ export function validateCatalogDetailFile(
   return result.data as Record<string, CatalogDetail>;
 }
 
-/** 원소 이름표를 검증·반환. 실패 시 CatalogValidationError throw. */
-export function validateElements(source: string, input: unknown): ElementTexts {
-  const result = elementsSchema.safeParse(input);
+/** 화학 원소 이름표를 검증·반환. 실패 시 CatalogValidationError throw. */
+export function validateChemicalElements(
+  source: string,
+  input: unknown,
+): ChemicalElementTexts {
+  const result = chemicalElementsSchema.safeParse(input);
   if (!result.success) {
     throw new CatalogValidationError(source, result.error.issues);
   }
-  return result.data as ElementTexts;
+  return result.data as ChemicalElementTexts;
 }
 
 export { catalogIndexSchema, catalogDetailSchema, catalogDetailFileSchema } from './catalog-schema.js';
-export { elementsSchema, ELEMENT_COUNT } from './elements-schema.js';
+export { chemicalElementsSchema } from './elements-schema.js';

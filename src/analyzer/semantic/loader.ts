@@ -119,8 +119,8 @@ export interface FallbackTexts {
   defaultFunction: string;
 }
 
-/** 원소 하나의 설명 */
-export interface ElementEntry {
+/** 화학 원소 하나의 설명 */
+export interface ChemicalElement {
   /** 원소 이름 (대한화학회 표기) */
   name: string;
   /** 원자 번호 */
@@ -129,19 +129,19 @@ export interface ElementEntry {
   desc: string;
 }
 
-/** 원소 이름표 */
-export interface ElementTexts {
+/** 화학 원소 이름표 */
+export interface ChemicalElementTexts {
   /** 설명 문장 형식 — `{z}` 와 `{desc}` 를 치환한다 */
   descriptionFormat: string;
   /** 원소 기호 → 설명 */
-  bySymbol: Record<string, ElementEntry>;
+  bySymbol: Record<string, ChemicalElement>;
 }
 
 export interface SemanticTexts {
   layer1: Record<string, Layer1TextEntry>;
   layer2: Record<string, Layer2TextEntry>;
   fallback: FallbackTexts;
-  elements: ElementTexts;
+  chemicalElements: ChemicalElementTexts;
 }
 
 // ─── 캐시 ───
@@ -163,7 +163,7 @@ export function getSemanticTexts(locale = 'ko'): SemanticTexts {
       layer1: koLayer1 as Record<string, Layer1TextEntry>,
       layer2: koLayer2 as Record<string, Layer2TextEntry>,
       fallback: koFallback as FallbackTexts,
-      elements: koElements as ElementTexts,
+      chemicalElements: koElements as ChemicalElementTexts,
     };
     textCache.set('ko', texts);
     return texts;

@@ -82,6 +82,12 @@ describe('화학식 의미 해석', () => {
     expect(roles('\\ce{Ca(OH)2}')).toContain('원자단');
   });
 
+  it('괄호 안에 수학 어휘가 새지 않는다', () => {
+    // 괄호를 감싼 row 가 layer1 의 paren.content 로 흘러 "묶음" 을 받던 자리
+    expect(roles('\\ce{Ca(OH)2}')).not.toContain('묶음');
+    expect(roles('\\ce{NaCl (aq)}')).not.toContain('묶음');
+  });
+
   it('화학식 밖의 수식은 평소의 수학 어휘로 설명한다', () => {
     const r = roles('x^2');
 

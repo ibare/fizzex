@@ -11,10 +11,11 @@
  */
 
 import { readFileSync } from 'node:fs';
+import type { z } from 'zod';
 import {
   validateCatalogIndex,
   validateCatalogDetailFile,
-  validateElements,
+  validateChemicalElements,
   CatalogValidationError,
 } from '../src/analyzer/semantic/validator/index.js';
 import { formIndexSchema, formTextSchema } from '../src/analyzer/semantic/validator/form-schema.js';
@@ -46,6 +47,21 @@ function error(msg: string): void {
 function warn(msg: string): void {
   console.warn(`  ⚠ ${msg}`);
   warnings++;
+}
+
+/**
+ * zod 이슈 한 줄.
+ *
+ * `invalid_key` 처럼 실제 사유가 `issue.issues[]` 안에 중첩되는 종류가 있다.
+ * 겉의 메시지만 찍으면 "Invalid key in record" 로 끝나 무엇이 잘못됐는지 모른다.
+ */
+function issueLine(source: string, issue: z.core.$ZodIssue): string {
+  const where = issue.path.join('.');
+  const nested =
+    'issues' in issue && Array.isArray(issue.issues)
+      ? issue.issues.map((i) => i.message).join('; ')
+      : '';
+  return `${source}: ${where}: ${issue.message}${nested ? ` — ${nested}` : ''}`;
 }
 
 function ok(msg: string): void {
@@ -140,7 +156,7 @@ function validateCatalog(): void {
     entries = validateCatalogIndex(loadJson<unknown>(resolve(catalogDir, 'index.json')));
   } catch (e) {
     if (e instanceof CatalogValidationError) {
-      for (const issue of e.issues) error(`index.json: ${issue.path.join('.')}: ${issue.message}`);
+      for (const issue of e.issues) error(issueLine('index.json', issue));
     } else {
       error(`index.json 로드 실패: ${String(e)}`);
     }
@@ -157,7 +173,7 @@ function validateCatalog(): void {
       detailCache.set(category, validateCatalogDetailFile(`ko/${category}.json`, loadJson<unknown>(path)));
     } catch (e) {
       if (e instanceof CatalogValidationError) {
-        for (const issue of e.issues) error(`ko/${category}.json: ${issue.path.join('.')}: ${issue.message}`);
+        for (const issue of e.issues) error(issueLine(`ko/${category}.json`, issue));
       } else {
         error(`카테고리 "${category}" 상세 JSON 로드 실패: ko/${category}.json`);
       }
@@ -220,11 +236,11 @@ function validateElementNames(): void {
 
   const path = resolve(dataDir, 'elements/ko.json');
   try {
-    const data = validateElements('elements/ko.json', loadJson<unknown>(path));
+    const data = validateChemicalElements('elements/ko.json', loadJson<unknown>(path));
     ok(`${Object.keys(data.bySymbol).length}개 원소 검증 완료`);
   } catch (e) {
     if (e instanceof CatalogValidationError) {
-      for (const issue of e.issues) error(`elements/ko.json: ${issue.path.join('.')}: ${issue.message}`);
+      for (const issue of e.issues) error(issueLine('elements/ko.json', issue));
     } else {
       error(`elements/ko.json 로드 실패: ${String(e)}`);
     }
