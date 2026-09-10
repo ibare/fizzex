@@ -218,7 +218,10 @@ describe('정규화 IR — provenance', () => {
 });
 
 describe('정규화 IR — 화학식', () => {
-  const tag = (latex: string) => normalizeAst(parseLatex(latex).ast).root.tag;
+  const tag = (latex: string) => {
+    const { root } = normalizeAst(parseLatex(latex).ast);
+    return root.kind === 'opaque' ? root.tag : null;
+  };
 
   it('서로 다른 화학식은 서로 다른 태그를 갖는다', () => {
     expect(tag('\\ce{H2O}')).toBe('chem:H2O');

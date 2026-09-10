@@ -136,5 +136,83 @@
     }
   },
   "defaultOperator": "연산자 {op}입니다.",
-  "defaultFunction": "함수 {name}입니다."
+  "defaultFunction": "함수 {name}입니다.",
+  "chem": {
+    "formula": {
+      "role": "화학식",
+      "description": "물질을 원소 기호로 나타낸 표기입니다."
+    },
+    "equation": {
+      "role": "화학 반응식",
+      "description": "왼쪽의 물질이 오른쪽의 물질로 바뀌는 과정을 나타냅니다."
+    },
+    "species": {
+      "role": "화학종",
+      "description": "반응에 참여하는 물질 한 가지입니다."
+    },
+    "element": {
+      "role": "원소",
+      "description": "주기율표의 원소를 나타내는 기호입니다."
+    },
+    "group": {
+      "role": "원자단",
+      "description": "괄호로 묶여 하나의 단위처럼 행동하는 원자 무리입니다."
+    },
+    "coefficient": {
+      "role": "계수",
+      "description": "반응에 참여하는 입자의 개수 비입니다. 양변의 원자 수를 맞추는 값입니다."
+    },
+    "count": {
+      "role": "원자 수",
+      "description": "바로 앞 원소나 원자단이 몇 개 들어 있는지 나타냅니다."
+    },
+    "charge": {
+      "role": "전하",
+      "description": "이온이 띠는 전하의 크기입니다. 잃거나 얻은 전자의 수와 같습니다."
+    },
+    "chargeSign": {
+      "role": "전하 부호",
+      "description": "전자를 잃어 양이온(+)인지, 얻어 음이온(−)인지 나타냅니다."
+    },
+    "massNumber": {
+      "role": "질량수",
+      "description": "원자핵 속 양성자와 중성자를 합한 수입니다. 동위원소를 구분합니다."
+    },
+    "atomicNumber": {
+      "role": "원자 번호",
+      "description": "원자핵 속 양성자 수입니다. 어떤 원소인지를 결정합니다."
+    },
+    "arrow": {
+      "role": "반응 화살표",
+      "description": "반응이 화살표 방향으로 진행됨을 나타냅니다."
+    },
+    "equilibriumArrow": {
+      "role": "가역 반응",
+      "description": "정반응과 역반응이 함께 일어나 평형을 이룹니다."
+    },
+    "condition": {
+      "role": "반응 조건",
+      "description": "반응에 필요한 촉매·온도·압력 등의 조건입니다."
+    },
+    "plus": {
+      "role": "화학종 구분",
+      "description": "같은 편에 있는 물질들을 잇습니다. 덧셈이 아닙니다."
+    },
+    "hydrate": {
+      "role": "수화물 결합",
+      "description": "결정 안에 물 분자가 함께 들어 있음을 나타냅니다."
+    },
+    "state": {
+      "role": "상태",
+      "description": "고체(s)·액체(l)·기체(g)·수용액(aq) 중 어떤 상태인지 나타냅니다."
+    },
+    "gas": {
+      "role": "기체 발생",
+      "description": "반응으로 기체가 빠져나감을 나타냅니다."
+    },
+    "precipitate": {
+      "role": "침전",
+      "description": "반응으로 고체가 가라앉아 생김을 나타냅니다."
+    }
+  }
 }

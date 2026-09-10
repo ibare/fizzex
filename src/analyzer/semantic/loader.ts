@@ -71,6 +71,33 @@ export interface Layer2TextEntry {
   description: string;
 }
 
+/**
+ * 화학식 어휘 키.
+ *
+ * 화학식 안에서만 쓰는 말이다. 같은 노드라도 화학식 밖에서는 다른 뜻이므로
+ * (위첨자 = 지수 vs 전하) `roles` 와 섞지 않고 별도 섹션으로 둔다.
+ */
+export type ChemTextKey =
+  | 'formula' // 화학식 전체
+  | 'equation' // 반응 화살표가 있는 반응식
+  | 'species' // 화학종 한 덩어리
+  | 'element' // 원소 기호
+  | 'group' // 괄호로 묶인 원자단
+  | 'coefficient' // 반응식의 계수
+  | 'count' // 원자 수 (아래첨자)
+  | 'charge' // 전하 크기 (위첨자)
+  | 'chargeSign' // 전하 부호
+  | 'massNumber' // 질량수 (왼쪽 위첨자)
+  | 'atomicNumber' // 원자 번호 (왼쪽 아래첨자)
+  | 'arrow' // 반응 화살표
+  | 'equilibriumArrow' // 가역 반응 화살표
+  | 'condition' // 촉매·온도 등 반응 조건
+  | 'plus' // 화학종 구분
+  | 'hydrate' // 수화물 결합점
+  | 'state' // 상태 표기
+  | 'gas' // 기체 발생
+  | 'precipitate'; // 침전
+
 export interface FallbackTexts {
   roles: Record<string, string>;
   descriptions: Record<string, string>;
@@ -84,6 +111,8 @@ export interface FallbackTexts {
     'superscriptOnly' | 'subscriptOnly' | 'both' | 'withLeft',
     { role: string; description: string }
   >;
+  /** 화학식 안에서만 쓰는 어휘 — chem-semantics.ts 가 소비한다 */
+  chem: Record<ChemTextKey, { role: string; description: string }>;
   defaultOperator: string;
   defaultFunction: string;
 }
