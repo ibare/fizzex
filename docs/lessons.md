@@ -332,3 +332,61 @@ new Projector(surface, config, myMetrics).render(box);
       — 순환이다
 - [ ] 캡슐화를 뒤집기 전에 "누가 이걸 필요로 하는가" 를 먼저 확인했는가?
       순서가 거꾸로면 근거가 결론을 따라간다
+
+---
+
+## L9. 노드 타입을 추가할 때는 파일이 아니라 switch 를 센다
+
+### 문제
+
+`\ce{}` 지원을 위해 노드 타입을 두 번 추가했다(`scripts` 통합, `chem` 신설).
+두 번 다 "이 노드를 분기하는 곳" 목록을 만들었고, 두 번 다 목록이 모자랐다.
+
+`chem` 쪽은 검토 왕복마다 목록이 늘었다 — **3개 → 7개 → 13개 → 16개 → 18개.**
+매번 "이번에는 전수"라고 적었고 매번 아니었다.
+
+빠진 것들의 공통점이 있다. **같은 파일의 두 번째 switch** 였다.
+
+| 파일 | 첫 번째 (찾음) | 두 번째 (놓침) |
+|---|---|---|
+| `analyzer/ast-walker.ts` | `walkNode` | `findNodes` 내부 `search` |
+| `headless/ast-modifier.ts` | `cloneAst` | `getChildren` |
+| `latex/tolerant/error-recovery.ts` | `reassignNodeId` | `shiftChildRanges` |
+| `analyzer/polynomial-analyzer.ts` | `getChildren` | `hasChildren` |
+| `suggestion/suggestion-engine.ts` | `childArrays` | `switch (prevNode.type)` |
+
+파일을 열어 `case 'sqrt'` 를 찾고, 고치고, 그 파일을 "처리 완료"로 지웠다.
+같은 파일 아래쪽에 또 있으리라고는 보지 않았다.
+
+### 패턴
+
+**`hasChildren` 류는 게이트다.** `polynomial-analyzer` 에서 `getChildren` 만
+고쳤다면 호출부 두 곳이 모두 `if (hasChildren(node))` 뒤에 있어서 새로 넣은
+`case 'chem'` 이 **영원히 도달하지 않는 죽은 코드**가 됐을 것이다. 반쪽도 아니고 0이다.
+
+**타입을 붙였다는 사실이 안전하다는 뜻은 아니다.** Phase 1 에서 `complexTypes`
+문자열 배열을 `MathNodeType[]` 로 선언하고 "이제 컴파일이 잡는다"고 처리했다.
+틀렸다 — 배열에서 **원소가 빠지는 것**은 타입이 못 잡는다. 잘못된 원소만 잡는다.
+
+**컴파일러가 강제하는 곳은 소수다.** 이 저장소에서 `never` 소진 검사가 있는 곳은
+셋(`ast-to-box`, `canonical/from-ast`, `cursor-policy`)뿐이다. 나머지는 `default:`
+로 조용히 빠져나간다. 그 침묵의 결과는 대개 "렌더는 되는데 커서가 안 들어간다",
+"설명 자리에 영문 식별자가 뜬다", "id 가 중복돼 커서가 엉뚱한 데로 뛴다" 처럼
+**타입도 테스트도 아닌 사용 중에** 드러난다.
+
+**계획서에 위험표를 써놓고도 다음 단계에서 참조하지 않았다.** Phase 1 에서
+`explorer-map`·`ast-modifier`·`error-recovery` 를 "컴파일이 안 잡는 자리"로 적어뒀는데,
+Phase 2 목록을 새로 쓸 때 그 표를 다시 보지 않아 같은 자리를 다시 놓쳤다.
+
+### 적용 체크리스트
+
+- [ ] 대상을 **파일이 아니라 switch/if 체인/문자열 배열 단위**로 셌는가?
+      한 파일에 둘 이상 있는지 파일 끝까지 확인했는가?
+- [ ] 그중 **게이트**(`hasChildren`, `complexTypes`, `isComplexNode` 류)가 있는가?
+      게이트를 빠뜨리면 같은 파일의 다른 수정이 무효가 된다
+- [ ] `MathNodeType[]` 로 선언했다고 안심하지 않았는가? 원소 **누락**은 안 잡힌다
+- [ ] 이전 단계의 위험표·교훈을 **다시 열어봤는가?** 같은 종류의 작업이면 목록이 재사용된다
+- [ ] 완료 조건 게이트를 만들 때, **정상 구현이 그 게이트를 통과할 수 있는지** 먼저 따졌는가?
+      "정확히 N줄" 같은 카운트는 구현이 새 리터럴을 만드는 순간 반드시 깨진다 —
+      카운트가 아니라 "각 매치가 어느 범주인가"로 판정해야 한다
+- [ ] 자동 판별이 가능한 것(노드 타입 배열)은 **게이트가 아니라 타입**으로 막았는가?
