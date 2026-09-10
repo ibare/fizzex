@@ -103,7 +103,7 @@ const r = parseLatex('\\e');
 r.ast.children;   // []  ← nothing was produced
 r.hasErrors;      // false
 r.warnings;       // [{ type: 'unknown_command', severity: 'warning', position: 0,
-                  //    message: '알 수 없는 명령어: \\e',  // diagnostics are Korean
+                  //    message: 'Unknown command: \\e',
                   //    context: '\\e\\n^', token: 'e' }]
 ```
 
@@ -118,7 +118,13 @@ const analysis = analyzeExpression(ast);
 analysis.primaryDomain;             // 'polynomial'
 analysis.polynomial?.degree;        // 2
 analysis.visualization.graphable2D; // true
+analysis.summary;                   // { variables: ['x'], degree: 2,
+                                    //   functions: [], domains: ['polynomial'] }
 ```
+
+`summary` carries **facts, not a sentence** — the analyzer does not know which
+language you speak. Turn it into prose with `formatSummary`, which reads the
+locale you loaded.
 
 Two analyses answer different questions, and it is easy to mistake one for the
 other:
@@ -358,6 +364,41 @@ JSON that a worker doing arithmetic has no reason to load.
 
 - `renderLatexToSVG`, `renderAstToSVG` — typeset to vector SVG
 - Types: `MathFont`, `FontGlyph`, `FontGlyphPath`, `SvgRenderOptions`, `SvgRenderResult`
+
+## Localization
+
+Descriptions come in ten languages: `en` (default), `ko`, `ja`, `zh`, `ar`, `es`,
+`fr`, `hi`, `id`, `pt`.
+
+```tsx
+import { FizzexI18nProvider } from 'fizzex';
+
+<FizzexI18nProvider locale="ja">
+  <EditorView />
+</FizzexI18nProvider>
+```
+
+Outside React, load the language yourself:
+
+```ts
+import { loadLocale, setLocale } from 'fizzex';
+
+await loadLocale('ja');
+setLocale('ja');
+```
+
+**No language ships in the bundle.** One locale is about 570KB — ten would be
+5.7MB that an English-only host still pays for. `loadLocale` pulls just the one
+you ask for through a dynamic import, so your bundler emits a chunk per language
+and downloads one. Until a locale is loaded, descriptions come back empty rather
+than throwing.
+
+Catalog matching reads only the locale-independent index, so the same formula
+matches the same entry in every language. Diagnostics (parser warnings, thrown
+errors) are always English — they are not written for the reader of a formula.
+
+See [docs/i18n.md](docs/i18n.md) for what is and isn't translated, and how to add
+a language.
 
 ## Compatibility
 
