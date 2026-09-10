@@ -187,7 +187,7 @@ describe('Feature Extractor', () => {
   });
 
   describe('generateSummary', () => {
-    it('요약 문자열을 생성한다', () => {
+    it('변수와 차수를 사실로 담는다', () => {
       const { ast } = parseLatex('x^2 + 2x + 1');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
@@ -204,11 +204,11 @@ describe('Feature Extractor', () => {
         variables
       );
 
-      expect(typeof summary).toBe('string');
-      expect(summary.length).toBeGreaterThan(0);
+      expect(summary.variables).toContain('x');
+      expect(summary.degree).toBe(2);
     });
 
-    it('빈 문자열이 아니다', () => {
+    it('변수가 없으면 빈 변수 목록을 낸다', () => {
       const { ast } = parseLatex('42');
       const collected = walkAST(ast);
       const polynomial = analyzePolynomial(ast, collected);
@@ -225,7 +225,8 @@ describe('Feature Extractor', () => {
         variables
       );
 
-      expect(summary).not.toBe('');
+      expect(summary.variables).toEqual([]);
+      expect(summary.degree).toBeUndefined();
     });
   });
 });

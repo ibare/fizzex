@@ -102,6 +102,7 @@ export {
 } from '../analyzer/index.js';
 export type {
   ExpressionAnalysis,
+  AnalysisSummary,
   MathDomain,
   FunctionInfo,
   FunctionCategory,

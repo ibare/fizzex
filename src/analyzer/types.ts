@@ -158,8 +158,33 @@ export interface ExpressionAnalysis {
   /** 복잡도 점수 (1-10) */
   complexity: number;
 
-  /** 분석 요약 (사람이 읽을 수 있는 설명) */
-  summary: string;
+  /** 분석 요약 — 문장이 아니라 사실이다. 문장은 표시 계층이 만든다 */
+  summary: AnalysisSummary;
+}
+
+/**
+ * 분석 요약 — **어휘가 아니라 사실만 담는다.**
+ *
+ * 계산 계층은 어느 말로 설명할지 모른다. "2차 다항식" 인지 "quadratic polynomial" 인지는
+ * 로케일을 아는 표시 계층이 정한다. 그래서 여기에는 조립에 필요한 재료만 둔다.
+ *
+ * 워커 경계를 넘으므로 `structuredClone` 가능한 순수 데이터여야 한다.
+ */
+export interface AnalysisSummary {
+  /** 화학식이면 이것만 채워진다 — 화학식에는 변수도 차수도 없다 */
+  chemistry?: { reaction: boolean; reversible: boolean };
+
+  /** 식에 등장하는 변수. 비어 있으면 상수 표현식이다 */
+  variables: string[];
+
+  /** 다항식일 때의 차수 */
+  degree?: number;
+
+  /** 눈에 띄는 함수 이름 (최대 3개) */
+  functions: string[];
+
+  /** 눈에 띄는 도메인 (최대 2개). `arithmetic` 은 모든 식에 붙으므로 제외한다 */
+  domains: MathDomain[];
 }
 
 /**

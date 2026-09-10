@@ -83,12 +83,13 @@ describe('Expression Analyzer (통합)', () => {
       }
     });
 
-    it('summary가 빈 문자열이 아니다', () => {
+    it('summary 는 조립에 쓸 사실을 담는다', () => {
       const { ast } = parseLatex('x^2 + 1');
       const result = analyzeExpression(ast);
 
-      expect(result.summary).not.toBe('');
-      expect(typeof result.summary).toBe('string');
+      expect(result.summary.variables).toContain('x');
+      expect(result.summary.degree).toBe(2);
+      expect(result.summary.chemistry).toBeUndefined();
     });
 
     it('visualization 객체를 반환한다', () => {
@@ -126,7 +127,7 @@ describe('Expression Analyzer (통합)', () => {
       expect(result.form).toBe('chemical-formula');
       expect(result.primaryDomain).toBe('chemistry');
       expect(result.domains).toEqual(['chemistry']);
-      expect(result.summary).toBe('화학식');
+      expect(result.summary.chemistry).toEqual({ reaction: false, reversible: false });
     });
 
     it('반응 화살표가 있으면 chemical-equation 이다', () => {
@@ -141,7 +142,7 @@ describe('Expression Analyzer (통합)', () => {
       const result = analyzeExpression(parseLatex('\\ce{N2 + 3H2 <=>[Fe] 2NH3}').ast);
 
       expect(result.features).toContain('reversible-reaction');
-      expect(result.summary).toBe('가역 화학 반응식');
+      expect(result.summary.chemistry).toEqual({ reaction: true, reversible: true });
     });
 
     it('앞첨자는 동위원소, 첨자 부호는 전하로 읽는다', () => {

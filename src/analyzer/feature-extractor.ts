@@ -11,6 +11,7 @@ import type {
   PolynomialInfo,
   FunctionInfo,
   MathDomain,
+  AnalysisSummary,
 } from './types.js';
 import { hasTrigonometric } from './function-detector.js';
 
@@ -169,7 +170,11 @@ export function calculateComplexity(
 }
 
 /**
- * 분석 요약 생성
+ * 분석 요약 생성 — 사실만 모은다.
+ *
+ * 어휘를 여기서 고르지 않는 이유: 이 파일은 compute 클로저 안이라 로케일 데이터를
+ * 물 수 없고(`subpath-isolation.test.ts`), 애초에 계산 계층이 "2차 다항식" 이라는
+ * 한국어를 알고 있을 이유도 없다.
  */
 export function generateSummary(
   domains: MathDomain[],
@@ -177,68 +182,26 @@ export function generateSummary(
   polynomial: PolynomialInfo | undefined,
   functions: FunctionInfo[],
   variables: string[]
-): string {
-  const parts: string[] = [];
-
+): AnalysisSummary {
   // 화학식은 변수도 차수도 없다. 수학 어휘로 요약하면 "상수 표현식" 이 된다.
   if (domains.includes('chemistry')) {
-    return features.includes('chemical-reaction')
-      ? features.includes('reversible-reaction')
-        ? '가역 화학 반응식'
-        : '화학 반응식'
-      : '화학식';
-  }
-
-  // 변수 정보
-  if (variables.length === 0) {
-    parts.push('상수 표현식');
-  } else if (variables.length === 1) {
-    parts.push(`변수 ${variables[0]}의`);
-  } else {
-    parts.push(`변수 ${variables.join(', ')}의`);
-  }
-
-  // 다항식 정보
-  if (polynomial) {
-    const degreeLabels: Record<number, string> = {
-      1: '1차',
-      2: '2차',
-      3: '3차',
-      4: '4차',
-      5: '5차',
+    return {
+      chemistry: {
+        reaction: features.includes('chemical-reaction'),
+        reversible: features.includes('reversible-reaction'),
+      },
+      variables: [],
+      functions: [],
+      domains: [],
     };
-    const degreeLabel = degreeLabels[polynomial.degree] || `${polynomial.degree}차`;
-    parts.push(`${degreeLabel} 다항식`);
   }
 
-  // 주요 함수
-  if (functions.length > 0) {
-    const funcNames = functions.slice(0, 3).map((f) => f.name);
-    parts.push(`(${funcNames.join(', ')} 함수 포함)`);
-  }
-
-  // 도메인
-  const domainLabels: Record<MathDomain, string> = {
-    arithmetic: '산술',
-    polynomial: '다항식',
-    rational: '유리식',
-    trigonometric: '삼각함수',
-    exponential: '지수함수',
-    logarithmic: '로그함수',
-    calculus: '미적분',
-    'linear-algebra': '선형대수',
-    statistics: '통계',
-    chemistry: '화학',
+  const summary: AnalysisSummary = {
+    variables,
+    functions: functions.slice(0, 3).map((f) => f.name),
+    // arithmetic 은 거의 모든 식에 붙어 변별력이 없다
+    domains: domains.filter((d) => d !== 'arithmetic').slice(0, 2),
   };
-
-  const mainDomains = domains
-    .filter((d) => d !== 'arithmetic')
-    .slice(0, 2)
-    .map((d) => domainLabels[d]);
-
-  if (mainDomains.length > 0) {
-    parts.push(`[${mainDomains.join(', ')}]`);
-  }
-
-  return parts.join(' ');
+  if (polynomial) summary.degree = polynomial.degree;
+  return summary;
 }

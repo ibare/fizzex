@@ -107,6 +107,7 @@ export function analyzeExpression(ast: RootNode): ExpressionAnalysis {
 // 타입 export
 export type {
   ExpressionAnalysis,
+  AnalysisSummary,
   MathDomain,
   FunctionInfo,
   FunctionCategory,

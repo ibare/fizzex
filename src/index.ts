@@ -113,6 +113,7 @@ export type {
   Complex,
   ComplexResult,
   ExpressionAnalysis,
+  AnalysisSummary,
   MathDomain,
   FunctionInfo,
   FunctionCategory,
