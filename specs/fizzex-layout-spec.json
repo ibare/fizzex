@@ -617,6 +617,42 @@
       "priority": 3,
       "note": "xleftarrow/xrightarrow 텍스트 좌우 패딩"
     },
+    "chemArrowMinWidth": {
+      "value": 1.0,
+      "unit": "em",
+      "sources": {
+        "tex": "라벨 없는 반응 화살표의 최소 길이",
+        "opentype": "N/A",
+        "cambria": "1.0"
+      },
+      "tolerance": 0.05,
+      "priority": 3,
+      "note": "mhchem 고유 값 — TeX/OpenType 원본 규칙에 대응이 없다. xarrowPadding*2 = 0.6em 은 반응식에서 너무 짧다"
+    },
+    "chemHarpoonGap": {
+      "value": 0.09,
+      "unit": "em",
+      "sources": {
+        "tex": "가역 반응 화살표 두 선의 중심선 대비 오프셋",
+        "opentype": "N/A",
+        "cambria": "0.09"
+      },
+      "tolerance": 0.05,
+      "priority": 3,
+      "note": "mhchem 고유 값 — TeX/OpenType 원본 규칙에 대응이 없다"
+    },
+    "chemUnequalArrowRatio": {
+      "value": 0.6,
+      "unit": "ratio",
+      "sources": {
+        "tex": "<=>> / <<=> 에서 짧은 쪽 화살표의 길이 비",
+        "opentype": "N/A",
+        "cambria": "0.6"
+      },
+      "tolerance": 0.05,
+      "priority": 3,
+      "note": "mhchem 고유 값 — TeX/OpenType 원본 규칙에 대응이 없다. 단위 없는 비율이다"
+    },
     "radicalDegreeBottomRaisePercent": {
       "value": 0.6,
       "unit": "ratio",

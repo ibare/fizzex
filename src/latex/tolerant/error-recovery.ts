@@ -338,6 +338,9 @@ function shiftChildRanges(node: MathNode, offset: number): void {
       node.numerator = shiftSourceRanges(node.numerator, offset);
       node.denominator = shiftSourceRanges(node.denominator, offset);
       break;
+    case 'chem':
+      node.content = shiftSourceRanges(node.content, offset);
+      break;
     case 'scripts':
       node.base = shiftSourceRanges(node.base, offset);
       if (node.superscript) node.superscript = shiftSourceRanges(node.superscript, offset);
@@ -435,6 +438,9 @@ function reassignNodeId(node: MathNode): MathNode {
     case 'frac':
       cloned.numerator = cloned.numerator.map(reassignNodeId);
       cloned.denominator = cloned.denominator.map(reassignNodeId);
+      break;
+    case 'chem':
+      cloned.content = cloned.content.map(reassignNodeId);
       break;
     case 'scripts':
       cloned.base = cloned.base.map(reassignNodeId);

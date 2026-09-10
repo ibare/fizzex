@@ -111,6 +111,10 @@
     "role": "묶음",
     "description": "괄호로 묶여 하나의 단위로 취급되는 식입니다."
   },
+  "chem.content": {
+    "role": "화학식",
+    "description": "물질과 반응을 나타내는 화학 표기입니다."
+  },
   "abs.content": {
     "role": "절댓값 대상",
     "description": "부호를 무시한 크기입니다. 결과는 항상 0 이상입니다."

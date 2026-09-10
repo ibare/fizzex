@@ -12,6 +12,7 @@ import { basicHandlers } from './basic.js';
 import { bigOpHandlers } from './bigops.js';
 import { accentHandlers } from './accents.js';
 import { spaceHandlers } from './spaces.js';
+import { chemistryHandlers } from './chemistry.js';
 
 // 타입 재export
 export type { CommandHandler, CommandContext, CommandResult };
@@ -27,6 +28,7 @@ export type { CommandHandler, CommandContext, CommandResult };
  * 5. 그리스 문자
  * 6. 연산자 및 기호
  * 7. 공백
+ * 8. 화학식 (ce)
  */
 export const commandRegistry: Map<string, CommandHandler> = new Map([
   ...basicHandlers,
@@ -36,6 +38,7 @@ export const commandRegistry: Map<string, CommandHandler> = new Map([
   ...greekHandlers,
   ...operatorHandlers,
   ...spaceHandlers,
+  ...chemistryHandlers,
 ]);
 
 /**
@@ -70,5 +73,6 @@ export const commandStats = {
   greek: greekHandlers.size,
   operators: operatorHandlers.size,
   spaces: spaceHandlers.size,
+  chemistry: chemistryHandlers.size,
   total: commandRegistry.size,
 };

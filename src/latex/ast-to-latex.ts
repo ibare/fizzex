@@ -4,7 +4,8 @@
  * MathNode AST를 LaTeX 문자열로 직렬화
  */
 
-import type { MathNode } from '../types.js';
+import type { MathNode, XArrowNode } from '../types.js';
+import { chemNodesToNotation } from './chem/serializer.js';
 
 /** AST를 LaTeX 문자열로 변환 */
 export function astToLatex(node: MathNode): string {
@@ -72,6 +73,12 @@ export function astToLatex(node: MathNode): string {
       if (node.subscript) out += `_${arg(node.subscript)}`;
       if (node.superscript) out += `^${arg(node.superscript)}`;
       return out;
+    }
+
+    case 'chem': {
+      const row = node.content[0];
+      const inner = row && row.type === 'row' ? row.children : node.content;
+      return `\\ce{${chemNodesToNotation(inner, astToLatex)}}`;
     }
 
     case 'abs': {
@@ -189,8 +196,18 @@ export function astToLatex(node: MathNode): string {
 
     case 'xarrow': {
       const above = node.above.map(astToLatex).join('');
-      const dirMap: Record<string, string> = { left: 'xleftarrow', right: 'xrightarrow', both: 'xleftrightarrow' };
-      const cmd = dirMap[node.direction] || 'xrightarrow';
+      // Record 를 direction 유니온으로 좁혀 둔다 — 방향이 늘 때 컴파일이 잡아준다.
+      const dirMap: Record<XArrowNode['direction'], string> = {
+        left: 'xleftarrow',
+        right: 'xrightarrow',
+        both: 'xleftrightarrow',
+        // 가역 화살표는 대응하는 표준 명령이 없어 harpoon 으로 모은다.
+        // chem 안에서는 화학 직렬화기가 표기를 지키므로 이 경로는 밖으로 꺼낸 경우만이다.
+        equilibrium: 'xrightleftharpoons',
+        equilibriumForward: 'xrightleftharpoons',
+        equilibriumReverse: 'xrightleftharpoons',
+      };
+      const cmd = dirMap[node.direction];
       if (node.below && node.below.length > 0) {
         const below = node.below.map(astToLatex).join('');
         return `\\${cmd}[${below}]{${above}}`;

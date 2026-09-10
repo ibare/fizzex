@@ -5,6 +5,10 @@
  */
 
 import type { Box, GlyphBox, HBox, VBox, RuleBox, KernBox, SurdBox, PathBox, FontMetrics } from './types.js';
+import type { XArrowNode } from '../types.js';
+
+/** 확장 화살표 방향 */
+type XArrowDirection = XArrowNode['direction'];
 import { MathConstants } from './font-metrics.js';
 import { MathStyle, isDisplay, isCramped } from './math-style.js';
 import { isComplexNodeSlot } from './constants.js';
@@ -1471,13 +1475,25 @@ export function createOverbraceBox(
 }
 
 /** 확장 화살표 (xleftarrow/xrightarrow) Box 생성 */
+/**
+ * 가역 반응 화살표인가 — 두 줄로 그려진다.
+ *
+ * `latex/chem/grammar.ts` 의 `isEquilibriumDirection` 과 같은 판정이다.
+ * box 계층은 latex 계층을 import 하지 않으므로 여기 따로 둔다.
+ */
+export function isEquilibriumArrow(direction: XArrowDirection): boolean {
+  return direction.startsWith('equilibrium');
+}
+
+/** 확장 화살표 (xleftarrow/xrightarrow) Box 생성 */
 export function createXArrowBox(
   aboveBox: Box,
   belowBox: Box | undefined,
-  direction: 'left' | 'right' | 'both',
+  direction: XArrowDirection,
   metrics: FontMetrics,
   fontSize: number = 1.0,
-  sourceId?: string
+  sourceId?: string,
+  minWidth: number = 0
 ): HBox {
   const actualFontSize = metrics.getActualFontSize(fontSize);
   const padding = actualFontSize * MathConstants.xarrowPadding;
@@ -1486,10 +1502,16 @@ export function createXArrowBox(
 
   // 화살표 너비 = max(위 텍스트, 아래 텍스트) + 좌우 패딩
   const textWidth = Math.max(aboveBox.width, belowBox ? belowBox.width : 0);
-  const arrowWidth = textWidth + padding * 2;
+  const arrowWidth = Math.max(textWidth + padding * 2, minWidth);
 
   // 화살표 Rule (projector에서 감지하여 화살표 경로 그리기)
   const arrowRule = createRule(arrowWidth, ruleThickness);
+  if (isEquilibriumArrow(direction)) {
+    // 두 줄이 rule 박스를 벗어나 위아래 이웃과 겹치지 않도록 세로를 확보한다
+    const harpoonGap = actualFontSize * MathConstants.chemHarpoonGap;
+    arrowRule.height = harpoonGap + ruleThickness / 2;
+    arrowRule.depth = harpoonGap + ruleThickness / 2;
+  }
   (arrowRule as any).xarrow = { direction, width: arrowWidth };
 
   // 위 텍스트 중앙 정렬

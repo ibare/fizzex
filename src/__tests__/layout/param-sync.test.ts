@@ -210,6 +210,18 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
     resolve: () => MathConstants.xarrowPadding,
     location: 'MathConstants.xarrowPadding',
   },
+  chemArrowMinWidth: {
+    resolve: () => MathConstants.chemArrowMinWidth,
+    location: 'MathConstants.chemArrowMinWidth',
+  },
+  chemHarpoonGap: {
+    resolve: () => MathConstants.chemHarpoonGap,
+    location: 'MathConstants.chemHarpoonGap',
+  },
+  chemUnequalArrowRatio: {
+    resolve: () => MathConstants.chemUnequalArrowRatio,
+    location: 'MathConstants.chemUnequalArrowRatio',
+  },
 
   // ── radical degree ──
   radicalDegreeBottomRaisePercent: {
@@ -241,7 +253,10 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
   xi13_bigOpSpacing5: null,
   operatorSpacing_thin: null,
   operatorSpacing_medium: null,
-  operatorSpacing_thick: null,
+  operatorSpacing_thick: {
+    resolve: () => MathConstants.thickSpace,
+    location: 'MathConstants.thickSpace',
+  },
 };
 
 // ── 테스트 ──

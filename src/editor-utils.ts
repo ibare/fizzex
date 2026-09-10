@@ -31,6 +31,8 @@ function getChildKeys(node: MathNode): string[] {
       return ['base', 'superscript', 'subscript', 'leftSuperscript', 'leftSubscript'];
     case 'sqrt':
       return ['content', 'index'];
+    case 'chem':
+      return ['content'];
     case 'paren':
     case 'abs':
     case 'overline':

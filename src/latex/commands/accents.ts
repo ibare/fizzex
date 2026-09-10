@@ -3,6 +3,7 @@
  */
 
 import type { AccentNode } from '../../types.js';
+import type { XArrowNode } from '../../types.js';
 import type { CommandHandler } from './types.js';
 import { createAccent, createOverline, createUnderline, createOverbrace, createXArrow } from './helpers.js';
 
@@ -38,7 +39,7 @@ function braceHandler(variant: 'overbrace' | 'underbrace'): CommandHandler {
 }
 
 /** xleftarrow/xrightarrow 핸들러 생성 */
-function xarrowHandler(direction: 'left' | 'right' | 'both'): CommandHandler {
+function xarrowHandler(direction: XArrowNode['direction']): CommandHandler {
   return (ctx) => {
     let pos = ctx.pos;
 
@@ -91,4 +92,5 @@ export const accentHandlers: Map<string, CommandHandler> = new Map([
   ['xleftarrow', xarrowHandler('left')],
   ['xrightarrow', xarrowHandler('right')],
   ['xleftrightarrow', xarrowHandler('both')],
+  ['xrightleftharpoons', xarrowHandler('equilibrium')],
 ]);

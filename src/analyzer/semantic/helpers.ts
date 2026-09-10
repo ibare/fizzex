@@ -82,6 +82,8 @@ export function getChildArrays(node: MathNode): MathNode[][] {
       return [node.children];
     case 'frac':
       return [node.numerator, node.denominator];
+    case 'chem':
+      return [node.content];
     case 'scripts':
       return [node.base, ...SCRIPT_SLOTS.map((slot) => node[slot]).filter((v): v is MathNode[] => v !== undefined)];
     case 'sqrt':

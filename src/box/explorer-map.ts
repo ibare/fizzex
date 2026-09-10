@@ -92,6 +92,9 @@ function collectAstNodes(node: MathNode): Map<string, MathNode> {
         if (n.leftSuperscript) for (const c of n.leftSuperscript) walk(c);
         if (n.leftSubscript) for (const c of n.leftSubscript) walk(c);
         break;
+      case 'chem':
+        for (const c of n.content) walk(c);
+        break;
       case 'sqrt':
         for (const c of n.content) walk(c);
         if (n.index) for (const c of n.index) walk(c);

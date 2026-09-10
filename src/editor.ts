@@ -371,6 +371,8 @@ function getChildKeys(node: MathNode): string[] {
       return ['base', 'superscript', 'subscript', 'leftSuperscript', 'leftSubscript'];
     case 'sqrt':
       return ['content', 'index'];
+    case 'chem':
+      return ['content'];
     case 'paren':
     case 'abs':
     case 'overline':
@@ -616,11 +618,45 @@ export class MathEditor {
 
   /** 연산자 삽입 */
   insertOperator(op: OperatorSymbol | string): void {
+    // 화학식 첨자 안의 + - 는 이항 연산자가 아니라 전하 부호다.
+    // SO4^2- 를 손으로 치려면 첨자 밖으로 나가지도, 연산자 간격이 붙지도 않아야 한다.
+    if ((op === '+' || op === '-') && this.isInsideChemScript()) {
+      const sign: TextNode = {
+        id: generateId(),
+        type: 'text',
+        content: op === '-' ? '−' : '+',
+      };
+      this.insertNodeAtCursor(sign);
+      return;
+    }
+
     // 현재 슬롯의 정책이 autoExitOnBinop 이면 컨테이너 밖으로 먼저 나간다
     this.exitSlotForBinaryOperator();
 
     const newNode: OperatorNode = { id: generateId(), type: 'operator', operator: op };
     this.insertNodeAtCursor(newNode);
+  }
+
+  /**
+   * 커서가 화학식 안의 첨자 슬롯에 있는가.
+   *
+   * 조상 체인을 훑어 chem 을 만나기 전에 첨자 슬롯을 지나는지 본다.
+   */
+  private isInsideChemScript(): boolean {
+    let id = this.requireBoundary().parentId;
+    let sawScriptSlot = false;
+
+    for (let depth = 0; depth < 64; depth++) {
+      const parentInfo = findParent(this.state.ast, id);
+      if (!parentInfo) return false;
+      const { parent, childKey } = parentInfo;
+
+      if (parent.type === 'scripts' && childKey !== 'base') sawScriptSlot = true;
+      if (parent.type === 'chem') return sawScriptSlot;
+
+      id = parent.id;
+    }
+    return false;
   }
 
   /**
@@ -637,6 +673,8 @@ export class MathEditor {
 
     const policy = getSlotPolicyByParent(parentInfo.parent.type, parentInfo.childKey);
     if (!policy?.autoExitOnBinop) return;
+    // 화학식 안에서는 첨자를 벗어나지 않는다 — 전하 부호를 계속 이어 쓸 수 있어야 한다
+    if (this.isInsideChemScript()) return;
 
     // 컨테이너 노드(예: power, frac) 다음 위치로 커서 이동
     const containerInfo = findParent(this.state.ast, parentInfo.parent.id);
@@ -873,7 +911,7 @@ export class MathEditor {
 
       const parent = parentInfo.parent;
 
-      const complexTypes: MathNodeType[] = ['frac', 'scripts', 'paren', 'abs', 'integral', 'sum', 'limit', 'product', 'overline', 'matrix'];
+      const complexTypes: MathNodeType[] = ['frac', 'scripts', 'chem', 'paren', 'abs', 'integral', 'sum', 'limit', 'product', 'overline', 'matrix'];
       if (complexTypes.includes(parent.type)) {
         // 복합 노드 전체를 삭제 (불변)
         const grandParentInfo = findParent(this.state.ast, parent.id);
@@ -1041,7 +1079,8 @@ export class MathEditor {
         }
         return null;
       }
-      case 'sqrt': {
+      case 'sqrt':
+      case 'chem': {
         const contentRow = node.content[0] as RowNode;
         return { id: contentRow.id, length: contentRow.children.length };
       }

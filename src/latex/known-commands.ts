@@ -67,6 +67,8 @@ export const KNOWN_PACKAGE_COMMANDS: ReadonlyMap<string, string> = new Map([
   // mathtools
   ['DeclarePairedDelimiter', 'mathtools'],
   ['DeclareMathOperator', 'mathtools'],
+
+
   ['coloneqq', 'mathtools'], ['eqqcolon', 'mathtools'],
 
   // amsthm
@@ -74,6 +76,13 @@ export const KNOWN_PACKAGE_COMMANDS: ReadonlyMap<string, string> = new Map([
 
   // hyperref
   ['href', 'hyperref'], ['url', 'hyperref'],
+
+  // mhchem — \ce 는 구현했고 나머지는 아직이다
+  ['pu', 'mhchem'],
+  ['bond', 'mhchem'],
+  ['ces', 'mhchem'],
+  ['cf', 'mhchem'],
+  ['cee', 'mhchem'],
 ]);
 
 /**

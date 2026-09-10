@@ -9,6 +9,7 @@ import type {
   RootNode,
   FracNode,
   ScriptsNode,
+  ChemNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -106,6 +107,11 @@ function walkNode(
       const frac = node as FracNode;
       walkChildren(frac.numerator, result, depth + 1);
       walkChildren(frac.denominator, result, depth + 1);
+      break;
+    }
+
+    case 'chem': {
+      walkChildren((node as ChemNode).content, result, depth + 1);
       break;
     }
 
@@ -286,6 +292,10 @@ export function findNodes<T extends MathNode>(
         const frac = node as FracNode;
         frac.numerator.forEach(search);
         frac.denominator.forEach(search);
+        break;
+      }
+      case 'chem': {
+        (node as ChemNode).content.forEach(search);
         break;
       }
       case 'scripts': {

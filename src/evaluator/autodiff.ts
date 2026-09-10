@@ -273,6 +273,7 @@ function dispatchInner(node: MathNode, ctx: AutoCtx): DualOutcome {
         nodeType: 'operator',
         reason: `bare-operator:${(node as OperatorNode).operator}`,
       });
+    case 'chem':
     case 'overline':
     case 'accent':
     case 'matrix':

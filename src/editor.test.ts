@@ -948,4 +948,61 @@ describe('Editor', () => {
       expect(children.some((c) => c.type === 'scripts')).toBe(false);
     });
   });
+
+  // ─────────────────────────────────────────────
+  // 화학식 편집
+  // ─────────────────────────────────────────────
+  describe('화학식 안에서의 입력', () => {
+    it('첨자 안의 - 는 첨자 밖으로 나가지 않는다 (전하 부호)', () => {
+      // SO4^2- 를 손으로 치려면 - 가 이항 연산자로 해석되면 안 된다
+      const editor = new MathEditor(vi.fn());
+      editor.setState(createStateFromLatex('\\ce{SO4^2}'));
+
+      // 위첨자 row 안으로 커서를 옮긴다
+      const chem = editor.getState().ast.children[0] as any;
+      const body = chem.content[0].children;
+      const scripts = body.find((n: any) => n.type === 'scripts');
+      const supRow = scripts.superscript[0];
+      editor.setState({
+        ...editor.getState(),
+        cursor: { kind: 'boundary', parentId: supRow.id, index: supRow.children.length },
+      });
+
+      editor.insertOperator('-');
+
+      const after = editor.getState().ast.children[0] as any;
+      const afterScripts = after.content[0].children.find((n: any) => n.type === 'scripts');
+      const sup = afterScripts.superscript[0].children;
+      // 부호가 첨자 안에 남고, 간격을 붙이는 operator 가 아니라 text 다
+      expect(sup).toHaveLength(2);
+      expect(sup[1].type).toBe('text');
+      expect(sup[1].content).toBe('−');
+    });
+
+    it('화학식 밖 첨자에서는 - 가 기존대로 밖으로 나간다', () => {
+      const editor = new MathEditor(vi.fn());
+      editor.setState(createStateFromLatex('x^2'));
+      const scripts = editor.getState().ast.children[0] as any;
+      const supRow = scripts.superscript[0];
+      editor.setState({
+        ...editor.getState(),
+        cursor: { kind: 'boundary', parentId: supRow.id, index: supRow.children.length },
+      });
+
+      editor.insertOperator('-');
+
+      // 첨자 밖 최상위로 나온다
+      const children = editor.getState().ast.children;
+      expect(children.some((c) => c.type === 'operator')).toBe(true);
+    });
+
+    it('커서가 화학식 안으로 들어간다', () => {
+      const editor = new MathEditor(vi.fn());
+      editor.setState(createStateFromLatex('\\ce{H2O}'));
+      const chem = editor.getState().ast.children[0] as any;
+      // 화학식 본문 row 가 커서 진입 대상이다
+      expect(chem.content[0].type).toBe('row');
+      expect(chem.content[0].id).toBeTruthy();
+    });
+  });
 });

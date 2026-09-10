@@ -4,7 +4,7 @@
  * 수식 AST를 Box 트리로 변환
  */
 
-import type { MathNode, ScriptsNode } from '../types.js';
+import type { MathNode, ScriptsNode, ChemNode, XArrowNode, RowNode } from '../types.js';
 import type { Box, HBox, PathBox, SurdBox, FontMetrics } from './types.js';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths.js';
 import { MathConstants } from './font-metrics.js';
@@ -90,6 +90,9 @@ function astToBoxInternal(
 
     case 'scripts':
       return convertScripts(node, metrics, fontSize, style);
+
+    case 'chem':
+      return convertChem(node, metrics, fontSize, style);
 
     case 'sqrt':
       return convertSqrt(node, metrics, fontSize, style);
@@ -268,6 +271,55 @@ function convertFrac(
   }
 
   return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id, effectiveStyle);
+}
+
+/**
+ * 화학식 안에서 인접한 두 요소 사이에 필요한 간격 종류.
+ *
+ * 일반 수식에는 atom 타입 분류와 8×8 간격표가 없다. 화학식은 반응식 가독성이 간격에 크게
+ * 좌우되므로, chem 스코프 안에서만 필요한 최소 크기로 그 역할을 대신한다.
+ */
+type ChemAtomClass = 'ord' | 'bin' | 'rel' | 'space';
+
+function chemAtomClass(node: MathNode): ChemAtomClass {
+  if (node.type === 'xarrow') return 'rel';
+  if (node.type === 'operator') return 'bin';
+  if (node.type === 'space') return 'space';
+  return 'ord';
+}
+
+/**
+ * (왼쪽, 오른쪽) → em 단위 kern.
+ *
+ * bin(연산자)은 createOperator 가 이미 좌우 여백을 갖고 있어 0 이다.
+ * 이 여백은 AST 에 넣지 않는다 — 사용자가 지울 수 있으면 안 되고 왕복에도 나타나면 안 된다.
+ */
+function chemGapEm(left: ChemAtomClass, right: ChemAtomClass): number {
+  if (left === 'space' || right === 'space') return 0;
+  if (left === 'rel' || right === 'rel') return MathConstants.thickSpace;
+  return 0;
+}
+
+/** 화학식 노드 변환 */
+function convertChem(
+  node: ChemNode,
+  metrics: FontMetrics,
+  fontSize: number,
+  style: MathStyle
+): Box {
+  const row = node.content[0];
+  const children = row && row.type === 'row' ? (row as RowNode).children : node.content;
+  const em = metrics.getActualFontSize(fontSize);
+
+  const boxes: Box[] = [];
+  for (let i = 0; i < children.length; i++) {
+    if (i > 0) {
+      const gap = chemGapEm(chemAtomClass(children[i - 1]), chemAtomClass(children[i]));
+      if (gap > 0) boxes.push(createKern(em * gap));
+    }
+    boxes.push(astToBoxInternal(children[i], metrics, fontSize, style));
+  }
+  return createHBox(boxes, node.id);
 }
 
 /** 첨자 노드 변환 — 위/아래/좌측 첨자를 한 노드가 소유한다 */
@@ -563,7 +615,7 @@ function convertAccent(
 
 /** 확장 화살표 노드 변환 */
 function convertXArrow(
-  node: MathNode & { above: MathNode[]; below?: MathNode[]; direction: 'left' | 'right' | 'both' },
+  node: XArrowNode,
   metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
@@ -577,7 +629,9 @@ function convertXArrow(
     belowBox = astToBoxInternal(belowNode, metrics, fontSize * MathConstants.exponentScale, style);
   }
 
-  return createXArrowBox(aboveBox, belowBox, node.direction, metrics, fontSize, node.id);
+  // 반응 화살표는 라벨이 없어도 반응식에서 읽히도록 최소 길이를 준다
+  const minWidth = metrics.getActualFontSize(fontSize) * MathConstants.chemArrowMinWidth;
+  return createXArrowBox(aboveBox, belowBox, node.direction, metrics, fontSize, node.id, minWidth);
 }
 
 /** 행렬 노드 변환 */

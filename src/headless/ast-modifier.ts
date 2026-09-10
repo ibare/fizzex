@@ -124,6 +124,8 @@ export function cloneAst(node: MathNode): MathNode {
         numerator: node.numerator.map(cloneAst),
         denominator: node.denominator.map(cloneAst),
       };
+    case 'chem':
+      return { ...node, content: node.content.map(cloneAst) };
     case 'scripts':
       return {
         ...node,
@@ -239,6 +241,8 @@ function getChildren(node: MathNode): MathNode[] {
       return node.children;
     case 'frac':
       return [...node.numerator, ...node.denominator];
+    case 'chem':
+      return node.content;
     case 'scripts':
       return [
         ...node.base,

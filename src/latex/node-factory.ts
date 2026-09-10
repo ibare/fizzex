@@ -13,6 +13,7 @@ import type {
   OperatorNode,
   FracNode,
   ScriptsNode,
+  ChemNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -65,6 +66,7 @@ export type MathNodeMap = {
   overset: OversetNode;
   cancel: CancelNode;
   xarrow: XArrowNode;
+  chem: ChemNode;
   matrix: MatrixNode;
   align: AlignNode;
   cases: CasesNode;
@@ -378,6 +380,7 @@ export function hasChildren(node: MathNode): boolean {
     type === 'overset' ||
     type === 'cancel' ||
     type === 'xarrow' ||
+    type === 'chem' ||
     type === 'opaque'
   );
 }

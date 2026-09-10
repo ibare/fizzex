@@ -474,6 +474,18 @@ export const MathConstants = {
   overbraceBraceHeight: 0.3,
   overbraceAnnotationGap: 0.15,
   xarrowPadding: 0.3,
+
+  /**
+   * Rel atom 좌우 간격 (TeX \thickmuskip = 5mu).
+   * spec 의 operatorSpacing_thick 을 구현한 것이다.
+   */
+  thickSpace: 0.278,
+  /** 라벨 없는 반응 화살표의 최소 길이 */
+  chemArrowMinWidth: 1.0,
+  /** 가역 반응 화살표 두 선의 중심선 대비 오프셋 */
+  chemHarpoonGap: 0.09,
+  /** <=>> / <<=> 에서 짧은 쪽 화살표의 길이 비 */
+  chemUnequalArrowRatio: 0.6,
   smallMatrixScale: 0.7,
 
   // ── radical degree (Rule 11) ──

@@ -18,6 +18,10 @@ import type { SpanPair } from './offset-map.js';
 const TEXT_MODE_COMMANDS = new Set([
   'text', 'mathrm', 'textrm', 'textbf', 'textit', 'textsf', 'texttt',
   'mbox', 'hbox', 'fbox', 'operatorname',
+  // 화학식 본문은 공백이 의미를 가지므로 정규화·구분자 감지를 건너뛴다
+  'ce',
+  // NOTE: `streaming/tokenizer.ts` 의 같은 이름 Set 과 짝을 이룬다.
+  // 목적이 달라 합치지는 않지만 내용이 갈라지면 안 된다 — text-mode-sync.test.ts 가 지킨다.
 ]);
 
 export interface PreProcessOptions {

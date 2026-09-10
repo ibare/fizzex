@@ -70,6 +70,10 @@ export function buildAstAncestorMap(ast: MathNode): Map<string, AncestorEntry[]>
         }
         break;
       }
+      case 'chem':
+        for (const c of node.content)
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
+        break;
       case 'sqrt':
         for (const c of node.content)
           walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);

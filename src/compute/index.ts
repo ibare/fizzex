@@ -129,6 +129,7 @@ export type {
   OperatorNode,
   FracNode,
   ScriptsNode,
+  ChemNode,
   SqrtNode,
   ParenNode,
   AbsNode,

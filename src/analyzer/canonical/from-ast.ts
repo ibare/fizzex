@@ -34,6 +34,7 @@ import type {
   OversetNode,
   ParenNode,
   ScriptsNode,
+  ChemNode,
   ProductNode,
   RootNode,
   RowNode,
@@ -352,6 +353,10 @@ function normalizeNode(node: MathNode, ctx: Ctx, depth: number): ExprNode {
       // 그 위에 위첨자를 거듭제곱으로 씌운다
       return n.superscript ? app('pow', [inner, seq(n.superscript)], src) : inner;
     }
+
+    case 'chem':
+      // 화학식은 수식이 아니다 — 통째로 불투명 처리한다
+      return opaque('chem', [seq((node as ChemNode).content)], src);
 
     case 'frac': {
       const n = node as FracNode;

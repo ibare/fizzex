@@ -7,6 +7,8 @@
 
 import type { Box, BoxRenderConfig, GlyphBox, HBox, VBox, RuleBox, SurdBox, PathBox, FontMetrics } from './types.js';
 import { MathConstants } from './font-metrics.js';
+import { isEquilibriumArrow } from './box-builder.js';
+import type { XArrowNode } from '../types.js';
 import type { CursorPosition } from '../types.js';
 import { findBoxBySourceId, getCursorXPosition } from './box-layout.js';
 import { isComplexNodeSlot } from './constants.js';
@@ -367,7 +369,10 @@ export class Projector {
     info: { direction: string; width: number }
   ): void {
     const x = rule.x;
-    const midY = rule.y - rule.height / 2;
+    // rule 이 차지한 세로 범위 [y-height, y+depth] 의 한가운데.
+    // 일반 화살표는 height=depth=thickness/2 라 baseline 그대로이고,
+    // 평형 화살표처럼 세로를 키운 rule 에서도 두 선이 범위 안에 남는다.
+    const midY = rule.y + (rule.depth - rule.height) / 2;
     const w = info.width;
     const lw = this.config.baseFontSize * 0.04;
     const headSize = this.config.baseFontSize * 0.15;
@@ -376,6 +381,31 @@ export class Projector {
     this.backend.setStrokeStyle(this.config.color);
     this.backend.setLineWidth(lw);
     this.backend.beginPath();
+
+    // 가역 반응 화살표 — 위는 오른쪽, 아래는 왼쪽으로 가는 두 줄
+    if (isEquilibriumArrow(info.direction as XArrowNode['direction'])) {
+      const g = this.config.baseFontSize * MathConstants.chemHarpoonGap;
+      const ratio = MathConstants.chemUnequalArrowRatio;
+      // 우세하지 않은 쪽을 짧게 그린다
+      const topLen = info.direction === 'equilibriumReverse' ? w * ratio : w;
+      const botLen = info.direction === 'equilibriumForward' ? w * ratio : w;
+
+      // 위: 오른쪽 끝에 맞춘 오른쪽 화살표
+      this.backend.moveTo(x + w - topLen, midY - g);
+      this.backend.lineTo(x + w, midY - g);
+      this.backend.moveTo(x + w - headSize, midY - g - headSize);
+      this.backend.lineTo(x + w, midY - g);
+
+      // 아래: 왼쪽 끝에 맞춘 왼쪽 화살표
+      this.backend.moveTo(x + botLen, midY + g);
+      this.backend.lineTo(x, midY + g);
+      this.backend.moveTo(x + headSize, midY + g + headSize);
+      this.backend.lineTo(x, midY + g);
+
+      this.backend.stroke();
+      this.backend.restore();
+      return;
+    }
 
     // 수평선
     this.backend.moveTo(x, midY);

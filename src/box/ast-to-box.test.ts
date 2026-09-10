@@ -197,4 +197,76 @@ describe('AST to Box', () => {
       expect(varBox.sourceId).toBe(ast.children[0].id);
     });
   });
+
+  // ─────────────────────────────────────────────
+  // 화학식 (\ce)
+  // ─────────────────────────────────────────────
+  describe('화학식 조판', () => {
+    function boxOf(latex: string): Box {
+      const { ast } = parseLatex(latex);
+      return astToBox(ast, metrics, 1.0, true);
+    }
+
+    function collectGlyphs(box: Box, out: any[] = []): any[] {
+      if (box.type === 'glyph') out.push(box);
+      const kids = (box as HBox).children;
+      if (Array.isArray(kids)) for (const c of kids) collectGlyphs(c, out);
+      return out;
+    }
+
+    function collectKerns(box: Box, out: Box[] = []): Box[] {
+      if (box.type === 'kern') out.push(box);
+      const kids = (box as HBox).children;
+      if (Array.isArray(kids)) for (const c of kids) collectKerns(c, out);
+      return out;
+    }
+
+    it('원소 기호를 곧게 세워 쓴다 — 이탤릭 글리프가 없다', () => {
+      const glyphs = collectGlyphs(boxOf('\\ce{H2O}'));
+      expect(glyphs.length).toBeGreaterThan(0);
+      expect(glyphs.every((g) => g.italic === false)).toBe(true);
+    });
+
+    it('화살표 좌우에 여백을 넣는다 — AST 가 아니라 조판이 넣는다', () => {
+      const withArrow = boxOf('\\ce{A -> B}');
+      const withoutArrow = boxOf('\\ce{AB}');
+      expect(collectKerns(withArrow).length).toBeGreaterThan(
+        collectKerns(withoutArrow).length,
+      );
+    });
+
+    it('항 사이 공백이 폭 차이로 드러난다 — H2O (l) 이 H2O(l) 보다 넓다', () => {
+      expect(boxOf('\\ce{H2O (l)}').width).toBeGreaterThan(boxOf('\\ce{H2O(l)}').width);
+    });
+
+    it('라벨 없는 화살표에도 최소 길이를 준다', () => {
+      const box = boxOf('\\ce{A -> B}');
+      const rules: any[] = [];
+      const walk = (b: Box): void => {
+        if (b.type === 'rule' && (b as any).xarrow) rules.push(b);
+        const kids = (b as HBox).children;
+        if (Array.isArray(kids)) for (const c of kids) walk(c);
+      };
+      walk(box);
+      expect(rules).toHaveLength(1);
+      expect(rules[0].xarrow.width).toBeGreaterThanOrEqual(20 * 1.0);
+    });
+
+    it('가역 화살표는 두 선을 담을 세로 여유를 갖는다', () => {
+      const findArrowRule = (latex: string): any => {
+        let found: any = null;
+        const walk = (b: Box): void => {
+          if (b.type === 'rule' && (b as any).xarrow) found = b;
+          const kids = (b as HBox).children;
+          if (Array.isArray(kids)) for (const c of kids) walk(c);
+        };
+        walk(boxOf(latex));
+        return found;
+      };
+      const plain = findArrowRule('\\ce{A -> B}');
+      const equilibrium = findArrowRule('\\ce{A <=> B}');
+      expect(equilibrium.height).toBeGreaterThan(plain.height);
+      expect(equilibrium.depth).toBeGreaterThan(plain.depth);
+    });
+  });
 });

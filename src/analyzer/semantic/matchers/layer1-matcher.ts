@@ -62,6 +62,7 @@ const LAYER1_RULE_DEFS: Layer1RuleDef[] = [
   { key: 'limit.approach', parentType: 'limit', childPosition: 'approach' },
   { key: 'limit.body', parentType: 'limit', childPosition: 'body' },
   { key: 'paren.content', parentType: 'paren', childPosition: 'content' },
+  { key: 'chem.content', parentType: 'chem', childPosition: 'content' },
   { key: 'abs.content', parentType: 'abs', childPosition: 'content' },
   { key: 'func.argument', parentType: 'func', childPosition: 'argument' },
   { key: 'matrix.element', parentType: 'matrix', childPosition: 'element' },

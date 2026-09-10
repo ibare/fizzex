@@ -2,7 +2,7 @@
  * 명령어 핸들러용 노드 생성 헬퍼 함수
  */
 
-import type { MathNode, RowNode, ScriptsNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
+import type { MathNode, RowNode, ScriptsNode, ChemNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
 import { generateLatexId, deriveId } from '../../utils/id-generator.js';
 
 /** ID 생성 (내부용 alias) */
@@ -56,6 +56,17 @@ export function createParen(
   const node: ParenNode = { id: parenId, type: 'paren', content: [contentRow], parenType, autoSize };
   if (delimiterSize) node.delimiterSize = delimiterSize;
   return node;
+}
+
+/**
+ * 화학식 노드 생성 (`\ce{...}`)
+ *
+ * 본문은 RowNode 하나로 감싼다 — 커서가 들어갈 자리를 주기 위함이고, `createParen` 과 같은 규약이다.
+ */
+export function createChem(content: MathNode[]): ChemNode {
+  const id = generateId();
+  const contentRow: RowNode = { id: deriveId(id, '_content'), type: 'row', children: content };
+  return { id, type: 'chem', content: [contentRow] };
 }
 
 export function createAbs(content: MathNode[]): MathNode {
@@ -362,7 +373,7 @@ export function createAccent(
 export function createXArrow(
   above: MathNode[],
   below: MathNode[] | undefined,
-  direction: 'left' | 'right' | 'both'
+  direction: XArrowNode['direction']
 ): MathNode {
   const id = generateId();
   const aboveRow: RowNode = { id: deriveId(id, '_above'), type: 'row', children: above };

@@ -410,6 +410,8 @@ function getNodeChildren(node: MathNode): MathNode[] {
         ...(node as { numerator: MathNode[] }).numerator,
         ...(node as { denominator: MathNode[] }).denominator,
       ];
+    case 'chem':
+      return (node as { content: MathNode[] }).content;
     case 'scripts': {
       const n = node as ScriptsNode;
       return [...n.base, ...SCRIPT_SLOTS.flatMap((slot) => n[slot] ?? [])];

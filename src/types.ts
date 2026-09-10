@@ -31,6 +31,7 @@ export type MathNodeType =
   | 'overset'   // 위/아래 첨자 구조 (overset, underset, stackrel)
   | 'cancel'    // 취소선 (cancel, bcancel, xcancel)
   | 'xarrow'    // 확장 화살표 (xleftarrow, xrightarrow)
+  | 'chem'      // 화학식 구간 (\ce{...})
   | 'literal'   // 원본 LaTeX 보존 (해석 없이)
   | 'error'     // 파싱 실패 구간
   | 'opaque';   // 미지 커맨드 (구조는 있으나 의미 불명)
@@ -227,7 +228,20 @@ export interface XArrowNode extends MathNodeBase {
   type: 'xarrow';
   above: MathNode[];        // 화살표 위 텍스트
   below?: MathNode[];       // 화살표 아래 텍스트 (선택)
-  direction: 'left' | 'right' | 'both';
+  /**
+   * 화살표 모양.
+   * - left/right/both: 한 줄짜리 화살표
+   * - equilibrium: 가역 반응 (위는 오른쪽, 아래는 왼쪽으로 가는 두 줄)
+   * - equilibriumForward: 정반응이 우세 — 되돌아가는 쪽이 짧다
+   * - equilibriumReverse: 역반응이 우세
+   */
+  direction:
+    | 'left'
+    | 'right'
+    | 'both'
+    | 'equilibrium'
+    | 'equilibriumForward'
+    | 'equilibriumReverse';
 }
 
 /** 행렬 노드 */
@@ -299,6 +313,25 @@ export interface SpaceNode extends MathNodeBase {
   width: number;
 }
 
+/**
+ * 화학식 노드 (`\ce{...}`)
+ *
+ * 이 노드 안쪽에서만 입력과 직렬화가 화학 표기법으로 해석된다. 바깥은 평소의 수식 규칙 그대로다.
+ * 안쪽 내용물은 화학 전용 노드가 아니라 글자(text)·숫자(number)·첨자(scripts)·괄호(paren)·
+ * 화살표(xarrow)·기호(operator) 같은 일반 노드로 이루어진다.
+ *
+ * 화학식 안에서 달라지는 것:
+ * - 글자는 기울이지 않고 곧게 세워 쓴다 (H₂O 의 H, O)
+ * - 원소 기호 바로 뒤의 숫자는 아래첨자가 된다 (H2 → H₂)
+ * - `->` `<=>` 같은 글자 조합이 반응 화살표가 된다
+ * - 띄어쓰기가 의미를 가진다 (`H2O (l)` 과 `H2O(l)` 은 다르다)
+ */
+export interface ChemNode extends MathNodeBase {
+  type: 'chem';
+  /** 화학식 본문 — 계수·원소·전하·상태·화살표가 왼쪽에서 오른쪽으로 놓인 한 줄 */
+  content: MathNode[];
+}
+
 /** Row 노드 (가로 나열) */
 export interface RowNode extends MathNodeBase {
   type: 'row';
@@ -355,6 +388,7 @@ export type MathNode =
   | OversetNode
   | CancelNode
   | XArrowNode
+  | ChemNode
   | MatrixNode
   | AlignNode
   | CasesNode

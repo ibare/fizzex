@@ -667,7 +667,8 @@ export function analyzeCursorContext(state: EditorState): CursorContext {
         return 'after_operator';
       case 'paren':
       case 'abs':
-        // 닫는 괄호/절댓값 뒤는 변수 뒤와 유사
+      case 'chem':
+        // 닫는 괄호/절댓값/화학식 뒤는 변수 뒤와 유사
         return 'after_variable';
       case 'frac':
       case 'scripts':

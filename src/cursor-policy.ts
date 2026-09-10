@@ -50,6 +50,7 @@ export type ContainerNodeType =
   | 'cancel'
   | 'overset'
   | 'xarrow'
+  | 'chem'
   | 'matrix'
   | 'align'
   | 'cases'
@@ -111,6 +112,9 @@ export const CONTAINER_POLICY: {
   frac: {
     numerator: TERM,
     denominator: TERM,
+  },
+  chem: {
+    content: SUBEXPR,
   },
   scripts: {
     base: SUBEXPR,

@@ -10,10 +10,19 @@ function spaceHandler(width: number): CommandHandler {
   return (ctx) => ({ nodes: [createSpace(width)], consumed: ctx.pos });
 }
 
+/**
+ * thin space (3/18 em).
+ *
+ * spec 의 `operatorSpacing_thin` 과 같은 값이다. 화학식의 항 사이 공백도 이 폭을 쓴다 —
+ * `latex/` 는 `box/` 를 import 할 수 없어(compute 클로저) MathConstants 를 참조하지 못하므로
+ * 여기 명명 상수를 둔다.
+ */
+export const THIN_SPACE_EM = 0.167;
+
 /** 공백 핸들러 레지스트리 */
 export const spaceHandlers: Map<string, CommandHandler> = new Map([
   // 가변 공백
-  [',', spaceHandler(0.167)],  // thin space (3/18 em)
+  [',', spaceHandler(THIN_SPACE_EM)],  // thin space (3/18 em)
   [':', spaceHandler(0.222)],  // medium space (4/18 em)
   [';', spaceHandler(0.278)],  // thick space (5/18 em)
   ['!', spaceHandler(-0.167)], // negative thin space
