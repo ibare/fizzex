@@ -1,0 +1,99 @@
+{
+  "arithmetic-mean": {
+    "name": "Média aritmética",
+    "oneLiner": "Valor representativo obtido somando todos os dados e dividindo pela quantidade deles",
+    "description": "A média aritmética é o valor obtido ao somar o conjunto inteiro de dados e dividir pela quantidade de dados. Quando se fala em 'média', normalmente é a média aritmética que se quer dizer. É o valor representativo que indica da forma mais simples onde está o centro dos dados, e a estatística mais usada no dia a dia.",
+    "field": "Estatística",
+    "significance": "É a maneira mais básica de resumir um conjunto de dados em um único número, e o ponto de partida de quase toda análise estatística.",
+    "elementMeanings": {
+      "\\bar{x}": { "role": "média aritmética", "description": "É o valor médio do conjunto inteiro de dados.", "kind": "output" },
+      "x_i": { "role": "valor individual", "description": "É o i-ésimo valor do conjunto de dados.", "kind": "input" },
+      "n": { "role": "quantidade de dados", "description": "Indica quantos dados existem.", "kind": "input" },
+      "\\sum": { "role": "símbolo de somatório", "description": "Significa somar todos os valores dos dados.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular a média das notas de prova dos alunos de uma turma",
+      "Calcular a média das temperaturas diárias ao longo de um mês",
+      "Descobrir o gasto médio diário a partir do registro de despesas da mesada"
+    ],
+    "relatedFormulas": ["weighted-mean", "variance-basic", "std-dev-basic"]
+  },
+  "variance-basic": {
+    "name": "Variância",
+    "oneLiner": "Média dos quadrados das distâncias entre cada dado e a média",
+    "description": "A variância é a medida que expressa em um único número o quanto os dados estão espalhados em torno da média. Basta subtrair a média de cada dado, elevar essa diferença ao quadrado, somar tudo e dividir pela quantidade de dados. Quanto maior o valor, mais amplamente os dados estão distribuídos.",
+    "field": "Estatística",
+    "significance": "É a medida central para quantificar a dispersão dos dados e, junto com o desvio padrão, forma a base da análise estatística.",
+    "elementMeanings": {
+      "\\sigma^2": { "role": "variância", "description": "Variância populacional. Indica o quanto os dados estão dispersos.", "kind": "output" },
+      "x_i": { "role": "valor individual", "description": "É o i-ésimo valor do conjunto de dados.", "kind": "input" },
+      "\\bar{x}": { "role": "média", "description": "É a média aritmética do conjunto inteiro de dados.", "kind": "output" },
+      "(x_i - \\bar{x})^2": { "role": "quadrado do desvio", "description": "É o quadrado da distância entre cada dado e a média.", "kind": "structural" },
+      "n": { "role": "quantidade de dados", "description": "É o número total de dados.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Comparar, pela variância, a diferença na distribuição das notas de duas turmas que têm a mesma média",
+      "Usar a variância para verificar a uniformidade do peso dos produtos em uma fábrica",
+      "Medir pela variância a amplitude de oscilação do retorno de uma ação"
+    ],
+    "relatedFormulas": ["arithmetic-mean", "std-dev-basic", "coefficient-of-variation"]
+  },
+  "std-dev-basic": {
+    "name": "Desvio padrão",
+    "oneLiner": "Medida que expressa, na unidade original, o quanto os dados se afastam da média",
+    "description": "O desvio padrão é a raiz quadrada da variância. Como a variância está em unidade ao quadrado, sua interpretação intuitiva é difícil; ao extrair a raiz quadrada, o resultado volta à mesma unidade dos dados originais, e é possível entender de imediato que os dados estão 'mais ou menos a esta distância da média'.",
+    "field": "Estatística",
+    "significance": "Como expressa a dispersão na mesma unidade dos dados originais, sua interpretação é intuitiva, e junto com a distribuição normal é a medida de dispersão mais utilizada.",
+    "elementMeanings": {
+      "\\sigma": { "role": "desvio padrão", "description": "Desvio padrão populacional. Indica a dispersão dos dados na unidade original.", "kind": "output" },
+      "x_i": { "role": "valor individual", "description": "É o i-ésimo valor do conjunto de dados.", "kind": "input" },
+      "\\bar{x}": { "role": "média", "description": "É a média aritmética do conjunto inteiro de dados.", "kind": "output" },
+      "n": { "role": "quantidade de dados", "description": "É o número total de dados.", "kind": "input" },
+      "\\sqrt{}": { "role": "raiz quadrada", "description": "Extrai a raiz quadrada da variância para retornar à unidade original.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Expressar a dispersão dos dados de altura dos alunos como 'média de 165 cm, desvio padrão de 5 cm'",
+      "Julgar pelo desvio padrão das notas se a distribuição do desempenho é homogênea",
+      "Explicar na previsão do tempo a amplitude de variação da temperatura pelo desvio padrão"
+    ],
+    "relatedFormulas": ["variance-basic", "arithmetic-mean", "coefficient-of-variation"]
+  },
+  "weighted-mean": {
+    "name": "Média ponderada",
+    "oneLiner": "Média calculada levando em conta a importância (peso) de cada dado",
+    "description": "A média ponderada não trata todos os dados igualmente: multiplica cada dado por um peso que representa sua importância, soma tudo e divide pela soma dos pesos. O cálculo das notas escolares, em que cada disciplina tem um número diferente de créditos, é o exemplo mais típico.",
+    "field": "Estatística",
+    "significance": "Quando os dados têm importâncias diferentes, oferece um valor representativo mais preciso do que a simples média aritmética.",
+    "elementMeanings": {
+      "\\bar{x}": { "role": "média ponderada", "description": "É o valor médio calculado levando os pesos em conta.", "kind": "output" },
+      "w_i": { "role": "peso", "description": "É a importância ou a participação do i-ésimo dado.", "kind": "input" },
+      "x_i": { "role": "valor individual", "description": "É o i-ésimo valor do conjunto de dados.", "kind": "input" },
+      "\\sum w_i x_i": { "role": "soma ponderada", "description": "É a soma dos valores obtidos multiplicando cada dado pelo seu peso.", "kind": "structural" },
+      "\\sum w_i": { "role": "soma dos pesos", "description": "É o valor obtido somando todos os pesos.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular o coeficiente de rendimento universitário (CR/GPA), em que cada disciplina tem créditos (pesos) diferentes",
+      "Apurar a nota total de avaliações com pontuações diferentes por atividade",
+      "Calcular o retorno médio de uma carteira de investimentos considerando a participação de cada ativo"
+    ],
+    "relatedFormulas": ["arithmetic-mean", "variance-basic"]
+  },
+  "coefficient-of-variation": {
+    "name": "Coeficiente de variação",
+    "oneLiner": "Valor que divide o desvio padrão pela média para comparar dispersões independentemente da unidade",
+    "description": "O coeficiente de variação é a razão entre o desvio padrão e a média. Ele permite comparar de forma justa a dispersão de conjuntos de dados com unidades diferentes ou com médias de tamanhos diferentes. Costuma ser apresentado em porcentagem (%).",
+    "field": "Estatística",
+    "significance": "É uma medida adimensional que permite comparar a variabilidade entre dados de unidades ou escalas distintas.",
+    "elementMeanings": {
+      "CV": { "role": "coeficiente de variação", "description": "É o desvio padrão dividido pela média. Indica a dispersão relativa.", "kind": "output" },
+      "\\sigma": { "role": "desvio padrão", "description": "É a dispersão dos dados.", "kind": "input" },
+      "\\bar{x}": { "role": "média", "description": "É a média aritmética do conjunto inteiro de dados. Não pode ser zero.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Comparar de forma justa a dispersão da altura (cm) e a do peso (kg)",
+      "Comparar a variabilidade relativa das notas de disciplinas diferentes",
+      "Comparar a uniformidade de qualidade de produtos diferentes fabricados nas fábricas A e B"
+    ],
+    "relatedFormulas": ["std-dev-basic", "arithmetic-mean", "variance-basic"]
+  }
+}

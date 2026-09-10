@@ -1,0 +1,142 @@
+{
+  "fermat-little": {
+    "name": "费马小定理",
+    "oneLiner": "保证对素数 p 与它互素的整数 a，a 的 p-1 次方除以 p 余 1 的定理",
+    "description": "费马小定理是说：当素数 p 不整除 a 时，a^(p-1) 除以 p 的余数必定是 1。它极大地简化了模幂运算，并构成 RSA 密码体制的理论基础。",
+    "discoverer": "皮埃尔·德·费马",
+    "field": "数论",
+    "significance": "它是现代密码学的核心基础，在素性判定算法和模逆元计算中不可或缺。",
+    "elementMeanings": {
+      "a": { "role": "底数", "description": "与素数 p 互素的整数。它是乘方的底数。", "kind": "input" },
+      "p": { "role": "素数模", "description": "作为除法基准的素数。", "kind": "input" },
+      "p-1": { "role": "指数", "description": "素数减 1 所得的值，按这个指数取幂后余数就变成 1。", "kind": "structural" },
+      "\\equiv 1": { "role": "同余结果", "description": "表示模运算的结果为 1。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "在 RSA 密码体制中计算大数的模逆元",
+      "在素性判定算法（费马检验）中验证素数候选",
+      "设计散列函数时分析碰撞概率"
+    ],
+    "relatedFormulas": ["euler-theorem"]
+  },
+  "euler-theorem": {
+    "name": "欧拉定理",
+    "oneLiner": "对互素的整数 a 与正整数 n，a 的欧拉函数值次方除以 n 余 1 的定理",
+    "description": "欧拉定理是把费马小定理推广到合数的结果。当 a 与 n 互素时，把 a 取欧拉函数值次幂，除以 n 的余数就是 1。费马小定理相当于 n 为素数的特殊情形。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "数论",
+    "significance": "作为费马小定理的推广，它直接用于证明 RSA 密码的正确性，并为合数上的模运算提供基础。",
+    "elementMeanings": {
+      "a": { "role": "底数", "description": "与 n 互素的整数。", "kind": "input" },
+      "n": { "role": "模", "description": "作为除法基准的正整数。", "kind": "input" },
+      "\\varphi(n)": { "role": "欧拉函数", "description": "从 1 到 n 的整数中与 n 互素的数的个数。", "kind": "output" },
+      "\\equiv 1": { "role": "同余结果", "description": "表示模运算的结果为 1。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "RSA 密码中计算解密指数的数学依据",
+      "分析迪菲-赫尔曼密钥交换协议的安全性",
+      "计算循环群的阶"
+    ],
+    "relatedFormulas": ["fermat-little"]
+  },
+  "prime-counting": {
+    "name": "素数定理",
+    "oneLiner": "揭示不超过 x 的素数个数渐近于 x/ln(x) 的定理",
+    "description": "素数定理表明，当 x 足够大时，数出不超过 x 的素数个数的函数收敛于 x/ln(x)。它证明了一个惊人的事实：素数的分布看似无规律，但从宏观上看却遵循可预测的密度。",
+    "discoverer": "雅克·阿达马、夏尔·德拉瓦莱普桑（各自独立证明）",
+    "field": "数论",
+    "significance": "它是关于素数分布最基本的定理，也是与黎曼猜想直接相关的解析数论的出发点。",
+    "elementMeanings": {
+      "\\pi(x)": { "role": "素数计数函数", "description": "数出不超过 x 的素数个数的函数。", "kind": "output" },
+      "x": { "role": "上限", "description": "计数素数的范围的上限值。", "kind": "input" },
+      "\\ln(x)": { "role": "自然对数", "description": "x 的自然对数。它表示素数密度的下降速率。", "kind": "structural" },
+      "\\sim": { "role": "渐近等价", "description": "表示当 x 无限增大时两个函数之比收敛于 1。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "搜寻密码用大素数时估计搜索范围",
+      "利用素数密度设计概率性素性判定算法",
+      "在数学研究中对素数间隔作统计分析"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "euclidean-algorithm": {
+    "name": "欧几里得算法",
+    "oneLiner": "通过反复取余运算求两个整数最大公约数的算法",
+    "description": "欧几里得算法反复应用 gcd(a,b) = gcd(b, a mod b) 这一性质，高效地算出最大公约数。余数变为 0 的那一刻的除数就是最大公约数。它被认为是有记载的最古老的算法。",
+    "discoverer": "欧几里得",
+    "field": "数论",
+    "significance": "它是有记载的第一个算法，在分数约分、模逆元计算、RSA 密钥生成等计算机科学各处被核心使用。",
+    "elementMeanings": {
+      "a": { "role": "第一个整数", "description": "要求最大公约数的两个数之一。", "kind": "input" },
+      "b": { "role": "第二个整数", "description": "要求最大公约数的两个数中的另一个。", "kind": "input" },
+      "\\gcd": { "role": "最大公约数函数", "description": "返回两个整数最大公约数的函数。", "kind": "output" },
+      "a \\mod b": { "role": "余数", "description": "a 除以 b 的余数。一直重复到这个值变成 0 为止。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "把分数化为最简分数时计算分子与分母的最大公约数",
+      "在 RSA 密钥生成中用扩展欧几里得算法求出私钥",
+      "在音乐中用两种节拍周期的最小公倍数算出合奏周期"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "quadratic-reciprocity": {
+    "name": "二次互反律",
+    "oneLiner": "揭示两个奇素数 p、q 之间的二次剩余关系彼此对称地决定的定律",
+    "description": "二次互反律给出：给定奇素数 p 与 q 时，p 是否为 q 的二次剩余与 q 是否为 p 的二次剩余之间的确切关系。这条被高斯称为「算术之宝石」的定律，是首次展现数论中互反性原理的结果。",
+    "discoverer": "卡尔·弗里德里希·高斯",
+    "field": "数论",
+    "significance": "它是代数数论与类域论的出发点，也是判定二次方程是否有模意义下的解的核心工具。",
+    "elementMeanings": {
+      "p": { "role": "第一个奇素数", "description": "要应用互反律的两个素数之一。", "kind": "input" },
+      "q": { "role": "第二个奇素数", "description": "要应用互反律的两个素数中的另一个。", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "勒让德符号", "description": "当 p 是 q 的二次剩余时返回 1，否则返回 -1 的符号。", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "符号决定因子", "description": "决定两个勒让德符号之积的正负号的那一项。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "快速判定二次同余式是否有解",
+      "在密码学中设计基于二次剩余的密码系统",
+      "在代数数论研究中推广到高次互反律"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "goldbach-conjecture": {
+    "name": "哥德巴赫猜想",
+    "oneLiner": "大于 2 的所有偶数都能表示为两个素数之和的未解决猜想",
+    "description": "哥德巴赫猜想主张不小于 4 的所有偶数都可以表示为两个素数之和。它最早出现在 1742 年哥德巴赫写给欧拉的信中，虽已用计算机验证到极大的范围，但至今尚未获得证明，是数学中具有代表性的未解决问题。",
+    "discoverer": "克里斯蒂安·哥德巴赫",
+    "field": "数论",
+    "significance": "它是加性数论具有代表性的难题，需要对素数的加法性质有深刻理解才能解决。",
+    "elementMeanings": {
+      "2n": { "role": "偶数", "description": "不小于 4 的任意偶数。", "kind": "input" },
+      "p": { "role": "第一个素数", "description": "构成该偶数的两个素数之一。", "kind": "input" },
+      "q": { "role": "第二个素数", "description": "构成该偶数的两个素数中的另一个。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "借助计算机开展的大规模数值验证项目",
+      "在素数分布研究中为加性问题提供动机",
+      "在数学教育中作为说明猜想与证明之别的代表案例"
+    ],
+    "relatedFormulas": ["prime-counting", "fermat-little"]
+  },
+  "fibonacci-general": {
+    "name": "斐波那契通项公式",
+    "oneLiner": "用黄金比直接算出斐波那契数列第 n 项的闭形式公式",
+    "description": "斐波那契通项公式（比内公式）不经递归，直接用黄金比及其共轭算出数列的第 n 项。由无理数组合而成却总是得到整数，这一点令人惊叹；它也是展示线性递推式特征方程解法的代表案例。",
+    "discoverer": "雅克·菲利普·马里·比内（公式化）、亚伯拉罕·棣莫弗（更早发现）",
+    "field": "数论",
+    "significance": "它表明线性递推式可以化为闭形式求解，并揭示了黄金比与斐波那契数列之间的深刻联系。",
+    "elementMeanings": {
+      "F_n": { "role": "斐波那契数", "description": "数列的第 n 项。", "kind": "output" },
+      "\\varphi": { "role": "黄金比", "description": "(1+√5)/2，约 1.618。它是正的特征根。", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "共轭黄金比", "description": "(1−√5)/2，约 −0.618。它是负的特征根。", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "归一化常数", "description": "两个特征根之差，起到相除以使结果成为整数的作用。", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "项号", "description": "所要求的斐波那契数列中的位置。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在算法分析中计算斐波那契堆的性能界限",
+      "解释自然界中花瓣数、松果螺旋等黄金比图样",
+      "在金融中算出斐波那契回撤位"
+    ],
+    "relatedFormulas": ["euclidean-algorithm"]
+  }
+}

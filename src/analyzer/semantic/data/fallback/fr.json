@@ -1,0 +1,220 @@
+{
+  "roles": {
+    "root": "Expression complète",
+    "number": "Nombre",
+    "variable": "Variable",
+    "operator": "Opérateur",
+    "frac": "Fraction",
+    "sqrt": "Racine carrée",
+    "sum": "Somme (sigma)",
+    "product": "Produit (pi)",
+    "integral": "Intégrale",
+    "limit": "Limite (lim)",
+    "matrix": "Matrice",
+    "paren": "Parenthèses",
+    "abs": "Valeur absolue",
+    "overline": "Barre supérieure",
+    "text": "Texte",
+    "cases": "Expression par cas",
+    "cancel": "Terme barré",
+    "chem": "Formule chimique",
+    "func": "Fonction {name}"
+  },
+  "descriptions": {
+    "root": "Structure d'ensemble de cette expression.",
+    "number": "Le nombre {value}.",
+    "variable": "La variable {name}. Sa valeur peut changer.",
+    "frac": "Fraction — le terme du haut (numérateur) divisé par celui du bas (dénominateur).",
+    "sqrt": "Racine carrée — le nombre dont le carré donne cette valeur.",
+    "sum": "Somme — on additionne le terme général en faisant varier l'indice.",
+    "product": "Produit — on multiplie le terme général en faisant varier l'indice.",
+    "integral": "Intégrale — on calcule l'aire sous la courbe de la fonction.",
+    "limit": "Limite — valeur vers laquelle on converge quand la variable s'approche d'un point donné.",
+    "paren": "Expression regroupée entre parenthèses.",
+    "abs": "Valeur absolue — la grandeur prise sans son signe.",
+    "overline": "Symbole surmonté d'une barre. Elle indique une moyenne, un conjugué, une adhérence, etc.",
+    "chem": "Notation chimique qui représente des substances et des réactions.",
+    "matrix": "Matrice {rows}x{cols}."
+  },
+  "specialVariables": {
+    "infinity": "Représente l'infini.",
+    "eulerE": "La constante de Néper e (environ 2,718). Elle est à la base des exponentielles et de l'analyse.",
+    "pi": "Le nombre pi (environ 3,14159), rapport de la circonférence au diamètre.",
+    "imaginaryI": "L'unité imaginaire. Son carré vaut -1."
+  },
+  "operators": {
+    "+": "Opération d'addition.",
+    "-": "Opération de soustraction, ou signe d'un nombre négatif.",
+    "×": "Opération de multiplication.",
+    "·": "Opération de multiplication.",
+    "*": "Opération de multiplication.",
+    "÷": "Opération de division.",
+    "=": "Signe égal — les deux membres ont la même valeur.",
+    "<": "Inégalité — le membre de gauche est plus petit que celui de droite.",
+    ">": "Inégalité — le membre de gauche est plus grand que celui de droite.",
+    "≤": "Inférieur ou égal — la gauche est plus petite que la droite, ou lui est égale.",
+    "≥": "Supérieur ou égal — la gauche est plus grande que la droite, ou lui est égale.",
+    "≠": "Indique que les deux membres ne sont pas égaux.",
+    "∈": "Appartenance — l'élément de gauche appartient à l'ensemble de droite.",
+    "→": "Implication — la condition de gauche entraîne la conclusion de droite.",
+    "⟹": "Implication — la condition de gauche entraîne la conclusion de droite.",
+    "∪": "Union — on réunit tous les éléments des deux ensembles.",
+    "∩": "Intersection — on ne garde que les éléments communs aux deux ensembles."
+  },
+  "functions": {
+    "sin": "Fonction sinus — fonction trigonométrique valant, dans un triangle rectangle, le côté opposé sur l'hypoténuse.",
+    "cos": "Fonction cosinus — fonction trigonométrique valant le côté adjacent sur l'hypoténuse.",
+    "tan": "Fonction tangente — c'est sin/cos.",
+    "log": "Fonction logarithme — la réciproque de l'élévation à une puissance.",
+    "ln": "Logarithme népérien — le logarithme de base e.",
+    "exp": "Fonction exponentielle — les puissances de e.",
+    "lim": "Opérateur de limite.",
+    "det": "Déterminant — valeur scalaire caractéristique d'une matrice.",
+    "max": "Fonction qui donne la valeur maximale.",
+    "min": "Fonction qui donne la valeur minimale."
+  },
+  "accents": {
+    "hat": {
+      "role": "Estimateur / vecteur unitaire",
+      "description": "Le chapeau indique un estimateur ou un vecteur unitaire."
+    },
+    "widehat": {
+      "role": "Estimateur / vecteur unitaire",
+      "description": "Le chapeau indique un estimateur ou un vecteur unitaire."
+    },
+    "vec": {
+      "role": "Vecteur",
+      "description": "La flèche indique un vecteur, doté d'une norme et d'une direction."
+    },
+    "overrightarrow": {
+      "role": "Vecteur",
+      "description": "La flèche indique un vecteur, doté d'une norme et d'une direction."
+    },
+    "overleftarrow": {
+      "role": "Vecteur",
+      "description": "La flèche indique un vecteur, doté d'une norme et d'une direction."
+    },
+    "dot": {
+      "role": "Dérivée par rapport au temps",
+      "description": "Le point indique une dérivée par rapport au temps. En physique, il sert par exemple à noter la vitesse."
+    },
+    "ddot": {
+      "role": "Dérivée seconde par rapport au temps",
+      "description": "Les deux points indiquent une dérivée seconde par rapport au temps, par exemple l'accélération."
+    },
+    "tilde": {
+      "role": "Approximation / transformation",
+      "description": "Le tilde indique une valeur approchée ou une quantité transformée."
+    },
+    "widetilde": {
+      "role": "Approximation / transformation",
+      "description": "Le tilde indique une valeur approchée ou une quantité transformée."
+    },
+    "bar": {
+      "role": "Moyenne / conjugué",
+      "description": "La barre indique une moyenne ou le conjugué d'un nombre complexe."
+    }
+  },
+  "defaultAccent": {
+    "role": "Accent",
+    "description": "Symbole portant un accent."
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "Puissance",
+      "description": "Puissance — on multiplie la base par elle-même autant de fois que l'indique l'exposant."
+    },
+    "subscriptOnly": {
+      "role": "Indice",
+      "description": "Indice — il désigne un élément ou une composante précise."
+    },
+    "both": {
+      "role": "Indice et exposant",
+      "description": "Symbole portant à la fois un indice et un exposant."
+    },
+    "withLeft": {
+      "role": "Indices de part et d'autre",
+      "description": "Notation où des indices sont placés des deux côtés du symbole."
+    }
+  },
+  "defaultOperator": "L'opérateur {op}.",
+  "defaultFunction": "La fonction {name}.",
+  "chem": {
+    "formula": {
+      "role": "Formule chimique",
+      "description": "Notation qui représente une substance à l'aide des symboles des éléments."
+    },
+    "equation": {
+      "role": "Équation chimique",
+      "description": "Elle représente la transformation des substances de gauche en celles de droite."
+    },
+    "species": {
+      "role": "Espèce chimique",
+      "description": "Une des substances qui participent à la réaction."
+    },
+    "element": {
+      "role": "Élément",
+      "description": "Symbole qui désigne un élément du tableau périodique."
+    },
+    "group": {
+      "role": "Groupement d'atomes",
+      "description": "Groupe d'atomes réunis entre parenthèses, qui se comporte comme une seule unité."
+    },
+    "coefficient": {
+      "role": "Coefficient stœchiométrique",
+      "description": "Rapport des nombres de particules engagées dans la réaction. Il égalise le nombre d'atomes de chaque côté."
+    },
+    "count": {
+      "role": "Nombre d'atomes",
+      "description": "Il indique combien de fois l'élément ou le groupement qui précède est présent."
+    },
+    "charge": {
+      "role": "Charge",
+      "description": "Grandeur de la charge portée par l'ion. Elle est égale au nombre d'électrons perdus ou gagnés."
+    },
+    "chargeSign": {
+      "role": "Signe de la charge",
+      "description": "Il indique si l'espèce a perdu des électrons (cation, +) ou en a gagné (anion, −)."
+    },
+    "massNumber": {
+      "role": "Nombre de masse",
+      "description": "Somme des protons et des neutrons du noyau. Il distingue les isotopes."
+    },
+    "atomicNumber": {
+      "role": "Numéro atomique",
+      "description": "Nombre de protons du noyau. Il détermine de quel élément il s'agit."
+    },
+    "arrow": {
+      "role": "Flèche de réaction",
+      "description": "Elle indique que la réaction se fait dans le sens de la flèche."
+    },
+    "equilibriumArrow": {
+      "role": "Réaction réversible",
+      "description": "La réaction directe et la réaction inverse ont lieu ensemble et s'établissent en équilibre."
+    },
+    "condition": {
+      "role": "Conditions de la réaction",
+      "description": "Catalyseur, température, pression et autres conditions nécessaires à la réaction."
+    },
+    "plus": {
+      "role": "Séparateur d'espèces",
+      "description": "Il relie les substances situées du même côté. Ce n'est pas une addition."
+    },
+    "hydrate": {
+      "role": "Liaison d'hydratation",
+      "description": "Elle indique que des molécules d'eau sont incluses dans le cristal."
+    },
+    "state": {
+      "role": "État physique",
+      "description": "Il indique l'état : solide (s), liquide (l), gaz (g) ou solution aqueuse (aq)."
+    },
+    "gas": {
+      "role": "Dégagement gazeux",
+      "description": "Il indique qu'un gaz s'échappe au cours de la réaction."
+    },
+    "precipitate": {
+      "role": "Précipité",
+      "description": "Il indique qu'un solide se forme et se dépose au cours de la réaction."
+    }
+  }
+}

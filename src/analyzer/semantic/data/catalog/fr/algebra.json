@@ -1,0 +1,307 @@
+{
+  "euler-identity": {
+    "name": "Identité d'Euler",
+    "oneLiner": "Formule qui relie en une seule égalité les cinq constantes fondamentales des mathématiques",
+    "description": "L'identité d'Euler réunit en une égalité d'une grande concision la constante de Néper e, l'unité imaginaire i, le nombre pi, 1 et 0. Elle se déduit naturellement de la formule d'Euler en donnant à l'angle la valeur pi, et symbolise les liens profonds qui traversent les différentes branches des mathématiques.",
+    "discoverer": "Leonhard Euler",
+    "field": "Algèbre",
+    "significance": "Elle montre que fonction exponentielle, fonctions trigonométriques et nombres complexes ne font qu'un, et passe pour la plus belle égalité de l'histoire des mathématiques.",
+    "elementMeanings": {
+      "e": { "role": "Constante de Néper", "description": "Environ 2,71828. C'est la base du logarithme népérien et elle traduit une croissance continue.", "kind": "constant", "value": 2.71828183 },
+      "i": { "role": "Unité imaginaire", "description": "Nombre dont le carré vaut -1. C'est la brique de base des nombres complexes.", "kind": "constant" },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre. Environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "1": { "role": "Élément neutre de la multiplication", "description": "Élément neutre de la multiplication et point de départ des entiers naturels.", "kind": "constant", "value": 1 },
+      "0": { "role": "Élément neutre de l'addition", "description": "Élément neutre de l'addition, et résultat de l'égalité.", "kind": "constant", "value": 0 }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "quadratic-formula": {
+    "name": "Formule des racines de l'équation du second degré",
+    "oneLiner": "Formule qui donne directement les solutions de l'équation ax²+bx+c=0 à partir de ses coefficients",
+    "description": "La formule des racines du second degré calcule exactement les deux racines de l'équation à partir des seuls coefficients a, b et c. Le signe du discriminant détermine le nombre de racines réelles ; c'est la méthode de résolution la plus fondamentale de l'algèbre.",
+    "field": "Algèbre",
+    "significance": "Outil universel qui résout toute équation du second degré, elle permet, grâce à la notion de discriminant, de statuer sur l'existence des racines.",
+    "elementMeanings": {
+      "a": { "role": "Coefficient du terme du second degré", "description": "Nombre qui multiplie le carré de x. Il doit être non nul pour que l'équation soit du second degré.", "kind": "input" },
+      "b": { "role": "Coefficient du terme du premier degré", "description": "Nombre qui multiplie x. Il influe sur la position de l'axe de la parabole.", "kind": "input" },
+      "c": { "role": "Terme constant", "description": "Constante ajoutée sans variable. Elle détermine l'ordonnée à l'origine.", "kind": "input" },
+      "b^2-4ac": { "role": "Discriminant", "description": "Il détermine le nombre et la nature des racines : positif, deux racines réelles distinctes ; nul, une racine double ; négatif, des racines complexes.", "kind": "output" },
+      "\\pm": { "role": "Signe double", "description": "Il représente à la fois le cas de l'addition et celui de la soustraction, donnant ainsi les deux racines.", "kind": "structural" }
+    },
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem"]
+  },
+  "binomial-theorem": {
+    "name": "Théorème du binôme",
+    "oneLiner": "Théorème qui développe la puissance d'une somme de deux termes à l'aide des coefficients binomiaux",
+    "description": "Le théorème du binôme développe (a+b) à la puissance n en une somme faisant intervenir les coefficients binomiaux. Outil central qui relie combinatoire et algèbre, il est étroitement lié au triangle de Pascal.",
+    "discoverer": "Isaac Newton (généralisation)",
+    "field": "Algèbre",
+    "significance": "Largement employé dans toutes les mathématiques — développement de polynômes, probabilités, combinatoire —, il fournit la base des calculs approchés.",
+    "elementMeanings": {
+      "a": { "role": "Premier terme", "description": "Premier terme du binôme. Son degré décroît au fil du développement.", "kind": "input" },
+      "b": { "role": "Second terme", "description": "Second terme du binôme. Son degré croît au fil du développement.", "kind": "input" },
+      "n": { "role": "Exposant de la puissance", "description": "Entier positif ou nul qui indique combien de fois le binôme est multiplié par lui-même.", "kind": "input" },
+      "k": { "role": "Indice du développement", "description": "Variable de sommation qui indique combien de fois b intervient dans chaque terme.", "kind": "input" },
+      "\\binom{n}{k}": { "role": "Coefficient binomial", "description": "Nombre de façons de choisir k éléments parmi n. Il correspond à chaque valeur du triangle de Pascal.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "geometric-series": {
+    "name": "Somme d'une série géométrique",
+    "oneLiner": "Formule qui donne sous forme close la somme d'une série de raison constante",
+    "description": "La formule de la somme d'une série géométrique calcule de façon concise cette somme à partir du premier terme a et de la raison r. Si la valeur absolue de la raison est inférieure à 1, la série infinie converge elle aussi ; la formule est largement utilisée en mathématiques financières et en physique.",
+    "field": "Algèbre",
+    "significance": "Elle permet d'exprimer par une valeur finie un processus infini convergent, et ses applications pratiques sont très larges : intérêts composés, traitement du signal, etc.",
+    "elementMeanings": {
+      "a": { "role": "Premier terme", "description": "Premier terme de la série. C'est la valeur de référence qui fixe l'ordre de grandeur de la somme.", "kind": "input" },
+      "r": { "role": "Raison", "description": "Rapport entre deux termes consécutifs. Sa valeur absolue doit être inférieure à 1 pour que la série infinie converge.", "kind": "input" },
+      "n": { "role": "Nombre de termes", "description": "Nombre de termes à additionner dans une série finie.", "kind": "input" },
+      "S_n": { "role": "Somme partielle", "description": "Somme des n premiers termes.", "kind": "output" },
+      "S_{\\infty}": { "role": "Somme de la série infinie", "description": "Valeur vers laquelle la série converge, a/(1-r), lorsque la valeur absolue de la raison est inférieure à 1.", "kind": "output" }
+    },
+    "relatedFormulas": ["taylor-series", "binomial-theorem"]
+  },
+  "difference-of-squares": {
+    "name": "Différence de deux carrés",
+    "oneLiner": "Formule qui factorise la différence des carrés de deux nombres en produit de leur somme par leur différence",
+    "description": "L'identité de la différence de deux carrés énonce que le carré de a diminué du carré de b est égal à (a+b)(a-b). C'est le schéma de factorisation le plus élémentaire, également utile pour décomposer des polynômes de degré élevé et pour le calcul mental.",
+    "field": "Algèbre",
+    "significance": "Point de départ de la factorisation algébrique, elle est indispensable dans des domaines variés : rationalisation, calcul de limites, décomposition en facteurs premiers en théorie des nombres.",
+    "elementMeanings": {
+      "a": { "role": "Première valeur", "description": "Premier nombre ou première expression que l'on élève au carré.", "kind": "input" },
+      "b": { "role": "Seconde valeur", "description": "Second nombre ou seconde expression que l'on élève au carré.", "kind": "input" },
+      "a^2": { "role": "Premier carré", "description": "Le nombre a élevé au carré.", "kind": "structural" },
+      "b^2": { "role": "Second carré", "description": "Le nombre b élevé au carré.", "kind": "structural" },
+      "(a+b)": { "role": "Facteur somme", "description": "Facteur constitué de la somme de a et de b.", "kind": "structural" },
+      "(a-b)": { "role": "Facteur différence", "description": "Facteur constitué de la différence de a et de b.", "kind": "structural" }
+    },
+    "relatedFormulas": ["quadratic-formula", "binomial-theorem"]
+  },
+  "perfect-square": {
+    "name": "Carré d'une somme",
+    "oneLiner": "Identité qui développe le carré de la somme de deux termes",
+    "description": "L'identité du carré d'une somme énonce que le carré de (a+b) est égal à la somme du carré de a, de 2ab et du carré de b. Elle est essentielle pour factoriser les expressions du second degré et reconnaître un carré parfait, et fonde la résolution des équations du second degré par mise sous forme canonique.",
+    "field": "Algèbre",
+    "significance": "Outil le plus élémentaire pour comprendre la structure d'une expression du second degré, elle est indispensable au passage à la forme canonique et à la recherche d'un minimum.",
+    "elementMeanings": {
+      "a": { "role": "Premier terme", "description": "Premier terme du binôme que l'on élève au carré.", "kind": "input" },
+      "b": { "role": "Second terme", "description": "Second terme du binôme que l'on élève au carré.", "kind": "input" },
+      "a^2": { "role": "Carré du premier terme", "description": "Le nombre a élevé au carré.", "kind": "structural" },
+      "2ab": { "role": "Double produit", "description": "Le produit de a par b multiplié par 2. C'est le terme intermédiaire qui apparaît au développement.", "kind": "structural" },
+      "b^2": { "role": "Carré du second terme", "description": "Le nombre b élevé au carré.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calculer l'augmentation totale de surface quand on allonge de b le côté d'un potager carré",
+      "Développer ou réorganiser la formule de la variance en statistique"
+    ],
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem", "quadratic-formula"]
+  },
+  "sum-difference-product": {
+    "name": "Produit de la somme par la différence",
+    "oneLiner": "Identité selon laquelle le produit de la somme et de la différence de deux termes donne la différence de leurs carrés",
+    "description": "Cette identité énonce que (a+b)(a-b) est égal au carré de a diminué du carré de b. C'est la même relation que la différence de deux carrés, mais lue dans le sens de la multiplication plutôt que de la factorisation. Elle est commode pour transformer une multiplication compliquée en une simple différence de carrés.",
+    "field": "Algèbre",
+    "significance": "En remplaçant une multiplication par une différence de carrés, elle simplifie le calcul mental et numérique, et constitue un outil clé de la rationalisation et de la factorisation.",
+    "elementMeanings": {
+      "a": { "role": "Valeur de référence", "description": "Valeur commune à la somme et à la différence.", "kind": "input" },
+      "b": { "role": "Écart", "description": "Valeur que l'on ajoute à la valeur de référence ou que l'on en retranche.", "kind": "input" },
+      "(a+b)": { "role": "Somme", "description": "Facteur obtenu en additionnant a et b.", "kind": "structural" },
+      "(a-b)": { "role": "Différence", "description": "Facteur obtenu en retranchant b de a.", "kind": "structural" },
+      "a^2-b^2": { "role": "Différence des carrés", "description": "Le résultat : la différence des carrés des deux nombres.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calculer mentalement 49 x 51 comme (50+1)(50-1) = 2500-1 = 2499",
+      "S'en servir pour rationaliser un dénominateur contenant un radical"
+    ],
+    "relatedFormulas": ["difference-of-squares", "perfect-square"]
+  },
+  "arithmetic-series-sum": {
+    "name": "Somme d'une série arithmétique",
+    "oneLiner": "Formule qui donne la somme des n premiers termes d'une suite arithmétique",
+    "description": "La formule de la somme d'une série arithmétique multiplie la moyenne du premier et du dernier terme par le nombre de termes. Célèbre par l'anecdote du jeune Gauss calculant la somme des entiers de 1 à 100, c'est une formule élégante qui exploite la symétrie des suites arithmétiques.",
+    "discoverer": "Carl Friedrich Gauss (attribution anecdotique)",
+    "field": "Algèbre",
+    "significance": "Elle permet de calculer rapidement la somme de quantités qui croissent ou décroissent régulièrement et sert de base aux mathématiques discrètes et à l'analyse d'algorithmes.",
+    "elementMeanings": {
+      "S_n": { "role": "Somme de la série", "description": "Somme des n premiers termes.", "kind": "output" },
+      "n": { "role": "Nombre de termes", "description": "Nombre total de termes à additionner.", "kind": "input" },
+      "a_1": { "role": "Premier terme", "description": "Premier terme de la suite.", "kind": "input" },
+      "a_n": { "role": "Dernier terme", "description": "n-ième terme de la suite.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calculer le nombre total de places dans des gradins (chaque rangée en compte un nombre fixe de plus)",
+      "Calculer le revenu annuel total lorsque le salaire augmente chaque mois d'un montant fixe"
+    ],
+    "relatedFormulas": ["arithmetic-general", "geometric-series-sum"]
+  },
+  "arithmetic-general": {
+    "name": "Terme général d'une suite arithmétique",
+    "oneLiner": "Formule qui donne le n-ième terme d'une suite arithmétique à partir du premier terme et de la raison",
+    "description": "La formule du terme général d'une suite arithmétique calcule directement n'importe quel n-ième terme en ajoutant au premier terme (n-1) fois la raison. Elle exprime la régularité de la suite en une seule expression et met clairement en évidence son caractère linéaire.",
+    "field": "Algèbre",
+    "significance": "Manière la plus élémentaire de saisir un motif de suite par une formule, elle fait le lien avec la notion de fonction.",
+    "elementMeanings": {
+      "a_n": { "role": "Terme général", "description": "Valeur du n-ième terme de la suite.", "kind": "output" },
+      "a_1": { "role": "Premier terme", "description": "Valeur initiale de la suite.", "kind": "input" },
+      "n": { "role": "Rang du terme", "description": "Entier naturel qui indique le rang du terme cherché.", "kind": "input" },
+      "d": { "role": "Raison", "description": "Écart constant entre deux termes consécutifs.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calculer la hauteur du n-ième étage quand un ascenseur monte d'une hauteur identique à chaque étage",
+      "Prévoir la valeur à un instant donné lorsque le temps s'écoule régulièrement"
+    ],
+    "relatedFormulas": ["arithmetic-series-sum", "geometric-general"]
+  },
+  "geometric-series-sum": {
+    "name": "Somme finie d'une série géométrique",
+    "oneLiner": "Formule qui donne la somme des n premiers termes d'une suite géométrique",
+    "description": "La formule de la somme finie d'une série géométrique calcule cette somme sous forme close à partir du premier terme, de la raison et du nombre de termes. Elle s'applique lorsque la raison est différente de 1, et la raison élevée à la puissance n y joue un rôle central. Contrairement à la formule générale de la série géométrique (geometric-series), elle se concentre sur la somme finie.",
+    "field": "Algèbre",
+    "significance": "Elle sert directement à quantifier les évolutions exponentielles de la vie courante : intérêts composés, calcul de mensualités, amortissement.",
+    "elementMeanings": {
+      "S_n": { "role": "Somme finie", "description": "Somme des n premiers termes.", "kind": "output" },
+      "a_1": { "role": "Premier terme", "description": "Premier terme de la série.", "kind": "input" },
+      "r": { "role": "Raison", "description": "Rapport entre deux termes consécutifs. Elle doit être différente de 1.", "kind": "input" },
+      "n": { "role": "Nombre de termes", "description": "Nombre total de termes à additionner.", "kind": "input" },
+      "r^n": { "role": "Raison à la puissance n", "description": "La raison multipliée n fois par elle-même. Elle détermine la vitesse de divergence ou de convergence de la série.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calculer le montant cumulé après n années d'un placement qui croît chaque année d'un pourcentage fixe",
+      "Calculer la quantité résiduelle cumulée d'un médicament éliminé chaque heure selon un pourcentage fixe"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-general", "infinite-geometric"]
+  },
+  "geometric-general": {
+    "name": "Terme général d'une suite géométrique",
+    "oneLiner": "Formule qui donne le n-ième terme d'une suite géométrique à partir du premier terme et de la raison",
+    "description": "La formule du terme général d'une suite géométrique calcule directement n'importe quel n-ième terme en multipliant le premier terme par la raison élevée à la puissance (n-1). Elle exprime en une seule formule la croissance ou la décroissance exponentielle de la suite.",
+    "field": "Algèbre",
+    "significance": "C'est l'outil de base pour modéliser les évolutions exponentielles : croissance démographique, désintégration radioactive, intérêts composés.",
+    "elementMeanings": {
+      "a_n": { "role": "Terme général", "description": "Valeur du n-ième terme de la suite.", "kind": "output" },
+      "a_1": { "role": "Premier terme", "description": "Valeur initiale de la suite.", "kind": "input" },
+      "r": { "role": "Raison", "description": "Rapport entre deux termes consécutifs.", "kind": "input" },
+      "n": { "role": "Rang du terme", "description": "Entier naturel qui indique le rang du terme cherché.", "kind": "input" },
+      "r^{n-1}": { "role": "Puissance de la raison", "description": "La raison multipliée (n-1) fois par elle-même. Elle donne le facteur appliqué au premier terme.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calculer le nombre d'individus après n générations lorsque des bactéries doublent à chaque génération",
+      "Calculer le capital et les intérêts après n années pour un dépôt à intérêts composés à taux fixe"
+    ],
+    "relatedFormulas": ["geometric-series-sum", "arithmetic-general", "infinite-geometric"]
+  },
+  "infinite-geometric": {
+    "name": "Série géométrique infinie",
+    "oneLiner": "Somme d'une série géométrique prolongée à l'infini lorsque la valeur absolue de la raison est inférieure à 1",
+    "description": "La formule de la série géométrique infinie montre que, lorsque la valeur absolue de la raison est inférieure à 1, la série converge vers une valeur finie même prolongée indéfiniment. On obtient cette limite en divisant le premier terme par (1 moins la raison). C'est l'exemple le plus intuitif pour comprendre les notions de limite et de convergence.",
+    "field": "Algèbre",
+    "significance": "Illustration emblématique de l'idée qu'un processus infini peut produire un résultat fini, elle est le point de départ de l'analyse et de la théorie des séries.",
+    "elementMeanings": {
+      "S": { "role": "Somme de la série infinie", "description": "Valeur limite obtenue en additionnant une infinité de termes.", "kind": "output" },
+      "a_1": { "role": "Premier terme", "description": "Premier terme de la série.", "kind": "input" },
+      "r": { "role": "Raison", "description": "Rapport entre deux termes consécutifs. Il faut |r|<1 pour que la série converge.", "kind": "input" },
+      "1-r": { "role": "Dénominateur de convergence", "description": "La raison retranchée de 1. On divise par cette valeur pour obtenir la limite.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Distance totale parcourue par une balle qui rebondit à chaque fois d'un pourcentage fixe de sa hauteur",
+      "Conversion d'un nombre décimal périodique en fraction (par exemple 0,333... = 1/3)"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-series-sum", "geometric-general"]
+  },
+  "exponent-law": {
+    "name": "Loi des exposants",
+    "oneLiner": "Loi selon laquelle on additionne les exposants lorsqu'on multiplie des puissances de même base",
+    "description": "La loi des exposants énonce que multiplier entre elles des puissances d'une même base a revient à additionner leurs exposants. Elle découle naturellement de la définition de la puissance et fonde tout le système du calcul sur les exposants. Les autres règles — division, puissance d'une puissance — en dérivent.",
+    "field": "Algèbre",
+    "significance": "Règle la plus fondamentale du calcul sur les exposants, elle sert de base aux propriétés des logarithmes, aux fonctions exponentielles et à la notation scientifique.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "Nombre pris pour base de la puissance. C'est un réel non nul.", "kind": "input" },
+      "m": { "role": "Premier exposant", "description": "Exposant de la première puissance.", "kind": "input" },
+      "n": { "role": "Second exposant", "description": "Exposant de la seconde puissance.", "kind": "input" },
+      "m+n": { "role": "Exposant somme", "description": "Somme des deux exposants. C'est l'exposant du produit.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Simplifier un calcul en notation scientifique en additionnant les exposants des puissances de 10",
+      "Manipuler les puissances de 2 lors des conversions d'unités de mémoire informatique"
+    ],
+    "relatedFormulas": ["log-definition", "log-product-rule"]
+  },
+  "log-definition": {
+    "name": "Définition du logarithme",
+    "oneLiner": "Relation d'équivalence qui définit le logarithme comme l'opération réciproque de l'élévation à une puissance",
+    "description": "La définition du logarithme reformule en notation logarithmique la relation exponentielle selon laquelle élever la base a à la puissance c donne b. Elle établit clairement que exposant et logarithme sont des opérations réciproques et sert de point de départ au calcul logarithmique.",
+    "discoverer": "John Napier",
+    "field": "Algèbre",
+    "significance": "Elle rend possible la propriété essentielle du logarithme — transformer une multiplication en addition — et constitue un outil de base du calcul scientifique et de la théorie de l'information.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "Base du logarithme. Ce doit être un nombre positif différent de 1.", "kind": "input" },
+      "b": { "role": "Argument", "description": "Nombre dont on prend le logarithme. Il doit être positif.", "kind": "input" },
+      "c": { "role": "Valeur du logarithme", "description": "Nombre qui indique à quelle puissance il faut élever la base pour obtenir l'argument.", "kind": "output" },
+      "\\log_a b": { "role": "Notation logarithmique", "description": "Logarithme de base a et d'argument b.", "kind": "structural" },
+      "a^c = b": { "role": "Notation exponentielle", "description": "La même relation exprimée sous forme de puissance.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "La magnitude d'un séisme (échelle de Richter), définie en échelle logarithmique : une unité de plus correspond à environ 31,6 fois plus d'énergie",
+      "Le niveau sonore (décibels), mesuré en échelle logarithmique, ce qui permet de couvrir toute l'étendue de l'audition humaine"
+    ],
+    "relatedFormulas": ["exponent-law", "log-product-rule"]
+  },
+  "log-product-rule": {
+    "name": "Logarithme d'un produit",
+    "oneLiner": "Loi selon laquelle le logarithme du produit de deux nombres est égal à la somme de leurs logarithmes",
+    "description": "La règle du logarithme d'un produit montre que le logarithme d'un produit se décompose en la somme des logarithmes de chaque facteur. Elle se déduit directement de la loi des exposants et exprime la propriété essentielle du logarithme : convertir la multiplication en addition. Les règles du quotient et de la puissance en sont des prolongements.",
+    "field": "Algèbre",
+    "significance": "En permettant de remplacer des multiplications compliquées par de simples additions, elle a révolutionné le calcul numérique avant l'ère des calculatrices.",
+    "elementMeanings": {
+      "a": { "role": "Premier facteur", "description": "Premier nombre positif du produit.", "kind": "input" },
+      "b": { "role": "Second facteur", "description": "Second nombre positif du produit.", "kind": "input" },
+      "\\log(ab)": { "role": "Logarithme du produit", "description": "Logarithme du produit de a par b.", "kind": "structural" },
+      "\\log a": { "role": "Premier logarithme", "description": "Logarithme de a.", "kind": "structural" },
+      "\\log b": { "role": "Second logarithme", "description": "Logarithme de b.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "En astronomie, convertir un rapport d'éclat en différence de magnitudes (une addition) pour comparer la luminosité des étoiles",
+      "En théorie de l'information, calculer la quantité d'information conjointe d'événements indépendants comme la somme de leurs quantités d'information"
+    ],
+    "relatedFormulas": ["log-definition", "exponent-law"]
+  },
+  "complex-plane": {
+    "name": "Plan complexe",
+    "oneLiner": "Plan qui représente le nombre complexe z = a + bi par le point de coordonnées (a, b)",
+    "description": "Le plan complexe (ou plan d'Argand) est un repère à deux dimensions où l'axe horizontal porte la partie réelle et l'axe vertical la partie imaginaire. Chaque nombre complexe correspond à un point du plan, ou à un vecteur issu de l'origine : le module |z| est la distance à l'origine et l'argument arg(z) l'angle formé avec le demi-axe des réels positifs. La forme polaire et la formule d'Euler font apparaître naturellement le sens géométrique des opérations, comme la rotation ou l'homothétie.",
+    "field": "Algèbre",
+    "significance": "En reliant la définition abstraite des nombres complexes à l'intuition géométrique, il permet de comprendre visuellement les fonctions complexes et les transformations de rotation.",
+    "elementMeanings": {
+      "z": { "role": "Nombre complexe", "description": "Point du plan constitué d'une partie réelle et d'une partie imaginaire.", "kind": "input" },
+      "a": { "role": "Partie réelle", "description": "Abscisse de z, c'est-à-dire Re(z).", "kind": "structural" },
+      "b": { "role": "Partie imaginaire", "description": "Ordonnée de z, c'est-à-dire Im(z).", "kind": "structural" },
+      "|z|": { "role": "Module", "description": "Distance de l'origine à z, soit sqrt(a^2 + b^2).", "kind": "output" },
+      "\\arg(z)": { "role": "Argument", "description": "Angle formé par le demi-axe des réels positifs et le vecteur allant de l'origine à z, soit atan2(b, a).", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Représenter l'impédance d'un circuit électrique en courant alternatif par un vecteur du plan complexe pour visualiser le déphasage",
+      "Analyser le résultat d'une transformée de Fourier en traitement du signal par son module et sa phase dans le plan complexe"
+    ],
+    "relatedFormulas": ["euler-identity"]
+  },
+  "linear-transform-2x2": {
+    "name": "Transformation linéaire 2×2",
+    "oneLiner": "Transformation linéaire par laquelle une matrice 2×2 M envoie un vecteur du plan sur un autre vecteur",
+    "description": "Une transformation linéaire 2×2 est la fonction par laquelle la matrice M = [[a, b], [c, d]] envoie tout point (x, y) du plan sur (ax + by, cx + dy). Les vecteurs de base e1 et e2 deviennent les colonnes de M : le carré unité se change en parallélogramme et le quadrillage en quadrillage transformé. Le déterminant det(M) donne le facteur de variation de l'aire et l'orientation ; s'il est nul, la dimension s'effondre.",
+    "field": "Algèbre",
+    "significance": "En réunissant dans une seule matrice les transformations géométriques du plan — rotation, réflexion, homothétie, cisaillement —, elle fonde l'infographie et l'algèbre linéaire.",
+    "elementMeanings": {
+      "M": { "role": "Matrice de transformation", "description": "Matrice réelle 2×2. Elle détermine la transformation linéaire du plan.", "kind": "input" },
+      "a": { "role": "M[0][0]", "description": "Abscisse qu'a, après transformation, la composante horizontale de la base e1.", "kind": "structural" },
+      "b": { "role": "M[0][1]", "description": "Abscisse qu'a, après transformation, la composante horizontale de la base e2.", "kind": "structural" },
+      "c": { "role": "M[1][0]", "description": "Ordonnée qu'a, après transformation, la composante verticale de la base e1.", "kind": "structural" },
+      "d": { "role": "M[1][1]", "description": "Ordonnée qu'a, après transformation, la composante verticale de la base e2.", "kind": "structural" },
+      "\\det(M)": { "role": "Déterminant", "description": "ad - bc. C'est le facteur d'échelle de l'aire unité après transformation, et son signe donne l'orientation.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Un moteur graphique 2D qui traite rotation, homothétie et cisaillement par un unique produit matriciel 2×2",
+      "L'analyse en composantes principales (ACP) qui extrait les directions de variance des données comme vecteurs propres d'une matrice de covariance 2×2"
+    ],
+    "relatedFormulas": []
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "2次式の形",
+    "oneLiner": "x の2乗が入った式 — グラフは放物線",
+    "slots": {
+      "a": {
+        "role": "2次の係数",
+        "description": "放物線の向きと幅を決める"
+      },
+      "b": {
+        "role": "1次の係数",
+        "description": "軸の左右の位置を動かす"
+      },
+      "c": {
+        "role": "定数項",
+        "description": "y軸と交わる高さ"
+      },
+      "x": {
+        "role": "観察する点",
+        "description": "グラフ上で見てみる x の値"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "自由探究 — 2次関数",
+        "description": "座標平面の上で a・b・c の変化を観察"
+      },
+      "quadratic-bridge-2d": {
+        "name": "橋のアーチ — 2次関数",
+        "description": "橋脚・アーチ・反射で見る放物線"
+      },
+      "quadratic-basketball-2d": {
+        "name": "バスケのフリースロー — 2次関数",
+        "description": "発射の高さ・最高点・着地の軌跡"
+      },
+      "quadratic-fountain-2d": {
+        "name": "噴水 — 2次関数",
+        "description": "水しぶきの最高点がそのまま頂点"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "2つの平方の和の形",
+    "oneLiner": "2つの値の2乗を足したものが、残る一つの2乗と等しい関係",
+    "slots": {
+      "a": {
+        "role": "第一の辺",
+        "description": "直角をはさむ一方の辺"
+      },
+      "b": {
+        "role": "第二の辺",
+        "description": "直角をはさむもう一方の辺"
+      },
+      "c": {
+        "role": "斜辺",
+        "description": "直角の向かい側、最も長い辺"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "自由探究",
+        "description": "直角三角形と三辺の上の正方形で見るピタゴラスの定理"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "はしご",
+        "description": "壁に立てかけたはしごの角度と安全性"
+      },
+      "pythagorean-tv-2d": {
+        "name": "テレビ画面",
+        "description": "画面の横と縦から対角線のインチを換算"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "近道",
+        "description": "ブロックを回るか横切るかの距離の比較"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "指数変化の形",
+    "oneLiner": "変化率が今の量に比例して、急激に増えたり減ったりする形",
+    "slots": {
+      "N_0": {
+        "role": "初期値",
+        "description": "時刻が0のときの量"
+      },
+      "r": {
+        "role": "変化率",
+        "description": "正なら増加、負なら減衰"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "指数減少 — 2D",
+        "description": "カフェイン・電池・炭素14・薬物をアンカーに切り替えながら半減期を体感"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "複利の形",
+    "oneLiner": "利子にさらに利子が付いて元金が増えていく形",
+    "slots": {
+      "P": {
+        "role": "元金",
+        "description": "最初に預けた金額"
+      },
+      "r": {
+        "role": "年利率",
+        "description": "1年あたりの利率"
+      },
+      "n": {
+        "role": "年間の複利回数",
+        "description": "1年に何回利子を付けるか"
+      },
+      "t": {
+        "role": "期間",
+        "description": "預ける年数"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "複利 — 2D",
+        "description": "預金・株式・積立・インフレをアンカーに切り替えながら複利成長を体感"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "等加速度変位の形",
+    "oneLiner": "一定の加速度で動いた距離 — 時間の2乗に比例する項が付く",
+    "slots": {
+      "v_0": {
+        "role": "初速度",
+        "description": "出発するときの速さ"
+      },
+      "a": {
+        "role": "加速度",
+        "description": "一定に保たれる加速度"
+      },
+      "t": {
+        "role": "経過時間",
+        "description": "観察する時点"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "自由落下 — 2D",
+        "description": "地球・月・火星・木星をアンカーに惑星ごとの重力加速度を体感"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "正弦波の形",
+    "oneLiner": "同じ形が一定の周期で繰り返される波形",
+    "slots": {
+      "A": {
+        "role": "振幅",
+        "description": "中心から山までの高さ"
+      },
+      "\\omega": {
+        "role": "角振動数",
+        "description": "どれだけ速く繰り返すか"
+      },
+      "\\varphi": {
+        "role": "位相",
+        "description": "波形を左右に押しずらした量"
+      },
+      "t": {
+        "role": "観察する時刻",
+        "description": "波形の上で見てみる時点"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "正弦波 — 2D",
+        "description": "スピーカー・振り子・潮汐・電圧計をアンカーに振幅・周期・位相の役割を体感"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "軌道周期の形",
+    "oneLiner": "軌道が大きいほど一周するのに長くかかる関係",
+    "slots": {
+      "M": {
+        "role": "中心天体の質量",
+        "description": "公転の中心になる天体の質量"
+      },
+      "a": {
+        "role": "軌道長半径",
+        "description": "楕円軌道の長い方の半径"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "地球の軌道 — 2D",
+        "description": "ISS・GPS・静止軌道・月をアンカーに切り替えながら観察する2Dの俯瞰ビュー"
+      },
+      "kepler-orbit-3d": {
+        "name": "地球の軌道 — 3D",
+        "description": "同じアンカーを3D空間で回転させながら距離の感覚をつかむ立体ビュー"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "接線の形",
+    "oneLiner": "曲線上の一点で同じ傾きのまま触れる直線",
+    "slots": {
+      "f": {
+        "role": "曲線",
+        "description": "接線を引く対象の関数"
+      },
+      "x": {
+        "role": "観察する点",
+        "description": "接点を動かしてみる x の値"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "接線の探究 — 2D",
+        "description": "曲線 y=f(x) と点 x での接線を一緒に見せるインタラクティブなビュー"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "複素数の形",
+    "oneLiner": "実部と虚部からなる数 — 平面上の一点",
+    "slots": {
+      "a": {
+        "role": "実部",
+        "description": "横軸の座標"
+      },
+      "b": {
+        "role": "虚部",
+        "description": "縦軸の座標"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "2×2 変換の形",
+    "oneLiner": "平面のベクトルを別のベクトルへ送る1次変換",
+    "slots": {
+      "a": {
+        "role": "1行1列",
+        "description": "x軸の像が横方向にどれだけ伸びるか"
+      },
+      "b": {
+        "role": "1行2列",
+        "description": "y軸の像が横方向にどれだけ傾くか"
+      },
+      "c": {
+        "role": "2行1列",
+        "description": "x軸の像が縦方向にどれだけ傾くか"
+      },
+      "d": {
+        "role": "2行2列",
+        "description": "y軸の像が縦方向にどれだけ伸びるか"
+      }
+    }
+  }
+}

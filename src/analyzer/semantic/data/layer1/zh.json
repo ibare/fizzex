@@ -1,0 +1,162 @@
+{
+  "frac.numerator": {
+    "role": "分子",
+    "description": "分数中位于上方的部分，即被除的量。",
+    "refinements": {
+      "containsVariable": "分子中含有变量，它决定函数的零点（f(x)=0）。",
+      "constantOnly": "分子是常数，因此这个分数的大小是固定的比值。"
+    }
+  },
+  "frac.denominator": {
+    "role": "分母",
+    "description": "分数中位于下方的部分，即作为除数的量。为 0 时无定义。",
+    "refinements": {
+      "containsVariable": "分母中含有变量，因此在某些值处可能无定义（渐近线）。",
+      "constantOnly": "分母是常数，因此对整个式子施加固定的比例。"
+    }
+  },
+  "power.base": {
+    "role": "底数",
+    "description": "乘方中被重复相乘的对象。",
+    "refinements": {
+      "isEulerE": "以自然常数 e 为底的指数函数，表示增长或衰减。",
+      "isVariable": "变量的乘方。指数越大，增长得越快。"
+    }
+  },
+  "power.exponent": {
+    "role": "指数",
+    "description": "乘方中相乘的次数。",
+    "refinements": {
+      "isTwo": "平方 — 结果总是大于或等于 0。",
+      "isNegativeOne": "倒数 — 等于 1/底数。",
+      "isHalf": "平方根 — 底数的正平方根。",
+      "containsVariable": "指数中含有变量，表示指数式的增长或衰减。"
+    }
+  },
+  "sqrt.content": {
+    "role": "被开方数",
+    "description": "要开平方根的对象。在实数范围内不能为负数。"
+  },
+  "sqrt.index": {
+    "role": "根指数",
+    "description": "n 次方根中的 n。省略时为 2（平方根）。"
+  },
+  "subscript.base": {
+    "role": "被编号的对象",
+    "description": "带有下标的对象。"
+  },
+  "subscript.subscript": {
+    "role": "下标",
+    "description": "指定特定元素或分量的编号。"
+  },
+  "scripts.leftSuperscript": {
+    "role": "左上标",
+    "description": "标在符号左上方的数。像同位素的质量数那样指明对象。"
+  },
+  "scripts.leftSubscript": {
+    "role": "左下标",
+    "description": "标在符号左下方的数。像元素的原子序数那样指明对象。"
+  },
+  "sum.lower": {
+    "role": "求和起点",
+    "description": "求和开始处的指标值。"
+  },
+  "sum.upper": {
+    "role": "求和终点",
+    "description": "求和结束处的指标值。",
+    "refinements": {
+      "isInfinity": "求和到无穷大的无穷级数，是否收敛很关键。"
+    }
+  },
+  "sum.body": {
+    "role": "通项",
+    "description": "每一步相加的量，其值随指标而变化。"
+  },
+  "product.lower": {
+    "role": "连乘起点",
+    "description": "连乘开始处的指标值。"
+  },
+  "product.upper": {
+    "role": "连乘终点",
+    "description": "连乘结束处的指标值。"
+  },
+  "product.body": {
+    "role": "通项",
+    "description": "每一步相乘的量。"
+  },
+  "integral.lower": {
+    "role": "积分下限",
+    "description": "积分区间的起点。"
+  },
+  "integral.upper": {
+    "role": "积分上限",
+    "description": "积分区间的终点。",
+    "refinements": {
+      "isInfinity": "积分到正无穷大，需要确认是否收敛。"
+    }
+  },
+  "integral.integrand": {
+    "role": "被积函数",
+    "description": "积分的对象。求的是这个函数曲线下方的面积。"
+  },
+  "limit.approach": {
+    "role": "趋近值",
+    "description": "变量无限接近的目标值。"
+  },
+  "limit.body": {
+    "role": "取极限的式子",
+    "description": "观察变量趋近时，这个式子的值收敛到何处。"
+  },
+  "paren.content": {
+    "role": "整体",
+    "description": "用括号括起、当作一个整体来处理的式子。"
+  },
+  "chem.content": {
+    "role": "化学式",
+    "description": "表示物质与反应的化学记法。"
+  },
+  "abs.content": {
+    "role": "取绝对值的对象",
+    "description": "忽略符号后的大小。结果总是大于或等于 0。"
+  },
+  "func.argument": {
+    "role": "函数自变量",
+    "description": "输入到函数中的值。"
+  },
+  "matrix.element": {
+    "role": "矩阵元素",
+    "description": "矩阵中的一个元素。"
+  },
+  "cases.element": {
+    "role": "分段取值",
+    "description": "满足特定条件时的函数值。"
+  },
+  "accent.content": {
+    "role": "标注对象",
+    "description": "带有标注记号的符号。"
+  },
+  "overline.content": {
+    "role": "平均值/共轭",
+    "description": "上划线表示平均值、复共轭，或拓扑学中的闭包。"
+  },
+  "cancel.content": {
+    "role": "被约去的项",
+    "description": "被约分或被消去的部分。"
+  },
+  "overset.base": {
+    "role": "基础符号",
+    "description": "被加注的目标符号。"
+  },
+  "overset.annotation": {
+    "role": "注记",
+    "description": "标在符号上方或下方的补充说明。"
+  },
+  "xarrow.above": {
+    "role": "箭头上方文字",
+    "description": "表示反应或变换的条件。"
+  },
+  "xarrow.below": {
+    "role": "箭头下方文字",
+    "description": "表示反应或变换的附加条件。"
+  }
+}

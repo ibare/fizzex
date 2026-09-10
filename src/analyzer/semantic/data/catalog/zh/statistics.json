@@ -1,0 +1,191 @@
+{
+  "bayes-theorem": {
+    "name": "贝叶斯定理",
+    "oneLiner": "在给出新证据时更新先验概率以求出后验概率的定理",
+    "description": "贝叶斯定理是利用条件概率之间的关系，把先验概率更新为后验概率的公式。它让人能够在每次观测到新数据时，系统地修正原有的信念。它是统计推断、机器学习与决策理论的核心工具。",
+    "discoverer": "托马斯·贝叶斯",
+    "field": "统计学",
+    "significance": "它把不确定性之下的推断作了数学上的形式化，是垃圾邮件过滤、医学诊断、机器学习等现代应用领域的基础。",
+    "elementMeanings": {
+      "P(A|B)": { "role": "后验概率", "description": "在观测到事件 B 之后事件 A 发生的概率。", "kind": "output" },
+      "P(B|A)": { "role": "似然", "description": "事件 A 为真时观测到事件 B 的概率。", "kind": "input" },
+      "P(A)": { "role": "先验概率", "description": "在观测事件 B 之前对事件 A 所持的先验信念。", "kind": "input" },
+      "P(B)": { "role": "证据的概率", "description": "观测到事件 B 的总概率，起归一化常数的作用。", "kind": "input" }
+    },
+    "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
+  },
+  "normal-distribution": {
+    "name": "正态分布概率密度函数",
+    "oneLiner": "以均值为中心构成钟形对称曲线的概率分布",
+    "description": "正态分布是由均值与标准差两个参数决定的连续概率分布。它的概率密度函数在均值处取最大值，并向两侧对称地下降，画出钟形曲线。由于中心极限定理，它是逼近自然现象与测量值分布的最重要的分布。",
+    "discoverer": "卡尔·弗里德里希·高斯",
+    "field": "统计学",
+    "significance": "由于中心极限定理，它成为几乎一切统计推断的基础，也是自然科学与社会科学中使用最广泛的概率分布。",
+    "elementMeanings": {
+      "f(x)": { "role": "概率密度", "description": "点 x 处的概率密度值。它本身并不是概率，须对区间积分才能求出概率。", "kind": "output" },
+      "\\mu": { "role": "均值", "description": "分布的中心，即钟形曲线顶点的位置。", "kind": "input" },
+      "\\sigma": { "role": "标准差", "description": "分布的离散程度。越大曲线就越扁平。", "kind": "input" },
+      "\\sigma^2": { "role": "方差", "description": "标准差的平方。表示数据相对于均值分散得有多开。", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "高斯核", "description": "离均值越远就急剧下降的指数函数部分。", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "归一化常数", "description": "使总面积等于 1 的系数。", "kind": "structural" }
+    },
+    "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
+  },
+  "standard-deviation": {
+    "name": "标准差",
+    "oneLiner": "表示数据相对于均值分散得有多开的尺度",
+    "description": "标准差是把每个数据值与均值之差平方后求平均，再取平方根所得的值。它是方差的正平方根，与原数据的单位相同，因而解释起来很直观。它是表示数据离散程度最基本的统计量。",
+    "field": "统计学",
+    "significance": "它使人能以原有单位衡量数据的变动性，在质量管理、金融风险分析等场合被核心使用。",
+    "elementMeanings": {
+      "\\sigma": { "role": "标准差", "description": "总体标准差，表示数据的离散程度。", "kind": "output" },
+      "x_i": { "role": "单个数据值", "description": "数据集中第 i 个观测值。", "kind": "input" },
+      "\\mu": { "role": "总体均值", "description": "总体的平均值。若是样本则使用样本均值。", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "离差的平方", "description": "每个数据偏离均值多远的平方值。", "kind": "structural" },
+      "N": { "role": "数据个数", "description": "总体的全部数据个数。", "kind": "input" },
+      "\\sqrt{}": { "role": "平方根", "description": "对方差取平方根，使其与原数据单位相同。", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
+  },
+  "correlation-coefficient": {
+    "name": "相关系数",
+    "oneLiner": "用 -1 到 1 之间的数值表示两个变量之间线性关系强弱与方向的量",
+    "description": "皮尔逊相关系数是把两个变量的协方差除以各自标准差之积所得的值。接近 1 表示强的正线性关系，接近 -1 表示强的负线性关系，接近 0 则表示线性关系很弱。它是概括两个变量之间关联性最基本的统计量。",
+    "discoverer": "卡尔·皮尔逊",
+    "field": "统计学",
+    "significance": "它把变量间的关系概括为单一数字，为回归分析、金融投资组合理论、实验设计等提供了基础。",
+    "elementMeanings": {
+      "r": { "role": "相关系数", "description": "皮尔逊相关系数，取值在 -1 到 1 之间。", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "协方差", "description": "衡量 X 与 Y 一同变化的程度。", "kind": "input" },
+      "\\sigma_X": { "role": "X 的标准差", "description": "变量 X 的离散程度。", "kind": "input" },
+      "\\sigma_Y": { "role": "Y 的标准差", "description": "变量 Y 的离散程度。", "kind": "input" },
+      "X": { "role": "第一个变量", "description": "要分析相关关系的第一个变量。", "kind": "input" },
+      "Y": { "role": "第二个变量", "description": "要分析相关关系的第二个变量。", "kind": "input" }
+    },
+    "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
+  },
+  "law-of-large-numbers": {
+    "name": "大数定律",
+    "oneLiner": "样本量越大样本均值就越收敛于总体均值的定律",
+    "description": "大数定律保证，独立同分布的随机变量的样本均值，在样本量无限增大时收敛于总体均值。它有弱形式与强形式两个版本，是从理论上支撑统计估计正当性的根本定理。",
+    "discoverer": "雅各布·伯努利",
+    "field": "统计学",
+    "significance": "它从数学上保证抽样调查能够提供关于总体的有效推断，是保险、博彩与实验科学的理论基础。",
+    "elementMeanings": {
+      "\\bar{X}_n": { "role": "样本均值", "description": "n 个观测值的算术平均。", "kind": "output" },
+      "\\mu": { "role": "总体均值", "description": "总体真正的平均值，也是样本均值收敛的目标。", "kind": "input" },
+      "n": { "role": "样本量", "description": "观测数据的个数。越大样本均值就越接近总体均值。", "kind": "input" },
+      "X_i": { "role": "单个观测值", "description": "第 i 个独立观测值。它们都服从同一个分布。", "kind": "input" },
+      "\\epsilon": { "role": "误差界限", "description": "样本均值与总体均值之差落在这个值以内的概率收敛于 1。", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
+  },
+  "t-test": {
+    "name": "t 检验统计量",
+    "oneLiner": "检验样本均值是否与总体均值有显著差异的统计量",
+    "description": "t 检验统计量是把样本均值与原假设中总体均值之差除以标准误所得的值。在总体方差未知时用样本方差代替，它服从带自由度的 t 分布。因为在小样本下也能适用，它是实验研究与临床试验中使用最广泛的假设检验方法。",
+    "discoverer": "威廉·戈塞特",
+    "field": "统计学",
+    "significance": "它使小样本情形下对总体均值的统计推断成为可能，是医学、心理学、教育学研究中的标准检验方法。",
+    "elementMeanings": {
+      "t": { "role": "t 统计量", "description": "把样本均值与总体均值之差用标准误为单位表示的值。", "kind": "output" },
+      "\\bar{x}": { "role": "样本均值", "description": "样本数据的算术平均。", "kind": "input" },
+      "\\mu": { "role": "总体均值", "description": "原假设中所假定的总体平均值。", "kind": "input" },
+      "s": { "role": "样本标准差", "description": "由样本数据估计出的标准差。", "kind": "input" },
+      "\\sqrt{n}": { "role": "样本量的平方根", "description": "样本量 n 的平方根，用于计算标准误。", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
+  },
+  "chi-squared": {
+    "name": "卡方检验",
+    "oneLiner": "检验观测频数与期望频数之差在统计上是否显著的统计量",
+    "description": "卡方统计量是把每个类别中观测频数与期望频数之差平方后除以期望频数，再全部加起来所得的值。它用于拟合优度检验与独立性检验，是分类数据分析的代表性方法。判断显著性时以带自由度的卡方分布为基准。",
+    "discoverer": "卡尔·皮尔逊",
+    "field": "统计学",
+    "significance": "它使对分类数据的假设检验成为可能，在问卷分析、遗传学、质量管理中被核心使用。",
+    "elementMeanings": {
+      "\\chi^2": { "role": "卡方统计量", "description": "把观测值与期望值之差综合起来的检验统计量。", "kind": "output" },
+      "O": { "role": "观测频数", "description": "各个类别实际观测到的频数。", "kind": "input" },
+      "E": { "role": "期望频数", "description": "原假设为真时各个类别所期望的频数。", "kind": "input" },
+      "(O-E)^2": { "role": "离差的平方", "description": "观测值与期望值之差的平方。它不分方向地累积离差。", "kind": "structural" },
+      "\\Sigma": { "role": "求和符号", "description": "对所有类别作求和的运算。", "kind": "structural" }
+    },
+    "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
+  },
+  "poisson-dist": {
+    "name": "泊松分布",
+    "oneLiner": "在一定时间或空间内稀有事件发生次数的概率分布",
+    "description": "泊松分布对单位时间或空间内平均发生率恒定的独立事件的发生次数建模。它由平均发生率这一个参数决定，具有均值与方差相等的特点。它是分析稀有事件频率时使用广泛的离散概率分布。",
+    "discoverer": "西梅昂·德尼·泊松",
+    "field": "统计学",
+    "significance": "它对稀有事件的发生模式建模，在保险事故预测、通信流量分析、质量管理中被核心运用。",
+    "elementMeanings": {
+      "P(X=k)": { "role": "概率", "description": "事件恰好发生 k 次的概率。", "kind": "output" },
+      "\\lambda": { "role": "平均发生率", "description": "单位时间或空间内事件发生的平均次数。", "kind": "input" },
+      "k": { "role": "发生次数", "description": "所关心的事件发生次数（0 以上的整数）。", "kind": "input" },
+      "e^{-\\lambda}": { "role": "归一化因子", "description": "使全部概率之和等于 1 的指数函数部分。", "kind": "structural" },
+      "k!": { "role": "k 的阶乘", "description": "用来修正 k 个事件顺序组合数的阶乘值。", "kind": "structural" }
+    },
+    "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "binomial-dist": {
+    "name": "二项分布",
+    "oneLiner": "求 n 次独立试验中成功次数为 k 次的概率的分布",
+    "description": "二项分布是把成功概率为 p 的伯努利试验独立重复 n 次时，成功次数的概率分布。它用组合数与成功/失败概率之积算出每个结果的概率。n 足够大时可用正态分布逼近，成功概率非常小时则可用泊松分布逼近。",
+    "discoverer": "雅各布·伯努利",
+    "field": "统计学",
+    "significance": "它是成功—失败二值实验的基本模型，是质量检验、医学试验、民意调查分析的理论基础。",
+    "elementMeanings": {
+      "P(X=k)": { "role": "概率", "description": "n 次试验中恰好成功 k 次的概率。", "kind": "output" },
+      "C(n,k)": { "role": "组合数", "description": "从 n 个中选出 k 个的情形数，即 n!/(k!(n-k)!)。", "kind": "structural" },
+      "p": { "role": "成功概率", "description": "一次试验中成功的概率。", "kind": "input" },
+      "1-p": { "role": "失败概率", "description": "一次试验中失败的概率。", "kind": "input" },
+      "n": { "role": "试验次数", "description": "独立试验的总次数。", "kind": "input" },
+      "k": { "role": "成功次数", "description": "所关心的成功次数（从 0 到 n）。", "kind": "input" }
+    },
+    "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "conditional-prob": {
+    "name": "条件概率",
+    "oneLiner": "在一个事件已发生的条件下另一个事件发生的概率",
+    "description": "条件概率定义的是在事件 B 已经发生这一条件下事件 A 发生的概率。它用两个事件交集的概率除以条件事件的概率来计算。它是贝叶斯定理的基础，也是贯穿概率论与统计推断最根本的概念。",
+    "field": "统计学",
+    "significance": "它定量地表达事件之间的依赖关系，是贝叶斯推断、马尔可夫链与决策理论的数学基础。",
+    "elementMeanings": {
+      "P(A|B)": { "role": "条件概率", "description": "在给定事件 B 的条件下事件 A 发生的概率。", "kind": "output" },
+      "P(A \\cap B)": { "role": "交集的概率", "description": "事件 A 与事件 B 同时发生的概率。", "kind": "input" },
+      "P(B)": { "role": "条件事件的概率", "description": "作为条件给出的事件 B 的概率，它不能为 0。", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
+  },
+  "total-probability": {
+    "name": "全概率公式",
+    "oneLiner": "在被划分为互斥事件的情形下求总概率的公式",
+    "description": "全概率公式是在把样本空间划分为互斥且穷尽的事件之后，用各个划分下的条件概率的加权和求出某个特定事件的概率。它让人能够把复杂的概率问题拆成若干条件情形来计算。它在计算贝叶斯定理的分母时被核心使用。",
+    "field": "统计学",
+    "significance": "它是系统地分解复杂概率计算的工具，与贝叶斯定理结合起来构成统计推断的核心框架。",
+    "elementMeanings": {
+      "P(A)": { "role": "事件 A 的概率", "description": "所要求的事件 A 的总概率。", "kind": "output" },
+      "P(A|B_i)": { "role": "条件概率", "description": "在给定事件 B_i 时事件 A 的概率。", "kind": "input" },
+      "P(B_i)": { "role": "划分事件的概率", "description": "第 i 个划分事件 B_i 的概率。", "kind": "input" },
+      "\\Sigma": { "role": "求和符号", "description": "对所有划分事件 B_i 作求和的运算。", "kind": "structural" }
+    },
+    "relatedFormulas": ["conditional-prob", "bayes-theorem"]
+  },
+  "covariance": {
+    "name": "协方差",
+    "oneLiner": "衡量两个随机变量一同变化的倾向的方向与大小的量",
+    "description": "协方差是两个随机变量各自偏离自身均值的程度之积的期望值。为正表示它们倾向于同方向变化，为负则表示倾向于反方向变化。它是相关系数的基础，在投资组合理论与多元分析中被核心使用。",
+    "field": "统计学",
+    "significance": "它衡量变量间的共同变动，为投资组合方差计算、主成分分析与多元回归提供了基础。",
+    "elementMeanings": {
+      "\\text{Cov}(X,Y)": { "role": "协方差", "description": "表示 X 与 Y 共同变动程度的值。", "kind": "output" },
+      "E": { "role": "期望值算子", "description": "求随机变量期望值（均值）的运算。", "kind": "structural" },
+      "X": { "role": "第一个随机变量", "description": "要计算协方差的第一个变量。", "kind": "input" },
+      "Y": { "role": "第二个随机变量", "description": "要计算协方差的第二个变量。", "kind": "input" },
+      "\\mu_X": { "role": "X 的均值", "description": "随机变量 X 的期望值（均值）。", "kind": "input" },
+      "\\mu_Y": { "role": "Y 的均值", "description": "随机变量 Y 的期望值（均值）。", "kind": "input" }
+    },
+    "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
+  }
+}

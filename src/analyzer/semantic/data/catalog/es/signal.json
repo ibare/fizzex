@@ -1,0 +1,346 @@
+{
+  "fourier-transform": {
+    "name": "Transformada de Fourier",
+    "oneLiner": "La transformada integral que lleva una señal del dominio del tiempo al dominio de la frecuencia",
+    "description": "La transformada de Fourier descompone una señal que es función del tiempo en una función de la frecuencia. Se basa en el principio de que toda señal puede expresarse como suma de ondas sinusoidales de distintas frecuencias y proporciona la amplitud y la fase de cada componente frecuencial. Se utiliza en toda la ciencia y la ingeniería: tratamiento de señales, análisis de imágenes, mecánica cuántica, etc.",
+    "discoverer": "Joseph Fourier",
+    "field": "Procesamiento de señales",
+    "significance": "Al hacer posible la doble representación en tiempo y frecuencia, estableció la base teórica del procesamiento de señales moderno.",
+    "elementMeanings": {
+      "f": {
+        "role": "Función o señal",
+        "description": "Es la función original o la señal temporal que se va a transformar.",
+        "kind": "input"
+      },
+      "ξ": {
+        "role": "Frecuencia",
+        "description": "Es la variable de frecuencia ordinaria. Unidades: Hz.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variable independiente",
+        "description": "Es la variable independiente de la función original (el tiempo, entre otras).",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Constante natural",
+        "description": "Es la base de la función exponencial compleja.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "i": {
+        "role": "Unidad imaginaria",
+        "description": "i² = −1. En la exponencial compleja representa el giro de fase.",
+        "kind": "constant"
+      },
+      "π": {
+        "role": "Número pi",
+        "description": "Forma parte de la constante de normalización 2π.",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "El reconocimiento de voz mediante el análisis frecuencial de la señal sonora",
+      "La reconstrucción de los datos frecuenciales de una resonancia magnética como imagen espacial"
+    ],
+    "relatedFormulas": [
+      "inverse-fourier",
+      "laplace-transform",
+      "convolution"
+    ]
+  },
+  "inverse-fourier": {
+    "name": "Transformada inversa de Fourier",
+    "oneLiner": "La transformada integral que devuelve un espectro del dominio de la frecuencia a una señal en el dominio del tiempo",
+    "description": "La transformada inversa de Fourier es el proceso inverso de la transformada de Fourier: recupera la señal original en el dominio del tiempo a partir de la información espectral expresada en el dominio de la frecuencia. El signo de la exponencial compleja pasa a ser positivo y, con el convenio de frecuencia ordinaria, forma con la directa un par de transformadas simétrico y sin factor de normalización.",
+    "discoverer": "Joseph Fourier",
+    "field": "Procesamiento de señales",
+    "significance": "Garantiza que el resultado del análisis frecuencial puede devolverse íntegramente a la señal original y aporta así el fundamento teórico de la síntesis de señales.",
+    "elementMeanings": {
+      "f": {
+        "role": "Función o señal",
+        "description": "Es la señal original en el dominio del tiempo ya recuperada.",
+        "kind": "output"
+      },
+      "ξ": {
+        "role": "Frecuencia",
+        "description": "Es la variable independiente del dominio de la frecuencia. Unidades: Hz.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variable independiente",
+        "description": "Es la variable independiente de la función que se recupera (el tiempo, entre otras).",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Constante natural",
+        "description": "Es la base de la función exponencial compleja.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "π": {
+        "role": "Número pi",
+        "description": "Forma parte de la constante de normalización 2π.",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Convertir de nuevo en señal temporal los datos frecuenciales tratados tras el filtrado",
+      "La reproducción de datos de audio comprimidos tras su reconstrucción"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "laplace-transform",
+      "convolution"
+    ]
+  },
+  "laplace-transform": {
+    "name": "Transformada de Laplace",
+    "oneLiner": "La transformada integral que lleva una función del dominio del tiempo al dominio de la frecuencia compleja",
+    "description": "La transformada de Laplace convierte una función del tiempo en una función de la variable compleja s y transforma así las ecuaciones diferenciales en ecuaciones algebraicas. Puede verse como una generalización de la transformada de Fourier y permite tratar también señales amortiguadas. Es esencial en el análisis de sistemas de control, el estudio de circuitos y la determinación de la estabilidad de un sistema.",
+    "discoverer": "Pierre-Simon Laplace",
+    "field": "Procesamiento de señales",
+    "significance": "Permitió resolver algebraicamente las ecuaciones diferenciales y se convirtió en la herramienta estándar de la ingeniería de control y del análisis de sistemas.",
+    "elementMeanings": {
+      "F(s)": {
+        "role": "Resultado de la transformada de Laplace",
+        "description": "Es la representación de la función en el dominio de la frecuencia compleja.",
+        "kind": "output"
+      },
+      "f(t)": {
+        "role": "Función temporal",
+        "description": "Es la función original del dominio del tiempo que se transforma. Está definida para t >= 0.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Frecuencia compleja",
+        "description": "s = σ + jω. La parte real representa la amortiguación y la imaginaria, la oscilación.",
+        "kind": "structural"
+      },
+      "e^{-st}": {
+        "role": "Exponencial compleja amortiguada",
+        "description": "Es la función núcleo por la que se multiplica la función temporal.",
+        "kind": "structural"
+      },
+      "\\int_0^{\\infty}": {
+        "role": "Integral unilateral",
+        "description": "La integral desde 0 hasta el infinito. Trata sistemas causales.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "El diseño de la función de transferencia de un controlador PID",
+      "El análisis de la respuesta transitoria de un circuito RLC"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "z-transform",
+      "transfer-function"
+    ]
+  },
+  "z-transform": {
+    "name": "Transformada Z",
+    "oneLiner": "La herramienta matemática que lleva una señal en tiempo discreto al dominio complejo z",
+    "description": "La transformada Z es la versión en tiempo discreto de la transformada de Laplace: convierte una señal en tiempo discreto x[n] en una función de la variable compleja z. Es imprescindible para el diseño de filtros digitales, el análisis de sistemas de control digitales y la resolución de ecuaciones en diferencias. La relación z = e^(sT) la conecta con la transformada de Laplace.",
+    "discoverer": "Witold Hurewicz",
+    "field": "Procesamiento de señales",
+    "significance": "Es la herramienta estándar del análisis de sistemas en tiempo discreto y proporciona la base teórica del tratamiento digital de señales y del control digital.",
+    "elementMeanings": {
+      "X(z)": {
+        "role": "Resultado de la transformada Z",
+        "description": "Es la representación de la señal discreta en el dominio complejo z.",
+        "kind": "output"
+      },
+      "x[n]": {
+        "role": "Señal en tiempo discreto",
+        "description": "Es el valor de la muestra en el índice entero n.",
+        "kind": "input"
+      },
+      "z": {
+        "role": "Variable compleja",
+        "description": "Es el número complejo cuya circunferencia unidad (|z|=1) se corresponde con el dominio de la frecuencia.",
+        "kind": "structural"
+      },
+      "z^{-n}": {
+        "role": "Operador de retardo",
+        "description": "Es la potencia negativa de z que representa un retardo de n muestras.",
+        "kind": "structural"
+      },
+      "\\sum": {
+        "role": "Suma de la serie",
+        "description": "Es la suma desde n = −∞ hasta ∞ (o desde 0).",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "El diseño de los coeficientes del filtro de un ecualizador de audio digital",
+      "El sistema digital de control de posición de un brazo robótico"
+    ],
+    "relatedFormulas": [
+      "laplace-transform",
+      "sampling",
+      "transfer-function"
+    ]
+  },
+  "nyquist-theorem": {
+    "name": "Teorema de Nyquist",
+    "oneLiner": "La condición de frecuencia mínima de muestreo para convertir una señal analógica en digital sin distorsión",
+    "description": "El teorema de Nyquist establece que, para reconstruir perfectamente una señal analógica de banda limitada, hay que muestrearla como mínimo al doble de su frecuencia máxima. Si no se cumple esa condición aparece el solapamiento (aliasing) y la señal original ya no puede recuperarse. Es la base del diseño de todo sistema de conversión analógico-digital.",
+    "discoverer": "Harry Nyquist, Claude Shannon",
+    "field": "Procesamiento de señales",
+    "significance": "Formuló la condición fundamental que enlaza el mundo analógico y el digital y estableció la base de las comunicaciones y la grabación digitales.",
+    "elementMeanings": {
+      "f_s": {
+        "role": "Frecuencia de muestreo",
+        "description": "El número de muestras que se toman por segundo. Unidad: hercio (Hz).",
+        "kind": "input"
+      },
+      "f_{max}": {
+        "role": "Frecuencia máxima",
+        "description": "La componente de frecuencia más alta presente en la señal. Unidad: hercio (Hz).",
+        "kind": "input"
+      },
+      "2": {
+        "role": "Razón de Nyquist",
+        "description": "Solo muestreando al menos al doble se puede evitar el solapamiento.",
+        "kind": "constant",
+        "value": 2,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "El motivo por el que el audio de un CD (44,1 kHz) cubre el rango audible humano (20 kHz)",
+      "El filtro antisolapamiento del sensor de una cámara digital"
+    ],
+    "relatedFormulas": [
+      "sampling",
+      "fourier-transform",
+      "shannon-capacity"
+    ]
+  },
+  "sampling": {
+    "name": "Muestreo",
+    "oneLiner": "El proceso de extraer valores de una señal en tiempo continuo a intervalos regulares para convertirla en una señal en tiempo discreto",
+    "description": "El muestreo es el proceso por el que una señal analógica continua x(t) se convierte en una señal discreta x[n] tomando su valor cada periodo T. Es el primer paso del tratamiento digital de señales y solo si se cumple la condición de Nyquist se puede reproducir fielmente la señal original. El periodo de muestreo T y la frecuencia de muestreo f_s son inversos entre sí.",
+    "field": "Procesamiento de señales",
+    "significance": "Es el proceso fundamental que convierte una señal analógica en digital y define la etapa de entrada de todo sistema digital.",
+    "elementMeanings": {
+      "x[n]": {
+        "role": "Señal discreta",
+        "description": "El valor de la muestra n-ésima. Es la unidad básica de la señal digital.",
+        "kind": "output"
+      },
+      "x(t)": {
+        "role": "Señal continua",
+        "description": "Es la señal temporal analógica original.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Índice de muestra",
+        "description": "Es un número entero que indica de qué muestra se trata.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "Periodo de muestreo",
+        "description": "El intervalo de tiempo entre muestras consecutivas. Unidad: segundo (s). T = 1/f_s.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Convertir en datos digitales la voz captada por un micrófono",
+      "La digitalización de las señales biológicas en un electrocardiógrafo (ECG)"
+    ],
+    "relatedFormulas": [
+      "nyquist-theorem",
+      "z-transform",
+      "fourier-transform"
+    ]
+  },
+  "convolution": {
+    "name": "Convolución",
+    "oneLiner": "La operación que crea una nueva función integrando el solapamiento de dos funciones mientras una se desplaza sobre la otra",
+    "description": "La convolución es la operación que invierte una función, la desplaza sobre la otra y calcula la integral de la región en la que se solapan. En un sistema lineal e invariante en el tiempo (LTI), la convolución de la señal de entrada con la respuesta al impulso es la señal de salida. Se emplea de forma muy amplia en el filtrado de señales, el tratamiento de imágenes o la composición de distribuciones de probabilidad.",
+    "field": "Procesamiento de señales",
+    "significance": "Describe por completo la relación entrada-salida de los sistemas LTI y se ha convertido en la operación central del tratamiento de señales y del análisis de sistemas.",
+    "elementMeanings": {
+      "(f*g)(t)": {
+        "role": "Resultado de la convolución",
+        "description": "Es la nueva función que se genera al convolucionar las funciones f y g.",
+        "kind": "output"
+      },
+      "f(\\tau)": {
+        "role": "Primera función",
+        "description": "La primera función respecto a la variable de integración τ. Suele ser la señal de entrada.",
+        "kind": "input"
+      },
+      "g(t-\\tau)": {
+        "role": "Función invertida y desplazada",
+        "description": "La segunda función, invertida y desplazada una cantidad t. Suele ser la respuesta al impulso.",
+        "kind": "input"
+      },
+      "\\tau": {
+        "role": "Variable de integración",
+        "description": "Es la variable muda que recorre la región en la que se solapan las dos funciones.",
+        "kind": "structural"
+      },
+      "\\int": {
+        "role": "Integral",
+        "description": "Calcula toda la región de solapamiento mediante la integral desde −∞ hasta ∞.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "El modelado matemático del efecto de desenfoque de una cámara",
+      "La extracción de características de una imagen en las redes neuronales convolucionales (CNN)"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "transfer-function",
+      "inverse-fourier"
+    ]
+  },
+  "transfer-function": {
+    "name": "Función de transferencia",
+    "oneLiner": "La función característica de un sistema, definida como el cociente entre las transformadas de Laplace de la salida y de la entrada",
+    "description": "La función de transferencia expresa en el dominio de la frecuencia compleja la relación entrada-salida de un sistema LTI: es el cociente entre la transformada de Laplace de la salida y la de la entrada. Sus polos y ceros permiten conocer la estabilidad, la respuesta en frecuencia y la respuesta transitoria del sistema. Es la herramienta de análisis más importante de la ingeniería de control.",
+    "field": "Procesamiento de señales",
+    "significance": "Resume en una sola función el comportamiento dinámico de un sistema y se ha convertido en la herramienta estándar del diseño de sistemas de control y del análisis de estabilidad.",
+    "elementMeanings": {
+      "H(s)": {
+        "role": "Función de transferencia",
+        "description": "Es la característica del sistema expresada como función de la frecuencia compleja s.",
+        "kind": "output"
+      },
+      "Y(s)": {
+        "role": "Transformada de Laplace de la salida",
+        "description": "Es el resultado de transformar por Laplace la señal de salida del sistema.",
+        "kind": "output"
+      },
+      "X(s)": {
+        "role": "Transformada de Laplace de la entrada",
+        "description": "Es el resultado de transformar por Laplace la señal de entrada del sistema.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Frecuencia compleja",
+        "description": "Es la variable de Laplace. Se emplea para analizar los polos y los ceros del sistema.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "El diseño de la respuesta del sistema de control de crucero de un automóvil",
+      "El análisis de la respuesta en frecuencia de un amplificador de audio"
+    ],
+    "relatedFormulas": [
+      "laplace-transform",
+      "z-transform",
+      "convolution"
+    ]
+  }
+}

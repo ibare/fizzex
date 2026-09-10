@@ -1,0 +1,820 @@
+{
+  "mass-energy": {
+    "name": "質量とエネルギーの等価性",
+    "oneLiner": "質量とエネルギーが光速の2乗を比としてたがいに移り変わることを表す式",
+    "description": "アインシュタインの特殊相対性理論から導かれた等式。質量はエネルギーへ、エネルギーは質量へ変わることができ、その変換の比が光速の2乗であることを示します。光速の2乗がとても大きいので、小さな質量からも莫大なエネルギーが出てきます。",
+    "discoverer": "アルベルト・アインシュタイン",
+    "field": "物理学",
+    "significance": "質量がエネルギーの一つの形であることを明らかにして現代物理学の見方を変え、核分裂と核融合のしくみを説明します。",
+    "elementMeanings": {
+      "E": {
+        "role": "エネルギー",
+        "kind": "output",
+        "unit": "J",
+        "description": "物体がもつエネルギー。単位はジュール(J)。"
+      },
+      "m": {
+        "role": "質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "物体の静止質量。単位はキログラム(kg)。"
+      },
+      "c": {
+        "role": "光速",
+        "kind": "constant",
+        "value": 299800000.0,
+        "unit": "m/s",
+        "description": "真空中の光の速さ。約3×10⁸ m/s。"
+      },
+      "c^2": {
+        "role": "光速の2乗",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "約9×10¹⁶。質量とエネルギーの変換の比です。"
+      }
+    },
+    "relatedFormulas": [
+      "kinetic-energy",
+      "newton-second"
+    ]
+  },
+  "newton-second": {
+    "name": "ニュートンの運動の第2法則",
+    "oneLiner": "物体にはたらく力が質量と加速度の積に等しいという法則",
+    "description": "ニュートンの第2法則は、物体にはたらく合力が質量と加速度の積であることを表します。同じ力でも質量が大きいほど加速度は小さくなり、これは慣性の大きさを質量で数量化したものです。古典力学の最も中心的な運動方程式です。",
+    "discoverer": "アイザック・ニュートン",
+    "field": "物理学",
+    "significance": "力・質量・加速度の関係を量的に確立し、古典力学の基礎を築きました。",
+    "elementMeanings": {
+      "F": {
+        "role": "力",
+        "kind": "output",
+        "unit": "N",
+        "description": "物体にはたらく合力。単位はニュートン(N)。"
+      },
+      "m": {
+        "role": "質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "物体の質量。慣性の大きさを表します。単位は kg。"
+      },
+      "a": {
+        "role": "加速度",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "速度の1秒あたりの変化の割合。単位は m/s²。"
+      }
+    },
+    "relatedFormulas": [
+      "universal-gravitation",
+      "kinetic-energy",
+      "mass-energy"
+    ]
+  },
+  "universal-gravitation": {
+    "name": "万有引力の法則",
+    "oneLiner": "二つの物体の間に、質量の積に比例し距離の2乗に反比例する引力がはたらくという法則",
+    "description": "万有引力の法則は、質量をもつすべての物体がたがいに引き合い、その力の大きさが二つの質量の積に比例し、距離の2乗に反比例することを述べます。リンゴの落下と月の公転を一つの原理にまとめた画期的な法則です。",
+    "discoverer": "アイザック・ニュートン",
+    "field": "物理学",
+    "significance": "天体の運動と地上の力学を一つにまとめ、最初の普遍的な物理法則を確立しました。",
+    "elementMeanings": {
+      "F": {
+        "role": "重力",
+        "kind": "output",
+        "unit": "N",
+        "description": "二つの物体の間にはたらく引力。単位はニュートン(N)。"
+      },
+      "G": {
+        "role": "重力定数",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "万有引力定数。約6.674×10⁻¹¹ N·m²/kg²。"
+      },
+      "m_1": {
+        "role": "1つ目の物体の質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "たがいに作用し合う1つ目の物体の質量です。"
+      },
+      "m_2": {
+        "role": "2つ目の物体の質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "たがいに作用し合う2つ目の物体の質量です。"
+      },
+      "r": {
+        "role": "距離",
+        "kind": "input",
+        "unit": "m",
+        "description": "二つの物体の重心の間の距離です。"
+      },
+      "r^2": {
+        "role": "距離の2乗",
+        "kind": "structural",
+        "description": "逆2乗の法則を表します。距離が2倍になると力は1/4になります。"
+      }
+    },
+    "relatedFormulas": [
+      "coulomb-law",
+      "newton-second"
+    ]
+  },
+  "coulomb-law": {
+    "name": "クーロンの法則",
+    "oneLiner": "二つの電荷の間に、電気量の積に比例し距離の2乗に反比例する電気力がはたらくという法則",
+    "description": "クーロンの法則は、二つの点電荷の間の電気力が電気量の積に比例し、距離の2乗に反比例することを表します。万有引力と同じ逆2乗の法則の形をしていますが、電気力は引力にも斥力にもなるという違いがあります。",
+    "discoverer": "シャルル・オーギュスタン・ド・クーロン",
+    "field": "物理学",
+    "significance": "電磁気学の出発点であり、マクスウェル方程式と現代の電磁気理論の基礎を与えます。",
+    "elementMeanings": {
+      "F": {
+        "role": "電気力",
+        "kind": "output",
+        "unit": "N",
+        "description": "二つの電荷の間にはたらく力。単位はニュートン(N)。"
+      },
+      "k_e": {
+        "role": "クーロン定数",
+        "kind": "constant",
+        "value": 8988000000.0,
+        "unit": "N·m²/C²",
+        "description": "約8.988×10⁹ N·m²/C²。電気力の強さを決めます。"
+      },
+      "q_1": {
+        "role": "1つ目の電荷",
+        "kind": "input",
+        "unit": "C",
+        "description": "1つ目の帯電体の電気量。単位はクーロン(C)。"
+      },
+      "q_2": {
+        "role": "2つ目の電荷",
+        "kind": "input",
+        "unit": "C",
+        "description": "2つ目の帯電体の電気量。同じ符号なら斥力、違う符号なら引力になります。"
+      },
+      "r": {
+        "role": "距離",
+        "kind": "input",
+        "unit": "m",
+        "description": "二つの点電荷の間の距離です。"
+      },
+      "r^2": {
+        "role": "距離の2乗",
+        "kind": "structural",
+        "description": "逆2乗の法則を表します。距離が遠いほど力は急に弱くなります。"
+      }
+    },
+    "relatedFormulas": [
+      "universal-gravitation",
+      "newton-second"
+    ]
+  },
+  "kinetic-energy": {
+    "name": "運動エネルギー",
+    "oneLiner": "動いている物体がもつエネルギーを質量と速さで表す公式",
+    "description": "運動エネルギーの公式は、質量 m の物体が速さ v で動いているときにもつエネルギーが (1/2)mv² であることを表します。速さの2乗に比例するので、速さが2倍になるとエネルギーは4倍になります。仕事とエネルギーの定理の要であり、エネルギー保存則の基本となる要素です。",
+    "field": "物理学",
+    "significance": "エネルギー保存則の要となる要素であり、力学の問題を解くときに最もよく使われるエネルギーの形です。",
+    "elementMeanings": {
+      "K": {
+        "role": "運動エネルギー",
+        "kind": "output",
+        "unit": "J",
+        "description": "物体が動いていることによるエネルギー。単位はジュール(J)。"
+      },
+      "\\frac{1}{2}": {
+        "role": "比例定数",
+        "kind": "constant",
+        "value": 0.5,
+        "description": "ニュートンの第2法則から積分で導くときに現れる係数です。"
+      },
+      "m": {
+        "role": "質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "動いている物体の質量。単位は kg。"
+      },
+      "v": {
+        "role": "速さ",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "物体が動く速さ。単位は m/s。"
+      },
+      "v^2": {
+        "role": "速さの2乗",
+        "kind": "structural",
+        "description": "速さが2倍ならエネルギーは4倍。非線形の関係を表します。"
+      }
+    },
+    "relatedFormulas": [
+      "mass-energy",
+      "newton-second"
+    ]
+  },
+  "kinematic-displacement": {
+    "name": "等加速度運動の変位の公式",
+    "oneLiner": "初速度と一定の加速度で動く物体の変位を時間で表す公式",
+    "description": "等加速度の直線運動で物体の変位を求める基本の公式です。初速度による移動距離と、加速度による追加の移動距離を足し合わせます。ニュートンの第2法則とならんで古典力学の問題を解く中心的な道具であり、自由落下や投射体の運動などさまざまな場面に当てはまります。",
+    "discoverer": "ガリレオ・ガリレイ",
+    "field": "物理学",
+    "significance": "等加速度運動を量的に記述する中心的な運動学の公式であり、力学の問題の最も基本的な道具です。",
+    "elementMeanings": {
+      "s": {
+        "role": "変位",
+        "kind": "output",
+        "unit": "m",
+        "description": "物体が動いた距離。単位はメートル(m)。"
+      },
+      "v_0": {
+        "role": "初速度",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "運動を始めた時点の速度。単位は m/s。"
+      },
+      "t": {
+        "role": "時間",
+        "kind": "input",
+        "unit": "s",
+        "description": "運動が続いた時間。単位は秒(s)。"
+      },
+      "a": {
+        "role": "加速度",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "一定の加速度。単位は m/s²。"
+      },
+      "\\frac{1}{2}": {
+        "role": "比例定数",
+        "kind": "constant",
+        "value": 0.5,
+        "description": "積分から導かれる係数。加速度による変位の比例の因子です。"
+      },
+      "t^2": {
+        "role": "時間の2乗",
+        "kind": "structural",
+        "description": "加速度による変位が時間の2乗に比例することを表します。"
+      }
+    },
+    "relatedFormulas": [
+      "velocity-acceleration",
+      "velocity-displacement",
+      "newton-second"
+    ],
+    "realWorldExamples": [
+      "自由落下する物体が何秒後にどれだけ落ちたかを計算する",
+      "自動車がブレーキを踏んでから止まるまでの制動距離を出す",
+      "飛行機が離陸するときに滑走路で必要な滑走距離を計算する"
+    ]
+  },
+  "velocity-acceleration": {
+    "name": "速度と加速度の関係式",
+    "oneLiner": "等加速度運動で時間に応じた速度の変わり方を表す公式",
+    "description": "等加速度の直線運動で、ある時刻の速度を初速度と加速度と経過した時間で表す、最も基本的な運動学の公式です。加速度が一定のとき速度は時間について直線的に変わり、この関係から加速度の定義そのものが導かれます。",
+    "discoverer": "ガリレオ・ガリレイ",
+    "field": "物理学",
+    "significance": "加速度という考え方を数量化した最も基本的な運動学の関係式であり、あらゆる等加速度運動の分析の出発点です。",
+    "elementMeanings": {
+      "v": {
+        "role": "あとの速度",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "時刻 t での速度。単位は m/s。"
+      },
+      "v_0": {
+        "role": "初速度",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "運動を始めた時点の速度。単位は m/s。"
+      },
+      "a": {
+        "role": "加速度",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "一定の加速度。単位は m/s²。"
+      },
+      "t": {
+        "role": "時間",
+        "kind": "input",
+        "unit": "s",
+        "description": "運動が続いた時間。単位は秒(s)。"
+      }
+    },
+    "relatedFormulas": [
+      "kinematic-displacement",
+      "velocity-displacement",
+      "newton-second"
+    ],
+    "realWorldExamples": [
+      "信号で発進した自動車が5秒後に達する速度を計算する",
+      "スカイダイバーが落ち始めてからある時点での速度を見積もる",
+      "ロケットの打ち上げから一定時間後の上昇速度を出す"
+    ]
+  },
+  "velocity-displacement": {
+    "name": "速度と変位の関係式",
+    "oneLiner": "時間を経由せずに速度と変位の関係を直接表す公式",
+    "description": "等加速度の直線運動で時間の変数を消し、速度と変位の関係を直接表す公式です。あとの速度の2乗が、初速度の2乗に加速度と変位の積の2倍を足した値に等しくなります。時間がわからないときにとくに役立ち、エネルギー保存の見方とも深くつながっています。",
+    "discoverer": "ガリレオ・ガリレイ",
+    "field": "物理学",
+    "significance": "時間なしで速度と距離の関係を直接求められるため、力学の問題の重要な補助の道具です。",
+    "elementMeanings": {
+      "v^2": {
+        "role": "あとの速度の2乗",
+        "kind": "output",
+        "unit": "(m/s)²",
+        "description": "最後の速度の2乗。単位は (m/s)²。"
+      },
+      "v_0^2": {
+        "role": "初速度の2乗",
+        "kind": "input",
+        "unit": "(m/s)²",
+        "description": "初速度の2乗。単位は (m/s)²。"
+      },
+      "2": {
+        "role": "定数の係数",
+        "kind": "constant",
+        "value": 2,
+        "description": "運動方程式を導く途中で現れる係数です。"
+      },
+      "a": {
+        "role": "加速度",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "一定の加速度。単位は m/s²。"
+      },
+      "s": {
+        "role": "変位",
+        "kind": "input",
+        "unit": "m",
+        "description": "物体が動いた距離。単位はメートル(m)。"
+      }
+    },
+    "relatedFormulas": [
+      "kinematic-displacement",
+      "velocity-acceleration",
+      "kinetic-energy"
+    ],
+    "realWorldExamples": [
+      "制動距離だけがわかっているときに衝突直前の自動車の速度を逆算する",
+      "銃口を出た弾丸の初速度を銃身の長さと加速度から計算する",
+      "ジェットコースターがある高さで達する速さを出す"
+    ]
+  },
+  "projectile-motion": {
+    "name": "放物運動の軌跡の方程式",
+    "oneLiner": "投げ出された物体の軌跡を水平距離の関数として表す放物線の方程式",
+    "description": "初速度と発射角で投げ出された物体の軌跡を表す方程式です。水平方向は等速運動、垂直方向は重力による等加速度運動が合わさって放物線の経路をつくります。空気の抵抗を無視した理想的なモデルですが、スポーツの物理から弾道学まで幅広く当てはまります。",
+    "discoverer": "ガリレオ・ガリレイ",
+    "field": "物理学",
+    "significance": "2次元の運動を水平と垂直に分けて分析する方法を確立したもので、弾道学の基礎です。",
+    "elementMeanings": {
+      "y": {
+        "role": "垂直方向の位置",
+        "kind": "output",
+        "unit": "m",
+        "description": "投げ出した点から測った垂直方向の高さ。単位はメートル(m)。"
+      },
+      "x": {
+        "role": "水平距離",
+        "kind": "input",
+        "unit": "m",
+        "description": "投げ出した点からの水平方向の移動距離。単位はメートル(m)。"
+      },
+      "\\theta": {
+        "role": "発射角",
+        "kind": "input",
+        "unit": "rad",
+        "description": "水平面と初速度のベクトルがつくる角です。"
+      },
+      "\\tan\\theta": {
+        "role": "発射角の正接",
+        "kind": "structural",
+        "description": "最初の軌跡の傾きを表します。"
+      },
+      "g": {
+        "role": "重力加速度",
+        "kind": "constant",
+        "value": 9.8,
+        "unit": "m/s²",
+        "description": "地球の表面の近くで約9.8 m/s²。"
+      },
+      "v_0": {
+        "role": "初速",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "投げ出した時点の速さ。単位は m/s。"
+      },
+      "\\cos^2\\theta": {
+        "role": "発射角の余弦の2乗",
+        "kind": "structural",
+        "description": "水平方向の速度成分の2乗を反映します。"
+      }
+    },
+    "relatedFormulas": [
+      "kinematic-displacement",
+      "velocity-acceleration"
+    ],
+    "realWorldExamples": [
+      "野球で打者が打ったボールの飛距離と最高点の高さを予測する",
+      "噴水の水の流れが描く放物線の経路の設計",
+      "大砲から撃ち出された砲弾の着弾点の計算"
+    ]
+  },
+  "simple-harmonic": {
+    "name": "単振動の運動方程式",
+    "oneLiner": "復元力によって周期的にくり返される運動を正弦関数で表す公式",
+    "description": "単振動(単純調和運動)は、つり合いの位置からの変位に比例する復元力を受ける物体の運動です。変位が正弦(または余弦)の関数で表され、振幅・角振動数・初期位相で余すところなく記述されます。ばねの振動、振り子の運動、LC回路など、自然界の数多くの振動する現象を説明する基本のモデルです。",
+    "field": "物理学",
+    "significance": "振動と波の現象を記述する最も基本的なモデルであり、複雑な周期運動も単振動の重ね合わせとして分析できます。",
+    "elementMeanings": {
+      "x": {
+        "role": "変位",
+        "kind": "output",
+        "unit": "m",
+        "description": "つり合いの位置からのずれの大きさ。単位はメートル(m)。"
+      },
+      "A": {
+        "role": "振幅",
+        "kind": "input",
+        "unit": "m",
+        "description": "最大の変位。振動の大きさを表します。単位はメートル(m)。"
+      },
+      "\\omega": {
+        "role": "角振動数",
+        "kind": "input",
+        "unit": "rad/s",
+        "description": "単位時間あたりの位相の変化量。単位は rad/s。周期 T との関係は 2π/T。"
+      },
+      "t": {
+        "role": "時間",
+        "kind": "input",
+        "unit": "s",
+        "description": "運動が続いた時間。単位は秒(s)。"
+      },
+      "\\varphi": {
+        "role": "初期位相",
+        "kind": "input",
+        "unit": "rad",
+        "description": "t=0 での位相。最初の条件を反映します。"
+      }
+    },
+    "relatedFormulas": [
+      "wave-speed",
+      "kinetic-energy"
+    ],
+    "realWorldExamples": [
+      "時計の振り子が左右に往復する周期の分析",
+      "ギターの弦の振動のパターンのモデル化",
+      "地震計が揺れを感知するしくみ"
+    ]
+  },
+  "wave-speed": {
+    "name": "波の速さの公式",
+    "oneLiner": "波の伝わる速さが振動数と波長の積に等しいという関係式",
+    "description": "波の伝わる速さは1秒間に波が進む距離であり、これは1秒間に振動する回数(振動数)と1波長の長さを掛けたものに等しくなります。音・光・水面の波など、あらゆる種類の波に共通して当てはまる基本の関係式です。",
+    "field": "物理学",
+    "significance": "あらゆる波の現象に共通して当てはまる基本の関係式であり、音響学・光学・通信などの基礎です。",
+    "elementMeanings": {
+      "v": {
+        "role": "波の速さ",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "波が媒質を通って伝わる速さ。単位は m/s。"
+      },
+      "f": {
+        "role": "振動数",
+        "kind": "input",
+        "unit": "Hz",
+        "description": "単位時間あたりの振動の回数。単位はヘルツ(Hz)。"
+      },
+      "\\lambda": {
+        "role": "波長",
+        "kind": "input",
+        "unit": "m",
+        "description": "1周期にあたる空間の長さ。単位はメートル(m)。"
+      }
+    },
+    "relatedFormulas": [
+      "simple-harmonic",
+      "de-broglie"
+    ],
+    "realWorldExamples": [
+      "ラジオの周波数から電波の波長を計算する",
+      "超音波検査で媒質の中の音波の波長を決める",
+      "楽器の音の高さと共鳴管の長さの関係の分析"
+    ]
+  },
+  "ideal-gas-law": {
+    "name": "理想気体の状態方程式",
+    "oneLiner": "理想気体の圧力・体積・温度・物質量の間の関係を表す状態方程式",
+    "description": "理想気体の状態方程式は、気体の圧力と体積の積が物質量と絶対温度の積に比例するという状態方程式です。ボイルの法則、シャルルの法則、アボガドロの法則を一つにまとめたもので、分子どうしの相互作用がなく、分子自身の体積も無視できるという理想的な条件を仮定しています。",
+    "field": "物理学",
+    "significance": "熱力学と気体の力学の基本の方程式であり、実際の気体のふるまいをおおよそ理解するための出発点です。",
+    "elementMeanings": {
+      "P": {
+        "role": "圧力",
+        "kind": "input",
+        "unit": "Pa",
+        "description": "気体が容器の壁に加える力の強さ。単位はパスカル(Pa)。"
+      },
+      "V": {
+        "role": "体積",
+        "kind": "input",
+        "unit": "m³",
+        "description": "気体が占める空間の大きさ。単位は立方メートル(m³)またはリットル(L)。"
+      },
+      "n": {
+        "role": "物質量",
+        "kind": "input",
+        "unit": "mol",
+        "description": "気体の量。単位はモル(mol)。"
+      },
+      "R": {
+        "role": "気体定数",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)",
+        "description": "理想気体定数。約8.314 J/(mol·K)。"
+      },
+      "T": {
+        "role": "絶対温度",
+        "kind": "input",
+        "unit": "K",
+        "description": "ケルビンで測った温度。0 K は絶対零度です。"
+      }
+    },
+    "relatedFormulas": [
+      "first-law-thermo",
+      "boltzmann-dist"
+    ],
+    "realWorldExamples": [
+      "タイヤの中の空気圧が温度の変化で変わることの予測",
+      "風船を温めたり冷やしたりしたときの体積の変化の計算",
+      "高い山でお菓子の袋がふくらむ現象の説明"
+    ]
+  },
+  "first-law-thermo": {
+    "name": "熱力学第一法則",
+    "oneLiner": "系の内部エネルギーの変化が、吸収した熱とした仕事の差に等しいというエネルギー保存の法則",
+    "description": "熱力学第一法則はエネルギー保存則を熱力学の言葉で表したものです。系が外から熱を吸収すると内部エネルギーが増えるか、外に対して仕事をするかであり、エネルギーが生まれたり消えたりすることはありません。熱機関、冷凍機、化学反応など、エネルギーがかかわるすべての過程の基本の制約です。",
+    "field": "物理学",
+    "significance": "熱と仕事がエネルギーの異なる形であることを確立し、エネルギー保存の普遍性を熱力学にまで広げました。",
+    "elementMeanings": {
+      "\\Delta U": {
+        "role": "内部エネルギーの変化",
+        "kind": "output",
+        "unit": "J",
+        "description": "系の内部エネルギーの変化量。分子の運動エネルギーと位置エネルギーの合計の変化。"
+      },
+      "Q": {
+        "role": "熱",
+        "kind": "input",
+        "unit": "J",
+        "description": "系が外から吸収した熱量。正なら吸熱、負なら放熱。単位はジュール(J)。"
+      },
+      "W": {
+        "role": "仕事",
+        "kind": "input",
+        "unit": "J",
+        "description": "系が外に対してした仕事。正なら膨張、負なら圧縮。単位はジュール(J)。"
+      }
+    },
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "kinetic-energy"
+    ],
+    "realWorldExamples": [
+      "自動車のエンジンで燃料の燃焼熱がピストンの運動に変わる過程",
+      "冷蔵庫が内部の熱を外へ放り出すしくみ",
+      "断熱圧縮のときに気体の温度が上がる理由の説明"
+    ]
+  },
+  "schrodinger-eq": {
+    "name": "シュレーディンガー方程式",
+    "oneLiner": "量子状態の時間変化を記述する量子力学の根本の方程式",
+    "description": "シュレーディンガー方程式は、量子力学で波動関数の時間変化を記述する偏微分方程式です。古典力学のニュートンの運動方程式にあたる量子力学の運動方程式で、原子・分子・固体の量子的なふるまいを予測するのに使われます。波動関数の絶対値の2乗は、粒子を見つける確率密度を表します。",
+    "discoverer": "エルヴィン・シュレーディンガー",
+    "field": "物理学",
+    "significance": "量子力学の基本の運動方程式であり、原子の構造、化学結合、半導体の物理など現代科学の土台を与えます。",
+    "elementMeanings": {
+      "i": {
+        "role": "虚数単位",
+        "kind": "structural",
+        "description": "2乗すると -1 になる数。波動関数の位相の変化を表します。"
+      },
+      "\\hbar": {
+        "role": "換算プランク定数",
+        "kind": "constant",
+        "value": 1.055e-34,
+        "unit": "J·s",
+        "description": "プランク定数を 2π で割った値。約1.055×10⁻³⁴ J·s。"
+      },
+      "\\frac{\\partial \\psi}{\\partial t}": {
+        "role": "波動関数の時間についての偏微分",
+        "kind": "structural",
+        "description": "波動関数が時間とともにどう変わるかを表します。"
+      },
+      "\\hat{H}": {
+        "role": "ハミルトニアン演算子",
+        "kind": "structural",
+        "description": "系の全エネルギー(運動エネルギー + 位置エネルギー)に対応する演算子です。"
+      },
+      "\\psi": {
+        "role": "波動関数",
+        "kind": "structural",
+        "description": "量子状態を記述する複素関数。絶対値の2乗が確率密度です。"
+      }
+    },
+    "relatedFormulas": [
+      "de-broglie",
+      "mass-energy"
+    ],
+    "realWorldExamples": [
+      "水素原子の電子の軌道のエネルギー準位の計算",
+      "半導体の電子のバンド構造の分析",
+      "トンネル効果を利用した走査型トンネル顕微鏡(STM)のしくみ"
+    ]
+  },
+  "de-broglie": {
+    "name": "ド・ブロイ波長",
+    "oneLiner": "すべての粒子が波の性質をもち、その波長が運動量に反比例することを表す式",
+    "description": "ド・ブロイの仮説によれば、質量をもつすべての粒子は波の性質をもち、その波長はプランク定数を運動量で割った値になります。この物質波という考え方は電子顕微鏡のしくみであり、シュレーディンガー方程式が生まれる直接のきっかけになりました。目に見える大きさの物体のド・ブロイ波長はきわめて小さく観測できませんが、電子などの微視的な粒子では実験で確かめられています。",
+    "discoverer": "ルイ・ド・ブロイ",
+    "field": "物理学",
+    "significance": "粒子と波の二重性を物質にまで広げ、量子力学が生まれる決定的なきっかけを与えました。",
+    "elementMeanings": {
+      "\\lambda": {
+        "role": "ド・ブロイ波長",
+        "kind": "output",
+        "unit": "m",
+        "description": "粒子に対応する物質波の波長。単位はメートル(m)。"
+      },
+      "h": {
+        "role": "プランク定数",
+        "kind": "constant",
+        "value": 6.626e-34,
+        "unit": "J·s",
+        "description": "約6.626×10⁻³⁴ J·s。量子力学の基本の定数です。"
+      },
+      "p": {
+        "role": "運動量",
+        "kind": "input",
+        "unit": "kg·m/s",
+        "description": "粒子の運動量(質量掛ける速度)。単位は kg·m/s。"
+      }
+    },
+    "relatedFormulas": [
+      "schrodinger-eq",
+      "wave-speed",
+      "mass-energy"
+    ],
+    "realWorldExamples": [
+      "電子顕微鏡で電子ビームの分解能を決める波長の計算",
+      "中性子回折の実験による結晶構造の分析",
+      "原子干渉計で原子の波の性質を使った精密な測定"
+    ]
+  },
+  "boltzmann-dist": {
+    "name": "ボルツマン分布",
+    "oneLiner": "熱平衡の状態で粒子があるエネルギーをもつ確率がエネルギーの指数関数で小さくなることを表す分布",
+    "description": "ボルツマン分布は、熱平衡にある系で粒子がエネルギー E をもつ確率が e の (-E/kT) 乗に比例するという統計力学の基本の結果です。温度が高いほど高いエネルギーの状態を占める確率が大きくなり、温度が低いとほとんどの粒子は低いエネルギーの状態に集まります。化学反応の速さ、半導体の電子の分布、大気の密度の分布などを説明します。",
+    "discoverer": "ルートヴィッヒ・ボルツマン",
+    "field": "物理学",
+    "significance": "統計力学の根本の原理であり、巨視的な熱力学の法則を微視的な粒子の運動で説明する橋渡しの役目を果たします。",
+    "elementMeanings": {
+      "P": {
+        "role": "確率",
+        "kind": "output",
+        "description": "粒子がある特定のエネルギー状態にある確率です。"
+      },
+      "e": {
+        "role": "自然対数の底",
+        "kind": "constant",
+        "value": 2.71828183,
+        "description": "自然対数の底。約2.718。"
+      },
+      "E": {
+        "role": "エネルギー",
+        "kind": "input",
+        "unit": "J",
+        "description": "その状態のエネルギー。単位はジュール(J)。"
+      },
+      "k": {
+        "role": "ボルツマン定数",
+        "kind": "constant",
+        "value": 1.381e-23,
+        "unit": "J/K",
+        "description": "約1.381×10⁻²³ J/K。温度とエネルギーを結びつける定数です。"
+      },
+      "T": {
+        "role": "絶対温度",
+        "kind": "input",
+        "unit": "K",
+        "description": "ケルビンで測った温度。高いほどエネルギーの散らばりが大きくなります。"
+      }
+    },
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "first-law-thermo"
+    ],
+    "realWorldExamples": [
+      "高いところほど大気の密度が指数関数的に小さくなる現象の説明",
+      "半導体で温度に応じて自由電子の数が変わることの予測",
+      "化学反応で活性化エネルギーの壁を越える分子の割合の計算"
+    ]
+  },
+  "lorentz-transform": {
+    "name": "ローレンツの時間変換",
+    "oneLiner": "慣性系どうしの時間座標の変換を表す特殊相対性理論の公式",
+    "description": "ローレンツ変換は、たがいに等速で動く二つの慣性系の間で時空の座標を変換する公式です。時間の変換式は、ある系の時間が別の系では空間の座標にも依存することを示しており、これは同時であることの相対性を数式で表したものです。時間の遅れや長さの収縮といった相対論的な効果の根本にあります。",
+    "discoverer": "ヘンドリック・ローレンツ",
+    "field": "物理学",
+    "significance": "ガリレイ変換に取って代わり、特殊相対性理論の数学的な基礎を確立しました。",
+    "elementMeanings": {
+      "t'": {
+        "role": "変換された時間",
+        "kind": "output",
+        "unit": "s",
+        "description": "動いている観測者の系での時間の座標です。"
+      },
+      "\\gamma": {
+        "role": "ローレンツ因子",
+        "kind": "structural",
+        "description": "1/√(1-v²/c²)。速度が光速に近いほど大きくなります。"
+      },
+      "t": {
+        "role": "もとの時間",
+        "kind": "input",
+        "unit": "s",
+        "description": "静止した系での時間の座標です。"
+      },
+      "v": {
+        "role": "相対速度",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "二つの系の間の相対的な速度。単位は m/s。"
+      },
+      "x": {
+        "role": "空間の座標",
+        "kind": "input",
+        "unit": "m",
+        "description": "静止した系での位置。時間の変換に空間がかかわることを示します。"
+      },
+      "c^2": {
+        "role": "光速の2乗",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "時空の変換の比例定数。時間と空間の混ざり方を決めます。"
+      }
+    },
+    "relatedFormulas": [
+      "mass-energy",
+      "velocity-acceleration"
+    ],
+    "realWorldExamples": [
+      "GPS衛星の時刻の補正(相対論的な時間の遅れを反映)",
+      "粒子加速器で高速の粒子の寿命が延びるのを観測する",
+      "ミューオンが大気から地表まで届く理由の説明"
+    ]
+  },
+  "gauss-law": {
+    "name": "ガウスの法則",
+    "oneLiner": "電荷の分布がつくる電場の発散が電荷密度に比例するという、マクスウェル方程式の第1式",
+    "description": "ガウスの法則は4つのマクスウェル方程式の第1式で、電場の発散(空間的な広がり)が、その点の電荷密度を真空の誘電率で割った値に等しいことを表します。電荷が電場の源であることを数式で表したもので、正の電荷から電場が出て負の電荷へ入ることを記述します。対称性の高い電荷の分布がつくる電場を簡潔に求めるのにとくに役立ちます。",
+    "discoverer": "カール・フリードリヒ・ガウス / ジェームズ・クラーク・マクスウェル",
+    "field": "物理学",
+    "significance": "電磁気学の4つの基本方程式(マクスウェル方程式)の一つであり、電荷と電場の関係を定めます。",
+    "elementMeanings": {
+      "\\nabla \\cdot \\mathbf{E}": {
+        "role": "電場の発散",
+        "kind": "structural",
+        "description": "電場がある点でどれだけ広がっているか、集まっているかを表す微分の演算です。"
+      },
+      "\\rho": {
+        "role": "電荷密度",
+        "kind": "input",
+        "unit": "C/m³",
+        "description": "単位体積あたりの電気量。単位は C/m³。"
+      },
+      "\\varepsilon_0": {
+        "role": "真空の誘電率",
+        "kind": "constant",
+        "value": 8.854e-12,
+        "unit": "C²/(N·m²)",
+        "description": "約8.854×10⁻¹² F/m。真空中で電場の強さを決める定数です。"
+      }
+    },
+    "relatedFormulas": [
+      "coulomb-law"
+    ],
+    "realWorldExamples": [
+      "導体球の表面の電場の分布の計算",
+      "平行板コンデンサの内部の一様な電場の導出",
+      "帯電した導体の内部で電場が0になる理由の説明"
+    ]
+  }
+}

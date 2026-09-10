@@ -1,0 +1,322 @@
+{
+  "linear-function": {
+    "name": "Fungsi linear",
+    "oneLiner": "Fungsi paling dasar yang grafiknya berupa garis lurus dan sebanding dengan x",
+    "description": "Fungsi linear y = ax + b adalah fungsi yang nilai y-nya berubah tetap sebesar a setiap kali x bertambah 1. Grafiknya selalu berupa garis lurus, dengan a sebagai gradien dan b sebagai titik potong sumbu y.",
+    "field": "Aljabar",
+    "significance": "Ini titik awal seluruh pembelajaran fungsi, sekaligus alat paling dasar untuk menyatakan gejala yang laju perubahannya tetap secara matematis.",
+    "elementMeanings": {
+      "a": {
+        "role": "Gradien",
+        "description": "Menyatakan seberapa curam garis lurusnya. Bila positif, garis miring ke kanan atas; bila negatif, miring ke kanan bawah.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Titik potong sumbu y",
+        "description": "Koordinat y dari titik tempat garis memotong sumbu y. Ini juga nilai y saat x sama dengan 0.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variabel bebas",
+        "description": "Nilai masukan yang boleh ditetapkan dengan bebas.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Variabel terikat",
+        "description": "Nilai keluaran yang ditentukan oleh nilai x.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung tarif taksi berupa tarif dasar ditambah tarif per jarak",
+      "Hubungan waktu dan jarak pada orang yang berjalan dengan laju tetap"
+    ],
+    "relatedFormulas": ["slope-formula", "point-slope-form", "direct-proportion"]
+  },
+  "slope-formula": {
+    "name": "Rumus gradien",
+    "oneLiner": "Rumus untuk mencari gradien sebuah garis lurus dari koordinat dua titik",
+    "description": "Rumus gradien m = (y2 - y1) / (x2 - x1) menghitung seberapa curam garis lurus yang melalui dua titik pada bidang koordinat. Rumus ini menyatakan perubahan y dibanding perubahan x, yaitu laju perubahannya.",
+    "field": "Aljabar",
+    "significance": "Rumus ini menyatakan arah dan kecuraman garis lurus secara tepat dalam angka, dan menuntun secara wajar ke laju perubahan yang merupakan konsep dasar turunan.",
+    "elementMeanings": {
+      "m": {
+        "role": "Gradien",
+        "description": "Nilai yang menyatakan tingkat kecuraman sebuah garis lurus.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Koordinat x titik pertama",
+        "description": "Kedudukan mendatar titik pertama.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Koordinat y titik pertama",
+        "description": "Kedudukan tegak titik pertama.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Koordinat x titik kedua",
+        "description": "Kedudukan mendatar titik kedua.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Koordinat y titik kedua",
+        "description": "Kedudukan tegak titik kedua.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung tingkat kemiringan jalan pegunungan",
+      "Laju kenaikan selama kurun waktu tertentu pada grafik harga saham"
+    ],
+    "relatedFormulas": ["linear-function", "point-slope-form", "distance-formula"]
+  },
+  "point-slope-form": {
+    "name": "Bentuk titik-gradien",
+    "oneLiner": "Bentuk untuk menyusun persamaan garis lurus ketika satu titik dan gradiennya diketahui",
+    "description": "Bentuk titik-gradien y - y1 = m(x - x1) memungkinkan kita langsung menyusun persamaan sebuah garis lurus ketika satu titik (x1, y1) pada garis itu dan gradien m sudah diketahui.",
+    "field": "Aljabar",
+    "significance": "Ini bentuk paling praktis untuk mencari persamaan garis lurus, dan bentuk yang sama juga dipakai saat mencari persamaan garis singgung dalam kalkulus turunan.",
+    "elementMeanings": {
+      "m": {
+        "role": "Gradien",
+        "description": "Tingkat kecuraman garis lurus.",
+        "kind": "input"
+      },
+      "x_1": {
+        "role": "Koordinat x titik yang diketahui",
+        "description": "Kedudukan mendatar titik yang sudah dipastikan terletak pada garis.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Koordinat y titik yang diketahui",
+        "description": "Kedudukan tegak titik yang sudah dipastikan terletak pada garis.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Model peramalan suhu mendatang dari suhu saat ini dan laju perubahannya",
+      "Persamaan yang menyatakan arah penjualan dari omzet pada suatu saat dan laju pertumbuhannya"
+    ],
+    "relatedFormulas": ["linear-function", "slope-formula"]
+  },
+  "quadratic-standard": {
+    "name": "Bentuk baku fungsi kuadrat",
+    "oneLiner": "Bentuk dasar fungsi kuadrat yang grafiknya berupa parabola",
+    "description": "Bentuk baku fungsi kuadrat y = ax2 + bx + c adalah fungsi yang memuat kuadrat dari x, dan grafiknya berbentuk parabola. Tanda a menentukan apakah parabolanya terbuka ke atas atau terbuka ke bawah.",
+    "field": "Aljabar",
+    "significance": "Ini fungsi inti untuk menjelaskan berbagai gejala nyata seperti gerak parabola dan persoalan nilai terbesar/terkecil.",
+    "elementMeanings": {
+      "a": {
+        "role": "Koefisien suku kuadrat",
+        "description": "Menentukan arah dan lebar parabola. Bila positif parabola terbuka ke atas, bila negatif terbuka ke bawah.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Koefisien suku linear",
+        "description": "Mempengaruhi kedudukan sumbu simetri parabola.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Suku tetap",
+        "description": "Koordinat y dari titik tempat parabola memotong sumbu y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Perubahan ketinggian bola yang dilempar",
+      "Kurva struktur lengkung sebuah jembatan"
+    ],
+    "relatedFormulas": ["quadratic-vertex", "discriminant", "quadratic-formula"]
+  },
+  "quadratic-vertex": {
+    "name": "Bentuk puncak fungsi kuadrat",
+    "oneLiner": "Bentuk fungsi kuadrat yang koordinat titik puncak parabolanya langsung terlihat",
+    "description": "Bentuk puncak fungsi kuadrat y = a(x - h)2 + k adalah bentuk yang membuat kita langsung tahu bahwa titik puncak parabolanya berada di (h, k). Bentuk ini diperoleh dengan mengubah bentuk baku menjadi kuadrat sempurna.",
+    "field": "Aljabar",
+    "significance": "Karena nilai terbesar atau terkecil sebuah fungsi langsung terbaca, bentuk ini dipakai secara mendasar untuk menyelesaikan persoalan pengoptimalan.",
+    "elementMeanings": {
+      "a": {
+        "role": "Koefisien suku kuadrat",
+        "description": "Menentukan arah dan lebar parabola. Nilainya sama dengan a pada bentuk baku.",
+        "kind": "input"
+      },
+      "h": {
+        "role": "Koordinat x titik puncak",
+        "description": "Kedudukan sumbu tempat parabola setangkup.",
+        "kind": "input"
+      },
+      "k": {
+        "role": "Koordinat y titik puncak",
+        "description": "Nilai terkecil (bila a > 0) atau nilai terbesar (bila a < 0) parabola.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Mencari ketinggian tertinggi pancaran air mancur",
+      "Mencari harga yang membuat keuntungan terbesar saat menetapkan harga barang"
+    ],
+    "relatedFormulas": ["quadratic-standard", "discriminant"]
+  },
+  "discriminant": {
+    "name": "Diskriminan",
+    "oneLiner": "Bentuk yang lebih dahulu memberi tahu berapa banyak akar sebuah persamaan kuadrat",
+    "description": "Diskriminan D = b2 - 4ac memungkinkan kita menentukan banyak dan jenis akar persamaan kuadrat ax2 + bx + c = 0 tanpa harus menyelesaikan persamaannya. Bila D positif, akarnya dua dan berbeda; bila 0, akarnya kembar; bila negatif, tidak ada akar real.",
+    "field": "Aljabar",
+    "significance": "Karena keberadaan penyelesaian dapat dinilai lebih dahulu sebelum persamaannya diselesaikan, diskriminan berperan penting dalam menentukan arah penyelesaian persoalan.",
+    "elementMeanings": {
+      "D": {
+        "role": "Nilai diskriminan",
+        "description": "Tanda nilai inilah yang menentukan banyak dan jenis akarnya.",
+        "kind": "output"
+      },
+      "b": {
+        "role": "Koefisien suku linear",
+        "description": "Bilangan yang dikalikan dengan x pada persamaan kuadrat.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Koefisien suku kuadrat",
+        "description": "Bilangan yang dikalikan dengan kuadrat dari x pada persamaan kuadrat.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Suku tetap",
+        "description": "Bilangan yang ditambahkan tanpa variabel pada persamaan kuadrat.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menilai apakah bola yang dilempar dapat mencapai ketinggian tertentu",
+      "Memastikan ada tidaknya titik potong antara dua kurva"
+    ],
+    "relatedFormulas": ["quadratic-formula", "quadratic-standard", "quadratic-vertex"]
+  },
+  "absolute-value-function": {
+    "name": "Fungsi nilai mutlak",
+    "oneLiner": "Fungsi berbentuk huruf V yang seluruh keluarannya bernilai 0 atau lebih",
+    "description": "Fungsi nilai mutlak y = |x| adalah fungsi yang mengabaikan tanda nilai masukannya dan hanya menyisakan besarnya. Grafiknya berbentuk huruf V dengan titik puncak di titik asal: bila x positif nilainya dikembalikan apa adanya, bila negatif tandanya dibalik.",
+    "field": "Aljabar",
+    "significance": "Ini alat dasar untuk menyatakan secara matematis keadaan yang hanya mementingkan besar tanpa memperhatikan arah, seperti jarak, galat, dan simpangan.",
+    "elementMeanings": {
+      "x": {
+        "role": "Nilai masukan",
+        "description": "Nilai asli yang boleh positif, negatif, maupun 0.",
+        "kind": "input"
+      },
+      "|x|": {
+        "role": "Nilai mutlak",
+        "description": "Besar nilai x setelah tandanya dilepas. Sama dengan jaraknya ke 0 pada garis bilangan.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Saat mencari selisih antara suhu di bawah nol dan suhu di atas nol",
+      "Saat mengukur seberapa jauh menyimpang dari nilai sasaran (galat)"
+    ],
+    "relatedFormulas": ["distance-formula", "linear-function"]
+  },
+  "floor-function": {
+    "name": "Fungsi lantai",
+    "oneLiner": "Fungsi yang membuang bagian di belakang koma sehingga membulatkan ke bilangan bulat terdekat ke bawah",
+    "description": "Fungsi lantai (fungsi tangga) y = floor(x) mengembalikan bilangan bulat terbesar yang tidak melebihi x. Grafiknya berbentuk tangga, dengan nilainya naik satu tingkat di setiap titik bilangan bulat.",
+    "field": "Aljabar",
+    "significance": "Ini dasar matematis bagi semua keadaan nyata yang memerlukan 'pembulatan ke bawah', seperti hasil bagi pada pembagian, perhitungan tarif bertingkat, dan pembagian bilangan bulat dalam pemrograman komputer.",
+    "elementMeanings": {
+      "x": {
+        "role": "Nilai masukan",
+        "description": "Nilai masukan pada jangkauan bilangan real.",
+        "kind": "input"
+      },
+      "\\lfloor x \\rfloor": {
+        "role": "Nilai lantai",
+        "description": "Bilangan terbesar di antara bilangan bulat yang tidak melebihi x. Contoh: floor dari 3,7 adalah 3, dan floor dari -1,2 adalah -2.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung tarif bus bertingkat (tarif berlaku per 5 km)",
+      "Banyaknya kue yang diterima satu orang saat dibagi rata kepada teman-teman"
+    ],
+    "relatedFormulas": ["absolute-value-function"]
+  },
+  "distance-formula": {
+    "name": "Rumus jarak",
+    "oneLiner": "Rumus untuk mencari jarak lurus antara dua titik pada bidang koordinat",
+    "description": "Rumus jarak d = sqrt((x2 - x1)2 + (y2 - y1)2) menghitung jarak lurus antara dua titik (x1, y1) dan (x2, y2) pada bidang koordinat. Rumus ini adalah penerapan teorema Pythagoras pada koordinat.",
+    "field": "Geometri",
+    "significance": "Ini alat paling dasar dalam geometri koordinat, sekaligus titik awal berbagai persoalan geometri seperti panjang sisi bangun dan jari-jari lingkaran.",
+    "elementMeanings": {
+      "d": {
+        "role": "Jarak",
+        "description": "Panjang ruas garis lurus yang menghubungkan kedua titik.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Koordinat x titik pertama",
+        "description": "Kedudukan mendatar titik pertama.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Koordinat y titik pertama",
+        "description": "Kedudukan tegak titik pertama.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Koordinat x titik kedua",
+        "description": "Kedudukan mendatar titik kedua.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Koordinat y titik kedua",
+        "description": "Kedudukan tegak titik kedua.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung jarak lurus antara dua tempat pada peta",
+      "Menentukan jarak antara dua tokoh dalam permainan"
+    ],
+    "relatedFormulas": ["midpoint-formula", "slope-formula"]
+  },
+  "midpoint-formula": {
+    "name": "Rumus titik tengah",
+    "oneLiner": "Rumus untuk mencari kedudukan tepat di tengah antara dua titik",
+    "description": "Rumus titik tengah M = ((x1 + x2)/2, (y1 + y2)/2) mencari titik yang tepat berada di tengah ruas garis yang menghubungkan dua titik pada bidang koordinat. Caranya cukup dengan mencari rata-rata masing-masing koordinatnya.",
+    "field": "Geometri",
+    "significance": "Ini rumus dasar saat mencari titik bagi dua sebuah ruas garis, pusat sebuah bangun, atau titik cerminnya, sekaligus alat yang wajib ada dalam menyelesaikan soal geometri koordinat.",
+    "elementMeanings": {
+      "M": {
+        "role": "Titik tengah",
+        "description": "Titik yang berada tepat di tengah antara kedua titik.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Koordinat x titik pertama",
+        "description": "Kedudukan mendatar titik pertama.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Koordinat y titik pertama",
+        "description": "Kedudukan tegak titik pertama.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Koordinat x titik kedua",
+        "description": "Kedudukan mendatar titik kedua.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Koordinat y titik kedua",
+        "description": "Kedudukan tegak titik kedua.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Mencari tempat bertemu yang tepat di tengah antara rumah dua orang teman",
+      "Menghitung letak pemasangan papan penanda di tengah sebuah ruas garis"
+    ],
+    "relatedFormulas": ["distance-formula", "slope-formula"]
+  }
+}

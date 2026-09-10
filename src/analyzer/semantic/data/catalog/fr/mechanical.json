@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "Contrainte",
+    "oneLiner": "Grandeur physique qui exprime la force interne exercée par unité de surface",
+    "description": "La contrainte est la force par unité de surface qui apparaît à l'intérieur d'un corps sous l'effet d'une force extérieure. Elle prend diverses formes — traction, compression, cisaillement — et constitue l'indicateur le plus élémentaire pour juger de la rupture d'un matériau. En conception de structures, la sécurité repose avant tout sur le maintien de la contrainte sous la valeur admissible.",
+    "field": "Génie mécanique",
+    "significance": "Notion de base de la résistance des matériaux, elle sert de point de départ à l'évaluation de la sûreté et à la conception des structures.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Contrainte", "description": "Force interne par unité de surface. Unité : pascal (Pa) ou N/m².", "kind": "output" },
+      "F": { "role": "Force", "description": "Force extérieure appliquée au corps. Unité : newton (N).", "kind": "input" },
+      "A": { "role": "Aire de la section", "description": "Aire de la section sur laquelle la force s'exerce. Unité : m².", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer la contrainte de traction des câbles d'un pont", "Vérifier la contrainte de compression des piliers d'un bâtiment"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "Déformation relative",
+    "oneLiner": "Rapport entre l'allongement subi et la longueur initiale",
+    "description": "La déformation relative est une grandeur sans dimension qui exprime l'ampleur de la déformation d'un corps sous l'effet d'une force extérieure, rapportée à sa longueur initiale. Tant qu'elle reste faible, le corps revient à sa forme d'origine dans le domaine élastique ; au-delà d'un seuil critique, une déformation plastique apparaît et modifie sa forme de façon permanente.",
+    "field": "Génie mécanique",
+    "significance": "En quantifiant l'ampleur de la déformation d'un matériau, elle fournit la base de l'analyse des comportements élastique et plastique.",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "Déformation relative", "description": "Rapport de la variation de longueur. Grandeur sans dimension (sans unité).", "kind": "output" },
+      "\\Delta L": { "role": "Variation de longueur", "description": "Longueur après déformation moins longueur initiale. Unité : m.", "kind": "input" },
+      "L": { "role": "Longueur initiale", "description": "Longueur du corps avant application de la force extérieure. Unité : m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Mesurer l'allongement d'une éprouvette lors d'un essai de traction sur métal", "Évaluer l'ampleur de la déformation de l'ossature d'un bâtiment lors d'un séisme"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "Loi de Hooke",
+    "oneLiner": "Loi selon laquelle, dans le domaine élastique, la contrainte est proportionnelle à la déformation relative",
+    "description": "La loi de Hooke énonce que la contrainte exercée sur un matériau est égale au produit du module d'élasticité par la déformation relative. Elle n'est valable que dans la limite d'élasticité ; au-delà, le comportement devient non linéaire. La force de rappel d'un ressort (F = kx) en est une forme particulière.",
+    "discoverer": "Robert Hooke",
+    "field": "Génie mécanique",
+    "significance": "En établissant la relation linéaire du comportement élastique, elle a fondé théoriquement l'analyse des structures et les essais de matériaux.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Contrainte", "description": "Force exercée par unité de surface. Unité : pascal (Pa).", "kind": "output" },
+      "E": { "role": "Module d'élasticité", "description": "Module de Young. Constante propre au matériau qui traduit sa rigidité. Unité : Pa.", "kind": "input" },
+      "\\varepsilon": { "role": "Déformation relative", "description": "Rapport de la variation de longueur. Elle est sans dimension.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer la force de rappel élastique d'un ressort", "Prévoir la déformation d'un pilier en béton sous charge"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "Équation de Bernoulli",
+    "oneLiner": "Principe selon lequel, dans l'écoulement d'un fluide incompressible, la somme des énergies de pression, de vitesse et de hauteur reste constante",
+    "description": "L'équation de Bernoulli exprime la conservation de l'énergie dans l'écoulement stationnaire d'un fluide incompressible et non visqueux. Elle traduit quantitativement le fait que la pression diminue quand la vitesse augmente, et qu'elle diminue également quand la hauteur s'élève. Ses applications vont du principe de la portance d'une aile d'avion à la conception des canalisations.",
+    "discoverer": "Daniel Bernoulli",
+    "field": "Génie mécanique",
+    "significance": "Principe central de la mécanique des fluides, elle fournit les bases de conception de domaines aussi variés que l'aéronautique, l'hydraulique et la tuyauterie.",
+    "elementMeanings": {
+      "P": { "role": "Pression statique", "description": "Pression statique du fluide. Unité : pascal (Pa).", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "Pression dynamique", "description": "Pression due au mouvement du fluide. Elle est proportionnelle au carré de la vitesse.", "kind": "structural" },
+      "\\rho": { "role": "Masse volumique", "description": "Masse volumique du fluide. Unité : kg/m³.", "kind": "input" },
+      "v": { "role": "Vitesse d'écoulement", "description": "Vitesse d'écoulement du fluide. Unité : m/s.", "kind": "input" },
+      "g": { "role": "Accélération de la pesanteur", "description": "Accélération de la pesanteur au voisinage de la surface terrestre. Environ 9,8 m/s².", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "Hauteur", "description": "Hauteur du fluide au-dessus du plan de référence. Unité : m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Portance engendrée par la différence de pression entre le dessus et le dessous d'une aile d'avion", "Jet d'eau qui accélère lorsqu'on pince l'extrémité d'un tuyau d'arrosage"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "Nombre de Reynolds",
+    "oneLiner": "Nombre sans dimension qui indique si un écoulement est laminaire ou turbulent",
+    "description": "Le nombre de Reynolds est un nombre sans dimension qui exprime le rapport entre les forces d'inertie et les forces visqueuses. Lorsqu'il est petit (environ 2300 ou moins), l'écoulement est laminaire ; lorsqu'il est grand, la turbulence apparaît. C'est l'indicateur clé pour prévoir le régime d'écoulement dans tous les systèmes d'ingénierie mettant en jeu un fluide : canalisations, avions, navires.",
+    "discoverer": "Osborne Reynolds",
+    "field": "Génie mécanique",
+    "significance": "En rendant prévisible la transition entre régime laminaire et régime turbulent, il a fourni le critère décisif de la conception des systèmes fluides.",
+    "elementMeanings": {
+      "Re": { "role": "Nombre de Reynolds", "description": "Rapport des forces d'inertie aux forces visqueuses. C'est un nombre sans dimension.", "kind": "output" },
+      "\\rho": { "role": "Masse volumique", "description": "Masse volumique du fluide. Unité : kg/m³.", "kind": "input" },
+      "v": { "role": "Vitesse d'écoulement", "description": "Vitesse moyenne d'écoulement du fluide. Unité : m/s.", "kind": "input" },
+      "L": { "role": "Longueur caractéristique", "description": "Longueur représentative de la géométrie de l'écoulement, comme le diamètre d'une conduite. Unité : m.", "kind": "input" },
+      "\\mu": { "role": "Viscosité dynamique", "description": "Coefficient de viscosité dynamique du fluide. Unité : Pa·s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Prévoir l'apparition de turbulence lors de la conception d'une conduite d'eau", "Analyser l'écoulement dans la couche limite à la surface d'une aile d'avion"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "Équations de Navier-Stokes",
+    "oneLiner": "Équations aux dérivées partielles fondamentales qui décrivent le mouvement d'un fluide visqueux",
+    "description": "Les équations de Navier-Stokes appliquent la deuxième loi de Newton à un fluide continu : elles expriment que le gradient de pression, les forces visqueuses et les forces extérieures déterminent l'accélération du fluide. Comme elles n'admettent généralement pas de solution analytique, on les résout numériquement (CFD) ; leur importance mathématique est telle qu'elles figurent parmi les problèmes du millénaire.",
+    "discoverer": "Claude-Louis Navier et George Gabriel Stokes",
+    "field": "Génie mécanique",
+    "significance": "Équations les plus générales décrivant tout écoulement de fluide visqueux, elles sont le fondement de la mécanique des fluides numérique (CFD).",
+    "elementMeanings": {
+      "\\rho": { "role": "Masse volumique", "description": "Masse volumique du fluide. Unité : kg/m³.", "kind": "input" },
+      "\\mathbf{v}": { "role": "Champ de vitesse", "description": "Vecteur vitesse des particules de fluide. C'est une fonction de la position et du temps.", "kind": "output" },
+      "p": { "role": "Pression", "description": "Champ de pression qui s'exerce sur le fluide. Unité : pascal (Pa).", "kind": "input" },
+      "\\mu": { "role": "Viscosité dynamique", "description": "Coefficient de viscosité dynamique du fluide. Unité : Pa·s.", "kind": "input" },
+      "\\mathbf{f}": { "role": "Force extérieure", "description": "Force volumique appliquée au fluide, comme la pesanteur.", "kind": "input" }
+    },
+    "realWorldExamples": ["Simulation numérique de l'écoulement de l'air autour d'une automobile", "Analyse des régimes de circulation du sang dans les vaisseaux"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "Loi de la conduction thermique",
+    "oneLiner": "Loi qui exprime la quantité de chaleur transmise à travers un matériau sous l'effet d'une différence de température",
+    "description": "La loi de Fourier sur la conduction thermique énonce que le flux de chaleur est proportionnel au produit de la conductivité thermique, de l'aire de la section et du gradient de température. La chaleur va des zones chaudes vers les zones froides, et d'autant plus vite que la conductivité thermique du matériau est élevée. C'est la base de toute conception thermique, du choix d'un isolant au refroidissement des semi-conducteurs.",
+    "discoverer": "Joseph Fourier",
+    "field": "Génie mécanique",
+    "significance": "En rendant possible l'analyse quantitative des transferts de chaleur, elle a fondé la thermodynamique appliquée et l'ingénierie de la gestion thermique.",
+    "elementMeanings": {
+      "Q": { "role": "Flux thermique", "description": "Énergie thermique transmise par unité de temps. Unité : watt (W).", "kind": "output" },
+      "k": { "role": "Conductivité thermique", "description": "Constante propre au matériau qui traduit sa capacité à transmettre la chaleur. Unité : W/(m·K).", "kind": "input" },
+      "A": { "role": "Aire de la section", "description": "Aire de la section traversée par la chaleur. Unité : m².", "kind": "input" },
+      "\\Delta T": { "role": "Différence de température", "description": "Écart de température entre le côté chaud et le côté froid. Unité : K ou degré Celsius.", "kind": "input" },
+      "\\Delta x": { "role": "Épaisseur", "description": "Épaisseur du matériau dans la direction du transfert de chaleur. Unité : m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer les performances d'isolation d'un mur de bâtiment", "Concevoir le dissipateur thermique du processeur d'un ordinateur portable"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "Charge critique de flambement d'Euler",
+    "oneLiner": "Charge critique à laquelle une colonne élancée fléchit brusquement sous l'effet d'une compression",
+    "description": "La formule du flambement d'Euler donne la charge critique à laquelle flambe une colonne élancée articulée à ses deux extrémités et soumise à une compression axiale. Elle est proportionnelle au module d'élasticité et au moment quadratique de la section, et inversement proportionnelle au carré de la longueur de la colonne. Plus la colonne est longue, plus elle est vulnérable au flambement : c'est un point de vérification incontournable de la conception sûre des structures.",
+    "discoverer": "Leonhard Euler",
+    "field": "Génie mécanique",
+    "significance": "En rendant prévisible par le calcul la limite de stabilité des éléments comprimés, elle est devenue un critère de vérification obligatoire en génie des structures.",
+    "elementMeanings": {
+      "P_{cr}": { "role": "Charge critique de flambement", "description": "Force de compression minimale à laquelle le flambement s'amorce. Unité : newton (N).", "kind": "output" },
+      "\\pi^2": { "role": "Carré du nombre pi", "description": "Constante qui provient de la forme d'onde du mode de flambement.", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "Module d'élasticité", "description": "Rigidité du matériau (module de Young). Unité : pascal (Pa).", "kind": "input" },
+      "I": { "role": "Moment quadratique de section", "description": "Propriété géométrique qui traduit la résistance de la section à la flexion. Unité : m⁴.", "kind": "input" },
+      "L": { "role": "Longueur de la colonne", "description": "Longueur de flambement. La longueur effective dépend des conditions d'appui. Unité : m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Vérifier la sécurité au flambement des poteaux métalliques d'un immeuble de grande hauteur", "Déterminer l'épaisseur minimale des tubes d'un cadre de vélo"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

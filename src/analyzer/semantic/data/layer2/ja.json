@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "分母にあるべき乗の底です。変数であれば、大きくなるほど関数全体の値が抑えられます。"
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "分母のべき乗の次数です。指数が大きいほど分母が速く大きくなり、全体の値を抑えます。"
+  },
+  "sum.body>frac.denominator": {
+    "role": "級数の分母",
+    "description": "級数の各項の分母です。速く大きくなれば、級数が収束する可能性が高くなります。"
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "p級数の指数",
+    "description": "級数の分母のべき乗の指数です。1より大きければ級数は収束します(p級数の判定)。"
+  },
+  "sum.body>frac.numerator": {
+    "role": "級数の分子",
+    "description": "級数の各項の分子です。"
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "積分が負の無限大から始まる広義積分です。被積分関数が十分速く減衰しないと収束しません。"
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "指数が分数の分子です。指数全体が分数であれば、根(ルート)を表します。"
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "指数の分母です。分母が n であれば n乗根と同じです。"
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "入れ子の分子",
+    "description": "分数の中に分数が入れ子になっています。複雑な比の関係を表します。"
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "入れ子の分母",
+    "description": "分母の中にさらに分数があります。全体を整理すると掛け算に変換できます。"
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "積分する分数の分子です。"
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "積分する分数の分母です。部分分数分解が役に立つことがあります。"
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "極限における分数の分子です。分母と同時に0や無限になると、ロピタルの定理を適用できます。"
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "極限における分数の分母です。分子と同時に0や無限になると、ロピタルの定理を適用できます。"
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "ftc": {
+    "name": "Fundamental theorem of calculus",
+    "oneLiner": "The theorem showing that differentiation and integration are inverse operations",
+    "description": "The fundamental theorem of calculus shows that the definite integral of a continuous function equals the difference of its antiderivative at the two endpoints. Thanks to it you can evaluate a definite integral from an antiderivative alone, without measuring any area directly. It is the key reason differentiation and integration form a single system.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "By establishing that differentiation and integration are inverse to each other, it laid the foundation of all of analysis.",
+    "elementMeanings": {
+      "f(x)": { "role": "Integrand", "description": "The continuous function being integrated.", "kind": "structural" },
+      "F(x)": { "role": "Antiderivative", "description": "The indefinite integral of f(x). It satisfies F'(x) = f(x).", "kind": "structural" },
+      "a": { "role": "Lower limit of integration", "description": "The starting point of the interval of integration.", "kind": "input" },
+      "b": { "role": "Upper limit of integration", "description": "The ending point of the interval of integration.", "kind": "input" },
+      "dx": { "role": "Variable of integration", "description": "The infinitesimal increment showing that the integration is with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "gaussian-integral"]
+  },
+  "taylor-series": {
+    "name": "Taylor series",
+    "oneLiner": "The expansion that writes a function as an infinite polynomial around a particular point",
+    "description": "The Taylor series represents an infinitely differentiable function as a power series built from the values of its derivatives at a point a. Each term is the n-th derivative divided by n! times (x-a) to the n. It is the key tool for approximating complicated functions in numerical computation and physics.",
+    "discoverer": "Brook Taylor",
+    "field": "Calculus",
+    "significance": "It lets transcendental functions such as trigonometric and exponential functions be approximated by polynomials, and it is the basis of numerical analysis.",
+    "elementMeanings": {
+      "f(x)": { "role": "Original function", "description": "The function you want to expand as a series.", "kind": "structural" },
+      "a": { "role": "Centre of expansion", "description": "The point the series is expanded about. When a=0 it is called a Maclaurin series.", "kind": "input" },
+      "f^{(n)}(a)": { "role": "Value of the n-th derivative", "description": "The value of the n-th derivative at the point a. It sets the coefficient of each term.", "kind": "structural" },
+      "n!": { "role": "Factorial", "description": "n factorial. It sits in the denominator of each term and adjusts the coefficient.", "kind": "structural" },
+      "(x-a)^n": { "role": "Power term", "description": "The n-th power of the distance from the centre of expansion a.", "kind": "structural" }
+    },
+    "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
+  },
+  "gaussian-integral": {
+    "name": "Gaussian integral",
+    "oneLiner": "The integral of e to the minus x squared from minus infinity to plus infinity",
+    "description": "The Gaussian integral shows that integrating e to the minus x squared over the whole line gives the square root of pi. The antiderivative cannot be written with elementary functions, yet the definite integral can be evaluated by an ingenious change to polar coordinates. It is the backbone of the normal distribution in probability and statistics.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Calculus",
+    "significance": "It supplies the normalizing constant of the normal distribution, and it plays a central role in the path integrals of quantum and statistical mechanics.",
+    "elementMeanings": {
+      "e^{-x^2}": { "role": "Gaussian function", "description": "The bell-shaped function. It falls sharply towards 0 as x moves away from 0.", "kind": "structural" },
+      "\\int_{-\\infty}^{\\infty}": { "role": "Integral over the whole line", "description": "The integral from minus infinity to plus infinity.", "kind": "structural" },
+      "\\sqrt{\\pi}": { "role": "Value of the integral", "description": "The value of the Gaussian integral, the square root of pi.", "kind": "output" },
+      "dx": { "role": "Variable of integration", "description": "It shows that the integration is with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "ftc"]
+  },
+  "derivative-definition": {
+    "name": "Definition of the derivative",
+    "oneLiner": "The expression defining the instantaneous rate of change of a function as a limit",
+    "description": "The definition of the derivative is the limit of the change in the function divided by the change in the independent variable. When this limit exists the function is said to be differentiable at that point, and its value is the slope of the tangent line. It is the most fundamental concept in calculus.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "By defining the notion of an instantaneous rate of change rigorously, it established the logical foundation of calculus.",
+    "elementMeanings": {
+      "f'(x)": { "role": "Derivative", "description": "The instantaneous rate of change at x, the slope of the tangent to the graph.", "kind": "output" },
+      "f(x+h)": { "role": "Shifted function value", "description": "The value of the function at the point shifted from x by h.", "kind": "structural" },
+      "f(x)": { "role": "Original function value", "description": "The value of the function at the point x.", "kind": "structural" },
+      "h": { "role": "Increment", "description": "A tiny increment of x. In the limit it is sent to 0.", "kind": "input" },
+      "\\lim_{h \\to 0}": { "role": "Limit operation", "description": "The operation of sending h arbitrarily close to 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
+  },
+  "chain-rule": {
+    "name": "Chain rule",
+    "oneLiner": "The rule that gives the derivative of a composite function as the product of the derivatives of the outer and inner functions",
+    "description": "The chain rule says that to differentiate a composite function f(g(x)) you multiply the derivative of the outer function by the derivative of the inner one. It extends to multivariable calculus and to the backpropagation algorithm, making it a key technique of modern mathematics and artificial intelligence.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "It lets complicated composite functions be differentiated systematically, and it is the mathematical foundation of the backpropagation algorithm in deep learning.",
+    "elementMeanings": {
+      "f": { "role": "Outer function", "description": "The function on the outside of the composition.", "kind": "structural" },
+      "g": { "role": "Inner function", "description": "The function on the inside of the composition.", "kind": "structural" },
+      "f'(g(x))": { "role": "Derivative of the outer function", "description": "The derivative of the outer function evaluated at g(x).", "kind": "structural" },
+      "g'(x)": { "role": "Derivative of the inner function", "description": "The derivative of the inner function with respect to x.", "kind": "structural" },
+      "x": { "role": "Independent variable", "description": "The variable the differentiation is taken with respect to.", "kind": "input" }
+    },
+    "relatedFormulas": ["derivative-definition", "ftc"]
+  },
+  "product-rule": {
+    "name": "Product rule",
+    "oneLiner": "The rule for differentiating a product by differentiating each factor in turn and adding",
+    "description": "The product rule says that differentiating the product of two functions f(x) and g(x) gives f'(x)g(x) + f(x)g'(x). It follows naturally from taking the limit in the definition of the derivative, and it extends to products of three or more functions. It is one of the most frequently used basic rules in differentiation.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "It lets functions built from products be differentiated systematically, and it is the theoretical basis of integration by parts.",
+    "elementMeanings": {
+      "f": { "role": "First function", "description": "The function on the left of the product.", "kind": "structural" },
+      "g": { "role": "Second function", "description": "The function on the right of the product.", "kind": "structural" },
+      "f'": { "role": "Derivative of the first function", "description": "The result of differentiating f with respect to x.", "kind": "structural" },
+      "g'": { "role": "Derivative of the second function", "description": "The result of differentiating g with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
+    "realWorldExamples": [
+      "Differentiating momentum p = mv with respect to time in physics, to find the force when both mass and velocity change",
+      "Differentiating total revenue R = p(x) * x in economics to obtain marginal revenue"
+    ]
+  },
+  "quotient-rule": {
+    "name": "Quotient rule",
+    "oneLiner": "The rule for differentiating a quotient by cross-combining the derivatives of the numerator and denominator",
+    "description": "The quotient rule says that differentiating a function of the form f(x)/g(x) gives (f'g - fg')/g^2. It can be derived from the product rule together with the chain rule, and it applies wherever the denominator is not 0. It is essential for differentiating rational functions and ratios of trigonometric functions.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "It makes differentiating fractional expressions mechanical, and it is the key to deriving the derivatives of trigonometric functions such as tan x.",
+    "elementMeanings": {
+      "f": { "role": "Numerator function", "description": "The function in the numerator of the quotient.", "kind": "structural" },
+      "g": { "role": "Denominator function", "description": "The function in the denominator of the quotient. It requires g(x) != 0.", "kind": "structural" },
+      "f'": { "role": "Derivative of the numerator", "description": "The result of differentiating f with respect to x.", "kind": "structural" },
+      "g'": { "role": "Derivative of the denominator", "description": "The result of differentiating g with respect to x.", "kind": "structural" },
+      "g^2": { "role": "Square of the denominator", "description": "The square of g(x), which sits in the denominator of the result.", "kind": "structural" }
+    },
+    "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
+    "realWorldExamples": [
+      "Finding the rate of change of the solute-to-solution ratio in a concentration calculation",
+      "Tracking changes in impedance by analysing how the voltage-to-current ratio changes in an electrical circuit"
+    ]
+  },
+  "power-rule": {
+    "name": "Power rule",
+    "oneLiner": "The rule that differentiating x to the n brings the exponent down in front and lowers it by 1",
+    "description": "The power rule, d/dx(x^n) = nx^(n-1), is the most basic formula in differentiation. It is proved with the binomial theorem for natural number exponents, and with exponential and logarithmic functions for real exponents. It is the starting point for differentiating almost every polynomial.",
+    "discoverer": "Isaac Newton",
+    "field": "Calculus",
+    "significance": "It is the first gateway to learning differentiation and the most frequently used derivative formula, the foundation of differentiating polynomials.",
+    "elementMeanings": {
+      "x": { "role": "Independent variable", "description": "The variable the differentiation is taken with respect to.", "kind": "input" },
+      "n": { "role": "Exponent", "description": "The exponent of the power. It may be a natural number, an integer, or any real number.", "kind": "input" },
+      "x^n": { "role": "Power function", "description": "x to the n, the function being differentiated.", "kind": "structural" },
+      "nx^{n-1}": { "role": "Derivative", "description": "The result: the exponent n comes down as a coefficient and the exponent drops to n-1.", "kind": "output" }
+    },
+    "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
+    "realWorldExamples": [
+      "Differentiating the free-fall distance s = (1/2)gt^2 with respect to time to get the velocity v = gt",
+      "The fact that differentiating the area of a circle A = pi*r^2 with respect to the radius gives the circumference 2*pi*r"
+    ]
+  },
+  "exp-derivative": {
+    "name": "Derivative of the exponential function",
+    "oneLiner": "The property that differentiating the natural exponential function e^x gives back the function itself",
+    "description": "The derivative of the exponential function has the remarkable property d/dx(e^x) = e^x. The natural constant e is the only base with this self-reproducing property, which makes it central to differential equations and to modelling natural phenomena. For a general exponential a^x the derivative extends to a^x * ln(a).",
+    "discoverer": "Leonhard Euler",
+    "field": "Calculus",
+    "significance": "As the only function whose form is unchanged by differentiation, it is the basic solution of differential equations and the backbone of modelling natural phenomena.",
+    "elementMeanings": {
+      "e": { "role": "Natural constant", "description": "About 2.71828..., the irrational number that is the base of the natural logarithm.", "kind": "constant", "value": 2.71828183 },
+      "e^x": { "role": "Natural exponential function", "description": "e to the x. Differentiating it gives back the same function.", "kind": "structural" },
+      "x": { "role": "Independent variable", "description": "The variable sitting in the exponent.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "Differential operator", "description": "The operator that differentiates with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
+    "realWorldExamples": [
+      "Finding the rate of decay in radioactive decay N(t) = N_0 * e^(-lambda*t)",
+      "The model of continuous compounding, where the growth rate of the principal is proportional to the current balance"
+    ]
+  },
+  "log-derivative": {
+    "name": "Derivative of the logarithm",
+    "oneLiner": "The formula that differentiating the natural logarithm ln x gives 1 over x",
+    "description": "Differentiating the logarithm gives the compact result d/dx(ln x) = 1/x. It follows from the inverse function relationship with the derivative of the exponential. It is defined for x > 0, and conversely in integration the antiderivative of 1/x is ln|x| + C.",
+    "discoverer": "Leonhard Euler",
+    "field": "Calculus",
+    "significance": "It supplies the antiderivative of 1/x, and through logarithmic differentiation it simplifies the differentiation of complicated products and powers.",
+    "elementMeanings": {
+      "\\ln x": { "role": "Natural logarithm", "description": "The logarithm with base e. It is defined for x > 0.", "kind": "structural" },
+      "x": { "role": "Independent variable", "description": "The argument of the logarithm and the variable of differentiation.", "kind": "input" },
+      "\\frac{1}{x}": { "role": "Derivative", "description": "The derivative of ln x. It is inversely proportional to x.", "kind": "output" },
+      "\\frac{d}{dx}": { "role": "Differential operator", "description": "The operator that differentiates with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
+    "realWorldExamples": [
+      "Analysing the rate of change of the entropy H = -sum(p * ln p) in information theory",
+      "The Weber-Fechner law, which models the logarithmic relationship between stimulus intensity and sensation"
+    ]
+  },
+  "sin-derivative": {
+    "name": "Derivative of sine",
+    "oneLiner": "The formula that differentiating sin x gives cos x",
+    "description": "The most basic result in differentiating trigonometric functions is d/dx(sin x) = cos x. It is proved from the definition of the derivative using the limit lim(h->0) sin(h)/h = 1. Since the derivative of cos x is -sin x, sine and cosine cycle into each other under differentiation.",
+    "discoverer": "Leonhard Euler",
+    "field": "Calculus",
+    "significance": "It is essential for describing periodic phenomena mathematically, and it is the basis for analysing wave equations and harmonic motion.",
+    "elementMeanings": {
+      "\\sin x": { "role": "Sine function", "description": "The basic trigonometric function with period two pi.", "kind": "structural" },
+      "\\cos x": { "role": "Derivative (cosine)", "description": "The result of differentiating sin x. Its phase runs pi/2 ahead of the sine.", "kind": "output" },
+      "x": { "role": "Independent variable", "description": "The angle variable, measured in radians.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "Differential operator", "description": "The operator that differentiates with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
+    "realWorldExamples": [
+      "Differentiating the displacement theta(t) = A*sin(omega*t) of a simple pendulum to find its angular velocity",
+      "Differentiating an alternating voltage V(t) = V_0*sin(omega*t) to work out the phase relationship of the current"
+    ]
+  },
+  "power-integral": {
+    "name": "Integral of a power function",
+    "oneLiner": "The formula that integrating x to the n raises the exponent by 1 and divides by the new exponent",
+    "description": "The indefinite integral of a power function is the reverse of differentiation: the integral of x^n is x^(n+1)/(n+1) + C for n != -1. It is the power rule applied backwards, and the case n = -1 is handled separately as ln|x| + C. It is the most basic formula for integrating polynomials.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "It is the first step in learning integration and the most frequently used indefinite integral formula.",
+    "elementMeanings": {
+      "x^n": { "role": "Integrand", "description": "The power function being integrated.", "kind": "structural" },
+      "n": { "role": "Exponent", "description": "The exponent of the power. It requires n != -1.", "kind": "input" },
+      "x^{n+1}": { "role": "Power in the result", "description": "The power with its exponent raised by 1.", "kind": "structural" },
+      "n+1": { "role": "New exponent (denominator)", "description": "It sits in the denominator of the result so that differentiating recovers the original function.", "kind": "structural" },
+      "C": { "role": "Constant of integration", "description": "The arbitrary constant of an indefinite integral. It is the term that vanishes on differentiation.", "kind": "constant" },
+      "dx": { "role": "Variable of integration", "description": "It shows that the integration is with respect to x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
+    "realWorldExamples": [
+      "Integrating the velocity v = at with respect to time to find the distance travelled s = (1/2)at^2",
+      "Integrating a pressure distribution in fluid mechanics to compute the total force"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "Integration by parts",
+    "oneLiner": "The technique that transforms the integral of a product by differentiating one factor and integrating the other",
+    "description": "Integration by parts is the product rule carried over to integration, giving the formula int(u dv) = uv - int(v du). It turns a product that is hard to integrate directly into a more manageable form. Choosing u and dv well is the crux, and the method is sometimes applied repeatedly or used to set up a recurrence.",
+    "discoverer": "Brook Taylor",
+    "field": "Calculus",
+    "significance": "As the integral counterpart of the product rule, it is essential for integrating inverse functions such as ln x and arctan x, and many other transcendental integrals.",
+    "elementMeanings": {
+      "u": { "role": "Function to differentiate", "description": "The function chosen to be differentiated in the process.", "kind": "structural" },
+      "dv": { "role": "Part to integrate", "description": "The differential form chosen to be integrated in the process.", "kind": "structural" },
+      "v": { "role": "Antiderivative of dv", "description": "The result of integrating dv.", "kind": "structural" },
+      "du": { "role": "Differential of u", "description": "The result of differentiating u.", "kind": "structural" },
+      "uv": { "role": "Boundary term", "description": "The product of u and v. In a definite integral you evaluate it at the two endpoints.", "kind": "output" }
+    },
+    "relatedFormulas": ["product-rule", "ftc", "power-integral"],
+    "realWorldExamples": [
+      "Deriving the transform formula for the Laplace transform L{t*f(t)} by integration by parts",
+      "Computing an expected value E[X] = int(x * f(x) dx) in probability theory"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "Maclaurin series for the exponential function",
+    "oneLiner": "The series expanding e^x about x = 0 as the infinite polynomial 1 + x + x^2/2! + ...",
+    "description": "The Maclaurin series for the exponential function is e^x = sum(x^n / n!, n=0..inf), and it converges for every real x. Because every derivative of e^x is e^x itself and equals 1 at x=0, the coefficient of each term is 1/n!. It is the most basic way of approximating the exponential in numerical computation, and the starting point for deriving Euler's formula.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Calculus",
+    "significance": "It supplies the polynomial approximation of the exponential function and is the key step in deriving Euler's identity e^(i*pi) + 1 = 0.",
+    "elementMeanings": {
+      "e^x": { "role": "Original function", "description": "The natural exponential function being expanded as a series.", "kind": "structural" },
+      "x^n": { "role": "Power term", "description": "x to the n, the numerator of the n-th term.", "kind": "structural" },
+      "n!": { "role": "Factorial", "description": "n factorial, the denominator of the n-th term.", "kind": "structural" },
+      "\\sum_{n=0}^{\\infty}": { "role": "Infinite series", "description": "The operation of adding every term from n=0 to infinity.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
+    "realWorldExamples": [
+      "Calculators and computers using finitely many terms of this series to evaluate e^x",
+      "Expanding the time evolution operator e^(-iHt) as a series for approximate calculation in quantum mechanics"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "Maclaurin series for sine",
+    "oneLiner": "The series expanding sin x about x = 0 as x - x^3/3! + x^5/5! - ...",
+    "description": "The Maclaurin series for sine is sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf). Only odd powers appear and the signs alternate. It converges for every real x, and the small-angle approximation sin x is about x is just its first term.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Calculus",
+    "significance": "It makes polynomial approximation of trigonometric functions possible and gives the mathematical grounding for the small-angle approximation sin x is about x.",
+    "elementMeanings": {
+      "\\sin x": { "role": "Original function", "description": "The sine function being expanded as a series.", "kind": "structural" },
+      "(-1)^n": { "role": "Alternating sign factor", "description": "It flips the sign of the terms between positive and negative.", "kind": "structural" },
+      "x^{2n+1}": { "role": "Odd power term", "description": "Only odd powers appear because sine is an odd function.", "kind": "structural" },
+      "(2n+1)!": { "role": "Factorial", "description": "The denominator of each term. It guarantees the series converges.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
+    "realWorldExamples": [
+      "Deriving the period of a simple pendulum in physics by applying the small-angle approximation (sin theta is about theta)",
+      "Approximating a sine wave by a polynomial for fast computation in digital signal processing"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "Maclaurin series for cosine",
+    "oneLiner": "The series expanding cos x about x = 0 as 1 - x^2/2! + x^4/4! - ...",
+    "description": "The Maclaurin series for cosine is cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf). Only even powers appear and the signs alternate. Differentiating the sine series term by term gives the cosine series, so the relationship between the two is confirmed through differentiation.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Calculus",
+    "significance": "It supplies the polynomial approximation of the cosine function, and together with the sine series it is used to derive Euler's formula.",
+    "elementMeanings": {
+      "\\cos x": { "role": "Original function", "description": "The cosine function being expanded as a series.", "kind": "structural" },
+      "(-1)^n": { "role": "Alternating sign factor", "description": "It flips the sign of the terms between positive and negative.", "kind": "structural" },
+      "x^{2n}": { "role": "Even power term", "description": "Only even powers appear because cosine is an even function.", "kind": "structural" },
+      "(2n)!": { "role": "Factorial", "description": "The denominator of each term. It guarantees the series converges.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
+    "realWorldExamples": [
+      "Using cos theta is about 1 - theta^2/2 in optics to approximate lens aberration",
+      "Approximating the cosines in a rotation matrix by polynomials for real-time control in robotics"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "L'Hôpital's rule",
+    "oneLiner": "The theorem that evaluates an indeterminate limit of the form 0/0 or infinity/infinity as the ratio of the derivatives",
+    "description": "L'Hôpital's rule states that when a limit takes an indeterminate form such as 0/0 or infinity/infinity, differentiating the numerator and denominator separately and taking the limit of that ratio gives the original limit. It may be applied repeatedly if needed, and it cannot be used when the form is not indeterminate. It is proved rigorously using Cauchy's mean value theorem.",
+    "discoverer": "Guillaume de l'Hôpital (discovered by Johann Bernoulli)",
+    "field": "Calculus",
+    "significance": "By reducing indeterminate limits to a differentiation problem, it gives a powerful tool for evaluating limits.",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": { "role": "Limit operation", "description": "The operation of sending x arbitrarily close to c.", "kind": "structural" },
+      "f(x)": { "role": "Numerator function", "description": "The function in the numerator of the limit.", "kind": "structural" },
+      "g(x)": { "role": "Denominator function", "description": "The function in the denominator of the limit.", "kind": "structural" },
+      "f'(x)": { "role": "Derivative of the numerator", "description": "The result of differentiating f(x) with respect to x.", "kind": "structural" },
+      "g'(x)": { "role": "Derivative of the denominator", "description": "The result of differentiating g(x) with respect to x.", "kind": "structural" },
+      "\\frac{0}{0}": { "role": "Indeterminate form", "description": "The indeterminate form in which numerator and denominator both go to 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "taylor-series"],
+    "realWorldExamples": [
+      "Computing the limiting transition probability in physics as the gap between energy levels approaches 0",
+      "Analysing profit in economics when marginal cost and marginal revenue both converge to 0"
+    ]
+  },
+  "tangent": {
+    "name": "Tangent line",
+    "oneLiner": "The straight line through a point on a curve that has the same slope as the curve there",
+    "description": "The tangent line to the curve y=f(x) at the point (a, f(a)) is the line y - f(a) = f'(a)(x - a), whose slope is the value of the derivative f'(a). It is the linear function that best approximates the curve near that point, and it reveals the instantaneous rate of change geometrically. It is where the most intuitive meaning of the derivative becomes visible on the curve itself.",
+    "discoverer": "Pierre de Fermat, Isaac Newton, Gottfried Leibniz",
+    "field": "Calculus",
+    "significance": "By showing the geometric meaning of the derivative as a line on the curve, it is the learning starting point that connects the idea of differentiation to visual intuition.",
+    "elementMeanings": {
+      "f(x)": { "role": "Curve", "description": "The function whose tangent line you are drawing.", "kind": "input" },
+      "x": { "role": "x-coordinate of the point of tangency", "description": "The point that decides where on the curve the tangent line sits.", "kind": "input" },
+      "f'(x)": { "role": "Slope of the tangent line", "description": "The value of the derivative at the point x. It sets the slope of the tangent line.", "kind": "output" },
+      "y - f(x) = f'(x)(X - x)": { "role": "Equation of the tangent line", "description": "The line through the point (x, f(x)) with slope f'(x).", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "chain-rule", "taylor-series"]
+  }
+}

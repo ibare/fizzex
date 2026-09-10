@@ -1,0 +1,396 @@
+{
+  "pythagorean-theorem": {
+    "name": "三平方の定理",
+    "oneLiner": "直角三角形で斜辺の2乗が残る2辺の2乗の和に等しいという定理",
+    "description": "三平方の定理は、直角三角形の斜辺の長さの2乗が、ほかの2辺の長さの2乗の和に等しいことを明らかにします。ユークリッド幾何学の最も基本的な定理であり、距離という考え方の土台になります。何千通りもの証明があるほど、数学の歴史の中で最も多く研究されてきた定理です。",
+    "discoverer": "ピタゴラス(伝統的な帰属)",
+    "field": "幾何学",
+    "significance": "ユークリッド距離の定義を与えるものであり、三角法・解析幾何・ベクトル空間など現代数学全般の基礎です。",
+    "elementMeanings": {
+      "a": {
+        "role": "直角をはさむ辺",
+        "description": "直角をはさむ一方の辺の長さです。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "直角をはさむ辺",
+        "description": "直角をはさむもう一方の辺の長さです。",
+        "kind": "input"
+      },
+      "c": {
+        "role": "斜辺",
+        "description": "直角の向かい側にある、最も長い辺の長さです。",
+        "kind": "output"
+      },
+      "a^2+b^2": {
+        "role": "直角をはさむ辺の2乗の和",
+        "description": "直角をはさむ2辺の長さの2乗を足した値です。",
+        "kind": "output"
+      },
+      "c^2": {
+        "role": "斜辺の2乗",
+        "description": "斜辺の長さを2乗した値。直角をはさむ2辺の2乗の和に等しくなります。",
+        "kind": "output"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "直角をはさむ辺",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "直角をはさむ辺",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": [
+      "law-of-cosines",
+      "heron-formula"
+    ]
+  },
+  "heron-formula": {
+    "name": "ヘロンの公式",
+    "oneLiner": "3辺の長さだけから三角形の面積を求める公式",
+    "description": "ヘロンの公式は、三角形の3辺 a, b, c と半周長 s を使って面積を計算します。高さを別に求めなくてよいので、座標が与えられている場合や測量ではとても実用的です。面積の2乗が、半周長と各辺との差の積で表されるという美しい形をしています。",
+    "discoverer": "アレクサンドリアのヘロン",
+    "field": "幾何学",
+    "significance": "高さの情報がなくても辺の長さだけで面積を求められるため、測量やコンピュータグラフィックスで広く使われています。",
+    "elementMeanings": {
+      "a": {
+        "role": "1つ目の辺",
+        "description": "三角形の1つ目の辺の長さです。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "2つ目の辺",
+        "description": "三角形の2つ目の辺の長さです。",
+        "kind": "input"
+      },
+      "c": {
+        "role": "3つ目の辺",
+        "description": "三角形の3つ目の辺の長さです。",
+        "kind": "input"
+      },
+      "s": {
+        "role": "半周長",
+        "description": "3辺の和の半分。s = (a+b+c)/2 です。",
+        "kind": "output"
+      },
+      "A": {
+        "role": "面積",
+        "description": "三角形の面積。ルート(s(s-a)(s-b)(s-c)) で計算されます。",
+        "kind": "output"
+      }
+    },
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "circle-area"
+    ]
+  },
+  "circle-area": {
+    "name": "円の面積",
+    "oneLiner": "半径の2乗に円周率を掛けて円の面積を求める公式",
+    "description": "円の面積の公式は、半径 r の円が占める面積が円周率と半径の2乗の積に等しいことを表します。アルキメデスが円を限りなく細い三角形に分けて証明して以来、積分の原型となった公式です。",
+    "discoverer": "アルキメデス",
+    "field": "幾何学",
+    "significance": "最も基本的な曲線図形の面積の公式であり、積分という考え方の歴史的な出発点です。",
+    "elementMeanings": {
+      "A": {
+        "role": "面積",
+        "description": "円が占める面積です。単位は長さの2乗。",
+        "kind": "output"
+      },
+      "\\pi": {
+        "role": "円周率",
+        "description": "円周と直径の比。約3.14159です。",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "半径",
+        "description": "円の中心から円周までの距離です。",
+        "kind": "input"
+      },
+      "r^2": {
+        "role": "半径の2乗",
+        "description": "半径を2乗した値。面積の大きさを決めます。",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "sphere-volume",
+      "pythagorean-theorem"
+    ]
+  },
+  "law-of-cosines": {
+    "name": "余弦定理",
+    "oneLiner": "任意の三角形で1辺の長さを残る2辺とそのはさむ角から求める定理",
+    "description": "余弦定理は、三角形で1辺の2乗が、残る2辺の2乗の和から、その2辺とはさむ角の余弦の積の2倍を引いたものに等しいという関係式です。三平方の定理を一般化したもので、はさむ角が直角のときは余弦が0になり三平方の定理に戻ります。",
+    "field": "幾何学",
+    "significance": "直角三角形でないふつうの三角形でも辺と角の関係を求められるようにし、測量やナビゲーションに欠かせません。",
+    "elementMeanings": {
+      "a": {
+        "role": "求めたい辺",
+        "description": "余弦定理で長さを求めようとしている辺です。",
+        "kind": "output"
+      },
+      "b": {
+        "role": "わかっている辺",
+        "description": "三角形のわかっている一方の辺の長さです。",
+        "kind": "input"
+      },
+      "c": {
+        "role": "わかっている辺",
+        "description": "三角形のわかっているもう一方の辺の長さです。",
+        "kind": "input"
+      },
+      "C": {
+        "role": "はさむ角",
+        "description": "辺 b と辺 c の間にはさまれた角です。",
+        "kind": "input",
+        "unit": "rad"
+      },
+      "\\cos C": {
+        "role": "はさむ角の余弦",
+        "description": "はさむ角 C の余弦の値。角が直角なら0になります。",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "heron-formula"
+    ]
+  },
+  "sphere-volume": {
+    "name": "球の体積",
+    "oneLiner": "半径の3乗に比例する球の体積の公式",
+    "description": "球の体積の公式は、半径 r の球が占める空間が (4/3) と円周率と半径の3乗の積であることを表します。アルキメデスが球を円柱に内接させて見つけたこの関係は積分でも導くことができ、3次元幾何学の基本となる結果です。",
+    "discoverer": "アルキメデス",
+    "field": "幾何学",
+    "significance": "3次元空間で最も基本的な曲面立体の体積の公式であり、物理学や工学で幅広く使われます。",
+    "elementMeanings": {
+      "V": {
+        "role": "体積",
+        "description": "球が占める空間の大きさです。単位は長さの3乗。",
+        "kind": "output"
+      },
+      "\\frac{4}{3}": {
+        "role": "比例定数",
+        "description": "球の体積と半径の3乗との間の比例の係数です。",
+        "kind": "constant",
+        "value": 1.33333333
+      },
+      "\\pi": {
+        "role": "円周率",
+        "description": "円周と直径の比。約3.14159です。",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "半径",
+        "description": "球の中心から表面までの距離です。",
+        "kind": "input"
+      },
+      "r^3": {
+        "role": "半径の3乗",
+        "description": "半径を3回掛けた値。体積が3次元的に増えることを反映します。",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "circle-area"
+    ]
+  },
+  "euler-polyhedron": {
+    "name": "オイラーの多面体定理",
+    "oneLiner": "凸多面体における頂点・辺・面の数のあいだの関係",
+    "description": "オイラーの多面体定理は、凸多面体で頂点の数から辺の数を引き、面の数を足すと、いつでも2になるという驚くべき関係を示します。位相幾何学の出発点となった公式で、多面体の形が変わってもこの関係は変わりません。オイラー標数という位相不変量の最も基本的な例です。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "幾何学",
+    "significance": "幾何学的な対象の位相的な性質を数量化した最初の結果であり、位相幾何学とグラフ理論の出発点です。",
+    "elementMeanings": {
+      "V": {
+        "role": "頂点の数",
+        "description": "多面体の頂点(辺が集まる点)の総数です。",
+        "kind": "input"
+      },
+      "E": {
+        "role": "辺の数",
+        "description": "多面体の辺(二つの面が接する線分)の総数です。",
+        "kind": "input"
+      },
+      "F": {
+        "role": "面の数",
+        "description": "多面体の面(平面の多角形)の総数です。",
+        "kind": "input"
+      },
+      "2": {
+        "role": "オイラー標数",
+        "description": "凸多面体(球と位相同型)のオイラー標数。つねに2です。",
+        "kind": "constant",
+        "value": 2
+      }
+    },
+    "realWorldExamples": [
+      "立方体で確かめる: 頂点8 - 辺12 + 面6 = 2",
+      "サッカーボール(切頂二十面体)で確かめる: 頂点60 - 辺90 + 面32 = 2"
+    ],
+    "relatedFormulas": [
+      "pythagorean-theorem"
+    ]
+  },
+  "circle-equation": {
+    "name": "円の方程式",
+    "oneLiner": "座標平面で中心と半径から円を表す方程式",
+    "description": "円の方程式は、中心が (a, b) で半径が r の円の上にあるすべての点 (x, y) が満たす条件を表します。三平方の定理から直接導かれ、解析幾何学で円を代数的に扱うための基本の道具です。展開すると一般形になり、平方完成で整理すると標準形に戻ります。",
+    "field": "幾何学",
+    "significance": "幾何学的な図形を代数の方程式で表す解析幾何学の代表的な例であり、円と直線の関係を調べるのに欠かせません。",
+    "elementMeanings": {
+      "x": {
+        "role": "点の x 座標",
+        "description": "円の上の任意の点の横の座標です。",
+        "kind": "input"
+      },
+      "y": {
+        "role": "点の y 座標",
+        "description": "円の上の任意の点の縦の座標です。",
+        "kind": "input"
+      },
+      "a": {
+        "role": "中心の x 座標",
+        "description": "円の中心の点の横の座標です。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "中心の y 座標",
+        "description": "円の中心の点の縦の座標です。",
+        "kind": "input"
+      },
+      "r": {
+        "role": "半径",
+        "description": "円の中心から円周までの距離です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "GPSの位置の追跡で、ある基地局から一定の距離にありうる位置の集まり",
+      "ロボットアームの届く範囲を円の方程式でモデル化して作業領域を計算する"
+    ],
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "circle-area",
+      "ellipse-equation"
+    ]
+  },
+  "ellipse-equation": {
+    "name": "楕円の方程式",
+    "oneLiner": "二つの焦点からの距離の和が一定である点の軌跡を表す方程式",
+    "description": "楕円の方程式は、中心が原点で、長軸と短軸の半分の長さがそれぞれ a, b である楕円の上のすべての点が満たす条件です。円の方程式で x 軸と y 軸の縮尺が異なる場合に一般化したもので、a = b なら円になります。ケプラーの惑星運動の法則で中心的な役目を果たします。",
+    "discoverer": "アポロニウス(円錐曲線の研究)",
+    "field": "幾何学",
+    "significance": "惑星の軌道の数学モデルであり、光学における反射の性質、建築のささやきの回廊など、さまざまな応用があります。",
+    "elementMeanings": {
+      "x": {
+        "role": "点の x 座標",
+        "description": "楕円の上の任意の点の横の座標です。",
+        "kind": "input"
+      },
+      "y": {
+        "role": "点の y 座標",
+        "description": "楕円の上の任意の点の縦の座標です。",
+        "kind": "input"
+      },
+      "a": {
+        "role": "長半径",
+        "description": "楕円の横の軸(長軸)の半分の長さです。最も遠い点までの距離。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "短半径",
+        "description": "楕円の縦の軸(短軸)の半分の長さです。最も近い点までの距離。",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "長半径の2乗",
+        "description": "x 成分を正規化する分母です。",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "短半径の2乗",
+        "description": "y 成分を正規化する分母です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "ケプラーの第1法則: 惑星は太陽を一つの焦点とする楕円の軌道を描く",
+      "ささやきの回廊: 楕円形の部屋で一方の焦点の音が反対側の焦点に集まる現象"
+    ],
+    "relatedFormulas": [
+      "circle-equation",
+      "hyperbola-equation",
+      "circle-area"
+    ]
+  },
+  "hyperbola-equation": {
+    "name": "双曲線の方程式",
+    "oneLiner": "二つの焦点からの距離の差が一定である点の軌跡を表す方程式",
+    "description": "双曲線の方程式は、中心が原点で、実軸と虚軸の半分の長さがそれぞれ a, b である双曲線の上のすべての点が満たす条件です。楕円とちがって距離の「差」が一定で、二つに分かれた開いた曲線になります。漸近線 y = (b/a)x と y = -(b/a)x に少しずつ近づきますが、交わることはありません。",
+    "discoverer": "アポロニウス(円錐曲線の研究)",
+    "field": "幾何学",
+    "significance": "ナビゲーション(ロランシステム)、双曲線形の冷却塔の設計、特殊相対性理論の時空の構造などに使われます。",
+    "elementMeanings": {
+      "x": {
+        "role": "点の x 座標",
+        "description": "双曲線の上の任意の点の横の座標です。",
+        "kind": "input"
+      },
+      "y": {
+        "role": "点の y 座標",
+        "description": "双曲線の上の任意の点の縦の座標です。",
+        "kind": "input"
+      },
+      "a": {
+        "role": "実軸の半分の長さ",
+        "description": "双曲線の頂点から中心までの距離です。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "虚軸の半分の長さ",
+        "description": "漸近線の傾きを決める軸の半分の長さです。",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "実軸の半分の長さの2乗",
+        "description": "x 成分を正規化する分母です。",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "虚軸の半分の長さの2乗",
+        "description": "y 成分を正規化する分母です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "ロランによるナビゲーション: 二つの基地局から受け取る信号の時間差で位置を決めるしくみ",
+      "双曲線形の冷却塔: 構造の強さと空気の流れの効率をともに高める形"
+    ],
+    "relatedFormulas": [
+      "ellipse-equation",
+      "circle-equation"
+    ]
+  }
+}

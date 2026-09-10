@@ -1,0 +1,101 @@
+{
+  "de-morgan": {
+    "name": "ド・モルガンの法則",
+    "oneLiner": "論理積の否定は否定の論理和に等しく、論理和の否定は否定の論理積に等しいという法則",
+    "description": "ド・モルガンの法則は、否定の演算が論理積と論理和を入れかえる性質を定めます。複雑な論理式を簡単にしたり同値な形に変えたりするのに欠かせず、集合論では和集合と共通部分の補集合の関係としてそのまま当てはまります。",
+    "discoverer": "オーガスタス・ド・モルガン",
+    "field": "論理学",
+    "significance": "論理回路の設計、プログラミングの条件式の最適化、集合論の基礎的な証明などで中心的に使われる変形の規則です。",
+    "elementMeanings": {
+      "A": { "role": "一つ目の命題", "description": "論理式を構成する一つ目の命題または集合です。", "kind": "input" },
+      "B": { "role": "二つ目の命題", "description": "論理式を構成する二つ目の命題または集合です。", "kind": "input" },
+      "\\neg": { "role": "否定の演算子", "description": "命題の真と偽を入れかえる演算子です。", "kind": "structural" },
+      "\\wedge": { "role": "論理積", "description": "二つの命題がどちらも真のときだけ真になる演算です。", "kind": "structural" },
+      "\\vee": { "role": "論理和", "description": "二つの命題のどちらか一方でも真なら真になる演算です。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "プログラミングで複雑な if 条件の否定を簡単にする",
+      "デジタル論理回路で NAND/NOR ゲートに変換して設計する",
+      "データベースのクエリで NOT (A AND B) の条件を最適化する"
+    ],
+    "relatedFormulas": ["boolean-complement"]
+  },
+  "inclusion-exclusion": {
+    "name": "包除原理",
+    "oneLiner": "二つの集合の和集合の大きさを、それぞれの大きさの和から共通部分の大きさを引いて求める原理",
+    "description": "包除原理は、和集合の要素の個数を数えるときに二重に数えた分を補正する方法です。二つの集合なら共通部分を一度引き、三つ以上ではひとつおきに足したり引いたりする形に一般化されます。",
+    "field": "集合論",
+    "significance": "場合の数を数えるときの基本原理であり、確率論の加法定理やオイラーのφ関数の導出など、組合せ論全体の土台になります。",
+    "elementMeanings": {
+      "|A \\cup B|": { "role": "和集合の大きさ", "description": "A または B に属する要素の総数です。", "kind": "output" },
+      "|A|": { "role": "A の大きさ", "description": "集合 A に属する要素の個数です。", "kind": "input" },
+      "|B|": { "role": "B の大きさ", "description": "集合 B に属する要素の個数です。", "kind": "input" },
+      "|A \\cap B|": { "role": "共通部分の大きさ", "description": "A と B の両方に属する要素の個数です。二重に数えた分を補正するために引きます。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "アンケートで二つの項目のどちらかを選んだ回答者の人数を計算する",
+      "検索エンジンで OR 条件の結果から重複を除いた総件数を算出する",
+      "確率の計算で二つの事象のうち少なくとも一方が起こる確率を求める"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "power-set": {
+    "name": "べき集合の大きさ",
+    "oneLiner": "要素が n 個の集合のすべての部分集合の個数は2の n 乗であるという定理",
+    "description": "べき集合の大きさの公式は、有限集合 S のすべての部分集合(空集合と S 自身を含む)の個数がちょうど 2^|S| 個であることを示します。それぞれの要素について「含める」か「含めない」かの二通りの選択が独立に行われるため、二者択一の積として説明できます。",
+    "field": "集合論",
+    "significance": "組合せ論と集合論の基本的な結果であり、部分集合の列挙、ビットマスクのアルゴリズム、論理回路の状態空間の分析にそのまま使われます。",
+    "elementMeanings": {
+      "|P(S)|": { "role": "べき集合の大きさ", "description": "集合 S のすべての部分集合の個数です。", "kind": "output" },
+      "2": { "role": "選択肢の数", "description": "それぞれの要素について「含める」「含めない」の二通りの選択があることを表します。", "kind": "constant", "value": 2 },
+      "|S|": { "role": "要素の個数", "description": "もとの集合 S に属する要素の個数です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "n 種類のメニューから考えられる注文の組合せの数を計算する",
+      "ネットワークのセキュリティでファイアウォールの規則の組合せの総数を分析する",
+      "ビットマスクを使って部分集合を列挙するアルゴリズムを設計する"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "combination": {
+    "name": "組合せ",
+    "oneLiner": "n 個から順序を考えずに k 個を選ぶ場合の数を求める公式",
+    "description": "組合せの公式は、異なる n 個の要素から順序に関係なく k 個を選ぶ方法の数を計算します。順列を、選んだ k 個の並べ方(k!)で割って重複を取り除いた結果であり、二項係数と同じ値になります。",
+    "field": "組合せ論",
+    "significance": "確率の計算、二項定理、統計の標本抽出など、数学と科学の全体でもっともよく使われる数え上げの道具です。",
+    "elementMeanings": {
+      "C(n,k)": { "role": "組合せの数", "description": "n 個から k 個を順序を考えずに選ぶ場合の数です。", "kind": "output" },
+      "n": { "role": "全体の要素数", "description": "選ぶ対象となる要素全体の個数です。", "kind": "input" },
+      "k": { "role": "選ぶ要素の数", "description": "選び出す要素の個数です。", "kind": "input" },
+      "n!": { "role": "n の階乗", "description": "1から n までのすべての自然数の積です。", "kind": "structural" },
+      "k!": { "role": "k の階乗", "description": "選ばれた要素どうしの並べ方の数です。重複を取り除くために割ります。", "kind": "structural" },
+      "(n-k)!": { "role": "残りの階乗", "description": "選ばれなかった要素の並べ方の数です。これも重複を取り除くために使います。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "45個の数字から6個を選ぶくじの場合の数を計算する",
+      "30人のなかから5人でチームを作る方法の数",
+      "統計で標本を抽出するときに考えられる組合せの数を算出する"
+    ],
+    "relatedFormulas": ["permutation", "inclusion-exclusion", "power-set"]
+  },
+  "permutation": {
+    "name": "順列",
+    "oneLiner": "n 個から順序を考えて k 個を並べる場合の数を求める公式",
+    "description": "順列の公式は、異なる n 個の要素から k 個を取り出して順に並べる方法の数を計算します。1番目に n 通り、2番目に (n-1) 通り、… と掛けていく積の法則から自然に導かれます。",
+    "field": "組合せ論",
+    "significance": "順序が意味を持つ配置の問題の基本的な道具であり、暗号の解読、日程の割りあて、場合の数の分析などに広く使われています。",
+    "elementMeanings": {
+      "P(n,k)": { "role": "順列の数", "description": "n 個から k 個を順序を考えて取り出す場合の数です。", "kind": "output" },
+      "n": { "role": "全体の要素数", "description": "選ぶ対象となる要素全体の個数です。", "kind": "input" },
+      "k": { "role": "選ぶ要素の数", "description": "取り出して並べる要素の個数です。", "kind": "input" },
+      "n!": { "role": "n の階乗", "description": "1から n までのすべての自然数の積です。", "kind": "structural" },
+      "(n-k)!": { "role": "残りの階乗", "description": "選ばれなかった要素の並べ方の数です。分母でこれを割ることで、前の k 個の場所だけを数えることになります。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "4桁の暗証番号で数字が重複せずに並ぶ場合の数",
+      "かけっこで8人のなかから金・銀・銅のメダルを与える組合せ",
+      "面接で5人の応募者を順番に並べる日程を組む"
+    ],
+    "relatedFormulas": ["combination", "inclusion-exclusion", "power-set"]
+  }
+}

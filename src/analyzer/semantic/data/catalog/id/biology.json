@@ -1,0 +1,244 @@
+{
+  "logistic-growth": {
+    "name": "Pertumbuhan logistik",
+    "oneLiner": "Model saat laju pertumbuhan menurun seiring jumlah individu mendekati daya dukung lingkungan",
+    "description": "Model pertumbuhan logistik menjelaskan proses ketika pertumbuhan sebuah populasi mula-mula bersifat eksponensial, lalu berangsur melambat karena persaingan sumber daya seiring mendekatnya jumlah individu ke daya dukung lingkungan (K). Ini model matematis paling dasar bagi pertumbuhan yang bergantung kerapatan, dan ia menghasilkan kurva pertumbuhan berbentuk huruf S (kurva sigmoid).",
+    "discoverer": "Pierre François Verhulst",
+    "field": "Biologi",
+    "significance": "Ini model dasar untuk meramalkan dinamika populasi dalam ekologi, dan diterapkan pada berbagai bidang seperti epidemiologi, ekonomi, dan penyebaran teknologi.",
+    "elementMeanings": {
+      "dN/dt": {
+        "role": "Laju perubahan jumlah individu",
+        "description": "Besarnya perubahan jumlah individu per satuan waktu.",
+        "kind": "output"
+      },
+      "r": {
+        "role": "Laju pertumbuhan intrinsik",
+        "description": "Laju pertumbuhan terbesar sebuah populasi ketika tidak ada batasan sumber daya.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Jumlah individu saat ini",
+        "description": "Ukuran populasi pada suatu saat tertentu.",
+        "kind": "input"
+      },
+      "K": {
+        "role": "Daya dukung lingkungan",
+        "description": "Jumlah individu terbanyak yang sanggup ditopang lingkungan tersebut.",
+        "kind": "input"
+      },
+      "(1 - N/K)": {
+        "role": "Faktor penahan pertumbuhan",
+        "description": "Ketika N mendekati K, nilainya menuju 0 sehingga menahan pertumbuhan.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Kurva pertumbuhan berbentuk S pada jumlah ikan yang dilepas ke sebuah danau",
+      "Menganalisis pola masuknya biakan bakteri ke fase stasioner",
+      "Memodelkan pertambahan jumlah pengguna media sosial"
+    ],
+    "relatedFormulas": ["exponential-growth", "lotka-volterra"]
+  },
+  "hardy-weinberg": {
+    "name": "Asas Hardy-Weinberg",
+    "oneLiner": "Asas yang menyatakan frekuensi gen tetap terjaga pada keadaan ideal ketika evolusi tidak berlangsung",
+    "description": "Asas Hardy-Weinberg menyatakan bahwa pada populasi ideal yang bebas dari mutasi, seleksi alam, hanyutan genetik, migrasi, dan perkawinan tak acak, frekuensi alel dan frekuensi genotipe tetap tidak berubah dari generasi ke generasi. Bila frekuensi dua alel dituliskan sebagai p dan q, frekuensi genotipenya dinyatakan lewat penjabaran binomial.",
+    "discoverer": "Godfrey Harold Hardy, Wilhelm Weinberg",
+    "field": "Biologi",
+    "significance": "Sebagai dasar genetika populasi, asas ini menyediakan tolok ukur (hipotesis nol) untuk menilai apakah evolusi sedang berlangsung pada suatu populasi nyata.",
+    "elementMeanings": {
+      "p": {
+        "role": "Frekuensi alel dominan",
+        "description": "Frekuensi nisbi alel dominan dalam populasi. Nilainya antara 0 dan 1.",
+        "kind": "input"
+      },
+      "q": {
+        "role": "Frekuensi alel resesif",
+        "description": "Frekuensi nisbi alel resesif dalam populasi. p + q = 1.",
+        "kind": "input"
+      },
+      "p^2": {
+        "role": "Frekuensi homozigot dominan",
+        "description": "Frekuensi genotipe homozigot dominan (AA).",
+        "kind": "output"
+      },
+      "2pq": {
+        "role": "Frekuensi heterozigot",
+        "description": "Frekuensi genotipe heterozigot (Aa).",
+        "kind": "output"
+      },
+      "q^2": {
+        "role": "Frekuensi homozigot resesif",
+        "description": "Frekuensi genotipe homozigot resesif (aa).",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Menaksir frekuensi pembawa sifat penyakit keturunan (misalnya anemia sel sabit)",
+      "Menguji ada tidaknya hanyutan genetik pada populasi berukuran kecil",
+      "Memeriksa keadaan kesetimbangan genetik suatu populasi lewat sebaran golongan darah"
+    ],
+    "relatedFormulas": ["logistic-growth"]
+  },
+  "michaelis-menten": {
+    "name": "Kinetika Michaelis-Menten",
+    "oneLiner": "Model saat laju reaksi enzim membentuk kurva jenuh terhadap kepekatan substrat",
+    "description": "Persamaan Michaelis-Menten menjelaskan bagaimana laju awal sebuah reaksi enzim berubah menurut kepekatan substratnya. Saat kepekatan substrat rendah, lajunya bertambah hampir sebanding, tetapi saat kepekatannya tinggi, enzim menjadi jenuh sehingga lajunya menuju laju terbesar. Tetapan Michaelis Km adalah kepekatan substrat saat laju reaksinya separuh dari laju terbesar.",
+    "discoverer": "Leonor Michaelis, Maud Menten",
+    "field": "Biologi",
+    "significance": "Sebagai model dasar kinetika reaksi enzim, persamaan ini dipakai secara mendasar dalam perancangan obat dan rekayasa metabolisme.",
+    "elementMeanings": {
+      "v": {
+        "role": "Laju reaksi",
+        "description": "Laju awal reaksi enzim. Satuan: mol/(L s) dan sejenisnya.",
+        "kind": "output"
+      },
+      "V_{max}": {
+        "role": "Laju reaksi terbesar",
+        "description": "Laju terbesar ketika seluruh enzim sudah terikat dengan substrat.",
+        "kind": "input"
+      },
+      "[S]": {
+        "role": "Kepekatan substrat",
+        "description": "Kepekatan substrat yang terikat pada enzim. Satuan: mol/L.",
+        "kind": "input"
+      },
+      "K_m": {
+        "role": "Tetapan Michaelis",
+        "description": "Kepekatan substrat saat laju reaksi separuh dari Vmax. Petunjuk kekuatan pertautan enzim-substrat.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Asas kerja obat yang menghambat reaksi dengan mengubah Km sebuah enzim",
+      "Gejala kejenuhan enzim pengurai alkohol (batas laju penguraian saat minum berlebihan)",
+      "Merancang kepekatan substrat paling baik untuk enzim industri"
+    ],
+    "relatedFormulas": ["arrhenius-equation", "logistic-growth"]
+  },
+  "exponential-growth": {
+    "name": "Pertumbuhan eksponensial",
+    "oneLiner": "Model saat jumlah individu bertambah secara berlipat menurut waktu tanpa batasan sumber daya",
+    "description": "Model pertumbuhan eksponensial menjelaskan keadaan ideal ketika sebuah populasi bertambah dengan laju tetap di lingkungan yang sumber dayanya tak terbatas. Bentuknya adalah jumlah individu awal dikalikan fungsi eksponensial alami, dan bila laju pertumbuhan r bernilai positif, jumlah individu meledak secara berlipat. Dalam kenyataannya, batasan sumber daya umumnya membuatnya beralih menjadi pertumbuhan logistik.",
+    "field": "Biologi",
+    "significance": "Ini model matematis paling dasar bagi pertumbuhan populasi, sekaligus titik awal model-model yang lebih rumit seperti model logistik.",
+    "elementMeanings": {
+      "N(t)": {
+        "role": "Jumlah individu pada waktu t",
+        "description": "Ukuran populasi setelah waktu t berlalu.",
+        "kind": "output"
+      },
+      "N_0": {
+        "role": "Jumlah individu awal",
+        "description": "Ukuran populasi pada saat t=0.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Bilangan pokok logaritma natural",
+        "description": "Kira-kira 2,718. Tetapan matematis yang menyatakan pertumbuhan sinambung.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "r": {
+        "role": "Laju pertumbuhan intrinsik",
+        "description": "Laju pertumbuhan bersih sebuah populasi. Bila r > 0 populasi tumbuh, bila r < 0 populasi menyusut.",
+        "kind": "input"
+      },
+      "t": {
+        "role": "Waktu",
+        "description": "Waktu yang berlalu. Satuannya berbeda-beda menurut keadaan (jam, hari, tahun, dan sebagainya).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Perbanyakan yang mendadak pesat pada fase log biakan bakteri tahap awal",
+      "Ledakan jumlah individu pada tahap awal masuknya spesies asing",
+      "Perhitungan bunga majemuk (penerapan pertumbuhan eksponensial di bidang keuangan)"
+    ],
+    "relatedFormulas": ["logistic-growth", "half-life"]
+  },
+  "sir-model": {
+    "name": "Model SIR",
+    "oneLiner": "Model yang menyatakan proses menyebar dan meredanya penyakit menular lewat tiga petak: rentan, terinfeksi, dan sembuh",
+    "description": "Model SIR adalah model petak dasar dalam epidemiologi penyakit menular; ia membagi penduduk menjadi tiga kelompok — yang rentan (S), yang terinfeksi (I), dan yang sembuh (R) — untuk menjelaskan dinamika penyakit menular. Naik turunnya jumlah orang terinfeksi ditentukan oleh parameter laju penularan dan parameter laju kesembuhan, dan bila angka reproduksi dasar (R0 = laju penularan/laju kesembuhan) lebih besar dari 1, terjadilah wabah besar.",
+    "discoverer": "William Ogilvy Kermack, Anderson McKendrick",
+    "field": "Biologi",
+    "significance": "Sebagai kerangka dasar untuk memodelkan penyebaran penyakit menular secara matematis, model ini dipakai secara mendasar dalam penyusunan kebijakan penanggulangan wabah dan siasat vaksinasi.",
+    "elementMeanings": {
+      "dI/dt": {
+        "role": "Laju perubahan jumlah orang terinfeksi",
+        "description": "Besarnya perubahan jumlah orang terinfeksi per satuan waktu.",
+        "kind": "output"
+      },
+      "\\beta": {
+        "role": "Laju penularan",
+        "description": "Peluang orang rentan tertular saat bersentuhan dengan orang terinfeksi, dikalikan dengan seringnya persentuhan itu terjadi.",
+        "kind": "input"
+      },
+      "S": {
+        "role": "Jumlah orang rentan",
+        "description": "Penduduk yang belum tertular sehingga masih mungkin tertular.",
+        "kind": "input"
+      },
+      "I": {
+        "role": "Jumlah orang terinfeksi",
+        "description": "Penduduk yang saat ini berada dalam keadaan terinfeksi.",
+        "kind": "input"
+      },
+      "\\gamma": {
+        "role": "Laju kesembuhan",
+        "description": "Bagian orang terinfeksi yang sembuh per satuan waktu. Kebalikan dari lama waktu rata-rata sampai sembuh.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Meramalkan arah penyebaran Covid-19 dan menganalisis pengaruh pembatasan jarak sosial",
+      "Menghitung cakupan vaksinasi yang dibutuhkan untuk mencapai kekebalan kelompok",
+      "Meramalkan kapan puncak penularan musim flu terjadi"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth"]
+  },
+  "lotka-volterra": {
+    "name": "Persamaan Lotka-Volterra",
+    "oneLiner": "Sistem persamaan diferensial yang menyatakan naik turunnya populasi pemangsa dan mangsa secara berkala",
+    "description": "Persamaan Lotka-Volterra adalah model yang menjelaskan interaksi pemangsa-mangsa secara matematis. Mangsa bertambah secara eksponensial bila tidak ada pemangsa, tetapi menyusut karena perjumpaan dengan pemangsa. Pemangsa menyusut bila tidak ada makanan, tetapi bertambah dengan memangsa mangsanya. Interaksi ini menghasilkan naik turunnya kedua populasi secara berkala.",
+    "discoverer": "Alfred Lotka, Vito Volterra",
+    "field": "Biologi",
+    "significance": "Ini model dasar untuk menganalisis dinamika interaksi antarjenis dalam ekologi secara matematis, sekaligus titik awal kajian kemantapan ekosistem.",
+    "elementMeanings": {
+      "dx/dt": {
+        "role": "Laju perubahan jumlah mangsa",
+        "description": "Besarnya perubahan jumlah individu mangsa per satuan waktu.",
+        "kind": "output"
+      },
+      "x": {
+        "role": "Jumlah mangsa",
+        "description": "Ukuran populasi jenis yang menjadi mangsa (makanan).",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Jumlah pemangsa",
+        "description": "Ukuran populasi jenis pemangsa.",
+        "kind": "input"
+      },
+      "\\alpha": {
+        "role": "Laju pertumbuhan mangsa",
+        "description": "Laju pertumbuhan intrinsik mangsa ketika tidak ada tekanan pemangsaan.",
+        "kind": "input"
+      },
+      "\\beta": {
+        "role": "Koefisien pemangsaan",
+        "description": "Bagian mangsa yang menyusut ketika pemangsa dan mangsa berjumpa.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Naik turunnya jumlah lynx Kanada dan kelinci salju dengan daur kira-kira 10 tahun",
+      "Perubahan jumlah fitoplankton dan zooplankton pada ekosistem laut",
+      "Meramalkan pengaruh pemasukan musuh alami dalam pengendalian hayati"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth", "sir-model"]
+  }
+}

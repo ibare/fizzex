@@ -1,0 +1,191 @@
+{
+  "bayes-theorem": {
+    "name": "Théorème de Bayes",
+    "oneLiner": "Théorème qui met à jour une probabilité a priori en probabilité a posteriori lorsqu'une nouvelle observation est disponible",
+    "description": "Le théorème de Bayes est la formule qui, en s'appuyant sur les relations entre probabilités conditionnelles, transforme une probabilité a priori en probabilité a posteriori. Il permet de réviser systématiquement une croyance existante chaque fois qu'une nouvelle donnée est observée. C'est l'outil central de l'inférence statistique, de l'apprentissage automatique et de la théorie de la décision.",
+    "discoverer": "Thomas Bayes",
+    "field": "Statistique",
+    "significance": "En formalisant mathématiquement le raisonnement en situation d'incertitude, il fonde des applications contemporaines comme les filtres anti-spam, le diagnostic médical ou l'apprentissage automatique.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Probabilité a posteriori", "description": "Probabilité que l'événement A se produise une fois l'événement B observé.", "kind": "output" },
+      "P(B|A)": { "role": "Vraisemblance", "description": "Probabilité d'observer l'événement B lorsque l'événement A est vrai.", "kind": "input" },
+      "P(A)": { "role": "Probabilité a priori", "description": "Croyance que l'on a sur l'événement A avant d'observer l'événement B.", "kind": "input" },
+      "P(B)": { "role": "Probabilité de l'observation", "description": "Probabilité totale d'observer l'événement B. Elle joue le rôle de constante de normalisation.", "kind": "input" }
+    },
+    "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
+  },
+  "normal-distribution": {
+    "name": "Densité de probabilité de la loi normale",
+    "oneLiner": "Loi de probabilité dont la courbe, symétrique autour de la moyenne, a la forme d'une cloche",
+    "description": "La loi normale est une loi de probabilité continue déterminée par deux paramètres : la moyenne et l'écart type. Sa densité atteint son maximum à la moyenne et décroît symétriquement de part et d'autre, dessinant une courbe en cloche. En vertu du théorème central limite, c'est la loi la plus importante pour approcher la distribution des phénomènes naturels et des mesures.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Statistique",
+    "significance": "En vertu du théorème central limite, elle est à la base de presque toute l'inférence statistique et constitue la loi de probabilité la plus employée en sciences de la nature comme en sciences sociales.",
+    "elementMeanings": {
+      "f(x)": { "role": "Densité de probabilité", "description": "Valeur de la densité au point x. Ce n'est pas directement une probabilité : celle-ci s'obtient en intégrant sur un intervalle.", "kind": "output" },
+      "\\mu": { "role": "Moyenne", "description": "Centre de la distribution. C'est la position du sommet de la courbe en cloche.", "kind": "input" },
+      "\\sigma": { "role": "Écart type", "description": "Dispersion de la distribution. Plus il est grand, plus la courbe est aplatie.", "kind": "input" },
+      "\\sigma^2": { "role": "Variance", "description": "Carré de l'écart type. Il exprime à quel point les données s'éloignent de la moyenne.", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "Noyau gaussien", "description": "Partie exponentielle, qui décroît brutalement à mesure que l'on s'éloigne de la moyenne.", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "Constante de normalisation", "description": "Coefficient qui ramène à 1 l'aire totale sous la courbe.", "kind": "structural" }
+    },
+    "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
+  },
+  "standard-deviation": {
+    "name": "Écart type",
+    "oneLiner": "Mesure de la dispersion des données autour de leur moyenne",
+    "description": "L'écart type est la racine carrée de la moyenne des carrés des écarts entre chaque donnée et la moyenne. Racine carrée positive de la variance, il s'exprime dans la même unité que les données d'origine, ce qui le rend facile à interpréter. C'est la statistique la plus élémentaire pour décrire la dispersion d'une série de données.",
+    "field": "Statistique",
+    "significance": "Il permet de mesurer la variabilité des données dans leur unité d'origine et joue un rôle central dans le contrôle qualité ou l'analyse du risque financier.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Écart type", "description": "Écart type de la population. Il exprime la dispersion des données.", "kind": "output" },
+      "x_i": { "role": "Donnée individuelle", "description": "i-ème observation de la série de données.", "kind": "input" },
+      "\\mu": { "role": "Moyenne de la population", "description": "Moyenne de la population. Pour un échantillon, on utilise la moyenne empirique.", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "Carré de l'écart", "description": "Carré de la distance qui sépare chaque donnée de la moyenne.", "kind": "structural" },
+      "N": { "role": "Nombre de données", "description": "Nombre total de données de la population.", "kind": "input" },
+      "\\sqrt{}": { "role": "Racine carrée", "description": "En prenant la racine carrée de la variance, on retrouve l'unité des données d'origine.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
+  },
+  "correlation-coefficient": {
+    "name": "Coefficient de corrélation",
+    "oneLiner": "Valeur comprise entre -1 et 1 qui exprime la force et le sens de la relation linéaire entre deux variables",
+    "description": "Le coefficient de corrélation de Pearson est la covariance de deux variables divisée par le produit de leurs écarts types. Proche de 1, il signale une forte relation linéaire positive ; proche de -1, une forte relation linéaire négative ; proche de 0, une relation linéaire faible. C'est la statistique la plus élémentaire pour résumer le lien entre deux variables.",
+    "discoverer": "Karl Pearson",
+    "field": "Statistique",
+    "significance": "En résumant la relation entre deux variables par un seul nombre, il sert de fondement à l'analyse de régression, à la théorie du portefeuille et à la conception d'expériences.",
+    "elementMeanings": {
+      "r": { "role": "Coefficient de corrélation", "description": "Coefficient de corrélation de Pearson. Il prend ses valeurs entre -1 et 1.", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "Covariance", "description": "Elle mesure à quel point X et Y varient ensemble.", "kind": "input" },
+      "\\sigma_X": { "role": "Écart type de X", "description": "Dispersion de la variable X.", "kind": "input" },
+      "\\sigma_Y": { "role": "Écart type de Y", "description": "Dispersion de la variable Y.", "kind": "input" },
+      "X": { "role": "Première variable", "description": "Première variable dont on analyse la corrélation.", "kind": "input" },
+      "Y": { "role": "Deuxième variable", "description": "Deuxième variable dont on analyse la corrélation.", "kind": "input" }
+    },
+    "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
+  },
+  "law-of-large-numbers": {
+    "name": "Loi des grands nombres",
+    "oneLiner": "Loi selon laquelle la moyenne d'un échantillon converge vers la moyenne de la population à mesure que la taille de l'échantillon augmente",
+    "description": "La loi des grands nombres garantit que la moyenne empirique de variables aléatoires indépendantes et de même loi converge vers la moyenne de la population lorsque la taille de l'échantillon tend vers l'infini. Elle existe sous une forme faible et une forme forte ; c'est le théorème fondamental qui justifie théoriquement l'estimation statistique.",
+    "discoverer": "Jacques Bernoulli",
+    "field": "Statistique",
+    "significance": "Elle garantit mathématiquement qu'une enquête par échantillon peut fournir une inférence valable sur la population et sert de socle théorique à l'assurance, aux jeux de hasard et aux sciences expérimentales.",
+    "elementMeanings": {
+      "\\bar{X}_n": { "role": "Moyenne empirique", "description": "Moyenne arithmétique des n observations.", "kind": "output" },
+      "\\mu": { "role": "Moyenne de la population", "description": "Véritable moyenne de la population. C'est la valeur vers laquelle converge la moyenne empirique.", "kind": "input" },
+      "n": { "role": "Taille de l'échantillon", "description": "Nombre d'observations. Plus il est grand, plus la moyenne empirique se rapproche de la moyenne de la population.", "kind": "input" },
+      "X_i": { "role": "Observation individuelle", "description": "i-ème observation indépendante. Toutes suivent la même loi.", "kind": "input" },
+      "\\epsilon": { "role": "Marge d'erreur", "description": "La probabilité que l'écart entre la moyenne empirique et la moyenne de la population reste inférieur à cette valeur tend vers 1.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
+  },
+  "t-test": {
+    "name": "Statistique du test t",
+    "oneLiner": "Statistique qui teste si la moyenne d'un échantillon diffère significativement de celle de la population",
+    "description": "La statistique du test t est l'écart entre la moyenne de l'échantillon et la moyenne postulée par l'hypothèse nulle, divisé par l'erreur type. Lorsque la variance de la population est inconnue, on lui substitue la variance de l'échantillon, et la statistique suit une loi de Student dont le paramètre est le nombre de degrés de liberté. Applicable même à de petits échantillons, c'est la méthode de test d'hypothèse la plus employée dans la recherche expérimentale et les essais cliniques.",
+    "discoverer": "William Gosset",
+    "field": "Statistique",
+    "significance": "Elle rend possible l'inférence statistique sur une moyenne à partir de petits échantillons et constitue la méthode de test de référence en médecine, en psychologie et en sciences de l'éducation.",
+    "elementMeanings": {
+      "t": { "role": "Statistique t", "description": "Écart entre la moyenne de l'échantillon et celle de la population, exprimé en unités d'erreur type.", "kind": "output" },
+      "\\bar{x}": { "role": "Moyenne de l'échantillon", "description": "Moyenne arithmétique des données de l'échantillon.", "kind": "input" },
+      "\\mu": { "role": "Moyenne de la population", "description": "Moyenne de la population postulée par l'hypothèse nulle.", "kind": "input" },
+      "s": { "role": "Écart type de l'échantillon", "description": "Écart type estimé à partir des données de l'échantillon.", "kind": "input" },
+      "\\sqrt{n}": { "role": "Racine carrée de la taille de l'échantillon", "description": "Racine carrée de la taille n de l'échantillon. Elle intervient dans le calcul de l'erreur type.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
+  },
+  "chi-squared": {
+    "name": "Test du khi-deux",
+    "oneLiner": "Statistique qui teste si l'écart entre les effectifs observés et les effectifs attendus est statistiquement significatif",
+    "description": "La statistique du khi-deux s'obtient en élevant au carré, pour chaque catégorie, l'écart entre l'effectif observé et l'effectif attendu, en divisant par l'effectif attendu, puis en sommant le tout. Elle sert au test d'adéquation comme au test d'indépendance : c'est la méthode emblématique de l'analyse des données catégorielles. La significativité s'apprécie par rapport à la loi du khi-deux au nombre de degrés de liberté considéré.",
+    "discoverer": "Karl Pearson",
+    "field": "Statistique",
+    "significance": "Elle rend possible le test d'hypothèse sur des données catégorielles et joue un rôle central dans l'analyse des sondages, la génétique et le contrôle qualité.",
+    "elementMeanings": {
+      "\\chi^2": { "role": "Statistique du khi-deux", "description": "Statistique de test qui agrège les écarts entre les valeurs observées et les valeurs attendues.", "kind": "output" },
+      "O": { "role": "Effectif observé", "description": "Effectif réellement observé dans chaque catégorie.", "kind": "input" },
+      "E": { "role": "Effectif attendu", "description": "Effectif attendu dans chaque catégorie si l'hypothèse nulle est vraie.", "kind": "input" },
+      "(O-E)^2": { "role": "Carré de l'écart", "description": "Carré de l'écart entre valeur observée et valeur attendue. Il cumule les écarts sans tenir compte de leur sens.", "kind": "structural" },
+      "\\Sigma": { "role": "Signe de sommation", "description": "Opération qui additionne sur toutes les catégories.", "kind": "structural" }
+    },
+    "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
+  },
+  "poisson-dist": {
+    "name": "Loi de Poisson",
+    "oneLiner": "Loi de probabilité du nombre d'occurrences d'un événement rare dans un intervalle de temps ou d'espace donné",
+    "description": "La loi de Poisson modélise le nombre d'occurrences d'événements indépendants dont le taux moyen d'apparition par unité de temps ou d'espace est constant. Elle est déterminée par ce seul paramètre et a pour particularité d'avoir une variance égale à sa moyenne. C'est la loi de probabilité discrète la plus employée pour analyser la fréquence d'événements rares.",
+    "discoverer": "Siméon Denis Poisson",
+    "field": "Statistique",
+    "significance": "En modélisant l'apparition d'événements rares, elle est essentielle à la prévision des sinistres en assurance, à l'analyse du trafic des réseaux de communication et au contrôle qualité.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Probabilité", "description": "Probabilité que l'événement se produise exactement k fois.", "kind": "output" },
+      "\\lambda": { "role": "Taux moyen d'occurrence", "description": "Nombre moyen d'occurrences de l'événement par unité de temps ou d'espace.", "kind": "input" },
+      "k": { "role": "Nombre d'occurrences", "description": "Nombre d'occurrences considéré (entier positif ou nul).", "kind": "input" },
+      "e^{-\\lambda}": { "role": "Facteur de normalisation", "description": "Partie exponentielle qui ramène à 1 la somme de toutes les probabilités.", "kind": "structural" },
+      "k!": { "role": "Factorielle de k", "description": "Factorielle qui corrige le nombre d'ordres possibles des k événements.", "kind": "structural" }
+    },
+    "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "binomial-dist": {
+    "name": "Loi binomiale",
+    "oneLiner": "Loi qui donne la probabilité d'obtenir k succès au cours de n épreuves indépendantes",
+    "description": "La loi binomiale est la loi du nombre de succès obtenus en répétant n fois, de façon indépendante, une épreuve de Bernoulli de probabilité de succès p. La probabilité de chaque résultat se calcule comme le produit d'un nombre de combinaisons par les probabilités de succès et d'échec. Si n est assez grand, on peut l'approcher par la loi normale ; si la probabilité de succès est très faible, par la loi de Poisson.",
+    "discoverer": "Jacques Bernoulli",
+    "field": "Statistique",
+    "significance": "Modèle de base des expériences binaires succès-échec, elle fonde le contrôle qualité, les essais médicaux et l'analyse des sondages d'opinion.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Probabilité", "description": "Probabilité d'obtenir exactement k succès en n épreuves.", "kind": "output" },
+      "C(n,k)": { "role": "Nombre de combinaisons", "description": "Nombre de façons de choisir k éléments parmi n, soit n!/(k!(n-k)!).", "kind": "structural" },
+      "p": { "role": "Probabilité de succès", "description": "Probabilité de succès lors d'une épreuve.", "kind": "input" },
+      "1-p": { "role": "Probabilité d'échec", "description": "Probabilité d'échec lors d'une épreuve.", "kind": "input" },
+      "n": { "role": "Nombre d'épreuves", "description": "Nombre total d'épreuves indépendantes.", "kind": "input" },
+      "k": { "role": "Nombre de succès", "description": "Nombre de succès considéré (de 0 à n).", "kind": "input" }
+    },
+    "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "conditional-prob": {
+    "name": "Probabilité conditionnelle",
+    "oneLiner": "Probabilité qu'un événement se produise sachant qu'un autre événement s'est produit",
+    "description": "La probabilité conditionnelle définit la probabilité que l'événement A se produise sachant que l'événement B s'est déjà produit. On la calcule en divisant la probabilité de l'intersection des deux événements par celle de l'événement donné en condition. Elle est à la base du théorème de Bayes et constitue la notion la plus fondamentale de la théorie des probabilités et de l'inférence statistique.",
+    "field": "Statistique",
+    "significance": "Elle exprime quantitativement les relations de dépendance entre événements et fonde mathématiquement l'inférence bayésienne, les chaînes de Markov et la théorie de la décision.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Probabilité conditionnelle", "description": "Probabilité que l'événement A se produise sachant l'événement B.", "kind": "output" },
+      "P(A \\cap B)": { "role": "Probabilité de l'intersection", "description": "Probabilité que les événements A et B se produisent simultanément.", "kind": "input" },
+      "P(B)": { "role": "Probabilité de l'événement conditionnant", "description": "Probabilité de l'événement B donné en condition. Elle doit être non nulle.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
+  },
+  "total-probability": {
+    "name": "Formule des probabilités totales",
+    "oneLiner": "Formule qui donne la probabilité globale d'un événement lorsque l'univers est partitionné en événements incompatibles",
+    "description": "La formule des probabilités totales donne la probabilité d'un événement comme la somme pondérée de ses probabilités conditionnelles à chaque partie, lorsque l'univers est découpé en événements deux à deux incompatibles qui le recouvrent entièrement. Elle permet de décomposer un problème de probabilité compliqué en plusieurs situations conditionnelles. Elle sert notamment à calculer le dénominateur du théorème de Bayes.",
+    "field": "Statistique",
+    "significance": "Outil de décomposition systématique des calculs de probabilité, elle forme, avec le théorème de Bayes, le cadre central de l'inférence statistique.",
+    "elementMeanings": {
+      "P(A)": { "role": "Probabilité de l'événement A", "description": "Probabilité globale de l'événement A que l'on cherche à déterminer.", "kind": "output" },
+      "P(A|B_i)": { "role": "Probabilité conditionnelle", "description": "Probabilité de l'événement A sachant l'événement B_i.", "kind": "input" },
+      "P(B_i)": { "role": "Probabilité d'un événement de la partition", "description": "Probabilité du i-ème événement B_i de la partition.", "kind": "input" },
+      "\\Sigma": { "role": "Signe de sommation", "description": "Opération qui additionne sur tous les événements B_i de la partition.", "kind": "structural" }
+    },
+    "relatedFormulas": ["conditional-prob", "bayes-theorem"]
+  },
+  "covariance": {
+    "name": "Covariance",
+    "oneLiner": "Valeur qui mesure le sens et l'ampleur de la tendance qu'ont deux variables aléatoires à varier ensemble",
+    "description": "La covariance est l'espérance du produit des écarts de deux variables aléatoires à leur moyenne respective. Positive, elle indique une tendance à varier dans le même sens ; négative, une tendance à varier en sens contraire. Elle est à la base du coefficient de corrélation et joue un rôle central en théorie du portefeuille et en analyse multivariée.",
+    "field": "Statistique",
+    "significance": "En mesurant la variation conjointe de deux variables, elle fonde le calcul de la variance d'un portefeuille, l'analyse en composantes principales et la régression multivariée.",
+    "elementMeanings": {
+      "\\text{Cov}(X,Y)": { "role": "Covariance", "description": "Valeur qui exprime l'ampleur de la variation conjointe de X et de Y.", "kind": "output" },
+      "E": { "role": "Opérateur d'espérance", "description": "Opération qui donne l'espérance (la moyenne) d'une variable aléatoire.", "kind": "structural" },
+      "X": { "role": "Première variable aléatoire", "description": "Première variable dont on calcule la covariance.", "kind": "input" },
+      "Y": { "role": "Deuxième variable aléatoire", "description": "Deuxième variable dont on calcule la covariance.", "kind": "input" },
+      "\\mu_X": { "role": "Moyenne de X", "description": "Espérance (moyenne) de la variable aléatoire X.", "kind": "input" },
+      "\\mu_Y": { "role": "Moyenne de Y", "description": "Espérance (moyenne) de la variable aléatoire Y.", "kind": "input" }
+    },
+    "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
+  }
+}

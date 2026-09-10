@@ -1,0 +1,330 @@
+{
+  "ftc": {
+    "name": "Teorema dasar kalkulus",
+    "oneLiner": "Teorema yang menyatakan bahwa penurunan dan pengintegralan adalah operasi yang saling berkebalikan",
+    "description": "Teorema dasar kalkulus menunjukkan bahwa integral tentu sebuah fungsi kontinu sama dengan selisih nilai antiturunannya pada kedua ujung selang. Berkat teorema ini, integral tentu dapat dihitung hanya melalui antiturunannya tanpa perlu mencari luasnya secara langsung. Inilah landasan pokok yang menyatukan penurunan dan pengintegralan ke dalam satu sistem.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Menegakkan kenyataan bahwa penurunan dan pengintegralan berhubungan secara berkebalikan sehingga meletakkan dasar bagi seluruh analisis matematis.",
+    "elementMeanings": {
+      "f(x)": { "role": "Integran", "description": "Fungsi kontinu yang hendak diintegralkan.", "kind": "structural" },
+      "F(x)": { "role": "Antiturunan", "description": "Integral taktentu dari f(x). Fungsi ini memenuhi F'(x) = f(x).", "kind": "structural" },
+      "a": { "role": "Batas bawah integral", "description": "Titik awal selang integral tentunya.", "kind": "input" },
+      "b": { "role": "Batas atas integral", "description": "Titik akhir selang integral tentunya.", "kind": "input" },
+      "dx": { "role": "Variabel pengintegralan", "description": "Perubahan yang sangat kecil yang menyatakan bahwa pengintegralan dilakukan terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "gaussian-integral"]
+  },
+  "taylor-series": {
+    "name": "Deret Taylor",
+    "oneLiner": "Penguraian yang menyatakan sebuah fungsi sebagai suku banyak takhingga di sekitar suatu titik tertentu",
+    "description": "Deret Taylor menyatakan fungsi yang dapat diturunkan tak terhingga kali sebagai deret pangkat yang tersusun dari nilai-nilai turunannya di satu titik a. Setiap sukunya berbentuk koefisien, yaitu turunan ke-n dibagi n!, dikalikan dengan (x-a) pangkat n. Ini alat pokok untuk menghampiri fungsi yang rumit dalam perhitungan numerik dan fisika.",
+    "discoverer": "Brook Taylor",
+    "field": "Kalkulus",
+    "significance": "Memungkinkan fungsi transenden seperti fungsi trigonometri dan fungsi eksponensial dihampiri dengan suku banyak, dan menjadi dasar analisis numerik.",
+    "elementMeanings": {
+      "f(x)": { "role": "Fungsi asal", "description": "Fungsi sasaran yang hendak diuraikan menjadi deret.", "kind": "structural" },
+      "a": { "role": "Pusat penguraian", "description": "Titik acuan tempat deret itu diuraikan. Bila a=0, deretnya disebut deret Maclaurin.", "kind": "input" },
+      "f^{(n)}(a)": { "role": "Nilai turunan ke-n", "description": "Nilai turunan ke-n di titik a. Nilai ini menentukan koefisien setiap sukunya.", "kind": "structural" },
+      "n!": { "role": "Faktorial", "description": "Faktorial n. Nilai ini berada di penyebut setiap suku dan menyesuaikan koefisiennya.", "kind": "structural" },
+      "(x-a)^n": { "role": "Suku pangkat", "description": "Pangkat n dari jarak terhadap pusat penguraian a.", "kind": "structural" }
+    },
+    "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
+  },
+  "gaussian-integral": {
+    "name": "Integral Gauss",
+    "oneLiner": "Integral fungsi berbentuk e pangkat minus x kuadrat dari takhingga negatif sampai takhingga positif",
+    "description": "Integral Gauss menunjukkan bahwa hasil pengintegralan e pangkat minus x kuadrat pada seluruh selang adalah akar pi. Antiturunannya tidak dapat dinyatakan dengan fungsi elementer, tetapi nilai integral tentunya diperoleh melalui cara cerdik yang memakai peralihan ke koordinat kutub. Integral ini menjadi landasan sebaran normal dalam teori peluang dan statistika.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Kalkulus",
+    "significance": "Menyediakan konstanta penormalan sebaran normal, sekaligus berperan pokok dalam integral lintasan pada mekanika kuantum dan mekanika statistik.",
+    "elementMeanings": {
+      "e^{-x^2}": { "role": "Fungsi Gauss", "description": "Fungsi berbentuk lonceng. Makin jauh x dari 0, makin tajam nilainya menuju 0.", "kind": "structural" },
+      "\\int_{-\\infty}^{\\infty}": { "role": "Integral seluruh selang", "description": "Pengintegralan dari takhingga negatif sampai takhingga positif.", "kind": "structural" },
+      "\\sqrt{\\pi}": { "role": "Hasil pengintegralan", "description": "Nilai integral Gauss, yaitu akar kuadrat dari konstanta lingkaran.", "kind": "output" },
+      "dx": { "role": "Variabel pengintegralan", "description": "Menyatakan bahwa pengintegralan dilakukan terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "ftc"]
+  },
+  "derivative-definition": {
+    "name": "Definisi turunan",
+    "oneLiner": "Bentuk yang mendefinisikan laju perubahan sesaat sebuah fungsi melalui limit",
+    "description": "Definisi turunan adalah limit dari nisbah antara perubahan nilai fungsi dan perubahan variabel bebasnya. Ketika limit ini ada, fungsi itu dikatakan dapat diturunkan di titik tersebut, dan nilainya menjadi kemiringan garis singgungnya. Inilah gagasan yang paling mendasar dalam kalkulus.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Mendefinisikan gagasan laju perubahan sesaat secara saksama sehingga menegakkan dasar logis kalkulus.",
+    "elementMeanings": {
+      "f'(x)": { "role": "Turunan", "description": "Laju perubahan sesaat di x. Inilah kemiringan garis singgung grafiknya.", "kind": "output" },
+      "f(x+h)": { "role": "Nilai fungsi yang tergeser", "description": "Nilai fungsi di titik yang bergeser sejauh h dari x.", "kind": "structural" },
+      "f(x)": { "role": "Nilai fungsi semula", "description": "Nilai fungsi di titik x.", "kind": "structural" },
+      "h": { "role": "Besar perubahan", "description": "Tambahan yang sangat kecil pada x. Dalam limit, nilainya dibawa ke 0.", "kind": "input" },
+      "\\lim_{h \\to 0}": { "role": "Operasi limit", "description": "Operasi membawa h sedekat-dekatnya ke 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
+  },
+  "chain-rule": {
+    "name": "Aturan rantai",
+    "oneLiner": "Aturan untuk mencari turunan fungsi komposisi sebagai hasil kali turunan fungsi luar dan fungsi dalam",
+    "description": "Aturan rantai adalah kaidah bahwa ketika fungsi komposisi f(g(x)) diturunkan, turunan fungsi luarnya cukup dikalikan dengan turunan fungsi dalamnya. Aturan ini diperluas menjadi teknik pokok matematika modern dan kecerdasan buatan, seperti kalkulus peubah banyak dan algoritma perambatan balik.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Memungkinkan penurunan fungsi komposisi yang rumit dilakukan secara sistematis, dan menjadi landasan matematis algoritma perambatan balik pada pembelajaran mendalam.",
+    "elementMeanings": {
+      "f": { "role": "Fungsi luar", "description": "Fungsi yang terletak di sisi luar komposisi.", "kind": "structural" },
+      "g": { "role": "Fungsi dalam", "description": "Fungsi yang terletak di sisi dalam komposisi.", "kind": "structural" },
+      "f'(g(x))": { "role": "Turunan fungsi luar", "description": "Nilai turunan fungsi luar yang dihitung di g(x).", "kind": "structural" },
+      "g'(x)": { "role": "Turunan fungsi dalam", "description": "Turunan fungsi dalam terhadap x.", "kind": "structural" },
+      "x": { "role": "Variabel bebas", "description": "Variabel yang menjadi acuan penurunan.", "kind": "input" }
+    },
+    "relatedFormulas": ["derivative-definition", "ftc"]
+  },
+  "product-rule": {
+    "name": "Aturan hasil kali",
+    "oneLiner": "Aturan menurunkan hasil kali dua fungsi dengan menurunkan masing-masing secara bergantian lalu menjumlahkannya",
+    "description": "Aturan hasil kali adalah kaidah bahwa turunan dari hasil kali dua fungsi f(x) dan g(x) adalah f'(x)g(x) + f(x)g'(x). Aturan ini muncul secara wajar dari proses pengambilan limit pada definisi turunan, dan dapat diperluas untuk hasil kali tiga fungsi atau lebih. Ini salah satu aturan dasar yang paling sering dipakai dalam perhitungan turunan.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Memungkinkan penurunan fungsi berbentuk hasil kali ditangani secara sistematis, sekaligus menjadi landasan teoretis pengintegralan parsial.",
+    "elementMeanings": {
+      "f": { "role": "Fungsi pertama", "description": "Fungsi yang terletak di sebelah kiri hasil kali.", "kind": "structural" },
+      "g": { "role": "Fungsi kedua", "description": "Fungsi yang terletak di sebelah kanan hasil kali.", "kind": "structural" },
+      "f'": { "role": "Turunan fungsi pertama", "description": "Hasil penurunan f terhadap x.", "kind": "structural" },
+      "g'": { "role": "Turunan fungsi kedua", "description": "Hasil penurunan g terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
+    "realWorldExamples": [
+      "Penurunan momentum p = mv terhadap waktu dalam fisika: dipakai untuk mencari gaya ketika massa dan kecepatannya sama-sama berubah",
+      "Menurunkan penerimaan total R = p(x) * x dalam ekonomi untuk menghitung penerimaan marginal"
+    ]
+  },
+  "quotient-rule": {
+    "name": "Aturan hasil bagi",
+    "oneLiner": "Aturan menurunkan pembagian dua fungsi dengan menyilangkan turunan pembilang dan penyebutnya",
+    "description": "Aturan hasil bagi adalah kaidah bahwa turunan fungsi berbentuk f(x)/g(x) adalah (f'g - fg')/g^2. Aturan ini dapat diturunkan dari aturan hasil kali dan aturan rantai, dan berlaku pada selang yang penyebutnya tidak nol. Aturan ini penting untuk menurunkan fungsi rasional atau nisbah antar fungsi trigonometri.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Memungkinkan penurunan fungsi berbentuk pecahan ditangani secara mekanis, dan menjadi kunci penurunan turunan fungsi trigonometri seperti tan x.",
+    "elementMeanings": {
+      "f": { "role": "Fungsi pembilang", "description": "Fungsi yang menjadi pembilang pada pembagian itu.", "kind": "structural" },
+      "g": { "role": "Fungsi penyebut", "description": "Fungsi yang menjadi penyebut pada pembagian itu. Nilai g(x) tidak boleh 0.", "kind": "structural" },
+      "f'": { "role": "Turunan pembilang", "description": "Hasil penurunan f terhadap x.", "kind": "structural" },
+      "g'": { "role": "Turunan penyebut", "description": "Hasil penurunan g terhadap x.", "kind": "structural" },
+      "g^2": { "role": "Kuadrat penyebut", "description": "Kuadrat g(x) yang berada di penyebut hasilnya.", "kind": "structural" }
+    },
+    "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
+    "realWorldExamples": [
+      "Dipakai ketika mencari laju perubahan nisbah zat terlarut terhadap larutan dalam perhitungan kepekatan",
+      "Menelusuri perubahan impedansi dengan menganalisis perubahan nisbah tegangan terhadap arus pada rangkaian listrik"
+    ]
+  },
+  "power-rule": {
+    "name": "Aturan pangkat",
+    "oneLiner": "Aturan bahwa menurunkan x pangkat n berarti menurunkan pangkatnya ke depan dan mengurangi pangkatnya dengan 1",
+    "description": "Aturan pangkat adalah rumus penurunan paling dasar, yaitu d/dx(x^n) = nx^(n-1). Untuk pangkat berupa bilangan asli, aturan ini dibuktikan dengan teorema binomial; untuk pangkat berupa bilangan real, dibuktikan dengan bantuan fungsi eksponensial dan fungsi logaritma. Aturan ini menjadi titik awal bagi hampir semua penurunan fungsi suku banyak.",
+    "discoverer": "Isaac Newton",
+    "field": "Kalkulus",
+    "significance": "Gerbang pertama dalam mempelajari penurunan sekaligus rumus turunan yang paling sering dipakai, dan menjadi dasar penurunan fungsi suku banyak.",
+    "elementMeanings": {
+      "x": { "role": "Variabel bebas", "description": "Variabel yang menjadi acuan penurunan.", "kind": "input" },
+      "n": { "role": "Pangkat", "description": "Pangkat pada perpangkatan itu. Nilainya boleh bilangan asli, bilangan bulat, maupun bilangan real.", "kind": "input" },
+      "x^n": { "role": "Fungsi pangkat", "description": "x pangkat n. Inilah yang diturunkan.", "kind": "structural" },
+      "nx^{n-1}": { "role": "Turunan", "description": "Hasil ketika pangkat n turun menjadi koefisien dan pangkatnya berkurang menjadi n-1.", "kind": "output" }
+    },
+    "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
+    "realWorldExamples": [
+      "Diterapkan ketika menurunkan jarak jatuh bebas s = (1/2)gt^2 terhadap waktu untuk memperoleh kecepatan v = gt",
+      "Hubungan bahwa menurunkan luas lingkaran A = pi*r^2 terhadap jari-jarinya menghasilkan kelilingnya, 2*pi*r"
+    ]
+  },
+  "exp-derivative": {
+    "name": "Turunan fungsi eksponensial",
+    "oneLiner": "Sifat bahwa fungsi eksponensial alami e^x menghasilkan dirinya sendiri ketika diturunkan",
+    "description": "Turunan fungsi eksponensial menunjukkan sifat menakjubkan d/dx(e^x) = e^x. Konstanta alami e adalah satu-satunya bilangan pokok yang memenuhi sifat menyalin diri ini, dan menjadi inti persamaan diferensial serta pemodelan gejala alam. Untuk fungsi eksponensial umum a^x, turunannya diperluas menjadi a^x * ln(a).",
+    "discoverer": "Leonhard Euler",
+    "field": "Kalkulus",
+    "significance": "Satu-satunya fungsi yang bentuknya tidak berubah meski diturunkan, sekaligus penyelesaian dasar persamaan diferensial dan landasan pemodelan gejala alam.",
+    "elementMeanings": {
+      "e": { "role": "Konstanta alami", "description": "Kira-kira 2,71828... Bilangan takrasional yang menjadi bilangan pokok logaritma natural.", "kind": "constant", "value": 2.71828183 },
+      "e^x": { "role": "Fungsi eksponensial alami", "description": "e pangkat x. Fungsi ini menjadi dirinya sendiri meski diturunkan.", "kind": "structural" },
+      "x": { "role": "Variabel bebas", "description": "Variabel yang berada di posisi pangkat.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "Operator penurunan", "description": "Operator yang melakukan penurunan terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
+    "realWorldExamples": [
+      "Dipakai ketika mencari laju peluruhan pada peluruhan radioaktif N(t) = N_0 * e^(-lambda*t)",
+      "Model pada perhitungan bunga majemuk sinambung, yaitu laju pertumbuhan pokok sebanding dengan saldo saat ini"
+    ]
+  },
+  "log-derivative": {
+    "name": "Turunan fungsi logaritma",
+    "oneLiner": "Rumus bahwa menurunkan logaritma natural ln x menghasilkan 1 per x",
+    "description": "Turunan fungsi logaritma memberikan hasil yang ringkas, yaitu d/dx(ln x) = 1/x. Hasil ini diturunkan dari hubungan fungsi invers dengan turunan fungsi eksponensial. Fungsi ini terdefinisi untuk x > 0, dan sebaliknya dalam pengintegralan, integral taktentu dari 1/x adalah ln|x| + C.",
+    "discoverer": "Leonhard Euler",
+    "field": "Kalkulus",
+    "significance": "Menyediakan antiturunan dari 1/x, dan melalui penurunan logaritmik menyederhanakan penurunan hasil kali maupun fungsi pangkat yang rumit.",
+    "elementMeanings": {
+      "\\ln x": { "role": "Logaritma natural", "description": "Fungsi logaritma dengan bilangan pokok e. Fungsi ini terdefinisi untuk x > 0.", "kind": "structural" },
+      "x": { "role": "Variabel bebas", "description": "Numerus logaritmanya sekaligus variabel penurunannya.", "kind": "input" },
+      "\\frac{1}{x}": { "role": "Turunan", "description": "Turunan dari ln x. Nilainya berbanding terbalik dengan x.", "kind": "output" },
+      "\\frac{d}{dx}": { "role": "Operator penurunan", "description": "Operator yang melakukan penurunan terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
+    "realWorldExamples": [
+      "Dipakai ketika menganalisis laju perubahan entropi H = -sum(p * ln p) dalam teori informasi",
+      "Hukum Weber-Fechner: memodelkan hubungan logaritmik antara kuat rangsangan dan besar penginderaan"
+    ]
+  },
+  "sin-derivative": {
+    "name": "Turunan fungsi trigonometri (sinus)",
+    "oneLiner": "Rumus bahwa menurunkan sin x menghasilkan cos x",
+    "description": "Ini hasil paling dasar dalam penurunan fungsi trigonometri, yaitu d/dx(sin x) = cos x. Hasil ini dibuktikan dari definisi turunan dengan memakai limit lim(h->0) sin(h)/h = 1. Karena turunan cos x adalah -sin x, sinus dan kosinus saling berputar satu sama lain melalui penurunan.",
+    "discoverer": "Leonhard Euler",
+    "field": "Kalkulus",
+    "significance": "Penting untuk memerikan gejala berkala secara matematis, sekaligus menjadi dasar persamaan gelombang dan analisis gerak harmonik.",
+    "elementMeanings": {
+      "\\sin x": { "role": "Fungsi sinus", "description": "Fungsi trigonometri dasar yang berperiode 2 pi.", "kind": "structural" },
+      "\\cos x": { "role": "Turunan (kosinus)", "description": "Hasil penurunan sin x. Fasenya mendahului sinus sejauh pi/2.", "kind": "output" },
+      "x": { "role": "Variabel bebas", "description": "Variabel sudut dalam satuan radian.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "Operator penurunan", "description": "Operator yang melakukan penurunan terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
+    "realWorldExamples": [
+      "Dipakai ketika menurunkan simpangan theta(t) = A*sin(omega*t) pada gerak bandul sederhana untuk memperoleh kecepatan sudutnya",
+      "Menurunkan tegangan bolak-balik V(t) = V_0*sin(omega*t) untuk mengetahui hubungan fase arusnya"
+    ]
+  },
+  "power-integral": {
+    "name": "Integral taktentu fungsi pangkat",
+    "oneLiner": "Rumus bahwa mengintegralkan x pangkat n berarti menaikkan pangkatnya dengan 1 lalu membaginya dengan pangkat yang baru",
+    "description": "Integral taktentu fungsi pangkat adalah proses kebalikan penurunan, yaitu integral dari x^n adalah x^(n+1)/(n+1) + C (dengan n != -1). Rumus ini adalah penerapan terbalik dari aturan pangkat pada penurunan, sedangkan kasus n = -1 ditangani tersendiri sebagai ln|x| + C. Ini rumus paling dasar dalam pengintegralan fungsi suku banyak.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Titik awal pertama dalam mempelajari pengintegralan sekaligus rumus integral taktentu yang paling sering dipakai.",
+    "elementMeanings": {
+      "x^n": { "role": "Integran", "description": "Fungsi pangkat yang hendak diintegralkan.", "kind": "structural" },
+      "n": { "role": "Pangkat", "description": "Pangkat pada perpangkatan itu. Nilainya harus n != -1.", "kind": "input" },
+      "x^{n+1}": { "role": "Pangkat pada hasil pengintegralan", "description": "Perpangkatan yang pangkatnya bertambah 1.", "kind": "structural" },
+      "n+1": { "role": "Pangkat baru (penyebut)", "description": "Nilai yang berada di penyebut hasilnya sehingga penurunannya memulihkan fungsi semula.", "kind": "structural" },
+      "C": { "role": "Konstanta pengintegralan", "description": "Konstanta sembarang pada integral taktentu. Suku ini lenyap bila diturunkan.", "kind": "constant" },
+      "dx": { "role": "Variabel pengintegralan", "description": "Menyatakan bahwa pengintegralan dilakukan terhadap x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
+    "realWorldExamples": [
+      "Dipakai ketika mengintegralkan kecepatan v = at terhadap waktu untuk memperoleh jarak tempuh s = (1/2)at^2",
+      "Menghitung gaya total dengan mengintegralkan sebaran tekanan dalam mekanika fluida"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "Pengintegralan parsial",
+    "oneLiner": "Teknik mengubah bentuk integral hasil kali dua fungsi dengan menurunkan salah satunya dan mengintegralkan yang lain",
+    "description": "Pengintegralan parsial adalah penerapan aturan hasil kali pada pengintegralan, dengan rumus int(u dv) = uv - int(v du). Teknik ini mengubah hasil kali fungsi yang sukar diintegralkan secara langsung menjadi bentuk yang lebih mudah ditangani. Kuncinya adalah memilih u dan dv secara tepat, dan kadang dipakai penerapan berulang atau hubungan berputar.",
+    "discoverer": "Brook Taylor",
+    "field": "Kalkulus",
+    "significance": "Versi integral dari aturan hasil kali, yang penting untuk mengintegralkan fungsi invers seperti ln x dan arctan x serta berbagai fungsi transenden.",
+    "elementMeanings": {
+      "u": { "role": "Fungsi yang diturunkan", "description": "Fungsi yang dipilih sebagai bagian yang diturunkan dalam proses pengintegralan.", "kind": "structural" },
+      "dv": { "role": "Bagian yang diintegralkan", "description": "Bentuk diferensial yang dipilih sebagai bagian yang diintegralkan dalam prosesnya.", "kind": "structural" },
+      "v": { "role": "Antiturunan dari dv", "description": "Hasil pengintegralan dv.", "kind": "structural" },
+      "du": { "role": "Diferensial u", "description": "Hasil penurunan u.", "kind": "structural" },
+      "uv": { "role": "Suku batas", "description": "Hasil kali u dan v. Pada integral tentu, nilai kedua ujungnya disubstitusikan.", "kind": "output" }
+    },
+    "relatedFormulas": ["product-rule", "ftc", "power-integral"],
+    "realWorldExamples": [
+      "Menurunkan rumus transformasi dengan pengintegralan parsial ketika menghitung transformasi Laplace L{t*f(t)}",
+      "Sering dipakai ketika menghitung nilai harapan E[X] = int(x * f(x) dx) dalam teori peluang"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "Deret Maclaurin fungsi eksponensial",
+    "oneLiner": "Deret hasil penguraian e^x menjadi suku banyak takhingga 1 + x + x^2/2! + ... di sekitar x = 0",
+    "description": "Deret Maclaurin fungsi eksponensial adalah e^x = sum(x^n / n!, n=0..inf), yang konvergen untuk semua bilangan real x. Karena semua turunan e^x pada setiap tingkat adalah e^x sendiri dan nilainya 1 di x=0, koefisien setiap sukunya menjadi 1/n!. Ini cara paling dasar untuk menghampiri fungsi eksponensial dalam perhitungan numerik, sekaligus titik awal penurunan rumus Euler.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Kalkulus",
+    "significance": "Menyediakan hampiran suku banyak untuk fungsi eksponensial, dan menjadi langkah pokok dalam menurunkan identitas Euler e^(i*pi) + 1 = 0.",
+    "elementMeanings": {
+      "e^x": { "role": "Fungsi asal", "description": "Fungsi eksponensial alami yang hendak diuraikan menjadi deret.", "kind": "structural" },
+      "x^n": { "role": "Suku pangkat", "description": "x pangkat n. Inilah pembilang suku ke-n.", "kind": "structural" },
+      "n!": { "role": "Faktorial", "description": "Faktorial n. Inilah penyebut suku ke-n.", "kind": "structural" },
+      "\\sum_{n=0}^{\\infty}": { "role": "Deret takhingga", "description": "Operasi menjumlahkan semua suku dari n=0 sampai takhingga.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
+    "realWorldExamples": [
+      "Kalkulator dan komputer memakai sejumlah berhingga suku deret ini ketika menghitung nilai e^x",
+      "Menguraikan operator perkembangan waktu e^(-iHt) menjadi deret untuk perhitungan hampiran dalam mekanika kuantum"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "Deret Maclaurin fungsi sinus",
+    "oneLiner": "Deret hasil penguraian sin x menjadi x - x^3/3! + x^5/5! - ... di sekitar x = 0",
+    "description": "Deret Maclaurin fungsi sinus adalah sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf). Hanya suku berderajat ganjil yang muncul, dan tandanya berselang-seling. Deret ini konvergen untuk semua bilangan real x, dan hampiran sin x kira-kira x untuk x yang kecil sesuai dengan suku pertamanya.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Kalkulus",
+    "significance": "Memungkinkan hampiran suku banyak untuk fungsi trigonometri, dan menyediakan dasar matematis bagi hampiran sudut kecil sin x kira-kira x.",
+    "elementMeanings": {
+      "\\sin x": { "role": "Fungsi asal", "description": "Fungsi sinus yang hendak diuraikan menjadi deret.", "kind": "structural" },
+      "(-1)^n": { "role": "Faktor pengganti tanda", "description": "Mengubah tanda sukunya berselang-seling antara positif dan negatif.", "kind": "structural" },
+      "x^{2n+1}": { "role": "Suku pangkat ganjil", "description": "Yang muncul hanya derajat ganjil karena sinus merupakan fungsi ganjil.", "kind": "structural" },
+      "(2n+1)!": { "role": "Faktorial", "description": "Penyebut setiap suku. Nilai ini menjamin kekonvergenan deretnya.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
+    "realWorldExamples": [
+      "Menerapkan hampiran sudut kecil (sin theta kira-kira theta) dalam fisika untuk menurunkan rumus periode bandul sederhana",
+      "Menghampiri gelombang sinus dengan suku banyak agar perhitungannya cepat dalam pengolahan isyarat digital"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "Deret Maclaurin fungsi kosinus",
+    "oneLiner": "Deret hasil penguraian cos x menjadi 1 - x^2/2! + x^4/4! - ... di sekitar x = 0",
+    "description": "Deret Maclaurin fungsi kosinus adalah cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf). Hanya suku berderajat genap yang muncul, dan tandanya berselang-seling. Bila deret sinus diturunkan suku demi suku, hasilnya menjadi deret kosinus, sehingga hubungan kedua deret itu terlihat melalui penurunan.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Kalkulus",
+    "significance": "Menyediakan hampiran suku banyak untuk fungsi kosinus, dan bersama deret sinus dipakai untuk menurunkan rumus Euler.",
+    "elementMeanings": {
+      "\\cos x": { "role": "Fungsi asal", "description": "Fungsi kosinus yang hendak diuraikan menjadi deret.", "kind": "structural" },
+      "(-1)^n": { "role": "Faktor pengganti tanda", "description": "Mengubah tanda sukunya berselang-seling antara positif dan negatif.", "kind": "structural" },
+      "x^{2n}": { "role": "Suku pangkat genap", "description": "Yang muncul hanya derajat genap karena kosinus merupakan fungsi genap.", "kind": "structural" },
+      "(2n)!": { "role": "Faktorial", "description": "Penyebut setiap suku. Nilai ini menjamin kekonvergenan deretnya.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
+    "realWorldExamples": [
+      "Memakai cos theta kira-kira 1 - theta^2/2 dalam optika untuk menghampiri perhitungan aberasi lensa",
+      "Menghampiri kosinus pada matriks rotasi dengan suku banyak untuk kendali waktu nyata dalam robotika"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "Aturan L'Hopital",
+    "oneLiner": "Teorema untuk mencari limit bentuk taktentu 0/0 atau takhingga/takhingga melalui nisbah turunan pembilang dan penyebutnya",
+    "description": "Aturan L'Hopital adalah teorema yang menyatakan bahwa ketika nilai limitnya berbentuk taktentu seperti 0/0 atau takhingga/takhingga, mengambil limit dari nisbah turunan pembilang dan penyebutnya memberikan hasil yang sama dengan limit semula. Bila perlu, aturan ini dapat diterapkan berulang kali, dan tidak boleh dipakai bila bentuknya bukan bentuk taktentu. Aturan ini dibuktikan secara saksama dengan teorema nilai rata-rata Cauchy.",
+    "discoverer": "Guillaume de l'Hopital (ditemukan oleh Johann Bernoulli)",
+    "field": "Kalkulus",
+    "significance": "Mereduksi perhitungan limit bentuk taktentu menjadi persoalan penurunan sehingga menyediakan alat yang ampuh untuk menghitung limit.",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": { "role": "Operasi limit", "description": "Operasi membawa x sedekat-dekatnya ke c.", "kind": "structural" },
+      "f(x)": { "role": "Fungsi pembilang", "description": "Fungsi yang menjadi pembilang dalam limit itu.", "kind": "structural" },
+      "g(x)": { "role": "Fungsi penyebut", "description": "Fungsi yang menjadi penyebut dalam limit itu.", "kind": "structural" },
+      "f'(x)": { "role": "Turunan pembilang", "description": "Hasil penurunan f(x) terhadap x.", "kind": "structural" },
+      "g'(x)": { "role": "Turunan penyebut", "description": "Hasil penurunan g(x) terhadap x.", "kind": "structural" },
+      "\\frac{0}{0}": { "role": "Bentuk taktentu", "description": "Bentuk taktentu ketika pembilang dan penyebutnya sama-sama menuju 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "taylor-series"],
+    "realWorldExamples": [
+      "Menghitung limit peluang transisi ketika selisih aras energi mendekati 0 dalam fisika",
+      "Analisis laba pada keadaan biaya marginal dan penerimaan marginal sama-sama menuju 0 dalam ekonomi"
+    ]
+  },
+  "tangent": {
+    "name": "Garis singgung",
+    "oneLiner": "Garis lurus yang melalui satu titik pada sebuah kurva dan memiliki kemiringan yang sama dengan kurva itu di titik tersebut",
+    "description": "Garis singgung adalah garis lurus y - f(a) = f'(a)(x - a) yang kemiringannya adalah nilai turunan f'(a) di titik (a, f(a)) pada kurva y=f(x). Ini fungsi linear yang paling baik menghampiri kurva di sekitar titik itu, dan menyingkapkan laju perubahan sesaat di satu titik secara geometris. Makna penurunan yang paling intuitif tergambarkan di atas kurvanya.",
+    "discoverer": "Pierre de Fermat, Isaac Newton, Gottfried Leibniz",
+    "field": "Kalkulus",
+    "significance": "Menampakkan makna geometris turunan sebagai sebuah garis lurus pada kurva sehingga menjadi titik awal pembelajaran yang menghubungkan gagasan penurunan dengan gambaran visualnya.",
+    "elementMeanings": {
+      "f(x)": { "role": "Kurva", "description": "Fungsi sasaran yang akan dibuatkan garis singgungnya.", "kind": "input" },
+      "x": { "role": "Koordinat x titik singgung", "description": "Titik yang menentukan di mana pada kurva garis singgungnya diletakkan.", "kind": "input" },
+      "f'(x)": { "role": "Kemiringan garis singgung", "description": "Nilai turunan di titik x. Nilai ini menentukan kemiringan garis singgungnya.", "kind": "output" },
+      "y - f(x) = f'(x)(X - x)": { "role": "Persamaan garis singgung", "description": "Garis lurus yang melalui titik (x, f(x)) dan berkemiringan f'(x).", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "chain-rule", "taylor-series"]
+  }
+}

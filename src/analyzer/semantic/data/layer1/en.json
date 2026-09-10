@@ -1,0 +1,162 @@
+{
+  "frac.numerator": {
+    "role": "Numerator",
+    "description": "The top part of a fraction. The quantity being divided.",
+    "refinements": {
+      "containsVariable": "The numerator contains a variable, so it determines the zeros of the function (f(x)=0).",
+      "constantOnly": "The numerator is a constant, so this fraction scales by a fixed ratio."
+    }
+  },
+  "frac.denominator": {
+    "role": "Denominator",
+    "description": "The bottom part of a fraction. The quantity you divide by. If it becomes 0, the expression is undefined.",
+    "refinements": {
+      "containsVariable": "The denominator contains a variable, so the expression may be undefined at certain values (asymptotes).",
+      "constantOnly": "The denominator is a constant, so it applies a fixed ratio to the whole expression."
+    }
+  },
+  "power.base": {
+    "role": "Base",
+    "description": "The quantity that gets multiplied by itself in a power.",
+    "refinements": {
+      "isEulerE": "An exponential function with the natural constant e as its base. It models growth and decay.",
+      "isVariable": "A power of a variable. The larger the exponent, the faster it grows."
+    }
+  },
+  "power.exponent": {
+    "role": "Exponent",
+    "description": "How many times the base is multiplied by itself.",
+    "refinements": {
+      "isTwo": "Squared — the result is always 0 or greater.",
+      "isNegativeOne": "Reciprocal — the same as 1/base.",
+      "isHalf": "Square root — the positive square root of the base.",
+      "containsVariable": "The exponent contains a variable, so it models exponential growth or decay."
+    }
+  },
+  "sqrt.content": {
+    "role": "Radicand",
+    "description": "The quantity whose root is taken. Over the real numbers it cannot be negative."
+  },
+  "sqrt.index": {
+    "role": "Root index",
+    "description": "The n in an nth root. When omitted it is 2 (square root)."
+  },
+  "subscript.base": {
+    "role": "Indexed object",
+    "description": "The object the subscript is attached to."
+  },
+  "subscript.subscript": {
+    "role": "Index",
+    "description": "A number that picks out a particular element or component."
+  },
+  "scripts.leftSuperscript": {
+    "role": "Left superscript",
+    "description": "A number placed at the upper left of a symbol. It identifies the object, like the mass number of an isotope."
+  },
+  "scripts.leftSubscript": {
+    "role": "Left subscript",
+    "description": "A number placed at the lower left of a symbol. It identifies the object, like the atomic number of an element."
+  },
+  "sum.lower": {
+    "role": "Lower limit",
+    "description": "The index value where the summation starts."
+  },
+  "sum.upper": {
+    "role": "Upper limit",
+    "description": "The index value where the summation ends.",
+    "refinements": {
+      "isInfinity": "An infinite series summed to infinity. Whether it converges is the key question."
+    }
+  },
+  "sum.body": {
+    "role": "General term",
+    "description": "The quantity added at each step. Its value depends on the index."
+  },
+  "product.lower": {
+    "role": "Lower limit",
+    "description": "The index value where the product starts."
+  },
+  "product.upper": {
+    "role": "Upper limit",
+    "description": "The index value where the product ends."
+  },
+  "product.body": {
+    "role": "General term",
+    "description": "The quantity multiplied at each step."
+  },
+  "integral.lower": {
+    "role": "Lower limit of integration",
+    "description": "The starting point of the interval of integration."
+  },
+  "integral.upper": {
+    "role": "Upper limit of integration",
+    "description": "The ending point of the interval of integration.",
+    "refinements": {
+      "isInfinity": "The integral runs to positive infinity. You have to check whether it converges."
+    }
+  },
+  "integral.integrand": {
+    "role": "Integrand",
+    "description": "The function being integrated. You are finding the area under its curve."
+  },
+  "limit.approach": {
+    "role": "Approached value",
+    "description": "The target value the variable gets arbitrarily close to."
+  },
+  "limit.body": {
+    "role": "Limit expression",
+    "description": "You look at what value this expression converges to as the variable approaches its target."
+  },
+  "paren.content": {
+    "role": "Grouped expression",
+    "description": "An expression enclosed in parentheses and treated as a single unit."
+  },
+  "chem.content": {
+    "role": "Chemical formula",
+    "description": "Chemical notation representing substances and reactions."
+  },
+  "abs.content": {
+    "role": "Absolute value argument",
+    "description": "The magnitude with the sign ignored. The result is always 0 or greater."
+  },
+  "func.argument": {
+    "role": "Function argument",
+    "description": "The value fed into the function."
+  },
+  "matrix.element": {
+    "role": "Matrix entry",
+    "description": "A single element of the matrix."
+  },
+  "cases.element": {
+    "role": "Conditional value",
+    "description": "The function value when a particular condition holds."
+  },
+  "accent.content": {
+    "role": "Accented object",
+    "description": "A symbol carrying an accent."
+  },
+  "overline.content": {
+    "role": "Mean / conjugate",
+    "description": "An overline denotes a mean, a complex conjugate, or a closure in topology."
+  },
+  "cancel.content": {
+    "role": "Cancelled term",
+    "description": "The part that is reduced away or cancels out."
+  },
+  "overset.base": {
+    "role": "Base symbol",
+    "description": "The symbol the annotation is attached to."
+  },
+  "overset.annotation": {
+    "role": "Annotation",
+    "description": "Extra explanation placed above or below a symbol."
+  },
+  "xarrow.above": {
+    "role": "Text above the arrow",
+    "description": "It states the conditions of a reaction or transformation."
+  },
+  "xarrow.below": {
+    "role": "Text below the arrow",
+    "description": "It states additional conditions of a reaction or transformation."
+  }
+}

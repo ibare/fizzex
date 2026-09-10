@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "关闭",
+    "closeWithKey": "关闭 (Esc)",
+    "hintHover": "悬停：查看元素",
+    "hintClick": "点击：调整数值",
+    "hintEsc": "Esc：关闭",
+    "explore": "探索公式",
+    "copyImage": "复制图像",
+    "reset": "重置",
+    "similarTo": "与 {name} 相似",
+    "closeNamed": "关闭 {name}",
+    "domainGuard": "定义域保护：{reason}"
+  },
+  "bindingFault": {
+    "derivative": "无法计算 {name} 的导数",
+    "domain": "{name} 的值超出定义域",
+    "divergent": "{name} 的值发散",
+    "unsupported": "此可视化不支持 {name} 的形式",
+    "evalFailed": "无法计算 {name}",
+    "unbound": "{name} 尚未有值",
+    "unknown": "{name} 无法求值"
+  },
+  "duration": {
+    "seconds": "{value}秒",
+    "minutes": "{value}分钟",
+    "hours": "{value}小时",
+    "days": "{value}天"
+  },
+  "summary": {
+    "variables": "变量 {names} 的",
+    "constantExpression": "常量表达式",
+    "polynomialOfDegree": "{degree}次多项式",
+    "withFunctions": "(含 {names})",
+    "domains": "[{names}]",
+    "chemicalFormula": "化学式",
+    "chemicalEquation": "化学方程式",
+    "reversibleChemicalEquation": "可逆化学方程式",
+    "domainNames": {
+      "arithmetic": "算术",
+      "polynomial": "多项式",
+      "rational": "有理式",
+      "trigonometric": "三角函数",
+      "exponential": "指数函数",
+      "logarithmic": "对数函数",
+      "calculus": "微积分",
+      "linear-algebra": "线性代数",
+      "statistics": "统计",
+      "chemistry": "化学"
+    },
+    "listSeparator": "、"
+  }
+}

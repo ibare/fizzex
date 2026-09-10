@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "Forma cuadrática",
+    "oneLiner": "Expresión con x al cuadrado — su gráfica es una parábola",
+    "slots": {
+      "a": {
+        "role": "Coeficiente cuadrático",
+        "description": "Fija la orientación y la anchura de la parábola"
+      },
+      "b": {
+        "role": "Coeficiente lineal",
+        "description": "Desplaza el eje hacia la izquierda o la derecha"
+      },
+      "c": {
+        "role": "Término independiente",
+        "description": "Altura a la que corta el eje y"
+      },
+      "x": {
+        "role": "Punto de observación",
+        "description": "Valor de x que se examina sobre la gráfica"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "Exploración libre — función cuadrática",
+        "description": "Observa los cambios de a, b y c en el plano de coordenadas"
+      },
+      "quadratic-bridge-2d": {
+        "name": "Arco de puente — función cuadrática",
+        "description": "La parábola vista con pilares, arco y reflejo"
+      },
+      "quadratic-basketball-2d": {
+        "name": "Tiro libre de baloncesto — función cuadrática",
+        "description": "La trayectoria: altura de lanzamiento, punto más alto y caída"
+      },
+      "quadratic-fountain-2d": {
+        "name": "Fuente — función cuadrática",
+        "description": "El punto más alto del chorro es justo el vértice"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "Forma de suma de dos cuadrados",
+    "oneLiner": "Relación en la que la suma de los cuadrados de dos valores es igual al cuadrado del tercero",
+    "slots": {
+      "a": {
+        "role": "Primer cateto",
+        "description": "Uno de los lados que forman el ángulo recto"
+      },
+      "b": {
+        "role": "Segundo cateto",
+        "description": "El otro lado que forma el ángulo recto"
+      },
+      "c": {
+        "role": "Hipotenusa",
+        "description": "El lado opuesto al ángulo recto, el más largo"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "Exploración libre",
+        "description": "El teorema de Pitágoras visto con un triángulo rectángulo y los cuadrados sobre sus tres lados"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "Escalera",
+        "description": "El ángulo y la seguridad de una escalera apoyada en la pared"
+      },
+      "pythagorean-tv-2d": {
+        "name": "Pantalla de televisión",
+        "description": "Cálculo de las pulgadas de la diagonal a partir del ancho y el alto de la pantalla"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "Atajo",
+        "description": "Comparación de distancias entre rodear la manzana y cruzarla"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "Forma de cambio exponencial",
+    "oneLiner": "Forma en la que la tasa de cambio es proporcional a la cantidad actual, así que esta crece o decrece exponencialmente",
+    "slots": {
+      "N_0": {
+        "role": "Valor inicial",
+        "description": "La cantidad en el instante cero"
+      },
+      "r": {
+        "role": "Tasa de cambio",
+        "description": "Si es positiva hay crecimiento; si es negativa, decrecimiento"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "Decrecimiento exponencial — 2D",
+        "description": "Percibe la semivida cambiando entre los anclajes de cafeína, batería, carbono-14 y fármacos"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "Forma de interés compuesto",
+    "oneLiner": "Forma en la que los intereses generan a su vez intereses y el capital va creciendo",
+    "slots": {
+      "P": {
+        "role": "Capital inicial",
+        "description": "La cantidad depositada al principio"
+      },
+      "r": {
+        "role": "Tipo de interés anual",
+        "description": "El interés referido a un año"
+      },
+      "n": {
+        "role": "Capitalizaciones al año",
+        "description": "Cuántas veces al año se aplican los intereses"
+      },
+      "t": {
+        "role": "Plazo",
+        "description": "Los años que se mantiene el depósito"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "Interés compuesto — 2D",
+        "description": "Percibe el crecimiento compuesto cambiando entre los anclajes de depósito, acciones, ahorro periódico e inflación"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "Forma del desplazamiento con aceleración constante",
+    "oneLiner": "La distancia recorrida con una aceleración constante — lleva un término proporcional al cuadrado del tiempo",
+    "slots": {
+      "v_0": {
+        "role": "Velocidad inicial",
+        "description": "La velocidad en el momento de partir"
+      },
+      "a": {
+        "role": "Aceleración",
+        "description": "La aceleración que se mantiene constante"
+      },
+      "t": {
+        "role": "Tiempo transcurrido",
+        "description": "El instante de observación"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "Caída libre — 2D",
+        "description": "Percibe la gravedad de cada planeta con los anclajes de la Tierra, la Luna, Marte y Júpiter"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "Forma sinusoidal",
+    "oneLiner": "Onda en la que la misma figura se repite con un periodo constante",
+    "slots": {
+      "A": {
+        "role": "Amplitud",
+        "description": "La altura desde el centro hasta la cresta"
+      },
+      "\\omega": {
+        "role": "Frecuencia angular",
+        "description": "Con qué rapidez se repite"
+      },
+      "\\varphi": {
+        "role": "Fase",
+        "description": "Cuánto se ha desplazado la onda hacia los lados"
+      },
+      "t": {
+        "role": "Instante de observación",
+        "description": "El instante que se examina sobre la onda"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "Onda sinusoidal — 2D",
+        "description": "Percibe el papel de la amplitud, el periodo y la fase con los anclajes de altavoz, péndulo, mareas y voltímetro"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "Forma del periodo orbital",
+    "oneLiner": "Relación por la que, cuanto mayor es la órbita, más se tarda en dar una vuelta completa",
+    "slots": {
+      "M": {
+        "role": "Masa del cuerpo central",
+        "description": "La masa del cuerpo alrededor del cual se orbita"
+      },
+      "a": {
+        "role": "Semieje mayor de la órbita",
+        "description": "El radio del lado largo de la órbita elíptica"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "Órbita terrestre — 2D",
+        "description": "Vista cenital en 2D que se observa cambiando entre los anclajes ISS, GPS, órbita geoestacionaria y Luna"
+      },
+      "kepler-orbit-3d": {
+        "name": "Órbita terrestre — 3D",
+        "description": "Vista tridimensional que gira los mismos anclajes en el espacio 3D para captar las distancias"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "Forma de la recta tangente",
+    "oneLiner": "Recta que roza una curva en un punto con la misma pendiente",
+    "slots": {
+      "f": {
+        "role": "Curva",
+        "description": "La función a la que se traza la tangente"
+      },
+      "x": {
+        "role": "Punto de observación",
+        "description": "El valor de x al que se desplaza el punto de tangencia"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "Explorador de tangentes — 2D",
+        "description": "Vista interactiva que muestra a la vez la curva y=f(x) y la tangente en el punto x"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "Forma de número complejo",
+    "oneLiner": "Número formado por una parte real y una parte imaginaria — un punto del plano",
+    "slots": {
+      "a": {
+        "role": "Parte real",
+        "description": "La coordenada del eje horizontal"
+      },
+      "b": {
+        "role": "Parte imaginaria",
+        "description": "La coordenada del eje vertical"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "Forma de transformación 2×2",
+    "oneLiner": "Transformación lineal que lleva los vectores del plano a otros vectores",
+    "slots": {
+      "a": {
+        "role": "Fila 1, columna 1",
+        "description": "Cuánto se estira en horizontal la imagen del eje x"
+      },
+      "b": {
+        "role": "Fila 1, columna 2",
+        "description": "Cuánto se inclina en horizontal la imagen del eje y"
+      },
+      "c": {
+        "role": "Fila 2, columna 1",
+        "description": "Cuánto se inclina en vertical la imagen del eje x"
+      },
+      "d": {
+        "role": "Fila 2, columna 2",
+        "description": "Cuánto se estira en vertical la imagen del eje y"
+      }
+    }
+  }
+}

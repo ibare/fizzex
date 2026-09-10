@@ -1,0 +1,164 @@
+{
+  "compound-interest": {
+    "name": "Intérêts composés",
+    "oneLiner": "Mode de calcul dans lequel les intérêts portent non seulement sur le capital, mais aussi sur les intérêts déjà acquis",
+    "description": "Dans le régime des intérêts composés, les intérêts se calculent sur le capital augmenté des intérêts déjà versés, si bien que le patrimoine croît de façon exponentielle avec le temps. Le montant final dépend de la fréquence de capitalisation (annuelle, mensuelle, quotidienne, etc.) : plus elle est élevée, plus le gain total est important. C'est le calcul le plus fondamental de l'épargne, du crédit et de l'analyse d'investissement.",
+    "field": "Finance",
+    "significance": "Principe central de la croissance du patrimoine dans l'épargne et l'investissement de long terme, il fonde le calcul des intérêts d'emprunt, la préparation de la retraite et la comparaison des rendements.",
+    "elementMeanings": {
+      "A": { "role": "Montant final", "description": "Somme du capital et des intérêts au terme d'une période donnée.", "kind": "output" },
+      "P": { "role": "Capital initial", "description": "Somme investie ou déposée au départ.", "kind": "input" },
+      "r": { "role": "Taux d'intérêt annuel", "description": "Taux d'intérêt annuel exprimé en décimal. Exemple : 5 % s'écrit 0,05.", "kind": "input" },
+      "n": { "role": "Nombre de capitalisations par an", "description": "Nombre de fois où les intérêts sont calculés dans l'année. Il vaut 12 pour une capitalisation mensuelle.", "kind": "input" },
+      "t": { "role": "Durée", "description": "Durée du placement, exprimée en années.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcul de la somme perçue à l'échéance d'un plan d'épargne",
+      "Estimation du total des intérêts d'un prêt immobilier",
+      "Comparaison de l'effet des intérêts composés sur des placements de long terme"
+    ],
+    "relatedFormulas": ["present-value", "annuity-pv", "rule-of-72"]
+  },
+  "present-value": {
+    "name": "Valeur actuelle",
+    "oneLiner": "Valeur, à la date d'aujourd'hui, d'une somme qui sera perçue dans le futur",
+    "description": "La valeur actuelle convertit un flux de trésorerie futur en son équivalent d'aujourd'hui par application d'un taux d'actualisation. Elle traduit la valeur temps de l'argent : une somme future vaut moins que la même somme aujourd'hui. Elle joue un rôle central dans les décisions d'investissement, l'évaluation des obligations et l'estimation de la valeur d'une entreprise.",
+    "field": "Finance",
+    "significance": "En rendant comparables des flux situés à des dates différentes, elle constitue le fondement de l'évaluation des investissements, de la valorisation des entreprises et des décisions financières.",
+    "elementMeanings": {
+      "PV": { "role": "Valeur actuelle", "description": "Équivalent, à la date d'aujourd'hui, d'un montant futur.", "kind": "output" },
+      "FV": { "role": "Valeur future", "description": "Montant qui sera perçu ou versé à une date future donnée.", "kind": "input" },
+      "r": { "role": "Taux d'actualisation", "description": "Taux appliqué pour ramener un flux futur à aujourd'hui.", "kind": "input" },
+      "n": { "role": "Nombre de périodes", "description": "Nombre de périodes qui séparent aujourd'hui de la date du flux futur.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcul du prix théorique d'une obligation",
+      "Évaluation de la rentabilité d'un projet d'investissement (analyse de la VAN)",
+      "Comparaison entre un gain de loterie versé en une fois et le même gain versé sous forme de rente"
+    ],
+    "relatedFormulas": ["compound-interest", "annuity-pv", "black-scholes"]
+  },
+  "black-scholes": {
+    "name": "Modèle de Black-Scholes",
+    "oneLiner": "Modèle d'évaluation qui calcule le prix théorique d'une option d'achat européenne",
+    "description": "Le modèle de Black-Scholes calcule le prix équitable d'une option européenne à partir du cours du sous-jacent, du prix d'exercice, de l'échéance, du taux sans risque et de la volatilité. Il se démontre en appliquant le principe d'absence d'opportunité d'arbitrage, sous l'hypothèse que le sous-jacent suit un mouvement brownien géométrique. C'est le socle théorique des marchés de produits dérivés contemporains et le modèle central de l'ingénierie financière.",
+    "discoverer": "Fischer Black, Myron Scholes",
+    "field": "Finance",
+    "significance": "En fournissant une référence théorique pour le prix des options, il a permis la naissance et l'essor des marchés de produits dérivés ; il a valu le prix Nobel d'économie en 1997.",
+    "elementMeanings": {
+      "C": { "role": "Prix de l'option d'achat", "description": "Prix théorique actuel d'une option d'achat européenne.", "kind": "output" },
+      "S": { "role": "Cours actuel du sous-jacent", "description": "Prix de marché actuel de l'actif sur lequel porte l'option.", "kind": "input" },
+      "K": { "role": "Prix d'exercice", "description": "Prix convenu auquel le détenteur de l'option peut acheter le sous-jacent.", "kind": "input" },
+      "r": { "role": "Taux sans risque", "description": "Rendement sans risque jusqu'à l'échéance.", "kind": "input" },
+      "T": { "role": "Durée jusqu'à l'échéance", "description": "Temps restant avant l'échéance de l'option, exprimé en années.", "kind": "input" },
+      "N(d)": { "role": "Fonction de répartition de la loi normale centrée réduite", "description": "Valeur de la fonction de répartition de la loi normale centrée réduite. Elle joue le rôle d'une pondération probabiliste.", "kind": "structural" },
+      "d_1": { "role": "Premier paramètre", "description": "Rapport entre le cours du sous-jacent et le prix d'exercice, ajusté par la volatilité.", "kind": "output" },
+      "d_2": { "role": "Second paramètre", "description": "Valeur obtenue en retranchant le terme de volatilité à d_1 ; elle est liée à la probabilité d'exercice.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calcul du prix théorique d'une option d'achat sur action",
+      "Extraction de la volatilité implicite à partir des prix du marché des options",
+      "Gestion du risque d'un portefeuille de produits dérivés"
+    ],
+    "relatedFormulas": ["present-value", "capm", "sharpe-ratio"]
+  },
+  "capm": {
+    "name": "Modèle d'évaluation des actifs financiers (MEDAF)",
+    "oneLiner": "Modèle qui calcule le rendement attendu d'un actif en fonction de son risque systématique",
+    "description": "Le MEDAF énonce que le rendement attendu d'un actif est égal au taux sans risque augmenté de la prime de risque de marché multipliée par le bêta. Le bêta mesure la sensibilité de l'actif aux variations de l'ensemble du marché. C'est le modèle central de l'hypothèse des marchés efficients, selon laquelle seul le risque systématique, non diversifiable, est rémunéré.",
+    "discoverer": "William Sharpe",
+    "field": "Finance",
+    "significance": "En quantifiant la relation entre le risque et le rendement attendu, il constitue le cadre de référence de la valorisation des actifs, de l'estimation du coût du capital et de l'évaluation de la performance d'un portefeuille.",
+    "elementMeanings": {
+      "E(R_i)": { "role": "Rendement attendu de l'actif", "description": "Rendement attendu de l'actif i pris isolément.", "kind": "output" },
+      "R_f": { "role": "Taux sans risque", "description": "Rendement d'un placement sans risque, comme une obligation d'État.", "kind": "input" },
+      "\\beta_i": { "role": "Bêta", "description": "Indicateur du risque systématique de l'actif i : sa sensibilité aux variations du rendement du marché.", "kind": "input" },
+      "E(R_m)": { "role": "Rendement attendu du marché", "description": "Rendement attendu de l'ensemble du portefeuille de marché.", "kind": "input" },
+      "E(R_m) - R_f": { "role": "Prime de risque de marché", "description": "Rendement supplémentaire attendu d'un placement sur le marché par rapport au placement sans risque.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Estimation du taux d'actualisation (coût du capital) d'un nouveau projet d'investissement",
+      "Évaluation de la surperformance d'un gérant de fonds",
+      "Calcul du rendement attendu raisonnable d'une action"
+    ],
+    "relatedFormulas": ["sharpe-ratio", "black-scholes", "present-value"]
+  },
+  "sharpe-ratio": {
+    "name": "Ratio de Sharpe",
+    "oneLiner": "Indicateur qui évalue la performance d'un placement en mesurant le surcroît de rendement obtenu par unité de risque",
+    "description": "Le ratio de Sharpe divise le rendement excédentaire d'un portefeuille — son rendement diminué du taux sans risque — par l'écart type de ce rendement. Plus il est élevé, plus le rendement obtenu est important au regard du risque assumé. C'est l'indicateur le plus répandu pour comparer les performances ajustées du risque de stratégies ou de fonds différents.",
+    "discoverer": "William Sharpe",
+    "field": "Finance",
+    "significance": "Il permet de comparer équitablement des performances au regard du risque encouru et sert de référence dans l'évaluation des fonds et les décisions d'allocation d'actifs.",
+    "elementMeanings": {
+      "S": { "role": "Ratio de Sharpe", "description": "Indicateur de rendement ajusté du risque. Plus il est élevé, plus le placement est efficient.", "kind": "output" },
+      "R_p": { "role": "Rendement du portefeuille", "description": "Rendement réalisé ou attendu du portefeuille.", "kind": "input" },
+      "R_f": { "role": "Taux sans risque", "description": "Rendement d'un actif sans risque, comme une obligation d'État.", "kind": "input" },
+      "\\sigma_p": { "role": "Écart type du portefeuille", "description": "Volatilité du rendement du portefeuille. Elle représente le risque total.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Comparaison des performances de plusieurs fonds communs de placement",
+      "Évaluation du rendement ajusté du risque d'un fonds spéculatif",
+      "Appréciation de l'efficience d'une stratégie d'allocation d'actifs"
+    ],
+    "relatedFormulas": ["capm", "standard-deviation"]
+  },
+  "annuity-pv": {
+    "name": "Valeur actuelle d'une annuité",
+    "oneLiner": "Somme des valeurs actuelles d'un montant fixe versé régulièrement pendant une durée donnée",
+    "description": "La formule de la valeur actuelle d'une annuité calcule la valeur totale, à la date d'aujourd'hui, d'une annuité ordinaire dont chaque période verse le même montant. Plutôt que d'actualiser chaque versement séparément, on l'obtient d'un seul coup grâce à la formule de la somme d'une suite géométrique. Elle est indispensable au calcul des mensualités de prêt, à la conception des rentes et à l'évaluation des contrats de location.",
+    "field": "Finance",
+    "significance": "En calculant efficacement la valeur de flux versés régulièrement, elle s'est imposée comme la norme pratique de l'évaluation des prêts, des rentes et des obligations.",
+    "elementMeanings": {
+      "PV": { "role": "Valeur actuelle", "description": "Équivalent, à la date d'aujourd'hui, de l'ensemble des versements de l'annuité.", "kind": "output" },
+      "PMT": { "role": "Versement par période", "description": "Montant fixe versé à chaque période.", "kind": "input" },
+      "r": { "role": "Taux d'actualisation par période", "description": "Taux d'actualisation appliqué sur une période.", "kind": "input" },
+      "n": { "role": "Nombre total de périodes", "description": "Nombre total de périodes pendant lesquelles l'annuité est versée.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcul de la mensualité de remboursement d'un prêt immobilier",
+      "Calcul du capital équivalent en cas de versement unique d'une pension de retraite publique",
+      "Comparaison du coût total de contrats de location de voiture"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest"]
+  },
+  "rule-of-72": {
+    "name": "Règle de 72",
+    "oneLiner": "Règle qui permet d'estimer rapidement le temps nécessaire pour qu'un capital double",
+    "description": "La règle de 72 est un calcul rapide : en divisant 72 par le taux d'intérêt annuel exprimé en pourcentage, on obtient la durée approximative, en années, au bout de laquelle le capital double. Elle rend l'effet des intérêts composés immédiatement perceptible et se révèle particulièrement précise pour des taux compris entre 6 et 10 %. On l'emploie pour les décisions financières rapides et la comparaison de placements.",
+    "field": "Finance",
+    "significance": "C'est un outil financier pratique, qui permet d'estimer intuitivement la vitesse de croissance d'un placement sans passer par un calcul d'intérêts composés.",
+    "elementMeanings": {
+      "t": { "role": "Durée de doublement", "description": "Durée approximative, exprimée en années, nécessaire pour que le capital double.", "kind": "output" },
+      "r": { "role": "Taux d'intérêt annuel", "description": "Rendement annuel exprimé en pourcentage. Exemple : pour 8 % par an, r = 8.", "kind": "input" },
+      "72": { "role": "Constante", "description": "Constante d'approximation liée à ln(2). Elle sert à estimer la durée de doublement d'une croissance à intérêts composés.", "kind": "constant", "value": 72 }
+    },
+    "realWorldExamples": [
+      "Calculer rapidement qu'un placement à 6 % par an double son capital en douze ans environ",
+      "Estimer la durée au bout de laquelle les prix doublent avec une inflation de 3 %",
+      "Comparer la vitesse de croissance de produits d'épargne à des taux différents"
+    ],
+    "relatedFormulas": ["compound-interest", "present-value"]
+  },
+  "duration": {
+    "name": "Duration",
+    "oneLiner": "Échéance moyenne pondérée des flux d'une obligation, qui mesure la sensibilité de son prix aux variations de taux",
+    "description": "La duration est la moyenne des dates auxquelles surviennent les flux d'une obligation, pondérée par le poids de la valeur actuelle de chaque flux. Appelée aussi duration de Macaulay, c'est la mesure de risque essentielle pour savoir de combien le prix d'une obligation varie lorsque les taux changent. Elle est indispensable à la gestion d'un portefeuille obligataire et à la conception des stratégies d'immunisation.",
+    "discoverer": "Frederick Macaulay",
+    "field": "Finance",
+    "significance": "En quantifiant le risque de taux, elle est l'outil central de l'élaboration des stratégies obligataires, de l'adossement actif-passif et de l'immunisation des portefeuilles.",
+    "elementMeanings": {
+      "D": { "role": "Duration", "description": "Échéance moyenne des flux, pondérée par leur valeur actuelle et exprimée en années.", "kind": "output" },
+      "t": { "role": "Date du flux", "description": "Date à laquelle survient chaque flux, exprimée en années.", "kind": "input" },
+      "PV(CF_t)": { "role": "Valeur actuelle du flux", "description": "Valeur actuelle, une fois actualisé, du flux survenant à la date t.", "kind": "input" },
+      "P": { "role": "Prix de l'obligation", "description": "Somme des valeurs actuelles de tous les flux. C'est le prix de marché de l'obligation.", "kind": "input" },
+      "\\Sigma": { "role": "Signe de sommation", "description": "Opération qui additionne sur toutes les dates de flux.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Prévoir la perte d'un portefeuille obligataire en cas de hausse des taux",
+      "Élaborer une stratégie d'adossement actif-passif pour un fonds de pension",
+      "Comparer la sensibilité aux taux de différentes obligations"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest", "capm"]
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "logistic-growth": {
+    "name": "逻辑斯蒂增长",
+    "oneLiner": "种群数量越接近环境容纳量、增长率就越小的模型",
+    "description": "逻辑斯蒂增长模型描述这样一个过程：种群在初期呈指数式增长，但随着接近环境容纳量(K)，因资源竞争而逐渐放缓。它是密度制约型增长最基本的数学模型，会画出 S 形的增长曲线（S 形曲线）。",
+    "discoverer": "皮埃尔·弗朗索瓦·韦吕勒",
+    "field": "生物学",
+    "significance": "它是生态学中预测种群动态的基本模型，并被应用于流行病学、经济学、技术扩散等各个领域。",
+    "elementMeanings": {
+      "dN/dt": { "role": "种群数量变化率", "description": "单位时间内种群数量的变化量。", "kind": "output" },
+      "r": { "role": "内禀增长率", "description": "资源不受限制时种群的最大增长率。", "kind": "input" },
+      "N": { "role": "当前种群数量", "description": "某一时刻的种群大小。", "kind": "input" },
+      "K": { "role": "环境容纳量", "description": "给定环境所能支撑的最大种群数量。", "kind": "input" },
+      "(1 - N/K)": { "role": "增长抑制因子", "description": "当 N 接近 K 时趋近于 0，从而抑制增长。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "放流到湖中的鱼类种群数量的 S 形增长曲线",
+      "细菌培养中进入稳定期的模式分析",
+      "社交媒体用户数增长的建模"
+    ],
+    "relatedFormulas": ["exponential-growth", "lotka-volterra"]
+  },
+  "hardy-weinberg": {
+    "name": "哈迪-温伯格定律",
+    "oneLiner": "表明在不发生进化的理想条件下基因频率保持不变的定律",
+    "description": "哈迪-温伯格定律表明，在没有突变、自然选择、遗传漂变、迁移和非随机交配的理想种群中，等位基因频率与基因型频率世代相传也保持恒定。若把两个等位基因的频率记为 p 和 q，基因型频率就可以用二项展开来表示。",
+    "discoverer": "戈弗雷·哈罗德·哈代、威廉·温伯格",
+    "field": "生物学",
+    "significance": "它是群体遗传学的基础，为判断真实种群中是否正在发生进化提供了基准（零假设）。",
+    "elementMeanings": {
+      "p": { "role": "显性等位基因频率", "description": "显性等位基因在种群中的相对频率，介于 0 与 1 之间。", "kind": "input" },
+      "q": { "role": "隐性等位基因频率", "description": "隐性等位基因在种群中的相对频率。p + q = 1。", "kind": "input" },
+      "p^2": { "role": "显性纯合子频率", "description": "显性纯合(AA)基因型的频率。", "kind": "output" },
+      "2pq": { "role": "杂合子频率", "description": "杂合(Aa)基因型的频率。", "kind": "output" },
+      "q^2": { "role": "隐性纯合子频率", "description": "隐性纯合(aa)基因型的频率。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "估计遗传病（如镰状细胞贫血）携带者的频率",
+      "检验小规模种群中是否发生了遗传漂变",
+      "通过血型分布确认群体是否处于遗传平衡状态"
+    ],
+    "relatedFormulas": ["logistic-growth"]
+  },
+  "michaelis-menten": {
+    "name": "米氏方程",
+    "oneLiner": "酶反应速率随底物浓度画出饱和曲线的模型",
+    "description": "米氏方程说明酶反应的初速率如何随底物浓度而变化。底物浓度低时几乎成正比地增大，浓度升高后酶趋于饱和，速率收敛到最大值。米氏常数 Km 是反应速率达到最大值一半时的底物浓度。",
+    "discoverer": "利奥诺尔·米凯利斯、莫德·门滕",
+    "field": "生物学",
+    "significance": "作为酶促反应动力学的基本模型，在药物设计与代谢工程中发挥着核心作用。",
+    "elementMeanings": {
+      "v": { "role": "反应速率", "description": "酶反应的初速率。单位：mol/(L s) 等。", "kind": "output" },
+      "V_{max}": { "role": "最大反应速率", "description": "所有酶都与底物结合时的最大速率。", "kind": "input" },
+      "[S]": { "role": "底物浓度", "description": "与酶结合的底物的浓度。单位：mol/L。", "kind": "input" },
+      "K_m": { "role": "米氏常数", "description": "反应速率为 Vmax 一半时的底物浓度，是酶与底物亲和力的指标。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "药物通过改变酶的 Km 来抑制反应的原理",
+      "酒精分解酶的饱和现象（饮酒过量时分解速率的上限）",
+      "工业用酶最适底物浓度的设计"
+    ],
+    "relatedFormulas": ["arrhenius-equation", "logistic-growth"]
+  },
+  "exponential-growth": {
+    "name": "指数增长",
+    "oneLiner": "在资源不受限制时种群数量随时间成倍剧增的模型",
+    "description": "指数增长模型描述种群在资源无限的环境中按恒定比率增长的理想情形。它的形式是初始种群数量乘以自然指数函数，只要增长率 r 为正，种群数量就会呈爆发式激增。在现实中，通常会因资源受限而转变为逻辑斯蒂增长。",
+    "field": "生物学",
+    "significance": "它是种群增长最基本的数学模型，也是逻辑斯蒂模型等更复杂模型的出发点。",
+    "elementMeanings": {
+      "N(t)": { "role": "时刻 t 的种群数量", "description": "经过时间 t 之后的种群大小。", "kind": "output" },
+      "N_0": { "role": "初始种群数量", "description": "时间 t=0 时的种群大小。", "kind": "input" },
+      "e": { "role": "自然对数的底", "description": "约为 2.718，是表示连续增长的数学常数。", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "r": { "role": "内禀增长率", "description": "种群的净增长率。r > 0 时增长，r < 0 时减少。", "kind": "input" },
+      "t": { "role": "时间", "description": "经过的时间，单位视具体情况而定（小时、天、年等）。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "细菌培养初期对数期的急剧繁殖",
+      "外来物种入侵初期种群数量的爆发式增长",
+      "复利计算（指数增长在金融中的应用）"
+    ],
+    "relatedFormulas": ["logistic-growth", "half-life"]
+  },
+  "sir-model": {
+    "name": "SIR 模型",
+    "oneLiner": "把传染病的扩散与消退过程分成易感-感染-康复三个仓室来描述的模型",
+    "description": "SIR 模型是传染病流行病学的基本仓室模型，它把人群分成易感者(S)、感染者(I)、康复者(R) 三组来说明传染病的动态。感染者人数的增减由感染率参数和康复率参数决定，当基本再生数(R0 = 感染率/康复率)大于 1 时就会发生大流行。",
+    "discoverer": "威廉·奥吉尔维·克马克、安德森·麦肯德里克",
+    "field": "生物学",
+    "significance": "它是用数学方法对传染病扩散建模的基础框架，在防疫政策与疫苗策略的制定中发挥着核心作用。",
+    "elementMeanings": {
+      "dI/dt": { "role": "感染者人数变化率", "description": "单位时间内感染者人数的变化量。", "kind": "output" },
+      "\\beta": { "role": "感染率", "description": "易感者接触感染者后被感染的概率乘以接触频率所得的值。", "kind": "input" },
+      "S": { "role": "易感者人数", "description": "尚未感染、仍有可能被感染的人群。", "kind": "input" },
+      "I": { "role": "感染者人数", "description": "当前处于感染状态的人群。", "kind": "input" },
+      "\\gamma": { "role": "康复率", "description": "感染者在单位时间内康复的比例，等于平均康复所需时间的倒数。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "预测新冠疫情扩散趋势并分析保持社交距离的效果",
+      "计算达成群体免疫所需的疫苗接种率",
+      "预测流感季感染高峰出现的时点"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth"]
+  },
+  "lotka-volterra": {
+    "name": "洛特卡-沃尔泰拉方程",
+    "oneLiner": "描述捕食者与被捕食者种群周期性增减的联立微分方程",
+    "description": "洛特卡-沃尔泰拉方程是用数学方式说明捕食者-被捕食者相互作用的模型。被捕食者在没有捕食者时会指数式增长，但因与捕食者相遇而减少；捕食者在没有食物时会减少，但靠捕食被捕食者而增加。这种相互作用造就了两个种群的周期性振荡。",
+    "discoverer": "阿尔弗雷德·洛特卡、维托·沃尔泰拉",
+    "field": "生物学",
+    "significance": "它是生态学中用数学方法分析种间相互作用动态的基础模型，也是生态系统稳定性研究的出发点。",
+    "elementMeanings": {
+      "dx/dt": { "role": "被捕食者数量变化率", "description": "单位时间内被捕食者数量的变化量。", "kind": "output" },
+      "x": { "role": "被捕食者数量", "description": "被捕食者（猎物）物种的种群大小。", "kind": "input" },
+      "y": { "role": "捕食者数量", "description": "捕食者物种的种群大小。", "kind": "input" },
+      "\\alpha": { "role": "被捕食者增长率", "description": "没有捕食压力时被捕食者的内禀增长率。", "kind": "input" },
+      "\\beta": { "role": "捕食系数", "description": "捕食者与被捕食者相遇时被捕食者减少的比率。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "加拿大猞猁与雪兔数量约 10 年一个周期的振荡",
+      "海洋生态系统中浮游植物与浮游动物数量的波动",
+      "生物防治中引入天敌效果的预测"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth", "sir-model"]
+  }
+}

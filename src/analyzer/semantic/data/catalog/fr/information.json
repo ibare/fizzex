@@ -1,0 +1,92 @@
+{
+  "shannon-entropy": {
+    "name": "Entropie de Shannon",
+    "oneLiner": "Mesure fondamentale de la théorie de l'information, qui quantifie l'incertitude (la quantité d'information) d'une distribution de probabilité",
+    "description": "L'entropie de Shannon quantifie l'incertitude moyenne qui subsiste tant que le résultat d'une variable aléatoire n'est pas connu. Plus les probabilités sont uniformes, plus l'entropie est élevée ; plus un résultat est certain, plus elle est basse. Elle fournit la borne inférieure théorique du nombre de bits nécessaires pour compresser ou transmettre une information.",
+    "discoverer": "Claude Shannon",
+    "field": "Théorie de l'information",
+    "significance": "Concept fondateur de la théorie de l'information, il a marqué tous les domaines qui en dépendent : compression des données, télécommunications, cryptographie, apprentissage automatique.",
+    "elementMeanings": {
+      "H(X)": { "role": "Entropie", "description": "Quantité d'information moyenne de la variable aléatoire X. Unité : le bit (en base 2) ou le nat (en base e).", "kind": "output" },
+      "p(x)": { "role": "Probabilité", "description": "Probabilité que l'événement x se produise.", "kind": "input" },
+      "\\log p(x)": { "role": "Information propre", "description": "Quantité d'information de l'événement x. Plus sa probabilité est faible, plus elle est grande.", "kind": "structural" },
+      "-\\sum": { "role": "Espérance changée de signe", "description": "On change le signe de l'espérance de l'information propre pour obtenir une valeur positive.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "L'incertitude d'un lancer de pièce : 1 bit pour une pièce équilibrée, moins de 1 bit pour une pièce biaisée",
+      "Calcul du taux de compression maximal qu'un algorithme de compression (ZIP, etc.) peut théoriquement atteindre"
+    ],
+    "relatedFormulas": ["kl-divergence", "mutual-information", "cross-entropy", "source-coding"]
+  },
+  "kl-divergence": {
+    "name": "Divergence de Kullback-Leibler",
+    "oneLiner": "Mesure de l'écart asymétrique entre deux distributions de probabilité",
+    "description": "La divergence de KL mesure la perte d'information provoquée par le remplacement de la vraie distribution P par une distribution approchée Q. Elle est toujours positive ou nulle, et ne s'annule que lorsque les deux distributions sont identiques. Étant asymétrique, D_KL(P||Q) et D_KL(Q||P) diffèrent en général. Elle joue un rôle central en inférence variationnelle et dans les modèles génératifs.",
+    "discoverer": "Solomon Kullback, Richard Leibler",
+    "field": "Théorie de l'information",
+    "significance": "Outil de base pour mesurer l'écart entre deux distributions, elle est largement employée en inférence bayésienne, dans les auto-encodeurs variationnels et pour l'optimisation de politique en apprentissage par renforcement.",
+    "elementMeanings": {
+      "D_{KL}(P \\| Q)": { "role": "Divergence de KL", "description": "Quantité d'information perdue en passant de P à Q.", "kind": "output" },
+      "p(x)": { "role": "Vraie distribution", "description": "Distribution de probabilité réelle, celle qui sert de référence.", "kind": "input" },
+      "q(x)": { "role": "Distribution approchée", "description": "Distribution du modèle censée approcher la vraie distribution.", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "Logarithme du rapport de probabilités", "description": "Logarithme du rapport des probabilités attribuées par les deux distributions à chaque événement.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Dans un auto-encodeur variationnel (VAE), contraindre la distribution des variables latentes à rester proche d'une loi normale",
+      "Évaluer de combien la distribution de sortie d'un modèle de génération de texte s'écarte de celle des données d'entraînement"
+    ],
+    "relatedFormulas": ["shannon-entropy", "mutual-information", "cross-entropy"]
+  },
+  "mutual-information": {
+    "name": "Information mutuelle",
+    "oneLiner": "Mesure de la quantité d'information que deux variables aléatoires partagent",
+    "description": "L'information mutuelle mesure de combien l'incertitude sur une variable diminue lorsqu'on observe l'autre. Elle vaut 0 si les deux variables sont indépendantes et prend d'autant plus de valeur qu'elles sont dépendantes. Comme elle capte les dépendances non linéaires autant que les relations linéaires, c'est une mesure de dépendance plus générale que le coefficient de corrélation.",
+    "discoverer": "Claude Shannon",
+    "field": "Théorie de l'information",
+    "significance": "Parce qu'elle mesure les dépendances entre variables au-delà du linéaire, elle sert en sélection de caractéristiques, en partitionnement de données ou encore en neurosciences.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "Information mutuelle", "description": "Quantité d'information partagée par X et Y.", "kind": "output" },
+      "H(X)": { "role": "Entropie de X", "description": "Incertitude (quantité d'information) de X prise seule.", "kind": "input" },
+      "H(X|Y)": { "role": "Entropie conditionnelle", "description": "Incertitude sur X qui subsiste une fois Y connu.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Détecter une relation non linéaire entre deux gènes à partir de données d'expression génique",
+      "Évaluer, lors de la sélection de caractéristiques en apprentissage automatique, l'information partagée entre une variable d'entrée et la variable de sortie"
+    ],
+    "relatedFormulas": ["shannon-entropy", "kl-divergence", "data-processing-inequality"]
+  },
+  "source-coding": {
+    "name": "Théorème du codage de source de Shannon",
+    "oneLiner": "Théorème selon lequel la longueur moyenne des mots de code d'une compression sans perte ne peut pas descendre sous l'entropie",
+    "description": "Le théorème du codage de source de Shannon démontre que, lorsqu'on compresse une source d'information sans perte, la longueur moyenne du code par symbole ne peut pas être plus courte que l'entropie de la source. L'entropie est donc la limite théorique de la compression, et l'on peut s'en approcher d'aussi près que l'on veut en codant par blocs suffisamment longs.",
+    "discoverer": "Claude Shannon",
+    "field": "Théorie de l'information",
+    "significance": "En établissant la limite fondamentale de la compression des données, il a fourni le socle théorique du développement d'algorithmes pratiques comme le codage de Huffman ou le codage arithmétique.",
+    "elementMeanings": {
+      "L": { "role": "Longueur moyenne du code", "description": "Nombre moyen de bits nécessaires pour coder un symbole.", "kind": "output" },
+      "H(X)": { "role": "Entropie de la source", "description": "Quantité d'information moyenne par symbole de la source. C'est la borne inférieure théorique de la compression.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Dans la compression d'un fichier ZIP, c'est l'entropie des données d'origine qui fixe la limite de compression",
+      "Calculer la taille minimale d'un fichier au format sans perte (FLAC) pour la diffusion musicale"
+    ],
+    "relatedFormulas": ["shannon-entropy"]
+  },
+  "data-processing-inequality": {
+    "name": "Inégalité de traitement des données",
+    "oneLiner": "Principe selon lequel traiter des données ne peut que conserver ou perdre de l'information, jamais en créer",
+    "description": "L'inégalité de traitement des données affirme que, dans une chaîne de Markov X -> Y -> Z, l'information mutuelle entre X et Z ne peut pas dépasser celle entre X et Y. Autrement dit, aucun post-traitement ne peut faire apparaître une information qui n'était pas déjà là. Elle garantit l'irréversibilité de la perte d'information lors de l'extraction de caractéristiques, de la réduction de dimension ou de la transmission.",
+    "discoverer": "Claude Shannon (établie comme propriété fondamentale de la théorie de l'information)",
+    "field": "Théorie de l'information",
+    "significance": "En fixant une limite fondamentale au traitement de l'information, elle impose des contraintes théoriques à la conception des canaux de transmission comme à l'apprentissage de représentations.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "Information mutuelle entre la source et l'étape intermédiaire", "description": "Quantité d'information partagée par les données d'origine X et le résultat intermédiaire Y.", "kind": "input" },
+      "I(X;Z)": { "role": "Information mutuelle entre la source et le résultat final", "description": "Quantité d'information partagée par les données d'origine X et le résultat Z, obtenu après traitement supplémentaire.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Pourquoi les couleurs d'origine d'une image convertie en noir et blanc ne peuvent plus être restituées",
+      "Le principe selon lequel l'information d'entrée est progressivement comprimée à mesure que les couches d'un réseau profond s'accumulent (théorie du goulot d'étranglement informationnel)"
+    ],
+    "relatedFormulas": ["mutual-information", "shannon-entropy"]
+  }
+}

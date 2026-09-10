@@ -1,0 +1,191 @@
+{
+  "bayes-theorem": {
+    "name": "Teorema Bayes",
+    "oneLiner": "Teorema untuk mencari peluang posterior dengan memperbarui peluang prior ketika bukti baru diberikan",
+    "description": "Teorema Bayes adalah rumus yang memperbarui peluang prior menjadi peluang posterior dengan memanfaatkan hubungan peluang bersyarat. Teorema ini memungkinkan kita membetulkan keyakinan yang ada secara sistematis setiap kali data baru diamati. Ini alat pokok dalam penyimpulan statistik, pembelajaran mesin, dan teori pengambilan keputusan.",
+    "discoverer": "Thomas Bayes",
+    "field": "Statistika",
+    "significance": "Memformalkan penalaran dalam keadaan tidak pasti secara matematis, dan menjadi dasar bidang terapan modern seperti penyaring surel sampah, diagnosis medis, dan pembelajaran mesin.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Peluang posterior", "description": "Peluang terjadinya kejadian A setelah kejadian B teramati.", "kind": "output" },
+      "P(B|A)": { "role": "Likelihood", "description": "Peluang teramatinya kejadian B ketika kejadian A benar.", "kind": "input" },
+      "P(A)": { "role": "Peluang prior", "description": "Keyakinan awal tentang kejadian A sebelum kejadian B diamati.", "kind": "input" },
+      "P(B)": { "role": "Peluang bukti", "description": "Peluang keseluruhan teramatinya kejadian B. Perannya sebagai konstanta penormalan.", "kind": "input" }
+    },
+    "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
+  },
+  "normal-distribution": {
+    "name": "Fungsi kepekatan peluang sebaran normal",
+    "oneLiner": "Sebaran peluang yang membentuk kurva setangkup berbentuk lonceng dengan rata-rata sebagai pusatnya",
+    "description": "Sebaran normal adalah sebaran peluang kontinu yang ditentukan oleh dua parameter, yaitu rata-rata dan simpangan baku. Fungsi kepekatan peluangnya bernilai maksimum di rata-rata dan menurun secara setangkup ke kedua sisi sehingga membentuk lonceng. Berkat teorema limit pusat, inilah sebaran terpenting untuk menghampiri sebaran gejala alam dan hasil pengukuran.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Statistika",
+    "significance": "Berkat teorema limit pusat, sebaran ini menjadi dasar hampir semua penyimpulan statistik, dan merupakan sebaran peluang yang paling luas dipakai dalam ilmu alam maupun ilmu sosial.",
+    "elementMeanings": {
+      "f(x)": { "role": "Kepekatan peluang", "description": "Nilai kepekatan peluang di titik x. Ini bukan peluang secara langsung; peluangnya diperoleh dengan mengintegralkan pada suatu selang.", "kind": "output" },
+      "\\mu": { "role": "Rata-rata", "description": "Pusat sebaran. Letak titik puncak kurva lonceng.", "kind": "input" },
+      "\\sigma": { "role": "Simpangan baku", "description": "Tingkat penyebaran sebaran. Makin besar nilainya, makin melandai kurvanya.", "kind": "input" },
+      "\\sigma^2": { "role": "Variansi", "description": "Kuadrat simpangan baku. Nilai ini menyatakan seberapa berpencar data dari rata-ratanya.", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "Kernel Gauss", "description": "Bagian fungsi eksponensial yang menurun tajam seiring menjauhnya nilai dari rata-rata.", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "Konstanta penormalan", "description": "Koefisien yang membuat luas daerah keseluruhannya sama dengan 1.", "kind": "structural" }
+    },
+    "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
+  },
+  "standard-deviation": {
+    "name": "Simpangan baku",
+    "oneLiner": "Ukuran yang menyatakan seberapa berpencar data dari rata-ratanya",
+    "description": "Simpangan baku adalah akar kuadrat dari rata-rata kuadrat selisih setiap nilai data terhadap rata-ratanya. Sebagai akar kuadrat positif dari variansi, satuannya sama dengan satuan data aslinya sehingga penafsirannya intuitif. Ini besaran statistik paling dasar untuk menyatakan pencaran data.",
+    "field": "Statistika",
+    "significance": "Memungkinkan pengukuran keragaman data dalam satuan aslinya, dan berperan pokok dalam pengendalian mutu serta analisis risiko keuangan.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Simpangan baku", "description": "Simpangan baku populasi. Nilai ini menyatakan tingkat penyebaran data.", "kind": "output" },
+      "x_i": { "role": "Nilai data ke-i", "description": "Nilai pengamatan ke-i dalam kumpulan data.", "kind": "input" },
+      "\\mu": { "role": "Rata-rata populasi", "description": "Nilai rata-rata populasi. Untuk sampel, dipakai rata-rata sampelnya.", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "Kuadrat simpangan", "description": "Kuadrat dari seberapa jauh setiap data menyimpang dari rata-ratanya.", "kind": "structural" },
+      "N": { "role": "Banyak data", "description": "Banyak seluruh data dalam populasi.", "kind": "input" },
+      "\\sqrt{}": { "role": "Akar kuadrat", "description": "Menarik akar kuadrat dari variansi agar satuannya sama dengan satuan data aslinya.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
+  },
+  "correlation-coefficient": {
+    "name": "Koefisien korelasi",
+    "oneLiner": "Nilai antara -1 dan 1 yang menyatakan kuat dan arah hubungan linear antara dua variabel",
+    "description": "Koefisien korelasi Pearson adalah kovariansi dua variabel dibagi hasil kali simpangan baku masing-masing. Nilai yang mendekati 1 berarti hubungan linear positif yang kuat, mendekati -1 berarti hubungan linear negatif yang kuat, dan mendekati 0 berarti hubungan linearnya lemah. Ini besaran statistik paling dasar untuk merangkum keterkaitan antara dua variabel.",
+    "discoverer": "Karl Pearson",
+    "field": "Statistika",
+    "significance": "Merangkum hubungan antar variabel menjadi satu angka sehingga menjadi dasar analisis regresi, teori portofolio keuangan, dan perancangan percobaan.",
+    "elementMeanings": {
+      "r": { "role": "Koefisien korelasi", "description": "Koefisien korelasi Pearson. Nilainya antara -1 dan 1.", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "Kovariansi", "description": "Mengukur seberapa besar X dan Y berubah bersama-sama.", "kind": "input" },
+      "\\sigma_X": { "role": "Simpangan baku X", "description": "Tingkat penyebaran variabel X.", "kind": "input" },
+      "\\sigma_Y": { "role": "Simpangan baku Y", "description": "Tingkat penyebaran variabel Y.", "kind": "input" },
+      "X": { "role": "Variabel pertama", "description": "Variabel pertama yang hubungan korelasinya dianalisis.", "kind": "input" },
+      "Y": { "role": "Variabel kedua", "description": "Variabel kedua yang hubungan korelasinya dianalisis.", "kind": "input" }
+    },
+    "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
+  },
+  "law-of-large-numbers": {
+    "name": "Hukum bilangan besar",
+    "oneLiner": "Hukum yang menyatakan rata-rata sampel menuju rata-rata populasi seiring membesarnya ukuran sampel",
+    "description": "Hukum bilangan besar menjamin bahwa rata-rata sampel dari peubah acak yang saling bebas dan bersebaran sama akan menuju rata-rata populasi ketika ukuran sampelnya membesar tanpa batas. Hukum ini punya dua bentuk, yaitu bentuk lemah dan bentuk kuat, dan merupakan teorema mendasar yang menopang keabsahan penaksiran statistik secara teoretis.",
+    "discoverer": "Jakob Bernoulli",
+    "field": "Statistika",
+    "significance": "Menjamin secara matematis bahwa survei sampel dapat memberikan penyimpulan yang sahih tentang populasinya, sekaligus menjadi landasan teoretis asuransi, perjudian, dan ilmu percobaan.",
+    "elementMeanings": {
+      "\\bar{X}_n": { "role": "Rata-rata sampel", "description": "Rata-rata hitung dari n nilai pengamatan.", "kind": "output" },
+      "\\mu": { "role": "Rata-rata populasi", "description": "Nilai rata-rata sebenarnya dari populasi. Inilah sasaran yang dituju rata-rata sampel.", "kind": "input" },
+      "n": { "role": "Ukuran sampel", "description": "Banyak data pengamatan. Makin besar nilainya, makin dekat rata-rata sampel ke rata-rata populasi.", "kind": "input" },
+      "X_i": { "role": "Nilai pengamatan ke-i", "description": "Nilai pengamatan bebas ke-i. Semuanya mengikuti sebaran yang sama.", "kind": "input" },
+      "\\epsilon": { "role": "Batas galat", "description": "Peluang bahwa selisih rata-rata sampel dan rata-rata populasi berada dalam nilai ini akan menuju 1.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
+  },
+  "t-test": {
+    "name": "Statistik uji-t",
+    "oneLiner": "Statistik uji untuk menguji apakah rata-rata sampel berbeda secara berarti dari rata-rata populasi",
+    "description": "Statistik uji-t adalah selisih antara rata-rata sampel dan rata-rata populasi menurut hipotesis nol, dibagi galat bakunya. Ketika variansi populasi tidak diketahui, variansi sampel dipakai sebagai gantinya, dan statistik ini mengikuti sebaran t menurut derajat kebebasannya. Karena dapat dipakai bahkan pada sampel kecil, ini metode uji hipotesis yang paling luas dipakai dalam penelitian percobaan dan uji klinis.",
+    "discoverer": "William Gosset",
+    "field": "Statistika",
+    "significance": "Memungkinkan penyimpulan statistik tentang rata-rata populasi pada keadaan sampel kecil, dan menjadi metode uji baku dalam penelitian kedokteran, psikologi, serta pendidikan.",
+    "elementMeanings": {
+      "t": { "role": "Statistik t", "description": "Nilai yang menyatakan selisih rata-rata sampel dan rata-rata populasi dalam satuan galat baku.", "kind": "output" },
+      "\\bar{x}": { "role": "Rata-rata sampel", "description": "Rata-rata hitung dari data sampel.", "kind": "input" },
+      "\\mu": { "role": "Rata-rata populasi", "description": "Rata-rata populasi yang diandaikan dalam hipotesis nol.", "kind": "input" },
+      "s": { "role": "Simpangan baku sampel", "description": "Simpangan baku yang ditaksir dari data sampel.", "kind": "input" },
+      "\\sqrt{n}": { "role": "Akar kuadrat ukuran sampel", "description": "Akar kuadrat ukuran sampel n. Nilai ini dipakai untuk menghitung galat bakunya.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
+  },
+  "chi-squared": {
+    "name": "Uji khi-kuadrat",
+    "oneLiner": "Statistik uji untuk menguji apakah selisih antara frekuensi teramati dan frekuensi harapan berarti secara statistik",
+    "description": "Statistik khi-kuadrat adalah jumlah dari kuadrat selisih antara frekuensi teramati dan frekuensi harapan pada setiap kategori, yang masing-masing dibagi frekuensi harapannya. Statistik ini dipakai untuk uji kecocokan dan uji kebebasan, dan merupakan metode utama analisis data kategorik. Keberartiannya dinilai berdasarkan sebaran khi-kuadrat menurut derajat kebebasannya.",
+    "discoverer": "Karl Pearson",
+    "field": "Statistika",
+    "significance": "Memungkinkan uji hipotesis atas data kategorik, dan berperan pokok dalam analisis survei, genetika, serta pengendalian mutu.",
+    "elementMeanings": {
+      "\\chi^2": { "role": "Statistik khi-kuadrat", "description": "Statistik uji yang merangkum selisih antara nilai teramati dan nilai harapan.", "kind": "output" },
+      "O": { "role": "Frekuensi teramati", "description": "Frekuensi setiap kategori yang benar-benar teramati.", "kind": "input" },
+      "E": { "role": "Frekuensi harapan", "description": "Frekuensi setiap kategori yang diharapkan bila hipotesis nol benar.", "kind": "input" },
+      "(O-E)^2": { "role": "Kuadrat simpangan", "description": "Kuadrat selisih antara nilai teramati dan nilai harapan. Simpangannya diakumulasi tanpa memperhatikan arahnya.", "kind": "structural" },
+      "\\Sigma": { "role": "Lambang penjumlahan", "description": "Operasi menjumlahkan atas semua kategori.", "kind": "structural" }
+    },
+    "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
+  },
+  "poisson-dist": {
+    "name": "Sebaran Poisson",
+    "oneLiner": "Sebaran peluang banyaknya kejadian langka yang terjadi dalam suatu selang waktu atau ruang",
+    "description": "Sebaran Poisson memodelkan banyaknya kejadian bebas yang laju rata-rata terjadinya tetap dalam satu satuan waktu atau ruang. Sebaran ini ditentukan oleh satu parameter saja, yaitu laju rata-rata kejadian, dan punya ciri khas bahwa rata-rata dan variansinya sama. Ini sebaran peluang diskret yang luas dipakai untuk menganalisis frekuensi kejadian langka.",
+    "discoverer": "Simeon Denis Poisson",
+    "field": "Statistika",
+    "significance": "Memodelkan pola terjadinya kejadian langka sehingga berperan pokok dalam peramalan klaim asuransi, analisis lalu lintas komunikasi, dan pengendalian mutu.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Peluang", "description": "Peluang bahwa kejadian itu terjadi tepat k kali.", "kind": "output" },
+      "\\lambda": { "role": "Laju rata-rata kejadian", "description": "Rata-rata banyaknya kejadian dalam satu satuan waktu atau ruang.", "kind": "input" },
+      "k": { "role": "Banyak kejadian", "description": "Banyaknya kejadian yang ditanyakan (bilangan bulat 0 atau lebih).", "kind": "input" },
+      "e^{-\\lambda}": { "role": "Faktor penormalan", "description": "Bagian fungsi eksponensial yang membuat jumlah seluruh peluangnya sama dengan 1.", "kind": "structural" },
+      "k!": { "role": "Faktorial k", "description": "Nilai faktorial yang mengoreksi banyaknya susunan urutan k kejadian.", "kind": "structural" }
+    },
+    "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "binomial-dist": {
+    "name": "Sebaran binomial",
+    "oneLiner": "Sebaran untuk mencari peluang terjadinya k keberhasilan dalam n percobaan bebas",
+    "description": "Sebaran binomial adalah sebaran peluang banyaknya keberhasilan ketika percobaan Bernoulli dengan peluang keberhasilan p diulang secara bebas sebanyak n kali. Peluang setiap hasil dihitung dari hasil kali banyaknya kombinasi dengan peluang berhasil dan peluang gagal. Bila n cukup besar, sebaran ini dapat dihampiri dengan sebaran normal; dan bila peluang keberhasilannya sangat kecil, dapat dihampiri dengan sebaran Poisson.",
+    "discoverer": "Jakob Bernoulli",
+    "field": "Statistika",
+    "significance": "Model dasar percobaan dwikutub berhasil-gagal, sekaligus landasan teoretis pemeriksaan mutu, uji kedokteran, dan analisis jajak pendapat.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Peluang", "description": "Peluang berhasil tepat k kali dalam n percobaan.", "kind": "output" },
+      "C(n,k)": { "role": "Banyak kombinasi", "description": "Banyak cara memilih k benda dari n benda, yaitu n!/(k!(n-k)!).", "kind": "structural" },
+      "p": { "role": "Peluang keberhasilan", "description": "Peluang berhasil dalam satu kali percobaan.", "kind": "input" },
+      "1-p": { "role": "Peluang kegagalan", "description": "Peluang gagal dalam satu kali percobaan.", "kind": "input" },
+      "n": { "role": "Banyak percobaan", "description": "Banyak seluruh percobaan bebas.", "kind": "input" },
+      "k": { "role": "Banyak keberhasilan", "description": "Banyaknya keberhasilan yang ditanyakan (dari 0 sampai n).", "kind": "input" }
+    },
+    "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "conditional-prob": {
+    "name": "Peluang bersyarat",
+    "oneLiner": "Peluang terjadinya suatu kejadian dengan syarat kejadian lain telah terjadi",
+    "description": "Peluang bersyarat mendefinisikan peluang terjadinya kejadian A dengan syarat kejadian B telah terjadi. Peluang ini dihitung dengan membagi peluang irisan kedua kejadian dengan peluang kejadian yang menjadi syaratnya. Konsep ini menjadi dasar teorema Bayes, sekaligus gagasan paling mendasar di seluruh teori peluang dan penyimpulan statistik.",
+    "field": "Statistika",
+    "significance": "Menyatakan hubungan kebergantungan antar kejadian secara kuantitatif, dan menjadi dasar matematis inferensi Bayes, rantai Markov, serta teori pengambilan keputusan.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Peluang bersyarat", "description": "Peluang terjadinya kejadian A dengan syarat kejadian B diberikan.", "kind": "output" },
+      "P(A \\cap B)": { "role": "Peluang irisan", "description": "Peluang terjadinya kejadian A dan kejadian B sekaligus.", "kind": "input" },
+      "P(B)": { "role": "Peluang kejadian syarat", "description": "Peluang kejadian B yang diberikan sebagai syarat. Nilainya tidak boleh 0.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
+  },
+  "total-probability": {
+    "name": "Rumus peluang total",
+    "oneLiner": "Rumus untuk mencari peluang keseluruhan ketika ruang sampelnya terpilah menjadi kejadian-kejadian yang saling lepas",
+    "description": "Rumus peluang total mencari peluang suatu kejadian tertentu sebagai jumlah terbobot dari peluang bersyarat pada setiap bagian, ketika ruang sampelnya dipilah menjadi kejadian-kejadian yang saling lepas dan meliputi keseluruhan. Rumus ini memungkinkan persoalan peluang yang rumit dihitung dengan memilahnya menjadi beberapa keadaan bersyarat. Rumus ini berperan pokok dalam menghitung penyebut teorema Bayes.",
+    "field": "Statistika",
+    "significance": "Alat untuk menguraikan perhitungan peluang yang rumit secara sistematis, dan bersama teorema Bayes membentuk kerangka pokok penyimpulan statistik.",
+    "elementMeanings": {
+      "P(A)": { "role": "Peluang kejadian A", "description": "Peluang keseluruhan kejadian A yang hendak dicari.", "kind": "output" },
+      "P(A|B_i)": { "role": "Peluang bersyarat", "description": "Peluang kejadian A ketika kejadian B_i diberikan.", "kind": "input" },
+      "P(B_i)": { "role": "Peluang kejadian bagian", "description": "Peluang kejadian bagian ke-i, yaitu B_i.", "kind": "input" },
+      "\\Sigma": { "role": "Lambang penjumlahan", "description": "Operasi menjumlahkan atas semua kejadian bagian B_i.", "kind": "structural" }
+    },
+    "relatedFormulas": ["conditional-prob", "bayes-theorem"]
+  },
+  "covariance": {
+    "name": "Kovariansi",
+    "oneLiner": "Nilai yang mengukur arah dan besar kecenderungan dua peubah acak berubah bersama-sama",
+    "description": "Kovariansi adalah nilai harapan dari hasil kali simpangan masing-masing peubah acak terhadap rata-ratanya sendiri. Nilai positif menandakan kecenderungan berubah searah, sedangkan nilai negatif menandakan kecenderungan berubah berlawanan arah. Kovariansi menjadi dasar koefisien korelasi, dan berperan pokok dalam teori portofolio serta analisis peubah ganda.",
+    "field": "Statistika",
+    "significance": "Mengukur perubahan bersama antar variabel sehingga menjadi dasar perhitungan variansi portofolio, analisis komponen utama, dan regresi peubah ganda.",
+    "elementMeanings": {
+      "\\text{Cov}(X,Y)": { "role": "Kovariansi", "description": "Nilai yang menyatakan tingkat perubahan bersama X dan Y.", "kind": "output" },
+      "E": { "role": "Operator nilai harapan", "description": "Operasi untuk mencari nilai harapan (rata-rata) sebuah peubah acak.", "kind": "structural" },
+      "X": { "role": "Peubah acak pertama", "description": "Variabel pertama yang kovariansinya dihitung.", "kind": "input" },
+      "Y": { "role": "Peubah acak kedua", "description": "Variabel kedua yang kovariansinya dihitung.", "kind": "input" },
+      "\\mu_X": { "role": "Rata-rata X", "description": "Nilai harapan (rata-rata) peubah acak X.", "kind": "input" },
+      "\\mu_Y": { "role": "Rata-rata Y", "description": "Nilai harapan (rata-rata) peubah acak Y.", "kind": "input" }
+    },
+    "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
+  }
+}

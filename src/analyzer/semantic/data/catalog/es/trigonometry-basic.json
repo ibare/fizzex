@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "Definición de seno",
+    "oneLiner": "En un triángulo rectángulo, la razón entre el cateto opuesto a un ángulo y la hipotenusa",
+    "description": "El seno (sin) es el valor que resulta de dividir el lado opuesto a un ángulo determinado (el cateto opuesto) entre el lado más largo (la hipotenusa) de un triángulo rectángulo. Una vez fijado el ángulo, el valor es siempre el mismo, sin importar el tamaño del triángulo. Es la más básica de las razones trigonométricas.",
+    "field": "Trigonometría",
+    "significance": "Es la razón trigonométrica más básica para expresar la relación entre los lados y los ángulos de un triángulo rectángulo, y resulta esencial en el análisis de ondas y vibraciones en física e ingeniería.",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "Valor del seno", "description": "Es la razón del seno para el ángulo theta.", "kind": "output" },
+      "\\theta": { "role": "Ángulo", "description": "Es el ángulo de referencia en el triángulo rectángulo. Señala uno de los ángulos que no es el recto.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Cateto opuesto", "description": "Es el lado situado enfrente del ángulo de referencia.", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Hipotenusa", "description": "El lado más largo del triángulo rectángulo. Está enfrente del ángulo recto.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Hallar la altura de un árbol a partir de la longitud de su sombra y del ángulo del sol",
+      "Calcular la altura vertical de una cuesta cuando se conoce su ángulo de inclinación",
+      "Hallar la altura máxima que alcanza un columpio al balancearse"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "Definición de coseno",
+    "oneLiner": "En un triángulo rectángulo, la razón entre el cateto adyacente a un ángulo y la hipotenusa",
+    "description": "El coseno (cos) es el valor que resulta de dividir el lado contiguo al ángulo de referencia (el cateto adyacente) entre el lado más largo (la hipotenusa) de un triángulo rectángulo. Igual que el seno, para un mismo ángulo su valor es siempre el mismo, con independencia del tamaño del triángulo.",
+    "field": "Trigonometría",
+    "significance": "Junto con el seno es uno de los dos pilares de la trigonometría, y resulta imprescindible en el producto escalar de vectores, el procesamiento de señales o la rotación de coordenadas.",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "Valor del coseno", "description": "Es la razón del coseno para el ángulo theta.", "kind": "output" },
+      "\\theta": { "role": "Ángulo", "description": "Es el ángulo de referencia en el triángulo rectángulo.", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "Cateto adyacente", "description": "Es el lado contiguo al ángulo de referencia (excluida la hipotenusa).", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Hipotenusa", "description": "Es el lado más largo del triángulo rectángulo.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular la distancia horizontal desde el suelo hasta la pared cuando se apoya una escalera",
+      "Hallar la distancia recorrida en horizontal cuando se conoce el ángulo de inclinación de una loma",
+      "Calcular la posición horizontal del extremo de un brazo robótico a partir del ángulo de su articulación"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "Definición de tangente",
+    "oneLiner": "En un triángulo rectángulo, la razón entre el cateto opuesto a un ángulo y el cateto adyacente",
+    "description": "La tangente (tan) es el valor que resulta de dividir el lado opuesto al ángulo de referencia (el cateto opuesto) entre el lado contiguo (el cateto adyacente) de un triángulo rectángulo. Equivale a dividir el seno entre el coseno. Resulta especialmente útil para expresar pendientes e inclinaciones.",
+    "field": "Trigonometría",
+    "significance": "Es la razón trigonométrica que expresa directamente la pendiente y la inclinación, y se usa ampliamente en topografía, navegación y diseño arquitectónico.",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "Valor de la tangente", "description": "Es la razón de la tangente para el ángulo theta.", "kind": "output" },
+      "\\theta": { "role": "Ángulo", "description": "Es el ángulo de referencia en el triángulo rectángulo.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Cateto opuesto", "description": "Es el lado situado enfrente del ángulo de referencia.", "kind": "input" },
+      "\\text{adjacent}": { "role": "Cateto adyacente", "description": "Es el lado contiguo al ángulo de referencia (excluida la hipotenusa).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Medir la altura de un edificio con el ángulo con el que se mira hacia arriba desde cierta distancia",
+      "Calcular la pendiente (%) que indica una señal de tráfico",
+      "Hallar la altura hasta la cima de una montaña a partir de la distancia horizontal y el ángulo"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "Identidad pitagórica fundamental",
+    "oneLiner": "La identidad según la cual la suma del cuadrado del seno y el cuadrado del coseno vale siempre 1",
+    "description": "La identidad pitagórica garantiza que, sea cual sea el ángulo, el cuadrado del seno más el cuadrado del coseno es exactamente 1. Se deduce de forma inmediata del teorema de Pitágoras (el cuadrado de la hipotenusa es la suma de los cuadrados de los catetos) dividiendo ambos miembros entre el cuadrado de la hipotenusa. Es la relación más básica entre las funciones trigonométricas.",
+    "field": "Trigonometría",
+    "significance": "Es el punto de partida de todas las identidades trigonométricas y la relación básica que más se emplea al transformar expresiones y al demostrar resultados.",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "Cuadrado del seno", "description": "Es el valor de sin theta elevado al cuadrado.", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "Cuadrado del coseno", "description": "Es el valor de cos theta elevado al cuadrado.", "kind": "structural" },
+      "\\theta": { "role": "Ángulo", "description": "Un ángulo cualquiera. La identidad se cumple para cualquier valor.", "kind": "input", "unit": "rad" },
+      "1": { "role": "Suma", "description": "La suma del cuadrado del seno y el cuadrado del coseno vale siempre 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Obtener directamente el valor del coseno cuando se conoce el del seno en un cálculo trigonométrico",
+      "Comprobar en física que la descomposición de un vector en componentes es correcta",
+      "Verificar en gráficos por computadora que una transformación de rotación conserva las longitudes"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "Teorema de los senos",
+    "oneLiner": "La ley según la cual, en un triángulo, dividir cada lado entre el seno del ángulo opuesto da siempre el mismo valor",
+    "description": "El teorema de los senos es una relación que se cumple en cualquier triángulo (no hace falta que tenga un ángulo recto). El lado a dividido entre el seno del ángulo A, el lado b dividido entre el seno del ángulo B y el lado c dividido entre el seno del ángulo C dan todos el mismo valor. Esa razón coincide además con el diámetro de la circunferencia circunscrita al triángulo.",
+    "field": "Trigonometría",
+    "significance": "Permite obtener la relación entre lados y ángulos también en triángulos que no son rectángulos, y es una herramienta clave en topografía y navegación.",
+    "elementMeanings": {
+      "a": { "role": "Lado a", "description": "Es la longitud del lado situado enfrente del ángulo A.", "kind": "input" },
+      "b": { "role": "Lado b", "description": "Es la longitud del lado situado enfrente del ángulo B.", "kind": "input" },
+      "c": { "role": "Lado c", "description": "Es la longitud del lado situado enfrente del ángulo C.", "kind": "input" },
+      "\\sin A": { "role": "Seno del ángulo A", "description": "Es el valor del seno del ángulo del vértice A del triángulo.", "kind": "structural" },
+      "\\sin B": { "role": "Seno del ángulo B", "description": "Es el valor del seno del ángulo del vértice B del triángulo.", "kind": "structural" },
+      "\\sin C": { "role": "Seno del ángulo C", "description": "Es el valor del seno del ángulo del vértice C del triángulo.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular la distancia hasta un edificio al otro lado de un río con los ángulos medidos desde dos puntos",
+      "Determinar una posición por triangulación sin usar GPS",
+      "Situar un barco durante la navegación mediante el ángulo entre dos faros"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

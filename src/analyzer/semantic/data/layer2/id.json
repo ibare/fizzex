@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "Bilangan pokok perpangkatan pada penyebut. Jika berupa variabel, nilai yang makin besar menekan nilai seluruh fungsi."
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "Derajat perpangkatan pada penyebut. Makin besar pangkatnya, makin cepat penyebut membesar dan makin kuat menekan nilai keseluruhan."
+  },
+  "sum.body>frac.denominator": {
+    "role": "Penyebut deret",
+    "description": "Penyebut setiap suku deret. Jika membesar dengan cepat, deret cenderung konvergen."
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "Pangkat deret-p",
+    "description": "Pangkat pada penyebut deret. Jika lebih besar dari 1, deret konvergen (uji deret-p)."
+  },
+  "sum.body>frac.numerator": {
+    "role": "Pembilang deret",
+    "description": "Pembilang setiap suku deret."
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "Integral tak wajar yang dimulai dari takhingga negatif. Integral ini konvergen hanya jika integrannya meluruh cukup cepat."
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "Pangkatnya berupa pembilang sebuah pecahan. Pangkat pecahan secara keseluruhan menyatakan bentuk akar."
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "Penyebut dari pangkat. Penyebut n sama artinya dengan akar pangkat n."
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "Pembilang bersusun",
+    "description": "Ada pecahan di dalam pecahan lain. Bentuk ini menyatakan hubungan rasio bersusun."
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "Penyebut bersusun",
+    "description": "Ada pecahan lain di dalam penyebut. Menyederhanakannya mengubah pembagian menjadi perkalian."
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "Pembilang pecahan yang diintegralkan."
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "Penyebut pecahan yang diintegralkan. Penguraian pecahan parsial bisa membantu di sini."
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "Pembilang pecahan di dalam limit. Jika pembilang dan penyebut sama-sama menuju 0 atau takhingga, aturan l'Hôpital dapat dipakai."
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "Penyebut pecahan di dalam limit. Jika penyebut dan pembilang sama-sama menuju 0 atau takhingga, aturan l'Hôpital dapat dipakai."
+  }
+}

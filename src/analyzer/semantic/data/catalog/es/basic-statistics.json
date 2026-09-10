@@ -1,0 +1,206 @@
+{
+  "arithmetic-mean": {
+    "name": "Media aritmética",
+    "oneLiner": "El valor representativo que se obtiene al sumar todos los datos y dividir entre cuántos son",
+    "description": "La media aritmética es la suma de todos los datos dividida entre el número de datos. Cuando se habla de \"el promedio\", normalmente se hace referencia a esta media aritmética. Es el valor representativo que indica de la forma más sencilla dónde está el centro de los datos y es el estadístico más utilizado en la vida cotidiana.",
+    "field": "Estadística",
+    "significance": "Es la manera más básica de resumir un conjunto de datos en un solo número y el punto de partida de casi cualquier análisis estadístico.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Media aritmética",
+        "description": "Es el valor medio del conjunto completo de datos.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Dato individual",
+        "description": "Es el valor i-ésimo del conjunto de datos.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Número de datos",
+        "description": "Indica cuántos datos hay.",
+        "kind": "input"
+      },
+      "\\sum": {
+        "role": "Signo de sumatorio",
+        "description": "Significa que hay que sumar todos los valores de los datos.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Calcular la nota media de un examen en una clase",
+      "Calcular la temperatura media diaria a lo largo de un mes",
+      "Obtener el gasto medio diario a partir del registro de la paga semanal"
+    ],
+    "relatedFormulas": [
+      "weighted-mean",
+      "variance-basic",
+      "std-dev-basic"
+    ]
+  },
+  "variance-basic": {
+    "name": "Varianza",
+    "oneLiner": "La media de los cuadrados de lo que cada dato se aleja de la media",
+    "description": "La varianza expresa con un solo número cuánto se dispersan los datos alrededor de la media. Se resta la media a cada dato, se eleva al cuadrado esa diferencia, se suman todos los resultados y se divide entre el número de datos. Cuanto mayor es el valor, más dispersos están los datos.",
+    "field": "Estadística",
+    "significance": "Es la medida clave que cuantifica la dispersión de los datos y, junto con la desviación típica, constituye la base del análisis estadístico.",
+    "elementMeanings": {
+      "\\sigma^2": {
+        "role": "Varianza",
+        "description": "Varianza poblacional. Indica cuánto se dispersan los datos.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Dato individual",
+        "description": "Es el valor i-ésimo del conjunto de datos.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Media",
+        "description": "Es la media aritmética del conjunto completo de datos.",
+        "kind": "output"
+      },
+      "(x_i - \\bar{x})^2": {
+        "role": "Cuadrado de la desviación",
+        "description": "Es el cuadrado de lo que cada dato se aleja de la media.",
+        "kind": "structural"
+      },
+      "n": {
+        "role": "Número de datos",
+        "description": "Es el total de datos.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Comparar con la varianza cómo se reparten las notas de dos clases que tienen la misma media",
+      "Usar la varianza para comprobar la uniformidad del peso de los productos en una fábrica",
+      "Medir con la varianza la amplitud de las oscilaciones de la rentabilidad de una acción"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "std-dev-basic",
+      "coefficient-of-variation"
+    ]
+  },
+  "std-dev-basic": {
+    "name": "Desviación típica",
+    "oneLiner": "La medida que expresa, en las unidades originales, cuánto se alejan los datos de la media",
+    "description": "La desviación típica es la raíz cuadrada de la varianza. La varianza está en unidades al cuadrado y por eso resulta difícil de interpretar de forma intuitiva; al tomar la raíz cuadrada se recuperan las mismas unidades que los datos originales y se entiende de inmediato que los datos se alejan de la media aproximadamente esa cantidad.",
+    "field": "Estadística",
+    "significance": "Expresa la dispersión en las mismas unidades que los datos originales, por lo que su interpretación es intuitiva; junto con la distribución normal es la medida de dispersión más utilizada.",
+    "elementMeanings": {
+      "\\sigma": {
+        "role": "Desviación típica",
+        "description": "Desviación típica poblacional. Expresa la dispersión de los datos en sus unidades originales.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Dato individual",
+        "description": "Es el valor i-ésimo del conjunto de datos.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Media",
+        "description": "Es la media aritmética del conjunto completo de datos.",
+        "kind": "output"
+      },
+      "n": {
+        "role": "Número de datos",
+        "description": "Es el total de datos.",
+        "kind": "input"
+      },
+      "\\sqrt{}": {
+        "role": "Raíz cuadrada",
+        "description": "Toma la raíz cuadrada de la varianza para volver a las unidades originales.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Describir la dispersión de las estaturas de los alumnos con expresiones como \"media 165 cm, desviación típica 5 cm\"",
+      "Juzgar con la desviación típica de las notas si el reparto de calificaciones es homogéneo",
+      "Explicar en la previsión meteorológica la amplitud de la variación de temperatura mediante la desviación típica"
+    ],
+    "relatedFormulas": [
+      "variance-basic",
+      "arithmetic-mean",
+      "coefficient-of-variation"
+    ]
+  },
+  "weighted-mean": {
+    "name": "Media ponderada",
+    "oneLiner": "La media obtenida al tener en cuenta la importancia (el peso) de cada dato",
+    "description": "La media ponderada no trata todos los datos por igual: multiplica cada dato por un peso que refleja su importancia, suma los resultados y divide entre la suma de los pesos. El cálculo de la nota media de una carrera, donde cada asignatura tiene un número distinto de créditos, es el ejemplo más representativo.",
+    "field": "Estadística",
+    "significance": "Cuando los datos no tienen la misma importancia, ofrece un valor representativo más ajustado que la media aritmética simple.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Media ponderada",
+        "description": "Es el valor medio calculado teniendo en cuenta los pesos.",
+        "kind": "output"
+      },
+      "w_i": {
+        "role": "Peso",
+        "description": "Es la importancia o la proporción del dato i-ésimo.",
+        "kind": "input"
+      },
+      "x_i": {
+        "role": "Dato individual",
+        "description": "Es el valor i-ésimo del conjunto de datos.",
+        "kind": "input"
+      },
+      "\\sum w_i x_i": {
+        "role": "Suma ponderada",
+        "description": "Es la suma de cada dato multiplicado por su peso.",
+        "kind": "structural"
+      },
+      "\\sum w_i": {
+        "role": "Suma de los pesos",
+        "description": "Es el resultado de sumar todos los pesos.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Calcular la nota media universitaria cuando cada asignatura tiene un número distinto de créditos",
+      "Obtener la puntuación total de una evaluación continua en la que cada tarea puntúa de forma distinta",
+      "Calcular la rentabilidad media de una cartera de inversión según el peso de cada valor"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  },
+  "coefficient-of-variation": {
+    "name": "Coeficiente de variación",
+    "oneLiner": "El valor que resulta de dividir la desviación típica entre la media y permite comparar la dispersión al margen de las unidades",
+    "description": "El coeficiente de variación es el cociente entre la desviación típica y la media. Permite comparar de forma justa la dispersión de conjuntos de datos con unidades distintas o con medias de tamaño muy diferente. Suele expresarse en porcentaje (%).",
+    "field": "Estadística",
+    "significance": "Es una medida adimensional que permite comparar la variabilidad de datos de unidades o magnitudes distintas.",
+    "elementMeanings": {
+      "CV": {
+        "role": "Coeficiente de variación",
+        "description": "Es la desviación típica dividida entre la media. Indica la dispersión relativa.",
+        "kind": "output"
+      },
+      "\\sigma": {
+        "role": "Desviación típica",
+        "description": "Es la dispersión de los datos.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Media",
+        "description": "Es la media aritmética del conjunto completo de datos. No puede valer 0.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Comparar de forma justa la dispersión de la estatura (cm) y la del peso (kg)",
+      "Comparar la variabilidad relativa de las notas de asignaturas distintas",
+      "Comparar la uniformidad de la calidad de productos distintos fabricados en las plantas A y B"
+    ],
+    "relatedFormulas": [
+      "std-dev-basic",
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "arrhenius-equation": {
+    "name": "Persamaan Arrhenius",
+    "oneLiner": "Rumus yang menyatakan bahwa tetapan laju reaksi berubah secara eksponensial menurut suhu",
+    "description": "Persamaan Arrhenius menjelaskan bagaimana tetapan laju sebuah reaksi kimia berubah menurut suhu. Makin tinggi energi pengaktifannya makin lambat reaksinya, dan makin tinggi suhunya makin cepat reaksinya berlangsung. Faktor frekuensi A mencerminkan seberapa sering molekul bertumbukan beserta pengaruh arah tumbukannya, sedangkan suku eksponensialnya menyatakan bagian molekul yang mampu melampaui penghalang energi pengaktifan.",
+    "discoverer": "Svante Arrhenius",
+    "field": "Kimia",
+    "significance": "Persamaan ini menakar hubungan antara suhu dan laju reaksi sehingga menegakkan hukum inti kinetika kimia.",
+    "elementMeanings": {
+      "k": {
+        "role": "Tetapan laju reaksi",
+        "description": "Tetapan yang menentukan seberapa cepat reaksi berlangsung pada suhu tertentu.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "Faktor frekuensi",
+        "description": "Faktor praeksponensial yang mencerminkan frekuensi tumbukan molekul dan pengaruh arah tumbukan.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Bilangan pokok logaritma natural",
+        "description": "Kira-kira 2,718. Inilah bilangan pokok fungsi eksponensial.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "E_a": {
+        "role": "Energi pengaktifan",
+        "description": "Penghalang energi yang harus dilampaui agar reaksi terjadi. Satuan: J/mol.",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Tetapan gas",
+        "description": "Tetapan gas ideal. Kira-kira 8,314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "Suhu mutlak",
+        "description": "Suhu reaksi. Satuan: kelvin (K).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Sebab makanan lebih lambat basi di dalam lemari es (suhu rendah membuat reaksi lambat)",
+      "Asas katalis mempercepat reaksi dengan menurunkan energi pengaktifan",
+      "Merancang suhu reaksi yang paling baik dalam proses industri"
+    ],
+    "relatedFormulas": [
+      "half-life",
+      "gibbs-free-energy"
+    ]
+  },
+  "gibbs-free-energy": {
+    "name": "Energi bebas Gibbs",
+    "oneLiner": "Rumus yang menilai kespontanan sebuah reaksi dari perubahan entalpi dan entropi",
+    "description": "Perubahan energi bebas Gibbs adalah acuan untuk menilai apakah sebuah reaksi berlangsung spontan pada suhu dan tekanan tetap. Bila perubahannya bernilai negatif reaksinya spontan, bila positif tidak spontan, dan bila 0 keadaannya setimbang. Nilainya ditentukan oleh persaingan antara perubahan entalpi (energi kalor) dan perubahan entropi (tingkat ketidakteraturan).",
+    "discoverer": "Josiah Willard Gibbs",
+    "field": "Kimia",
+    "significance": "Rumus ini menyediakan acuan penilaian inti dalam termodinamika untuk meramalkan kespontanan reaksi kimia dan perubahan wujud.",
+    "elementMeanings": {
+      "\\Delta G": {
+        "role": "Perubahan energi bebas Gibbs",
+        "description": "Petunjuk kespontanan reaksi. Bila negatif reaksinya spontan. Satuan: J atau kJ.",
+        "kind": "output"
+      },
+      "\\Delta H": {
+        "role": "Perubahan entalpi",
+        "description": "Energi kalor yang dilepaskan atau diserap dalam reaksi. Satuan: J atau kJ.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "Suhu mutlak",
+        "description": "Suhu reaksi. Satuan: kelvin (K).",
+        "kind": "input"
+      },
+      "\\Delta S": {
+        "role": "Perubahan entropi",
+        "description": "Perubahan tingkat ketidakteraturan akibat reaksi. Satuan: J/K.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menganalisis kesetimbangan fase padat-cair pada titik beku air",
+      "Menjelaskan kespontanan reaksi hidrolisis ATP di dalam tubuh makhluk hidup",
+      "Meramalkan reaksi penguraian yang berlangsung spontan pada suhu tinggi"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "nernst-equation"
+    ]
+  },
+  "nernst-equation": {
+    "name": "Persamaan Nernst",
+    "oneLiner": "Rumus yang menyatakan bahwa potensial sel berubah menurut nisbah kepekatan pereaksi dan hasil reaksi",
+    "description": "Persamaan Nernst menghitung potensial sel elektrokimia pada keadaan tak standar. Perhitungannya berangkat dari potensial standar lalu diberi koreksi menurut nisbah kepekatan pereaksi dan hasil reaksi (kuosien reaksi Q). Pada keadaan setimbang, potensial selnya menjadi 0 sehingga terhubung langsung dengan energi bebas Gibbs.",
+    "discoverer": "Walther Nernst",
+    "field": "Kimia",
+    "significance": "Persamaan ini meramalkan potensial reaksi elektrokimia secara cermat menurut kondisi kepekatan sehingga menyiapkan landasan teoretis bagi teknologi baterai dan elektrolisis.",
+    "elementMeanings": {
+      "E": {
+        "role": "Potensial sel",
+        "description": "Potensial sebenarnya pada keadaan tak standar. Satuan: volt (V).",
+        "kind": "output"
+      },
+      "E^\\circ": {
+        "role": "Potensial sel standar",
+        "description": "Potensial pada keadaan standar (1 M, 1 atm, 25 derajat). Satuan: volt (V).",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Tetapan gas",
+        "description": "Tetapan gas ideal. Kira-kira 8,314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "Suhu mutlak",
+        "description": "Suhu reaksi. Satuan: kelvin (K).",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Banyak elektron",
+        "description": "Jumlah mol elektron yang berpindah dalam reaksi.",
+        "kind": "input"
+      },
+      "F": {
+        "role": "Tetapan Faraday",
+        "description": "Muatan dari 1 mol elektron. Kira-kira 96.485 C/mol.",
+        "kind": "constant",
+        "value": 96485,
+        "unit": "C/mol"
+      },
+      "Q": {
+        "role": "Kuosien reaksi",
+        "description": "Nisbah kepekatan hasil reaksi terhadap kepekatan pereaksi. Pada keadaan setimbang nilainya sama dengan tetapan kesetimbangan K.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Meramalkan perubahan potensial pengisian dan pengosongan baterai ion litium",
+      "Asas kerja pH meter (perubahan potensial menurut kepekatan ion hidrogen)",
+      "Menilai potensial logam pada reaksi korosi"
+    ],
+    "relatedFormulas": [
+      "gibbs-free-energy",
+      "ph-definition"
+    ]
+  },
+  "half-life": {
+    "name": "Waktu paruh",
+    "oneLiner": "Rumus yang menyatakan waktu yang diperlukan agar jumlah suatu zat berkurang menjadi separuhnya",
+    "description": "Waktu paruh adalah waktu yang diperlukan agar jumlah zat menjadi separuh nilai awalnya pada peluruhan radioaktif atau reaksi orde satu. Nilainya berbanding terbalik dengan tetapan laju k sehingga makin cepat reaksinya makin pendek waktu paruhnya. Ciri khas reaksi orde satu adalah nilai ini tetap, tak bergantung pada kepekatan awal.",
+    "field": "Kimia",
+    "significance": "Waktu paruh adalah konsep inti untuk menakar berkurangnya zat menurut waktu, seperti pada penanggalan radioaktif, metabolisme obat, dan pengelolaan limbah nuklir.",
+    "elementMeanings": {
+      "t_{1/2}": {
+        "role": "Waktu paruh",
+        "description": "Waktu yang diperlukan agar jumlah zat berkurang menjadi separuhnya. Satuan: sekon (s) dan sejenisnya.",
+        "kind": "output"
+      },
+      "\\ln 2": {
+        "role": "Logaritma natural 2",
+        "description": "Kira-kira 0,693. Tetapan yang muncul dengan sendirinya dari syarat 'separuh'.",
+        "kind": "constant",
+        "value": 0.693147,
+        "unit": ""
+      },
+      "k": {
+        "role": "Tetapan laju",
+        "description": "Tetapan kesebandingan yang menentukan laju reaksi. Satuan: 1/s (reaksi orde satu).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Penanggalan karbon-14 (waktu paruhnya kira-kira 5.730 tahun)",
+      "Menentukan selang waktu minum obat dari waktu paruhnya di dalam tubuh",
+      "Menghitung lama penyimpanan aman limbah radioaktif"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "exponential-growth"
+    ]
+  },
+  "ph-definition": {
+    "name": "Definisi pH",
+    "oneLiner": "Rumus yang menyatakan keasaman sebuah larutan sebagai logaritma basis 10 negatif dari kepekatan ion hidrogen",
+    "description": "pH adalah ukuran yang menyatakan tingkat keasaman atau kebasaan larutan berair, yaitu logaritma basis 10 negatif dari kepekatan ion hidrogen. Nilai pH 7 berarti netral, kurang dari 7 berarti asam, dan lebih dari 7 berarti basa. Setiap perubahan 1 satuan pH berarti kepekatan ion hidrogennya berubah 10 kali lipat.",
+    "discoverer": "Søren Sørensen",
+    "field": "Kimia",
+    "significance": "Ukuran ini menyatakan sifat asam-basa larutan dalam bentuk angka yang mudah dipakai sehingga dimanfaatkan luas di berbagai bidang seperti kimia, biologi, dan ilmu lingkungan.",
+    "elementMeanings": {
+      "pH": {
+        "role": "Indeks ion hidrogen",
+        "description": "Bilangan tak berdimensi yang menyatakan keasaman. Rentang lazimnya 0 sampai 14.",
+        "kind": "output"
+      },
+      "[H^+]": {
+        "role": "Kepekatan ion hidrogen",
+        "description": "Kepekatan molar ion hidrogen di dalam larutan. Satuan: mol/L.",
+        "kind": "input"
+      },
+      "\\log": {
+        "role": "Logaritma basis 10",
+        "description": "Logaritma dengan bilangan pokok 10. Fungsi ini memampatkan perbedaan besar kepekatan agar mudah dinyatakan.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Mengelola pH air kolam renang (dijaga kira-kira 7,2 sampai 7,8)",
+      "Mengukur pH asam lambung (kira-kira 1,5 sampai 3,5)",
+      "Mengukur pH hujan asam dan menilai dampaknya terhadap lingkungan"
+    ],
+    "relatedFormulas": [
+      "nernst-equation"
+    ]
+  },
+  "boyle-law": {
+    "name": "Hukum Boyle",
+    "oneLiner": "Hukum yang menyatakan bahwa tekanan dan volume gas berbanding terbalik pada suhu tetap",
+    "description": "Hukum Boyle menyatakan bahwa ketika suhunya tetap, hasil kali tekanan dan volume gas bernilai tetap. Artinya, memperkecil volume membuat tekanannya naik, dan memperbesar volume membuat tekanannya turun. Hukum ini merupakan kasus khusus hukum gas ideal dan salah satu hukum paling dasar untuk memahami perilaku gas secara makroskopis.",
+    "discoverer": "Robert Boyle",
+    "field": "Kimia",
+    "significance": "Sebagai hukum kuantitatif pertama tentang perilaku gas, hukum ini menjadi titik tolak hukum gas ideal dan teori kinetik molekul gas.",
+    "elementMeanings": {
+      "P_1": {
+        "role": "Tekanan awal",
+        "description": "Tekanan gas sebelum perubahan. Satuan: pascal (Pa) atau atmosfer (atm).",
+        "kind": "input"
+      },
+      "V_1": {
+        "role": "Volume awal",
+        "description": "Volume gas sebelum perubahan. Satuan: liter (L) atau m pangkat tiga.",
+        "kind": "input"
+      },
+      "P_2": {
+        "role": "Tekanan akhir",
+        "description": "Tekanan gas setelah perubahan.",
+        "kind": "input"
+      },
+      "V_2": {
+        "role": "Volume akhir",
+        "description": "Volume gas setelah perubahan.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Gejala naiknya tekanan gas di dalam alat suntik ketika pendorongnya ditekan",
+      "Perubahan volume udara menurut kedalaman saat menyelam skuba",
+      "Pemampatan gas di dalam silinder mesin mobil"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law"
+    ]
+  },
+  "avogadro-number": {
+    "name": "Bilangan Avogadro",
+    "oneLiner": "Tetapan dasar yang menyatakan banyaknya partikel yang terkandung dalam 1 mol",
+    "description": "Bilangan Avogadro adalah banyaknya partikel (atom, molekul, ion, dan sejenisnya) yang menyusun 1 mol zat, yaitu kira-kira 6,022 dikali 10 pangkat 23. Bilangan ini menjadi jembatan antara dunia makroskopis (gram, liter) dan dunia mikroskopis (atom, molekul). Inilah tetapan inti gagasan mol dalam kimia.",
+    "discoverer": "Jean Baptiste Perrin (penentuan secara percobaan), Amedeo Avogadro (sumbangan gagasan)",
+    "field": "Kimia",
+    "significance": "Bilangan ini adalah tetapan paling dasar dalam kimia yang menghubungkan dunia mikroskopis pada tingkat atom dan molekul dengan dunia makroskopis berskala laboratorium.",
+    "elementMeanings": {
+      "N_A": {
+        "role": "Bilangan Avogadro",
+        "description": "Banyaknya partikel tiap mol. Kira-kira 6,022x10 pangkat 23 /mol.",
+        "kind": "constant",
+        "value": 6.022e+23,
+        "unit": "mol⁻¹"
+      },
+      "n": {
+        "role": "Jumlah mol",
+        "description": "Banyaknya zat. Satuan: mol.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Banyak partikel",
+        "description": "Jumlah partikel yang sebenarnya (atom, molekul, dan sejenisnya).",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung banyaknya atom yang terkandung dalam 12 g karbon",
+      "Menghitung hubungan kuantitatif dalam reaksi kimia (dengan perbandingan mol)",
+      "Memahami hubungan antara volume gas dan banyaknya molekul"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "boyle-law"
+    ]
+  },
+  "water-synthesis": {
+    "name": "Reaksi pembentukan air",
+    "oneLiner": "Reaksi hidrogen bertemu oksigen dan menjadi air — asas bahan bakar hidrogen",
+    "description": "Dua molekul hidrogen bereaksi dengan satu molekul oksigen menjadi dua molekul air. Reaksi ini eksoterm dan melepaskan banyak kalor, dan karena hasilnya hanya air maka tidak ada karbon yang dilepaskan. Koefisien 2, 1, dan 2 merupakan hasil penyetaraan 4 atom hidrogen dan 2 atom oksigen di kedua ruas.",
+    "field": "Kimia",
+    "significance": "Inilah reaksi yang dipakai sel bahan bakar hidrogen dan mobil hidrogen untuk memperoleh energi. Reaksi ini juga contoh pertama yang ditemui saat belajar menyetarakan koefisien persamaan reaksi kimia.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Tenaga penggerak mobil sel bahan bakar hidrogen",
+      "Pendorong mesin roket berbahan hidrogen cair dan oksigen cair"
+    ]
+  },
+  "methane-combustion": {
+    "name": "Pembakaran metana",
+    "oneLiner": "Reaksi terbakarnya gas kota yang menghasilkan karbon dioksida dan air",
+    "description": "Satu molekul metana bereaksi dengan dua molekul oksigen menjadi satu molekul karbon dioksida dan dua molekul air. Bila hidrokarbon bereaksi tuntas dengan oksigen, hasilnya selalu karbon dioksida dan air, dan hal itu disebut pembakaran sempurna. Bila oksigennya kurang, akan terbentuk karbon monoksida atau jelaga.",
+    "field": "Kimia",
+    "significance": "Inilah reaksi dasar pembakaran gas alam yang dipakai di rumah tangga maupun pembangkit listrik, sekaligus titik tolak perhitungan emisi gas rumah kaca.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Pembakaran pada kompor gas dan pemanas air",
+      "Produksi kalor pada pembangkit listrik tenaga gas alam"
+    ]
+  },
+  "photosynthesis": {
+    "name": "Fotosintesis",
+    "oneLiner": "Reaksi tumbuhan membuat glukosa dari karbon dioksida dan air dengan bantuan cahaya",
+    "description": "Enam molekul karbon dioksida dan enam molekul air menerima energi cahaya lalu menjadi satu molekul glukosa dan enam molekul oksigen. Ini reaksi endoterm yang menyimpan energi cahaya sebagai energi ikatan kimia, dan berlangsung di dalam kloroplas. Hampir seluruh oksigen di atmosfer bumi berasal dari reaksi ini.",
+    "field": "Kimia",
+    "significance": "Sebagai reaksi yang mengubah energi matahari menjadi bentuk yang dapat dipakai makhluk hidup, fotosintesis adalah titik tolak hampir semua rantai makanan.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Produksi zat makanan oleh tumbuhan dan alga",
+      "Hutan dan laut sebagai penyerap karbon"
+    ],
+    "relatedFormulas": [
+      "cellular-respiration"
+    ]
+  },
+  "cellular-respiration": {
+    "name": "Respirasi sel",
+    "oneLiner": "Reaksi membakar glukosa dengan oksigen untuk memperoleh energi bagi kegiatan hidup",
+    "description": "Satu molekul glukosa bereaksi dengan enam molekul oksigen menjadi enam molekul karbon dioksida dan enam molekul air. Arahnya tepat berlawanan dengan fotosintesis, dan energi yang keluar tersimpan dalam ATP. Sesungguhnya reaksi ini melalui banyak tahap, tetapi neraca keseluruhannya terangkum dalam satu baris ini.",
+    "field": "Kimia",
+    "significance": "Inilah cara sebagian besar makhluk hidup, termasuk hewan dan tumbuhan, memperoleh energi. Bersama fotosintesis, reaksi ini menjadi pasangan yang menggerakkan daur karbon.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Pasokan energi ketika otot bergerak",
+      "Kegunaan oksigen yang dihirup saat bernapas"
+    ],
+    "relatedFormulas": [
+      "photosynthesis"
+    ]
+  },
+  "neutralization-hcl-naoh": {
+    "name": "Reaksi penetralan",
+    "oneLiner": "Reaksi asam bertemu basa dan menghasilkan garam beserta air",
+    "description": "Asam klorida bereaksi dengan natrium hidroksida menjadi natrium klorida dan air. Inti reaksinya adalah ion hidrogen dari asam bertemu ion hidroksida dari basa lalu menjadi air, sedangkan ion-ion yang tersisa membentuk garam. Reaksi ini eksoterm sehingga menimbulkan kalor.",
+    "field": "Kimia",
+    "significance": "Sebagai reaksi utama yang memperlihatkan bahwa sifat asam dan sifat basa saling meniadakan, reaksi ini menjadi asas percobaan titrasi.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Meminum obat maag saat perut terasa perih",
+      "Menaburkan kapur pada tanah masam untuk menetralkannya"
+    ]
+  },
+  "haber-process": {
+    "name": "Proses Haber-Bosch",
+    "oneLiner": "Reaksi membuat amonia dari nitrogen di udara — titik tolak pupuk",
+    "description": "Satu molekul nitrogen dan tiga molekul hidrogen bereaksi di atas katalis besi menjadi dua molekul amonia. Karena reaksinya bolak-balik, reaksi maju dan reaksi balik berlangsung bersamaan, sehingga suhu tinggi, tekanan tinggi, dan katalis dipakai untuk mengangkat rendemen ke arah amonia. Ikatan rangkap tiga pada molekul nitrogen sangat kuat sehingga kondisinya harus keras.",
+    "discoverer": "Fritz Haber, Carl Bosch",
+    "field": "Kimia",
+    "significance": "Inilah reaksi yang mengubah nitrogen di udara menjadi bentuk yang dapat dipakai tumbuhan. Berkat reaksi ini pupuk nitrogen dapat diproduksi besar-besaran sehingga menopang pertambahan penduduk pada abad ke-20.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Produksi pupuk nitrogen",
+      "Contoh utama kesetimbangan kimia dan asas Le Chatelier"
+    ]
+  },
+  "carbonic-acid-equilibrium": {
+    "name": "Kesetimbangan asam karbonat",
+    "oneLiner": "Reaksi bolak-balik ketika karbon dioksida larut dalam air dan menjadi asam karbonat",
+    "description": "Karbon dioksida dan air bereaksi menjadi asam karbonat, dan asam karbonat kembali lagi menjadi karbon dioksida dan air. Reaksinya tidak condong sepenuhnya ke arah mana pun melainkan mencapai kesetimbangan, dan bila tekanannya diturunkan kesetimbangannya condong ke arah karbon dioksida.",
+    "field": "Kimia",
+    "significance": "Reaksi ini menjelaskan kerja penyangga yang menjaga keasaman darah tetap tetap serta penyerapan karbon dioksida oleh air laut.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Naiknya gelembung ketika tutup minuman bersoda dibuka",
+      "Pengasaman laut",
+      "Penyanggaan pH darah"
+    ]
+  },
+  "barium-sulfate-precipitation": {
+    "name": "Pengendapan barium sulfat",
+    "oneLiner": "Reaksi ketika dua larutan dicampur lalu terbentuk zat padat yang tidak larut dan mengendap",
+    "description": "Ketika larutan barium klorida dan larutan natrium sulfat dicampur, ion barium bertemu ion sulfat lalu menjadi barium sulfat yang hampir tidak larut dalam air sehingga mengendap sebagai endapan putih. Tanda panah ke bawah menyatakan pengendapan. Natrium klorida yang tersisa tetap larut dalam air.",
+    "field": "Kimia",
+    "significance": "Sebagai contoh utama reaksi pengendapan ketika ion-ion bertemu dan membentuk endapan, reaksi ini dipakai dalam percobaan pengujian untuk memastikan ada tidaknya ion tertentu.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Zat kontras yang diminum pada pemeriksaan pencitraan saluran cerna",
+      "Pengujian ion sulfat di dalam larutan berair"
+    ]
+  },
+  "water-molecule": {
+    "name": "Air",
+    "oneLiner": "Molekul yang tersusun dari dua atom hidrogen dan satu atom oksigen",
+    "description": "Dua atom hidrogen menempel pada satu atom oksigen dengan bentuk bengkok. Elektron cenderung tertarik ke sisi oksigen sehingga molekulnya menjadi polar, dan berkat itu molekul-molekul air saling berpegangan lewat ikatan hidrogen. Di sinilah letak sebab mengapa molekul sekecil itu bertitik didih tinggi dan mampu melarutkan banyak zat.",
+    "field": "Kimia",
+    "significance": "Air adalah panggung tempat kegiatan hidup berlangsung sekaligus pelarut yang paling luas dipakai.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Mengisi lebih dari separuh berat tubuh makhluk hidup",
+      "Sifat es yang terapung di atas air"
+    ]
+  },
+  "carbon-dioxide": {
+    "name": "Karbon dioksida",
+    "oneLiner": "Molekul linear dengan dua atom oksigen yang menempel pada satu atom karbon",
+    "description": "Karbon berada di tengah dengan dua oksigen menempel lurus di kedua sisinya. Ikatannya sendiri bersifat polar, tetapi karena kiri dan kanannya setangkup maka kepolaran seluruh molekulnya saling meniadakan. Molekul ini menyerap lalu memancarkan kembali sinar inframerah sehingga menahan panas bumi.",
+    "field": "Kimia",
+    "significance": "Karbon dioksida adalah hasil pembakaran dan pernapasan sekaligus bahan baku fotosintesis, dan merupakan gas rumah kaca yang utama.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Gelembung pada minuman bersoda",
+      "Es kering",
+      "Efek rumah kaca"
+    ]
+  },
+  "sulfate-ion": {
+    "name": "Ion sulfat",
+    "oneLiner": "Anion dengan empat oksigen yang menempel pada satu belerang dan membawa dua elektron tambahan",
+    "description": "Ini adalah ion poliatomik dengan atom belerang di tengah yang dikelilingi empat atom oksigen membentuk tetrahedron. Karena memiliki dua elektron tambahan, muatannya 2-; angka pada indeks atas menyatakan besar muatannya, sedangkan tandanya menyatakan bahwa ion itu menerima elektron.",
+    "field": "Kimia",
+    "significance": "Sebagai penyusun bersama asam sulfat dan garam-garamnya, ion ini mewakili ion poliatomik yang berperilaku sebagai satu kesatuan di dalam air.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Larutan berair asam sulfat",
+      "Garam sulfat seperti gipsum dan tembaga sulfat"
+    ]
+  },
+  "calcium-hydroxide": {
+    "name": "Kalsium hidroksida",
+    "oneLiner": "Basa dengan dua ion hidroksida yang menempel pada satu kalsium — kapur padam",
+    "description": "Satu ion kalsium berikatan dengan dua ion hidroksida. Tanda kurung menyatakan bahwa ion hidroksida itu satu kesatuan, dan angka 2 di belakangnya berarti kesatuan itu ada dua. Zat ini sedikit larut dalam air dan bersifat basa kuat.",
+    "field": "Kimia",
+    "significance": "Inilah contoh utama tata penulisan yang mengikat gugus atom dengan tanda kurung, dan zat ini dipakai luas untuk menetralkan keasaman.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Kapur untuk menetralkan tanah masam",
+      "Air kapur untuk menguji karbon dioksida"
+    ]
+  },
+  "copper-sulfate-pentahydrate": {
+    "name": "Tembaga sulfat pentahidrat",
+    "oneLiner": "Tembaga sulfat biru yang menampung lima molekul air di dalam kristalnya",
+    "description": "Pada setiap kristal tembaga sulfat terdapat lima molekul air yang menempati kedudukan tertentu. Titik di tengah menyatakan bahwa air itu bukan terikat secara kimia melainkan bertempat di dalam struktur kristalnya. Bila dipanaskan sampai airnya menguap, warna birunya hilang dan tersisa serbuk putih.",
+    "field": "Kimia",
+    "significance": "Inilah contoh utama tata penulisan hidrat, dan karena warnanya berubah menurut ada tidaknya air, zat ini dipakai untuk menguji kandungan air.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Percobaan membuat kristal tembaga sulfat biru",
+      "Menguji kandungan air di dalam alkohol"
+    ]
+  },
+  "thorium-227": {
+    "name": "Torium-227",
+    "oneLiner": "Isotop radioaktif torium dengan 90 proton dan nomor massa 227",
+    "description": "Angka 227 di kiri atas adalah nomor massa, yaitu jumlah proton dan neutron di dalam inti atom, sedangkan angka 90 di kiri bawah adalah nomor atom, yaitu jumlah protonnya. Nomor atom menentukan unsurnya, sedangkan nomor massa membedakan isotop mana dari unsur yang sama. Torium-227 berubah menjadi radium-223 melalui peluruhan alfa.",
+    "field": "Kimia",
+    "significance": "Inilah contoh utama tata penulisan isotop, sekaligus satu tahap dalam deret peluruhan aktinium.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Penelusuran deret peluruhan radioaktif",
+      "Penelitian terapi bersasaran dengan nuklida pemancar alfa"
+    ]
+  }
+}

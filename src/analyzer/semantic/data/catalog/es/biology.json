@@ -1,0 +1,262 @@
+{
+  "logistic-growth": {
+    "name": "Crecimiento logístico",
+    "oneLiner": "El modelo en el que la tasa de crecimiento disminuye a medida que la población se acerca a la capacidad de carga del medio",
+    "description": "El modelo de crecimiento logístico describe cómo el crecimiento de una población es exponencial al principio, pero se va frenando por la competencia por los recursos a medida que se acerca a la capacidad de carga del medio (K). Es el modelo matemático más básico del crecimiento dependiente de la densidad y genera una curva de crecimiento en forma de S (curva sigmoide).",
+    "discoverer": "Pierre François Verhulst",
+    "field": "Biología",
+    "significance": "Es el modelo básico para predecir la dinámica de poblaciones en ecología y se aplica en campos muy diversos, como la epidemiología, la economía o la difusión de tecnologías.",
+    "elementMeanings": {
+      "dN/dt": {
+        "role": "Tasa de variación de la población",
+        "description": "La variación del número de individuos por unidad de tiempo.",
+        "kind": "output"
+      },
+      "r": {
+        "role": "Tasa intrínseca de crecimiento",
+        "description": "La tasa máxima de crecimiento de la población cuando no hay límite de recursos.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Población actual",
+        "description": "El tamaño de la población en un instante determinado.",
+        "kind": "input"
+      },
+      "K": {
+        "role": "Capacidad de carga",
+        "description": "El número máximo de individuos que el medio dado puede sostener.",
+        "kind": "input"
+      },
+      "(1 - N/K)": {
+        "role": "Factor de freno del crecimiento",
+        "description": "Cuando N se acerca a K tiende a 0 y frena el crecimiento.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "La curva de crecimiento en S de los peces repoblados en un lago",
+      "El análisis de la entrada en fase estacionaria de un cultivo bacteriano",
+      "El modelado del aumento del número de usuarios de una red social"
+    ],
+    "relatedFormulas": [
+      "exponential-growth",
+      "lotka-volterra"
+    ]
+  },
+  "hardy-weinberg": {
+    "name": "Principio de Hardy-Weinberg",
+    "oneLiner": "El principio que indica que las frecuencias génicas se mantienen constantes en condiciones ideales sin evolución",
+    "description": "El principio de Hardy-Weinberg indica que, en una población ideal sin mutación, selección natural, deriva genética, migración ni apareamiento no aleatorio, las frecuencias alélicas y las frecuencias genotípicas se mantienen constantes generación tras generación. Si se llaman p y q a las frecuencias de dos alelos, las frecuencias genotípicas se expresan mediante el desarrollo del binomio.",
+    "discoverer": "Godfrey Harold Hardy, Wilhelm Weinberg",
+    "field": "Biología",
+    "significance": "Es la base de la genética de poblaciones y proporciona el criterio (la hipótesis nula) para juzgar si en una población real se está produciendo evolución.",
+    "elementMeanings": {
+      "p": {
+        "role": "Frecuencia del alelo dominante",
+        "description": "La frecuencia relativa del alelo dominante en la población. Entre 0 y 1.",
+        "kind": "input"
+      },
+      "q": {
+        "role": "Frecuencia del alelo recesivo",
+        "description": "La frecuencia relativa del alelo recesivo en la población. p + q = 1.",
+        "kind": "input"
+      },
+      "p^2": {
+        "role": "Frecuencia de homocigotos dominantes",
+        "description": "La frecuencia del genotipo homocigoto dominante (AA).",
+        "kind": "output"
+      },
+      "2pq": {
+        "role": "Frecuencia de heterocigotos",
+        "description": "La frecuencia del genotipo heterocigoto (Aa).",
+        "kind": "output"
+      },
+      "q^2": {
+        "role": "Frecuencia de homocigotos recesivos",
+        "description": "La frecuencia del genotipo homocigoto recesivo (aa).",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Estimar la frecuencia de portadores de una enfermedad genética (como la anemia falciforme)",
+      "Comprobar si se está produciendo deriva genética en una población pequeña",
+      "Verificar el equilibrio genético de una población a partir de la distribución de los grupos sanguíneos"
+    ],
+    "relatedFormulas": [
+      "logistic-growth"
+    ]
+  },
+  "michaelis-menten": {
+    "name": "Cinética de Michaelis-Menten",
+    "oneLiner": "El modelo según el cual la velocidad de una reacción enzimática dibuja una curva de saturación frente a la concentración de sustrato",
+    "description": "La ecuación de Michaelis-Menten describe cómo varía la velocidad inicial de una reacción enzimática con la concentración de sustrato. Cuando la concentración de sustrato es baja, la velocidad aumenta de forma casi proporcional, pero al aumentar la concentración la enzima se satura y la velocidad tiende a su valor máximo. La constante de Michaelis Km es la concentración de sustrato a la que la velocidad de reacción es la mitad de la máxima.",
+    "discoverer": "Leonor Michaelis, Maud Menten",
+    "field": "Biología",
+    "significance": "Es el modelo básico de la cinética enzimática y desempeña un papel esencial en el diseño de fármacos y en la ingeniería metabólica.",
+    "elementMeanings": {
+      "v": {
+        "role": "Velocidad de reacción",
+        "description": "La velocidad inicial de la reacción enzimática. Unidades: mol/(L s), entre otras.",
+        "kind": "output"
+      },
+      "V_{max}": {
+        "role": "Velocidad máxima de reacción",
+        "description": "La velocidad máxima, alcanzada cuando toda la enzima está unida al sustrato.",
+        "kind": "input"
+      },
+      "[S]": {
+        "role": "Concentración de sustrato",
+        "description": "La concentración del sustrato que se une a la enzima. Unidades: mol/L.",
+        "kind": "input"
+      },
+      "K_m": {
+        "role": "Constante de Michaelis",
+        "description": "La concentración de sustrato a la que la velocidad es la mitad de Vmax. Es un indicador de la afinidad entre enzima y sustrato.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "El mecanismo por el que un fármaco inhibe una reacción alterando la Km de la enzima",
+      "La saturación de las enzimas que degradan el alcohol (el límite de la velocidad de degradación cuando se bebe en exceso)",
+      "El diseño de la concentración óptima de sustrato para enzimas industriales"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "logistic-growth"
+    ]
+  },
+  "exponential-growth": {
+    "name": "Crecimiento exponencial",
+    "oneLiner": "El modelo en el que la población aumenta de forma exponencial con el tiempo sin límite de recursos",
+    "description": "El modelo de crecimiento exponencial describe la situación ideal en la que una población aumenta a un ritmo constante en un entorno de recursos ilimitados. Tiene la forma de la población inicial multiplicada por una función exponencial natural y, si la tasa de crecimiento r es positiva, la población se dispara de forma exponencial. En la realidad lo habitual es que la limitación de recursos lo transforme en un crecimiento logístico.",
+    "field": "Biología",
+    "significance": "Es el modelo matemático más básico del crecimiento poblacional y el punto de partida de modelos más complejos, como el logístico.",
+    "elementMeanings": {
+      "N(t)": {
+        "role": "Población en el instante t",
+        "description": "El tamaño de la población una vez transcurrido el tiempo t.",
+        "kind": "output"
+      },
+      "N_0": {
+        "role": "Población inicial",
+        "description": "El tamaño de la población en el instante t=0.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Base del logaritmo natural",
+        "description": "Unos 2,718. Es la constante matemática que representa el crecimiento continuo.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "r": {
+        "role": "Tasa intrínseca de crecimiento",
+        "description": "La tasa neta de crecimiento de la población. Si r > 0 crece, si r < 0 disminuye.",
+        "kind": "input"
+      },
+      "t": {
+        "role": "Tiempo",
+        "description": "El tiempo transcurrido. Las unidades dependen del caso (horas, días, años, etc.).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La multiplicación acelerada de la fase logarítmica al inicio de un cultivo bacteriano",
+      "El aumento explosivo de la población en las primeras fases de la entrada de una especie invasora",
+      "El cálculo del interés compuesto (una aplicación financiera del crecimiento exponencial)"
+    ],
+    "relatedFormulas": [
+      "logistic-growth",
+      "half-life"
+    ]
+  },
+  "sir-model": {
+    "name": "Modelo SIR",
+    "oneLiner": "El modelo que representa la propagación y la extinción de una enfermedad infecciosa mediante tres compartimentos: susceptibles, infectados y recuperados",
+    "description": "El modelo SIR es el modelo compartimental básico de la epidemiología: divide la población en tres grupos —susceptibles (S), infectados (I) y recuperados (R)— para describir la dinámica de una enfermedad infecciosa. El aumento o la disminución del número de infectados viene determinado por el parámetro de transmisión y el de recuperación, y si el número reproductivo básico (R0 = tasa de transmisión / tasa de recuperación) es mayor que 1 se produce una epidemia.",
+    "discoverer": "William Ogilvy Kermack, Anderson McKendrick",
+    "field": "Biología",
+    "significance": "Es el marco básico para modelar matemáticamente la propagación de las epidemias y resulta esencial para diseñar políticas sanitarias y estrategias de vacunación.",
+    "elementMeanings": {
+      "dI/dt": {
+        "role": "Tasa de variación del número de infectados",
+        "description": "La variación del número de infectados por unidad de tiempo.",
+        "kind": "output"
+      },
+      "\\beta": {
+        "role": "Tasa de transmisión",
+        "description": "La probabilidad de que un susceptible se contagie al entrar en contacto con un infectado, multiplicada por la frecuencia de contactos.",
+        "kind": "input"
+      },
+      "S": {
+        "role": "Número de susceptibles",
+        "description": "La población que aún no se ha contagiado y puede contagiarse.",
+        "kind": "input"
+      },
+      "I": {
+        "role": "Número de infectados",
+        "description": "La población que se encuentra infectada en este momento.",
+        "kind": "input"
+      },
+      "\\gamma": {
+        "role": "Tasa de recuperación",
+        "description": "La proporción de infectados que se recupera por unidad de tiempo. Es el inverso del tiempo medio hasta la recuperación.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La predicción de la evolución de la covid-19 y el análisis del efecto de la distancia social",
+      "El cálculo de la tasa de vacunación necesaria para alcanzar la inmunidad de grupo",
+      "La predicción del momento del pico de contagios en la temporada de gripe"
+    ],
+    "relatedFormulas": [
+      "logistic-growth",
+      "exponential-growth"
+    ]
+  },
+  "lotka-volterra": {
+    "name": "Ecuaciones de Lotka-Volterra",
+    "oneLiner": "El sistema de ecuaciones diferenciales que describe las oscilaciones periódicas de las poblaciones de depredador y presa",
+    "description": "Las ecuaciones de Lotka-Volterra son el modelo que describe matemáticamente la interacción entre depredador y presa. La presa crece de forma exponencial si no hay depredadores, pero disminuye por los encuentros con ellos. El depredador disminuye si no tiene alimento, pero aumenta al alimentarse de las presas. Esta interacción genera oscilaciones periódicas en ambas poblaciones.",
+    "discoverer": "Alfred Lotka, Vito Volterra",
+    "field": "Biología",
+    "significance": "Es el modelo básico para analizar matemáticamente la dinámica de las interacciones entre especies en ecología y el punto de partida del estudio de la estabilidad de los ecosistemas.",
+    "elementMeanings": {
+      "dx/dt": {
+        "role": "Tasa de variación de la población de presas",
+        "description": "La variación del número de presas por unidad de tiempo.",
+        "kind": "output"
+      },
+      "x": {
+        "role": "Población de presas",
+        "description": "El tamaño de la población de la especie presa (el alimento).",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Población de depredadores",
+        "description": "El tamaño de la población de la especie depredadora.",
+        "kind": "input"
+      },
+      "\\alpha": {
+        "role": "Tasa de crecimiento de las presas",
+        "description": "La tasa intrínseca de crecimiento de la presa cuando no hay presión de depredación.",
+        "kind": "input"
+      },
+      "\\beta": {
+        "role": "Coeficiente de depredación",
+        "description": "La proporción en que disminuyen las presas cuando se encuentran con los depredadores.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Las oscilaciones de unos diez años de las poblaciones del lince canadiense y la liebre americana",
+      "Las variaciones de las poblaciones de fitoplancton y zooplancton en los ecosistemas marinos",
+      "La predicción del efecto de introducir enemigos naturales en el control biológico de plagas"
+    ],
+    "relatedFormulas": [
+      "logistic-growth",
+      "exponential-growth",
+      "sir-model"
+    ]
+  }
+}

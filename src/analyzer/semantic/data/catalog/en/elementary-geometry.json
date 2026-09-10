@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "Area of a triangle",
+    "oneLiner": "The formula that multiplies base by height and halves it to get the area of a triangle",
+    "description": "The area of a triangle is its base length times its height, divided by 2. Cutting a rectangle along a diagonal gives two triangles, which is why the area comes out as half the rectangle's.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the triangle covers.", "kind": "output" },
+      "b": { "role": "Base", "description": "The length of the bottom side of the triangle.", "kind": "input" },
+      "h": { "role": "Height", "description": "The perpendicular distance from the base to the opposite vertex.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Half", "description": "It means half of the rectangle.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Finding the triangular area of a roof", "Working out how much fabric a triangular flag takes"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "Area of a rectangle",
+    "oneLiner": "The formula that multiplies length by width to get the area of a rectangle",
+    "description": "The area of a rectangle is its length times its width. In a quadrilateral whose four angles are all right angles, this is the same as counting how many unit squares fit in one row and multiplying by the number of rows.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the rectangle covers.", "kind": "output" },
+      "l": { "role": "Length", "description": "The horizontal length of the rectangle.", "kind": "input" },
+      "w": { "role": "Width", "description": "The vertical length of the rectangle.", "kind": "input" }
+    },
+    "realWorldExamples": ["Finding the floor area of a room", "Working out the area of a blackboard", "Comparing smartphone screen sizes"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "Area of a square",
+    "oneLiner": "The formula that squares the side length to get the area of a square",
+    "description": "The area of a square is the length of one side multiplied by itself. Since all four sides are the same length, it works on the same principle as the area of a rectangle whose length and width are equal.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the square covers.", "kind": "output" },
+      "s": { "role": "Side", "description": "The length of one side of the square.", "kind": "input" },
+      "s^2": { "role": "Square of the side", "description": "The side length multiplied by itself.", "kind": "output" }
+    },
+    "realWorldExamples": ["Finding the area of a single tile", "Working out the size of a square picture frame"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "Area of a parallelogram",
+    "oneLiner": "The formula that multiplies base by height to get the area of a parallelogram",
+    "description": "The area of a parallelogram is its base length times its height. Cut a parallelogram and slide the piece over and you get a rectangle, which is why the formula has the same shape as the one for a rectangle.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the parallelogram covers.", "kind": "output" },
+      "b": { "role": "Base", "description": "The length of the bottom side of the parallelogram.", "kind": "input" },
+      "h": { "role": "Height", "description": "The perpendicular distance between the two parallel sides.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out the area of a slanted window pane", "The size of a parallelogram-shaped desk cover"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "Area of a trapezoid",
+    "oneLiner": "The formula that multiplies the sum of the two parallel sides by the height and halves it",
+    "description": "The area of a trapezoid is the lengths of the two parallel sides (the top and the bottom) added together, multiplied by the height, and divided by 2. Flip a second copy of the trapezoid and join it on and you get a parallelogram; this is half of that, which is where the 2 comes from.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the trapezoid covers.", "kind": "output" },
+      "a": { "role": "Top side", "description": "The length of the upper parallel side of the trapezoid.", "kind": "input" },
+      "b": { "role": "Bottom side", "description": "The length of the lower parallel side of the trapezoid.", "kind": "input" },
+      "h": { "role": "Height", "description": "The perpendicular distance between the two parallel sides.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Half", "description": "It means half of the parallelogram.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Finding the area of a trapezoid-shaped flower bed", "Working out the area of a trapezoid roof"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "Area of a rhombus",
+    "oneLiner": "The formula that multiplies the two diagonals and halves the result to get the area of a rhombus",
+    "description": "The area of a rhombus is the product of its two diagonal lengths divided by 2. The two diagonals of a rhombus meet at right angles, and cutting along them and rearranging the pieces gives half of a rectangle.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the rhombus covers.", "kind": "output" },
+      "d_1": { "role": "Diagonal 1", "description": "The length of one diagonal of the rhombus.", "kind": "input" },
+      "d_2": { "role": "Diagonal 2", "description": "The length of the other diagonal of the rhombus.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Half", "description": "It means half of the rectangle.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Working out the area of a rhombus-cut gem", "Finding how much fabric a kite takes"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "Area of a circle",
+    "oneLiner": "The formula that multiplies the square of the radius by pi to get the area of a circle",
+    "description": "The area of a circle is the radius squared times pi. Slice a circle into very thin wedges and lay them out and you get something close to a rectangle whose length is half the circumference and whose width is the radius — and that gives this formula.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the circle covers.", "kind": "output" },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The distance from the center of the circle to its edge.", "kind": "input" },
+      "r^2": { "role": "Square of the radius", "description": "The radius multiplied by itself.", "kind": "input" }
+    },
+    "realWorldExamples": ["Comparing pizza sizes", "Finding the area of a round clock face", "Working out the area of a coin"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "Circumference of a circle",
+    "oneLiner": "The formula that multiplies twice the radius by pi to get the circumference of a circle",
+    "description": "The circumference of a circle is twice the radius — that is, the diameter — times pi. The distance you travel going once around the circle is exactly its circumference.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "C": { "role": "Circumference", "description": "The total length measured along the outer edge of the circle.", "kind": "output" },
+      "2": { "role": "Constant", "description": "The factor that turns the radius into the diameter.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The distance from the center of the circle to its edge.", "kind": "input" }
+    },
+    "realWorldExamples": ["The distance a bicycle wheel covers in one full turn", "The length of one lap of a circular track"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "Area of a sector",
+    "oneLiner": "The formula that multiplies the square of the radius by the central angle and halves it to get the area of a sector",
+    "description": "The area of a sector is the radius squared times the central angle in radians, divided by 2. A sector is a slice of a circle, so the bigger the central angle, the bigger the area.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the sector covers.", "kind": "output" },
+      "r": { "role": "Radius", "description": "The radius of the sector.", "kind": "input" },
+      "r^2": { "role": "Square of the radius", "description": "The radius multiplied by itself.", "kind": "input" },
+      "\\theta": { "role": "Central angle", "description": "The angle opened out from the center of the sector (in radians).", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "Half", "description": "The coefficient in the area formula.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["The area a clock's minute hand sweeps out", "The area of a single slice of pizza"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "Arc length",
+    "oneLiner": "The formula that multiplies the radius by the central angle to get the length of an arc",
+    "description": "The length of an arc is the radius times the central angle in radians. An arc is a piece of the circumference, and when the central angle is a full turn (2 pi) the arc length equals the whole circumference.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "l": { "role": "Arc length", "description": "The length of a portion of the circle's edge.", "kind": "output" },
+      "r": { "role": "Radius", "description": "The distance from the center of the circle to its edge.", "kind": "input" },
+      "\\theta": { "role": "Central angle", "description": "The central angle the arc subtends (in radians).", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["The length of a curved stretch of roller coaster track", "The arc length between the marks on a clock face"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "Perimeter of a rectangle",
+    "oneLiner": "The formula that doubles the sum of the length and the width to get the perimeter of a rectangle",
+    "description": "The perimeter of a rectangle is the length plus the width, multiplied by 2. Opposite sides of a rectangle are equal, so adding one length and one width and doubling gives the total of all four sides.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "P": { "role": "Perimeter", "description": "The total length of the rectangle's four sides.", "kind": "output" },
+      "l": { "role": "Length", "description": "The horizontal length of the rectangle.", "kind": "input" },
+      "w": { "role": "Width", "description": "The vertical length of the rectangle.", "kind": "input" },
+      "2": { "role": "Constant", "description": "You multiply by 2 because there are two pairs of opposite sides.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["Working out the length of the border of a picture frame", "The distance run along the edge of a sports field"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "Perimeter of a triangle",
+    "oneLiner": "The formula that adds all three side lengths to get the perimeter of a triangle",
+    "description": "The perimeter of a triangle is the sum of the lengths of its three sides. It is the same as the total distance you travel going once around the triangle's edge.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "P": { "role": "Perimeter", "description": "The total length of the triangle's three sides.", "kind": "output" },
+      "a": { "role": "First side", "description": "The length of the first side of the triangle.", "kind": "input" },
+      "b": { "role": "Second side", "description": "The length of the second side of the triangle.", "kind": "input" },
+      "c": { "role": "Third side", "description": "The length of the third side of the triangle.", "kind": "input" }
+    },
+    "realWorldExamples": ["The total length of a triangular fence", "How much cord it takes to trim the edge of a triangular flag"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "Area of a regular polygon",
+    "oneLiner": "The formula that gets the area of a regular polygon from the number of sides, the side length, and the apothem",
+    "description": "The area of a regular polygon is the number of sides times the side length times the apothem (the perpendicular distance from the center to a side), divided by 2. Split the polygon into triangles from the center and this is the same as adding up the areas of all those triangles.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the regular polygon covers.", "kind": "output" },
+      "n": { "role": "Number of sides", "description": "How many sides the regular polygon has.", "kind": "input" },
+      "s": { "role": "Side length", "description": "The length of one side of the regular polygon.", "kind": "input" },
+      "a": { "role": "Apothem", "description": "The perpendicular distance from the center to the midpoint of a side.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Half", "description": "The coefficient that comes from the triangle area formula.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["The area of one hexagonal cell in a honeycomb", "The area of a pentagonal star ornament"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "Area of an annulus",
+    "oneLiner": "The formula that multiplies the difference of the squared radii by pi to get the area of a ring",
+    "description": "The area of an annulus (a ring shape) is the area of the outer circle minus the area of the inner one. Subtract the square of the small radius from the square of the large one and multiply by pi.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the annulus (ring shape) covers.", "kind": "output" },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "Outer radius", "description": "The radius of the larger outer circle.", "kind": "input" },
+      "r": { "role": "Inner radius", "description": "The radius of the smaller inner circle.", "kind": "input" },
+      "R^2 - r^2": { "role": "Difference of the squared radii", "description": "The square of the inner radius subtracted from the square of the outer radius.", "kind": "output" }
+    },
+    "realWorldExamples": ["Finding the area of the top of a doughnut", "The area of a circular running lane"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "Angle sum of a triangle",
+    "oneLiner": "The property that the three interior angles of a triangle always add up to 180 degrees",
+    "description": "The angle sum property says that adding the angles at all three vertices of a triangle always gives 180 degrees, a half turn. This holds for any triangle at all — acute, right, or obtuse — the three interior angles always add to 180 degrees.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "\\alpha": { "role": "First interior angle", "description": "The angle at the first vertex of the triangle.", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "Second interior angle", "description": "The angle at the second vertex of the triangle.", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "Third interior angle", "description": "The angle at the third vertex of the triangle.", "kind": "input", "unit": "deg" },
+      "180°": { "role": "Half turn", "description": "The angle a straight line makes, which equals the angle sum of a triangle.", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["Finding the remaining angle when you know two of them", "Getting the angles right on a triangular structure in construction"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

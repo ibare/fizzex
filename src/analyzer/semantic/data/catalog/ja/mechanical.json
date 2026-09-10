@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "応力",
+    "oneLiner": "単位面積あたりにはたらく内部の力を表す物理量",
+    "description": "応力は、外から加わる力によって物体の内部に生じる、単位面積あたりの力です。引張、圧縮、せん断などさまざまな形があり、材料が壊れるかどうかを判断する最も基本的な指標です。構造物の設計では、許容応力より小さく保つことが安全の要になります。",
+    "field": "機械工学",
+    "significance": "材料力学の基本となる考え方であり、構造物の安全性の評価と設計の出発点を与えます。",
+    "elementMeanings": {
+      "\\sigma": { "role": "応力", "description": "単位面積あたりの内部の力。単位: パスカル(Pa)または N/m²。", "kind": "output" },
+      "F": { "role": "力", "description": "物体にはたらく外からの力。単位: ニュートン(N)。", "kind": "input" },
+      "A": { "role": "断面積", "description": "力がはたらく断面の面積。単位: m²。", "kind": "input" }
+    },
+    "realWorldExamples": ["橋のケーブルにかかる引張応力を計算する", "建物の柱にかかる圧縮応力を検討する"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "ひずみ",
+    "oneLiner": "もとの長さに対する変形した長さの割合",
+    "description": "ひずみは、外からの力によって物体が変形した度合いを、もとの長さに対する割合で表す無次元の量です。ひずみが小さいうちは弾性の範囲でもとの形に戻りますが、限界を超えると塑性変形が起こり、形が永久に変わってしまいます。",
+    "field": "機械工学",
+    "significance": "材料の変形の度合いを数値にして、弾性と塑性のふるまいを解析する土台をつくります。",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "ひずみ", "description": "長さの変化の割合。無次元の量(単位なし)。", "kind": "output" },
+      "\\Delta L": { "role": "長さの変化量", "description": "変形後の長さからもとの長さを引いた値。単位: m。", "kind": "input" },
+      "L": { "role": "もとの長さ", "description": "力を加える前の物体の初めの長さ。単位: m。", "kind": "input" }
+    },
+    "realWorldExamples": ["金属の引張試験で試験片の伸びを測る", "地震のときに建物の骨組みの変形の度合いを評価する"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "フックの法則",
+    "oneLiner": "弾性の範囲では応力がひずみに比例するという法則",
+    "description": "フックの法則は、材料にはたらく応力が弾性係数とひずみの積で表されることを述べます。弾性の限界の中でだけ成り立ち、それを超えると線形でないふるまいが現れます。ばねの復元力(F=kx)も、この法則の特別な形です。",
+    "discoverer": "ロバート・フック",
+    "field": "機械工学",
+    "significance": "弾性のふるまいが線形であることを定め、構造解析と材料試験の理論的な土台を築きました。",
+    "elementMeanings": {
+      "\\sigma": { "role": "応力", "description": "単位面積あたりにはたらく力。単位: パスカル(Pa)。", "kind": "output" },
+      "E": { "role": "弾性係数", "description": "ヤング率。材料の硬さを表す固有の定数。単位: Pa。", "kind": "input" },
+      "\\varepsilon": { "role": "ひずみ", "description": "長さの変化の割合。無次元です。", "kind": "input" }
+    },
+    "realWorldExamples": ["ばねの弾性による復元力を計算する", "コンクリートの柱が荷重を受けたときの変形を予測する"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "ベルヌーイの定理",
+    "oneLiner": "非圧縮性の流体の流れで、圧力・速度・高さのエネルギーの和が一定であるという原理",
+    "description": "ベルヌーイの定理は、定常な非圧縮性・非粘性の流れにおけるエネルギー保存を表します。流れが速くなると圧力が下がり、高さが上がると圧力が下がるという関係を数量的に示します。航空機の翼が揚力を得るしくみから配管の設計まで、幅広く使われます。",
+    "discoverer": "ダニエル・ベルヌーイ",
+    "field": "機械工学",
+    "significance": "流体力学の中心的な原理であり、航空、水力、配管などさまざまな工学分野の設計の基礎を与えます。",
+    "elementMeanings": {
+      "P": { "role": "静圧", "description": "流体の静的な圧力。単位: パスカル(Pa)。", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "動圧", "description": "流体の運動によって生じる圧力。速度の2乗に比例します。", "kind": "structural" },
+      "\\rho": { "role": "密度", "description": "流体の質量密度。単位: kg/m³。", "kind": "input" },
+      "v": { "role": "流速", "description": "流体の流れる速さ。単位: m/s。", "kind": "input" },
+      "g": { "role": "重力加速度", "description": "地表の近くでの重力加速度。およそ 9.8 m/s²。", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "高さ", "description": "基準面から測った流体の位置の高さ。単位: m。", "kind": "input" }
+    },
+    "realWorldExamples": ["航空機の翼の上下の圧力差によって揚力が生まれる", "庭のホースの先をつまむと水の勢いが速くなる現象"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "レイノルズ数",
+    "oneLiner": "流体の流れが層流か乱流かを見分ける無次元数",
+    "description": "レイノルズ数は、慣性力と粘性力の比を表す無次元数です。この値が小さいと(およそ2300以下)層流になり、大きいと乱流が生じます。配管、航空機、船舶など流体にかかわるあらゆる工学の仕組みで、流れの性質を予測する中心的な指標です。",
+    "discoverer": "オズボーン・レイノルズ",
+    "field": "機械工学",
+    "significance": "流れが層流から乱流へ移り変わることを予測できるようにし、流体の仕組みを設計するための中心的な判定基準を与えました。",
+    "elementMeanings": {
+      "Re": { "role": "レイノルズ数", "description": "慣性力と粘性力の比。無次元数です。", "kind": "output" },
+      "\\rho": { "role": "密度", "description": "流体の質量密度。単位: kg/m³。", "kind": "input" },
+      "v": { "role": "流速", "description": "流体の平均の流れの速さ。単位: m/s。", "kind": "input" },
+      "L": { "role": "代表長さ", "description": "管の直径など、流れの形の特徴を代表する長さ。単位: m。", "kind": "input" },
+      "\\mu": { "role": "粘性係数", "description": "流体の粘度。単位: Pa·s。", "kind": "input" }
+    },
+    "realWorldExamples": ["水道管を設計するときに乱流が起こるかどうかを予測する", "航空機の翼の表面の境界層の流れを解析する"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "ナビエ・ストークス方程式",
+    "oneLiner": "粘性のある流体の運動を記述する基本の偏微分方程式",
+    "description": "ナビエ・ストークス方程式は、ニュートンの第2法則を連続体である流体に当てはめたもので、圧力勾配・粘性力・外力が流体の加速度を決めることを表します。解析的な解が一般には存在しないため数値解析(CFD)で解かれ、ミレニアム懸賞問題の一つに選ばれるほど数学的にも重要です。",
+    "discoverer": "クロード・ルイ・ナビエ、ジョージ・ガブリエル・ストークス",
+    "field": "機械工学",
+    "significance": "粘性のあるあらゆる流れを記述する最も一般的な方程式であり、数値流体力学(CFD)の基礎です。",
+    "elementMeanings": {
+      "\\rho": { "role": "密度", "description": "流体の質量密度。単位: kg/m³。", "kind": "input" },
+      "\\mathbf{v}": { "role": "速度場", "description": "流体の粒子の速度ベクトル。位置と時刻の関数です。", "kind": "output" },
+      "p": { "role": "圧力", "description": "流体にはたらく圧力の場。単位: パスカル(Pa)。", "kind": "input" },
+      "\\mu": { "role": "粘性係数", "description": "流体の粘度。単位: Pa·s。", "kind": "input" },
+      "\\mathbf{f}": { "role": "外力", "description": "重力など、流体にはたらく体積力です。", "kind": "input" }
+    },
+    "realWorldExamples": ["自動車のまわりの空気の流れを計算機でシミュレーションする", "血管の中の血流のパターンを解析する"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "熱伝導の法則",
+    "oneLiner": "温度の差によって物質の内部を伝わる熱の量を表す法則",
+    "description": "フーリエの熱伝導の法則は、伝わる熱の割合が熱伝導率、断面積、温度勾配の積に比例することを表します。熱は温度の高いほうから低いほうへ流れ、材料の熱伝導率が大きいほど速く伝わります。断熱材を選ぶことから半導体を冷やすことまで、熱の管理を設計するときの基本です。",
+    "discoverer": "ジョゼフ・フーリエ",
+    "field": "機械工学",
+    "significance": "熱が伝わる現象を数量的に解析できるようにし、熱力学と熱管理の工学の基礎を築きました。",
+    "elementMeanings": {
+      "Q": { "role": "伝熱の割合", "description": "単位時間あたりに伝わる熱エネルギー。単位: ワット(W)。", "kind": "output" },
+      "k": { "role": "熱伝導率", "description": "材料が熱を伝える能力を表す固有の定数。単位: W/(m·K)。", "kind": "input" },
+      "A": { "role": "断面積", "description": "熱が通る断面の面積。単位: m²。", "kind": "input" },
+      "\\Delta T": { "role": "温度の差", "description": "熱い側と冷たい側の温度の差。単位: K または セ氏度。", "kind": "input" },
+      "\\Delta x": { "role": "厚さ", "description": "熱が伝わる向きの材料の厚さ。単位: m。", "kind": "input" }
+    },
+    "realWorldExamples": ["建物の壁の断熱の性能を計算する", "ノートパソコンの CPU のヒートシンクを設計する"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "オイラーの座屈荷重",
+    "oneLiner": "長い柱が圧縮する力によって急に曲がってしまう限界の荷重",
+    "description": "オイラーの座屈の公式は、両端をピンで支えた長い柱が軸の向きに圧縮の力を受けるとき、座屈が起こる限界の荷重を表します。弾性係数と断面二次モーメントに比例し、柱の長さの2乗に反比例します。柱が長いほど座屈しやすく、構造物を安全に設計するうえで必ず検討しなければならない項目です。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "機械工学",
+    "significance": "圧縮を受ける部材の安定の限界を理論的に予測できるようにし、構造工学の設計で欠かせない検討の基準になりました。",
+    "elementMeanings": {
+      "P_{cr}": { "role": "限界の座屈荷重", "description": "座屈が始まる最小の圧縮の力。単位: ニュートン(N)。", "kind": "output" },
+      "\\pi^2": { "role": "円周率の2乗", "description": "座屈するときの波の形から生じる定数です。", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "弾性係数", "description": "材料の硬さ(ヤング率)。単位: パスカル(Pa)。", "kind": "input" },
+      "I": { "role": "断面二次モーメント", "description": "断面が曲げに耐える能力を表す形の性質。単位: mの4乗。", "kind": "input" },
+      "L": { "role": "柱の長さ", "description": "座屈の長さ。支え方によって有効な長さが変わります。単位: m。", "kind": "input" }
+    },
+    "realWorldExamples": ["高層ビルの鉄骨の柱の座屈に対する安全性を検討する", "自転車のフレームのパイプの最小の厚さを決める"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

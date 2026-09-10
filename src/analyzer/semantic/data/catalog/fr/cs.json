@@ -1,0 +1,123 @@
+{
+  "comparison-sort-bound": {
+    "name": "Borne inférieure des tris par comparaison",
+    "oneLiner": "Théorème garantissant que la complexité temporelle dans le pire des cas d'un tri par comparaison ne peut pas descendre sous O(n log n)",
+    "description": "Le théorème de la borne inférieure des tris par comparaison démontre qu'un algorithme qui trie uniquement en comparant des éléments doit, dans le pire des cas, effectuer au moins O(n log n) comparaisons. Dans le modèle de l'arbre de décision, distinguer les n! permutations exige une hauteur d'au moins log2(n!), ce qui, d'après l'approximation de Stirling, vaut O(n log n).",
+    "field": "Informatique",
+    "significance": "Il prouve que le tri fusion, le tri par tas et leurs semblables sont asymptotiquement optimaux et fixe clairement la limite de performance des tris par comparaison.",
+    "elementMeanings": {
+      "n": { "role": "Nombre d'éléments", "description": "Nombre total d'éléments à trier.", "kind": "input" },
+      "\\log n": { "role": "Facteur logarithmique", "description": "Composante logarithmique du nombre de comparaisons, issue de la hauteur de l'arbre de décision.", "kind": "structural" },
+      "n!": { "role": "Nombre de permutations", "description": "Nombre de dispositions possibles de n éléments. C'est la borne inférieure du nombre de feuilles de l'arbre de décision.", "kind": "structural" },
+      "\\Omega(n \\log n)": { "role": "Notation de borne inférieure", "description": "Elle indique que, dans le pire des cas, le nombre de comparaisons est au moins proportionnel à n log n.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Justification théorique du choix d'un algorithme lors du tri des index d'une base de données",
+      "Analyse de la complexité temporelle d'une solution fondée sur un tri lors d'un concours de programmation",
+      "Garantie de performance des fonctions de tri des bibliothèques standard (Timsort, par exemple)"
+    ],
+    "relatedFormulas": ["master-theorem"]
+  },
+  "master-theorem": {
+    "name": "Théorème maître",
+    "oneLiner": "Théorème qui classe en trois cas la complexité temporelle des récurrences de type diviser pour régner T(n) = aT(n/b) + f(n)",
+    "description": "Le théorème maître est l'outil standard pour analyser les récurrences des algorithmes de type diviser pour régner. Selon la relation entre le nombre de sous-problèmes a, le facteur de réduction de taille b et le coût de recombinaison f(n), il distingue trois cas et donne immédiatement une complexité temporelle sous forme close.",
+    "discoverer": "Jon Bentley, Dorothea Haken et James B. Saxe",
+    "field": "Informatique",
+    "significance": "Outil central de l'analyse des algorithmes diviser pour régner, il permet de déterminer aussitôt la complexité du tri fusion, de la recherche dichotomique ou de la multiplication matricielle de Strassen.",
+    "elementMeanings": {
+      "T(n)": { "role": "Fonction de temps", "description": "Temps d'exécution de l'algorithme pour une entrée de taille n.", "kind": "output" },
+      "a": { "role": "Nombre de sous-problèmes", "description": "Nombre de sous-problèmes issus de la division récursive. C'est un entier supérieur ou égal à 1.", "kind": "input" },
+      "n/b": { "role": "Taille des sous-problèmes", "description": "Taille de l'entrée de chaque sous-problème. b est une constante strictement supérieure à 1.", "kind": "input" },
+      "f(n)": { "role": "Coût de recombinaison", "description": "Coût non récursif des étapes de division et de recombinaison.", "kind": "input" },
+      "\\log_b a": { "role": "Exposant critique", "description": "Valeur de référence que l'on compare au degré polynomial de f(n) pour trancher entre les trois cas.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Obtenir O(n log n) à partir de T(n) = 2T(n/2) + O(n) pour le tri fusion",
+      "Obtenir O(log n) à partir de T(n) = T(n/2) + O(1) pour la recherche dichotomique",
+      "Analyser T(n) = 7T(n/2) + O(n^2) pour la multiplication matricielle de Strassen"
+    ],
+    "relatedFormulas": ["comparison-sort-bound"]
+  },
+  "hamming-distance": {
+    "name": "Distance de Hamming",
+    "oneLiner": "Mesure de distance qui compte le nombre de positions où deux chaînes de même longueur diffèrent",
+    "description": "La distance de Hamming se définit comme le nombre de positions où deux chaînes binaires (ou plus généralement deux chaînes de caractères) de même longueur diffèrent. C'est un concept clé de la théorie des codes détecteurs et correcteurs d'erreurs, utilisé directement pour mesurer combien de bits ont été inversés lors d'une transmission de données.",
+    "discoverer": "Richard Hamming",
+    "field": "Informatique",
+    "significance": "Elle sert de base à la conception des codes correcteurs d'erreurs (code de Hamming) et est largement employée dans les systèmes de communication, la comparaison de séquences d'ADN et la recherche par similarité.",
+    "elementMeanings": {
+      "x": { "role": "Première chaîne", "description": "L'une des deux chaînes à comparer.", "kind": "input" },
+      "y": { "role": "Seconde chaîne", "description": "L'autre des deux chaînes à comparer.", "kind": "input" },
+      "d(x,y)": { "role": "Distance de Hamming", "description": "Nombre de positions où x et y diffèrent.", "kind": "output" },
+      "n": { "role": "Longueur des chaînes", "description": "Longueur commune aux deux chaînes.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Détecter le nombre d'erreurs binaires dans les données reçues sur un réseau",
+      "Fixer la distance de Hamming minimale lors de la conception de la capacité de correction d'un code QR",
+      "Mesurer le nombre de mutations d'un ADN par la distance de Hamming en bio-informatique"
+    ],
+    "relatedFormulas": ["password-entropy"]
+  },
+  "boolean-complement": {
+    "name": "Loi du complément en algèbre de Boole",
+    "oneLiner": "Loi fondamentale de l'algèbre de Boole selon laquelle la somme logique d'une variable et de son complément vaut toujours 1 (vrai)",
+    "description": "La loi du complément énonce que la disjonction (OU) d'une variable A et de sa négation A' vaut toujours 1, tandis que leur conjonction (ET) vaut toujours 0. C'est la règle la plus élémentaire de simplification des expressions logiques, appliquée systématiquement en conception de circuits numériques et en programmation.",
+    "discoverer": "George Boole",
+    "field": "Informatique",
+    "significance": "Point de départ de l'optimisation des circuits logiques numériques et de la simplification des expressions logiques, elle est à la base de tous les théorèmes de l'algèbre de Boole.",
+    "elementMeanings": {
+      "A": { "role": "Variable logique", "description": "Variable booléenne qui prend la valeur vrai (1) ou faux (0).", "kind": "input" },
+      "A'": { "role": "Complément", "description": "Négation de A. Si A vaut 1, il vaut 0 ; si A vaut 0, il vaut 1.", "kind": "structural" },
+      "+": { "role": "Somme logique (OU)", "description": "Elle représente l'opération OU en algèbre de Boole.", "kind": "structural" },
+      "1": { "role": "Valeur toujours vraie", "description": "Valeur constamment vraie. Elle montre que le résultat de la disjonction vaut nécessairement 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Appliquer la loi du complément lors de la minimisation d'une expression logique par table de Karnaugh",
+      "Vérifier que x | ~x == 1 en optimisant des opérations sur les bits en programmation",
+      "Supprimer les portes inutiles lors de la conception d'un circuit FPGA"
+    ],
+    "relatedFormulas": ["de-morgan"]
+  },
+  "handshaking-lemma": {
+    "name": "Lemme des poignées de main",
+    "oneLiner": "Lemme selon lequel la somme des degrés de tous les sommets d'un graphe est égale au double du nombre d'arêtes",
+    "description": "Le lemme des poignées de main découle du fait que, dans un graphe non orienté, chaque arête contribue au degré d'exactement deux sommets. La somme de tous les degrés est donc toujours paire, et le nombre de sommets de degré impair est lui aussi nécessairement pair.",
+    "discoverer": "Leonhard Euler",
+    "field": "Informatique",
+    "significance": "Théorème le plus élémentaire de la théorie des graphes, il fonde l'analyse de réseaux, la caractérisation des chemins eulériens et la validation de la cohérence d'un graphe.",
+    "elementMeanings": {
+      "\\sum \\deg(v)": { "role": "Somme des degrés", "description": "Somme, sur tous les sommets du graphe, du nombre d'arêtes qui leur sont incidentes.", "kind": "output" },
+      "2|E|": { "role": "Double du nombre d'arêtes", "description": "Le nombre total d'arêtes multiplié par 2. Comme chaque arête contribue à deux sommets, ce nombre égale la somme des degrés.", "kind": "output" },
+      "\\deg(v)": { "role": "Degré d'un sommet", "description": "Nombre d'arêtes incidentes au sommet v.", "kind": "input" },
+      "|E|": { "role": "Nombre d'arêtes", "description": "Nombre total d'arêtes du graphe.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analyser la relation entre le nombre total de liens d'amitié et le nombre de connexions par personne dans un réseau social",
+      "Contrôler la cohérence entre le nombre de ports et le nombre de liens lors de la validation d'une topologie de réseau informatique",
+      "Vérifier la condition préalable à l'existence d'un chemin ou d'un circuit eulérien"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  },
+  "password-entropy": {
+    "name": "Entropie d'un mot de passe",
+    "oneLiner": "Formule qui mesure en bits la quantité d'information d'un mot de passe à partir du nombre de caractères possibles N et de la longueur L",
+    "description": "La formule d'entropie d'un mot de passe convertit en logarithme le nombre de combinaisons obtenues en choisissant L caractères dans un alphabet de taille N, pour donner une quantité d'information en bits. Plus l'entropie est élevée, plus la résistance aux attaques par force brute est forte : c'est le critère quantitatif sur lequel s'appuient les politiques de sécurité.",
+    "discoverer": "Claude Shannon (notion d'entropie de l'information)",
+    "field": "Informatique",
+    "significance": "Mesure standard pour évaluer objectivement la robustesse d'un mot de passe en sécurité informatique, elle fournit une base quantitative aux politiques de sécurité et à la conception des systèmes d'authentification.",
+    "elementMeanings": {
+      "H": { "role": "Entropie", "description": "Quantité d'information en bits. C'est le logarithme du nombre moyen d'essais nécessaires lors d'une attaque par force brute.", "kind": "output" },
+      "N": { "role": "Taille de l'alphabet", "description": "Nombre de caractères distincts utilisables. Il vaut 26 avec les seules minuscules et dépasse 90 avec majuscules, chiffres et caractères spéciaux.", "kind": "input" },
+      "L": { "role": "Longueur du mot de passe", "description": "Nombre de caractères qui composent le mot de passe.", "kind": "input" },
+      "\\log_2": { "role": "Logarithme binaire", "description": "Fonction qui convertit un nombre de cas en bits.", "kind": "structural" },
+      "N^L": { "role": "Nombre total de cas", "description": "Nombre de combinaisons possibles de mots de passe.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Implémenter un indicateur de robustesse du mot de passe lors de l'inscription sur un site web",
+      "Fixer un seuil minimal d'entropie de mot de passe dans la politique de sécurité d'une entreprise",
+      "Comparer la robustesse d'une phrase de passe et celle d'une chaîne de caractères aléatoire"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "compound-interest": {
+    "name": "复利",
+    "oneLiner": "不仅本金、连此前产生的利息也要计息的计算方式",
+    "description": "复利是把利息加到本金上之后再对总额计息的方式，随着时间推移资产会呈几何级数增长。最终金额会随计息频率（年、月、日等）而不同，频率越高总收益越大。它是储蓄、贷款、投资分析中最基本的计算方法。",
+    "field": "金融",
+    "significance": "它是长期储蓄与投资中资产增长的核心原理，也是计算贷款利息、规划退休资金、比较投资收益的基础。",
+    "elementMeanings": {
+      "A": { "role": "最终金额", "description": "一定期间之后本金与利息合计的总金额。", "kind": "output" },
+      "P": { "role": "本金", "description": "最初投资或存入的金额。", "kind": "input" },
+      "r": { "role": "年利率", "description": "每年的利率（用小数表示）。例如 5% 就是 0.05。", "kind": "input" },
+      "n": { "role": "每年计息次数", "description": "一年中计算利息的次数。按月复利就是 12。", "kind": "input" },
+      "t": { "role": "期限", "description": "投资的期限（以年为单位）。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "计算零存整取到期时可领取的金额",
+      "核算住房抵押贷款的利息总额",
+      "比较长期投资的复利效果"
+    ],
+    "relatedFormulas": ["present-value", "annuity-pv", "rule-of-72"]
+  },
+  "present-value": {
+    "name": "现值",
+    "oneLiner": "把将来才收到的金额折算成当前时点价值的数值",
+    "description": "现值是把未来的现金流施加折现率、换算成当前时点等价价值的概念。它反映货币的时间价值，基于未来的钱价值低于现在这一原理。它在投资决策、债券估值、企业价值评估中被核心使用。",
+    "field": "金融",
+    "significance": "它使不同时点的现金流可以互相比较，构成了投资评估、企业估值与财务决策的根基。",
+    "elementMeanings": {
+      "PV": { "role": "现值", "description": "未来金额在当前时点的等价价值。", "kind": "output" },
+      "FV": { "role": "终值", "description": "在未来某个特定时点收取或支付的金额。", "kind": "input" },
+      "r": { "role": "折现率", "description": "把未来现金流换算到当前时所采用的利率。", "kind": "input" },
+      "n": { "role": "期限", "description": "从现在到未来现金流发生时点之间的期数。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "算出债券的合理价格",
+      "评估经营项目的投资价值（NPV 分析）",
+      "比较彩票一次性领取金额与分期领取金额"
+    ],
+    "relatedFormulas": ["compound-interest", "annuity-pv", "black-scholes"]
+  },
+  "black-scholes": {
+    "name": "布莱克-斯科尔斯模型",
+    "oneLiner": "算出欧式看涨期权理论价格的期权定价模型",
+    "description": "布莱克-斯科尔斯模型以标的资产价格、行权价、到期时间、无风险利率、波动率为输入，计算欧式期权的公允价格。它在标的资产服从几何布朗运动的假设下，运用无套利原理推导得出。它是现代衍生品市场的理论基础，也是金融工程的核心模型。",
+    "discoverer": "费希尔·布莱克、迈伦·斯科尔斯",
+    "field": "金融",
+    "significance": "它提出了期权价格的理论基准，带动了衍生品市场的诞生与发展，是获得 1997 年诺贝尔经济学奖的公式。",
+    "elementMeanings": {
+      "C": { "role": "看涨期权价格", "description": "欧式看涨期权的理论当前价格。", "kind": "output" },
+      "S": { "role": "标的资产现价", "description": "作为期权基础的资产当前的市场价格。", "kind": "input" },
+      "K": { "role": "行权价", "description": "期权持有者可以买入标的资产的约定价格。", "kind": "input" },
+      "r": { "role": "无风险利率", "description": "到期为止的无风险收益率。", "kind": "input" },
+      "T": { "role": "距到期的期限", "description": "距期权到期所剩的时间（以年为单位）。", "kind": "input" },
+      "N(d)": { "role": "标准正态分布累积函数", "description": "标准正态分布的累积分布函数值，起概率权重的作用。", "kind": "structural" },
+      "d_1": { "role": "第一参数", "description": "把标的资产价格与行权价的关系用波动率调整后的值。", "kind": "output" },
+      "d_2": { "role": "第二参数", "description": "从 d_1 中减去波动率项所得的值，与行权概率相关。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "算出股票看涨期权的理论价格",
+      "在期权市场中反推隐含波动率",
+      "衍生品投资组合的风险管理"
+    ],
+    "relatedFormulas": ["present-value", "capm", "sharpe-ratio"]
+  },
+  "capm": {
+    "name": "资本资产定价模型",
+    "oneLiner": "按资产的系统性风险算出预期收益率的模型",
+    "description": "CAPM 说明，单项资产的预期收益率等于无风险收益率加上市场风险溢价的贝塔倍。贝塔表示单项资产对市场整体波动的敏感度。它是效率市场假说的核心模型，主张只有无法分散的系统性风险才会得到补偿。",
+    "discoverer": "威廉·夏普",
+    "field": "金融",
+    "significance": "它把风险与预期收益的关系定量化，是资产定价、资本成本估算与投资组合业绩评估的标准框架。",
+    "elementMeanings": {
+      "E(R_i)": { "role": "资产的预期收益率", "description": "单项资产 i 的预期收益率。", "kind": "output" },
+      "R_f": { "role": "无风险收益率", "description": "没有风险的投资（如国债）的收益率。", "kind": "input" },
+      "\\beta_i": { "role": "贝塔", "description": "资产 i 的系统性风险指标，即对市场收益率波动的敏感度。", "kind": "input" },
+      "E(R_m)": { "role": "市场预期收益率", "description": "市场投资组合整体的预期收益率。", "kind": "input" },
+      "E(R_m) - R_f": { "role": "市场风险溢价", "description": "投资市场相对于无风险资产额外期望获得的收益。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "估算新投资项目的折现率（资本成本）",
+      "评估基金经理的超额收益",
+      "算出股票的合理预期收益率"
+    ],
+    "relatedFormulas": ["sharpe-ratio", "black-scholes", "present-value"]
+  },
+  "sharpe-ratio": {
+    "name": "夏普比率",
+    "oneLiner": "衡量每单位风险所获超额收益、用以评价投资业绩的指标",
+    "description": "夏普比率是用投资组合收益率减去无风险收益率所得的超额收益，再除以投资组合收益率的标准差。数值越大表示相对于所承担的风险取得了越高的收益。它是比较不同投资策略或基金的风险调整后业绩时使用最广泛的指标。",
+    "discoverer": "威廉·夏普",
+    "field": "金融",
+    "significance": "它使投资业绩能够按风险作公平比较，被标准地用于基金评价与资产配置决策。",
+    "elementMeanings": {
+      "S": { "role": "夏普比率", "description": "风险调整后的收益率指标，越高表示投资越有效率。", "kind": "output" },
+      "R_p": { "role": "投资组合收益率", "description": "投资组合已实现或预期的收益率。", "kind": "input" },
+      "R_f": { "role": "无风险收益率", "description": "国债等无风险资产的收益率。", "kind": "input" },
+      "\\sigma_p": { "role": "投资组合标准差", "description": "投资组合收益率的波动性，表示总风险。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "比较各只共同基金之间的业绩",
+      "评估对冲基金的风险调整后收益率",
+      "判断资产配置策略的效率"
+    ],
+    "relatedFormulas": ["capm", "standard-deviation"]
+  },
+  "annuity-pv": {
+    "name": "年金现值",
+    "oneLiner": "在一定期间内定期支付的固定金额的现值总和",
+    "description": "年金现值公式计算每期领取相同金额的普通年金在当前时点的总价值。它不必逐笔折现每期支付额，而可以利用等比数列求和公式一次求出。它是核算贷款还款额、设计养老金、评估租赁合同时不可或缺的公式。",
+    "field": "金融",
+    "significance": "它能高效地算出定期支付现金流的价值，是贷款、年金与债券估值的实务标准。",
+    "elementMeanings": {
+      "PV": { "role": "现值", "description": "年金全部支付额在当前时点的等价价值。", "kind": "output" },
+      "PMT": { "role": "每期支付额", "description": "每一期固定支付的金额。", "kind": "input" },
+      "r": { "role": "每期折现率", "description": "适用于一个期间的折现率。", "kind": "input" },
+      "n": { "role": "总期数", "description": "年金支付的全部期间的次数。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "计算每月住房抵押贷款的还款额",
+      "算出养老金一次性领取时的折算金额",
+      "比较汽车租赁合同的总成本"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest"]
+  },
+  "rule-of-72": {
+    "name": "72 法则",
+    "oneLiner": "快速估算投资本金翻倍所需时间的法则",
+    "description": "72 法则是一种简便算法：用 72 除以年利率（%），就能求出本金翻倍所需的大致年数。它让人可以直观地把握复利效果，在 6~10% 区间的利率下尤其准确。它在快速财务决策与投资比较中很实用。",
+    "field": "金融",
+    "significance": "它是一种实用的金融工具，不必作复杂的复利计算就能直观估算投资的增长速度。",
+    "elementMeanings": {
+      "t": { "role": "翻倍所需期限", "description": "本金翻倍所需要的大致期限（以年为单位）。", "kind": "output" },
+      "r": { "role": "年利率", "description": "每年的收益率（百分数）。例如年 8% 时 r = 8。", "kind": "input" },
+      "72": { "role": "常数", "description": "与 ln(2) 相关的近似常数，用于估算复利增长的翻倍期限。", "kind": "constant", "value": 72 }
+    },
+    "realWorldExamples": [
+      "快速算出年收益率 6% 的投资约 12 年本金翻倍",
+      "估算通货膨胀率 3% 时物价翻倍所需的期限",
+      "比较不同利率的投资产品之间的增长速度"
+    ],
+    "relatedFormulas": ["compound-interest", "present-value"]
+  },
+  "duration": {
+    "name": "久期",
+    "oneLiner": "债券现金流的加权平均到期期限，用以衡量价格对利率变动敏感度的指标",
+    "description": "久期是把债券各笔现金流发生的时点，按该笔现金流现值所占比重作加权平均所得的值。它也叫麦考利久期，是表示利率变动时债券价格会变动多少的核心风险尺度。它对债券投资组合管理与免疫策略设计不可或缺。",
+    "discoverer": "弗雷德里克·麦考利",
+    "field": "金融",
+    "significance": "它把利率风险定量化，是制定债券投资策略、资产负债匹配与投资组合免疫的核心工具。",
+    "elementMeanings": {
+      "D": { "role": "久期", "description": "按现金流现值加权的平均到期期限（以年为单位）。", "kind": "output" },
+      "t": { "role": "现金流发生时点", "description": "每笔现金流发生的时点（以年为单位）。", "kind": "input" },
+      "PV(CF_t)": { "role": "现金流的现值", "description": "把时点 t 发生的现金流折现所得的现值。", "kind": "input" },
+      "P": { "role": "债券价格", "description": "全部现金流现值之和，也就是债券的市场价格。", "kind": "input" },
+      "\\Sigma": { "role": "求和符号", "description": "对所有现金流时点作求和的运算。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "预测利率上调时债券投资组合的损失",
+      "制定养老基金的资产负债匹配策略",
+      "比较不同债券的利率敏感度"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest", "capm"]
+  }
+}

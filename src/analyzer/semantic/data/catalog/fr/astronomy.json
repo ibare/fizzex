@@ -1,0 +1,600 @@
+{
+  "kepler-third": {
+    "name": "Troisième loi de Kepler",
+    "oneLiner": "Plus l'orbite est haute, plus la révolution est lente",
+    "description": "Le carré de la période de révolution est proportionnel au cube du rayon de l'orbite. Les planètes, les lunes et les satellites artificiels obéissent tous à cette loi.",
+    "discoverer": "Johannes Kepler",
+    "field": "Mécanique céleste",
+    "significance": "En établissant mathématiquement la régularité du mouvement des planètes, elle a préparé le terrain à la mécanique de Newton ; elle est aujourd'hui essentielle à l'analyse des orbites des exoplanètes et des satellites.",
+    "elementMeanings": {
+      "T": {
+        "role": "Période de révolution",
+        "kind": "output",
+        "unit": "s",
+        "description": "Le temps que met le satellite à faire un tour de la Terre"
+      },
+      "T^2": {
+        "role": "Carré de la période de révolution",
+        "kind": "output",
+        "unit": "s²",
+        "description": "Une quantité proportionnelle au cube du rayon de l'orbite"
+      },
+      "4pi2": {
+        "role": "4π²",
+        "kind": "constant",
+        "value": 39.478,
+        "description": "Constante issue des propriétés géométriques de l'orbite circulaire ≈ 39,48"
+      },
+      "G": {
+        "role": "Constante de gravitation universelle",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante fondamentale qui fixe l'intensité de la gravitation. Comme elle est extrêmement petite, il faut au quotidien une masse aussi énorme que celle de la Terre pour que la gravitation se fasse sentir"
+      },
+      "M": {
+        "role": "Masse de la Terre",
+        "kind": "constant",
+        "value": 5.972e24,
+        "unit": "kg",
+        "description": "Plus l'astre central est massif, plus il attire fortement son satellite. Sur une même orbite autour de Jupiter, la période serait bien plus courte"
+      },
+      "a": {
+        "role": "Rayon de l'orbite",
+        "kind": "input",
+        "unit": "km",
+        "description": "La distance entre le satellite et le centre de la Terre. Comme elle intervient au cube, une petite variation change beaucoup la période"
+      },
+      "a^3": {
+        "role": "Cube du rayon",
+        "kind": "output",
+        "unit": "km³",
+        "description": "La raison pour laquelle relever un peu l'orbite allonge fortement la période"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Rayon de l'orbite",
+        "min": 6500,
+        "max": 400000,
+        "default": 6771,
+        "step": 1,
+        "unit": "km",
+        "scale": "log",
+        "effects": [
+          {
+            "range": [
+              6500,
+              8000
+            ],
+            "description": "Orbite basse (LEO). La gravité y est forte : il faut tourner vite pour ne pas retomber. Un tour en 90 minutes, et 16 levers de soleil par jour."
+          },
+          {
+            "range": [
+              8000,
+              35000
+            ],
+            "description": "Orbite moyenne. La gravité est plus faible, on peut donc tourner plus lentement. Les satellites GPS font exactement deux tours par jour."
+          },
+          {
+            "range": [
+              35000,
+              50000
+            ],
+            "description": "Près de l'orbite géostationnaire. Un tour en exactement 24 heures : vu de la Terre, le satellite semble fixe dans le ciel, ce qui sert à la diffusion télévisée."
+          },
+          {
+            "range": [
+              50000,
+              400000
+            ],
+            "description": "Orbite haute. En approchant de la Lune, la gravité terrestre s'affaiblit beaucoup. La Lune met 27 jours à faire un tour."
+          }
+        ]
+      }
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "Période de révolution",
+        "unit": "h",
+        "format": "time",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "custom",
+          "sourceParam": "a"
+        },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "Vitesse orbitale",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": [
+          "a"
+        ],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "Altitude",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "subtract",
+          "sourceParam": "a",
+          "operand": 6371
+        }
+      },
+      {
+        "id": "earthRatio",
+        "label": "Par rapport au rayon terrestre",
+        "unit": "×",
+        "format": "number",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "divide",
+          "sourceParam": "a",
+          "operand": 6371
+        }
+      }
+    ],
+    "constraints": [
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6371,
+        "severity": "error",
+        "message": "En dessous du rayon terrestre (6 371 km) on se trouve à l'intérieur de la Terre : aucune orbite n'est possible"
+      },
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6571,
+        "severity": "warning",
+        "message": "En dessous de 200 km d'altitude, la résistance de l'atmosphère fait rapidement décliner l'orbite"
+      }
+    ],
+    "milestones": [
+      {
+        "param": "a",
+        "value": 6771,
+        "label": "Orbite de l'ISS",
+        "shortLabel": "ISS",
+        "emoji": "🛸",
+        "description": "Altitude 400 km. Un tour en 90 minutes, 16 levers de soleil par jour"
+      },
+      {
+        "param": "a",
+        "value": 26560,
+        "label": "Orbite GPS",
+        "shortLabel": "GPS",
+        "emoji": "📡",
+        "description": "Altitude 20 200 km. Période d'exactement 12 heures"
+      },
+      {
+        "param": "a",
+        "value": 42164,
+        "label": "Orbite géostationnaire",
+        "shortLabel": "GEO",
+        "emoji": "📺",
+        "description": "Altitude 35 786 km. Exactement 24 heures — le satellite paraît fixe dans le ciel"
+      },
+      {
+        "param": "a",
+        "value": 384400,
+        "label": "Lune",
+        "shortLabel": "Lune",
+        "emoji": "🌙",
+        "description": "Période de 27,3 jours. L'astre le plus proche de la Terre"
+      }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          {
+            "range": [
+              0,
+              500
+            ],
+            "template": "environ {ratio} fois l'altitude de croisière d'un avion de ligne (10 km)",
+            "referenceValue": 10,
+            "referenceLabel": "altitude de croisière d'un avion de ligne"
+          },
+          {
+            "range": [
+              500,
+              5000
+            ],
+            "template": "une hauteur d'environ {ratio} fois la distance Paris-Rennes ({ref} km)",
+            "referenceValue": 325,
+            "referenceLabel": "distance Paris-Rennes"
+          },
+          {
+            "range": [
+              5000,
+              50000
+            ],
+            "template": "environ {ratio} fois le diamètre de la Terre ({ref} km)",
+            "referenceValue": 12742,
+            "referenceLabel": "diamètre de la Terre"
+          },
+          {
+            "range": [
+              50000,
+              400000
+            ],
+            "template": "environ {ratio} % de la distance Terre-Lune",
+            "referenceValue": 384400,
+            "referenceLabel": "distance Terre-Lune"
+          }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "Calculer la masse du Soleil à partir de la période de révolution et du rayon orbital de la Terre",
+      "Estimer la taille de l'orbite d'une exoplanète en observant sa période de révolution",
+      "Concevoir la période de révolution d'un satellite en fonction de l'altitude de son orbite"
+    ],
+    "relatedFormulas": [
+      "universal-gravitation",
+      "escape-velocity"
+    ]
+  },
+  "hubble-law": {
+    "name": "Loi de Hubble",
+    "oneLiner": "Loi de l'expansion de l'Univers selon laquelle la vitesse de fuite d'une galaxie lointaine est proportionnelle à sa distance",
+    "description": "La loi de Hubble énonce que plus une galaxie est lointaine, plus elle s'éloigne de nous rapidement, et que cette vitesse de fuite est directement proportionnelle à la distance. La constante de proportionnalité, la constante de Hubble, mesure le taux d'expansion de l'Univers et joue un rôle central dans l'estimation de son âge. C'est l'une des preuves observationnelles les plus solides de la cosmologie du Big Bang.",
+    "discoverer": "Edwin Hubble",
+    "field": "Astronomie",
+    "significance": "En démontrant par l'observation que l'Univers est en expansion, elle a fourni le point de départ de la cosmologie moderne.",
+    "elementMeanings": {
+      "v": {
+        "role": "Vitesse de fuite",
+        "kind": "output",
+        "unit": "km/s",
+        "description": "La vitesse à laquelle la galaxie s'éloigne de l'observateur. Unité : km/s."
+      },
+      "H_0": {
+        "role": "Constante de Hubble",
+        "kind": "constant",
+        "value": 70,
+        "unit": "km/s/Mpc",
+        "description": "Le taux d'expansion actuel de l'Univers. Environ 70 km/s/Mpc."
+      },
+      "d": {
+        "role": "Distance",
+        "kind": "input",
+        "unit": "Mpc",
+        "description": "La distance de l'observateur à la galaxie. Unité : mégaparsec (Mpc)."
+      }
+    },
+    "realWorldExamples": [
+      "Estimer la distance d'une galaxie à partir de son décalage vers le rouge",
+      "Calculer l'âge de l'Univers (environ 13,8 milliards d'années)",
+      "Étudier l'accélération éventuelle de l'expansion de l'Univers"
+    ],
+    "relatedFormulas": [
+      "schwarzschild-radius",
+      "gravitational-lensing"
+    ]
+  },
+  "schwarzschild-radius": {
+    "name": "Rayon de Schwarzschild",
+    "oneLiner": "Formule qui donne le rayon critique en deçà duquel un corps devient un trou noir",
+    "description": "Le rayon de Schwarzschild est le rayon minimal auquel un corps d'une masse donnée doit être comprimé pour devenir un trou noir. Si la masse est comprimée à l'intérieur de ce rayon, il se forme un horizon des événements dont même la lumière ne peut s'échapper. Ce résultat découle de la solution de Schwarzschild en relativité générale.",
+    "discoverer": "Karl Schwarzschild",
+    "field": "Astronomie",
+    "significance": "En définissant quantitativement la taille d'un trou noir, il a établi une notion centrale de l'astrophysique relativiste.",
+    "elementMeanings": {
+      "r_s": {
+        "role": "Rayon de Schwarzschild",
+        "kind": "output",
+        "unit": "m",
+        "description": "Le rayon de l'horizon des événements. Unité : mètre (m)."
+      },
+      "G": {
+        "role": "Constante gravitationnelle",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitation universelle. Environ 6,674×10⁻¹¹ N·m²/kg²."
+      },
+      "M": {
+        "role": "Masse",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse de l'astre. Unité : kg."
+      },
+      "c": {
+        "role": "Vitesse de la lumière",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "La vitesse de la lumière dans le vide. Environ 3×10⁸ m/s."
+      },
+      "c^2": {
+        "role": "Carré de la vitesse de la lumière",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Placé au dénominateur, il traduit le fait que le rayon croît avec la masse."
+      }
+    },
+    "realWorldExamples": [
+      "Calculer le rayon de Schwarzschild du Soleil (environ 3 km)",
+      "Estimer la taille de l'horizon des événements d'un trou noir supermassif",
+      "Analyser la condition critique d'effondrement d'une étoile à neutrons en trou noir"
+    ],
+    "relatedFormulas": [
+      "mass-energy",
+      "escape-velocity",
+      "gravitational-lensing"
+    ]
+  },
+  "stefan-boltzmann": {
+    "name": "Loi de Stefan-Boltzmann",
+    "oneLiner": "Loi selon laquelle la luminosité totale d'une étoile est proportionnelle au carré de son rayon et à la puissance quatrième de sa température de surface",
+    "description": "La loi de Stefan-Boltzmann énonce que l'énergie totale rayonnée par un corps noir (sa luminosité) est proportionnelle à sa surface et à la puissance quatrième de sa température de surface. Pour une étoile, connaître le rayon et la température de surface permet de calculer la luminosité totale et, inversement, la luminosité et la température permettent d'estimer la taille de l'étoile.",
+    "discoverer": "Josef Stefan, Ludwig Boltzmann",
+    "field": "Astronomie",
+    "significance": "En quantifiant les relations entre les propriétés physiques des étoiles (taille, température, luminosité), elle est devenue le fondement de leur classification et des théories de leur évolution.",
+    "elementMeanings": {
+      "L": {
+        "role": "Luminosité",
+        "kind": "output",
+        "unit": "W",
+        "description": "L'énergie totale émise par l'étoile par unité de temps. Unité : watt (W)."
+      },
+      "R": {
+        "role": "Rayon de l'étoile",
+        "kind": "input",
+        "unit": "m",
+        "description": "Le rayon de l'étoile. Unité : mètre (m)."
+      },
+      "R^2": {
+        "role": "Carré du rayon",
+        "kind": "structural",
+        "description": "Le facteur proportionnel à la surface (4πR²)."
+      },
+      "\\sigma": {
+        "role": "Constante de Stefan-Boltzmann",
+        "kind": "constant",
+        "value": 5.670e-8,
+        "unit": "W/(m²·K⁴)",
+        "description": "Environ 5,67×10⁻⁸ W/(m²·K⁴)."
+      },
+      "T": {
+        "role": "Température de surface",
+        "kind": "input",
+        "unit": "K",
+        "description": "La température effective de la surface de l'étoile. Unité : kelvin (K)."
+      },
+      "T^4": {
+        "role": "Puissance quatrième de la température",
+        "kind": "structural",
+        "description": "Si la température double, la luminosité est multipliée par 16. C'est une relation fortement non linéaire."
+      }
+    },
+    "realWorldExamples": [
+      "Estimer le rayon d'une étoile à partir de sa température de surface et de sa luminosité",
+      "Comparer les tailles d'une géante rouge et d'une naine blanche",
+      "Interpréter la position d'une étoile dans le diagramme HR (Hertzsprung-Russell)"
+    ],
+    "relatedFormulas": [
+      "wien-displacement",
+      "mass-energy"
+    ]
+  },
+  "wien-displacement": {
+    "name": "Loi du déplacement de Wien",
+    "oneLiner": "Loi selon laquelle la longueur d'onde du maximum du rayonnement du corps noir est inversement proportionnelle à la température",
+    "description": "La loi du déplacement de Wien énonce que la longueur d'onde à laquelle un corps noir rayonne le plus intensément est inversement proportionnelle à sa température. Plus la température est élevée, plus cette longueur d'onde est courte et se déplace vers le bleu ; plus la température est basse, plus elle est grande et se déplace vers le rouge. Cette loi permet d'estimer la température de surface d'une étoile à partir de sa seule couleur.",
+    "discoverer": "Wilhelm Wien",
+    "field": "Astronomie",
+    "significance": "En établissant la relation quantitative entre la couleur et la température d'une étoile, elle a fourni la base de l'observation astronomique par spectroscopie.",
+    "elementMeanings": {
+      "\\lambda_{max}": {
+        "role": "Longueur d'onde du maximum de rayonnement",
+        "kind": "output",
+        "unit": "m",
+        "description": "La longueur d'onde où l'intensité du spectre du corps noir est maximale. Unité : mètre (m)."
+      },
+      "b": {
+        "role": "Constante du déplacement de Wien",
+        "kind": "constant",
+        "value": 2.898e-3,
+        "unit": "m·K",
+        "description": "Environ 2,898×10⁻³ m·K."
+      },
+      "T": {
+        "role": "Température",
+        "kind": "input",
+        "unit": "K",
+        "description": "La température absolue du corps noir. Unité : kelvin (K)."
+      }
+    },
+    "realWorldExamples": [
+      "Estimer la température de surface d'une étoile d'après sa couleur (les étoiles bleues sont chaudes, les rouges sont froides)",
+      "Mesurer la température de surface du Soleil (environ 5 778 K, dans le jaune)",
+      "Observer les astres froids avec un télescope infrarouge"
+    ],
+    "relatedFormulas": [
+      "stefan-boltzmann"
+    ]
+  },
+  "drake-equation": {
+    "name": "Équation de Drake",
+    "oneLiner": "Équation probabiliste qui estime le nombre de civilisations intelligentes avec lesquelles nous pourrions communiquer dans notre galaxie",
+    "description": "L'équation de Drake estime, comme un produit de plusieurs facteurs probabilistes, le nombre de civilisations de notre galaxie qui émettent aujourd'hui des signaux radio détectables. Ces facteurs vont du taux de formation des étoiles à la durée de vie d'une civilisation ; la plupart de leurs valeurs restent incertaines, mais l'équation oriente méthodiquement la recherche d'une intelligence extraterrestre (SETI).",
+    "discoverer": "Frank Drake",
+    "field": "Astronomie",
+    "significance": "En organisant scientifiquement la question de la recherche d'intelligences extraterrestres, elle a donné au programme SETI son cadre théorique.",
+    "elementMeanings": {
+      "N": {
+        "role": "Nombre de civilisations contactables",
+        "kind": "output",
+        "description": "Le nombre de civilisations de la galaxie qui émettent actuellement des signaux détectables."
+      },
+      "R_*": {
+        "role": "Taux de formation des étoiles",
+        "kind": "input",
+        "unit": "/yr",
+        "description": "Le nombre d'étoiles nouvellement formées chaque année dans la galaxie."
+      },
+      "f_p": {
+        "role": "Proportion d'étoiles à planètes",
+        "kind": "input",
+        "description": "La proportion d'étoiles qui possèdent un système planétaire."
+      },
+      "n_e": {
+        "role": "Nombre de planètes habitables",
+        "kind": "input",
+        "description": "Le nombre de planètes situées dans la zone habitable, par système planétaire."
+      },
+      "f_l": {
+        "role": "Proportion d'apparition de la vie",
+        "kind": "input",
+        "description": "La probabilité que la vie apparaisse effectivement sur une planète habitable."
+      },
+      "f_i": {
+        "role": "Proportion de vie intelligente",
+        "kind": "input",
+        "description": "La probabilité que la vie évolue jusqu'à l'intelligence."
+      },
+      "f_c": {
+        "role": "Proportion de civilisations communicantes",
+        "kind": "input",
+        "description": "La probabilité qu'une vie intelligente développe une technique capable d'émettre des signaux détectables."
+      },
+      "L": {
+        "role": "Durée de vie d'une civilisation",
+        "kind": "input",
+        "unit": "yr",
+        "description": "La durée pendant laquelle une civilisation contactable émet des signaux. Unité : année."
+      }
+    },
+    "realWorldExamples": [
+      "Définir une stratégie de recherche dans le cadre du programme SETI",
+      "Mettre à jour les valeurs de f_p et n_e grâce aux découvertes d'exoplanètes",
+      "Discuter quantitativement du paradoxe de Fermi (pourquoi n'observe-t-on aucune trace de civilisation extraterrestre ?)"
+    ],
+    "relatedFormulas": [
+      "hubble-law"
+    ]
+  },
+  "gravitational-lensing": {
+    "name": "Effet de lentille gravitationnelle",
+    "oneLiner": "Formule qui donne l'angle dont un astre très massif dévie la trajectoire de la lumière",
+    "description": "L'effet de lentille gravitationnelle est la déviation que subit la lumière passant près d'un astre très massif, à cause de la courbure de l'espace-temps. L'angle de déviation est proportionnel à la masse de l'astre et inversement proportionnel à la distance minimale à laquelle la lumière passe de lui. C'est une prédiction directe de la relativité générale, vérifiée pour la première fois lors de l'éclipse de 1919.",
+    "discoverer": "Albert Einstein",
+    "field": "Astronomie",
+    "significance": "Premier phénomène à confirmer la relativité générale par l'observation, il est aujourd'hui un outil essentiel pour cartographier la matière noire.",
+    "elementMeanings": {
+      "\\theta": {
+        "role": "Angle de déviation",
+        "kind": "output",
+        "unit": "rad",
+        "description": "L'angle dont la lumière est déviée. Unité : radian (rad)."
+      },
+      "G": {
+        "role": "Constante gravitationnelle",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitation universelle. Environ 6,674×10⁻¹¹ N·m²/kg²."
+      },
+      "M": {
+        "role": "Masse de l'astre-lentille",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse de l'astre qui dévie la lumière. Unité : kg."
+      },
+      "c": {
+        "role": "Vitesse de la lumière",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "La vitesse de la lumière dans le vide. Environ 3×10⁸ m/s."
+      },
+      "c^2": {
+        "role": "Carré de la vitesse de la lumière",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Le facteur qui traduit la correction relativiste."
+      },
+      "b": {
+        "role": "Paramètre d'impact",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distance minimale à laquelle la lumière passe de l'astre-lentille. Unité : mètre (m)."
+      }
+    },
+    "realWorldExamples": [
+      "Observer la déformation des images de galaxies d'arrière-plan par un amas de galaxies",
+      "Rechercher des exoplanètes par microlentille gravitationnelle",
+      "Établir des cartes de la répartition de la matière noire"
+    ],
+    "relatedFormulas": [
+      "schwarzschild-radius",
+      "universal-gravitation"
+    ]
+  },
+  "escape-velocity": {
+    "name": "Vitesse de libération",
+    "oneLiner": "Formule qui donne la vitesse minimale nécessaire pour échapper à l'attraction d'un astre",
+    "description": "La vitesse de libération est la vitesse minimale qu'un objet doit avoir à la surface d'un astre pour quitter définitivement son champ de gravitation. Plus l'astre est massif et plus son rayon est petit, plus cette vitesse est élevée. Au rayon de Schwarzschild, elle atteint la vitesse de la lumière : c'est là que se noue la définition même du trou noir.",
+    "field": "Astronomie",
+    "significance": "Elle est à la base de nombreux problèmes d'astrophysique : lancement de fusées, capacité d'une planète à retenir une atmosphère, conditions de formation d'un trou noir.",
+    "elementMeanings": {
+      "v_e": {
+        "role": "Vitesse de libération",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "La vitesse minimale permettant d'échapper au champ de gravitation. Unité : m/s."
+      },
+      "G": {
+        "role": "Constante gravitationnelle",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitation universelle. Environ 6,674×10⁻¹¹ N·m²/kg²."
+      },
+      "M": {
+        "role": "Masse de l'astre",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse de l'astre dont on veut s'échapper. Unité : kg."
+      },
+      "r": {
+        "role": "Rayon",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distance entre le centre de l'astre et le point de départ. Unité : mètre (m)."
+      }
+    },
+    "realWorldExamples": [
+      "Calculer la vitesse de libération de la Terre (environ 11,2 km/s)",
+      "Expliquer l'absence d'atmosphère de la Lune par sa faible vitesse de libération",
+      "Relier la forte vitesse de libération de Jupiter à son épaisse atmosphère"
+    ],
+    "relatedFormulas": [
+      "universal-gravitation",
+      "schwarzschild-radius",
+      "kepler-third",
+      "kinetic-energy"
+    ]
+  }
+}

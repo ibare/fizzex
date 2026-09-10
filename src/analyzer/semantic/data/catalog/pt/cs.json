@@ -1,0 +1,123 @@
+{
+  "comparison-sort-bound": {
+    "name": "Limite inferior da ordenação por comparação",
+    "oneLiner": "O teorema que garante que a complexidade de tempo no pior caso dos algoritmos de ordenação por comparação não pode ser inferior a O(n log n)",
+    "description": "O teorema do limite inferior da ordenação por comparação demonstra que um algoritmo que ordena usando apenas comparações entre elementos precisa fazer, no pior caso, ao menos O(n log n) comparações. No modelo da árvore de decisão, distinguir n! permutações exige uma altura de pelo menos log2(n!), o que, pela aproximação de Stirling, é O(n log n).",
+    "field": "Ciência da computação",
+    "significance": "Prova que a ordenação por intercalação, a ordenação por heap e outras são assintoticamente ótimas, e delimita com clareza o teto de desempenho da ordenação por comparação.",
+    "elementMeanings": {
+      "n": { "role": "número de elementos", "description": "É a quantidade total de elementos a ordenar.", "kind": "input" },
+      "\\log n": { "role": "fator logarítmico", "description": "É a componente logarítmica do número de comparações, que vem da altura da árvore de decisão.", "kind": "structural" },
+      "n!": { "role": "número de permutações", "description": "É a quantidade de arranjos possíveis de n elementos. É o limite inferior do número de folhas da árvore de decisão.", "kind": "structural" },
+      "\\Omega(n \\log n)": { "role": "notação de limite inferior", "description": "Indica que, no pior caso, o número de comparações é pelo menos proporcional a n log n.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Fundamento teórico para escolher o algoritmo ao ordenar índices de banco de dados",
+      "Análise da complexidade de tempo de soluções baseadas em ordenação em maratonas de programação",
+      "Base da garantia de desempenho das funções de ordenação de bibliotecas (como o Timsort)"
+    ],
+    "relatedFormulas": ["master-theorem"]
+  },
+  "master-theorem": {
+    "name": "Teorema mestre",
+    "oneLiner": "O teorema que classifica em três casos a complexidade de tempo das recorrências de divisão e conquista da forma T(n) = aT(n/b) + f(n)",
+    "description": "O teorema mestre é a ferramenta padrão para analisar as recorrências dos algoritmos de divisão e conquista. Conforme a relação entre o número de subproblemas a, o fator de redução do tamanho b e o custo de combinação f(n), ele classifica a recorrência em três casos e determina de imediato a complexidade de tempo em forma fechada.",
+    "discoverer": "Jon Bentley, Dorothea Haken, James Saxe",
+    "field": "Ciência da computação",
+    "significance": "É a ferramenta central da análise de algoritmos de divisão e conquista, e permite determinar na hora a complexidade da ordenação por intercalação, da busca binária, da multiplicação de matrizes de Strassen e de outros.",
+    "elementMeanings": {
+      "T(n)": { "role": "função de tempo", "description": "É o tempo de execução do algoritmo para uma entrada de tamanho n.", "kind": "output" },
+      "a": { "role": "número de subproblemas", "description": "É a quantidade de subproblemas em que se divide a recursão. É um inteiro maior ou igual a 1.", "kind": "input" },
+      "n/b": { "role": "tamanho do subproblema", "description": "É o tamanho da entrada de cada subproblema. b é uma constante maior que 1.", "kind": "input" },
+      "f(n)": { "role": "custo de combinação", "description": "É o custo não recursivo gasto nas etapas de divisão e de combinação.", "kind": "input" },
+      "\\log_b a": { "role": "expoente crítico", "description": "É o valor de referência que, comparado ao grau polinomial de f(n), determina qual dos três casos se aplica.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Obter O(n log n) a partir de T(n) = 2T(n/2) + O(n) na ordenação por intercalação",
+      "Obter O(log n) a partir de T(n) = T(n/2) + O(1) na busca binária",
+      "Analisar T(n) = 7T(n/2) + O(n^2) na multiplicação de matrizes de Strassen"
+    ],
+    "relatedFormulas": ["comparison-sort-bound"]
+  },
+  "hamming-distance": {
+    "name": "Distância de Hamming",
+    "oneLiner": "A medida de distância que conta em quantas posições correspondentes dois textos de mesmo comprimento diferem",
+    "description": "A distância de Hamming é definida como o número de posições em que duas cadeias binárias (ou cadeias quaisquer) de mesmo comprimento diferem. É um conceito central da teoria dos códigos de detecção e correção de erros, usado diretamente para medir quantos bits foram invertidos na transmissão de dados.",
+    "discoverer": "Richard Hamming",
+    "field": "Ciência da computação",
+    "significance": "É a base do projeto dos códigos corretores de erro (código de Hamming) e é amplamente aproveitada em sistemas de comunicação, comparação de sequências de DNA e busca por similaridade.",
+    "elementMeanings": {
+      "x": { "role": "primeira cadeia", "description": "É uma das duas cadeias a comparar.", "kind": "input" },
+      "y": { "role": "segunda cadeia", "description": "É a outra das duas cadeias a comparar.", "kind": "input" },
+      "d(x,y)": { "role": "distância de Hamming", "description": "É a quantidade de posições correspondentes em que x e y diferem.", "kind": "output" },
+      "n": { "role": "comprimento das cadeias", "description": "É o comprimento comum às duas cadeias.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Detectar o número de erros de bit nos dados recebidos numa comunicação de rede",
+      "Definir a distância mínima de Hamming ao projetar a capacidade de correção de erros de um código QR",
+      "Medir em bioinformática o número de mutações do DNA pela distância de Hamming"
+    ],
+    "relatedFormulas": ["password-entropy"]
+  },
+  "boolean-complement": {
+    "name": "Lei do complemento da álgebra booleana",
+    "oneLiner": "A lei básica da álgebra booleana segundo a qual a disjunção entre uma variável lógica qualquer e o seu complemento é sempre 1 (verdadeiro)",
+    "description": "A lei do complemento da álgebra booleana diz que a operação OR entre a variável A e a sua negação A' dá sempre 1, e a operação AND entre elas dá sempre 0. É a regra mais básica de simplificação de expressões lógicas e se aplica de forma indispensável ao projeto de circuitos digitais e à programação.",
+    "discoverer": "George Boole",
+    "field": "Ciência da computação",
+    "significance": "É o ponto de partida da otimização de circuitos lógicos digitais e da simplificação de expressões lógicas, e serve de base a todos os teoremas da álgebra booleana.",
+    "elementMeanings": {
+      "A": { "role": "variável lógica", "description": "É uma variável booleana que assume o valor verdadeiro (1) ou falso (0).", "kind": "input" },
+      "A'": { "role": "complemento", "description": "É a negação de A. Se A é 1, vale 0; se A é 0, vale 1.", "kind": "structural" },
+      "+": { "role": "disjunção (OR)", "description": "Representa a operação OR na álgebra booleana.", "kind": "structural" },
+      "1": { "role": "valor sempre verdadeiro", "description": "É o valor sempre verdadeiro. Mostra que o resultado da disjunção é necessariamente 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Aplicar a lei do complemento na minimização de expressões lógicas com o mapa de Karnaugh",
+      "Verificar que x | ~x == 1 ao otimizar operações de bits na programação",
+      "Eliminar portas desnecessárias no projeto de circuitos em FPGA"
+    ],
+    "relatedFormulas": ["de-morgan"]
+  },
+  "handshaking-lemma": {
+    "name": "Lema do aperto de mãos",
+    "oneLiner": "O lema segundo o qual, num grafo, a soma dos graus de todos os vértices é igual ao dobro do número de arestas",
+    "description": "O lema do aperto de mãos decorre do fato de que, num grafo não dirigido, cada aresta contribui para o grau de exatamente dois vértices. Assim, a soma de todos os graus é sempre par, e o número de vértices de grau ímpar é necessariamente par também.",
+    "discoverer": "Leonhard Euler",
+    "field": "Ciência da computação",
+    "significance": "É o teorema mais básico da teoria dos grafos e serve de alicerce à análise de redes, à decisão sobre caminhos eulerianos e à verificação da validade de grafos.",
+    "elementMeanings": {
+      "\\sum \\deg(v)": { "role": "soma dos graus", "description": "É a soma, sobre todos os vértices do grafo, do número de arestas ligadas a cada um.", "kind": "output" },
+      "2|E|": { "role": "dobro do número de arestas", "description": "É o número total de arestas multiplicado por 2. Como cada aresta contribui para dois vértices, esse valor é igual à soma dos graus.", "kind": "output" },
+      "\\deg(v)": { "role": "grau do vértice", "description": "É o número de arestas ligadas ao vértice v.", "kind": "input" },
+      "|E|": { "role": "número de arestas", "description": "É a quantidade total de arestas do grafo.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analisar numa rede social a relação entre o total de laços de amizade e o número de conexões de cada pessoa",
+      "Conferir a coerência entre o número de portas e o número de enlaces ao validar a topologia de uma rede de computadores",
+      "Verificar a condição prévia para decidir se existe caminho ou circuito euleriano"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  },
+  "password-entropy": {
+    "name": "Entropia de senha",
+    "oneLiner": "A fórmula que mede em bits a quantidade de informação de uma senha a partir do número de caracteres possíveis N e do comprimento L",
+    "description": "A fórmula da entropia de senha converte em logaritmo o número de combinações possíveis ao escolher L posições de um conjunto de N caracteres, obtendo a quantidade de informação em bits. Quanto maior a entropia, maior a resistência a ataques de força bruta, o que a torna um critério quantitativo para definir políticas de segurança.",
+    "discoverer": "Claude Shannon (conceito de entropia da informação)",
+    "field": "Ciência da computação",
+    "significance": "É a medida padrão para avaliar objetivamente a força de uma senha em segurança da informação, e dá base quantitativa às políticas de segurança e ao projeto de sistemas de autenticação.",
+    "elementMeanings": {
+      "H": { "role": "entropia", "description": "É a quantidade de informação em bits. É o logaritmo do número médio de tentativas necessárias num ataque de força bruta.", "kind": "output" },
+      "N": { "role": "tamanho do conjunto de caracteres", "description": "É a quantidade de caracteres distintos disponíveis. Só com minúsculas são 26; com maiúsculas, minúsculas, dígitos e símbolos, passa de 90.", "kind": "input" },
+      "L": { "role": "comprimento da senha", "description": "É o número de caracteres que compõem a senha.", "kind": "input" },
+      "\\log_2": { "role": "logaritmo binário", "description": "É a função que converte o número de casos para bits.", "kind": "structural" },
+      "N^L": { "role": "número total de casos", "description": "É a quantidade de todas as combinações de senha possíveis.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Implementar o indicador de força de senha no cadastro de um site",
+      "Definir o critério mínimo de entropia de senha na política de segurança de uma empresa",
+      "Comparar a força de segurança entre frases-senha e cadeias aleatórias de caracteres"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "ftc": {
+    "name": "微积分基本定理",
+    "oneLiner": "阐明微分与积分互为逆运算的定理",
+    "description": "微积分基本定理表明，连续函数的定积分等于它的原函数在两个端点处取值之差。有了这个定理，不必直接去求面积，只凭原函数就能算出定积分。它是把微分与积分统一为一个体系的核心依据。",
+    "discoverer": "艾萨克·牛顿、戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它确立了微分与积分互为逆运算这一事实，为整个分析学奠定了基础。",
+    "elementMeanings": {
+      "f(x)": { "role": "被积函数", "description": "要作积分的连续函数。", "kind": "structural" },
+      "F(x)": { "role": "原函数", "description": "f(x) 的不定积分，满足 F'(x) = f(x)。", "kind": "structural" },
+      "a": { "role": "积分下限", "description": "定积分区间的起点。", "kind": "input" },
+      "b": { "role": "积分上限", "description": "定积分区间的终点。", "kind": "input" },
+      "dx": { "role": "积分变量", "description": "表示对 x 作积分的微小变化量。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "gaussian-integral"]
+  },
+  "taylor-series": {
+    "name": "泰勒级数",
+    "oneLiner": "把函数表示为某一点附近的无穷多项式的展开",
+    "description": "泰勒级数把无穷次可微的函数表示成由某一点 a 处各阶导数值构成的幂级数。每一项都是 n 阶导数除以 n! 所得的系数，再乘以 (x-a) 的 n 次方。它是数值计算与物理学中逼近复杂函数的核心工具。",
+    "discoverer": "布鲁克·泰勒",
+    "field": "微积分学",
+    "significance": "它使三角函数、指数函数等超越函数能够用多项式来逼近，是数值分析的基础。",
+    "elementMeanings": {
+      "f(x)": { "role": "原函数", "description": "要展开成级数的目标函数。", "kind": "structural" },
+      "a": { "role": "展开中心", "description": "展开级数所依据的基准点。a=0 时称为麦克劳林级数。", "kind": "input" },
+      "f^{(n)}(a)": { "role": "n 阶导数值", "description": "在点 a 处的第 n 阶导数值，它决定各项的系数。", "kind": "structural" },
+      "n!": { "role": "阶乘", "description": "n 的阶乘。它放在各项的分母上调整系数。", "kind": "structural" },
+      "(x-a)^n": { "role": "幂次项", "description": "到展开中心 a 的距离的 n 次方。", "kind": "structural" }
+    },
+    "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
+  },
+  "gaussian-integral": {
+    "name": "高斯积分",
+    "oneLiner": "对 e 的负 x 平方形式的函数从负无穷大到正无穷大的积分",
+    "description": "高斯积分表明，把 e 的负 x 平方在全区间上积分所得的值是根号派。虽然它的不定积分无法用初等函数表示，但借助极坐标变换这一巧妙方法可以求出定积分的值。它是概率论与统计学中正态分布的根基。",
+    "discoverer": "卡尔·弗里德里希·高斯",
+    "field": "微积分学",
+    "significance": "它提供了正态分布的归一化常数，在量子力学与统计力学的路径积分中也起着核心作用。",
+    "elementMeanings": {
+      "e^{-x^2}": { "role": "高斯函数", "description": "钟形的函数。x 离 0 越远就越急剧地收敛到 0。", "kind": "structural" },
+      "\\int_{-\\infty}^{\\infty}": { "role": "全区间积分", "description": "从负无穷大到正无穷大的积分。", "kind": "structural" },
+      "\\sqrt{\\pi}": { "role": "积分结果", "description": "高斯积分的值，即圆周率的平方根。", "kind": "output" },
+      "dx": { "role": "积分变量", "description": "表示对 x 作积分。", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "ftc"]
+  },
+  "derivative-definition": {
+    "name": "导数的定义",
+    "oneLiner": "用极限来定义函数瞬时变化率的式子",
+    "description": "导数的定义是函数值的变化量除以自变量的变化量所得之比的极限。这个极限存在时，就说函数在该点可导，而它的值就是切线的斜率。它是微积分学最根本的概念。",
+    "discoverer": "艾萨克·牛顿、戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它严格地定义了瞬时变化率这一概念，确立了微积分学的逻辑基础。",
+    "elementMeanings": {
+      "f'(x)": { "role": "导数", "description": "在 x 处的瞬时变化率，也就是图像切线的斜率。", "kind": "output" },
+      "f(x+h)": { "role": "移动后的函数值", "description": "在从 x 移动 h 所到达的点处的函数值。", "kind": "structural" },
+      "f(x)": { "role": "原来的函数值", "description": "在点 x 处的函数值。", "kind": "structural" },
+      "h": { "role": "变化量", "description": "x 的微小增量。在极限中把它送到 0。", "kind": "input" },
+      "\\lim_{h \\to 0}": { "role": "极限运算", "description": "把 h 无限接近 0 的运算。", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
+  },
+  "chain-rule": {
+    "name": "链式法则",
+    "oneLiner": "用外函数与内函数导数之积来求复合函数导数的法则",
+    "description": "链式法则是这样一条规则：对复合函数 f(g(x)) 求导时，把外函数的导数乘以内函数的导数即可。它可推广到多元微积分与反向传播算法等现代数学与人工智能的核心技法。",
+    "discoverer": "戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它使人能够系统地对复杂的复合函数求导，也是深度学习反向传播算法的数学基础。",
+    "elementMeanings": {
+      "f": { "role": "外函数", "description": "位于复合外层的函数。", "kind": "structural" },
+      "g": { "role": "内函数", "description": "位于复合内层的函数。", "kind": "structural" },
+      "f'(g(x))": { "role": "外层导数", "description": "把外函数在 g(x) 处求值所得的导数值。", "kind": "structural" },
+      "g'(x)": { "role": "内层导数", "description": "内函数对 x 的导数。", "kind": "structural" },
+      "x": { "role": "自变量", "description": "作为求导基准的变量。", "kind": "input" }
+    },
+    "relatedFormulas": ["derivative-definition", "ftc"]
+  },
+  "product-rule": {
+    "name": "乘积求导法则",
+    "oneLiner": "对两个函数之积求导时轮流对各自求导再相加的法则",
+    "description": "乘积求导法则是这样一条规则：对两个函数 f(x) 与 g(x) 之积求导，结果为 f'(x)g(x) + f(x)g'(x)。它可以从导数定义中取极限的过程自然推导出来，也能推广到三个以上函数之积。它是求导计算中使用最频繁的基本法则之一。",
+    "discoverer": "戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它使人能够系统地处理由乘积构成的函数的求导，也成为分部积分的理论基础。",
+    "elementMeanings": {
+      "f": { "role": "第一个函数", "description": "位于乘积左侧的函数。", "kind": "structural" },
+      "g": { "role": "第二个函数", "description": "位于乘积右侧的函数。", "kind": "structural" },
+      "f'": { "role": "第一个函数的导数", "description": "把 f 对 x 求导所得的结果。", "kind": "structural" },
+      "g'": { "role": "第二个函数的导数", "description": "把 g 对 x 求导所得的结果。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
+    "realWorldExamples": [
+      "物理学中对动量 p = mv 关于时间求导：质量与速度都在变化时用来求力",
+      "经济学中对总收入 R = p(x) * x 求导以计算边际收入"
+    ]
+  },
+  "quotient-rule": {
+    "name": "商的求导法则",
+    "oneLiner": "对两个函数相除求导时把分子与分母的导数交叉组合的法则",
+    "description": "商的求导法则是这样一条规则：对 f(x)/g(x) 形式的函数求导，结果为 (f'g - fg')/g^2。它可以由乘积求导法则与链式法则推导出来，适用于分母不为 0 的区间。对有理函数或三角函数之比求导时它不可或缺。",
+    "discoverer": "戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它使分式形式函数的求导可以机械地处理，也是推导 tan x 等三角函数导数的关键。",
+    "elementMeanings": {
+      "f": { "role": "分子函数", "description": "相当于除法中分子的函数。", "kind": "structural" },
+      "g": { "role": "分母函数", "description": "相当于除法中分母的函数。必须满足 g(x) != 0。", "kind": "structural" },
+      "f'": { "role": "分子的导数", "description": "把 f 对 x 求导所得的结果。", "kind": "structural" },
+      "g'": { "role": "分母的导数", "description": "把 g 对 x 求导所得的结果。", "kind": "structural" },
+      "g^2": { "role": "分母的平方", "description": "放在结果分母上的 g(x) 的平方。", "kind": "structural" }
+    },
+    "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
+    "realWorldExamples": [
+      "在浓度计算中求溶质/溶液之比的变化率时使用",
+      "在电路中分析电压/电流之比的变化以追踪阻抗的变化"
+    ]
+  },
+  "power-rule": {
+    "name": "幂函数求导法则",
+    "oneLiner": "对 x 的 n 次方求导时把指数移到前面并让指数减 1 的法则",
+    "description": "幂函数求导法则就是 d/dx(x^n) = nx^(n-1)，它是求导最基本的公式。指数为自然数时可用二项式定理证明，为实数时则借助指数函数与对数函数证明。它是几乎一切多项式函数求导的出发点。",
+    "discoverer": "艾萨克·牛顿",
+    "field": "微积分学",
+    "significance": "它既是学习求导的第一道门槛，也是使用最频繁的求导公式，是多项式函数求导的基础。",
+    "elementMeanings": {
+      "x": { "role": "自变量", "description": "作为求导基准的变量。", "kind": "input" },
+      "n": { "role": "指数", "description": "乘方的指数。自然数、整数、实数都可以。", "kind": "input" },
+      "x^n": { "role": "幂函数", "description": "x 的 n 次方，也就是求导的对象。", "kind": "structural" },
+      "nx^{n-1}": { "role": "导数", "description": "指数 n 降下来成为系数、指数减为 n-1 之后的结果。", "kind": "output" }
+    },
+    "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
+    "realWorldExamples": [
+      "把自由落体距离 s = (1/2)gt^2 对时间求导以求速度 v = gt 时适用",
+      "把圆的面积 A = pi*r^2 对半径求导就得到周长 2*pi*r 的关系"
+    ]
+  },
+  "exp-derivative": {
+    "name": "指数函数的求导",
+    "oneLiner": "自然指数函数 e^x 求导之后仍是它自身的性质",
+    "description": "指数函数的求导表现出 d/dx(e^x) = e^x 这一惊人的性质。自然常数 e 是唯一满足这种自我复制性质的底数，它是微分方程与自然现象建模的核心。一般指数函数 a^x 的导数则推广为 a^x * ln(a)。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "微积分学",
+    "significance": "它是求导后形态不变的唯一函数，既是微分方程的基本解，也是自然现象建模的根基。",
+    "elementMeanings": {
+      "e": { "role": "自然常数", "description": "约为 2.71828……，是作为自然对数底数的无理数。", "kind": "constant", "value": 2.71828183 },
+      "e^x": { "role": "自然指数函数", "description": "e 的 x 次方。求导之后仍是它自身。", "kind": "structural" },
+      "x": { "role": "自变量", "description": "位于指数位置的变量。", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "求导算子", "description": "执行对 x 求导的算子。", "kind": "structural" }
+    },
+    "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
+    "realWorldExamples": [
+      "在放射性衰变 N(t) = N_0 * e^(-lambda*t) 中求衰变速度时使用",
+      "连续复利计算中本金增长率与当前余额成正比的模型"
+    ]
+  },
+  "log-derivative": {
+    "name": "对数函数的求导",
+    "oneLiner": "对自然对数 ln x 求导得到 x 分之 1 的公式",
+    "description": "对数函数的求导给出 d/dx(ln x) = 1/x 这个简洁的结果。它可由指数函数求导的反函数关系推导出来。它定义在 x > 0 上，而反过来在积分中，1/x 的不定积分是 ln|x| + C。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "微积分学",
+    "significance": "它提供了 1/x 的原函数，并借助对数求导法把复杂的乘积与幂函数的求导化简。",
+    "elementMeanings": {
+      "\\ln x": { "role": "自然对数", "description": "以 e 为底的对数函数，定义在 x > 0 上。", "kind": "structural" },
+      "x": { "role": "自变量", "description": "既是对数的真数，也是求导的变量。", "kind": "input" },
+      "\\frac{1}{x}": { "role": "导数", "description": "ln x 的导数，与 x 成反比。", "kind": "output" },
+      "\\frac{d}{dx}": { "role": "求导算子", "description": "执行对 x 求导的算子。", "kind": "structural" }
+    },
+    "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
+    "realWorldExamples": [
+      "在信息论中分析熵 H = -sum(p * ln p) 的变化率时使用",
+      "韦伯-费希纳定律：把刺激强度与感觉大小之间的对数关系建模"
+    ]
+  },
+  "sin-derivative": {
+    "name": "三角函数的求导（正弦）",
+    "oneLiner": "对 sin x 求导得到 cos x 的公式",
+    "description": "它是三角函数求导中最基本的结果，即 d/dx(sin x) = cos x。它可由导数定义并利用 lim(h->0) sin(h)/h = 1 这个极限来证明。因为 cos x 的导数是 -sin x，所以正弦与余弦通过求导形成互相循环的关系。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "微积分学",
+    "significance": "它对周期现象的数学描述不可或缺，是波动方程与简谐运动分析的基础。",
+    "elementMeanings": {
+      "\\sin x": { "role": "正弦函数", "description": "周期为 2 派的基本三角函数。", "kind": "structural" },
+      "\\cos x": { "role": "导数（余弦）", "description": "对 sin x 求导所得的结果。它的相位比正弦超前派/2。", "kind": "output" },
+      "x": { "role": "自变量", "description": "以弧度为单位的角度变量。", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "求导算子", "description": "执行对 x 求导的算子。", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
+    "realWorldExamples": [
+      "在单摆运动中把位移 theta(t) = A*sin(omega*t) 求导以求角速度时使用",
+      "把交流电压 V(t) = V_0*sin(omega*t) 求导以把握电流的相位关系"
+    ]
+  },
+  "power-integral": {
+    "name": "幂函数的不定积分",
+    "oneLiner": "对 x 的 n 次方作积分时把指数加 1 并除以新指数的公式",
+    "description": "幂函数的不定积分就是 x^n 的积分等于 x^(n+1)/(n+1) + C（n != -1），它是求导的逆过程。它是把幂函数求导法则反过来运用的结果，而 n = -1 的情形则另行处理为 ln|x| + C。它是多项式函数积分最基本的公式。",
+    "discoverer": "艾萨克·牛顿、戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它既是学习积分的第一个起点，也是使用最频繁的不定积分公式。",
+    "elementMeanings": {
+      "x^n": { "role": "被积函数", "description": "要作积分的幂函数。", "kind": "structural" },
+      "n": { "role": "指数", "description": "乘方的指数。必须满足 n != -1。", "kind": "input" },
+      "x^{n+1}": { "role": "积分结果的幂", "description": "指数增加了 1 的乘方。", "kind": "structural" },
+      "n+1": { "role": "新指数（分母）", "description": "放在结果分母上，求导时便可复原为原函数。", "kind": "structural" },
+      "C": { "role": "积分常数", "description": "不定积分中的任意常数，求导时会消失的项。", "kind": "constant" },
+      "dx": { "role": "积分变量", "description": "表示对 x 作积分。", "kind": "structural" }
+    },
+    "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
+    "realWorldExamples": [
+      "把速度 v = at 对时间作积分以求移动距离 s = (1/2)at^2 时使用",
+      "在流体力学中对压强分布作积分以计算总的力"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "分部积分",
+    "oneLiner": "对两个函数之积作积分时把一边求导、另一边积分来作变换的技巧",
+    "description": "分部积分是把乘积求导法则应用到积分上，得到 int(u dv) = uv - int(v du) 这一公式。它把难以直接积分的函数之积换成更好处理的形式。关键在于恰当地选择 u 与 dv，有时也会反复应用或利用循环关系。",
+    "discoverer": "布鲁克·泰勒",
+    "field": "微积分学",
+    "significance": "它是乘积求导法则的积分版本，对 ln x、arctan x 等反函数的积分以及各种超越函数的积分不可或缺。",
+    "elementMeanings": {
+      "u": { "role": "要求导的函数", "description": "在积分过程中被选来作求导的那一边的函数。", "kind": "structural" },
+      "dv": { "role": "要积分的部分", "description": "在积分过程中被选来作积分的那一边的微分形式。", "kind": "structural" },
+      "v": { "role": "dv 的原函数", "description": "把 dv 作积分所得的结果。", "kind": "structural" },
+      "du": { "role": "u 的微分", "description": "把 u 求导所得的结果。", "kind": "structural" },
+      "uv": { "role": "边界项", "description": "u 与 v 之积。在定积分中要代入两个端点的值。", "kind": "output" }
+    },
+    "relatedFormulas": ["product-rule", "ftc", "power-integral"],
+    "realWorldExamples": [
+      "计算拉普拉斯变换 L{t*f(t)} 时用分部积分推导变换公式",
+      "在概率论中计算期望值 E[X] = int(x * f(x) dx) 时经常用到"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "指数函数的麦克劳林级数",
+    "oneLiner": "把 e^x 在 x = 0 附近展开成无穷多项式 1 + x + x^2/2! + … 的级数",
+    "description": "指数函数的麦克劳林级数是 e^x = sum(x^n / n!, n=0..inf)，它对一切实数 x 都收敛。因为 e^x 各阶导数都是 e^x 自身且在 x=0 处取值为 1，所以各项的系数就是 1/n!。它是数值计算中逼近指数函数最基本的方法，也是推导欧拉公式的出发点。",
+    "discoverer": "科林·麦克劳林",
+    "field": "微积分学",
+    "significance": "它提供了指数函数的多项式逼近，是推导欧拉恒等式 e^(i*pi) + 1 = 0 的关键步骤。",
+    "elementMeanings": {
+      "e^x": { "role": "原函数", "description": "要展开成级数的自然指数函数。", "kind": "structural" },
+      "x^n": { "role": "幂次项", "description": "x 的 n 次方，即第 n 项的分子。", "kind": "structural" },
+      "n!": { "role": "阶乘", "description": "n 的阶乘，即第 n 项的分母。", "kind": "structural" },
+      "\\sum_{n=0}^{\\infty}": { "role": "无穷级数", "description": "把从 n=0 到无穷大的所有项加起来的运算。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
+    "realWorldExamples": [
+      "计算器与计算机计算 e^x 的值时使用这个级数的有限项",
+      "在量子力学中把时间演化算子 e^(-iHt) 展开成级数以作近似计算"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "正弦函数的麦克劳林级数",
+    "oneLiner": "把 sin x 在 x = 0 附近展开成 x - x^3/3! + x^5/5! - … 的级数",
+    "description": "正弦函数的麦克劳林级数是 sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf)。它只出现奇数次项，且符号交替。它对一切实数 x 都收敛，而 x 很小时 sin x 近似 x 的近似式就相当于它的第一项。",
+    "discoverer": "科林·麦克劳林",
+    "field": "微积分学",
+    "significance": "它使三角函数的多项式逼近成为可能，并为小角近似 sin x 近似 x 提供了数学依据。",
+    "elementMeanings": {
+      "\\sin x": { "role": "原函数", "description": "要展开成级数的正弦函数。", "kind": "structural" },
+      "(-1)^n": { "role": "符号交替因子", "description": "使各项的符号在正负之间交替。", "kind": "structural" },
+      "x^{2n+1}": { "role": "奇数次幂项", "description": "只出现奇数次，是因为正弦是奇函数。", "kind": "structural" },
+      "(2n+1)!": { "role": "阶乘", "description": "各项的分母，它保证级数收敛。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
+    "realWorldExamples": [
+      "物理学中应用小角近似（sin theta 近似 theta）来推导单摆的周期公式",
+      "数字信号处理中把正弦波用多项式逼近以快速计算"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "余弦函数的麦克劳林级数",
+    "oneLiner": "把 cos x 在 x = 0 附近展开成 1 - x^2/2! + x^4/4! - … 的级数",
+    "description": "余弦函数的麦克劳林级数是 cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf)。它只出现偶数次项，且符号交替。把正弦级数逐项求导就得到余弦级数，两个级数的关系可以通过求导来确认。",
+    "discoverer": "科林·麦克劳林",
+    "field": "微积分学",
+    "significance": "它提供了余弦函数的多项式逼近，并与正弦级数一起用于推导欧拉公式。",
+    "elementMeanings": {
+      "\\cos x": { "role": "原函数", "description": "要展开成级数的余弦函数。", "kind": "structural" },
+      "(-1)^n": { "role": "符号交替因子", "description": "使各项的符号在正负之间交替。", "kind": "structural" },
+      "x^{2n}": { "role": "偶数次幂项", "description": "只出现偶数次，是因为余弦是偶函数。", "kind": "structural" },
+      "(2n)!": { "role": "阶乘", "description": "各项的分母，它保证级数收敛。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
+    "realWorldExamples": [
+      "光学中用 cos theta 近似 1 - theta^2/2 来近似计算透镜像差",
+      "机器人学中把旋转矩阵的余弦用多项式逼近以用于实时控制"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "洛必达法则",
+    "oneLiner": "用分子分母导数之比来求 0/0 或无穷大/无穷大 型未定式极限的定理",
+    "description": "洛必达法则说的是，当极限值成为 0/0 或无穷大/无穷大 这类未定式时，把分子与分母各自求导之后再取它们之比的极限，所得的结果与原极限相同。必要时可以反复多次应用，而不是未定式的情形则不能使用。它可以借助柯西中值定理严格地证明。",
+    "discoverer": "纪尧姆·德·洛必达（由约翰·伯努利发现）",
+    "field": "微积分学",
+    "significance": "它把未定式极限的计算归结为求导问题，为极限计算提供了强有力的工具。",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": { "role": "极限运算", "description": "把 x 无限接近 c 的运算。", "kind": "structural" },
+      "f(x)": { "role": "分子函数", "description": "在极限中相当于分子的函数。", "kind": "structural" },
+      "g(x)": { "role": "分母函数", "description": "在极限中相当于分母的函数。", "kind": "structural" },
+      "f'(x)": { "role": "分子的导数", "description": "把 f(x) 对 x 求导所得的结果。", "kind": "structural" },
+      "g'(x)": { "role": "分母的导数", "description": "把 g(x) 对 x 求导所得的结果。", "kind": "structural" },
+      "\\frac{0}{0}": { "role": "未定式", "description": "分子与分母都趋于 0 的未定式。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "taylor-series"],
+    "realWorldExamples": [
+      "物理学中计算能级差趋近于 0 时跃迁概率的极限",
+      "经济学中分析边际成本与边际收入同时收敛于 0 的情形下的利润"
+    ]
+  },
+  "tangent": {
+    "name": "切线",
+    "oneLiner": "过曲线上一点、并与曲线在该点具有相同斜率的直线",
+    "description": "切线是在曲线 y=f(x) 的点 (a, f(a)) 处，以导数值 f'(a) 为斜率的直线 y - f(a) = f'(a)(x - a)。它是在该点附近对曲线逼近得最好的一次函数，把一点处的瞬时变化率以几何方式显现出来。求导最直观的意义就在曲线上被可视化了。",
+    "discoverer": "皮埃尔·德·费马、艾萨克·牛顿、戈特弗里德·莱布尼茨",
+    "field": "微积分学",
+    "significance": "它把导数的几何意义以曲线上的一条直线展示出来，是把求导概念与视觉直观连接起来的学习起点。",
+    "elementMeanings": {
+      "f(x)": { "role": "曲线", "description": "要作切线的目标函数。", "kind": "input" },
+      "x": { "role": "切点的 x 坐标", "description": "决定把切线放在曲线上哪个位置的点。", "kind": "input" },
+      "f'(x)": { "role": "切线斜率", "description": "在点 x 处的导数值，它决定切线的斜率。", "kind": "output" },
+      "y - f(x) = f'(x)(X - x)": { "role": "切线方程", "description": "过点 (x, f(x)) 且斜率为 f'(x) 的直线。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "chain-rule", "taylor-series"]
+  }
+}

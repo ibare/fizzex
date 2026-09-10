@@ -1,0 +1,132 @@
+{
+  "fourier-transform": {
+    "name": "傅里叶变换",
+    "oneLiner": "把时域信号变换到频域的积分变换",
+    "description": "傅里叶变换把作为时间函数的信号分解为频率的函数。它基于“任何信号都可以表示成不同频率正弦波之和”这一原理，给出各频率分量的幅度与相位信息。在信号处理、图像分析、量子力学等科学与工程的各个领域都有使用。",
+    "discoverer": "约瑟夫·傅里叶",
+    "field": "信号处理",
+    "significance": "使时域与频域的双重表示成为可能，确立了现代信号处理的理论基础。",
+    "elementMeanings": {
+      "f": { "role": "函数/信号", "description": "要变换的原函数或时间信号。", "kind": "input" },
+      "ξ": { "role": "频率", "description": "普通频率变量。单位：Hz。", "kind": "input" },
+      "x": { "role": "自变量", "description": "原函数的自变量（时间等）。", "kind": "input" },
+      "e": { "role": "自然常数", "description": "复指数函数的底。", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "i": { "role": "虚数单位", "description": "i² = −1。在复指数函数中表示相位旋转。", "kind": "constant" },
+      "π": { "role": "圆周率", "description": "归一化常数 2π 的一部分。", "kind": "constant", "value": 3.14159265, "unit": "" }
+    },
+    "realWorldExamples": ["通过语音信号的频率分析实现语音识别", "把核磁共振成像的频率数据重建为空间图像"],
+    "relatedFormulas": ["inverse-fourier", "laplace-transform", "convolution"]
+  },
+  "inverse-fourier": {
+    "name": "逆傅里叶变换",
+    "oneLiner": "把频域的频谱还原为时域信号的积分变换",
+    "description": "逆傅里叶变换是傅里叶变换的逆过程，它把在频域中表示的频谱信息还原为原来的时域信号。复指数函数的符号变为正号，在普通频率约定下不带归一化因子，与正变换构成对称的变换对。",
+    "discoverer": "约瑟夫·傅里叶",
+    "field": "信号处理",
+    "significance": "保证了频率分析的结果可以完整地还原为原信号，为信号合成提供了理论依据。",
+    "elementMeanings": {
+      "f": { "role": "函数/信号", "description": "还原得到的原时域信号。", "kind": "output" },
+      "ξ": { "role": "频率", "description": "频域中的自变量。单位：Hz。", "kind": "input" },
+      "x": { "role": "自变量", "description": "要还原的函数的自变量（时间等）。", "kind": "input" },
+      "e": { "role": "自然常数", "description": "复指数函数的底。", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "π": { "role": "圆周率", "description": "归一化常数 2π 的一部分。", "kind": "constant", "value": 3.14159265, "unit": "" }
+    },
+    "realWorldExamples": ["把滤波处理后的频率数据再变换回时间信号", "压缩音频数据的还原播放"],
+    "relatedFormulas": ["fourier-transform", "laplace-transform", "convolution"]
+  },
+  "laplace-transform": {
+    "name": "拉普拉斯变换",
+    "oneLiner": "把时域函数变换到复频域的积分变换",
+    "description": "拉普拉斯变换把时间函数变换成复数 s 的函数，从而把微分方程化为代数方程。它可以看作傅里叶变换的推广，也能处理衰减的信号。在控制系统分析、电路分析、系统稳定性判别中发挥着核心作用。",
+    "discoverer": "皮埃尔-西蒙·拉普拉斯",
+    "field": "信号处理",
+    "significance": "使微分方程可以用代数方法求解，成为控制工程与系统分析的标准工具。",
+    "elementMeanings": {
+      "F(s)": { "role": "拉普拉斯变换结果", "description": "在复频域中的函数表示。", "kind": "output" },
+      "f(t)": { "role": "时间函数", "description": "要变换的原时域函数，在 t >= 0 上有定义。", "kind": "input" },
+      "s": { "role": "复频率", "description": "s = σ + jω。实部表示衰减，虚部表示振荡。", "kind": "structural" },
+      "e^{-st}": { "role": "衰减复指数", "description": "与时间函数相乘的核函数。", "kind": "structural" },
+      "\\int_0^{\\infty}": { "role": "单边积分", "description": "从 0 到无穷大的积分，用于处理因果系统。", "kind": "structural" }
+    },
+    "realWorldExamples": ["PID 控制器传递函数的设计", "RLC 电路暂态响应的分析"],
+    "relatedFormulas": ["fourier-transform", "z-transform", "transfer-function"]
+  },
+  "z-transform": {
+    "name": "Z 变换",
+    "oneLiner": "把离散时间信号变换到复 z 域的数学工具",
+    "description": "Z 变换是拉普拉斯变换的离散时间版本，它把离散时间信号 x[n] 变换成复变量 z 的函数。在数字滤波器设计、数字控制系统分析、差分方程求解中必不可少。它通过 z = e^(sT) 的关系与拉普拉斯变换相联系。",
+    "discoverer": "维托尔德·胡列维奇",
+    "field": "信号处理",
+    "significance": "作为离散时间系统分析的标准工具，为数字信号处理与数字控制提供了理论基础。",
+    "elementMeanings": {
+      "X(z)": { "role": "Z 变换结果", "description": "离散信号在复 z 域中的表示。", "kind": "output" },
+      "x[n]": { "role": "离散时间信号", "description": "在整数指标 n 处的采样值。", "kind": "input" },
+      "z": { "role": "复变量", "description": "其单位圆(|z|=1)对应频域的复数。", "kind": "structural" },
+      "z^{-n}": { "role": "延迟算子", "description": "表示延迟 n 个采样的 z 的负幂。", "kind": "structural" },
+      "\\sum": { "role": "级数求和", "description": "从 n = 负无穷大到正无穷大（或从 0 开始）的求和。", "kind": "structural" }
+    },
+    "realWorldExamples": ["数字音频均衡器滤波系数的设计", "机械臂的数字位置控制系统"],
+    "relatedFormulas": ["laplace-transform", "sampling", "transfer-function"]
+  },
+  "nyquist-theorem": {
+    "name": "奈奎斯特定理",
+    "oneLiner": "把模拟信号无失真地转换为数字信号所需的最低采样频率条件",
+    "description": "奈奎斯特定理规定，要完整还原带限的模拟信号，采样频率必须达到信号最高频率的 2 倍以上。若不满足这个条件就会产生混叠，原信号将无法还原。它是所有模数转换系统的设计基础。",
+    "discoverer": "哈里·奈奎斯特、克劳德·香农",
+    "field": "信号处理",
+    "significance": "给出了连接模拟世界与数字世界的根本条件，确立了数字通信与记录技术的基础。",
+    "elementMeanings": {
+      "f_s": { "role": "采样频率", "description": "每秒采样的次数。单位：赫兹(Hz)。", "kind": "input" },
+      "f_{max}": { "role": "最高频率", "description": "信号中所含的最高频率分量。单位：赫兹(Hz)。", "kind": "input" },
+      "2": { "role": "奈奎斯特倍率", "description": "至少要按 2 倍以上采样才能避免混叠。", "kind": "constant", "value": 2, "unit": "" }
+    },
+    "realWorldExamples": ["CD 音频(44.1kHz)能覆盖人类听觉范围(20kHz)的原理", "数码相机传感器的抗混叠滤波器"],
+    "relatedFormulas": ["sampling", "fourier-transform", "shannon-capacity"]
+  },
+  "sampling": {
+    "name": "采样",
+    "oneLiner": "按固定间隔取出连续时间信号的值，把它转换为离散时间信号的过程",
+    "description": "采样是每隔周期 T 取出连续模拟信号 x(t) 的值，把它转换为离散信号 x[n] 的过程。它是数字信号处理的第一步，只有满足奈奎斯特条件才能忠实地再现原信号。采样周期 T 与采样频率 f_s 互为倒数。",
+    "field": "信号处理",
+    "significance": "它是把模拟信号转换为数字信号的根本过程，定义了所有数字系统的输入环节。",
+    "elementMeanings": {
+      "x[n]": { "role": "离散信号", "description": "第 n 个采样值，是数字信号的基本单位。", "kind": "output" },
+      "x(t)": { "role": "连续信号", "description": "原来的模拟时间信号。", "kind": "input" },
+      "n": { "role": "采样指标", "description": "取整数值，表示这是第几个采样。", "kind": "input" },
+      "T": { "role": "采样周期", "description": "相邻采样之间的时间间隔。单位：秒(s)。T = 1/f_s。", "kind": "input" }
+    },
+    "realWorldExamples": ["把话筒输入的语音转换成数字数据", "心电图(ECG)设备对生物信号的数字化"],
+    "relatedFormulas": ["nyquist-theorem", "z-transform", "fourier-transform"]
+  },
+  "convolution": {
+    "name": "卷积",
+    "oneLiner": "让两个函数交叠并平移后积分，从而生成新函数的运算",
+    "description": "卷积是把一个函数翻转后在另一个函数上平移，并对交叠区域求积分的运算。在线性时不变(LTI)系统中，输入信号与冲激响应的卷积就是输出信号。它在信号滤波、图像处理、概率分布的合成等方面有广泛应用。",
+    "field": "信号处理",
+    "significance": "完整地刻画了 LTI 系统的输入输出关系，成为信号处理与系统分析的核心运算。",
+    "elementMeanings": {
+      "(f*g)(t)": { "role": "卷积结果", "description": "由两个函数 f 与 g 的卷积生成的新函数。", "kind": "output" },
+      "f(\\tau)": { "role": "第一个函数", "description": "关于积分变量 τ 的第一个函数，通常是输入信号。", "kind": "input" },
+      "g(t-\\tau)": { "role": "翻转平移后的函数", "description": "把第二个函数翻转后再平移 t 所得，通常是冲激响应。", "kind": "input" },
+      "\\tau": { "role": "积分变量", "description": "遍历两个函数交叠区域的哑变量。", "kind": "structural" },
+      "\\int": { "role": "积分", "description": "用从负无穷大到正无穷大的积分计算全部交叠区域。", "kind": "structural" }
+    },
+    "realWorldExamples": ["相机模糊效果的数学建模", "深度学习 CNN 中的图像特征提取"],
+    "relatedFormulas": ["fourier-transform", "transfer-function", "inverse-fourier"]
+  },
+  "transfer-function": {
+    "name": "传递函数",
+    "oneLiner": "定义为系统输出与输入的拉普拉斯变换之比的系统特性函数",
+    "description": "传递函数是在复频域中表示 LTI 系统输入输出关系的函数，即输出的拉普拉斯变换除以输入的拉普拉斯变换所得的比值。通过系统的极点与零点，可以把握稳定性、频率响应和暂态响应特性。它是控制工程中最重要的分析工具。",
+    "field": "信号处理",
+    "significance": "把系统的动态特性概括为一个函数，成为控制系统设计与稳定性分析的标准工具。",
+    "elementMeanings": {
+      "H(s)": { "role": "传递函数", "description": "用复频率 s 的函数表示的系统特性。", "kind": "output" },
+      "Y(s)": { "role": "输出的拉普拉斯变换", "description": "系统输出信号的拉普拉斯变换结果。", "kind": "output" },
+      "X(s)": { "role": "输入的拉普拉斯变换", "description": "系统输入信号的拉普拉斯变换结果。", "kind": "input" },
+      "s": { "role": "复频率", "description": "拉普拉斯变量，用于分析系统的极点与零点。", "kind": "structural" }
+    },
+    "realWorldExamples": ["汽车定速巡航系统响应特性的设计", "音频功率放大器频率响应的分析"],
+    "relatedFormulas": ["laplace-transform", "z-transform", "convolution"]
+  }
+}

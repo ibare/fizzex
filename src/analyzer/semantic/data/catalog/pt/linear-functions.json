@@ -1,0 +1,148 @@
+{
+  "linear-function": {
+    "name": "Função afim",
+    "oneLiner": "A função mais básica de todas, cujo gráfico é uma reta proporcional a x",
+    "description": "Na função afim y = ax + b, cada vez que x aumenta em 1, y varia sempre a mesma quantidade a. O gráfico é sempre uma reta, em que a é o coeficiente angular e b é o intercepto no eixo y.",
+    "field": "Álgebra",
+    "significance": "É o ponto de partida do estudo de todas as funções e a ferramenta mais básica para expressar matematicamente fenômenos de taxa de variação constante.",
+    "elementMeanings": {
+      "a": { "role": "coeficiente angular", "description": "Indica quão inclinada é a reta. Se for positivo, a reta sobe para a direita; se for negativo, desce para a direita.", "kind": "input" },
+      "b": { "role": "intercepto no eixo y", "description": "É a ordenada do ponto em que a reta encontra o eixo y. É também o valor de y quando x é 0.", "kind": "input" },
+      "x": { "role": "variável independente", "description": "É o valor de entrada, que pode ser escolhido livremente.", "kind": "input" },
+      "y": { "role": "variável dependente", "description": "É o valor de saída, determinado pelo valor de x.", "kind": "output" }
+    },
+    "realWorldExamples": ["Cálculo da tarifa de táxi, em que a bandeirada é somada ao valor por distância", "Relação tempo-distância de uma pessoa que caminha a velocidade constante"],
+    "relatedFormulas": ["slope-formula", "point-slope-form", "direct-proportion"]
+  },
+  "slope-formula": {
+    "name": "Fórmula do coeficiente angular",
+    "oneLiner": "Fórmula que calcula a inclinação de uma reta a partir das coordenadas de dois pontos",
+    "description": "A fórmula do coeficiente angular m = (y2 - y1) / (x2 - x1) calcula quão inclinada é a reta que passa por dois pontos do plano cartesiano. Ela representa a variação de y em relação à variação de x, isto é, a taxa de variação.",
+    "field": "Álgebra",
+    "significance": "Expressa numericamente e com precisão a direção e a inclinação de uma reta, e leva naturalmente à taxa de variação, conceito básico da derivada.",
+    "elementMeanings": {
+      "m": { "role": "coeficiente angular", "description": "É o valor que indica o grau de inclinação da reta.", "kind": "output" },
+      "x_1": { "role": "abscissa do primeiro ponto", "description": "É a posição horizontal do primeiro ponto.", "kind": "input" },
+      "y_1": { "role": "ordenada do primeiro ponto", "description": "É a posição vertical do primeiro ponto.", "kind": "input" },
+      "x_2": { "role": "abscissa do segundo ponto", "description": "É a posição horizontal do segundo ponto.", "kind": "input" },
+      "y_2": { "role": "ordenada do segundo ponto", "description": "É a posição vertical do segundo ponto.", "kind": "input" }
+    },
+    "realWorldExamples": ["Cálculo da declividade de uma trilha de montanha", "Taxa de alta de um período determinado em um gráfico de ações"],
+    "relatedFormulas": ["linear-function", "point-slope-form", "distance-formula"]
+  },
+  "point-slope-form": {
+    "name": "Forma ponto-inclinação",
+    "oneLiner": "Forma que monta a equação da reta quando se conhecem um ponto e a inclinação",
+    "description": "A forma ponto-inclinação y - y1 = m(x - x1) permite montar imediatamente a equação da reta quando se conhecem um ponto (x1, y1) sobre ela e o coeficiente angular m.",
+    "field": "Álgebra",
+    "significance": "É a forma mais prática de obter a equação de uma reta, e também é a usada no cálculo para determinar a equação da reta tangente.",
+    "elementMeanings": {
+      "m": { "role": "coeficiente angular", "description": "É o grau de inclinação da reta.", "kind": "input" },
+      "x_1": { "role": "abscissa do ponto conhecido", "description": "É a posição horizontal do ponto que se sabe pertencer à reta.", "kind": "input" },
+      "y_1": { "role": "ordenada do ponto conhecido", "description": "É a posição vertical do ponto que se sabe pertencer à reta.", "kind": "input" }
+    },
+    "realWorldExamples": ["Modelo que prevê a temperatura futura a partir da temperatura atual e da taxa de variação", "Expressão da tendência de faturamento a partir do faturamento em certo momento e da taxa de crescimento"],
+    "relatedFormulas": ["linear-function", "slope-formula"]
+  },
+  "quadratic-standard": {
+    "name": "Forma geral da função quadrática",
+    "oneLiner": "Forma básica da função quadrática, cujo gráfico é uma parábola",
+    "description": "A forma geral da função quadrática y = ax² + bx + c é uma função que contém o quadrado de x, e seu gráfico tem formato de parábola. O sinal de a determina se a concavidade é voltada para cima ou para baixo.",
+    "field": "Álgebra",
+    "significance": "É a função central para explicar fenômenos variados da vida real, como o movimento parabólico e os problemas de máximo e mínimo.",
+    "elementMeanings": {
+      "a": { "role": "coeficiente do termo quadrático", "description": "Determina a orientação e a abertura da parábola. Se for positivo, a concavidade é voltada para cima; se for negativo, para baixo.", "kind": "input" },
+      "b": { "role": "coeficiente do termo linear", "description": "Influencia a posição do eixo da parábola.", "kind": "input" },
+      "c": { "role": "termo constante", "description": "É a ordenada do ponto em que a parábola encontra o eixo y.", "kind": "input" }
+    },
+    "realWorldExamples": ["Variação da altura de uma bola arremessada", "Curva da estrutura em arco de uma ponte"],
+    "relatedFormulas": ["quadratic-vertex", "discriminant", "quadratic-formula"]
+  },
+  "quadratic-vertex": {
+    "name": "Forma canônica da função quadrática",
+    "oneLiner": "Forma da função quadrática em que as coordenadas do vértice da parábola aparecem diretamente",
+    "description": "A forma canônica da função quadrática y = a(x - h)² + k deixa ver de imediato que o vértice da parábola é (h, k). Ao converter a forma geral em um quadrado perfeito, chega-se a essa forma.",
+    "field": "Álgebra",
+    "significance": "Como permite identificar de imediato o valor máximo ou mínimo da função, é usada de forma central na resolução de problemas de otimização.",
+    "elementMeanings": {
+      "a": { "role": "coeficiente do termo quadrático", "description": "Determina a orientação e a abertura da parábola. É o mesmo a da forma geral.", "kind": "input" },
+      "h": { "role": "abscissa do vértice", "description": "É a posição do eixo em relação ao qual a parábola é simétrica.", "kind": "input" },
+      "k": { "role": "ordenada do vértice", "description": "É o valor mínimo (a > 0) ou máximo (a < 0) da parábola.", "kind": "input" }
+    },
+    "realWorldExamples": ["Determinar a altura máxima do jato de água de um chafariz", "Encontrar o preço que maximiza o lucro ao definir o preço de um produto"],
+    "relatedFormulas": ["quadratic-standard", "discriminant"]
+  },
+  "discriminant": {
+    "name": "Discriminante",
+    "oneLiner": "Expressão que informa de antemão quantas raízes tem uma equação do segundo grau",
+    "description": "O discriminante D = b² - 4ac permite julgar a quantidade e o tipo das raízes da equação ax² + bx + c = 0 sem precisar resolvê-la. Se D for positivo, há duas raízes distintas; se for zero, há uma raiz dupla; se for negativo, não há raízes reais.",
+    "field": "Álgebra",
+    "significance": "Permite avaliar previamente a existência de soluções antes de resolver a equação, e por isso tem papel central na definição do rumo da resolução do problema.",
+    "elementMeanings": {
+      "D": { "role": "valor do discriminante", "description": "O sinal desse valor determina a quantidade e o tipo das raízes.", "kind": "output" },
+      "b": { "role": "coeficiente do termo linear", "description": "É o número que multiplica x na equação do segundo grau.", "kind": "input" },
+      "a": { "role": "coeficiente do termo quadrático", "description": "É o número que multiplica o quadrado de x na equação do segundo grau.", "kind": "input" },
+      "c": { "role": "termo constante", "description": "É o número somado na equação do segundo grau, sem variável.", "kind": "input" }
+    },
+    "realWorldExamples": ["Julgar se uma bola arremessada consegue atingir determinada altura", "Verificar se existe ponto de interseção entre duas curvas"],
+    "relatedFormulas": ["quadratic-formula", "quadratic-standard", "quadratic-vertex"]
+  },
+  "absolute-value-function": {
+    "name": "Função modular",
+    "oneLiner": "Função em forma de V cujas saídas são todas maiores ou iguais a zero",
+    "description": "A função modular y = |x| ignora o sinal do valor de entrada e mantém apenas seu tamanho. O gráfico tem forma de V com vértice na origem: se x é positivo, o valor é devolvido como está; se é negativo, é devolvido com o sinal trocado.",
+    "field": "Álgebra",
+    "significance": "É a ferramenta básica para expressar matematicamente situações em que só o tamanho importa, independentemente da direção, como distância, erro e desvio.",
+    "elementMeanings": {
+      "x": { "role": "valor de entrada", "description": "É o valor original, que pode ser positivo, negativo ou zero.", "kind": "input" },
+      "|x|": { "role": "valor absoluto", "description": "É o tamanho de x sem o sinal. Equivale à distância até o 0 na reta numérica.", "kind": "output" }
+    },
+    "realWorldExamples": ["Ao calcular a diferença entre uma temperatura negativa e uma positiva", "Ao medir o quanto algo se afastou do valor alvo (o erro)"],
+    "relatedFormulas": ["distance-formula", "linear-function"]
+  },
+  "floor-function": {
+    "name": "Função piso",
+    "oneLiner": "Função que descarta a parte decimal e arredonda para baixo até o inteiro mais próximo",
+    "description": "A função piso (função escada) y = floor(x) devolve o maior inteiro que não é maior que x. O gráfico tem forma de escada, e o valor sobe um degrau a cada ponto inteiro.",
+    "field": "Álgebra",
+    "significance": "É a base matemática de toda situação cotidiana que exige arredondamento para baixo, como o quociente da divisão, o cálculo por faixas de tarifa e a divisão inteira na programação de computadores.",
+    "elementMeanings": {
+      "x": { "role": "valor de entrada", "description": "É o valor de entrada no conjunto dos números reais.", "kind": "input" },
+      "\\lfloor x \\rfloor": { "role": "valor do piso", "description": "É o maior dos inteiros menores ou iguais a x. Exemplo: floor(3,7) = 3, floor(-1,2) = -2.", "kind": "output" }
+    },
+    "realWorldExamples": ["Cálculo da tarifa de ônibus por faixas (tarifa aplicada a cada 5 km)", "Quantidade de biscoitos que cada um recebe ao dividir igualmente entre amigos"],
+    "relatedFormulas": ["absolute-value-function"]
+  },
+  "distance-formula": {
+    "name": "Fórmula da distância entre dois pontos",
+    "oneLiner": "Fórmula que calcula a distância em linha reta entre dois pontos do plano cartesiano",
+    "description": "A fórmula da distância d = sqrt((x2 - x1)² + (y2 - y1)²) calcula a distância em linha reta entre os pontos (x1, y1) e (x2, y2) do plano cartesiano. É a aplicação do teorema de Pitágoras às coordenadas.",
+    "field": "Geometria",
+    "significance": "É a ferramenta mais básica da geometria analítica e o ponto de partida de problemas geométricos variados, como o comprimento dos lados de uma figura e o raio de uma circunferência.",
+    "elementMeanings": {
+      "d": { "role": "distância", "description": "É o comprimento do segmento de reta que liga os dois pontos.", "kind": "output" },
+      "x_1": { "role": "abscissa do primeiro ponto", "description": "É a posição horizontal do primeiro ponto.", "kind": "input" },
+      "y_1": { "role": "ordenada do primeiro ponto", "description": "É a posição vertical do primeiro ponto.", "kind": "input" },
+      "x_2": { "role": "abscissa do segundo ponto", "description": "É a posição horizontal do segundo ponto.", "kind": "input" },
+      "y_2": { "role": "ordenada do segundo ponto", "description": "É a posição vertical do segundo ponto.", "kind": "input" }
+    },
+    "realWorldExamples": ["Cálculo da distância em linha reta entre dois lugares em um mapa", "Determinação da distância entre dois personagens em um jogo"],
+    "relatedFormulas": ["midpoint-formula", "slope-formula"]
+  },
+  "midpoint-formula": {
+    "name": "Fórmula do ponto médio",
+    "oneLiner": "Fórmula que encontra a posição exatamente no meio de dois pontos",
+    "description": "A fórmula do ponto médio M = ((x1 + x2)/2, (y1 + y2)/2) encontra o ponto exatamente no meio do segmento que liga dois pontos do plano cartesiano. Basta calcular a média de cada coordenada.",
+    "field": "Geometria",
+    "significance": "É a fórmula básica para determinar o ponto que divide um segmento ao meio, o centro de uma figura, pontos simétricos e afins, e é ferramenta indispensável na resolução de problemas de geometria analítica.",
+    "elementMeanings": {
+      "M": { "role": "ponto médio", "description": "É o ponto que fica exatamente no meio dos dois pontos.", "kind": "output" },
+      "x_1": { "role": "abscissa do primeiro ponto", "description": "É a posição horizontal do primeiro ponto.", "kind": "input" },
+      "y_1": { "role": "ordenada do primeiro ponto", "description": "É a posição vertical do primeiro ponto.", "kind": "input" },
+      "x_2": { "role": "abscissa do segundo ponto", "description": "É a posição horizontal do segundo ponto.", "kind": "input" },
+      "y_2": { "role": "ordenada do segundo ponto", "description": "É a posição vertical do segundo ponto.", "kind": "input" }
+    },
+    "realWorldExamples": ["Encontrar um lugar de encontro exatamente no meio do caminho entre as casas de dois amigos", "Cálculo da posição para instalar uma placa no centro de um trecho"],
+    "relatedFormulas": ["distance-formula", "slope-formula"]
+  }
+}

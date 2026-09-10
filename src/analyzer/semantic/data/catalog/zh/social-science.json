@@ -1,0 +1,137 @@
+{
+  "gini-coefficient": {
+    "name": "基尼系数",
+    "oneLiner": "用 0 到 1 之间的数值表示收入或资产不平等程度的尺度",
+    "description": "基尼系数由洛伦兹曲线与完全平等线之间的面积比例算出。为 0 表示完全平等（所有人收入相同），为 1 表示完全不平等（一个人独占全部）。它是比较各国不平等状况与评估政策时使用最广泛的不平等指标。",
+    "discoverer": "科拉多·基尼",
+    "field": "社会科学",
+    "significance": "它把经济不平等压缩为单一数值，成为国际比较与政策制定的基本指标。",
+    "elementMeanings": {
+      "G": { "role": "基尼系数", "description": "介于 0（完全平等）与 1（完全不平等）之间的不平等尺度。", "kind": "output" },
+      "L(x)": { "role": "洛伦兹曲线", "description": "表示相对于人口比例 x 的累计收入比例的曲线。", "kind": "structural" },
+      "\\int L(x) dx": { "role": "洛伦兹曲线下的面积", "description": "从 0 到 1 洛伦兹曲线下方的面积。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "世界银行比较各国收入不平等时使用的核心指标",
+      "定量评估福利政策实施前后收入分配的变化"
+    ],
+    "relatedFormulas": ["laffer-curve"]
+  },
+  "ebbinghaus-curve": {
+    "name": "艾宾浩斯遗忘曲线",
+    "oneLiner": "表示记忆随时间推移呈指数衰减的曲线",
+    "description": "艾宾浩斯遗忘曲线表明，学习之后随着时间推移，记忆保持率呈指数下降。学习刚结束时记忆流失最快，时间越久遗忘速度越慢。通过重复学习（间隔重复）提高记忆强度 S，就可以放慢遗忘的速度。",
+    "discoverer": "赫尔曼·艾宾浩斯",
+    "field": "社会科学",
+    "significance": "它开创了对人类记忆的定量研究，为间隔重复学习法等科学学习策略奠定了基础。",
+    "elementMeanings": {
+      "R": { "role": "记忆保持率", "description": "所学内容中仍留在记忆里的比例，取 0 到 1 之间的值。", "kind": "output" },
+      "t": { "role": "经过时间", "description": "自学习时刻起经过的时间。", "kind": "input" },
+      "S": { "role": "记忆强度", "description": "记忆的稳定性。可通过重复学习提高，越大则遗忘越慢。", "kind": "input" },
+      "e^{-t/S}": { "role": "指数衰减", "description": "表示按时间相对于记忆强度之比而发生的指数下降。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Anki 等间隔重复应用计算最佳复习时机的原理",
+      "外语单词学习中若不复习，一天之内就会忘掉 70% 以上的现象"
+    ],
+    "relatedFormulas": ["malthus-population"]
+  },
+  "malthus-population": {
+    "name": "马尔萨斯人口模型",
+    "oneLiner": "认为人口以固定比率呈指数增长的几何级数增长模型",
+    "description": "马尔萨斯人口模型假定，若没有资源约束，人口将以固定的增长率呈指数增长。它用初始人口乘以自然增长率与时间的指数来推算未来人口。实际上因为存在资源上限与环境阻力，需要用逻辑斯谛模型来补充，但作为短期增长预测的基本框架它仍然有用。",
+    "discoverer": "托马斯·马尔萨斯",
+    "field": "社会科学",
+    "significance": "它引发了关于人口过剩与资源短缺的学术讨论，为人口学与生态学奠定了基础。",
+    "elementMeanings": {
+      "N(t)": { "role": "时刻 t 的人口", "description": "时刻 t 的总人口数。", "kind": "output" },
+      "N_0": { "role": "初始人口", "description": "时刻 t=0 时的人口数。", "kind": "input" },
+      "r": { "role": "自然增长率", "description": "出生率减去死亡率所得的人口净增长率。", "kind": "input" },
+      "t": { "role": "时间", "description": "自初始时刻起经过的时间。", "kind": "input" },
+      "e^{rt}": { "role": "指数增长因子", "description": "表示按增长率与时间之积而发生的几何级数增长。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "预测发展中国家短期人口增长趋势的模型",
+      "在细菌培养实验中预测初期无约束环境下的个体数增殖"
+    ],
+    "relatedFormulas": ["ebbinghaus-curve", "gravity-model"]
+  },
+  "weber-fechner": {
+    "name": "韦伯-费希纳定律",
+    "oneLiner": "认为感觉的大小与刺激强度的对数成正比的心理物理学定律",
+    "description": "韦伯-费希纳定律说明，物理刺激的强度必须呈几何级数增长，感觉的大小才会呈算术级数增长。也就是说，刺激弱时即使很小的变化也容易察觉，而刺激强时则需要很大的变化才能感到差异。它表明人的感觉是按对数尺度运作的。",
+    "discoverer": "恩斯特·韦伯、古斯塔夫·费希纳",
+    "field": "社会科学",
+    "significance": "它开创了心理物理学，为定量测量主观感觉开辟了道路，也影响了 UX 设计与声学工程。",
+    "elementMeanings": {
+      "S": { "role": "感觉的大小", "description": "人主观感受到的刺激强弱。", "kind": "output" },
+      "k": { "role": "比例常数", "description": "随感觉通道（视觉、听觉等）而不同的常数。", "kind": "input" },
+      "I": { "role": "刺激的强度", "description": "以物理方式测得的刺激强弱。", "kind": "input" },
+      "I_0": { "role": "阈值刺激", "description": "能够被察觉的最小刺激强度（绝对阈值）。", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "刺激比的对数", "description": "对当前刺激与阈值之比取自然对数所得的值。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "分贝 (dB) 单位采用对数尺度的原因：声能要变成 10 倍才会感觉「响了一倍」",
+      "屏幕亮度调节中把暗部分得细、亮部分得宽的伽马校正"
+    ],
+    "relatedFormulas": ["elo-rating"]
+  },
+  "elo-rating": {
+    "name": "埃洛等级分系统",
+    "oneLiner": "由两名选手的实力差计算获胜期望概率的等级体系",
+    "description": "埃洛等级分把两名选手的分数差代入逻辑斯谛函数，算出获胜的期望概率。分数差为 400 分时，较高一方的期望胜率约为 91%。分数会随比赛结果更新，结果越出乎意料，变动幅度就越大。",
+    "discoverer": "阿帕德·埃洛",
+    "field": "社会科学",
+    "significance": "它从国际象棋起步，成为体育、电子竞技、匹配系统等领域评估实力的国际标准。",
+    "elementMeanings": {
+      "E_A": { "role": "A 的期望胜率", "description": "选手 A 被期望战胜 B 的概率。", "kind": "output" },
+      "R_A": { "role": "A 的等级分", "description": "选手 A 当前的实力分数。", "kind": "input" },
+      "R_B": { "role": "B 的等级分", "description": "选手 B 当前的实力分数。", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "等级分差的变换", "description": "把两名选手的分数差换算成概率之比的指数项。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "国际象棋世界锦标赛中选手官方等级分的核定",
+      "网络游戏（英雄联盟等）匹配机制中按实力配对对手"
+    ],
+    "relatedFormulas": ["sigmoid", "weber-fechner"]
+  },
+  "laffer-curve": {
+    "name": "拉弗曲线",
+    "oneLiner": "表示税率高到极端反而使税收减少的税率—税收关系的曲线",
+    "description": "拉弗曲线把这样一个概念画了出来：税率为 0% 时税收为 0，税率为 100% 时经济活动停摆税收也为 0，因此在两者之间必定存在一个使税收最大化的最优税率。它的核心是税率与税收呈倒 U 形关系这一定性洞见，而非精确的公式，最优税率的位置会随经济状况而变化。",
+    "discoverer": "阿瑟·拉弗",
+    "field": "社会科学",
+    "significance": "它是税收政策争论的核心框架，为供给学派经济学中「减税可增加税收」的主张提供了理论依据。",
+    "elementMeanings": {
+      "세율": { "role": "自变量", "description": "政府设定的税收比率，介于 0% 与 100% 之间。", "kind": "input" },
+      "세수": { "role": "因变量", "description": "政府实际征收到的税款总额。", "kind": "output" },
+      "최적 세율": { "role": "极大点", "description": "使税收最大化的税率，对应曲线的顶点。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "1980 年代美国里根政府减税政策（里根经济学）的理论背景",
+      "各国政府调整企业所得税率时预测税收变化的论证框架"
+    ],
+    "relatedFormulas": ["gini-coefficient"]
+  },
+  "gravity-model": {
+    "name": "引力模型",
+    "oneLiner": "认为两个地区之间的交流量与人口（规模）成正比、与距离成反比的空间相互作用模型",
+    "description": "引力模型受牛顿万有引力定律的启发，认为两个地区之间的交流（贸易、人员流动、通信等）的量与各地区规模（人口、GDP 等）的乘积成正比，与距离的平方成反比。尽管结构简单，它对国际贸易、城市通勤、移民模式等的预测却好得惊人。",
+    "discoverer": "威廉·赖利（零售引力模型）、扬·丁伯根（贸易引力模型）",
+    "field": "社会科学",
+    "significance": "它是国际贸易分析的实证核心模型，被标准地用于估计贸易协定与关税政策的效果。",
+    "elementMeanings": {
+      "T_{ij}": { "role": "交流量", "description": "地区 i 与 j 之间交流（贸易、流动等）的量。", "kind": "output" },
+      "k": { "role": "比例常数", "description": "调整模型整体尺度的常数。", "kind": "input" },
+      "P_i": { "role": "i 地区的规模", "description": "表示地区 i 的人口、GDP 等规模的变量。", "kind": "input" },
+      "P_j": { "role": "j 地区的规模", "description": "表示地区 j 的人口、GDP 等规模的变量。", "kind": "input" },
+      "d_{ij}": { "role": "两地区之间的距离", "description": "地区 i 与 j 之间的地理距离。", "kind": "input" },
+      "d_{ij}^2": { "role": "距离的平方", "description": "体现平方反比律。距离变成两倍，交流量就减到 1/4。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "用距离与经济规模解释韩日之间的贸易量为何多于韩国—巴西之间",
+      "新建大型购物中心的商圈分析中，按周边城市人口与距离推算客流量"
+    ],
+    "relatedFormulas": ["universal-gravitation", "malthus-population"]
+  }
+}

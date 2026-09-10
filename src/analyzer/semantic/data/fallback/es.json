@@ -1,0 +1,220 @@
+{
+  "roles": {
+    "root": "Expresión completa",
+    "number": "Número",
+    "variable": "Variable",
+    "operator": "Operador",
+    "frac": "Fracción",
+    "sqrt": "Raíz cuadrada",
+    "sum": "Sumatorio (sigma)",
+    "product": "Producto (pi)",
+    "integral": "Integral",
+    "limit": "Límite (lim)",
+    "matrix": "Matriz",
+    "paren": "Paréntesis",
+    "abs": "Valor absoluto",
+    "overline": "Barra superior",
+    "text": "Texto",
+    "cases": "Definición por casos",
+    "cancel": "Tachado",
+    "chem": "Fórmula química",
+    "func": "Función {name}"
+  },
+  "descriptions": {
+    "root": "Es la estructura completa de esta expresión.",
+    "number": "Es el número {value}.",
+    "variable": "Es la variable {name}. Su valor puede cambiar.",
+    "frac": "Fracción: el valor de dividir la parte de arriba (numerador) entre la de abajo (denominador).",
+    "sqrt": "Raíz cuadrada: el número que, elevado al cuadrado, da este valor.",
+    "sum": "Sumatorio: se suman todos los términos generales recorriendo el índice.",
+    "product": "Producto: se multiplican todos los términos generales recorriendo el índice.",
+    "integral": "Integral: calcula el área bajo la curva de una función.",
+    "limit": "Límite: el valor al que se converge cuando la variable se acerca a un valor concreto.",
+    "paren": "Es una expresión agrupada entre paréntesis.",
+    "abs": "Valor absoluto: la magnitud sin tener en cuenta el signo.",
+    "overline": "Es un símbolo con una barra encima. Indica una media, un conjugado, una clausura, etc.",
+    "chem": "Es notación química que representa sustancias y reacciones.",
+    "matrix": "Es una matriz {rows}x{cols}."
+  },
+  "specialVariables": {
+    "infinity": "Representa el infinito.",
+    "eulerE": "Es la constante natural e (unos 2,718). Es la base de la función exponencial y del cálculo.",
+    "pi": "Es el número pi (unos 3,14159).",
+    "imaginaryI": "Es la unidad imaginaria. El cuadrado de i es -1."
+  },
+  "operators": {
+    "+": "Es la operación de suma.",
+    "-": "Es la operación de resta o el signo negativo.",
+    "×": "Es la operación de multiplicación.",
+    "·": "Es la operación de multiplicación.",
+    "*": "Es la operación de multiplicación.",
+    "÷": "Es la operación de división.",
+    "=": "Igualdad: indica que los dos miembros son iguales.",
+    "<": "Desigualdad: el miembro izquierdo es menor que el derecho.",
+    ">": "Desigualdad: el miembro izquierdo es mayor que el derecho.",
+    "≤": "Menor o igual: el miembro izquierdo es menor o igual que el derecho.",
+    "≥": "Mayor o igual: el miembro izquierdo es mayor o igual que el derecho.",
+    "≠": "Indica que no son iguales.",
+    "∈": "Pertenencia: el elemento de la izquierda pertenece al conjunto de la derecha.",
+    "→": "Implicación: la condición de la izquierda lleva a la conclusión de la derecha.",
+    "⟹": "Implicación: la condición de la izquierda lleva a la conclusión de la derecha.",
+    "∪": "Unión: reúne todos los elementos de los dos conjuntos.",
+    "∩": "Intersección: deja solo los elementos comunes a los dos conjuntos."
+  },
+  "functions": {
+    "sin": "Función seno: una de las funciones trigonométricas; en un triángulo rectángulo es el cateto opuesto dividido entre la hipotenusa.",
+    "cos": "Función coseno: una de las funciones trigonométricas; es el cateto adyacente dividido entre la hipotenusa.",
+    "tan": "Función tangente: es sin/cos.",
+    "log": "Función logaritmo: es la función inversa de la potenciación.",
+    "ln": "Logaritmo natural: el logaritmo en base e.",
+    "exp": "Función exponencial: una potencia de e.",
+    "lim": "Es la función límite.",
+    "det": "Determinante: el valor escalar característico de una matriz.",
+    "max": "Es la función que da el valor máximo.",
+    "min": "Es la función que da el valor mínimo."
+  },
+  "accents": {
+    "hat": {
+      "role": "Estimador / vector unitario",
+      "description": "El acento circunflejo indica un estimador o un vector unitario."
+    },
+    "widehat": {
+      "role": "Estimador / vector unitario",
+      "description": "El acento circunflejo indica un estimador o un vector unitario."
+    },
+    "vec": {
+      "role": "Vector",
+      "description": "La flecha indica que se trata de un vector con módulo y dirección."
+    },
+    "overrightarrow": {
+      "role": "Vector",
+      "description": "La flecha indica que se trata de un vector con módulo y dirección."
+    },
+    "overleftarrow": {
+      "role": "Vector",
+      "description": "La flecha indica que se trata de un vector con módulo y dirección."
+    },
+    "dot": {
+      "role": "Derivada temporal",
+      "description": "El punto indica la derivada respecto al tiempo. En física se usa para la velocidad, entre otras magnitudes."
+    },
+    "ddot": {
+      "role": "Segunda derivada temporal",
+      "description": "Los dos puntos indican la segunda derivada respecto al tiempo. Se usa para la aceleración, entre otras magnitudes."
+    },
+    "tilde": {
+      "role": "Aproximación / transformación",
+      "description": "La tilde indica un valor aproximado o una cantidad transformada."
+    },
+    "widetilde": {
+      "role": "Aproximación / transformación",
+      "description": "La tilde indica un valor aproximado o una cantidad transformada."
+    },
+    "bar": {
+      "role": "Media / conjugado",
+      "description": "La barra horizontal indica un valor medio o el conjugado de un número complejo."
+    }
+  },
+  "defaultAccent": {
+    "role": "Acento",
+    "description": "Es un símbolo que lleva un acento."
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "Potencia",
+      "description": "Potencia: la base se multiplica por sí misma tantas veces como indica el exponente."
+    },
+    "subscriptOnly": {
+      "role": "Subíndice",
+      "description": "Subíndice: señala un elemento o una componente concreta."
+    },
+    "both": {
+      "role": "Índices",
+      "description": "Es un símbolo que lleva a la vez superíndice y subíndice."
+    },
+    "withLeft": {
+      "role": "Índices a ambos lados",
+      "description": "Es una notación con índices delante y detrás del símbolo."
+    }
+  },
+  "defaultOperator": "Es el operador {op}.",
+  "defaultFunction": "Es la función {name}.",
+  "chem": {
+    "formula": {
+      "role": "Fórmula química",
+      "description": "Es la notación que representa una sustancia mediante símbolos de elementos."
+    },
+    "equation": {
+      "role": "Ecuación química",
+      "description": "Representa el proceso por el que las sustancias de la izquierda se transforman en las de la derecha."
+    },
+    "species": {
+      "role": "Especie química",
+      "description": "Es una de las sustancias que participan en la reacción."
+    },
+    "element": {
+      "role": "Elemento",
+      "description": "Es el símbolo que representa un elemento de la tabla periódica."
+    },
+    "group": {
+      "role": "Grupo atómico",
+      "description": "Es un conjunto de átomos agrupado entre paréntesis que se comporta como una sola unidad."
+    },
+    "coefficient": {
+      "role": "Coeficiente",
+      "description": "Es la proporción de partículas que participan en la reacción. Sirve para igualar el número de átomos de ambos miembros."
+    },
+    "count": {
+      "role": "Número de átomos",
+      "description": "Indica cuántos hay del elemento o del grupo atómico que le precede."
+    },
+    "charge": {
+      "role": "Carga",
+      "description": "Es la magnitud de la carga que tiene el ion. Coincide con el número de electrones perdidos o ganados."
+    },
+    "chargeSign": {
+      "role": "Signo de la carga",
+      "description": "Indica si es un catión (+), por haber perdido electrones, o un anión (−), por haberlos ganado."
+    },
+    "massNumber": {
+      "role": "Número másico",
+      "description": "Es la suma de protones y neutrones del núcleo atómico. Distingue los isótopos."
+    },
+    "atomicNumber": {
+      "role": "Número atómico",
+      "description": "Es el número de protones del núcleo atómico. Determina de qué elemento se trata."
+    },
+    "arrow": {
+      "role": "Flecha de reacción",
+      "description": "Indica que la reacción avanza en el sentido de la flecha."
+    },
+    "equilibriumArrow": {
+      "role": "Reacción reversible",
+      "description": "La reacción directa y la inversa ocurren a la vez y alcanzan el equilibrio."
+    },
+    "condition": {
+      "role": "Condiciones de reacción",
+      "description": "Son las condiciones necesarias para la reacción: catalizador, temperatura, presión, etc."
+    },
+    "plus": {
+      "role": "Separador de especies",
+      "description": "Enlaza las sustancias que están en el mismo miembro. No es una suma."
+    },
+    "hydrate": {
+      "role": "Enlace de hidratación",
+      "description": "Indica que dentro del cristal hay además moléculas de agua."
+    },
+    "state": {
+      "role": "Estado de agregación",
+      "description": "Indica en qué estado está: sólido (s), líquido (l), gas (g) o disolución acuosa (aq)."
+    },
+    "gas": {
+      "role": "Desprendimiento de gas",
+      "description": "Indica que la reacción libera un gas."
+    },
+    "precipitate": {
+      "role": "Precipitado",
+      "description": "Indica que la reacción forma un sólido que se deposita en el fondo."
+    }
+  }
+}

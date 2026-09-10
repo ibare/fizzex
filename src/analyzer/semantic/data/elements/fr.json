@@ -1,0 +1,595 @@
+{
+  "descriptionFormat": "Numéro atomique {z}. {desc}",
+  "bySymbol": {
+    "H": {
+      "name": "hydrogène",
+      "z": 1,
+      "desc": "L'élément le plus léger et le plus abondant de l'univers."
+    },
+    "He": {
+      "name": "hélium",
+      "z": 2,
+      "desc": "Gaz léger et inerte, utilisé pour les ballons et la réfrigération."
+    },
+    "Li": {
+      "name": "lithium",
+      "z": 3,
+      "desc": "Le plus léger des métaux, matériau clé des batteries rechargeables."
+    },
+    "Be": {
+      "name": "béryllium",
+      "z": 4,
+      "desc": "Métal léger et rigide, utilisé dans les pièces aéronautiques."
+    },
+    "B": {
+      "name": "bore",
+      "z": 5,
+      "desc": "Utilisé dans le verre et les détergents, il sert aussi à doper les semi-conducteurs."
+    },
+    "C": {
+      "name": "carbone",
+      "z": 6,
+      "desc": "Élément qui forme le squelette du vivant ; ses chaînes donnent d'innombrables composés."
+    },
+    "N": {
+      "name": "azote",
+      "z": 7,
+      "desc": "Il représente environ 78 pour cent de l'air et entre dans les protéines et les engrais."
+    },
+    "O": {
+      "name": "oxygène",
+      "z": 8,
+      "desc": "Nécessaire à la respiration et à la combustion, c'est l'élément le plus abondant de la croûte terrestre."
+    },
+    "F": {
+      "name": "fluor",
+      "z": 9,
+      "desc": "L'élément le plus réactif, utilisé dans les dentifrices et les revêtements."
+    },
+    "Ne": {
+      "name": "néon",
+      "z": 10,
+      "desc": "Gaz inerte qui émet une lumière rouge lorsqu'un courant le traverse."
+    },
+    "Na": {
+      "name": "sodium",
+      "z": 11,
+      "desc": "Métal qui réagit violemment avec l'eau ; c'est l'un des composants du sel."
+    },
+    "Mg": {
+      "name": "magnésium",
+      "z": 12,
+      "desc": "Métal léger, présent au centre de la chlorophylle."
+    },
+    "Al": {
+      "name": "aluminium",
+      "z": 13,
+      "desc": "Métal léger et inoxydable, utilisé pour les canettes et les châssis de fenêtre."
+    },
+    "Si": {
+      "name": "silicium",
+      "z": 14,
+      "desc": "Composant principal du sable et du verre, matériau des puces électroniques."
+    },
+    "P": {
+      "name": "phosphore",
+      "z": 15,
+      "desc": "Il sert au stockage de l'énergie dans la cellule et à la formation des os."
+    },
+    "S": {
+      "name": "soufre",
+      "z": 16,
+      "desc": "On le trouve en cristaux jaunes dans les zones volcaniques ; il sert à fabriquer l'acide sulfurique."
+    },
+    "Cl": {
+      "name": "chlore",
+      "z": 17,
+      "desc": "Gaz utilisé pour la désinfection ; c'est l'autre composant du sel."
+    },
+    "Ar": {
+      "name": "argon",
+      "z": 18,
+      "desc": "Troisième gaz le plus abondant de l'air ; inerte, il est utilisé en soudure."
+    },
+    "K": {
+      "name": "potassium",
+      "z": 19,
+      "desc": "Métal indispensable au fonctionnement des nerfs et des muscles."
+    },
+    "Ca": {
+      "name": "calcium",
+      "z": 20,
+      "desc": "Il forme les os et les coquillages, et c'est le composant principal du calcaire."
+    },
+    "Sc": {
+      "name": "scandium",
+      "z": 21,
+      "desc": "Léger et résistant, il entre dans les alliages pour vélos et aéronefs."
+    },
+    "Ti": {
+      "name": "titane",
+      "z": 22,
+      "desc": "Léger et inoxydable, utilisé pour les implants et les avions."
+    },
+    "V": {
+      "name": "vanadium",
+      "z": 23,
+      "desc": "Ajouté à l'acier, il le rend nettement plus dur."
+    },
+    "Cr": {
+      "name": "chrome",
+      "z": 24,
+      "desc": "Il donne un éclat inoxydable et sert au chromage."
+    },
+    "Mn": {
+      "name": "manganèse",
+      "z": 25,
+      "desc": "Il rend l'acier tenace et entre aussi dans les piles."
+    },
+    "Fe": {
+      "name": "fer",
+      "z": 26,
+      "desc": "Le métal le plus utilisé ; il transporte l'oxygène dans le sang."
+    },
+    "Co": {
+      "name": "cobalt",
+      "z": 27,
+      "desc": "Métal utilisé pour les pigments bleus et les électrodes de batteries."
+    },
+    "Ni": {
+      "name": "nickel",
+      "z": 28,
+      "desc": "Inoxydable, il entre dans les pièces de monnaie et l'acier inoxydable."
+    },
+    "Cu": {
+      "name": "cuivre",
+      "z": 29,
+      "desc": "Métal rougeâtre et excellent conducteur, utilisé pour les fils électriques."
+    },
+    "Zn": {
+      "name": "zinc",
+      "z": 30,
+      "desc": "Utilisé en galvanisation pour protéger le fer de la rouille ; il est aussi essentiel à l'organisme."
+    },
+    "Ga": {
+      "name": "gallium",
+      "z": 31,
+      "desc": "Son point de fusion est si bas qu'il fond dans la main ; il sert aux composants électroluminescents."
+    },
+    "Ge": {
+      "name": "germanium",
+      "z": 32,
+      "desc": "Matériau des premiers semi-conducteurs, il est aujourd'hui utilisé dans les fibres optiques."
+    },
+    "As": {
+      "name": "arsenic",
+      "z": 33,
+      "desc": "Très toxique, il sert pourtant aussi de matériau semi-conducteur."
+    },
+    "Se": {
+      "name": "sélénium",
+      "z": 34,
+      "desc": "Il conduit mieux l'électricité sous la lumière, ce qui a servi aux photocopieurs."
+    },
+    "Br": {
+      "name": "brome",
+      "z": 35,
+      "desc": "Un des rares éléments liquides à température ambiante, de couleur brun-rouge."
+    },
+    "Kr": {
+      "name": "krypton",
+      "z": 36,
+      "desc": "Gaz inerte dont on remplit les ampoules à haute performance."
+    },
+    "Rb": {
+      "name": "rubidium",
+      "z": 37,
+      "desc": "Il donne une flamme rouge et sert dans les horloges atomiques."
+    },
+    "Sr": {
+      "name": "strontium",
+      "z": 38,
+      "desc": "Métal qui donne sa couleur rouge aux feux d'artifice."
+    },
+    "Y": {
+      "name": "yttrium",
+      "z": 39,
+      "desc": "Métal utilisé pour les luminophores et les supraconducteurs."
+    },
+    "Zr": {
+      "name": "zirconium",
+      "z": 40,
+      "desc": "Résistant à la chaleur et à la corrosion, il sert aux pièces de réacteurs nucléaires."
+    },
+    "Nb": {
+      "name": "niobium",
+      "z": 41,
+      "desc": "Métal utilisé pour les aimants supraconducteurs et les alliages résistants."
+    },
+    "Mo": {
+      "name": "molybdène",
+      "z": 42,
+      "desc": "Il supporte les hautes températures et entre dans les aciers à outils."
+    },
+    "Tc": {
+      "name": "technétium",
+      "z": 43,
+      "desc": "Premier élément artificiel, presque absent de la nature, utilisé en imagerie médicale."
+    },
+    "Ru": {
+      "name": "ruthénium",
+      "z": 44,
+      "desc": "Métal précieux utilisé pour les contacts électroniques et les catalyseurs."
+    },
+    "Rh": {
+      "name": "rhodium",
+      "z": 45,
+      "desc": "Utilisé dans les pots catalytiques qui dépolluent les gaz d'échappement."
+    },
+    "Pd": {
+      "name": "palladium",
+      "z": 46,
+      "desc": "Il absorbe bien l'hydrogène et sert dans les convertisseurs catalytiques."
+    },
+    "Ag": {
+      "name": "argent",
+      "z": 47,
+      "desc": "C'est le métal qui conduit le mieux l'électricité et la chaleur."
+    },
+    "Cd": {
+      "name": "cadmium",
+      "z": 48,
+      "desc": "Toxique, il servait autrefois d'électrode dans les batteries rechargeables."
+    },
+    "In": {
+      "name": "indium",
+      "z": 49,
+      "desc": "Il sert à fabriquer les électrodes transparentes des écrans tactiles."
+    },
+    "Sn": {
+      "name": "étain",
+      "z": 50,
+      "desc": "Il fond facilement et sert à la soudure ; c'est un composant du bronze."
+    },
+    "Sb": {
+      "name": "antimoine",
+      "z": 51,
+      "desc": "Utilisé dans les retardateurs de flamme, qui empêchent le feu de prendre."
+    },
+    "Te": {
+      "name": "tellure",
+      "z": 52,
+      "desc": "Métalloïde utilisé dans les cellules solaires et les alliages."
+    },
+    "I": {
+      "name": "iode",
+      "z": 53,
+      "desc": "Indispensable aux hormones thyroïdiennes, il sert aussi d'antiseptique."
+    },
+    "Xe": {
+      "name": "xénon",
+      "z": 54,
+      "desc": "Il émet une lumière vive, utilisée pour les phares et les flashs."
+    },
+    "Cs": {
+      "name": "césium",
+      "z": 55,
+      "desc": "Un des métaux les plus mous ; il sert de référence aux horloges atomiques."
+    },
+    "Ba": {
+      "name": "baryum",
+      "z": 56,
+      "desc": "Il arrête bien les rayons X et sert de produit de contraste."
+    },
+    "La": {
+      "name": "lanthane",
+      "z": 57,
+      "desc": "Utilisé dans le verre des objectifs photographiques et dans les batteries."
+    },
+    "Ce": {
+      "name": "cérium",
+      "z": 58,
+      "desc": "La terre rare la plus abondante, utilisée comme abrasif et comme catalyseur."
+    },
+    "Pr": {
+      "name": "praséodyme",
+      "z": 59,
+      "desc": "Utilisé pour les aimants puissants et le verre des lunettes de soudeur."
+    },
+    "Nd": {
+      "name": "néodyme",
+      "z": 60,
+      "desc": "Élément des aimants permanents les plus puissants."
+    },
+    "Pm": {
+      "name": "prométhium",
+      "z": 61,
+      "desc": "Élément radioactif presque absent de la nature."
+    },
+    "Sm": {
+      "name": "samarium",
+      "z": 62,
+      "desc": "Utilisé dans les aimants qui gardent leur magnétisme à haute température."
+    },
+    "Eu": {
+      "name": "europium",
+      "z": 63,
+      "desc": "Utilisé contre la contrefaçon des billets et pour le luminophore rouge des écrans."
+    },
+    "Gd": {
+      "name": "gadolinium",
+      "z": 64,
+      "desc": "Élément utilisé comme produit de contraste en imagerie par résonance magnétique."
+    },
+    "Tb": {
+      "name": "terbium",
+      "z": 65,
+      "desc": "Utilisé pour les luminophores verts et les matériaux magnétostrictifs."
+    },
+    "Dy": {
+      "name": "dysprosium",
+      "z": 66,
+      "desc": "Il empêche les aimants de perdre leur force à haute température."
+    },
+    "Ho": {
+      "name": "holmium",
+      "z": 67,
+      "desc": "Il concentre bien le champ magnétique et sert aux aimants puissants."
+    },
+    "Er": {
+      "name": "erbium",
+      "z": 68,
+      "desc": "Utilisé pour amplifier le signal dans les communications par fibre optique."
+    },
+    "Tm": {
+      "name": "thulium",
+      "z": 69,
+      "desc": "Élément rare utilisé dans les appareils portatifs à rayons X."
+    },
+    "Yb": {
+      "name": "ytterbium",
+      "z": 70,
+      "desc": "Utilisé dans les horloges atomiques et les lasers à fibre."
+    },
+    "Lu": {
+      "name": "lutécium",
+      "z": 71,
+      "desc": "Utilisé comme catalyseur de raffinage du pétrole et en imagerie médicale."
+    },
+    "Hf": {
+      "name": "hafnium",
+      "z": 72,
+      "desc": "Il absorbe bien les neutrons et sert aux barres de contrôle des réacteurs."
+    },
+    "Ta": {
+      "name": "tantale",
+      "z": 73,
+      "desc": "Résistant à la corrosion, il sert aux condensateurs des composants électroniques."
+    },
+    "W": {
+      "name": "tungstène",
+      "z": 74,
+      "desc": "Il a le point de fusion le plus élevé des métaux et servait aux filaments d'ampoules."
+    },
+    "Re": {
+      "name": "rhénium",
+      "z": 75,
+      "desc": "Métal rare utilisé pour les pièces à haute température des réacteurs d'avion."
+    },
+    "Os": {
+      "name": "osmium",
+      "z": 76,
+      "desc": "L'élément le plus dense, et extrêmement dur."
+    },
+    "Ir": {
+      "name": "iridium",
+      "z": 77,
+      "desc": "Le métal le plus résistant à la corrosion, utilisé dans les bougies d'allumage."
+    },
+    "Pt": {
+      "name": "platine",
+      "z": 78,
+      "desc": "Inerte, il est utilisé aussi bien en joaillerie qu'en catalyse."
+    },
+    "Au": {
+      "name": "or",
+      "z": 79,
+      "desc": "Son éclat inaltérable en fait un métal de monnaie et de contacts électroniques."
+    },
+    "Hg": {
+      "name": "mercure",
+      "z": 80,
+      "desc": "Seul métal liquide à température ambiante, et toxique."
+    },
+    "Tl": {
+      "name": "thallium",
+      "z": 81,
+      "desc": "Très toxique, il est utilisé dans les équipements infrarouges."
+    },
+    "Pb": {
+      "name": "plomb",
+      "z": 82,
+      "desc": "Métal lourd et mou, qui arrête bien les rayonnements."
+    },
+    "Bi": {
+      "name": "bismuth",
+      "z": 83,
+      "desc": "Élément lourd mais peu toxique, utilisé dans les médicaments."
+    },
+    "Po": {
+      "name": "polonium",
+      "z": 84,
+      "desc": "Élément fortement radioactif, découvert par les époux Curie."
+    },
+    "At": {
+      "name": "astate",
+      "z": 85,
+      "desc": "L'élément le moins abondant de la nature."
+    },
+    "Rn": {
+      "name": "radon",
+      "z": 86,
+      "desc": "Gaz radioactif qui s'échappe du sol."
+    },
+    "Fr": {
+      "name": "francium",
+      "z": 87,
+      "desc": "Le métal le plus réactif, mais il se désintègre immédiatement."
+    },
+    "Ra": {
+      "name": "radium",
+      "z": 88,
+      "desc": "Il luit dans l'obscurité ; il a été découvert par les époux Curie."
+    },
+    "Ac": {
+      "name": "actinium",
+      "z": 89,
+      "desc": "Premier élément de la famille des actinides, il émet un fort rayonnement."
+    },
+    "Th": {
+      "name": "thorium",
+      "z": 90,
+      "desc": "Métal radioactif étudié comme combustible pour les réacteurs nucléaires."
+    },
+    "Pa": {
+      "name": "protactinium",
+      "z": 91,
+      "desc": "Élément radioactif rare, produit par la désintégration de l'uranium."
+    },
+    "U": {
+      "name": "uranium",
+      "z": 92,
+      "desc": "Sa fission en fait le combustible des centrales nucléaires."
+    },
+    "Np": {
+      "name": "neptunium",
+      "z": 93,
+      "desc": "Premier élément artificiel situé après l'uranium."
+    },
+    "Pu": {
+      "name": "plutonium",
+      "z": 94,
+      "desc": "Utilisé comme combustible nucléaire et comme source d'énergie des sondes spatiales."
+    },
+    "Am": {
+      "name": "américium",
+      "z": 95,
+      "desc": "Présent en très petite quantité dans les détecteurs d'incendie."
+    },
+    "Cm": {
+      "name": "curium",
+      "z": 96,
+      "desc": "Élément artificiel radioactif nommé d'après les époux Curie."
+    },
+    "Bk": {
+      "name": "berkélium",
+      "z": 97,
+      "desc": "Élément artificiel créé à Berkeley."
+    },
+    "Cf": {
+      "name": "californium",
+      "z": 98,
+      "desc": "Il émet beaucoup de neutrons et sert aux appareils de prospection."
+    },
+    "Es": {
+      "name": "einsteinium",
+      "z": 99,
+      "desc": "Découvert pour la première fois dans les débris d'un essai de bombe à hydrogène."
+    },
+    "Fm": {
+      "name": "fermium",
+      "z": 100,
+      "desc": "Élément artificiel nommé d'après le physicien Fermi."
+    },
+    "Md": {
+      "name": "mendélévium",
+      "z": 101,
+      "desc": "Il porte le nom de Mendeleïev, créateur du tableau périodique."
+    },
+    "No": {
+      "name": "nobélium",
+      "z": 102,
+      "desc": "Élément artificiel radioactif nommé d'après Nobel."
+    },
+    "Lr": {
+      "name": "lawrencium",
+      "z": 103,
+      "desc": "Il porte le nom de Lawrence, inventeur de l'accélérateur de particules."
+    },
+    "Rf": {
+      "name": "rutherfordium",
+      "z": 104,
+      "desc": "Il porte le nom de Rutherford, qui a découvert le noyau atomique."
+    },
+    "Db": {
+      "name": "dubnium",
+      "z": 105,
+      "desc": "Élément nommé d'après l'institut russe de Doubna."
+    },
+    "Sg": {
+      "name": "seaborgium",
+      "z": 106,
+      "desc": "Il porte le nom de Seaborg, qui a créé plusieurs éléments artificiels."
+    },
+    "Bh": {
+      "name": "bohrium",
+      "z": 107,
+      "desc": "Il porte le nom de Bohr, auteur d'un modèle de l'atome."
+    },
+    "Hs": {
+      "name": "hassium",
+      "z": 108,
+      "desc": "Élément artificiel nommé d'après la région allemande de Hesse."
+    },
+    "Mt": {
+      "name": "meitnérium",
+      "z": 109,
+      "desc": "Il porte le nom de Meitner, qui a expliqué la fission nucléaire."
+    },
+    "Ds": {
+      "name": "darmstadtium",
+      "z": 110,
+      "desc": "Élément créé à Darmstadt, en Allemagne."
+    },
+    "Rg": {
+      "name": "roentgenium",
+      "z": 111,
+      "desc": "Il porte le nom de Röntgen, qui a découvert les rayons X."
+    },
+    "Cn": {
+      "name": "copernicium",
+      "z": 112,
+      "desc": "Il porte le nom de l'astronome Copernic."
+    },
+    "Nh": {
+      "name": "nihonium",
+      "z": 113,
+      "desc": "Élément créé au Japon, dont le nom désigne le Japon."
+    },
+    "Fl": {
+      "name": "flérovium",
+      "z": 114,
+      "desc": "Il porte le nom du physicien russe Fliorov."
+    },
+    "Mc": {
+      "name": "moscovium",
+      "z": 115,
+      "desc": "Il porte le nom de la région russe de Moscou."
+    },
+    "Lv": {
+      "name": "livermorium",
+      "z": 116,
+      "desc": "Il porte le nom du laboratoire américain de Livermore."
+    },
+    "Ts": {
+      "name": "tennesse",
+      "z": 117,
+      "desc": "Élément artificiel nommé d'après l'État américain du Tennessee."
+    },
+    "Og": {
+      "name": "oganesson",
+      "z": 118,
+      "desc": "Élément au numéro atomique le plus élevé du tableau périodique."
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "Volume bola",
+    "oneLiner": "Rumus untuk mencari volume bola dengan mengalikan pangkat tiga jari-jari dengan pi dan empat pertiga",
+    "description": "Volume bola adalah hasil kali jari-jari yang dikalikan tiga kali dengan konstanta lingkaran (pi) dan empat pertiga. Rumus ini dipakai untuk mencari besar ruang yang ditempati benda yang bulat sempurna seperti bola basket.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati bola.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "Konstanta perbandingan", "description": "Koefisien tetap yang menentukan volume bola.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jarak dari pusat bola ke permukaannya.", "kind": "input" },
+      "r^3": { "role": "Pangkat tiga jari-jari", "description": "Jari-jari yang dikalikan tiga kali. Karena volume berdimensi tiga, jari-jari dipangkatkan tiga.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung volume bola basket", "Menaksir volume Bumi", "Membandingkan ukuran kelereng"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "Luas permukaan bola",
+    "oneLiner": "Rumus untuk mencari luas permukaan bola dengan mengalikan kuadrat jari-jari dengan pi dan 4",
+    "description": "Luas permukaan bola adalah kuadrat jari-jari yang dikalikan dengan konstanta lingkaran dan 4. Nilainya tepat 4 kali luas lingkaran yang berjari-jari sama. Luas permukaan inilah bidang yang perlu dicat ketika sebuah bola dicat.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "S": { "role": "Luas permukaan", "description": "Luas seluruh permukaan bola.", "kind": "output" },
+      "4": { "role": "Konstanta", "description": "Menyatakan bahwa luas permukaan bola sama dengan 4 kali luas lingkaran berjari-jari sama.", "kind": "constant", "value": 4 },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jarak dari pusat bola ke permukaannya.", "kind": "input" },
+      "r^2": { "role": "Kuadrat jari-jari", "description": "Jari-jari yang dikalikan dua kali.", "kind": "input" }
+    },
+    "realWorldExamples": ["Luas total kulit sebuah bola sepak", "Banyaknya kertas yang diperlukan untuk menempel pada permukaan globe"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "Volume tabung",
+    "oneLiner": "Rumus untuk mencari volume tabung dengan mengalikan luas lingkaran alas dengan tingginya",
+    "description": "Volume tabung adalah luas alas (luas lingkaran) yang dikalikan dengan tinggi. Bentuk ini dapat dibayangkan sebagai alas bundar yang ditumpuk ke atas setinggi tabungnya.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati tabung.", "kind": "output" },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jari-jari lingkaran alas tabung.", "kind": "input" },
+      "r^2": { "role": "Kuadrat jari-jari", "description": "Jari-jari yang dikalikan dua kali. Nilai ini menentukan luas alas.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak antara alas atas dan alas bawah tabung.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung isi sebuah kaleng minuman", "Kapasitas tangki air berbentuk tabung"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "Luas permukaan tabung",
+    "oneLiner": "Rumus untuk mencari luas permukaan tabung dengan menjumlahkan luas dua alas dan luas selimutnya",
+    "description": "Luas permukaan tabung adalah jumlah luas dua lingkaran di atas dan di bawah dengan luas selimutnya. Bila selimutnya dibentangkan, bentuknya menjadi persegi panjang yang panjangnya keliling lingkaran dan lebarnya tinggi tabung.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "S": { "role": "Luas permukaan", "description": "Luas seluruh permukaan tabung.", "kind": "output" },
+      "2": { "role": "Konstanta", "description": "Koefisien yang difaktorkan keluar sebagai faktor bersama.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jari-jari lingkaran alas tabung.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak antara alas atas dan alas bawah tabung.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung luas kertas label sebuah kaleng minuman", "Banyaknya kertas kado untuk membungkus kotak hadiah berbentuk tabung"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "Volume kerucut",
+    "oneLiner": "Rumus untuk mencari volume kerucut dengan mengalikan luas lingkaran alas dengan tinggi lalu membaginya dengan 3",
+    "description": "Volume kerucut adalah luas alas yang dikalikan tinggi lalu dibagi 3. Nilainya tepat sepertiga volume tabung yang alas dan tingginya sama.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati kerucut.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "Sepertiga", "description": "Menyatakan bahwa volume kerucut adalah sepertiga volume tabung yang alas dan tingginya sama.", "kind": "constant", "value": 0.33333333 },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jari-jari lingkaran alas kerucut.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak tegak lurus dari titik puncak kerucut ke alasnya.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung isi sebuah cone es krim", "Volume sebuah topi kerucut"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "Luas permukaan kerucut",
+    "oneLiner": "Rumus untuk mencari luas permukaan kerucut dengan menjumlahkan luas lingkaran alas dan luas selimutnya",
+    "description": "Luas permukaan kerucut adalah jumlah luas lingkaran alas dan luas selimutnya yang berbentuk juring. Bila selimutnya dibentangkan, bentuknya menjadi juring yang luasnya adalah hasil kali jari-jari dan garis pelukis (panjang sisi miring) dikalikan konstanta lingkaran.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "S": { "role": "Luas permukaan", "description": "Luas seluruh permukaan kerucut.", "kind": "output" },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jari-jari lingkaran alas kerucut.", "kind": "input" },
+      "l": { "role": "Garis pelukis", "description": "Panjang sisi miring dari titik puncak kerucut ke keliling alasnya.", "kind": "input" }
+    },
+    "realWorldExamples": ["Luas kertas yang diperlukan untuk membuat topi kerucut", "Menghitung luas kain sebuah tenda berbentuk kerucut"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "Volume balok",
+    "oneLiner": "Rumus untuk mencari volume balok dengan mengalikan panjang, lebar, dan tinggi",
+    "description": "Volume balok adalah hasil kali panjang, lebar, dan tinggi. Sama saja dengan mengalikan luas persegi panjang pada alasnya dengan tinggi, dan setara dengan mencacah berapa banyak kubus satuan yang muat di dalam kotak itu.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati balok.", "kind": "output" },
+      "l": { "role": "Panjang", "description": "Panjang sisi mendatar balok.", "kind": "input" },
+      "w": { "role": "Lebar", "description": "Lebar balok.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Tinggi balok.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung volume kardus paket", "Banyaknya air yang muat dalam sebuah kolam renang", "Menaksir kapasitas dalam sebuah lemari es"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "Luas permukaan balok",
+    "oneLiner": "Rumus untuk mencari luas permukaan balok dengan menjumlahkan luas tiga pasang sisi lalu mengalikannya dua",
+    "description": "Luas permukaan balok adalah jumlah luas tiga sisi yang berbeda lalu dikalikan 2. Pada balok terdapat tiga pasang sisi yang berhadapan, dan sisi-sisi dalam satu pasang luasnya sama, sehingga tiga jenis sisi dijumlahkan lalu digandakan.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "S": { "role": "Luas permukaan", "description": "Luas seluruh permukaan balok.", "kind": "output" },
+      "2": { "role": "Konstanta", "description": "Dikalikan 2 karena ada tiga pasang sisi yang berhadapan.", "kind": "constant", "value": 2 },
+      "l": { "role": "Panjang", "description": "Panjang sisi mendatar balok.", "kind": "input" },
+      "w": { "role": "Lebar", "description": "Lebar balok.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Tinggi balok.", "kind": "input" },
+      "lw": { "role": "Sisi atas/bawah", "description": "Luas sisi hasil kali panjang dan lebar.", "kind": "output" },
+      "lh": { "role": "Sisi depan/belakang", "description": "Luas sisi hasil kali panjang dan tinggi.", "kind": "output" },
+      "wh": { "role": "Sisi samping", "description": "Luas sisi hasil kali lebar dan tinggi.", "kind": "output" }
+    },
+    "realWorldExamples": ["Banyaknya kertas kado untuk membungkus sebuah kotak hadiah", "Menghitung luas permukaan luar kardus paket"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "Volume tetrahedron beraturan",
+    "oneLiner": "Rumus untuk mencari volume tetrahedron beraturan dengan mengalikan pangkat tiga panjang rusuknya dengan akar 2 dibagi 12",
+    "description": "Volume tetrahedron beraturan adalah pangkat tiga panjang satu rusuk yang dikalikan dengan akar 2 dibagi 12. Tetrahedron beraturan adalah bangun ruang yang keempat sisinya berupa segitiga sama sisi yang sama besar, dan merupakan bidang banyak beraturan yang paling sederhana.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati tetrahedron beraturan.", "kind": "output" },
+      "\\frac{\\sqrt{2}}{12}": { "role": "Konstanta perbandingan", "description": "Koefisien tetap yang muncul dari struktur geometris tetrahedron beraturan.", "kind": "constant", "value": 0.11785113 },
+      "a": { "role": "Panjang rusuk", "description": "Panjang satu rusuk (sisi) tetrahedron beraturan. Semua rusuknya sama panjang.", "kind": "input" },
+      "a^3": { "role": "Pangkat tiga rusuk", "description": "Panjang rusuk yang dikalikan tiga kali.", "kind": "input" }
+    },
+    "realWorldExamples": ["Volume cokelat berbentuk piramida", "Menghitung ukuran dadu tetrahedron (D4)"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "Volume limas",
+    "oneLiner": "Rumus untuk mencari volume limas dengan mengalikan luas alas dengan tinggi lalu membaginya dengan 3",
+    "description": "Volume limas adalah luas alas yang dikalikan tinggi lalu dibagi 3. Nilainya tepat sepertiga volume prisma yang alas dan tingginya sama. Rumus ini dipakai untuk bangun ruang yang alasnya segi banyak dan puncaknya lancip, seperti piramida Mesir.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati limas.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "Sepertiga", "description": "Menyatakan bahwa volume limas adalah sepertiga volume prisma yang alas dan tingginya sama.", "kind": "constant", "value": 0.33333333 },
+      "B": { "role": "Luas alas", "description": "Luas alas limas yang berbentuk segi banyak.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak tegak lurus dari titik puncak limas ke alasnya.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menaksir volume piramida Mesir", "Menghitung ruang di dalam tenda berbentuk piramida"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}

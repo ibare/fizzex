@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "Base de la puissance située au dénominateur. Si c'est une variable, plus elle grandit, plus la valeur de la fonction est atténuée."
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "Degré de la puissance au dénominateur. Plus l'exposant est grand, plus le dénominateur croît vite et atténue la valeur totale."
+  },
+  "sum.body>frac.denominator": {
+    "role": "Dénominateur de la série",
+    "description": "Dénominateur de chaque terme de la série. S'il croît vite, la série a de bonnes chances de converger."
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "Exposant de la série de Riemann",
+    "description": "Exposant de la puissance au dénominateur de la série. S'il est strictement supérieur à 1, la série converge (critère de Riemann)."
+  },
+  "sum.body>frac.numerator": {
+    "role": "Numérateur de la série",
+    "description": "Numérateur de chaque terme de la série."
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "Intégrale impropre qui commence à moins l'infini. Elle ne converge que si l'intégrande décroît assez vite."
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "L'exposant est le numérateur d'une fraction. Un exposant fractionnaire correspond à une racine."
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "Dénominateur de l'exposant. S'il vaut n, cela revient à une racine n-ième."
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "Numérateur imbriqué",
+    "description": "Une fraction est imbriquée dans une autre fraction. Cela exprime un rapport de rapports."
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "Dénominateur imbriqué",
+    "description": "Une autre fraction se trouve au dénominateur. En simplifiant l'ensemble, on la transforme en multiplication."
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "Numérateur de la fraction que l'on intègre."
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "Dénominateur de la fraction que l'on intègre. Une décomposition en éléments simples peut être utile."
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "Numérateur de la fraction dans la limite. S'il tend vers 0 ou vers l'infini en même temps que le dénominateur, on peut appliquer la règle de L'Hôpital."
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "Dénominateur de la fraction dans la limite. S'il tend vers 0 ou vers l'infini en même temps que le numérateur, on peut appliquer la règle de L'Hôpital."
+  }
+}

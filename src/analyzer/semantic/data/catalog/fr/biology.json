@@ -1,0 +1,262 @@
+{
+  "logistic-growth": {
+    "name": "Croissance logistique",
+    "oneLiner": "Modèle dans lequel le taux de croissance diminue à mesure que l'effectif approche la capacité de charge du milieu",
+    "description": "Le modèle de croissance logistique décrit un processus où la croissance d'une population est d'abord exponentielle, puis ralentit progressivement à cause de la compétition pour les ressources lorsqu'elle se rapproche de la capacité de charge (K). C'est le modèle mathématique le plus élémentaire de la croissance dépendante de la densité, et il produit une courbe de croissance en S (courbe sigmoïde).",
+    "discoverer": "Pierre François Verhulst",
+    "field": "Biologie",
+    "significance": "C'est le modèle de base de la prévision de la dynamique des populations en écologie, et il s'applique à des domaines variés : épidémiologie, économie, diffusion des technologies.",
+    "elementMeanings": {
+      "dN/dt": {
+        "role": "Taux de variation de l'effectif",
+        "description": "La variation de l'effectif par unité de temps.",
+        "kind": "output"
+      },
+      "r": {
+        "role": "Taux d'accroissement intrinsèque",
+        "description": "Le taux d'accroissement maximal de la population en l'absence de limitation des ressources.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Effectif actuel",
+        "description": "La taille de la population à un instant donné.",
+        "kind": "input"
+      },
+      "K": {
+        "role": "Capacité de charge",
+        "description": "L'effectif maximal que le milieu considéré peut soutenir.",
+        "kind": "input"
+      },
+      "(1 - N/K)": {
+        "role": "Facteur de freinage de la croissance",
+        "description": "Quand N se rapproche de K, ce facteur tend vers 0 et freine la croissance.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "La courbe de croissance en S de poissons relâchés dans un lac",
+      "L'analyse de l'entrée en phase stationnaire d'une culture bactérienne",
+      "La modélisation de la croissance du nombre d'utilisateurs d'un réseau social"
+    ],
+    "relatedFormulas": [
+      "exponential-growth",
+      "lotka-volterra"
+    ]
+  },
+  "hardy-weinberg": {
+    "name": "Loi de Hardy-Weinberg",
+    "oneLiner": "Loi selon laquelle les fréquences génétiques se maintiennent dans les conditions idéales où aucune évolution n'a lieu",
+    "description": "La loi de Hardy-Weinberg énonce que, dans une population idéale sans mutation, sans sélection naturelle, sans dérive génétique, sans migration et sans reproduction non aléatoire, les fréquences alléliques et génotypiques restent constantes au fil des générations. Si l'on note p et q les fréquences des deux allèles, les fréquences génotypiques s'expriment par le développement du binôme.",
+    "discoverer": "Godfrey Harold Hardy, Wilhelm Weinberg",
+    "field": "Biologie",
+    "significance": "Fondement de la génétique des populations, elle fournit le critère (l'hypothèse nulle) permettant de juger si une évolution est en cours dans une population réelle.",
+    "elementMeanings": {
+      "p": {
+        "role": "Fréquence de l'allèle dominant",
+        "description": "La fréquence relative de l'allèle dominant dans la population. Comprise entre 0 et 1.",
+        "kind": "input"
+      },
+      "q": {
+        "role": "Fréquence de l'allèle récessif",
+        "description": "La fréquence relative de l'allèle récessif dans la population. p + q = 1.",
+        "kind": "input"
+      },
+      "p^2": {
+        "role": "Fréquence des homozygotes dominants",
+        "description": "La fréquence du génotype homozygote dominant (AA).",
+        "kind": "output"
+      },
+      "2pq": {
+        "role": "Fréquence des hétérozygotes",
+        "description": "La fréquence du génotype hétérozygote (Aa).",
+        "kind": "output"
+      },
+      "q^2": {
+        "role": "Fréquence des homozygotes récessifs",
+        "description": "La fréquence du génotype homozygote récessif (aa).",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Estimer la fréquence des porteurs d'une maladie génétique (drépanocytose, par exemple)",
+      "Vérifier si une dérive génétique se produit dans une population de petite taille",
+      "Contrôler l'équilibre génétique d'une population à partir de la répartition des groupes sanguins"
+    ],
+    "relatedFormulas": [
+      "logistic-growth"
+    ]
+  },
+  "michaelis-menten": {
+    "name": "Équation de Michaelis-Menten",
+    "oneLiner": "Modèle selon lequel la vitesse d'une réaction enzymatique suit une courbe de saturation en fonction de la concentration en substrat",
+    "description": "L'équation de Michaelis-Menten décrit comment la vitesse initiale d'une réaction enzymatique varie avec la concentration en substrat. À faible concentration, la vitesse augmente presque proportionnellement ; à forte concentration, l'enzyme se sature et la vitesse tend vers son maximum. La constante de Michaelis Km est la concentration en substrat pour laquelle la vitesse vaut la moitié de la vitesse maximale.",
+    "discoverer": "Leonor Michaelis, Maud Menten",
+    "field": "Biologie",
+    "significance": "Modèle de base de la cinétique enzymatique, il est un outil essentiel de la conception des médicaments et de l'ingénierie métabolique.",
+    "elementMeanings": {
+      "v": {
+        "role": "Vitesse de réaction",
+        "description": "La vitesse initiale de la réaction enzymatique. Unité : mol/(L s), par exemple.",
+        "kind": "output"
+      },
+      "V_{max}": {
+        "role": "Vitesse maximale",
+        "description": "La vitesse maximale, atteinte lorsque toutes les enzymes sont liées au substrat.",
+        "kind": "input"
+      },
+      "[S]": {
+        "role": "Concentration en substrat",
+        "description": "La concentration du substrat qui se lie à l'enzyme. Unité : mol/L.",
+        "kind": "input"
+      },
+      "K_m": {
+        "role": "Constante de Michaelis",
+        "description": "La concentration en substrat pour laquelle la vitesse vaut la moitié de Vmax. C'est un indicateur de l'affinité entre l'enzyme et le substrat.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Le principe par lequel un médicament inhibe une réaction en modifiant le Km de l'enzyme",
+      "La saturation des enzymes de dégradation de l'alcool (la vitesse de dégradation plafonne en cas d'excès)",
+      "La conception de la concentration optimale en substrat pour les enzymes industrielles"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "logistic-growth"
+    ]
+  },
+  "exponential-growth": {
+    "name": "Croissance exponentielle",
+    "oneLiner": "Modèle où l'effectif augmente de façon exponentielle avec le temps, sans limitation des ressources",
+    "description": "Le modèle de croissance exponentielle décrit la situation idéale d'une population qui croît à taux constant dans un milieu aux ressources illimitées. Il s'écrit comme le produit de l'effectif initial par une fonction exponentielle ; si le taux d'accroissement r est positif, l'effectif explose de façon exponentielle. Dans la réalité, la limitation des ressources fait généralement basculer la croissance vers le modèle logistique.",
+    "field": "Biologie",
+    "significance": "C'est le modèle mathématique le plus élémentaire de la croissance d'une population et le point de départ de modèles plus complexes comme le modèle logistique.",
+    "elementMeanings": {
+      "N(t)": {
+        "role": "Effectif à l'instant t",
+        "description": "La taille de la population après un temps t.",
+        "kind": "output"
+      },
+      "N_0": {
+        "role": "Effectif initial",
+        "description": "La taille de la population à l'instant t = 0.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Base du logarithme népérien",
+        "description": "Environ 2,718. Constante mathématique qui exprime une croissance continue.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "r": {
+        "role": "Taux d'accroissement intrinsèque",
+        "description": "Le taux d'accroissement net de la population. Si r > 0 elle croît, si r < 0 elle décroît.",
+        "kind": "input"
+      },
+      "t": {
+        "role": "Temps",
+        "description": "Le temps écoulé. L'unité dépend du contexte (heure, jour, année, etc.).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La multiplication rapide en phase exponentielle au début d'une culture bactérienne",
+      "L'explosion démographique qui suit l'arrivée d'une espèce exotique",
+      "Le calcul des intérêts composés (application financière de la croissance exponentielle)"
+    ],
+    "relatedFormulas": [
+      "logistic-growth",
+      "half-life"
+    ]
+  },
+  "sir-model": {
+    "name": "Modèle SIR",
+    "oneLiner": "Modèle qui représente la propagation et l'extinction d'une épidémie à l'aide de trois compartiments : sensibles, infectés, rétablis",
+    "description": "Le modèle SIR est le modèle compartimental de base de l'épidémiologie : il divise la population en trois groupes — les sensibles (S), les infectés (I) et les rétablis (R) — pour décrire la dynamique d'une maladie infectieuse. L'évolution du nombre d'infectés est déterminée par le paramètre de transmission et le paramètre de guérison ; si le taux de reproduction de base (R0 = transmission / guérison) dépasse 1, une épidémie se déclare.",
+    "discoverer": "William Ogilvy Kermack, Anderson McKendrick",
+    "field": "Biologie",
+    "significance": "Cadre fondamental de la modélisation mathématique des épidémies, il est essentiel à l'élaboration des politiques sanitaires et des stratégies vaccinales.",
+    "elementMeanings": {
+      "dI/dt": {
+        "role": "Taux de variation du nombre d'infectés",
+        "description": "La variation du nombre d'infectés par unité de temps.",
+        "kind": "output"
+      },
+      "\\beta": {
+        "role": "Taux de transmission",
+        "description": "La probabilité qu'un sensible soit infecté lors d'un contact avec un infecté, multipliée par la fréquence des contacts.",
+        "kind": "input"
+      },
+      "S": {
+        "role": "Nombre de sensibles",
+        "description": "La population qui n'est pas encore infectée et peut donc l'être.",
+        "kind": "input"
+      },
+      "I": {
+        "role": "Nombre d'infectés",
+        "description": "La population actuellement infectée.",
+        "kind": "input"
+      },
+      "\\gamma": {
+        "role": "Taux de guérison",
+        "description": "La proportion d'infectés qui guérissent par unité de temps. C'est l'inverse de la durée moyenne jusqu'à la guérison.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Prévoir la propagation de la Covid-19 et analyser l'effet de la distanciation sociale",
+      "Calculer le taux de couverture vaccinale nécessaire à l'immunité collective",
+      "Prévoir le moment du pic épidémique lors d'une saison grippale"
+    ],
+    "relatedFormulas": [
+      "logistic-growth",
+      "exponential-growth"
+    ]
+  },
+  "lotka-volterra": {
+    "name": "Équations de Lotka-Volterra",
+    "oneLiner": "Système d'équations différentielles qui décrit les oscillations périodiques des populations de prédateurs et de proies",
+    "description": "Les équations de Lotka-Volterra modélisent mathématiquement l'interaction entre prédateurs et proies. En l'absence de prédateurs, les proies croissent de façon exponentielle, mais leurs rencontres avec les prédateurs les font diminuer. Les prédateurs, eux, déclinent faute de nourriture, mais augmentent lorsqu'ils consomment des proies. Cette interaction engendre des oscillations périodiques des deux populations.",
+    "discoverer": "Alfred Lotka, Vito Volterra",
+    "field": "Biologie",
+    "significance": "Modèle de base de l'analyse mathématique de la dynamique des interactions entre espèces en écologie, il est le point de départ de l'étude de la stabilité des écosystèmes.",
+    "elementMeanings": {
+      "dx/dt": {
+        "role": "Taux de variation de l'effectif des proies",
+        "description": "La variation de l'effectif des proies par unité de temps.",
+        "kind": "output"
+      },
+      "x": {
+        "role": "Effectif des proies",
+        "description": "La taille de la population de l'espèce proie.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Effectif des prédateurs",
+        "description": "La taille de la population de l'espèce prédatrice.",
+        "kind": "input"
+      },
+      "\\alpha": {
+        "role": "Taux d'accroissement des proies",
+        "description": "Le taux d'accroissement intrinsèque des proies en l'absence de pression de prédation.",
+        "kind": "input"
+      },
+      "\\beta": {
+        "role": "Coefficient de prédation",
+        "description": "La proportion de proies éliminées lors des rencontres entre prédateurs et proies.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "L'oscillation d'environ dix ans des populations de lynx du Canada et de lièvres d'Amérique",
+      "Les fluctuations des populations de phytoplancton et de zooplancton dans les écosystèmes marins",
+      "La prévision de l'effet de l'introduction d'un auxiliaire en lutte biologique"
+    ],
+    "relatedFormulas": [
+      "logistic-growth",
+      "exponential-growth",
+      "sir-model"
+    ]
+  }
+}

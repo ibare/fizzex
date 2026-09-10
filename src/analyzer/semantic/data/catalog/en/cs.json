@@ -1,0 +1,123 @@
+{
+  "comparison-sort-bound": {
+    "name": "Comparison sort lower bound",
+    "oneLiner": "The theorem guaranteeing that no comparison-based sorting algorithm can beat O(n log n) in the worst case",
+    "description": "The comparison sort lower bound proves that an algorithm sorting purely by comparing elements has to make at least O(n log n) comparisons in the worst case. In the decision tree model, telling apart n! permutations requires a height of at least log2(n!), and by Stirling's approximation that is O(n log n).",
+    "field": "Computer science",
+    "significance": "It proves that merge sort, heap sort, and the like are asymptotically optimal, and it pins down exactly where the performance of comparison sorting stops.",
+    "elementMeanings": {
+      "n": { "role": "Number of elements", "description": "The total count of elements to be sorted.", "kind": "input" },
+      "\\log n": { "role": "Logarithmic factor", "description": "The logarithmic part of the comparison count, coming from the height of the decision tree.", "kind": "structural" },
+      "n!": { "role": "Number of permutations", "description": "How many arrangements of n elements are possible. It is the lower bound on the number of leaves in the decision tree.", "kind": "structural" },
+      "\\Omega(n \\log n)": { "role": "Lower bound notation", "description": "It says the worst-case comparison count is at least proportional to n log n.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "The theoretical basis for choosing an algorithm when sorting a database index",
+      "Analyzing the time complexity of a sorting-based solution in a programming contest",
+      "The grounds for the performance guarantees of library sort functions such as Timsort"
+    ],
+    "relatedFormulas": ["master-theorem"]
+  },
+  "master-theorem": {
+    "name": "Master theorem",
+    "oneLiner": "The theorem that sorts divide-and-conquer recurrences of the form T(n) = aT(n/b) + f(n) into three cases",
+    "description": "The master theorem is the standard tool for analyzing the recurrences of divide-and-conquer algorithms. Depending on how the number of subproblems a, the size reduction factor b, and the combining cost f(n) relate, it sorts the recurrence into one of three cases and hands you the closed-form time complexity immediately.",
+    "discoverer": "Jon Bentley, Dorothea Haken, James Saxe",
+    "field": "Computer science",
+    "significance": "It is the key tool for analyzing divide-and-conquer algorithms, letting you read off the complexity of merge sort, binary search, Strassen's matrix multiplication, and more at a glance.",
+    "elementMeanings": {
+      "T(n)": { "role": "Time function", "description": "The running time of the algorithm on an input of size n.", "kind": "output" },
+      "a": { "role": "Number of subproblems", "description": "How many subproblems the recursion splits into. It is an integer of at least 1.", "kind": "input" },
+      "n/b": { "role": "Subproblem size", "description": "The input size of each subproblem. b is a constant greater than 1.", "kind": "input" },
+      "f(n)": { "role": "Combining cost", "description": "The non-recursive cost spent on the dividing and combining steps.", "kind": "input" },
+      "\\log_b a": { "role": "Critical exponent", "description": "The threshold value that, compared against the polynomial degree of f(n), decides which of the three cases applies.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Getting O(n log n) out of merge sort's T(n) = 2T(n/2) + O(n)",
+      "Getting O(log n) out of binary search's T(n) = T(n/2) + O(1)",
+      "Analyzing Strassen's matrix multiplication, T(n) = 7T(n/2) + O(n^2)"
+    ],
+    "relatedFormulas": ["comparison-sort-bound"]
+  },
+  "hamming-distance": {
+    "name": "Hamming distance",
+    "oneLiner": "The distance measure counting how many corresponding positions differ between two strings of equal length",
+    "description": "The Hamming distance is defined as the number of positions at which two binary strings (or general strings) of the same length differ. It is the central concept of error detection and correction coding theory, and it is used directly to measure how many bits got flipped in a data transmission.",
+    "discoverer": "Richard Hamming",
+    "field": "Computer science",
+    "significance": "It is the design basis of error-correcting codes (Hamming codes), and it is used widely in communication systems, DNA sequence comparison, and similarity search.",
+    "elementMeanings": {
+      "x": { "role": "First string", "description": "One of the two strings being compared.", "kind": "input" },
+      "y": { "role": "Second string", "description": "The other of the two strings being compared.", "kind": "input" },
+      "d(x,y)": { "role": "Hamming distance", "description": "How many corresponding positions differ between x and y.", "kind": "output" },
+      "n": { "role": "String length", "description": "The common length of the two strings.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Detecting how many bit errors are in received data in network communication",
+      "Setting the minimum Hamming distance when designing the error correction capability of a QR code",
+      "Measuring the number of DNA mutations as a Hamming distance in bioinformatics"
+    ],
+    "relatedFormulas": ["password-entropy"]
+  },
+  "boolean-complement": {
+    "name": "Complement law of Boolean algebra",
+    "oneLiner": "The basic law of Boolean algebra that the OR of any logic variable with its complement is always 1 (true)",
+    "description": "The complement law says that ORing a variable A with its negation A' always gives 1, and ANDing them always gives 0. It is the most basic rule for simplifying logical expressions, and it is applied constantly in digital circuit design and in programming.",
+    "discoverer": "George Boole",
+    "field": "Computer science",
+    "significance": "It is the starting point for optimizing digital logic circuits and simplifying logical expressions, and the foundation of every theorem in Boolean algebra.",
+    "elementMeanings": {
+      "A": { "role": "Logic variable", "description": "A Boolean variable taking the value true (1) or false (0).", "kind": "input" },
+      "A'": { "role": "Complement", "description": "The negation of A. It is 0 when A is 1, and 1 when A is 0.", "kind": "structural" },
+      "+": { "role": "Logical OR", "description": "It denotes the OR operation in Boolean algebra.", "kind": "structural" },
+      "1": { "role": "Tautological value", "description": "The always-true value. It shows that the result of the OR must be 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Applying the complement law when minimizing a logical expression with a Karnaugh map",
+      "Checking that x | ~x == 1 when optimizing bitwise operations in programming",
+      "Removing unnecessary gates in FPGA circuit design"
+    ],
+    "relatedFormulas": ["de-morgan"]
+  },
+  "handshaking-lemma": {
+    "name": "Handshaking lemma",
+    "oneLiner": "The lemma that the degrees of all vertices in a graph add up to twice the number of edges",
+    "description": "The handshaking lemma follows from the fact that in an undirected graph each edge contributes to the degree of exactly two vertices. So the total of all degrees is always even, and the number of vertices with odd degree must be even too.",
+    "discoverer": "Leonhard Euler",
+    "field": "Computer science",
+    "significance": "It is the most basic theorem of graph theory, underpinning network analysis, tests for Eulerian paths, and graph validity checks.",
+    "elementMeanings": {
+      "\\sum \\deg(v)": { "role": "Total degree", "description": "The number of incident edges added up over every vertex of the graph.", "kind": "output" },
+      "2|E|": { "role": "Twice the number of edges", "description": "The total number of edges multiplied by 2. Since each edge contributes to two vertices, it equals the total degree.", "kind": "output" },
+      "\\deg(v)": { "role": "Vertex degree", "description": "The number of edges incident to the vertex v.", "kind": "input" },
+      "|E|": { "role": "Number of edges", "description": "The total count of edges in the graph.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analyzing the relation between the total number of friendships and each person's connection count in a social network",
+      "Checking that port counts and link counts agree when validating a computer network topology",
+      "Checking the precondition for deciding whether an Eulerian path or circuit exists"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  },
+  "password-entropy": {
+    "name": "Password entropy",
+    "oneLiner": "The formula that measures a password's information content in bits from the alphabet size N and the length L",
+    "description": "The password entropy formula takes the number of possible combinations when choosing L characters from an alphabet of size N and converts it with a logarithm into an information content in bits. The higher the entropy, the more resistant the password is to brute force attack, which makes it the quantitative basis for security policy.",
+    "discoverer": "Claude Shannon (the concept of information entropy)",
+    "field": "Computer science",
+    "significance": "It is the standard measure for objectively gauging password strength in information security, and it gives security policy and authentication system design a quantitative footing.",
+    "elementMeanings": {
+      "H": { "role": "Entropy", "description": "The information content in bits. It is the logarithm of the number of attempts a brute force attack needs on average.", "kind": "output" },
+      "N": { "role": "Alphabet size", "description": "How many distinct characters are available. It is 26 for lowercase only, and over 90 for upper and lower case plus digits and symbols.", "kind": "input" },
+      "L": { "role": "Password length", "description": "How many characters make up the password.", "kind": "input" },
+      "\\log_2": { "role": "Binary logarithm", "description": "The function that converts a count of possibilities into bits.", "kind": "structural" },
+      "N^L": { "role": "Total number of possibilities", "description": "How many password combinations are possible in all.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Building a password strength meter for a website's sign-up form",
+      "Setting a minimum password entropy requirement in a corporate security policy",
+      "Comparing the strength of passphrases against random character strings"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  }
+}

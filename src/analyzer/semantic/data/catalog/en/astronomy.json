@@ -1,0 +1,246 @@
+{
+  "kepler-third": {
+    "name": "Kepler's third law",
+    "oneLiner": "The higher the orbit, the slower the revolution",
+    "description": "The square of the orbital period is proportional to the cube of the orbital radius. Planets, moons, and artificial satellites all obey this law.",
+    "discoverer": "Johannes Kepler",
+    "field": "Celestial mechanics",
+    "significance": "By setting out the regularity of planetary motion mathematically it laid the ground for Newtonian mechanics, and it is central to the analysis of exoplanet and satellite orbits.",
+    "elementMeanings": {
+      "T": { "role": "Orbital period", "kind": "output", "unit": "s", "description": "The time it takes the satellite to go once around the Earth" },
+      "T^2": { "role": "Square of the orbital period", "kind": "output", "unit": "s²", "description": "The quantity proportional to the cube of the orbital radius" },
+      "4pi2": { "role": "4π²", "kind": "constant", "value": 39.478, "description": "A constant coming out of the geometry of a circular orbit, ≈ 39.48" },
+      "G": { "role": "Gravitational constant", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "The fundamental constant setting the strength of gravity. Because this number is so extremely small, everyday gravity is only noticeable when a mass as huge as the Earth is involved" },
+      "M": { "role": "Mass of the Earth", "kind": "constant", "value": 5.972e24, "unit": "kg", "description": "The heavier the central body, the harder it pulls on the satellite. At the same orbital radius around Jupiter, the period would be far shorter" },
+      "a": { "role": "Orbital radius", "kind": "input", "unit": "km", "description": "The distance between the satellite and the centre of the Earth. Because it enters cubed, even a small change moves the period a lot" },
+      "a^3": { "role": "Cube of the radius", "kind": "output", "unit": "km³", "description": "Why raising the orbit only a little makes the period much longer" }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Orbital radius",
+        "min": 6500,
+        "max": 400000,
+        "default": 6771,
+        "step": 1,
+        "unit": "km",
+        "scale": "log",
+        "effects": [
+          { "range": [6500, 8000], "description": "Low Earth orbit (LEO). Gravity is strong here, so a satellite has to move fast to keep from falling. One lap every 90 minutes, and 16 sunrises a day." },
+          { "range": [8000, 35000], "description": "Medium orbit. Gravity is weaker, so a slower orbit is enough. GPS satellites go round exactly twice a day." },
+          { "range": [35000, 50000], "description": "Near geostationary orbit. Going round exactly once every 24 hours makes a satellite look fixed in the sky from the ground, which is why it is used for TV relays." },
+          { "range": [50000, 400000], "description": "High orbit. Out near the Moon, the Earth's gravity is much weaker. The Moon takes as long as 27 days to go round once." }
+        ]
+      }
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "Orbital period",
+        "unit": "h",
+        "format": "time",
+        "sourceParams": ["a"],
+        "transform": { "type": "custom", "sourceParam": "a" },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "Orbital speed",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": ["a"],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "Altitude",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": ["a"],
+        "transform": { "type": "subtract", "sourceParam": "a", "operand": 6371 }
+      },
+      {
+        "id": "earthRatio",
+        "label": "Relative to Earth's radius",
+        "unit": "×",
+        "format": "number",
+        "sourceParams": ["a"],
+        "transform": { "type": "divide", "sourceParam": "a", "operand": 6371 }
+      }
+    ],
+    "constraints": [
+      { "param": "a", "type": "min", "value": 6371, "severity": "error", "message": "Anything smaller than the Earth's radius (6,371km) is inside the Earth, so no orbit is possible" },
+      { "param": "a", "type": "min", "value": 6571, "severity": "warning", "message": "Below an altitude of 200km, atmospheric drag decays the orbit quickly" }
+    ],
+    "milestones": [
+      { "param": "a", "value": 6771, "label": "ISS orbit", "shortLabel": "ISS", "emoji": "🛸", "description": "Altitude 400km. One lap every 90 minutes, 16 sunrises a day" },
+      { "param": "a", "value": 26560, "label": "GPS orbit", "shortLabel": "GPS", "emoji": "📡", "description": "Altitude 20,200km. A period of exactly 12 hours" },
+      { "param": "a", "value": 42164, "label": "Geostationary orbit", "shortLabel": "GEO", "emoji": "📺", "description": "Altitude 35,786km. Exactly 24 hours — it looks fixed in the sky" },
+      { "param": "a", "value": 384400, "label": "The Moon", "shortLabel": "Moon", "emoji": "🌙", "description": "A period of 27.3 days. The closest celestial body to Earth" }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          { "range": [0, 500], "template": "About {ratio} times the cruising altitude of an airliner (10km)", "referenceValue": 10, "referenceLabel": "Airliner cruising altitude" },
+          { "range": [500, 5000], "template": "A height of about {ratio} times the Seoul-Busan distance ({ref}km)", "referenceValue": 325, "referenceLabel": "Seoul-Busan distance" },
+          { "range": [5000, 50000], "template": "About {ratio} times the diameter of the Earth ({ref}km)", "referenceValue": 12742, "referenceLabel": "Diameter of the Earth" },
+          { "range": [50000, 400000], "template": "About {ratio}% of the Earth-Moon distance", "referenceValue": 384400, "referenceLabel": "Earth-Moon distance" }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "Calculating the mass of the Sun from the Earth's orbital period and radius",
+      "Estimating the size of an exoplanet's orbit from its observed period",
+      "Choosing a satellite's orbital altitude to give the period you want"
+    ],
+    "relatedFormulas": ["universal-gravitation", "escape-velocity"]
+  },
+  "hubble-law": {
+    "name": "Hubble's law",
+    "oneLiner": "The law of cosmic expansion: the recession speed of a distant galaxy is proportional to its distance",
+    "description": "Hubble's law states that the farther away a galaxy is, the faster it is moving away from us, with the recession speed directly proportional to the distance. The constant of proportionality, the Hubble constant, is the expansion rate of the universe and plays a key part in estimating its age. It is one of the strongest observational pieces of evidence for Big Bang cosmology.",
+    "discoverer": "Edwin Hubble",
+    "field": "Astronomy",
+    "significance": "By showing observationally that the universe is expanding, it set modern cosmology on its way.",
+    "elementMeanings": {
+      "v": { "role": "Recession speed", "kind": "output", "unit": "km/s", "description": "The speed at which the galaxy is moving away from the observer. Units: km/s." },
+      "H_0": { "role": "Hubble constant", "kind": "constant", "value": 70, "unit": "km/s/Mpc", "description": "The present expansion rate of the universe. About 70 km/s/Mpc." },
+      "d": { "role": "Distance", "kind": "input", "unit": "Mpc", "description": "The distance from the observer to the galaxy. Units: megaparsecs (Mpc)." }
+    },
+    "realWorldExamples": [
+      "Estimating distance from the redshift of a galaxy",
+      "Calculating the age of the universe (about 13.8 billion years)",
+      "Research into whether cosmic expansion is accelerating"
+    ],
+    "relatedFormulas": ["schwarzschild-radius", "gravitational-lensing"]
+  },
+  "schwarzschild-radius": {
+    "name": "Schwarzschild radius",
+    "oneLiner": "The formula for the critical radius at which an object becomes a black hole",
+    "description": "The Schwarzschild radius is the smallest radius to which an object of a given mass must be compressed to become a black hole. Squeeze the mass inside this radius and an event horizon forms, from which not even light can escape. It comes out of the Schwarzschild solution of general relativity.",
+    "discoverer": "Karl Schwarzschild",
+    "field": "Astronomy",
+    "significance": "By defining the size of a black hole quantitatively, it established a central concept of relativistic astrophysics.",
+    "elementMeanings": {
+      "r_s": { "role": "Schwarzschild radius", "kind": "output", "unit": "m", "description": "The radius of the event horizon. Units: metres (m)." },
+      "G": { "role": "Gravitational constant", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "The constant of universal gravitation. About 6.674×10⁻¹¹ N·m²/kg²." },
+      "M": { "role": "Mass", "kind": "input", "unit": "kg", "description": "The mass of the body. Units: kg." },
+      "c": { "role": "Speed of light", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "The speed of light in a vacuum. About 3×10⁸ m/s." },
+      "c^2": { "role": "Square of the speed of light", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "Sitting in the denominator, it makes the radius grow with the mass." }
+    },
+    "realWorldExamples": [
+      "Calculating the Schwarzschild radius of the Sun (about 3km)",
+      "Estimating the size of the event horizon of a supermassive black hole",
+      "Analysing the critical condition for a neutron star to collapse into a black hole"
+    ],
+    "relatedFormulas": ["mass-energy", "escape-velocity", "gravitational-lensing"]
+  },
+  "stefan-boltzmann": {
+    "name": "Stefan-Boltzmann law",
+    "oneLiner": "The law that a star's total radiated luminosity is proportional to the square of its radius and the fourth power of its surface temperature",
+    "description": "The Stefan-Boltzmann law states that the total energy radiated by a black body (its luminosity) is proportional to its surface area and to the fourth power of its surface temperature. For a star, knowing the radius and the surface temperature gives the total luminosity, and conversely the luminosity and temperature let you estimate the star's size.",
+    "discoverer": "Josef Stefan, Ludwig Boltzmann",
+    "field": "Astronomy",
+    "significance": "By quantifying how a star's physical properties — size, temperature, and luminosity — relate, it became the basis of stellar classification and evolution theory.",
+    "elementMeanings": {
+      "L": { "role": "Luminosity", "kind": "output", "unit": "W", "description": "The total energy the star radiates per unit time. Units: watts (W)." },
+      "R": { "role": "Radius of the star", "kind": "input", "unit": "m", "description": "The radius of the star. Units: metres (m)." },
+      "R^2": { "role": "Square of the radius", "kind": "structural", "description": "The factor proportional to the surface area (4πR²)." },
+      "\\sigma": { "role": "Stefan-Boltzmann constant", "kind": "constant", "value": 5.670e-8, "unit": "W/(m²·K⁴)", "description": "About 5.67×10⁻⁸ W/m²/K⁴." },
+      "T": { "role": "Surface temperature", "kind": "input", "unit": "K", "description": "The effective temperature of the star's surface. Units: kelvin (K)." },
+      "T^4": { "role": "Fourth power of the temperature", "kind": "structural", "description": "Double the temperature and the luminosity goes up 16-fold. A strongly non-linear relation." }
+    },
+    "realWorldExamples": [
+      "Estimating a star's radius from its surface temperature and luminosity",
+      "Comparing the sizes of red giants and white dwarfs",
+      "Reading a star's position on the HR (Hertzsprung-Russell) diagram"
+    ],
+    "relatedFormulas": ["wien-displacement", "mass-energy"]
+  },
+  "wien-displacement": {
+    "name": "Wien's displacement law",
+    "oneLiner": "The law that the wavelength of peak black-body radiation is inversely proportional to temperature",
+    "description": "Wien's displacement law states that the wavelength at which a black body radiates most strongly is inversely proportional to its temperature. The hotter the body, the shorter the peak wavelength and the bluer it looks; the cooler it is, the longer the wavelength and the redder it shifts. The law lets you estimate a star's surface temperature from its colour alone.",
+    "discoverer": "Wilhelm Wien",
+    "field": "Astronomy",
+    "significance": "By revealing the quantitative relation between a star's colour and its temperature, it provided the basis for spectroscopic observation of celestial objects.",
+    "elementMeanings": {
+      "\\lambda_{max}": { "role": "Peak wavelength", "kind": "output", "unit": "m", "description": "The wavelength of greatest intensity in the black-body radiation spectrum. Units: metres (m)." },
+      "b": { "role": "Wien displacement constant", "kind": "constant", "value": 2.898e-3, "unit": "m·K", "description": "About 2.898×10⁻³ m·K." },
+      "T": { "role": "Temperature", "kind": "input", "unit": "K", "description": "The absolute temperature of the black body. Units: kelvin (K)." }
+    },
+    "realWorldExamples": [
+      "Estimating a star's surface temperature from its colour (blue stars are hot, red stars cool)",
+      "Measuring the Sun's surface temperature (about 5,778K, in the yellow part of the spectrum)",
+      "Observing cold objects with an infrared telescope"
+    ],
+    "relatedFormulas": ["stefan-boltzmann"]
+  },
+  "drake-equation": {
+    "name": "Drake equation",
+    "oneLiner": "A probabilistic equation estimating the number of intelligent civilisations in our galaxy we could communicate with",
+    "description": "The Drake equation estimates, as a product of several probability factors, the number of civilisations in our galaxy currently sending radio signals we could detect. The factors run from the rate of star formation to the lifetime of a civilisation, and although most of the values are uncertain, the equation lays out the search for extraterrestrial intelligence (SETI) systematically.",
+    "discoverer": "Frank Drake",
+    "field": "Astronomy",
+    "significance": "By putting the search for extraterrestrial intelligence on a systematic scientific footing, it gave SETI research its theoretical framework.",
+    "elementMeanings": {
+      "N": { "role": "Number of contactable civilisations", "kind": "output", "description": "The number of civilisations in the galaxy currently sending detectable signals." },
+      "R_*": { "role": "Rate of star formation", "kind": "input", "unit": "/yr", "description": "How many new stars are born in the galaxy each year." },
+      "f_p": { "role": "Fraction with planets", "kind": "input", "description": "The fraction of stars that have planetary systems." },
+      "n_e": { "role": "Number of habitable planets", "kind": "input", "description": "The number of planets in the habitable zone per planetary system." },
+      "f_l": { "role": "Fraction where life arises", "kind": "input", "description": "The probability that life actually appears on a habitable planet." },
+      "f_i": { "role": "Fraction that become intelligent", "kind": "input", "description": "The probability that life evolves into intelligent beings." },
+      "f_c": { "role": "Fraction with communication technology", "kind": "input", "description": "The probability that intelligent life develops technology that sends detectable signals." },
+      "L": { "role": "Lifetime of a civilisation", "kind": "input", "unit": "yr", "description": "How long a contactable civilisation goes on emitting signals. Units: years." }
+    },
+    "realWorldExamples": [
+      "Setting search strategy in SETI projects",
+      "Updating the values of f_p and n_e with exoplanet discovery data",
+      "Quantitative discussion of the Fermi paradox (why we see no sign of alien civilisations)"
+    ],
+    "relatedFormulas": ["hubble-law"]
+  },
+  "gravitational-lensing": {
+    "name": "Gravitational lensing",
+    "oneLiner": "The formula for the angle by which a massive body bends the path of light",
+    "description": "Gravitational lensing is the bending of light that passes near a very massive body, caused by the curvature of spacetime. The deflection angle is proportional to the body's mass and inversely proportional to how close the light passes to it. It is a direct prediction of general relativity, first confirmed by observation during the solar eclipse of 1919.",
+    "discoverer": "Albert Einstein",
+    "field": "Astronomy",
+    "significance": "It was the first phenomenon to confirm general relativity observationally, and it is now a key tool for mapping the distribution of dark matter.",
+    "elementMeanings": {
+      "\\theta": { "role": "Deflection angle", "kind": "output", "unit": "rad", "description": "The angle by which the light is bent. Units: radians (rad)." },
+      "G": { "role": "Gravitational constant", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "The constant of universal gravitation. About 6.674×10⁻¹¹ N·m²/kg²." },
+      "M": { "role": "Mass of the lensing body", "kind": "input", "unit": "kg", "description": "The mass of the body that bends the light. Units: kg." },
+      "c": { "role": "Speed of light", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "The speed of light in a vacuum. About 3×10⁸ m/s." },
+      "c^2": { "role": "Square of the speed of light", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "The factor carrying the relativistic correction." },
+      "b": { "role": "Impact parameter", "kind": "input", "unit": "m", "description": "How close the light passes to the lensing body. Units: metres (m)." }
+    },
+    "realWorldExamples": [
+      "Observing the distorted images of background galaxies produced by a galaxy cluster",
+      "Searching for exoplanets by gravitational microlensing",
+      "Mapping the distribution of dark matter"
+    ],
+    "relatedFormulas": ["schwarzschild-radius", "universal-gravitation"]
+  },
+  "escape-velocity": {
+    "name": "Escape velocity",
+    "oneLiner": "The formula for the minimum speed needed to break free of a body's gravity",
+    "description": "Escape velocity is the smallest speed an object at the surface of a body must have to leave its gravitational grip entirely. The more massive the body and the smaller its radius, the higher the escape velocity. At the Schwarzschild radius the escape velocity reaches the speed of light, which ties it directly to the definition of a black hole.",
+    "field": "Astronomy",
+    "significance": "It underlies many problems in astrophysics, from rocket launches to whether a planet can hold on to an atmosphere and the conditions for black hole formation.",
+    "elementMeanings": {
+      "v_e": { "role": "Escape velocity", "kind": "output", "unit": "m/s", "description": "The minimum speed needed to leave the gravitational field. Units: m/s." },
+      "G": { "role": "Gravitational constant", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "The constant of universal gravitation. About 6.674×10⁻¹¹ N·m²/kg²." },
+      "M": { "role": "Mass of the body", "kind": "input", "unit": "kg", "description": "The mass of the body being escaped from. Units: kg." },
+      "r": { "role": "Radius", "kind": "input", "unit": "m", "description": "The distance from the centre of the body to the starting point. Units: metres (m)." }
+    },
+    "realWorldExamples": [
+      "Calculating the Earth's escape velocity (about 11.2 km/s)",
+      "Explaining the Moon's lack of an atmosphere by its low escape velocity",
+      "The link between Jupiter's high escape velocity and its thick atmosphere"
+    ],
+    "relatedFormulas": ["universal-gravitation", "schwarzschild-radius", "kepler-third", "kinetic-energy"]
+  }
+}

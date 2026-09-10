@@ -1,0 +1,162 @@
+{
+  "frac.numerator": {
+    "role": "Pembilang",
+    "description": "Bagian atas pada pecahan. Kuantitas yang dibagi.",
+    "refinements": {
+      "containsVariable": "Pembilang memuat variabel, sehingga menentukan pembuat nol fungsi (f(x)=0).",
+      "constantOnly": "Pembilang berupa konstanta, sehingga pecahan ini berskala dengan rasio tetap."
+    }
+  },
+  "frac.denominator": {
+    "role": "Penyebut",
+    "description": "Bagian bawah pada pecahan. Kuantitas pembagi. Jika bernilai 0, bentuk ini tidak terdefinisi.",
+    "refinements": {
+      "containsVariable": "Penyebut memuat variabel, sehingga bentuk ini bisa tidak terdefinisi pada nilai tertentu (asimtot).",
+      "constantOnly": "Penyebut berupa konstanta, sehingga menerapkan rasio tetap pada seluruh bentuk."
+    }
+  },
+  "power.base": {
+    "role": "Bilangan pokok",
+    "description": "Bilangan yang dikalikan berulang pada perpangkatan.",
+    "refinements": {
+      "isEulerE": "Fungsi eksponensial dengan konstanta alami e sebagai bilangan pokok. Menggambarkan pertumbuhan dan peluruhan.",
+      "isVariable": "Perpangkatan sebuah variabel. Makin besar pangkatnya, makin cepat pertumbuhannya."
+    }
+  },
+  "power.exponent": {
+    "role": "Pangkat",
+    "description": "Banyaknya bilangan pokok dikalikan dengan dirinya sendiri.",
+    "refinements": {
+      "isTwo": "Kuadrat — hasilnya selalu 0 atau lebih.",
+      "isNegativeOne": "Kebalikan — sama dengan 1/bilangan pokok.",
+      "isHalf": "Akar kuadrat — akar kuadrat positif dari bilangan pokok.",
+      "containsVariable": "Pangkat memuat variabel, sehingga menggambarkan pertumbuhan atau peluruhan eksponensial."
+    }
+  },
+  "sqrt.content": {
+    "role": "Radikan",
+    "description": "Bilangan yang diakarkan. Pada himpunan bilangan real nilainya tidak boleh negatif."
+  },
+  "sqrt.index": {
+    "role": "Indeks akar",
+    "description": "Nilai n pada akar pangkat n. Jika tidak ditulis, nilainya 2 (akar kuadrat)."
+  },
+  "subscript.base": {
+    "role": "Objek berindeks",
+    "description": "Objek yang diberi indeks bawah."
+  },
+  "subscript.subscript": {
+    "role": "Indeks",
+    "description": "Nomor yang menunjuk elemen atau komponen tertentu."
+  },
+  "scripts.leftSuperscript": {
+    "role": "Indeks atas kiri",
+    "description": "Bilangan yang ditulis di kiri atas sebuah lambang. Bilangan ini menandai objeknya, seperti nomor massa sebuah isotop."
+  },
+  "scripts.leftSubscript": {
+    "role": "Indeks bawah kiri",
+    "description": "Bilangan yang ditulis di kiri bawah sebuah lambang. Bilangan ini menandai objeknya, seperti nomor atom sebuah unsur."
+  },
+  "sum.lower": {
+    "role": "Batas bawah penjumlahan",
+    "description": "Nilai indeks tempat penjumlahan dimulai."
+  },
+  "sum.upper": {
+    "role": "Batas atas penjumlahan",
+    "description": "Nilai indeks tempat penjumlahan berakhir.",
+    "refinements": {
+      "isInfinity": "Deret takhingga yang dijumlahkan sampai takhingga. Kekonvergenannya menjadi hal yang penting."
+    }
+  },
+  "sum.body": {
+    "role": "Suku umum",
+    "description": "Kuantitas yang ditambahkan pada setiap langkah. Nilainya bergantung pada indeks."
+  },
+  "product.lower": {
+    "role": "Batas bawah perkalian",
+    "description": "Nilai indeks tempat perkalian dimulai."
+  },
+  "product.upper": {
+    "role": "Batas atas perkalian",
+    "description": "Nilai indeks tempat perkalian berakhir."
+  },
+  "product.body": {
+    "role": "Suku umum",
+    "description": "Kuantitas yang dikalikan pada setiap langkah."
+  },
+  "integral.lower": {
+    "role": "Batas bawah integral",
+    "description": "Titik awal selang pengintegralan."
+  },
+  "integral.upper": {
+    "role": "Batas atas integral",
+    "description": "Titik akhir selang pengintegralan.",
+    "refinements": {
+      "isInfinity": "Integral berjalan sampai takhingga positif. Kekonvergenannya perlu diperiksa."
+    }
+  },
+  "integral.integrand": {
+    "role": "Integran",
+    "description": "Fungsi yang diintegralkan. Yang dicari adalah luas daerah di bawah kurvanya."
+  },
+  "limit.approach": {
+    "role": "Nilai yang didekati",
+    "description": "Nilai tujuan yang didekati variabel sedekat-dekatnya."
+  },
+  "limit.body": {
+    "role": "Bentuk limit",
+    "description": "Di sini dilihat ke nilai mana bentuk ini menuju saat variabelnya mendekati nilai tujuan."
+  },
+  "paren.content": {
+    "role": "Bentuk dalam kurung",
+    "description": "Bentuk yang diapit tanda kurung dan diperlakukan sebagai satu kesatuan."
+  },
+  "chem.content": {
+    "role": "Rumus kimia",
+    "description": "Notasi kimia yang menyatakan zat dan reaksi."
+  },
+  "abs.content": {
+    "role": "Isi nilai mutlak",
+    "description": "Besar nilai tanpa memperhatikan tandanya. Hasilnya selalu 0 atau lebih."
+  },
+  "func.argument": {
+    "role": "Argumen fungsi",
+    "description": "Nilai yang dimasukkan ke dalam fungsi."
+  },
+  "matrix.element": {
+    "role": "Elemen matriks",
+    "description": "Satu elemen dari matriks."
+  },
+  "cases.element": {
+    "role": "Nilai bersyarat",
+    "description": "Nilai fungsi ketika syarat tertentu terpenuhi."
+  },
+  "accent.content": {
+    "role": "Objek beraksen",
+    "description": "Lambang yang membawa sebuah aksen."
+  },
+  "overline.content": {
+    "role": "Rata-rata / konjugat",
+    "description": "Garis atas menyatakan rata-rata, konjugat kompleks, atau penutup dalam topologi."
+  },
+  "cancel.content": {
+    "role": "Suku yang dicoret",
+    "description": "Bagian yang disederhanakan atau saling menghapus."
+  },
+  "overset.base": {
+    "role": "Lambang dasar",
+    "description": "Lambang yang diberi keterangan tambahan."
+  },
+  "overset.annotation": {
+    "role": "Keterangan",
+    "description": "Penjelasan tambahan yang ditulis di atas atau di bawah sebuah lambang."
+  },
+  "xarrow.above": {
+    "role": "Teks di atas panah",
+    "description": "Menyatakan syarat suatu reaksi atau perubahan."
+  },
+  "xarrow.below": {
+    "role": "Teks di bawah panah",
+    "description": "Menyatakan syarat tambahan suatu reaksi atau perubahan."
+  }
+}

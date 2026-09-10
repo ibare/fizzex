@@ -1,0 +1,148 @@
+{
+  "linear-function": {
+    "name": "一次函数",
+    "oneLiner": "画出与 x 成正比的直线图像的最基本函数",
+    "description": "一次函数 y = ax + b 是这样一个函数：x 每增加 1，y 就固定变化 a。它的图像永远是一条直线，其中 a 表示斜率，b 表示 y 轴截距。",
+    "field": "代数学",
+    "significance": "它是学习一切函数的出发点，也是用数学表达“变化率恒定”这类现象最基本的工具。",
+    "elementMeanings": {
+      "a": { "role": "斜率", "description": "表示直线有多陡。为正时向右上方倾斜，为负时向右下方倾斜。", "kind": "input" },
+      "b": { "role": "y 轴截距", "description": "直线与 y 轴交点的纵坐标，也就是 x 为 0 时的 y 值。", "kind": "input" },
+      "x": { "role": "自变量", "description": "可以自由取值的输入值。", "kind": "input" },
+      "y": { "role": "因变量", "description": "随 x 的取值而确定的输出值。", "kind": "output" }
+    },
+    "realWorldExamples": ["在出租车起步价上按里程加价的费用计算", "以恒定速度行走的人的时间与路程关系"],
+    "relatedFormulas": ["slope-formula", "point-slope-form", "direct-proportion"]
+  },
+  "slope-formula": {
+    "name": "斜率公式",
+    "oneLiner": "由两点的坐标求直线斜率的公式",
+    "description": "斜率公式 m = (y2 - y1) / (x2 - x1) 用来计算坐标平面上经过两点的直线有多陡。它表示 y 的变化量与 x 的变化量之比，也就是变化率。",
+    "field": "代数学",
+    "significance": "它把直线的方向与陡峭程度精确地表示为数值，并自然地引出微分的基本概念——变化率。",
+    "elementMeanings": {
+      "m": { "role": "斜率", "description": "表示直线陡峭程度的值。", "kind": "output" },
+      "x_1": { "role": "第一点的横坐标", "description": "第一个点的水平位置。", "kind": "input" },
+      "y_1": { "role": "第一点的纵坐标", "description": "第一个点的竖直位置。", "kind": "input" },
+      "x_2": { "role": "第二点的横坐标", "description": "第二个点的水平位置。", "kind": "input" },
+      "y_2": { "role": "第二点的纵坐标", "description": "第二个点的竖直位置。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算山路的坡度", "股价走势图中某一段时期的上涨率"],
+    "relatedFormulas": ["linear-function", "point-slope-form", "distance-formula"]
+  },
+  "point-slope-form": {
+    "name": "点斜式",
+    "oneLiner": "已知一个点和斜率时用来写出直线方程的形式",
+    "description": "点斜式 y - y1 = m(x - x1) 让我们在已知直线上一点 (x1, y1) 和斜率 m 时，可以直接写出这条直线的方程。",
+    "field": "代数学",
+    "significance": "它是求直线方程最实用的形式，在微分中求切线方程时也使用这一形式。",
+    "elementMeanings": {
+      "m": { "role": "斜率", "description": "直线的陡峭程度。", "kind": "input" },
+      "x_1": { "role": "已知点的横坐标", "description": "已确认在直线上的那个点的水平位置。", "kind": "input" },
+      "y_1": { "role": "已知点的纵坐标", "description": "已确认在直线上的那个点的竖直位置。", "kind": "input" }
+    },
+    "realWorldExamples": ["用当前温度与变化率预测未来温度的模型", "用某一时点的营业额与增长率表示营业额走势的式子"],
+    "relatedFormulas": ["linear-function", "slope-formula"]
+  },
+  "quadratic-standard": {
+    "name": "二次函数一般式",
+    "oneLiner": "画出抛物线图像的二次函数的基本形式",
+    "description": "二次函数一般式 y = ax² + bx + c 是含有 x 平方的函数，它的图像呈抛物线形状。抛物线开口向上还是向下，由 a 的符号决定。",
+    "field": "代数学",
+    "significance": "它是说明抛物线运动、最大值/最小值问题等各种现实现象的核心函数。",
+    "elementMeanings": {
+      "a": { "role": "二次项系数", "description": "决定抛物线的开口方向与宽窄。为正时开口向上，为负时开口向下。", "kind": "input" },
+      "b": { "role": "一次项系数", "description": "影响抛物线对称轴的位置。", "kind": "input" },
+      "c": { "role": "常数项", "description": "抛物线与 y 轴交点的纵坐标。", "kind": "input" }
+    },
+    "realWorldExamples": ["抛球时高度的变化", "桥梁拱形结构的曲线"],
+    "relatedFormulas": ["quadratic-vertex", "discriminant", "quadratic-formula"]
+  },
+  "quadratic-vertex": {
+    "name": "二次函数顶点式",
+    "oneLiner": "能直接看出抛物线顶点坐标的二次函数形式",
+    "description": "二次函数顶点式 y = a(x - h)² + k 让人一眼就能看出抛物线的顶点是 (h, k)。把一般式配方之后就得到这个形式。",
+    "field": "代数学",
+    "significance": "它能让人立刻把握函数的最大值或最小值，在求解最优化问题时发挥核心作用。",
+    "elementMeanings": {
+      "a": { "role": "二次项系数", "description": "决定抛物线的开口方向与宽窄，与一般式中的 a 是同一个值。", "kind": "input" },
+      "h": { "role": "顶点的横坐标", "description": "抛物线对称轴所在的位置。", "kind": "input" },
+      "k": { "role": "顶点的纵坐标", "description": "抛物线的最小值(a > 0)或最大值(a < 0)。", "kind": "input" }
+    },
+    "realWorldExamples": ["求喷泉水柱的最高高度", "给商品定价时寻找使收益最大的价格"],
+    "relatedFormulas": ["quadratic-standard", "discriminant"]
+  },
+  "discriminant": {
+    "name": "判别式",
+    "oneLiner": "预先告诉我们一元二次方程有几个根的式子",
+    "description": "判别式 D = b² - 4ac 让我们不必解方程，就能判断一元二次方程 ax² + bx + c = 0 的根的个数与类型。D 为正时有两个不相等的实根，为 0 时有两个相等的实根（重根），为负时没有实数根。",
+    "field": "代数学",
+    "significance": "它使人在解方程之前就能判断解是否存在，在决定解题方向时起着关键作用。",
+    "elementMeanings": {
+      "D": { "role": "判别式的值", "description": "根的个数与类型由这个值的符号决定。", "kind": "output" },
+      "b": { "role": "一次项系数", "description": "一元二次方程中乘在 x 上的数。", "kind": "input" },
+      "a": { "role": "二次项系数", "description": "一元二次方程中乘在 x 平方上的数。", "kind": "input" },
+      "c": { "role": "常数项", "description": "一元二次方程中不带变量、单独相加的数。", "kind": "input" }
+    },
+    "realWorldExamples": ["判断抛出的球能否达到某个特定高度", "确认两条曲线是否存在交点"],
+    "relatedFormulas": ["quadratic-formula", "quadratic-standard", "quadratic-vertex"]
+  },
+  "absolute-value-function": {
+    "name": "绝对值函数",
+    "oneLiner": "所有输出都不小于 0 的 V 形函数",
+    "description": "绝对值函数 y = |x| 忽略输入值的符号，只保留其大小。它的图像是以原点为顶点的 V 形：x 为正时原样返回，为负时改变符号后返回。",
+    "field": "代数学",
+    "significance": "它是用数学表达距离、误差、偏差这类只看大小、与方向无关的情形的基本工具。",
+    "elementMeanings": {
+      "x": { "role": "输入值", "description": "可以是正数、负数或 0 的原始值。", "kind": "input" },
+      "|x|": { "role": "绝对值", "description": "去掉 x 的符号后的大小，等于它在数轴上到 0 的距离。", "kind": "output" }
+    },
+    "realWorldExamples": ["求零下气温与零上气温之差时", "测量偏离目标值的程度（误差）时"],
+    "relatedFormulas": ["distance-formula", "linear-function"]
+  },
+  "floor-function": {
+    "name": "向下取整函数",
+    "oneLiner": "舍去小数部分、向下取到最近整数的函数",
+    "description": "向下取整函数（阶梯函数）y = floor(x) 返回不超过 x 的最大整数。它的图像呈阶梯状，在每个整数处函数值上一个台阶。",
+    "field": "代数学",
+    "significance": "它是除法的商、分段计费、计算机编程中的整数除法等一切现实中需要“向下取整”的场合的数学基础。",
+    "elementMeanings": {
+      "x": { "role": "输入值", "description": "实数范围内的输入值。", "kind": "input" },
+      "\\lfloor x \\rfloor": { "role": "向下取整值", "description": "不超过 x 的整数中最大的那个。例如：floor(3.7) = 3，floor(-1.2) = -2。", "kind": "output" }
+    },
+    "realWorldExamples": ["公交车分段计费的计算（按 5km 一档收费）", "把点心平分给朋友时每人能拿到的个数"],
+    "relatedFormulas": ["absolute-value-function"]
+  },
+  "distance-formula": {
+    "name": "两点间距离公式",
+    "oneLiner": "求坐标平面上两点之间直线距离的公式",
+    "description": "距离公式 d = sqrt((x2 - x1)² + (y2 - y1)²) 用来计算坐标平面上两点 (x1, y1) 与 (x2, y2) 之间的直线距离。它就是把勾股定理应用到坐标上。",
+    "field": "几何学",
+    "significance": "它是解析几何最基本的工具，也是求图形边长、圆的半径等各类几何问题的出发点。",
+    "elementMeanings": {
+      "d": { "role": "距离", "description": "连接两点的直线（线段）的长度。", "kind": "output" },
+      "x_1": { "role": "第一点的横坐标", "description": "第一个点的水平位置。", "kind": "input" },
+      "y_1": { "role": "第一点的纵坐标", "description": "第一个点的竖直位置。", "kind": "input" },
+      "x_2": { "role": "第二点的横坐标", "description": "第二个点的水平位置。", "kind": "input" },
+      "y_2": { "role": "第二点的纵坐标", "description": "第二个点的竖直位置。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算地图上两个地点之间的直线距离", "游戏中判定两个角色之间的距离"],
+    "relatedFormulas": ["midpoint-formula", "slope-formula"]
+  },
+  "midpoint-formula": {
+    "name": "中点公式",
+    "oneLiner": "求两点正中间位置的公式",
+    "description": "中点公式 M = ((x1 + x2)/2, (y1 + y2)/2) 用来求坐标平面上连接两点的线段的正中间那个点。只要分别求出各坐标的平均值即可。",
+    "field": "几何学",
+    "significance": "它是求线段的中点、图形的中心、对称点等问题的基础公式，也是解析几何解题的必备工具。",
+    "elementMeanings": {
+      "M": { "role": "中点", "description": "位于两点正中间的点。", "kind": "output" },
+      "x_1": { "role": "第一点的横坐标", "description": "第一个点的水平位置。", "kind": "input" },
+      "y_1": { "role": "第一点的纵坐标", "description": "第一个点的竖直位置。", "kind": "input" },
+      "x_2": { "role": "第二点的横坐标", "description": "第二个点的水平位置。", "kind": "input" },
+      "y_2": { "role": "第二点的纵坐标", "description": "第二个点的竖直位置。", "kind": "input" }
+    },
+    "realWorldExamples": ["寻找位于两位朋友家正中间的碰面地点", "计算在线段中心竖立指示牌的位置"],
+    "relatedFormulas": ["distance-formula", "slope-formula"]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "हर में आने वाली घात का आधार। यदि यह चर है तो इसके बढ़ने पर पूरे फलन का मान दबता जाता है।"
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "हर की घात की कोटि। घातांक जितना बड़ा होगा, हर उतनी ही तेज़ी से बढ़कर पूरे मान को दबाएगा।"
+  },
+  "sum.body>frac.denominator": {
+    "role": "श्रेणी का हर",
+    "description": "श्रेणी के प्रत्येक पद का हर। यह तेज़ी से बढ़े तो श्रेणी के अभिसरित होने की संभावना अधिक होती है।"
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "p-श्रेणी का घातांक",
+    "description": "श्रेणी के हर की घात का घातांक। यह 1 से बड़ा हो तो श्रेणी अभिसरित होती है (p-श्रेणी परीक्षण)।"
+  },
+  "sum.body>frac.numerator": {
+    "role": "श्रेणी का अंश",
+    "description": "श्रेणी के प्रत्येक पद का अंश।"
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "ऋण अनंत से शुरू होने वाला अनुचित समाकल। अभिसरण के लिए समाकल्य का पर्याप्त तेज़ी से क्षय होना आवश्यक है।"
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "घातांक ही भिन्न का अंश है। पूरा घातांक भिन्न हो तो वह मूल दर्शाता है।"
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "घातांक का हर। हर n हो तो यह n-वें मूल के बराबर होता है।"
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "अंतर्निहित अंश",
+    "description": "भिन्न के भीतर एक और भिन्न है। यह जटिल अनुपात संबंध दर्शाता है।"
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "अंतर्निहित हर",
+    "description": "हर के भीतर एक और भिन्न है। पूरे व्यंजक को सरल करने पर इसे गुणा में बदला जा सकता है।"
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "जिस भिन्न का समाकलन किया जा रहा है उसका अंश।"
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "जिस भिन्न का समाकलन किया जा रहा है उसका हर। यहाँ आंशिक भिन्न में वियोजन उपयोगी हो सकता है।"
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "सीमा में आने वाली भिन्न का अंश। हर के साथ यह भी एक साथ शून्य या अनंत हो जाए तो ल'हॉपिटल का नियम लगाया जा सकता है।"
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "सीमा में आने वाली भिन्न का हर। अंश के साथ यह भी एक साथ शून्य या अनंत हो जाए तो ल'हॉपिटल का नियम लगाया जा सकता है।"
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "ohm-law": {
+    "name": "Loi d'Ohm",
+    "oneLiner": "Loi fondamentale des circuits électriques selon laquelle la tension est égale au produit de l'intensité par la résistance",
+    "description": "La loi d'Ohm énonce que le courant qui parcourt un conducteur est proportionnel à la tension entre ses extrémités et inversement proportionnel à sa résistance. C'est la relation la plus élémentaire de l'analyse des circuits électriques, et elle vaut pour les composants linéaires dont la résistance est constante. Elle est le point de départ de la conception et de l'analyse des circuits.",
+    "discoverer": "Georg Simon Ohm",
+    "field": "Génie électrique",
+    "significance": "Elle a établi la relation quantitative entre tension, intensité et résistance, posant ainsi les fondements de la théorie des circuits électriques.",
+    "elementMeanings": {
+      "V": {
+        "role": "Tension",
+        "description": "La différence de potentiel entre les extrémités du conducteur. Unité : volt (V).",
+        "kind": "input"
+      },
+      "I": {
+        "role": "Intensité du courant",
+        "description": "Le flux de charges qui traverse le conducteur. Unité : ampère (A).",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Résistance",
+        "description": "La mesure de l'opposition au passage du courant. Unité : ohm (Ohm).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La relation entre la tension appliquée à une ampoule et sa luminosité",
+      "Le calcul de la puissance consommée par un radiateur électrique domestique"
+    ],
+    "relatedFormulas": [
+      "electric-power",
+      "kirchhoff-voltage",
+      "impedance"
+    ]
+  },
+  "electric-power": {
+    "name": "Puissance électrique",
+    "oneLiner": "Formule qui exprime le rythme auquel l'énergie électrique est consommée ou fournie par unité de temps",
+    "description": "La puissance électrique se définit comme le produit de la tension par l'intensité et exprime la vitesse de conversion de l'énergie électrique. Combinée à la loi d'Ohm, elle s'écrit aussi P = I²R ou P = V²/R. C'est une grandeur physique essentielle pour dimensionner le rendement et la capacité des installations électriques.",
+    "discoverer": "James Watt",
+    "field": "Génie électrique",
+    "significance": "Elle quantifie la consommation et la fourniture d'énergie électrique et fournit la base de la conception des systèmes de production, de transport et de distribution.",
+    "elementMeanings": {
+      "P": {
+        "role": "Puissance",
+        "description": "L'énergie consommée ou fournie par unité de temps. Unité : watt (W).",
+        "kind": "output"
+      },
+      "I": {
+        "role": "Intensité du courant",
+        "description": "Le courant qui parcourt le circuit. Unité : ampère (A).",
+        "kind": "input"
+      },
+      "V": {
+        "role": "Tension",
+        "description": "La différence de potentiel aux bornes du circuit. Unité : volt (V).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "L'indication de la puissance consommée sur les appareils électroménagers",
+      "La base du calcul de la facture d'électricité"
+    ],
+    "relatedFormulas": [
+      "ohm-law",
+      "kirchhoff-voltage",
+      "kirchhoff-current"
+    ]
+  },
+  "kirchhoff-voltage": {
+    "name": "Loi des mailles de Kirchhoff",
+    "oneLiner": "Loi selon laquelle la somme des chutes de tension le long d'une maille fermée est nulle",
+    "description": "La loi des mailles de Kirchhoff (LMK) énonce que, le long d'une maille fermée quelconque, la somme algébrique de toutes les chutes et de toutes les élévations de tension est nulle. C'est l'expression électrique du principe de conservation de l'énergie, et elle est indispensable pour déterminer les tensions inconnues d'un réseau complexe.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Génie électrique",
+    "significance": "En rendant possible l'analyse systématique des réseaux complexes, elle est devenue l'un des piliers de la théorie moderne des circuits.",
+    "elementMeanings": {
+      "\\sum V": {
+        "role": "Somme des tensions",
+        "description": "La somme algébrique de toutes les chutes et élévations de tension dans la maille. Elle est toujours nulle.",
+        "kind": "output"
+      },
+      "V_k": {
+        "role": "Tension individuelle",
+        "description": "La tension aux bornes de chaque composant de la maille. Les sources sont comptées positivement, les résistances négativement.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul de la répartition des tensions entre les résistances d'un circuit série",
+      "La conception des niveaux de tension d'une carte électronique"
+    ],
+    "relatedFormulas": [
+      "kirchhoff-current",
+      "ohm-law",
+      "impedance"
+    ]
+  },
+  "kirchhoff-current": {
+    "name": "Loi des nœuds de Kirchhoff",
+    "oneLiner": "Loi selon laquelle, en tout nœud d'un circuit, la somme des courants entrants et sortants est nulle",
+    "description": "La loi des nœuds de Kirchhoff (LNK) énonce qu'en tout nœud d'un circuit, la somme des courants entrants est égale à la somme des courants sortants. C'est une conséquence directe du principe de conservation de la charge, et elle est indispensable à l'analyse des circuits parallèles.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Génie électrique",
+    "significance": "En appliquant le principe de conservation de la charge à l'analyse des circuits, elle a établi les bases de la méthode des potentiels de nœuds.",
+    "elementMeanings": {
+      "\\sum I": {
+        "role": "Somme des courants",
+        "description": "La somme algébrique de tous les courants qui entrent dans un nœud et en sortent. Elle est toujours nulle.",
+        "kind": "output"
+      },
+      "I_k": {
+        "role": "Courant individuel",
+        "description": "Le courant qui parcourt chaque branche reliée au nœud.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul du courant de chaque branche dans un circuit de résistances en parallèle",
+      "L'analyse de l'équilibrage des charges d'un réseau de distribution électrique"
+    ],
+    "relatedFormulas": [
+      "kirchhoff-voltage",
+      "ohm-law",
+      "electric-power"
+    ]
+  },
+  "rc-time-constant": {
+    "name": "Constante de temps RC",
+    "oneLiner": "Constante de temps qui fixe la vitesse de charge ou de décharge d'un circuit résistance-condensateur",
+    "description": "La constante de temps RC se définit comme le produit de la résistance par la capacité ; elle représente la durée au bout de laquelle le condensateur est chargé à environ 63,2 % de sa tension finale. C'est le paramètre clé qui détermine le régime transitoire de nombreux circuits électroniques : filtres, circuits de temporisation, traitement du signal.",
+    "discoverer": "Fruit du développement collectif du génie électrique",
+    "field": "Génie électrique",
+    "significance": "En résumant en un seul paramètre la réponse transitoire et le comportement fréquentiel, elle est devenue un outil central de la conception des circuits analogiques.",
+    "elementMeanings": {
+      "\\tau": {
+        "role": "Constante de temps",
+        "description": "La constante de temps qui fixe la rapidité du régime transitoire du circuit. Unité : seconde (s).",
+        "kind": "output"
+      },
+      "R": {
+        "role": "Résistance",
+        "description": "La valeur de la résistance du circuit. Unité : ohm (Ohm).",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Capacité",
+        "description": "La capacité de stockage de charges du condensateur. Unité : farad (F).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La détermination du temps de charge du flash d'un appareil photo",
+      "Le circuit de détection tactile d'un écran tactile"
+    ],
+    "relatedFormulas": [
+      "ohm-law",
+      "impedance",
+      "resonance-frequency"
+    ]
+  },
+  "impedance": {
+    "name": "Impédance",
+    "oneLiner": "Opposition totale d'un circuit en courant alternatif, combinant résistance, réactance inductive et réactance capacitive",
+    "description": "L'impédance exprime l'effet total qui s'oppose au passage du courant dans un circuit alternatif. Elle combine, par le théorème de Pythagore, la composante purement résistive et la composante réactive (la différence entre réactance inductive et réactance capacitive). C'est une notion indispensable à l'analyse des circuits alternatifs et à l'optimisation du rendement du transport de l'énergie.",
+    "discoverer": "Oliver Heaviside",
+    "field": "Génie électrique",
+    "significance": "En réunissant en une seule grandeur les relations de phase complexes des circuits alternatifs, elle a systématisé leur analyse.",
+    "elementMeanings": {
+      "Z": {
+        "role": "Impédance",
+        "description": "L'opposition totale du circuit alternatif. Unité : ohm (Ohm).",
+        "kind": "output"
+      },
+      "R": {
+        "role": "Résistance",
+        "description": "La composante purement résistive. Elle dissipe de l'énergie.",
+        "kind": "input"
+      },
+      "X_L": {
+        "role": "Réactance inductive",
+        "description": "La réactance due à la bobine. X_L = 2πfL.",
+        "kind": "input"
+      },
+      "X_C": {
+        "role": "Réactance capacitive",
+        "description": "La réactance due au condensateur. X_C = 1/(2πfC).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La conception de la réponse en fréquence d'un système d'enceintes",
+      "La réduction des pertes de puissance sur les lignes de transport"
+    ],
+    "relatedFormulas": [
+      "ohm-law",
+      "resonance-frequency",
+      "rc-time-constant"
+    ]
+  },
+  "resonance-frequency": {
+    "name": "Fréquence de résonance",
+    "oneLiner": "Fréquence à laquelle, dans un circuit LC, la réactance inductive et la réactance capacitive deviennent égales",
+    "description": "La fréquence de résonance est la fréquence propre à laquelle, dans un circuit formé d'une bobine et d'un condensateur, l'énergie passe librement d'un composant à l'autre. À cette fréquence, l'impédance est minimale (montage série) ou maximale (montage parallèle) ; le phénomène est exploité très largement, de la sélection des stations d'un récepteur radio à la recharge sans fil.",
+    "discoverer": "William Thomson (lord Kelvin)",
+    "field": "Génie électrique",
+    "significance": "En fournissant le principe des circuits sélectifs en fréquence, elle a établi les bases des communications sans fil et de la conception des filtres.",
+    "elementMeanings": {
+      "f_0": {
+        "role": "Fréquence de résonance",
+        "description": "La fréquence propre à laquelle le circuit entre en résonance. Unité : hertz (Hz).",
+        "kind": "output"
+      },
+      "L": {
+        "role": "Inductance",
+        "description": "La capacité de la bobine à stocker de l'énergie magnétique. Unité : henry (H).",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Capacité",
+        "description": "La capacité du condensateur à stocker de l'énergie électrique. Unité : farad (F).",
+        "kind": "input"
+      },
+      "2\\pi": {
+        "role": "Coefficient lié à pi",
+        "description": "Le facteur de conversion entre pulsation et fréquence ordinaire.",
+        "kind": "constant",
+        "value": 6.283185307,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Le réglage de la fréquence d'une radio",
+      "Le choix de la fréquence de résonance d'un appareil d'IRM"
+    ],
+    "relatedFormulas": [
+      "impedance",
+      "rc-time-constant",
+      "shannon-capacity"
+    ]
+  },
+  "shannon-capacity": {
+    "name": "Capacité de canal de Shannon",
+    "oneLiner": "Débit d'information maximal transmissible sans erreur sur un canal bruité",
+    "description": "Le théorème de la capacité de canal de Shannon définit le débit de données maximal théoriquement atteignable pour une bande passante et un rapport signal sur bruit (SNR) donnés. Il montre quantitativement que plus la bande passante est large et plus le SNR est élevé, plus on peut transmettre d'information. Il fixe la limite fondamentale de la théorie de l'information et de la conception des systèmes de communication modernes.",
+    "discoverer": "Claude Shannon",
+    "field": "Génie électrique",
+    "significance": "Résultat central de la théorie de l'information, il fixe la borne supérieure théorique de tout système de communication numérique.",
+    "elementMeanings": {
+      "C": {
+        "role": "Capacité du canal",
+        "description": "Le débit binaire maximal transmissible sans erreur. Unité : bits par seconde (bps).",
+        "kind": "output"
+      },
+      "B": {
+        "role": "Bande passante",
+        "description": "La largeur de la plage de fréquences utilisable par le canal. Unité : hertz (Hz).",
+        "kind": "input"
+      },
+      "S": {
+        "role": "Puissance du signal",
+        "description": "La puissance moyenne du signal reçu.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Puissance du bruit",
+        "description": "La puissance moyenne du bruit du canal.",
+        "kind": "input"
+      },
+      "\\log_2": {
+        "role": "Logarithme de base 2",
+        "description": "La fonction logarithme qui permet d'exprimer le résultat en bits.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul du débit maximal théorique d'un système de téléphonie mobile 5G",
+      "Le choix de la bande passante lors de la conception des canaux Wi-Fi"
+    ],
+    "relatedFormulas": [
+      "resonance-frequency",
+      "ohm-law"
+    ]
+  }
+}

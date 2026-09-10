@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "Definisi sinus",
+    "oneLiner": "Perbandingan panjang sisi di depan sebuah sudut terhadap panjang sisi miring pada segitiga siku-siku",
+    "description": "Sinus (sin) adalah nilai sisi yang berada di depan suatu sudut (sisi depan) dibagi sisi terpanjang (sisi miring) pada segitiga siku-siku. Begitu sudutnya ditetapkan, nilainya selalu sama berapa pun ukuran segitiganya. Inilah perbandingan yang paling mendasar di antara perbandingan trigonometri.",
+    "field": "Trigonometri",
+    "significance": "Sebagai perbandingan trigonometri paling dasar yang menyatakan hubungan antara sisi dan sudut pada segitiga siku-siku, perbandingan ini dipakai sebagai inti analisis gelombang dan getaran dalam fisika dan teknik.",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "Nilai sinus", "description": "Perbandingan sinus untuk sudut theta.", "kind": "output" },
+      "\\theta": { "role": "Sudut", "description": "Sudut acuan pada segitiga siku-siku. Menunjuk salah satu sudut yang bukan sudut siku-siku.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Sisi depan", "description": "Sisi yang terletak di depan sudut acuan.", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Sisi miring", "description": "Sisi terpanjang pada segitiga siku-siku. Letaknya di depan sudut siku-siku.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Mencari tinggi pohon dari panjang bayangannya dan sudut matahari",
+      "Menghitung tinggi tegak sebuah tanjakan bila sudut kemiringannya diketahui",
+      "Mencari ketinggian tertinggi yang dicapai ayunan"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "Definisi kosinus",
+    "oneLiner": "Perbandingan panjang sisi yang mengapit sebuah sudut terhadap panjang sisi miring pada segitiga siku-siku",
+    "description": "Kosinus (cos) adalah nilai sisi yang menempel pada sudut acuan (sisi samping) dibagi sisi terpanjang (sisi miring) pada segitiga siku-siku. Sama seperti sinus, sudut yang sama selalu memberi nilai yang sama tanpa memedulikan ukuran segitiganya.",
+    "field": "Trigonometri",
+    "significance": "Bersama sinus, kosinus menjadi salah satu dari dua tiang trigonometri, dan tak tergantikan pada hasil kali titik vektor, pengolahan sinyal, serta rotasi koordinat.",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "Nilai kosinus", "description": "Perbandingan kosinus untuk sudut theta.", "kind": "output" },
+      "\\theta": { "role": "Sudut", "description": "Sudut acuan pada segitiga siku-siku.", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "Sisi samping", "description": "Sisi yang menempel pada sudut acuan (selain sisi miring).", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Sisi miring", "description": "Sisi terpanjang pada segitiga siku-siku.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung jarak mendatar dari dinding ke kaki tangga yang disandarkan padanya",
+      "Mencari jarak perpindahan mendatar bila sudut kemiringan bukit diketahui",
+      "Menghitung posisi mendatar ujung lengan robot dari sudut sendi-sendinya"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "Definisi tangen",
+    "oneLiner": "Perbandingan panjang sisi di depan sebuah sudut terhadap panjang sisi yang mengapitnya pada segitiga siku-siku",
+    "description": "Tangen (tan) adalah nilai sisi yang berada di depan sudut acuan (sisi depan) dibagi sisi yang menempel padanya (sisi samping) pada segitiga siku-siku. Nilainya sama dengan sinus dibagi kosinus. Perbandingan ini sangat berguna untuk menyatakan kemiringan atau kecuraman.",
+    "field": "Trigonometri",
+    "significance": "Sebagai perbandingan trigonometri yang langsung menyatakan kemiringan dan kecuraman, tangen dipakai luas dalam pengukuran tanah, navigasi, dan perancangan bangunan.",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "Nilai tangen", "description": "Perbandingan tangen untuk sudut theta.", "kind": "output" },
+      "\\theta": { "role": "Sudut", "description": "Sudut acuan pada segitiga siku-siku.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Sisi depan", "description": "Sisi yang terletak di depan sudut acuan.", "kind": "input" },
+      "\\text{adjacent}": { "role": "Sisi samping", "description": "Sisi yang menempel pada sudut acuan (selain sisi miring).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Mengukur tinggi gedung dari sudut pandang ke atas pada jarak tertentu",
+      "Menghitung kemiringan jalan dalam persen seperti pada rambu lalu lintas",
+      "Mencari tinggi puncak gunung dari jarak mendatar dan sudutnya"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "Identitas Pythagoras",
+    "oneLiner": "Identitas yang menyatakan bahwa kuadrat sinus ditambah kuadrat kosinus selalu bernilai 1",
+    "description": "Identitas Pythagoras menjamin bahwa pada sudut mana pun, kuadrat sin ditambah kuadrat cos tepat bernilai 1. Identitas ini langsung diturunkan dari teorema Pythagoras (kuadrat sisi miring sama dengan jumlah kuadrat kedua sisi lainnya) dengan membagi kedua ruas dengan kuadrat sisi miring. Inilah hubungan paling mendasar di antara fungsi-fungsi trigonometri.",
+    "field": "Trigonometri",
+    "significance": "Identitas ini adalah titik tolak semua identitas trigonometri, dan menjadi hubungan dasar yang paling sering dipakai dalam mengubah bentuk rumus maupun dalam pembuktian.",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "Kuadrat sinus", "description": "Nilai sin theta yang dikuadratkan.", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "Kuadrat kosinus", "description": "Nilai cos theta yang dikuadratkan.", "kind": "structural" },
+      "\\theta": { "role": "Sudut", "description": "Sudut sembarang. Identitas ini berlaku untuk nilai apa pun.", "kind": "input", "unit": "rad" },
+      "1": { "role": "Jumlah", "description": "Jumlah kuadrat sinus dan kuadrat kosinus selalu 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Langsung memperoleh nilai cos ketika nilai sin sudah diketahui dalam perhitungan trigonometri",
+      "Memeriksa ketepatan penguraian vektor menjadi komponen-komponennya dalam fisika",
+      "Memastikan transformasi rotasi mempertahankan panjang dalam grafika komputer"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "Aturan sinus",
+    "oneLiner": "Aturan yang menyatakan bahwa panjang tiap sisi segitiga dibagi sinus sudut di depannya selalu bernilai sama",
+    "description": "Aturan sinus adalah hubungan yang berlaku pada segitiga sembarang (tidak harus segitiga siku-siku). Sisi a dibagi sinus sudut A, sisi b dibagi sinus sudut B, dan sisi c dibagi sinus sudut C semuanya bernilai sama. Perbandingan itu juga sama dengan diameter lingkaran luar segitiga tersebut.",
+    "field": "Trigonometri",
+    "significance": "Aturan ini memungkinkan hubungan sisi dan sudut dicari pada segitiga sembarang, bukan hanya segitiga siku-siku, dan menjadi alat utama dalam pengukuran tanah serta navigasi.",
+    "elementMeanings": {
+      "a": { "role": "Sisi a", "description": "Panjang sisi yang berada di depan sudut A.", "kind": "input" },
+      "b": { "role": "Sisi b", "description": "Panjang sisi yang berada di depan sudut B.", "kind": "input" },
+      "c": { "role": "Sisi c", "description": "Panjang sisi yang berada di depan sudut C.", "kind": "input" },
+      "\\sin A": { "role": "Sinus sudut A", "description": "Nilai sinus dari sudut pada titik sudut A segitiga.", "kind": "structural" },
+      "\\sin B": { "role": "Sinus sudut B", "description": "Nilai sinus dari sudut pada titik sudut B segitiga.", "kind": "structural" },
+      "\\sin C": { "role": "Sinus sudut C", "description": "Nilai sinus dari sudut pada titik sudut C segitiga.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung jarak ke gedung di seberang sungai dari sudut yang diukur di dua titik",
+      "Menentukan posisi dengan triangulasi tanpa GPS",
+      "Mengetahui posisi kapal dari sudut antara dua mercusuar saat berlayar"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

@@ -115,6 +115,7 @@
     "corpus:full": "pnpm corpus:build && pnpm corpus:pdflatex-filter && pnpm corpus:report && pnpm corpus:compare",
     "corpus:open": "open src/__tests__/corpus/report.html",
     "semantic:validate": "tsx scripts/validate-semantic-data.ts",
+    "locale:validate": "tsx scripts/validate-locale-parity.ts",
     "audit:formulas": "tsx scripts/audit-formula-coverage.ts",
     "prepublishOnly": "pnpm build",
     "changeset": "changeset",

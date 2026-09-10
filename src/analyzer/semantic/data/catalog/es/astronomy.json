@@ -1,0 +1,600 @@
+{
+  "kepler-third": {
+    "name": "Tercera ley de Kepler",
+    "oneLiner": "Cuanto más alta es la órbita, más lenta es la revolución",
+    "description": "El cuadrado del periodo de revolución es proporcional al cubo del radio de la órbita. Los planetas, las lunas y los satélites artificiales cumplen todos esta ley.",
+    "discoverer": "Johannes Kepler",
+    "field": "Mecánica celeste",
+    "significance": "Estableció matemáticamente la regularidad del movimiento planetario y sentó las bases de la mecánica newtoniana; hoy es esencial para analizar las órbitas de exoplanetas y satélites.",
+    "elementMeanings": {
+      "T": {
+        "role": "Periodo de revolución",
+        "kind": "output",
+        "unit": "s",
+        "description": "El tiempo que tarda el satélite en dar una vuelta completa a la Tierra"
+      },
+      "T^2": {
+        "role": "Cuadrado del periodo de revolución",
+        "kind": "output",
+        "unit": "s²",
+        "description": "Es el valor proporcional al cubo del radio de la órbita"
+      },
+      "4pi2": {
+        "role": "4π²",
+        "kind": "constant",
+        "value": 39.478,
+        "description": "Constante que procede de las propiedades geométricas de la órbita circular ≈ 39,48"
+      },
+      "G": {
+        "role": "Constante de gravitación universal",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "Constante fundamental que determina la intensidad de la gravedad. Como es extraordinariamente pequeña, en la vida cotidiana solo notamos la gravedad si hay una masa enorme, como la de la Tierra"
+      },
+      "M": {
+        "role": "Masa de la Tierra",
+        "kind": "constant",
+        "value": 5.972e24,
+        "unit": "kg",
+        "description": "Cuanto más pesado es el cuerpo central, con más fuerza atrae al satélite. En la misma órbita, alrededor de Júpiter el periodo sería mucho más corto"
+      },
+      "a": {
+        "role": "Radio orbital",
+        "kind": "input",
+        "unit": "km",
+        "description": "La distancia entre el satélite y el centro de la Tierra. Como entra elevada al cubo, un cambio pequeño influye mucho en el periodo"
+      },
+      "a^3": {
+        "role": "Cubo del radio",
+        "kind": "output",
+        "unit": "km³",
+        "description": "La razón por la que basta con subir un poco la órbita para que el periodo se alargue bruscamente"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Radio orbital",
+        "min": 6500,
+        "max": 400000,
+        "default": 6771,
+        "step": 1,
+        "unit": "km",
+        "scale": "log",
+        "effects": [
+          {
+            "range": [
+              6500,
+              8000
+            ],
+            "description": "Órbita baja (LEO). La gravedad es intensa, así que hay que girar deprisa para no caer. Una vuelta cada 90 minutos y 16 amaneceres al día."
+          },
+          {
+            "range": [
+              8000,
+              35000
+            ],
+            "description": "Órbita media. La gravedad es más débil y basta con girar despacio. Los satélites GPS dan exactamente dos vueltas al día."
+          },
+          {
+            "range": [
+              35000,
+              50000
+            ],
+            "description": "Cerca de la órbita geoestacionaria. Si se da exactamente una vuelta cada 24 horas, desde la Tierra parece fijo en el cielo, y por eso se usa para las retransmisiones de televisión."
+          },
+          {
+            "range": [
+              50000,
+              400000
+            ],
+            "description": "Órbita alta. Al acercarse a la Luna, la gravedad terrestre se debilita mucho. La Luna tarda nada menos que 27 días en dar una vuelta."
+          }
+        ]
+      }
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "Periodo de revolución",
+        "unit": "h",
+        "format": "time",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "custom",
+          "sourceParam": "a"
+        },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "Velocidad orbital",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": [
+          "a"
+        ],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "Altitud",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "subtract",
+          "sourceParam": "a",
+          "operand": 6371
+        }
+      },
+      {
+        "id": "earthRatio",
+        "label": "Respecto al radio terrestre",
+        "unit": "×",
+        "format": "number",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "divide",
+          "sourceParam": "a",
+          "operand": 6371
+        }
+      }
+    ],
+    "constraints": [
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6371,
+        "severity": "error",
+        "message": "Por debajo del radio terrestre (6371 km) se estaría dentro de la Tierra, así que la órbita es imposible"
+      },
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6571,
+        "severity": "warning",
+        "message": "Por debajo de los 200 km de altitud la resistencia atmosférica degrada la órbita rápidamente"
+      }
+    ],
+    "milestones": [
+      {
+        "param": "a",
+        "value": 6771,
+        "label": "Órbita de la ISS",
+        "shortLabel": "ISS",
+        "emoji": "🛸",
+        "description": "Altitud de 400 km. Una vuelta cada 90 minutos y 16 amaneceres al día"
+      },
+      {
+        "param": "a",
+        "value": 26560,
+        "label": "Órbita GPS",
+        "shortLabel": "GPS",
+        "emoji": "📡",
+        "description": "Altitud de 20 200 km. Periodo de exactamente 12 horas"
+      },
+      {
+        "param": "a",
+        "value": 42164,
+        "label": "Órbita geoestacionaria",
+        "shortLabel": "GEO",
+        "emoji": "📺",
+        "description": "Altitud de 35 786 km. Exactamente 24 horas: parece fijo en el cielo"
+      },
+      {
+        "param": "a",
+        "value": 384400,
+        "label": "Luna",
+        "shortLabel": "Luna",
+        "emoji": "🌙",
+        "description": "Periodo de 27,3 días. Es el astro más cercano a la Tierra"
+      }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          {
+            "range": [
+              0,
+              500
+            ],
+            "template": "Unas {ratio} veces la altitud de crucero de un avión de pasajeros (10 km)",
+            "referenceValue": 10,
+            "referenceLabel": "Altitud de crucero de un avión de pasajeros"
+          },
+          {
+            "range": [
+              500,
+              5000
+            ],
+            "template": "Una altura de unas {ratio} veces la distancia entre Seúl y Busan ({ref} km)",
+            "referenceValue": 325,
+            "referenceLabel": "Distancia entre Seúl y Busan"
+          },
+          {
+            "range": [
+              5000,
+              50000
+            ],
+            "template": "Unas {ratio} veces el diámetro de la Tierra ({ref} km)",
+            "referenceValue": 12742,
+            "referenceLabel": "Diámetro de la Tierra"
+          },
+          {
+            "range": [
+              50000,
+              400000
+            ],
+            "template": "Aproximadamente el {ratio} % de la distancia entre la Tierra y la Luna",
+            "referenceValue": 384400,
+            "referenceLabel": "Distancia entre la Tierra y la Luna"
+          }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "Calcular la masa del Sol a partir del periodo y el radio orbital de la Tierra",
+      "Estimar el tamaño de la órbita de un exoplaneta observando su periodo",
+      "Diseñar el periodo de revolución de un satélite según la altitud de su órbita"
+    ],
+    "relatedFormulas": [
+      "universal-gravitation",
+      "escape-velocity"
+    ]
+  },
+  "hubble-law": {
+    "name": "Ley de Hubble",
+    "oneLiner": "La ley de la expansión del universo según la cual la velocidad de recesión de las galaxias lejanas es proporcional a su distancia",
+    "description": "La ley de Hubble indica que cuanto más lejana es una galaxia, con mayor velocidad se aleja de nosotros, y que esa velocidad de recesión es directamente proporcional a la distancia. La constante de proporcionalidad, la constante de Hubble, representa el ritmo de expansión del universo y desempeña un papel clave para estimar su edad. Es una de las pruebas observacionales más sólidas de la cosmología del Big Bang.",
+    "discoverer": "Edwin Hubble",
+    "field": "Astronomía",
+    "significance": "Demostró por observación que el universo se expande y marcó así el punto de partida de la cosmología moderna.",
+    "elementMeanings": {
+      "v": {
+        "role": "Velocidad de recesión",
+        "kind": "output",
+        "unit": "km/s",
+        "description": "La velocidad a la que la galaxia se aleja del observador. Unidad: km/s."
+      },
+      "H_0": {
+        "role": "Constante de Hubble",
+        "kind": "constant",
+        "value": 70,
+        "unit": "km/s/Mpc",
+        "description": "El ritmo de expansión actual del universo. Unos 70 km/s/Mpc."
+      },
+      "d": {
+        "role": "Distancia",
+        "kind": "input",
+        "unit": "Mpc",
+        "description": "La distancia desde el observador hasta la galaxia. Unidad: megaparsec (Mpc)."
+      }
+    },
+    "realWorldExamples": [
+      "Estimar distancias a partir del corrimiento al rojo de las galaxias",
+      "Calcular la edad del universo (unos 13 800 millones de años)",
+      "Investigar si la expansión del universo se está acelerando"
+    ],
+    "relatedFormulas": [
+      "schwarzschild-radius",
+      "gravitational-lensing"
+    ]
+  },
+  "schwarzschild-radius": {
+    "name": "Radio de Schwarzschild",
+    "oneLiner": "La fórmula que da el radio crítico que debe alcanzar un cuerpo para convertirse en un agujero negro",
+    "description": "El radio de Schwarzschild es el radio mínimo al que hay que comprimir un cuerpo de una masa dada para que se convierta en un agujero negro. Si la masa se comprime dentro de ese radio, se forma un horizonte de sucesos del que ni siquiera la luz puede escapar. Es un resultado que se deduce de la solución de Schwarzschild de la relatividad general.",
+    "discoverer": "Karl Schwarzschild",
+    "field": "Astronomía",
+    "significance": "Definió cuantitativamente el tamaño de un agujero negro y estableció uno de los conceptos centrales de la astrofísica relativista.",
+    "elementMeanings": {
+      "r_s": {
+        "role": "Radio de Schwarzschild",
+        "kind": "output",
+        "unit": "m",
+        "description": "El radio del horizonte de sucesos. Unidad: metro (m)."
+      },
+      "G": {
+        "role": "Constante de gravitación",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitación universal. Unos 6,674 × 10⁻¹¹ N·m²/kg²."
+      },
+      "M": {
+        "role": "Masa",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masa del cuerpo celeste. Unidad: kg."
+      },
+      "c": {
+        "role": "Velocidad de la luz",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "La velocidad de la luz en el vacío. Unos 3 × 10⁸ m/s."
+      },
+      "c^2": {
+        "role": "Cuadrado de la velocidad de la luz",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Está en el denominador y expresa que cuanto mayor es la masa, mayor es el radio."
+      }
+    },
+    "realWorldExamples": [
+      "Calcular el radio de Schwarzschild del Sol (unos 3 km)",
+      "Estimar el tamaño del horizonte de sucesos de un agujero negro supermasivo",
+      "Analizar la condición crítica del colapso de una estrella de neutrones en agujero negro"
+    ],
+    "relatedFormulas": [
+      "mass-energy",
+      "escape-velocity",
+      "gravitational-lensing"
+    ]
+  },
+  "stefan-boltzmann": {
+    "name": "Ley de Stefan-Boltzmann",
+    "oneLiner": "La ley según la cual la luminosidad total de una estrella es proporcional al cuadrado de su radio y a la cuarta potencia de su temperatura superficial",
+    "description": "La ley de Stefan-Boltzmann indica que la energía total radiada por un cuerpo negro (su luminosidad) es proporcional a su superficie y a la cuarta potencia de su temperatura superficial. En el caso de una estrella, conocidos el radio y la temperatura superficial se puede calcular la luminosidad total y, a la inversa, a partir de la luminosidad y la temperatura se puede estimar su tamaño.",
+    "discoverer": "Josef Stefan, Ludwig Boltzmann",
+    "field": "Astronomía",
+    "significance": "Cuantificó la relación entre las propiedades físicas de las estrellas (tamaño, temperatura y luminosidad) y se convirtió en la base de la clasificación estelar y de la teoría de la evolución de las estrellas.",
+    "elementMeanings": {
+      "L": {
+        "role": "Luminosidad",
+        "kind": "output",
+        "unit": "W",
+        "description": "La energía total que emite la estrella por unidad de tiempo. Unidad: vatio (W)."
+      },
+      "R": {
+        "role": "Radio de la estrella",
+        "kind": "input",
+        "unit": "m",
+        "description": "El radio de la estrella. Unidad: metro (m)."
+      },
+      "R^2": {
+        "role": "Cuadrado del radio",
+        "kind": "structural",
+        "description": "Es el factor proporcional a la superficie (4πR²)."
+      },
+      "\\sigma": {
+        "role": "Constante de Stefan-Boltzmann",
+        "kind": "constant",
+        "value": 5.67e-8,
+        "unit": "W/(m²·K⁴)",
+        "description": "Unos 5,67 × 10⁻⁸ W/(m²·K⁴)."
+      },
+      "T": {
+        "role": "Temperatura superficial",
+        "kind": "input",
+        "unit": "K",
+        "description": "La temperatura efectiva de la superficie de la estrella. Unidad: kelvin (K)."
+      },
+      "T^4": {
+        "role": "Cuarta potencia de la temperatura",
+        "kind": "structural",
+        "description": "Si la temperatura se duplica, la luminosidad se multiplica por 16. Expresa una relación fuertemente no lineal."
+      }
+    },
+    "realWorldExamples": [
+      "Estimar el radio de una estrella a partir de su temperatura superficial y su luminosidad",
+      "Comparar el tamaño de las gigantes rojas y el de las enanas blancas",
+      "Interpretar la posición de una estrella en el diagrama HR (Hertzsprung-Russell)"
+    ],
+    "relatedFormulas": [
+      "wien-displacement",
+      "mass-energy"
+    ]
+  },
+  "wien-displacement": {
+    "name": "Ley de desplazamiento de Wien",
+    "oneLiner": "La ley según la cual la longitud de onda de máxima intensidad de la radiación del cuerpo negro es inversamente proporcional a la temperatura",
+    "description": "La ley de desplazamiento de Wien indica que la longitud de onda a la que un cuerpo negro emite con más intensidad es inversamente proporcional a su temperatura. Cuanto mayor es la temperatura, más corta es esa longitud de onda y más se desplaza hacia el azul; cuanto menor es, más se desplaza hacia las longitudes de onda largas, hacia el rojo. Gracias a esta ley basta el color de una estrella para estimar su temperatura superficial.",
+    "discoverer": "Wilhelm Wien",
+    "field": "Astronomía",
+    "significance": "Reveló la relación cuantitativa entre el color y la temperatura de las estrellas y proporcionó la base de la observación astronómica mediante espectroscopia.",
+    "elementMeanings": {
+      "\\lambda_{max}": {
+        "role": "Longitud de onda de máxima emisión",
+        "kind": "output",
+        "unit": "m",
+        "description": "La longitud de onda de intensidad máxima en el espectro de radiación del cuerpo negro. Unidad: metro (m)."
+      },
+      "b": {
+        "role": "Constante de desplazamiento de Wien",
+        "kind": "constant",
+        "value": 0.002898,
+        "unit": "m·K",
+        "description": "Unos 2,898 × 10⁻³ m·K."
+      },
+      "T": {
+        "role": "Temperatura",
+        "kind": "input",
+        "unit": "K",
+        "description": "La temperatura absoluta del cuerpo negro. Unidad: kelvin (K)."
+      }
+    },
+    "realWorldExamples": [
+      "Estimar la temperatura superficial de una estrella por su color (las azules son calientes y las rojas, frías)",
+      "Medir la temperatura superficial del Sol (unos 5778 K, en la zona del amarillo)",
+      "Observar cuerpos fríos con telescopios de infrarrojos"
+    ],
+    "relatedFormulas": [
+      "stefan-boltzmann"
+    ]
+  },
+  "drake-equation": {
+    "name": "Ecuación de Drake",
+    "oneLiner": "La ecuación probabilística que estima cuántas civilizaciones inteligentes con las que podríamos comunicarnos hay en nuestra galaxia",
+    "description": "La ecuación de Drake estima, como producto de varios factores probabilísticos, el número de civilizaciones de nuestra galaxia que emiten en este momento señales de radio detectables. Los factores van desde la tasa de formación estelar hasta la duración de una civilización y, aunque la mayoría de sus valores son inciertos, la ecuación orienta de forma sistemática la búsqueda de vida inteligente extraterrestre (SETI).",
+    "discoverer": "Frank Drake",
+    "field": "Astronomía",
+    "significance": "Sistematizó científicamente el problema de la búsqueda de vida inteligente extraterrestre y proporcionó el marco teórico de la investigación SETI.",
+    "elementMeanings": {
+      "N": {
+        "role": "Número de civilizaciones con las que comunicarse",
+        "kind": "output",
+        "description": "El número de civilizaciones de la galaxia que emiten ahora mismo señales detectables."
+      },
+      "R_*": {
+        "role": "Tasa de formación estelar",
+        "kind": "input",
+        "unit": "/yr",
+        "description": "El número de estrellas que nacen cada año en la galaxia."
+      },
+      "f_p": {
+        "role": "Fracción de estrellas con planetas",
+        "kind": "input",
+        "description": "La proporción de estrellas que tienen un sistema planetario."
+      },
+      "n_e": {
+        "role": "Número de planetas habitables",
+        "kind": "input",
+        "description": "El número de planetas situados en la zona habitable de cada sistema planetario."
+      },
+      "f_l": {
+        "role": "Fracción en la que surge la vida",
+        "kind": "input",
+        "description": "La probabilidad de que en un planeta habitable llegue realmente a surgir vida."
+      },
+      "f_i": {
+        "role": "Fracción de vida inteligente",
+        "kind": "input",
+        "description": "La probabilidad de que la vida evolucione hasta ser inteligente."
+      },
+      "f_c": {
+        "role": "Fracción con tecnología de comunicación",
+        "kind": "input",
+        "description": "La probabilidad de que la vida inteligente desarrolle una tecnología capaz de emitir señales detectables."
+      },
+      "L": {
+        "role": "Duración de la civilización",
+        "kind": "input",
+        "unit": "yr",
+        "description": "El tiempo durante el que una civilización con la que se puede contactar emite señales. Unidad: años."
+      }
+    },
+    "realWorldExamples": [
+      "Diseñar la estrategia de búsqueda del proyecto SETI",
+      "Actualizar los valores de f_p y n_e con los datos de exoplanetas descubiertos",
+      "Discutir cuantitativamente la paradoja de Fermi (por qué no hay indicios de civilizaciones extraterrestres)"
+    ],
+    "relatedFormulas": [
+      "hubble-law"
+    ]
+  },
+  "gravitational-lensing": {
+    "name": "Lente gravitacional",
+    "oneLiner": "La fórmula que da el ángulo con el que un cuerpo de gran masa curva la trayectoria de la luz",
+    "description": "El efecto de lente gravitacional es el fenómeno por el que la luz que pasa cerca de un cuerpo de gran masa se curva a causa de la curvatura del espacio-tiempo. El ángulo de desviación es proporcional a la masa del cuerpo e inversamente proporcional a la distancia mínima a la que la luz pasa de él. Es una predicción directa de la relatividad general y su primera verificación observacional se logró durante el eclipse de 1919.",
+    "discoverer": "Albert Einstein",
+    "field": "Astronomía",
+    "significance": "Fue el primer fenómeno que verificó por observación la relatividad general y hoy es una herramienta esencial para observar la distribución de la materia oscura.",
+    "elementMeanings": {
+      "\\theta": {
+        "role": "Ángulo de desviación",
+        "kind": "output",
+        "unit": "rad",
+        "description": "El ángulo con el que se curva la luz. Unidad: radián (rad)."
+      },
+      "G": {
+        "role": "Constante de gravitación",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitación universal. Unos 6,674 × 10⁻¹¹ N·m²/kg²."
+      },
+      "M": {
+        "role": "Masa del cuerpo que actúa de lente",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masa del cuerpo que curva la luz. Unidad: kg."
+      },
+      "c": {
+        "role": "Velocidad de la luz",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "La velocidad de la luz en el vacío. Unos 3 × 10⁸ m/s."
+      },
+      "c^2": {
+        "role": "Cuadrado de la velocidad de la luz",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Es el factor que recoge la corrección relativista."
+      },
+      "b": {
+        "role": "Parámetro de impacto",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distancia mínima a la que la luz pasa del cuerpo que actúa de lente. Unidad: metro (m)."
+      }
+    },
+    "realWorldExamples": [
+      "Observar la distorsión de las imágenes de galaxias de fondo producida por un cúmulo de galaxias",
+      "Buscar exoplanetas mediante microlentes gravitacionales",
+      "Elaborar mapas de la distribución de la materia oscura"
+    ],
+    "relatedFormulas": [
+      "schwarzschild-radius",
+      "universal-gravitation"
+    ]
+  },
+  "escape-velocity": {
+    "name": "Velocidad de escape",
+    "oneLiner": "La fórmula que da la velocidad mínima necesaria para escapar de la gravedad de un cuerpo celeste",
+    "description": "La velocidad de escape es la velocidad mínima que debe tener un objeto en la superficie de un cuerpo celeste para abandonar por completo su campo gravitatorio. Cuanto mayor es la masa del cuerpo y menor su radio, mayor es la velocidad de escape. En el radio de Schwarzschild la velocidad de escape alcanza la de la luz, lo que enlaza directamente con la definición de agujero negro.",
+    "field": "Astronomía",
+    "significance": "Es la base de problemas astrofísicos muy diversos: el lanzamiento de cohetes, la capacidad de un planeta para retener su atmósfera o las condiciones de formación de un agujero negro.",
+    "elementMeanings": {
+      "v_e": {
+        "role": "Velocidad de escape",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "La velocidad mínima para abandonar el campo gravitatorio. Unidad: m/s."
+      },
+      "G": {
+        "role": "Constante de gravitación",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitación universal. Unos 6,674 × 10⁻¹¹ N·m²/kg²."
+      },
+      "M": {
+        "role": "Masa del cuerpo celeste",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masa del cuerpo del que se quiere escapar. Unidad: kg."
+      },
+      "r": {
+        "role": "Radio",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distancia desde el centro del cuerpo hasta el punto de partida. Unidad: metro (m)."
+      }
+    },
+    "realWorldExamples": [
+      "Calcular la velocidad de escape de la Tierra (unos 11,2 km/s)",
+      "Explicar la ausencia de atmósfera en la Luna por su baja velocidad de escape",
+      "La relación entre la elevada velocidad de escape de Júpiter y su densa atmósfera"
+    ],
+    "relatedFormulas": [
+      "universal-gravitation",
+      "schwarzschild-radius",
+      "kepler-third",
+      "kinetic-energy"
+    ]
+  }
+}

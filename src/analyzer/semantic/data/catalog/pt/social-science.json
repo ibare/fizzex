@@ -1,0 +1,137 @@
+{
+  "gini-coefficient": {
+    "name": "Coeficiente de Gini",
+    "oneLiner": "Medida que expressa o grau de desigualdade de renda ou de riqueza num valor entre 0 e 1",
+    "description": "O coeficiente de Gini é calculado pela razão entre a área compreendida entre a curva de Lorenz e a linha de igualdade perfeita. Se vale 0, significa igualdade perfeita (todos com a mesma renda); se vale 1, desigualdade total (uma única pessoa concentra tudo). É o indicador de desigualdade mais usado na comparação entre países e na avaliação de políticas.",
+    "discoverer": "Corrado Gini",
+    "field": "Ciências sociais",
+    "significance": "Ao condensar a desigualdade econômica num único número, tornou-se o indicador básico para comparações internacionais e para a formulação de políticas.",
+    "elementMeanings": {
+      "G": { "role": "coeficiente de Gini", "description": "É a medida de desigualdade entre 0 (igualdade perfeita) e 1 (desigualdade total).", "kind": "output" },
+      "L(x)": { "role": "curva de Lorenz", "description": "É a curva que indica a proporção acumulada de renda para uma proporção x da população.", "kind": "structural" },
+      "\\int L(x) dx": { "role": "área sob a curva de Lorenz", "description": "É a área sob a curva de Lorenz de 0 até 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O indicador central que o Banco Mundial usa para comparar a desigualdade de renda entre países",
+      "Avaliar quantitativamente a mudança na distribuição de renda antes e depois de uma política de assistência social"
+    ],
+    "relatedFormulas": ["laffer-curve"]
+  },
+  "ebbinghaus-curve": {
+    "name": "Curva do esquecimento de Ebbinghaus",
+    "oneLiner": "Curva que descreve o padrão de queda exponencial da memória com o passar do tempo",
+    "description": "A curva do esquecimento de Ebbinghaus mostra que a taxa de retenção da memória cai exponencialmente à medida que o tempo passa após o estudo. A perda é mais rápida logo depois do aprendizado e vai ficando mais lenta com o tempo. Pela revisão repetida (repetição espaçada) é possível aumentar a força da memória S e assim desacelerar o esquecimento.",
+    "discoverer": "Hermann Ebbinghaus",
+    "field": "Ciências sociais",
+    "significance": "Ao inaugurar o estudo quantitativo da memória humana, deu a base para estratégias científicas de aprendizado, como o método da repetição espaçada.",
+    "elementMeanings": {
+      "R": { "role": "taxa de retenção", "description": "É a proporção do conteúdo estudado que permanece na memória. Assume valores entre 0 e 1.", "kind": "output" },
+      "t": { "role": "tempo decorrido", "description": "É o tempo transcorrido desde o momento do estudo.", "kind": "input" },
+      "S": { "role": "força da memória", "description": "É a estabilidade da memória. Pode ser aumentada com revisões repetidas e, quanto maior, mais lento o esquecimento.", "kind": "input" },
+      "e^{-t/S}": { "role": "decaimento exponencial", "description": "Representa a queda exponencial segundo a razão entre o tempo e a força da memória.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O princípio pelo qual aplicativos de repetição espaçada como o Anki calculam o melhor momento para revisar",
+      "O fenômeno de esquecer mais de 70% das palavras de um idioma estrangeiro em um único dia quando não há revisão"
+    ],
+    "relatedFormulas": ["malthus-population"]
+  },
+  "malthus-population": {
+    "name": "Modelo populacional de Malthus",
+    "oneLiner": "Modelo de crescimento geométrico segundo o qual a população cresce exponencialmente a uma taxa constante",
+    "description": "O modelo populacional de Malthus supõe que, na ausência de restrição de recursos, a população cresce exponencialmente a uma taxa constante. A população futura é estimada multiplicando a população inicial pela exponencial da taxa de crescimento natural vezes o tempo. Na prática, os limites de recursos e a resistência ambiental exigem o complemento do modelo logístico, mas ele continua útil como base para previsões de crescimento de curto prazo.",
+    "discoverer": "Thomas Malthus",
+    "field": "Ciências sociais",
+    "significance": "Ao provocar o debate acadêmico sobre superpopulação e escassez de recursos, assentou as bases da demografia e da ecologia.",
+    "elementMeanings": {
+      "N(t)": { "role": "população no instante t", "description": "É a população total no instante t.", "kind": "output" },
+      "N_0": { "role": "população inicial", "description": "É a população no instante t=0.", "kind": "input" },
+      "r": { "role": "taxa de crescimento natural", "description": "É a taxa líquida de crescimento da população, isto é, a natalidade menos a mortalidade.", "kind": "input" },
+      "t": { "role": "tempo", "description": "É o tempo transcorrido desde o instante inicial.", "kind": "input" },
+      "e^{rt}": { "role": "fator de crescimento exponencial", "description": "Representa o crescimento geométrico segundo o produto da taxa de crescimento pelo tempo.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Modelo para prever a tendência de crescimento populacional de curto prazo em países em desenvolvimento",
+      "Prever a multiplicação do número de indivíduos num cultivo de bactérias em ambiente inicialmente sem restrições"
+    ],
+    "relatedFormulas": ["ebbinghaus-curve", "gravity-model"]
+  },
+  "weber-fechner": {
+    "name": "Lei de Weber-Fechner",
+    "oneLiner": "Lei psicofísica segundo a qual a intensidade da sensação é proporcional ao logaritmo da intensidade do estímulo",
+    "description": "A lei de Weber-Fechner explica que a intensidade física do estímulo precisa crescer em progressão geométrica para que a sensação cresça em progressão aritmética. Ou seja, quando o estímulo é fraco, mesmo pequenas variações são bem percebidas; quando é forte, é preciso uma variação grande para sentir a diferença. Ela mostra que os sentidos humanos operam numa escala logarítmica.",
+    "discoverer": "Ernst Weber, Gustav Fechner",
+    "field": "Ciências sociais",
+    "significance": "Ao fundar a psicofísica, abriu caminho para medir quantitativamente sensações subjetivas e influenciou também o design de UX e a engenharia acústica.",
+    "elementMeanings": {
+      "S": { "role": "intensidade da sensação", "description": "É a intensidade do estímulo tal como a pessoa a sente subjetivamente.", "kind": "output" },
+      "k": { "role": "constante de proporcionalidade", "description": "É a constante que varia conforme a modalidade sensorial (visão, audição etc.).", "kind": "input" },
+      "I": { "role": "intensidade do estímulo", "description": "É a intensidade do estímulo medida fisicamente.", "kind": "input" },
+      "I_0": { "role": "estímulo limiar", "description": "É a menor intensidade de estímulo detectável (limiar absoluto).", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "logaritmo da razão de estímulos", "description": "É o logaritmo natural da razão entre o estímulo atual e o limiar.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Por que a unidade decibel (dB) é logarítmica: a energia sonora precisa ser 10 vezes maior para soar 'duas vezes mais alto'",
+      "A correção gama do ajuste de brilho da tela, que divide a faixa escura em passos finos e a clara em passos largos"
+    ],
+    "relatedFormulas": ["elo-rating"]
+  },
+  "elo-rating": {
+    "name": "Sistema de classificação Elo",
+    "oneLiner": "Sistema de classificação que calcula a probabilidade esperada de vitória a partir da diferença de nível entre dois jogadores",
+    "description": "A classificação Elo calcula a probabilidade esperada de vitória colocando a diferença de pontuação entre dois jogadores numa função logística. Se a diferença é de 400 pontos, a probabilidade esperada de vitória do jogador mais bem classificado é de cerca de 91%. A pontuação é atualizada conforme o resultado da partida, e quanto mais inesperado o resultado, maior a variação.",
+    "discoverer": "Arpad Elo",
+    "field": "Ciências sociais",
+    "significance": "A começar pelo xadrez, tornou-se o padrão internacional de avaliação de nível em esportes, e-sports e sistemas de emparelhamento.",
+    "elementMeanings": {
+      "E_A": { "role": "probabilidade esperada de vitória de A", "description": "É a probabilidade esperada de o jogador A vencer B.", "kind": "output" },
+      "R_A": { "role": "pontuação de A", "description": "É a classificação atual do jogador A.", "kind": "input" },
+      "R_B": { "role": "pontuação de B", "description": "É a classificação atual do jogador B.", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "conversão da diferença de pontuação", "description": "É o termo exponencial que converte a diferença de pontuação dos dois jogadores numa razão de probabilidades.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O cálculo da classificação oficial dos jogadores num campeonato mundial de xadrez",
+      "O emparelhamento de adversários por nível no matchmaking de jogos on-line, como League of Legends"
+    ],
+    "relatedFormulas": ["sigmoid", "weber-fechner"]
+  },
+  "laffer-curve": {
+    "name": "Curva de Laffer",
+    "oneLiner": "Curva que representa a relação entre alíquota e arrecadação, na qual alíquotas extremamente altas acabam reduzindo a receita",
+    "description": "A curva de Laffer visualiza a ideia de que, como a arrecadação é 0 com alíquota de 0% e também é 0 com alíquota de 100% — pois a atividade econômica cessa —, existe entre esses extremos uma alíquota ótima que maximiza a receita. O essencial não é uma fórmula exata, mas a intuição qualitativa da relação em U invertido entre alíquota e arrecadação; a posição da alíquota ótima varia conforme a situação econômica.",
+    "discoverer": "Arthur Laffer",
+    "field": "Ciências sociais",
+    "significance": "Como marco central do debate sobre política tributária, tornou-se o fundamento teórico da economia da oferta e da ideia de que cortes de impostos podem aumentar a arrecadação.",
+    "elementMeanings": {
+      "세율": { "role": "variável independente", "description": "É a alíquota do imposto fixada pelo governo, entre 0% e 100%.", "kind": "input" },
+      "세수": { "role": "variável dependente", "description": "É o total de impostos efetivamente arrecadado pelo governo.", "kind": "output" },
+      "최적 세율": { "role": "ponto de máximo", "description": "É a alíquota que maximiza a arrecadação. Corresponde ao vértice da curva.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "O fundamento teórico da política de cortes de impostos do governo Reagan nos Estados Unidos nos anos 1980 (a Reaganomics)",
+      "O quadro de discussão com que governos preveem a variação da arrecadação ao ajustar a alíquota do imposto sobre empresas"
+    ],
+    "relatedFormulas": ["gini-coefficient"]
+  },
+  "gravity-model": {
+    "name": "Modelo gravitacional",
+    "oneLiner": "Modelo de interação espacial segundo o qual o intercâmbio entre duas regiões é proporcional à população (ao porte) e inversamente proporcional à distância",
+    "description": "O modelo gravitacional, inspirado na lei da gravitação universal de Newton, explica que o volume de intercâmbio entre duas regiões (comércio, deslocamento, comunicação etc.) é proporcional ao produto do porte de cada uma (população, PIB etc.) e inversamente proporcional ao quadrado da distância. Apesar da estrutura simples, prevê surpreendentemente bem o comércio internacional, os deslocamentos pendulares urbanos e os padrões migratórios.",
+    "discoverer": "William Reilly (modelo gravitacional do varejo), Jan Tinbergen (modelo gravitacional do comércio)",
+    "field": "Ciências sociais",
+    "significance": "É o modelo empírico central da análise do comércio internacional e é usado como padrão para estimar os efeitos de acordos comerciais e de políticas tarifárias.",
+    "elementMeanings": {
+      "T_{ij}": { "role": "volume de intercâmbio", "description": "É o volume de intercâmbio (comércio, deslocamento etc.) entre as regiões i e j.", "kind": "output" },
+      "k": { "role": "constante de proporcionalidade", "description": "É a constante que ajusta a escala geral do modelo.", "kind": "input" },
+      "P_i": { "role": "porte da região i", "description": "É a variável que representa o porte da região i, como população ou PIB.", "kind": "input" },
+      "P_j": { "role": "porte da região j", "description": "É a variável que representa o porte da região j, como população ou PIB.", "kind": "input" },
+      "d_{ij}": { "role": "distância entre as duas regiões", "description": "É a distância geográfica entre as regiões i e j.", "kind": "input" },
+      "d_{ij}^2": { "role": "quadrado da distância", "description": "Reflete a lei do inverso do quadrado: se a distância dobra, o intercâmbio cai para 1/4.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Explicar pela distância e pelo porte econômico por que o comércio entre Brasil e Argentina é maior que entre Brasil e Coreia do Sul",
+      "Estimar a atração de clientes conforme a população e a distância das cidades vizinhas na análise da área de influência de um novo shopping center"
+    ],
+    "relatedFormulas": ["universal-gravitation", "malthus-population"]
+  }
+}

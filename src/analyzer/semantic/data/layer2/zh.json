@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "分母中乘方的底数。若它是变量，它越大整个函数值就越被压低。"
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "分母中乘方的次数。指数越大，分母增长得越快，从而压低整体的值。"
+  },
+  "sum.body>frac.denominator": {
+    "role": "级数分母",
+    "description": "级数中每一项的分母。它增长得越快，级数收敛的可能性越高。"
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "p-级数指数",
+    "description": "级数分母的乘方指数。大于 1 时级数收敛（p-级数判别法）。"
+  },
+  "sum.body>frac.numerator": {
+    "role": "级数分子",
+    "description": "级数中每一项的分子。"
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "积分从负无穷大开始的反常积分。被积函数必须衰减得足够快才会收敛。"
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "指数是分数的分子。整个指数为分数时表示开方（根式）。"
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "指数的分母。分母为 n 时等同于 n 次方根。"
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "嵌套分子",
+    "description": "分数之中又嵌套着分数，表示复杂的比例关系。"
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "嵌套分母",
+    "description": "分母里还有一个分数。整理之后可以化为乘法。"
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "被积分的分数的分子。"
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "被积分的分数的分母。用部分分式分解可能会有帮助。"
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "极限中分数的分子。它与分母同时趋于 0 或无穷时，可以使用洛必达法则。"
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "极限中分数的分母。它与分子同时趋于 0 或无穷时，可以使用洛必达法则。"
+  }
+}

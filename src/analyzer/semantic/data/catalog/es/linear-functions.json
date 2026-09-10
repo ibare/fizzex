@@ -1,0 +1,355 @@
+{
+  "linear-function": {
+    "name": "Función lineal",
+    "oneLiner": "La función más básica de todas, cuya gráfica es una recta proporcional a x",
+    "description": "En la función lineal y = ax + b, cada vez que x aumenta en 1, y varía siempre la misma cantidad a. Su gráfica es siempre una recta: a es la pendiente y b, la ordenada en el origen.",
+    "field": "Álgebra",
+    "significance": "Es el punto de partida del estudio de todas las funciones y la herramienta más básica para expresar matemáticamente los fenómenos de variación constante.",
+    "elementMeanings": {
+      "a": {
+        "role": "Pendiente",
+        "description": "Indica lo inclinada que está la recta. Si es positiva sube hacia la derecha y si es negativa baja hacia la derecha.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Ordenada en el origen",
+        "description": "Es la coordenada y del punto en que la recta corta al eje de ordenadas. También es el valor de y cuando x vale 0.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variable independiente",
+        "description": "Es el valor de entrada, que se puede elegir libremente.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Variable dependiente",
+        "description": "Es el valor de salida, que queda determinado por el valor de x.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "El cálculo de la tarifa de un taxi, en la que a la bajada de bandera se le suma el importe por distancia",
+      "La relación entre tiempo y distancia de una persona que camina a velocidad constante"
+    ],
+    "relatedFormulas": [
+      "slope-formula",
+      "point-slope-form",
+      "direct-proportion"
+    ]
+  },
+  "slope-formula": {
+    "name": "Fórmula de la pendiente",
+    "oneLiner": "La fórmula que da la pendiente de una recta a partir de las coordenadas de dos puntos",
+    "description": "La fórmula de la pendiente m = (y₂ − y₁) / (x₂ − x₁) calcula lo inclinada que está la recta que pasa por dos puntos del plano de coordenadas. Expresa la variación de y frente a la variación de x, es decir, la tasa de variación.",
+    "field": "Álgebra",
+    "significance": "Expresa numéricamente y con precisión la dirección y la inclinación de una recta, y enlaza de forma natural con la tasa de variación, el concepto básico de la derivada.",
+    "elementMeanings": {
+      "m": {
+        "role": "Pendiente",
+        "description": "Es el valor que indica la inclinación de la recta.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Coordenada x del primer punto",
+        "description": "Es la posición horizontal del primer punto.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Coordenada y del primer punto",
+        "description": "Es la posición vertical del primer punto.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Coordenada x del segundo punto",
+        "description": "Es la posición horizontal del segundo punto.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Coordenada y del segundo punto",
+        "description": "Es la posición vertical del segundo punto.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "El cálculo de la pendiente de un camino de montaña",
+      "La subida acumulada durante un periodo en un gráfico de cotizaciones"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "point-slope-form",
+      "distance-formula"
+    ]
+  },
+  "point-slope-form": {
+    "name": "Ecuación punto-pendiente",
+    "oneLiner": "La forma que permite escribir la ecuación de una recta cuando se conocen un punto y la pendiente",
+    "description": "La forma punto-pendiente y − y₁ = m(x − x₁) permite escribir directamente la ecuación de la recta cuando se conocen un punto (x₁, y₁) de la recta y su pendiente m.",
+    "field": "Álgebra",
+    "significance": "Es la forma más práctica de obtener la ecuación de una recta y también se emplea en cálculo para hallar la ecuación de la recta tangente.",
+    "elementMeanings": {
+      "m": {
+        "role": "Pendiente",
+        "description": "Es la inclinación de la recta.",
+        "kind": "input"
+      },
+      "x_1": {
+        "role": "Coordenada x del punto conocido",
+        "description": "Es la posición horizontal del punto que se sabe que está en la recta.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Coordenada y del punto conocido",
+        "description": "Es la posición vertical del punto que se sabe que está en la recta.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Un modelo que predice la temperatura futura a partir de la temperatura actual y la tasa de variación",
+      "La expresión que describe la evolución de las ventas a partir de las ventas de un momento dado y su tasa de crecimiento"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "slope-formula"
+    ]
+  },
+  "quadratic-standard": {
+    "name": "Forma general de la función cuadrática",
+    "oneLiner": "La forma básica de la función cuadrática, cuya gráfica es una parábola",
+    "description": "La forma general de la función cuadrática y = ax² + bx + c es una función que contiene el cuadrado de x y cuya gráfica tiene forma de parábola. El signo de a determina si la parábola es cóncava hacia abajo o hacia arriba.",
+    "field": "Álgebra",
+    "significance": "Es la función clave para describir fenómenos cotidianos muy diversos: el movimiento parabólico, los problemas de máximos y mínimos, etc.",
+    "elementMeanings": {
+      "a": {
+        "role": "Coeficiente del término cuadrático",
+        "description": "Determina la orientación y la anchura de la parábola. Si es positivo es cóncava hacia arriba y si es negativo, hacia abajo.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Coeficiente del término lineal",
+        "description": "Influye en la posición del eje de la parábola.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Término independiente",
+        "description": "Es la coordenada y del punto en que la parábola corta al eje de ordenadas.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La variación de la altura de una pelota al lanzarla",
+      "La curva del arco de un puente"
+    ],
+    "relatedFormulas": [
+      "quadratic-vertex",
+      "discriminant",
+      "quadratic-formula"
+    ]
+  },
+  "quadratic-vertex": {
+    "name": "Forma canónica de la función cuadrática",
+    "oneLiner": "La forma de la función cuadrática en la que se leen directamente las coordenadas del vértice de la parábola",
+    "description": "La forma canónica de la función cuadrática y = a(x − h)² + k permite ver de un vistazo que el vértice de la parábola es (h, k). Se obtiene al convertir la forma general en un cuadrado perfecto.",
+    "field": "Álgebra",
+    "significance": "Permite conocer de inmediato el valor máximo o mínimo de la función, por lo que resulta esencial para resolver problemas de optimización.",
+    "elementMeanings": {
+      "a": {
+        "role": "Coeficiente del término cuadrático",
+        "description": "Determina la orientación y la anchura de la parábola. Es el mismo valor que la a de la forma general.",
+        "kind": "input"
+      },
+      "h": {
+        "role": "Coordenada x del vértice",
+        "description": "Es la posición del eje respecto al cual la parábola es simétrica.",
+        "kind": "input"
+      },
+      "k": {
+        "role": "Coordenada y del vértice",
+        "description": "Es el valor mínimo (a > 0) o máximo (a < 0) de la parábola.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Hallar la altura máxima del chorro de una fuente",
+      "Encontrar el precio de un producto que hace máximo el beneficio"
+    ],
+    "relatedFormulas": [
+      "quadratic-standard",
+      "discriminant"
+    ]
+  },
+  "discriminant": {
+    "name": "Discriminante",
+    "oneLiner": "La expresión que indica de antemano cuántas soluciones tiene una ecuación de segundo grado",
+    "description": "El discriminante D = b² − 4ac permite saber cuántas soluciones tiene la ecuación de segundo grado ax² + bx + c = 0 y de qué tipo son, sin necesidad de resolverla. Si D es positivo hay dos soluciones distintas, si es 0 hay una solución doble y si es negativo no hay soluciones reales.",
+    "field": "Álgebra",
+    "significance": "Permite decidir si existen soluciones antes de resolver la ecuación y desempeña así un papel clave a la hora de orientar la resolución del problema.",
+    "elementMeanings": {
+      "D": {
+        "role": "Valor del discriminante",
+        "description": "Su signo determina el número y el tipo de soluciones.",
+        "kind": "output"
+      },
+      "b": {
+        "role": "Coeficiente del término lineal",
+        "description": "Es el número que multiplica a x en la ecuación de segundo grado.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Coeficiente del término cuadrático",
+        "description": "Es el número que multiplica al cuadrado de x en la ecuación de segundo grado.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Término independiente",
+        "description": "Es el número que se suma en la ecuación de segundo grado sin acompañar a la variable.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Decidir si una pelota lanzada puede alcanzar una altura determinada",
+      "Comprobar si dos curvas llegan a cortarse"
+    ],
+    "relatedFormulas": [
+      "quadratic-formula",
+      "quadratic-standard",
+      "quadratic-vertex"
+    ]
+  },
+  "absolute-value-function": {
+    "name": "Función valor absoluto",
+    "oneLiner": "La función en forma de V cuyas salidas son todas mayores o iguales que 0",
+    "description": "La función valor absoluto y = |x| descarta el signo del valor de entrada y deja solo su magnitud. Su gráfica tiene forma de V con el vértice en el origen: si x es positivo lo devuelve tal cual y si es negativo le cambia el signo.",
+    "field": "Álgebra",
+    "significance": "Es la herramienta básica para expresar matemáticamente las situaciones en las que solo importa la magnitud y no el sentido, como las distancias, los errores o las desviaciones.",
+    "elementMeanings": {
+      "x": {
+        "role": "Valor de entrada",
+        "description": "Es el valor original, que puede ser positivo, negativo o 0.",
+        "kind": "input"
+      },
+      "|x|": {
+        "role": "Valor absoluto",
+        "description": "La magnitud de x una vez retirado su signo. Coincide con su distancia hasta el 0 en la recta numérica.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Calcular la diferencia entre una temperatura bajo cero y otra sobre cero",
+      "Medir cuánto se aleja un resultado del valor objetivo (el error)"
+    ],
+    "relatedFormulas": [
+      "distance-formula",
+      "linear-function"
+    ]
+  },
+  "floor-function": {
+    "name": "Función parte entera",
+    "oneLiner": "La función que descarta los decimales y redondea hacia abajo al entero más próximo",
+    "description": "La función parte entera (función escalonada) y = ⌊x⌋ devuelve el mayor entero que no supera a x. Su gráfica tiene forma de escalera y el valor sube un peldaño en cada punto entero.",
+    "field": "Álgebra",
+    "significance": "Es la base matemática de todas las situaciones cotidianas en las que hace falta redondear hacia abajo: el cociente de una división, el cálculo de tarifas por tramos o la división entera en programación.",
+    "elementMeanings": {
+      "x": {
+        "role": "Valor de entrada",
+        "description": "Es un valor de entrada dentro de los números reales.",
+        "kind": "input"
+      },
+      "\\lfloor x \\rfloor": {
+        "role": "Parte entera por defecto",
+        "description": "Es el mayor de los enteros menores o iguales que x. Por ejemplo: ⌊3,7⌋ = 3, ⌊−1,2⌋ = −2.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "El cálculo de la tarifa de autobús por tramos (importe aplicado cada 5 km)",
+      "El número de galletas que le toca a cada persona al repartirlas por igual entre los amigos"
+    ],
+    "relatedFormulas": [
+      "absolute-value-function"
+    ]
+  },
+  "distance-formula": {
+    "name": "Fórmula de la distancia entre dos puntos",
+    "oneLiner": "La fórmula que da la distancia en línea recta entre dos puntos del plano de coordenadas",
+    "description": "La fórmula de la distancia d = √((x₂ − x₁)² + (y₂ − y₁)²) calcula la distancia en línea recta entre los puntos (x₁, y₁) y (x₂, y₂) del plano de coordenadas. Es la aplicación del teorema de Pitágoras a las coordenadas.",
+    "field": "Geometría",
+    "significance": "Es la herramienta más básica de la geometría analítica y el punto de partida de problemas geométricos muy diversos: la longitud de los lados de una figura, el radio de una circunferencia, etc.",
+    "elementMeanings": {
+      "d": {
+        "role": "Distancia",
+        "description": "Es la longitud del segmento que une los dos puntos.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Coordenada x del primer punto",
+        "description": "Es la posición horizontal del primer punto.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Coordenada y del primer punto",
+        "description": "Es la posición vertical del primer punto.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Coordenada x del segundo punto",
+        "description": "Es la posición horizontal del segundo punto.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Coordenada y del segundo punto",
+        "description": "Es la posición vertical del segundo punto.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Calcular la distancia en línea recta entre dos lugares de un mapa",
+      "Determinar la distancia entre dos personajes en un videojuego"
+    ],
+    "relatedFormulas": [
+      "midpoint-formula",
+      "slope-formula"
+    ]
+  },
+  "midpoint-formula": {
+    "name": "Fórmula del punto medio",
+    "oneLiner": "La fórmula que da la posición situada justo en el centro de dos puntos",
+    "description": "La fórmula del punto medio M = ((x₁ + x₂)/2, (y₁ + y₂)/2) da el punto situado justo en el centro del segmento que une dos puntos del plano de coordenadas. Basta con hallar la media de cada coordenada.",
+    "field": "Geometría",
+    "significance": "Es la fórmula básica para hallar el punto que divide un segmento en dos partes iguales, el centro de una figura o un punto simétrico, y una herramienta imprescindible para resolver problemas de geometría analítica.",
+    "elementMeanings": {
+      "M": {
+        "role": "Punto medio",
+        "description": "Es el punto situado justo en el centro de los dos puntos.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Coordenada x del primer punto",
+        "description": "Es la posición horizontal del primer punto.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Coordenada y del primer punto",
+        "description": "Es la posición vertical del primer punto.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Coordenada x del segundo punto",
+        "description": "Es la posición horizontal del segundo punto.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Coordenada y del segundo punto",
+        "description": "Es la posición vertical del segundo punto.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Buscar un lugar de encuentro situado justo entre las casas de dos amigos",
+      "Calcular dónde colocar una señal en el centro de un tramo"
+    ],
+    "relatedFormulas": [
+      "distance-formula",
+      "slope-formula"
+    ]
+  }
+}

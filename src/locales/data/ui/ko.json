@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "닫기",
+    "closeWithKey": "닫기 (ESC)",
+    "hintHover": "호버: 요소 탐색",
+    "hintClick": "클릭: 값 조절",
+    "hintEsc": "ESC: 닫기",
+    "explore": "수식 탐색",
+    "copyImage": "이미지 복사",
+    "reset": "원래대로",
+    "similarTo": "{name}와(과) 유사",
+    "closeNamed": "{name} 닫기",
+    "domainGuard": "도메인 가드: {reason}"
+  },
+  "bindingFault": {
+    "derivative": "{name} 도함수 평가 실패",
+    "domain": "{name} 값이 정의역을 벗어남",
+    "divergent": "{name} 값이 발산",
+    "unsupported": "{name} 의 형식이 시각화에서 지원되지 않음",
+    "evalFailed": "{name} 평가 실패",
+    "unbound": "{name} 미바인딩",
+    "unknown": "{name} 평가 불가"
+  },
+  "duration": {
+    "seconds": "{value}초",
+    "minutes": "{value}분",
+    "hours": "{value}시간",
+    "days": "{value}일"
+  },
+  "summary": {
+    "variables": "변수 {names}의",
+    "constantExpression": "상수 표현식",
+    "polynomialOfDegree": "{degree}차 다항식",
+    "withFunctions": "({names} 함수 포함)",
+    "domains": "[{names}]",
+    "chemicalFormula": "화학식",
+    "chemicalEquation": "화학 반응식",
+    "reversibleChemicalEquation": "가역 화학 반응식",
+    "domainNames": {
+      "arithmetic": "산술",
+      "polynomial": "다항식",
+      "rational": "유리식",
+      "trigonometric": "삼각함수",
+      "exponential": "지수함수",
+      "logarithmic": "로그함수",
+      "calculus": "미적분",
+      "linear-algebra": "선형대수",
+      "statistics": "통계",
+      "chemistry": "화학"
+    },
+    "listSeparator": ", "
+  }
+}

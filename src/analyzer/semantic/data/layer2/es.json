@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "Es la base de una potencia situada en el denominador. Si es una variable, cuanto más crece más se reduce el valor de toda la función."
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "Es el grado de la potencia del denominador. Cuanto mayor es el exponente, más rápido crece el denominador y más se reduce el valor total."
+  },
+  "sum.body>frac.denominator": {
+    "role": "Denominador de la serie",
+    "description": "Es el denominador de cada término de la serie. Si crece rápidamente, es probable que la serie converja."
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "Exponente de la serie p",
+    "description": "Es el exponente de la potencia del denominador de la serie. Si es mayor que 1, la serie converge (criterio de la serie p)."
+  },
+  "sum.body>frac.numerator": {
+    "role": "Numerador de la serie",
+    "description": "Es el numerador de cada término de la serie."
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "Es una integral impropia que empieza en el infinito negativo. Solo converge si el integrando decrece lo bastante rápido."
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "El exponente es el numerador de una fracción. Cuando el exponente completo es fraccionario, representa una raíz."
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "Es el denominador del exponente. Si el denominador es n, equivale a la raíz n-ésima."
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "Numerador anidado",
+    "description": "Hay una fracción anidada dentro de otra fracción. Representa una relación de proporciones compleja."
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "Denominador anidado",
+    "description": "Hay otra fracción dentro del denominador. Al simplificar el conjunto se puede convertir en una multiplicación."
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "Es el numerador de la fracción que se integra."
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "Es el denominador de la fracción que se integra. Puede ser útil descomponerlo en fracciones parciales."
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "Es el numerador de la fracción dentro del límite. Si tiende a 0 o a infinito a la vez que el denominador, se puede aplicar la regla de L'Hôpital."
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "Es el denominador de la fracción dentro del límite. Si tiende a 0 o a infinito a la vez que el numerador, se puede aplicar la regla de L'Hôpital."
+  }
+}

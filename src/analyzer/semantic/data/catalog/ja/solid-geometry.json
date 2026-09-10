@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "球の体積",
+    "oneLiner": "半径の3乗に円周率と3分の4を掛けて球の体積を求める公式",
+    "description": "球の体積は、半径を3回掛けた値に円周率(パイ)と3分の4を掛けたものです。バスケットボールのように完全に丸い物体が占める空間の大きさを求めるときに使います。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "V": { "role": "体積", "description": "球が占める空間の大きさです。", "kind": "output" },
+      "\\frac{4}{3}": { "role": "比例定数", "description": "球の体積を決める固定された係数です。", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "円周率", "description": "円周を直径で割った値で、およそ3.14159です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "球の中心から表面までの距離です。", "kind": "input" },
+      "r^3": { "role": "半径の3乗", "description": "半径を3回掛けた値です。体積は3次元の量なので3乗します。", "kind": "input" }
+    },
+    "realWorldExamples": ["バスケットボールの体積を計算する", "地球の体積をおおまかに求める", "ビー玉の大きさを比べる"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "球の表面積",
+    "oneLiner": "半径の2乗に円周率と4を掛けて球の表面積を求める公式",
+    "description": "球の表面積は、半径の2乗に円周率と4を掛けた値です。同じ半径を持つ円の面積のちょうど4倍になります。ボールをペンキで塗るときに必要な面積が、まさにこの表面積です。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "S": { "role": "表面積", "description": "球の表面全体の面積です。", "kind": "output" },
+      "4": { "role": "定数", "description": "球の表面積が同じ半径の円の面積の4倍であることを表します。", "kind": "constant", "value": 4 },
+      "\\pi": { "role": "円周率", "description": "円周を直径で割った値で、およそ3.14159です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "球の中心から表面までの距離です。", "kind": "input" },
+      "r^2": { "role": "半径の2乗", "description": "半径を2回掛けた値です。", "kind": "input" }
+    },
+    "realWorldExamples": ["サッカーボールの革の合計の面積", "地球儀の表面に紙を貼るときに必要な量"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "円柱の体積",
+    "oneLiner": "底面である円の面積に高さを掛けて円柱の体積を求める公式",
+    "description": "円柱の体積は、底面の面積(円の面積)に高さを掛けた値です。丸い底面が高さのぶんだけ積み上がった形だと考えるとわかりやすくなります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "V": { "role": "体積", "description": "円柱が占める空間の大きさです。", "kind": "output" },
+      "\\pi": { "role": "円周率", "description": "円周を直径で割った値で、およそ3.14159です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "円柱の底面の円の半径です。", "kind": "input" },
+      "r^2": { "role": "半径の2乗", "description": "半径を2回掛けた値です。底面の面積を決めます。", "kind": "input" },
+      "h": { "role": "高さ", "description": "円柱の上下の底面の間の距離です。", "kind": "input" }
+    },
+    "realWorldExamples": ["飲み物の缶に入る量を計算する", "円筒形の水タンクの容量"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "円柱の表面積",
+    "oneLiner": "二つの底面と側面の面積を合わせて円柱の表面積を求める公式",
+    "description": "円柱の表面積は、上下の二つの円の面積と側面の面積を合わせた値です。側面を開くと長方形になり、その横が円周、縦が高さにあたります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "S": { "role": "表面積", "description": "円柱の表面全体の面積です。", "kind": "output" },
+      "2": { "role": "定数", "description": "共通因数としてくくり出された係数です。", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "円周率", "description": "円周を直径で割った値で、およそ3.14159です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "円柱の底面の円の半径です。", "kind": "input" },
+      "h": { "role": "高さ", "description": "円柱の上下の底面の間の距離です。", "kind": "input" }
+    },
+    "realWorldExamples": ["飲み物の缶のラベルの面積を計算する", "円筒形のギフトボックスを包装紙で包むときに必要な量"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "円錐の体積",
+    "oneLiner": "底面である円の面積に高さを掛けて3で割り、円錐の体積を求める公式",
+    "description": "円錐の体積は、底面の面積に高さを掛けて3で割った値です。同じ底面と高さを持つ円柱のちょうど3分の1になります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "V": { "role": "体積", "description": "円錐が占める空間の大きさです。", "kind": "output" },
+      "\\frac{1}{3}": { "role": "3分の1", "description": "円錐の体積が、底面と高さの等しい円柱の3分の1であることを表します。", "kind": "constant", "value": 0.33333333 },
+      "\\pi": { "role": "円周率", "description": "円周を直径で割った値で、およそ3.14159です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "円錐の底面の円の半径です。", "kind": "input" },
+      "h": { "role": "高さ", "description": "円錐の頂点から底面までの垂直な距離です。", "kind": "input" }
+    },
+    "realWorldExamples": ["アイスクリームのコーンに入る量を計算する", "とんがり帽子の体積"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "円錐の表面積",
+    "oneLiner": "底面の円の面積と側面の面積を合わせて円錐の表面積を求める公式",
+    "description": "円錐の表面積は、底面の円の面積と側面(扇形)の面積を合わせた値です。側面を開くと扇形になり、その面積は半径と母線(斜面の長さ)の積に円周率を掛けたものです。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "S": { "role": "表面積", "description": "円錐の表面全体の面積です。", "kind": "output" },
+      "\\pi": { "role": "円周率", "description": "円周を直径で割った値で、およそ3.14159です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "円錐の底面の円の半径です。", "kind": "input" },
+      "l": { "role": "母線", "description": "円錐の頂点から底面の縁までの斜面の長さです。", "kind": "input" }
+    },
+    "realWorldExamples": ["とんがり帽子に必要な紙の面積", "円錐形のテントの布の面積を計算する"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "直方体の体積",
+    "oneLiner": "横・縦・高さをすべて掛けて直方体の体積を求める公式",
+    "description": "直方体の体積は、横と縦と高さをすべて掛けた値です。底面である長方形の面積に高さを掛けることと同じで、箱の中に単位立方体がいくつ入るかを数えることにあたります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "V": { "role": "体積", "description": "直方体が占める空間の大きさです。", "kind": "output" },
+      "l": { "role": "横", "description": "直方体の横の長さです。", "kind": "input" },
+      "w": { "role": "縦", "description": "直方体の縦の長さです。", "kind": "input" },
+      "h": { "role": "高さ", "description": "直方体の高さです。", "kind": "input" }
+    },
+    "realWorldExamples": ["宅配便の箱の体積を計算する", "プールに入る水の量", "冷蔵庫の内部の容量をおおまかに求める"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "直方体の表面積",
+    "oneLiner": "3組の面の面積を足して2倍し、直方体の表面積を求める公式",
+    "description": "直方体の表面積は、たがいに異なる三つの面の面積を足して2を掛けた値です。直方体には向かい合う面が3組あり、同じ組の面どうしは面積が等しいので、3種類の面を足して2倍します。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "S": { "role": "表面積", "description": "直方体の表面全体の面積です。", "kind": "output" },
+      "2": { "role": "定数", "description": "向かい合う面が3組あるので2を掛けます。", "kind": "constant", "value": 2 },
+      "l": { "role": "横", "description": "直方体の横の長さです。", "kind": "input" },
+      "w": { "role": "縦", "description": "直方体の縦の長さです。", "kind": "input" },
+      "h": { "role": "高さ", "description": "直方体の高さです。", "kind": "input" },
+      "lw": { "role": "上面と下面", "description": "横と縦を掛けた面の面積です。", "kind": "output" },
+      "lh": { "role": "前面と背面", "description": "横と高さを掛けた面の面積です。", "kind": "output" },
+      "wh": { "role": "側面", "description": "縦と高さを掛けた面の面積です。", "kind": "output" }
+    },
+    "realWorldExamples": ["ギフトボックスを包装紙で包むときに必要な量", "宅配便の箱の外側の面積を計算する"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "正四面体の体積",
+    "oneLiner": "1辺の長さの3乗にルート2割る12を掛けて正四面体の体積を求める公式",
+    "description": "正四面体の体積は、1辺の長さを3乗した値にルート2割る12を掛けたものです。正四面体は四つの面がすべて同じ正三角形である立体で、もっとも単純な正多面体です。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "V": { "role": "体積", "description": "正四面体が占める空間の大きさです。", "kind": "output" },
+      "\\frac{\\sqrt{2}}{12}": { "role": "比例定数", "description": "正四面体の幾何学的な構造から出てくる固定された係数です。", "kind": "constant", "value": 0.11785113 },
+      "a": { "role": "辺の長さ", "description": "正四面体の1辺の長さです。すべての辺が等しくなっています。", "kind": "input" },
+      "a^3": { "role": "辺の3乗", "description": "辺の長さを3回掛けた値です。", "kind": "input" }
+    },
+    "realWorldExamples": ["ピラミッド形のチョコレートの体積", "正四面体のサイコロ(D4)の大きさを計算する"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "角錐の体積",
+    "oneLiner": "底面の面積に高さを掛けて3で割り、角錐の体積を求める公式",
+    "description": "角錐の体積は、底面の面積に高さを掛けて3で割った値です。同じ底面と高さを持つ角柱のちょうど3分の1になります。エジプトのピラミッドのように、底面が多角形で頂上がとがった立体に使います。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "V": { "role": "体積", "description": "角錐が占める空間の大きさです。", "kind": "output" },
+      "\\frac{1}{3}": { "role": "3分の1", "description": "角錐の体積が、底面と高さの等しい角柱の3分の1であることを表します。", "kind": "constant", "value": 0.33333333 },
+      "B": { "role": "底面の面積", "description": "角錐の底面(多角形)の面積です。", "kind": "input" },
+      "h": { "role": "高さ", "description": "角錐の頂点から底面までの垂直な距離です。", "kind": "input" }
+    },
+    "realWorldExamples": ["エジプトのピラミッドの体積をおおまかに求める", "ピラミッド形のテントの内部の空間を計算する"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}

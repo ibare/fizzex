@@ -1,0 +1,72 @@
+{
+  "direct-proportion": {
+    "name": "Perbandingan senilai",
+    "oneLiner": "Hubungan ketika satu kuantitas bertambah, kuantitas lain ikut bertambah dengan rasio yang sama",
+    "description": "Perbandingan senilai y = kx adalah hubungan ketika x menjadi 2 kali lipat, y juga menjadi 2 kali lipat, dan ketika x menjadi 3 kali lipat, y juga menjadi 3 kali lipat. Grafiknya berupa garis lurus yang melalui titik asal, dengan k sebagai konstanta perbandingan.",
+    "field": "Aljabar",
+    "significance": "Menyatakan hubungan perbandingan yang paling dasar dan, sebagai kasus khusus fungsi linear (dengan titik potong sumbu y sama dengan 0), menjadi titik awal seluruh pembelajaran perbandingan.",
+    "elementMeanings": {
+      "y": { "role": "Variabel terikat", "description": "Nilai hasil yang ditentukan oleh x.", "kind": "output" },
+      "k": { "role": "Konstanta perbandingan", "description": "Rasio tetap antara x dan y. Dapat dicari dengan k = y/x.", "kind": "input" },
+      "x": { "role": "Variabel bebas", "description": "Nilai masukan yang ditentukan secara bebas.", "kind": "input" }
+    },
+    "realWorldExamples": ["Hubungan antara banyak apel dan harganya ketika satu apel berharga 500 rupiah", "Hubungan antara waktu dan jarak ketika berlari dengan kecepatan tetap"],
+    "relatedFormulas": ["linear-function", "inverse-proportion"]
+  },
+  "inverse-proportion": {
+    "name": "Perbandingan berbalik nilai",
+    "oneLiner": "Hubungan ketika satu kuantitas bertambah, kuantitas lain berkurang dengan rasio yang sama",
+    "description": "Perbandingan berbalik nilai y = k/x adalah hubungan ketika x menjadi 2 kali lipat, y menjadi setengahnya, dan ketika x menjadi 3 kali lipat, y menjadi sepertiganya. Grafiknya berbentuk hiperbola yang mendekati sumbu x dan sumbu y tanpa batas, tetapi tidak pernah menyentuhnya.",
+    "field": "Aljabar",
+    "significance": "Menyatakan hubungan yang menjaga hasil kali tetap, dan menjadi dasar matematis berbagai gejala seperti hukum Boyle dalam fisika serta hubungan antara pekerjaan dan waktu.",
+    "elementMeanings": {
+      "y": { "role": "Variabel terikat", "description": "Nilai hasil yang ditentukan oleh x.", "kind": "output" },
+      "k": { "role": "Konstanta perbandingan", "description": "Nilai hasil kali x dan y yang selalu tetap. Dapat dicari dengan k = xy.", "kind": "input" },
+      "x": { "role": "Variabel bebas", "description": "Nilai masukan yang tidak boleh 0.", "kind": "input" }
+    },
+    "realWorldExamples": ["Hubungan ketika menempuh jarak yang sama, makin cepat lajunya makin singkat waktunya", "Hubungan pada persegi panjang berluas sama, makin panjang sisi mendatarnya makin pendek sisi tegaknya"],
+    "relatedFormulas": ["direct-proportion", "speed-formula"]
+  },
+  "percentage": {
+    "name": "Persentase",
+    "oneLiner": "Besar bagian ketika keseluruhan dianggap bernilai 100",
+    "description": "Persentase p = (bagian/keseluruhan) x 100 menyatakan berapa besar porsi suatu kuantitas terhadap keseluruhan dengan patokan 100. Bentuk ini memakai lambang persen (%) dan memudahkan perbandingan serta komunikasi.",
+    "field": "Aritmetika",
+    "significance": "Cara menyatakan rasio yang paling luas dipakai dalam kehidupan sehari-hari, seperti potongan harga, suku bunga, nilai ujian, dan statistik.",
+    "elementMeanings": {
+      "p": { "role": "Persentase", "description": "Nilai rasio ketika keseluruhan dianggap 100. Satuannya %.", "kind": "output", "unit": "%" },
+      "부분": { "role": "Kuantitas yang dibandingkan", "description": "Besar bagian dari keseluruhan yang ingin diketahui.", "kind": "input" },
+      "전체": { "role": "Kuantitas acuan", "description": "Besar keseluruhan yang setara dengan 100%.", "kind": "input" }
+    },
+    "realWorldExamples": ["Rasio banyak soal yang dijawab benar dalam ujian (nilai 80 = 80%)", "Menghitung besar potongan harga sebenarnya ketika barang diskon 30%"],
+    "relatedFormulas": ["direct-proportion"]
+  },
+  "speed-formula": {
+    "name": "Rumus kecepatan",
+    "oneLiner": "Rumus untuk mencari kelajuan dengan membagi jarak tempuh dengan waktu tempuh",
+    "description": "Rumus kecepatan v = d/t menyatakan jarak yang ditempuh sebuah benda dalam satu satuan waktu. Ini rumus fisika paling dasar yang merangkum hubungan antara tiga kuantitas: jarak, waktu, dan kecepatan.",
+    "field": "Fisika",
+    "significance": "Rumus paling mendasar untuk menjelaskan gerak, sekaligus titik awal untuk memahami hubungan jarak-waktu-kecepatan.",
+    "elementMeanings": {
+      "v": { "role": "Kecepatan", "description": "Jarak tempuh per satuan waktu. Contoh: 60 km per jam berarti menempuh 60 km dalam 1 jam.", "kind": "output", "unit": "m/s" },
+      "d": { "role": "Jarak", "description": "Panjang lintasan yang benar-benar ditempuh benda.", "kind": "input", "unit": "m" },
+      "t": { "role": "Waktu", "description": "Waktu yang diperlukan untuk menempuhnya.", "kind": "input", "unit": "s" }
+    },
+    "realWorldExamples": ["Mencari kecepatan per jam ketika mobil menempuh 120 km dalam 2 jam", "Menghitung catatan waktu dan kecepatan rata-rata pada lari 100 m"],
+    "relatedFormulas": ["direct-proportion", "inverse-proportion", "density-formula"]
+  },
+  "density-formula": {
+    "name": "Rumus massa jenis",
+    "oneLiner": "Rumus yang menyatakan seberapa rapat suatu zat mengisi satu satuan volume",
+    "description": "Rumus massa jenis mencari tingkat kerapatan suatu zat dengan membagi massa dengan volume. Pada ukuran yang sama, makin besar massanya makin tinggi massa jenisnya; pada massa yang sama, makin besar volumenya makin rendah massa jenisnya.",
+    "field": "Fisika",
+    "significance": "Besaran fisika dasar yang dipakai untuk membedakan jenis zat dan menentukan apakah suatu benda terapung atau tenggelam di air.",
+    "elementMeanings": {
+      "\\rho": { "role": "Massa jenis", "description": "Massa per satuan volume. Satuannya biasanya g/cm3 atau kg/m3.", "kind": "output", "unit": "kg/m3" },
+      "m": { "role": "Massa", "description": "Nilai yang menyatakan banyaknya materi pada sebuah benda. Satuannya g atau kg.", "kind": "input", "unit": "kg" },
+      "V": { "role": "Volume", "description": "Besar ruang yang ditempati benda. Satuannya cm3 atau m3.", "kind": "input", "unit": "m3" }
+    },
+    "realWorldExamples": ["Alasan bola besi tenggelam sedangkan balok kayu terapung di air", "Cara membedakan emas asli dan emas palsu melalui massa jenisnya"],
+    "relatedFormulas": ["speed-formula"]
+  }
+}

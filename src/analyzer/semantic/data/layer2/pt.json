@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "É a base de uma potência que está no denominador. Se for uma variável, quanto maior ela fica, mais o valor da função é reduzido."
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "É o grau da potência no denominador. Quanto maior o expoente, mais rápido o denominador cresce e mais o valor total diminui."
+  },
+  "sum.body>frac.denominator": {
+    "role": "denominador da série",
+    "description": "É o denominador de cada termo da série. Se cresce rápido, há boa chance de a série convergir."
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "expoente da p-série",
+    "description": "É o expoente da potência no denominador da série. Se for maior que 1, a série converge (critério da p-série)."
+  },
+  "sum.body>frac.numerator": {
+    "role": "numerador da série",
+    "description": "É o numerador de cada termo da série."
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "É uma integral imprópria que começa no infinito negativo. Ela só converge se o integrando decair rápido o bastante."
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "O expoente é o numerador de uma fração. Quando o expoente inteiro é fracionário, ele representa uma raiz."
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "É o denominador do expoente. Se o denominador for n, equivale à raiz n-ésima."
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "numerador aninhado",
+    "description": "Há uma fração dentro de outra fração. Isso representa uma relação de proporção mais complexa."
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "denominador aninhado",
+    "description": "Há outra fração dentro do denominador. Reorganizando o conjunto, é possível convertê-la em uma multiplicação."
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "É o numerador da fração que está sendo integrada."
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "É o denominador da fração que está sendo integrada. Decompor em frações parciais pode ser útil."
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "É o numerador da fração no limite. Se ele e o denominador tendem a 0 ou ao infinito ao mesmo tempo, pode-se aplicar a regra de L'Hôpital."
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "É o denominador da fração no limite. Se ele e o numerador tendem a 0 ou ao infinito ao mesmo tempo, pode-se aplicar a regra de L'Hôpital."
+  }
+}

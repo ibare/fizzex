@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "Fermer",
+    "closeWithKey": "Fermer (Esc)",
+    "hintHover": "Survol : explorer les parties",
+    "hintClick": "Clic : ajuster la valeur",
+    "hintEsc": "Esc : fermer",
+    "explore": "Explorer la formule",
+    "copyImage": "Copier l'image",
+    "reset": "Réinitialiser",
+    "similarTo": "Semblable à {name}",
+    "closeNamed": "Fermer {name}",
+    "domainGuard": "Garde de domaine : {reason}"
+  },
+  "bindingFault": {
+    "derivative": "Impossible de calculer la dérivée de {name}",
+    "domain": "{name} est en dehors du domaine",
+    "divergent": "{name} diverge",
+    "unsupported": "Cette visualisation ne prend pas en charge la forme de {name}",
+    "evalFailed": "Impossible de calculer {name}",
+    "unbound": "{name} n'a pas encore de valeur",
+    "unknown": "Impossible d'évaluer {name}"
+  },
+  "duration": {
+    "seconds": "{value} s",
+    "minutes": "{value} min",
+    "hours": "{value} h",
+    "days": "{value} j"
+  },
+  "summary": {
+    "variables": "en {names}",
+    "constantExpression": "Expression constante",
+    "polynomialOfDegree": "polynôme de degré {degree}",
+    "withFunctions": "(avec {names})",
+    "domains": "[{names}]",
+    "chemicalFormula": "Formule chimique",
+    "chemicalEquation": "Équation chimique",
+    "reversibleChemicalEquation": "Équation chimique réversible",
+    "domainNames": {
+      "arithmetic": "Arithmétique",
+      "polynomial": "Polynomiale",
+      "rational": "Rationnelle",
+      "trigonometric": "Trigonométrique",
+      "exponential": "Exponentielle",
+      "logarithmic": "Logarithmique",
+      "calculus": "Analyse",
+      "linear-algebra": "Algèbre linéaire",
+      "statistics": "Statistiques",
+      "chemistry": "Chimie"
+    },
+    "listSeparator": ", "
+  }
+}

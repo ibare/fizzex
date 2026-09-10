@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "The base of a power in the denominator. If it is a variable, larger values push the whole function down."
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "The degree of the power in the denominator. The larger the exponent, the faster the denominator grows and the more it suppresses the whole value."
+  },
+  "sum.body>frac.denominator": {
+    "role": "Series denominator",
+    "description": "The denominator of each term of the series. If it grows quickly, the series is likely to converge."
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "p-series exponent",
+    "description": "The exponent on the denominator of the series. If it is greater than 1, the series converges (p-series test)."
+  },
+  "sum.body>frac.numerator": {
+    "role": "Series numerator",
+    "description": "The numerator of each term of the series."
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "An improper integral starting at negative infinity. It converges only if the integrand decays fast enough."
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "The exponent is the numerator of a fraction. A fractional exponent as a whole denotes a root."
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "The denominator of the exponent. A denominator of n is the same as an nth root."
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "Nested numerator",
+    "description": "A fraction is nested inside another fraction. It expresses a compound ratio."
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "Nested denominator",
+    "description": "There is another fraction inside the denominator. Simplifying it turns the division into a multiplication."
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "The numerator of the fraction being integrated."
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "The denominator of the fraction being integrated. Partial fraction decomposition may help here."
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "The numerator of the fraction inside the limit. If it and the denominator both go to 0 or infinity, l'Hôpital's rule applies."
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "The denominator of the fraction inside the limit. If it and the numerator both go to 0 or infinity, l'Hôpital's rule applies."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "إغلاق",
+    "closeWithKey": "إغلاق (Esc)",
+    "hintHover": "التمرير: استكشاف العناصر",
+    "hintClick": "النقر: ضبط القيمة",
+    "hintEsc": "Esc: إغلاق",
+    "explore": "استكشاف المعادلة",
+    "copyImage": "نسخ الصورة",
+    "reset": "إعادة تعيين",
+    "similarTo": "مشابه لـ {name}",
+    "closeNamed": "إغلاق {name}",
+    "domainGuard": "حارس المجال: {reason}"
+  },
+  "bindingFault": {
+    "derivative": "تعذّر حساب مشتقة {name}",
+    "domain": "قيمة {name} خارج المجال",
+    "divergent": "قيمة {name} تتباعد",
+    "unsupported": "شكل {name} غير مدعوم في هذا التمثيل",
+    "evalFailed": "تعذّر حساب {name}",
+    "unbound": "لا توجد قيمة لـ {name} بعد",
+    "unknown": "لا يمكن حساب {name}"
+  },
+  "duration": {
+    "seconds": "{value} ث",
+    "minutes": "{value} د",
+    "hours": "{value} س",
+    "days": "{value} ي"
+  },
+  "summary": {
+    "variables": "بالمتغيرات {names}",
+    "constantExpression": "تعبير ثابت",
+    "polynomialOfDegree": "كثير حدود من الدرجة {degree}",
+    "withFunctions": "(مع {names})",
+    "domains": "[{names}]",
+    "chemicalFormula": "صيغة كيميائية",
+    "chemicalEquation": "معادلة كيميائية",
+    "reversibleChemicalEquation": "معادلة كيميائية عكوسة",
+    "domainNames": {
+      "arithmetic": "الحساب",
+      "polynomial": "كثيرات الحدود",
+      "rational": "الدوال النسبية",
+      "trigonometric": "المثلثات",
+      "exponential": "الدوال الأسية",
+      "logarithmic": "اللوغاريتمات",
+      "calculus": "التفاضل والتكامل",
+      "linear-algebra": "الجبر الخطي",
+      "statistics": "الإحصاء",
+      "chemistry": "الكيمياء"
+    },
+    "listSeparator": "، "
+  }
+}

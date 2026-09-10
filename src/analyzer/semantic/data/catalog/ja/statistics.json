@@ -1,0 +1,191 @@
+{
+  "bayes-theorem": {
+    "name": "ベイズの定理",
+    "oneLiner": "新しい証拠が得られたときに事前確率を更新して事後確率を求める定理",
+    "description": "ベイズの定理は、条件付き確率の関係を使って事前確率を事後確率へ更新する公式です。新しいデータが観測されるたびに、これまでの信念を体系的に修正できるようにします。統計的推論、機械学習、意思決定理論の中心的な道具です。",
+    "discoverer": "トマス・ベイズ",
+    "field": "統計学",
+    "significance": "不確実さのもとでの推論を数学の形にまとめたもので、迷惑メールの判別、医療診断、機械学習など現代の応用分野の基礎になっています。",
+    "elementMeanings": {
+      "P(A|B)": { "role": "事後確率", "description": "事象 B が観測されたあとに事象 A が起こる確率です。", "kind": "output" },
+      "P(B|A)": { "role": "尤度", "description": "事象 A が真であるときに事象 B が観測される確率です。", "kind": "input" },
+      "P(A)": { "role": "事前確率", "description": "事象 B を観測する前に事象 A について持っていた信念です。", "kind": "input" },
+      "P(B)": { "role": "証拠の確率", "description": "事象 B が観測される全体の確率です。正規化定数の役割をします。", "kind": "input" }
+    },
+    "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
+  },
+  "normal-distribution": {
+    "name": "正規分布の確率密度関数",
+    "oneLiner": "平均を中心に釣鐘の形をした対称な曲線になる確率分布",
+    "description": "正規分布は、平均と標準偏差という二つのパラメータで決まる連続的な確率分布です。確率密度関数は平均のところで最大になり、左右に対称に減っていく釣鐘の形を描きます。中心極限定理により、自然現象や測定値の分布を近似するもっとも重要な分布です。",
+    "discoverer": "カール・フリードリヒ・ガウス",
+    "field": "統計学",
+    "significance": "中心極限定理によってほとんどすべての統計的推論の基礎になり、自然科学でも社会科学でももっとも広く使われる確率分布です。",
+    "elementMeanings": {
+      "f(x)": { "role": "確率密度", "description": "点 x における確率密度の値です。確率そのものではなく、区間で積分して確率を求めます。", "kind": "output" },
+      "\\mu": { "role": "平均", "description": "分布の中心です。釣鐘型の曲線の頂点の位置にあたります。", "kind": "input" },
+      "\\sigma": { "role": "標準偏差", "description": "分布の広がりの度合いです。大きいほど曲線は平たくなります。", "kind": "input" },
+      "\\sigma^2": { "role": "分散", "description": "標準偏差の2乗です。データが平均からどれだけ散らばっているかを表します。", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "ガウス核", "description": "平均から離れるほど急激に小さくなる指数関数の部分です。", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "正規化定数", "description": "全体の面積が1になるようにする係数です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
+  },
+  "standard-deviation": {
+    "name": "標準偏差",
+    "oneLiner": "データが平均からどれだけ広がっているかを表す尺度",
+    "description": "標準偏差は、それぞれのデータと平均との差を2乗して平均を取り、その平方根をとった値です。分散の正の平方根であり、もとのデータと同じ単位になるので直感的に解釈できます。データの散らばりを表すもっとも基本的な統計量です。",
+    "field": "統計学",
+    "significance": "データのばらつきをもとの単位で測ることができ、品質管理や金融のリスク分析などで中心的に使われています。",
+    "elementMeanings": {
+      "\\sigma": { "role": "標準偏差", "description": "母集団の標準偏差です。データの広がりの度合いを表します。", "kind": "output" },
+      "x_i": { "role": "個々のデータの値", "description": "データの集まりのなかの i 番目の観測値です。", "kind": "input" },
+      "\\mu": { "role": "母平均", "description": "母集団の平均値です。標本の場合は標本平均を使います。", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "偏差の2乗", "description": "それぞれのデータが平均からどれだけ離れているかを2乗した値です。", "kind": "structural" },
+      "N": { "role": "データの個数", "description": "母集団のデータの総数です。", "kind": "input" },
+      "\\sqrt{}": { "role": "平方根", "description": "分散の平方根をとって、もとのデータと同じ単位に戻します。", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
+  },
+  "correlation-coefficient": {
+    "name": "相関係数",
+    "oneLiner": "二つの変数の間の線形な関係の強さと向きを-1から1の値で表すもの",
+    "description": "ピアソンの相関係数は、二つの変数の共分散をそれぞれの標準偏差の積で割った値です。1に近ければ強い正の線形関係、-1に近ければ強い負の線形関係、0に近ければ線形の関係が弱いことを意味します。二つの変数の結びつきをまとめる、もっとも基本的な統計量です。",
+    "discoverer": "カール・ピアソン",
+    "field": "統計学",
+    "significance": "変数どうしの関係を一つの数値にまとめ、回帰分析、金融のポートフォリオ理論、実験計画などの基礎を与えます。",
+    "elementMeanings": {
+      "r": { "role": "相関係数", "description": "ピアソンの相関係数です。-1から1までの値をとります。", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "共分散", "description": "X と Y がいっしょに変わる度合いを測ります。", "kind": "input" },
+      "\\sigma_X": { "role": "X の標準偏差", "description": "変数 X の広がりの度合いです。", "kind": "input" },
+      "\\sigma_Y": { "role": "Y の標準偏差", "description": "変数 Y の広がりの度合いです。", "kind": "input" },
+      "X": { "role": "一つ目の変数", "description": "相関を調べる一つ目の変数です。", "kind": "input" },
+      "Y": { "role": "二つ目の変数", "description": "相関を調べる二つ目の変数です。", "kind": "input" }
+    },
+    "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
+  },
+  "law-of-large-numbers": {
+    "name": "大数の法則",
+    "oneLiner": "標本の大きさが大きくなるほど標本平均が母平均に近づいていくという法則",
+    "description": "大数の法則は、独立で同じ分布に従う確率変数の標本平均が、標本の大きさを限りなく大きくすると母平均に収束することを保証します。弱い形と強い形の二つの版があり、統計的な推定の正しさを理論から支える根本的な定理です。",
+    "discoverer": "ヤコブ・ベルヌーイ",
+    "field": "統計学",
+    "significance": "標本調査が母集団について妥当な推論を与えられることを数学的に保証し、保険、賭け、実験科学の理論的な土台になっています。",
+    "elementMeanings": {
+      "\\bar{X}_n": { "role": "標本平均", "description": "n 個の観測値の算術平均です。", "kind": "output" },
+      "\\mu": { "role": "母平均", "description": "母集団の真の平均値です。標本平均が近づいていく目標になります。", "kind": "input" },
+      "n": { "role": "標本の大きさ", "description": "観測したデータの個数です。大きいほど標本平均は母平均に近づきます。", "kind": "input" },
+      "X_i": { "role": "個々の観測値", "description": "i 番目の独立な観測値です。すべて同じ分布に従います。", "kind": "input" },
+      "\\epsilon": { "role": "誤差の許容幅", "description": "標本平均と母平均の差がこの値の内側におさまる確率が1に近づきます。", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
+  },
+  "t-test": {
+    "name": "t検定統計量",
+    "oneLiner": "標本平均が母平均と有意に異なるかどうかを検定する統計量",
+    "description": "t検定統計量は、標本平均と帰無仮説の母平均との差を標準誤差で割った値です。母分散がわからないときに標本分散を代わりに使い、自由度に応じた t 分布に従います。小さな標本でも使えるため、実験研究や臨床試験でもっとも広く使われる仮説検定の方法です。",
+    "discoverer": "ウィリアム・ゴセット",
+    "field": "統計学",
+    "significance": "標本が小さい状況でも母平均について統計的に推論できるようにし、医学、心理学、教育学の研究で標準的な検定の方法になっています。",
+    "elementMeanings": {
+      "t": { "role": "t統計量", "description": "標本平均と母平均の差を標準誤差を単位として表した値です。", "kind": "output" },
+      "\\bar{x}": { "role": "標本平均", "description": "標本データの算術平均です。", "kind": "input" },
+      "\\mu": { "role": "母平均", "description": "帰無仮説で仮定する母集団の平均です。", "kind": "input" },
+      "s": { "role": "標本標準偏差", "description": "標本データから推定した標準偏差です。", "kind": "input" },
+      "\\sqrt{n}": { "role": "標本の大きさの平方根", "description": "標本の大きさ n の平方根です。標準誤差の計算に使われます。", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
+  },
+  "chi-squared": {
+    "name": "カイ二乗検定",
+    "oneLiner": "観測された度数と期待される度数の違いが統計的に有意かどうかを検定する統計量",
+    "description": "カイ二乗統計量は、それぞれのカテゴリで観測度数と期待度数の差を2乗し、期待度数で割って足し合わせた値です。適合度検定と独立性の検定に使われ、カテゴリデータを分析する代表的な方法です。自由度に応じたカイ二乗分布を基準にして有意かどうかを判断します。",
+    "discoverer": "カール・ピアソン",
+    "field": "統計学",
+    "significance": "カテゴリデータについて仮説検定を行えるようにし、アンケートの分析、遺伝学、品質管理で中心的に使われています。",
+    "elementMeanings": {
+      "\\chi^2": { "role": "カイ二乗統計量", "description": "観測値と期待値の差をまとめた検定統計量です。", "kind": "output" },
+      "O": { "role": "観測度数", "description": "実際に観測されたそれぞれのカテゴリの度数です。", "kind": "input" },
+      "E": { "role": "期待度数", "description": "帰無仮説が正しいときに期待されるそれぞれのカテゴリの度数です。", "kind": "input" },
+      "(O-E)^2": { "role": "偏差の2乗", "description": "観測値と期待値の差の2乗です。向きに関係なく偏差を積み上げます。", "kind": "structural" },
+      "\\Sigma": { "role": "総和の記号", "description": "すべてのカテゴリについて足し合わせる演算です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
+  },
+  "poisson-dist": {
+    "name": "ポアソン分布",
+    "oneLiner": "一定の時間や空間でまれな事象が起こる回数の確率分布",
+    "description": "ポアソン分布は、単位となる時間や空間のなかで平均発生率が一定である独立した事象の起こる回数をモデル化します。平均発生率という一つのパラメータで決まり、平均と分散が等しいという特徴があります。まれな事象の頻度を分析するのに広く使われる離散的な確率分布です。",
+    "discoverer": "シメオン・ドニ・ポアソン",
+    "field": "統計学",
+    "significance": "まれな事象の起こり方をモデル化し、保険の事故予測、通信のトラフィック分析、品質管理で中心的に使われています。",
+    "elementMeanings": {
+      "P(X=k)": { "role": "確率", "description": "事象がちょうど k 回起こる確率です。", "kind": "output" },
+      "\\lambda": { "role": "平均発生率", "description": "単位となる時間や空間のなかで事象が起こる平均の回数です。", "kind": "input" },
+      "k": { "role": "発生回数", "description": "注目している事象の起こる回数(0以上の整数)です。", "kind": "input" },
+      "e^{-\\lambda}": { "role": "正規化の因子", "description": "確率の合計が1になるようにする指数関数の部分です。", "kind": "structural" },
+      "k!": { "role": "k の階乗", "description": "k 個の事象の並び方の数を補正する階乗の値です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "binomial-dist": {
+    "name": "二項分布",
+    "oneLiner": "n 回の独立な試行で成功が k 回になる確率を求める分布",
+    "description": "二項分布は、成功する確率が p のベルヌーイ試行を n 回独立にくり返したときの、成功回数の確率分布です。組合せの数と成功・失敗の確率の積で、それぞれの結果の確率を計算します。n が十分に大きければ正規分布で、成功の確率がとても小さければポアソン分布で近似できます。",
+    "discoverer": "ヤコブ・ベルヌーイ",
+    "field": "統計学",
+    "significance": "成功か失敗かの二択の実験を表す基本のモデルであり、品質検査、医学の試験、世論調査の分析の理論的な基礎です。",
+    "elementMeanings": {
+      "P(X=k)": { "role": "確率", "description": "n 回の試行でちょうど k 回成功する確率です。", "kind": "output" },
+      "C(n,k)": { "role": "組合せの数", "description": "n 個から k 個を選ぶ場合の数です。n!/(k!(n-k)!) で表されます。", "kind": "structural" },
+      "p": { "role": "成功の確率", "description": "1回の試行で成功する確率です。", "kind": "input" },
+      "1-p": { "role": "失敗の確率", "description": "1回の試行で失敗する確率です。", "kind": "input" },
+      "n": { "role": "試行の回数", "description": "独立した試行の総数です。", "kind": "input" },
+      "k": { "role": "成功の回数", "description": "注目している成功の回数(0から n まで)です。", "kind": "input" }
+    },
+    "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "conditional-prob": {
+    "name": "条件付き確率",
+    "oneLiner": "ある事象が起こったという条件のもとで、別の事象が起こる確率",
+    "description": "条件付き確率は、事象 B がすでに起こったという条件のもとで事象 A が起こる確率を定めます。二つの事象の共通部分の確率を、条件となる事象の確率で割って計算します。ベイズの定理の土台であり、確率論と統計的推論の全体でもっとも根本的な考え方です。",
+    "field": "統計学",
+    "significance": "事象どうしの依存関係を数量として表し、ベイズ推論、マルコフ連鎖、意思決定理論の数学的な基礎になります。",
+    "elementMeanings": {
+      "P(A|B)": { "role": "条件付き確率", "description": "事象 B が与えられた条件のもとで事象 A が起こる確率です。", "kind": "output" },
+      "P(A \\cap B)": { "role": "共通部分の確率", "description": "事象 A と事象 B が同時に起こる確率です。", "kind": "input" },
+      "P(B)": { "role": "条件となる事象の確率", "description": "条件として与えられた事象 B の確率です。0であってはいけません。", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
+  },
+  "total-probability": {
+    "name": "全確率の公式",
+    "oneLiner": "たがいに排反な事象に分割されている場合に全体の確率を求める公式",
+    "description": "全確率の公式は、標本空間をたがいに排反で全体をおおう事象に分割したとき、ある事象の確率を、それぞれの分割についての条件付き確率の重み付き和として求めます。複雑な確率の問題を、いくつかの条件ごとの状況に分けて計算できるようにします。ベイズの定理の分母を計算するのに中心的に使われます。",
+    "field": "統計学",
+    "significance": "複雑な確率の計算を体系的に分解する道具であり、ベイズの定理と組み合わさって統計的推論の中心的な枠組みを作ります。",
+    "elementMeanings": {
+      "P(A)": { "role": "事象 A の確率", "description": "求めようとしている事象 A の全体の確率です。", "kind": "output" },
+      "P(A|B_i)": { "role": "条件付き確率", "description": "事象 B_i が与えられたときの事象 A の確率です。", "kind": "input" },
+      "P(B_i)": { "role": "分割された事象の確率", "description": "i 番目の分割された事象 B_i の確率です。", "kind": "input" },
+      "\\Sigma": { "role": "総和の記号", "description": "すべての分割された事象 B_i について足し合わせる演算です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["conditional-prob", "bayes-theorem"]
+  },
+  "covariance": {
+    "name": "共分散",
+    "oneLiner": "二つの確率変数がいっしょに変わる傾向の向きと大きさを測る値",
+    "description": "共分散は、二つの確率変数がそれぞれ自分の平均からずれた量の積の期待値です。正なら同じ向きに、負なら反対の向きに変わる傾向があることを表します。相関係数の土台であり、ポートフォリオ理論や多変量解析で中心的に使われます。",
+    "field": "統計学",
+    "significance": "変数どうしがともに変動する度合いを測り、ポートフォリオの分散の計算、主成分分析、多変量回帰の基礎を与えます。",
+    "elementMeanings": {
+      "\\text{Cov}(X,Y)": { "role": "共分散", "description": "X と Y がともに変動する度合いを表す値です。", "kind": "output" },
+      "E": { "role": "期待値の演算子", "description": "確率変数の期待値(平均)を求める演算です。", "kind": "structural" },
+      "X": { "role": "一つ目の確率変数", "description": "共分散を計算する一つ目の変数です。", "kind": "input" },
+      "Y": { "role": "二つ目の確率変数", "description": "共分散を計算する二つ目の変数です。", "kind": "input" },
+      "\\mu_X": { "role": "X の平均", "description": "確率変数 X の期待値(平均)です。", "kind": "input" },
+      "\\mu_Y": { "role": "Y の平均", "description": "確率変数 Y の期待値(平均)です。", "kind": "input" }
+    },
+    "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
+  }
+}

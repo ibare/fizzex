@@ -1,0 +1,164 @@
+{
+  "compound-interest": {
+    "name": "Juros compostos",
+    "oneLiner": "Modo de cálculo em que os juros incidem não só sobre o capital, mas também sobre os juros já acumulados",
+    "description": "Nos juros compostos, os juros passam a incidir sobre o capital acrescido dos juros anteriores, de modo que o patrimônio cresce exponencialmente com o tempo. O montante final varia conforme a frequência de capitalização (anual, mensal, diária etc.) e, quanto maior a frequência, maior o rendimento total. É o cálculo mais básico em poupança, empréstimos e análise de investimentos.",
+    "field": "Finanças",
+    "significance": "É o princípio central do crescimento patrimonial na poupança e no investimento de longo prazo, e a base do cálculo de juros de empréstimos, do planejamento da aposentadoria e da comparação de rendimentos.",
+    "elementMeanings": {
+      "A": { "role": "montante final", "description": "É o total do capital somado aos juros após certo período.", "kind": "output" },
+      "P": { "role": "capital inicial", "description": "É o valor inicialmente investido ou depositado.", "kind": "input" },
+      "r": { "role": "taxa de juros anual", "description": "É a taxa de juros ao ano (em forma decimal). Exemplo: 5% corresponde a 0,05.", "kind": "input" },
+      "n": { "role": "número de capitalizações por ano", "description": "É quantas vezes por ano os juros são calculados. Na capitalização mensal, é 12.", "kind": "input" },
+      "t": { "role": "prazo", "description": "É o prazo do investimento (em anos).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular o valor a receber no vencimento de uma aplicação com aportes mensais",
+      "Apurar o total de juros de um financiamento imobiliário",
+      "Comparar o efeito dos juros compostos em investimentos de longo prazo"
+    ],
+    "relatedFormulas": ["present-value", "annuity-pv", "rule-of-72"]
+  },
+  "present-value": {
+    "name": "Valor presente",
+    "oneLiner": "Valor de uma quantia futura convertido para o momento atual",
+    "description": "O valor presente é o conceito de converter fluxos de caixa futuros em um valor equivalente no momento atual, aplicando uma taxa de desconto. Baseia-se no princípio do valor do dinheiro no tempo, segundo o qual dinheiro no futuro vale menos do que hoje. É usado de forma central em decisões de investimento, na avaliação de títulos e na avaliação de negócios.",
+    "field": "Finanças",
+    "significance": "Ao tornar comparáveis fluxos de caixa de momentos diferentes, é o alicerce da avaliação de investimentos, do cálculo do valor de empresas e das decisões financeiras.",
+    "elementMeanings": {
+      "PV": { "role": "valor presente", "description": "É o valor equivalente, no momento atual, de uma quantia futura.", "kind": "output" },
+      "FV": { "role": "valor futuro", "description": "É a quantia a ser recebida ou paga em determinado momento no futuro.", "kind": "input" },
+      "r": { "role": "taxa de desconto", "description": "É a taxa de juros aplicada para trazer o fluxo de caixa futuro ao presente.", "kind": "input" },
+      "n": { "role": "prazo", "description": "É o número de períodos entre o momento atual e a ocorrência do fluxo de caixa futuro.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular o preço justo de um título de renda fixa",
+      "Avaliar o valor do investimento em um projeto empresarial (análise de VPL)",
+      "Comparar o recebimento à vista de um prêmio de loteria com o recebimento em parcelas"
+    ],
+    "relatedFormulas": ["compound-interest", "annuity-pv", "black-scholes"]
+  },
+  "black-scholes": {
+    "name": "Modelo de Black-Scholes",
+    "oneLiner": "Modelo de precificação de opções que calcula o preço teórico de uma opção de compra europeia",
+    "description": "O modelo de Black-Scholes calcula o preço justo de uma opção europeia a partir do preço do ativo subjacente, do preço de exercício, do prazo até o vencimento, da taxa livre de risco e da volatilidade. É deduzido pelo princípio da ausência de arbitragem, sob a hipótese de que o ativo subjacente segue um movimento browniano geométrico. É a base teórica do mercado moderno de derivativos e o modelo central da engenharia financeira.",
+    "discoverer": "Fischer Black, Myron Scholes",
+    "field": "Finanças",
+    "significance": "Ao oferecer uma referência teórica para o preço das opções, impulsionou o surgimento e o desenvolvimento do mercado de derivativos; é a fórmula que rendeu o Prêmio Nobel de Economia de 1997.",
+    "elementMeanings": {
+      "C": { "role": "preço da opção de compra", "description": "É o preço teórico atual de uma opção de compra europeia.", "kind": "output" },
+      "S": { "role": "preço atual do ativo subjacente", "description": "É o preço de mercado atual do ativo que serve de base à opção.", "kind": "input" },
+      "K": { "role": "preço de exercício", "description": "É o preço combinado pelo qual o titular da opção pode comprar o ativo subjacente.", "kind": "input" },
+      "r": { "role": "taxa livre de risco", "description": "É a taxa de retorno sem risco até o vencimento.", "kind": "input" },
+      "T": { "role": "prazo até o vencimento", "description": "É o tempo que falta até o vencimento da opção (em anos).", "kind": "input" },
+      "N(d)": { "role": "função de distribuição acumulada normal padrão", "description": "É o valor da função de distribuição acumulada da normal padrão. Funciona como um peso probabilístico.", "kind": "structural" },
+      "d_1": { "role": "primeiro parâmetro", "description": "É a relação entre o preço do ativo subjacente e o preço de exercício, ajustada pela volatilidade.", "kind": "output" },
+      "d_2": { "role": "segundo parâmetro", "description": "É d_1 menos o termo de volatilidade e está relacionado à probabilidade de exercício.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calcular o preço teórico de uma opção de compra de ações",
+      "Extrair a volatilidade implícita a partir dos preços do mercado de opções",
+      "Gerenciar o risco de uma carteira de derivativos"
+    ],
+    "relatedFormulas": ["present-value", "capm", "sharpe-ratio"]
+  },
+  "capm": {
+    "name": "Modelo de precificação de ativos financeiros (CAPM)",
+    "oneLiner": "Modelo que calcula o retorno esperado de um ativo em função do seu risco sistemático",
+    "description": "O CAPM explica que o retorno esperado de um ativo individual é igual à taxa livre de risco somada ao prêmio de risco de mercado multiplicado pelo beta. O beta indica a sensibilidade do ativo às oscilações do mercado como um todo. É o modelo central da hipótese dos mercados eficientes, segundo a qual apenas o risco sistemático, não diversificável, é remunerado.",
+    "discoverer": "William Sharpe",
+    "field": "Finanças",
+    "significance": "Ao quantificar a relação entre risco e retorno esperado, é o quadro padrão da precificação de ativos, da estimativa do custo de capital e da avaliação de desempenho de carteiras.",
+    "elementMeanings": {
+      "E(R_i)": { "role": "retorno esperado do ativo", "description": "É o retorno esperado do ativo individual i.", "kind": "output" },
+      "R_f": { "role": "taxa livre de risco", "description": "É o retorno de um investimento sem risco (títulos públicos, por exemplo).", "kind": "input" },
+      "\\beta_i": { "role": "beta", "description": "É o indicador de risco sistemático do ativo i, isto é, sua sensibilidade às variações do retorno de mercado.", "kind": "input" },
+      "E(R_m)": { "role": "retorno esperado do mercado", "description": "É o retorno esperado da carteira de mercado como um todo.", "kind": "input" },
+      "E(R_m) - R_f": { "role": "prêmio de risco de mercado", "description": "É o retorno adicional esperado do investimento no mercado em relação ao ativo sem risco.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Estimar a taxa de desconto (custo de capital) de um novo projeto de investimento",
+      "Avaliar o retorno excedente obtido por um gestor de fundos",
+      "Calcular o retorno esperado justo de uma ação"
+    ],
+    "relatedFormulas": ["sharpe-ratio", "black-scholes", "present-value"]
+  },
+  "sharpe-ratio": {
+    "name": "Índice de Sharpe",
+    "oneLiner": "Indicador que avalia o desempenho de um investimento medindo o retorno excedente por unidade de risco",
+    "description": "O índice de Sharpe é o retorno excedente — o retorno da carteira menos a taxa livre de risco — dividido pelo desvio padrão do retorno da carteira. Quanto maior o valor, maior foi o retorno obtido em relação ao risco assumido. É o indicador mais usado para comparar o desempenho ajustado ao risco de diferentes estratégias de investimento ou fundos.",
+    "discoverer": "William Sharpe",
+    "field": "Finanças",
+    "significance": "Permite comparar de forma justa o desempenho de investimentos em relação ao risco e é usado como padrão na avaliação de fundos e nas decisões de alocação de ativos.",
+    "elementMeanings": {
+      "S": { "role": "índice de Sharpe", "description": "É o indicador de retorno ajustado ao risco. Quanto maior, mais eficiente é o investimento.", "kind": "output" },
+      "R_p": { "role": "retorno da carteira", "description": "É o retorno realizado ou esperado da carteira de investimentos.", "kind": "input" },
+      "R_f": { "role": "taxa livre de risco", "description": "É o retorno de ativos sem risco, como títulos públicos.", "kind": "input" },
+      "\\sigma_p": { "role": "desvio padrão da carteira", "description": "É a volatilidade do retorno da carteira. Representa o risco total.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Comparar o desempenho entre fundos mútuos",
+      "Avaliar o retorno ajustado ao risco de um fundo de investimento alternativo",
+      "Julgar a eficiência de uma estratégia de alocação de ativos"
+    ],
+    "relatedFormulas": ["capm", "standard-deviation"]
+  },
+  "annuity-pv": {
+    "name": "Valor presente de uma anuidade",
+    "oneLiner": "Soma dos valores presentes de um pagamento fixo feito periodicamente durante certo prazo",
+    "description": "A fórmula do valor presente de uma anuidade calcula o valor total, no momento atual, de uma anuidade comum que paga a mesma quantia a cada período. Em vez de descontar cada pagamento separadamente, é possível obter tudo de uma vez pela fórmula da soma de uma progressão geométrica. É indispensável no cálculo de prestações de empréstimos, no planejamento de aposentadorias e na avaliação de contratos de arrendamento.",
+    "field": "Finanças",
+    "significance": "Ao calcular com eficiência o valor de fluxos de caixa periódicos, é o padrão prático na avaliação de empréstimos, aposentadorias e títulos.",
+    "elementMeanings": {
+      "PV": { "role": "valor presente", "description": "É o valor equivalente, no momento atual, de todos os pagamentos da anuidade.", "kind": "output" },
+      "PMT": { "role": "pagamento por período", "description": "É a quantia fixa paga a cada período.", "kind": "input" },
+      "r": { "role": "taxa de desconto por período", "description": "É a taxa de desconto aplicada a um período.", "kind": "input" },
+      "n": { "role": "número total de períodos", "description": "É o número de períodos durante os quais a anuidade é paga.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular a prestação mensal de um financiamento imobiliário",
+      "Apurar o valor equivalente ao receber a aposentadoria de uma só vez",
+      "Comparar o custo total de contratos de arrendamento de automóveis"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest"]
+  },
+  "rule-of-72": {
+    "name": "Regra dos 72",
+    "oneLiner": "Regra que estima rapidamente o tempo necessário para o capital investido dobrar",
+    "description": "A regra dos 72 é o cálculo simplificado segundo o qual, dividindo 72 pela taxa de juros anual (em %), obtém-se aproximadamente em quantos anos o capital dobra. Permite entender de forma intuitiva o efeito dos juros compostos e é especialmente precisa para taxas na faixa de 6% a 10%. É usada na prática para decisões financeiras rápidas e comparações de investimentos.",
+    "field": "Finanças",
+    "significance": "É uma ferramenta financeira prática que permite estimar intuitivamente a velocidade de crescimento de um investimento sem cálculos complexos de juros compostos.",
+    "elementMeanings": {
+      "t": { "role": "tempo até dobrar", "description": "É o tempo aproximado (em anos) necessário para o capital dobrar.", "kind": "output" },
+      "r": { "role": "taxa de juros anual", "description": "É o retorno anual (em porcentagem). Exemplo: para 8% ao ano, r = 8.", "kind": "input" },
+      "72": { "role": "constante", "description": "É a constante aproximada relacionada a ln(2). Serve para estimar o tempo de duplicação no crescimento composto.", "kind": "constant", "value": 72 }
+    },
+    "realWorldExamples": [
+      "Calcular rapidamente que, a 6% ao ano, o capital dobra em cerca de 12 anos",
+      "Estimar em quanto tempo os preços dobram com uma inflação de 3%",
+      "Comparar a velocidade de crescimento de produtos de investimento com taxas diferentes"
+    ],
+    "relatedFormulas": ["compound-interest", "present-value"]
+  },
+  "duration": {
+    "name": "Duration",
+    "oneLiner": "Prazo médio ponderado dos fluxos de caixa de um título, usado para medir a sensibilidade do preço às variações de juros",
+    "description": "A duration é a média dos instantes em que ocorrem os fluxos de caixa de um título, ponderada pela participação do valor presente de cada fluxo. Também chamada de duration de Macaulay, é a medida de risco central que indica o quanto o preço do título varia quando os juros mudam. É indispensável na gestão de carteiras de renda fixa e no desenho de estratégias de imunização.",
+    "discoverer": "Frederick Macaulay",
+    "field": "Finanças",
+    "significance": "Ao quantificar o risco de juros, é a ferramenta central na formulação de estratégias de investimento em renda fixa, no casamento entre ativos e passivos e na imunização de carteiras.",
+    "elementMeanings": {
+      "D": { "role": "duration", "description": "É o prazo médio dos fluxos de caixa ponderado pelo valor presente (em anos).", "kind": "output" },
+      "t": { "role": "instante do fluxo de caixa", "description": "É o momento (em anos) em que cada fluxo de caixa ocorre.", "kind": "input" },
+      "PV(CF_t)": { "role": "valor presente do fluxo de caixa", "description": "É o valor presente, já descontado, do fluxo de caixa que ocorre no instante t.", "kind": "input" },
+      "P": { "role": "preço do título", "description": "É a soma dos valores presentes de todos os fluxos de caixa, isto é, o preço de mercado do título.", "kind": "input" },
+      "\\Sigma": { "role": "símbolo de somatório", "description": "É a operação que soma sobre todos os instantes de fluxo de caixa.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Prever a perda de uma carteira de renda fixa numa alta de juros",
+      "Formular a estratégia de casamento entre ativos e passivos de um fundo de pensão",
+      "Comparar a sensibilidade a juros de títulos diferentes"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest", "capm"]
+  }
+}

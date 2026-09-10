@@ -1,0 +1,101 @@
+{
+  "de-morgan": {
+    "name": "De Morgan's laws",
+    "oneLiner": "The laws stating that the negation of a conjunction is the disjunction of the negations, and vice versa",
+    "description": "De Morgan's laws establish that negation swaps conjunction and disjunction. They are essential for simplifying complicated logical expressions or rewriting them into equivalent forms, and they apply in exactly the same way in set theory as the relationship between the complement of a union and of an intersection.",
+    "discoverer": "Augustus De Morgan",
+    "field": "Logic",
+    "significance": "They are the key rewriting rules used in logic circuit design, in optimizing conditionals in programming, and in the basic proofs of set theory.",
+    "elementMeanings": {
+      "A": { "role": "First proposition", "description": "The first proposition or set making up the expression.", "kind": "input" },
+      "B": { "role": "Second proposition", "description": "The second proposition or set making up the expression.", "kind": "input" },
+      "\\neg": { "role": "Negation operator", "description": "The operator that flips a proposition between true and false.", "kind": "structural" },
+      "\\wedge": { "role": "Conjunction (AND)", "description": "The operation that is true only when both propositions are true.", "kind": "structural" },
+      "\\vee": { "role": "Disjunction (OR)", "description": "The operation that is true when at least one of the propositions is true.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Simplifying the negation of a complicated if condition in programming",
+      "Converting between NAND and NOR gates in digital logic circuit design",
+      "Optimizing a NOT (A AND B) condition in a database query"
+    ],
+    "relatedFormulas": ["boolean-complement"]
+  },
+  "inclusion-exclusion": {
+    "name": "Inclusion-exclusion principle",
+    "oneLiner": "The principle that finds the size of a union by adding the sizes of the sets and subtracting the size of their intersection",
+    "description": "The inclusion-exclusion principle corrects for double counting when you count the elements of a union. For two sets you subtract the intersection once; for three or more sets it generalizes to a pattern of including odd-sized intersections and excluding even-sized ones.",
+    "field": "Set theory",
+    "significance": "It is a basic counting principle, and it underlies the addition rule of probability, the derivation of Euler's totient function, and much of combinatorics.",
+    "elementMeanings": {
+      "|A \\cup B|": { "role": "Size of the union", "description": "The total number of elements belonging to A or to B.", "kind": "output" },
+      "|A|": { "role": "Size of A", "description": "The number of elements in the set A.", "kind": "input" },
+      "|B|": { "role": "Size of B", "description": "The number of elements in the set B.", "kind": "input" },
+      "|A \\cap B|": { "role": "Size of the intersection", "description": "The number of elements belonging to both A and B. You subtract it to correct for double counting.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Counting the survey respondents who picked at least one of two options",
+      "Finding the total number of results for an OR query in a search engine after removing duplicates",
+      "Finding the probability that at least one of two events occurs"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "power-set": {
+    "name": "Size of the power set",
+    "oneLiner": "The theorem that a set with n elements has 2 to the n subsets",
+    "description": "The power set formula shows that a finite set S has exactly 2^|S| subsets, counting the empty set and S itself. Each element is either included or left out, two independent choices, so the count is a product of binary choices.",
+    "field": "Set theory",
+    "significance": "It is a basic result of combinatorics and set theory, used directly in enumerating subsets, in bitmask algorithms, and in analysing the state space of logic circuits.",
+    "elementMeanings": {
+      "|P(S)|": { "role": "Size of the power set", "description": "The number of all subsets of the set S.", "kind": "output" },
+      "2": { "role": "Number of choices", "description": "It stands for the two choices available for each element: 'in' or 'out'.", "kind": "constant", "value": 2 },
+      "|S|": { "role": "Number of elements", "description": "The number of elements in the original set S.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Counting every possible order that can be made from n menu items",
+      "Analysing the total number of firewall rule combinations in network security",
+      "Designing a subset enumeration algorithm using bitmasks"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "combination": {
+    "name": "Combinations",
+    "oneLiner": "The formula for how many ways you can choose k items out of n when order does not matter",
+    "description": "The combination formula counts the ways of choosing k elements from n distinct elements without regard to order. It is the permutation count divided by the k! orderings of the chosen elements, which removes the duplicates, and it equals the binomial coefficient.",
+    "field": "Combinatorics",
+    "significance": "It is the most frequently used counting tool across mathematics and science — probability calculations, the binomial theorem, and statistical sampling.",
+    "elementMeanings": {
+      "C(n,k)": { "role": "Number of combinations", "description": "The number of ways to choose k items out of n without regard to order.", "kind": "output" },
+      "n": { "role": "Total number of elements", "description": "The number of elements available to choose from.", "kind": "input" },
+      "k": { "role": "Number chosen", "description": "The number of elements you pick.", "kind": "input" },
+      "n!": { "role": "n factorial", "description": "The product of every natural number from 1 to n.", "kind": "structural" },
+      "k!": { "role": "k factorial", "description": "The number of orderings of the chosen elements. You divide by it to remove duplicates.", "kind": "structural" },
+      "(n-k)!": { "role": "Factorial of the rest", "description": "The number of orderings of the elements left out. It too is there to remove duplicates.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Counting the ways to draw 6 lottery numbers out of 45",
+      "The number of ways to form a team of 5 from 30 people for a group project",
+      "Counting the possible samples that can be drawn in statistics"
+    ],
+    "relatedFormulas": ["permutation", "inclusion-exclusion", "power-set"]
+  },
+  "permutation": {
+    "name": "Permutations",
+    "oneLiner": "The formula for how many ways you can arrange k items out of n when order matters",
+    "description": "The permutation formula counts the ways of picking k elements from n distinct elements and lining them up in order. It follows naturally from the multiplication rule: n choices for the first place, (n-1) for the second, and so on.",
+    "field": "Combinatorics",
+    "significance": "It is the basic tool for arrangement problems where order carries meaning, and it is widely used in codebreaking, scheduling, and counting analysis.",
+    "elementMeanings": {
+      "P(n,k)": { "role": "Number of permutations", "description": "The number of ways to pick k items out of n in order.", "kind": "output" },
+      "n": { "role": "Total number of elements", "description": "The number of elements available to choose from.", "kind": "input" },
+      "k": { "role": "Number chosen", "description": "The number of elements you pick and arrange.", "kind": "input" },
+      "n!": { "role": "n factorial", "description": "The product of every natural number from 1 to n.", "kind": "structural" },
+      "(n-k)!": { "role": "Factorial of the rest", "description": "The number of orderings of the elements left out. Dividing by it in the denominator leaves only the first k places counted.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "The number of 4-digit passcodes whose digits are all different",
+      "The ways gold, silver, and bronze can be awarded among 8 runners",
+      "Scheduling 5 candidates one after another for interviews"
+    ],
+    "relatedFormulas": ["combination", "inclusion-exclusion", "power-set"]
+  }
+}

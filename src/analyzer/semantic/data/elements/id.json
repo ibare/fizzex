@@ -1,0 +1,595 @@
+{
+  "descriptionFormat": "Nomor atom {z}. {desc}",
+  "bySymbol": {
+    "H": {
+      "name": "Hidrogen",
+      "z": 1,
+      "desc": "Unsur paling ringan sekaligus paling melimpah di alam semesta."
+    },
+    "He": {
+      "name": "Helium",
+      "z": 2,
+      "desc": "Gas ringan yang tidak bereaksi, dipakai untuk balon dan pendinginan."
+    },
+    "Li": {
+      "name": "Litium",
+      "z": 3,
+      "desc": "Logam paling ringan, bahan utama baterai isi ulang."
+    },
+    "Be": {
+      "name": "Berilium",
+      "z": 4,
+      "desc": "Logam yang ringan dan keras, dipakai untuk komponen pesawat."
+    },
+    "B": {
+      "name": "Boron",
+      "z": 5,
+      "desc": "Dipakai pada kaca dan deterjen, sekaligus menjadi unsur pendadah semikonduktor."
+    },
+    "C": {
+      "name": "Karbon",
+      "z": 6,
+      "desc": "Unsur kerangka penyusun makhluk hidup; rantainya membentuk sangat banyak senyawa."
+    },
+    "N": {
+      "name": "Nitrogen",
+      "z": 7,
+      "desc": "Mengisi sekitar 78 persen udara, bahan penyusun protein dan pupuk."
+    },
+    "O": {
+      "name": "Oksigen",
+      "z": 8,
+      "desc": "Dipakai dalam pernapasan dan pembakaran, serta unsur terbanyak di kerak bumi."
+    },
+    "F": {
+      "name": "Fluorin",
+      "z": 9,
+      "desc": "Unsur paling reaktif, dipakai pada pasta gigi dan bahan pelapis."
+    },
+    "Ne": {
+      "name": "Neon",
+      "z": 10,
+      "desc": "Gas yang tidak bereaksi; memancarkan cahaya merah bila dialiri listrik."
+    },
+    "Na": {
+      "name": "Natrium",
+      "z": 11,
+      "desc": "Logam yang bereaksi hebat dengan air, salah satu penyusun garam dapur."
+    },
+    "Mg": {
+      "name": "Magnesium",
+      "z": 12,
+      "desc": "Logam ringan yang menempati pusat molekul klorofil."
+    },
+    "Al": {
+      "name": "Aluminium",
+      "z": 13,
+      "desc": "Logam yang ringan dan tahan karat, dipakai untuk kaleng dan kusen jendela."
+    },
+    "Si": {
+      "name": "Silikon",
+      "z": 14,
+      "desc": "Penyusun utama pasir dan kaca, sekaligus bahan cip semikonduktor."
+    },
+    "P": {
+      "name": "Fosforus",
+      "z": 15,
+      "desc": "Berperan dalam penyimpanan energi sel dan pembentukan tulang."
+    },
+    "S": {
+      "name": "Sulfur",
+      "z": 16,
+      "desc": "Ditemukan sebagai kristal kuning di daerah gunung berapi, bahan pembuat asam sulfat."
+    },
+    "Cl": {
+      "name": "Klorin",
+      "z": 17,
+      "desc": "Gas yang dipakai untuk disinfeksi, penyusun garam dapur yang satu lagi."
+    },
+    "Ar": {
+      "name": "Argon",
+      "z": 18,
+      "desc": "Gas terbanyak ketiga di udara; karena tidak bereaksi, dipakai untuk pengelasan."
+    },
+    "K": {
+      "name": "Kalium",
+      "z": 19,
+      "desc": "Logam yang mutlak diperlukan agar saraf dan otot dapat bekerja."
+    },
+    "Ca": {
+      "name": "Kalsium",
+      "z": 20,
+      "desc": "Penyusun tulang dan cangkang kerang, sekaligus komponen utama batu kapur."
+    },
+    "Sc": {
+      "name": "Skandium",
+      "z": 21,
+      "desc": "Ringan sekaligus kuat, dipakai pada paduan untuk sepeda dan pesawat."
+    },
+    "Ti": {
+      "name": "Titanium",
+      "z": 22,
+      "desc": "Ringan dan tahan korosi, dipakai untuk implan dan pesawat terbang."
+    },
+    "V": {
+      "name": "Vanadium",
+      "z": 23,
+      "desc": "Logam yang membuat baja menjadi jauh lebih keras bila dicampurkan."
+    },
+    "Cr": {
+      "name": "Kromium",
+      "z": 24,
+      "desc": "Memberi kilau yang tidak berkarat sehingga dipakai untuk penyepuhan."
+    },
+    "Mn": {
+      "name": "Mangan",
+      "z": 25,
+      "desc": "Membuat baja menjadi liat dan juga terkandung dalam baterai kering."
+    },
+    "Fe": {
+      "name": "Besi",
+      "z": 26,
+      "desc": "Logam yang paling banyak dipakai; di dalam darah ia mengangkut oksigen."
+    },
+    "Co": {
+      "name": "Kobalt",
+      "z": 27,
+      "desc": "Logam yang dipakai pada pigmen biru dan elektrode baterai isi ulang."
+    },
+    "Ni": {
+      "name": "Nikel",
+      "z": 28,
+      "desc": "Karena tahan karat, dicampurkan ke dalam uang logam dan baja nirkarat."
+    },
+    "Cu": {
+      "name": "Tembaga",
+      "z": 29,
+      "desc": "Logam kemerahan yang dipakai untuk kabel karena menghantar listrik dengan baik."
+    },
+    "Zn": {
+      "name": "Seng",
+      "z": 30,
+      "desc": "Dipakai melapisi besi agar tidak berkarat, dan juga diperlukan tubuh."
+    },
+    "Ga": {
+      "name": "Galium",
+      "z": 31,
+      "desc": "Titik leburnya begitu rendah sampai meleleh di telapak tangan; dipakai pada komponen pemancar cahaya."
+    },
+    "Ge": {
+      "name": "Germanium",
+      "z": 32,
+      "desc": "Dahulu menjadi bahan semikonduktor awal, kini dipakai pada serat optik."
+    },
+    "As": {
+      "name": "Arsen",
+      "z": 33,
+      "desc": "Sangat beracun, tetapi juga dipakai sebagai bahan semikonduktor."
+    },
+    "Se": {
+      "name": "Selenium",
+      "z": 34,
+      "desc": "Menghantar listrik dengan baik saat terkena cahaya sehingga dahulu dipakai pada mesin fotokopi."
+    },
+    "Br": {
+      "name": "Bromin",
+      "z": 35,
+      "desc": "Unsur langka yang berwujud cair pada suhu ruang dan berwarna cokelat kemerahan."
+    },
+    "Kr": {
+      "name": "Kripton",
+      "z": 36,
+      "desc": "Gas yang tidak bereaksi, diisikan ke dalam lampu berdaya tinggi."
+    },
+    "Rb": {
+      "name": "Rubidium",
+      "z": 37,
+      "desc": "Memberi nyala merah pada uji nyala dan dipakai pada jam atom."
+    },
+    "Sr": {
+      "name": "Stronsium",
+      "z": 38,
+      "desc": "Logam yang menghasilkan warna merah pada kembang api."
+    },
+    "Y": {
+      "name": "Itrium",
+      "z": 39,
+      "desc": "Logam yang dipakai sebagai bahan fosfor dan superkonduktor."
+    },
+    "Zr": {
+      "name": "Zirkonium",
+      "z": 40,
+      "desc": "Tahan panas dan korosi sehingga dipakai untuk komponen reaktor nuklir."
+    },
+    "Nb": {
+      "name": "Niobium",
+      "z": 41,
+      "desc": "Logam yang dipakai pada magnet superkonduktor dan paduan berkekuatan tinggi."
+    },
+    "Mo": {
+      "name": "Molibdenum",
+      "z": 42,
+      "desc": "Tahan pada suhu tinggi sehingga dicampurkan ke dalam baja perkakas."
+    },
+    "Tc": {
+      "name": "Teknesium",
+      "z": 43,
+      "desc": "Unsur buatan pertama yang hampir tidak ada di alam; dipakai untuk pencitraan medis."
+    },
+    "Ru": {
+      "name": "Rutenium",
+      "z": 44,
+      "desc": "Logam mulia yang dipakai pada titik kontak komponen elektronik dan katalis."
+    },
+    "Rh": {
+      "name": "Rodium",
+      "z": 45,
+      "desc": "Dipakai pada katalis yang membersihkan gas buang kendaraan."
+    },
+    "Pd": {
+      "name": "Paladium",
+      "z": 46,
+      "desc": "Menyerap hidrogen dengan baik dan dipakai pada konverter katalitik."
+    },
+    "Ag": {
+      "name": "Perak",
+      "z": 47,
+      "desc": "Penghantar listrik dan panas terbaik di antara semua logam."
+    },
+    "Cd": {
+      "name": "Kadmium",
+      "z": 48,
+      "desc": "Bersifat racun; dahulu dipakai sebagai elektrode baterai isi ulang."
+    },
+    "In": {
+      "name": "Indium",
+      "z": 49,
+      "desc": "Dipakai untuk membuat elektrode bening pada layar sentuh."
+    },
+    "Sn": {
+      "name": "Timah",
+      "z": 50,
+      "desc": "Mudah melebur sehingga dipakai untuk patri, dan menjadi salah satu penyusun perunggu."
+    },
+    "Sb": {
+      "name": "Antimon",
+      "z": 51,
+      "desc": "Dipakai pada bahan penghambat api agar sesuatu tidak mudah terbakar."
+    },
+    "Te": {
+      "name": "Telurium",
+      "z": 52,
+      "desc": "Metaloid yang dipakai pada sel surya dan paduan logam."
+    },
+    "I": {
+      "name": "Iodin",
+      "z": 53,
+      "desc": "Mutlak diperlukan hormon tiroid dan dipakai sebagai obat antiseptik."
+    },
+    "Xe": {
+      "name": "Xenon",
+      "z": 54,
+      "desc": "Memancarkan cahaya terang sehingga dipakai pada lampu depan mobil dan lampu kilat."
+    },
+    "Cs": {
+      "name": "Sesium",
+      "z": 55,
+      "desc": "Salah satu logam paling lunak dan menjadi acuan jam atom."
+    },
+    "Ba": {
+      "name": "Barium",
+      "z": 56,
+      "desc": "Menahan sinar-X dengan baik sehingga dipakai sebagai zat kontras."
+    },
+    "La": {
+      "name": "Lantanum",
+      "z": 57,
+      "desc": "Dipakai pada kaca lensa kamera dan baterai isi ulang."
+    },
+    "Ce": {
+      "name": "Serium",
+      "z": 58,
+      "desc": "Logam tanah jarang yang paling melimpah; dipakai sebagai bahan pemoles dan katalis."
+    },
+    "Pr": {
+      "name": "Praseodimium",
+      "z": 59,
+      "desc": "Dipakai pada magnet kuat dan kaca kacamata pelindung untuk pengelasan."
+    },
+    "Nd": {
+      "name": "Neodimium",
+      "z": 60,
+      "desc": "Unsur pembuat magnet permanen terkuat."
+    },
+    "Pm": {
+      "name": "Prometium",
+      "z": 61,
+      "desc": "Unsur radioaktif yang hampir tidak ada di alam."
+    },
+    "Sm": {
+      "name": "Samarium",
+      "z": 62,
+      "desc": "Dipakai pada magnet yang tidak kehilangan kemagnetan meski bersuhu tinggi."
+    },
+    "Eu": {
+      "name": "Europium",
+      "z": 63,
+      "desc": "Dipakai untuk pengaman uang kertas dan fosfor merah pada layar."
+    },
+    "Gd": {
+      "name": "Gadolinium",
+      "z": 64,
+      "desc": "Unsur yang dipakai sebagai zat kontras pencitraan resonansi magnetik."
+    },
+    "Tb": {
+      "name": "Terbium",
+      "z": 65,
+      "desc": "Dipakai pada fosfor hijau dan komponen magnetostriktif."
+    },
+    "Dy": {
+      "name": "Disprosium",
+      "z": 66,
+      "desc": "Membantu magnet agar tidak kehilangan kekuatannya pada suhu tinggi."
+    },
+    "Ho": {
+      "name": "Holmium",
+      "z": 67,
+      "desc": "Memusatkan medan magnet dengan baik sehingga dipakai pada magnet berkekuatan besar."
+    },
+    "Er": {
+      "name": "Erbium",
+      "z": 68,
+      "desc": "Dipakai untuk menguatkan sinyal pada komunikasi serat optik."
+    },
+    "Tm": {
+      "name": "Tulium",
+      "z": 69,
+      "desc": "Unsur langka yang dipakai pada perangkat sinar-X jinjing."
+    },
+    "Yb": {
+      "name": "Iterbium",
+      "z": 70,
+      "desc": "Dipakai pada jam atom dan laser serat optik."
+    },
+    "Lu": {
+      "name": "Lutesium",
+      "z": 71,
+      "desc": "Dipakai pada katalis penyulingan minyak bumi dan pencitraan medis."
+    },
+    "Hf": {
+      "name": "Hafnium",
+      "z": 72,
+      "desc": "Menyerap neutron dengan baik sehingga dipakai untuk batang kendali reaktor."
+    },
+    "Ta": {
+      "name": "Tantalum",
+      "z": 73,
+      "desc": "Tahan korosi sehingga dipakai pada kapasitor komponen elektronik."
+    },
+    "W": {
+      "name": "Wolfram",
+      "z": 74,
+      "desc": "Titik leburnya tertinggi di antara semua logam sehingga dahulu dipakai untuk filamen lampu pijar."
+    },
+    "Re": {
+      "name": "Renium",
+      "z": 75,
+      "desc": "Logam langka yang dipakai pada komponen bersuhu tinggi mesin jet."
+    },
+    "Os": {
+      "name": "Osmium",
+      "z": 76,
+      "desc": "Unsur dengan kerapatan terbesar dan sangat keras."
+    },
+    "Ir": {
+      "name": "Iridium",
+      "z": 77,
+      "desc": "Logam yang paling tahan korosi, dipakai pada busi."
+    },
+    "Pt": {
+      "name": "Platina",
+      "z": 78,
+      "desc": "Karena tidak bereaksi, dipakai luas untuk perhiasan dan katalis."
+    },
+    "Au": {
+      "name": "Emas",
+      "z": 79,
+      "desc": "Kilaunya tidak pernah pudar sehingga dipakai untuk mata uang dan titik kontak elektronik."
+    },
+    "Hg": {
+      "name": "Raksa",
+      "z": 80,
+      "desc": "Satu-satunya logam yang berwujud cair pada suhu ruang, dan bersifat racun."
+    },
+    "Tl": {
+      "name": "Talium",
+      "z": 81,
+      "desc": "Sangat beracun dan dipakai pada peralatan inframerah."
+    },
+    "Pb": {
+      "name": "Timbal",
+      "z": 82,
+      "desc": "Logam berat yang lunak dan menahan radiasi dengan baik."
+    },
+    "Bi": {
+      "name": "Bismut",
+      "z": 83,
+      "desc": "Unsur berat yang racunnya rendah sehingga dipakai dalam obat-obatan."
+    },
+    "Po": {
+      "name": "Polonium",
+      "z": 84,
+      "desc": "Unsur yang memancarkan radiasi kuat, ditemukan oleh pasangan Curie."
+    },
+    "At": {
+      "name": "Astatin",
+      "z": 85,
+      "desc": "Unsur yang paling sedikit keberadaannya di alam."
+    },
+    "Rn": {
+      "name": "Radon",
+      "z": 86,
+      "desc": "Gas radioaktif yang merembes keluar dari dalam tanah."
+    },
+    "Fr": {
+      "name": "Fransium",
+      "z": 87,
+      "desc": "Logam paling reaktif, tetapi langsung meluruh."
+    },
+    "Ra": {
+      "name": "Radium",
+      "z": 88,
+      "desc": "Bersinar dalam kegelapan, ditemukan oleh pasangan Curie."
+    },
+    "Ac": {
+      "name": "Aktinium",
+      "z": 89,
+      "desc": "Unsur pertama golongan aktinida dan memancarkan radiasi kuat."
+    },
+    "Th": {
+      "name": "Torium",
+      "z": 90,
+      "desc": "Logam radioaktif yang diteliti sebagai bahan bakar reaktor nuklir."
+    },
+    "Pa": {
+      "name": "Protaktinium",
+      "z": 91,
+      "desc": "Unsur radioaktif langka yang terbentuk dari peluruhan uranium."
+    },
+    "U": {
+      "name": "Uranium",
+      "z": 92,
+      "desc": "Mengalami pembelahan inti sehingga menjadi bahan bakar pembangkit listrik tenaga nuklir."
+    },
+    "Np": {
+      "name": "Neptunium",
+      "z": 93,
+      "desc": "Unsur buatan pertama yang letaknya sesudah uranium."
+    },
+    "Pu": {
+      "name": "Plutonium",
+      "z": 94,
+      "desc": "Dipakai sebagai bahan bakar nuklir dan sumber daya wahana penjelajah antariksa."
+    },
+    "Am": {
+      "name": "Amerisium",
+      "z": 95,
+      "desc": "Terkandung dalam jumlah sangat sedikit pada detektor kebakaran."
+    },
+    "Cm": {
+      "name": "Kurium",
+      "z": 96,
+      "desc": "Unsur radioaktif buatan yang dinamai dari pasangan Curie."
+    },
+    "Bk": {
+      "name": "Berkelium",
+      "z": 97,
+      "desc": "Unsur buatan yang dibuat di Berkeley."
+    },
+    "Cf": {
+      "name": "Kalifornium",
+      "z": 98,
+      "desc": "Memancarkan banyak neutron sehingga dipakai pada peralatan penyelidikan."
+    },
+    "Es": {
+      "name": "Einsteinium",
+      "z": 99,
+      "desc": "Pertama kali ditemukan pada sisa uji coba bom hidrogen."
+    },
+    "Fm": {
+      "name": "Fermium",
+      "z": 100,
+      "desc": "Unsur buatan yang dinamai dari fisikawan Fermi."
+    },
+    "Md": {
+      "name": "Mendelevium",
+      "z": 101,
+      "desc": "Dinamai dari Mendeleev, penyusun tabel periodik."
+    },
+    "No": {
+      "name": "Nobelium",
+      "z": 102,
+      "desc": "Unsur radioaktif buatan yang dinamai dari Nobel."
+    },
+    "Lr": {
+      "name": "Lawrensium",
+      "z": 103,
+      "desc": "Dinamai dari Lawrence, penemu pemercepat partikel."
+    },
+    "Rf": {
+      "name": "Ruterfordium",
+      "z": 104,
+      "desc": "Dinamai dari Rutherford, penemu inti atom."
+    },
+    "Db": {
+      "name": "Dubnium",
+      "z": 105,
+      "desc": "Unsur yang dinamai dari lembaga penelitian Dubna di Rusia."
+    },
+    "Sg": {
+      "name": "Seaborgium",
+      "z": 106,
+      "desc": "Dinamai dari Seaborg, pembuat banyak unsur buatan."
+    },
+    "Bh": {
+      "name": "Bohrium",
+      "z": 107,
+      "desc": "Dinamai dari Bohr, penyusun model atom."
+    },
+    "Hs": {
+      "name": "Hasium",
+      "z": 108,
+      "desc": "Unsur buatan yang dinamai dari wilayah Hessen di Jerman."
+    },
+    "Mt": {
+      "name": "Meitnerium",
+      "z": 109,
+      "desc": "Dinamai dari Meitner, yang mengungkap peristiwa pembelahan inti."
+    },
+    "Ds": {
+      "name": "Darmstadtium",
+      "z": 110,
+      "desc": "Unsur yang dibuat di Darmstadt, Jerman."
+    },
+    "Rg": {
+      "name": "Roentgenium",
+      "z": 111,
+      "desc": "Dinamai dari Röntgen, penemu sinar-X."
+    },
+    "Cn": {
+      "name": "Kopernisium",
+      "z": 112,
+      "desc": "Dinamai dari Copernicus, seorang astronom."
+    },
+    "Nh": {
+      "name": "Nihonium",
+      "z": 113,
+      "desc": "Unsur yang dibuat di Jepang; namanya berarti Jepang."
+    },
+    "Fl": {
+      "name": "Flerovium",
+      "z": 114,
+      "desc": "Dinamai dari Flerov, fisikawan asal Rusia."
+    },
+    "Mc": {
+      "name": "Moskovium",
+      "z": 115,
+      "desc": "Dinamai dari wilayah Moskwa di Rusia."
+    },
+    "Lv": {
+      "name": "Livermorium",
+      "z": 116,
+      "desc": "Dinamai dari lembaga penelitian Livermore di Amerika Serikat."
+    },
+    "Ts": {
+      "name": "Tenesin",
+      "z": 117,
+      "desc": "Unsur buatan yang dinamai dari negara bagian Tennessee, Amerika Serikat."
+    },
+    "Og": {
+      "name": "Oganeson",
+      "z": 118,
+      "desc": "Unsur dengan nomor atom terbesar dalam tabel periodik."
+    }
+  }
+}

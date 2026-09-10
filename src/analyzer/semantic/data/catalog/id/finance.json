@@ -1,0 +1,164 @@
+{
+  "compound-interest": {
+    "name": "Bunga majemuk",
+    "oneLiner": "Cara perhitungan ketika bunga dikenakan bukan hanya pada pokok, melainkan juga pada bunga yang sudah terkumpul sebelumnya",
+    "description": "Bunga majemuk adalah cara ketika bunga dikenakan lagi pada jumlah pokok yang sudah ditambah bunganya, sehingga harta tumbuh menurut deret ukur seiring berjalannya waktu. Jumlah akhirnya berbeda-beda menurut kekerapan perhitungan bunga (tahunan, bulanan, harian, dan sebagainya), dan makin sering perhitungannya makin besar total hasilnya. Ini cara hitung paling dasar dalam menabung, meminjam, dan menganalisis investasi.",
+    "field": "Keuangan",
+    "significance": "Prinsip pokok pertumbuhan harta pada tabungan dan investasi jangka panjang, sekaligus dasar untuk menghitung bunga pinjaman, merancang dana pensiun, dan membandingkan hasil investasi.",
+    "elementMeanings": {
+      "A": { "role": "Jumlah akhir", "description": "Total pokok ditambah bunga setelah jangka waktu tertentu.", "kind": "output" },
+      "P": { "role": "Pokok", "description": "Jumlah uang yang mula-mula diinvestasikan atau disimpan.", "kind": "input" },
+      "r": { "role": "Suku bunga tahunan", "description": "Suku bunga per tahun (dinyatakan dalam desimal). Contoh: 5% berarti 0,05.", "kind": "input" },
+      "n": { "role": "Frekuensi pemajemukan per tahun", "description": "Berapa kali bunga dihitung dalam setahun. Bila majemuk bulanan, nilainya 12.", "kind": "input" },
+      "t": { "role": "Jangka waktu", "description": "Lama investasi (dalam satuan tahun).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung uang yang diterima saat tabungan berjangka jatuh tempo",
+      "Menghitung total bunga kredit pemilikan rumah",
+      "Membandingkan efek bunga majemuk pada investasi jangka panjang"
+    ],
+    "relatedFormulas": ["present-value", "annuity-pv", "rule-of-72"]
+  },
+  "present-value": {
+    "name": "Nilai sekarang",
+    "oneLiner": "Nilai sejumlah uang yang akan diterima pada masa depan setelah dikonversi ke nilai pada saat ini",
+    "description": "Nilai sekarang adalah gagasan mengubah arus kas masa depan menjadi nilai setara pada saat ini dengan menerapkan tingkat diskonto. Gagasan ini mencerminkan nilai waktu uang, yaitu asas bahwa uang pada masa depan bernilai lebih rendah daripada uang saat ini. Konsep ini berperan pokok dalam pengambilan keputusan investasi, penilaian obligasi, dan penaksiran nilai usaha.",
+    "field": "Keuangan",
+    "significance": "Membuat arus kas dari waktu yang berbeda-beda dapat dibandingkan sehingga menjadi landasan penilaian investasi, penaksiran nilai perusahaan, dan pengambilan keputusan keuangan.",
+    "elementMeanings": {
+      "PV": { "role": "Nilai sekarang", "description": "Nilai setara pada saat ini dari sejumlah uang pada masa depan.", "kind": "output" },
+      "FV": { "role": "Nilai masa depan", "description": "Jumlah uang yang akan diterima atau dibayarkan pada waktu tertentu di masa depan.", "kind": "input" },
+      "r": { "role": "Tingkat diskonto", "description": "Suku bunga yang dipakai untuk mengonversi arus kas masa depan ke saat ini.", "kind": "input" },
+      "n": { "role": "Jangka waktu", "description": "Banyak periode dari saat ini sampai waktu terjadinya arus kas masa depan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung harga wajar sebuah obligasi",
+      "Menilai kelayakan investasi sebuah proyek usaha (analisis NPV)",
+      "Membandingkan hadiah lotre yang diterima sekaligus dengan yang diterima secara berkala"
+    ],
+    "relatedFormulas": ["compound-interest", "annuity-pv", "black-scholes"]
+  },
+  "black-scholes": {
+    "name": "Model Black-Scholes",
+    "oneLiner": "Model penetapan harga opsi yang menghitung harga teoretis opsi beli bergaya Eropa",
+    "description": "Model Black-Scholes menghitung harga wajar opsi bergaya Eropa dengan masukan berupa harga aset dasar, harga eksekusi, jatuh tempo, suku bunga bebas risiko, dan volatilitas. Model ini diturunkan dengan menerapkan asas tanpa arbitrase, dengan andaian bahwa aset dasarnya mengikuti gerak Brown geometris. Model ini landasan teoretis pasar derivatif modern sekaligus model inti rekayasa keuangan.",
+    "discoverer": "Fischer Black, Myron Scholes",
+    "field": "Keuangan",
+    "significance": "Menyediakan patokan teoretis harga opsi sehingga memacu lahir dan berkembangnya pasar derivatif, dan rumus ini meraih Hadiah Nobel Ekonomi pada 1997.",
+    "elementMeanings": {
+      "C": { "role": "Harga opsi beli", "description": "Harga teoretis opsi beli bergaya Eropa pada saat ini.", "kind": "output" },
+      "S": { "role": "Harga aset dasar saat ini", "description": "Harga pasar terkini aset yang menjadi dasar opsi.", "kind": "input" },
+      "K": { "role": "Harga eksekusi", "description": "Harga yang diperjanjikan, yang memungkinkan pemegang opsi membeli aset dasarnya.", "kind": "input" },
+      "r": { "role": "Suku bunga bebas risiko", "description": "Imbal hasil bebas risiko sampai jatuh tempo.", "kind": "input" },
+      "T": { "role": "Waktu sampai jatuh tempo", "description": "Sisa waktu sampai opsi jatuh tempo (dalam satuan tahun).", "kind": "input" },
+      "N(d)": { "role": "Fungsi kumulatif sebaran normal baku", "description": "Nilai fungsi sebaran kumulatif dari sebaran normal baku. Perannya sebagai bobot peluang.", "kind": "structural" },
+      "d_1": { "role": "Parameter pertama", "description": "Nilai yang menyesuaikan hubungan antara harga aset dasar dan harga eksekusi dengan volatilitasnya.", "kind": "output" },
+      "d_2": { "role": "Parameter kedua", "description": "Nilai d_1 dikurangi suku volatilitas, yang berkaitan dengan peluang opsi dieksekusi.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Menghitung harga teoretis opsi beli saham",
+      "Menghitung balik volatilitas tersirat di pasar opsi",
+      "Pengelolaan risiko portofolio produk derivatif"
+    ],
+    "relatedFormulas": ["present-value", "capm", "sharpe-ratio"]
+  },
+  "capm": {
+    "name": "Model penetapan harga aset modal",
+    "oneLiner": "Model yang menghitung imbal hasil harapan sebuah aset berdasarkan risiko sistematisnya",
+    "description": "CAPM menjelaskan bahwa imbal hasil harapan sebuah aset sama dengan imbal hasil bebas risiko ditambah beta kali premi risiko pasar. Beta menyatakan kepekaan aset itu terhadap pergerakan pasar secara keseluruhan. Ini model inti hipotesis pasar efisien yang menyatakan bahwa hanya risiko sistematis, yang tak dapat didiversifikasi, yang memperoleh imbalan.",
+    "discoverer": "William Sharpe",
+    "field": "Keuangan",
+    "significance": "Mengukur hubungan antara risiko dan imbal hasil harapan sehingga menjadi kerangka baku untuk penetapan harga aset, penaksiran biaya modal, dan penilaian kinerja portofolio.",
+    "elementMeanings": {
+      "E(R_i)": { "role": "Imbal hasil harapan aset", "description": "Imbal hasil harapan dari aset i.", "kind": "output" },
+      "R_f": { "role": "Imbal hasil bebas risiko", "description": "Imbal hasil investasi tanpa risiko (misalnya surat utang negara).", "kind": "input" },
+      "\\beta_i": { "role": "Beta", "description": "Indikator risiko sistematis aset i, yaitu kepekaannya terhadap perubahan imbal hasil pasar.", "kind": "input" },
+      "E(R_m)": { "role": "Imbal hasil harapan pasar", "description": "Imbal hasil harapan seluruh portofolio pasar.", "kind": "input" },
+      "E(R_m) - R_f": { "role": "Premi risiko pasar", "description": "Imbal hasil tambahan yang diharapkan dari investasi pasar dibandingkan investasi bebas risiko.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menaksir tingkat diskonto (biaya modal) sebuah proyek investasi baru",
+      "Menilai imbal hasil berlebih yang dicapai seorang manajer investasi",
+      "Menghitung imbal hasil harapan yang wajar untuk sebuah saham"
+    ],
+    "relatedFormulas": ["sharpe-ratio", "black-scholes", "present-value"]
+  },
+  "sharpe-ratio": {
+    "name": "Rasio Sharpe",
+    "oneLiner": "Indikator penilaian kinerja investasi yang mengukur imbal hasil berlebih per satu satuan risiko",
+    "description": "Rasio Sharpe adalah imbal hasil berlebih, yaitu imbal hasil portofolio dikurangi imbal hasil bebas risiko, dibagi simpangan baku imbal hasil portofolio itu. Makin besar nilainya, makin tinggi imbal hasil yang diperoleh dibandingkan risiko yang ditanggung. Ini indikator yang paling luas dipakai untuk membandingkan kinerja terisi risiko antara berbagai strategi investasi atau reksa dana.",
+    "discoverer": "William Sharpe",
+    "field": "Keuangan",
+    "significance": "Memungkinkan perbandingan kinerja investasi secara adil terhadap risikonya, dan dipakai secara baku dalam penilaian reksa dana serta keputusan alokasi aset.",
+    "elementMeanings": {
+      "S": { "role": "Rasio Sharpe", "description": "Indikator imbal hasil terisi risiko. Makin tinggi nilainya, makin efisien investasinya.", "kind": "output" },
+      "R_p": { "role": "Imbal hasil portofolio", "description": "Imbal hasil terwujud atau imbal hasil harapan sebuah portofolio investasi.", "kind": "input" },
+      "R_f": { "role": "Imbal hasil bebas risiko", "description": "Imbal hasil aset bebas risiko seperti surat utang negara.", "kind": "input" },
+      "\\sigma_p": { "role": "Simpangan baku portofolio", "description": "Volatilitas imbal hasil portofolio. Nilai ini menyatakan risiko totalnya.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Membandingkan kinerja antar reksa dana",
+      "Menilai imbal hasil terisi risiko sebuah dana lindung nilai",
+      "Menilai keefisienan sebuah strategi alokasi aset"
+    ],
+    "relatedFormulas": ["capm", "standard-deviation"]
+  },
+  "annuity-pv": {
+    "name": "Nilai sekarang anuitas",
+    "oneLiner": "Jumlah nilai sekarang dari sejumlah uang tetap yang dibayarkan secara berkala selama jangka waktu tertentu",
+    "description": "Rumus nilai sekarang anuitas menghitung total nilai pada saat ini dari anuitas biasa, yaitu pembayaran dengan jumlah sama pada setiap periode. Alih-alih mendiskontokan setiap pembayaran satu per satu, nilainya dapat dicari sekaligus dengan rumus jumlah deret geometri. Rumus ini penting untuk menghitung angsuran pinjaman, merancang program pensiun, dan menilai kontrak sewa guna usaha.",
+    "field": "Keuangan",
+    "significance": "Menghitung nilai arus kas berkala secara efisien sehingga menjadi standar praktik dalam penilaian pinjaman, anuitas, dan obligasi.",
+    "elementMeanings": {
+      "PV": { "role": "Nilai sekarang", "description": "Nilai setara pada saat ini dari seluruh pembayaran anuitas.", "kind": "output" },
+      "PMT": { "role": "Pembayaran per periode", "description": "Jumlah uang tetap yang dibayarkan pada setiap periode.", "kind": "input" },
+      "r": { "role": "Tingkat diskonto per periode", "description": "Tingkat diskonto yang berlaku untuk satu periode.", "kind": "input" },
+      "n": { "role": "Banyak periode", "description": "Banyak seluruh periode selama anuitas dibayarkan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung angsuran bulanan kredit pemilikan rumah",
+      "Menghitung jumlah konversi ketika dana pensiun nasional diambil sekaligus",
+      "Membandingkan total biaya kontrak sewa guna usaha kendaraan"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest"]
+  },
+  "rule-of-72": {
+    "name": "Aturan 72",
+    "oneLiner": "Aturan untuk menaksir dengan cepat waktu yang diperlukan agar pokok investasi menjadi dua kali lipat",
+    "description": "Aturan 72 adalah cara hitung praktis: dengan membagi 72 dengan suku bunga tahunan (dalam persen), diperoleh perkiraan lama waktu (dalam tahun) sampai pokoknya menjadi dua kali lipat. Aturan ini membantu memahami efek bunga majemuk secara intuitif, dan paling tepat pada rentang suku bunga 6 sampai 10%. Aturan ini praktis dipakai untuk pengambilan keputusan keuangan yang cepat dan perbandingan investasi.",
+    "field": "Keuangan",
+    "significance": "Alat keuangan praktis yang memungkinkan penaksiran laju pertumbuhan investasi secara intuitif tanpa perhitungan bunga majemuk yang rumit.",
+    "elementMeanings": {
+      "t": { "role": "Waktu untuk menjadi dua kali lipat", "description": "Perkiraan lama waktu yang diperlukan agar pokoknya menjadi dua kali lipat (dalam satuan tahun).", "kind": "output" },
+      "r": { "role": "Suku bunga tahunan", "description": "Imbal hasil per tahun (dalam persen). Contoh: bila 8% per tahun, maka r = 8.", "kind": "input" },
+      "72": { "role": "Konstanta", "description": "Konstanta hampiran yang berkaitan dengan ln(2). Nilai ini dipakai untuk menaksir waktu penggandaan pada pertumbuhan majemuk.", "kind": "constant", "value": 72 }
+    },
+    "realWorldExamples": [
+      "Menghitung dengan cepat bahwa investasi berimbal hasil 6% per tahun menggandakan pokoknya dalam kira-kira 12 tahun",
+      "Menaksir lama waktu sampai harga menjadi dua kali lipat pada laju inflasi 3%",
+      "Membandingkan laju pertumbuhan antar produk investasi dengan suku bunga berbeda"
+    ],
+    "relatedFormulas": ["compound-interest", "present-value"]
+  },
+  "duration": {
+    "name": "Durasi",
+    "oneLiner": "Jatuh tempo rata-rata terbobot arus kas obligasi, yaitu indikator kepekaan harga terhadap perubahan suku bunga",
+    "description": "Durasi adalah rata-rata terbobot dari waktu terjadinya setiap arus kas obligasi, dengan bobot berupa porsi nilai sekarang arus kas itu. Ukuran ini juga disebut durasi Macaulay, dan merupakan ukuran risiko utama yang menyatakan seberapa besar harga obligasi berubah ketika suku bunga berubah. Ukuran ini penting untuk mengelola portofolio obligasi dan merancang strategi imunisasi.",
+    "discoverer": "Frederick Macaulay",
+    "field": "Keuangan",
+    "significance": "Mengukur risiko suku bunga sehingga menjadi alat utama dalam penyusunan strategi investasi obligasi, pemadanan aset-liabilitas, dan imunisasi portofolio.",
+    "elementMeanings": {
+      "D": { "role": "Durasi", "description": "Jatuh tempo rata-rata arus kas yang terbobot nilai sekarangnya (dalam satuan tahun).", "kind": "output" },
+      "t": { "role": "Waktu terjadinya arus kas", "description": "Waktu terjadinya setiap arus kas (dalam satuan tahun).", "kind": "input" },
+      "PV(CF_t)": { "role": "Nilai sekarang arus kas", "description": "Nilai sekarang hasil pendiskontoan arus kas yang terjadi pada waktu t.", "kind": "input" },
+      "P": { "role": "Harga obligasi", "description": "Jumlah nilai sekarang seluruh arus kas. Inilah harga pasar obligasi itu.", "kind": "input" },
+      "\\Sigma": { "role": "Lambang penjumlahan", "description": "Operasi menjumlahkan atas semua waktu terjadinya arus kas.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Memperkirakan kerugian portofolio obligasi ketika suku bunga dinaikkan",
+      "Menyusun strategi pemadanan aset-liabilitas sebuah dana pensiun",
+      "Membandingkan kepekaan suku bunga antar obligasi yang berbeda"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest", "capm"]
+  }
+}

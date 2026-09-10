@@ -1,0 +1,471 @@
+{
+  "arrhenius-equation": {
+    "name": "阿伦尼乌斯方程",
+    "oneLiner": "表示反应速率常数随温度呈指数变化的公式",
+    "description": "阿伦尼乌斯方程说明化学反应的速率常数如何随温度变化。活化能越高反应越慢，温度越高反应越快。指前因子 A 反映分子碰撞频率与取向效应，指数项则表示能够越过活化能垒的分子所占的比例。",
+    "discoverer": "斯万特·阿伦尼乌斯",
+    "field": "化学",
+    "significance": "它把温度与反应速率的关系定量化，确立了化学反应动力学的核心定律。",
+    "elementMeanings": {
+      "k": {
+        "role": "反应速率常数",
+        "description": "决定在特定温度下反应进行快慢的常数。",
+        "kind": "output"
+      },
+      "A": {
+        "role": "指前因子",
+        "description": "反映分子碰撞频率与取向效应的指前因子。",
+        "kind": "input"
+      },
+      "e": {
+        "role": "自然对数的底",
+        "description": "约 2.718。它是指数函数的底。",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "E_a": {
+        "role": "活化能",
+        "description": "反应得以发生所必须越过的能垒。单位：J/mol。",
+        "kind": "input"
+      },
+      "R": {
+        "role": "气体常数",
+        "description": "理想气体常数。约 8.314 J/(mol K)。",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "绝对温度",
+        "description": "反应温度。单位：开尔文(K)。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "食物在冰箱里变质较慢的原因（温度低则反应慢）",
+      "催化剂降低活化能从而加速反应的原理",
+      "在工业流程中设计最佳反应温度"
+    ],
+    "relatedFormulas": [
+      "half-life",
+      "gibbs-free-energy"
+    ]
+  },
+  "gibbs-free-energy": {
+    "name": "吉布斯自由能",
+    "oneLiner": "用焓变与熵变来判断反应是否自发的公式",
+    "description": "吉布斯自由能变化量是判断在恒温恒压下反应是否自发进行的标准。变化量为负则反应自发，为正则非自发，为 0 则处于平衡状态。它由焓（热能）变化与熵（无序度）变化之间的较量决定。",
+    "discoverer": "约西亚·威拉德·吉布斯",
+    "field": "化学",
+    "significance": "它为预测化学反应与相变的自发性提供了热力学的核心判据。",
+    "elementMeanings": {
+      "\\Delta G": {
+        "role": "吉布斯自由能变",
+        "description": "反应自发性的指标。为负则自发。单位：J 或 kJ。",
+        "kind": "output"
+      },
+      "\\Delta H": {
+        "role": "焓变",
+        "description": "反应中放出或吸收的热能。单位：J 或 kJ。",
+        "kind": "input"
+      },
+      "T": {
+        "role": "绝对温度",
+        "description": "反应温度。单位：开尔文(K)。",
+        "kind": "input"
+      },
+      "\\Delta S": {
+        "role": "熵变",
+        "description": "反应所引起的无序度变化。单位：J/K。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "在水的凝固点分析固-液相平衡",
+      "解释生物体内 ATP 水解反应的自发性",
+      "预测在高温下自发进行的分解反应"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "nernst-equation"
+    ]
+  },
+  "nernst-equation": {
+    "name": "能斯特方程",
+    "oneLiner": "表示电池电位随反应物与生成物浓度之比而变化的公式",
+    "description": "能斯特方程用来计算非标准条件下电化学电池的电位。它从标准电位出发，再按反应物与生成物的浓度之比（反应商 Q）加以修正。在平衡时电池电位为 0，从而与吉布斯自由能直接联系起来。",
+    "discoverer": "瓦尔特·能斯特",
+    "field": "化学",
+    "significance": "它使电化学反应的电位能按浓度条件精确预测，为电池与电解技术奠定了理论基础。",
+    "elementMeanings": {
+      "E": {
+        "role": "电池电位",
+        "description": "非标准条件下的实际电位。单位：伏特(V)。",
+        "kind": "output"
+      },
+      "E^\\circ": {
+        "role": "标准电池电位",
+        "description": "标准条件(1 M、1 atm、25 度)下的电位。单位：伏特(V)。",
+        "kind": "input"
+      },
+      "R": {
+        "role": "气体常数",
+        "description": "理想气体常数。约 8.314 J/(mol K)。",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "绝对温度",
+        "description": "反应温度。单位：开尔文(K)。",
+        "kind": "input"
+      },
+      "n": {
+        "role": "电子数",
+        "description": "反应中转移的电子的物质的量。",
+        "kind": "input"
+      },
+      "F": {
+        "role": "法拉第常数",
+        "description": "1 摩尔电子所带的电量。约 96,485 C/mol。",
+        "kind": "constant",
+        "value": 96485,
+        "unit": "C/mol"
+      },
+      "Q": {
+        "role": "反应商",
+        "description": "生成物浓度与反应物浓度之比。在平衡时它等于平衡常数 K。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "预测锂离子电池充放电时的电位变化",
+      "pH 计的工作原理（电位随氢离子浓度变化）",
+      "在腐蚀反应中评估金属的电位"
+    ],
+    "relatedFormulas": [
+      "gibbs-free-energy",
+      "ph-definition"
+    ]
+  },
+  "half-life": {
+    "name": "半衰期",
+    "oneLiner": "表示物质的量减少到一半所需时间的公式",
+    "description": "半衰期是在放射性衰变或一级反应中，物质的量降到初始值一半所需的时间。它与速率常数 k 成反比，所以反应越快半衰期越短。这个值与初始浓度无关而保持恒定，正是一级反应的特征。",
+    "field": "化学",
+    "significance": "它是放射性测年、药物代谢、核废料管理等场合中，把物质随时间减少这一过程定量化的核心概念。",
+    "elementMeanings": {
+      "t_{1/2}": {
+        "role": "半衰期",
+        "description": "物质的量减少到一半所需的时间。单位：秒(s)等。",
+        "kind": "output"
+      },
+      "\\ln 2": {
+        "role": "2 的自然对数",
+        "description": "约 0.693。它是由「一半」这个条件自然导出的常数。",
+        "kind": "constant",
+        "value": 0.693147,
+        "unit": ""
+      },
+      "k": {
+        "role": "速率常数",
+        "description": "决定反应速率的比例常数。单位：1/s（一级反应）。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "碳-14 测年（半衰期约 5,730 年）",
+      "根据药物在体内的半衰期确定服药间隔",
+      "推算放射性废料的安全保管年限"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "exponential-growth"
+    ]
+  },
+  "ph-definition": {
+    "name": "pH 的定义",
+    "oneLiner": "用氢离子浓度的负常用对数表示溶液酸度的公式",
+    "description": "pH 是表示水溶液酸性或碱性程度的尺度，等于氢离子浓度的负常用对数。pH 为 7 是中性，小于 7 为酸性，大于 7 为碱性。pH 每变化 1，氢离子浓度就变化 10 倍。",
+    "discoverer": "瑟伦·瑟伦森",
+    "field": "化学",
+    "significance": "它把溶液的酸碱性质简便地数值化，在化学、生物学、环境科学等广泛领域中被使用。",
+    "elementMeanings": {
+      "pH": {
+        "role": "氢离子指数",
+        "description": "表示酸度的无量纲数。一般在 0~14 的范围内。",
+        "kind": "output"
+      },
+      "[H^+]": {
+        "role": "氢离子浓度",
+        "description": "溶液中氢离子的摩尔浓度。单位：mol/L。",
+        "kind": "input"
+      },
+      "\\log": {
+        "role": "常用对数",
+        "description": "以 10 为底的对数。它把浓度的数量级差异压缩后表示出来。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "游泳池水的 pH 管理（维持在约 7.2~7.8）",
+      "胃酸的 pH 测定（约 1.5~3.5）",
+      "酸雨的 pH 测定与环境影响评估"
+    ],
+    "relatedFormulas": [
+      "nernst-equation"
+    ]
+  },
+  "boyle-law": {
+    "name": "玻意耳定律",
+    "oneLiner": "在温度一定时气体的压强与体积成反比的定律",
+    "description": "玻意耳定律表明，温度一定时气体的压强与体积之积保持不变。也就是说，体积减小则压强升高，体积增大则压强降低。它是理想气体定律的特殊情形，也是理解气体宏观行为最基本的定律之一。",
+    "discoverer": "罗伯特·玻意耳",
+    "field": "化学",
+    "significance": "它是关于气体行为的第一条定量定律，成为理想气体定律与气体分子运动论的出发点。",
+    "elementMeanings": {
+      "P_1": {
+        "role": "初始压强",
+        "description": "变化前气体的压强。单位：帕斯卡(Pa)或大气压(atm)。",
+        "kind": "input"
+      },
+      "V_1": {
+        "role": "初始体积",
+        "description": "变化前气体的体积。单位：升(L)或立方米。",
+        "kind": "input"
+      },
+      "P_2": {
+        "role": "最终压强",
+        "description": "变化后气体的压强。",
+        "kind": "input"
+      },
+      "V_2": {
+        "role": "最终体积",
+        "description": "变化后气体的体积。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "按下注射器时内部气体压强升高的现象",
+      "潜水时空气体积随水深发生的变化",
+      "汽车发动机气缸内的气体压缩"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law"
+    ]
+  },
+  "avogadro-number": {
+    "name": "阿伏伽德罗常数",
+    "oneLiner": "表示 1 摩尔中所含粒子个数的基本常数",
+    "description": "阿伏伽德罗常数是构成 1 摩尔物质的粒子（原子、分子、离子等）的个数，约为 6.022 乘以 10 的 23 次方。它在宏观世界（克、升）与微观世界（原子、分子）之间架起桥梁，是化学中摩尔概念的核心常数。",
+    "discoverer": "让·佩兰（实验测定）、阿梅代奥·阿伏伽德罗（概念贡献）",
+    "field": "化学",
+    "significance": "它把原子分子层面的微观世界与实验室尺度的宏观世界联系起来，是化学最基本的常数。",
+    "elementMeanings": {
+      "N_A": {
+        "role": "阿伏伽德罗常数",
+        "description": "每摩尔的粒子数。约 6.022x10 的 23 次方 /mol。",
+        "kind": "constant",
+        "value": 6.022e+23,
+        "unit": "mol⁻¹"
+      },
+      "n": {
+        "role": "物质的量",
+        "description": "物质的数量。单位：摩尔(mol)。",
+        "kind": "input"
+      },
+      "N": {
+        "role": "粒子数",
+        "description": "实际粒子（原子、分子等）的个数。",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "计算 12 g 碳中所含的原子数",
+      "计算化学反应的量的关系（利用摩尔比）",
+      "弄清气体体积与分子数之间的关系"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "boyle-law"
+    ]
+  },
+  "water-synthesis": {
+    "name": "水的生成反应",
+    "oneLiner": "氢与氧结合生成水的反应 —— 氢燃料的原理",
+    "description": "两个氢分子与一个氧分子反应，生成两个水分子。它是放出大量热的放热反应，生成物只有水，因此不排放碳。计量数 2、1、2 是为了使两边的氢原子各 4 个、氧原子各 2 个相等的结果。",
+    "field": "化学",
+    "significance": "这是氢燃料电池与氢能汽车获取能量的反应，也是学习配平化学方程式时最先遇到的例子。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "氢燃料电池汽车的动力",
+      "火箭发动机的液氢·液氧推进"
+    ]
+  },
+  "methane-combustion": {
+    "name": "甲烷的燃烧",
+    "oneLiner": "城市燃气燃烧后生成二氧化碳与水的反应",
+    "description": "一个甲烷分子与两个氧分子反应，生成一个二氧化碳分子和两个水分子。碳氢化合物与氧完全反应时总是生成二氧化碳和水，这称为完全燃烧。氧不足时则会生成一氧化碳或炭黑。",
+    "field": "化学",
+    "significance": "它是家庭与发电厂所用天然气燃烧的基本反应，也是计算温室气体排放量的出发点。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "燃气灶与锅炉的燃烧",
+      "天然气发电厂的产热"
+    ]
+  },
+  "photosynthesis": {
+    "name": "光合作用",
+    "oneLiner": "植物借助光把二氧化碳和水制成葡萄糖的反应",
+    "description": "六个二氧化碳分子与六个水分子吸收光能后，生成一个葡萄糖分子和六个氧分子。这是把光能储存为化学键能的吸热反应，发生在叶绿体中。地球大气中的氧绝大部分来自这个反应。",
+    "field": "化学",
+    "significance": "它把太阳能转变为生物可利用的形式，是几乎所有食物链的起点。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "植物与藻类制造养分",
+      "作为碳汇的森林与海洋"
+    ],
+    "relatedFormulas": [
+      "cellular-respiration"
+    ]
+  },
+  "cellular-respiration": {
+    "name": "细胞呼吸",
+    "oneLiner": "用氧把葡萄糖氧化以获得生命活动能量的反应",
+    "description": "一个葡萄糖分子与六个氧分子反应，生成六个二氧化碳分子和六个水分子。它与光合作用的方向正好相反，放出的能量被储存在 ATP 中。实际上要经过多个步骤，但总的收支可以概括为这一行。",
+    "field": "化学",
+    "significance": "这是包括动物与植物在内的大多数生物获取能量的方式。它与光合作用配对，使碳得以循环。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "肌肉活动时的能量供给",
+      "呼吸时吸入的氧的用途"
+    ],
+    "relatedFormulas": [
+      "photosynthesis"
+    ]
+  },
+  "neutralization-hcl-naoh": {
+    "name": "中和反应",
+    "oneLiner": "酸与碱相遇生成盐和水的反应",
+    "description": "盐酸与氢氧化钠反应生成氯化钠和水。反应的本质是酸的氢离子与碱的氢氧根离子结合成水，剩下的离子则构成盐。它是会放热的放热反应。",
+    "field": "化学",
+    "significance": "它是展示酸性与碱性彼此抵消这一事实的代表性反应，也是滴定实验的原理。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "烧心时服用抗酸药",
+      "向酸性土壤撒石灰加以中和"
+    ]
+  },
+  "haber-process": {
+    "name": "哈伯-博施法",
+    "oneLiner": "用空气中的氮制造氨的反应 —— 化肥的起点",
+    "description": "一个氮分子与三个氢分子在铁催化剂上反应，生成两个氨分子。它是可逆反应，正反应与逆反应同时进行，靠高温高压和催化剂把氨一侧的产率提上去。氮分子的三键非常牢固，所以条件相当苛刻。",
+    "discoverer": "弗里茨·哈伯、卡尔·博施",
+    "field": "化学",
+    "significance": "它把空气中的氮转变为植物可利用的形式。氮肥得以大量生产，支撑了 20 世纪的人口增长。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "氮肥的生产",
+      "化学平衡与勒沙特列原理的代表案例"
+    ]
+  },
+  "carbonic-acid-equilibrium": {
+    "name": "碳酸的平衡",
+    "oneLiner": "二氧化碳溶于水生成碳酸的可逆反应",
+    "description": "二氧化碳与水反应生成碳酸，碳酸又会变回二氧化碳和水。它不会完全偏向任何一边，而是达成平衡；降低压强时则偏向二氧化碳一侧。",
+    "field": "化学",
+    "significance": "它解释了把血液酸度维持恒定的缓冲作用，以及海水对二氧化碳的吸收。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "打开碳酸饮料瓶盖时冒出气泡",
+      "海洋酸化",
+      "血液的 pH 缓冲"
+    ]
+  },
+  "barium-sulfate-precipitation": {
+    "name": "硫酸钡的沉淀",
+    "oneLiner": "把两种水溶液混合后，不溶于水的固体沉降下来的反应",
+    "description": "把氯化钡水溶液与硫酸钠水溶液混合，钡离子与硫酸根离子结合成几乎不溶于水的硫酸钡，作为白色沉淀降下来。向下的箭头表示沉淀。剩下的氯化钠则溶在水里保持不变。",
+    "field": "化学",
+    "significance": "它是离子相遇生成沉淀的沉淀反应的代表例子，被用于检验某种离子是否存在的检出实验。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "胃肠造影检查时口服的造影剂",
+      "检出水溶液中的硫酸根离子"
+    ]
+  },
+  "water-molecule": {
+    "name": "水",
+    "oneLiner": "由两个氢原子和一个氧原子构成的分子",
+    "description": "两个氢原子以弯折的形状连在一个氧原子上。电子偏向氧一侧，使分子带有极性，因而水分子之间靠氢键彼此拉住。分子虽小却沸点很高、又能溶解许多物质，原因就在这里。",
+    "field": "化学",
+    "significance": "它是生命活动展开的舞台，也是使用最广泛的溶剂。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "占生物体重的一半以上",
+      "冰能浮在水上的性质"
+    ]
+  },
+  "carbon-dioxide": {
+    "name": "二氧化碳",
+    "oneLiner": "一个碳原子两侧各连一个氧原子的直线形分子",
+    "description": "碳居中，两个氧笔直地连在两侧。键本身是有极性的，但左右对称，所以整个分子的极性相互抵消。它吸收又放出红外线，把地球的温度留住。",
+    "field": "化学",
+    "significance": "它既是燃烧与呼吸的产物，又是光合作用的原料，还是有代表性的温室气体。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "碳酸饮料中的气泡",
+      "干冰",
+      "温室效应"
+    ]
+  },
+  "sulfate-ion": {
+    "name": "硫酸根离子",
+    "oneLiner": "一个硫连着四个氧、并多带两个电子的阴离子",
+    "description": "它是以硫原子居中、四个氧原子以正四面体形状环绕的多原子离子。因为多带两个电子而呈 2- 的电荷，上标的数字表示电荷的大小，符号则表示它得到了电子。",
+    "field": "化学",
+    "significance": "它是硫酸及其各种盐的共同成分，是在水中像一个整体那样行动的多原子离子的代表。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "硫酸的水溶液",
+      "石膏与硫酸铜这类硫酸盐"
+    ]
+  },
+  "calcium-hydroxide": {
+    "name": "氢氧化钙",
+    "oneLiner": "一个钙连着两个氢氧根离子的碱 —— 熟石灰",
+    "description": "一个钙离子与两个氢氧根离子结合在一起。括号表示氢氧根离子是一个整体，后面的 2 则表示这样的整体有两个。它微溶于水，呈强碱性。",
+    "field": "化学",
+    "significance": "它是用括号把原子团括起来这一记法的代表例子，被广泛用于中和酸性。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "用来中和酸性土壤的石灰",
+      "用来检验二氧化碳的石灰水"
+    ]
+  },
+  "copper-sulfate-pentahydrate": {
+    "name": "五水合硫酸铜",
+    "oneLiner": "晶体中含有五个水分子的蓝色硫酸铜",
+    "description": "每一个硫酸铜晶体单元中都有五个水分子固定地占据一定位置。中间的圆点表示这些水并不是以化学键连上去的，而是安置在晶体结构之中。加热把水赶走后蓝色便消失，变成白色粉末。",
+    "field": "化学",
+    "significance": "它是水合物记法的代表例子，因有无水分而变色，可用于检出水分。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "培养蓝色硫酸铜晶体的实验",
+      "检出酒精中的水分"
+    ]
+  },
+  "thorium-227": {
+    "name": "钍-227",
+    "oneLiner": "质子数 90、质量数 227 的钍的放射性同位素",
+    "description": "左上方的 227 是原子核中质子数与中子数之和，即质量数；左下方的 90 是质子数，即原子序数。原子序数决定它是哪一种元素，质量数则分辨它是同一元素的哪一种同位素。钍-227 经 α 衰变变成镭-223。",
+    "field": "化学",
+    "significance": "它是同位素记法的代表例子，也是锕衰变系列中的一环。",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "追踪放射性衰变系列",
+      "利用 α 放射性核素的靶向治疗研究"
+    ]
+  }
+}

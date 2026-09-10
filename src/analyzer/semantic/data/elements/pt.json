@@ -1,0 +1,595 @@
+{
+  "descriptionFormat": "Número atômico {z}. {desc}",
+  "bySymbol": {
+    "H": {
+      "name": "Hidrogênio",
+      "z": 1,
+      "desc": "É o elemento mais leve e o mais abundante do universo."
+    },
+    "He": {
+      "name": "Hélio",
+      "z": 2,
+      "desc": "Gás leve que não reage, usado em balões e em resfriamento."
+    },
+    "Li": {
+      "name": "Lítio",
+      "z": 3,
+      "desc": "É o metal mais leve e o material central das baterias recarregáveis."
+    },
+    "Be": {
+      "name": "Berílio",
+      "z": 4,
+      "desc": "Metal leve e rígido, usado em peças aeronáuticas."
+    },
+    "B": {
+      "name": "Boro",
+      "z": 5,
+      "desc": "Usado em vidros e detergentes, também é elemento dopante em semicondutores."
+    },
+    "C": {
+      "name": "Carbono",
+      "z": 6,
+      "desc": "É o elemento que forma o esqueleto dos seres vivos; ao criar cadeias, dá origem a inúmeros compostos."
+    },
+    "N": {
+      "name": "Nitrogênio",
+      "z": 7,
+      "desc": "Ocupa cerca de 78 por cento do ar e é matéria-prima de proteínas e fertilizantes."
+    },
+    "O": {
+      "name": "Oxigênio",
+      "z": 8,
+      "desc": "Usado na respiração e na combustão, é o elemento mais abundante da crosta terrestre."
+    },
+    "F": {
+      "name": "Flúor",
+      "z": 9,
+      "desc": "É o elemento mais reativo, usado em pastas de dente e em revestimentos."
+    },
+    "Ne": {
+      "name": "Neônio",
+      "z": 10,
+      "desc": "Gás que não reage e emite luz avermelhada quando percorrido por eletricidade."
+    },
+    "Na": {
+      "name": "Sódio",
+      "z": 11,
+      "desc": "Metal que reage violentamente com a água e é um dos componentes do sal."
+    },
+    "Mg": {
+      "name": "Magnésio",
+      "z": 12,
+      "desc": "Metal leve que está no centro da molécula de clorofila."
+    },
+    "Al": {
+      "name": "Alumínio",
+      "z": 13,
+      "desc": "Metal leve que não enferruja, usado em latas e esquadrias."
+    },
+    "Si": {
+      "name": "Silício",
+      "z": 14,
+      "desc": "É o principal componente da areia e do vidro, e o material dos chips semicondutores."
+    },
+    "P": {
+      "name": "Fósforo",
+      "z": 15,
+      "desc": "Usado no armazenamento de energia das células e na formação dos ossos."
+    },
+    "S": {
+      "name": "Enxofre",
+      "z": 16,
+      "desc": "Encontrado como cristal amarelo em regiões vulcânicas, é matéria-prima do ácido sulfúrico."
+    },
+    "Cl": {
+      "name": "Cloro",
+      "z": 17,
+      "desc": "Gás usado em desinfecção e o outro componente do sal."
+    },
+    "Ar": {
+      "name": "Argônio",
+      "z": 18,
+      "desc": "Terceiro gás mais abundante do ar; por não reagir, é usado em soldagem."
+    },
+    "K": {
+      "name": "Potássio",
+      "z": 19,
+      "desc": "Metal indispensável ao funcionamento dos nervos e dos músculos."
+    },
+    "Ca": {
+      "name": "Cálcio",
+      "z": 20,
+      "desc": "Forma os ossos e as conchas, e é o principal componente do calcário."
+    },
+    "Sc": {
+      "name": "Escândio",
+      "z": 21,
+      "desc": "Leve e resistente, é usado em bicicletas e em ligas aeronáuticas."
+    },
+    "Ti": {
+      "name": "Titânio",
+      "z": 22,
+      "desc": "Leve e resistente à corrosão, é usado em implantes e em aeronaves."
+    },
+    "V": {
+      "name": "Vanádio",
+      "z": 23,
+      "desc": "Metal que deixa o aço muito mais duro quando misturado a ele."
+    },
+    "Cr": {
+      "name": "Cromo",
+      "z": 24,
+      "desc": "Dá um brilho que não enferruja, por isso é usado em cromagem."
+    },
+    "Mn": {
+      "name": "Manganês",
+      "z": 25,
+      "desc": "Torna o aço mais tenaz e também entra na composição de pilhas."
+    },
+    "Fe": {
+      "name": "Ferro",
+      "z": 26,
+      "desc": "É o metal mais usado e transporta oxigênio no sangue."
+    },
+    "Co": {
+      "name": "Cobalto",
+      "z": 27,
+      "desc": "Metal usado em pigmentos azuis e em eletrodos de baterias recarregáveis."
+    },
+    "Ni": {
+      "name": "Níquel",
+      "z": 28,
+      "desc": "Por não enferrujar, entra na composição de moedas e do aço inoxidável."
+    },
+    "Cu": {
+      "name": "Cobre",
+      "z": 29,
+      "desc": "Metal avermelhado que conduz bem a eletricidade e é usado em fios."
+    },
+    "Zn": {
+      "name": "Zinco",
+      "z": 30,
+      "desc": "Usado na galvanização que impede a ferrugem do ferro, e também é essencial ao corpo."
+    },
+    "Ga": {
+      "name": "Gálio",
+      "z": 31,
+      "desc": "Tem ponto de fusão tão baixo que derrete na mão, e é usado em dispositivos emissores de luz."
+    },
+    "Ge": {
+      "name": "Germânio",
+      "z": 32,
+      "desc": "Foi o material dos primeiros semicondutores e hoje é usado em fibras ópticas."
+    },
+    "As": {
+      "name": "Arsênio",
+      "z": 33,
+      "desc": "É bastante tóxico, mas também serve como material semicondutor."
+    },
+    "Se": {
+      "name": "Selênio",
+      "z": 34,
+      "desc": "Conduz bem a eletricidade quando recebe luz, por isso foi usado em copiadoras."
+    },
+    "Br": {
+      "name": "Bromo",
+      "z": 35,
+      "desc": "Elemento raro por ser líquido à temperatura ambiente, tem cor marrom-avermelhada."
+    },
+    "Kr": {
+      "name": "Criptônio",
+      "z": 36,
+      "desc": "Gás que não reage, usado para preencher lâmpadas de alto desempenho."
+    },
+    "Rb": {
+      "name": "Rubídio",
+      "z": 37,
+      "desc": "Emite luz vermelha no teste de chama e é usado em relógios atômicos."
+    },
+    "Sr": {
+      "name": "Estrôncio",
+      "z": 38,
+      "desc": "Metal que produz a cor vermelha dos fogos de artifício."
+    },
+    "Y": {
+      "name": "Ítrio",
+      "z": 39,
+      "desc": "Metal usado em materiais fluorescentes e em supercondutores."
+    },
+    "Zr": {
+      "name": "Zircônio",
+      "z": 40,
+      "desc": "Resistente ao calor e à corrosão, é usado em peças de reatores nucleares."
+    },
+    "Nb": {
+      "name": "Nióbio",
+      "z": 41,
+      "desc": "Metal usado em ímãs supercondutores e em ligas resistentes."
+    },
+    "Mo": {
+      "name": "Molibdênio",
+      "z": 42,
+      "desc": "Suporta altas temperaturas e por isso é misturado ao aço de ferramentas."
+    },
+    "Tc": {
+      "name": "Tecnécio",
+      "z": 43,
+      "desc": "Primeiro elemento artificial, quase ausente na natureza, é usado em exames de imagem."
+    },
+    "Ru": {
+      "name": "Rutênio",
+      "z": 44,
+      "desc": "Metal nobre usado em contatos de componentes eletrônicos e em catalisadores."
+    },
+    "Rh": {
+      "name": "Ródio",
+      "z": 45,
+      "desc": "Usado nos catalisadores que purificam os gases de escape dos automóveis."
+    },
+    "Pd": {
+      "name": "Paládio",
+      "z": 46,
+      "desc": "Absorve bem o hidrogênio e é usado em conversores catalíticos."
+    },
+    "Ag": {
+      "name": "Prata",
+      "z": 47,
+      "desc": "É o metal que melhor conduz eletricidade e calor."
+    },
+    "Cd": {
+      "name": "Cádmio",
+      "z": 48,
+      "desc": "É tóxico e já foi usado como eletrodo de baterias recarregáveis."
+    },
+    "In": {
+      "name": "Índio",
+      "z": 49,
+      "desc": "Usado para fabricar os eletrodos transparentes das telas sensíveis ao toque."
+    },
+    "Sn": {
+      "name": "Estanho",
+      "z": 50,
+      "desc": "Derrete com facilidade e é usado em solda, além de ser um componente do bronze."
+    },
+    "Sb": {
+      "name": "Antimônio",
+      "z": 51,
+      "desc": "Usado em retardantes de chama, que dificultam a queima."
+    },
+    "Te": {
+      "name": "Telúrio",
+      "z": 52,
+      "desc": "Semimetal usado em células solares e em ligas."
+    },
+    "I": {
+      "name": "Iodo",
+      "z": 53,
+      "desc": "É indispensável aos hormônios da tireoide e usado em antissépticos."
+    },
+    "Xe": {
+      "name": "Xenônio",
+      "z": 54,
+      "desc": "Produz luz intensa e é usado em faróis de automóveis e em lâmpadas de flash."
+    },
+    "Cs": {
+      "name": "Césio",
+      "z": 55,
+      "desc": "É um dos metais mais moles e serve de referência para os relógios atômicos."
+    },
+    "Ba": {
+      "name": "Bário",
+      "z": 56,
+      "desc": "Bloqueia bem os raios X e por isso é usado como contraste."
+    },
+    "La": {
+      "name": "Lantânio",
+      "z": 57,
+      "desc": "Usado no vidro de lentes fotográficas e em baterias recarregáveis."
+    },
+    "Ce": {
+      "name": "Cério",
+      "z": 58,
+      "desc": "É a terra rara mais abundante, usada em abrasivos e catalisadores."
+    },
+    "Pr": {
+      "name": "Praseodímio",
+      "z": 59,
+      "desc": "Usado em ímãs potentes e no vidro de óculos de proteção para soldagem."
+    },
+    "Nd": {
+      "name": "Neodímio",
+      "z": 60,
+      "desc": "É o elemento com que se fazem os ímãs permanentes mais fortes."
+    },
+    "Pm": {
+      "name": "Promécio",
+      "z": 61,
+      "desc": "Elemento radioativo quase inexistente na natureza."
+    },
+    "Sm": {
+      "name": "Samário",
+      "z": 62,
+      "desc": "Usado em ímãs que não perdem o magnetismo mesmo em altas temperaturas."
+    },
+    "Eu": {
+      "name": "Európio",
+      "z": 63,
+      "desc": "Usado contra a falsificação de notas e no fósforo vermelho das telas."
+    },
+    "Gd": {
+      "name": "Gadolínio",
+      "z": 64,
+      "desc": "Elemento usado como contraste em exames de ressonância magnética."
+    },
+    "Tb": {
+      "name": "Térbio",
+      "z": 65,
+      "desc": "Usado em fósforos verdes e em dispositivos magnetostrictivos."
+    },
+    "Dy": {
+      "name": "Disprósio",
+      "z": 66,
+      "desc": "Ajuda os ímãs a não perderem força em altas temperaturas."
+    },
+    "Ho": {
+      "name": "Hólmio",
+      "z": 67,
+      "desc": "Concentra bem o campo magnético e é usado em ímãs potentes."
+    },
+    "Er": {
+      "name": "Érbio",
+      "z": 68,
+      "desc": "Usado para amplificar sinais na comunicação por fibra óptica."
+    },
+    "Tm": {
+      "name": "Túlio",
+      "z": 69,
+      "desc": "Elemento raro usado em aparelhos portáteis de raios X."
+    },
+    "Yb": {
+      "name": "Itérbio",
+      "z": 70,
+      "desc": "Usado em relógios atômicos e em lasers de fibra óptica."
+    },
+    "Lu": {
+      "name": "Lutécio",
+      "z": 71,
+      "desc": "Usado em catalisadores de refino de petróleo e em exames de imagem."
+    },
+    "Hf": {
+      "name": "Háfnio",
+      "z": 72,
+      "desc": "Absorve bem os nêutrons e é usado em barras de controle de reatores."
+    },
+    "Ta": {
+      "name": "Tântalo",
+      "z": 73,
+      "desc": "Resistente à corrosão, é usado nos capacitores de componentes eletrônicos."
+    },
+    "W": {
+      "name": "Tungstênio",
+      "z": 74,
+      "desc": "Tem o ponto de fusão mais alto entre os metais e foi usado em filamentos de lâmpadas."
+    },
+    "Re": {
+      "name": "Rênio",
+      "z": 75,
+      "desc": "Metal raro usado em peças de motores a jato que operam em alta temperatura."
+    },
+    "Os": {
+      "name": "Ósmio",
+      "z": 76,
+      "desc": "É o elemento de maior densidade e é extremamente duro."
+    },
+    "Ir": {
+      "name": "Irídio",
+      "z": 77,
+      "desc": "É o metal mais resistente à corrosão, usado em velas de ignição."
+    },
+    "Pt": {
+      "name": "Platina",
+      "z": 78,
+      "desc": "Por não reagir, é largamente usada em joias e em catalisadores."
+    },
+    "Au": {
+      "name": "Ouro",
+      "z": 79,
+      "desc": "Com um brilho que não se altera, é usado em moedas e em contatos eletrônicos."
+    },
+    "Hg": {
+      "name": "Mercúrio",
+      "z": 80,
+      "desc": "É o único metal líquido à temperatura ambiente e é tóxico."
+    },
+    "Tl": {
+      "name": "Tálio",
+      "z": 81,
+      "desc": "É extremamente tóxico e usado em equipamentos de infravermelho."
+    },
+    "Pb": {
+      "name": "Chumbo",
+      "z": 82,
+      "desc": "Metal pesado e mole que bloqueia bem a radiação."
+    },
+    "Bi": {
+      "name": "Bismuto",
+      "z": 83,
+      "desc": "Apesar de ser um elemento pesado, tem baixa toxicidade e é usado em medicamentos."
+    },
+    "Po": {
+      "name": "Polônio",
+      "z": 84,
+      "desc": "Elemento que emite radiação intensa, descoberto pelo casal Curie."
+    },
+    "At": {
+      "name": "Astato",
+      "z": 85,
+      "desc": "É o elemento menos abundante na natureza."
+    },
+    "Rn": {
+      "name": "Radônio",
+      "z": 86,
+      "desc": "Gás radioativo que escapa do solo."
+    },
+    "Fr": {
+      "name": "Frâncio",
+      "z": 87,
+      "desc": "É o metal mais reativo, mas se desintegra quase de imediato."
+    },
+    "Ra": {
+      "name": "Rádio",
+      "z": 88,
+      "desc": "Brilha no escuro e foi descoberto pelo casal Curie."
+    },
+    "Ac": {
+      "name": "Actínio",
+      "z": 89,
+      "desc": "É o primeiro elemento dos actinídeos e emite radiação intensa."
+    },
+    "Th": {
+      "name": "Tório",
+      "z": 90,
+      "desc": "Metal radioativo estudado como combustível de reatores nucleares."
+    },
+    "Pa": {
+      "name": "Protactínio",
+      "z": 91,
+      "desc": "Elemento radioativo raro, formado no decaimento do urânio."
+    },
+    "U": {
+      "name": "Urânio",
+      "z": 92,
+      "desc": "Sofre fissão nuclear e serve de combustível para a geração de energia nuclear."
+    },
+    "Np": {
+      "name": "Netúnio",
+      "z": 93,
+      "desc": "É o primeiro elemento artificial depois do urânio."
+    },
+    "Pu": {
+      "name": "Plutônio",
+      "z": 94,
+      "desc": "Usado como combustível nuclear e como fonte de energia de sondas espaciais."
+    },
+    "Am": {
+      "name": "Amerício",
+      "z": 95,
+      "desc": "Entra em quantidade mínima nos detectores de incêndio."
+    },
+    "Cm": {
+      "name": "Cúrio",
+      "z": 96,
+      "desc": "Elemento radioativo artificial batizado em homenagem ao casal Curie."
+    },
+    "Bk": {
+      "name": "Berquélio",
+      "z": 97,
+      "desc": "Elemento artificial produzido em Berkeley."
+    },
+    "Cf": {
+      "name": "Califórnio",
+      "z": 98,
+      "desc": "Emite muitos nêutrons e é usado em equipamentos de prospecção."
+    },
+    "Es": {
+      "name": "Einstênio",
+      "z": 99,
+      "desc": "Foi encontrado pela primeira vez nos resíduos de um teste de bomba de hidrogênio."
+    },
+    "Fm": {
+      "name": "Férmio",
+      "z": 100,
+      "desc": "Elemento artificial batizado em homenagem ao físico Fermi."
+    },
+    "Md": {
+      "name": "Mendelévio",
+      "z": 101,
+      "desc": "Recebeu o nome de Mendeleev, criador da tabela periódica."
+    },
+    "No": {
+      "name": "Nobélio",
+      "z": 102,
+      "desc": "Elemento radioativo artificial batizado em homenagem a Nobel."
+    },
+    "Lr": {
+      "name": "Laurêncio",
+      "z": 103,
+      "desc": "Recebeu o nome de Lawrence, inventor do acelerador de partículas."
+    },
+    "Rf": {
+      "name": "Rutherfórdio",
+      "z": 104,
+      "desc": "Recebeu o nome de Rutherford, que descobriu o núcleo atômico."
+    },
+    "Db": {
+      "name": "Dúbnio",
+      "z": 105,
+      "desc": "Elemento batizado com o nome do instituto russo de Dubna."
+    },
+    "Sg": {
+      "name": "Seabórgio",
+      "z": 106,
+      "desc": "Recebeu o nome de Seaborg, que produziu vários elementos artificiais."
+    },
+    "Bh": {
+      "name": "Bóhrio",
+      "z": 107,
+      "desc": "Recebeu o nome de Bohr, que formulou o modelo atômico."
+    },
+    "Hs": {
+      "name": "Hássio",
+      "z": 108,
+      "desc": "Elemento artificial batizado com o nome da região alemã de Hesse."
+    },
+    "Mt": {
+      "name": "Meitnério",
+      "z": 109,
+      "desc": "Recebeu o nome de Meitner, que explicou a fissão nuclear."
+    },
+    "Ds": {
+      "name": "Darmstácio",
+      "z": 110,
+      "desc": "Elemento produzido em Darmstadt, na Alemanha."
+    },
+    "Rg": {
+      "name": "Roentgênio",
+      "z": 111,
+      "desc": "Recebeu o nome de Roentgen, que descobriu os raios X."
+    },
+    "Cn": {
+      "name": "Copernício",
+      "z": 112,
+      "desc": "Recebeu o nome do astrônomo Copérnico."
+    },
+    "Nh": {
+      "name": "Nihônio",
+      "z": 113,
+      "desc": "Elemento produzido no Japão, com um nome que significa Japão."
+    },
+    "Fl": {
+      "name": "Fleróvio",
+      "z": 114,
+      "desc": "Recebeu o nome do físico russo Flerov."
+    },
+    "Mc": {
+      "name": "Moscóvio",
+      "z": 115,
+      "desc": "Recebeu o nome da região russa de Moscou."
+    },
+    "Lv": {
+      "name": "Livermório",
+      "z": 116,
+      "desc": "Recebeu o nome do laboratório americano de Livermore."
+    },
+    "Ts": {
+      "name": "Tenessino",
+      "z": 117,
+      "desc": "Elemento artificial batizado com o nome do estado americano do Tennessee."
+    },
+    "Og": {
+      "name": "Oganessônio",
+      "z": 118,
+      "desc": "É o elemento de maior número atômico da tabela periódica."
+    }
+  }
+}

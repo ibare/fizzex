@@ -1,0 +1,92 @@
+{
+  "shannon-entropy": {
+    "name": "Entropia de Shannon",
+    "oneLiner": "A medida básica da teoria da informação para a incerteza (quantidade de informação) de uma distribuição de probabilidade",
+    "description": "A entropia de Shannon quantifica a incerteza média que existe antes de se conhecer o resultado de uma variável aleatória. Quanto mais uniformes as probabilidades, maior a entropia; quanto mais certo é um único resultado, menor ela é. Fornece o limite inferior teórico do número de bits necessários para comprimir ou transmitir informação.",
+    "discoverer": "Claude Shannon",
+    "field": "Teoria da informação",
+    "significance": "É o conceito central que fundou a teoria da informação e influenciou áreas inteiras como compressão de dados, comunicação, criptografia e aprendizado de máquina.",
+    "elementMeanings": {
+      "H(X)": { "role": "entropia", "description": "É a quantidade média de informação da variável aleatória X. Unidade: bits (base 2) ou nats (base e).", "kind": "output" },
+      "p(x)": { "role": "probabilidade", "description": "É a probabilidade de o evento x ocorrer.", "kind": "input" },
+      "\\log p(x)": { "role": "autoinformação", "description": "É a quantidade de informação do evento x. Quanto menor a probabilidade, maior a informação.", "kind": "structural" },
+      "-\\sum": { "role": "esperança negada", "description": "O sinal negativo diante da esperança da autoinformação torna o resultado positivo.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "A incerteza do lançamento de uma moeda: 1 bit para uma moeda honesta, menos de 1 bit para uma viciada",
+      "Calcular a taxa máxima de compressão que um algoritmo como o ZIP pode alcançar em teoria"
+    ],
+    "relatedFormulas": ["kl-divergence", "mutual-information", "cross-entropy", "source-coding"]
+  },
+  "kl-divergence": {
+    "name": "Divergência de Kullback-Leibler",
+    "oneLiner": "Medida da diferença assimétrica entre duas distribuições de probabilidade",
+    "description": "A divergência KL mede a perda de informação que ocorre ao substituir a distribuição verdadeira P pela distribuição aproximada Q. É sempre maior ou igual a 0 e vale 0 apenas quando as duas distribuições são iguais. Por ser assimétrica, D_KL(P||Q) e D_KL(Q||P) em geral diferem. É usada de forma central em inferência variacional e em modelos generativos.",
+    "discoverer": "Solomon Kullback, Richard Leibler",
+    "field": "Teoria da informação",
+    "significance": "É a ferramenta básica para medir diferenças entre distribuições e é amplamente usada em inferência bayesiana, em VAEs e na otimização de políticas em aprendizado por reforço.",
+    "elementMeanings": {
+      "D_{KL}(P \\| Q)": { "role": "divergência KL", "description": "É a quantidade de informação perdida ao ir de P para Q.", "kind": "output" },
+      "p(x)": { "role": "distribuição verdadeira", "description": "É a distribuição de probabilidade real (de referência).", "kind": "input" },
+      "q(x)": { "role": "distribuição aproximada", "description": "É a distribuição do modelo que tenta aproximar a distribuição verdadeira.", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "log da razão de probabilidades", "description": "É o logaritmo da razão entre as probabilidades das duas distribuições em cada evento.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Levar a distribuição das variáveis latentes de um autocodificador variacional (VAE) a se aproximar de uma distribuição normal",
+      "Avaliar o quanto a distribuição de saída de um modelo de geração de linguagem se afastou da distribuição dos dados de treino"
+    ],
+    "relatedFormulas": ["shannon-entropy", "mutual-information", "cross-entropy"]
+  },
+  "mutual-information": {
+    "name": "Informação mútua",
+    "oneLiner": "Medida da quantidade de informação que duas variáveis aleatórias compartilham",
+    "description": "A informação mútua mede o quanto a incerteza sobre uma variável diminui ao observar a outra. Vale 0 quando as duas variáveis são independentes e assume valores tanto maiores quanto mais dependentes elas forem. Por captar não apenas relações lineares, mas também dependências não lineares, é uma medida de dependência mais geral que o coeficiente de correlação.",
+    "discoverer": "Claude Shannon",
+    "field": "Teoria da informação",
+    "significance": "Por medir dependências de forma não linear, é aproveitada em seleção de atributos, agrupamento, neurociência e muitas outras áreas.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "informação mútua", "description": "É a quantidade de informação que X e Y compartilham.", "kind": "output" },
+      "H(X)": { "role": "entropia de X", "description": "É a incerteza (quantidade de informação) de X sozinho.", "kind": "input" },
+      "H(X|Y)": { "role": "entropia condicional", "description": "É a incerteza de X que permanece mesmo depois de se conhecer Y.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Detectar relações não lineares entre dois genes em dados de expressão gênica",
+      "Avaliar quanta informação as variáveis de entrada e de saída compartilham na seleção de atributos em aprendizado de máquina"
+    ],
+    "relatedFormulas": ["shannon-entropy", "kl-divergence", "data-processing-inequality"]
+  },
+  "source-coding": {
+    "name": "Teorema da codificação de fonte de Shannon",
+    "oneLiner": "Teorema segundo o qual o comprimento médio do código na compressão sem perdas não pode ser menor que a entropia",
+    "description": "O teorema da codificação de fonte de Shannon demonstra que, ao comprimir uma fonte de informação sem perdas, o comprimento médio do código por símbolo não pode ficar abaixo da entropia da fonte. A entropia é, portanto, o limite teórico da compressão, e codificando em blocos suficientemente longos é possível chegar arbitrariamente perto desse limite.",
+    "discoverer": "Claude Shannon",
+    "field": "Teoria da informação",
+    "significance": "Ao estabelecer o limite fundamental da compressão de dados, deu a base teórica para o desenvolvimento de algoritmos práticos como a codificação de Huffman e a codificação aritmética.",
+    "elementMeanings": {
+      "L": { "role": "comprimento médio do código", "description": "É o número médio de bits necessário para codificar um símbolo.", "kind": "output" },
+      "H(X)": { "role": "entropia da fonte", "description": "É a quantidade média de informação por símbolo da fonte. É o limite inferior teórico da compressão.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Na compressão de um arquivo ZIP, a entropia dos dados originais determina o limite da compressão",
+      "Calcular o menor tamanho de arquivo possível de um formato sem perdas (FLAC) em streaming de música"
+    ],
+    "relatedFormulas": ["shannon-entropy"]
+  },
+  "data-processing-inequality": {
+    "name": "Desigualdade do processamento de dados",
+    "oneLiner": "Princípio segundo o qual processar dados apenas preserva ou perde informação, nunca a aumenta",
+    "description": "A desigualdade do processamento de dados afirma que, na cadeia de Markov X -> Y -> Z, a informação mútua entre X e Z não pode exceder a informação mútua entre X e Y. Ou seja, não é possível criar por pós-processamento uma informação que antes não existia. Isso garante a irreversibilidade da perda de informação em extração de atributos, redução de dimensionalidade, comunicação e outros contextos.",
+    "discoverer": "Claude Shannon (obtida como propriedade fundamental da teoria da informação)",
+    "field": "Teoria da informação",
+    "significance": "Ao fixar o limite fundamental do processamento de informação, impõe restrições teóricas ao projeto de canais de comunicação e ao aprendizado de representações em aprendizado de máquina.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "informação mútua entre a origem e a etapa intermediária", "description": "É a informação que os dados originais X e o resultado intermediário Y compartilham.", "kind": "input" },
+      "I(X;Z)": { "role": "informação mútua entre a origem e o resultado final", "description": "É a informação que os dados originais X e o resultado processado Z compartilham.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Por que não é possível recuperar as cores originais depois de converter uma imagem para preto e branco",
+      "O princípio pelo qual, em aprendizado profundo, a informação de entrada vai sendo comprimida à medida que as camadas se aprofundam (teoria do gargalo de informação)"
+    ],
+    "relatedFormulas": ["mutual-information", "shannon-entropy"]
+  }
+}

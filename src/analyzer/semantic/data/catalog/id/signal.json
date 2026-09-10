@@ -1,0 +1,314 @@
+{
+  "fourier-transform": {
+    "name": "Transformasi Fourier",
+    "oneLiner": "Transformasi integral yang mengubah sinyal dari kawasan waktu ke kawasan frekuensi",
+    "description": "Transformasi Fourier menguraikan sinyal yang merupakan fungsi waktu menjadi fungsi frekuensi. Ia berlandaskan asas bahwa setiap sinyal dapat dinyatakan sebagai jumlah gelombang sinus dengan frekuensi yang berbeda-beda, dan ia memberikan keterangan tentang besar serta fase tiap komponen frekuensinya. Transformasi ini dipakai di seluruh bidang sains dan keteknikan, seperti pengolahan sinyal, analisis citra, dan mekanika kuantum.",
+    "discoverer": "Joseph Fourier",
+    "field": "Pengolahan sinyal",
+    "significance": "Dengan memungkinkan penyajian ganda dalam kawasan waktu dan kawasan frekuensi, transformasi ini menegakkan landasan teoretis pengolahan sinyal modern.",
+    "elementMeanings": {
+      "f": {
+        "role": "Fungsi/sinyal",
+        "description": "Fungsi asli atau sinyal waktu yang hendak ditransformasikan.",
+        "kind": "input"
+      },
+      "ξ": {
+        "role": "Frekuensi",
+        "description": "Variabel frekuensi biasa. Satuan: Hz.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variabel bebas",
+        "description": "Variabel bebas dari fungsi aslinya (waktu dan sejenisnya).",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Konstanta alami",
+        "description": "Bilangan pokok dari fungsi eksponensial kompleks.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "i": {
+        "role": "Satuan imajiner",
+        "description": "i² = −1. Menyatakan putaran fase pada fungsi eksponensial kompleks.",
+        "kind": "constant"
+      },
+      "π": {
+        "role": "Konstanta lingkaran pi",
+        "description": "Bagian dari konstanta penormalan 2π.",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Pengenalan suara lewat analisis frekuensi sinyal suara",
+      "Menyusun ulang data frekuensi citra MRI menjadi citra ruang"
+    ],
+    "relatedFormulas": ["inverse-fourier", "laplace-transform", "convolution"]
+  },
+  "inverse-fourier": {
+    "name": "Transformasi Fourier balikan",
+    "oneLiner": "Transformasi integral yang memulihkan spektrum di kawasan frekuensi menjadi sinyal di kawasan waktu",
+    "description": "Transformasi Fourier balikan adalah kebalikan dari transformasi Fourier: ia memulihkan keterangan spektrum yang dinyatakan dalam kawasan frekuensi menjadi sinyal kawasan waktu yang asli. Tanda pada fungsi eksponensial kompleksnya berubah menjadi positif, dan dalam kesepakatan frekuensi biasa, keduanya membentuk pasangan transformasi yang setangkup tanpa faktor penormalan.",
+    "discoverer": "Joseph Fourier",
+    "field": "Pengolahan sinyal",
+    "significance": "Dengan menjamin bahwa hasil analisis frekuensi dapat dipulihkan sepenuhnya menjadi sinyal asli, transformasi ini menyediakan dasar teoretis bagi pemaduan sinyal.",
+    "elementMeanings": {
+      "f": {
+        "role": "Fungsi/sinyal",
+        "description": "Sinyal kawasan waktu asli yang telah dipulihkan.",
+        "kind": "output"
+      },
+      "ξ": {
+        "role": "Frekuensi",
+        "description": "Variabel bebas di kawasan frekuensi. Satuan: Hz.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variabel bebas",
+        "description": "Variabel bebas dari fungsi yang hendak dipulihkan (waktu dan sejenisnya).",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Konstanta alami",
+        "description": "Bilangan pokok dari fungsi eksponensial kompleks.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "π": {
+        "role": "Konstanta lingkaran pi",
+        "description": "Bagian dari konstanta penormalan 2π.",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Mengubah kembali data frekuensi yang sudah ditapis menjadi sinyal waktu",
+      "Memulihkan dan memutar kembali data audio yang termampatkan"
+    ],
+    "relatedFormulas": ["fourier-transform", "laplace-transform", "convolution"]
+  },
+  "laplace-transform": {
+    "name": "Transformasi Laplace",
+    "oneLiner": "Transformasi integral yang mengubah fungsi kawasan waktu ke kawasan frekuensi kompleks",
+    "description": "Transformasi Laplace mengubah fungsi waktu menjadi fungsi bilangan kompleks s sehingga persamaan diferensial berubah menjadi persamaan aljabar. Ia dapat dipandang sebagai perumuman transformasi Fourier dan sanggup menangani sinyal yang meredam. Transformasi ini dipakai secara mendasar untuk analisis sistem kendali, penelaahan rangkaian, dan penentuan kemantapan sistem.",
+    "discoverer": "Pierre-Simon Laplace",
+    "field": "Pengolahan sinyal",
+    "significance": "Karena memungkinkan persamaan diferensial diselesaikan secara aljabar, transformasi ini menjadi alat baku teknik kendali dan penelaahan sistem.",
+    "elementMeanings": {
+      "F(s)": {
+        "role": "Hasil transformasi Laplace",
+        "description": "Penyajian fungsi di kawasan frekuensi kompleks.",
+        "kind": "output"
+      },
+      "f(t)": {
+        "role": "Fungsi waktu",
+        "description": "Fungsi kawasan waktu asli yang hendak ditransformasikan. Terdefinisi pada t >= 0.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Frekuensi kompleks",
+        "description": "s = sigma + j omega. Bagian realnya menyatakan redaman, bagian imajinernya menyatakan getaran.",
+        "kind": "structural"
+      },
+      "e^{-st}": {
+        "role": "Eksponensial kompleks teredam",
+        "description": "Fungsi kernel yang dikalikan pada fungsi waktu.",
+        "kind": "structural"
+      },
+      "\\int_0^{\\infty}": {
+        "role": "Integral sepihak",
+        "description": "Integral dari 0 sampai takhingga. Menangani sistem yang kausal.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Merancang fungsi alih pengendali PID",
+      "Menelaah tanggapan peralihan rangkaian RLC"
+    ],
+    "relatedFormulas": ["fourier-transform", "z-transform", "transfer-function"]
+  },
+  "z-transform": {
+    "name": "Transformasi Z",
+    "oneLiner": "Alat matematis yang mengubah sinyal waktu diskret ke kawasan z kompleks",
+    "description": "Transformasi Z adalah versi waktu diskret dari transformasi Laplace: ia mengubah sinyal waktu diskret x[n] menjadi fungsi variabel kompleks z. Transformasi ini sangat diperlukan untuk perancangan tapis digital, analisis sistem kendali digital, dan penyelesaian persamaan beda. Ia terhubung dengan transformasi Laplace lewat hubungan z = e^(sT).",
+    "discoverer": "Witold Hurewicz",
+    "field": "Pengolahan sinyal",
+    "significance": "Sebagai alat baku penelaahan sistem waktu diskret, transformasi ini menyediakan landasan teoretis bagi pengolahan sinyal digital dan kendali digital.",
+    "elementMeanings": {
+      "X(z)": {
+        "role": "Hasil transformasi Z",
+        "description": "Penyajian sinyal diskret di kawasan z kompleks.",
+        "kind": "output"
+      },
+      "x[n]": {
+        "role": "Sinyal waktu diskret",
+        "description": "Nilai cuplikan pada indeks bulat n.",
+        "kind": "input"
+      },
+      "z": {
+        "role": "Variabel kompleks",
+        "description": "Bilangan kompleks yang lingkaran satuannya (|z|=1) bersesuaian dengan kawasan frekuensi.",
+        "kind": "structural"
+      },
+      "z^{-n}": {
+        "role": "Operator tundaan",
+        "description": "Pangkat negatif dari z yang menyatakan tundaan sebanyak n cuplikan.",
+        "kind": "structural"
+      },
+      "\\sum": {
+        "role": "Jumlah deret",
+        "description": "Penjumlahan dari n = negatif takhingga sampai takhingga (atau mulai dari 0).",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Merancang koefisien tapis pada ekualiser audio digital",
+      "Sistem kendali kedudukan digital pada lengan robot"
+    ],
+    "relatedFormulas": ["laplace-transform", "sampling", "transfer-function"]
+  },
+  "nyquist-theorem": {
+    "name": "Teorema Nyquist",
+    "oneLiner": "Syarat frekuensi pencuplikan terkecil agar sinyal analog dapat diubah menjadi digital tanpa cacat",
+    "description": "Teorema Nyquist menetapkan bahwa untuk memulihkan sinyal analog berbatas pita secara sempurna, pencuplikan harus dilakukan sekurang-kurangnya dua kali frekuensi tertinggi sinyal itu. Bila syarat ini tidak dipenuhi, timbullah aliasing sehingga sinyal aslinya tidak dapat dipulihkan. Inilah dasar perancangan semua sistem pengubah analog ke digital.",
+    "discoverer": "Harry Nyquist, Claude Shannon",
+    "field": "Pengolahan sinyal",
+    "significance": "Dengan menyodorkan syarat mendasar yang menghubungkan dunia analog dan digital, teorema ini menegakkan dasar telekomunikasi dan teknologi perekaman digital.",
+    "elementMeanings": {
+      "f_s": {
+        "role": "Frekuensi pencuplikan",
+        "description": "Banyaknya cuplikan yang diambil tiap sekon. Satuan: hertz (Hz).",
+        "kind": "input"
+      },
+      "f_{max}": {
+        "role": "Frekuensi tertinggi",
+        "description": "Komponen frekuensi tertinggi yang terkandung dalam sinyal. Satuan: hertz (Hz).",
+        "kind": "input"
+      },
+      "2": {
+        "role": "Nisbah Nyquist",
+        "description": "Pencuplikan harus sekurang-kurangnya dua kali lipat agar aliasing dapat dicegah.",
+        "kind": "constant",
+        "value": 2,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Asas mengapa audio CD (44,1 kHz) mencakup rentang pendengaran manusia (20 kHz)",
+      "Tapis pencegah aliasing pada sensor kamera digital"
+    ],
+    "relatedFormulas": ["sampling", "fourier-transform", "shannon-capacity"]
+  },
+  "sampling": {
+    "name": "Pencuplikan",
+    "oneLiner": "Proses mengambil nilai sinyal waktu sinambung pada selang tetap untuk mengubahnya menjadi sinyal waktu diskret",
+    "description": "Pencuplikan adalah proses mengubah sinyal analog sinambung x(t) menjadi sinyal diskret x[n] dengan mengambil nilainya setiap perioda T. Ini langkah pertama pengolahan sinyal digital, dan syarat Nyquist harus dipenuhi agar sinyal aslinya dapat ditampilkan kembali dengan setia. Perioda pencuplikan T dan frekuensi pencuplikan f_s berhubungan secara kebalikan.",
+    "field": "Pengolahan sinyal",
+    "significance": "Sebagai proses mendasar yang mengubah sinyal analog menjadi digital, pencuplikan mendefinisikan tahap masukan bagi semua sistem digital.",
+    "elementMeanings": {
+      "x[n]": {
+        "role": "Sinyal diskret",
+        "description": "Nilai cuplikan ke-n. Satuan dasar sebuah sinyal digital.",
+        "kind": "output"
+      },
+      "x(t)": {
+        "role": "Sinyal sinambung",
+        "description": "Sinyal waktu analog yang asli.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Indeks cuplikan",
+        "description": "Bilangan bulat yang menyatakan cuplikan ke berapa.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "Perioda pencuplikan",
+        "description": "Selang waktu antara dua cuplikan berurutan. Satuan: sekon (s). T = 1/f_s.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Mengubah suara yang masuk lewat mikrofon menjadi data digital",
+      "Mendigitalkan sinyal hayati pada alat elektrokardiogram (EKG)"
+    ],
+    "relatedFormulas": ["nyquist-theorem", "z-transform", "fourier-transform"]
+  },
+  "convolution": {
+    "name": "Konvolusi",
+    "oneLiner": "Operasi yang membentuk fungsi baru dengan menindihkan dan menggeser dua fungsi sambil mengintegralkannya",
+    "description": "Konvolusi adalah operasi membalikkan sebuah fungsi, lalu menggesernya di atas fungsi yang lain sambil menghitung integral daerah tindihannya. Pada sistem linear tak berubah waktu (LTI), konvolusi antara sinyal masukan dan tanggapan impuls menghasilkan sinyal keluaran. Operasi ini dipakai luas untuk penapisan sinyal, pengolahan citra, dan pemaduan sebaran peluang.",
+    "field": "Pengolahan sinyal",
+    "significance": "Karena memerikan hubungan masukan-keluaran sistem LTI secara lengkap, konvolusi menjadi operasi inti pengolahan sinyal dan analisis sistem.",
+    "elementMeanings": {
+      "(f*g)(t)": {
+        "role": "Hasil konvolusi",
+        "description": "Fungsi baru yang terbentuk dari konvolusi dua fungsi f dan g.",
+        "kind": "output"
+      },
+      "f(\\tau)": {
+        "role": "Fungsi pertama",
+        "description": "Fungsi pertama terhadap variabel integrasi tau. Umumnya berupa sinyal masukan.",
+        "kind": "input"
+      },
+      "g(t-\\tau)": {
+        "role": "Fungsi terbalik tergeser",
+        "description": "Fungsi kedua yang dibalikkan lalu digeser sejauh t. Umumnya berupa tanggapan impuls.",
+        "kind": "input"
+      },
+      "\\tau": {
+        "role": "Variabel integrasi",
+        "description": "Variabel bantu yang menyusuri daerah tindihan kedua fungsi.",
+        "kind": "structural"
+      },
+      "\\int": {
+        "role": "Integral",
+        "description": "Integral dari negatif takhingga sampai takhingga untuk menghitung seluruh daerah tindihan.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Memodelkan efek kabur (blur) kamera secara matematis",
+      "Penyarian ciri citra pada CNN dalam pembelajaran mendalam"
+    ],
+    "relatedFormulas": ["fourier-transform", "transfer-function", "inverse-fourier"]
+  },
+  "transfer-function": {
+    "name": "Fungsi alih",
+    "oneLiner": "Fungsi pencirian sistem yang didefinisikan sebagai nisbah transformasi Laplace keluaran terhadap masukan",
+    "description": "Fungsi alih menyatakan hubungan masukan-keluaran sistem LTI di kawasan frekuensi kompleks, yaitu nisbah transformasi Laplace keluaran dibagi transformasi Laplace masukan. Lewat kutub dan nol sebuah sistem, kita dapat mengetahui kemantapan, tanggapan frekuensi, dan sifat tanggapan peralihannya. Inilah alat analisis terpenting dalam teknik kendali.",
+    "field": "Pengolahan sinyal",
+    "significance": "Karena merangkum sifat dinamis sebuah sistem ke dalam satu fungsi, fungsi alih menjadi alat baku perancangan sistem kendali dan analisis kemantapan.",
+    "elementMeanings": {
+      "H(s)": {
+        "role": "Fungsi alih",
+        "description": "Sifat sistem yang dinyatakan sebagai fungsi frekuensi kompleks s.",
+        "kind": "output"
+      },
+      "Y(s)": {
+        "role": "Transformasi Laplace keluaran",
+        "description": "Hasil transformasi Laplace dari sinyal keluaran sistem.",
+        "kind": "output"
+      },
+      "X(s)": {
+        "role": "Transformasi Laplace masukan",
+        "description": "Hasil transformasi Laplace dari sinyal masukan sistem.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Frekuensi kompleks",
+        "description": "Variabel Laplace. Dipakai untuk menganalisis kutub dan nol sebuah sistem.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Merancang sifat tanggapan sistem kendali jelajah pada mobil",
+      "Menganalisis tanggapan frekuensi penguat audio"
+    ],
+    "relatedFormulas": ["laplace-transform", "z-transform", "convolution"]
+  }
+}

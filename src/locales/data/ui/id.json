@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "Tutup",
+    "closeWithKey": "Tutup (Esc)",
+    "hintHover": "Arahkan: jelajahi bagian",
+    "hintClick": "Klik: ubah nilai",
+    "hintEsc": "Esc: tutup",
+    "explore": "Jelajahi rumus",
+    "copyImage": "Salin gambar",
+    "reset": "Atur ulang",
+    "similarTo": "Mirip dengan {name}",
+    "closeNamed": "Tutup {name}",
+    "domainGuard": "Penjaga domain: {reason}"
+  },
+  "bindingFault": {
+    "derivative": "Tidak bisa menghitung turunan {name}",
+    "domain": "Nilai {name} di luar domain",
+    "divergent": "Nilai {name} divergen",
+    "unsupported": "Bentuk {name} tidak didukung visualisasi ini",
+    "evalFailed": "Tidak bisa menghitung {name}",
+    "unbound": "{name} belum punya nilai",
+    "unknown": "{name} tidak bisa dihitung"
+  },
+  "duration": {
+    "seconds": "{value} dtk",
+    "minutes": "{value} mnt",
+    "hours": "{value} jam",
+    "days": "{value} hari"
+  },
+  "summary": {
+    "variables": "dalam {names}",
+    "constantExpression": "Ekspresi konstan",
+    "polynomialOfDegree": "polinomial derajat {degree}",
+    "withFunctions": "(dengan {names})",
+    "domains": "[{names}]",
+    "chemicalFormula": "Rumus kimia",
+    "chemicalEquation": "Persamaan kimia",
+    "reversibleChemicalEquation": "Persamaan kimia reversibel",
+    "domainNames": {
+      "arithmetic": "Aritmetika",
+      "polynomial": "Polinomial",
+      "rational": "Rasional",
+      "trigonometric": "Trigonometri",
+      "exponential": "Eksponensial",
+      "logarithmic": "Logaritma",
+      "calculus": "Kalkulus",
+      "linear-algebra": "Aljabar linear",
+      "statistics": "Statistika",
+      "chemistry": "Kimia"
+    },
+    "listSeparator": ", "
+  }
+}

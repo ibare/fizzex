@@ -1,0 +1,132 @@
+{
+  "fourier-transform": {
+    "name": "Transformada de Fourier",
+    "oneLiner": "Transformada integral que converte um sinal do domínio do tempo para o domínio da frequência",
+    "description": "A transformada de Fourier decompõe um sinal que é função do tempo em uma função da frequência. Baseia-se no princípio de que todo sinal pode ser expresso como soma de senoides de frequências diferentes, e fornece a informação de amplitude e fase de cada componente de frequência. É usada em toda a ciência e a engenharia: processamento de sinais, análise de imagens, mecânica quântica e muito mais.",
+    "discoverer": "Joseph Fourier",
+    "field": "Processamento de sinais",
+    "significance": "Tornou possível a dupla representação nos domínios do tempo e da frequência e estabeleceu a base teórica do processamento de sinais moderno.",
+    "elementMeanings": {
+      "f": { "role": "função/sinal", "description": "É a função original ou o sinal temporal a ser transformado.", "kind": "input" },
+      "ξ": { "role": "frequência", "description": "É a variável de frequência comum. Unidade: Hz.", "kind": "input" },
+      "x": { "role": "variável independente", "description": "É a variável independente da função original (o tempo, por exemplo).", "kind": "input" },
+      "e": { "role": "constante de Euler", "description": "É a base da função exponencial complexa.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "i": { "role": "unidade imaginária", "description": "i² = −1. Na função exponencial complexa, representa a rotação de fase.", "kind": "constant" },
+      "π": { "role": "número pi", "description": "É parte da constante de normalização 2π.", "kind": "constant", "value": 3.14159265, "unit": "" }
+    },
+    "realWorldExamples": ["Reconhecimento de voz por meio da análise de frequência do sinal de áudio", "Reconstrução dos dados de frequência de um exame de ressonância magnética em imagem espacial"],
+    "relatedFormulas": ["inverse-fourier", "laplace-transform", "convolution"]
+  },
+  "inverse-fourier": {
+    "name": "Transformada inversa de Fourier",
+    "oneLiner": "Transformada integral que recupera o sinal no domínio do tempo a partir do espectro no domínio da frequência",
+    "description": "A transformada inversa de Fourier é o processo inverso da transformada de Fourier: recupera o sinal original no domínio do tempo a partir da informação espectral expressa no domínio da frequência. O sinal da função exponencial complexa passa a positivo e, na convenção de frequência comum, forma um par de transformadas simétrico, sem fator de normalização.",
+    "discoverer": "Joseph Fourier",
+    "field": "Processamento de sinais",
+    "significance": "Garante que o resultado da análise de frequência pode ser totalmente revertido ao sinal original, fornecendo a base teórica da síntese de sinais.",
+    "elementMeanings": {
+      "f": { "role": "função/sinal", "description": "É o sinal original no domínio do tempo, já recuperado.", "kind": "output" },
+      "ξ": { "role": "frequência", "description": "É a variável independente do domínio da frequência. Unidade: Hz.", "kind": "input" },
+      "x": { "role": "variável independente", "description": "É a variável independente da função a recuperar (o tempo, por exemplo).", "kind": "input" },
+      "e": { "role": "constante de Euler", "description": "É a base da função exponencial complexa.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "π": { "role": "número pi", "description": "É parte da constante de normalização 2π.", "kind": "constant", "value": 3.14159265, "unit": "" }
+    },
+    "realWorldExamples": ["Converter de volta em sinal temporal os dados de frequência processados após a filtragem", "Reprodução de dados de áudio comprimidos após sua reconstrução"],
+    "relatedFormulas": ["fourier-transform", "laplace-transform", "convolution"]
+  },
+  "laplace-transform": {
+    "name": "Transformada de Laplace",
+    "oneLiner": "Transformada integral que converte uma função do domínio do tempo para o domínio da frequência complexa",
+    "description": "A transformada de Laplace converte uma função do tempo em uma função da variável complexa s, transformando equações diferenciais em equações algébricas. Pode ser vista como uma generalização da transformada de Fourier e também dá conta de sinais amortecidos. Tem papel central na análise de sistemas de controle, na análise de circuitos e na avaliação da estabilidade de sistemas.",
+    "discoverer": "Pierre-Simon Laplace",
+    "field": "Processamento de sinais",
+    "significance": "Permitiu resolver equações diferenciais de forma algébrica e se tornou a ferramenta padrão da engenharia de controle e da análise de sistemas.",
+    "elementMeanings": {
+      "F(s)": { "role": "resultado da transformada de Laplace", "description": "É a representação da função no domínio da frequência complexa.", "kind": "output" },
+      "f(t)": { "role": "função do tempo", "description": "É a função original no domínio do tempo a ser transformada. Está definida para t >= 0.", "kind": "input" },
+      "s": { "role": "frequência complexa", "description": "s = σ + jω. A parte real representa o amortecimento e a imaginária, a oscilação.", "kind": "structural" },
+      "e^{-st}": { "role": "exponencial complexa amortecida", "description": "É a função núcleo que multiplica a função do tempo.", "kind": "structural" },
+      "\\int_0^{\\infty}": { "role": "integral unilateral", "description": "Integral de 0 ao infinito. Trata de sistemas causais.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Projeto da função de transferência de um controlador PID", "Análise da resposta transitória de um circuito RLC"],
+    "relatedFormulas": ["fourier-transform", "z-transform", "transfer-function"]
+  },
+  "z-transform": {
+    "name": "Transformada Z",
+    "oneLiner": "Ferramenta matemática que converte um sinal de tempo discreto para o domínio complexo z",
+    "description": "A transformada Z é a versão em tempo discreto da transformada de Laplace: converte o sinal de tempo discreto x[n] em uma função da variável complexa z. É indispensável no projeto de filtros digitais, na análise de sistemas de controle digital e na resolução de equações de diferenças. Liga-se à transformada de Laplace pela relação z = e^(sT).",
+    "discoverer": "Witold Hurewicz",
+    "field": "Processamento de sinais",
+    "significance": "Como ferramenta padrão da análise de sistemas de tempo discreto, fornece a base teórica do processamento digital de sinais e do controle digital.",
+    "elementMeanings": {
+      "X(z)": { "role": "resultado da transformada Z", "description": "É a representação do sinal discreto no domínio complexo z.", "kind": "output" },
+      "x[n]": { "role": "sinal de tempo discreto", "description": "É o valor da amostra no índice inteiro n.", "kind": "input" },
+      "z": { "role": "variável complexa", "description": "É o número complexo cujo círculo unitário (|z|=1) corresponde ao domínio da frequência.", "kind": "structural" },
+      "z^{-n}": { "role": "operador de atraso", "description": "É a potência negativa de z que representa um atraso de n amostras.", "kind": "structural" },
+      "\\sum": { "role": "soma da série", "description": "É a soma de n = -infinito a infinito (ou a partir de 0).", "kind": "structural" }
+    },
+    "realWorldExamples": ["Projeto dos coeficientes de filtro de um equalizador de áudio digital", "Sistema digital de controle de posição de um braço robótico"],
+    "relatedFormulas": ["laplace-transform", "sampling", "transfer-function"]
+  },
+  "nyquist-theorem": {
+    "name": "Teorema de Nyquist",
+    "oneLiner": "Condição de frequência mínima de amostragem para converter um sinal analógico em digital sem distorção",
+    "description": "O teorema de Nyquist estabelece que, para reconstruir perfeitamente um sinal analógico de banda limitada, é preciso amostrá-lo a pelo menos o dobro da frequência máxima do sinal. Se essa condição não for satisfeita, ocorre aliasing e o sinal original não pode ser reconstruído. É a base do projeto de todo sistema de conversão analógico-digital.",
+    "discoverer": "Harry Nyquist, Claude Shannon",
+    "field": "Processamento de sinais",
+    "significance": "Apresentou a condição fundamental que liga os mundos analógico e digital e estabeleceu a base das comunicações e das tecnologias de gravação digitais.",
+    "elementMeanings": {
+      "f_s": { "role": "frequência de amostragem", "description": "Número de amostras tomadas por segundo. Unidade: hertz (Hz).", "kind": "input" },
+      "f_{max}": { "role": "frequência máxima", "description": "Componente de frequência mais alta contida no sinal. Unidade: hertz (Hz).", "kind": "input" },
+      "2": { "role": "razão de Nyquist", "description": "É preciso amostrar a pelo menos o dobro para evitar o aliasing.", "kind": "constant", "value": 2, "unit": "" }
+    },
+    "realWorldExamples": ["O princípio pelo qual o áudio de CD (44,1 kHz) cobre a faixa audível humana (20 kHz)", "Filtro antialiasing do sensor de uma câmera digital"],
+    "relatedFormulas": ["sampling", "fourier-transform", "shannon-capacity"]
+  },
+  "sampling": {
+    "name": "Amostragem",
+    "oneLiner": "Processo que extrai valores de um sinal de tempo contínuo em intervalos regulares e o converte em sinal de tempo discreto",
+    "description": "A amostragem é o processo de converter o sinal analógico contínuo x(t) no sinal discreto x[n], extraindo valores a cada período T. É a primeira etapa do processamento digital de sinais, e só é possível reproduzir fielmente o sinal original se a condição de Nyquist for satisfeita. O período de amostragem T e a frequência de amostragem f_s são inversos um do outro.",
+    "field": "Processamento de sinais",
+    "significance": "Como processo fundamental de conversão de sinais analógicos em digitais, define a etapa de entrada de todo sistema digital.",
+    "elementMeanings": {
+      "x[n]": { "role": "sinal discreto", "description": "Valor da n-ésima amostra. É a unidade básica do sinal digital.", "kind": "output" },
+      "x(t)": { "role": "sinal contínuo", "description": "É o sinal analógico original no tempo.", "kind": "input" },
+      "n": { "role": "índice da amostra", "description": "É um valor inteiro que indica de qual amostra se trata.", "kind": "input" },
+      "T": { "role": "período de amostragem", "description": "Intervalo de tempo entre amostras consecutivas. Unidade: segundo (s). T = 1/f_s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Conversão em dados digitais da voz captada por um microfone", "Digitalização de sinais biológicos em aparelhos de eletrocardiograma (ECG)"],
+    "relatedFormulas": ["nyquist-theorem", "z-transform", "fourier-transform"]
+  },
+  "convolution": {
+    "name": "Convolução",
+    "oneLiner": "Operação que cria uma nova função integrando a sobreposição de duas funções enquanto uma desliza sobre a outra",
+    "description": "A convolução é a operação que inverte uma função, desloca-a sobre a outra e calcula a integral da região de sobreposição. Em sistemas lineares e invariantes no tempo (LIT), a convolução entre o sinal de entrada e a resposta ao impulso é o sinal de saída. É amplamente usada na filtragem de sinais, no processamento de imagens e na composição de distribuições de probabilidade.",
+    "field": "Processamento de sinais",
+    "significance": "Descreve por completo a relação entrada-saída dos sistemas LIT e se tornou a operação central do processamento de sinais e da análise de sistemas.",
+    "elementMeanings": {
+      "(f*g)(t)": { "role": "resultado da convolução", "description": "É a nova função gerada pela convolução das funções f e g.", "kind": "output" },
+      "f(\\tau)": { "role": "primeira função", "description": "Primeira função, em termos da variável de integração tau. Costuma ser o sinal de entrada.", "kind": "input" },
+      "g(t-\\tau)": { "role": "função invertida e deslocada", "description": "É a segunda função invertida e deslocada de t. Costuma ser a resposta ao impulso.", "kind": "input" },
+      "\\tau": { "role": "variável de integração", "description": "É a variável muda que percorre a região de sobreposição das duas funções.", "kind": "structural" },
+      "\\int": { "role": "integral", "description": "Calcula toda a região de sobreposição por meio da integral de -infinito a infinito.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Modelagem matemática do efeito de desfoque de uma câmera", "Extração de características de imagens em redes neurais convolucionais (CNN)"],
+    "relatedFormulas": ["fourier-transform", "transfer-function", "inverse-fourier"]
+  },
+  "transfer-function": {
+    "name": "Função de transferência",
+    "oneLiner": "Função característica do sistema, definida como a razão entre as transformadas de Laplace da saída e da entrada",
+    "description": "A função de transferência expressa a relação entrada-saída de um sistema LIT no domínio da frequência complexa: é a razão entre a transformada de Laplace da saída e a da entrada. Pelos polos e zeros do sistema é possível determinar sua estabilidade, sua resposta em frequência e suas características de resposta transitória. É a ferramenta de análise mais importante da engenharia de controle.",
+    "field": "Processamento de sinais",
+    "significance": "Resume as características dinâmicas do sistema em uma única função e se tornou a ferramenta padrão do projeto de sistemas de controle e da análise de estabilidade.",
+    "elementMeanings": {
+      "H(s)": { "role": "função de transferência", "description": "São as características do sistema expressas como função da frequência complexa s.", "kind": "output" },
+      "Y(s)": { "role": "transformada de Laplace da saída", "description": "É o resultado da transformada de Laplace do sinal de saída do sistema.", "kind": "output" },
+      "X(s)": { "role": "transformada de Laplace da entrada", "description": "É o resultado da transformada de Laplace do sinal de entrada do sistema.", "kind": "input" },
+      "s": { "role": "frequência complexa", "description": "Variável de Laplace. É usada para analisar os polos e zeros do sistema.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Projeto das características de resposta do sistema de piloto automático de um carro", "Análise da resposta em frequência de um amplificador de áudio"],
+    "relatedFormulas": ["laplace-transform", "z-transform", "convolution"]
+  }
+}

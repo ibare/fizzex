@@ -1,0 +1,210 @@
+{
+  "de-morgan": {
+    "name": "Lois de De Morgan",
+    "oneLiner": "Lois selon lesquelles la négation d'une conjonction est la disjonction des négations, et la négation d'une disjonction la conjonction des négations",
+    "description": "Les lois de De Morgan établissent que la négation échange la conjonction et la disjonction. Elles sont indispensables pour simplifier une expression logique compliquée ou la transformer en une expression équivalente, et elles s'appliquent de la même manière en théorie des ensembles, comme relation entre le complémentaire d'une réunion et celui d'une intersection.",
+    "discoverer": "Augustus De Morgan",
+    "field": "Logique",
+    "significance": "Ce sont des règles de réécriture essentielles, utilisées dans la conception des circuits logiques, l'optimisation des conditions en programmation et les démonstrations de base de la théorie des ensembles.",
+    "elementMeanings": {
+      "A": {
+        "role": "Première proposition",
+        "description": "Première proposition, ou premier ensemble, qui compose l'expression logique.",
+        "kind": "input"
+      },
+      "B": {
+        "role": "Deuxième proposition",
+        "description": "Deuxième proposition, ou deuxième ensemble, qui compose l'expression logique.",
+        "kind": "input"
+      },
+      "\\neg": {
+        "role": "Opérateur de négation",
+        "description": "Opérateur qui inverse la valeur de vérité d'une proposition.",
+        "kind": "structural"
+      },
+      "\\wedge": {
+        "role": "Conjonction (ET)",
+        "description": "Opération qui n'est vraie que si les deux propositions sont vraies.",
+        "kind": "structural"
+      },
+      "\\vee": {
+        "role": "Disjonction (OU)",
+        "description": "Opération qui est vraie dès que l'une au moins des deux propositions est vraie.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Simplifier la négation d'une condition if compliquée en programmation",
+      "Convertir des portes NAND et NOR dans la conception de circuits logiques numériques",
+      "Optimiser une condition NOT (A AND B) dans une requête de base de données"
+    ],
+    "relatedFormulas": [
+      "boolean-complement"
+    ]
+  },
+  "inclusion-exclusion": {
+    "name": "Principe d'inclusion-exclusion",
+    "oneLiner": "Principe qui donne le cardinal de la réunion de deux ensembles en retranchant le cardinal de leur intersection de la somme de leurs cardinaux",
+    "description": "Le principe d'inclusion-exclusion corrige les doubles comptages lorsqu'on dénombre les éléments d'une réunion. Pour deux ensembles, on retranche une fois l'intersection ; à partir de trois ensembles, il se généralise en un motif où l'on inclut les intersections d'un nombre impair d'ensembles et l'on exclut celles d'un nombre pair.",
+    "field": "Théorie des ensembles",
+    "significance": "C'est un principe fondamental du dénombrement, et il fonde une grande partie de la combinatoire : théorème d'addition des probabilités, obtention de l'indicatrice d'Euler, etc.",
+    "elementMeanings": {
+      "|A \\cup B|": {
+        "role": "Cardinal de la réunion",
+        "description": "Nombre total d'éléments appartenant à A ou à B.",
+        "kind": "output"
+      },
+      "|A|": {
+        "role": "Cardinal de A",
+        "description": "Nombre d'éléments de l'ensemble A.",
+        "kind": "input"
+      },
+      "|B|": {
+        "role": "Cardinal de B",
+        "description": "Nombre d'éléments de l'ensemble B.",
+        "kind": "input"
+      },
+      "|A \\cap B|": {
+        "role": "Cardinal de l'intersection",
+        "description": "Nombre d'éléments appartenant à la fois à A et à B. On le retranche pour corriger le double comptage.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Compter, dans un sondage, les personnes ayant choisi au moins l'une des deux réponses",
+      "Obtenir le nombre total de résultats d'une recherche avec un OU, une fois les doublons supprimés",
+      "Calculer la probabilité qu'au moins l'un de deux événements se produise"
+    ],
+    "relatedFormulas": [
+      "combination",
+      "permutation"
+    ]
+  },
+  "power-set": {
+    "name": "Cardinal de l'ensemble des parties",
+    "oneLiner": "Théorème selon lequel un ensemble à n éléments possède 2 puissance n sous-ensembles",
+    "description": "La formule du cardinal de l'ensemble des parties montre que le nombre de sous-ensembles d'un ensemble fini S, l'ensemble vide et S lui-même compris, vaut exactement 2^|S|. Cela s'explique comme un produit de choix binaires : pour chaque élément, on décide indépendamment de l'inclure ou non.",
+    "field": "Théorie des ensembles",
+    "significance": "Résultat fondamental de la combinatoire et de la théorie des ensembles, il sert directement à l'énumération des sous-ensembles, aux algorithmes à masques de bits et à l'analyse de l'espace d'états des circuits logiques.",
+    "elementMeanings": {
+      "|P(S)|": {
+        "role": "Cardinal de l'ensemble des parties",
+        "description": "Nombre de tous les sous-ensembles de l'ensemble S.",
+        "kind": "output"
+      },
+      "2": {
+        "role": "Nombre de choix",
+        "description": "Indique que chaque élément donne lieu à deux possibilités : « inclus » ou « non inclus ».",
+        "kind": "constant",
+        "value": 2
+      },
+      "|S|": {
+        "role": "Nombre d'éléments",
+        "description": "Nombre d'éléments de l'ensemble S de départ.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Compter toutes les commandes possibles à partir d'un menu de n plats",
+      "Analyser, en sécurité réseau, le nombre total de combinaisons de règles de pare-feu",
+      "Concevoir un algorithme d'énumération des sous-ensembles à l'aide de masques de bits"
+    ],
+    "relatedFormulas": [
+      "combination",
+      "permutation"
+    ]
+  },
+  "combination": {
+    "name": "Combinaison",
+    "oneLiner": "Formule qui donne le nombre de façons de choisir k éléments parmi n sans tenir compte de l'ordre",
+    "description": "La formule des combinaisons calcule le nombre de façons de choisir k éléments parmi n éléments distincts, sans tenir compte de l'ordre. C'est le résultat obtenu en divisant le nombre d'arrangements par le nombre d'ordres possibles des k éléments (k!) afin d'éliminer les répétitions ; sa valeur est celle du coefficient binomial.",
+    "field": "Combinatoire",
+    "significance": "C'est l'outil de dénombrement le plus fréquemment employé en mathématiques et en sciences : calcul de probabilités, formule du binôme, échantillonnage statistique.",
+    "elementMeanings": {
+      "C(n,k)": {
+        "role": "Nombre de combinaisons",
+        "description": "Nombre de façons de choisir k éléments parmi n sans tenir compte de l'ordre.",
+        "kind": "output"
+      },
+      "n": {
+        "role": "Nombre total d'éléments",
+        "description": "Nombre total d'éléments parmi lesquels on choisit.",
+        "kind": "input"
+      },
+      "k": {
+        "role": "Nombre d'éléments choisis",
+        "description": "Nombre d'éléments que l'on prend.",
+        "kind": "input"
+      },
+      "n!": {
+        "role": "Factorielle de n",
+        "description": "Produit de tous les entiers naturels de 1 à n.",
+        "kind": "structural"
+      },
+      "k!": {
+        "role": "Factorielle de k",
+        "description": "Nombre d'ordres possibles des éléments choisis. On divise par ce nombre pour éliminer les répétitions.",
+        "kind": "structural"
+      },
+      "(n-k)!": {
+        "role": "Factorielle du reste",
+        "description": "Nombre d'ordres possibles des éléments non choisis. Il sert lui aussi à éliminer les répétitions.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Compter les tirages de 6 numéros parmi 45 au loto",
+      "Nombre de façons de former une équipe de 5 personnes parmi 30 pour un projet collectif",
+      "Calculer le nombre d'échantillons possibles en statistique"
+    ],
+    "relatedFormulas": [
+      "permutation",
+      "inclusion-exclusion",
+      "power-set"
+    ]
+  },
+  "permutation": {
+    "name": "Arrangement",
+    "oneLiner": "Formule qui donne le nombre de façons de ranger k éléments choisis parmi n en tenant compte de l'ordre",
+    "description": "La formule des arrangements calcule le nombre de façons de prendre k éléments parmi n éléments distincts et de les ranger dans un ordre. Elle se déduit naturellement du principe multiplicatif : n possibilités pour la première place, (n-1) pour la deuxième, et ainsi de suite.",
+    "field": "Combinatoire",
+    "significance": "C'est l'outil de base des problèmes de rangement où l'ordre a un sens ; on l'emploie en cryptanalyse, en organisation de plannings ou en analyse du nombre de cas.",
+    "elementMeanings": {
+      "P(n,k)": {
+        "role": "Nombre d'arrangements",
+        "description": "Nombre de façons de prendre k éléments parmi n en tenant compte de l'ordre.",
+        "kind": "output"
+      },
+      "n": {
+        "role": "Nombre total d'éléments",
+        "description": "Nombre total d'éléments parmi lesquels on choisit.",
+        "kind": "input"
+      },
+      "k": {
+        "role": "Nombre d'éléments choisis",
+        "description": "Nombre d'éléments que l'on prend et que l'on range.",
+        "kind": "input"
+      },
+      "n!": {
+        "role": "Factorielle de n",
+        "description": "Produit de tous les entiers naturels de 1 à n.",
+        "kind": "structural"
+      },
+      "(n-k)!": {
+        "role": "Factorielle du reste",
+        "description": "Nombre d'ordres possibles des éléments non choisis. En divisant par ce nombre, on ne compte que les k premières places.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Nombre de codes à 4 chiffres dont les chiffres sont tous différents",
+      "Attributions possibles des médailles d'or, d'argent et de bronze entre 8 coureurs",
+      "Établir un planning qui fait passer 5 candidats à un entretien dans un ordre donné"
+    ],
+    "relatedFormulas": [
+      "combination",
+      "inclusion-exclusion",
+      "power-set"
+    ]
+  }
+}

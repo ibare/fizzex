@@ -1,0 +1,307 @@
+{
+  "euler-identity": {
+    "name": "オイラーの等式",
+    "oneLiner": "数学の5つの根本的な定数を一つの等式で結びつける公式",
+    "description": "オイラーの等式は、自然対数の底 e、虚数単位 i、円周率、1、0 を一つの簡潔な等式に結びます。オイラーの公式で角を円周率に置くと自然に導かれ、数学のさまざまな分野を貫く深いつながりを象徴しています。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "代数学",
+    "significance": "指数関数、三角関数、複素数が一つにつながることを示し、数学の歴史のなかで最も美しい等式に数えられます。",
+    "elementMeanings": {
+      "e": { "role": "自然対数の底", "description": "およそ 2.71828。自然対数の底であり、連続的な成長を表します。", "kind": "constant", "value": 2.71828183 },
+      "i": { "role": "虚数単位", "description": "2乗すると -1 になる数。複素数の基本となる要素です。", "kind": "constant" },
+      "\\pi": { "role": "円周率", "description": "円の周の長さと直径の比。およそ 3.14159 です。", "kind": "constant", "value": 3.14159265 },
+      "1": { "role": "乗法の単位元", "description": "掛け算の単位元であり、自然数の始まりです。", "kind": "constant", "value": 1 },
+      "0": { "role": "加法の単位元", "description": "足し算の単位元であり、この等式の結果の値です。", "kind": "constant", "value": 0 }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "quadratic-formula": {
+    "name": "二次方程式の解の公式",
+    "oneLiner": "二次方程式 ax2+bx+c=0 の解を係数から直接求める公式",
+    "description": "二次方程式の解の公式は、係数 a, b, c だけから方程式の2つの解を正確に計算します。判別式の符号によって実数解の個数が決まり、代数学で最も基本となる解き方です。",
+    "field": "代数学",
+    "significance": "すべての二次方程式を解ける普遍的な道具であり、判別式という考え方によって解が存在するかを判断できるようにします。",
+    "elementMeanings": {
+      "a": { "role": "2次の項の係数", "description": "x の2乗に掛かる数。0でないときに二次方程式になります。", "kind": "input" },
+      "b": { "role": "1次の項の係数", "description": "x に掛かる数。放物線の軸の位置に影響します。", "kind": "input" },
+      "c": { "role": "定数項", "description": "変数がつかずに足される定数。y切片を決めます。", "kind": "input" },
+      "b^2-4ac": { "role": "判別式", "description": "解の個数と種類を決めます。正なら異なる2つの実数解、0なら重解、負なら虚数解です。", "kind": "output" },
+      "\\pm": { "role": "複号", "description": "足す場合と引く場合の2つを同時に表し、2つの解を示します。", "kind": "structural" }
+    },
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem"]
+  },
+  "binomial-theorem": {
+    "name": "二項定理",
+    "oneLiner": "2つの項の和のべき乗を二項係数で展開する定理",
+    "description": "二項定理は、(a+b) の n 乗を二項係数を使って級数の形に展開します。組合せ論と代数学をつなぐ中心的な道具であり、パスカルの三角形と深い関わりがあります。",
+    "discoverer": "アイザック・ニュートン(一般化)",
+    "field": "代数学",
+    "significance": "多項式の展開、確率論、組合せ論など数学の全般で広く使われ、近似の計算の基礎を与えます。",
+    "elementMeanings": {
+      "a": { "role": "1つ目の項", "description": "二項式の1つ目の項。展開すると次数が減っていきます。", "kind": "input" },
+      "b": { "role": "2つ目の項", "description": "二項式の2つ目の項。展開すると次数が増えていきます。", "kind": "input" },
+      "n": { "role": "べき乗の指数", "description": "二項式を何回掛けるかを表す、0以上の整数です。", "kind": "input" },
+      "k": { "role": "展開の添字", "description": "それぞれの項で b が掛けられる回数を表す、総和の変数です。", "kind": "input" },
+      "\\binom{n}{k}": { "role": "二項係数", "description": "n 個から k 個を選ぶ組合せの数。パスカルの三角形のそれぞれの値にあたります。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "geometric-series": {
+    "name": "等比級数の和の公式",
+    "oneLiner": "公比が一定の級数の和を閉じた形で求める公式",
+    "description": "等比級数の和の公式は、初項 a と公比 r が与えられたときに級数の和を簡潔に計算します。公比の絶対値が1より小さければ無限級数も収束し、金融の数学や物理学で広く使われます。",
+    "field": "代数学",
+    "significance": "収束する無限の過程を有限の値で表せるようにし、複利の計算や信号処理など実用的な応用がとても広い公式です。",
+    "elementMeanings": {
+      "a": { "role": "初項", "description": "級数の1つ目の項。全体の和の大きさを決める基準の値です。", "kind": "input" },
+      "r": { "role": "公比", "description": "連続する項どうしの比。絶対値が1より小さいときに無限級数が収束します。", "kind": "input" },
+      "n": { "role": "項の個数", "description": "有限の級数で足し合わせる項の数です。", "kind": "input" },
+      "S_n": { "role": "部分和", "description": "初めの n 個の項までの和です。", "kind": "output" },
+      "S_{\\infty}": { "role": "無限級数の和", "description": "公比の絶対値が1より小さいとき a/(1-r) に収束する値です。", "kind": "output" }
+    },
+    "relatedFormulas": ["taylor-series", "binomial-theorem"]
+  },
+  "difference-of-squares": {
+    "name": "平方の差の公式",
+    "oneLiner": "2つの数の2乗の差を、和と差の積に因数分解する公式",
+    "description": "平方の差の公式は、a の2乗から b の2乗を引いた値が (a+b)(a-b) と等しいという恒等式です。因数分解の最も基本的なパターンであり、高い次数の多項式の分解や暗算にも使われます。",
+    "field": "代数学",
+    "significance": "代数的な因数分解の出発点であり、有理化、極限の計算、整数論の素因数分解などさまざまな分野で欠かせません。",
+    "elementMeanings": {
+      "a": { "role": "1つ目の値", "description": "2乗される1つ目の数または式です。", "kind": "input" },
+      "b": { "role": "2つ目の値", "description": "2乗される2つ目の数または式です。", "kind": "input" },
+      "a^2": { "role": "1つ目の2乗", "description": "a を2乗した値です。", "kind": "structural" },
+      "b^2": { "role": "2つ目の2乗", "description": "b を2乗した値です。", "kind": "structural" },
+      "(a+b)": { "role": "和の因数", "description": "a と b の和からなる因数です。", "kind": "structural" },
+      "(a-b)": { "role": "差の因数", "description": "a から b を引いた差からなる因数です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["quadratic-formula", "binomial-theorem"]
+  },
+  "perfect-square": {
+    "name": "完全平方式",
+    "oneLiner": "2つの項の和の2乗を展開する恒等式",
+    "description": "完全平方式は、(a+b) の2乗が a の2乗、2ab、b の2乗の和に等しいという恒等式です。2次式の因数分解や完全平方かどうかの判定で中心的に使われ、二次方程式を平方完成で解く方法の土台になります。",
+    "field": "代数学",
+    "significance": "2次式の構造をつかむ最も基本的な道具であり、頂点の形への変形や最小値を求める問題に欠かせません。",
+    "elementMeanings": {
+      "a": { "role": "1つ目の項", "description": "2乗される二項式の1つ目の項です。", "kind": "input" },
+      "b": { "role": "2つ目の項", "description": "2乗される二項式の2つ目の項です。", "kind": "input" },
+      "a^2": { "role": "1つ目の項の2乗", "description": "a を2乗した値です。", "kind": "structural" },
+      "2ab": { "role": "交差項", "description": "a と b の積に2を掛けた値。展開したときに現れる中間の項です。", "kind": "structural" },
+      "b^2": { "role": "2つ目の項の2乗", "description": "b を2乗した値です。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "正方形の畑の1辺を b だけ伸ばしたときに増える全体の面積を計算する",
+      "統計学で分散の公式を展開したり整理したりするときに使う"
+    ],
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem", "quadratic-formula"]
+  },
+  "sum-difference-product": {
+    "name": "和と差の積の公式",
+    "oneLiner": "2つの項の和と差を掛けると2乗の差になる恒等式",
+    "description": "和と差の積の公式は、(a+b)(a-b) が a の2乗から b の2乗を引いた値に等しいという恒等式です。平方の差の公式を因数分解した形と同じものですが、掛け算の側から眺めた見方です。複雑な掛け算を単純な2乗の計算に変えるときに役立ちます。",
+    "field": "代数学",
+    "significance": "暗算や数値の計算で掛け算を2乗の差に置きかえて計算を簡単にし、有理化と因数分解の中心的な道具になります。",
+    "elementMeanings": {
+      "a": { "role": "基準の値", "description": "和にも差にも共通して現れる値です。", "kind": "input" },
+      "b": { "role": "変化量", "description": "基準の値に足したり引いたりする値です。", "kind": "input" },
+      "(a+b)": { "role": "和", "description": "a と b を足した因数です。", "kind": "structural" },
+      "(a-b)": { "role": "差", "description": "a から b を引いた因数です。", "kind": "structural" },
+      "a^2-b^2": { "role": "2乗の差", "description": "結果の値。2つの数の2乗の差です。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "49 x 51 を (50+1)(50-1) = 2500-1 = 2499 として暗算する",
+      "分母の無理数を取り除く有理化の過程で使う"
+    ],
+    "relatedFormulas": ["difference-of-squares", "perfect-square"]
+  },
+  "arithmetic-series-sum": {
+    "name": "等差級数の和の公式",
+    "oneLiner": "等差数列の初めの n 個の項の和を求める公式",
+    "description": "等差級数の和の公式は、初項と最後の項の平均に項の個数を掛けて和を求めます。ガウスが子どものころに1から100までの和を求めた逸話で有名であり、等差数列の対称的な構造を生かした優雅な公式です。",
+    "discoverer": "カール・フリードリヒ・ガウス(逸話にもとづく帰属)",
+    "field": "代数学",
+    "significance": "規則正しく増えたり減ったりする量の合計を素早く計算できるようにし、離散数学とアルゴリズムの解析の基礎になります。",
+    "elementMeanings": {
+      "S_n": { "role": "級数の和", "description": "初めの n 個の項をすべて足した値です。", "kind": "output" },
+      "n": { "role": "項の個数", "description": "足し合わせる項の総数です。", "kind": "input" },
+      "a_1": { "role": "初項", "description": "数列の1つ目の項です。", "kind": "input" },
+      "a_n": { "role": "最後の項", "description": "数列の n 番目の項です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "階段状に並んだ座席の総数を計算する(1列ごとに一定の数ずつ増える)",
+      "給料が毎月一定額ずつ上がるときの年間の総収入を計算する"
+    ],
+    "relatedFormulas": ["arithmetic-general", "geometric-series-sum"]
+  },
+  "arithmetic-general": {
+    "name": "等差数列の一般項",
+    "oneLiner": "等差数列の n 番目の項を初項と公差から求める公式",
+    "description": "等差数列の一般項の公式は、初項に公差の (n-1) 倍を足して、任意の n 番目の項を直接計算します。数列の規則性を一つの式で表し、等差数列が線形であることをはっきりと示します。",
+    "field": "代数学",
+    "significance": "数列のパターンを式でとらえる最も基本的な方法であり、関数の考え方へとつながる橋渡しになります。",
+    "elementMeanings": {
+      "a_n": { "role": "一般項", "description": "数列の n 番目の項の値です。", "kind": "output" },
+      "a_1": { "role": "初項", "description": "数列の始まりの値です。", "kind": "input" },
+      "n": { "role": "項の番号", "description": "求めたい項が何番目かを表す自然数です。", "kind": "input" },
+      "d": { "role": "公差", "description": "連続する2つの項の間の一定の差です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "エレベーターが階ごとに同じ高さだけ上がるときの n 階の高さを計算する",
+      "時間が一定に進むときの、ある時点の値を予測する"
+    ],
+    "relatedFormulas": ["arithmetic-series-sum", "geometric-general"]
+  },
+  "geometric-series-sum": {
+    "name": "等比級数の有限和の公式",
+    "oneLiner": "等比数列の初めの n 個の項の和を求める公式",
+    "description": "等比級数の有限和の公式は、初項・公比・項の数を使って級数の和を閉じた形で計算します。公比が1でないときに使え、公比の n 乗が中心的な役割をします。既存の等比級数の和の公式(geometric-series)とは違い、有限の和に焦点を当てています。",
+    "field": "代数学",
+    "significance": "複利の計算、分割払いの算定、減価償却など、実生活での指数的な変化を数量にするのにそのまま使われます。",
+    "elementMeanings": {
+      "S_n": { "role": "有限和", "description": "初めの n 個の項までの和です。", "kind": "output" },
+      "a_1": { "role": "初項", "description": "級数の1つ目の項です。", "kind": "input" },
+      "r": { "role": "公比", "description": "連続する項どうしの比です。1であってはいけません。", "kind": "input" },
+      "n": { "role": "項の個数", "description": "足し合わせる項の総数です。", "kind": "input" },
+      "r^n": { "role": "公比の n 乗", "description": "公比を n 回掛けた値。級数が発散するか収束するかの速さを決めます。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "毎年一定の割合で増える投資額の n 年後の累計を計算する",
+      "薬が1時間ごとに一定の割合で体内で分解されるときの、残っている量の累計を計算する"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-general", "infinite-geometric"]
+  },
+  "geometric-general": {
+    "name": "等比数列の一般項",
+    "oneLiner": "等比数列の n 番目の項を初項と公比から求める公式",
+    "description": "等比数列の一般項の公式は、初項に公比の (n-1) 乗を掛けて、任意の n 番目の項を直接計算します。数列が指数的に増えたり減ったりするパターンを、一つの式で表します。",
+    "field": "代数学",
+    "significance": "人口の増加、放射性物質の崩壊、複利など、指数的な変化をモデルにするための基本的な道具です。",
+    "elementMeanings": {
+      "a_n": { "role": "一般項", "description": "数列の n 番目の項の値です。", "kind": "output" },
+      "a_1": { "role": "初項", "description": "数列の始まりの値です。", "kind": "input" },
+      "r": { "role": "公比", "description": "連続する2つの項の間の比です。", "kind": "input" },
+      "n": { "role": "項の番号", "description": "求めたい項が何番目かを表す自然数です。", "kind": "input" },
+      "r^{n-1}": { "role": "公比のべき乗", "description": "公比を (n-1) 回掛けた値。初項からの倍率を表します。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "細菌が世代ごとに2倍に分裂するときの n 世代後の個体数を計算する",
+      "毎年一定の利率で複利がつく預金の n 年後の元利合計を計算する"
+    ],
+    "relatedFormulas": ["geometric-series-sum", "arithmetic-general", "infinite-geometric"]
+  },
+  "infinite-geometric": {
+    "name": "無限等比級数",
+    "oneLiner": "公比の絶対値が1より小さいときに、無限に足し合わせた等比級数の和",
+    "description": "無限等比級数の公式は、公比の絶対値が1より小さいとき、等比級数が無限に続いても有限の値に収束することを示します。初項を (1-公比) で割ると収束する値が得られます。極限と収束の考え方を理解するのに最も直感的な例です。",
+    "field": "代数学",
+    "significance": "無限の過程が有限の結果を生みうるという数学的な洞察の代表的な例であり、解析学と級数論の出発点です。",
+    "elementMeanings": {
+      "S": { "role": "無限級数の和", "description": "限りなく多くの項を足し合わせた収束の値です。", "kind": "output" },
+      "a_1": { "role": "初項", "description": "級数の1つ目の項です。", "kind": "input" },
+      "r": { "role": "公比", "description": "連続する項どうしの比。|r|<1 でなければ収束しません。", "kind": "input" },
+      "1-r": { "role": "収束の分母", "description": "1から公比を引いた値。この値で割って収束する値を求めます。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "ボールが床にぶつかるたびに高さの一定の割合だけはね返るときの、移動した距離の合計",
+      "循環小数を分数に直す過程(例: 0.333... = 1/3)"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-series-sum", "geometric-general"]
+  },
+  "exponent-law": {
+    "name": "指数法則",
+    "oneLiner": "同じ底のべき乗どうしを掛けるとき、指数を足すという法則",
+    "description": "指数法則は、同じ底 a のべき乗どうしを掛けると、指数を足したものと等しくなるという基本の法則です。これはべき乗の定義から自然に導かれ、指数の計算の体系全体の土台になります。割り算やべき乗のべき乗など、ほかの指数法則もこの法則から生まれます。",
+    "field": "代数学",
+    "significance": "指数の計算の最も根本的な規則であり、対数の法則、指数関数、科学的記数法などの土台になります。",
+    "elementMeanings": {
+      "a": { "role": "底", "description": "べき乗の基準になる数。0でない実数です。", "kind": "input" },
+      "m": { "role": "1つ目の指数", "description": "1つ目のべき乗の指数です。", "kind": "input" },
+      "n": { "role": "2つ目の指数", "description": "2つ目のべき乗の指数です。", "kind": "input" },
+      "m+n": { "role": "足し合わせた指数", "description": "2つの指数を足した値。積の結果の指数です。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "科学的記数法で10のべき乗を掛けるときに、指数を足して簡単に計算する",
+      "コンピューターのメモリーの単位を変えるときに2のべき乗をあつかう"
+    ],
+    "relatedFormulas": ["log-definition", "log-product-rule"]
+  },
+  "log-definition": {
+    "name": "対数の定義",
+    "oneLiner": "べき乗の逆の演算として対数を定める同値な関係",
+    "description": "対数の定義は、底 a を c 回べき乗すると b になるという指数の関係を、対数の書き方に置きかえて表します。指数と対数が互いに逆の演算であることをはっきりさせ、対数の計算の出発点になります。",
+    "discoverer": "ジョン・ネイピア",
+    "field": "代数学",
+    "significance": "掛け算を足し算に変えるという対数の中心的な性質を可能にし、科学の計算と情報理論の基本的な道具です。",
+    "elementMeanings": {
+      "a": { "role": "底", "description": "対数の底。1ではない正の数でなければなりません。", "kind": "input" },
+      "b": { "role": "真数", "description": "対数をとる対象。正の数でなければなりません。", "kind": "input" },
+      "c": { "role": "対数の値", "description": "底を何回べき乗すれば真数になるかを表す数です。", "kind": "output" },
+      "\\log_a b": { "role": "対数の表記", "description": "底が a、真数が b の対数です。", "kind": "structural" },
+      "a^c = b": { "role": "指数の表記", "description": "同じ関係を指数の形で表したものです。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "地震の規模(マグニチュード)が対数の尺度で定められ、1増えるとエネルギーがおよそ31.6倍になる",
+      "音の大きさ(デシベル)が対数の尺度で測られ、人の聴覚の広い範囲をあつかえる"
+    ],
+    "relatedFormulas": ["exponent-law", "log-product-rule"]
+  },
+  "log-product-rule": {
+    "name": "対数の積の法則",
+    "oneLiner": "2つの数の積の対数が、それぞれの対数の和に等しいという法則",
+    "description": "対数の積の法則は、積の対数をそれぞれの対数の和に分けられることを示します。指数法則から直接導かれ、対数が掛け算を足し算に変えるという中心的な性質を表します。商の法則やべき乗の法則も、この原理を広げたものです。",
+    "field": "代数学",
+    "significance": "複雑な掛け算を簡単な足し算に置きかえられるようにし、計算機のなかった時代の数値計算に革命をもたらしました。",
+    "elementMeanings": {
+      "a": { "role": "1つ目の因数", "description": "掛け合わされる1つ目の正の数です。", "kind": "input" },
+      "b": { "role": "2つ目の因数", "description": "掛け合わされる2つ目の正の数です。", "kind": "input" },
+      "\\log(ab)": { "role": "積の対数", "description": "a と b の積に対数をとった値です。", "kind": "structural" },
+      "\\log a": { "role": "1つ目の対数", "description": "a に対数をとった値です。", "kind": "structural" },
+      "\\log b": { "role": "2つ目の対数", "description": "b に対数をとった値です。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "天文学で星の明るさ(等級)を比べるときに、明るさの比を等級の差(足し算)に置きかえる",
+      "情報理論で独立な事象を合わせた情報量を、それぞれの情報量の和として計算する"
+    ],
+    "relatedFormulas": ["log-definition", "exponent-law"]
+  },
+  "complex-plane": {
+    "name": "複素平面",
+    "oneLiner": "複素数 z = a + bi を (a, b) の座標の点として目に見える形にする平面",
+    "description": "複素平面(アルガン図)は、複素数を横軸の実部と縦軸の虚部で表す2次元の座標系です。それぞれの複素数は平面上の1点、あるいは原点から出発するベクトルに対応し、絶対値 |z| は原点からの距離、偏角 arg(z) は正の実軸となす角になります。極形式とオイラーの公式を通して、回転や拡大といった幾何的な意味が自然に現れます。",
+    "field": "代数学",
+    "significance": "複素数の抽象的な定義を幾何的な直感と結びつけ、複素関数や回転の変換を目で見て理解できるようにします。",
+    "elementMeanings": {
+      "z": { "role": "複素数", "description": "実部と虚部からなる平面上の点です。", "kind": "input" },
+      "a": { "role": "実部", "description": "z の横軸の座標、Re(z) です。", "kind": "structural" },
+      "b": { "role": "虚部", "description": "z の縦軸の座標、Im(z) です。", "kind": "structural" },
+      "|z|": { "role": "絶対値", "description": "原点から z までの距離。sqrt(a^2 + b^2) です。", "kind": "output" },
+      "\\arg(z)": { "role": "偏角", "description": "正の実軸と、原点から z へ向かうベクトルがなす角。atan2(b, a) です。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "交流回路のインピーダンスを複素平面のベクトルで表し、位相の差を目に見える形にする",
+      "信号処理のフーリエ変換の結果を、複素平面での大きさと位相として解析する"
+    ],
+    "relatedFormulas": ["euler-identity"]
+  },
+  "linear-transform-2x2": {
+    "name": "2×2 の線形変換",
+    "oneLiner": "2×2 の行列 M が平面のベクトルを別のベクトルへ送る1次変換",
+    "description": "2×2 の線形変換は、行列 M = [[a, b], [c, d]] が平面上のすべての点 (x, y) を (ax + by, cx + dy) へ送る関数です。基底ベクトル e1, e2 が M の列ベクトルへ移り、単位の正方形は平行四辺形に、格子は変換された格子に変わります。行列式 det(M) は面積の変化の割合と向きを表し、0のときは次元がつぶれます。",
+    "field": "代数学",
+    "significance": "回転・反射・拡大・せん断といった平面の幾何的な変換を一つの行列にまとめて表し、コンピューターグラフィックスと線形代数の基礎になります。",
+    "elementMeanings": {
+      "M": { "role": "変換の行列", "description": "2×2 の実数の行列。平面の1次変換を決めます。", "kind": "input" },
+      "a": { "role": "M[0][0]", "description": "基底 e1 の横の成分が、変換したあとにもつ横の座標です。", "kind": "structural" },
+      "b": { "role": "M[0][1]", "description": "基底 e2 の横の成分が、変換したあとにもつ横の座標です。", "kind": "structural" },
+      "c": { "role": "M[1][0]", "description": "基底 e1 の縦の成分が、変換したあとにもつ縦の座標です。", "kind": "structural" },
+      "d": { "role": "M[1][1]", "description": "基底 e2 の縦の成分が、変換したあとにもつ縦の座標です。", "kind": "structural" },
+      "\\det(M)": { "role": "行列式", "description": "ad - bc。変換したあとの単位面積の倍率と向き(符号)です。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "2D のグラフィックスエンジンが回転・拡大・せん断を一つの 2×2 行列の積で処理する",
+      "主成分分析(PCA)が、データの分散の向きを 2×2 の共分散行列の固有ベクトルとして取り出す"
+    ],
+    "relatedFormulas": []
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "Quadratic form",
+    "oneLiner": "An expression containing x squared — its graph is a parabola",
+    "slots": {
+      "a": {
+        "role": "Quadratic coefficient",
+        "description": "Sets which way the parabola opens and how wide it is"
+      },
+      "b": {
+        "role": "Linear coefficient",
+        "description": "Shifts the axis of symmetry left or right"
+      },
+      "c": {
+        "role": "Constant term",
+        "description": "The height at which the graph crosses the y-axis"
+      },
+      "x": {
+        "role": "Observation point",
+        "description": "The x value to inspect on the graph"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "Free exploration — quadratic function",
+        "description": "Watch a, b and c change on the coordinate plane"
+      },
+      "quadratic-bridge-2d": {
+        "name": "Bridge arch — quadratic function",
+        "description": "A parabola seen through piers, arches and reflection"
+      },
+      "quadratic-basketball-2d": {
+        "name": "Basketball free throw — quadratic function",
+        "description": "The trajectory from release height through peak to landing"
+      },
+      "quadratic-fountain-2d": {
+        "name": "Fountain — quadratic function",
+        "description": "The top of the water jet is exactly the vertex"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "Sum of two squares form",
+    "oneLiner": "The squares of two values add up to the square of the third",
+    "slots": {
+      "a": {
+        "role": "First leg",
+        "description": "One of the sides forming the right angle"
+      },
+      "b": {
+        "role": "Second leg",
+        "description": "The other side forming the right angle"
+      },
+      "c": {
+        "role": "Hypotenuse",
+        "description": "The longest side, opposite the right angle"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "Free exploration",
+        "description": "The Pythagorean theorem seen through a right triangle and the squares on its three sides"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "Ladder",
+        "description": "The angle and safety of a ladder leaning against a wall"
+      },
+      "pythagorean-tv-2d": {
+        "name": "TV screen",
+        "description": "Converting screen width and height into a diagonal in inches"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "Shortcut",
+        "description": "Comparing the distance around the block with cutting across it"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "Exponential change form",
+    "oneLiner": "The rate of change is proportional to the current amount, so it grows or decays exponentially",
+    "slots": {
+      "N_0": {
+        "role": "Initial value",
+        "description": "The amount at time zero"
+      },
+      "r": {
+        "role": "Rate of change",
+        "description": "Positive means growth, negative means decay"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "Exponential decay — 2D",
+        "description": "Get a feel for half-life by switching between caffeine, battery, carbon-14 and drug anchors"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "Compound interest form",
+    "oneLiner": "Interest earns interest of its own, so the principal keeps building",
+    "slots": {
+      "P": {
+        "role": "Principal",
+        "description": "The amount deposited at the start"
+      },
+      "r": {
+        "role": "Annual interest rate",
+        "description": "The interest rate on a yearly basis"
+      },
+      "n": {
+        "role": "Compounding periods per year",
+        "description": "How many times a year interest is added"
+      },
+      "t": {
+        "role": "Term",
+        "description": "The number of years the money is left in"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "Compound interest — 2D",
+        "description": "Get a feel for compound growth by switching between savings, stocks, instalment savings and inflation anchors"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "Constant-acceleration displacement form",
+    "oneLiner": "The distance covered under constant acceleration — it carries a term proportional to time squared",
+    "slots": {
+      "v_0": {
+        "role": "Initial velocity",
+        "description": "The velocity at the moment of departure"
+      },
+      "a": {
+        "role": "Acceleration",
+        "description": "The acceleration, held constant"
+      },
+      "t": {
+        "role": "Elapsed time",
+        "description": "The moment being observed"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "Free fall — 2D",
+        "description": "Get a feel for gravitational acceleration per planet with Earth, Moon, Mars and Jupiter anchors"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "Sinusoid form",
+    "oneLiner": "A waveform that repeats the same shape at a fixed period",
+    "slots": {
+      "A": {
+        "role": "Amplitude",
+        "description": "The height from the centre line to the crest"
+      },
+      "\\omega": {
+        "role": "Angular frequency",
+        "description": "How quickly the shape repeats"
+      },
+      "\\varphi": {
+        "role": "Phase",
+        "description": "How far the waveform is pushed left or right"
+      },
+      "t": {
+        "role": "Observation time",
+        "description": "The moment to inspect on the waveform"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "Sine wave — 2D",
+        "description": "Get a feel for amplitude, period and phase with speaker, pendulum, tide and voltmeter anchors"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "Orbital period form",
+    "oneLiner": "The larger the orbit, the longer one revolution takes",
+    "slots": {
+      "M": {
+        "role": "Mass of the central body",
+        "description": "The mass of the body the orbit is centred on"
+      },
+      "a": {
+        "role": "Semi-major axis",
+        "description": "The longer radius of the elliptical orbit"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "Earth orbit — 2D",
+        "description": "A 2D overhead view observed while switching between ISS, GPS, geostationary orbit and the Moon"
+      },
+      "kepler-orbit-3d": {
+        "name": "Earth orbit — 3D",
+        "description": "A spatial view that rotates the same anchors in 3D to build a sense of distance"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "Tangent line form",
+    "oneLiner": "The straight line that grazes a curve at one point with the same slope",
+    "slots": {
+      "f": {
+        "role": "Curve",
+        "description": "The function to draw the tangent line to"
+      },
+      "x": {
+        "role": "Observation point",
+        "description": "The x value at which to move the point of tangency"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "Tangent explorer — 2D",
+        "description": "An interactive view showing the curve y=f(x) together with its tangent line at the point x"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "Complex number form",
+    "oneLiner": "A number made of a real part and an imaginary part — a point on the plane",
+    "slots": {
+      "a": {
+        "role": "Real part",
+        "description": "The horizontal coordinate"
+      },
+      "b": {
+        "role": "Imaginary part",
+        "description": "The vertical coordinate"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "2×2 transformation form",
+    "oneLiner": "A linear transformation that sends vectors of the plane to other vectors",
+    "slots": {
+      "a": {
+        "role": "Row 1, column 1",
+        "description": "How far the image of the x-axis stretches horizontally"
+      },
+      "b": {
+        "role": "Row 1, column 2",
+        "description": "How far the image of the y-axis tilts horizontally"
+      },
+      "c": {
+        "role": "Row 2, column 1",
+        "description": "How far the image of the x-axis tilts vertically"
+      },
+      "d": {
+        "role": "Row 2, column 2",
+        "description": "How far the image of the y-axis stretches vertically"
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "Définition du sinus",
+    "oneLiner": "Rapport entre la longueur du côté opposé à un angle et celle de l'hypoténuse dans un triangle rectangle",
+    "description": "Le sinus (sin) est, dans un triangle rectangle, le côté situé en face de l'angle considéré (le côté opposé) divisé par le plus long côté (l'hypoténuse). Une fois l'angle fixé, cette valeur reste la même quelle que soit la taille du triangle. C'est le plus fondamental des rapports trigonométriques.",
+    "field": "Trigonométrie",
+    "significance": "Rapport trigonométrique le plus élémentaire pour relier les côtés et les angles d'un triangle rectangle, il est au cœur de l'étude des ondes et des vibrations en physique et en ingénierie.",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "Valeur du sinus", "description": "Rapport sinus associé à l'angle thêta.", "kind": "output" },
+      "\\theta": { "role": "Angle", "description": "Angle de référence dans le triangle rectangle. Il désigne l'un des angles qui n'est pas l'angle droit.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Côté opposé", "description": "Côté situé en face de l'angle de référence.", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Hypoténuse", "description": "Le plus long côté du triangle rectangle. Il est situé en face de l'angle droit.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Trouver la hauteur d'un arbre à partir de la longueur de son ombre et de l'angle du soleil",
+      "Calculer la hauteur verticale d'une pente dont on connaît l'angle d'inclinaison",
+      "Déterminer la hauteur maximale atteinte par une balançoire"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "Définition du cosinus",
+    "oneLiner": "Rapport entre la longueur du côté adjacent à un angle et celle de l'hypoténuse dans un triangle rectangle",
+    "description": "Le cosinus (cos) est, dans un triangle rectangle, le côté qui touche l'angle de référence (le côté adjacent) divisé par le plus long côté (l'hypoténuse). Comme pour le sinus, sa valeur ne dépend que de l'angle et reste la même quelle que soit la taille du triangle.",
+    "field": "Trigonométrie",
+    "significance": "Avec le sinus, il constitue l'un des deux piliers de la trigonométrie et intervient nécessairement dans le produit scalaire, le traitement du signal ou la rotation des coordonnées.",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "Valeur du cosinus", "description": "Rapport cosinus associé à l'angle thêta.", "kind": "output" },
+      "\\theta": { "role": "Angle", "description": "Angle de référence dans le triangle rectangle.", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "Côté adjacent", "description": "Côté qui touche l'angle de référence (hypoténuse exclue).", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Hypoténuse", "description": "Le plus long côté du triangle rectangle.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calculer la distance horizontale entre le pied d'une échelle appuyée contre un mur et ce mur",
+      "Trouver la distance horizontale parcourue sur une colline dont on connaît l'angle de pente",
+      "Calculer la position horizontale de l'extrémité d'un bras robotisé à partir de l'angle de ses articulations"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "Définition de la tangente",
+    "oneLiner": "Rapport entre la longueur du côté opposé à un angle et celle du côté adjacent dans un triangle rectangle",
+    "description": "La tangente (tan) est, dans un triangle rectangle, le côté situé en face de l'angle de référence (le côté opposé) divisé par le côté qui le touche (le côté adjacent). Cela revient à diviser le sinus par le cosinus. Elle est particulièrement commode pour exprimer une pente ou une inclinaison.",
+    "field": "Trigonométrie",
+    "significance": "Rapport trigonométrique qui traduit directement une pente, elle est largement employée en topographie, en navigation et en conception architecturale.",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "Valeur de la tangente", "description": "Rapport tangente associé à l'angle thêta.", "kind": "output" },
+      "\\theta": { "role": "Angle", "description": "Angle de référence dans le triangle rectangle.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Côté opposé", "description": "Côté situé en face de l'angle de référence.", "kind": "input" },
+      "\\text{adjacent}": { "role": "Côté adjacent", "description": "Côté qui touche l'angle de référence (hypoténuse exclue).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Mesurer la hauteur d'un bâtiment grâce à l'angle sous lequel on le vise depuis une distance connue",
+      "Calculer la déclivité (en %) indiquée sur un panneau routier",
+      "Trouver l'altitude d'un sommet à partir de la distance horizontale et de l'angle de visée"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "Identité trigonométrique de Pythagore",
+    "oneLiner": "Identité selon laquelle la somme du carré du sinus et du carré du cosinus vaut toujours 1",
+    "description": "L'identité trigonométrique de Pythagore garantit que, pour n'importe quel angle, le carré du sinus plus le carré du cosinus vaut exactement 1. Elle se déduit immédiatement du théorème de Pythagore (le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés) en divisant les deux membres par le carré de l'hypoténuse. C'est la relation la plus fondamentale entre les fonctions trigonométriques.",
+    "field": "Trigonométrie",
+    "significance": "Point de départ de toutes les identités trigonométriques, c'est la relation de base la plus souvent utilisée dans les transformations d'expressions et les démonstrations.",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "Carré du sinus", "description": "Le sinus de thêta élevé au carré.", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "Carré du cosinus", "description": "Le cosinus de thêta élevé au carré.", "kind": "structural" },
+      "\\theta": { "role": "Angle", "description": "Un angle quelconque. L'identité est vraie pour toute valeur.", "kind": "input", "unit": "rad" },
+      "1": { "role": "Somme", "description": "La somme du carré du sinus et du carré du cosinus vaut toujours 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Obtenir directement le cosinus quand on connaît le sinus lors d'un calcul trigonométrique",
+      "Vérifier en physique l'exactitude de la décomposition d'un vecteur en composantes",
+      "Contrôler en infographie qu'une rotation conserve bien les longueurs"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "Loi des sinus",
+    "oneLiner": "Loi selon laquelle chaque côté d'un triangle divisé par le sinus de l'angle opposé donne toujours la même valeur",
+    "description": "La loi des sinus est une relation valable dans un triangle quelconque (il n'a pas besoin d'être rectangle). Le côté a divisé par le sinus de l'angle A, le côté b divisé par le sinus de l'angle B et le côté c divisé par le sinus de l'angle C donnent tous la même valeur. Ce rapport est aussi égal au diamètre du cercle circonscrit au triangle.",
+    "field": "Trigonométrie",
+    "significance": "Elle permet de relier côtés et angles même dans un triangle non rectangle et constitue un outil essentiel de la topographie et de la navigation.",
+    "elementMeanings": {
+      "a": { "role": "Côté a", "description": "Longueur du côté situé en face de l'angle A.", "kind": "input" },
+      "b": { "role": "Côté b", "description": "Longueur du côté situé en face de l'angle B.", "kind": "input" },
+      "c": { "role": "Côté c", "description": "Longueur du côté situé en face de l'angle C.", "kind": "input" },
+      "\\sin A": { "role": "Sinus de l'angle A", "description": "Valeur du sinus de l'angle au sommet A du triangle.", "kind": "structural" },
+      "\\sin B": { "role": "Sinus de l'angle B", "description": "Valeur du sinus de l'angle au sommet B du triangle.", "kind": "structural" },
+      "\\sin C": { "role": "Sinus de l'angle C", "description": "Valeur du sinus de l'angle au sommet C du triangle.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calculer la distance jusqu'à un bâtiment situé de l'autre côté d'une rivière à partir des angles mesurés depuis deux points",
+      "Déterminer une position par triangulation sans GPS",
+      "Situer un navire en mer grâce à l'angle entre deux phares"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

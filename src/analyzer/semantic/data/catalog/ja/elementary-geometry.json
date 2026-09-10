@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "三角形の面積",
+    "oneLiner": "底辺と高さを掛けて2で割り、三角形の面積を求める公式",
+    "description": "三角形の面積は、底辺の長さに高さを掛けて2で割った値です。長方形を対角線で切ると三角形が2つできるので、長方形の面積の半分になります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "三角形が占める広さです。", "kind": "output" },
+      "b": { "role": "底辺", "description": "三角形の下側の辺の長さです。", "kind": "input" },
+      "h": { "role": "高さ", "description": "底辺から頂点までの垂直の距離です。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "半分", "description": "長方形の半分であるという意味です。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["屋根の三角形の面積を求める", "三角の旗の布の広さを計算する"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "長方形の面積",
+    "oneLiner": "横と縦を掛けて長方形の面積を求める公式",
+    "description": "長方形の面積は、横の長さと縦の長さを掛けた値です。4つの角がすべて直角の四角形で、1列に単位の正方形がいくつ入るかを数え、その列が何列あるかを掛けることと同じです。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "長方形が占める広さです。", "kind": "output" },
+      "l": { "role": "横", "description": "長方形の横の長さです。", "kind": "input" },
+      "w": { "role": "縦", "description": "長方形の縦の長さです。", "kind": "input" }
+    },
+    "realWorldExamples": ["部屋の床の面積を求める", "黒板の広さを計算する", "スマートフォンの画面の大きさを比べる"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "正方形の面積",
+    "oneLiner": "1辺の長さを2乗して正方形の面積を求める公式",
+    "description": "正方形の面積は、1辺の長さを自分自身と掛けた値です。4つの辺の長さがすべて同じなので、横と縦が等しい長方形の面積と同じ考え方です。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "正方形が占める広さです。", "kind": "output" },
+      "s": { "role": "1辺", "description": "正方形の1辺の長さです。", "kind": "input" },
+      "s^2": { "role": "辺の2乗", "description": "1辺の長さを2回掛けた値です。", "kind": "output" }
+    },
+    "realWorldExamples": ["タイル1枚の面積を求める", "正方形の額縁の大きさを計算する"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "平行四辺形の面積",
+    "oneLiner": "底辺と高さを掛けて平行四辺形の面積を求める公式",
+    "description": "平行四辺形の面積は、底辺の長さに高さを掛けた値です。平行四辺形を切って移すと長方形になるので、長方形の面積の公式と同じ形になります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "平行四辺形が占める広さです。", "kind": "output" },
+      "b": { "role": "底辺", "description": "平行四辺形の下側の辺の長さです。", "kind": "input" },
+      "h": { "role": "高さ", "description": "平行な2つの辺の間の垂直の距離です。", "kind": "input" }
+    },
+    "realWorldExamples": ["かたむいた窓ガラスの面積を計算する", "平行四辺形の形をした机のカバーの大きさ"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "台形の面積",
+    "oneLiner": "上底と下底の和に高さを掛けて2で割って求める公式",
+    "description": "台形の面積は、平行な2つの辺(上底と下底)の長さを足したあと高さを掛けて、2で割った値です。同じ台形を2つ、ひっくり返して合わせると平行四辺形になり、その半分なので2で割ります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "台形が占める広さです。", "kind": "output" },
+      "a": { "role": "上底", "description": "台形の上側の平行な辺の長さです。", "kind": "input" },
+      "b": { "role": "下底", "description": "台形の下側の平行な辺の長さです。", "kind": "input" },
+      "h": { "role": "高さ", "description": "平行な2つの辺の間の垂直の距離です。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "半分", "description": "平行四辺形の半分であるという意味です。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["台形の形をした花だんの面積を求める", "台形の屋根の面積を計算する"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "ひし形の面積",
+    "oneLiner": "2本の対角線の長さを掛けて2で割り、ひし形の面積を求める公式",
+    "description": "ひし形の面積は、2本の対角線の長さの積を2で割った値です。ひし形の2本の対角線は垂直に交わり、対角線で切って並べかえると長方形の半分になります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "ひし形が占める広さです。", "kind": "output" },
+      "d_1": { "role": "対角線1", "description": "ひし形の1本目の対角線の長さです。", "kind": "input" },
+      "d_2": { "role": "対角線2", "description": "ひし形のもう1本の対角線の長さです。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "半分", "description": "長方形の半分であるという意味です。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["ひし形の宝石の面積を計算する", "たこ(カイト)の布の広さを求める"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "円の面積",
+    "oneLiner": "半径の2乗に円周率を掛けて円の面積を求める公式",
+    "description": "円の面積は、半径を2乗した値に円周率(パイ)を掛けたものです。円をとても細い切れはしに切って並べると長方形に近づき、その長方形の横が円周の半分、縦が半径になるので、この公式が出てきます。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "円が占める広さです。", "kind": "output" },
+      "\\pi": { "role": "円周率", "description": "円の周の長さを直径で割った値で、およそ 3.14159 です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "円の中心から周までの距離です。", "kind": "input" },
+      "r^2": { "role": "半径の2乗", "description": "半径を2回掛けた値です。", "kind": "input" }
+    },
+    "realWorldExamples": ["ピザの大きさを比べる", "丸い時計の面積を求める", "硬貨の広さを計算する"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "円周の長さ",
+    "oneLiner": "半径の2倍に円周率を掛けて円の周の長さを求める公式",
+    "description": "円の周の長さ(円周)は、半径の2倍、つまり直径に円周率(パイ)を掛けた値です。円に沿って1周した距離が、そのまま円周です。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "C": { "role": "周の長さ", "description": "円の外周に沿って測った全体の長さです。", "kind": "output" },
+      "2": { "role": "定数", "description": "半径を直径に変えるための値です。", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "円周率", "description": "円の周の長さを直径で割った値で、およそ 3.14159 です。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "円の中心から周までの距離です。", "kind": "input" }
+    },
+    "realWorldExamples": ["自転車の車輪が1回転して進む距離", "円形のトラックを1周する長さ"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "おうぎ形の面積",
+    "oneLiner": "半径の2乗と中心角を掛けて2で割り、おうぎ形の面積を求める公式",
+    "description": "おうぎ形の面積は、半径の2乗に中心角(ラジアン)を掛けて2で割った値です。おうぎ形は円の一部分なので、中心角が大きいほど面積も大きくなります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "おうぎ形が占める広さです。", "kind": "output" },
+      "r": { "role": "半径", "description": "おうぎ形の半径の長さです。", "kind": "input" },
+      "r^2": { "role": "半径の2乗", "description": "半径を2回掛けた値です。", "kind": "input" },
+      "\\theta": { "role": "中心角", "description": "おうぎ形の中心で開いている角です(ラジアン単位)。", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "半分", "description": "面積の公式に出てくる係数です。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["時計の長針が通りすぎた部分の面積", "ピザ1切れの面積"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "弧の長さ",
+    "oneLiner": "半径と中心角を掛けて弧の長さを求める公式",
+    "description": "弧の長さは、半径に中心角(ラジアン)を掛けた値です。弧は円周の一部分であり、中心角が1周(2パイ)になると、弧の長さは円周と等しくなります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "l": { "role": "弧の長さ", "description": "円周のうちの一部分の長さです。", "kind": "output" },
+      "r": { "role": "半径", "description": "円の中心から周までの距離です。", "kind": "input" },
+      "\\theta": { "role": "中心角", "description": "その弧に対応する中心角です(ラジアン単位)。", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["ジェットコースターの曲がった区間の長さ", "時計の目もりの間の弧の長さ"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "長方形の周の長さ",
+    "oneLiner": "横と縦の和を2倍して長方形の周の長さを求める公式",
+    "description": "長方形の周の長さは、横と縦を足したあとに2を掛けた値です。長方形は向かい合う辺どうしの長さが同じなので、横と縦を1組足して2倍すれば、4つの辺の長さの合計になります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "P": { "role": "周の長さ", "description": "長方形の4つの辺の長さの合計です。", "kind": "output" },
+      "l": { "role": "横", "description": "長方形の横の長さです。", "kind": "input" },
+      "w": { "role": "縦", "description": "長方形の縦の長さです。", "kind": "input" },
+      "2": { "role": "定数", "description": "向かい合う辺が2組あるので2を掛けます。", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["額縁のふちの長さを計算する", "運動場の周りに沿って走った距離"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "三角形の周の長さ",
+    "oneLiner": "3つの辺の長さをすべて足して三角形の周の長さを求める公式",
+    "description": "三角形の周の長さは、3つの辺の長さをすべて合わせた値です。三角形のふちに沿って1周した全体の距離と同じです。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "P": { "role": "周の長さ", "description": "三角形の3つの辺の長さの合計です。", "kind": "output" },
+      "a": { "role": "1つ目の辺", "description": "三角形の1つ目の辺の長さです。", "kind": "input" },
+      "b": { "role": "2つ目の辺", "description": "三角形の2つ目の辺の長さです。", "kind": "input" },
+      "c": { "role": "3つ目の辺", "description": "三角形の3つ目の辺の長さです。", "kind": "input" }
+    },
+    "realWorldExamples": ["三角形の形をした囲いの全体の長さ", "三角の旗のふちに必要なひもの長さ"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "正多角形の面積",
+    "oneLiner": "辺の数・1辺の長さ・アポテム(中心から辺までの距離)を使って正多角形の面積を求める公式",
+    "description": "正多角形の面積は、辺の数に1辺の長さとアポテム(中心から辺までの垂直の距離)を掛けて、2で割った値です。正多角形を中心からいくつもの三角形に分けると、それぞれの三角形の面積をすべて合わせたものと同じになります。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "正多角形が占める広さです。", "kind": "output" },
+      "n": { "role": "辺の数", "description": "正多角形の辺の個数です。", "kind": "input" },
+      "s": { "role": "1辺の長さ", "description": "正多角形の1辺の長さです。", "kind": "input" },
+      "a": { "role": "アポテム", "description": "中心から辺の中点までの垂直の距離です。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "半分", "description": "三角形の面積の公式から出てくる係数です。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["正六角形のハチの巣ひと部屋の面積", "正五角形の星の形をした飾りの広さ"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "円環の面積",
+    "oneLiner": "大きい円と小さい円の半径の2乗の差に円周率を掛けて、ドーナツ形の面積を求める公式",
+    "description": "円環(ドーナツの形)の面積は、外側の円の面積から内側の円の面積を引いた値です。大きい半径の2乗から小さい半径の2乗を引き、円周率を掛けます。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "A": { "role": "面積", "description": "円環(ドーナツの形)が占める広さです。", "kind": "output" },
+      "\\pi": { "role": "円周率", "description": "円の周の長さを直径で割った値で、およそ 3.14159 です。", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "外側の半径", "description": "外側の大きい円の半径です。", "kind": "input" },
+      "r": { "role": "内側の半径", "description": "内側の小さい円の半径です。", "kind": "input" },
+      "R^2 - r^2": { "role": "半径の2乗の差", "description": "外側の半径の2乗から内側の半径の2乗を引いた値です。", "kind": "output" }
+    },
+    "realWorldExamples": ["ドーナツの上の面の面積を求める", "円形のトラック(走るレーン)の面積"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "三角形の内角の和",
+    "oneLiner": "三角形の3つの内角をすべて足すと必ず180度になるという性質",
+    "description": "三角形の内角の和は、3つの頂点の角をすべて足すと必ず180度(半回転)になるという性質です。どんな三角形でも — 鋭角三角形、直角三角形、鈍角三角形 — 3つの内角の和はいつでも180度です。",
+    "field": "幾何学",
+    "elementMeanings": {
+      "\\alpha": { "role": "1つ目の内角", "description": "三角形の1つ目の頂点での角です。", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "2つ目の内角", "description": "三角形の2つ目の頂点での角です。", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "3つ目の内角", "description": "三角形の3つ目の頂点での角です。", "kind": "input", "unit": "deg" },
+      "180°": { "role": "半回転", "description": "一直線がつくる角であり、三角形の内角の和と等しくなります。", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["2つの角がわかっているときに残りの1つの角を求める", "建築で三角形の構造物の角度を合わせる"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

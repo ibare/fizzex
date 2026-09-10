@@ -1,0 +1,92 @@
+{
+  "shannon-entropy": {
+    "name": "Shannon entropy",
+    "oneLiner": "The basic measure in information theory of the uncertainty (information content) of a probability distribution",
+    "description": "Shannon entropy quantifies the average uncertainty you face before you learn the outcome of a random variable. The more even the probabilities, the higher the entropy; the more certain a single outcome, the lower it is. It gives the theoretical lower bound on the number of bits needed to compress or transmit information.",
+    "discoverer": "Claude Shannon",
+    "field": "Information theory",
+    "significance": "It is the core concept that founded information theory, and it has shaped data compression, communication, cryptography, machine learning, and much else.",
+    "elementMeanings": {
+      "H(X)": { "role": "Entropy", "description": "The average information content of the random variable X. Units: bits (base 2) or nats (base e).", "kind": "output" },
+      "p(x)": { "role": "Probability", "description": "The probability that the event x occurs.", "kind": "input" },
+      "\\log p(x)": { "role": "Self-information", "description": "The information content of the event x. The less likely it is, the more information it carries.", "kind": "structural" },
+      "-\\sum": { "role": "Negated expectation", "description": "The minus sign in front of the expected self-information makes the result positive.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "The uncertainty of a coin toss: 1 bit for a fair coin, less than 1 bit for a biased one",
+      "Working out the theoretical maximum compression ratio a compression algorithm such as ZIP can reach"
+    ],
+    "relatedFormulas": ["kl-divergence", "mutual-information", "cross-entropy", "source-coding"]
+  },
+  "kl-divergence": {
+    "name": "Kullback-Leibler divergence",
+    "oneLiner": "A measure of the asymmetric difference between two probability distributions",
+    "description": "The KL divergence measures the information lost when the true distribution P is replaced by an approximating distribution Q. It is always 0 or greater, and 0 only when the two distributions are identical. Because it is asymmetric, D_KL(P||Q) and D_KL(Q||P) are generally different. It is central to variational inference and generative models.",
+    "discoverer": "Solomon Kullback, Richard Leibler",
+    "field": "Information theory",
+    "significance": "As the basic tool for measuring the difference between distributions, it is widely used in Bayesian inference, VAEs, and policy optimization in reinforcement learning.",
+    "elementMeanings": {
+      "D_{KL}(P \\| Q)": { "role": "KL divergence", "description": "The amount of information lost in going from P to Q.", "kind": "output" },
+      "p(x)": { "role": "True distribution", "description": "The actual (reference) probability distribution.", "kind": "input" },
+      "q(x)": { "role": "Approximating distribution", "description": "The model distribution meant to approximate the true one.", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "Log probability ratio", "description": "The logarithm of the ratio of the two probabilities at each event.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Pushing the latent variable distribution of a variational autoencoder (VAE) towards a normal distribution",
+      "Judging how far the output distribution of a natural language generation model has drifted from the training data distribution"
+    ],
+    "relatedFormulas": ["shannon-entropy", "mutual-information", "cross-entropy"]
+  },
+  "mutual-information": {
+    "name": "Mutual information",
+    "oneLiner": "A measure of how much information two random variables share",
+    "description": "Mutual information measures how much the uncertainty about one variable drops once you observe the other. It is 0 when the two variables are independent and grows the more strongly they depend on each other. Because it captures nonlinear dependence as well as linear, it is a more general measure of dependence than the correlation coefficient.",
+    "discoverer": "Claude Shannon",
+    "field": "Information theory",
+    "significance": "Because it can measure dependence between variables nonlinearly, it is used in feature selection, clustering, neuroscience, and many other fields.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "Mutual information", "description": "The amount of information X and Y share.", "kind": "output" },
+      "H(X)": { "role": "Entropy of X", "description": "The uncertainty (information content) of X on its own.", "kind": "input" },
+      "H(X|Y)": { "role": "Conditional entropy", "description": "The uncertainty about X that remains once you know Y.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Detecting nonlinear relationships between two genes in gene expression data",
+      "Judging how much information an input variable shares with the output variable during feature selection in machine learning"
+    ],
+    "relatedFormulas": ["shannon-entropy", "kl-divergence", "data-processing-inequality"]
+  },
+  "source-coding": {
+    "name": "Shannon's source coding theorem",
+    "oneLiner": "The theorem that the average code length of lossless compression cannot fall below the entropy",
+    "description": "Shannon's source coding theorem proves that when an information source is compressed losslessly, the average code length per symbol cannot be shorter than the entropy of the source. Entropy is therefore the theoretical limit of compression, and coding over long enough blocks brings you arbitrarily close to that limit.",
+    "discoverer": "Claude Shannon",
+    "field": "Information theory",
+    "significance": "By establishing the fundamental limit of data compression, it laid the theoretical groundwork for practical compression algorithms such as Huffman coding and arithmetic coding.",
+    "elementMeanings": {
+      "L": { "role": "Average code length", "description": "The average number of bits needed to encode one symbol.", "kind": "output" },
+      "H(X)": { "role": "Source entropy", "description": "The average information content per symbol of the source. It is the theoretical lower bound on compression.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "The entropy of the original data setting the compression limit for a ZIP file",
+      "Working out the smallest possible file size for a lossless format (FLAC) in music streaming"
+    ],
+    "relatedFormulas": ["shannon-entropy"]
+  },
+  "data-processing-inequality": {
+    "name": "Data processing inequality",
+    "oneLiner": "The principle that processing data can preserve or lose information but never create it",
+    "description": "The data processing inequality says that in a Markov chain X -> Y -> Z, the mutual information between X and Z cannot exceed the mutual information between X and Y. In other words, no amount of post-processing can manufacture information that was not there. This guarantees that information loss is irreversible in feature extraction, dimensionality reduction, and communication.",
+    "discoverer": "Claude Shannon (derived as a basic property of information theory)",
+    "field": "Information theory",
+    "significance": "By setting a fundamental limit on information processing, it provides theoretical constraints for communication channel design and for representation learning in machine learning.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "Mutual information of the source and the intermediate stage", "description": "The information the original data X shares with the intermediate result Y.", "kind": "input" },
+      "I(X;Z)": { "role": "Mutual information of the source and the final result", "description": "The information the original data X shares with the further processed result Z.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Why the original colour information cannot be recovered once an image is converted to greyscale",
+      "How input information is progressively compressed as a deep learning network gets deeper (the information bottleneck theory)"
+    ],
+    "relatedFormulas": ["mutual-information", "shannon-entropy"]
+  }
+}

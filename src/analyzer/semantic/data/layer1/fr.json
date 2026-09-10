@@ -1,0 +1,162 @@
+{
+  "frac.numerator": {
+    "role": "Numérateur",
+    "description": "Partie supérieure d'une fraction. C'est la quantité qui est divisée.",
+    "refinements": {
+      "containsVariable": "Le numérateur contient une variable : il détermine les zéros de la fonction (f(x)=0).",
+      "constantOnly": "Le numérateur est une constante : cette fraction représente donc un rapport fixe."
+    }
+  },
+  "frac.denominator": {
+    "role": "Dénominateur",
+    "description": "Partie inférieure d'une fraction. C'est la quantité par laquelle on divise. L'expression n'est pas définie s'il vaut 0.",
+    "refinements": {
+      "containsVariable": "Le dénominateur contient une variable : l'expression peut ne pas être définie pour certaines valeurs (asymptote).",
+      "constantOnly": "Le dénominateur est une constante : il applique un rapport fixe à toute l'expression."
+    }
+  },
+  "power.base": {
+    "role": "Base",
+    "description": "Quantité que l'on multiplie par elle-même dans une puissance.",
+    "refinements": {
+      "isEulerE": "Fonction exponentielle de base e, la constante de Néper. Elle décrit une croissance ou une décroissance.",
+      "isVariable": "Puissance d'une variable. Plus l'exposant est grand, plus la croissance est rapide."
+    }
+  },
+  "power.exponent": {
+    "role": "Exposant",
+    "description": "Nombre de fois que la base est multipliée par elle-même.",
+    "refinements": {
+      "isTwo": "Carré — le résultat est toujours positif ou nul.",
+      "isNegativeOne": "Inverse — équivaut à 1 divisé par la base.",
+      "isHalf": "Racine carrée — la racine carrée positive de la base.",
+      "containsVariable": "L'exposant contient une variable : il traduit une croissance ou une décroissance exponentielle."
+    }
+  },
+  "sqrt.content": {
+    "role": "Radicande",
+    "description": "Quantité dont on prend la racine. Dans les nombres réels, elle ne peut pas être négative."
+  },
+  "sqrt.index": {
+    "role": "Indice de la racine",
+    "description": "Le n de la racine n-ième. S'il est omis, il vaut 2 (racine carrée)."
+  },
+  "subscript.base": {
+    "role": "Objet indicé",
+    "description": "Élément auquel l'indice est attaché."
+  },
+  "subscript.subscript": {
+    "role": "Indice",
+    "description": "Numéro qui désigne un élément ou une composante précise."
+  },
+  "scripts.leftSuperscript": {
+    "role": "Exposant à gauche",
+    "description": "Nombre placé en haut à gauche du symbole. Il précise l'objet, comme le nombre de masse d'un isotope."
+  },
+  "scripts.leftSubscript": {
+    "role": "Indice à gauche",
+    "description": "Nombre placé en bas à gauche du symbole. Il précise l'objet, comme le numéro atomique d'un élément."
+  },
+  "sum.lower": {
+    "role": "Début de la sommation",
+    "description": "Valeur de l'indice à laquelle la somme commence."
+  },
+  "sum.upper": {
+    "role": "Fin de la sommation",
+    "description": "Valeur de l'indice à laquelle la somme s'arrête.",
+    "refinements": {
+      "isInfinity": "Série infinie sommée jusqu'à l'infini. La convergence est ici la question décisive."
+    }
+  },
+  "sum.body": {
+    "role": "Terme général",
+    "description": "Quantité ajoutée à chaque étape. Sa valeur dépend de l'indice."
+  },
+  "product.lower": {
+    "role": "Début du produit",
+    "description": "Valeur de l'indice à laquelle le produit commence."
+  },
+  "product.upper": {
+    "role": "Fin du produit",
+    "description": "Valeur de l'indice à laquelle le produit s'arrête."
+  },
+  "product.body": {
+    "role": "Terme général",
+    "description": "Quantité multipliée à chaque étape."
+  },
+  "integral.lower": {
+    "role": "Borne inférieure",
+    "description": "Point de départ de l'intervalle d'intégration."
+  },
+  "integral.upper": {
+    "role": "Borne supérieure",
+    "description": "Point d'arrivée de l'intervalle d'intégration.",
+    "refinements": {
+      "isInfinity": "L'intégration se poursuit jusqu'à plus l'infini. Il faut vérifier la convergence."
+    }
+  },
+  "integral.integrand": {
+    "role": "Intégrande",
+    "description": "Fonction que l'on intègre. On calcule l'aire sous sa courbe."
+  },
+  "limit.approach": {
+    "role": "Point limite",
+    "description": "Valeur dont la variable se rapproche indéfiniment."
+  },
+  "limit.body": {
+    "role": "Expression sous la limite",
+    "description": "On observe vers quelle valeur cette expression converge quand la variable tend vers le point limite."
+  },
+  "paren.content": {
+    "role": "Groupement",
+    "description": "Expression entre parenthèses, traitée comme un seul bloc."
+  },
+  "chem.content": {
+    "role": "Formule chimique",
+    "description": "Notation chimique qui représente des substances et des réactions."
+  },
+  "abs.content": {
+    "role": "Contenu de la valeur absolue",
+    "description": "Grandeur prise sans son signe. Le résultat est toujours positif ou nul."
+  },
+  "func.argument": {
+    "role": "Argument de la fonction",
+    "description": "Valeur donnée en entrée à la fonction."
+  },
+  "matrix.element": {
+    "role": "Coefficient de la matrice",
+    "description": "Un élément de la matrice."
+  },
+  "cases.element": {
+    "role": "Valeur conditionnelle",
+    "description": "Valeur de la fonction lorsque la condition indiquée est vérifiée."
+  },
+  "accent.content": {
+    "role": "Symbole accentué",
+    "description": "Symbole portant un accent."
+  },
+  "overline.content": {
+    "role": "Moyenne / conjugué",
+    "description": "La barre supérieure indique une moyenne, un conjugué complexe ou, en topologie, l'adhérence."
+  },
+  "cancel.content": {
+    "role": "Terme barré",
+    "description": "Partie qui se simplifie ou qui s'annule."
+  },
+  "overset.base": {
+    "role": "Symbole de base",
+    "description": "Symbole auquel l'annotation est attachée."
+  },
+  "overset.annotation": {
+    "role": "Annotation",
+    "description": "Précision ajoutée au-dessus ou au-dessous du symbole."
+  },
+  "xarrow.above": {
+    "role": "Texte au-dessus de la flèche",
+    "description": "Indique les conditions de la réaction ou de la transformation."
+  },
+  "xarrow.below": {
+    "role": "Texte au-dessous de la flèche",
+    "description": "Indique les conditions complémentaires de la réaction ou de la transformation."
+  }
+}

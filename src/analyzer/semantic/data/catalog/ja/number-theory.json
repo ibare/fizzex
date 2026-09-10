@@ -1,0 +1,142 @@
+{
+  "fermat-little": {
+    "name": "フェルマーの小定理",
+    "oneLiner": "素数 p と互いに素な整数 a について、a の (p-1) 乗を p で割った余りが1になることを保証する定理",
+    "description": "フェルマーの小定理は、素数 p が a を割り切らないとき、a^(p-1) を p で割った余りが必ず1になるという定理です。べき乗の剰余の計算を大きく簡単にし、RSA暗号の理論的な土台になっています。",
+    "discoverer": "ピエール・ド・フェルマー",
+    "field": "数論",
+    "significance": "現代暗号学の中心的な基礎であり、素数判定のアルゴリズムや逆元の計算に欠かせません。",
+    "elementMeanings": {
+      "a": { "role": "底", "description": "素数 p と互いに素な整数。べき乗の底になります。", "kind": "input" },
+      "p": { "role": "素数の法", "description": "割り算の基準になる素数です。", "kind": "input" },
+      "p-1": { "role": "指数", "description": "素数から1を引いた値で、この指数だけべき乗すると余りが1になります。", "kind": "structural" },
+      "\\equiv 1": { "role": "合同の結果", "description": "剰余の演算の結果が1であることを表します。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "RSA暗号で大きな数の逆元を計算する",
+      "素数判定のアルゴリズム(フェルマーテスト)で素数の候補を検証する",
+      "ハッシュ関数を設計するときに衝突の確率を解析する"
+    ],
+    "relatedFormulas": ["euler-theorem"]
+  },
+  "euler-theorem": {
+    "name": "オイラーの定理",
+    "oneLiner": "互いに素な整数 a と正の整数 n について、a のオイラーのファイ関数の値の乗を n で割った余りが1になる定理",
+    "description": "オイラーの定理は、フェルマーの小定理を合成数まで広げた結果です。a と n が互いに素であるとき、a をオイラーのファイ関数の値だけべき乗すると、n で割った余りが1になります。フェルマーの小定理は n が素数である特別な場合にあたります。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "数論",
+    "significance": "フェルマーの小定理の一般化として RSA暗号の正しさの証明にそのまま使われ、合成数に対する剰余の演算の基礎を与えます。",
+    "elementMeanings": {
+      "a": { "role": "底", "description": "n と互いに素な整数です。", "kind": "input" },
+      "n": { "role": "法", "description": "割り算の基準になる正の整数です。", "kind": "input" },
+      "\\varphi(n)": { "role": "オイラーのファイ関数", "description": "1から n までの整数のうち、n と互いに素なものの個数です。", "kind": "output" },
+      "\\equiv 1": { "role": "合同の結果", "description": "剰余の演算の結果が1であることを表します。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "RSA暗号で復号の指数を計算する数学的な根拠",
+      "ディフィー・ヘルマン鍵交換の安全性を解析する",
+      "巡回群の位数を計算する"
+    ],
+    "relatedFormulas": ["fermat-little"]
+  },
+  "prime-counting": {
+    "name": "素数定理",
+    "oneLiner": "x 以下の素数の個数が x/ln(x) に漸近的に近づくことを明らかにした定理",
+    "description": "素数定理は、x が十分に大きいとき、x 以下の素数の個数を数える関数が x/ln(x) に近づくことを示します。素数の分布は不規則に見えるものの、大きく眺めると予測できる密度に従うという驚くべき事実を証明します。",
+    "discoverer": "ジャック・アダマール、シャルル・ド・ラ・ヴァレー・プーサン(それぞれ独立に証明)",
+    "field": "数論",
+    "significance": "素数の分布についての最も基本的な定理であり、リーマン予想に直結する解析的整数論の出発点です。",
+    "elementMeanings": {
+      "\\pi(x)": { "role": "素数計数関数", "description": "x 以下の素数の個数を数える関数です。", "kind": "output" },
+      "x": { "role": "上限", "description": "素数を数える範囲の上限の値です。", "kind": "input" },
+      "\\ln(x)": { "role": "自然対数", "description": "x の自然対数。素数の密度が減っていく割合を表します。", "kind": "structural" },
+      "\\sim": { "role": "漸近同値", "description": "x が限りなく大きくなるとき、2つの関数の比が1に近づくことを意味します。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "暗号に使う大きな素数を探すときに探索の範囲を見積もる",
+      "素数の密度を利用した確率的な素数判定のアルゴリズムを設計する",
+      "数学の研究で素数の間隔を統計的に解析する"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "euclidean-algorithm": {
+    "name": "ユークリッドの互除法",
+    "oneLiner": "2つの整数の最大公約数を、余りの計算の繰り返しで求めるアルゴリズム",
+    "description": "ユークリッドの互除法は、gcd(a,b) = gcd(b, a mod b) という性質を繰り返し当てはめて最大公約数を効率よく計算します。余りが0になった瞬間の割る数が最大公約数です。記録に残るアルゴリズムのうち最も古いものとして知られています。",
+    "discoverer": "ユークリッド",
+    "field": "数論",
+    "significance": "記録に残る最初のアルゴリズムであり、分数の約分、逆元の計算、RSAの鍵生成など、計算機科学の全般で中心的に使われます。",
+    "elementMeanings": {
+      "a": { "role": "1つ目の整数", "description": "最大公約数を求める2つの数のうちの一方です。", "kind": "input" },
+      "b": { "role": "2つ目の整数", "description": "最大公約数を求める2つの数のうちのもう一方です。", "kind": "input" },
+      "\\gcd": { "role": "最大公約数の関数", "description": "2つの整数の最大公約数を返す関数です。", "kind": "output" },
+      "a \\mod b": { "role": "余り", "description": "a を b で割った余り。この値が0になるまで繰り返します。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "分数を既約分数に直すときに分子と分母の最大公約数を計算する",
+      "RSAの鍵生成で拡張ユークリッドの互除法により秘密鍵を求める",
+      "音楽で2つの拍子の周期の最小公倍数から合奏の周期を計算する"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "quadratic-reciprocity": {
+    "name": "平方剰余の相互法則",
+    "oneLiner": "2つの奇素数 p, q について、平方剰余の関係が互いに対称に決まることを明らかにした法則",
+    "description": "平方剰余の相互法則は、奇素数 p と q が与えられたとき、p が q の平方剰余であるかどうかと、q が p の平方剰余であるかどうかの正確な関係を示します。ガウスが「算術の宝石」と呼んだこの法則は、数論における相互法則の原理を初めて示した結果です。",
+    "discoverer": "カール・フリードリヒ・ガウス",
+    "field": "数論",
+    "significance": "代数的整数論と類体論の出発点であり、2次の合同式に解があるかを判定する中心的な道具です。",
+    "elementMeanings": {
+      "p": { "role": "1つ目の奇素数", "description": "相互法則を当てはめる2つの素数のうちの一方です。", "kind": "input" },
+      "q": { "role": "2つ目の奇素数", "description": "相互法則を当てはめる2つの素数のうちのもう一方です。", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "ルジャンドル記号", "description": "p が q の平方剰余なら1、そうでなければ -1 を返す記号です。", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "符号を決める因子", "description": "2つのルジャンドル記号の積の符号を決める項です。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "2次の合同式に解があるかどうかを素早く判定する",
+      "暗号学で平方剰余にもとづく暗号方式を設計する",
+      "代数的整数論の研究で高次の相互法則へ一般化する"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "goldbach-conjecture": {
+    "name": "ゴールドバッハの予想",
+    "oneLiner": "2より大きいすべての偶数は2つの素数の和で表せるという未解決の予想",
+    "description": "ゴールドバッハの予想は、4以上のすべての偶数が2つの素数の和で表せると主張します。1742年にゴールドバッハがオイラーへ送った手紙で初めて提起され、コンピューターで非常に大きな範囲まで検証されていますが、いまだ証明されていない数学の代表的な未解決問題です。",
+    "discoverer": "クリスティアン・ゴールドバッハ",
+    "field": "数論",
+    "significance": "加法的整数論の代表的な難問であり、素数の足し算に関する性質の深い理解を求める問題です。",
+    "elementMeanings": {
+      "2n": { "role": "偶数", "description": "4以上の任意の偶数です。", "kind": "input" },
+      "p": { "role": "1つ目の素数", "description": "偶数をつくる2つの素数のうちの一方です。", "kind": "input" },
+      "q": { "role": "2つ目の素数", "description": "偶数をつくる2つの素数のうちのもう一方です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "コンピューターを使った大規模な数値検証のプロジェクト",
+      "素数の分布の研究で足し算にかかわる問題への動機づけになる",
+      "数学教育で予想と証明の違いを説明する代表的な例"
+    ],
+    "relatedFormulas": ["prime-counting", "fermat-little"]
+  },
+  "fibonacci-general": {
+    "name": "フィボナッチ数列の一般項",
+    "oneLiner": "フィボナッチ数列の n 番目の項を黄金比から直接計算する閉じた形の公式",
+    "description": "フィボナッチ数列の一般項の公式(ビネの公式)は、数列の n 番目の項を再帰によらず、黄金比とその共役を使って直接計算します。無理数の組み合わせから必ず整数が現れる点が驚きであり、線形の漸化式を特性方程式で解く方法を示す代表的な例です。",
+    "discoverer": "ジャック・フィリップ・マリー・ビネ(公式化)、アブラーム・ド・モアブル(先行する発見)",
+    "field": "数論",
+    "significance": "線形の漸化式が閉じた形で解けることを示し、黄金比とフィボナッチ数列の深いつながりを明らかにします。",
+    "elementMeanings": {
+      "F_n": { "role": "フィボナッチ数", "description": "数列の n 番目の項です。", "kind": "output" },
+      "\\varphi": { "role": "黄金比", "description": "(1+ルート5)/2、およそ1.618。正の特性根です。", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "共役の黄金比", "description": "(1-ルート5)/2、およそ -0.618。負の特性根です。", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "正規化の定数", "description": "2つの特性根の差であり、結果が整数になるように割る役割をします。", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "項の番号", "description": "求めたいフィボナッチ数列の位置です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "アルゴリズムの解析でフィボナッチヒープの性能の限界を計算する",
+      "自然界の花びらの数や松ぼっくりのらせんなど、黄金比のパターンを説明する",
+      "金融でフィボナッチ・リトレースメントの水準を求める"
+    ],
+    "relatedFormulas": ["euclidean-algorithm"]
+  }
+}

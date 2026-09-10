@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "閉じる",
+    "closeWithKey": "閉じる (Esc)",
+    "hintHover": "ホバー: 要素を見る",
+    "hintClick": "クリック: 値を調整",
+    "hintEsc": "Esc: 閉じる",
+    "explore": "数式を探索",
+    "copyImage": "画像をコピー",
+    "reset": "リセット",
+    "similarTo": "{name} に類似",
+    "closeNamed": "{name} を閉じる",
+    "domainGuard": "定義域ガード: {reason}"
+  },
+  "bindingFault": {
+    "derivative": "{name} の導関数を計算できませんでした",
+    "domain": "{name} の値が定義域の外にあります",
+    "divergent": "{name} の値が発散します",
+    "unsupported": "{name} の形はこの可視化では扱えません",
+    "evalFailed": "{name} を計算できませんでした",
+    "unbound": "{name} にまだ値がありません",
+    "unknown": "{name} は計算できません"
+  },
+  "duration": {
+    "seconds": "{value}秒",
+    "minutes": "{value}分",
+    "hours": "{value}時間",
+    "days": "{value}日"
+  },
+  "summary": {
+    "variables": "変数 {names} の",
+    "constantExpression": "定数式",
+    "polynomialOfDegree": "{degree}次多項式",
+    "withFunctions": "({names} を含む)",
+    "domains": "[{names}]",
+    "chemicalFormula": "化学式",
+    "chemicalEquation": "化学反応式",
+    "reversibleChemicalEquation": "可逆化学反応式",
+    "domainNames": {
+      "arithmetic": "算術",
+      "polynomial": "多項式",
+      "rational": "有理式",
+      "trigonometric": "三角関数",
+      "exponential": "指数関数",
+      "logarithmic": "対数関数",
+      "calculus": "微分積分",
+      "linear-algebra": "線形代数",
+      "statistics": "統計",
+      "chemistry": "化学"
+    },
+    "listSeparator": "、"
+  }
+}

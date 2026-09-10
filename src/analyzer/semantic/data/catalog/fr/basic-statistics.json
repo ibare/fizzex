@@ -1,0 +1,206 @@
+{
+  "arithmetic-mean": {
+    "name": "Moyenne arithmétique",
+    "oneLiner": "Valeur représentative obtenue en additionnant toutes les données puis en divisant par leur nombre",
+    "description": "La moyenne arithmétique est la somme de toutes les données divisée par le nombre de données. Quand on dit « la moyenne », c'est généralement d'elle qu'il s'agit. C'est la façon la plus simple d'indiquer où se situe le centre des données, et c'est la statistique la plus utilisée dans la vie courante.",
+    "field": "Statistiques",
+    "significance": "C'est la manière la plus élémentaire de résumer des données en un seul nombre, et le point de départ de presque toutes les analyses statistiques.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Moyenne arithmétique",
+        "description": "La valeur moyenne de l'ensemble des données.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Valeur individuelle",
+        "description": "La i-ième valeur de l'ensemble de données.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Nombre de données",
+        "description": "Il indique combien de données il y a.",
+        "kind": "input"
+      },
+      "\\sum": {
+        "role": "Symbole de sommation",
+        "description": "Il signifie qu'il faut additionner toutes les valeurs des données.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Calculer la moyenne des notes d'examen des élèves d'une classe",
+      "Calculer la température moyenne à partir des relevés quotidiens d'un mois",
+      "Trouver la dépense moyenne par jour dans un relevé d'argent de poche"
+    ],
+    "relatedFormulas": [
+      "weighted-mean",
+      "variance-basic",
+      "std-dev-basic"
+    ]
+  },
+  "variance-basic": {
+    "name": "Variance",
+    "oneLiner": "Moyenne des carrés des écarts entre chaque donnée et la moyenne",
+    "description": "La variance mesure, en un seul nombre, à quel point les données sont dispersées autour de la moyenne. On soustrait la moyenne de chaque donnée, on élève la différence au carré, puis on additionne le tout et on divise par le nombre de données. Plus la valeur est grande, plus les données sont étalées.",
+    "field": "Statistiques",
+    "significance": "C'est la mesure clé qui quantifie la dispersion des données ; avec l'écart type, elle constitue la base de l'analyse statistique.",
+    "elementMeanings": {
+      "\\sigma^2": {
+        "role": "Variance",
+        "description": "Variance de la population. Elle indique la dispersion des données.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Valeur individuelle",
+        "description": "La i-ième valeur de l'ensemble de données.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Moyenne",
+        "description": "La moyenne arithmétique de l'ensemble des données.",
+        "kind": "output"
+      },
+      "(x_i - \\bar{x})^2": {
+        "role": "Carré de l'écart",
+        "description": "Le carré de la distance entre chaque donnée et la moyenne.",
+        "kind": "structural"
+      },
+      "n": {
+        "role": "Nombre de données",
+        "description": "Le nombre total de données.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Comparer la répartition des notes de deux classes de même moyenne grâce à la variance",
+      "Utiliser la variance pour contrôler l'uniformité de la masse des produits d'une usine",
+      "Mesurer l'amplitude des fluctuations du rendement d'une action par la variance"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "std-dev-basic",
+      "coefficient-of-variation"
+    ]
+  },
+  "std-dev-basic": {
+    "name": "Écart type",
+    "oneLiner": "Mesure de la dispersion des données autour de la moyenne, exprimée dans l'unité d'origine",
+    "description": "L'écart type est la racine carrée de la variance. La variance s'exprime dans une unité au carré, difficile à interpréter intuitivement ; en prenant la racine carrée, on retrouve l'unité des données de départ et l'on comprend immédiatement « à peu près à cette distance de la moyenne ».",
+    "field": "Statistiques",
+    "significance": "Comme il exprime la dispersion dans la même unité que les données d'origine, son interprétation est intuitive ; avec la loi normale, c'est la mesure de dispersion la plus répandue.",
+    "elementMeanings": {
+      "\\sigma": {
+        "role": "Écart type",
+        "description": "Écart type de la population. Il exprime la dispersion des données dans leur unité d'origine.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Valeur individuelle",
+        "description": "La i-ième valeur de l'ensemble de données.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Moyenne",
+        "description": "La moyenne arithmétique de l'ensemble des données.",
+        "kind": "output"
+      },
+      "n": {
+        "role": "Nombre de données",
+        "description": "Le nombre total de données.",
+        "kind": "input"
+      },
+      "\\sqrt{}": {
+        "role": "Racine carrée",
+        "description": "En prenant la racine carrée de la variance, on revient à l'unité d'origine.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Exprimer la dispersion des tailles d'élèves sous la forme « moyenne 165 cm, écart type 5 cm »",
+      "Juger de l'homogénéité des résultats grâce à l'écart type des notes d'examen",
+      "Expliquer l'amplitude des variations de température dans une prévision météo par l'écart type"
+    ],
+    "relatedFormulas": [
+      "variance-basic",
+      "arithmetic-mean",
+      "coefficient-of-variation"
+    ]
+  },
+  "weighted-mean": {
+    "name": "Moyenne pondérée",
+    "oneLiner": "Moyenne obtenue en tenant compte de l'importance (le poids) de chaque donnée",
+    "description": "La moyenne pondérée ne traite pas toutes les données de la même façon : on multiplie chaque donnée par un poids qui exprime son importance, on additionne, puis on divise par la somme des poids. Le calcul d'une moyenne scolaire où les matières n'ont pas le même coefficient en est l'exemple type.",
+    "field": "Statistiques",
+    "significance": "Lorsque les données n'ont pas toutes la même importance, elle fournit une valeur représentative plus juste que la simple moyenne arithmétique.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Moyenne pondérée",
+        "description": "La moyenne calculée en tenant compte des poids.",
+        "kind": "output"
+      },
+      "w_i": {
+        "role": "Poids",
+        "description": "L'importance ou la part de la i-ième donnée.",
+        "kind": "input"
+      },
+      "x_i": {
+        "role": "Valeur individuelle",
+        "description": "La i-ième valeur de l'ensemble de données.",
+        "kind": "input"
+      },
+      "\\sum w_i x_i": {
+        "role": "Somme pondérée",
+        "description": "La somme des données multipliées chacune par son poids.",
+        "kind": "structural"
+      },
+      "\\sum w_i": {
+        "role": "Somme des poids",
+        "description": "La somme de tous les poids.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Calculer une moyenne générale universitaire où les matières ont des coefficients différents",
+      "Établir le total d'un contrôle continu où les épreuves ont des barèmes différents",
+      "Calculer le rendement moyen d'un portefeuille en tenant compte de la part de chaque titre"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  },
+  "coefficient-of-variation": {
+    "name": "Coefficient de variation",
+    "oneLiner": "Rapport de l'écart type à la moyenne, qui permet de comparer les dispersions indépendamment des unités",
+    "description": "Le coefficient de variation est l'écart type divisé par la moyenne. Il permet de comparer équitablement la dispersion de données exprimées dans des unités différentes ou dont les moyennes n'ont pas le même ordre de grandeur. On l'exprime habituellement en pourcentage (%).",
+    "field": "Statistiques",
+    "significance": "C'est une mesure sans dimension qui permet de comparer la variabilité de données d'unités ou d'échelles différentes.",
+    "elementMeanings": {
+      "CV": {
+        "role": "Coefficient de variation",
+        "description": "L'écart type divisé par la moyenne. Il exprime la dispersion relative.",
+        "kind": "output"
+      },
+      "\\sigma": {
+        "role": "Écart type",
+        "description": "La dispersion des données.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Moyenne",
+        "description": "La moyenne arithmétique de l'ensemble des données. Elle doit être différente de 0.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Comparer équitablement la dispersion des tailles (cm) et celle des masses (kg)",
+      "Comparer la variabilité relative des notes obtenues dans des matières différentes",
+      "Comparer l'uniformité de qualité de produits différents fabriqués dans les usines A et B"
+    ],
+    "relatedFormulas": [
+      "std-dev-basic",
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  }
+}

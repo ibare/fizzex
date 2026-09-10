@@ -1,0 +1,142 @@
+{
+  "fermat-little": {
+    "name": "Petit théorème de Fermat",
+    "oneLiner": "Théorème garantissant que, pour un nombre premier p et un entier a premier avec p, a puissance (p-1) laisse le reste 1 dans la division par p",
+    "description": "Le petit théorème de Fermat affirme que, lorsqu'un nombre premier p ne divise pas a, le reste de la division de a^(p-1) par p vaut nécessairement 1. Il simplifie considérablement le calcul des puissances modulaires et constitue le fondement théorique du chiffrement RSA.",
+    "discoverer": "Pierre de Fermat",
+    "field": "Théorie des nombres",
+    "significance": "Pilier de la cryptographie moderne, il est indispensable aux algorithmes de test de primalité et au calcul des inverses modulaires.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "Entier premier avec le nombre premier p. C'est la base de la puissance.", "kind": "input" },
+      "p": { "role": "Module premier", "description": "Nombre premier qui sert de référence à la division.", "kind": "input" },
+      "p-1": { "role": "Exposant", "description": "Le nombre premier diminué de 1 : élever à cette puissance donne le reste 1.", "kind": "structural" },
+      "\\equiv 1": { "role": "Résultat de la congruence", "description": "Il indique que le résultat de l'opération modulaire vaut 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calculer l'inverse modulaire de grands nombres dans le chiffrement RSA",
+      "Vérifier un candidat premier dans un algorithme de primalité (test de Fermat)",
+      "Analyser la probabilité de collision lors de la conception d'une fonction de hachage"
+    ],
+    "relatedFormulas": ["euler-theorem"]
+  },
+  "euler-theorem": {
+    "name": "Théorème d'Euler",
+    "oneLiner": "Théorème selon lequel, pour un entier a premier avec un entier positif n, a élevé à l'indicatrice d'Euler de n laisse le reste 1 dans la division par n",
+    "description": "Le théorème d'Euler étend le petit théorème de Fermat aux nombres composés. Lorsque a et n sont premiers entre eux, élever a à la puissance de l'indicatrice d'Euler donne un reste égal à 1 dans la division par n. Le petit théorème de Fermat en est le cas particulier où n est premier.",
+    "discoverer": "Leonhard Euler",
+    "field": "Théorie des nombres",
+    "significance": "Généralisation du petit théorème de Fermat, il sert directement à démontrer la validité du chiffrement RSA et fonde l'arithmétique modulaire sur les nombres composés.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "Entier premier avec n.", "kind": "input" },
+      "n": { "role": "Module", "description": "Entier positif qui sert de référence à la division.", "kind": "input" },
+      "\\varphi(n)": { "role": "Indicatrice d'Euler", "description": "Nombre d'entiers compris entre 1 et n qui sont premiers avec n.", "kind": "output" },
+      "\\equiv 1": { "role": "Résultat de la congruence", "description": "Il indique que le résultat de l'opération modulaire vaut 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Fondement mathématique du calcul de l'exposant de déchiffrement en RSA",
+      "Analyse de la sûreté du protocole d'échange de clés Diffie-Hellman",
+      "Calcul de l'ordre d'un groupe cyclique"
+    ],
+    "relatedFormulas": ["fermat-little"]
+  },
+  "prime-counting": {
+    "name": "Théorème des nombres premiers",
+    "oneLiner": "Théorème établissant que le nombre de nombres premiers inférieurs ou égaux à x est asymptotiquement équivalent à x/ln(x)",
+    "description": "Le théorème des nombres premiers montre que, pour x assez grand, la fonction qui compte les nombres premiers inférieurs ou égaux à x tend vers x/ln(x). Il démontre ce fait remarquable : bien que la répartition des nombres premiers paraisse irrégulière, elle suit à grande échelle une densité prévisible.",
+    "discoverer": "Jacques Hadamard et Charles-Jean de La Vallée Poussin (démonstrations indépendantes)",
+    "field": "Théorie des nombres",
+    "significance": "Théorème le plus fondamental sur la répartition des nombres premiers, il est le point de départ de la théorie analytique des nombres et se rattache directement à l'hypothèse de Riemann.",
+    "elementMeanings": {
+      "\\pi(x)": { "role": "Fonction de compte des nombres premiers", "description": "Fonction qui compte les nombres premiers inférieurs ou égaux à x.", "kind": "output" },
+      "x": { "role": "Borne supérieure", "description": "Borne supérieure de l'intervalle dans lequel on compte les nombres premiers.", "kind": "input" },
+      "\\ln(x)": { "role": "Logarithme népérien", "description": "Logarithme népérien de x. Il traduit la décroissance de la densité des nombres premiers.", "kind": "structural" },
+      "\\sim": { "role": "Équivalence asymptotique", "description": "Il signifie que le rapport des deux fonctions tend vers 1 quand x devient infiniment grand.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Estimer l'étendue de la recherche lorsqu'on cherche de grands nombres premiers pour la cryptographie",
+      "Concevoir un test de primalité probabiliste fondé sur la densité des nombres premiers",
+      "Analyser statistiquement les écarts entre nombres premiers en recherche mathématique"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "euclidean-algorithm": {
+    "name": "Algorithme d'Euclide",
+    "oneLiner": "Algorithme qui détermine le plus grand commun diviseur de deux entiers par des divisions avec reste successives",
+    "description": "L'algorithme d'Euclide calcule efficacement le plus grand commun diviseur en appliquant de façon répétée la propriété pgcd(a,b) = pgcd(b, a mod b). Le diviseur employé au moment où le reste devient nul est le plus grand commun diviseur. C'est le plus ancien algorithme dont on ait la trace écrite.",
+    "discoverer": "Euclide",
+    "field": "Théorie des nombres",
+    "significance": "Premier algorithme jamais consigné par écrit, il est essentiel en informatique : simplification de fractions, calcul d'inverses modulaires, génération de clés RSA.",
+    "elementMeanings": {
+      "a": { "role": "Premier entier", "description": "L'un des deux nombres dont on cherche le plus grand commun diviseur.", "kind": "input" },
+      "b": { "role": "Second entier", "description": "L'autre des deux nombres dont on cherche le plus grand commun diviseur.", "kind": "input" },
+      "\\gcd": { "role": "Fonction pgcd", "description": "Fonction qui renvoie le plus grand commun diviseur de deux entiers.", "kind": "output" },
+      "a \\mod b": { "role": "Reste", "description": "Reste de la division de a par b. On répète l'opération jusqu'à ce que cette valeur soit nulle.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calculer le pgcd du numérateur et du dénominateur pour rendre une fraction irréductible",
+      "Obtenir la clé privée par l'algorithme d'Euclide étendu lors de la génération de clés RSA",
+      "Trouver la période commune de deux motifs rythmiques en musique grâce à leur plus petit commun multiple"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "quadratic-reciprocity": {
+    "name": "Loi de réciprocité quadratique",
+    "oneLiner": "Loi établissant que, pour deux nombres premiers impairs p et q, les relations de résidu quadratique se déterminent de façon symétrique",
+    "description": "La loi de réciprocité quadratique donne, pour deux nombres premiers impairs p et q, la relation exacte entre le fait que p soit un résidu quadratique modulo q et le fait que q soit un résidu quadratique modulo p. Gauss l'appelait « le joyau de l'arithmétique » : c'est le premier résultat à révéler un principe de réciprocité en théorie des nombres.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Théorie des nombres",
+    "significance": "Point de départ de la théorie algébrique des nombres et de la théorie du corps de classes, elle est l'outil central pour décider de l'existence de solutions modulaires d'une équation du second degré.",
+    "elementMeanings": {
+      "p": { "role": "Premier nombre premier impair", "description": "L'un des deux nombres premiers auxquels on applique la loi de réciprocité.", "kind": "input" },
+      "q": { "role": "Second nombre premier impair", "description": "L'autre des deux nombres premiers auxquels on applique la loi de réciprocité.", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "Symbole de Legendre", "description": "Symbole qui vaut 1 si p est un résidu quadratique modulo q, et -1 sinon.", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "Facteur de signe", "description": "Terme qui fixe le signe du produit des deux symboles de Legendre.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Décider rapidement de l'existence des solutions d'une congruence quadratique",
+      "Concevoir en cryptographie des systèmes fondés sur les résidus quadratiques",
+      "Généraliser aux lois de réciprocité supérieures en théorie algébrique des nombres"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "goldbach-conjecture": {
+    "name": "Conjecture de Goldbach",
+    "oneLiner": "Conjecture non résolue affirmant que tout nombre pair supérieur à 2 s'écrit comme somme de deux nombres premiers",
+    "description": "La conjecture de Goldbach affirme que tout nombre pair supérieur ou égal à 4 peut s'exprimer comme la somme de deux nombres premiers. Formulée pour la première fois en 1742 dans une lettre de Goldbach à Euler, elle a été vérifiée par ordinateur sur des intervalles considérables, mais reste l'un des grands problèmes ouverts des mathématiques.",
+    "discoverer": "Christian Goldbach",
+    "field": "Théorie des nombres",
+    "significance": "Problème emblématique de la théorie additive des nombres, il exige une compréhension profonde des propriétés additives des nombres premiers.",
+    "elementMeanings": {
+      "2n": { "role": "Nombre pair", "description": "Un nombre pair quelconque supérieur ou égal à 4.", "kind": "input" },
+      "p": { "role": "Premier nombre premier", "description": "L'un des deux nombres premiers dont la somme donne le nombre pair.", "kind": "input" },
+      "q": { "role": "Second nombre premier", "description": "L'autre des deux nombres premiers dont la somme donne le nombre pair.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Projets de vérification numérique à grande échelle par ordinateur",
+      "Source de motivation pour les problèmes additifs dans l'étude de la répartition des nombres premiers",
+      "Exemple de référence, en enseignement des mathématiques, pour expliquer la différence entre conjecture et démonstration"
+    ],
+    "relatedFormulas": ["prime-counting", "fermat-little"]
+  },
+  "fibonacci-general": {
+    "name": "Formule de Binet",
+    "oneLiner": "Formule close qui calcule directement le n-ième terme de la suite de Fibonacci à l'aide du nombre d'or",
+    "description": "La formule de Binet calcule le n-ième terme de la suite de Fibonacci sans récursivité, à partir du nombre d'or et de son conjugué. Il est frappant qu'une combinaison de nombres irrationnels donne toujours un entier ; c'est l'exemple type de la résolution d'une récurrence linéaire par son équation caractéristique.",
+    "discoverer": "Jacques Philippe Marie Binet (mise en forme) et Abraham de Moivre (découverte antérieure)",
+    "field": "Théorie des nombres",
+    "significance": "Elle montre qu'une récurrence linéaire admet une forme close et met au jour le lien profond entre le nombre d'or et la suite de Fibonacci.",
+    "elementMeanings": {
+      "F_n": { "role": "Nombre de Fibonacci", "description": "Le n-ième terme de la suite.", "kind": "output" },
+      "\\varphi": { "role": "Nombre d'or", "description": "(1+racine de 5)/2, environ 1,618. C'est la racine caractéristique positive.", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "Conjugué du nombre d'or", "description": "(1-racine de 5)/2, environ -0,618. C'est la racine caractéristique négative.", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "Constante de normalisation", "description": "Différence des deux racines caractéristiques ; on divise par elle pour que le résultat soit entier.", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "Rang du terme", "description": "Position recherchée dans la suite de Fibonacci.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calculer les limites de performance d'un tas de Fibonacci en analyse d'algorithmes",
+      "Expliquer les motifs en nombre d'or dans la nature, comme le nombre de pétales ou les spirales des pommes de pin",
+      "Déterminer les niveaux de retracement de Fibonacci en finance"
+    ],
+    "relatedFormulas": ["euclidean-algorithm"]
+  }
+}

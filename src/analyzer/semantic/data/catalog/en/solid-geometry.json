@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "Volume of a sphere",
+    "oneLiner": "The formula that finds the volume of a sphere by multiplying the cube of the radius by pi and four thirds",
+    "description": "The volume of a sphere is the radius multiplied by itself three times, then multiplied by pi and by four thirds. Use it to find how much space a perfectly round object such as a basketball takes up.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the sphere takes up.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "Constant of proportionality", "description": "The fixed coefficient that sets the volume of a sphere.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The distance from the centre of the sphere to its surface.", "kind": "input" },
+      "r^3": { "role": "Cube of the radius", "description": "The radius multiplied by itself three times. Volume is three-dimensional, so the radius is cubed.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out the volume of a basketball", "Estimating the volume of the Earth", "Comparing the sizes of marbles"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "Surface area of a sphere",
+    "oneLiner": "The formula that finds the surface area of a sphere by multiplying the square of the radius by pi and four",
+    "description": "The surface area of a sphere is the square of the radius multiplied by pi and by four. It is exactly four times the area of a circle with the same radius. The surface area is precisely the area you would need to cover if you painted a ball.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "S": { "role": "Surface area", "description": "The area of the entire surface of the sphere.", "kind": "output" },
+      "4": { "role": "Constant", "description": "It says that the surface of a sphere is four times the area of a circle of the same radius.", "kind": "constant", "value": 4 },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The distance from the centre of the sphere to its surface.", "kind": "input" },
+      "r^2": { "role": "Square of the radius", "description": "The radius multiplied by itself twice.", "kind": "input" }
+    },
+    "realWorldExamples": ["The total area of leather on a football", "How much paper you need to cover the surface of a globe"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "Volume of a cylinder",
+    "oneLiner": "The formula that finds the volume of a cylinder by multiplying the area of the circular base by the height",
+    "description": "The volume of a cylinder is the area of its base (the area of a circle) multiplied by its height. Think of it as a round base stacked upwards to the full height.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the cylinder takes up.", "kind": "output" },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The radius of the circular base of the cylinder.", "kind": "input" },
+      "r^2": { "role": "Square of the radius", "description": "The radius multiplied by itself twice. It sets the area of the base.", "kind": "input" },
+      "h": { "role": "Height", "description": "The distance between the top and bottom faces of the cylinder.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out how much a drinks can holds", "The capacity of a cylindrical water tank"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "Surface area of a cylinder",
+    "oneLiner": "The formula that finds the surface area of a cylinder by adding the two bases and the curved side",
+    "description": "The surface area of a cylinder is the area of the two circles at the top and bottom plus the area of the curved side. Unroll the side and you get a rectangle whose width is the circumference of the circle and whose height is the height of the cylinder.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "S": { "role": "Surface area", "description": "The area of the entire surface of the cylinder.", "kind": "output" },
+      "2": { "role": "Constant", "description": "The coefficient factored out as a common term.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The radius of the circular base of the cylinder.", "kind": "input" },
+      "h": { "role": "Height", "description": "The distance between the top and bottom faces of the cylinder.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out the area of the label on a drinks can", "How much wrapping paper it takes to cover a cylindrical gift box"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "Volume of a cone",
+    "oneLiner": "The formula that finds the volume of a cone by multiplying the area of the circular base by the height and dividing by 3",
+    "description": "The volume of a cone is the area of its base multiplied by its height and divided by 3. It is exactly one third of a cylinder with the same base and height.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the cone takes up.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "One third", "description": "It says that a cone has one third the volume of a cylinder with the same base and height.", "kind": "constant", "value": 0.33333333 },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The radius of the circular base of the cone.", "kind": "input" },
+      "h": { "role": "Height", "description": "The perpendicular distance from the apex of the cone to its base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out how much an ice cream cone holds", "The volume of a party hat"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "Surface area of a cone",
+    "oneLiner": "The formula that finds the surface area of a cone by adding the circular base and the curved side",
+    "description": "The surface area of a cone is the area of its circular base plus the area of its curved side. Unroll the side and you get a circular sector whose area is the radius times the slant height times pi.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "S": { "role": "Surface area", "description": "The area of the entire surface of the cone.", "kind": "output" },
+      "\\pi": { "role": "Pi", "description": "The circumference of a circle divided by its diameter, about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The radius of the circular base of the cone.", "kind": "input" },
+      "l": { "role": "Slant height", "description": "The slanted distance from the apex of the cone to the edge of its base.", "kind": "input" }
+    },
+    "realWorldExamples": ["The area of paper needed for a party hat", "Working out the fabric area of a conical tent"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "Volume of a cuboid",
+    "oneLiner": "The formula that finds the volume of a cuboid by multiplying length, width, and height together",
+    "description": "The volume of a cuboid is length times width times height. It is the same as multiplying the area of the rectangular base by the height, and it amounts to counting how many unit cubes fit inside the box.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the cuboid takes up.", "kind": "output" },
+      "l": { "role": "Length", "description": "The length of the cuboid.", "kind": "input" },
+      "w": { "role": "Width", "description": "The width of the cuboid.", "kind": "input" },
+      "h": { "role": "Height", "description": "The height of the cuboid.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out the volume of a delivery box", "How much water fits in a swimming pool", "Estimating the interior capacity of a refrigerator"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "Surface area of a cuboid",
+    "oneLiner": "The formula that finds the surface area of a cuboid by adding the areas of three faces and doubling",
+    "description": "The surface area of a cuboid is the sum of the areas of its three distinct faces, multiplied by 2. A cuboid has three pairs of opposite faces, and the faces in a pair have the same area, so you add the three kinds of face and double the result.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "S": { "role": "Surface area", "description": "The area of the entire surface of the cuboid.", "kind": "output" },
+      "2": { "role": "Constant", "description": "You multiply by 2 because the opposite faces come in three pairs.", "kind": "constant", "value": 2 },
+      "l": { "role": "Length", "description": "The length of the cuboid.", "kind": "input" },
+      "w": { "role": "Width", "description": "The width of the cuboid.", "kind": "input" },
+      "h": { "role": "Height", "description": "The height of the cuboid.", "kind": "input" },
+      "lw": { "role": "Top and bottom face", "description": "The area of the face given by length times width.", "kind": "output" },
+      "lh": { "role": "Front and back face", "description": "The area of the face given by length times height.", "kind": "output" },
+      "wh": { "role": "Side face", "description": "The area of the face given by width times height.", "kind": "output" }
+    },
+    "realWorldExamples": ["How much wrapping paper it takes to cover a gift box", "Working out the outer surface area of a delivery box"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "Volume of a regular tetrahedron",
+    "oneLiner": "The formula that finds the volume of a regular tetrahedron by multiplying the cube of an edge by the square root of 2 over 12",
+    "description": "The volume of a regular tetrahedron is the cube of one edge length multiplied by the square root of 2 divided by 12. A regular tetrahedron is a solid whose four faces are all identical equilateral triangles, the simplest of the regular polyhedra.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the regular tetrahedron takes up.", "kind": "output" },
+      "\\frac{\\sqrt{2}}{12}": { "role": "Constant of proportionality", "description": "The fixed coefficient that comes out of the geometry of a regular tetrahedron.", "kind": "constant", "value": 0.11785113 },
+      "a": { "role": "Edge length", "description": "The length of one edge of the regular tetrahedron. Every edge is the same.", "kind": "input" },
+      "a^3": { "role": "Cube of the edge", "description": "The edge length multiplied by itself three times.", "kind": "input" }
+    },
+    "realWorldExamples": ["The volume of a pyramid-shaped chocolate", "Working out the size of a tetrahedral die (D4)"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "Volume of a pyramid",
+    "oneLiner": "The formula that finds the volume of a pyramid by multiplying the area of the base by the height and dividing by 3",
+    "description": "The volume of a pyramid is the area of its base multiplied by its height and divided by 3. It is exactly one third of a prism with the same base and height. Use it for solids with a polygonal base and a pointed top, like the Egyptian pyramids.",
+    "field": "Geometry",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the pyramid takes up.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "One third", "description": "It says that a pyramid has one third the volume of a prism with the same base and height.", "kind": "constant", "value": 0.33333333 },
+      "B": { "role": "Area of the base", "description": "The area of the polygonal base of the pyramid.", "kind": "input" },
+      "h": { "role": "Height", "description": "The perpendicular distance from the apex of the pyramid to its base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Estimating the volume of an Egyptian pyramid", "Working out the interior space of a pyramid-shaped tent"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}

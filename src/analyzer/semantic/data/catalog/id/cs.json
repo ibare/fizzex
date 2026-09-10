@@ -1,0 +1,123 @@
+{
+  "comparison-sort-bound": {
+    "name": "Batas bawah pengurutan berbasis perbandingan",
+    "oneLiner": "Teorema yang menjamin bahwa kompleksitas waktu kasus terburuk algoritma pengurutan berbasis perbandingan tidak mungkin lebih kecil daripada O(n log n)",
+    "description": "Teorema batas bawah pengurutan berbasis perbandingan membuktikan bahwa algoritma yang mengurutkan hanya dengan membandingkan elemen harus melakukan sekurang-kurangnya O(n log n) perbandingan pada kasus terburuk. Dalam model pohon keputusan, untuk membedakan n! permutasi tinggi pohonnya harus paling sedikit log2(n!), dan menurut hampiran Stirling nilai itu adalah O(n log n).",
+    "field": "Ilmu komputer",
+    "significance": "Teorema ini membuktikan bahwa merge sort, heap sort, dan sejenisnya sudah optimal secara asimtotik, sekaligus menetapkan dengan jelas batas kinerja pengurutan berbasis perbandingan.",
+    "elementMeanings": {
+      "n": { "role": "Banyak elemen", "description": "Jumlah seluruh elemen yang harus diurutkan.", "kind": "input" },
+      "\\log n": { "role": "Faktor logaritma", "description": "Bagian logaritma dari banyaknya perbandingan, yang berasal dari tinggi pohon keputusan.", "kind": "structural" },
+      "n!": { "role": "Banyak permutasi", "description": "Banyaknya semua susunan yang mungkin dari n elemen. Nilai ini menjadi batas bawah jumlah daun pohon keputusan.", "kind": "structural" },
+      "\\Omega(n \\log n)": { "role": "Notasi batas bawah", "description": "Menyatakan bahwa pada kasus terburuk banyaknya perbandingan tidak kurang dari nilai yang sebanding dengan n log n.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Dasar teoretis pemilihan algoritma saat mengurutkan indeks basis data",
+      "Analisis kompleksitas waktu solusi berbasis pengurutan dalam lomba pemrograman",
+      "Dasar jaminan kinerja fungsi pengurutan pustaka standar seperti Timsort"
+    ],
+    "relatedFormulas": ["master-theorem"]
+  },
+  "master-theorem": {
+    "name": "Teorema master",
+    "oneLiner": "Teorema yang menggolongkan kompleksitas waktu relasi rekurens bagi-dan-taklukkan berbentuk T(n) = aT(n/b) + f(n) ke dalam tiga kasus",
+    "description": "Teorema master adalah alat baku untuk menganalisis relasi rekurens algoritma bagi-dan-taklukkan. Berdasarkan hubungan antara banyaknya submasalah a, rasio pengecilan ukuran b, dan biaya penggabungan f(n), teorema ini menggolongkan persoalan ke dalam tiga kasus sehingga kompleksitas waktu dalam bentuk tertutup dapat langsung ditentukan.",
+    "discoverer": "Jon Bentley, Dorothea Haken, James Saxe",
+    "field": "Ilmu komputer",
+    "significance": "Teorema ini adalah alat utama analisis algoritma bagi-dan-taklukkan, dan memungkinkan kompleksitas merge sort, pencarian biner, serta perkalian matriks Strassen ditentukan seketika.",
+    "elementMeanings": {
+      "T(n)": { "role": "Fungsi waktu", "description": "Waktu jalan algoritma untuk masukan berukuran n.", "kind": "output" },
+      "a": { "role": "Banyak submasalah", "description": "Jumlah submasalah hasil pembagian secara rekursif. Bilangan bulat 1 atau lebih.", "kind": "input" },
+      "n/b": { "role": "Ukuran submasalah", "description": "Ukuran masukan tiap submasalah. Nilai b adalah konstanta yang lebih besar daripada 1.", "kind": "input" },
+      "f(n)": { "role": "Biaya penggabungan", "description": "Biaya nonrekursif yang terpakai pada tahap pembagian dan penggabungan.", "kind": "input" },
+      "\\log_b a": { "role": "Pangkat kritis", "description": "Nilai acuan yang dibandingkan dengan derajat polinomial f(n) untuk membedakan ketiga kasus.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Memperoleh O(n log n) dari T(n) = 2T(n/2) + O(n) pada merge sort",
+      "Memperoleh O(log n) dari T(n) = T(n/2) + O(1) pada pencarian biner",
+      "Menganalisis T(n) = 7T(n/2) + O(n^2) pada perkalian matriks Strassen"
+    ],
+    "relatedFormulas": ["comparison-sort-bound"]
+  },
+  "hamming-distance": {
+    "name": "Jarak Hamming",
+    "oneLiner": "Ukuran jarak yang menghitung berapa kali nilai pada posisi yang bersesuaian berbeda pada dua untai yang sama panjang",
+    "description": "Jarak Hamming didefinisikan sebagai banyaknya posisi yang berbeda pada dua untai biner (atau untai biasa) yang sama panjang. Konsep ini menjadi inti teori deteksi dan koreksi galat, dan langsung dipakai untuk mengukur berapa bit yang terbalik saat data dikirimkan.",
+    "discoverer": "Richard Hamming",
+    "field": "Ilmu komputer",
+    "significance": "Jarak Hamming menjadi dasar perancangan kode koreksi galat (kode Hamming), dan dimanfaatkan luas pada sistem komunikasi, pembandingan urutan DNA, serta pencarian kemiripan.",
+    "elementMeanings": {
+      "x": { "role": "Untai pertama", "description": "Salah satu dari dua untai yang dibandingkan.", "kind": "input" },
+      "y": { "role": "Untai kedua", "description": "Untai lain dari dua untai yang dibandingkan.", "kind": "input" },
+      "d(x,y)": { "role": "Jarak Hamming", "description": "Banyaknya posisi yang bersesuaian tetapi berbeda antara x dan y.", "kind": "output" },
+      "n": { "role": "Panjang untai", "description": "Panjang yang sama dari kedua untai.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Mendeteksi banyaknya galat bit pada data yang diterima dalam komunikasi jaringan",
+      "Menetapkan jarak Hamming minimum saat merancang kemampuan koreksi galat kode QR",
+      "Mengukur banyaknya mutasi DNA sebagai jarak Hamming dalam bioinformatika"
+    ],
+    "relatedFormulas": ["password-entropy"]
+  },
+  "boolean-complement": {
+    "name": "Hukum komplemen aljabar Boole",
+    "oneLiner": "Hukum dasar aljabar Boole yang menyatakan bahwa disjungsi sebuah variabel logika dengan komplemennya selalu bernilai 1 (benar)",
+    "description": "Hukum komplemen aljabar Boole menyatakan bahwa operasi OR antara variabel A dan negasinya A' selalu menghasilkan 1, sedangkan operasi AND-nya selalu menghasilkan 0. Inilah aturan paling dasar dalam menyederhanakan bentuk logika, dan penerapannya tak terhindarkan dalam perancangan rangkaian digital maupun pemrograman.",
+    "discoverer": "George Boole",
+    "field": "Ilmu komputer",
+    "significance": "Hukum ini adalah titik tolak optimasi rangkaian logika digital dan penyederhanaan bentuk logika, serta menjadi dasar semua teorema aljabar Boole.",
+    "elementMeanings": {
+      "A": { "role": "Variabel logika", "description": "Variabel Boole yang bernilai benar (1) atau salah (0).", "kind": "input" },
+      "A'": { "role": "Komplemen", "description": "Negasi dari A. Jika A bernilai 1 maka 0, jika A bernilai 0 maka 1.", "kind": "structural" },
+      "+": { "role": "Disjungsi (OR)", "description": "Menyatakan operasi OR dalam aljabar Boole.", "kind": "structural" },
+      "1": { "role": "Nilai tautologi", "description": "Nilai yang selalu benar. Menunjukkan bahwa hasil disjungsinya pasti 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Menerapkan hukum komplemen saat meminimumkan bentuk logika dengan peta Karnaugh",
+      "Memastikan x | ~x == 1 saat mengoptimalkan operasi bit dalam pemrograman",
+      "Membuang gerbang yang tidak perlu dalam perancangan rangkaian FPGA"
+    ],
+    "relatedFormulas": ["de-morgan"]
+  },
+  "handshaking-lemma": {
+    "name": "Lema jabat tangan pada graf",
+    "oneLiner": "Lema yang menyatakan bahwa jumlah derajat semua simpul pada sebuah graf sama dengan dua kali banyaknya sisi",
+    "description": "Lema jabat tangan diturunkan dari kenyataan bahwa pada graf tak berarah setiap sisi menyumbang tepat pada derajat dua simpul. Karena itu jumlah seluruh derajat selalu genap, dan banyaknya simpul yang berderajat ganjil pun pasti genap.",
+    "discoverer": "Leonhard Euler",
+    "field": "Ilmu komputer",
+    "significance": "Lema ini adalah teorema paling dasar dalam teori graf, dan menjadi landasan analisis jaringan, penentuan lintasan Euler, serta pemeriksaan keabsahan sebuah graf.",
+    "elementMeanings": {
+      "\\sum \\deg(v)": { "role": "Jumlah derajat", "description": "Nilai penjumlahan banyaknya sisi yang terhubung pada seluruh simpul graf.", "kind": "output" },
+      "2|E|": { "role": "Dua kali banyak sisi", "description": "Jumlah seluruh sisi dikalikan 2. Karena setiap sisi menyumbang pada dua simpul, nilainya sama dengan jumlah derajat.", "kind": "output" },
+      "\\deg(v)": { "role": "Derajat simpul", "description": "Banyaknya sisi yang terhubung pada simpul v.", "kind": "input" },
+      "|E|": { "role": "Banyak sisi", "description": "Jumlah seluruh sisi yang ada dalam graf.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menganalisis hubungan antara jumlah seluruh pertemanan dan jumlah koneksi tiap orang pada jejaring sosial",
+      "Memeriksa kesesuaian jumlah porta dan jumlah tautan saat memverifikasi topologi jaringan komputer",
+      "Memeriksa syarat awal keberadaan lintasan atau sirkuit Euler"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  },
+  "password-entropy": {
+    "name": "Entropi kata sandi",
+    "oneLiner": "Rumus yang mengukur kandungan informasi sebuah kata sandi dalam satuan bit dari banyaknya jenis karakter N dan panjang L",
+    "description": "Rumus entropi kata sandi menghitung kandungan informasi dalam satuan bit dengan mengubah banyaknya kombinasi yang mungkin, ketika L karakter dipilih dari himpunan karakter berukuran N, ke dalam bentuk logaritma. Makin tinggi entropinya, makin kuat ketahanannya terhadap serangan coba-coba menyeluruh, sehingga nilai ini menjadi acuan kuantitatif dalam menyusun kebijakan keamanan.",
+    "discoverer": "Claude Shannon (gagasan entropi informasi)",
+    "field": "Ilmu komputer",
+    "significance": "Rumus ini adalah ukuran baku untuk menilai kekuatan kata sandi secara objektif dalam keamanan informasi, dan memberi dasar kuantitatif bagi kebijakan keamanan serta perancangan sistem autentikasi.",
+    "elementMeanings": {
+      "H": { "role": "Entropi", "description": "Kandungan informasi dalam satuan bit. Nilai ini adalah logaritma dari rata-rata banyaknya percobaan yang diperlukan pada serangan coba-coba menyeluruh.", "kind": "output" },
+      "N": { "role": "Ukuran himpunan karakter", "description": "Banyaknya jenis karakter berbeda yang dapat dipakai. Jika hanya huruf kecil nilainya 26, sedangkan huruf besar-kecil ditambah angka dan karakter khusus mencapai 90 atau lebih.", "kind": "input" },
+      "L": { "role": "Panjang kata sandi", "description": "Banyaknya karakter yang menyusun kata sandi.", "kind": "input" },
+      "\\log_2": { "role": "Logaritma biner", "description": "Fungsi yang mengubah banyaknya kemungkinan ke dalam satuan bit.", "kind": "structural" },
+      "N^L": { "role": "Banyak seluruh kemungkinan", "description": "Jumlah semua kombinasi kata sandi yang mungkin.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Membuat penunjuk kekuatan kata sandi pada halaman pendaftaran situs web",
+      "Menetapkan batas minimum entropi kata sandi dalam kebijakan keamanan perusahaan",
+      "Membandingkan kekuatan keamanan antara frasa sandi dan untai karakter acak"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "euler-identity": {
+    "name": "Identitas Euler",
+    "oneLiner": "Rumus yang merangkai lima konstanta paling mendasar dalam matematika ke dalam satu persamaan",
+    "description": "Identitas Euler merangkai konstanta alami e, satuan imajiner i, konstanta lingkaran, 1, dan 0 ke dalam satu persamaan yang ringkas. Identitas ini muncul secara wajar dari rumus Euler bila sudutnya diambil sebesar konstanta lingkaran, dan melambangkan kaitan mendalam yang menembus berbagai cabang matematika.",
+    "discoverer": "Leonhard Euler",
+    "field": "Aljabar",
+    "significance": "Identitas ini memperlihatkan bahwa fungsi eksponensial, fungsi trigonometri, dan bilangan kompleks bersambung menjadi satu, dan sering disebut sebagai persamaan terindah dalam sejarah matematika.",
+    "elementMeanings": {
+      "e": { "role": "Konstanta alami", "description": "Kira-kira 2,71828. Bilangan pokok logaritma natural dan menyatakan pertumbuhan sinambung.", "kind": "constant", "value": 2.71828183 },
+      "i": { "role": "Satuan imajiner", "description": "Bilangan yang kuadratnya -1. Unsur penyusun dasar bilangan kompleks.", "kind": "constant" },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Perbandingan keliling lingkaran terhadap diameternya. Kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "1": { "role": "Unsur identitas perkalian", "description": "Unsur identitas perkalian sekaligus awal bilangan asli.", "kind": "constant", "value": 1 },
+      "0": { "role": "Unsur identitas penjumlahan", "description": "Unsur identitas penjumlahan sekaligus nilai hasil persamaan ini.", "kind": "constant", "value": 0 }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "quadratic-formula": {
+    "name": "Rumus abc",
+    "oneLiner": "Rumus yang mencari penyelesaian persamaan kuadrat ax2+bx+c=0 langsung dari koefisiennya",
+    "description": "Rumus abc menghitung kedua akar persamaan kuadrat secara tepat hanya dari koefisien a, b, dan c. Banyaknya akar real ditentukan oleh tanda diskriminannya, dan inilah cara penyelesaian yang paling mendasar dalam aljabar.",
+    "field": "Aljabar",
+    "significance": "Rumus ini adalah alat serbaguna yang dapat menyelesaikan setiap persamaan kuadrat, dan lewat gagasan diskriminan memungkinkan keberadaan akar-akarnya dinilai.",
+    "elementMeanings": {
+      "a": { "role": "Koefisien suku kuadrat", "description": "Bilangan yang mengalikan kuadrat x. Nilainya harus bukan 0 agar persamaannya berderajat dua.", "kind": "input" },
+      "b": { "role": "Koefisien suku linear", "description": "Bilangan yang mengalikan x. Nilainya memengaruhi kedudukan sumbu parabola.", "kind": "input" },
+      "c": { "role": "Suku tetap", "description": "Konstanta yang ditambahkan tanpa peubah. Nilainya menentukan titik potong sumbu y.", "kind": "input" },
+      "b^2-4ac": { "role": "Diskriminan", "description": "Menentukan banyak dan jenis akarnya. Bila positif ada dua akar real berbeda, bila 0 ada akar kembar, dan bila negatif akarnya imajiner.", "kind": "output" },
+      "\\pm": { "role": "Tanda plus-minus", "description": "Menyatakan sekaligus dua kemungkinan penjumlahan dan pengurangan sehingga kedua akarnya terwakili.", "kind": "structural" }
+    },
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem"]
+  },
+  "binomial-theorem": {
+    "name": "Teorema binomial",
+    "oneLiner": "Teorema yang menjabarkan perpangkatan jumlah dua suku dengan koefisien binomial",
+    "description": "Teorema binomial menjabarkan (a+b) pangkat n menjadi sebuah deret dengan memakai koefisien binomial. Teorema ini adalah alat utama yang menghubungkan kombinatorika dengan aljabar, dan berkaitan erat dengan segitiga Pascal.",
+    "discoverer": "Isaac Newton (perumuman)",
+    "field": "Aljabar",
+    "significance": "Teorema ini dimanfaatkan luas di seluruh matematika, mulai dari penjabaran polinomial, teori peluang, sampai kombinatorika, sekaligus menyediakan dasar perhitungan hampiran.",
+    "elementMeanings": {
+      "a": { "role": "Suku pertama", "description": "Suku pertama pada bentuk binomial. Derajatnya menurun saat dijabarkan.", "kind": "input" },
+      "b": { "role": "Suku kedua", "description": "Suku kedua pada bentuk binomial. Derajatnya naik saat dijabarkan.", "kind": "input" },
+      "n": { "role": "Pangkat", "description": "Bilangan bulat taknegatif yang menyatakan berapa kali bentuk binomial itu dikalikan.", "kind": "input" },
+      "k": { "role": "Indeks penjabaran", "description": "Peubah penjumlahan yang menyatakan berapa kali b dikalikan pada tiap suku.", "kind": "input" },
+      "\\binom{n}{k}": { "role": "Koefisien binomial", "description": "Banyaknya kombinasi memilih k dari n. Nilainya bersesuaian dengan tiap bilangan pada segitiga Pascal.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "geometric-series": {
+    "name": "Rumus jumlah deret geometri",
+    "oneLiner": "Rumus yang mencari jumlah deret dengan rasio tetap dalam bentuk tertutup",
+    "description": "Rumus jumlah deret geometri menghitung jumlah deret secara ringkas bila suku pertama a dan rasio r diketahui. Bila nilai mutlak rasionya lebih kecil daripada 1, deret takhingganya pun konvergen, dan rumus ini dimanfaatkan luas dalam matematika keuangan maupun fisika.",
+    "field": "Aljabar",
+    "significance": "Rumus ini memungkinkan proses takhingga yang konvergen dinyatakan sebagai nilai berhingga, dan penerapan praktisnya sangat luas, mulai dari perhitungan bunga majemuk sampai pengolahan sinyal.",
+    "elementMeanings": {
+      "a": { "role": "Suku pertama", "description": "Suku pertama deret. Nilai acuan yang menentukan besarnya jumlah keseluruhan.", "kind": "input" },
+      "r": { "role": "Rasio", "description": "Perbandingan antara dua suku berurutan. Nilai mutlaknya harus lebih kecil daripada 1 agar deret takhingganya konvergen.", "kind": "input" },
+      "n": { "role": "Banyak suku", "description": "Banyaknya suku yang dijumlahkan pada deret berhingga.", "kind": "input" },
+      "S_n": { "role": "Jumlah parsial", "description": "Jumlah sampai n suku yang pertama.", "kind": "output" },
+      "S_{\\infty}": { "role": "Jumlah deret takhingga", "description": "Nilai yang dituju, yaitu a/(1-r), ketika nilai mutlak rasionya kurang dari 1.", "kind": "output" }
+    },
+    "relatedFormulas": ["taylor-series", "binomial-theorem"]
+  },
+  "difference-of-squares": {
+    "name": "Selisih dua kuadrat",
+    "oneLiner": "Rumus yang memfaktorkan selisih kuadrat dua bilangan menjadi hasil kali jumlah dan selisihnya",
+    "description": "Rumus selisih dua kuadrat adalah identitas yang menyatakan bahwa kuadrat a dikurangi kuadrat b sama dengan (a+b)(a-b). Inilah pola pemfaktoran yang paling dasar, dan dimanfaatkan pula untuk menguraikan polinomial berderajat tinggi maupun untuk berhitung di luar kepala.",
+    "field": "Aljabar",
+    "significance": "Rumus ini adalah titik tolak pemfaktoran aljabar, dan pemakaiannya tak terhindarkan di berbagai bidang, seperti merasionalkan penyebut, menghitung limit, dan memfaktorkan bilangan prima dalam teori bilangan.",
+    "elementMeanings": {
+      "a": { "role": "Nilai pertama", "description": "Bilangan atau bentuk pertama yang dikuadratkan.", "kind": "input" },
+      "b": { "role": "Nilai kedua", "description": "Bilangan atau bentuk kedua yang dikuadratkan.", "kind": "input" },
+      "a^2": { "role": "Kuadrat pertama", "description": "Nilai a yang dikuadratkan.", "kind": "structural" },
+      "b^2": { "role": "Kuadrat kedua", "description": "Nilai b yang dikuadratkan.", "kind": "structural" },
+      "(a+b)": { "role": "Faktor jumlah", "description": "Faktor yang tersusun dari jumlah a dan b.", "kind": "structural" },
+      "(a-b)": { "role": "Faktor selisih", "description": "Faktor yang tersusun dari selisih a dikurangi b.", "kind": "structural" }
+    },
+    "relatedFormulas": ["quadratic-formula", "binomial-theorem"]
+  },
+  "perfect-square": {
+    "name": "Bentuk kuadrat sempurna",
+    "oneLiner": "Identitas yang menjabarkan kuadrat dari jumlah dua suku",
+    "description": "Bentuk kuadrat sempurna adalah identitas yang menyatakan bahwa kuadrat (a+b) sama dengan jumlah kuadrat a, 2ab, dan kuadrat b. Identitas ini dipakai sebagai inti dalam pemfaktoran bentuk kuadrat dan pengenalan kuadrat sempurna, sekaligus menjadi dasar cara melengkapkan kuadrat untuk menyelesaikan persamaan kuadrat.",
+    "field": "Aljabar",
+    "significance": "Identitas ini adalah alat paling dasar untuk memahami struktur bentuk kuadrat, dan tak tergantikan dalam mengubah ke bentuk titik puncak maupun menyelesaikan soal nilai minimum.",
+    "elementMeanings": {
+      "a": { "role": "Suku pertama", "description": "Suku pertama dari bentuk binomial yang dikuadratkan.", "kind": "input" },
+      "b": { "role": "Suku kedua", "description": "Suku kedua dari bentuk binomial yang dikuadratkan.", "kind": "input" },
+      "a^2": { "role": "Kuadrat suku pertama", "description": "Nilai a yang dikuadratkan.", "kind": "structural" },
+      "2ab": { "role": "Suku silang", "description": "Hasil kali a dan b yang dikalikan 2. Suku tengah yang muncul saat dijabarkan.", "kind": "structural" },
+      "b^2": { "role": "Kuadrat suku kedua", "description": "Nilai b yang dikuadratkan.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung pertambahan luas keseluruhan ketika sisi kebun berbentuk persegi diperpanjang sebesar b",
+      "Dipakai saat menjabarkan atau merapikan rumus ragam dalam statistika"
+    ],
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem", "quadratic-formula"]
+  },
+  "sum-difference-product": {
+    "name": "Rumus jumlah kali selisih",
+    "oneLiner": "Identitas yang menyatakan bahwa hasil kali jumlah dan selisih dua suku menghasilkan selisih kuadratnya",
+    "description": "Rumus jumlah kali selisih adalah identitas yang menyatakan bahwa (a+b)(a-b) sama dengan kuadrat a dikurangi kuadrat b. Isinya sama dengan bentuk pemfaktoran pada rumus selisih dua kuadrat, hanya saja dipandang dari arah perkalian. Rumus ini berguna untuk mengubah perkalian yang rumit menjadi operasi kuadrat yang sederhana.",
+    "field": "Aljabar",
+    "significance": "Rumus ini menyederhanakan perhitungan dengan mengubah perkalian menjadi selisih kuadrat, baik saat berhitung di luar kepala maupun secara numerik, dan menjadi alat utama dalam merasionalkan penyebut serta memfaktorkan.",
+    "elementMeanings": {
+      "a": { "role": "Nilai acuan", "description": "Nilai yang muncul bersama pada jumlah maupun selisihnya.", "kind": "input" },
+      "b": { "role": "Besar perubahan", "description": "Nilai yang ditambahkan pada atau dikurangkan dari nilai acuan.", "kind": "input" },
+      "(a+b)": { "role": "Jumlah", "description": "Faktor hasil penjumlahan a dan b.", "kind": "structural" },
+      "(a-b)": { "role": "Selisih", "description": "Faktor hasil pengurangan b dari a.", "kind": "structural" },
+      "a^2-b^2": { "role": "Selisih kuadrat", "description": "Nilai hasilnya, yaitu selisih kuadrat kedua bilangan itu.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Menghitung 49 x 51 di luar kepala sebagai (50+1)(50-1) = 2500-1 = 2499",
+      "Dimanfaatkan dalam proses merasionalkan untuk menghilangkan bentuk akar pada penyebut"
+    ],
+    "relatedFormulas": ["difference-of-squares", "perfect-square"]
+  },
+  "arithmetic-series-sum": {
+    "name": "Rumus jumlah deret aritmetika",
+    "oneLiner": "Rumus untuk mencari jumlah n suku pertama sebuah barisan aritmetika",
+    "description": "Rumus jumlah deret aritmetika mencari jumlahnya dengan mengalikan rata-rata suku pertama dan suku terakhir dengan banyaknya suku. Rumus ini terkenal lewat kisah Gauss kecil yang menjumlahkan bilangan 1 sampai 100, dan merupakan rumus elok yang memanfaatkan struktur setangkup barisan aritmetika.",
+    "discoverer": "Carl Friedrich Gauss (penisbahan menurut anekdot)",
+    "field": "Aljabar",
+    "significance": "Rumus ini memungkinkan jumlah keseluruhan besaran yang bertambah atau berkurang secara teratur dihitung dengan cepat, dan menjadi dasar matematika diskret serta analisis algoritma.",
+    "elementMeanings": {
+      "S_n": { "role": "Jumlah deret", "description": "Nilai penjumlahan seluruh n suku yang pertama.", "kind": "output" },
+      "n": { "role": "Banyak suku", "description": "Jumlah seluruh suku yang dijumlahkan.", "kind": "input" },
+      "a_1": { "role": "Suku pertama", "description": "Suku pertama barisan itu.", "kind": "input" },
+      "a_n": { "role": "Suku terakhir", "description": "Suku ke-n barisan itu.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung jumlah seluruh kursi pada susunan bangku bertingkat (tiap baris bertambah sebanyak bilangan tetap)",
+      "Menghitung penghasilan setahun ketika gaji naik sebesar jumlah tetap tiap bulan"
+    ],
+    "relatedFormulas": ["arithmetic-general", "geometric-series-sum"]
+  },
+  "arithmetic-general": {
+    "name": "Rumus suku ke-n barisan aritmetika",
+    "oneLiner": "Rumus untuk mencari suku ke-n barisan aritmetika dari suku pertama dan bedanya",
+    "description": "Rumus suku ke-n barisan aritmetika menghitung suku ke-n mana pun secara langsung dengan menambahkan (n-1) kali beda pada suku pertama. Rumus ini menyatakan keteraturan barisan dalam satu bentuk dan memperlihatkan dengan jelas sifat linear barisan aritmetika.",
+    "field": "Aljabar",
+    "significance": "Rumus ini adalah cara paling dasar untuk menangkap pola sebuah barisan dalam bentuk rumus, sekaligus menjadi jembatan menuju gagasan fungsi.",
+    "elementMeanings": {
+      "a_n": { "role": "Suku ke-n", "description": "Nilai suku ke-n barisan itu.", "kind": "output" },
+      "a_1": { "role": "Suku pertama", "description": "Nilai awal barisan itu.", "kind": "input" },
+      "n": { "role": "Nomor suku", "description": "Bilangan asli yang menyatakan suku keberapa yang hendak dicari.", "kind": "input" },
+      "d": { "role": "Beda", "description": "Selisih tetap antara dua suku yang berurutan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung ketinggian lantai ke-n ketika lift naik setinggi jarak yang sama pada tiap lantai",
+      "Meramalkan nilai pada saat tertentu ketika waktu berjalan secara tetap"
+    ],
+    "relatedFormulas": ["arithmetic-series-sum", "geometric-general"]
+  },
+  "geometric-series-sum": {
+    "name": "Rumus jumlah berhingga deret geometri",
+    "oneLiner": "Rumus untuk mencari jumlah n suku pertama sebuah barisan geometri",
+    "description": "Rumus jumlah berhingga deret geometri menghitung jumlah deret dalam bentuk tertutup dengan memakai suku pertama, rasio, dan banyaknya suku. Rumus ini berlaku ketika rasionya bukan 1, dan rasio pangkat n memegang peran utama di dalamnya. Berbeda dengan rumus jumlah deret geometri yang sudah ada (geometric-series), rumus ini memusatkan perhatian pada jumlah berhingga.",
+    "field": "Aljabar",
+    "significance": "Rumus ini langsung dimanfaatkan untuk menakar perubahan berlipat ganda dalam kehidupan sehari-hari, seperti perhitungan bunga majemuk, penetapan angsuran, dan penyusutan.",
+    "elementMeanings": {
+      "S_n": { "role": "Jumlah berhingga", "description": "Jumlah sampai n suku yang pertama.", "kind": "output" },
+      "a_1": { "role": "Suku pertama", "description": "Suku pertama deret itu.", "kind": "input" },
+      "r": { "role": "Rasio", "description": "Perbandingan antara dua suku yang berurutan. Nilainya harus bukan 1.", "kind": "input" },
+      "n": { "role": "Banyak suku", "description": "Jumlah seluruh suku yang dijumlahkan.", "kind": "input" },
+      "r^n": { "role": "Rasio pangkat n", "description": "Rasio yang dikalikan sebanyak n kali. Nilainya menentukan laju divergensi atau konvergensi deret.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung jumlah tertumpuk dana investasi setelah n tahun bila tumbuh dengan persentase tetap tiap tahun",
+      "Menghitung sisa tertumpuk obat dalam tubuh bila terurai dengan persentase tetap tiap jam"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-general", "infinite-geometric"]
+  },
+  "geometric-general": {
+    "name": "Rumus suku ke-n barisan geometri",
+    "oneLiner": "Rumus untuk mencari suku ke-n barisan geometri dari suku pertama dan rasionya",
+    "description": "Rumus suku ke-n barisan geometri menghitung suku ke-n mana pun secara langsung dengan mengalikan suku pertama dengan rasio pangkat (n-1). Rumus ini menyatakan pola pertumbuhan atau peluruhan eksponensial sebuah barisan dalam satu bentuk.",
+    "field": "Aljabar",
+    "significance": "Rumus ini adalah alat dasar untuk memodelkan perubahan berlipat ganda, seperti pertumbuhan penduduk, peluruhan radioaktif, dan bunga majemuk.",
+    "elementMeanings": {
+      "a_n": { "role": "Suku ke-n", "description": "Nilai suku ke-n barisan itu.", "kind": "output" },
+      "a_1": { "role": "Suku pertama", "description": "Nilai awal barisan itu.", "kind": "input" },
+      "r": { "role": "Rasio", "description": "Perbandingan antara dua suku yang berurutan.", "kind": "input" },
+      "n": { "role": "Nomor suku", "description": "Bilangan asli yang menyatakan suku keberapa yang hendak dicari.", "kind": "input" },
+      "r^{n-1}": { "role": "Perpangkatan rasio", "description": "Rasio yang dikalikan sebanyak (n-1) kali. Nilainya menyatakan pengali terhadap suku pertama.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung jumlah bakteri setelah n keturunan bila tiap keturunan membelah menjadi 2 kali lipat",
+      "Menghitung pokok beserta bunga sebuah simpanan setelah n tahun dengan bunga majemuk bertingkat tetap"
+    ],
+    "relatedFormulas": ["geometric-series-sum", "arithmetic-general", "infinite-geometric"]
+  },
+  "infinite-geometric": {
+    "name": "Deret geometri takhingga",
+    "oneLiner": "Jumlah deret geometri yang dijumlahkan tanpa batas ketika nilai mutlak rasionya lebih kecil daripada 1",
+    "description": "Rumus deret geometri takhingga memperlihatkan bahwa ketika nilai mutlak rasionya kurang dari 1, deret geometri itu menuju nilai berhingga meskipun terus berlanjut tanpa batas. Nilai yang dituju diperoleh dengan membagi suku pertama dengan (1 dikurangi rasio). Inilah contoh paling gamblang untuk memahami gagasan limit dan kekonvergenan.",
+    "field": "Aljabar",
+    "significance": "Rumus ini adalah contoh utama wawasan matematis bahwa proses takhingga dapat melahirkan hasil yang berhingga, sekaligus titik tolak analisis dan teori deret.",
+    "elementMeanings": {
+      "S": { "role": "Jumlah deret takhingga", "description": "Nilai kekonvergenan hasil penjumlahan suku yang tak terhingga banyaknya.", "kind": "output" },
+      "a_1": { "role": "Suku pertama", "description": "Suku pertama deret itu.", "kind": "input" },
+      "r": { "role": "Rasio", "description": "Perbandingan antara dua suku yang berurutan. Harus memenuhi |r|<1 agar konvergen.", "kind": "input" },
+      "1-r": { "role": "Penyebut kekonvergenan", "description": "Rasio yang dikurangkan dari 1. Suku pertama dibagi nilai ini untuk memperoleh nilai kekonvergenannya.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Jarak tempuh seluruhnya ketika bola memantul setinggi persentase tetap tiap kali membentur lantai",
+      "Proses mengubah desimal berulang menjadi pecahan (misalnya 0,333... = 1/3)"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-series-sum", "geometric-general"]
+  },
+  "exponent-law": {
+    "name": "Sifat perpangkatan",
+    "oneLiner": "Sifat yang menyatakan bahwa pangkat dijumlahkan ketika perpangkatan berbilangan pokok sama dikalikan",
+    "description": "Sifat perpangkatan adalah hukum dasar yang menyatakan bahwa mengalikan perpangkatan dengan bilangan pokok a yang sama setara dengan menjumlahkan pangkatnya. Sifat ini muncul secara wajar dari definisi perpangkatan dan menjadi dasar seluruh tata operasi pangkat. Sifat-sifat pangkat lain, seperti pembagian dan perpangkatan berlapis, pun berasal dari sifat ini.",
+    "field": "Aljabar",
+    "significance": "Sifat ini adalah aturan paling mendasar dalam operasi pangkat, sekaligus landasan sifat logaritma, fungsi eksponensial, dan notasi ilmiah.",
+    "elementMeanings": {
+      "a": { "role": "Bilangan pokok", "description": "Bilangan yang menjadi acuan perpangkatan. Berupa bilangan real yang bukan 0.", "kind": "input" },
+      "m": { "role": "Pangkat pertama", "description": "Pangkat pada perpangkatan yang pertama.", "kind": "input" },
+      "n": { "role": "Pangkat kedua", "description": "Pangkat pada perpangkatan yang kedua.", "kind": "input" },
+      "m+n": { "role": "Pangkat hasil penjumlahan", "description": "Jumlah kedua pangkat itu. Inilah pangkat pada hasil kalinya.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Berhitung dengan mudah pada notasi ilmiah dengan menjumlahkan pangkat saat mengalikan perpangkatan 10",
+      "Dimanfaatkan saat menangani perpangkatan 2 dalam mengubah satuan memori komputer"
+    ],
+    "relatedFormulas": ["log-definition", "log-product-rule"]
+  },
+  "log-definition": {
+    "name": "Definisi logaritma",
+    "oneLiner": "Hubungan setara yang mendefinisikan logaritma sebagai operasi kebalikan dari perpangkatan",
+    "description": "Definisi logaritma mengubah hubungan perpangkatan, yaitu bahwa memangkatkan bilangan pokok a sebanyak c kali menghasilkan b, ke dalam notasi logaritma. Definisi ini menegaskan bahwa pangkat dan logaritma saling berkebalikan, sekaligus menjadi titik tolak perhitungan logaritma.",
+    "discoverer": "John Napier",
+    "field": "Aljabar",
+    "significance": "Definisi ini memungkinkan sifat inti logaritma yang mengubah perkalian menjadi penjumlahan, dan menjadi alat dasar dalam perhitungan ilmiah maupun teori informasi.",
+    "elementMeanings": {
+      "a": { "role": "Bilangan pokok", "description": "Bilangan pokok logaritma. Harus berupa bilangan positif yang bukan 1.", "kind": "input" },
+      "b": { "role": "Numerus", "description": "Bilangan yang dikenai logaritma. Harus positif.", "kind": "input" },
+      "c": { "role": "Nilai logaritma", "description": "Bilangan yang menyatakan berapa kali bilangan pokok harus dipangkatkan agar menjadi numerusnya.", "kind": "output" },
+      "\\log_a b": { "role": "Notasi logaritma", "description": "Logaritma dengan bilangan pokok a dan numerus b.", "kind": "structural" },
+      "a^c = b": { "role": "Notasi perpangkatan", "description": "Hubungan yang sama dinyatakan dalam bentuk perpangkatan.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Kekuatan gempa (skala Richter) didefinisikan dalam skala logaritma sehingga kenaikan 1 berarti energinya menjadi kira-kira 31,6 kali lipat",
+      "Kuat bunyi (desibel) diukur dalam skala logaritma sehingga rentang pendengaran manusia dapat ditangani"
+    ],
+    "relatedFormulas": ["exponent-law", "log-product-rule"]
+  },
+  "log-product-rule": {
+    "name": "Sifat logaritma hasil kali",
+    "oneLiner": "Sifat yang menyatakan bahwa logaritma hasil kali dua bilangan sama dengan jumlah masing-masing logaritmanya",
+    "description": "Sifat logaritma hasil kali memperlihatkan bahwa logaritma sebuah hasil kali dapat diuraikan menjadi jumlah logaritma masing-masing faktornya. Sifat ini diturunkan langsung dari sifat perpangkatan dan menyatakan sifat inti logaritma yang mengubah perkalian menjadi penjumlahan. Sifat pembagian dan sifat perpangkatan pun merupakan perluasan asas yang sama.",
+    "field": "Aljabar",
+    "significance": "Sifat ini memungkinkan perkalian yang rumit diubah menjadi penjumlahan yang sederhana sehingga membawa perubahan besar pada perhitungan numerik di masa sebelum ada mesin hitung.",
+    "elementMeanings": {
+      "a": { "role": "Faktor pertama", "description": "Bilangan positif pertama yang dikalikan.", "kind": "input" },
+      "b": { "role": "Faktor kedua", "description": "Bilangan positif kedua yang dikalikan.", "kind": "input" },
+      "\\log(ab)": { "role": "Logaritma hasil kali", "description": "Nilai logaritma dari hasil kali a dan b.", "kind": "structural" },
+      "\\log a": { "role": "Logaritma pertama", "description": "Nilai logaritma dari a.", "kind": "structural" },
+      "\\log b": { "role": "Logaritma kedua", "description": "Nilai logaritma dari b.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Mengubah nisbah kecerahan menjadi selisih magnitudo (penjumlahan) saat membandingkan kecerahan bintang dalam astronomi",
+      "Menghitung kandungan informasi gabungan dari kejadian-kejadian saling bebas sebagai jumlah masing-masing kandungan informasinya dalam teori informasi"
+    ],
+    "relatedFormulas": ["log-definition", "exponent-law"]
+  },
+  "complex-plane": {
+    "name": "Bidang kompleks",
+    "oneLiner": "Bidang yang menggambarkan bilangan kompleks z = a + bi sebagai titik berkoordinat (a, b)",
+    "description": "Bidang kompleks (bidang Argand) adalah sistem koordinat dua dimensi yang menyatakan bilangan kompleks dengan bagian real pada sumbu mendatar dan bagian imajiner pada sumbu tegak. Tiap bilangan kompleks bersesuaian dengan satu titik pada bidang itu, atau dengan vektor yang berpangkal di titik asal; nilai mutlak |z| menjadi jaraknya dari titik asal, sedangkan argumen arg(z) menjadi sudut yang dibentuknya terhadap sumbu real positif. Melalui bentuk kutub dan rumus Euler, makna geometris seperti rotasi dan pembesaran muncul dengan sendirinya.",
+    "field": "Aljabar",
+    "significance": "Bidang kompleks menghubungkan definisi abstrak bilangan kompleks dengan gerak hati geometris sehingga fungsi kompleks dan transformasi rotasi dapat dipahami secara visual.",
+    "elementMeanings": {
+      "z": { "role": "Bilangan kompleks", "description": "Titik pada bidang yang tersusun dari bagian real dan bagian imajiner.", "kind": "input" },
+      "a": { "role": "Bagian real", "description": "Koordinat z pada sumbu mendatar, yaitu Re(z).", "kind": "structural" },
+      "b": { "role": "Bagian imajiner", "description": "Koordinat z pada sumbu tegak, yaitu Im(z).", "kind": "structural" },
+      "|z|": { "role": "Nilai mutlak", "description": "Jarak dari titik asal ke z, yaitu sqrt(a^2 + b^2).", "kind": "output" },
+      "\\arg(z)": { "role": "Argumen", "description": "Sudut antara sumbu real positif dan vektor dari titik asal ke z, yaitu atan2(b, a).", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Menggambarkan impedansi rangkaian listrik arus bolak-balik sebagai vektor pada bidang kompleks untuk memvisualkan beda fasenya",
+      "Menganalisis hasil transformasi Fourier dalam pengolahan sinyal menurut besar dan fase pada bidang kompleks"
+    ],
+    "relatedFormulas": ["euler-identity"]
+  },
+  "linear-transform-2x2": {
+    "name": "Transformasi linear 2×2",
+    "oneLiner": "Transformasi berderajat satu yang memetakan vektor pada bidang ke vektor lain melalui matriks 2×2 bernama M",
+    "description": "Transformasi linear 2×2 adalah fungsi yang, melalui matriks M = [[a, b], [c, d]], memetakan setiap titik (x, y) pada bidang ke (ax + by, cx + dy). Vektor basis e1 dan e2 berpindah menjadi vektor-vektor kolom M, persegi satuan berubah menjadi jajaran genjang, dan kisinya berubah menjadi kisi hasil transformasi. Determinan det(M) menyatakan laju perubahan luas beserta arahnya, dan bila bernilai 0 dimensinya runtuh.",
+    "field": "Aljabar",
+    "significance": "Transformasi ini menyatukan transformasi geometri pada bidang, seperti rotasi, pencerminan, pembesaran, dan geseran, ke dalam satu matriks sehingga menjadi dasar grafika komputer dan aljabar linear.",
+    "elementMeanings": {
+      "M": { "role": "Matriks transformasi", "description": "Matriks real 2×2. Matriks ini menentukan transformasi berderajat satu pada bidang.", "kind": "input" },
+      "a": { "role": "M[0][0]", "description": "Koordinat mendatar yang dimiliki komponen mendatar basis e1 setelah ditransformasikan.", "kind": "structural" },
+      "b": { "role": "M[0][1]", "description": "Koordinat mendatar yang dimiliki komponen mendatar basis e2 setelah ditransformasikan.", "kind": "structural" },
+      "c": { "role": "M[1][0]", "description": "Koordinat tegak yang dimiliki komponen tegak basis e1 setelah ditransformasikan.", "kind": "structural" },
+      "d": { "role": "M[1][1]", "description": "Koordinat tegak yang dimiliki komponen tegak basis e2 setelah ditransformasikan.", "kind": "structural" },
+      "\\det(M)": { "role": "Determinan", "description": "ad - bc. Menyatakan pengali luas satuan setelah transformasi beserta arahnya (tandanya).", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Mesin grafis 2D menangani rotasi, pembesaran, dan geseran sebagai satu perkalian matriks 2×2",
+      "Analisis komponen utama (PCA) mengambil arah ragam data sebagai vektor eigen dari matriks peragam 2×2"
+    ],
+    "relatedFormulas": []
+  }
+}

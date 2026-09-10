@@ -1,0 +1,471 @@
+{
+  "arrhenius-equation": {
+    "name": "Ecuación de Arrhenius",
+    "oneLiner": "La fórmula que expresa cómo la constante de velocidad de reacción varía exponencialmente con la temperatura",
+    "description": "La ecuación de Arrhenius explica cómo cambia con la temperatura la constante de velocidad de una reacción química. Cuanto mayor es la energía de activación, más lenta es la reacción, y cuanto mayor es la temperatura, más rápida. El factor de frecuencia A recoge la frecuencia de las colisiones moleculares y el efecto de la orientación, mientras que el término exponencial indica la proporción de moléculas capaces de superar la barrera de energía de activación.",
+    "discoverer": "Svante Arrhenius",
+    "field": "Química",
+    "significance": "Al cuantificar la relación entre la temperatura y la velocidad de reacción, estableció la ley central de la cinética química.",
+    "elementMeanings": {
+      "k": {
+        "role": "Constante de velocidad de reacción",
+        "description": "La constante que determina la velocidad a la que transcurre la reacción a una temperatura dada.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "Factor de frecuencia",
+        "description": "El factor preexponencial que recoge la frecuencia de las colisiones moleculares y el efecto de la orientación.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Base del logaritmo natural",
+        "description": "Aproximadamente 2,718. Es la base de la función exponencial.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "E_a": {
+        "role": "Energía de activación",
+        "description": "La barrera de energía que hay que superar para que ocurra la reacción. Unidad: J/mol.",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Constante de los gases",
+        "description": "La constante de los gases ideales. Aproximadamente 8,314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "Temperatura absoluta",
+        "description": "La temperatura de la reacción. Unidad: kelvin (K).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Por qué los alimentos se estropean más despacio en el frigorífico (a menor temperatura, reacción más lenta)",
+      "El principio por el que un catalizador acelera la reacción al rebajar la energía de activación",
+      "El diseño de la temperatura óptima de reacción en un proceso industrial"
+    ],
+    "relatedFormulas": [
+      "half-life",
+      "gibbs-free-energy"
+    ]
+  },
+  "gibbs-free-energy": {
+    "name": "Energía libre de Gibbs",
+    "oneLiner": "La fórmula que decide si una reacción es espontánea a partir de las variaciones de entalpía y de entropía",
+    "description": "La variación de la energía libre de Gibbs es el criterio para decidir si una reacción transcurre espontáneamente a temperatura y presión constantes. Si la variación es negativa la reacción es espontánea, si es positiva no lo es, y si vale 0 el sistema está en equilibrio. Queda determinada por la competencia entre la variación de entalpía (energía térmica) y la de entropía (grado de desorden).",
+    "discoverer": "Josiah Willard Gibbs",
+    "field": "Química",
+    "significance": "Aporta el criterio termodinámico central para predecir la espontaneidad de las reacciones químicas y de los cambios de estado.",
+    "elementMeanings": {
+      "\\Delta G": {
+        "role": "Variación de la energía libre de Gibbs",
+        "description": "El indicador de la espontaneidad de la reacción. Si es negativo, es espontánea. Unidad: J o kJ.",
+        "kind": "output"
+      },
+      "\\Delta H": {
+        "role": "Variación de entalpía",
+        "description": "La energía térmica que la reacción desprende o absorbe. Unidad: J o kJ.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "Temperatura absoluta",
+        "description": "La temperatura de la reacción. Unidad: kelvin (K).",
+        "kind": "input"
+      },
+      "\\Delta S": {
+        "role": "Variación de entropía",
+        "description": "El cambio del grado de desorden que produce la reacción. Unidad: J/K.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Analizar el equilibrio de fases sólido-líquido en el punto de congelación del agua",
+      "Explicar la espontaneidad de la hidrólisis del ATP en los seres vivos",
+      "Predecir reacciones de descomposición que transcurren espontáneamente a alta temperatura"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "nernst-equation"
+    ]
+  },
+  "nernst-equation": {
+    "name": "Ecuación de Nernst",
+    "oneLiner": "La fórmula que expresa cómo el potencial de una pila varía con la razón de concentraciones entre reactivos y productos",
+    "description": "La ecuación de Nernst calcula el potencial de una celda electroquímica en condiciones no estándar. Parte del potencial estándar y aplica una corrección según la razón entre las concentraciones de productos y reactivos (el cociente de reacción Q). En el equilibrio, el potencial de la pila se hace 0, lo que la conecta directamente con la energía libre de Gibbs.",
+    "discoverer": "Walther Nernst",
+    "field": "Química",
+    "significance": "Al permitir predecir con precisión el potencial de las reacciones electroquímicas según las condiciones de concentración, sentó la base teórica de las baterías y de la electrólisis.",
+    "elementMeanings": {
+      "E": {
+        "role": "Potencial de la pila",
+        "description": "El potencial real en condiciones no estándar. Unidad: voltio (V).",
+        "kind": "output"
+      },
+      "E^\\circ": {
+        "role": "Potencial estándar de la pila",
+        "description": "El potencial en condiciones estándar (1 M, 1 atm, 25 grados). Unidad: voltio (V).",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Constante de los gases",
+        "description": "La constante de los gases ideales. Aproximadamente 8,314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "Temperatura absoluta",
+        "description": "La temperatura de la reacción. Unidad: kelvin (K).",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Número de electrones",
+        "description": "El número de moles de electrones que se transfieren en la reacción.",
+        "kind": "input"
+      },
+      "F": {
+        "role": "Constante de Faraday",
+        "description": "La carga de un mol de electrones. Aproximadamente 96.485 C/mol.",
+        "kind": "constant",
+        "value": 96485,
+        "unit": "C/mol"
+      },
+      "Q": {
+        "role": "Cociente de reacción",
+        "description": "La razón entre las concentraciones de los productos y las de los reactivos. En el equilibrio coincide con la constante de equilibrio K.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Predecir la variación del potencial de carga y descarga de una batería de iones de litio",
+      "El principio de funcionamiento de un pH-metro (la variación del potencial con la concentración de iones hidrógeno)",
+      "Evaluar el potencial de un metal en una reacción de corrosión"
+    ],
+    "relatedFormulas": [
+      "gibbs-free-energy",
+      "ph-definition"
+    ]
+  },
+  "half-life": {
+    "name": "Vida media",
+    "oneLiner": "La fórmula que expresa el tiempo que tarda la cantidad de una sustancia en reducirse a la mitad",
+    "description": "La vida media es el tiempo que tarda la cantidad de una sustancia en quedar reducida a la mitad de su valor inicial en una desintegración radiactiva o en una reacción de primer orden. Es inversamente proporcional a la constante de velocidad k, así que cuanto más rápida es la reacción, más corta es la vida media. Que este valor sea constante e independiente de la concentración inicial es la característica de las reacciones de primer orden.",
+    "field": "Química",
+    "significance": "Es el concepto clave para cuantificar la disminución de una sustancia con el tiempo: datación radiactiva, metabolismo de fármacos, gestión de residuos nucleares, etc.",
+    "elementMeanings": {
+      "t_{1/2}": {
+        "role": "Vida media",
+        "description": "El tiempo que tarda la cantidad de sustancia en reducirse a la mitad. Unidad: segundos (s), entre otras.",
+        "kind": "output"
+      },
+      "\\ln 2": {
+        "role": "Logaritmo natural de 2",
+        "description": "Aproximadamente 0,693. Es la constante que surge de forma natural de la condición de 'la mitad'.",
+        "kind": "constant",
+        "value": 0.693147,
+        "unit": ""
+      },
+      "k": {
+        "role": "Constante de velocidad",
+        "description": "La constante de proporcionalidad que determina la velocidad de la reacción. Unidad: 1/s (reacción de primer orden).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "La datación por carbono-14 (vida media de unos 5.730 años)",
+      "Determinar el intervalo entre dosis a partir de la vida media del fármaco en el organismo",
+      "Calcular el periodo de almacenamiento seguro de los residuos radiactivos"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "exponential-growth"
+    ]
+  },
+  "ph-definition": {
+    "name": "Definición de pH",
+    "oneLiner": "La fórmula que expresa la acidez de una disolución como el logaritmo decimal cambiado de signo de la concentración de iones hidrógeno",
+    "description": "El pH es la medida del carácter ácido o básico de una disolución acuosa y equivale al logaritmo decimal de la concentración de iones hidrógeno cambiado de signo. Un pH de 7 es neutro; por debajo de 7 la disolución es ácida y por encima, básica. Cuando el pH varía en una unidad, la concentración de iones hidrógeno varía diez veces.",
+    "discoverer": "Søren Sørensen",
+    "field": "Química",
+    "significance": "Al poner cifra de forma sencilla al carácter ácido-base de una disolución, se emplea en campos muy amplios: química, biología, ciencias ambientales, etc.",
+    "elementMeanings": {
+      "pH": {
+        "role": "Índice de iones hidrógeno",
+        "description": "El número adimensional que expresa la acidez. Lo habitual es que esté entre 0 y 14.",
+        "kind": "output"
+      },
+      "[H^+]": {
+        "role": "Concentración de iones hidrógeno",
+        "description": "La concentración molar de iones hidrógeno en la disolución. Unidad: mol/L.",
+        "kind": "input"
+      },
+      "\\log": {
+        "role": "Logaritmo decimal",
+        "description": "El logaritmo en base 10. Comprime las diferencias de magnitud de la concentración.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "El control del pH del agua de una piscina (mantenerlo entre 7,2 y 7,8 aproximadamente)",
+      "La medida del pH del jugo gástrico (entre 1,5 y 3,5 aproximadamente)",
+      "La medida del pH de la lluvia ácida y la evaluación de su impacto ambiental"
+    ],
+    "relatedFormulas": [
+      "nernst-equation"
+    ]
+  },
+  "boyle-law": {
+    "name": "Ley de Boyle",
+    "oneLiner": "La ley según la cual, a temperatura constante, la presión y el volumen de un gas son inversamente proporcionales",
+    "description": "La ley de Boyle establece que, cuando la temperatura es constante, el producto de la presión por el volumen de un gas se mantiene constante. Es decir, al reducir el volumen sube la presión, y al aumentarlo baja. Es un caso particular de la ley de los gases ideales y una de las leyes más básicas para entender el comportamiento macroscópico de los gases.",
+    "discoverer": "Robert Boyle",
+    "field": "Química",
+    "significance": "Fue la primera ley cuantitativa sobre el comportamiento de los gases y el punto de partida de la ley de los gases ideales y de la teoría cinético-molecular.",
+    "elementMeanings": {
+      "P_1": {
+        "role": "Presión inicial",
+        "description": "La presión del gas antes del cambio. Unidad: pascal (Pa) o atmósfera (atm).",
+        "kind": "input"
+      },
+      "V_1": {
+        "role": "Volumen inicial",
+        "description": "El volumen del gas antes del cambio. Unidad: litro (L) o m³.",
+        "kind": "input"
+      },
+      "P_2": {
+        "role": "Presión final",
+        "description": "La presión del gas después del cambio.",
+        "kind": "input"
+      },
+      "V_2": {
+        "role": "Volumen final",
+        "description": "El volumen del gas después del cambio.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "El aumento de la presión del gas del interior de una jeringa al apretar el émbolo",
+      "El cambio de volumen del aire con la profundidad al bucear",
+      "La compresión del gas dentro del cilindro del motor de un automóvil"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law"
+    ]
+  },
+  "avogadro-number": {
+    "name": "Número de Avogadro",
+    "oneLiner": "La constante fundamental que indica cuántas partículas contiene un mol",
+    "description": "El número de Avogadro es la cantidad de partículas (átomos, moléculas, iones, etc.) que forman un mol de sustancia, aproximadamente 6,022 por 10 elevado a 23. Hace de puente entre el mundo macroscópico (gramos, litros) y el microscópico (átomos, moléculas). Es la constante central del concepto de mol en química.",
+    "discoverer": "Jean Baptiste Perrin (determinación experimental), Amedeo Avogadro (aportación conceptual)",
+    "field": "Química",
+    "significance": "Es la constante más básica de la química, la que conecta el mundo microscópico de átomos y moléculas con el mundo macroscópico del laboratorio.",
+    "elementMeanings": {
+      "N_A": {
+        "role": "Número de Avogadro",
+        "description": "El número de partículas por mol. Aproximadamente 6,022x10 elevado a 23 /mol.",
+        "kind": "constant",
+        "value": 6.022e+23,
+        "unit": "mol⁻¹"
+      },
+      "n": {
+        "role": "Número de moles",
+        "description": "La cantidad de sustancia. Unidad: mol.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Número de partículas",
+        "description": "El número real de partículas (átomos, moléculas, etc.).",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Calcular cuántos átomos hay en 12 g de carbono",
+      "Calcular las relaciones cuantitativas de una reacción química (usando la razón molar)",
+      "Entender la relación entre el volumen de un gas y su número de moléculas"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "boyle-law"
+    ]
+  },
+  "water-synthesis": {
+    "name": "Síntesis del agua",
+    "oneLiner": "La reacción en la que el hidrógeno se une al oxígeno para dar agua: el principio del combustible de hidrógeno",
+    "description": "Dos moléculas de hidrógeno reaccionan con una de oxígeno y dan dos moléculas de agua. Es una reacción exotérmica que desprende mucho calor y, como el único producto es agua, no emite carbono. Los coeficientes 2, 1 y 2 son el resultado de igualar los 4 átomos de hidrógeno y los 2 de oxígeno de ambos miembros.",
+    "field": "Química",
+    "significance": "Es la reacción con la que obtienen energía las pilas de combustible y los coches de hidrógeno. Es también el primer ejemplo que se encuentra al aprender a ajustar los coeficientes de una ecuación química.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "La propulsión de un coche con pila de combustible de hidrógeno",
+      "El empuje de un motor de cohete con hidrógeno y oxígeno líquidos"
+    ]
+  },
+  "methane-combustion": {
+    "name": "Combustión del metano",
+    "oneLiner": "La reacción por la que el gas natural, al arder, produce dióxido de carbono y agua",
+    "description": "Una molécula de metano reacciona con dos de oxígeno y da una molécula de dióxido de carbono y dos de agua. Cuando un hidrocarburo reacciona por completo con el oxígeno, siempre se obtienen dióxido de carbono y agua: eso es la combustión completa. Si falta oxígeno se forman monóxido de carbono u hollín.",
+    "field": "Química",
+    "significance": "Es la reacción básica de la combustión del gas natural que se usa en los hogares y en las centrales eléctricas, y el punto de partida para calcular las emisiones de gases de efecto invernadero.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "La combustión en una cocina de gas o en una caldera",
+      "La producción de calor en una central de gas natural"
+    ]
+  },
+  "photosynthesis": {
+    "name": "Fotosíntesis",
+    "oneLiner": "La reacción con la que las plantas fabrican glucosa a partir de dióxido de carbono y agua usando la luz",
+    "description": "Seis moléculas de dióxido de carbono y seis de agua, al recibir energía luminosa, dan una molécula de glucosa y seis de oxígeno. Es una reacción endotérmica en la que la energía de la luz queda almacenada como energía de enlace químico, y ocurre en los cloroplastos. Casi todo el oxígeno de la atmósfera terrestre procede de esta reacción.",
+    "field": "Química",
+    "significance": "Es la reacción que transforma la energía solar en una forma aprovechable por los seres vivos y el punto de partida de casi todas las cadenas alimentarias.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "La producción de nutrientes por las plantas y las algas",
+      "Los bosques y los océanos como sumideros de carbono"
+    ],
+    "relatedFormulas": [
+      "cellular-respiration"
+    ]
+  },
+  "cellular-respiration": {
+    "name": "Respiración celular",
+    "oneLiner": "La reacción que quema glucosa con oxígeno para obtener la energía de las funciones vitales",
+    "description": "Una molécula de glucosa reacciona con seis de oxígeno y da seis moléculas de dióxido de carbono y seis de agua. Va exactamente en sentido contrario a la fotosíntesis, y la energía liberada queda recogida en el ATP. En realidad transcurre en varias etapas, pero el balance global se resume en esta única línea.",
+    "field": "Química",
+    "significance": "Es la forma en que obtienen energía casi todos los seres vivos, animales y plantas incluidos. Junto con la fotosíntesis, hace que el carbono circule.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "El aporte de energía cuando los músculos se mueven",
+      "El destino del oxígeno que se inspira al respirar"
+    ],
+    "relatedFormulas": [
+      "photosynthesis"
+    ]
+  },
+  "neutralization-hcl-naoh": {
+    "name": "Reacción de neutralización",
+    "oneLiner": "La reacción en la que un ácido y una base se unen para dar una sal y agua",
+    "description": "El ácido clorhídrico y el hidróxido de sodio reaccionan y dan cloruro de sodio y agua. La esencia de la reacción es que el ion hidrógeno del ácido y el ion hidróxido de la base se unen para formar agua, mientras que los iones restantes constituyen la sal. Es una reacción exotérmica que desprende calor.",
+    "field": "Química",
+    "significance": "Es la reacción representativa que muestra cómo lo ácido y lo básico se contrarrestan entre sí, y el principio en el que se basan las valoraciones.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Tomar un antiácido contra el ardor de estómago",
+      "Echar cal a un suelo ácido para neutralizarlo"
+    ]
+  },
+  "haber-process": {
+    "name": "Proceso de Haber-Bosch",
+    "oneLiner": "La reacción que fabrica amoniaco con el nitrógeno del aire: el punto de partida de los fertilizantes",
+    "description": "Una molécula de nitrógeno y tres de hidrógeno reaccionan sobre un catalizador de hierro y dan dos moléculas de amoniaco. Al ser una reacción reversible, la reacción directa y la inversa ocurren a la vez, y con alta temperatura, alta presión y catalizador se eleva el rendimiento hacia el amoniaco. Las condiciones son duras porque el triple enlace de la molécula de nitrógeno es muy resistente.",
+    "discoverer": "Fritz Haber, Carl Bosch",
+    "field": "Química",
+    "significance": "Es la reacción que convirtió el nitrógeno del aire en una forma aprovechable por las plantas. Al permitir producir fertilizantes nitrogenados a gran escala, sostuvo el crecimiento de la población en el siglo XX.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "La producción de fertilizantes nitrogenados",
+      "El caso representativo del equilibrio químico y del principio de Le Châtelier"
+    ]
+  },
+  "carbonic-acid-equilibrium": {
+    "name": "Equilibrio del ácido carbónico",
+    "oneLiner": "La reacción reversible por la que el dióxido de carbono se disuelve en agua y se convierte en ácido carbónico",
+    "description": "El dióxido de carbono y el agua reaccionan y dan ácido carbónico, y el ácido carbónico vuelve a convertirse en dióxido de carbono y agua. No se inclina por completo hacia ningún lado, sino que alcanza el equilibrio, y al bajar la presión se desplaza hacia el dióxido de carbono.",
+    "field": "Química",
+    "significance": "Explica la acción amortiguadora que mantiene constante la acidez de la sangre y la absorción de dióxido de carbono por el agua del mar.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Las burbujas que suben al abrir una bebida gaseosa",
+      "La acidificación de los océanos",
+      "El tamponamiento del pH de la sangre"
+    ]
+  },
+  "barium-sulfate-precipitation": {
+    "name": "Precipitación del sulfato de bario",
+    "oneLiner": "La reacción en la que, al mezclar dos disoluciones acuosas, se deposita un sólido insoluble en agua",
+    "description": "Al mezclar una disolución de cloruro de bario con otra de sulfato de sodio, los iones bario y los iones sulfato se unen y forman sulfato de bario, que apenas se disuelve en agua y se deposita como un precipitado blanco. La flecha hacia abajo indica el precipitado. El cloruro de sodio restante queda disuelto en el agua.",
+    "field": "Química",
+    "significance": "Es el ejemplo representativo de las reacciones de precipitación, en las que los iones se unen para formar un poso, y se usa en los ensayos para comprobar si hay un ion determinado.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "El contraste que se bebe en una radiografía del aparato digestivo",
+      "La detección de iones sulfato en una disolución acuosa"
+    ]
+  },
+  "water-molecule": {
+    "name": "Agua",
+    "oneLiner": "La molécula formada por dos átomos de hidrógeno y uno de oxígeno",
+    "description": "A un átomo de oxígeno se unen dos átomos de hidrógeno formando un ángulo. Los electrones se desplazan hacia el oxígeno, lo que da polaridad a la molécula y hace que las moléculas de agua se sujeten entre sí mediante enlaces de hidrógeno. Ahí está la razón de que, siendo una molécula pequeña, tenga un punto de ebullición alto y disuelva muchas sustancias.",
+    "field": "Química",
+    "significance": "Es el escenario en el que se desarrolla la vida y el disolvente más utilizado.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Supone más de la mitad del peso corporal de los seres vivos",
+      "La propiedad por la que el hielo flota en el agua"
+    ]
+  },
+  "carbon-dioxide": {
+    "name": "Dióxido de carbono",
+    "oneLiner": "La molécula lineal en la que un átomo de carbono lleva unidos dos átomos de oxígeno",
+    "description": "Con el carbono en el centro, los dos oxígenos se unen en línea recta a cada lado. Los enlaces son polares, pero como la molécula es simétrica, la polaridad se anula en el conjunto. Absorbe y vuelve a emitir radiación infrarroja, con lo que retiene el calor de la Tierra.",
+    "field": "Química",
+    "significance": "Es producto de la combustión y de la respiración, materia prima de la fotosíntesis y el gas de efecto invernadero por excelencia.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Las burbujas de las bebidas gaseosas",
+      "El hielo seco",
+      "El efecto invernadero"
+    ]
+  },
+  "sulfate-ion": {
+    "name": "Ion sulfato",
+    "oneLiner": "El anión formado por un azufre con cuatro oxígenos unidos y dos electrones de más",
+    "description": "Es un ion poliatómico en el que cuatro átomos de oxígeno rodean en disposición tetraédrica a un átomo de azufre central. Al tener dos electrones de más lleva carga 2-: la cifra del superíndice indica la magnitud de la carga y el signo, que ha ganado electrones.",
+    "field": "Química",
+    "significance": "Es el componente común del ácido sulfúrico y de sus sales, y el representante de los iones poliatómicos que se comportan en el agua como una sola unidad.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Las disoluciones acuosas de ácido sulfúrico",
+      "Sulfatos como el yeso o el sulfato de cobre"
+    ]
+  },
+  "calcium-hydroxide": {
+    "name": "Hidróxido de calcio",
+    "oneLiner": "La base formada por un calcio con dos iones hidróxido unidos: la cal apagada",
+    "description": "Un ion calcio está unido a dos iones hidróxido. El paréntesis indica que el ion hidróxido es una única unidad, y el 2 que va detrás significa que hay dos de esas unidades. Se disuelve poco en agua y presenta un carácter fuertemente básico.",
+    "field": "Química",
+    "significance": "Es el ejemplo representativo de la notación que agrupa un grupo atómico entre paréntesis y se usa ampliamente para neutralizar la acidez.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "La cal con la que se neutralizan los suelos ácidos",
+      "El agua de cal con la que se identifica el dióxido de carbono"
+    ]
+  },
+  "copper-sulfate-pentahydrate": {
+    "name": "Sulfato de cobre pentahidratado",
+    "oneLiner": "El sulfato de cobre azul que aloja cinco moléculas de agua dentro del cristal",
+    "description": "Cada cristal de sulfato de cobre incorpora cinco moléculas de agua situadas en posiciones fijas. El punto central indica que esa agua no está unida por un enlace químico, sino alojada dentro de la estructura cristalina. Si se calienta y se evapora el agua, el color azul desaparece y queda un polvo blanco.",
+    "field": "Química",
+    "significance": "Es el ejemplo representativo de la notación de los hidratos y, como cambia de color según haya agua o no, se usa para detectar humedad.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "El experimento de obtener cristales azules de sulfato de cobre",
+      "La detección de agua en el alcohol"
+    ]
+  },
+  "thorium-227": {
+    "name": "Torio-227",
+    "oneLiner": "El isótopo radiactivo del torio con 90 protones y número másico 227",
+    "description": "El 227 de arriba a la izquierda es el número másico, la suma de los protones y los neutrones del núcleo; el 90 de abajo a la izquierda es el número atómico, es decir, el número de protones. El número atómico determina de qué elemento se trata, y el número másico distingue de qué isótopo de ese elemento se trata. El torio-227 se convierte en radio-223 por desintegración alfa.",
+    "field": "Química",
+    "significance": "Es el ejemplo representativo de la notación de los isótopos y una etapa de la serie de desintegración del actinio.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "El seguimiento de las series de desintegración radiactiva",
+      "La investigación en terapias dirigidas con emisores alfa"
+    ]
+  }
+}

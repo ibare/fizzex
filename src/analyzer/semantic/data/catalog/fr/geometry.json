@@ -1,0 +1,396 @@
+{
+  "pythagorean-theorem": {
+    "name": "Théorème de Pythagore",
+    "oneLiner": "Théorème selon lequel, dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés",
+    "description": "Le théorème de Pythagore établit que le carré de la longueur de l'hypoténuse d'un triangle rectangle est égal à la somme des carrés des longueurs des deux autres côtés. C'est le théorème le plus fondamental de la géométrie euclidienne et le socle de la notion de distance. Il en existe des milliers de démonstrations : c'est le théorème le plus étudié de toute l'histoire des mathématiques.",
+    "discoverer": "Pythagore (attribution traditionnelle)",
+    "field": "Géométrie",
+    "significance": "Il fournit la définition de la distance euclidienne et fonde des pans entiers des mathématiques modernes : trigonométrie, géométrie analytique, espaces vectoriels.",
+    "elementMeanings": {
+      "a": {
+        "role": "Côté de l'angle droit",
+        "description": "La longueur de l'un des côtés qui forment l'angle droit.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Côté de l'angle droit",
+        "description": "La longueur de l'autre côté qui forme l'angle droit.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Hypoténuse",
+        "description": "La longueur du plus grand côté, celui qui est opposé à l'angle droit.",
+        "kind": "output"
+      },
+      "a^2+b^2": {
+        "role": "Somme des carrés des côtés de l'angle droit",
+        "description": "La somme des carrés des longueurs des deux côtés de l'angle droit.",
+        "kind": "output"
+      },
+      "c^2": {
+        "role": "Carré de l'hypoténuse",
+        "description": "Le carré de la longueur de l'hypoténuse. Il est égal à la somme des carrés des deux autres côtés.",
+        "kind": "output"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Côté de l'angle droit",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "Côté de l'angle droit",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": [
+      "law-of-cosines",
+      "heron-formula"
+    ]
+  },
+  "heron-formula": {
+    "name": "Formule de Héron",
+    "oneLiner": "Formule qui donne l'aire d'un triangle à partir des seules longueurs de ses trois côtés",
+    "description": "La formule de Héron calcule l'aire d'un triangle à partir de ses trois côtés a, b, c et de son demi-périmètre s. Comme elle dispense de déterminer la hauteur, elle est très commode lorsque l'on dispose de coordonnées ou que l'on fait des relevés de terrain. Elle possède une structure élégante : le carré de l'aire s'écrit comme le produit du demi-périmètre par ses différences avec chaque côté.",
+    "discoverer": "Héron d'Alexandrie",
+    "field": "Géométrie",
+    "significance": "Parce qu'elle donne l'aire à partir des seules longueurs des côtés, sans information sur la hauteur, elle est très employée en topographie et en synthèse d'images.",
+    "elementMeanings": {
+      "a": {
+        "role": "Premier côté",
+        "description": "La longueur du premier côté du triangle.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Deuxième côté",
+        "description": "La longueur du deuxième côté du triangle.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Troisième côté",
+        "description": "La longueur du troisième côté du triangle.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Demi-périmètre",
+        "description": "La moitié de la somme des trois côtés. s = (a+b+c)/2.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "Aire",
+        "description": "L'aire du triangle. Elle vaut √(s(s−a)(s−b)(s−c)).",
+        "kind": "output"
+      }
+    },
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "circle-area"
+    ]
+  },
+  "circle-area": {
+    "name": "Aire du disque",
+    "oneLiner": "Formule qui donne l'aire d'un disque en multipliant le carré du rayon par le nombre pi",
+    "description": "La formule de l'aire du disque indique que la surface occupée par un disque de rayon r est égale au produit du nombre pi par le carré du rayon. Depuis qu'Archimède l'a démontrée en découpant le disque en triangles infiniment fins, elle est considérée comme la préfiguration du calcul intégral.",
+    "discoverer": "Archimède",
+    "field": "Géométrie",
+    "significance": "C'est la formule d'aire la plus élémentaire pour une figure courbe et le point de départ historique de la notion d'intégrale.",
+    "elementMeanings": {
+      "A": {
+        "role": "Aire",
+        "description": "La surface occupée par le disque. Unité : le carré d'une longueur.",
+        "kind": "output"
+      },
+      "\\pi": {
+        "role": "Nombre pi",
+        "description": "Le rapport de la circonférence au diamètre. Environ 3,14159.",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "Rayon",
+        "description": "La distance du centre du cercle à sa circonférence.",
+        "kind": "input"
+      },
+      "r^2": {
+        "role": "Carré du rayon",
+        "description": "Le rayon élevé au carré. C'est lui qui fixe l'ordre de grandeur de l'aire.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "sphere-volume",
+      "pythagorean-theorem"
+    ]
+  },
+  "law-of-cosines": {
+    "name": "Loi des cosinus",
+    "oneLiner": "Loi qui donne la longueur d'un côté d'un triangle quelconque à partir des deux autres côtés et de l'angle qu'ils forment",
+    "description": "La loi des cosinus énonce que, dans un triangle, le carré d'un côté est égal à la somme des carrés des deux autres côtés diminuée du double produit de ces côtés par le cosinus de l'angle qu'ils forment. C'est la généralisation du théorème de Pythagore : lorsque cet angle est droit, son cosinus s'annule et l'on retrouve le théorème de Pythagore.",
+    "field": "Géométrie",
+    "significance": "Elle permet de relier côtés et angles dans un triangle quelconque, et pas seulement rectangle ; elle est indispensable en topographie et en navigation.",
+    "elementMeanings": {
+      "a": {
+        "role": "Côté cherché",
+        "description": "Le côté dont on veut calculer la longueur à l'aide de la loi des cosinus.",
+        "kind": "output"
+      },
+      "b": {
+        "role": "Côté connu",
+        "description": "La longueur d'un des côtés connus du triangle.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Côté connu",
+        "description": "La longueur de l'autre côté connu du triangle.",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Angle compris",
+        "description": "L'angle compris entre le côté b et le côté c.",
+        "kind": "input",
+        "unit": "rad"
+      },
+      "\\cos C": {
+        "role": "Cosinus de l'angle compris",
+        "description": "Le cosinus de l'angle C. Il vaut 0 lorsque cet angle est droit.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "heron-formula"
+    ]
+  },
+  "sphere-volume": {
+    "name": "Volume de la sphère",
+    "oneLiner": "Formule du volume d'une sphère, proportionnel au cube du rayon",
+    "description": "La formule du volume de la sphère indique que l'espace occupé par une sphère de rayon r vaut le produit de 4/3, du nombre pi et du cube du rayon. Archimède a découvert cette relation en inscrivant la sphère dans un cylindre ; on peut aussi l'obtenir par le calcul intégral, et elle constitue un résultat de base de la géométrie dans l'espace.",
+    "discoverer": "Archimède",
+    "field": "Géométrie",
+    "significance": "C'est la formule de volume la plus élémentaire pour un solide à surface courbe, et elle est utilisée très largement en physique et dans les sciences de l'ingénieur.",
+    "elementMeanings": {
+      "V": {
+        "role": "Volume",
+        "description": "L'étendue de l'espace occupé par la sphère. Unité : le cube d'une longueur.",
+        "kind": "output"
+      },
+      "\\frac{4}{3}": {
+        "role": "Constante de proportionnalité",
+        "description": "Le coefficient de proportionnalité entre le volume de la sphère et le cube de son rayon.",
+        "kind": "constant",
+        "value": 1.33333333
+      },
+      "\\pi": {
+        "role": "Nombre pi",
+        "description": "Le rapport de la circonférence au diamètre. Environ 3,14159.",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "Rayon",
+        "description": "La distance du centre de la sphère à sa surface.",
+        "kind": "input"
+      },
+      "r^3": {
+        "role": "Cube du rayon",
+        "description": "Le rayon multiplié trois fois par lui-même. Il traduit la croissance du volume en trois dimensions.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "circle-area"
+    ]
+  },
+  "euler-polyhedron": {
+    "name": "Formule d'Euler pour les polyèdres",
+    "oneLiner": "Relation entre les nombres de sommets, d'arêtes et de faces d'un polyèdre convexe",
+    "description": "La formule d'Euler pour les polyèdres met en évidence une relation surprenante : dans un polyèdre convexe, le nombre de sommets moins le nombre d'arêtes plus le nombre de faces vaut toujours 2. Cette formule, qui a donné naissance à la topologie, reste vraie quelle que soit la forme du polyèdre. C'est l'exemple le plus élémentaire d'un invariant topologique, la caractéristique d'Euler.",
+    "discoverer": "Leonhard Euler",
+    "field": "Géométrie",
+    "significance": "Premier résultat à quantifier une propriété topologique d'un objet géométrique, elle est le point de départ de la topologie et de la théorie des graphes.",
+    "elementMeanings": {
+      "V": {
+        "role": "Nombre de sommets",
+        "description": "Le nombre total de sommets du polyèdre (les points où se rejoignent les arêtes).",
+        "kind": "input"
+      },
+      "E": {
+        "role": "Nombre d'arêtes",
+        "description": "Le nombre total d'arêtes du polyèdre (les segments où se rejoignent deux faces).",
+        "kind": "input"
+      },
+      "F": {
+        "role": "Nombre de faces",
+        "description": "Le nombre total de faces du polyèdre (les polygones plans).",
+        "kind": "input"
+      },
+      "2": {
+        "role": "Caractéristique d'Euler",
+        "description": "La caractéristique d'Euler d'un polyèdre convexe (homéomorphe à la sphère). Elle vaut toujours 2.",
+        "kind": "constant",
+        "value": 2
+      }
+    },
+    "realWorldExamples": [
+      "Vérification sur le cube : 8 sommets − 12 arêtes + 6 faces = 2",
+      "Vérification sur le ballon de football (icosaèdre tronqué) : 60 sommets − 90 arêtes + 32 faces = 2"
+    ],
+    "relatedFormulas": [
+      "pythagorean-theorem"
+    ]
+  },
+  "circle-equation": {
+    "name": "Équation du cercle",
+    "oneLiner": "Équation qui décrit un cercle du plan à partir de son centre et de son rayon",
+    "description": "L'équation du cercle exprime la condition que vérifient tous les points (x, y) situés sur le cercle de centre (a, b) et de rayon r. Elle se déduit directement du théorème de Pythagore et constitue l'outil de base pour traiter algébriquement les cercles en géométrie analytique. Développée, elle donne la forme générale ; mise sous forme canonique, elle retrouve la forme réduite.",
+    "field": "Géométrie",
+    "significance": "Exemple central de la géométrie analytique, où une figure géométrique s'exprime par une équation algébrique, elle est indispensable à l'étude des positions relatives d'un cercle et d'une droite.",
+    "elementMeanings": {
+      "x": {
+        "role": "Abscisse du point",
+        "description": "L'abscisse d'un point quelconque du cercle.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Ordonnée du point",
+        "description": "L'ordonnée d'un point quelconque du cercle.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Abscisse du centre",
+        "description": "L'abscisse du centre du cercle.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Ordonnée du centre",
+        "description": "L'ordonnée du centre du cercle.",
+        "kind": "input"
+      },
+      "r": {
+        "role": "Rayon",
+        "description": "La distance du centre du cercle à sa circonférence.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "En géolocalisation GPS, l'ensemble des positions possibles situées à une distance donnée d'une station",
+      "La modélisation par l'équation d'un cercle de la portée d'un bras robotisé, pour calculer son espace de travail"
+    ],
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "circle-area",
+      "ellipse-equation"
+    ]
+  },
+  "ellipse-equation": {
+    "name": "Équation de l'ellipse",
+    "oneLiner": "Équation du lieu des points dont la somme des distances à deux foyers est constante",
+    "description": "L'équation de l'ellipse exprime la condition que vérifient tous les points d'une ellipse centrée à l'origine dont les demi-axes, grand et petit, valent respectivement a et b. C'est la généralisation de l'équation du cercle au cas où les échelles des axes x et y diffèrent ; si a = b, on retrouve un cercle. Elle joue un rôle central dans les lois de Kepler sur le mouvement des planètes.",
+    "discoverer": "Apollonios de Perge (étude des coniques)",
+    "field": "Géométrie",
+    "significance": "Modèle mathématique des orbites planétaires, elle trouve des applications variées : propriétés de réflexion en optique, galeries des murmures en architecture.",
+    "elementMeanings": {
+      "x": {
+        "role": "Abscisse du point",
+        "description": "L'abscisse d'un point quelconque de l'ellipse.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Ordonnée du point",
+        "description": "L'ordonnée d'un point quelconque de l'ellipse.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Demi-grand axe",
+        "description": "La moitié du grand axe (horizontal) de l'ellipse. C'est la distance au point le plus éloigné.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Demi-petit axe",
+        "description": "La moitié du petit axe (vertical) de l'ellipse. C'est la distance au point le plus proche.",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "Carré du demi-grand axe",
+        "description": "Le dénominateur qui normalise la composante en x.",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "Carré du demi-petit axe",
+        "description": "Le dénominateur qui normalise la composante en y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Première loi de Kepler : les planètes décrivent une orbite elliptique dont le Soleil occupe un foyer",
+      "Galerie des murmures : dans une salle elliptique, le son émis en un foyer se rassemble à l'autre foyer"
+    ],
+    "relatedFormulas": [
+      "circle-equation",
+      "hyperbola-equation",
+      "circle-area"
+    ]
+  },
+  "hyperbola-equation": {
+    "name": "Équation de l'hyperbole",
+    "oneLiner": "Équation du lieu des points dont la différence des distances à deux foyers est constante",
+    "description": "L'équation de l'hyperbole exprime la condition que vérifient tous les points d'une hyperbole centrée à l'origine dont les demi-axes, réel et imaginaire, valent respectivement a et b. Contrairement à l'ellipse, c'est ici la « différence » des distances qui est constante, et la courbe est ouverte et formée de deux branches. Elle se rapproche indéfiniment de ses asymptotes y = (b/a)x et y = −(b/a)x sans jamais les atteindre.",
+    "discoverer": "Apollonios de Perge (étude des coniques)",
+    "field": "Géométrie",
+    "significance": "Elle sert en navigation (système LORAN), dans la conception des tours de refroidissement hyperboliques et dans la structure de l'espace-temps de la relativité restreinte.",
+    "elementMeanings": {
+      "x": {
+        "role": "Abscisse du point",
+        "description": "L'abscisse d'un point quelconque de l'hyperbole.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Ordonnée du point",
+        "description": "L'ordonnée d'un point quelconque de l'hyperbole.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Demi-axe réel",
+        "description": "La distance entre un sommet de l'hyperbole et son centre.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Demi-axe imaginaire",
+        "description": "Le demi-axe qui fixe la pente des asymptotes.",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "Carré du demi-axe réel",
+        "description": "Le dénominateur qui normalise la composante en x.",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "Carré du demi-axe imaginaire",
+        "description": "Le dénominateur qui normalise la composante en y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Navigation LORAN : le principe qui détermine une position à partir de l'écart de temps entre les signaux reçus de deux stations",
+      "Tour de refroidissement hyperbolique : une forme qui optimise la résistance de la structure et l'efficacité de la circulation de l'air"
+    ],
+    "relatedFormulas": [
+      "ellipse-equation",
+      "circle-equation"
+    ]
+  }
+}

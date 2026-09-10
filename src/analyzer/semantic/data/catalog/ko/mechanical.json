@@ -6,9 +6,9 @@
     "field": "기계공학",
     "significance": "재료 역학의 기본 개념으로, 구조물의 안전성 평가와 설계의 출발점을 제공합니다.",
     "elementMeanings": {
-      "\\sigma": { "role": "응력", "description": "단위 면적당 내부 힘. 단위: 파스칼(Pa) 또는 N/m제곱.", "kind": "output" },
+      "\\sigma": { "role": "응력", "description": "단위 면적당 내부 힘. 단위: 파스칼(Pa) 또는 N/m².", "kind": "output" },
       "F": { "role": "힘", "description": "물체에 작용하는 외력. 단위: 뉴턴(N).", "kind": "input" },
-      "A": { "role": "단면적", "description": "힘이 작용하는 단면의 면적. 단위: m제곱.", "kind": "input" }
+      "A": { "role": "단면적", "description": "힘이 작용하는 단면의 면적. 단위: m².", "kind": "input" }
     },
     "realWorldExamples": ["교량 케이블의 인장 응력 계산", "건물 기둥의 압축 응력 검토"],
     "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
@@ -52,9 +52,9 @@
     "elementMeanings": {
       "P": { "role": "정압", "description": "유체의 정적 압력. 단위: 파스칼(Pa).", "kind": "input" },
       "\\frac{1}{2}\\rho v^2": { "role": "동압", "description": "유체의 운동에 의한 압력. 속도의 제곱에 비례합니다.", "kind": "structural" },
-      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m제곱.", "kind": "input" },
+      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m³.", "kind": "input" },
       "v": { "role": "유속", "description": "유체의 흐름 속도. 단위: m/s.", "kind": "input" },
-      "g": { "role": "중력 가속도", "description": "지표면 근처의 중력 가속도. 약 9.8 m/s제곱.", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "g": { "role": "중력 가속도", "description": "지표면 근처의 중력 가속도. 약 9.8 m/s².", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
       "h": { "role": "높이", "description": "기준면으로부터의 유체 위치 높이. 단위: m.", "kind": "input" }
     },
     "realWorldExamples": ["항공기 날개 위아래의 압력차에 의한 양력 발생", "정원 호스 끝을 좁히면 물줄기가 빨라지는 현상"],
@@ -69,7 +69,7 @@
     "significance": "유동의 층류-난류 천이를 예측 가능하게 하여 유체 시스템 설계의 핵심 판별 기준을 제공했습니다.",
     "elementMeanings": {
       "Re": { "role": "레이놀즈 수", "description": "관성력과 점성력의 비. 무차원 수입니다.", "kind": "output" },
-      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m제곱.", "kind": "input" },
+      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m³.", "kind": "input" },
       "v": { "role": "유속", "description": "유체의 평균 흐름 속도. 단위: m/s.", "kind": "input" },
       "L": { "role": "특성 길이", "description": "관의 지름 등 흐름의 기하학적 특성을 대표하는 길이. 단위: m.", "kind": "input" },
       "\\mu": { "role": "점성 계수", "description": "유체의 동적 점성 계수. 단위: Pa 곱하기 s.", "kind": "input" }
@@ -85,7 +85,7 @@
     "field": "기계공학",
     "significance": "모든 점성 유체 흐름을 기술하는 가장 일반적인 방정식으로, 전산유체역학(CFD)의 기초입니다.",
     "elementMeanings": {
-      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m제곱.", "kind": "input" },
+      "\\rho": { "role": "밀도", "description": "유체의 질량 밀도. 단위: kg/m³.", "kind": "input" },
       "\\mathbf{v}": { "role": "속도장", "description": "유체 입자의 속도 벡터. 위치와 시간의 함수입니다.", "kind": "output" },
       "p": { "role": "압력", "description": "유체에 작용하는 압력장. 단위: 파스칼(Pa).", "kind": "input" },
       "\\mu": { "role": "점성 계수", "description": "유체의 동적 점성 계수. 단위: Pa 곱하기 s.", "kind": "input" },
@@ -104,7 +104,7 @@
     "elementMeanings": {
       "Q": { "role": "열 전달률", "description": "단위 시간당 전달되는 열에너지. 단위: 와트(W).", "kind": "output" },
       "k": { "role": "열전도율", "description": "재료의 열 전달 능력을 나타내는 고유 상수. 단위: W/(m 곱하기 K).", "kind": "input" },
-      "A": { "role": "단면적", "description": "열이 통과하는 단면의 면적. 단위: m제곱.", "kind": "input" },
+      "A": { "role": "단면적", "description": "열이 통과하는 단면의 면적. 단위: m².", "kind": "input" },
       "\\Delta T": { "role": "온도 차이", "description": "열원 쪽과 냉원 쪽의 온도 차이. 단위: K 또는 섭씨도.", "kind": "input" },
       "\\Delta x": { "role": "두께", "description": "열이 전달되는 방향의 재료 두께. 단위: m.", "kind": "input" }
     },

@@ -1,0 +1,820 @@
+{
+  "mass-energy": {
+    "name": "Équivalence masse-énergie",
+    "oneLiner": "Formule qui exprime la conversion réciproque de la masse et de l'énergie, dans un rapport égal au carré de la vitesse de la lumière",
+    "description": "Égalité issue de la relativité restreinte d'Einstein. Elle montre que la masse peut se convertir en énergie et l'énergie en masse, et que le rapport de conversion est le carré de la vitesse de la lumière. Comme ce carré est immense, une masse même minime peut libérer une énergie considérable.",
+    "discoverer": "Albert Einstein",
+    "field": "Physique",
+    "significance": "En révélant que la masse est une forme de l'énergie, elle a changé le paradigme de la physique moderne et explique le principe de la fission et de la fusion nucléaires.",
+    "elementMeanings": {
+      "E": {
+        "role": "Énergie",
+        "kind": "output",
+        "unit": "J",
+        "description": "L'énergie que possède le corps. Unité : joule (J)."
+      },
+      "m": {
+        "role": "Masse",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse au repos du corps. Unité : kilogramme (kg)."
+      },
+      "c": {
+        "role": "Vitesse de la lumière",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "La vitesse de la lumière dans le vide. Environ 3×10⁸ m/s."
+      },
+      "c^2": {
+        "role": "Carré de la vitesse de la lumière",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Environ 9×10¹⁶. C'est le rapport de conversion entre masse et énergie."
+      }
+    },
+    "relatedFormulas": [
+      "kinetic-energy",
+      "newton-second"
+    ]
+  },
+  "newton-second": {
+    "name": "Deuxième loi de Newton",
+    "oneLiner": "Loi selon laquelle la force appliquée à un corps est égale au produit de sa masse par son accélération",
+    "description": "La deuxième loi de Newton énonce que la force résultante appliquée à un corps est le produit de sa masse par son accélération. À force égale, plus la masse est grande, plus l'accélération est faible : la masse quantifie ainsi l'inertie. C'est l'équation du mouvement centrale de la mécanique classique.",
+    "discoverer": "Isaac Newton",
+    "field": "Physique",
+    "significance": "En établissant quantitativement la relation entre force, masse et accélération, elle a fondé la mécanique classique.",
+    "elementMeanings": {
+      "F": {
+        "role": "Force",
+        "kind": "output",
+        "unit": "N",
+        "description": "La force résultante appliquée au corps. Unité : newton (N)."
+      },
+      "m": {
+        "role": "Masse",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse du corps. Elle mesure son inertie. Unité : kg."
+      },
+      "a": {
+        "role": "Accélération",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "Le taux de variation de la vitesse au cours du temps. Unité : m/s²."
+      }
+    },
+    "relatedFormulas": [
+      "universal-gravitation",
+      "kinetic-energy",
+      "mass-energy"
+    ]
+  },
+  "universal-gravitation": {
+    "name": "Loi de la gravitation universelle",
+    "oneLiner": "Loi selon laquelle deux corps s'attirent avec une force proportionnelle au produit de leurs masses et inversement proportionnelle au carré de leur distance",
+    "description": "La loi de la gravitation universelle énonce que tous les corps massifs s'attirent mutuellement, avec une force proportionnelle au produit de leurs deux masses et inversement proportionnelle au carré de leur distance. C'est une loi révolutionnaire : elle réunit sous un même principe la chute d'une pomme et la révolution de la Lune.",
+    "discoverer": "Isaac Newton",
+    "field": "Physique",
+    "significance": "En unifiant le mouvement des astres et la mécanique terrestre, elle a établi la première loi physique universelle.",
+    "elementMeanings": {
+      "F": {
+        "role": "Force gravitationnelle",
+        "kind": "output",
+        "unit": "N",
+        "description": "La force d'attraction qui s'exerce entre les deux corps. Unité : newton (N)."
+      },
+      "G": {
+        "role": "Constante gravitationnelle",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "La constante de gravitation universelle. Environ 6,674×10⁻¹¹ N·m²/kg²."
+      },
+      "m_1": {
+        "role": "Masse du premier corps",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse du premier des deux corps en interaction."
+      },
+      "m_2": {
+        "role": "Masse du second corps",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse du second des deux corps en interaction."
+      },
+      "r": {
+        "role": "Distance",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distance entre les centres de masse des deux corps."
+      },
+      "r^2": {
+        "role": "Carré de la distance",
+        "kind": "structural",
+        "description": "Il traduit la loi en carré inverse. Si la distance double, la force est divisée par 4."
+      }
+    },
+    "relatedFormulas": [
+      "coulomb-law",
+      "newton-second"
+    ]
+  },
+  "coulomb-law": {
+    "name": "Loi de Coulomb",
+    "oneLiner": "Loi selon laquelle deux charges exercent l'une sur l'autre une force électrique proportionnelle au produit de leurs charges et inversement proportionnelle au carré de leur distance",
+    "description": "La loi de Coulomb énonce que la force électrique entre deux charges ponctuelles est proportionnelle au produit de leurs charges et inversement proportionnelle au carré de leur distance. Sa structure en carré inverse est la même que celle de la gravitation universelle, à une différence près : la force électrique peut être attractive ou répulsive.",
+    "discoverer": "Charles-Augustin de Coulomb",
+    "field": "Physique",
+    "significance": "Point de départ de l'électromagnétisme, elle fournit la base des équations de Maxwell et de la théorie électromagnétique moderne.",
+    "elementMeanings": {
+      "F": {
+        "role": "Force électrique",
+        "kind": "output",
+        "unit": "N",
+        "description": "La force qui s'exerce entre les deux charges. Unité : newton (N)."
+      },
+      "k_e": {
+        "role": "Constante de Coulomb",
+        "kind": "constant",
+        "value": 8.988e9,
+        "unit": "N·m²/C²",
+        "description": "Environ 8,988×10⁹ N·m²/C². Elle fixe l'intensité de la force électrique."
+      },
+      "q_1": {
+        "role": "Première charge",
+        "kind": "input",
+        "unit": "C",
+        "description": "La charge du premier corps électrisé. Unité : coulomb (C)."
+      },
+      "q_2": {
+        "role": "Seconde charge",
+        "kind": "input",
+        "unit": "C",
+        "description": "La charge du second corps électrisé. De même signe, la force est répulsive ; de signes contraires, elle est attractive."
+      },
+      "r": {
+        "role": "Distance",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distance entre les deux charges ponctuelles."
+      },
+      "r^2": {
+        "role": "Carré de la distance",
+        "kind": "structural",
+        "description": "Il traduit la loi en carré inverse. Plus la distance augmente, plus la force faiblit rapidement."
+      }
+    },
+    "relatedFormulas": [
+      "universal-gravitation",
+      "newton-second"
+    ]
+  },
+  "kinetic-energy": {
+    "name": "Énergie cinétique",
+    "oneLiner": "Formule qui exprime, à partir de la masse et de la vitesse, l'énergie que possède un corps en mouvement",
+    "description": "La formule de l'énergie cinétique indique qu'un corps de masse m animé de la vitesse v possède une énergie égale à (1/2)mv². Comme elle est proportionnelle au carré de la vitesse, doubler la vitesse quadruple l'énergie. Elle est au cœur du théorème de l'énergie cinétique et constitue un élément de base de la conservation de l'énergie.",
+    "field": "Physique",
+    "significance": "Élément central de la conservation de l'énergie, c'est la forme d'énergie la plus fréquemment employée dans la résolution des problèmes de mécanique.",
+    "elementMeanings": {
+      "K": {
+        "role": "Énergie cinétique",
+        "kind": "output",
+        "unit": "J",
+        "description": "L'énergie due au mouvement du corps. Unité : joule (J)."
+      },
+      "\\frac{1}{2}": {
+        "role": "Constante de proportionnalité",
+        "kind": "constant",
+        "value": 0.5,
+        "description": "Le coefficient qui apparaît lorsqu'on intègre la deuxième loi de Newton."
+      },
+      "m": {
+        "role": "Masse",
+        "kind": "input",
+        "unit": "kg",
+        "description": "La masse du corps en mouvement. Unité : kg."
+      },
+      "v": {
+        "role": "Vitesse",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "La vitesse de déplacement du corps. Unité : m/s."
+      },
+      "v^2": {
+        "role": "Carré de la vitesse",
+        "kind": "structural",
+        "description": "Si la vitesse double, l'énergie est multipliée par quatre. C'est une relation non linéaire."
+      }
+    },
+    "relatedFormulas": [
+      "mass-energy",
+      "newton-second"
+    ]
+  },
+  "kinematic-displacement": {
+    "name": "Formule du déplacement en mouvement uniformément accéléré",
+    "oneLiner": "Formule qui exprime en fonction du temps le déplacement d'un corps animé d'une vitesse initiale et d'une accélération constante",
+    "description": "C'est la formule de base pour calculer le déplacement d'un corps en mouvement rectiligne uniformément accéléré. Elle additionne la distance due à la vitesse initiale et la distance supplémentaire due à l'accélération. Avec la deuxième loi de Newton, c'est l'outil central de la résolution des problèmes de mécanique classique, et elle s'applique à de nombreuses situations : chute libre, mouvement d'un projectile, etc.",
+    "discoverer": "Galilée",
+    "field": "Physique",
+    "significance": "Formule cinématique essentielle pour décrire quantitativement le mouvement uniformément accéléré, c'est l'outil le plus élémentaire des problèmes de mécanique.",
+    "elementMeanings": {
+      "s": {
+        "role": "Déplacement",
+        "kind": "output",
+        "unit": "m",
+        "description": "La distance parcourue par le corps. Unité : mètre (m)."
+      },
+      "v_0": {
+        "role": "Vitesse initiale",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "La vitesse à l'instant où le mouvement commence. Unité : m/s."
+      },
+      "t": {
+        "role": "Temps",
+        "kind": "input",
+        "unit": "s",
+        "description": "La durée du mouvement. Unité : seconde (s)."
+      },
+      "a": {
+        "role": "Accélération",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "L'accélération, supposée constante. Unité : m/s²."
+      },
+      "\\frac{1}{2}": {
+        "role": "Constante de proportionnalité",
+        "kind": "constant",
+        "value": 0.5,
+        "description": "Le coefficient issu de l'intégration. C'est le facteur de proportionnalité du déplacement dû à l'accélération."
+      },
+      "t^2": {
+        "role": "Carré du temps",
+        "kind": "structural",
+        "description": "Il traduit le fait que le déplacement dû à l'accélération est proportionnel au carré du temps."
+      }
+    },
+    "relatedFormulas": [
+      "velocity-acceleration",
+      "velocity-displacement",
+      "newton-second"
+    ],
+    "realWorldExamples": [
+      "Calculer de combien est tombé un corps en chute libre après quelques secondes",
+      "Déterminer la distance de freinage d'une voiture jusqu'à son arrêt",
+      "Calculer la longueur de piste nécessaire au décollage d'un avion"
+    ]
+  },
+  "velocity-acceleration": {
+    "name": "Relation vitesse-accélération",
+    "oneLiner": "Formule qui exprime la variation de la vitesse au cours du temps dans un mouvement uniformément accéléré",
+    "description": "C'est la formule cinématique la plus élémentaire : elle donne la vitesse à un instant quelconque d'un mouvement rectiligne uniformément accéléré, à partir de la vitesse initiale, de l'accélération et du temps écoulé. Lorsque l'accélération est constante, la vitesse varie linéairement avec le temps, et cette relation contient la définition même de l'accélération.",
+    "discoverer": "Galilée",
+    "field": "Physique",
+    "significance": "Relation cinématique la plus élémentaire à quantifier la notion d'accélération, elle est le point de départ de toute analyse d'un mouvement uniformément accéléré.",
+    "elementMeanings": {
+      "v": {
+        "role": "Vitesse finale",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "La vitesse à l'instant t. Unité : m/s."
+      },
+      "v_0": {
+        "role": "Vitesse initiale",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "La vitesse à l'instant où le mouvement commence. Unité : m/s."
+      },
+      "a": {
+        "role": "Accélération",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "L'accélération, supposée constante. Unité : m/s²."
+      },
+      "t": {
+        "role": "Temps",
+        "kind": "input",
+        "unit": "s",
+        "description": "La durée du mouvement. Unité : seconde (s)."
+      }
+    },
+    "relatedFormulas": [
+      "kinematic-displacement",
+      "velocity-displacement",
+      "newton-second"
+    ],
+    "realWorldExamples": [
+      "Calculer la vitesse atteinte 5 secondes après le démarrage d'une voiture au feu vert",
+      "Estimer la vitesse d'un parachutiste à un instant donné de sa chute",
+      "Déterminer la vitesse ascensionnelle d'une fusée un certain temps après son lancement"
+    ]
+  },
+  "velocity-displacement": {
+    "name": "Relation vitesse-déplacement",
+    "oneLiner": "Formule qui relie directement vitesse et déplacement, sans passer par le temps",
+    "description": "Cette formule relie directement la vitesse et le déplacement d'un mouvement rectiligne uniformément accéléré, en éliminant la variable temps. Le carré de la vitesse finale est égal au carré de la vitesse initiale augmenté du double du produit de l'accélération par le déplacement. Elle est particulièrement utile quand on ignore la durée, et elle est étroitement liée au point de vue de la conservation de l'énergie.",
+    "discoverer": "Galilée",
+    "field": "Physique",
+    "significance": "Parce qu'elle donne directement la relation entre vitesse et distance sans faire intervenir le temps, elle est un auxiliaire essentiel des problèmes de mécanique.",
+    "elementMeanings": {
+      "v^2": {
+        "role": "Carré de la vitesse finale",
+        "kind": "output",
+        "unit": "(m/s)²",
+        "description": "Le carré de la vitesse finale. Unité : (m/s)²."
+      },
+      "v_0^2": {
+        "role": "Carré de la vitesse initiale",
+        "kind": "input",
+        "unit": "(m/s)²",
+        "description": "Le carré de la vitesse initiale. Unité : (m/s)²."
+      },
+      "2": {
+        "role": "Coefficient constant",
+        "kind": "constant",
+        "value": 2,
+        "description": "Le coefficient qui apparaît au cours de la dérivation de l'équation du mouvement."
+      },
+      "a": {
+        "role": "Accélération",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "L'accélération, supposée constante. Unité : m/s²."
+      },
+      "s": {
+        "role": "Déplacement",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distance parcourue par le corps. Unité : mètre (m)."
+      }
+    },
+    "relatedFormulas": [
+      "kinematic-displacement",
+      "velocity-acceleration",
+      "kinetic-energy"
+    ],
+    "realWorldExamples": [
+      "Retrouver la vitesse d'une voiture juste avant un choc à partir de la seule distance de freinage",
+      "Calculer la vitesse initiale d'une balle à sa sortie du canon à partir de la longueur du canon et de l'accélération",
+      "Déterminer la vitesse atteinte par des montagnes russes à une hauteur donnée"
+    ]
+  },
+  "projectile-motion": {
+    "name": "Équation de la trajectoire d'un projectile",
+    "oneLiner": "Équation de la parabole qui décrit la trajectoire d'un projectile en fonction de la distance horizontale",
+    "description": "Cette équation décrit la trajectoire d'un corps lancé avec une vitesse initiale et un angle de tir donnés. La composition d'un mouvement horizontal uniforme et d'un mouvement vertical uniformément accéléré par la pesanteur produit une trajectoire parabolique. C'est un modèle idéal, qui néglige la résistance de l'air, mais il s'applique très largement, de la physique du sport à la balistique.",
+    "discoverer": "Galilée",
+    "field": "Physique",
+    "significance": "Elle a établi la méthode consistant à analyser un mouvement plan en le décomposant en composantes horizontale et verticale, et elle fonde la balistique.",
+    "elementMeanings": {
+      "y": {
+        "role": "Position verticale",
+        "kind": "output",
+        "unit": "m",
+        "description": "La hauteur par rapport au point de lancement. Unité : mètre (m)."
+      },
+      "x": {
+        "role": "Distance horizontale",
+        "kind": "input",
+        "unit": "m",
+        "description": "La distance horizontale parcourue depuis le point de lancement. Unité : mètre (m)."
+      },
+      "\\theta": {
+        "role": "Angle de tir",
+        "kind": "input",
+        "unit": "rad",
+        "description": "L'angle que fait le vecteur vitesse initiale avec le plan horizontal."
+      },
+      "\\tan\\theta": {
+        "role": "Tangente de l'angle de tir",
+        "kind": "structural",
+        "description": "Elle donne la pente initiale de la trajectoire."
+      },
+      "g": {
+        "role": "Accélération de la pesanteur",
+        "kind": "constant",
+        "value": 9.8,
+        "unit": "m/s²",
+        "description": "Environ 9,8 m/s² au voisinage de la surface terrestre."
+      },
+      "v_0": {
+        "role": "Vitesse initiale",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "La vitesse à l'instant du lancement. Unité : m/s."
+      },
+      "\\cos^2\\theta": {
+        "role": "Carré du cosinus de l'angle de tir",
+        "kind": "structural",
+        "description": "Il traduit le carré de la composante horizontale de la vitesse."
+      }
+    },
+    "relatedFormulas": [
+      "kinematic-displacement",
+      "velocity-acceleration"
+    ],
+    "realWorldExamples": [
+      "Prévoir la distance et la hauteur maximale d'une balle frappée au base-ball",
+      "Concevoir la trajectoire parabolique du jet d'eau d'une fontaine",
+      "Calculer le point d'impact d'un obus tiré par un canon"
+    ]
+  },
+  "simple-harmonic": {
+    "name": "Équation du mouvement harmonique simple",
+    "oneLiner": "Formule qui décrit par une fonction sinusoïdale un mouvement périodique entretenu par une force de rappel",
+    "description": "Le mouvement harmonique simple est celui d'un corps soumis à une force de rappel proportionnelle à son écart à la position d'équilibre. Le déplacement s'exprime par une fonction sinus (ou cosinus) et se décrit entièrement par l'amplitude, la pulsation et la phase initiale. C'est le modèle de base qui explique d'innombrables phénomènes vibratoires : oscillation d'un ressort, mouvement d'un pendule, circuit LC.",
+    "field": "Physique",
+    "significance": "Modèle le plus élémentaire pour décrire les vibrations et les ondes, il permet aussi d'analyser des mouvements périodiques complexes comme des superpositions d'oscillations harmoniques.",
+    "elementMeanings": {
+      "x": {
+        "role": "Déplacement",
+        "kind": "output",
+        "unit": "m",
+        "description": "L'écart à la position d'équilibre. Unité : mètre (m)."
+      },
+      "A": {
+        "role": "Amplitude",
+        "kind": "input",
+        "unit": "m",
+        "description": "Le déplacement maximal. Il mesure l'ampleur de l'oscillation. Unité : mètre (m)."
+      },
+      "\\omega": {
+        "role": "Pulsation",
+        "kind": "input",
+        "unit": "rad/s",
+        "description": "La variation de phase par unité de temps. Unité : rad/s. Relation avec la période T : 2π/T."
+      },
+      "t": {
+        "role": "Temps",
+        "kind": "input",
+        "unit": "s",
+        "description": "La durée du mouvement. Unité : seconde (s)."
+      },
+      "\\varphi": {
+        "role": "Phase initiale",
+        "kind": "input",
+        "unit": "rad",
+        "description": "La phase à t = 0. Elle traduit les conditions initiales."
+      }
+    },
+    "relatedFormulas": [
+      "wave-speed",
+      "kinetic-energy"
+    ],
+    "realWorldExamples": [
+      "Analyser la période des allers-retours du balancier d'une horloge",
+      "Modéliser le mode de vibration d'une corde de guitare",
+      "Le principe de détection des vibrations d'un sismographe"
+    ]
+  },
+  "wave-speed": {
+    "name": "Formule de la vitesse d'une onde",
+    "oneLiner": "Relation selon laquelle la vitesse de propagation d'une onde est égale au produit de sa fréquence par sa longueur d'onde",
+    "description": "La vitesse de propagation d'une onde est la distance qu'elle parcourt en une seconde, ce qui revient à multiplier le nombre d'oscillations par seconde (la fréquence) par la longueur d'une oscillation. C'est une relation fondamentale qui s'applique universellement à toutes les ondes : sonores, lumineuses, à la surface de l'eau.",
+    "field": "Physique",
+    "significance": "Relation fondamentale valable pour tous les phénomènes ondulatoires, elle est à la base de l'acoustique, de l'optique et des télécommunications.",
+    "elementMeanings": {
+      "v": {
+        "role": "Vitesse de l'onde",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "La vitesse à laquelle l'onde se propage dans le milieu. Unité : m/s."
+      },
+      "f": {
+        "role": "Fréquence",
+        "kind": "input",
+        "unit": "Hz",
+        "description": "Le nombre d'oscillations par unité de temps. Unité : hertz (Hz)."
+      },
+      "\\lambda": {
+        "role": "Longueur d'onde",
+        "kind": "input",
+        "unit": "m",
+        "description": "La longueur spatiale qui correspond à une période. Unité : mètre (m)."
+      }
+    },
+    "relatedFormulas": [
+      "simple-harmonic",
+      "de-broglie"
+    ],
+    "realWorldExamples": [
+      "Calculer la longueur d'onde d'une onde radio à partir de sa fréquence",
+      "Déterminer la longueur d'onde des ultrasons dans un milieu lors d'une échographie",
+      "Analyser la relation entre la hauteur d'un son et la longueur du tuyau résonant d'un instrument"
+    ]
+  },
+  "ideal-gas-law": {
+    "name": "Loi des gaz parfaits",
+    "oneLiner": "Équation d'état qui relie la pression, le volume, la température et la quantité de matière d'un gaz parfait",
+    "description": "La loi des gaz parfaits est l'équation d'état selon laquelle le produit de la pression par le volume est proportionnel au produit de la quantité de matière par la température absolue. Elle réunit en une seule relation les lois de Boyle-Mariotte, de Charles et d'Avogadro, et suppose des conditions idéales : aucune interaction entre les molécules et un volume propre des molécules négligeable.",
+    "field": "Physique",
+    "significance": "Équation de base de la thermodynamique et de la mécanique des gaz, elle est le point de départ d'une compréhension approchée du comportement des gaz réels.",
+    "elementMeanings": {
+      "P": {
+        "role": "Pression",
+        "kind": "input",
+        "unit": "Pa",
+        "description": "L'intensité de la force que le gaz exerce sur les parois du récipient. Unité : pascal (Pa)."
+      },
+      "V": {
+        "role": "Volume",
+        "kind": "input",
+        "unit": "m³",
+        "description": "L'espace occupé par le gaz. Unité : mètre cube (m³) ou litre (L)."
+      },
+      "n": {
+        "role": "Quantité de matière",
+        "kind": "input",
+        "unit": "mol",
+        "description": "La quantité de gaz. Unité : mole (mol)."
+      },
+      "R": {
+        "role": "Constante des gaz",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)",
+        "description": "La constante des gaz parfaits. Environ 8,314 J/(mol·K)."
+      },
+      "T": {
+        "role": "Température absolue",
+        "kind": "input",
+        "unit": "K",
+        "description": "La température exprimée en kelvins. 0 K est le zéro absolu."
+      }
+    },
+    "relatedFormulas": [
+      "first-law-thermo",
+      "boltzmann-dist"
+    ],
+    "realWorldExamples": [
+      "Prévoir la variation de la pression d'un pneu en fonction de la température",
+      "Calculer le changement de volume d'un ballon que l'on chauffe ou que l'on refroidit",
+      "Expliquer pourquoi un paquet de gâteaux gonfle en altitude"
+    ]
+  },
+  "first-law-thermo": {
+    "name": "Premier principe de la thermodynamique",
+    "oneLiner": "Principe de conservation de l'énergie selon lequel la variation d'énergie interne d'un système est égale à la différence entre la chaleur absorbée et le travail fourni",
+    "description": "Le premier principe de la thermodynamique est l'expression thermodynamique de la conservation de l'énergie. Lorsqu'un système absorbe de la chaleur venue de l'extérieur, son énergie interne augmente ou bien il fournit du travail à l'extérieur : l'énergie n'est ni créée ni détruite. C'est la contrainte fondamentale de tout processus mettant en jeu de l'énergie : machines thermiques, machines frigorifiques, réactions chimiques.",
+    "field": "Physique",
+    "significance": "En établissant que chaleur et travail sont deux formes de l'énergie, il a étendu à la thermodynamique l'universalité de la conservation de l'énergie.",
+    "elementMeanings": {
+      "\\Delta U": {
+        "role": "Variation d'énergie interne",
+        "kind": "output",
+        "unit": "J",
+        "description": "La variation de l'énergie interne du système. C'est la variation de la somme de l'énergie cinétique moléculaire et de l'énergie potentielle."
+      },
+      "Q": {
+        "role": "Chaleur",
+        "kind": "input",
+        "unit": "J",
+        "description": "La quantité de chaleur absorbée par le système. Positive, elle est reçue ; négative, elle est cédée. Unité : joule (J)."
+      },
+      "W": {
+        "role": "Travail",
+        "kind": "input",
+        "unit": "J",
+        "description": "Le travail fourni par le système à l'extérieur. Positif, il y a détente ; négatif, il y a compression. Unité : joule (J)."
+      }
+    },
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "kinetic-energy"
+    ],
+    "realWorldExamples": [
+      "La transformation, dans un moteur d'automobile, de la chaleur de combustion en mouvement du piston",
+      "Le principe par lequel un réfrigérateur évacue vers l'extérieur la chaleur de son intérieur",
+      "Expliquer pourquoi la température d'un gaz s'élève lors d'une compression adiabatique"
+    ]
+  },
+  "schrodinger-eq": {
+    "name": "Équation de Schrödinger",
+    "oneLiner": "Équation fondamentale de la mécanique quantique, qui décrit l'évolution d'un état quantique au cours du temps",
+    "description": "L'équation de Schrödinger est l'équation aux dérivées partielles qui décrit l'évolution temporelle de la fonction d'onde en mécanique quantique. C'est l'équation du mouvement de la mécanique quantique, l'homologue de l'équation de Newton en mécanique classique ; elle sert à prédire le comportement quantique des atomes, des molécules et des solides. Le carré du module de la fonction d'onde donne la densité de probabilité de présence de la particule.",
+    "discoverer": "Erwin Schrödinger",
+    "field": "Physique",
+    "significance": "Équation du mouvement de base de la mécanique quantique, elle fonde des pans entiers de la science moderne : structure atomique, liaison chimique, physique des semi-conducteurs.",
+    "elementMeanings": {
+      "i": {
+        "role": "Unité imaginaire",
+        "kind": "structural",
+        "description": "Le nombre dont le carré vaut −1. Il traduit la variation de phase de la fonction d'onde."
+      },
+      "\\hbar": {
+        "role": "Constante de Planck réduite",
+        "kind": "constant",
+        "value": 1.055e-34,
+        "unit": "J·s",
+        "description": "La constante de Planck divisée par 2π. Environ 1,055×10⁻³⁴ J·s."
+      },
+      "\\frac{\\partial \\psi}{\\partial t}": {
+        "role": "Dérivée partielle de la fonction d'onde par rapport au temps",
+        "kind": "structural",
+        "description": "Elle indique comment la fonction d'onde évolue au cours du temps."
+      },
+      "\\hat{H}": {
+        "role": "Opérateur hamiltonien",
+        "kind": "structural",
+        "description": "L'opérateur qui correspond à l'énergie totale du système (énergie cinétique + énergie potentielle)."
+      },
+      "\\psi": {
+        "role": "Fonction d'onde",
+        "kind": "structural",
+        "description": "La fonction complexe qui décrit l'état quantique. Le carré de son module est la densité de probabilité."
+      }
+    },
+    "relatedFormulas": [
+      "de-broglie",
+      "mass-energy"
+    ],
+    "realWorldExamples": [
+      "Calculer les niveaux d'énergie des orbitales électroniques de l'atome d'hydrogène",
+      "Analyser la structure de bandes électroniques d'un semi-conducteur",
+      "Le principe du microscope à effet tunnel (STM), fondé sur l'effet tunnel"
+    ]
+  },
+  "de-broglie": {
+    "name": "Longueur d'onde de De Broglie",
+    "oneLiner": "Formule selon laquelle toute particule possède un caractère ondulatoire dont la longueur d'onde est inversement proportionnelle à sa quantité de mouvement",
+    "description": "Selon l'hypothèse de De Broglie, toute particule dotée d'une masse possède des propriétés ondulatoires, et sa longueur d'onde est la constante de Planck divisée par sa quantité de mouvement. Cette notion d'onde de matière est le principe du microscope électronique, et elle a directement motivé l'élaboration de l'équation de Schrödinger. La longueur d'onde de De Broglie d'un objet macroscopique est bien trop petite pour être observée, mais elle est vérifiée expérimentalement pour les particules microscopiques comme l'électron.",
+    "discoverer": "Louis de Broglie",
+    "field": "Physique",
+    "significance": "En étendant la dualité onde-corpuscule à la matière, elle a fourni l'impulsion décisive à la naissance de la mécanique quantique.",
+    "elementMeanings": {
+      "\\lambda": {
+        "role": "Longueur d'onde de De Broglie",
+        "kind": "output",
+        "unit": "m",
+        "description": "La longueur d'onde de l'onde de matière associée à la particule. Unité : mètre (m)."
+      },
+      "h": {
+        "role": "Constante de Planck",
+        "kind": "constant",
+        "value": 6.626e-34,
+        "unit": "J·s",
+        "description": "Environ 6,626×10⁻³⁴ J·s. C'est la constante fondamentale de la mécanique quantique."
+      },
+      "p": {
+        "role": "Quantité de mouvement",
+        "kind": "input",
+        "unit": "kg·m/s",
+        "description": "La quantité de mouvement de la particule (masse multipliée par vitesse). Unité : kg·m/s."
+      }
+    },
+    "relatedFormulas": [
+      "schrodinger-eq",
+      "wave-speed",
+      "mass-energy"
+    ],
+    "realWorldExamples": [
+      "Calculer la longueur d'onde qui fixe le pouvoir de résolution d'un faisceau d'électrons en microscopie électronique",
+      "Analyser la structure d'un cristal par diffraction de neutrons",
+      "Les mesures de précision par interférométrie atomique, qui exploitent le caractère ondulatoire des atomes"
+    ]
+  },
+  "boltzmann-dist": {
+    "name": "Distribution de Boltzmann",
+    "oneLiner": "Distribution selon laquelle, à l'équilibre thermique, la probabilité qu'une particule ait une énergie donnée décroît exponentiellement avec cette énergie",
+    "description": "La distribution de Boltzmann est le résultat fondamental de la physique statistique selon lequel, dans un système à l'équilibre thermique, la probabilité qu'une particule ait l'énergie E est proportionnelle à e^(−E/kT). Plus la température est élevée, plus les états de haute énergie sont occupés ; plus elle est basse, plus les particules se concentrent dans les états de basse énergie. Elle explique la vitesse des réactions chimiques, la répartition des électrons dans les semi-conducteurs ou encore la variation de la densité de l'atmosphère.",
+    "discoverer": "Ludwig Boltzmann",
+    "field": "Physique",
+    "significance": "Principe fondamental de la physique statistique, elle fait le pont entre les lois macroscopiques de la thermodynamique et le mouvement microscopique des particules.",
+    "elementMeanings": {
+      "P": {
+        "role": "Probabilité",
+        "kind": "output",
+        "description": "La probabilité que la particule se trouve dans un état d'énergie donné."
+      },
+      "e": {
+        "role": "Constante de Néper",
+        "kind": "constant",
+        "value": 2.71828183,
+        "description": "La base du logarithme népérien. Environ 2,718."
+      },
+      "E": {
+        "role": "Énergie",
+        "kind": "input",
+        "unit": "J",
+        "description": "L'énergie de l'état considéré. Unité : joule (J)."
+      },
+      "k": {
+        "role": "Constante de Boltzmann",
+        "kind": "constant",
+        "value": 1.381e-23,
+        "unit": "J/K",
+        "description": "Environ 1,381×10⁻²³ J/K. C'est la constante qui relie température et énergie."
+      },
+      "T": {
+        "role": "Température absolue",
+        "kind": "input",
+        "unit": "K",
+        "description": "La température exprimée en kelvins. Plus elle est élevée, plus l'énergie est dispersée."
+      }
+    },
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "first-law-thermo"
+    ],
+    "realWorldExamples": [
+      "Expliquer la décroissance exponentielle de la densité de l'atmosphère avec l'altitude",
+      "Prévoir la variation du nombre d'électrons libres d'un semi-conducteur avec la température",
+      "Calculer la proportion de molécules qui franchissent la barrière d'énergie d'activation d'une réaction chimique"
+    ]
+  },
+  "lorentz-transform": {
+    "name": "Transformation de Lorentz du temps",
+    "oneLiner": "Formule de la relativité restreinte qui donne la transformation de la coordonnée temporelle entre deux référentiels galiléens",
+    "description": "La transformation de Lorentz convertit les coordonnées d'espace-temps entre deux référentiels galiléens en mouvement rectiligne uniforme l'un par rapport à l'autre. La formule de transformation du temps montre que le temps d'un référentiel dépend aussi, dans l'autre, de la coordonnée d'espace : c'est l'expression mathématique de la relativité de la simultanéité. Elle est à l'origine des effets relativistes comme la dilatation du temps et la contraction des longueurs.",
+    "discoverer": "Hendrik Lorentz",
+    "field": "Physique",
+    "significance": "En remplaçant la transformation de Galilée, elle a établi le socle mathématique de la relativité restreinte.",
+    "elementMeanings": {
+      "t'": {
+        "role": "Temps transformé",
+        "kind": "output",
+        "unit": "s",
+        "description": "La coordonnée temporelle dans le référentiel de l'observateur en mouvement."
+      },
+      "\\gamma": {
+        "role": "Facteur de Lorentz",
+        "kind": "structural",
+        "description": "1/√(1 − v²/c²). Il croît à mesure que la vitesse approche celle de la lumière."
+      },
+      "t": {
+        "role": "Temps initial",
+        "kind": "input",
+        "unit": "s",
+        "description": "La coordonnée temporelle dans le référentiel au repos."
+      },
+      "v": {
+        "role": "Vitesse relative",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "La vitesse relative des deux référentiels. Unité : m/s."
+      },
+      "x": {
+        "role": "Coordonnée d'espace",
+        "kind": "input",
+        "unit": "m",
+        "description": "La position dans le référentiel au repos. Elle montre que l'espace intervient dans la transformation du temps."
+      },
+      "c^2": {
+        "role": "Carré de la vitesse de la lumière",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "La constante de proportionnalité de la transformation d'espace-temps. Elle fixe la proportion dans laquelle temps et espace se mélangent."
+      }
+    },
+    "relatedFormulas": [
+      "mass-energy",
+      "velocity-acceleration"
+    ],
+    "realWorldExamples": [
+      "La correction temporelle des satellites GPS (qui tient compte de la dilatation relativiste du temps)",
+      "L'allongement observé de la durée de vie des particules rapides dans un accélérateur",
+      "Expliquer pourquoi les muons atmosphériques parviennent jusqu'au sol"
+    ]
+  },
+  "gauss-law": {
+    "name": "Théorème de Gauss",
+    "oneLiner": "Première des équations de Maxwell : la divergence du champ électrique créé par une distribution de charges est proportionnelle à la densité de charge",
+    "description": "Le théorème de Gauss, première des quatre équations de Maxwell, énonce que la divergence du champ électrique (son étalement dans l'espace) est égale à la densité de charge en ce point divisée par la permittivité du vide. Il exprime mathématiquement que les charges sont les sources du champ électrique : le champ sort des charges positives et entre dans les charges négatives. Il est particulièrement commode pour obtenir simplement le champ d'une distribution de charges très symétrique.",
+    "discoverer": "Carl Friedrich Gauss / James Clerk Maxwell",
+    "field": "Physique",
+    "significance": "L'une des quatre équations fondamentales de l'électromagnétisme (les équations de Maxwell), elle fixe la relation entre les charges et le champ électrique.",
+    "elementMeanings": {
+      "\\nabla \\cdot \\mathbf{E}": {
+        "role": "Divergence du champ électrique",
+        "kind": "structural",
+        "description": "L'opération différentielle qui indique dans quelle mesure le champ électrique diverge ou converge en un point."
+      },
+      "\\rho": {
+        "role": "Densité de charge",
+        "kind": "input",
+        "unit": "C/m³",
+        "description": "La charge par unité de volume. Unité : C/m³."
+      },
+      "\\varepsilon_0": {
+        "role": "Permittivité du vide",
+        "kind": "constant",
+        "value": 8.854e-12,
+        "unit": "C²/(N·m²)",
+        "description": "Environ 8,854×10⁻¹² F/m. C'est la constante qui fixe l'intensité du champ électrique dans le vide."
+      }
+    },
+    "relatedFormulas": [
+      "coulomb-law"
+    ],
+    "realWorldExamples": [
+      "Calculer la répartition du champ électrique à la surface d'une sphère conductrice",
+      "Établir le champ électrique uniforme entre les armatures d'un condensateur plan",
+      "Expliquer pourquoi le champ électrique est nul à l'intérieur d'un conducteur électrisé"
+    ]
+  }
+}

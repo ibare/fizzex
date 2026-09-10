@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "应力",
+    "oneLiner": "表示单位面积上所受内力的物理量",
+    "description": "应力是外力在物体内部所引起的单位面积上的力。它有拉伸、压缩、剪切等多种形式，是判断材料是否会破坏的最基本指标。在结构设计中，把它保持在许用应力以下是安全的关键。",
+    "field": "机械工程",
+    "significance": "它是材料力学的基本概念，为结构安全性评估与设计提供了出发点。",
+    "elementMeanings": {
+      "\\sigma": { "role": "应力", "description": "单位面积上的内力。单位：帕斯卡(Pa)或 N/m²。", "kind": "output" },
+      "F": { "role": "力", "description": "作用在物体上的外力。单位：牛顿(N)。", "kind": "input" },
+      "A": { "role": "截面积", "description": "力所作用的截面的面积。单位：m²。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算桥梁缆索的拉伸应力", "校核建筑柱子的压缩应力"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "应变",
+    "oneLiner": "变形长度相对于原长的比值",
+    "description": "应变是把物体在外力作用下的变形程度表示为相对于原长之比的无量纲量。应变较小时物体在弹性范围内能恢复原状，一旦超过临界值就发生塑性变形，形状被永久改变。",
+    "field": "机械工程",
+    "significance": "它把材料的变形程度定量化，为分析弹性与塑性行为奠定了基础。",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "应变", "description": "长度变化的比值。无量纲量（没有单位）。", "kind": "output" },
+      "\\Delta L": { "role": "长度变化量", "description": "变形后的长度减去原长所得的值。单位：m。", "kind": "input" },
+      "L": { "role": "原长", "description": "施加外力前物体的初始长度。单位：m。", "kind": "input" }
+    },
+    "realWorldExamples": ["在金属拉伸试验中测量试样的伸长", "评估地震时建筑框架的变形程度"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "胡克定律",
+    "oneLiner": "在弹性范围内应力与应变成正比的定律",
+    "description": "胡克定律表述为：作用于材料的应力等于弹性模量与应变之积。它只在弹性极限内成立，超过之后就出现非线性行为。弹簧的回复力(F=kx)也是这一定律的特殊形式。",
+    "discoverer": "罗伯特·胡克",
+    "field": "机械工程",
+    "significance": "它确立了弹性行为的线性关系，为结构分析与材料试验建立了理论基础。",
+    "elementMeanings": {
+      "\\sigma": { "role": "应力", "description": "单位面积上所受的力。单位：帕斯卡(Pa)。", "kind": "output" },
+      "E": { "role": "弹性模量", "description": "杨氏模量(Young's modulus)。表示材料刚度的固有常数。单位：Pa。", "kind": "input" },
+      "\\varepsilon": { "role": "应变", "description": "长度变化的比值。它是无量纲的。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算弹簧的弹性回复力", "预测混凝土柱在荷载下的变形"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "伯努利方程",
+    "oneLiner": "不可压缩流体流动中，压力、速度与高度三项能量之和保持不变的原理",
+    "description": "伯努利方程表达了定常、不可压缩、无黏流体流动中的能量守恒。它定量地给出流速加快则压强降低、高度上升则压强降低的关系。从飞机机翼产生升力的原理到管路设计，应用十分广泛。",
+    "discoverer": "丹尼尔·伯努利",
+    "field": "机械工程",
+    "significance": "它是流体力学的核心原理，为航空、水力、管路等诸多工程领域的设计提供基础。",
+    "elementMeanings": {
+      "P": { "role": "静压", "description": "流体的静态压强。单位：帕斯卡(Pa)。", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "动压", "description": "由流体运动产生的压强。它与速度的平方成正比。", "kind": "structural" },
+      "\\rho": { "role": "密度", "description": "流体的质量密度。单位：kg/m³。", "kind": "input" },
+      "v": { "role": "流速", "description": "流体的流动速度。单位：m/s。", "kind": "input" },
+      "g": { "role": "重力加速度", "description": "地表附近的重力加速度。约 9.8 m/s²。", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "高度", "description": "流体位置相对于基准面的高度。单位：m。", "kind": "input" }
+    },
+    "realWorldExamples": ["机翼上下表面的压强差产生升力", "捏窄花园水管口时水流变快的现象"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "雷诺数",
+    "oneLiner": "判别流体流动是层流还是湍流的无量纲数",
+    "description": "雷诺数是表示惯性力与黏性力之比的无量纲数。这个值小时（约 2300 以下）为层流，大时则出现湍流。在管路、飞机、船舶等一切与流体有关的工程系统中，它都是预测流动特性的核心指标。",
+    "discoverer": "奥斯本·雷诺",
+    "field": "机械工程",
+    "significance": "它使层流到湍流的转捩得以预测，为流体系统设计提供了核心的判别准则。",
+    "elementMeanings": {
+      "Re": { "role": "雷诺数", "description": "惯性力与黏性力之比。它是无量纲数。", "kind": "output" },
+      "\\rho": { "role": "密度", "description": "流体的质量密度。单位：kg/m³。", "kind": "input" },
+      "v": { "role": "流速", "description": "流体的平均流动速度。单位：m/s。", "kind": "input" },
+      "L": { "role": "特征长度", "description": "代表流动几何特征的长度，如管道直径。单位：m。", "kind": "input" },
+      "\\mu": { "role": "黏度系数", "description": "流体的动力黏度。单位：Pa 乘以 s。", "kind": "input" }
+    },
+    "realWorldExamples": ["设计自来水管时预测是否会产生湍流", "分析机翼表面的边界层流动"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "纳维-斯托克斯方程",
+    "oneLiner": "描述黏性流体运动的基本偏微分方程",
+    "description": "纳维-斯托克斯方程是把牛顿第二定律应用于连续流体的结果，表明压强梯度、黏性力与外力共同决定流体的加速度。它一般不存在解析解，需用数值方法(CFD)求解；它还被选为千禧年难题之一，在数学上同样重要。",
+    "discoverer": "克洛德-路易·纳维、乔治·加布里埃尔·斯托克斯",
+    "field": "机械工程",
+    "significance": "它是描述一切黏性流体流动最一般的方程，是计算流体力学(CFD)的基础。",
+    "elementMeanings": {
+      "\\rho": { "role": "密度", "description": "流体的质量密度。单位：kg/m³。", "kind": "input" },
+      "\\mathbf{v}": { "role": "速度场", "description": "流体质点的速度向量。它是位置与时间的函数。", "kind": "output" },
+      "p": { "role": "压强", "description": "作用于流体的压强场。单位：帕斯卡(Pa)。", "kind": "input" },
+      "\\mu": { "role": "黏度系数", "description": "流体的动力黏度。单位：Pa 乘以 s。", "kind": "input" },
+      "\\mathbf{f}": { "role": "外力", "description": "重力等作用于流体的体积力。", "kind": "input" }
+    },
+    "realWorldExamples": ["对汽车周围气流作数值仿真", "分析血管内的血流形态"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "热传导定律",
+    "oneLiner": "表示因温度差而穿过物质内部传递的热量的定律",
+    "description": "傅里叶热传导定律表明，传热速率与导热系数、截面积和温度梯度之积成正比。热从温度高处流向温度低处，材料的导热系数越高传递得越快。从选择保温材料到半导体散热，它都是热管理设计的基本依据。",
+    "discoverer": "约瑟夫·傅里叶",
+    "field": "机械工程",
+    "significance": "它使传热现象的定量分析成为可能，确立了热力学与热管理工程的基础。",
+    "elementMeanings": {
+      "Q": { "role": "传热速率", "description": "单位时间内传递的热能。单位：瓦特(W)。", "kind": "output" },
+      "k": { "role": "导热系数", "description": "表示材料传热能力的固有常数。单位：W/(m 乘以 K)。", "kind": "input" },
+      "A": { "role": "截面积", "description": "热量所通过的截面的面积。单位：m²。", "kind": "input" },
+      "\\Delta T": { "role": "温度差", "description": "热源侧与冷源侧的温度之差。单位：K 或摄氏度。", "kind": "input" },
+      "\\Delta x": { "role": "厚度", "description": "沿热传递方向的材料厚度。单位：m。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算建筑墙体的保温性能", "设计笔记本电脑 CPU 的散热片"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "欧拉屈曲载荷",
+    "oneLiner": "细长柱在压力作用下突然弯曲时的临界载荷",
+    "description": "欧拉屈曲公式给出两端铰支的细长柱承受轴向压力时发生屈曲的临界载荷。它与弹性模量、截面惯性矩成正比，与柱长的平方成反比。柱子越长越容易屈曲，这是结构安全设计中必须校核的项目。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "机械工程",
+    "significance": "它使受压构件的稳定性极限得以在理论上预测，成为结构工程设计必查的准则。",
+    "elementMeanings": {
+      "P_{cr}": { "role": "临界屈曲载荷", "description": "开始发生屈曲的最小压力。单位：牛顿(N)。", "kind": "output" },
+      "\\pi^2": { "role": "圆周率的平方", "description": "源自屈曲模态波形的常数。", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "弹性模量", "description": "材料的刚度（杨氏模量）。单位：帕斯卡(Pa)。", "kind": "input" },
+      "I": { "role": "截面惯性矩", "description": "表示截面抗弯能力的几何性质。单位：m 的四次方。", "kind": "input" },
+      "L": { "role": "柱长", "description": "屈曲长度。有效长度随支承条件而变。单位：m。", "kind": "input" }
+    },
+    "realWorldExamples": ["校核高层建筑钢柱的屈曲安全性", "确定自行车车架管件的最小壁厚"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

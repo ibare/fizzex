@@ -1,0 +1,307 @@
+{
+  "euler-identity": {
+    "name": "Identidad de Euler",
+    "oneLiner": "La fórmula que enlaza en una sola igualdad las cinco constantes fundamentales de las matemáticas",
+    "description": "La identidad de Euler reúne en una igualdad escueta la constante natural e, la unidad imaginaria i, el número pi, el 1 y el 0. Se deduce de forma natural de la fórmula de Euler tomando como ángulo el número pi, y simboliza la profunda conexión que atraviesa las distintas ramas de las matemáticas.",
+    "discoverer": "Leonhard Euler",
+    "field": "Álgebra",
+    "significance": "Muestra que la función exponencial, las funciones trigonométricas y los números complejos forman un todo, y se considera la igualdad más bella de la historia de las matemáticas.",
+    "elementMeanings": {
+      "e": { "role": "Constante natural", "description": "Aproximadamente 2,71828. Es la base del logaritmo natural y representa el crecimiento continuo.", "kind": "constant", "value": 2.71828183 },
+      "i": { "role": "Unidad imaginaria", "description": "El número cuyo cuadrado es -1. Es el componente básico de los números complejos.", "kind": "constant" },
+      "\\pi": { "role": "Número pi", "description": "La razón entre la longitud de la circunferencia y el diámetro. Aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "1": { "role": "Elemento neutro del producto", "description": "Es el elemento neutro de la multiplicación y el comienzo de los números naturales.", "kind": "constant", "value": 1 },
+      "0": { "role": "Elemento neutro de la suma", "description": "Es el elemento neutro de la suma y el resultado de la igualdad.", "kind": "constant", "value": 0 }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "quadratic-formula": {
+    "name": "Fórmula general de la ecuación de segundo grado",
+    "oneLiner": "La fórmula que obtiene directamente las soluciones de la ecuación ax2+bx+c=0 a partir de sus coeficientes",
+    "description": "La fórmula general de la ecuación de segundo grado calcula con exactitud las dos raíces de la ecuación usando solo los coeficientes a, b y c. El signo del discriminante determina cuántas raíces reales hay, y es el método de resolución más básico del álgebra.",
+    "field": "Álgebra",
+    "significance": "Es la herramienta universal que permite resolver cualquier ecuación de segundo grado y, mediante el concepto de discriminante, decidir si existen raíces.",
+    "elementMeanings": {
+      "a": { "role": "Coeficiente del término cuadrático", "description": "El número que multiplica a x al cuadrado. Debe ser distinto de 0 para que la ecuación sea de segundo grado.", "kind": "input" },
+      "b": { "role": "Coeficiente del término lineal", "description": "El número que multiplica a x. Influye en la posición del eje de la parábola.", "kind": "input" },
+      "c": { "role": "Término independiente", "description": "La constante que se suma sin variable. Determina la ordenada en el origen.", "kind": "input" },
+      "b^2-4ac": { "role": "Discriminante", "description": "Determina el número y el tipo de raíces. Si es positivo hay dos raíces reales distintas, si es 0 una raíz doble y si es negativo raíces imaginarias.", "kind": "output" },
+      "\\pm": { "role": "Doble signo", "description": "Expresa a la vez los casos de suma y de resta, y con ello las dos raíces.", "kind": "structural" }
+    },
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem"]
+  },
+  "binomial-theorem": {
+    "name": "Teorema del binomio",
+    "oneLiner": "El teorema que desarrolla la potencia de una suma de dos términos mediante los coeficientes binomiales",
+    "description": "El teorema del binomio desarrolla (a+b) elevado a n como una suma, usando los coeficientes binomiales. Es la herramienta clave que enlaza la combinatoria con el álgebra y está estrechamente relacionado con el triángulo de Pascal.",
+    "discoverer": "Isaac Newton (generalización)",
+    "field": "Álgebra",
+    "significance": "Se usa ampliamente en todas las matemáticas —desarrollo de polinomios, teoría de la probabilidad, combinatoria— y aporta la base del cálculo aproximado.",
+    "elementMeanings": {
+      "a": { "role": "Primer término", "description": "El primer término del binomio. Al desarrollar, su grado va disminuyendo.", "kind": "input" },
+      "b": { "role": "Segundo término", "description": "El segundo término del binomio. Al desarrollar, su grado va aumentando.", "kind": "input" },
+      "n": { "role": "Exponente de la potencia", "description": "Es el entero no negativo que indica cuántas veces se multiplica el binomio por sí mismo.", "kind": "input" },
+      "k": { "role": "Índice del desarrollo", "description": "Es la variable de sumación que indica cuántas veces aparece b como factor en cada término.", "kind": "input" },
+      "\\binom{n}{k}": { "role": "Coeficiente binomial", "description": "El número de combinaciones de k elementos tomados de n. Corresponde a cada valor del triángulo de Pascal.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "geometric-series": {
+    "name": "Fórmula de la suma de una serie geométrica",
+    "oneLiner": "La fórmula que obtiene en forma cerrada la suma de una serie cuya razón es constante",
+    "description": "La fórmula de la suma de una serie geométrica calcula de forma escueta la suma cuando se conocen el primer término a y la razón r. Si el valor absoluto de la razón es menor que 1, la serie infinita también converge, y se aplica ampliamente en matemática financiera y en física.",
+    "field": "Álgebra",
+    "significance": "Permite expresar con un valor finito un proceso infinito convergente, y tiene aplicaciones prácticas muy amplias, como el cálculo del interés compuesto o el procesamiento de señales.",
+    "elementMeanings": {
+      "a": { "role": "Primer término", "description": "El primer término de la serie. Es el valor de referencia que determina la magnitud de la suma total.", "kind": "input" },
+      "r": { "role": "Razón", "description": "La razón entre términos consecutivos. Su valor absoluto debe ser menor que 1 para que la serie infinita converja.", "kind": "input" },
+      "n": { "role": "Número de términos", "description": "Es el número de términos que se suman en una serie finita.", "kind": "input" },
+      "S_n": { "role": "Suma parcial", "description": "Es la suma de los n primeros términos.", "kind": "output" },
+      "S_{\\infty}": { "role": "Suma de la serie infinita", "description": "Es el valor al que converge, a/(1-r), cuando el valor absoluto de la razón es menor que 1.", "kind": "output" }
+    },
+    "relatedFormulas": ["taylor-series", "binomial-theorem"]
+  },
+  "difference-of-squares": {
+    "name": "Diferencia de cuadrados",
+    "oneLiner": "La fórmula que factoriza la diferencia de los cuadrados de dos números como el producto de su suma por su diferencia",
+    "description": "La fórmula de la diferencia de cuadrados es la identidad según la cual a al cuadrado menos b al cuadrado es igual a (a+b)(a-b). Es el patrón de factorización más básico y se emplea también al descomponer polinomios de grado superior y en el cálculo mental.",
+    "field": "Álgebra",
+    "significance": "Es el punto de partida de la factorización algebraica y resulta imprescindible en campos muy diversos: racionalización, cálculo de límites, descomposición en factores primos en teoría de números, etc.",
+    "elementMeanings": {
+      "a": { "role": "Primer valor", "description": "Es el primer número o expresión que se eleva al cuadrado.", "kind": "input" },
+      "b": { "role": "Segundo valor", "description": "Es el segundo número o expresión que se eleva al cuadrado.", "kind": "input" },
+      "a^2": { "role": "Primer cuadrado", "description": "Es el valor de a elevado al cuadrado.", "kind": "structural" },
+      "b^2": { "role": "Segundo cuadrado", "description": "Es el valor de b elevado al cuadrado.", "kind": "structural" },
+      "(a+b)": { "role": "Factor suma", "description": "Es el factor formado por la suma de a y b.", "kind": "structural" },
+      "(a-b)": { "role": "Factor diferencia", "description": "Es el factor formado por la diferencia entre a y b.", "kind": "structural" }
+    },
+    "relatedFormulas": ["quadratic-formula", "binomial-theorem"]
+  },
+  "perfect-square": {
+    "name": "Cuadrado de un binomio",
+    "oneLiner": "La identidad que desarrolla el cuadrado de la suma de dos términos",
+    "description": "El cuadrado de un binomio es la identidad según la cual (a+b) al cuadrado es igual a la suma de a al cuadrado, 2ab y b al cuadrado. Se usa de forma central para factorizar expresiones de segundo grado y para reconocer trinomios cuadrados perfectos, y es la base del método de completar el cuadrado para resolver ecuaciones de segundo grado.",
+    "field": "Álgebra",
+    "significance": "Es la herramienta más básica para entender la estructura de una expresión de segundo grado y resulta imprescindible para pasarla a la forma canónica y resolver problemas de valor mínimo.",
+    "elementMeanings": {
+      "a": { "role": "Primer término", "description": "Es el primer término del binomio que se eleva al cuadrado.", "kind": "input" },
+      "b": { "role": "Segundo término", "description": "Es el segundo término del binomio que se eleva al cuadrado.", "kind": "input" },
+      "a^2": { "role": "Cuadrado del primer término", "description": "Es el valor de a elevado al cuadrado.", "kind": "structural" },
+      "2ab": { "role": "Término cruzado", "description": "Es el producto de a por b multiplicado por 2. Es el término intermedio que aparece al desarrollar.", "kind": "structural" },
+      "b^2": { "role": "Cuadrado del segundo término", "description": "Es el valor de b elevado al cuadrado.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular cuánta superficie total se gana al alargar en b el lado de un huerto cuadrado",
+      "Se usa en estadística al desarrollar o reordenar la fórmula de la varianza"
+    ],
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem", "quadratic-formula"]
+  },
+  "sum-difference-product": {
+    "name": "Producto de una suma por una diferencia",
+    "oneLiner": "La identidad según la cual multiplicar la suma de dos términos por su diferencia da la diferencia de sus cuadrados",
+    "description": "Esta identidad establece que (a+b)(a-b) es igual a a al cuadrado menos b al cuadrado. Coincide con la forma factorizada de la diferencia de cuadrados, pero mirada desde el lado de la multiplicación. Resulta útil para convertir un producto complicado en una simple resta de cuadrados.",
+    "field": "Álgebra",
+    "significance": "Simplifica los cálculos mentales y numéricos al transformar una multiplicación en una diferencia de cuadrados, y es una herramienta clave de la racionalización y de la factorización.",
+    "elementMeanings": {
+      "a": { "role": "Valor de referencia", "description": "Es el valor que aparece en común en la suma y en la diferencia.", "kind": "input" },
+      "b": { "role": "Variación", "description": "Es el valor que se suma o se resta al valor de referencia.", "kind": "input" },
+      "(a+b)": { "role": "Suma", "description": "Es el factor formado al sumar a y b.", "kind": "structural" },
+      "(a-b)": { "role": "Diferencia", "description": "Es el factor formado al restar b de a.", "kind": "structural" },
+      "a^2-b^2": { "role": "Diferencia de cuadrados", "description": "Es el resultado: la diferencia entre los cuadrados de los dos números.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calcular mentalmente 49 x 51 como (50+1)(50-1) = 2500-1 = 2499",
+      "Se emplea en el proceso de racionalización para eliminar el irracional del denominador"
+    ],
+    "relatedFormulas": ["difference-of-squares", "perfect-square"]
+  },
+  "arithmetic-series-sum": {
+    "name": "Fórmula de la suma de una progresión aritmética",
+    "oneLiner": "La fórmula que obtiene la suma de los n primeros términos de una progresión aritmética",
+    "description": "La fórmula de la suma de una progresión aritmética obtiene el resultado multiplicando la media del primer y el último término por el número de términos. Es célebre por la anécdota de Gauss, que de niño sumó los números del 1 al 100, y es una fórmula elegante que aprovecha la estructura simétrica de la progresión aritmética.",
+    "discoverer": "Carl Friedrich Gauss (atribución anecdótica)",
+    "field": "Álgebra",
+    "significance": "Permite calcular con rapidez la suma total de cantidades que crecen o decrecen de forma regular, y es la base de la matemática discreta y del análisis de algoritmos.",
+    "elementMeanings": {
+      "S_n": { "role": "Suma de la progresión", "description": "Es el resultado de sumar los n primeros términos.", "kind": "output" },
+      "n": { "role": "Número de términos", "description": "Es el número total de términos que se suman.", "kind": "input" },
+      "a_1": { "role": "Primer término", "description": "Es el primer término de la progresión.", "kind": "input" },
+      "a_n": { "role": "Último término", "description": "Es el término n-ésimo de la progresión.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular el número total de asientos en una grada escalonada (cada fila tiene un número fijo más de asientos)",
+      "Calcular los ingresos anuales cuando el sueldo sube cada mes una cantidad fija"
+    ],
+    "relatedFormulas": ["arithmetic-general", "geometric-series-sum"]
+  },
+  "arithmetic-general": {
+    "name": "Término general de una progresión aritmética",
+    "oneLiner": "La fórmula que obtiene el término n-ésimo de una progresión aritmética a partir del primer término y de la diferencia",
+    "description": "La fórmula del término general de una progresión aritmética calcula directamente cualquier término n-ésimo sumando al primer término la diferencia multiplicada por (n-1). Expresa en una sola fórmula la regularidad de la progresión y deja claro su carácter lineal.",
+    "field": "Álgebra",
+    "significance": "Es la manera más básica de captar en una fórmula el patrón de una sucesión y sirve de puente hacia el concepto de función.",
+    "elementMeanings": {
+      "a_n": { "role": "Término general", "description": "Es el valor del término n-ésimo de la progresión.", "kind": "output" },
+      "a_1": { "role": "Primer término", "description": "Es el valor inicial de la progresión.", "kind": "input" },
+      "n": { "role": "Índice del término", "description": "Es el número natural que indica qué posición ocupa el término que se busca.", "kind": "input" },
+      "d": { "role": "Diferencia", "description": "Es la diferencia constante entre dos términos consecutivos.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular la altura de la planta n cuando un ascensor sube la misma altura en cada planta",
+      "Predecir el valor en un instante determinado cuando el tiempo transcurre de forma uniforme"
+    ],
+    "relatedFormulas": ["arithmetic-series-sum", "geometric-general"]
+  },
+  "geometric-series-sum": {
+    "name": "Fórmula de la suma finita de una progresión geométrica",
+    "oneLiner": "La fórmula que obtiene la suma de los n primeros términos de una progresión geométrica",
+    "description": "La fórmula de la suma finita de una progresión geométrica calcula la suma en forma cerrada a partir del primer término, la razón y el número de términos. Se aplica cuando la razón no vale 1, y la razón elevada a n desempeña el papel central. A diferencia de la fórmula de la suma de una serie geométrica (geometric-series), aquí el foco está en la suma finita.",
+    "field": "Álgebra",
+    "significance": "Se aplica directamente para cuantificar los cambios exponenciales de la vida real: cálculo del interés compuesto, cuotas de un préstamo, amortización de bienes, etc.",
+    "elementMeanings": {
+      "S_n": { "role": "Suma finita", "description": "Es la suma de los n primeros términos.", "kind": "output" },
+      "a_1": { "role": "Primer término", "description": "Es el primer término de la progresión.", "kind": "input" },
+      "r": { "role": "Razón", "description": "Es la razón entre términos consecutivos. Debe ser distinta de 1.", "kind": "input" },
+      "n": { "role": "Número de términos", "description": "Es el número total de términos que se suman.", "kind": "input" },
+      "r^n": { "role": "Razón elevada a n", "description": "Es la razón multiplicada n veces por sí misma. Determina la velocidad con la que la serie diverge o converge.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular el importe acumulado al cabo de n años de una inversión que crece cada año un porcentaje fijo",
+      "Calcular la cantidad residual acumulada cuando un fármaco se degrada en el organismo un porcentaje fijo cada hora"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-general", "infinite-geometric"]
+  },
+  "geometric-general": {
+    "name": "Término general de una progresión geométrica",
+    "oneLiner": "La fórmula que obtiene el término n-ésimo de una progresión geométrica a partir del primer término y de la razón",
+    "description": "La fórmula del término general de una progresión geométrica calcula directamente cualquier término n-ésimo multiplicando el primer término por la razón elevada a (n-1). Expresa en una sola fórmula el patrón de crecimiento o decrecimiento exponencial de la sucesión.",
+    "field": "Álgebra",
+    "significance": "Es la herramienta básica para modelar cambios exponenciales como el crecimiento de la población, la desintegración radiactiva o el interés compuesto.",
+    "elementMeanings": {
+      "a_n": { "role": "Término general", "description": "Es el valor del término n-ésimo de la progresión.", "kind": "output" },
+      "a_1": { "role": "Primer término", "description": "Es el valor inicial de la progresión.", "kind": "input" },
+      "r": { "role": "Razón", "description": "Es la razón entre dos términos consecutivos.", "kind": "input" },
+      "n": { "role": "Índice del término", "description": "Es el número natural que indica qué posición ocupa el término que se busca.", "kind": "input" },
+      "r^{n-1}": { "role": "Potencia de la razón", "description": "Es la razón multiplicada (n-1) veces por sí misma. Expresa el factor de multiplicación respecto del primer término.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular el número de individuos tras n generaciones cuando una bacteria se divide en dos en cada generación",
+      "Calcular el capital más los intereses de un depósito al cabo de n años con interés compuesto a un tipo fijo"
+    ],
+    "relatedFormulas": ["geometric-series-sum", "arithmetic-general", "infinite-geometric"]
+  },
+  "infinite-geometric": {
+    "name": "Serie geométrica infinita",
+    "oneLiner": "La suma de una progresión geométrica sumada infinitamente cuando el valor absoluto de la razón es menor que 1",
+    "description": "La fórmula de la serie geométrica infinita muestra que, cuando el valor absoluto de la razón es menor que 1, la serie geométrica converge a un valor finito aunque continúe indefinidamente. Dividiendo el primer término entre (1 menos la razón) se obtiene el valor al que converge. Es el ejemplo más intuitivo para entender los conceptos de límite y convergencia.",
+    "field": "Álgebra",
+    "significance": "Es el ejemplo por excelencia de la idea matemática de que un proceso infinito puede dar un resultado finito, y el punto de partida del análisis y de la teoría de series.",
+    "elementMeanings": {
+      "S": { "role": "Suma de la serie infinita", "description": "Es el valor al que converge la suma de infinitos términos.", "kind": "output" },
+      "a_1": { "role": "Primer término", "description": "Es el primer término de la serie.", "kind": "input" },
+      "r": { "role": "Razón", "description": "La razón entre términos consecutivos. Debe cumplirse |r|<1 para que converja.", "kind": "input" },
+      "1-r": { "role": "Denominador de convergencia", "description": "Es el resultado de restar la razón a 1. Se divide entre este valor para obtener la suma.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "La distancia total que recorre una pelota que, en cada bote, sube un porcentaje fijo de la altura anterior",
+      "El proceso de convertir un decimal periódico en fracción (por ejemplo, 0,333... = 1/3)"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-series-sum", "geometric-general"]
+  },
+  "exponent-law": {
+    "name": "Ley de los exponentes",
+    "oneLiner": "La ley según la cual, al multiplicar potencias de la misma base, los exponentes se suman",
+    "description": "La ley de los exponentes es la regla básica según la cual el producto de potencias de una misma base a equivale a sumar los exponentes. Se deduce de forma natural de la definición de potencia y es el fundamento de todo el sistema de operaciones con exponentes. Las demás leyes —la de la división, la de la potencia de una potencia— derivan de ella.",
+    "field": "Álgebra",
+    "significance": "Es la regla más elemental de las operaciones con exponentes y sirve de base a las propiedades de los logaritmos, a la función exponencial y a la notación científica.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "El número que sirve de base de la potencia. Es un número real distinto de 0.", "kind": "input" },
+      "m": { "role": "Primer exponente", "description": "Es el exponente de la primera potencia.", "kind": "input" },
+      "n": { "role": "Segundo exponente", "description": "Es el exponente de la segunda potencia.", "kind": "input" },
+      "m+n": { "role": "Exponente sumado", "description": "Es la suma de los dos exponentes. Es el exponente del producto.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calcular cómodamente en notación científica sumando los exponentes al multiplicar potencias de 10",
+      "Se usa al manejar potencias de 2 en la conversión de unidades de memoria informática"
+    ],
+    "relatedFormulas": ["log-definition", "log-product-rule"]
+  },
+  "log-definition": {
+    "name": "Definición de logaritmo",
+    "oneLiner": "La relación de equivalencia que define el logaritmo como la operación inversa de la potenciación",
+    "description": "La definición de logaritmo reescribe en notación logarítmica la relación exponencial que dice que al elevar la base a a la potencia c se obtiene b. Deja claro que la potenciación y el logaritmo son operaciones inversas y es el punto de partida del cálculo logarítmico.",
+    "discoverer": "John Napier",
+    "field": "Álgebra",
+    "significance": "Hace posible la propiedad esencial del logaritmo, que convierte multiplicaciones en sumas, y es una herramienta básica del cálculo científico y de la teoría de la información.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "La base del logaritmo. Debe ser un número positivo distinto de 1.", "kind": "input" },
+      "b": { "role": "Argumento", "description": "El valor del que se toma el logaritmo. Debe ser positivo.", "kind": "input" },
+      "c": { "role": "Valor del logaritmo", "description": "Es el número que indica a qué potencia hay que elevar la base para obtener el argumento.", "kind": "output" },
+      "\\log_a b": { "role": "Notación logarítmica", "description": "Es el logaritmo de base a y argumento b.", "kind": "structural" },
+      "a^c = b": { "role": "Notación exponencial", "description": "Es la misma relación expresada en forma de potencia.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "La magnitud de un terremoto (la escala de Richter) se define en escala logarítmica, de modo que al aumentar en 1 la energía se multiplica por unas 31,6 veces",
+      "El volumen del sonido (el decibelio) se mide en escala logarítmica, lo que permite abarcar todo el rango auditivo humano"
+    ],
+    "relatedFormulas": ["exponent-law", "log-product-rule"]
+  },
+  "log-product-rule": {
+    "name": "Ley del logaritmo de un producto",
+    "oneLiner": "La ley según la cual el logaritmo del producto de dos números es igual a la suma de sus logaritmos",
+    "description": "La ley del logaritmo de un producto muestra que el logaritmo de un producto se puede descomponer en la suma de los logaritmos de cada factor. Se deduce directamente de la ley de los exponentes y expresa la propiedad esencial del logaritmo, que convierte la multiplicación en suma. La ley del cociente y la de la potencia son extensiones de este mismo principio.",
+    "field": "Álgebra",
+    "significance": "Permite transformar multiplicaciones complicadas en sumas sencillas, lo que revolucionó el cálculo numérico en la época anterior a las calculadoras.",
+    "elementMeanings": {
+      "a": { "role": "Primer factor", "description": "Es el primer número positivo que se multiplica.", "kind": "input" },
+      "b": { "role": "Segundo factor", "description": "Es el segundo número positivo que se multiplica.", "kind": "input" },
+      "\\log(ab)": { "role": "Logaritmo del producto", "description": "Es el logaritmo del producto de a por b.", "kind": "structural" },
+      "\\log a": { "role": "Primer logaritmo", "description": "Es el logaritmo de a.", "kind": "structural" },
+      "\\log b": { "role": "Segundo logaritmo", "description": "Es el logaritmo de b.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Al comparar en astronomía el brillo de las estrellas (su magnitud), convertir la razón de brillos en una diferencia de magnitudes (una suma)",
+      "Calcular en teoría de la información la información conjunta de sucesos independientes como la suma de sus informaciones"
+    ],
+    "relatedFormulas": ["log-definition", "exponent-law"]
+  },
+  "complex-plane": {
+    "name": "Plano complejo",
+    "oneLiner": "El plano que representa visualmente el número complejo z = a + bi como el punto de coordenadas (a, b)",
+    "description": "El plano complejo (o plano de Argand) es un sistema de coordenadas bidimensional que representa los números complejos con la parte real en el eje horizontal y la parte imaginaria en el vertical. Cada número complejo se corresponde con un punto del plano, o con un vector que parte del origen; el módulo |z| es la distancia al origen y el argumento arg(z) es el ángulo que forma con el semieje real positivo. A través de la forma polar y de la fórmula de Euler surgen de manera natural significados geométricos como la rotación o la dilatación.",
+    "field": "Álgebra",
+    "significance": "Conecta la definición abstracta de los números complejos con la intuición geométrica y permite entender visualmente las funciones complejas y las transformaciones de rotación.",
+    "elementMeanings": {
+      "z": { "role": "Número complejo", "description": "Es un punto del plano formado por una parte real y una parte imaginaria.", "kind": "input" },
+      "a": { "role": "Parte real", "description": "Es la coordenada horizontal de z, Re(z).", "kind": "structural" },
+      "b": { "role": "Parte imaginaria", "description": "Es la coordenada vertical de z, Im(z).", "kind": "structural" },
+      "|z|": { "role": "Módulo", "description": "Es la distancia desde el origen hasta z: sqrt(a^2 + b^2).", "kind": "output" },
+      "\\arg(z)": { "role": "Argumento", "description": "Es el ángulo que forma el semieje real positivo con el vector del origen a z: atan2(b, a).", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Representar la impedancia de un circuito de corriente alterna como un vector del plano complejo para visualizar el desfase",
+      "Analizar el resultado de la transformada de Fourier en procesamiento de señales como módulo y fase en el plano complejo"
+    ],
+    "relatedFormulas": ["euler-identity"]
+  },
+  "linear-transform-2x2": {
+    "name": "Transformación lineal 2×2",
+    "oneLiner": "La transformación lineal con la que una matriz M de 2×2 lleva un vector del plano a otro vector",
+    "description": "Una transformación lineal 2×2 es la función con la que la matriz M = [[a, b], [c, d]] lleva cada punto (x, y) del plano al punto (ax + by, cx + dy). Los vectores de la base e1 y e2 van a parar a las columnas de M, el cuadrado unidad se convierte en un paralelogramo y la retícula pasa a ser la retícula transformada. El determinante det(M) expresa el factor de cambio del área y la orientación; si vale 0, la dimensión se colapsa.",
+    "field": "Álgebra",
+    "significance": "Expresa de forma unificada, con una sola matriz, las transformaciones geométricas del plano —rotación, reflexión, dilatación, cizalladura— y es la base de los gráficos por computadora y del álgebra lineal.",
+    "elementMeanings": {
+      "M": { "role": "Matriz de transformación", "description": "Una matriz real de 2×2. Determina la transformación lineal del plano.", "kind": "input" },
+      "a": { "role": "M[0][0]", "description": "Es la coordenada horizontal que tiene, tras la transformación, la componente horizontal de la base e1.", "kind": "structural" },
+      "b": { "role": "M[0][1]", "description": "Es la coordenada horizontal que tiene, tras la transformación, la componente horizontal de la base e2.", "kind": "structural" },
+      "c": { "role": "M[1][0]", "description": "Es la coordenada vertical que tiene, tras la transformación, la componente vertical de la base e1.", "kind": "structural" },
+      "d": { "role": "M[1][1]", "description": "Es la coordenada vertical que tiene, tras la transformación, la componente vertical de la base e2.", "kind": "structural" },
+      "\\det(M)": { "role": "Determinante", "description": "ad - bc. Es el factor por el que se multiplica el área unidad tras la transformación, y su signo indica la orientación.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Un motor gráfico 2D que resuelve la rotación, la dilatación y la cizalladura con un solo producto por una matriz 2×2",
+      "El análisis de componentes principales (PCA), que extrae las direcciones de máxima varianza de los datos como los vectores propios de una matriz de covarianzas 2×2"
+    ],
+    "relatedFormulas": []
+  }
+}

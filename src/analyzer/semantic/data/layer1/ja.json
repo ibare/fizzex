@@ -1,0 +1,162 @@
+{
+  "frac.numerator": {
+    "role": "分子",
+    "description": "分数の上側の部分。割られる量です。",
+    "refinements": {
+      "containsVariable": "分子に変数が含まれているため、関数の零点(f(x)=0)を決めます。",
+      "constantOnly": "分子が定数なので、この分数の大きさは固定された比率です。"
+    }
+  },
+  "frac.denominator": {
+    "role": "分母",
+    "description": "分数の下側の部分。割る量です。0になると定義されません。",
+    "refinements": {
+      "containsVariable": "分母に変数があるため、特定の値で定義されないことがあります(漸近線)。",
+      "constantOnly": "分母が定数なので、式全体に固定の比率を適用します。"
+    }
+  },
+  "power.base": {
+    "role": "底",
+    "description": "べき乗で繰り返し掛けられる対象です。",
+    "refinements": {
+      "isEulerE": "自然対数の底 e を底とする指数関数です。増加や減衰を表します。",
+      "isVariable": "変数のべき乗です。指数が大きいほど速く増加します。"
+    }
+  },
+  "power.exponent": {
+    "role": "指数",
+    "description": "べき乗で掛ける回数です。",
+    "refinements": {
+      "isTwo": "2乗 — 結果は常に0以上です。",
+      "isNegativeOne": "逆数 — 1/底 と同じです。",
+      "isHalf": "平方根 — 底の正の平方根です。",
+      "containsVariable": "指数に変数が含まれ、指数関数的な増加や減衰を表します。"
+    }
+  },
+  "sqrt.content": {
+    "role": "被開平数",
+    "description": "平方根を求める対象です。実数の範囲では負になれません。"
+  },
+  "sqrt.index": {
+    "role": "根指数",
+    "description": "n乗根の n です。省略されると2(平方根)です。"
+  },
+  "subscript.base": {
+    "role": "添字を付ける対象",
+    "description": "下付き添字が付く対象です。"
+  },
+  "subscript.subscript": {
+    "role": "添字",
+    "description": "特定の要素や成分を指定する番号です。"
+  },
+  "scripts.leftSuperscript": {
+    "role": "左上付き添字",
+    "description": "記号の左上に付く数です。同位体の質量数のように対象を特定します。"
+  },
+  "scripts.leftSubscript": {
+    "role": "左下付き添字",
+    "description": "記号の左下に付く数です。元素の原子番号のように対象を特定します。"
+  },
+  "sum.lower": {
+    "role": "総和の始まり",
+    "description": "総和が始まる添字の値です。"
+  },
+  "sum.upper": {
+    "role": "総和の終わり",
+    "description": "総和が終わる添字の値です。",
+    "refinements": {
+      "isInfinity": "無限大まで足し合わせる無限級数です。収束するかどうかが重要です。"
+    }
+  },
+  "sum.body": {
+    "role": "一般項",
+    "description": "各段階で加えられる量です。添字によって値が変わります。"
+  },
+  "product.lower": {
+    "role": "総乗の始まり",
+    "description": "掛け算が始まる添字の値です。"
+  },
+  "product.upper": {
+    "role": "総乗の終わり",
+    "description": "掛け算が終わる添字の値です。"
+  },
+  "product.body": {
+    "role": "一般項",
+    "description": "各段階で掛けられる量です。"
+  },
+  "integral.lower": {
+    "role": "積分の下端",
+    "description": "積分区間の始点です。"
+  },
+  "integral.upper": {
+    "role": "積分の上端",
+    "description": "積分区間の終点です。",
+    "refinements": {
+      "isInfinity": "正の無限大まで積分します。収束するかどうかを確かめる必要があります。"
+    }
+  },
+  "integral.integrand": {
+    "role": "被積分関数",
+    "description": "積分する対象です。この関数の曲線の下の面積を求めます。"
+  },
+  "limit.approach": {
+    "role": "近づく値",
+    "description": "変数が限りなく近づく目標の値です。"
+  },
+  "limit.body": {
+    "role": "極限をとる式",
+    "description": "変数が近づくとき、この式の値がどこへ収束するかを見ます。"
+  },
+  "paren.content": {
+    "role": "まとまり",
+    "description": "括弧でくくられ、一つの単位として扱われる式です。"
+  },
+  "chem.content": {
+    "role": "化学式",
+    "description": "物質と反応を表す化学の表記です。"
+  },
+  "abs.content": {
+    "role": "絶対値の対象",
+    "description": "符号を無視した大きさです。結果は常に0以上です。"
+  },
+  "func.argument": {
+    "role": "関数の引数",
+    "description": "関数に入力される値です。"
+  },
+  "matrix.element": {
+    "role": "行列の成分",
+    "description": "行列の一つの要素です。"
+  },
+  "cases.element": {
+    "role": "条件ごとの値",
+    "description": "特定の条件が満たされたときの関数の値です。"
+  },
+  "accent.content": {
+    "role": "アクセントの対象",
+    "description": "アクセントが付いた記号です。"
+  },
+  "overline.content": {
+    "role": "平均・共役",
+    "description": "上線は平均、複素共役、または位相数学での閉包を表します。"
+  },
+  "cancel.content": {
+    "role": "消された項",
+    "description": "約分されたり消去されたりする部分です。"
+  },
+  "overset.base": {
+    "role": "基本の記号",
+    "description": "注釈が付く対象の記号です。"
+  },
+  "overset.annotation": {
+    "role": "注釈",
+    "description": "記号の上や下に付く追加の説明です。"
+  },
+  "xarrow.above": {
+    "role": "矢印の上のテキスト",
+    "description": "反応や変換の条件を表します。"
+  },
+  "xarrow.below": {
+    "role": "矢印の下のテキスト",
+    "description": "反応や変換の付加的な条件を表します。"
+  }
+}

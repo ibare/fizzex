@@ -1,0 +1,126 @@
+{
+  "logistic-growth": {
+    "name": "Logistic growth",
+    "oneLiner": "A model in which the growth rate falls as the population approaches the carrying capacity",
+    "description": "The logistic growth model describes how a population grows exponentially at first but gradually slows as it nears the environment's carrying capacity (K) and competition for resources sets in. It is the most basic mathematical model of density-dependent growth, and it produces an S-shaped growth curve (a sigmoid curve).",
+    "discoverer": "Pierre François Verhulst",
+    "field": "Biology",
+    "significance": "It is the basic model for predicting population dynamics in ecology, and it is applied in epidemiology, economics, technology diffusion, and many other fields.",
+    "elementMeanings": {
+      "dN/dt": { "role": "Rate of change of the population", "description": "How much the population changes per unit time.", "kind": "output" },
+      "r": { "role": "Intrinsic rate of increase", "description": "The maximum growth rate of the population when resources are not limited.", "kind": "input" },
+      "N": { "role": "Current population size", "description": "The size of the population at a given moment.", "kind": "input" },
+      "K": { "role": "Carrying capacity", "description": "The largest population the given environment can support.", "kind": "input" },
+      "(1 - N/K)": { "role": "Growth-limiting factor", "description": "As N approaches K it tends to 0, holding growth back.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "The S-shaped growth curve of fish released into a lake",
+      "Analysing when a bacterial culture enters its stationary phase",
+      "Modelling the growth in the number of social media users"
+    ],
+    "relatedFormulas": ["exponential-growth", "lotka-volterra"]
+  },
+  "hardy-weinberg": {
+    "name": "Hardy-Weinberg principle",
+    "oneLiner": "The principle that gene frequencies stay constant under ideal conditions where no evolution occurs",
+    "description": "The Hardy-Weinberg principle states that in an ideal population with no mutation, natural selection, genetic drift, migration, or non-random mating, allele frequencies and genotype frequencies stay constant from generation to generation. Writing the frequencies of the two alleles as p and q, the genotype frequencies come out as a binomial expansion.",
+    "discoverer": "Godfrey Harold Hardy, Wilhelm Weinberg",
+    "field": "Biology",
+    "significance": "It is the foundation of population genetics, providing the baseline (the null hypothesis) against which you judge whether evolution is actually happening in a real population.",
+    "elementMeanings": {
+      "p": { "role": "Dominant allele frequency", "description": "The relative frequency of the dominant allele in the population. Between 0 and 1.", "kind": "input" },
+      "q": { "role": "Recessive allele frequency", "description": "The relative frequency of the recessive allele in the population. p + q = 1.", "kind": "input" },
+      "p^2": { "role": "Dominant homozygote frequency", "description": "The frequency of the dominant homozygous (AA) genotype.", "kind": "output" },
+      "2pq": { "role": "Heterozygote frequency", "description": "The frequency of the heterozygous (Aa) genotype.", "kind": "output" },
+      "q^2": { "role": "Recessive homozygote frequency", "description": "The frequency of the recessive homozygous (aa) genotype.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Estimating carrier frequencies for genetic disorders such as sickle cell anaemia",
+      "Testing whether genetic drift is occurring in a small population",
+      "Checking a population's genetic equilibrium from its blood type distribution"
+    ],
+    "relatedFormulas": ["logistic-growth"]
+  },
+  "michaelis-menten": {
+    "name": "Michaelis-Menten kinetics",
+    "oneLiner": "A model in which the rate of an enzyme reaction traces a saturation curve against substrate concentration",
+    "description": "The Michaelis-Menten equation describes how the initial rate of an enzyme reaction varies with substrate concentration. At low substrate concentrations the rate rises almost in proportion, but as the concentration climbs the enzyme becomes saturated and the rate converges on its maximum. The Michaelis constant Km is the substrate concentration at which the rate is half of the maximum.",
+    "discoverer": "Leonor Michaelis, Maud Menten",
+    "field": "Biology",
+    "significance": "It is the basic model of enzyme kinetics and is central to drug design and metabolic engineering.",
+    "elementMeanings": {
+      "v": { "role": "Reaction rate", "description": "The initial rate of the enzyme reaction. Units: mol/(L s) and the like.", "kind": "output" },
+      "V_{max}": { "role": "Maximum reaction rate", "description": "The maximum rate, reached when every enzyme molecule is bound to substrate.", "kind": "input" },
+      "[S]": { "role": "Substrate concentration", "description": "The concentration of the substrate that binds to the enzyme. Units: mol/L.", "kind": "input" },
+      "K_m": { "role": "Michaelis constant", "description": "The substrate concentration at which the rate is half of Vmax. A measure of enzyme-substrate affinity.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "How a drug inhibits a reaction by changing an enzyme's Km",
+      "Saturation of the alcohol-metabolising enzyme (the limit on breakdown rate when you drink too much)",
+      "Choosing the optimal substrate concentration for an industrial enzyme"
+    ],
+    "relatedFormulas": ["arrhenius-equation", "logistic-growth"]
+  },
+  "exponential-growth": {
+    "name": "Exponential growth",
+    "oneLiner": "A model in which the population multiplies with time, unchecked by any limit on resources",
+    "description": "The exponential growth model describes the ideal situation of a population increasing at a constant rate in an environment with unlimited resources. It takes the initial population multiplied by a natural exponential function, and when the growth rate r is positive the population explodes. In reality, limited resources usually turn this into logistic growth.",
+    "field": "Biology",
+    "significance": "It is the most basic mathematical model of population growth and the starting point for more elaborate models such as the logistic one.",
+    "elementMeanings": {
+      "N(t)": { "role": "Population at time t", "description": "The size of the population after time t has passed.", "kind": "output" },
+      "N_0": { "role": "Initial population", "description": "The size of the population at time t=0.", "kind": "input" },
+      "e": { "role": "Base of the natural logarithm", "description": "About 2.718. The mathematical constant that expresses continuous growth.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "r": { "role": "Intrinsic rate of increase", "description": "The net growth rate of the population. If r > 0 it grows; if r < 0 it shrinks.", "kind": "input" },
+      "t": { "role": "Time", "description": "Elapsed time. The units depend on the situation (hours, days, years, and so on).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "The steep multiplication of an early bacterial culture in its log phase",
+      "The explosive rise in numbers just after an invasive species arrives",
+      "Compound interest calculations (exponential growth applied in finance)"
+    ],
+    "relatedFormulas": ["logistic-growth", "half-life"]
+  },
+  "sir-model": {
+    "name": "SIR model",
+    "oneLiner": "A model that captures how an epidemic spreads and dies out across three compartments: susceptible, infected, and recovered",
+    "description": "The SIR model is the basic compartmental model of epidemiology. It splits the population into susceptible (S), infected (I), and recovered (R) groups and describes how an epidemic unfolds. An infection-rate parameter and a recovery-rate parameter decide whether the number of infected people rises or falls, and when the basic reproduction number (R0 = infection rate / recovery rate) exceeds 1, an epidemic breaks out.",
+    "discoverer": "William Ogilvy Kermack, Anderson McKendrick",
+    "field": "Biology",
+    "significance": "It is the basic framework for modelling epidemic spread mathematically, and it is central to setting disease-control policy and vaccination strategy.",
+    "elementMeanings": {
+      "dI/dt": { "role": "Rate of change in the number infected", "description": "How much the number of infected people changes per unit time.", "kind": "output" },
+      "\\beta": { "role": "Infection rate", "description": "The probability that a susceptible person catches the disease on contact with an infected one, multiplied by the contact frequency.", "kind": "input" },
+      "S": { "role": "Number of susceptible people", "description": "The population that has not yet been infected and so can be.", "kind": "input" },
+      "I": { "role": "Number of infected people", "description": "The population currently infected.", "kind": "input" },
+      "\\gamma": { "role": "Recovery rate", "description": "The fraction of infected people who recover per unit time. The reciprocal of the average time to recovery.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Predicting the trend of COVID-19 spread and analysing the effect of social distancing",
+      "Calculating the vaccination coverage needed to reach herd immunity",
+      "Predicting when infections will peak in the flu season"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth"]
+  },
+  "lotka-volterra": {
+    "name": "Lotka-Volterra equations",
+    "oneLiner": "A system of differential equations describing the cyclic rise and fall of predator and prey populations",
+    "description": "The Lotka-Volterra equations are a mathematical model of predator-prey interaction. With no predators, the prey grows exponentially, but encounters with predators cut it back. Predators decline without food but grow as they eat prey. This interaction produces a periodic oscillation in both populations.",
+    "discoverer": "Alfred Lotka, Vito Volterra",
+    "field": "Biology",
+    "significance": "It is the basic model for analysing the dynamics of interactions between species in ecology, and the starting point for research into ecosystem stability.",
+    "elementMeanings": {
+      "dx/dt": { "role": "Rate of change of the prey population", "description": "How much the prey population changes per unit time.", "kind": "output" },
+      "x": { "role": "Prey population", "description": "The population size of the prey (food) species.", "kind": "input" },
+      "y": { "role": "Predator population", "description": "The population size of the predator species.", "kind": "input" },
+      "\\alpha": { "role": "Prey growth rate", "description": "The intrinsic rate of increase of the prey when there is no predation pressure.", "kind": "input" },
+      "\\beta": { "role": "Predation coefficient", "description": "The rate at which prey are lost when predator and prey meet.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "The roughly ten-year oscillation in Canada lynx and snowshoe hare numbers",
+      "Swings in plankton and zooplankton numbers in marine ecosystems",
+      "Predicting the effect of introducing a natural enemy in biological pest control"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth", "sir-model"]
+  }
+}

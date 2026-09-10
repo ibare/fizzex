@@ -1,0 +1,152 @@
+{
+  "softmax": {
+    "name": "Softmax function",
+    "oneLiner": "The normalized exponential function that turns an input vector into a probability distribution",
+    "description": "The softmax function turns an arbitrary vector of real numbers into a probability distribution that sums to 1. It applies the exponential function to each entry and divides by the total, so the largest value ends up with the highest probability. It is the standard choice for the output layer of multi-class classification.",
+    "discoverer": "John Nash / Luce / McCulloch and Pitts (originating in statistical mechanics, as a generalization of the Boltzmann distribution)",
+    "field": "Machine learning",
+    "significance": "It is the key function that turns the output of a neural network into interpretable probabilities in multi-class classification problems.",
+    "elementMeanings": {
+      "P(y_i)": { "role": "Class probability", "description": "The predicted probability of belonging to the i-th class.", "kind": "output" },
+      "z_i": { "role": "Logit", "description": "The raw output of the network for the i-th class.", "kind": "input" },
+      "e^{z_i}": { "role": "Exponentiated value", "description": "The logit passed through the exponential function to make it positive.", "kind": "structural" },
+      "\\sum e^{z_j}": { "role": "Normalizing constant", "description": "The sum of the exponentiated values over all classes. It makes the probabilities add up to 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "An image classifier reporting probabilities for cat, dog, and bird",
+      "Producing a probability distribution over the whole vocabulary when predicting the next word in natural language processing"
+    ],
+    "relatedFormulas": ["cross-entropy", "sigmoid"]
+  },
+  "cross-entropy": {
+    "name": "Cross-entropy loss",
+    "oneLiner": "The loss function that measures the difference between the true distribution and the predicted one",
+    "description": "Cross-entropy quantifies the mismatch between the true label distribution and the model's predicted distribution. The closer the prediction is to the truth, the smaller the loss; the more confident a wrong prediction, the sharper the loss grows. It is the most widely used loss function for classification.",
+    "discoverer": "Claude Shannon (originating in information theory)",
+    "field": "Machine learning",
+    "significance": "It is the standard loss function for training classification models, and it optimizes the quality of probabilistic predictions directly.",
+    "elementMeanings": {
+      "H": { "role": "Cross-entropy loss", "description": "The scalar value giving the difference between the true and predicted distributions.", "kind": "output" },
+      "y_i": { "role": "True label", "description": "The actual probability of the i-th class. With one-hot encoding it is 1 for the correct class and 0 otherwise.", "kind": "input" },
+      "\\hat{y}_i": { "role": "Predicted probability", "description": "The probability the model assigns to the i-th class.", "kind": "input" },
+      "\\log(\\hat{y}_i)": { "role": "Log probability", "description": "The logarithm of the predicted probability. It diverges to minus infinity as the probability approaches 0.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "The criterion for measuring prediction error while training a spam mail classifier",
+      "Binary classification training for a medical imaging model that decides whether a disease is present"
+    ],
+    "relatedFormulas": ["softmax", "mse-loss", "shannon-entropy"]
+  },
+  "mse-loss": {
+    "name": "Mean squared error loss",
+    "oneLiner": "The function that measures the error of a regression model as the mean of the squared differences between predictions and true values",
+    "description": "The mean squared error (MSE) squares the difference between the prediction and the true value at each data point and takes the average. Squaring penalizes large errors more heavily, and the function is easy to differentiate, so it pairs naturally with gradient descent. It is the standard loss function for regression problems.",
+    "field": "Machine learning",
+    "significance": "It is the basic loss function of regression analysis and neural network training, an extension of the method of least squares.",
+    "elementMeanings": {
+      "L": { "role": "Loss value", "description": "The scalar value giving the average error of the model as a whole.", "kind": "output" },
+      "n": { "role": "Number of data points", "description": "The total number of data points.", "kind": "input" },
+      "y_i": { "role": "True value", "description": "The actual target value of the i-th data point.", "kind": "input" },
+      "\\hat{y}_i": { "role": "Predicted value", "description": "The value the model predicts for the i-th data point.", "kind": "input" },
+      "(y_i - \\hat{y}_i)^2": { "role": "Squared error", "description": "Squaring each individual error removes its sign and gives more weight to large errors.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Measuring the gap between actual and predicted prices while training a house price model",
+      "Judging the error between forecast and measured daily temperatures in a weather model"
+    ],
+    "relatedFormulas": ["cross-entropy", "gradient-descent"]
+  },
+  "gradient-descent": {
+    "name": "Gradient descent",
+    "oneLiner": "The optimization algorithm that repeatedly updates parameters in the direction opposite the gradient of the loss to find a minimum",
+    "description": "Gradient descent computes the gradient of the loss function at the current parameter values and updates the parameters by stepping against the gradient by an amount set by the learning rate. Repeating this steadily lowers the loss, and it is the basic optimization method behind almost all neural network training.",
+    "discoverer": "Augustin-Louis Cauchy",
+    "field": "Machine learning",
+    "significance": "It is the core optimization algorithm for training almost every machine learning model, deep learning included.",
+    "elementMeanings": {
+      "\\theta": { "role": "Parameters", "description": "The parameter vector covering the learnable weights and biases of the model.", "kind": "input" },
+      "\\alpha": { "role": "Learning rate", "description": "The size of the step taken in one update. Too large and it diverges; too small and it converges slowly.", "kind": "input" },
+      "\\nabla L": { "role": "Gradient of the loss", "description": "The vector of partial derivatives of the loss with respect to each parameter. It points in the direction where the loss grows fastest.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Automatically tuning millions of neural network weights to fit the data",
+      "Optimizing model parameters in a recommender system so they reflect user preferences"
+    ],
+    "relatedFormulas": ["mse-loss", "backpropagation", "batch-normalization"]
+  },
+  "sigmoid": {
+    "name": "Sigmoid function",
+    "oneLiner": "The S-shaped activation function that squashes any real number into a value between 0 and 1",
+    "description": "The sigmoid function traces an S-shaped curve that approaches 0 for very negative inputs and 1 for very positive ones. Its output can be read as a probability, which suits the output layer of binary classification. Its gradient is nearly 0 for inputs of large magnitude, however, causing the vanishing gradient problem, so hidden layers increasingly use ReLU and the like instead.",
+    "field": "Machine learning",
+    "significance": "It is the basic activation function of logistic regression and neural networks, and it is what introduces nonlinearity.",
+    "elementMeanings": {
+      "\\sigma(x)": { "role": "Sigmoid output", "description": "An output between 0 and 1 that can be read as a probability.", "kind": "output" },
+      "x": { "role": "Input", "description": "The value fed into the activation function, such as a weighted sum.", "kind": "input" },
+      "e^{-x}": { "role": "Negative exponential", "description": "The larger the input, the closer this gets to 0, pushing the whole output towards 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "A binary classifier that outputs the probability an email is spam as a number between 0 and 1",
+      "A medical diagnosis model that reports the probability a patient tests positive for a disease"
+    ],
+    "relatedFormulas": ["softmax", "cross-entropy"]
+  },
+  "batch-normalization": {
+    "name": "Batch normalization",
+    "oneLiner": "The technique that stabilizes training by normalizing inputs over each mini-batch",
+    "description": "Batch normalization normalizes the input at each layer of a network using the mean and variance of the mini-batch. It reduces internal covariate shift, stabilizing training and allowing higher learning rates. After normalizing, it applies learnable scale and shift parameters so the layer keeps its expressive power.",
+    "discoverer": "Sergey Ioffe, Christian Szegedy",
+    "field": "Machine learning",
+    "significance": "By dramatically improving the stability and speed of deep learning training, it became an essential component of modern neural network design.",
+    "elementMeanings": {
+      "\\hat{x}": { "role": "Normalized input", "description": "The input normalized to mean 0 and variance 1.", "kind": "output" },
+      "x": { "role": "Raw input", "description": "The layer input before normalization.", "kind": "input" },
+      "\\mu": { "role": "Batch mean", "description": "The mean of the inputs computed over the current mini-batch.", "kind": "input" },
+      "\\sigma": { "role": "Batch standard deviation", "description": "The standard deviation of the inputs computed over the current mini-batch.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Training hundreds of layers stably in a deep image recognition network such as ResNet",
+      "Speeding up training and curbing overfitting in a speech recognition model"
+    ],
+    "relatedFormulas": ["gradient-descent", "backpropagation"]
+  },
+  "attention-mechanism": {
+    "name": "Scaled dot-product attention",
+    "oneLiner": "The attention mechanism that takes a weighted sum of values based on the similarity between queries and keys",
+    "description": "The attention mechanism computes similarity as the dot product of the query (Q) and the key (K), scales it by the square root of the key dimension, and applies softmax to obtain weights. Summing the values (V) with those weights lets the model focus selectively on the relevant parts of the input sequence. It is the heart of the transformer architecture.",
+    "discoverer": "Ashish Vaswani et al. (Google research team)",
+    "field": "Machine learning",
+    "significance": "As the core component of the transformer, it is the technology underlying modern large language models such as GPT and BERT.",
+    "elementMeanings": {
+      "Q": { "role": "Query matrix", "description": "The matrix of vectors expressing what the current position is looking for.", "kind": "input" },
+      "K": { "role": "Key matrix", "description": "The matrix of vectors expressing what information each position holds.", "kind": "input" },
+      "V": { "role": "Value matrix", "description": "The matrix of vectors holding the information actually passed along.", "kind": "input" },
+      "K^T": { "role": "Transpose of the keys", "description": "The key matrix transposed so it can be dotted with the queries.", "kind": "structural" },
+      "\\sqrt{d_k}": { "role": "Scaling factor", "description": "The square root of the key vector dimension. It keeps the dot products from growing too large.", "kind": "structural" },
+      "\\text{softmax}": { "role": "Normalizing function", "description": "It turns the similarity scores into weights that sum to 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Focusing on the relevant words of the source sentence while generating a machine translation",
+      "How conversational AI such as ChatGPT understands context and generates a reply"
+    ],
+    "relatedFormulas": ["softmax", "backpropagation"]
+  },
+  "backpropagation": {
+    "name": "Backpropagation",
+    "oneLiner": "The algorithm that propagates the gradient of the loss from the output layer back to the input layer using the chain rule",
+    "description": "Backpropagation applies the chain rule repeatedly in order to differentiate the loss function with respect to each weight. Because it propagates gradients from the output layer back towards the input layer, it computes the gradients of every weight efficiently in a single pass. Those gradients are then handed to gradient descent to update the weights.",
+    "discoverer": "David Rumelhart, Geoffrey Hinton, Ronald Williams",
+    "field": "Machine learning",
+    "significance": "It is the key algorithm that made practical training of multilayer neural networks possible, establishing the foundation of deep learning.",
+    "elementMeanings": {
+      "\\partial L / \\partial w": { "role": "Gradient of the loss with respect to a weight", "description": "The size and direction of the effect a particular weight has on the loss.", "kind": "output" },
+      "\\partial L / \\partial \\hat{y}": { "role": "Gradient of the loss with respect to the output", "description": "How much the loss changes as the prediction changes.", "kind": "structural" },
+      "\\partial \\hat{y} / \\partial w": { "role": "Gradient of the output with respect to a weight", "description": "How much the output changes as the weight changes.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Training an image recognition model with tens of millions of parameters",
+      "Computing the gradients needed to learn contextual representations in a natural language processing model"
+    ],
+    "relatedFormulas": ["gradient-descent", "cross-entropy", "mse-loss"]
+  }
+}

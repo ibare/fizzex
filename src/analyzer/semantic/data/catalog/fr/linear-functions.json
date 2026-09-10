@@ -1,0 +1,355 @@
+{
+  "linear-function": {
+    "name": "Fonction affine",
+    "oneLiner": "La fonction la plus élémentaire, dont la représentation graphique est une droite",
+    "description": "La fonction affine y = ax + b est une fonction où y varie toujours de la même quantité a chaque fois que x augmente de 1. Sa représentation graphique est toujours une droite : a en est le coefficient directeur et b l'ordonnée à l'origine.",
+    "field": "Algèbre",
+    "significance": "Point de départ de l'étude de toutes les fonctions, c'est l'outil le plus élémentaire pour décrire mathématiquement un phénomène à taux de variation constant.",
+    "elementMeanings": {
+      "a": {
+        "role": "Coefficient directeur",
+        "description": "Il indique l'inclinaison de la droite. S'il est positif, la droite monte vers la droite ; s'il est négatif, elle descend.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Ordonnée à l'origine",
+        "description": "L'ordonnée du point où la droite coupe l'axe des y. C'est aussi la valeur de y quand x vaut 0.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "La valeur d'entrée, que l'on peut choisir librement.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Variable dépendante",
+        "description": "La valeur de sortie, déterminée par celle de x.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul d'une course de taxi, où s'ajoute au tarif de prise en charge un montant par kilomètre",
+      "La relation entre le temps et la distance pour une personne qui marche à vitesse constante"
+    ],
+    "relatedFormulas": [
+      "slope-formula",
+      "point-slope-form",
+      "direct-proportion"
+    ]
+  },
+  "slope-formula": {
+    "name": "Formule du coefficient directeur",
+    "oneLiner": "Formule qui donne le coefficient directeur d'une droite à partir des coordonnées de deux points",
+    "description": "La formule du coefficient directeur m = (y2 − y1) / (x2 − x1) calcule l'inclinaison de la droite passant par deux points du plan. Elle exprime la variation de y rapportée à celle de x, autrement dit le taux de variation.",
+    "field": "Algèbre",
+    "significance": "Elle traduit précisément en un nombre la direction et l'inclinaison d'une droite, et conduit naturellement au taux de variation, notion de base de la dérivation.",
+    "elementMeanings": {
+      "m": {
+        "role": "Coefficient directeur",
+        "description": "La valeur qui exprime l'inclinaison de la droite.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Abscisse du premier point",
+        "description": "La position horizontale du premier point.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Ordonnée du premier point",
+        "description": "La position verticale du premier point.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Abscisse du second point",
+        "description": "La position horizontale du second point.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Ordonnée du second point",
+        "description": "La position verticale du second point.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul de la pente d'un chemin de montagne",
+      "Le taux de hausse d'un cours de Bourse sur une période donnée"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "point-slope-form",
+      "distance-formula"
+    ]
+  },
+  "point-slope-form": {
+    "name": "Forme point-pente",
+    "oneLiner": "Forme qui donne l'équation d'une droite lorsqu'on connaît un point et le coefficient directeur",
+    "description": "La forme point-pente y − y1 = m(x − x1) permet d'écrire immédiatement l'équation d'une droite dès que l'on connaît un de ses points (x1, y1) et son coefficient directeur m.",
+    "field": "Algèbre",
+    "significance": "C'est la façon la plus pratique d'obtenir l'équation d'une droite ; on l'utilise aussi en analyse pour écrire l'équation d'une tangente.",
+    "elementMeanings": {
+      "m": {
+        "role": "Coefficient directeur",
+        "description": "L'inclinaison de la droite.",
+        "kind": "input"
+      },
+      "x_1": {
+        "role": "Abscisse du point connu",
+        "description": "La position horizontale d'un point dont on sait qu'il appartient à la droite.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Ordonnée du point connu",
+        "description": "La position verticale d'un point dont on sait qu'il appartient à la droite.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Un modèle qui prévoit la température future à partir de la température actuelle et de son taux de variation",
+      "L'expression de l'évolution du chiffre d'affaires à partir de sa valeur à une date donnée et de son taux de croissance"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "slope-formula"
+    ]
+  },
+  "quadratic-standard": {
+    "name": "Forme développée d'une fonction du second degré",
+    "oneLiner": "Forme de base d'une fonction du second degré, dont la courbe est une parabole",
+    "description": "La forme développée y = ax² + bx + c est une fonction qui contient le carré de x et dont la représentation graphique est une parabole. Le signe de a détermine si la parabole est tournée vers le haut ou vers le bas.",
+    "field": "Algèbre",
+    "significance": "C'est la fonction clé pour décrire de nombreux phénomènes concrets : mouvement parabolique, problèmes de maximum et de minimum.",
+    "elementMeanings": {
+      "a": {
+        "role": "Coefficient du terme du second degré",
+        "description": "Il fixe l'orientation et l'ouverture de la parabole. S'il est positif, la parabole est tournée vers le haut ; s'il est négatif, vers le bas.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Coefficient du terme du premier degré",
+        "description": "Il influe sur la position de l'axe de symétrie de la parabole.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Terme constant",
+        "description": "L'ordonnée du point où la parabole coupe l'axe des y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "L'évolution de la hauteur d'une balle que l'on lance",
+      "La courbe d'une arche de pont"
+    ],
+    "relatedFormulas": [
+      "quadratic-vertex",
+      "discriminant",
+      "quadratic-formula"
+    ]
+  },
+  "quadratic-vertex": {
+    "name": "Forme canonique d'une fonction du second degré",
+    "oneLiner": "Forme d'une fonction du second degré où les coordonnées du sommet de la parabole se lisent directement",
+    "description": "La forme canonique y = a(x − h)² + k permet de voir d'un seul coup d'œil que le sommet de la parabole est le point (h, k). On l'obtient en mettant la forme développée sous forme de carré parfait.",
+    "field": "Algèbre",
+    "significance": "Comme elle donne immédiatement le maximum ou le minimum de la fonction, elle est essentielle pour résoudre les problèmes d'optimisation.",
+    "elementMeanings": {
+      "a": {
+        "role": "Coefficient du terme du second degré",
+        "description": "Il fixe l'orientation et l'ouverture de la parabole. C'est le même a que dans la forme développée.",
+        "kind": "input"
+      },
+      "h": {
+        "role": "Abscisse du sommet",
+        "description": "La position de l'axe de symétrie de la parabole.",
+        "kind": "input"
+      },
+      "k": {
+        "role": "Ordonnée du sommet",
+        "description": "Le minimum (si a > 0) ou le maximum (si a < 0) de la fonction.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Déterminer la hauteur maximale du jet d'eau d'une fontaine",
+      "Trouver le prix de vente qui rend le bénéfice maximal"
+    ],
+    "relatedFormulas": [
+      "quadratic-standard",
+      "discriminant"
+    ]
+  },
+  "discriminant": {
+    "name": "Discriminant",
+    "oneLiner": "Expression qui indique à l'avance combien de racines possède une équation du second degré",
+    "description": "Le discriminant D = b² − 4ac permet de connaître le nombre et la nature des racines de l'équation ax² + bx + c = 0 sans avoir à la résoudre. Si D est positif, il y a deux racines distinctes ; s'il est nul, une racine double ; s'il est négatif, aucune racine réelle.",
+    "field": "Algèbre",
+    "significance": "Comme il permet de savoir avant tout calcul s'il existe des solutions, il joue un rôle décisif dans le choix de la méthode de résolution.",
+    "elementMeanings": {
+      "D": {
+        "role": "Valeur du discriminant",
+        "description": "C'est le signe de cette valeur qui détermine le nombre et la nature des racines.",
+        "kind": "output"
+      },
+      "b": {
+        "role": "Coefficient du terme du premier degré",
+        "description": "Le nombre par lequel x est multiplié dans l'équation du second degré.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Coefficient du terme du second degré",
+        "description": "Le nombre par lequel le carré de x est multiplié dans l'équation du second degré.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Terme constant",
+        "description": "Le nombre qui s'ajoute sans variable dans l'équation du second degré.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Déterminer si une balle lancée peut atteindre une hauteur donnée",
+      "Vérifier si deux courbes se coupent"
+    ],
+    "relatedFormulas": [
+      "quadratic-formula",
+      "quadratic-standard",
+      "quadratic-vertex"
+    ]
+  },
+  "absolute-value-function": {
+    "name": "Fonction valeur absolue",
+    "oneLiner": "Fonction en forme de V dont toutes les valeurs de sortie sont positives ou nulles",
+    "description": "La fonction valeur absolue y = |x| ne retient que la grandeur de la valeur d'entrée, en ignorant son signe. Sa courbe a la forme d'un V dont le sommet est l'origine : si x est positif, la fonction le renvoie tel quel ; s'il est négatif, elle en change le signe.",
+    "field": "Algèbre",
+    "significance": "C'est l'outil de base pour décrire mathématiquement les situations où seule compte la grandeur, indépendamment du sens : distance, erreur, écart.",
+    "elementMeanings": {
+      "x": {
+        "role": "Valeur d'entrée",
+        "description": "La valeur de départ, qui peut être positive, négative ou nulle.",
+        "kind": "input"
+      },
+      "|x|": {
+        "role": "Valeur absolue",
+        "description": "La grandeur de x, privée de son signe. C'est aussi sa distance à 0 sur la droite graduée.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Calculer l'écart entre une température négative et une température positive",
+      "Mesurer l'écart (l'erreur) par rapport à une valeur cible"
+    ],
+    "relatedFormulas": [
+      "distance-formula",
+      "linear-function"
+    ]
+  },
+  "floor-function": {
+    "name": "Fonction partie entière",
+    "oneLiner": "Fonction qui supprime la partie décimale et arrondit à l'entier immédiatement inférieur",
+    "description": "La fonction partie entière (fonction en escalier) y = floor(x) renvoie le plus grand entier qui ne dépasse pas x. Sa courbe a la forme d'un escalier : la valeur monte d'un cran à chaque entier.",
+    "field": "Algèbre",
+    "significance": "C'est le fondement mathématique de toutes les situations où l'on arrondit par défaut : quotient d'une division, calcul de tarifs par tranches, division entière en programmation.",
+    "elementMeanings": {
+      "x": {
+        "role": "Valeur d'entrée",
+        "description": "Une valeur d'entrée réelle quelconque.",
+        "kind": "input"
+      },
+      "\\lfloor x \\rfloor": {
+        "role": "Partie entière",
+        "description": "Le plus grand entier inférieur ou égal à x. Par exemple : ⌊3,7⌋ = 3, ⌊−1,2⌋ = −2.",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul du tarif d'un bus par tranches (un tarif appliqué tous les 5 km)",
+      "Le nombre de gâteaux que reçoit chaque ami quand on les partage également"
+    ],
+    "relatedFormulas": [
+      "absolute-value-function"
+    ]
+  },
+  "distance-formula": {
+    "name": "Formule de la distance entre deux points",
+    "oneLiner": "Formule qui donne la distance en ligne droite entre deux points du plan",
+    "description": "La formule de la distance d = √((x2 − x1)² + (y2 − y1)²) calcule la distance en ligne droite entre les points (x1, y1) et (x2, y2) du plan. C'est l'application du théorème de Pythagore aux coordonnées.",
+    "field": "Géométrie",
+    "significance": "Outil le plus élémentaire de la géométrie analytique, elle est le point de départ de nombreux problèmes : longueur des côtés d'une figure, rayon d'un cercle, etc.",
+    "elementMeanings": {
+      "d": {
+        "role": "Distance",
+        "description": "La longueur du segment qui joint les deux points.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Abscisse du premier point",
+        "description": "La position horizontale du premier point.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Ordonnée du premier point",
+        "description": "La position verticale du premier point.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Abscisse du second point",
+        "description": "La position horizontale du second point.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Ordonnée du second point",
+        "description": "La position verticale du second point.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Calculer la distance à vol d'oiseau entre deux lieux sur une carte",
+      "Déterminer la distance entre deux personnages dans un jeu vidéo"
+    ],
+    "relatedFormulas": [
+      "midpoint-formula",
+      "slope-formula"
+    ]
+  },
+  "midpoint-formula": {
+    "name": "Formule du milieu",
+    "oneLiner": "Formule qui donne la position située exactement au milieu de deux points",
+    "description": "La formule du milieu M = ((x1 + x2)/2, (y1 + y2)/2) donne le point situé exactement au milieu du segment qui joint deux points du plan. Il suffit de faire la moyenne de chaque coordonnée.",
+    "field": "Géométrie",
+    "significance": "Formule de base pour trouver le milieu d'un segment, le centre d'une figure ou un point symétrique, elle est un outil indispensable en géométrie analytique.",
+    "elementMeanings": {
+      "M": {
+        "role": "Milieu",
+        "description": "Le point situé exactement au milieu des deux points.",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "Abscisse du premier point",
+        "description": "La position horizontale du premier point.",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "Ordonnée du premier point",
+        "description": "La position verticale du premier point.",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "Abscisse du second point",
+        "description": "La position horizontale du second point.",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "Ordonnée du second point",
+        "description": "La position verticale du second point.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Trouver un lieu de rendez-vous à mi-chemin entre les domiciles de deux amis",
+      "Calculer l'endroit où planter un panneau au milieu d'un segment"
+    ],
+    "relatedFormulas": [
+      "distance-formula",
+      "slope-formula"
+    ]
+  }
+}

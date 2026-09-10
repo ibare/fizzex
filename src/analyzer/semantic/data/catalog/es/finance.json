@@ -1,0 +1,164 @@
+{
+  "compound-interest": {
+    "name": "Interés compuesto",
+    "oneLiner": "Forma de calcular los intereses en la que estos se aplican no solo al capital, sino también a los intereses ya generados",
+    "description": "En el interés compuesto los intereses se calculan sobre el capital más los intereses acumulados, de modo que el patrimonio crece exponencialmente con el paso del tiempo. El importe final varía según la frecuencia de capitalización (anual, mensual, diaria, etc.) y, cuanto mayor es esa frecuencia, mayor es el rendimiento total. Es el cálculo más básico del ahorro, el préstamo y el análisis de inversiones.",
+    "field": "Finanzas",
+    "significance": "Es el principio clave del crecimiento del patrimonio en el ahorro y la inversión a largo plazo, y la base del cálculo de intereses de préstamos, de la planificación de la jubilación y de la comparación de rentabilidades.",
+    "elementMeanings": {
+      "A": { "role": "Importe final", "description": "Es el importe total, capital más intereses, al cabo de un cierto periodo.", "kind": "output" },
+      "P": { "role": "Capital inicial", "description": "Es la cantidad que se invierte o se deposita al principio.", "kind": "input" },
+      "r": { "role": "Tipo de interés anual", "description": "Es el tipo de interés anual expresado en tanto por uno. Por ejemplo, un 5 % es 0,05.", "kind": "input" },
+      "n": { "role": "Número de capitalizaciones al año", "description": "Es cuántas veces al año se calculan los intereses. Con capitalización mensual son 12.", "kind": "input" },
+      "t": { "role": "Plazo", "description": "Es la duración de la inversión, expresada en años.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular el importe que se recibe al vencimiento de un plan de ahorro",
+      "Determinar el total de intereses de una hipoteca",
+      "Comparar el efecto del interés compuesto en inversiones a largo plazo"
+    ],
+    "relatedFormulas": ["present-value", "annuity-pv", "rule-of-72"]
+  },
+  "present-value": {
+    "name": "Valor actual",
+    "oneLiner": "Importe futuro convertido en su valor equivalente en el momento presente",
+    "description": "El valor actual es el concepto que transforma un flujo de caja futuro en su valor equivalente de hoy aplicando una tasa de descuento. Se apoya en el valor temporal del dinero: un importe futuro vale menos que el mismo importe hoy. Se usa de forma central en las decisiones de inversión, en la valoración de bonos y en la valoración de empresas.",
+    "field": "Finanzas",
+    "significance": "Al hacer comparables flujos de caja de momentos distintos, constituye la base de la evaluación de inversiones, la valoración de empresas y la toma de decisiones financieras.",
+    "elementMeanings": {
+      "PV": { "role": "Valor actual", "description": "Es el valor equivalente hoy de un importe futuro.", "kind": "output" },
+      "FV": { "role": "Valor futuro", "description": "Es el importe que se cobrará o se pagará en un momento futuro determinado.", "kind": "input" },
+      "r": { "role": "Tasa de descuento", "description": "Es el tipo de interés que se aplica para trasladar un flujo de caja futuro al presente.", "kind": "input" },
+      "n": { "role": "Número de periodos", "description": "Es el número de periodos que hay desde hoy hasta el momento en que se produce el flujo de caja.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular el precio adecuado de un bono",
+      "Evaluar el valor de inversión de un proyecto empresarial (análisis del VAN)",
+      "Comparar el cobro de un premio de lotería en un pago único frente al cobro en forma de renta"
+    ],
+    "relatedFormulas": ["compound-interest", "annuity-pv", "black-scholes"]
+  },
+  "black-scholes": {
+    "name": "Modelo de Black-Scholes",
+    "oneLiner": "Modelo de valoración de opciones que calcula el precio teórico de una opción de compra europea",
+    "description": "El modelo de Black-Scholes calcula el precio justo de una opción europea a partir del precio del activo subyacente, el precio de ejercicio, el vencimiento, el tipo de interés libre de riesgo y la volatilidad. Se deduce aplicando el principio de ausencia de arbitraje bajo el supuesto de que el subyacente sigue un movimiento browniano geométrico. Es el fundamento teórico del mercado moderno de derivados y el modelo central de la ingeniería financiera.",
+    "discoverer": "Fischer Black, Myron Scholes",
+    "field": "Finanzas",
+    "significance": "Al ofrecer una referencia teórica para el precio de las opciones, impulsó el nacimiento y el desarrollo del mercado de derivados; es la fórmula que recibió el Premio Nobel de Economía en 1997.",
+    "elementMeanings": {
+      "C": { "role": "Precio de la opción de compra", "description": "Es el precio teórico actual de una opción de compra europea.", "kind": "output" },
+      "S": { "role": "Precio actual del subyacente", "description": "Es el precio de mercado actual del activo que sirve de subyacente a la opción.", "kind": "input" },
+      "K": { "role": "Precio de ejercicio", "description": "Es el precio pactado al que el tenedor de la opción puede comprar el activo subyacente.", "kind": "input" },
+      "r": { "role": "Tipo libre de riesgo", "description": "Es la rentabilidad sin riesgo hasta el vencimiento.", "kind": "input" },
+      "T": { "role": "Tiempo hasta el vencimiento", "description": "Es el tiempo que queda hasta el vencimiento de la opción, expresado en años.", "kind": "input" },
+      "N(d)": { "role": "Función de distribución normal estándar acumulada", "description": "Es el valor de la función de distribución acumulada de la normal estándar. Actúa como un peso probabilístico.", "kind": "structural" },
+      "d_1": { "role": "Primer parámetro", "description": "Es la relación entre el precio del subyacente y el precio de ejercicio ajustada por la volatilidad.", "kind": "output" },
+      "d_2": { "role": "Segundo parámetro", "description": "Es d_1 menos el término de volatilidad y está relacionado con la probabilidad de ejercicio.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calcular el precio teórico de una opción de compra sobre acciones",
+      "Deducir la volatilidad implícita a partir del mercado de opciones",
+      "Gestionar el riesgo de una cartera de derivados"
+    ],
+    "relatedFormulas": ["present-value", "capm", "sharpe-ratio"]
+  },
+  "capm": {
+    "name": "Modelo de valoración de activos financieros",
+    "oneLiner": "Modelo que calcula la rentabilidad esperada de un activo en función de su riesgo sistemático",
+    "description": "El CAPM explica que la rentabilidad esperada de un activo concreto es igual al tipo libre de riesgo más la prima de riesgo del mercado multiplicada por su beta. La beta indica la sensibilidad del activo a las variaciones del conjunto del mercado. Es el modelo central de la hipótesis del mercado eficiente, según la cual solo se remunera el riesgo sistemático, el que no se puede diversificar.",
+    "discoverer": "William Sharpe",
+    "field": "Finanzas",
+    "significance": "Al cuantificar la relación entre riesgo y rentabilidad esperada, es el marco estándar para la valoración de activos, la estimación del coste de capital y la evaluación de carteras.",
+    "elementMeanings": {
+      "E(R_i)": { "role": "Rentabilidad esperada del activo", "description": "Es la rentabilidad esperada del activo i.", "kind": "output" },
+      "R_f": { "role": "Rentabilidad libre de riesgo", "description": "Es la rentabilidad de una inversión sin riesgo, como la deuda pública.", "kind": "input" },
+      "\\beta_i": { "role": "Beta", "description": "Es el indicador del riesgo sistemático del activo i: su sensibilidad a las variaciones de la rentabilidad del mercado.", "kind": "input" },
+      "E(R_m)": { "role": "Rentabilidad esperada del mercado", "description": "Es la rentabilidad esperada del conjunto de la cartera de mercado.", "kind": "input" },
+      "E(R_m) - R_f": { "role": "Prima de riesgo del mercado", "description": "Es la rentabilidad adicional que se espera de invertir en el mercado frente a la inversión sin riesgo.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Estimar la tasa de descuento (el coste de capital) de un nuevo proyecto de inversión",
+      "Evaluar la rentabilidad en exceso obtenida por un gestor de fondos",
+      "Calcular la rentabilidad esperada razonable de una acción"
+    ],
+    "relatedFormulas": ["sharpe-ratio", "black-scholes", "present-value"]
+  },
+  "sharpe-ratio": {
+    "name": "Ratio de Sharpe",
+    "oneLiner": "Indicador que evalúa el resultado de una inversión midiendo la rentabilidad en exceso por unidad de riesgo",
+    "description": "El ratio de Sharpe divide la rentabilidad en exceso —la rentabilidad de la cartera menos la rentabilidad libre de riesgo— entre la desviación típica de la rentabilidad de la cartera. Cuanto mayor es el valor, mayor ha sido la rentabilidad obtenida en relación con el riesgo asumido. Es el indicador más utilizado para comparar el rendimiento ajustado al riesgo de distintas estrategias o fondos.",
+    "discoverer": "William Sharpe",
+    "field": "Finanzas",
+    "significance": "Permite comparar de forma justa los resultados de inversión en relación con el riesgo y se usa de manera estándar en la evaluación de fondos y en las decisiones de asignación de activos.",
+    "elementMeanings": {
+      "S": { "role": "Ratio de Sharpe", "description": "Es el indicador de rentabilidad ajustada al riesgo. Cuanto mayor es, más eficiente resulta la inversión.", "kind": "output" },
+      "R_p": { "role": "Rentabilidad de la cartera", "description": "Es la rentabilidad realizada o esperada de la cartera de inversión.", "kind": "input" },
+      "R_f": { "role": "Rentabilidad libre de riesgo", "description": "Es la rentabilidad de un activo sin riesgo, como la deuda pública.", "kind": "input" },
+      "\\sigma_p": { "role": "Desviación típica de la cartera", "description": "Es la volatilidad de la rentabilidad de la cartera. Representa su riesgo total.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Comparar los resultados de distintos fondos de inversión",
+      "Evaluar la rentabilidad ajustada al riesgo de un fondo de cobertura",
+      "Juzgar la eficiencia de una estrategia de asignación de activos"
+    ],
+    "relatedFormulas": ["capm", "standard-deviation"]
+  },
+  "annuity-pv": {
+    "name": "Valor actual de una anualidad",
+    "oneLiner": "Suma de los valores actuales de un importe fijo que se paga periódicamente durante un cierto plazo",
+    "description": "La fórmula del valor actual de una anualidad calcula el valor total de hoy de una renta ordinaria que paga la misma cantidad en cada periodo. En lugar de descontar cada pago por separado, permite obtenerlo de una vez mediante la suma de una progresión geométrica. Es una fórmula imprescindible para calcular cuotas de préstamos, diseñar planes de pensiones y valorar contratos de arrendamiento.",
+    "field": "Finanzas",
+    "significance": "Al calcular con eficacia el valor de un flujo de pagos periódicos, es el estándar práctico en la valoración de préstamos, pensiones y bonos.",
+    "elementMeanings": {
+      "PV": { "role": "Valor actual", "description": "Es el valor equivalente hoy del conjunto de los pagos de la anualidad.", "kind": "output" },
+      "PMT": { "role": "Pago por periodo", "description": "Es la cantidad fija que se paga en cada periodo.", "kind": "input" },
+      "r": { "role": "Tasa de descuento por periodo", "description": "Es la tasa de descuento que se aplica a un periodo.", "kind": "input" },
+      "n": { "role": "Número total de periodos", "description": "Es el número total de periodos durante los que se paga la anualidad.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular la cuota mensual de una hipoteca",
+      "Obtener el importe equivalente al cobrar la pensión pública en un pago único",
+      "Comparar el coste total de un contrato de renting de un coche"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest"]
+  },
+  "rule-of-72": {
+    "name": "Regla del 72",
+    "oneLiner": "Regla que estima rápidamente el tiempo que tarda el capital invertido en duplicarse",
+    "description": "La regla del 72 es un cálculo rápido según el cual, dividiendo 72 entre el tipo de interés anual (en porcentaje), se obtiene aproximadamente el número de años que tarda el capital en duplicarse. Permite captar de forma intuitiva el efecto del interés compuesto y es especialmente precisa con tipos de entre el 6 % y el 10 %. Resulta práctica para decisiones financieras rápidas y para comparar inversiones.",
+    "field": "Finanzas",
+    "significance": "Es una herramienta financiera práctica que permite estimar de forma intuitiva la velocidad de crecimiento de una inversión sin necesidad de cálculos complejos de interés compuesto.",
+    "elementMeanings": {
+      "t": { "role": "Tiempo hasta duplicar", "description": "Es el tiempo aproximado, en años, que se necesita para que el capital se duplique.", "kind": "output" },
+      "r": { "role": "Tipo de interés anual", "description": "Es la rentabilidad anual en porcentaje. Por ejemplo, un 8 % anual significa r = 8.", "kind": "input" },
+      "72": { "role": "Constante", "description": "Es una constante aproximada relacionada con ln(2). Se usa para estimar el tiempo de duplicación con crecimiento compuesto.", "kind": "constant", "value": 72 }
+    },
+    "realWorldExamples": [
+      "Calcular deprisa que una inversión al 6 % anual duplica el capital en unos 12 años",
+      "Estimar en cuánto tiempo se duplican los precios con una inflación del 3 %",
+      "Comparar la velocidad de crecimiento de productos de inversión con tipos distintos"
+    ],
+    "relatedFormulas": ["compound-interest", "present-value"]
+  },
+  "duration": {
+    "name": "Duración",
+    "oneLiner": "Vencimiento medio ponderado de los flujos de caja de un bono, que mide la sensibilidad de su precio a las variaciones de los tipos de interés",
+    "description": "La duración es la media de los momentos en los que se producen los flujos de caja de un bono, ponderada por el peso del valor actual de cada uno. También se conoce como duración de Macaulay y es la medida de riesgo clave para saber cuánto varía el precio del bono cuando cambian los tipos de interés. Resulta imprescindible en la gestión de carteras de renta fija y en el diseño de estrategias de inmunización.",
+    "discoverer": "Frederick Macaulay",
+    "field": "Finanzas",
+    "significance": "Al cuantificar el riesgo de tipo de interés, es la herramienta central para definir estrategias de inversión en bonos, casar activos y pasivos e inmunizar carteras.",
+    "elementMeanings": {
+      "D": { "role": "Duración", "description": "Es el vencimiento medio de los flujos de caja ponderado por su valor actual, expresado en años.", "kind": "output" },
+      "t": { "role": "Momento del flujo de caja", "description": "Es el momento, en años, en el que se produce cada flujo de caja.", "kind": "input" },
+      "PV(CF_t)": { "role": "Valor actual del flujo de caja", "description": "Es el valor actual, ya descontado, del flujo de caja que se produce en el momento t.", "kind": "input" },
+      "P": { "role": "Precio del bono", "description": "Es la suma de los valores actuales de todos los flujos de caja: el precio de mercado del bono.", "kind": "input" },
+      "\\Sigma": { "role": "Símbolo de sumatorio", "description": "Es la operación que suma sobre todos los momentos en los que hay flujos de caja.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Prever las pérdidas de una cartera de bonos ante una subida de tipos",
+      "Definir la estrategia de casamiento de activos y pasivos de un fondo de pensiones",
+      "Comparar la sensibilidad a los tipos de interés de distintos bonos"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest", "capm"]
+  }
+}

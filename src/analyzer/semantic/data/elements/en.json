@@ -1,0 +1,595 @@
+{
+  "descriptionFormat": "Atomic number {z}. {desc}",
+  "bySymbol": {
+    "H": {
+      "name": "Hydrogen",
+      "z": 1,
+      "desc": "The lightest element and the most abundant one in the universe."
+    },
+    "He": {
+      "name": "Helium",
+      "z": 2,
+      "desc": "A light, unreactive gas used in balloons and for cooling."
+    },
+    "Li": {
+      "name": "Lithium",
+      "z": 3,
+      "desc": "The lightest metal and the key material in rechargeable batteries."
+    },
+    "Be": {
+      "name": "Beryllium",
+      "z": 4,
+      "desc": "A light, stiff metal used in aerospace components."
+    },
+    "B": {
+      "name": "Boron",
+      "z": 5,
+      "desc": "Used in glass and detergents, and as a doping element in semiconductors."
+    },
+    "C": {
+      "name": "Carbon",
+      "z": 6,
+      "desc": "The backbone element of living things; it forms chains that build countless compounds."
+    },
+    "N": {
+      "name": "Nitrogen",
+      "z": 7,
+      "desc": "It makes up about 78 percent of the air and is the raw material of proteins and fertilisers."
+    },
+    "O": {
+      "name": "Oxygen",
+      "z": 8,
+      "desc": "Used in respiration and combustion, and the most abundant element in the crust."
+    },
+    "F": {
+      "name": "Fluorine",
+      "z": 9,
+      "desc": "The most reactive element, used in toothpaste and coatings."
+    },
+    "Ne": {
+      "name": "Neon",
+      "z": 10,
+      "desc": "An unreactive gas that glows red when a current passes through it."
+    },
+    "Na": {
+      "name": "Sodium",
+      "z": 11,
+      "desc": "A metal that reacts violently with water and is one component of table salt."
+    },
+    "Mg": {
+      "name": "Magnesium",
+      "z": 12,
+      "desc": "A light metal that sits at the centre of chlorophyll."
+    },
+    "Al": {
+      "name": "Aluminium",
+      "z": 13,
+      "desc": "A metal that is light and rust-free, used in cans and window frames."
+    },
+    "Si": {
+      "name": "Silicon",
+      "z": 14,
+      "desc": "The main constituent of sand and glass, and the material of semiconductor chips."
+    },
+    "P": {
+      "name": "Phosphorus",
+      "z": 15,
+      "desc": "Used to store energy in cells and to build bone."
+    },
+    "S": {
+      "name": "Sulfur",
+      "z": 16,
+      "desc": "Found as yellow crystals in volcanic areas and used to make sulfuric acid."
+    },
+    "Cl": {
+      "name": "Chlorine",
+      "z": 17,
+      "desc": "A gas used for disinfection and the other component of table salt."
+    },
+    "Ar": {
+      "name": "Argon",
+      "z": 18,
+      "desc": "The third most abundant gas in the air; being unreactive, it is used in welding."
+    },
+    "K": {
+      "name": "Potassium",
+      "z": 19,
+      "desc": "A metal essential for nerves and muscles to work."
+    },
+    "Ca": {
+      "name": "Calcium",
+      "z": 20,
+      "desc": "It builds bone and seashells and is the main constituent of limestone."
+    },
+    "Sc": {
+      "name": "Scandium",
+      "z": 21,
+      "desc": "Light yet strong, used in bicycle and aerospace alloys."
+    },
+    "Ti": {
+      "name": "Titanium",
+      "z": 22,
+      "desc": "Light and corrosion-free, used in implants and aircraft."
+    },
+    "V": {
+      "name": "Vanadium",
+      "z": 23,
+      "desc": "A metal that makes steel far harder when alloyed into it."
+    },
+    "Cr": {
+      "name": "Chromium",
+      "z": 24,
+      "desc": "It gives a rust-free shine and is used for plating."
+    },
+    "Mn": {
+      "name": "Manganese",
+      "z": 25,
+      "desc": "It toughens steel and also goes into dry cells."
+    },
+    "Fe": {
+      "name": "Iron",
+      "z": 26,
+      "desc": "The most widely used metal; it carries oxygen in the blood."
+    },
+    "Co": {
+      "name": "Cobalt",
+      "z": 27,
+      "desc": "A metal used in blue pigments and rechargeable battery electrodes."
+    },
+    "Ni": {
+      "name": "Nickel",
+      "z": 28,
+      "desc": "Rust-free, so it goes into coins and stainless steel."
+    },
+    "Cu": {
+      "name": "Copper",
+      "z": 29,
+      "desc": "A reddish metal used in wiring because it conducts electricity well."
+    },
+    "Zn": {
+      "name": "Zinc",
+      "z": 30,
+      "desc": "Used in plating that keeps iron from rusting, and essential to the body."
+    },
+    "Ga": {
+      "name": "Gallium",
+      "z": 31,
+      "desc": "Its melting point is so low that it melts in your hand; it is used in light-emitting devices."
+    },
+    "Ge": {
+      "name": "Germanium",
+      "z": 32,
+      "desc": "The material of early semiconductors, now used in optical fibres."
+    },
+    "As": {
+      "name": "Arsenic",
+      "z": 33,
+      "desc": "Highly toxic, yet also used as a semiconductor material."
+    },
+    "Se": {
+      "name": "Selenium",
+      "z": 34,
+      "desc": "It conducts electricity well under light, so it was used in photocopiers."
+    },
+    "Br": {
+      "name": "Bromine",
+      "z": 35,
+      "desc": "A rare element that is liquid at room temperature and reddish brown."
+    },
+    "Kr": {
+      "name": "Krypton",
+      "z": 36,
+      "desc": "An unreactive gas used to fill high-performance light bulbs."
+    },
+    "Rb": {
+      "name": "Rubidium",
+      "z": 37,
+      "desc": "It burns red in a flame test and is used in atomic clocks."
+    },
+    "Sr": {
+      "name": "Strontium",
+      "z": 38,
+      "desc": "The metal that gives fireworks their red colour."
+    },
+    "Y": {
+      "name": "Yttrium",
+      "z": 39,
+      "desc": "A metal used in phosphors and superconductor materials."
+    },
+    "Zr": {
+      "name": "Zirconium",
+      "z": 40,
+      "desc": "Resistant to heat and corrosion, so it is used in reactor components."
+    },
+    "Nb": {
+      "name": "Niobium",
+      "z": 41,
+      "desc": "A metal used in superconducting magnets and strong alloys."
+    },
+    "Mo": {
+      "name": "Molybdenum",
+      "z": 42,
+      "desc": "It withstands high temperatures, so it is alloyed into tool steel."
+    },
+    "Tc": {
+      "name": "Technetium",
+      "z": 43,
+      "desc": "The first artificial element, almost absent in nature, used in medical imaging."
+    },
+    "Ru": {
+      "name": "Ruthenium",
+      "z": 44,
+      "desc": "A precious metal used in electrical contacts and catalysts."
+    },
+    "Rh": {
+      "name": "Rhodium",
+      "z": 45,
+      "desc": "Used in the catalysts that clean up car exhaust."
+    },
+    "Pd": {
+      "name": "Palladium",
+      "z": 46,
+      "desc": "It absorbs hydrogen readily and is used in catalytic converters."
+    },
+    "Ag": {
+      "name": "Silver",
+      "z": 47,
+      "desc": "It conducts electricity and heat better than any other metal."
+    },
+    "Cd": {
+      "name": "Cadmium",
+      "z": 48,
+      "desc": "Toxic, and once used as a rechargeable battery electrode."
+    },
+    "In": {
+      "name": "Indium",
+      "z": 49,
+      "desc": "Used to make the transparent electrodes of touchscreens."
+    },
+    "Sn": {
+      "name": "Tin",
+      "z": 50,
+      "desc": "It melts easily, so it is used in solder, and it is one component of bronze."
+    },
+    "Sb": {
+      "name": "Antimony",
+      "z": 51,
+      "desc": "Used in flame retardants that keep things from burning."
+    },
+    "Te": {
+      "name": "Tellurium",
+      "z": 52,
+      "desc": "A metalloid used in solar cells and alloys."
+    },
+    "I": {
+      "name": "Iodine",
+      "z": 53,
+      "desc": "Essential to thyroid hormones and used in antiseptics."
+    },
+    "Xe": {
+      "name": "Xenon",
+      "z": 54,
+      "desc": "It gives a bright light, used in car headlamps and flash lamps."
+    },
+    "Cs": {
+      "name": "Caesium",
+      "z": 55,
+      "desc": "One of the softest metals and the reference for atomic clocks."
+    },
+    "Ba": {
+      "name": "Barium",
+      "z": 56,
+      "desc": "It blocks X-rays well, so it is used as a contrast agent."
+    },
+    "La": {
+      "name": "Lanthanum",
+      "z": 57,
+      "desc": "Used in camera lens glass and rechargeable batteries."
+    },
+    "Ce": {
+      "name": "Cerium",
+      "z": 58,
+      "desc": "The most abundant rare earth, used in polishes and catalysts."
+    },
+    "Pr": {
+      "name": "Praseodymium",
+      "z": 59,
+      "desc": "Used in strong magnets and in welding goggle glass."
+    },
+    "Nd": {
+      "name": "Neodymium",
+      "z": 60,
+      "desc": "The element behind the strongest permanent magnets."
+    },
+    "Pm": {
+      "name": "Promethium",
+      "z": 61,
+      "desc": "A radioactive element that is almost absent in nature."
+    },
+    "Sm": {
+      "name": "Samarium",
+      "z": 62,
+      "desc": "Used in magnets that keep their magnetism even at high temperatures."
+    },
+    "Eu": {
+      "name": "Europium",
+      "z": 63,
+      "desc": "Used in banknote anti-counterfeiting and in red display phosphors."
+    },
+    "Gd": {
+      "name": "Gadolinium",
+      "z": 64,
+      "desc": "The element used in magnetic resonance imaging contrast agents."
+    },
+    "Tb": {
+      "name": "Terbium",
+      "z": 65,
+      "desc": "Used in green phosphors and magnetostrictive devices."
+    },
+    "Dy": {
+      "name": "Dysprosium",
+      "z": 66,
+      "desc": "It helps magnets keep their strength at high temperatures."
+    },
+    "Ho": {
+      "name": "Holmium",
+      "z": 67,
+      "desc": "It concentrates magnetic fields well and is used in powerful magnets."
+    },
+    "Er": {
+      "name": "Erbium",
+      "z": 68,
+      "desc": "Used to amplify signals in optical fibre communication."
+    },
+    "Tm": {
+      "name": "Thulium",
+      "z": 69,
+      "desc": "A rare element used in portable X-ray devices."
+    },
+    "Yb": {
+      "name": "Ytterbium",
+      "z": 70,
+      "desc": "Used in atomic clocks and fibre lasers."
+    },
+    "Lu": {
+      "name": "Lutetium",
+      "z": 71,
+      "desc": "Used in petroleum refining catalysts and medical imaging."
+    },
+    "Hf": {
+      "name": "Hafnium",
+      "z": 72,
+      "desc": "It absorbs neutrons well, so it is used in reactor control rods."
+    },
+    "Ta": {
+      "name": "Tantalum",
+      "z": 73,
+      "desc": "Corrosion-resistant, so it is used in the capacitors of electronic components."
+    },
+    "W": {
+      "name": "Tungsten",
+      "z": 74,
+      "desc": "It has the highest melting point of any metal, so it was used in bulb filaments."
+    },
+    "Re": {
+      "name": "Rhenium",
+      "z": 75,
+      "desc": "A rare metal used in the high-temperature parts of jet engines."
+    },
+    "Os": {
+      "name": "Osmium",
+      "z": 76,
+      "desc": "The densest element, and extremely hard."
+    },
+    "Ir": {
+      "name": "Iridium",
+      "z": 77,
+      "desc": "The most corrosion-resistant metal, used in spark plugs."
+    },
+    "Pt": {
+      "name": "Platinum",
+      "z": 78,
+      "desc": "Unreactive, so it is used widely in jewellery and catalysts."
+    },
+    "Au": {
+      "name": "Gold",
+      "z": 79,
+      "desc": "Its unchanging lustre made it money, and it is used in electrical contacts."
+    },
+    "Hg": {
+      "name": "Mercury",
+      "z": 80,
+      "desc": "The only metal that is liquid at room temperature, and it is toxic."
+    },
+    "Tl": {
+      "name": "Thallium",
+      "z": 81,
+      "desc": "Extremely toxic, and used in infrared equipment."
+    },
+    "Pb": {
+      "name": "Lead",
+      "z": 82,
+      "desc": "A heavy, soft metal that blocks radiation well."
+    },
+    "Bi": {
+      "name": "Bismuth",
+      "z": 83,
+      "desc": "A heavy element that is nonetheless low in toxicity, so it is used in medicines."
+    },
+    "Po": {
+      "name": "Polonium",
+      "z": 84,
+      "desc": "An element that emits strong radiation, discovered by the Curies."
+    },
+    "At": {
+      "name": "Astatine",
+      "z": 85,
+      "desc": "The scarcest naturally occurring element."
+    },
+    "Rn": {
+      "name": "Radon",
+      "z": 86,
+      "desc": "A radioactive gas that seeps out of the ground."
+    },
+    "Fr": {
+      "name": "Francium",
+      "z": 87,
+      "desc": "The most reactive metal, but it decays almost immediately."
+    },
+    "Ra": {
+      "name": "Radium",
+      "z": 88,
+      "desc": "It glows in the dark, and was discovered by the Curies."
+    },
+    "Ac": {
+      "name": "Actinium",
+      "z": 89,
+      "desc": "The first element of the actinides; it emits strong radiation."
+    },
+    "Th": {
+      "name": "Thorium",
+      "z": 90,
+      "desc": "A radioactive metal studied as a reactor fuel."
+    },
+    "Pa": {
+      "name": "Protactinium",
+      "z": 91,
+      "desc": "A rare radioactive element formed as uranium decays."
+    },
+    "U": {
+      "name": "Uranium",
+      "z": 92,
+      "desc": "It undergoes fission and serves as the fuel of nuclear power."
+    },
+    "Np": {
+      "name": "Neptunium",
+      "z": 93,
+      "desc": "The first artificial element beyond uranium."
+    },
+    "Pu": {
+      "name": "Plutonium",
+      "z": 94,
+      "desc": "Used as nuclear fuel and to power space probes."
+    },
+    "Am": {
+      "name": "Americium",
+      "z": 95,
+      "desc": "A tiny amount goes into smoke detectors."
+    },
+    "Cm": {
+      "name": "Curium",
+      "z": 96,
+      "desc": "An artificial radioactive element named after the Curies."
+    },
+    "Bk": {
+      "name": "Berkelium",
+      "z": 97,
+      "desc": "An artificial element made at Berkeley."
+    },
+    "Cf": {
+      "name": "Californium",
+      "z": 98,
+      "desc": "It emits many neutrons, so it is used in survey instruments."
+    },
+    "Es": {
+      "name": "Einsteinium",
+      "z": 99,
+      "desc": "First found in the debris of a hydrogen bomb test."
+    },
+    "Fm": {
+      "name": "Fermium",
+      "z": 100,
+      "desc": "An artificial element named after the physicist Fermi."
+    },
+    "Md": {
+      "name": "Mendelevium",
+      "z": 101,
+      "desc": "Named after Mendeleev, who built the periodic table."
+    },
+    "No": {
+      "name": "Nobelium",
+      "z": 102,
+      "desc": "An artificial radioactive element named after Nobel."
+    },
+    "Lr": {
+      "name": "Lawrencium",
+      "z": 103,
+      "desc": "Named after Lawrence, who invented the particle accelerator."
+    },
+    "Rf": {
+      "name": "Rutherfordium",
+      "z": 104,
+      "desc": "Named after Rutherford, who discovered the atomic nucleus."
+    },
+    "Db": {
+      "name": "Dubnium",
+      "z": 105,
+      "desc": "An element named after the Dubna laboratory in Russia."
+    },
+    "Sg": {
+      "name": "Seaborgium",
+      "z": 106,
+      "desc": "Named after Seaborg, who created many artificial elements."
+    },
+    "Bh": {
+      "name": "Bohrium",
+      "z": 107,
+      "desc": "Named after Bohr, who built the model of the atom."
+    },
+    "Hs": {
+      "name": "Hassium",
+      "z": 108,
+      "desc": "An artificial element named after the German state of Hesse."
+    },
+    "Mt": {
+      "name": "Meitnerium",
+      "z": 109,
+      "desc": "Named after Meitner, who explained nuclear fission."
+    },
+    "Ds": {
+      "name": "Darmstadtium",
+      "z": 110,
+      "desc": "An element made in Darmstadt, Germany."
+    },
+    "Rg": {
+      "name": "Roentgenium",
+      "z": 111,
+      "desc": "Named after Roentgen, who discovered X-rays."
+    },
+    "Cn": {
+      "name": "Copernicium",
+      "z": 112,
+      "desc": "Named after the astronomer Copernicus."
+    },
+    "Nh": {
+      "name": "Nihonium",
+      "z": 113,
+      "desc": "An element made in Japan; its name means Japan."
+    },
+    "Fl": {
+      "name": "Flerovium",
+      "z": 114,
+      "desc": "Named after the Russian physicist Flerov."
+    },
+    "Mc": {
+      "name": "Moscovium",
+      "z": 115,
+      "desc": "Named after the Moscow region of Russia."
+    },
+    "Lv": {
+      "name": "Livermorium",
+      "z": 116,
+      "desc": "Named after the Livermore laboratory in the United States."
+    },
+    "Ts": {
+      "name": "Tennessine",
+      "z": 117,
+      "desc": "An artificial element named after the US state of Tennessee."
+    },
+    "Og": {
+      "name": "Oganesson",
+      "z": 118,
+      "desc": "The element with the highest atomic number in the periodic table."
+    }
+  }
+}

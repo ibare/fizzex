@@ -1,0 +1,165 @@
+{
+  "gdp-formula": {
+    "name": "Fórmula do produto interno bruto",
+    "oneLiner": "A fórmula que mede a atividade econômica de um país como a soma de consumo, investimento, gastos do governo e exportações líquidas",
+    "description": "A fórmula do PIB mede o valor de mercado de todos os bens e serviços finais produzidos dentro de um país em determinado período. Pela ótica da despesa, ela se decompõe em quatro componentes: consumo das famílias, investimento das empresas, gastos do governo e exportações líquidas. É o indicador macroeconômico mais básico para comparar o tamanho das economias e acompanhar as flutuações do ciclo econômico.",
+    "discoverer": "Simon Kuznets",
+    "field": "Economia",
+    "significance": "Resume o desempenho econômico de um país num único número e serve de referência para decisões de política, comparações internacionais e análise dos ciclos econômicos.",
+    "elementMeanings": {
+      "Y": { "role": "produto interno bruto", "description": "É o valor de mercado total de todos os bens e serviços finais produzidos no país em determinado período.", "kind": "output" },
+      "C": { "role": "consumo", "description": "São os gastos das famílias na compra de bens e serviços.", "kind": "input" },
+      "I": { "role": "investimento", "description": "É o investimento total, que inclui a compra de bens de capital pelas empresas e a variação de estoques.", "kind": "input" },
+      "G": { "role": "gastos do governo", "description": "São os gastos que o governo faz na compra de bens e serviços.", "kind": "input" },
+      "X": { "role": "exportações", "description": "É o valor dos bens e serviços vendidos ao exterior.", "kind": "input" },
+      "M": { "role": "importações", "description": "É o valor dos bens e serviços comprados do exterior.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular a taxa anual de crescimento econômico de um país",
+      "Julgar se há recessão (dois trimestres seguidos de queda do PIB)",
+      "Comparar o tamanho das economias entre países"
+    ],
+    "relatedFormulas": ["supply-demand", "quantity-theory"]
+  },
+  "supply-demand": {
+    "name": "Equilíbrio entre oferta e demanda",
+    "oneLiner": "O princípio de que o preço de mercado se determina no ponto em que a quantidade demandada e a ofertada coincidem",
+    "description": "O equilíbrio entre oferta e demanda é o princípio central da economia segundo o qual o mercado alcança o equilíbrio no preço em que a quantidade demandada iguala a ofertada. O ponto em que a curva de demanda encontra a de oferta determina o preço e a quantidade de equilíbrio. É o modelo que fundamenta a alocação de recursos pelo mecanismo de preços.",
+    "discoverer": "Alfred Marshall",
+    "field": "Economia",
+    "significance": "Explica o princípio de formação dos preços de mercado e dá base teórica ao controle de preços pelo governo, à análise dos efeitos de impostos e à avaliação da eficiência dos mercados.",
+    "elementMeanings": {
+      "Q_d": { "role": "quantidade demandada", "description": "É a quantidade do bem que os consumidores querem comprar a um dado preço.", "kind": "input" },
+      "Q_s": { "role": "quantidade ofertada", "description": "É a quantidade do bem que os produtores querem vender a um dado preço.", "kind": "input" },
+      "P": { "role": "preço", "description": "É o preço de mercado de uma unidade do bem. No equilíbrio, é o valor que iguala a quantidade demandada à ofertada.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Formação do preço da gasolina conforme oscila o preço do petróleo",
+      "Análise do efeito do aumento do salário mínimo sobre o mercado de trabalho",
+      "Prever a queda de preço dos produtos agrícolas em safras abundantes"
+    ],
+    "relatedFormulas": ["elasticity", "consumer-surplus", "gdp-formula"]
+  },
+  "elasticity": {
+    "name": "Elasticidade-preço da demanda",
+    "oneLiner": "O valor que exprime, como razão, a sensibilidade da quantidade demandada às variações de preço",
+    "description": "A elasticidade-preço é o indicador que mede em quantos por cento varia a quantidade demandada quando o preço varia 1%. Se o valor absoluto da elasticidade é maior que 1, a demanda é elástica; se é menor que 1, é inelástica. É usada de forma central na estratégia de preços das empresas, na incidência da carga tributária e na análise de mercados.",
+    "discoverer": "Alfred Marshall",
+    "field": "Economia",
+    "significance": "Quantifica o efeito das variações de preço sobre o comportamento do consumidor e é ferramenta indispensável para a fixação de preços pelas empresas e para o desenho da política tributária do governo.",
+    "elementMeanings": {
+      "E": { "role": "elasticidade", "description": "É a elasticidade-preço da demanda. É a razão relativa entre a variação da quantidade demandada e a do preço.", "kind": "output" },
+      "\\Delta Q": { "role": "variação da quantidade demandada", "description": "É a variação da quantidade demandada provocada pela mudança de preço.", "kind": "input" },
+      "Q": { "role": "quantidade demandada", "description": "É a quantidade demandada no momento de referência.", "kind": "input" },
+      "\\Delta P": { "role": "variação do preço", "description": "É a variação do preço.", "kind": "input" },
+      "P": { "role": "preço", "description": "É o preço no momento de referência.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Prever a queda no consumo com o aumento do imposto sobre cigarros",
+      "Efeito do aumento de preço de uma marca de luxo sobre o faturamento",
+      "Comparar a diferença de reação da demanda entre bens essenciais e bens supérfluos"
+    ],
+    "relatedFormulas": ["supply-demand", "consumer-surplus", "marginal-cost"]
+  },
+  "cobb-douglas": {
+    "name": "Função de produção de Cobb-Douglas",
+    "oneLiner": "A função de produção macroeconômica que explica o produto total a partir das quantidades de trabalho e de capital empregadas",
+    "description": "A função de produção de Cobb-Douglas expressa em forma de potências o produto obtido conforme o emprego dos dois fatores de produção, trabalho e capital. Tem como parâmetros uma constante que representa o nível tecnológico e as elasticidades do produto em relação a cada fator. É a ferramenta básica da análise dos rendimentos de escala, da teoria do crescimento econômico e dos estudos sobre distribuição de renda.",
+    "discoverer": "Charles Cobb, Paul Douglas",
+    "field": "Economia",
+    "significance": "Analisa a substituibilidade entre os fatores de produção e as economias de escala, e é a função que sustenta a macroeconomia moderna, como o modelo de crescimento de Solow.",
+    "elementMeanings": {
+      "Y": { "role": "produto total", "description": "É o produto total obtido com o emprego dos fatores de produção.", "kind": "output" },
+      "A": { "role": "produtividade total dos fatores", "description": "É a constante que representa o nível tecnológico ou a eficiência.", "kind": "input" },
+      "L": { "role": "quantidade de trabalho", "description": "É a quantidade de trabalho empregada na produção.", "kind": "input" },
+      "K": { "role": "quantidade de capital", "description": "É a quantidade de capital (máquinas, instalações e afins) empregada na produção.", "kind": "input" },
+      "\\alpha": { "role": "elasticidade do produto em relação ao trabalho", "description": "Indica em quantos por cento cresce o produto quando o emprego de trabalho aumenta 1%.", "kind": "input" },
+      "\\beta": { "role": "elasticidade do produto em relação ao capital", "description": "Indica em quantos por cento cresce o produto quando o emprego de capital aumenta 1%.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analisar as diferenças de taxa de crescimento econômico entre países",
+      "Medir o efeito do avanço tecnológico sobre a produtividade",
+      "Estimar a proporção da renda distribuída ao trabalho e ao capital"
+    ],
+    "relatedFormulas": ["gdp-formula", "marginal-cost"]
+  },
+  "fisher-equation": {
+    "name": "Equação de Fisher",
+    "oneLiner": "A fórmula que exprime a relação entre taxa de juros nominal, taxa de juros real e taxa de inflação",
+    "description": "A equação de Fisher mostra a relação segundo a qual a taxa de juros nominal se compõe do produto entre a taxa de juros real e a taxa de inflação esperada. É usada para avaliar o poder de compra real do rendimento dos investimentos e para analisar como a política de juros do banco central afeta a economia. É a fórmula central que liga o valor do dinheiro no tempo às variações de preços.",
+    "discoverer": "Irving Fisher",
+    "field": "Economia",
+    "significance": "É o núcleo da dicotomia clássica que separa variáveis nominais de reais e fornece o arcabouço básico da política de juros e da análise da inflação.",
+    "elementMeanings": {
+      "i": { "role": "taxa de juros nominal", "description": "É a taxa de juros que não leva em conta a variação de preços.", "kind": "output" },
+      "r": { "role": "taxa de juros real", "description": "É a taxa de juros medida em poder de compra efetivo, já descontada a inflação.", "kind": "input" },
+      "\\pi": { "role": "taxa de inflação", "description": "É a taxa de aumento dos preços em determinado período.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular o rendimento real de uma aplicação em depósito",
+      "Levar a inflação em conta ao definir a taxa básica de juros do banco central",
+      "Avaliar o rendimento real de um investimento em títulos"
+    ],
+    "relatedFormulas": ["quantity-theory", "compound-interest", "present-value"]
+  },
+  "quantity-theory": {
+    "name": "Teoria quantitativa da moeda",
+    "oneLiner": "A teoria segundo a qual o produto da quantidade de moeda pela velocidade de circulação é igual ao produto do nível de preços pelo produto real",
+    "description": "A teoria quantitativa da moeda explica que a quantidade total de moeda na economia e a sua velocidade de circulação mantêm uma relação de identidade com o PIB nominal (o produto do nível de preços pelo produto real). É a base da teoria monetarista, segundo a qual, no longo prazo, o aumento da quantidade de moeda é a principal causa da alta dos preços. É um arcabouço indispensável à análise da inflação e ao desenho da política monetária.",
+    "discoverer": "Irving Fisher",
+    "field": "Economia",
+    "significance": "Explica a causa fundamental da inflação pelo aumento da quantidade de moeda e dá fundamento teórico à formulação da política monetária dos bancos centrais.",
+    "elementMeanings": {
+      "M": { "role": "quantidade de moeda", "description": "É a quantidade total de moeda em circulação na economia.", "kind": "input" },
+      "V": { "role": "velocidade de circulação da moeda", "description": "É o número médio de vezes que uma unidade monetária é usada em transações num dado período.", "kind": "input" },
+      "P": { "role": "nível de preços", "description": "É o nível geral de preços dos bens e serviços.", "kind": "output" },
+      "Y": { "role": "produto real", "description": "É o PIB real, com a variação de preços já removida.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analisar o efeito da política de afrouxamento quantitativo sobre os preços",
+      "Explicar o fenômeno da hiperinflação",
+      "Prever os efeitos econômicos de uma política monetária restritiva"
+    ],
+    "relatedFormulas": ["gdp-formula", "fisher-equation"]
+  },
+  "consumer-surplus": {
+    "name": "Excedente do consumidor",
+    "oneLiner": "A diferença entre o valor máximo que o consumidor está disposto a pagar e o valor que realmente paga",
+    "description": "O excedente do consumidor é calculado como a área abaixo da curva de demanda e acima do preço de mercado. É o conceito central da economia do bem-estar que mede em unidades monetárias o benefício líquido que o consumidor obtém ao comprar um bem. Permite avaliar quantitativamente o efeito de mudanças de política ou da estrutura de mercado sobre o bem-estar dos consumidores.",
+    "discoverer": "Jules Dupuit",
+    "field": "Economia",
+    "significance": "Serve de critério para medir a eficiência do mercado e o bem-estar do consumidor, e é usado na análise dos efeitos de bem-estar da regulação de monopólios, da tributação e da política comercial.",
+    "elementMeanings": {
+      "CS": { "role": "excedente do consumidor", "description": "É o benefício líquido total obtido pelo consumidor. É a área abaixo da curva de demanda menos o gasto efetivo.", "kind": "output" },
+      "D(q)": { "role": "função de demanda", "description": "É o preço máximo que o consumidor está disposto a pagar na quantidade q.", "kind": "structural" },
+      "p^*": { "role": "preço de equilíbrio de mercado", "description": "É o preço de mercado que o consumidor efetivamente paga.", "kind": "input" },
+      "q": { "role": "quantidade", "description": "É a quantidade transacionada do bem. É a variável de integração.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular o ganho extra que o consumidor obtém em período de liquidação",
+      "Efeito da fixação de preços por uma empresa monopolista sobre o bem-estar do consumidor",
+      "Estimar a perda de excedente do consumidor causada pela cobrança de tarifas de importação"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity"]
+  },
+  "marginal-cost": {
+    "name": "Custo marginal",
+    "oneLiner": "O custo adicional gerado ao aumentar a produção em uma unidade",
+    "description": "O custo marginal é a derivada da função de custo total em relação à quantidade produzida, ou seja, o custo adicional gerado ao aumentar a produção em uma unidade. É elemento central da condição de maximização do lucro da empresa (custo marginal = receita marginal) e serve de base teórica à curva de oferta. É a ferramenta básica das decisões de produção e das estratégias de preço.",
+    "discoverer": "Alfred Marshall",
+    "field": "Economia",
+    "significance": "Fundamenta a decisão sobre a quantidade ótima de produção e a fixação de preços pela empresa, e é o conceito central que compõe a curva de oferta em concorrência perfeita.",
+    "elementMeanings": {
+      "MC": { "role": "custo marginal", "description": "É a variação do custo total decorrente do aumento de uma unidade na produção.", "kind": "output" },
+      "TC": { "role": "custo total", "description": "É a soma de todos os custos para produzir determinada quantidade.", "kind": "input" },
+      "Q": { "role": "quantidade produzida", "description": "É a quantidade do bem produzida.", "kind": "input" },
+      "\\frac{d}{dQ}": { "role": "operador de derivação", "description": "É a derivada em relação à quantidade produzida. Obtém a taxa instantânea de variação do custo.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Decidir se vale a pena acionar mais uma linha da fábrica",
+      "Decisão de uma companhia aérea de vender assentos vazios com desconto",
+      "O custo marginal quase nulo de produzir mais uma cópia de um software"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity", "cobb-douglas"]
+  }
+}

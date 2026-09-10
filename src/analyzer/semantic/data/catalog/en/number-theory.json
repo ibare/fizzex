@@ -1,0 +1,142 @@
+{
+  "fermat-little": {
+    "name": "Fermat's little theorem",
+    "oneLiner": "The theorem guaranteeing that for a prime p and an integer a coprime to it, a to the (p-1)th power leaves remainder 1 on division by p",
+    "description": "Fermat's little theorem says that when a prime p does not divide a, the remainder of a^(p-1) on division by p is always 1. It simplifies modular exponentiation dramatically, and it forms the theoretical foundation of the RSA cryptosystem.",
+    "discoverer": "Pierre de Fermat",
+    "field": "Number theory",
+    "significance": "It is a cornerstone of modern cryptography, and it is essential to primality testing algorithms and to computing modular inverses.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "An integer coprime to the prime p. It is the base of the power.", "kind": "input" },
+      "p": { "role": "Prime modulus", "description": "The prime that the division is taken with respect to.", "kind": "input" },
+      "p-1": { "role": "Exponent", "description": "One less than the prime; raising to this power leaves a remainder of 1.", "kind": "structural" },
+      "\\equiv 1": { "role": "Congruence result", "description": "It says the result of the modular operation is 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Computing modular inverses of large numbers in the RSA cryptosystem",
+      "Screening prime candidates in a primality test (the Fermat test)",
+      "Analyzing collision probabilities when designing a hash function"
+    ],
+    "relatedFormulas": ["euler-theorem"]
+  },
+  "euler-theorem": {
+    "name": "Euler's theorem",
+    "oneLiner": "The theorem that for coprime integers a and n, a raised to Euler's totient of n leaves remainder 1 on division by n",
+    "description": "Euler's theorem extends Fermat's little theorem to composite numbers. When a and n are coprime, raising a to the power of Euler's totient function leaves a remainder of 1 on division by n. Fermat's little theorem is the special case where n is prime.",
+    "discoverer": "Leonhard Euler",
+    "field": "Number theory",
+    "significance": "As the generalization of Fermat's little theorem it is used directly to prove that RSA works, and it provides the basis for modular arithmetic with composite moduli.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "An integer coprime to n.", "kind": "input" },
+      "n": { "role": "Modulus", "description": "The positive integer that the division is taken with respect to.", "kind": "input" },
+      "\\varphi(n)": { "role": "Euler's totient function", "description": "How many integers from 1 to n are coprime to n.", "kind": "output" },
+      "\\equiv 1": { "role": "Congruence result", "description": "It says the result of the modular operation is 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "The mathematical basis for computing the decryption exponent in RSA",
+      "Analyzing the security of the Diffie-Hellman key exchange protocol",
+      "Computing the order of a cyclic group"
+    ],
+    "relatedFormulas": ["fermat-little"]
+  },
+  "prime-counting": {
+    "name": "Prime number theorem",
+    "oneLiner": "The theorem showing that the count of primes up to x is asymptotically x/ln(x)",
+    "description": "The prime number theorem shows that, for large enough x, the function counting the primes up to x converges to x/ln(x). It proves the striking fact that although the distribution of primes looks irregular, at large scale it follows a predictable density.",
+    "discoverer": "Jacques Hadamard, Charles de la Vallée Poussin (independent proofs)",
+    "field": "Number theory",
+    "significance": "It is the most basic theorem about the distribution of primes, and the starting point of analytic number theory, tied directly to the Riemann hypothesis.",
+    "elementMeanings": {
+      "\\pi(x)": { "role": "Prime counting function", "description": "The function counting how many primes there are up to x.", "kind": "output" },
+      "x": { "role": "Upper bound", "description": "The upper end of the range over which primes are counted.", "kind": "input" },
+      "\\ln(x)": { "role": "Natural logarithm", "description": "The natural logarithm of x. It gives the rate at which prime density falls off.", "kind": "structural" },
+      "\\sim": { "role": "Asymptotic equivalence", "description": "It means the ratio of the two functions converges to 1 as x grows without bound.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Estimating the search range when hunting for large primes for cryptography",
+      "Designing probabilistic primality tests using prime density",
+      "Statistical analysis of prime gaps in mathematical research"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "euclidean-algorithm": {
+    "name": "Euclidean algorithm",
+    "oneLiner": "The algorithm that finds the greatest common divisor of two integers by repeatedly taking remainders",
+    "description": "The Euclidean algorithm applies the property gcd(a,b) = gcd(b, a mod b) over and over to compute the greatest common divisor efficiently. The divisor at the moment the remainder hits 0 is the greatest common divisor. It is known as the oldest algorithm on record.",
+    "discoverer": "Euclid",
+    "field": "Number theory",
+    "significance": "It is the first algorithm ever recorded, and it is used throughout computer science — reducing fractions, computing modular inverses, generating RSA keys.",
+    "elementMeanings": {
+      "a": { "role": "First integer", "description": "One of the two numbers whose greatest common divisor is wanted.", "kind": "input" },
+      "b": { "role": "Second integer", "description": "The other of the two numbers whose greatest common divisor is wanted.", "kind": "input" },
+      "\\gcd": { "role": "Greatest common divisor function", "description": "The function returning the greatest common divisor of two integers.", "kind": "output" },
+      "a \\mod b": { "role": "Remainder", "description": "The remainder of a divided by b. You repeat until this value is 0.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Finding the greatest common divisor of numerator and denominator when reducing a fraction to lowest terms",
+      "Deriving the private key in RSA key generation with the extended Euclidean algorithm",
+      "Finding when two rhythmic cycles in music line up again, via their least common multiple"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "quadratic-reciprocity": {
+    "name": "Quadratic reciprocity",
+    "oneLiner": "The law showing that for two odd primes p and q, the quadratic residue relations settle each other symmetrically",
+    "description": "Quadratic reciprocity gives the exact relationship, for odd primes p and q, between whether p is a quadratic residue modulo q and whether q is a quadratic residue modulo p. Gauss called it the 'gem of arithmetic', and it was the first result to reveal a reciprocity principle in number theory.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Number theory",
+    "significance": "It is the starting point of algebraic number theory and class field theory, and the key tool for deciding whether a quadratic equation has solutions modulo a prime.",
+    "elementMeanings": {
+      "p": { "role": "First odd prime", "description": "One of the two primes the reciprocity law is applied to.", "kind": "input" },
+      "q": { "role": "Second odd prime", "description": "The other of the two primes the reciprocity law is applied to.", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "Legendre symbol", "description": "The symbol returning 1 if p is a quadratic residue modulo q and -1 otherwise.", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "Sign factor", "description": "The term that settles the sign of the product of the two Legendre symbols.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Quickly deciding whether a quadratic congruence has a solution",
+      "Designing cryptosystems based on quadratic residues",
+      "Generalizing to higher reciprocity laws in algebraic number theory research"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "goldbach-conjecture": {
+    "name": "Goldbach's conjecture",
+    "oneLiner": "The unsolved conjecture that every even number greater than 2 can be written as the sum of two primes",
+    "description": "Goldbach's conjecture claims that every even number from 4 up can be expressed as a sum of two primes. Goldbach first raised it in a 1742 letter to Euler; it has been verified by computer over an enormous range but never proved, which makes it one of the best-known open problems in mathematics.",
+    "discoverer": "Christian Goldbach",
+    "field": "Number theory",
+    "significance": "It is the archetypal hard problem of additive number theory, and it demands a deep understanding of how primes behave under addition.",
+    "elementMeanings": {
+      "2n": { "role": "Even number", "description": "Any even number from 4 up.", "kind": "input" },
+      "p": { "role": "First prime", "description": "One of the two primes making up the even number.", "kind": "input" },
+      "q": { "role": "Second prime", "description": "The other of the two primes making up the even number.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Large-scale numerical verification projects run by computer",
+      "Motivating additive problems in research on the distribution of primes",
+      "The standard example used in teaching to explain the difference between a conjecture and a proof"
+    ],
+    "relatedFormulas": ["prime-counting", "fermat-little"]
+  },
+  "fibonacci-general": {
+    "name": "Binet's formula",
+    "oneLiner": "The closed formula that computes the nth Fibonacci number directly from the golden ratio",
+    "description": "Binet's formula computes the nth term of the Fibonacci sequence directly, without recursion, using the golden ratio and its conjugate. It is striking that a combination of irrational numbers always comes out to an integer, and it is the standard illustration of solving a linear recurrence through its characteristic equation.",
+    "discoverer": "Jacques Philippe Marie Binet (formulation), Abraham de Moivre (earlier discovery)",
+    "field": "Number theory",
+    "significance": "It shows that a linear recurrence can be solved in closed form, and it reveals the deep link between the golden ratio and the Fibonacci sequence.",
+    "elementMeanings": {
+      "F_n": { "role": "Fibonacci number", "description": "The nth term of the sequence.", "kind": "output" },
+      "\\varphi": { "role": "Golden ratio", "description": "(1+root 5)/2, about 1.618. It is the positive characteristic root.", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "Conjugate golden ratio", "description": "(1-root 5)/2, about -0.618. It is the negative characteristic root.", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "Normalizing constant", "description": "The difference between the two characteristic roots; dividing by it makes the result an integer.", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "Term index", "description": "The position in the Fibonacci sequence you want.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Computing the performance bounds of a Fibonacci heap in algorithm analysis",
+      "Explaining golden ratio patterns in nature, such as petal counts and pine cone spirals",
+      "Deriving Fibonacci retracement levels in finance"
+    ],
+    "relatedFormulas": ["euclidean-algorithm"]
+  }
+}

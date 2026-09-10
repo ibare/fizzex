@@ -1,0 +1,124 @@
+{
+  "ohm-law": {
+    "name": "欧姆定律",
+    "oneLiner": "电压等于电流与电阻之积的电路基本定律",
+    "description": "欧姆定律表明，流过导体的电流与其两端的电压成正比，与电阻成反比。它是电路分析中最基本的关系式，在电阻保持恒定的线性元件上成立，也是电路设计与解析的出发点。",
+    "discoverer": "格奥尔格·西蒙·欧姆",
+    "field": "电气工程",
+    "significance": "确立了电压、电流与电阻之间的定量关系，为电路理论奠定了基础。",
+    "elementMeanings": {
+      "V": { "role": "电压", "description": "加在导体两端的电位差。单位：伏特(V)。", "kind": "input" },
+      "I": { "role": "电流", "description": "通过导体的电荷流动。单位：安培(A)。", "kind": "input" },
+      "R": { "role": "电阻", "description": "阻碍电流流动的程度。单位：欧姆(Ω)。", "kind": "input" }
+    },
+    "realWorldExamples": ["灯泡两端的电压与亮度之间的关系", "家用电热器耗电功率的计算"],
+    "relatedFormulas": ["electric-power", "kirchhoff-voltage", "impedance"]
+  },
+  "electric-power": {
+    "name": "电功率",
+    "oneLiner": "表示电能在单位时间内被消耗或供给的速率的公式",
+    "description": "电功率定义为电压与电流之积，表示电能的转换速率。与欧姆定律结合后，还可以写成 P=I²R 或 P=V²/R。它是电力系统效率与容量设计中的关键物理量。",
+    "discoverer": "詹姆斯·瓦特",
+    "field": "电气工程",
+    "significance": "把电能的消耗与供给定量化，为发电、输电、配电系统的设计提供了基础。",
+    "elementMeanings": {
+      "P": { "role": "电功率", "description": "单位时间内消耗或供给的能量。单位：瓦特(W)。", "kind": "output" },
+      "I": { "role": "电流", "description": "流过电路的电流。单位：安培(A)。", "kind": "input" },
+      "V": { "role": "电压", "description": "电路两端的电位差。单位：伏特(V)。", "kind": "input" }
+    },
+    "realWorldExamples": ["家用电器上标注的耗电功率", "电费计算的依据"],
+    "relatedFormulas": ["ohm-law", "kirchhoff-voltage", "kirchhoff-current"]
+  },
+  "kirchhoff-voltage": {
+    "name": "基尔霍夫电压定律",
+    "oneLiner": "沿闭合回路绕行一周时电压降之和为零的定律",
+    "description": "基尔霍夫电压定律(KVL)表明，沿任意闭合回路绕行一周，所有电压降与电压升的代数和为零。它是能量守恒定律在电学中的表述，在复杂电路网络中求未知电压时必不可少。",
+    "discoverer": "古斯塔夫·基尔霍夫",
+    "field": "电气工程",
+    "significance": "使复杂电路网络的分析得以系统化进行，成为现代电路理论的支柱之一。",
+    "elementMeanings": {
+      "\\sum V": { "role": "电压之和", "description": "闭合回路中所有电压降与电压升的代数和。总是等于 0。", "kind": "output" },
+      "V_k": { "role": "各元件电压", "description": "回路中每个元件两端的电压。电源取正号，电阻取负号。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算串联电路中各电阻上的分压", "电子电路板上电压等级的设计"],
+    "relatedFormulas": ["kirchhoff-current", "ohm-law", "impedance"]
+  },
+  "kirchhoff-current": {
+    "name": "基尔霍夫电流定律",
+    "oneLiner": "电路中任一节点流入电流与流出电流之和为零的定律",
+    "description": "基尔霍夫电流定律(KCL)表明，在电路的任一节点上，流入电流的总和等于流出电流的总和。它是电荷守恒定律的直接结果，在并联电路分析中必不可少。",
+    "discoverer": "古斯塔夫·基尔霍夫",
+    "field": "电气工程",
+    "significance": "把电荷守恒原理应用于电路分析，确立了节点分析法的基础。",
+    "elementMeanings": {
+      "\\sum I": { "role": "电流之和", "description": "流入和流出同一节点的所有电流的代数和。总是等于 0。", "kind": "output" },
+      "I_k": { "role": "各支路电流", "description": "流过与该节点相连的每一条支路(branch)的电流。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算并联电阻电路中各支路的电流", "配电系统中负载均衡的分析"],
+    "relatedFormulas": ["kirchhoff-voltage", "ohm-law", "electric-power"]
+  },
+  "rc-time-constant": {
+    "name": "RC 时间常数",
+    "oneLiner": "决定电阻-电容电路充电或放电快慢的时间常数",
+    "description": "RC 时间常数定义为电阻与电容之积，表示电容器充电到最终电压约 63.2% 所需的时间。它是滤波器设计、定时电路、信号处理等各类电子电路中决定暂态响应特性的关键参数。",
+    "discoverer": "电气工程界的共同成果",
+    "field": "电气工程",
+    "significance": "把暂态响应与频率特性归结为一个参数，成为模拟电路设计的核心工具。",
+    "elementMeanings": {
+      "\\tau": { "role": "时间常数", "description": "决定电路暂态响应快慢的时间常数。单位：秒(s)。", "kind": "output" },
+      "R": { "role": "电阻", "description": "电路的电阻值。单位：欧姆(Ω)。", "kind": "input" },
+      "C": { "role": "电容", "description": "电容器储存电荷的能力。单位：法拉(F)。", "kind": "input" }
+    },
+    "realWorldExamples": ["决定相机闪光灯的充电时间", "触摸屏的触摸检测电路"],
+    "relatedFormulas": ["ohm-law", "impedance", "resonance-frequency"]
+  },
+  "impedance": {
+    "name": "阻抗",
+    "oneLiner": "交流电路中把电阻、感抗与容抗综合起来的总阻碍",
+    "description": "阻抗表示交流电路中阻碍电流流动的总效果。它把纯电阻分量与电抗分量（感性与容性之差）按勾股定理合成而得。在交流电路分析与输电效率优化中，它是必不可少的概念。",
+    "discoverer": "奥利弗·亥维赛",
+    "field": "电气工程",
+    "significance": "把交流电路中复杂的相位关系统一为一个物理量，使交流电路的分析系统化。",
+    "elementMeanings": {
+      "Z": { "role": "阻抗", "description": "交流电路的总阻碍。单位：欧姆(Ω)。", "kind": "output" },
+      "R": { "role": "电阻", "description": "纯电阻分量，会消耗能量。", "kind": "input" },
+      "X_L": { "role": "感抗", "description": "由电感产生的电抗。X_L = 2πfL。", "kind": "input" },
+      "X_C": { "role": "容抗", "description": "由电容产生的电抗。X_C = 1/(2πfC)。", "kind": "input" }
+    },
+    "realWorldExamples": ["音箱系统各频段响应特性的设计", "输电线路电能损耗的最小化"],
+    "relatedFormulas": ["ohm-law", "resonance-frequency", "rc-time-constant"]
+  },
+  "resonance-frequency": {
+    "name": "谐振频率",
+    "oneLiner": "LC 电路中感抗与容抗相等时的频率",
+    "description": "谐振频率是由电感与电容构成的电路中，能量在两个元件之间自由往返的固有频率。在这个频率下阻抗达到最小（串联）或最大（并联），从收音机的选台到无线充电都有广泛应用。",
+    "discoverer": "威廉·汤姆孙（开尔文勋爵）",
+    "field": "电气工程",
+    "significance": "提供了频率选择电路的原理，确立了无线通信与滤波器设计的基础。",
+    "elementMeanings": {
+      "f_0": { "role": "谐振频率", "description": "电路发生谐振的固有频率。单位：赫兹(Hz)。", "kind": "output" },
+      "L": { "role": "电感", "description": "电感器储存磁能的能力。单位：亨利(H)。", "kind": "input" },
+      "C": { "role": "电容", "description": "电容器储存电能的能力。单位：法拉(F)。", "kind": "input" },
+      "2\\pi": { "role": "圆周率系数", "description": "角频率与普通频率之间的换算系数。", "kind": "constant", "value": 6.283185307, "unit": "" }
+    },
+    "realWorldExamples": ["收音机的频率调谐", "核磁共振成像装置共振频率的设定"],
+    "relatedFormulas": ["impedance", "rc-time-constant", "shannon-capacity"]
+  },
+  "shannon-capacity": {
+    "name": "香农信道容量",
+    "oneLiner": "在有噪声的信道上能够无差错传输的最大信息速率",
+    "description": "香农信道容量定理给出在给定带宽与信噪比(SNR)条件下，理论上可以达到的最大数据传输速率。它定量地表明带宽越宽、信噪比越高，就能传输越多的信息，并给出了信息论与现代通信系统设计的根本极限。",
+    "discoverer": "克劳德·香农",
+    "field": "电气工程",
+    "significance": "作为信息论的核心结果，给出了所有数字通信系统设计的理论上限。",
+    "elementMeanings": {
+      "C": { "role": "信道容量", "description": "可无差错传输的最大比特率。单位：比特/秒(bps)。", "kind": "output" },
+      "B": { "role": "带宽", "description": "信道可以使用的频率范围的宽度。单位：赫兹(Hz)。", "kind": "input" },
+      "S": { "role": "信号功率", "description": "接收信号的平均功率。", "kind": "input" },
+      "N": { "role": "噪声功率", "description": "信道的平均噪声功率。", "kind": "input" },
+      "\\log_2": { "role": "以 2 为底的对数", "description": "把结果表示成比特单位所用的对数函数。", "kind": "structural" }
+    },
+    "realWorldExamples": ["计算 5G 移动通信系统的理论最大传输速率", "设计 Wi-Fi 信道时带宽的确定"],
+    "relatedFormulas": ["resonance-frequency", "ohm-law"]
+  }
+}

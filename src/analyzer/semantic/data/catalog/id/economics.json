@@ -1,0 +1,165 @@
+{
+  "gdp-formula": {
+    "name": "Rumus produk domestik bruto",
+    "oneLiner": "Rumus yang mengukur kegiatan ekonomi sebuah negara sebagai jumlah konsumsi, investasi, belanja pemerintah, dan ekspor neto",
+    "description": "Rumus PDB mengukur nilai pasar seluruh barang dan jasa akhir yang dihasilkan di dalam sebuah negara selama kurun waktu tertentu. Menurut pendekatan pengeluaran, nilai itu diuraikan menjadi empat unsur: konsumsi rumah tangga, investasi perusahaan, belanja pemerintah, dan ekspor neto. Inilah indikator makroekonomi paling dasar untuk membandingkan besar perekonomian antarnegara dan melacak naik turunnya kegiatan ekonomi.",
+    "discoverer": "Simon Kuznets",
+    "field": "Ekonomi",
+    "significance": "Rumus ini merangkum capaian ekonomi sebuah negara ke dalam satu angka sehingga menjadi acuan pengambilan kebijakan, pembandingan antarnegara, dan analisis daur usaha.",
+    "elementMeanings": {
+      "Y": { "role": "Produk domestik bruto", "description": "Jumlah seluruh nilai pasar barang dan jasa akhir yang dihasilkan di dalam negeri selama kurun waktu tertentu.", "kind": "output" },
+      "C": { "role": "Konsumsi", "description": "Pengeluaran rumah tangga untuk membeli barang dan jasa.", "kind": "input" },
+      "I": { "role": "Investasi", "description": "Investasi bruto yang mencakup pembelian barang modal oleh perusahaan dan perubahan persediaan.", "kind": "input" },
+      "G": { "role": "Belanja pemerintah", "description": "Pengeluaran pemerintah untuk membeli barang dan jasa.", "kind": "input" },
+      "X": { "role": "Ekspor", "description": "Nilai barang dan jasa yang dijual ke luar negeri.", "kind": "input" },
+      "M": { "role": "Impor", "description": "Nilai barang dan jasa yang dibeli dari luar negeri.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung laju pertumbuhan ekonomi tahunan sebuah negara",
+      "Menilai apakah perekonomian sedang resesi (PDB turun dua triwulan berturut-turut)",
+      "Membandingkan besar perekonomian antarnegara"
+    ],
+    "relatedFormulas": ["supply-demand", "quantity-theory"]
+  },
+  "supply-demand": {
+    "name": "Keseimbangan permintaan dan penawaran",
+    "oneLiner": "Asas yang menyatakan bahwa harga pasar terbentuk pada titik ketika jumlah yang diminta sama dengan jumlah yang ditawarkan",
+    "description": "Keseimbangan permintaan dan penawaran adalah asas inti ilmu ekonomi yang menyatakan bahwa pasar mencapai keseimbangan pada harga ketika jumlah yang diminta sama dengan jumlah yang ditawarkan. Titik potong kurva permintaan dan kurva penawaran menentukan harga keseimbangan sekaligus jumlah keseimbangan. Model ini menjadi dasar pengalokasian sumber daya melalui mekanisme harga.",
+    "discoverer": "Alfred Marshall",
+    "field": "Ekonomi",
+    "significance": "Model ini menjelaskan asas pembentukan harga pasar dan menyediakan landasan teoretis untuk pengendalian harga oleh pemerintah, analisis dampak pajak, serta penilaian efisiensi pasar.",
+    "elementMeanings": {
+      "Q_d": { "role": "Jumlah yang diminta", "description": "Banyaknya barang yang hendak dibeli konsumen pada harga tertentu.", "kind": "input" },
+      "Q_s": { "role": "Jumlah yang ditawarkan", "description": "Banyaknya barang yang hendak dijual produsen pada harga tertentu.", "kind": "input" },
+      "P": { "role": "Harga", "description": "Harga pasar satu satuan barang. Pada keseimbangan, nilai inilah yang menyamakan jumlah yang diminta dengan jumlah yang ditawarkan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Penentuan harga bensin mengikuti naik turunnya harga minyak",
+      "Analisis dampak kenaikan upah minimum terhadap pasar tenaga kerja",
+      "Meramalkan turunnya harga hasil pertanian saat panen melimpah"
+    ],
+    "relatedFormulas": ["elasticity", "consumer-surplus", "gdp-formula"]
+  },
+  "elasticity": {
+    "name": "Elastisitas",
+    "oneLiner": "Nilai yang menyatakan kepekaan perubahan jumlah yang diminta terhadap perubahan harga dalam bentuk perbandingan",
+    "description": "Elastisitas harga adalah ukuran yang menyatakan berapa persen jumlah yang diminta berubah ketika harga berubah 1%. Bila nilai mutlak elastisitasnya lebih besar daripada 1 disebut elastis, dan bila lebih kecil daripada 1 disebut takelastis. Ukuran ini dipakai sebagai inti dalam menyusun siasat harga perusahaan, menentukan siapa yang menanggung beban pajak, dan menganalisis pasar.",
+    "discoverer": "Alfred Marshall",
+    "field": "Ekonomi",
+    "significance": "Elastisitas menakar pengaruh perubahan harga terhadap perilaku konsumen sehingga menjadi alat yang tak tergantikan dalam penetapan harga oleh perusahaan maupun perancangan kebijakan pajak oleh pemerintah.",
+    "elementMeanings": {
+      "E": { "role": "Elastisitas", "description": "Elastisitas harga permintaan. Perbandingan nisbi perubahan jumlah yang diminta terhadap perubahan harga.", "kind": "output" },
+      "\\Delta Q": { "role": "Perubahan jumlah yang diminta", "description": "Perubahan jumlah yang diminta akibat perubahan harga.", "kind": "input" },
+      "Q": { "role": "Jumlah yang diminta", "description": "Jumlah yang diminta pada saat acuan.", "kind": "input" },
+      "\\Delta P": { "role": "Perubahan harga", "description": "Perubahan pada harga.", "kind": "input" },
+      "P": { "role": "Harga", "description": "Harga pada saat acuan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Meramalkan turunnya konsumsi saat cukai rokok dinaikkan",
+      "Pengaruh kenaikan harga merek barang mewah terhadap penjualannya",
+      "Membandingkan beda tanggapan permintaan antara barang kebutuhan pokok dan barang mewah"
+    ],
+    "relatedFormulas": ["supply-demand", "consumer-surplus", "marginal-cost"]
+  },
+  "cobb-douglas": {
+    "name": "Fungsi produksi Cobb-Douglas",
+    "oneLiner": "Fungsi produksi makroekonomi yang menjelaskan jumlah produksi total dari masukan tenaga kerja dan modal",
+    "description": "Fungsi produksi Cobb-Douglas menyatakan keluaran menurut masukan dua faktor produksi, yaitu tenaga kerja dan modal, dalam bentuk fungsi berpangkat. Fungsi ini memiliki parameter berupa konstanta yang menyatakan tingkat teknologi serta elastisitas keluaran dari masing-masing faktor produksi. Inilah alat dasar untuk menganalisis hasil menurut skala, teori pertumbuhan ekonomi, dan penelitian pembagian pendapatan.",
+    "discoverer": "Charles Cobb, Paul Douglas",
+    "field": "Ekonomi",
+    "significance": "Fungsi ini menganalisis kemungkinan saling menggantikan antarfaktor produksi serta skala ekonomi, dan menjadi landasan makroekonomi modern, termasuk model pertumbuhan Solow.",
+    "elementMeanings": {
+      "Y": { "role": "Jumlah produksi total", "description": "Keluaran total yang diperoleh dari masukan faktor-faktor produksi.", "kind": "output" },
+      "A": { "role": "Produktivitas faktor total", "description": "Konstanta yang menyatakan tingkat teknologi atau efisiensi.", "kind": "input" },
+      "L": { "role": "Masukan tenaga kerja", "description": "Banyaknya tenaga kerja yang dicurahkan ke dalam produksi.", "kind": "input" },
+      "K": { "role": "Masukan modal", "description": "Banyaknya modal (mesin, peralatan, dan sejenisnya) yang dicurahkan ke dalam produksi.", "kind": "input" },
+      "\\alpha": { "role": "Elastisitas keluaran terhadap tenaga kerja", "description": "Menyatakan berapa persen keluaran bertambah ketika masukan tenaga kerja bertambah 1%.", "kind": "input" },
+      "\\beta": { "role": "Elastisitas keluaran terhadap modal", "description": "Menyatakan berapa persen keluaran bertambah ketika masukan modal bertambah 1%.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menganalisis beda laju pertumbuhan ekonomi antarnegara",
+      "Mengukur pengaruh kemajuan teknologi terhadap produktivitas",
+      "Menaksir nisbah pembagian pendapatan antara tenaga kerja dan modal"
+    ],
+    "relatedFormulas": ["gdp-formula", "marginal-cost"]
+  },
+  "fisher-equation": {
+    "name": "Persamaan Fisher",
+    "oneLiner": "Rumus yang menyatakan hubungan antara suku bunga nominal, suku bunga riil, dan laju inflasi",
+    "description": "Persamaan Fisher memperlihatkan hubungan bahwa suku bunga nominal tersusun dari hasil kali suku bunga riil dengan laju inflasi yang diharapkan. Persamaan ini dipakai untuk menilai daya beli riil dari imbal hasil investasi serta menganalisis dampak kebijakan suku bunga bank sentral terhadap perekonomian. Inilah rumus kunci yang menghubungkan nilai waktu uang dengan naik turunnya harga.",
+    "discoverer": "Irving Fisher",
+    "field": "Ekonomi",
+    "significance": "Persamaan ini adalah inti dikotomi klasik yang memisahkan besaran nominal dari besaran riil, sekaligus menyediakan kerangka dasar untuk kebijakan suku bunga dan analisis inflasi.",
+    "elementMeanings": {
+      "i": { "role": "Suku bunga nominal", "description": "Suku bunga yang belum memperhitungkan naik turunnya harga.", "kind": "output" },
+      "r": { "role": "Suku bunga riil", "description": "Suku bunga menurut daya beli sebenarnya setelah pengaruh inflasi dihilangkan.", "kind": "input" },
+      "\\pi": { "role": "Laju inflasi", "description": "Laju kenaikan harga selama kurun waktu tertentu.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung imbal hasil riil sebuah simpanan",
+      "Memperhitungkan inflasi saat bank sentral menetapkan suku bunga acuan",
+      "Menilai imbal hasil riil investasi obligasi"
+    ],
+    "relatedFormulas": ["quantity-theory", "compound-interest", "present-value"]
+  },
+  "quantity-theory": {
+    "name": "Teori kuantitas uang",
+    "oneLiner": "Teori yang menyatakan bahwa hasil kali jumlah uang beredar dengan laju perputarannya sama dengan hasil kali tingkat harga dengan keluaran riil",
+    "description": "Teori kuantitas uang menjelaskan bahwa jumlah seluruh uang dalam perekonomian beserta laju perputarannya memiliki hubungan identitas dengan PDB nominal (hasil kali tingkat harga dengan keluaran riil). Teori ini menjadi dasar aliran moneteris yang menyatakan bahwa dalam jangka panjang pertambahan jumlah uang beredar adalah penyebab utama kenaikan harga. Inilah kerangka yang tak tergantikan dalam analisis inflasi dan perancangan kebijakan moneter.",
+    "discoverer": "Irving Fisher",
+    "field": "Ekonomi",
+    "significance": "Teori ini menjelaskan pertambahan jumlah uang beredar sebagai penyebab mendasar inflasi dan memberi landasan teoretis bagi penyusunan kebijakan moneter bank sentral.",
+    "elementMeanings": {
+      "M": { "role": "Jumlah uang beredar", "description": "Jumlah seluruh uang yang beredar dalam perekonomian.", "kind": "input" },
+      "V": { "role": "Laju perputaran uang", "description": "Rata-rata berapa kali satu satuan uang dipakai dalam transaksi selama kurun waktu tertentu.", "kind": "input" },
+      "P": { "role": "Tingkat harga", "description": "Tingkat harga barang dan jasa secara menyeluruh.", "kind": "output" },
+      "Y": { "role": "Keluaran riil", "description": "PDB riil setelah pengaruh naik turunnya harga dihilangkan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menganalisis dampak kebijakan pelonggaran kuantitatif terhadap harga",
+      "Menjelaskan gejala hiperinflasi",
+      "Meramalkan dampak ekonomi dari kebijakan pengetatan moneter"
+    ],
+    "relatedFormulas": ["gdp-formula", "fisher-equation"]
+  },
+  "consumer-surplus": {
+    "name": "Surplus konsumen",
+    "oneLiner": "Selisih antara jumlah tertinggi yang bersedia dibayar konsumen dengan jumlah yang benar-benar dibayarkan",
+    "description": "Surplus konsumen dihitung sebagai luas daerah di bawah kurva permintaan dan di atas harga pasar. Inilah konsep inti ekonomi kesejahteraan yang mengukur manfaat neto yang diperoleh konsumen dari membeli sebuah barang dalam satuan uang. Konsep ini memungkinkan penilaian kuantitatif atas pengaruh perubahan kebijakan atau perubahan struktur pasar terhadap kesejahteraan konsumen.",
+    "discoverer": "Jules Dupuit",
+    "field": "Ekonomi",
+    "significance": "Surplus konsumen menjadi tolok ukur efisiensi pasar dan kesejahteraan konsumen, serta dipakai untuk menganalisis dampak kesejahteraan dari pengaturan monopoli, pengenaan pajak, dan kebijakan perdagangan.",
+    "elementMeanings": {
+      "CS": { "role": "Surplus konsumen", "description": "Manfaat neto keseluruhan yang diperoleh konsumen. Luas daerah di bawah kurva permintaan dikurangi pengeluaran yang sesungguhnya.", "kind": "output" },
+      "D(q)": { "role": "Fungsi permintaan", "description": "Harga tertinggi yang bersedia dibayar konsumen pada jumlah q.", "kind": "structural" },
+      "p^*": { "role": "Harga keseimbangan pasar", "description": "Harga pasar yang sungguh-sungguh dibayar konsumen.", "kind": "input" },
+      "q": { "role": "Jumlah", "description": "Jumlah barang yang diperdagangkan. Menjadi peubah pengintegralan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung keuntungan tambahan yang diperoleh konsumen selama masa obral",
+      "Pengaruh penetapan harga oleh perusahaan monopoli terhadap kesejahteraan konsumen",
+      "Menaksir berkurangnya surplus konsumen akibat pengenaan bea masuk"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity"]
+  },
+  "marginal-cost": {
+    "name": "Biaya marginal",
+    "oneLiner": "Biaya tambahan yang timbul ketika jumlah produksi ditambah satu satuan",
+    "description": "Biaya marginal adalah turunan fungsi biaya total terhadap jumlah produksi, yaitu biaya tambahan yang timbul ketika jumlah produksi dinaikkan satu satuan. Biaya ini merupakan unsur inti syarat pemaksimuman laba perusahaan (biaya marginal = penerimaan marginal) dan menjadi dasar teoretis kurva penawaran. Inilah alat dasar dalam pengambilan keputusan produksi dan siasat penetapan harga.",
+    "discoverer": "Alfred Marshall",
+    "field": "Ekonomi",
+    "significance": "Biaya marginal menjadi dasar penentuan jumlah produksi optimum dan penetapan harga oleh perusahaan, serta konsep inti yang menyusun kurva penawaran pada pasar persaingan sempurna.",
+    "elementMeanings": {
+      "MC": { "role": "Biaya marginal", "description": "Perubahan biaya total akibat pertambahan satu satuan jumlah produksi.", "kind": "output" },
+      "TC": { "role": "Biaya total", "description": "Jumlah seluruh biaya untuk menghasilkan jumlah produksi tertentu.", "kind": "input" },
+      "Q": { "role": "Jumlah produksi", "description": "Banyaknya barang yang dihasilkan.", "kind": "input" },
+      "\\frac{d}{dQ}": { "role": "Operator turunan", "description": "Turunan terhadap jumlah produksi. Mencari laju perubahan seketika dari biaya.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Memutuskan perlu tidaknya mengoperasikan pabrik tambahan",
+      "Keputusan maskapai menjual kursi kosong dengan potongan harga",
+      "Biaya marginal salinan perangkat lunak tambahan yang hampir bernilai nol"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity", "cobb-douglas"]
+  }
+}

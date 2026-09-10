@@ -1,0 +1,184 @@
+{
+  "pythagorean-theorem": {
+    "name": "勾股定理",
+    "oneLiner": "直角三角形中斜边的平方等于另外两边平方之和的定理",
+    "description": "勾股定理指出，直角三角形斜边长度的平方等于另外两条边长度的平方和。它是欧几里得几何最基本的定理，也是距离概念的基石。它有数千种证明，是数学史上被研究得最多的定理。",
+    "discoverer": "毕达哥拉斯（传统归属）",
+    "field": "几何学",
+    "significance": "它给出了欧几里得距离的定义，是三角学、解析几何、向量空间等现代数学各领域的基础。",
+    "elementMeanings": {
+      "a": { "role": "直角边", "description": "夹住直角的一条边的长度。", "kind": "input" },
+      "b": { "role": "直角边", "description": "夹住直角的另一条边的长度。", "kind": "input" },
+      "c": { "role": "斜边", "description": "直角对面那条最长的边的长度。", "kind": "output" },
+      "a^2+b^2": { "role": "两直角边平方之和", "description": "两条直角边长度的平方相加所得的值。", "kind": "output" },
+      "c^2": { "role": "斜边的平方", "description": "斜边长度的平方，等于两直角边的平方和。", "kind": "output" }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "直角边",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "直角边",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": ["law-of-cosines", "heron-formula"]
+  },
+  "heron-formula": {
+    "name": "海伦公式",
+    "oneLiner": "只用三条边的长度就能求出三角形面积的公式",
+    "description": "海伦公式利用三角形的三边 a、b、c 与半周长 s 来计算面积。由于不必另外求高，在只知道坐标或做测量时非常实用。它有着优雅的结构：面积的平方可以写成半周长与各边之差的乘积。",
+    "discoverer": "亚历山大的海伦",
+    "field": "几何学",
+    "significance": "不需要高的信息、只凭边长就能求面积，因此在测量与计算机图形学中被广泛使用。",
+    "elementMeanings": {
+      "a": { "role": "第一条边", "description": "三角形第一条边的长度。", "kind": "input" },
+      "b": { "role": "第二条边", "description": "三角形第二条边的长度。", "kind": "input" },
+      "c": { "role": "第三条边", "description": "三角形第三条边的长度。", "kind": "input" },
+      "s": { "role": "半周长", "description": "三边之和的一半。s = (a+b+c)/2。", "kind": "output" },
+      "A": { "role": "面积", "description": "三角形的面积，按根号(s(s-a)(s-b)(s-c)) 计算。", "kind": "output" }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "circle-area"]
+  },
+  "circle-area": {
+    "name": "圆的面积",
+    "oneLiner": "用半径的平方乘以圆周率求圆面积的公式",
+    "description": "圆的面积公式表明，半径为 r 的圆所占的面积等于圆周率与半径平方之积。自阿基米德把圆分割成无限薄的三角形加以证明以来，这个公式就成了积分思想的雏形。",
+    "discoverer": "阿基米德",
+    "field": "几何学",
+    "significance": "它是最基本的曲线图形面积公式，也是积分概念在历史上的出发点。",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "圆所占的面积。单位：长度的平方。", "kind": "output" },
+      "\\pi": { "role": "圆周率", "description": "圆的周长与直径之比，约为 3.14159。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "从圆心到圆周的距离。", "kind": "input" },
+      "r^2": { "role": "半径的平方", "description": "半径的平方，它决定面积的大小。", "kind": "input" }
+    },
+    "relatedFormulas": ["sphere-volume", "pythagorean-theorem"]
+  },
+  "law-of-cosines": {
+    "name": "余弦定理",
+    "oneLiner": "在任意三角形中，用另外两边及其夹角求一条边长度的定理",
+    "description": "余弦定理是这样一个关系式：三角形中一条边的平方，等于另外两边的平方和减去这两边与其夹角余弦之积的两倍。它是勾股定理的推广；当夹角为直角时余弦为 0，于是就回到勾股定理。",
+    "field": "几何学",
+    "significance": "它使我们在非直角的一般三角形中也能求出边与角的关系，在测量与导航中必不可少。",
+    "elementMeanings": {
+      "a": { "role": "待求的边", "description": "要用余弦定理求出长度的那条边。", "kind": "output" },
+      "b": { "role": "已知边", "description": "三角形中已知的一条边的长度。", "kind": "input" },
+      "c": { "role": "已知边", "description": "三角形中已知的另一条边的长度。", "kind": "input" },
+      "C": { "role": "夹角", "description": "边 b 与边 c 之间所夹的角。", "kind": "input", "unit": "rad" },
+      "\\cos C": { "role": "夹角的余弦", "description": "夹角 C 的余弦值。当这个角是直角时它等于 0。", "kind": "structural" }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "heron-formula"]
+  },
+  "sphere-volume": {
+    "name": "球的体积",
+    "oneLiner": "与半径立方成正比的球体积公式",
+    "description": "球的体积公式表明，半径为 r 的球所占的空间等于 (4/3) 与圆周率、半径立方三者之积。这一关系是阿基米德把球内接于圆柱时发现的，也可以用积分推导出来，是三维几何的基本结果。",
+    "discoverer": "阿基米德",
+    "field": "几何学",
+    "significance": "它是三维空间中最基本的曲面立体的体积公式，在物理学与工程中有广泛应用。",
+    "elementMeanings": {
+      "V": { "role": "体积", "description": "球所占空间的大小。单位：长度的立方。", "kind": "output" },
+      "\\frac{4}{3}": { "role": "比例常数", "description": "球的体积与半径立方之间的比例系数。", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "圆周率", "description": "圆的周长与直径之比，约为 3.14159。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "从球心到球面的距离。", "kind": "input" },
+      "r^3": { "role": "半径的立方", "description": "半径连乘三次所得的值，体现体积按三维方式增长。", "kind": "input" }
+    },
+    "relatedFormulas": ["circle-area"]
+  },
+  "euler-polyhedron": {
+    "name": "欧拉多面体公式",
+    "oneLiner": "凸多面体中顶点数、棱数与面数之间的关系",
+    "description": "欧拉多面体公式揭示了一个令人惊讶的关系：在凸多面体中，顶点数减去棱数再加上面数，结果总是 2。它是拓扑学的起点，无论多面体的形状怎样变化，这个关系都不改变。它是被称为欧拉示性数的拓扑不变量最基本的例子。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "几何学",
+    "significance": "它是把几何对象的拓扑性质加以量化的第一个结果，也是拓扑学与图论的出发点。",
+    "elementMeanings": {
+      "V": { "role": "顶点数", "description": "多面体顶点（棱相交之处）的总数。", "kind": "input" },
+      "E": { "role": "棱数", "description": "多面体棱（两个面相交所成线段）的总数。", "kind": "input" },
+      "F": { "role": "面数", "description": "多面体面（平面多边形）的总数。", "kind": "input" },
+      "2": { "role": "欧拉示性数", "description": "凸多面体（与球面同胚）的欧拉示性数，总是 2。", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": [
+      "用正方体验证：顶点 8 - 棱 12 + 面 6 = 2",
+      "用足球（截角二十面体）验证：顶点 60 - 棱 90 + 面 32 = 2"
+    ],
+    "relatedFormulas": ["pythagorean-theorem"]
+  },
+  "circle-equation": {
+    "name": "圆的方程",
+    "oneLiner": "在坐标平面上用圆心与半径表示圆的方程",
+    "description": "圆的方程给出圆心为 (a, b)、半径为 r 的圆上所有点 (x, y) 所满足的条件。它可以直接由勾股定理导出，是解析几何中用代数方法处理圆的基本工具。展开后就是一般式，配方整理后又回到标准式。",
+    "field": "几何学",
+    "significance": "它是把几何图形表示为代数方程的解析几何典型范例，在分析圆与直线的关系时必不可少。",
+    "elementMeanings": {
+      "x": { "role": "点的横坐标", "description": "圆上任意一点的水平坐标。", "kind": "input" },
+      "y": { "role": "点的纵坐标", "description": "圆上任意一点的竖直坐标。", "kind": "input" },
+      "a": { "role": "圆心的横坐标", "description": "圆心的水平坐标。", "kind": "input" },
+      "b": { "role": "圆心的纵坐标", "description": "圆心的竖直坐标。", "kind": "input" },
+      "r": { "role": "半径", "description": "从圆心到圆周的距离。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "GPS 定位中，与某个基站相距一定距离的所有可能位置的集合",
+      "把机械臂的可达范围用圆的方程建模，从而计算作业区域"
+    ],
+    "relatedFormulas": ["pythagorean-theorem", "circle-area", "ellipse-equation"]
+  },
+  "ellipse-equation": {
+    "name": "椭圆的方程",
+    "oneLiner": "表示到两个焦点距离之和恒定的点的轨迹的方程",
+    "description": "椭圆的方程给出中心在原点、长轴与短轴的半长分别为 a、b 的椭圆上所有点所满足的条件。它把圆的方程推广到 x 轴与 y 轴尺度不同的情形，当 a = b 时就是圆。它在开普勒行星运动定律中起着核心作用。",
+    "discoverer": "阿波罗尼奥斯（圆锥曲线研究）",
+    "field": "几何学",
+    "significance": "它是行星轨道的数学模型，在光学的反射性质、建筑中的回音壁等方面也有多种应用。",
+    "elementMeanings": {
+      "x": { "role": "点的横坐标", "description": "椭圆上任意一点的水平坐标。", "kind": "input" },
+      "y": { "role": "点的纵坐标", "description": "椭圆上任意一点的竖直坐标。", "kind": "input" },
+      "a": { "role": "长半轴", "description": "椭圆横轴（长轴）的半长，即到最远点的距离。", "kind": "input" },
+      "b": { "role": "短半轴", "description": "椭圆纵轴（短轴）的半长，即到最近点的距离。", "kind": "input" },
+      "a^2": { "role": "长半轴的平方", "description": "x 分量的归一化分母。", "kind": "input" },
+      "b^2": { "role": "短半轴的平方", "description": "y 分量的归一化分母。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "开普勒第一定律：行星沿以太阳为一个焦点的椭圆轨道运行",
+      "回音壁：在椭圆形房间里，一个焦点处的声音会汇聚到另一个焦点"
+    ],
+    "relatedFormulas": ["circle-equation", "hyperbola-equation", "circle-area"]
+  },
+  "hyperbola-equation": {
+    "name": "双曲线的方程",
+    "oneLiner": "表示到两个焦点距离之差恒定的点的轨迹的方程",
+    "description": "双曲线的方程给出中心在原点、实轴与虚轴的半长分别为 a、b 的双曲线上所有点所满足的条件。与椭圆不同，这里恒定的是距离之“差”，曲线分成两支且是开放的。它有一个特点：越来越接近渐近线 y = (b/a)x 与 y = -(b/a)x，却永不相交。",
+    "discoverer": "阿波罗尼奥斯（圆锥曲线研究）",
+    "field": "几何学",
+    "significance": "它被用于导航（罗兰系统）、双曲线冷却塔的设计、狭义相对论的时空结构等方面。",
+    "elementMeanings": {
+      "x": { "role": "点的横坐标", "description": "双曲线上任意一点的水平坐标。", "kind": "input" },
+      "y": { "role": "点的纵坐标", "description": "双曲线上任意一点的竖直坐标。", "kind": "input" },
+      "a": { "role": "实半轴", "description": "从双曲线顶点到中心的距离。", "kind": "input" },
+      "b": { "role": "虚半轴", "description": "决定渐近线斜率的那条轴的半长。", "kind": "input" },
+      "a^2": { "role": "实半轴的平方", "description": "x 分量的归一化分母。", "kind": "input" },
+      "b^2": { "role": "虚半轴的平方", "description": "y 分量的归一化分母。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "罗兰导航：根据从两个台站收到信号的时间差来确定位置的原理",
+      "双曲线形冷却塔：兼顾结构强度与气流效率的最优形状"
+    ],
+    "relatedFormulas": ["ellipse-equation", "circle-equation"]
+  }
+}

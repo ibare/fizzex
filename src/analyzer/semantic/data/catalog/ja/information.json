@@ -1,0 +1,92 @@
+{
+  "shannon-entropy": {
+    "name": "シャノンエントロピー",
+    "oneLiner": "確率分布の不確実性(情報量)を測る情報理論の基本的な尺度",
+    "description": "シャノンエントロピーは、確率変数の結果を知る前の平均的な不確実性を数値で表します。確率が均等であるほどエントロピーは高く、一つの結果が確実であるほど低くなります。情報を圧縮したり伝送したりするときに必要な最小ビット数の理論的な下限を与えます。",
+    "discoverer": "クロード・シャノン",
+    "field": "情報理論",
+    "significance": "情報理論を生み出した中心的な概念で、データ圧縮、通信、暗号理論、機械学習など幅広い分野に影響を与えました。",
+    "elementMeanings": {
+      "H(X)": { "role": "エントロピー", "description": "確率変数 X の平均情報量です。単位はビット(底が2のとき)またはナット(底が e のとき)です。", "kind": "output" },
+      "p(x)": { "role": "確率", "description": "事象 x が起こる確率です。", "kind": "input" },
+      "\\log p(x)": { "role": "自己情報量", "description": "事象 x の情報量です。確率が低いほど情報量は大きくなります。", "kind": "structural" },
+      "-\\sum": { "role": "期待値の符号反転", "description": "自己情報量の期待値に負の符号を付けて正の値にします。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "コイン投げの不確実性: 公平なコインは1ビット、偏ったコインは1ビット未満",
+      "データ圧縮アルゴリズム(ZIPなど)が達成できる理論上の最大圧縮率の算出"
+    ],
+    "relatedFormulas": ["kl-divergence", "mutual-information", "cross-entropy", "source-coding"]
+  },
+  "kl-divergence": {
+    "name": "カルバック・ライブラー情報量",
+    "oneLiner": "二つの確率分布の間の非対称なへだたりを測る尺度",
+    "description": "KL情報量は、真の分布 P を近似分布 Q で置きかえたときに生じる情報の損失を測ります。常に0以上で、二つの分布が一致するときにだけ0になります。非対称なので D_KL(P||Q) と D_KL(Q||P) は一般に異なります。変分推論や生成モデルなどで中心的に使われます。",
+    "discoverer": "ソロモン・カルバック、リチャード・ライブラー",
+    "field": "情報理論",
+    "significance": "分布どうしの違いを測る基本的な道具で、ベイズ推論、VAE、強化学習の方策最適化などに広く使われています。",
+    "elementMeanings": {
+      "D_{KL}(P \\| Q)": { "role": "KL情報量", "description": "P から Q へ移ったときの情報の損失量です。", "kind": "output" },
+      "p(x)": { "role": "真の分布", "description": "実際の(基準となる)確率分布です。", "kind": "input" },
+      "q(x)": { "role": "近似分布", "description": "真の分布を近似しようとするモデルの分布です。", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "対数尤度比", "description": "それぞれの事象における二つの分布の確率の比の対数です。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "変分オートエンコーダ(VAE)で潜在変数の分布を正規分布に近づける",
+      "自然言語生成モデルの出力分布が学習データの分布からどれだけ離れたかを評価する"
+    ],
+    "relatedFormulas": ["shannon-entropy", "mutual-information", "cross-entropy"]
+  },
+  "mutual-information": {
+    "name": "相互情報量",
+    "oneLiner": "二つの確率変数が共有している情報の量を測る尺度",
+    "description": "相互情報量は、一方の変数を観測したときに、もう一方の変数についての不確実性がどれだけ減るかを測ります。二つの変数が独立なら0で、依存が強いほど大きな値になります。線形の関係だけでなく非線形の依存もとらえられるため、相関係数より一般的な依存性の尺度です。",
+    "discoverer": "クロード・シャノン",
+    "field": "情報理論",
+    "significance": "変数どうしの依存性を非線形にも測れるため、特徴選択、クラスタリング、神経科学などさまざまな分野で使われています。",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "相互情報量", "description": "X と Y が共有している情報の量です。", "kind": "output" },
+      "H(X)": { "role": "X のエントロピー", "description": "X 単独の不確実性(情報量)です。", "kind": "input" },
+      "H(X|Y)": { "role": "条件付きエントロピー", "description": "Y を知ったあとにも残る X の不確実性です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "遺伝子発現データから二つの遺伝子の間の非線形な関係を見つける",
+      "機械学習の特徴選択で、入力変数と出力変数が共有する情報量を評価する"
+    ],
+    "relatedFormulas": ["shannon-entropy", "kl-divergence", "data-processing-inequality"]
+  },
+  "source-coding": {
+    "name": "シャノンの情報源符号化定理",
+    "oneLiner": "可逆圧縮の平均符号長はエントロピー以上でなければならないという定理",
+    "description": "シャノンの情報源符号化定理は、情報源を可逆に圧縮するとき、記号あたりの平均符号長が情報源のエントロピーより短くはなりえないことを証明します。エントロピーがそのまま圧縮の理論的な限界であり、十分に長いブロック単位で符号化すれば、この限界にいくらでも近づけます。",
+    "discoverer": "クロード・シャノン",
+    "field": "情報理論",
+    "significance": "データ圧縮の根本的な限界を定め、ハフマン符号化や算術符号化といった実用的な圧縮アルゴリズムを生み出す理論的な土台になりました。",
+    "elementMeanings": {
+      "L": { "role": "平均符号長", "description": "記号を一つ符号化するのに必要な平均ビット数です。", "kind": "output" },
+      "H(X)": { "role": "情報源のエントロピー", "description": "情報源の記号あたりの平均情報量です。圧縮の理論的な下限になります。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "ZIPファイルの圧縮では、元のデータのエントロピーが圧縮の限界を決める",
+      "音楽配信で可逆フォーマット(FLAC)の最小ファイルサイズを見積もる"
+    ],
+    "relatedFormulas": ["shannon-entropy"]
+  },
+  "data-processing-inequality": {
+    "name": "データ処理不等式",
+    "oneLiner": "データを加工しても情報は保たれるか失われるだけで、決して増えないという原理",
+    "description": "データ処理不等式は、マルコフ連鎖 X -> Y -> Z において、X と Z の相互情報量が X と Y の相互情報量を超えられないことを述べます。つまり、後から加工してもとになかった情報を作り出すことはできません。これは特徴抽出、次元削減、通信などにおいて、情報の損失が取り返しのつかないものであることを保証します。",
+    "discoverer": "クロード・シャノン(情報理論の基本的な性質として導かれた)",
+    "field": "情報理論",
+    "significance": "情報処理の根本的な限界を定め、通信路の設計や機械学習の表現学習に理論的な制約を与えます。",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "元のデータと途中段階の相互情報量", "description": "元のデータ X と途中の処理結果 Y が共有する情報量です。", "kind": "input" },
+      "I(X;Z)": { "role": "元のデータと最終結果の相互情報量", "description": "元のデータ X とさらに加工した結果 Z が共有する情報量です。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "画像を白黒に変換すると、もとの色の情報を復元できなくなる理由",
+      "深層学習で層が深くなるほど入力の情報が少しずつ圧縮されていく原理(情報ボトルネック理論)"
+    ],
+    "relatedFormulas": ["mutual-information", "shannon-entropy"]
+  }
+}

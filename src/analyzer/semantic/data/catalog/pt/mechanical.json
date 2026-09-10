@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "Tensão mecânica",
+    "oneLiner": "A grandeza física que representa a força interna que atua por unidade de área",
+    "description": "A tensão é a força por unidade de área que surge no interior de um corpo por ação de forças externas. Assume formas variadas — tração, compressão, cisalhamento — e é o indicador mais básico para julgar se um material vai romper. No projeto de estruturas, manter a tensão abaixo da tensão admissível é o ponto central da segurança.",
+    "field": "Engenharia mecânica",
+    "significance": "Como conceito básico da resistência dos materiais, fornece o ponto de partida da avaliação de segurança e do projeto de estruturas.",
+    "elementMeanings": {
+      "\\sigma": { "role": "tensão", "description": "Força interna por unidade de área. Unidade: pascal (Pa) ou N/m².", "kind": "output" },
+      "F": { "role": "força", "description": "Força externa que atua sobre o corpo. Unidade: newton (N).", "kind": "input" },
+      "A": { "role": "área da seção transversal", "description": "Área da seção sobre a qual a força atua. Unidade: m².", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular a tensão de tração nos cabos de uma ponte", "Examinar a tensão de compressão nos pilares de um edifício"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "Deformação específica",
+    "oneLiner": "A razão entre a variação de comprimento e o comprimento original",
+    "description": "A deformação específica é uma grandeza adimensional que expressa o quanto um corpo se deformou por ação de forças externas, como proporção do comprimento original. Quando é pequena, o corpo volta à forma inicial dentro do regime elástico; passado o valor crítico, ocorre deformação plástica e a forma muda de modo permanente.",
+    "field": "Engenharia mecânica",
+    "significance": "Quantifica o grau de deformação do material e prepara a base para a análise do comportamento elástico e plástico.",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "deformação específica", "description": "Razão da variação de comprimento. Grandeza adimensional (sem unidade).", "kind": "output" },
+      "\\Delta L": { "role": "variação de comprimento", "description": "Comprimento depois da deformação menos o comprimento original. Unidade: m.", "kind": "input" },
+      "L": { "role": "comprimento original", "description": "Comprimento inicial do corpo antes da aplicação da força externa. Unidade: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Medir o alongamento do corpo de prova no ensaio de tração de metais", "Avaliar o grau de deformação da estrutura de um edifício durante um terremoto"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "Lei de Hooke",
+    "oneLiner": "A lei segundo a qual, dentro do regime elástico, a tensão é proporcional à deformação específica",
+    "description": "A lei de Hooke descreve que a tensão que atua num material é o produto do módulo de elasticidade pela deformação específica. Vale apenas dentro do limite elástico; além dele, aparece comportamento não linear. A força restauradora de uma mola (F=kx) também é uma forma particular dessa lei.",
+    "discoverer": "Robert Hooke",
+    "field": "Engenharia mecânica",
+    "significance": "Ao estabelecer a relação linear do comportamento elástico, firmou a base teórica da análise estrutural e dos ensaios de materiais.",
+    "elementMeanings": {
+      "\\sigma": { "role": "tensão", "description": "Força que atua por unidade de área. Unidade: pascal (Pa).", "kind": "output" },
+      "E": { "role": "módulo de elasticidade", "description": "Módulo de Young. Constante própria do material que expressa a sua rigidez. Unidade: Pa.", "kind": "input" },
+      "\\varepsilon": { "role": "deformação específica", "description": "Razão da variação de comprimento. É adimensional.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular a força elástica de restauração de uma mola", "Prever a deformação de um pilar de concreto sob carga"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "Equação de Bernoulli",
+    "oneLiner": "O princípio de que, no escoamento de um fluido incompressível, a soma das energias de pressão, de velocidade e de altura permanece constante",
+    "description": "A equação de Bernoulli expressa a conservação de energia no escoamento permanente de um fluido incompressível e sem viscosidade. Ela mostra quantitativamente que a pressão cai quando a velocidade do escoamento aumenta e também quando a altura sobe. Aplica-se de modo amplo, do princípio da sustentação nas asas de aviões ao projeto de tubulações.",
+    "discoverer": "Daniel Bernoulli",
+    "field": "Engenharia mecânica",
+    "significance": "Como princípio central da mecânica dos fluidos, fornece a base de projeto de áreas variadas da engenharia, como aeronáutica, hidráulica e tubulações.",
+    "elementMeanings": {
+      "P": { "role": "pressão estática", "description": "Pressão estática do fluido. Unidade: pascal (Pa).", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "pressão dinâmica", "description": "Pressão devida ao movimento do fluido. É proporcional ao quadrado da velocidade.", "kind": "structural" },
+      "\\rho": { "role": "massa específica", "description": "Massa específica do fluido. Unidade: kg/m³.", "kind": "input" },
+      "v": { "role": "velocidade do escoamento", "description": "Velocidade com que o fluido escoa. Unidade: m/s.", "kind": "input" },
+      "g": { "role": "aceleração da gravidade", "description": "Aceleração da gravidade próximo à superfície da Terra. Cerca de 9,8 m/s².", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "altura", "description": "Altura em que o fluido se encontra em relação ao plano de referência. Unidade: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Geração de sustentação pela diferença de pressão entre a face superior e a inferior da asa do avião", "O fenômeno de o jato de água ficar mais rápido ao se estreitar a ponta da mangueira de jardim"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "Número de Reynolds",
+    "oneLiner": "O número adimensional que distingue se o escoamento de um fluido é laminar ou turbulento",
+    "description": "O número de Reynolds é um número adimensional que expressa a razão entre as forças de inércia e as forças viscosas. Quando é pequeno (abaixo de cerca de 2300), o escoamento é laminar; quando é grande, surge turbulência. É o indicador central para prever as características do escoamento em todos os sistemas de engenharia que envolvem fluidos, como tubulações, aeronaves e navios.",
+    "discoverer": "Osborne Reynolds",
+    "field": "Engenharia mecânica",
+    "significance": "Tornou previsível a transição entre escoamento laminar e turbulento e forneceu o critério central de decisão no projeto de sistemas de fluidos.",
+    "elementMeanings": {
+      "Re": { "role": "número de Reynolds", "description": "Razão entre as forças de inércia e as viscosas. É um número adimensional.", "kind": "output" },
+      "\\rho": { "role": "massa específica", "description": "Massa específica do fluido. Unidade: kg/m³.", "kind": "input" },
+      "v": { "role": "velocidade do escoamento", "description": "Velocidade média de escoamento do fluido. Unidade: m/s.", "kind": "input" },
+      "L": { "role": "comprimento característico", "description": "Comprimento que representa a geometria do escoamento, como o diâmetro do tubo. Unidade: m.", "kind": "input" },
+      "\\mu": { "role": "coeficiente de viscosidade", "description": "Viscosidade dinâmica do fluido. Unidade: Pa vezes s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Prever se haverá turbulência no projeto de tubulações de água", "Analisar o escoamento na camada limite sobre a superfície da asa de um avião"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "Equações de Navier-Stokes",
+    "oneLiner": "As equações diferenciais parciais fundamentais que descrevem o movimento de um fluido viscoso",
+    "description": "As equações de Navier-Stokes aplicam a segunda lei de Newton a um fluido contínuo e mostram que o gradiente de pressão, as forças viscosas e as forças externas determinam a aceleração do fluido. Como em geral não existe solução analítica, resolvem-se por métodos numéricos (CFD); a sua importância matemática é tal que foram escolhidas como um dos Problemas do Milênio.",
+    "discoverer": "Claude-Louis Navier, George Gabriel Stokes",
+    "field": "Engenharia mecânica",
+    "significance": "São as equações mais gerais para descrever qualquer escoamento de fluido viscoso e constituem a base da dinâmica dos fluidos computacional (CFD).",
+    "elementMeanings": {
+      "\\rho": { "role": "massa específica", "description": "Massa específica do fluido. Unidade: kg/m³.", "kind": "input" },
+      "\\mathbf{v}": { "role": "campo de velocidades", "description": "Vetor velocidade das partículas do fluido. É função da posição e do tempo.", "kind": "output" },
+      "p": { "role": "pressão", "description": "Campo de pressão que atua no fluido. Unidade: pascal (Pa).", "kind": "input" },
+      "\\mu": { "role": "coeficiente de viscosidade", "description": "Viscosidade dinâmica do fluido. Unidade: Pa vezes s.", "kind": "input" },
+      "\\mathbf{f}": { "role": "força externa", "description": "Força de volume que atua sobre o fluido, como a gravidade.", "kind": "input" }
+    },
+    "realWorldExamples": ["Simulação computacional do escoamento do ar ao redor de um automóvel", "Análise dos padrões de fluxo sanguíneo dentro dos vasos"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "Lei de Fourier da condução de calor",
+    "oneLiner": "A lei que expressa a quantidade de calor transmitida pelo interior de um material devido a uma diferença de temperatura",
+    "description": "A lei de Fourier da condução de calor mostra que a taxa de transferência de calor é proporcional ao produto da condutividade térmica, da área da seção e do gradiente de temperatura. O calor flui do ponto mais quente para o mais frio, e quanto maior a condutividade térmica do material, mais rápido é o transporte. É a base do projeto de gestão térmica, da escolha de isolantes ao resfriamento de semicondutores.",
+    "discoverer": "Joseph Fourier",
+    "field": "Engenharia mecânica",
+    "significance": "Tornou possível a análise quantitativa dos fenômenos de transferência de calor e firmou as bases da termodinâmica e da engenharia de gestão térmica.",
+    "elementMeanings": {
+      "Q": { "role": "taxa de transferência de calor", "description": "Energia térmica transmitida por unidade de tempo. Unidade: watt (W).", "kind": "output" },
+      "k": { "role": "condutividade térmica", "description": "Constante própria do material que expressa a sua capacidade de conduzir calor. Unidade: W/(m vezes K).", "kind": "input" },
+      "A": { "role": "área da seção transversal", "description": "Área da seção atravessada pelo calor. Unidade: m².", "kind": "input" },
+      "\\Delta T": { "role": "diferença de temperatura", "description": "Diferença de temperatura entre o lado da fonte quente e o da fonte fria. Unidade: K ou graus Celsius.", "kind": "input" },
+      "\\Delta x": { "role": "espessura", "description": "Espessura do material na direção em que o calor é transmitido. Unidade: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular o desempenho do isolamento térmico das paredes de um edifício", "Projetar o dissipador de calor da CPU de um notebook"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "Carga crítica de flambagem de Euler",
+    "oneLiner": "A carga crítica com que uma coluna esbelta se curva de repente por ação de uma força de compressão",
+    "description": "A fórmula da flambagem de Euler dá a carga crítica em que ocorre a flambagem de uma coluna esbelta apoiada por rótulas nas duas extremidades sob compressão axial. É proporcional ao módulo de elasticidade e ao momento de inércia da seção, e inversamente proporcional ao quadrado do comprimento da coluna. Quanto mais longa a coluna, mais vulnerável à flambagem, e essa é uma verificação obrigatória no projeto seguro de estruturas.",
+    "discoverer": "Leonhard Euler",
+    "field": "Engenharia mecânica",
+    "significance": "Tornou teoricamente previsível o limite de estabilidade das peças comprimidas e virou critério obrigatório de verificação no projeto em engenharia estrutural.",
+    "elementMeanings": {
+      "P_{cr}": { "role": "carga crítica de flambagem", "description": "Força de compressão mínima em que a flambagem começa. Unidade: newton (N).", "kind": "output" },
+      "\\pi^2": { "role": "quadrado do número pi", "description": "É a constante que vem da forma de onda do modo de flambagem.", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "módulo de elasticidade", "description": "Rigidez do material (módulo de Young). Unidade: pascal (Pa).", "kind": "input" },
+      "I": { "role": "momento de inércia da seção", "description": "Propriedade geométrica que expressa a resistência da seção à flexão. Unidade: m elevado à quarta potência.", "kind": "input" },
+      "L": { "role": "comprimento da coluna", "description": "Comprimento de flambagem. O comprimento efetivo varia conforme as condições de apoio. Unidade: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Verificar a segurança à flambagem dos pilares metálicos de um edifício alto", "Determinar a espessura mínima dos tubos do quadro de uma bicicleta"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

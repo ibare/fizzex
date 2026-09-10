@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "Volume da esfera",
+    "oneLiner": "Fórmula que obtém o volume da esfera multiplicando o cubo do raio por pi e por quatro terços",
+    "description": "O volume da esfera é o raio multiplicado por si mesmo três vezes, vezes pi e vezes quatro terços. Serve para obter o espaço ocupado por um corpo perfeitamente redondo, como uma bola de basquete.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pela esfera.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "constante de proporcionalidade", "description": "É o coeficiente fixo que determina o volume da esfera.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É a distância do centro da esfera até a superfície.", "kind": "input" },
+      "r^3": { "role": "cubo do raio", "description": "É o raio multiplicado por si mesmo três vezes. Como o volume é tridimensional, eleva-se ao cubo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular o volume de uma bola de basquete", "Estimar o volume da Terra", "Comparar o tamanho de bolinhas de gude"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "Área da superfície da esfera",
+    "oneLiner": "Fórmula que obtém a área da superfície da esfera multiplicando o quadrado do raio por pi e por 4",
+    "description": "A área da superfície da esfera é o quadrado do raio multiplicado por pi e por 4. Equivale exatamente a 4 vezes a área do círculo de mesmo raio. A quantidade de tinta necessária para pintar uma bola corresponde justamente a essa área.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "S": { "role": "área da superfície", "description": "É a área de toda a superfície da esfera.", "kind": "output" },
+      "4": { "role": "constante", "description": "Significa que a superfície da esfera equivale a 4 vezes a área do círculo de mesmo raio.", "kind": "constant", "value": 4 },
+      "\\pi": { "role": "pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É a distância do centro da esfera até a superfície.", "kind": "input" },
+      "r^2": { "role": "quadrado do raio", "description": "É o raio multiplicado por si mesmo duas vezes.", "kind": "input" }
+    },
+    "realWorldExamples": ["A área total do couro de uma bola de futebol", "A quantidade de papel necessária para revestir a superfície de um globo terrestre"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "Volume do cilindro",
+    "oneLiner": "Fórmula que obtém o volume do cilindro multiplicando a área do círculo da base pela altura",
+    "description": "O volume do cilindro é a área da base (a área do círculo) multiplicada pela altura. Basta pensar na forma como um círculo empilhado até a altura indicada.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pelo cilindro.", "kind": "output" },
+      "\\pi": { "role": "pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É o raio do círculo da base do cilindro.", "kind": "input" },
+      "r^2": { "role": "quadrado do raio", "description": "É o raio multiplicado por si mesmo duas vezes. Determina a área da base.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância entre as bases inferior e superior do cilindro.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular quanto cabe numa lata de refrigerante", "A capacidade de uma caixa d'água cilíndrica"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "Área da superfície do cilindro",
+    "oneLiner": "Fórmula que obtém a área da superfície do cilindro somando as duas bases e a face lateral",
+    "description": "A área da superfície do cilindro é a soma das áreas dos dois círculos, de cima e de baixo, com a área da face lateral. Planificada, a face lateral vira um retângulo cuja base é o comprimento da circunferência e cuja altura é a altura do cilindro.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "S": { "role": "área da superfície", "description": "É a área de toda a superfície do cilindro.", "kind": "output" },
+      "2": { "role": "constante", "description": "É o coeficiente colocado em evidência como fator comum.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É o raio do círculo da base do cilindro.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância entre as bases inferior e superior do cilindro.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular a área do rótulo de uma lata de refrigerante", "A quantidade de papel necessária para embrulhar uma caixa de presente cilíndrica"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "Volume do cone",
+    "oneLiner": "Fórmula que obtém o volume do cone multiplicando a área do círculo da base pela altura e dividindo por 3",
+    "description": "O volume do cone é a área da base multiplicada pela altura e dividida por 3. É exatamente um terço do cilindro de mesma base e mesma altura.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pelo cone.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "um terço", "description": "Significa que o volume do cone é um terço do cilindro de mesma base e mesma altura.", "kind": "constant", "value": 0.33333333 },
+      "\\pi": { "role": "pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É o raio do círculo da base do cone.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância perpendicular do vértice do cone até a base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular quanto cabe numa casquinha de sorvete", "O volume de um chapéu de festa cônico"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "Área da superfície do cone",
+    "oneLiner": "Fórmula que obtém a área da superfície do cone somando a área do círculo da base e a da face lateral",
+    "description": "A área da superfície do cone é a soma da área do círculo da base com a área da face lateral (em forma de setor circular). Planificada, a face lateral vira um setor circular cuja área é o produto do raio pela geratriz, multiplicado por pi.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "S": { "role": "área da superfície", "description": "É a área de toda a superfície do cone.", "kind": "output" },
+      "\\pi": { "role": "pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É o raio do círculo da base do cone.", "kind": "input" },
+      "l": { "role": "geratriz", "description": "É o comprimento inclinado que vai do vértice do cone até a borda da base.", "kind": "input" }
+    },
+    "realWorldExamples": ["A área de papel necessária para um chapéu de festa cônico", "Calcular a área de lona de uma tenda cônica"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "Volume do paralelepípedo retângulo",
+    "oneLiner": "Fórmula que obtém o volume do paralelepípedo retângulo multiplicando comprimento, largura e altura",
+    "description": "O volume do paralelepípedo retângulo é o produto do comprimento, da largura e da altura. É o mesmo que multiplicar a área do retângulo da base pela altura, e equivale a contar quantos cubos unitários cabem dentro da caixa.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pelo paralelepípedo retângulo.", "kind": "output" },
+      "l": { "role": "comprimento", "description": "É o comprimento do paralelepípedo retângulo.", "kind": "input" },
+      "w": { "role": "largura", "description": "É a largura do paralelepípedo retângulo.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a altura do paralelepípedo retângulo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular o volume de uma caixa de encomenda", "A quantidade de água que cabe numa piscina", "Estimar a capacidade interna de uma geladeira"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "Área da superfície do paralelepípedo retângulo",
+    "oneLiner": "Fórmula que obtém a área da superfície do paralelepípedo retângulo somando as áreas de três faces e dobrando o resultado",
+    "description": "A área da superfície do paralelepípedo retângulo é a soma das áreas de três faces distintas multiplicada por 2. O sólido tem três pares de faces opostas e, como as faces de um mesmo par têm áreas iguais, soma-se um exemplar de cada tipo e dobra-se o resultado.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "S": { "role": "área da superfície", "description": "É a área de toda a superfície do paralelepípedo retângulo.", "kind": "output" },
+      "2": { "role": "constante", "description": "Multiplica-se por 2 porque há três pares de faces opostas.", "kind": "constant", "value": 2 },
+      "l": { "role": "comprimento", "description": "É o comprimento do paralelepípedo retângulo.", "kind": "input" },
+      "w": { "role": "largura", "description": "É a largura do paralelepípedo retângulo.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a altura do paralelepípedo retângulo.", "kind": "input" },
+      "lw": { "role": "face superior/inferior", "description": "É a área da face obtida multiplicando o comprimento pela largura.", "kind": "output" },
+      "lh": { "role": "face frontal/traseira", "description": "É a área da face obtida multiplicando o comprimento pela altura.", "kind": "output" },
+      "wh": { "role": "face lateral", "description": "É a área da face obtida multiplicando a largura pela altura.", "kind": "output" }
+    },
+    "realWorldExamples": ["A quantidade de papel necessária para embrulhar uma caixa de presente", "Calcular a área externa de uma caixa de encomenda"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "Volume do tetraedro regular",
+    "oneLiner": "Fórmula que obtém o volume do tetraedro regular multiplicando o cubo da aresta por raiz de 2 dividido por 12",
+    "description": "O volume do tetraedro regular é o cubo do comprimento de uma aresta multiplicado por raiz de 2 dividido por 12. O tetraedro regular é o sólido cujas quatro faces são triângulos equiláteros iguais e é o mais simples dos poliedros regulares.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pelo tetraedro regular.", "kind": "output" },
+      "\\frac{\\sqrt{2}}{12}": { "role": "constante de proporcionalidade", "description": "É o coeficiente fixo que decorre da estrutura geométrica do tetraedro regular.", "kind": "constant", "value": 0.11785113 },
+      "a": { "role": "comprimento da aresta", "description": "É o comprimento de uma aresta do tetraedro regular. Todas as arestas são iguais.", "kind": "input" },
+      "a^3": { "role": "cubo da aresta", "description": "É o comprimento da aresta multiplicado por si mesmo três vezes.", "kind": "input" }
+    },
+    "realWorldExamples": ["O volume de um chocolate em forma de pirâmide", "Calcular o tamanho de um dado tetraédrico (D4)"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "Volume da pirâmide",
+    "oneLiner": "Fórmula que obtém o volume da pirâmide multiplicando a área da base pela altura e dividindo por 3",
+    "description": "O volume da pirâmide é a área da base multiplicada pela altura e dividida por 3. É exatamente um terço do prisma de mesma base e mesma altura. Aplica-se a sólidos de base poligonal e topo pontiagudo, como as pirâmides do Egito.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pela pirâmide.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "um terço", "description": "Significa que o volume da pirâmide é um terço do prisma de mesma base e mesma altura.", "kind": "constant", "value": 0.33333333 },
+      "B": { "role": "área da base", "description": "É a área da base (o polígono) da pirâmide.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância perpendicular do vértice da pirâmide até a base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Estimar o volume de uma pirâmide do Egito", "Calcular o espaço interno de uma barraca em forma de pirâmide"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}

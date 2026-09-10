@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "Stress",
+    "oneLiner": "The physical quantity giving the internal force acting per unit area",
+    "description": "Stress is the force per unit area that arises inside a body under an external load. It comes in several forms — tensile, compressive, shear — and it is the most basic indicator for judging whether a material will fail. Keeping it below the allowable stress is the heart of safety in structural design.",
+    "field": "Mechanical engineering",
+    "significance": "As the basic concept of mechanics of materials, it provides the starting point for assessing structural safety and for design.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Stress", "description": "The internal force per unit area. Unit: pascal (Pa) or N/m squared.", "kind": "output" },
+      "F": { "role": "Force", "description": "The external force acting on the body. Unit: newton (N).", "kind": "input" },
+      "A": { "role": "Cross-sectional area", "description": "The area of the section the force acts on. Unit: m squared.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculating the tensile stress in a bridge cable", "Checking the compressive stress in a building column"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "Strain",
+    "oneLiner": "The ratio of the change in length to the original length",
+    "description": "Strain is a dimensionless quantity expressing how far a body has deformed under an external load, as a fraction of its original length. While the strain is small the body springs back to its original shape within the elastic range, but past a critical value plastic deformation sets in and the shape changes permanently.",
+    "field": "Mechanical engineering",
+    "significance": "By quantifying how much a material deforms, it lays the groundwork for analyzing elastic and plastic behavior.",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "Strain", "description": "The fractional change in length. A dimensionless quantity (no unit).", "kind": "output" },
+      "\\Delta L": { "role": "Change in length", "description": "The original length subtracted from the length after deformation. Unit: m.", "kind": "input" },
+      "L": { "role": "Original length", "description": "The initial length of the body before the load is applied. Unit: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Measuring how far a specimen stretches in a metal tensile test", "Assessing how far a building frame deforms during an earthquake"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "Hooke's law",
+    "oneLiner": "The law that stress is proportional to strain within the elastic range",
+    "description": "Hooke's law states that the stress acting on a material is the elastic modulus times the strain. It holds only within the elastic limit; beyond that, behavior turns nonlinear. The restoring force of a spring (F=kx) is a special case of this law.",
+    "discoverer": "Robert Hooke",
+    "field": "Mechanical engineering",
+    "significance": "By establishing the linear relationship of elastic behavior, it laid the theoretical basis for structural analysis and materials testing.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Stress", "description": "The force acting per unit area. Unit: pascal (Pa).", "kind": "output" },
+      "E": { "role": "Elastic modulus", "description": "Young's modulus. The constant intrinsic to a material giving its stiffness. Unit: Pa.", "kind": "input" },
+      "\\varepsilon": { "role": "Strain", "description": "The fractional change in length. It is dimensionless.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculating the elastic restoring force of a spring", "Predicting how far a concrete column deforms under load"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "Bernoulli's equation",
+    "oneLiner": "The principle that pressure, velocity, and height energy add to a constant in the flow of an incompressible fluid",
+    "description": "Bernoulli's equation expresses conservation of energy in steady, incompressible, inviscid fluid flow. It puts numbers on the relationship that pressure falls as the flow speeds up, and falls as the height rises. It applies widely, from the lift of an aircraft wing to the design of piping.",
+    "discoverer": "Daniel Bernoulli",
+    "field": "Mechanical engineering",
+    "significance": "As a central principle of fluid mechanics, it provides the design basis for aviation, hydraulics, piping, and many other engineering fields.",
+    "elementMeanings": {
+      "P": { "role": "Static pressure", "description": "The static pressure of the fluid. Unit: pascal (Pa).", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "Dynamic pressure", "description": "The pressure due to the fluid's motion. It is proportional to the square of the speed.", "kind": "structural" },
+      "\\rho": { "role": "Density", "description": "The mass density of the fluid. Unit: kg/m³.", "kind": "input" },
+      "v": { "role": "Flow speed", "description": "The speed at which the fluid flows. Unit: m/s.", "kind": "input" },
+      "g": { "role": "Gravitational acceleration", "description": "The acceleration due to gravity near the Earth's surface. About 9.8 m/s squared.", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "Height", "description": "The height of the fluid above a reference plane. Unit: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Lift arising from the pressure difference above and below an aircraft wing", "Water speeding up when you pinch the end of a garden hose"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "Reynolds number",
+    "oneLiner": "The dimensionless number that tells whether a flow is laminar or turbulent",
+    "description": "The Reynolds number is a dimensionless number giving the ratio of inertial forces to viscous forces. When it is small (below about 2300) the flow is laminar; when it is large, turbulence sets in. It is the key indicator for predicting flow behavior in every engineering system involving fluids — piping, aircraft, ships.",
+    "discoverer": "Osborne Reynolds",
+    "field": "Mechanical engineering",
+    "significance": "By making the laminar-to-turbulent transition predictable, it gave fluid system design its key criterion.",
+    "elementMeanings": {
+      "Re": { "role": "Reynolds number", "description": "The ratio of inertial forces to viscous forces. It is a dimensionless number.", "kind": "output" },
+      "\\rho": { "role": "Density", "description": "The mass density of the fluid. Unit: kg/m³.", "kind": "input" },
+      "v": { "role": "Flow speed", "description": "The mean speed at which the fluid flows. Unit: m/s.", "kind": "input" },
+      "L": { "role": "Characteristic length", "description": "A length standing for the geometry of the flow, such as the diameter of a pipe. Unit: m.", "kind": "input" },
+      "\\mu": { "role": "Viscosity", "description": "The dynamic viscosity of the fluid. Unit: Pa times s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Predicting whether turbulence will occur when designing water pipes", "Analyzing boundary layer flow over the surface of an aircraft wing"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "Navier-Stokes equations",
+    "oneLiner": "The fundamental partial differential equations describing the motion of a viscous fluid",
+    "description": "The Navier-Stokes equations apply Newton's second law to a continuous fluid, showing that the pressure gradient, viscous forces, and external forces determine the fluid's acceleration. Analytic solutions generally do not exist, so they are solved numerically (CFD), and they matter mathematically too — enough to be named one of the Millennium Prize Problems.",
+    "discoverer": "Claude-Louis Navier, George Gabriel Stokes",
+    "field": "Mechanical engineering",
+    "significance": "They are the most general equations describing any viscous fluid flow, and the foundation of computational fluid dynamics (CFD).",
+    "elementMeanings": {
+      "\\rho": { "role": "Density", "description": "The mass density of the fluid. Unit: kg/m³.", "kind": "input" },
+      "\\mathbf{v}": { "role": "Velocity field", "description": "The velocity vector of a fluid particle. It is a function of position and time.", "kind": "output" },
+      "p": { "role": "Pressure", "description": "The pressure field acting on the fluid. Unit: pascal (Pa).", "kind": "input" },
+      "\\mu": { "role": "Viscosity", "description": "The dynamic viscosity of the fluid. Unit: Pa times s.", "kind": "input" },
+      "\\mathbf{f}": { "role": "External force", "description": "A body force acting on the fluid, such as gravity.", "kind": "input" }
+    },
+    "realWorldExamples": ["Computer simulation of the airflow around a car", "Analyzing blood flow patterns inside a vessel"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "Law of heat conduction",
+    "oneLiner": "The law giving the heat carried through a material by a temperature difference",
+    "description": "Fourier's law of heat conduction states that the rate of heat transfer is proportional to the thermal conductivity, the cross-sectional area, and the temperature gradient. Heat flows from hotter places to colder ones, and the higher the material's thermal conductivity, the faster it moves. It is the basis of thermal management design, from choosing insulation to cooling semiconductors.",
+    "discoverer": "Joseph Fourier",
+    "field": "Mechanical engineering",
+    "significance": "By making heat transfer quantitatively analyzable, it established the foundations of thermodynamics and thermal management engineering.",
+    "elementMeanings": {
+      "Q": { "role": "Rate of heat transfer", "description": "The heat energy transferred per unit time. Unit: watt (W).", "kind": "output" },
+      "k": { "role": "Thermal conductivity", "description": "The constant intrinsic to a material giving how well it carries heat. Unit: W/(m times K).", "kind": "input" },
+      "A": { "role": "Cross-sectional area", "description": "The area of the section the heat passes through. Unit: m squared.", "kind": "input" },
+      "\\Delta T": { "role": "Temperature difference", "description": "The temperature difference between the hot side and the cold side. Unit: K or degrees Celsius.", "kind": "input" },
+      "\\Delta x": { "role": "Thickness", "description": "The thickness of the material in the direction the heat travels. Unit: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculating the insulating performance of a building wall", "Designing the heat sink for a laptop CPU"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "Euler buckling load",
+    "oneLiner": "The critical load at which a long column suddenly bows under compression",
+    "description": "The Euler buckling formula gives the critical load at which a long column pinned at both ends buckles under an axial compressive force. It is proportional to the elastic modulus and the second moment of area, and inversely proportional to the square of the column's length. The longer the column, the more vulnerable it is to buckling, which makes this a mandatory check in safe structural design.",
+    "discoverer": "Leonhard Euler",
+    "field": "Mechanical engineering",
+    "significance": "By making the stability limit of a compression member theoretically predictable, it became a required check in structural engineering design.",
+    "elementMeanings": {
+      "P_{cr}": { "role": "Critical buckling load", "description": "The smallest compressive force at which buckling begins. Unit: newton (N).", "kind": "output" },
+      "\\pi^2": { "role": "Pi squared", "description": "A constant that comes from the waveform of the buckling mode.", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "Elastic modulus", "description": "The stiffness of the material (Young's modulus). Unit: pascal (Pa).", "kind": "input" },
+      "I": { "role": "Second moment of area", "description": "The geometric property giving the section's resistance to bending. Unit: m to the fourth power.", "kind": "input" },
+      "L": { "role": "Column length", "description": "The buckling length. The effective length varies with the support conditions. Unit: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Checking the buckling safety of steel columns in a high-rise building", "Deciding the minimum wall thickness of a bicycle frame tube"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

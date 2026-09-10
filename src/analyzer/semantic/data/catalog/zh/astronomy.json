@@ -1,0 +1,246 @@
+{
+  "kepler-third": {
+    "name": "开普勒第三定律",
+    "oneLiner": "轨道越高，公转越慢",
+    "description": "公转周期的平方与轨道半径的立方成正比。行星、卫星、人造卫星都遵循这条定律。",
+    "discoverer": "约翰内斯·开普勒",
+    "field": "天体力学",
+    "significance": "把行星运动的规律性用数学确立下来，为牛顿力学奠定了基础，如今在系外行星与卫星轨道分析中发挥着核心作用。",
+    "elementMeanings": {
+      "T": { "role": "公转周期", "kind": "output", "unit": "s", "description": "卫星绕地球转一圈所需的时间" },
+      "T^2": { "role": "公转周期的平方", "kind": "output", "unit": "s²", "description": "与轨道半径的立方成正比的量" },
+      "4pi2": { "role": "4π²", "kind": "constant", "value": 39.478, "description": "来自圆轨道几何性质的常数 ≈ 39.48" },
+      "G": { "role": "万有引力常数", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "决定引力强弱的基本常数。正因为这个数极小，日常中要有地球这样巨大的质量才能感受到引力" },
+      "M": { "role": "地球的质量", "kind": "constant", "value": 5.972e24, "unit": "kg", "description": "中心天体越重，对卫星的吸引就越强。同样的轨道若绕木星运行，周期会短得多" },
+      "a": { "role": "轨道半径", "kind": "input", "unit": "km", "description": "卫星与地心之间的距离。它以立方的形式进入公式，所以微小的变化也会对周期产生很大影响" },
+      "a^3": { "role": "半径的立方", "kind": "output", "unit": "km³", "description": "轨道只要略微抬高，周期就会急剧变长的原因" }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "轨道半径",
+        "min": 6500,
+        "max": 400000,
+        "default": 6771,
+        "step": 1,
+        "unit": "km",
+        "scale": "log",
+        "effects": [
+          { "range": [6500, 8000], "description": "近地轨道(LEO)。引力很强，必须转得快才不会掉下来。90 分钟绕一圈，一天能看到 16 次日出。" },
+          { "range": [8000, 35000], "description": "中地球轨道。引力变弱，转得慢一些也可以。GPS 卫星一天正好绕两圈。" },
+          { "range": [35000, 50000], "description": "接近地球静止轨道。正好 24 小时绕一圈时，从地面看它就像固定在天上，因此用于电视转播。" },
+          { "range": [50000, 400000], "description": "高轨道。越接近月球，地球引力就越弱。月球要花上 27 天才绕一圈。" }
+        ]
+      }
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "公转周期",
+        "unit": "h",
+        "format": "time",
+        "sourceParams": ["a"],
+        "transform": { "type": "custom", "sourceParam": "a" },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "轨道速度",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": ["a"],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "高度",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": ["a"],
+        "transform": { "type": "subtract", "sourceParam": "a", "operand": 6371 }
+      },
+      {
+        "id": "earthRatio",
+        "label": "相对地球半径",
+        "unit": "×",
+        "format": "number",
+        "sourceParams": ["a"],
+        "transform": { "type": "divide", "sourceParam": "a", "operand": 6371 }
+      }
+    ],
+    "constraints": [
+      { "param": "a", "type": "min", "value": 6371, "severity": "error", "message": "小于地球半径(6,371km)就位于地球内部，无法形成轨道" },
+      { "param": "a", "type": "min", "value": 6571, "severity": "warning", "message": "高度低于 200km 时，大气阻力会使轨道迅速衰减" }
+    ],
+    "milestones": [
+      { "param": "a", "value": 6771, "label": "ISS 轨道", "shortLabel": "ISS", "emoji": "🛸", "description": "高度 400km。90 分钟绕一圈，一天 16 次日出" },
+      { "param": "a", "value": 26560, "label": "GPS 轨道", "shortLabel": "GPS", "emoji": "📡", "description": "高度 20,200km。周期正好 12 小时" },
+      { "param": "a", "value": 42164, "label": "地球静止轨道", "shortLabel": "GEO", "emoji": "📺", "description": "高度 35,786km。正好 24 小时 — 看上去固定在天空中" },
+      { "param": "a", "value": 384400, "label": "月球", "shortLabel": "Moon", "emoji": "🌙", "description": "周期 27.3 天。距离地球最近的天体" }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          { "range": [0, 500], "template": "约为客机巡航高度(10km)的 {ratio} 倍", "referenceValue": 10, "referenceLabel": "客机巡航高度" },
+          { "range": [500, 5000], "template": "约为首尔到釜山距离({ref}km)的 {ratio} 倍高", "referenceValue": 325, "referenceLabel": "首尔到釜山的距离" },
+          { "range": [5000, 50000], "template": "约为地球直径({ref}km)的 {ratio} 倍", "referenceValue": 12742, "referenceLabel": "地球直径" },
+          { "range": [50000, 400000], "template": "约为地月距离的 {ratio}%", "referenceValue": 384400, "referenceLabel": "地月距离" }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "用地球的公转周期与轨道半径计算太阳的质量",
+      "通过观测系外行星的公转周期推算轨道大小",
+      "按人造卫星的轨道高度设计其公转周期"
+    ],
+    "relatedFormulas": ["universal-gravitation", "escape-velocity"]
+  },
+  "hubble-law": {
+    "name": "哈勃定律",
+    "oneLiner": "遥远星系的退行速度与距离成正比的宇宙膨胀定律",
+    "description": "哈勃定律表明，星系越远，远离我们的速度就越快，而且退行速度与距离成正比。作为比例常数的哈勃常数表示宇宙的膨胀率，在推算宇宙年龄时起着关键作用。它是大爆炸宇宙学最有力的观测证据之一。",
+    "discoverer": "埃德温·哈勃",
+    "field": "天文学",
+    "significance": "从观测上证明了宇宙正在膨胀，为现代宇宙学开辟了起点。",
+    "elementMeanings": {
+      "v": { "role": "退行速度", "kind": "output", "unit": "km/s", "description": "星系远离观测者的速度。单位：km/s。" },
+      "H_0": { "role": "哈勃常数", "kind": "constant", "value": 70, "unit": "km/s/Mpc", "description": "当前宇宙的膨胀率。约为 70 km/s/Mpc。" },
+      "d": { "role": "距离", "kind": "input", "unit": "Mpc", "description": "从观测者到星系的距离。单位：兆秒差距(Mpc)。" }
+    },
+    "realWorldExamples": [
+      "由星系的红移推算距离",
+      "计算宇宙的年龄（约 138 亿年）",
+      "研究宇宙膨胀是否在加速"
+    ],
+    "relatedFormulas": ["schwarzschild-radius", "gravitational-lensing"]
+  },
+  "schwarzschild-radius": {
+    "name": "史瓦西半径",
+    "oneLiner": "给出物体成为黑洞所需临界半径的公式",
+    "description": "史瓦西半径是某一质量的物体要成为黑洞所必须压缩到的最小半径。质量一旦被压缩到这个半径以内，就会形成连光都无法逃脱的事件视界。它是从广义相对论的史瓦西解中导出的结果。",
+    "discoverer": "卡尔·史瓦西",
+    "field": "天文学",
+    "significance": "定量地定义了黑洞的大小，确立了相对论天体物理学的核心概念。",
+    "elementMeanings": {
+      "r_s": { "role": "史瓦西半径", "kind": "output", "unit": "m", "description": "事件视界的半径。单位：米(m)。" },
+      "G": { "role": "引力常数", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "万有引力常数。约为 6.674×10⁻¹¹ N·m²/kg²。" },
+      "M": { "role": "质量", "kind": "input", "unit": "kg", "description": "天体的质量。单位：kg。" },
+      "c": { "role": "光速", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "真空中的光速。约为 3×10⁸ m/s。" },
+      "c^2": { "role": "光速的平方", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "它位于分母上，表示质量越大半径越大的关系。" }
+    },
+    "realWorldExamples": [
+      "计算太阳的史瓦西半径（约 3km）",
+      "估算超大质量黑洞事件视界的尺度",
+      "分析中子星坍缩成黑洞的临界条件"
+    ],
+    "relatedFormulas": ["mass-energy", "escape-velocity", "gravitational-lensing"]
+  },
+  "stefan-boltzmann": {
+    "name": "斯特藩-玻尔兹曼定律",
+    "oneLiner": "恒星的总辐射光度与半径的平方及表面温度的四次方成正比的定律",
+    "description": "斯特藩-玻尔兹曼定律表明，黑体的总辐射能量（光度）与表面积成正比，并与表面温度的四次方成正比。对恒星而言，知道半径和表面温度就能算出总光度；反过来，也可以由光度和温度推算恒星的大小。",
+    "discoverer": "约瑟夫·斯特藩、路德维希·玻尔兹曼",
+    "field": "天文学",
+    "significance": "把恒星的物理性质（大小、温度、光度）之间的关系定量化，成为恒星分类与演化理论的基础。",
+    "elementMeanings": {
+      "L": { "role": "光度", "kind": "output", "unit": "W", "description": "恒星单位时间内放出的总能量。单位：瓦特(W)。" },
+      "R": { "role": "恒星的半径", "kind": "input", "unit": "m", "description": "恒星的半径。单位：米(m)。" },
+      "R^2": { "role": "半径的平方", "kind": "structural", "description": "与表面积(4πR²)成正比的因子。" },
+      "\\sigma": { "role": "斯特藩-玻尔兹曼常数", "kind": "constant", "value": 5.670e-8, "unit": "W/(m²·K⁴)", "description": "约为 5.67×10⁻⁸ W/(m²·K⁴)。" },
+      "T": { "role": "表面温度", "kind": "input", "unit": "K", "description": "恒星表面的有效温度。单位：开尔文(K)。" },
+      "T^4": { "role": "温度的四次方", "kind": "structural", "description": "温度变为两倍，光度就变成 16 倍。这是很强的非线性关系。" }
+    },
+    "realWorldExamples": [
+      "由恒星的表面温度与光度推算半径",
+      "比较红巨星与白矮星的大小",
+      "解读恒星在赫罗图（赫茨普龙-罗素图）上的位置"
+    ],
+    "relatedFormulas": ["wien-displacement", "mass-energy"]
+  },
+  "wien-displacement": {
+    "name": "维恩位移定律",
+    "oneLiner": "黑体辐射强度最大处的波长与温度成反比的定律",
+    "description": "维恩位移定律表明，黑体辐射最强的波长与温度成反比。温度越高，最强辐射的波长越短，向蓝色偏移；温度越低，则向波长更长的红色偏移。凭这条定律，只看恒星的颜色就能推算其表面温度。",
+    "discoverer": "威廉·维恩",
+    "field": "天文学",
+    "significance": "揭示了恒星颜色与温度之间的定量关系，为基于光谱学的天体观测提供了基础。",
+    "elementMeanings": {
+      "\\lambda_{max}": { "role": "最强辐射波长", "kind": "output", "unit": "m", "description": "黑体辐射谱中强度最大处的波长。单位：米(m)。" },
+      "b": { "role": "维恩位移常数", "kind": "constant", "value": 2.898e-3, "unit": "m·K", "description": "约为 2.898×10⁻³ m·K。" },
+      "T": { "role": "温度", "kind": "input", "unit": "K", "description": "黑体的绝对温度。单位：开尔文(K)。" }
+    },
+    "realWorldExamples": [
+      "由恒星的颜色推算表面温度（蓝色的星炽热，红色的星较冷）",
+      "测定太阳的表面温度（约 5,778K，处于黄色波段）",
+      "用红外望远镜观测低温天体"
+    ],
+    "relatedFormulas": ["stefan-boltzmann"]
+  },
+  "drake-equation": {
+    "name": "德雷克方程",
+    "oneLiner": "估算银河系中可通信的智慧文明数量的概率方程",
+    "description": "德雷克方程把银河系中当前正在发出可探测无线电信号的文明数量，估算为若干概率因子之积。各个因子涵盖了从恒星形成率到文明寿命的方方面面，虽然大多数取值并不确定，但它为地外智慧生命搜寻(SETI)系统地指明了方向。",
+    "discoverer": "弗兰克·德雷克",
+    "field": "天文学",
+    "significance": "把搜寻地外智慧生命的问题科学地体系化，为 SETI 研究提供了理论框架。",
+    "elementMeanings": {
+      "N": { "role": "可通信文明数量", "kind": "output", "description": "银河系中当前正在发出可探测信号的文明数量。" },
+      "R_*": { "role": "恒星形成率", "kind": "input", "unit": "/yr", "description": "银河系中每年新诞生的恒星数量。" },
+      "f_p": { "role": "拥有行星的比例", "kind": "input", "description": "拥有行星系的恒星所占的比例。" },
+      "n_e": { "role": "宜居行星数量", "kind": "input", "description": "每个行星系中位于宜居带的行星数量。" },
+      "f_l": { "role": "生命诞生比例", "kind": "input", "description": "宜居行星上实际诞生生命的概率。" },
+      "f_i": { "role": "智慧生命比例", "kind": "input", "description": "生命演化为智慧生命的概率。" },
+      "f_c": { "role": "通信技术比例", "kind": "input", "description": "智慧生命发展出可发送可探测信号的技术的概率。" },
+      "L": { "role": "文明寿命", "kind": "input", "unit": "yr", "description": "可通信文明持续发出信号的时长。单位：年。" }
+    },
+    "realWorldExamples": [
+      "在 SETI 项目中制定搜寻策略",
+      "用系外行星的发现数据更新 f_p、n_e 的取值",
+      "围绕费米悖论（为什么看不到地外文明的证据）展开定量讨论"
+    ],
+    "relatedFormulas": ["hubble-law"]
+  },
+  "gravitational-lensing": {
+    "name": "引力透镜效应",
+    "oneLiner": "给出大质量天体使光线路径弯曲角度的公式",
+    "description": "引力透镜效应是指经过大质量天体附近的光线因时空弯曲而发生偏折的现象。偏转角与天体的质量成正比，与光线最接近该天体时的距离成反比。它是广义相对论的直接预言，最早的观测验证是在 1919 年的日食中完成的。",
+    "discoverer": "阿尔伯特·爱因斯坦",
+    "field": "天文学",
+    "significance": "它是首个从观测上验证广义相对论的现象，如今是观测暗物质分布的核心工具。",
+    "elementMeanings": {
+      "\\theta": { "role": "偏转角", "kind": "output", "unit": "rad", "description": "光线弯曲的角度。单位：弧度(rad)。" },
+      "G": { "role": "引力常数", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "万有引力常数。约为 6.674×10⁻¹¹ N·m²/kg²。" },
+      "M": { "role": "透镜天体质量", "kind": "input", "unit": "kg", "description": "使光线弯曲的天体的质量。单位：kg。" },
+      "c": { "role": "光速", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "真空中的光速。约为 3×10⁸ m/s。" },
+      "c^2": { "role": "光速的平方", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "体现相对论修正的因子。" },
+      "b": { "role": "碰撞参数", "kind": "input", "unit": "m", "description": "光线最接近透镜天体时的距离。单位：米(m)。" }
+    },
+    "realWorldExamples": [
+      "观测星系团造成的背景星系像畸变",
+      "用微引力透镜搜寻系外行星",
+      "绘制暗物质分布图"
+    ],
+    "relatedFormulas": ["schwarzschild-radius", "universal-gravitation"]
+  },
+  "escape-velocity": {
+    "name": "逃逸速度",
+    "oneLiner": "给出摆脱天体引力所需最小速度的公式",
+    "description": "逃逸速度是物体在天体表面要完全摆脱引力束缚所必须具备的最小速度。天体的质量越大、半径越小，逃逸速度就越大。在史瓦西半径处逃逸速度达到光速，这与黑洞的定义直接相关。",
+    "field": "天文学",
+    "significance": "它是火箭发射、行星能否保住大气、黑洞形成条件等各类天体物理问题的基础。",
+    "elementMeanings": {
+      "v_e": { "role": "逃逸速度", "kind": "output", "unit": "m/s", "description": "摆脱引力束缚所需的最小速度。单位：m/s。" },
+      "G": { "role": "引力常数", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "万有引力常数。约为 6.674×10⁻¹¹ N·m²/kg²。" },
+      "M": { "role": "天体质量", "kind": "input", "unit": "kg", "description": "要逃离的天体的质量。单位：kg。" },
+      "r": { "role": "半径", "kind": "input", "unit": "m", "description": "从天体中心到出发点的距离。单位：米(m)。" }
+    },
+    "realWorldExamples": [
+      "计算地球的逃逸速度（约 11.2 km/s）",
+      "用月球较低的逃逸速度解释它没有大气",
+      "木星的高逃逸速度与其浓厚大气之间的关系"
+    ],
+    "relatedFormulas": ["universal-gravitation", "schwarzschild-radius", "kepler-third", "kinetic-energy"]
+  }
+}

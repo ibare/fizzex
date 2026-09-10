@@ -1,0 +1,72 @@
+{
+  "direct-proportion": {
+    "name": "Proportionnalité directe",
+    "oneLiner": "Relation dans laquelle une quantité augmente dans le même rapport que l'autre",
+    "description": "La proportionnalité directe y = kx est la relation où y double quand x double et triple quand x triple. Son graphique est une droite passant par l'origine, et k est le coefficient de proportionnalité.",
+    "field": "Algèbre",
+    "significance": "Elle représente la relation proportionnelle la plus élémentaire et constitue, en tant que cas particulier de la fonction affine (ordonnée à l'origine nulle), le point de départ de tout l'apprentissage des proportions.",
+    "elementMeanings": {
+      "y": { "role": "Variable dépendante", "description": "Valeur de sortie, déterminée par x.", "kind": "output" },
+      "k": { "role": "Coefficient de proportionnalité", "description": "Rapport constant entre x et y. On l'obtient par k = y/x.", "kind": "input" },
+      "x": { "role": "Variable indépendante", "description": "Valeur d'entrée que l'on choisit librement.", "kind": "input" }
+    },
+    "realWorldExamples": ["Relation entre le nombre de pommes et le prix à payer quand une pomme coûte un euro", "Relation entre le temps et la distance lorsqu'on avance à vitesse constante"],
+    "relatedFormulas": ["linear-function", "inverse-proportion"]
+  },
+  "inverse-proportion": {
+    "name": "Proportionnalité inverse",
+    "oneLiner": "Relation dans laquelle une quantité diminue dans le même rapport que l'autre augmente",
+    "description": "La proportionnalité inverse y = k/x est la relation où y est divisé par deux quand x double et par trois quand x triple. Son graphique est une hyperbole, qui se rapproche indéfiniment des axes des abscisses et des ordonnées sans jamais les toucher.",
+    "field": "Algèbre",
+    "significance": "Elle décrit les relations dont le produit reste constant et sert de fondement mathématique à de nombreux phénomènes, comme la loi de Boyle en physique ou la relation entre le travail et la durée.",
+    "elementMeanings": {
+      "y": { "role": "Variable dépendante", "description": "Valeur de sortie, déterminée par x.", "kind": "output" },
+      "k": { "role": "Coefficient de proportionnalité", "description": "Valeur telle que le produit de x et de y reste toujours le même. On l'obtient par k = xy.", "kind": "input" },
+      "x": { "role": "Variable indépendante", "description": "Valeur d'entrée, nécessairement non nulle.", "kind": "input" }
+    },
+    "realWorldExamples": ["Pour une même distance, plus la vitesse est grande, plus la durée du trajet est courte", "Dans des rectangles de même aire, plus la longueur est grande, plus la largeur est petite"],
+    "relatedFormulas": ["direct-proportion", "speed-formula"]
+  },
+  "percentage": {
+    "name": "Pourcentage",
+    "oneLiner": "Part qu'occupe une portion lorsque le tout est ramené à 100",
+    "description": "Le pourcentage p = (partie/tout) x 100 exprime, sur une base de 100, la part qu'une quantité occupe dans le tout. Il s'écrit avec le signe pour cent (%) et facilite la comparaison comme la communication.",
+    "field": "Arithmétique",
+    "significance": "C'est la manière d'exprimer une proportion la plus répandue dans la vie quotidienne : remises, taux d'intérêt, notes, statistiques.",
+    "elementMeanings": {
+      "p": { "role": "Pourcentage", "description": "Valeur du rapport lorsque le tout vaut 100. Son unité est le %.", "kind": "output", "unit": "%" },
+      "부분": { "role": "Quantité comparée", "description": "Taille de la portion du tout que l'on cherche à connaître.", "kind": "input" },
+      "전체": { "role": "Quantité de référence", "description": "Taille du tout, qui correspond à 100 %.", "kind": "input" }
+    },
+    "realWorldExamples": ["Proportion de questions réussies à un examen (80 points = 80 %)", "Calcul de la remise réelle sur un article affiché à -30 %"],
+    "relatedFormulas": ["direct-proportion"]
+  },
+  "speed-formula": {
+    "name": "Formule de la vitesse",
+    "oneLiner": "Formule qui donne la vitesse en divisant la distance parcourue par le temps mis à la parcourir",
+    "description": "La formule de la vitesse v = d/t donne la distance parcourue par un corps pendant une unité de temps. C'est la formule de physique la plus élémentaire, celle qui met en relation les trois grandeurs distance, temps et vitesse.",
+    "field": "Physique",
+    "significance": "C'est la formule la plus fondamentale pour décrire un mouvement et le point de départ pour comprendre la relation entre distance, temps et vitesse.",
+    "elementMeanings": {
+      "v": { "role": "Vitesse", "description": "Distance parcourue par unité de temps. Exemple : 60 km/h signifie que l'on parcourt 60 km en une heure.", "kind": "output", "unit": "m/s" },
+      "d": { "role": "Distance", "description": "Longueur réellement parcourue par le corps.", "kind": "input", "unit": "m" },
+      "t": { "role": "Temps", "description": "Durée mise pour effectuer le trajet.", "kind": "input", "unit": "s" }
+    },
+    "realWorldExamples": ["Calculer la vitesse moyenne d'une voiture qui parcourt 120 km en 2 heures", "Calculer la vitesse moyenne à partir du chrono sur un 100 mètres"],
+    "relatedFormulas": ["direct-proportion", "inverse-proportion", "density-formula"]
+  },
+  "density-formula": {
+    "name": "Formule de la masse volumique",
+    "oneLiner": "Formule qui indique à quel point la matière est concentrée dans une unité de volume",
+    "description": "La formule de la masse volumique divise la masse par le volume pour mesurer à quel point la matière est compacte. À taille égale, plus la masse est grande, plus la masse volumique est élevée ; à masse égale, plus le volume est grand, plus elle est faible.",
+    "field": "Physique",
+    "significance": "C'est une grandeur physique de base, qui sert à distinguer les matières et à déterminer si un corps flotte ou coule.",
+    "elementMeanings": {
+      "\\rho": { "role": "Masse volumique", "description": "Masse par unité de volume. L'unité usuelle est le g/cm3 ou le kg/m3.", "kind": "output", "unit": "kg/m3" },
+      "m": { "role": "Masse", "description": "Grandeur qui exprime la quantité de matière d'un corps. L'unité est le g ou le kg.", "kind": "input", "unit": "kg" },
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par le corps. L'unité est le cm3 ou le m3.", "kind": "input", "unit": "m3" }
+    },
+    "realWorldExamples": ["Pourquoi une bille d'acier coule alors qu'un bloc de bois flotte", "Comment distinguer l'or véritable d'un faux grâce à la masse volumique"],
+    "relatedFormulas": ["speed-formula"]
+  }
+}

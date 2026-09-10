@@ -1,0 +1,206 @@
+{
+  "arithmetic-mean": {
+    "name": "Arithmetic mean",
+    "oneLiner": "The representative value you get by adding up every data value and dividing by how many there are",
+    "description": "The arithmetic mean is the sum of all the data divided by the number of data points. When people say 'the average', this is usually what they mean. It is the simplest way to say where the centre of the data sits, and it is the statistic used most often in everyday life.",
+    "field": "Statistics",
+    "significance": "It is the most basic way to summarise data in a single number, and it is where almost every statistical analysis starts.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Arithmetic mean",
+        "description": "The average value of the whole data set.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Individual data value",
+        "description": "The i-th value in the data set.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Number of data points",
+        "description": "It says how many data points there are.",
+        "kind": "input"
+      },
+      "\\sum": {
+        "role": "Summation sign",
+        "description": "It tells you to add up every data value.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Finding the average exam score of a class",
+      "Working out the average daily temperature over a month",
+      "Finding the average daily spend from a record of pocket money"
+    ],
+    "relatedFormulas": [
+      "weighted-mean",
+      "variance-basic",
+      "std-dev-basic"
+    ]
+  },
+  "variance-basic": {
+    "name": "Variance",
+    "oneLiner": "The average of the squared distances of each data point from the mean",
+    "description": "Variance expresses in a single number how widely the data is scattered around the mean. Subtract the mean from each data point, square the difference, add them all up, and divide by the number of data points. The larger the value, the more widely spread out the data is.",
+    "field": "Statistics",
+    "significance": "It is the central measure that quantifies how spread out data is, and together with the standard deviation it forms the basis of statistical analysis.",
+    "elementMeanings": {
+      "\\sigma^2": {
+        "role": "Variance",
+        "description": "The population variance. It says how spread out the data is.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Individual data value",
+        "description": "The i-th value in the data set.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Mean",
+        "description": "The arithmetic mean of the whole data set.",
+        "kind": "output"
+      },
+      "(x_i - \\bar{x})^2": {
+        "role": "Squared deviation",
+        "description": "The square of how far each data point sits from the mean.",
+        "kind": "structural"
+      },
+      "n": {
+        "role": "Number of data points",
+        "description": "The total number of data points.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Comparing how two classes' scores are distributed by variance even when their means match",
+      "Using variance to check how uniform product weights are in a factory",
+      "Measuring the swing in stock returns with variance"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "std-dev-basic",
+      "coefficient-of-variation"
+    ]
+  },
+  "std-dev-basic": {
+    "name": "Standard deviation",
+    "oneLiner": "A measure of how far the data spreads from the mean, expressed in the original units",
+    "description": "The standard deviation is the square root of the variance. Variance comes in squared units, which makes it hard to read intuitively; taking the square root puts it back into the same units as the data, so you can immediately say 'the data sits roughly this far from the mean'.",
+    "field": "Statistics",
+    "significance": "Because it expresses the spread in the same units as the data, it reads intuitively, and alongside the normal distribution it is the most widely used measure of dispersion.",
+    "elementMeanings": {
+      "\\sigma": {
+        "role": "Standard deviation",
+        "description": "The population standard deviation. It gives the spread of the data in its original units.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Individual data value",
+        "description": "The i-th value in the data set.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Mean",
+        "description": "The arithmetic mean of the whole data set.",
+        "kind": "output"
+      },
+      "n": {
+        "role": "Number of data points",
+        "description": "The total number of data points.",
+        "kind": "input"
+      },
+      "\\sqrt{}": {
+        "role": "Square root",
+        "description": "Taking the square root of the variance returns it to the original units.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Describing spread in height data as 'mean 165cm, standard deviation 5cm'",
+      "Judging from the standard deviation of exam scores whether results are evenly distributed",
+      "Explaining the swing in temperature in a weather forecast with the standard deviation"
+    ],
+    "relatedFormulas": [
+      "variance-basic",
+      "arithmetic-mean",
+      "coefficient-of-variation"
+    ]
+  },
+  "weighted-mean": {
+    "name": "Weighted mean",
+    "oneLiner": "An average that takes each data point's importance (its weight) into account",
+    "description": "The weighted mean does not treat every data point alike. You multiply each one by a weight standing for its importance, add the results, and divide by the sum of the weights. School grades, where subjects carry different credit values, are the classic example.",
+    "field": "Statistics",
+    "significance": "When data points differ in importance, it gives a more accurate representative value than a plain arithmetic mean.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Weighted mean",
+        "description": "The average calculated with the weights taken into account.",
+        "kind": "output"
+      },
+      "w_i": {
+        "role": "Weight",
+        "description": "The importance or share of the i-th data point.",
+        "kind": "input"
+      },
+      "x_i": {
+        "role": "Individual data value",
+        "description": "The i-th value in the data set.",
+        "kind": "input"
+      },
+      "\\sum w_i x_i": {
+        "role": "Weighted sum",
+        "description": "The sum of each data value multiplied by its weight.",
+        "kind": "structural"
+      },
+      "\\sum w_i": {
+        "role": "Sum of the weights",
+        "description": "Every weight added together.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Calculating a university grade point average (GPA) where subjects carry different credits (weights)",
+      "Working out a total performance score where tasks carry different point values",
+      "Calculating an average return on an investment portfolio that reflects each holding's share"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  },
+  "coefficient-of-variation": {
+    "name": "Coefficient of variation",
+    "oneLiner": "The standard deviation divided by the mean, so spread can be compared regardless of units",
+    "description": "The coefficient of variation is the ratio of the standard deviation to the mean. It lets you compare the spread of data sets fairly even when they have different units or very different average sizes. It is usually given as a percentage.",
+    "field": "Statistics",
+    "significance": "It is a dimensionless measure that lets you compare variability across data of different units or scales.",
+    "elementMeanings": {
+      "CV": {
+        "role": "Coefficient of variation",
+        "description": "The standard deviation divided by the mean. It gives the relative spread.",
+        "kind": "output"
+      },
+      "\\sigma": {
+        "role": "Standard deviation",
+        "description": "How spread out the data is.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Mean",
+        "description": "The arithmetic mean of the whole data set. It must not be 0.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Comparing the spread of height (cm) and weight (kg) fairly",
+      "Comparing the relative variability of exam scores across different subjects",
+      "Comparing how uniform the quality is for different products made at factories A and B"
+    ],
+    "relatedFormulas": [
+      "std-dev-basic",
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  }
+}

@@ -1,0 +1,600 @@
+{
+  "kepler-third": {
+    "name": "ケプラーの第3法則",
+    "oneLiner": "軌道が高いほど公転はゆっくりになる",
+    "description": "公転周期の2乗は軌道半径の3乗に比例します。惑星も衛星も人工衛星も、みなこの法則にしたがいます。",
+    "discoverer": "ヨハネス・ケプラー",
+    "field": "天体力学",
+    "significance": "惑星の運動の規則正しさを数学的にまとめてニュートン力学の土台をつくり、系外惑星や衛星の軌道の分析に中心的に使われています。",
+    "elementMeanings": {
+      "T": {
+        "role": "公転周期",
+        "kind": "output",
+        "unit": "s",
+        "description": "衛星が地球を一周するのにかかる時間"
+      },
+      "T^2": {
+        "role": "公転周期の2乗",
+        "kind": "output",
+        "unit": "s²",
+        "description": "軌道半径の3乗に比例する値です"
+      },
+      "4pi2": {
+        "role": "4π²",
+        "kind": "constant",
+        "value": 39.478,
+        "description": "円軌道の幾何学的な性質から出てくる定数 ≈ 39.48"
+      },
+      "G": {
+        "role": "万有引力定数",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "重力の強さを決める基本の定数。この数がきわめて小さいため、日常で重力を感じるには地球のような巨大な質量が必要になる"
+      },
+      "M": {
+        "role": "地球の質量",
+        "kind": "constant",
+        "value": 5.972e+24,
+        "unit": "kg",
+        "description": "中心の天体が重いほど衛星を強く引く。同じ軌道でも木星のまわりを回れば周期はずっと短くなる"
+      },
+      "a": {
+        "role": "軌道半径",
+        "kind": "input",
+        "unit": "km",
+        "description": "衛星と地球の中心との距離。3乗で効いてくるので、小さな変化でも周期に大きく影響する"
+      },
+      "a^3": {
+        "role": "半径の3乗",
+        "kind": "output",
+        "unit": "km³",
+        "description": "軌道を少し高くしただけで周期が急に長くなる理由"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "軌道半径",
+        "min": 6500,
+        "max": 400000,
+        "default": 6771,
+        "step": 1,
+        "unit": "km",
+        "scale": "log",
+        "effects": [
+          {
+            "range": [
+              6500,
+              8000
+            ],
+            "description": "低軌道(LEO)。重力が強いので、速く回らないと落ちてしまいます。90分で一周し、1日に16回の日の出を見ます。"
+          },
+          {
+            "range": [
+              8000,
+              35000
+            ],
+            "description": "中軌道。重力が弱まるので、ゆっくり回っても大丈夫です。GPS衛星は1日にちょうど2周します。"
+          },
+          {
+            "range": [
+              35000,
+              50000
+            ],
+            "description": "静止軌道の近く。ちょうど24時間で一周すると、地球から見て空に止まっているように見えるので、テレビの中継に使われます。"
+          },
+          {
+            "range": [
+              50000,
+              400000
+            ],
+            "description": "高軌道。月に近づくと地球の重力はかなり弱くなります。月は一周するのに27日もかかります。"
+          }
+        ]
+      }
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "公転周期",
+        "unit": "h",
+        "format": "time",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "custom",
+          "sourceParam": "a"
+        },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "軌道速度",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": [
+          "a"
+        ],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "高度",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "subtract",
+          "sourceParam": "a",
+          "operand": 6371
+        }
+      },
+      {
+        "id": "earthRatio",
+        "label": "地球半径との比",
+        "unit": "×",
+        "format": "number",
+        "sourceParams": [
+          "a"
+        ],
+        "transform": {
+          "type": "divide",
+          "sourceParam": "a",
+          "operand": 6371
+        }
+      }
+    ],
+    "constraints": [
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6371,
+        "severity": "error",
+        "message": "地球の半径(6,371km)より小さいと地球の内部になるため、軌道はありえません"
+      },
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6571,
+        "severity": "warning",
+        "message": "高度200km未満では大気の抵抗で軌道が急速に低下します"
+      }
+    ],
+    "milestones": [
+      {
+        "param": "a",
+        "value": 6771,
+        "label": "ISSの軌道",
+        "shortLabel": "ISS",
+        "emoji": "🛸",
+        "description": "高度400km。90分で一周し、1日に16回の日の出"
+      },
+      {
+        "param": "a",
+        "value": 26560,
+        "label": "GPSの軌道",
+        "shortLabel": "GPS",
+        "emoji": "📡",
+        "description": "高度20,200km。ちょうど12時間の周期"
+      },
+      {
+        "param": "a",
+        "value": 42164,
+        "label": "静止軌道",
+        "shortLabel": "GEO",
+        "emoji": "📺",
+        "description": "高度35,786km。ちょうど24時間 — 空に止まって見える"
+      },
+      {
+        "param": "a",
+        "value": 384400,
+        "label": "月",
+        "shortLabel": "月",
+        "emoji": "🌙",
+        "description": "27.3日の周期。地球に最も近い天体"
+      }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          {
+            "range": [
+              0,
+              500
+            ],
+            "template": "旅客機の巡航高度(10km)の約{ratio}倍",
+            "referenceValue": 10,
+            "referenceLabel": "旅客機の巡航高度"
+          },
+          {
+            "range": [
+              500,
+              5000
+            ],
+            "template": "ソウル~釜山の距離({ref}km)の約{ratio}倍の高さ",
+            "referenceValue": 325,
+            "referenceLabel": "ソウル~釜山の距離"
+          },
+          {
+            "range": [
+              5000,
+              50000
+            ],
+            "template": "地球の直径({ref}km)の約{ratio}倍",
+            "referenceValue": 12742,
+            "referenceLabel": "地球の直径"
+          },
+          {
+            "range": [
+              50000,
+              400000
+            ],
+            "template": "地球から月までの距離の約{ratio}%",
+            "referenceValue": 384400,
+            "referenceLabel": "地球から月までの距離"
+          }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "地球の公転周期と軌道半径から太陽の質量を計算する",
+      "系外惑星の公転周期の観測から軌道の大きさを推定する",
+      "人工衛星の軌道高度に応じた公転周期の設計"
+    ],
+    "relatedFormulas": [
+      "universal-gravitation",
+      "escape-velocity"
+    ]
+  },
+  "hubble-law": {
+    "name": "ハッブルの法則",
+    "oneLiner": "遠い銀河ほど後退する速度が距離に比例するという、宇宙の膨張の法則",
+    "description": "ハッブルの法則は、遠い銀河ほど速い速度で私たちから遠ざかっており、その後退速度が距離に正比例することを表します。比例定数であるハッブル定数は宇宙の膨張率を意味し、宇宙の年齢を見積もるうえで中心的な役目を果たします。ビッグバン宇宙論の最も強力な観測的な証拠の一つです。",
+    "discoverer": "エドウィン・ハッブル",
+    "field": "天文学",
+    "significance": "宇宙が膨張していることを観測で示し、現代宇宙論の出発点をつくりました。",
+    "elementMeanings": {
+      "v": {
+        "role": "後退速度",
+        "kind": "output",
+        "unit": "km/s",
+        "description": "銀河が観測者から遠ざかる速度。単位は km/s。"
+      },
+      "H_0": {
+        "role": "ハッブル定数",
+        "kind": "constant",
+        "value": 70,
+        "unit": "km/s/Mpc",
+        "description": "現在の宇宙の膨張率。約70 km/s/Mpc。"
+      },
+      "d": {
+        "role": "距離",
+        "kind": "input",
+        "unit": "Mpc",
+        "description": "観測者から銀河までの距離。単位はメガパーセク(Mpc)。"
+      }
+    },
+    "realWorldExamples": [
+      "銀河の赤方偏移から距離を推定する",
+      "宇宙の年齢の計算(約138億年)",
+      "宇宙の膨張が加速しているかどうかの研究"
+    ],
+    "relatedFormulas": [
+      "schwarzschild-radius",
+      "gravitational-lensing"
+    ]
+  },
+  "schwarzschild-radius": {
+    "name": "シュヴァルツシルト半径",
+    "oneLiner": "物体がブラックホールになるための限界の半径を表す式",
+    "description": "シュヴァルツシルト半径は、ある質量の物体がブラックホールになるために圧縮されなければならない最小の半径です。この半径の内側まで質量が圧縮されると、光さえ抜け出せない事象の地平面ができます。一般相対性理論のシュヴァルツシルト解から導かれた結果です。",
+    "discoverer": "カール・シュヴァルツシルト",
+    "field": "天文学",
+    "significance": "ブラックホールの大きさを量的に定め、相対論的天体物理学の中心的な考え方を確立しました。",
+    "elementMeanings": {
+      "r_s": {
+        "role": "シュヴァルツシルト半径",
+        "kind": "output",
+        "unit": "m",
+        "description": "事象の地平面の半径。単位はメートル(m)。"
+      },
+      "G": {
+        "role": "重力定数",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "万有引力定数。約6.674×10⁻¹¹ N·m²/kg²。"
+      },
+      "M": {
+        "role": "質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "天体の質量。単位は kg。"
+      },
+      "c": {
+        "role": "光速",
+        "kind": "constant",
+        "value": 299800000.0,
+        "unit": "m/s",
+        "description": "真空中の光の速さ。約3×10⁸ m/s。"
+      },
+      "c^2": {
+        "role": "光速の2乗",
+        "kind": "constant",
+        "value": 8.988e+16,
+        "unit": "m²/s²",
+        "description": "分母にあり、質量が大きいほど半径が大きくなる関係を表します。"
+      }
+    },
+    "realWorldExamples": [
+      "太陽のシュヴァルツシルト半径の計算(約3km)",
+      "超大質量ブラックホールの事象の地平面の大きさの推定",
+      "中性子星がブラックホールへ崩壊する限界の条件の分析"
+    ],
+    "relatedFormulas": [
+      "mass-energy",
+      "escape-velocity",
+      "gravitational-lensing"
+    ]
+  },
+  "stefan-boltzmann": {
+    "name": "シュテファン・ボルツマンの法則",
+    "oneLiner": "星の全放射光度が半径の2乗と表面温度の4乗に比例するという法則",
+    "description": "シュテファン・ボルツマンの法則は、黒体が放射する全エネルギー(光度)が表面積に比例し、表面温度の4乗に比例することを表します。星の場合は半径と表面温度がわかれば全光度を計算でき、逆に光度と温度から星の大きさを推定できます。",
+    "discoverer": "ヨーゼフ・シュテファン、ルートヴィッヒ・ボルツマン",
+    "field": "天文学",
+    "significance": "星の物理的な性質(大きさ・温度・光度)の関係を量的に表し、恒星の分類と進化の理論の土台になりました。",
+    "elementMeanings": {
+      "L": {
+        "role": "光度",
+        "kind": "output",
+        "unit": "W",
+        "description": "星が単位時間あたりに放つ全エネルギー。単位はワット(W)。"
+      },
+      "R": {
+        "role": "星の半径",
+        "kind": "input",
+        "unit": "m",
+        "description": "星の半径。単位はメートル(m)。"
+      },
+      "R^2": {
+        "role": "半径の2乗",
+        "kind": "structural",
+        "description": "表面積(4πR²)に比例する因子です。"
+      },
+      "\\sigma": {
+        "role": "シュテファン・ボルツマン定数",
+        "kind": "constant",
+        "value": 5.67e-08,
+        "unit": "W/(m²·K⁴)",
+        "description": "約5.67×10⁻⁸ W/(m²·K⁴)。"
+      },
+      "T": {
+        "role": "表面温度",
+        "kind": "input",
+        "unit": "K",
+        "description": "星の表面の有効温度。単位はケルビン(K)。"
+      },
+      "T^4": {
+        "role": "温度の4乗",
+        "kind": "structural",
+        "description": "温度が2倍になると光度は16倍。強い非線形の関係を表します。"
+      }
+    },
+    "realWorldExamples": [
+      "星の表面温度と光度から半径を推定する",
+      "赤色巨星と白色矮星の大きさの比較",
+      "HR図(ヘルツシュプルング・ラッセル図)での星の位置の解釈"
+    ],
+    "relatedFormulas": [
+      "wien-displacement",
+      "mass-energy"
+    ]
+  },
+  "wien-displacement": {
+    "name": "ウィーンの変位則",
+    "oneLiner": "黒体放射の強さが最大になる波長が温度に反比例するという法則",
+    "description": "ウィーンの変位則は、黒体が最も強く放射する波長が温度に反比例することを表します。温度が高いほど放射が最大になる波長は短くなって青い方へ、温度が低いほど長い波長の赤い方へ移ります。この法則により、星の色だけから表面温度を推定できます。",
+    "discoverer": "ヴィルヘルム・ヴィーン",
+    "field": "天文学",
+    "significance": "星の色と温度の量的な関係を明らかにし、分光にもとづく天体観測の基礎を与えました。",
+    "elementMeanings": {
+      "\\lambda_{max}": {
+        "role": "放射が最大になる波長",
+        "kind": "output",
+        "unit": "m",
+        "description": "黒体放射のスペクトルで強さが最大になる波長。単位はメートル(m)。"
+      },
+      "b": {
+        "role": "ウィーンの変位定数",
+        "kind": "constant",
+        "value": 0.002898,
+        "unit": "m·K",
+        "description": "約2.898×10⁻³ m·K。"
+      },
+      "T": {
+        "role": "温度",
+        "kind": "input",
+        "unit": "K",
+        "description": "黒体の絶対温度。単位はケルビン(K)。"
+      }
+    },
+    "realWorldExamples": [
+      "星の色から表面温度を推定する(青い星は熱く、赤い星は冷たい)",
+      "太陽の表面温度の測定(約5,778K、黄色の領域)",
+      "赤外線望遠鏡で冷たい天体を観測する"
+    ],
+    "relatedFormulas": [
+      "stefan-boltzmann"
+    ]
+  },
+  "drake-equation": {
+    "name": "ドレイクの方程式",
+    "oneLiner": "私たちの銀河で交信できる知的文明の数を見積もる確率的な方程式",
+    "description": "ドレイクの方程式は、私たちの銀河で今この時に探知できる電波の信号を送っている文明の数を、いくつもの確率の因子の積として見積もります。それぞれの因子は恒星の誕生率から文明の寿命までを含み、ほとんどの値は不確かですが、地球外知的生命の探査(SETI)の方向を筋道立てて示してくれます。",
+    "discoverer": "フランク・ドレイク",
+    "field": "天文学",
+    "significance": "地球外知的生命の探査という問いを科学的に体系づけ、SETI研究の理論的な枠組みを与えました。",
+    "elementMeanings": {
+      "N": {
+        "role": "交信できる文明の数",
+        "kind": "output",
+        "description": "銀河の中で今この時に探知できる信号を送っている文明の数。"
+      },
+      "R_*": {
+        "role": "恒星の誕生率",
+        "kind": "input",
+        "unit": "/yr",
+        "description": "銀河で毎年新しく生まれる恒星の数。"
+      },
+      "f_p": {
+        "role": "惑星をもつ割合",
+        "kind": "input",
+        "description": "惑星系をもつ恒星の割合。"
+      },
+      "n_e": {
+        "role": "生命が住める惑星の数",
+        "kind": "input",
+        "description": "惑星系あたり、生命が住める領域にある惑星の数。"
+      },
+      "f_l": {
+        "role": "生命が生まれる割合",
+        "kind": "input",
+        "description": "生命が住める惑星で実際に生命が誕生する確率。"
+      },
+      "f_i": {
+        "role": "知的生命になる割合",
+        "kind": "input",
+        "description": "生命が知的な存在へ進化する確率。"
+      },
+      "f_c": {
+        "role": "通信技術をもつ割合",
+        "kind": "input",
+        "description": "知的生命が探知できる信号を送る技術を発展させる確率。"
+      },
+      "L": {
+        "role": "文明の寿命",
+        "kind": "input",
+        "unit": "yr",
+        "description": "交信できる文明が信号を出し続ける期間。単位は年。"
+      }
+    },
+    "realWorldExamples": [
+      "SETIプロジェクトでの探査の戦略づくり",
+      "系外惑星の発見データによる f_p, n_e の値の更新",
+      "フェルミのパラドックス(なぜ地球外文明の証拠がないのか)についての量的な議論"
+    ],
+    "relatedFormulas": [
+      "hubble-law"
+    ]
+  },
+  "gravitational-lensing": {
+    "name": "重力レンズ効果",
+    "oneLiner": "巨大な質量の天体が光の進む道を曲げる角度を表す式",
+    "description": "重力レンズ効果は、巨大な質量をもつ天体の近くを通る光が、時空のゆがみによって曲げられる現象です。曲がる角度は天体の質量に比例し、光が天体に最も近づくときの距離に反比例します。一般相対性理論が直接に予言したもので、最初の観測による検証は1919年の日食のときに行われました。",
+    "discoverer": "アルベルト・アインシュタイン",
+    "field": "天文学",
+    "significance": "一般相対性理論を観測で検証した最初の現象であり、暗黒物質の分布を観測する中心的な道具として使われています。",
+    "elementMeanings": {
+      "\\theta": {
+        "role": "曲がる角度",
+        "kind": "output",
+        "unit": "rad",
+        "description": "光が曲げられる角度。単位はラジアン(rad)。"
+      },
+      "G": {
+        "role": "重力定数",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "万有引力定数。約6.674×10⁻¹¹ N·m²/kg²。"
+      },
+      "M": {
+        "role": "レンズとなる天体の質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "光を曲げる天体の質量。単位は kg。"
+      },
+      "c": {
+        "role": "光速",
+        "kind": "constant",
+        "value": 299800000.0,
+        "unit": "m/s",
+        "description": "真空中の光の速さ。約3×10⁸ m/s。"
+      },
+      "c^2": {
+        "role": "光速の2乗",
+        "kind": "constant",
+        "value": 8.988e+16,
+        "unit": "m²/s²",
+        "description": "相対論的な補正を反映する因子です。"
+      },
+      "b": {
+        "role": "衝突パラメータ",
+        "kind": "input",
+        "unit": "m",
+        "description": "光がレンズとなる天体に最も近づくときの距離。単位はメートル(m)。"
+      }
+    },
+    "realWorldExamples": [
+      "銀河団による背景の銀河の像のゆがみの観測",
+      "重力マイクロレンズによる系外惑星の探査",
+      "暗黒物質の分布地図の作成"
+    ],
+    "relatedFormulas": [
+      "schwarzschild-radius",
+      "universal-gravitation"
+    ]
+  },
+  "escape-velocity": {
+    "name": "脱出速度",
+    "oneLiner": "天体の重力を振り切るのに必要な最小の速度を表す式",
+    "description": "脱出速度は、天体の表面から物体が重力の及ぶ範囲を完全に抜け出すために必要な最小の速度です。天体の質量が大きいほど、また半径が小さいほど脱出速度は大きくなります。シュヴァルツシルト半径では脱出速度が光速に達し、ブラックホールの定義に直接つながります。",
+    "field": "天文学",
+    "significance": "ロケットの打ち上げ、惑星が大気を保てるかどうか、ブラックホールができる条件など、さまざまな天体物理の問題の土台になります。",
+    "elementMeanings": {
+      "v_e": {
+        "role": "脱出速度",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "重力の及ぶ範囲を抜け出すための最小の速度。単位は m/s。"
+      },
+      "G": {
+        "role": "重力定数",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "万有引力定数。約6.674×10⁻¹¹ N·m²/kg²。"
+      },
+      "M": {
+        "role": "天体の質量",
+        "kind": "input",
+        "unit": "kg",
+        "description": "抜け出そうとしている天体の質量。単位は kg。"
+      },
+      "r": {
+        "role": "半径",
+        "kind": "input",
+        "unit": "m",
+        "description": "天体の中心から出発点までの距離。単位はメートル(m)。"
+      }
+    },
+    "realWorldExamples": [
+      "地球の脱出速度の計算(約11.2 km/s)",
+      "月の脱出速度が小さいために大気がないことの説明",
+      "木星の大きな脱出速度と厚い大気との関係"
+    ],
+    "relatedFormulas": [
+      "universal-gravitation",
+      "schwarzschild-radius",
+      "kepler-third",
+      "kinetic-energy"
+    ]
+  }
+}

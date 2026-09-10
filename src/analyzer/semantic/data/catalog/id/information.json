@@ -1,0 +1,92 @@
+{
+  "shannon-entropy": {
+    "name": "Entropi Shannon",
+    "oneLiner": "Ukuran dasar dalam teori informasi untuk mengukur ketidakpastian (kandungan informasi) sebuah sebaran peluang",
+    "description": "Entropi Shannon mengukur rata-rata ketidakpastian yang ada sebelum hasil sebuah variabel acak diketahui. Makin merata peluangnya, makin tinggi entropinya; makin pasti salah satu hasilnya, makin rendah entropinya. Nilai ini memberikan batas bawah teoretis bagi banyaknya bit minimum yang diperlukan untuk memampatkan atau mengirimkan informasi.",
+    "discoverer": "Claude Shannon",
+    "field": "Teori informasi",
+    "significance": "Gagasan pokok yang melahirkan teori informasi, dan memberi pengaruh pada seluruh bidang seperti pemampatan data, komunikasi, kriptografi, dan pembelajaran mesin.",
+    "elementMeanings": {
+      "H(X)": { "role": "Entropi", "description": "Rata-rata kandungan informasi variabel acak X. Satuan: bit (bila bilangan pokoknya 2) atau nat (bila bilangan pokoknya e).", "kind": "output" },
+      "p(x)": { "role": "Peluang", "description": "Peluang terjadinya kejadian x.", "kind": "input" },
+      "\\log p(x)": { "role": "Informasi diri", "description": "Kandungan informasi kejadian x. Makin kecil peluangnya, makin besar kandungan informasinya.", "kind": "structural" },
+      "-\\sum": { "role": "Nilai harapan negatif", "description": "Tanda negatif pada nilai harapan informasi diri membuat hasilnya bernilai positif.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Ketidakpastian pelemparan uang logam: uang logam yang setimbang bernilai 1 bit, yang berat sebelah kurang dari 1 bit",
+      "Menghitung rasio pemampatan maksimum teoretis yang dapat dicapai algoritma pemampatan data (misalnya ZIP)"
+    ],
+    "relatedFormulas": ["kl-divergence", "mutual-information", "cross-entropy", "source-coding"]
+  },
+  "kl-divergence": {
+    "name": "Divergensi Kullback-Leibler",
+    "oneLiner": "Ukuran perbedaan tak setangkup antara dua sebaran peluang",
+    "description": "Divergensi KL mengukur kehilangan informasi yang muncul ketika sebaran sebenarnya P digantikan oleh sebaran hampiran Q. Nilainya selalu 0 atau lebih, dan bernilai 0 hanya jika kedua sebaran itu sama. Karena tak setangkup, D_KL(P||Q) dan D_KL(Q||P) pada umumnya berbeda. Ukuran ini berperan pokok dalam inferensi variasional dan model generatif.",
+    "discoverer": "Solomon Kullback, Richard Leibler",
+    "field": "Teori informasi",
+    "significance": "Alat dasar untuk mengukur perbedaan antar sebaran, yang luas dipakai dalam inferensi Bayes, VAE, dan pengoptimalan kebijakan pada pembelajaran penguatan.",
+    "elementMeanings": {
+      "D_{KL}(P \\| Q)": { "role": "Divergensi KL", "description": "Besar kehilangan informasi dari P ke Q.", "kind": "output" },
+      "p(x)": { "role": "Sebaran sebenarnya", "description": "Sebaran peluang yang sebenarnya (acuan).", "kind": "input" },
+      "q(x)": { "role": "Sebaran hampiran", "description": "Sebaran model yang berusaha menghampiri sebaran sebenarnya.", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "Logaritma nisbah peluang", "description": "Nilai logaritma dari nisbah peluang kedua sebaran pada setiap kejadian.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Mengarahkan sebaran variabel laten pada variational autoencoder (VAE) agar mendekati sebaran normal",
+      "Menilai seberapa jauh sebaran keluaran model pembangkit bahasa alami menyimpang dari sebaran data latihnya"
+    ],
+    "relatedFormulas": ["shannon-entropy", "mutual-information", "cross-entropy"]
+  },
+  "mutual-information": {
+    "name": "Informasi mutual",
+    "oneLiner": "Ukuran banyaknya informasi yang dibagi bersama oleh dua variabel acak",
+    "description": "Informasi mutual mengukur seberapa besar ketidakpastian tentang satu variabel berkurang ketika variabel lain diamati. Nilainya 0 bila kedua variabel saling bebas, dan makin besar bila keduanya makin bergantung. Karena mampu menangkap kebergantungan taklinear, bukan hanya hubungan linear, ukuran ini lebih umum daripada koefisien korelasi.",
+    "discoverer": "Claude Shannon",
+    "field": "Teori informasi",
+    "significance": "Karena dapat mengukur kebergantungan antar variabel secara taklinear, ukuran ini dipakai di berbagai bidang seperti pemilihan fitur, pengelompokan, dan ilmu saraf.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "Informasi mutual", "description": "Banyaknya informasi yang dibagi bersama oleh X dan Y.", "kind": "output" },
+      "H(X)": { "role": "Entropi X", "description": "Ketidakpastian (kandungan informasi) X sendirian.", "kind": "input" },
+      "H(X|Y)": { "role": "Entropi bersyarat", "description": "Ketidakpastian X yang masih tersisa setelah Y diketahui.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Mendeteksi hubungan taklinear antara dua gen pada data ekspresi gen",
+      "Menilai banyaknya informasi yang dibagi variabel masukan dan variabel keluaran dalam pemilihan fitur pembelajaran mesin"
+    ],
+    "relatedFormulas": ["shannon-entropy", "kl-divergence", "data-processing-inequality"]
+  },
+  "source-coding": {
+    "name": "Teorema pengodean sumber Shannon",
+    "oneLiner": "Teorema yang menyatakan panjang kode rata-rata pada pemampatan nirrugi tidak boleh kurang dari entropi",
+    "description": "Teorema pengodean sumber Shannon membuktikan bahwa ketika sebuah sumber informasi dimampatkan tanpa kehilangan, panjang kode rata-rata per lambang tidak bisa menjadi lebih pendek daripada entropi sumber itu. Entropi itulah batas teoretis pemampatan, dan dengan mengodekan dalam blok yang cukup panjang, batas ini dapat didekati sedekat yang dikehendaki.",
+    "discoverer": "Claude Shannon",
+    "field": "Teori informasi",
+    "significance": "Menetapkan batas mendasar pemampatan data sehingga menyediakan landasan teoretis bagi pengembangan algoritma pemampatan praktis seperti pengodean Huffman dan pengodean aritmetika.",
+    "elementMeanings": {
+      "L": { "role": "Panjang kode rata-rata", "description": "Rata-rata banyaknya bit yang diperlukan untuk menyandikan satu lambang.", "kind": "output" },
+      "H(X)": { "role": "Entropi sumber", "description": "Rata-rata kandungan informasi per lambang sebuah sumber informasi. Ini batas bawah teoretis pemampatan.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Entropi data asli menentukan batas pemampatan pada berkas ZIP",
+      "Menghitung ukuran berkas minimum format nirrugi (FLAC) pada layanan musik daring"
+    ],
+    "relatedFormulas": ["shannon-entropy"]
+  },
+  "data-processing-inequality": {
+    "name": "Ketaksamaan pengolahan data",
+    "oneLiner": "Prinsip bahwa mengolah data hanya dapat mempertahankan atau mengurangi informasi, dan tidak pernah menambahnya",
+    "description": "Ketaksamaan pengolahan data menyatakan bahwa pada rantai Markov X -> Y -> Z, informasi mutual antara X dan Z tidak dapat melebihi informasi mutual antara X dan Y. Artinya, pengolahan lanjutan atas data tidak dapat menciptakan informasi yang semula tidak ada. Hal ini menjamin ketakterbalikan kehilangan informasi pada ekstraksi fitur, reduksi dimensi, dan komunikasi.",
+    "discoverer": "Claude Shannon (diturunkan sebagai sifat dasar teori informasi)",
+    "field": "Teori informasi",
+    "significance": "Menetapkan batas mendasar pengolahan informasi sehingga memberi kendala teoretis pada perancangan kanal komunikasi dan pembelajaran representasi dalam pembelajaran mesin.",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "Informasi mutual data asli dan tahap antara", "description": "Banyaknya informasi yang dibagi bersama oleh data asli X dan hasil pengolahan antara Y.", "kind": "input" },
+      "I(X;Z)": { "role": "Informasi mutual data asli dan hasil akhir", "description": "Banyaknya informasi yang dibagi bersama oleh data asli X dan hasil pengolahan lanjutan Z.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Alasan informasi warna asli tidak dapat dipulihkan setelah sebuah gambar diubah menjadi hitam putih",
+      "Prinsip bahwa informasi masukan makin termampatkan seiring bertambah dalamnya lapisan pada pembelajaran mendalam (teori leher botol informasi)"
+    ],
+    "relatedFormulas": ["mutual-information", "shannon-entropy"]
+  }
+}

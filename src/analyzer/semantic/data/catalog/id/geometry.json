@@ -1,0 +1,369 @@
+{
+  "pythagorean-theorem": {
+    "name": "Teorema Pythagoras",
+    "oneLiner": "Teorema yang menyatakan kuadrat sisi miring segitiga siku-siku sama dengan jumlah kuadrat kedua sisi lainnya",
+    "description": "Teorema Pythagoras menyatakan bahwa kuadrat panjang sisi miring sebuah segitiga siku-siku sama dengan jumlah kuadrat panjang kedua sisi lainnya. Ini teorema paling dasar dalam geometri Euklides dan menjadi landasan bagi gagasan jarak. Teorema ini paling banyak dikaji dalam sejarah matematika, sampai-sampai buktinya ada ribuan macam.",
+    "discoverer": "Pythagoras (penisbatan menurut tradisi)",
+    "field": "Geometri",
+    "significance": "Teorema ini menyediakan definisi jarak Euklides dan menjadi dasar bagi hampir seluruh matematika modern, seperti trigonometri, geometri analitik, dan ruang vektor.",
+    "elementMeanings": {
+      "a": {
+        "role": "Sisi siku-siku",
+        "description": "Panjang salah satu sisi yang mengapit sudut siku-siku.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Sisi siku-siku",
+        "description": "Panjang sisi lain yang mengapit sudut siku-siku.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Sisi miring",
+        "description": "Panjang sisi terpanjang yang berhadapan dengan sudut siku-siku.",
+        "kind": "output"
+      },
+      "a^2+b^2": {
+        "role": "Jumlah kuadrat sisi siku-siku",
+        "description": "Hasil penjumlahan kuadrat panjang kedua sisi siku-siku.",
+        "kind": "output"
+      },
+      "c^2": {
+        "role": "Kuadrat sisi miring",
+        "description": "Kuadrat panjang sisi miring. Nilainya sama dengan jumlah kuadrat sisi siku-sikunya.",
+        "kind": "output"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Sisi siku-siku",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "Sisi siku-siku",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": ["law-of-cosines", "heron-formula"]
+  },
+  "heron-formula": {
+    "name": "Rumus Heron",
+    "oneLiner": "Rumus untuk mencari luas segitiga hanya dari panjang ketiga sisinya",
+    "description": "Rumus Heron menghitung luas sebuah segitiga dengan memakai ketiga sisinya a, b, c serta setengah kelilingnya s. Karena tingginya tidak perlu dicari lebih dahulu, rumus ini sangat praktis bila yang diketahui hanya koordinat, maupun dalam pengukuran tanah. Rumus ini memiliki susunan yang anggun: kuadrat luasnya dinyatakan sebagai hasil kali setengah keliling dengan selisihnya terhadap tiap sisi.",
+    "discoverer": "Heron dari Aleksandria",
+    "field": "Geometri",
+    "significance": "Karena luas dapat dicari hanya dari panjang sisi tanpa keterangan tinggi, rumus ini dipakai luas dalam pengukuran tanah dan grafika komputer.",
+    "elementMeanings": {
+      "a": {
+        "role": "Sisi pertama",
+        "description": "Panjang sisi pertama segitiga.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Sisi kedua",
+        "description": "Panjang sisi kedua segitiga.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Sisi ketiga",
+        "description": "Panjang sisi ketiga segitiga.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Setengah keliling",
+        "description": "Separuh dari jumlah ketiga sisi. s = (a+b+c)/2.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "Luas",
+        "description": "Luas segitiga. Dihitung sebagai akar dari s(s-a)(s-b)(s-c).",
+        "kind": "output"
+      }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "circle-area"]
+  },
+  "circle-area": {
+    "name": "Luas lingkaran",
+    "oneLiner": "Rumus untuk mencari luas lingkaran dengan mengalikan kuadrat jari-jari dengan konstanta lingkaran pi",
+    "description": "Rumus luas lingkaran menyatakan bahwa daerah yang ditempati lingkaran berjari-jari r sama dengan hasil kali konstanta lingkaran pi dengan kuadrat jari-jarinya. Sejak Archimedes membuktikannya dengan membagi lingkaran menjadi segitiga-segitiga yang tipis tak terhingga, rumus ini menjadi cikal bakal kalkulus integral.",
+    "discoverer": "Archimedes",
+    "field": "Geometri",
+    "significance": "Ini rumus luas bagi bangun berbatas lengkung yang paling dasar, sekaligus titik awal gagasan integral dalam sejarah.",
+    "elementMeanings": {
+      "A": {
+        "role": "Luas",
+        "description": "Daerah yang ditempati lingkaran. Satuan: panjang kuadrat.",
+        "kind": "output"
+      },
+      "\\pi": {
+        "role": "Konstanta lingkaran pi",
+        "description": "Nisbah keliling lingkaran terhadap garis tengahnya. Kira-kira 3,14159.",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "Jari-jari",
+        "description": "Jarak dari pusat lingkaran ke kelilingnya.",
+        "kind": "input"
+      },
+      "r^2": {
+        "role": "Kuadrat jari-jari",
+        "description": "Kuadrat dari jari-jari. Nilai inilah yang menentukan besar luasnya.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": ["sphere-volume", "pythagorean-theorem"]
+  },
+  "law-of-cosines": {
+    "name": "Aturan kosinus",
+    "oneLiner": "Aturan untuk mencari panjang satu sisi sebarang segitiga dari dua sisi lain dan sudut apitnya",
+    "description": "Aturan kosinus adalah hubungan yang menyatakan bahwa pada sebuah segitiga, kuadrat satu sisi sama dengan jumlah kuadrat kedua sisi lainnya dikurangi dua kali hasil kali kedua sisi itu dengan kosinus sudut apitnya. Ini perumuman teorema Pythagoras: bila sudut apitnya siku-siku, kosinusnya menjadi 0 sehingga aturan ini menyusut kembali menjadi teorema Pythagoras.",
+    "field": "Geometri",
+    "significance": "Aturan ini memungkinkan hubungan sisi dan sudut dicari juga pada segitiga sebarang yang bukan siku-siku, dan sangat diperlukan dalam pengukuran tanah serta navigasi.",
+    "elementMeanings": {
+      "a": {
+        "role": "Sisi yang dicari",
+        "description": "Sisi yang panjangnya hendak dicari dengan aturan kosinus.",
+        "kind": "output"
+      },
+      "b": {
+        "role": "Sisi yang diketahui",
+        "description": "Panjang salah satu sisi segitiga yang sudah diketahui.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Sisi yang diketahui",
+        "description": "Panjang sisi lain segitiga yang sudah diketahui.",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Sudut apit",
+        "description": "Besar sudut yang terapit di antara sisi b dan sisi c.",
+        "kind": "input",
+        "unit": "rad"
+      },
+      "\\cos C": {
+        "role": "Kosinus sudut apit",
+        "description": "Nilai kosinus sudut apit C. Bila sudutnya siku-siku, nilainya menjadi 0.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "heron-formula"]
+  },
+  "sphere-volume": {
+    "name": "Volume bola",
+    "oneLiner": "Rumus volume bola yang sebanding dengan pangkat tiga jari-jarinya",
+    "description": "Rumus volume bola menyatakan bahwa ruang yang ditempati bola berjari-jari r sama dengan hasil kali (4/3), konstanta lingkaran pi, dan pangkat tiga jari-jarinya. Hubungan yang ditemukan Archimedes dengan menyisipkan bola ke dalam tabung ini juga dapat diturunkan lewat integral, dan merupakan hasil dasar geometri tiga dimensi.",
+    "discoverer": "Archimedes",
+    "field": "Geometri",
+    "significance": "Ini rumus volume bagi benda ruang berpermukaan lengkung yang paling dasar, dan dipakai luas dalam fisika serta keteknikan.",
+    "elementMeanings": {
+      "V": {
+        "role": "Volume",
+        "description": "Besarnya ruang yang ditempati bola. Satuan: panjang pangkat tiga.",
+        "kind": "output"
+      },
+      "\\frac{4}{3}": {
+        "role": "Tetapan kesebandingan",
+        "description": "Faktor kesebandingan antara volume bola dan pangkat tiga jari-jarinya.",
+        "kind": "constant",
+        "value": 1.33333333
+      },
+      "\\pi": {
+        "role": "Konstanta lingkaran pi",
+        "description": "Nisbah keliling lingkaran terhadap garis tengahnya. Kira-kira 3,14159.",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "Jari-jari",
+        "description": "Jarak dari pusat bola ke permukaannya.",
+        "kind": "input"
+      },
+      "r^3": {
+        "role": "Pangkat tiga jari-jari",
+        "description": "Hasil mengalikan jari-jari sebanyak tiga kali. Ini mencerminkan bahwa volume bertambah secara tiga dimensi.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": ["circle-area"]
+  },
+  "euler-polyhedron": {
+    "name": "Rumus polihedron Euler",
+    "oneLiner": "Hubungan antara banyaknya titik sudut, rusuk, dan sisi pada polihedron cembung",
+    "description": "Rumus polihedron Euler menunjukkan hubungan yang menakjubkan: pada polihedron cembung, banyaknya titik sudut dikurangi banyaknya rusuk lalu ditambah banyaknya sisi selalu menghasilkan 2. Rumus ini menjadi titik mula topologi, dan hubungannya tidak berubah meskipun bentuk polihedronnya berbeda. Inilah contoh paling dasar dari invarian topologi yang disebut karakteristik Euler.",
+    "discoverer": "Leonhard Euler",
+    "field": "Geometri",
+    "significance": "Ini hasil pertama yang mengukur sifat topologi sebuah objek geometri, sekaligus titik awal topologi dan teori graf.",
+    "elementMeanings": {
+      "V": {
+        "role": "Banyaknya titik sudut",
+        "description": "Jumlah seluruh titik sudut (titik pertemuan rusuk) pada polihedron.",
+        "kind": "input"
+      },
+      "E": {
+        "role": "Banyaknya rusuk",
+        "description": "Jumlah seluruh rusuk (ruas garis pertemuan dua sisi) pada polihedron.",
+        "kind": "input"
+      },
+      "F": {
+        "role": "Banyaknya sisi",
+        "description": "Jumlah seluruh sisi (segi banyak datar) pada polihedron.",
+        "kind": "input"
+      },
+      "2": {
+        "role": "Karakteristik Euler",
+        "description": "Karakteristik Euler polihedron cembung (yang homeomorfik dengan bola). Nilainya selalu 2.",
+        "kind": "constant",
+        "value": 2
+      }
+    },
+    "realWorldExamples": [
+      "Pemeriksaan pada kubus: titik sudut 8 - rusuk 12 + sisi 6 = 2",
+      "Pemeriksaan pada bola sepak (ikosahedron terpancung): titik sudut 60 - rusuk 90 + sisi 32 = 2"
+    ],
+    "relatedFormulas": ["pythagorean-theorem"]
+  },
+  "circle-equation": {
+    "name": "Persamaan lingkaran",
+    "oneLiner": "Persamaan yang menyatakan sebuah lingkaran pada bidang koordinat lewat pusat dan jari-jarinya",
+    "description": "Persamaan lingkaran menyatakan syarat yang dipenuhi semua titik (x, y) pada lingkaran yang berpusat di (a, b) dan berjari-jari r. Persamaan ini diturunkan langsung dari teorema Pythagoras dan merupakan alat dasar untuk menangani lingkaran secara aljabar dalam geometri analitik. Bila dijabarkan ia menjadi bentuk umum, dan bila dirapikan menjadi kuadrat sempurna ia kembali ke bentuk baku.",
+    "field": "Geometri",
+    "significance": "Ini contoh inti geometri analitik dalam menyatakan bangun geometri sebagai persamaan aljabar, dan sangat diperlukan untuk menganalisis hubungan lingkaran dengan garis.",
+    "elementMeanings": {
+      "x": {
+        "role": "Koordinat x sebuah titik",
+        "description": "Koordinat mendatar sebarang titik pada lingkaran.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Koordinat y sebuah titik",
+        "description": "Koordinat tegak sebarang titik pada lingkaran.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Koordinat x pusat",
+        "description": "Koordinat mendatar titik pusat lingkaran.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Koordinat y pusat",
+        "description": "Koordinat tegak titik pusat lingkaran.",
+        "kind": "input"
+      },
+      "r": {
+        "role": "Jari-jari",
+        "description": "Jarak dari pusat lingkaran ke kelilingnya.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Himpunan kedudukan yang mungkin pada jarak tertentu dari sebuah menara pemancar dalam pelacakan posisi GPS",
+      "Menghitung daerah kerja lengan robot dengan memodelkan jangkauannya sebagai persamaan lingkaran"
+    ],
+    "relatedFormulas": ["pythagorean-theorem", "circle-area", "ellipse-equation"]
+  },
+  "ellipse-equation": {
+    "name": "Persamaan elips",
+    "oneLiner": "Persamaan yang menyatakan tempat kedudukan titik yang jumlah jaraknya ke dua titik fokus selalu tetap",
+    "description": "Persamaan elips adalah syarat yang dipenuhi semua titik pada elips yang berpusat di titik asal dengan setengah panjang sumbu panjang dan sumbu pendeknya berturut-turut a dan b. Ini perumuman persamaan lingkaran untuk keadaan saat skala sumbu x dan sumbu y berbeda; bila a = b, bentuknya menjadi lingkaran. Persamaan ini berperan penting dalam hukum gerak planet Kepler.",
+    "discoverer": "Apollonius (dalam kajian irisan kerucut)",
+    "field": "Geometri",
+    "significance": "Ini model matematis orbit planet, dan penerapannya bermacam-macam, seperti sifat pemantulan dalam optika dan galeri bisikan dalam arsitektur.",
+    "elementMeanings": {
+      "x": {
+        "role": "Koordinat x sebuah titik",
+        "description": "Koordinat mendatar sebarang titik pada elips.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Koordinat y sebuah titik",
+        "description": "Koordinat tegak sebarang titik pada elips.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Setengah panjang sumbu panjang",
+        "description": "Setengah panjang sumbu mendatar (sumbu panjang) elips. Jaraknya ke titik terjauh.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Setengah panjang sumbu pendek",
+        "description": "Setengah panjang sumbu tegak (sumbu pendek) elips. Jaraknya ke titik terdekat.",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "Kuadrat setengah panjang sumbu panjang",
+        "description": "Penyebut penormalan bagi komponen x.",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "Kuadrat setengah panjang sumbu pendek",
+        "description": "Penyebut penormalan bagi komponen y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Hukum I Kepler: planet menempuh orbit elips dengan matahari sebagai salah satu titik fokusnya",
+      "Galeri bisikan: gejala saat suara dari satu titik fokus berkumpul di titik fokus seberangnya dalam ruangan berbentuk elips"
+    ],
+    "relatedFormulas": ["circle-equation", "hyperbola-equation", "circle-area"]
+  },
+  "hyperbola-equation": {
+    "name": "Persamaan hiperbola",
+    "oneLiner": "Persamaan yang menyatakan tempat kedudukan titik yang selisih jaraknya ke dua titik fokus selalu tetap",
+    "description": "Persamaan hiperbola adalah syarat yang dipenuhi semua titik pada hiperbola yang berpusat di titik asal dengan setengah panjang sumbu nyata dan sumbu khayalnya berturut-turut a dan b. Berbeda dengan elips, yang tetap di sini adalah 'selisih' jaraknya, dan kurvanya terbuka serta terbagi menjadi dua cabang. Sifat khasnya adalah kurvanya makin mendekati asimtot y = (b/a)x dan y = -(b/a)x tanpa pernah memotongnya.",
+    "discoverer": "Apollonius (dalam kajian irisan kerucut)",
+    "field": "Geometri",
+    "significance": "Persamaan ini dipakai dalam navigasi (sistem LORAN), perancangan menara pendingin hiperbolik, dan penggambaran struktur ruang-waktu pada teori relativitas khusus.",
+    "elementMeanings": {
+      "x": {
+        "role": "Koordinat x sebuah titik",
+        "description": "Koordinat mendatar sebarang titik pada hiperbola.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Koordinat y sebuah titik",
+        "description": "Koordinat tegak sebarang titik pada hiperbola.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Setengah panjang sumbu nyata",
+        "description": "Jarak dari titik puncak hiperbola ke pusatnya.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Setengah panjang sumbu khayal",
+        "description": "Setengah panjang sumbu yang menentukan gradien asimtotnya.",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "Kuadrat setengah panjang sumbu nyata",
+        "description": "Penyebut penormalan bagi komponen x.",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "Kuadrat setengah panjang sumbu khayal",
+        "description": "Penyebut penormalan bagi komponen y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Navigasi LORAN: asas penentuan kedudukan dari selisih waktu sinyal yang diterima dari dua menara pemancar",
+      "Menara pendingin hiperbolik: bentuk yang mengoptimalkan kekuatan struktur dan efisiensi aliran udara"
+    ],
+    "relatedFormulas": ["ellipse-equation", "circle-equation"]
+  }
+}

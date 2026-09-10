@@ -1,0 +1,164 @@
+{
+  "compound-interest": {
+    "name": "Compound interest",
+    "oneLiner": "The way of computing interest in which interest accrues on the interest already earned as well as on the principal",
+    "description": "With compound interest, interest is charged again on the principal plus the interest already added, so wealth grows exponentially over time. The final amount depends on how often interest is compounded (yearly, monthly, daily, and so on), and the more often it compounds, the larger the total return. It is the most basic calculation in saving, borrowing, and investment analysis.",
+    "field": "Finance",
+    "significance": "It is the key principle behind the growth of wealth in long-term saving and investing, and the basis for computing loan interest, planning retirement funds, and comparing investment returns.",
+    "elementMeanings": {
+      "A": { "role": "Final amount", "description": "The total of principal and interest after a given period.", "kind": "output" },
+      "P": { "role": "Principal", "description": "The amount first invested or deposited.", "kind": "input" },
+      "r": { "role": "Annual interest rate", "description": "The yearly interest rate as a decimal. For example, 5% is 0.05.", "kind": "input" },
+      "n": { "role": "Compounding periods per year", "description": "How many times a year interest is computed. Monthly compounding makes it 12.", "kind": "input" },
+      "t": { "role": "Term", "description": "The length of the investment in years.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Working out the payout of a savings plan at maturity",
+      "Calculating the total interest on a mortgage",
+      "Comparing the compounding effect of long-term investments"
+    ],
+    "relatedFormulas": ["present-value", "annuity-pv", "rule-of-72"]
+  },
+  "present-value": {
+    "name": "Present value",
+    "oneLiner": "The value today of an amount to be received in the future",
+    "description": "Present value converts a future cash flow into its equivalent value today by applying a discount rate. It rests on the time value of money: money in the future is worth less than money now. It is central to investment decisions, bond valuation, and business valuation.",
+    "field": "Finance",
+    "significance": "By making cash flows at different points in time comparable, it underpins investment appraisal, company valuation, and financial decision-making.",
+    "elementMeanings": {
+      "PV": { "role": "Present value", "description": "The value today that is equivalent to the future amount.", "kind": "output" },
+      "FV": { "role": "Future value", "description": "The amount to be received or paid at a particular point in the future.", "kind": "input" },
+      "r": { "role": "Discount rate", "description": "The interest rate applied when converting a future cash flow to the present.", "kind": "input" },
+      "n": { "role": "Number of periods", "description": "The number of periods from now until the future cash flow occurs.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Working out the fair price of a bond",
+      "Appraising the investment value of a business project (NPV analysis)",
+      "Comparing a lottery lump sum with an annuity payout"
+    ],
+    "relatedFormulas": ["compound-interest", "annuity-pv", "black-scholes"]
+  },
+  "black-scholes": {
+    "name": "Black-Scholes model",
+    "oneLiner": "The option pricing model that gives the theoretical price of a European call option",
+    "description": "The Black-Scholes model computes the fair price of a European option from the underlying asset price, the strike price, the time to maturity, the risk-free rate, and the volatility. It is derived by applying the no-arbitrage principle under the assumption that the underlying asset follows geometric Brownian motion. It is the theoretical foundation of the modern derivatives market and the central model of financial engineering.",
+    "discoverer": "Fischer Black, Myron Scholes",
+    "field": "Finance",
+    "significance": "By setting a theoretical benchmark for option prices it drove the birth and growth of the derivatives market, and it won the 1997 Nobel Prize in Economics.",
+    "elementMeanings": {
+      "C": { "role": "Call option price", "description": "The theoretical price today of a European call option.", "kind": "output" },
+      "S": { "role": "Current price of the underlying", "description": "The current market price of the asset the option is written on.", "kind": "input" },
+      "K": { "role": "Strike price", "description": "The agreed price at which the option holder may buy the underlying asset.", "kind": "input" },
+      "r": { "role": "Risk-free rate", "description": "The risk-free rate of return through to maturity.", "kind": "input" },
+      "T": { "role": "Time to maturity", "description": "The time remaining until the option expires, in years.", "kind": "input" },
+      "N(d)": { "role": "Standard normal cumulative distribution function", "description": "The value of the cumulative distribution function of the standard normal distribution. It acts as a probabilistic weight.", "kind": "structural" },
+      "d_1": { "role": "First parameter", "description": "The relationship between the underlying price and the strike price, adjusted for volatility.", "kind": "output" },
+      "d_2": { "role": "Second parameter", "description": "d_1 minus the volatility term. It relates to the probability of exercise.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Working out the theoretical price of a stock call option",
+      "Backing out implied volatility from the options market",
+      "Managing the risk of a derivatives portfolio"
+    ],
+    "relatedFormulas": ["present-value", "capm", "sharpe-ratio"]
+  },
+  "capm": {
+    "name": "Capital asset pricing model",
+    "oneLiner": "The model that gives the expected return of an asset from its systematic risk",
+    "description": "The CAPM says that the expected return of an individual asset equals the risk-free rate plus beta times the market risk premium. Beta measures how sensitive the asset is to movements of the market as a whole. It is the central model of the efficient market hypothesis, in which only undiversifiable systematic risk is rewarded.",
+    "discoverer": "William Sharpe",
+    "field": "Finance",
+    "significance": "By quantifying the relationship between risk and expected return, it is the standard framework for asset pricing, estimating the cost of capital, and evaluating portfolio performance.",
+    "elementMeanings": {
+      "E(R_i)": { "role": "Expected return of the asset", "description": "The expected return of the individual asset i.", "kind": "output" },
+      "R_f": { "role": "Risk-free rate", "description": "The return on a riskless investment such as a government bond.", "kind": "input" },
+      "\\beta_i": { "role": "Beta", "description": "The measure of systematic risk of asset i: its sensitivity to movements in the market return.", "kind": "input" },
+      "E(R_m)": { "role": "Expected market return", "description": "The expected return of the market portfolio as a whole.", "kind": "input" },
+      "E(R_m) - R_f": { "role": "Market risk premium", "description": "The return expected from investing in the market over and above the risk-free rate.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Estimating the discount rate (cost of capital) for a new investment project",
+      "Judging the excess return delivered by a fund manager",
+      "Working out a fair expected return for a stock"
+    ],
+    "relatedFormulas": ["sharpe-ratio", "black-scholes", "present-value"]
+  },
+  "sharpe-ratio": {
+    "name": "Sharpe ratio",
+    "oneLiner": "The measure of investment performance that gives the excess return earned per unit of risk",
+    "description": "The Sharpe ratio is the portfolio return minus the risk-free rate, divided by the standard deviation of the portfolio return. The larger it is, the more return was earned for the risk taken. It is the most widely used measure for comparing the risk-adjusted performance of different investment strategies or funds.",
+    "discoverer": "William Sharpe",
+    "field": "Finance",
+    "significance": "It allows investment performance to be compared fairly against the risk taken, and it is standard in fund evaluation and asset allocation decisions.",
+    "elementMeanings": {
+      "S": { "role": "Sharpe ratio", "description": "The risk-adjusted return measure. The higher it is, the more efficient the investment.", "kind": "output" },
+      "R_p": { "role": "Portfolio return", "description": "The realized or expected return of the investment portfolio.", "kind": "input" },
+      "R_f": { "role": "Risk-free rate", "description": "The return on a riskless asset such as a government bond.", "kind": "input" },
+      "\\sigma_p": { "role": "Standard deviation of the portfolio", "description": "The volatility of the portfolio return. It represents total risk.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Comparing the performance of mutual funds",
+      "Judging the risk-adjusted return of a hedge fund",
+      "Assessing how efficient an asset allocation strategy is"
+    ],
+    "relatedFormulas": ["capm", "standard-deviation"]
+  },
+  "annuity-pv": {
+    "name": "Present value of an annuity",
+    "oneLiner": "The total present value of a fixed amount paid at regular intervals over a set period",
+    "description": "The annuity present value formula computes the total value today of an ordinary annuity that pays the same amount each period. Instead of discounting every payment separately, you can get it in one step with the sum of a geometric series. It is essential for working out loan repayments, designing pensions, and evaluating lease contracts.",
+    "field": "Finance",
+    "significance": "By valuing a stream of regular payments efficiently, it is the practical standard for loans, pensions, and bond valuation.",
+    "elementMeanings": {
+      "PV": { "role": "Present value", "description": "The value today that is equivalent to all the annuity payments together.", "kind": "output" },
+      "PMT": { "role": "Payment per period", "description": "The fixed amount paid each period.", "kind": "input" },
+      "r": { "role": "Discount rate per period", "description": "The discount rate applied over one period.", "kind": "input" },
+      "n": { "role": "Total number of periods", "description": "The number of periods over which the annuity is paid.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Working out a monthly mortgage repayment",
+      "Converting a pension into a lump sum payout",
+      "Comparing the total cost of a car lease contract"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest"]
+  },
+  "rule-of-72": {
+    "name": "Rule of 72",
+    "oneLiner": "The rule for quickly estimating how long it takes an investment to double",
+    "description": "The rule of 72 is a shortcut: divide 72 by the annual interest rate in percent and you get roughly how many years it takes the principal to double. It makes the effect of compounding easy to grasp, and it is especially accurate for rates in the 6-10% range. It is useful for quick financial decisions and comparisons between investments.",
+    "field": "Finance",
+    "significance": "It is a practical financial tool that lets you gauge how fast an investment grows without doing the full compound interest calculation.",
+    "elementMeanings": {
+      "t": { "role": "Time to double", "description": "Roughly how long, in years, it takes the principal to double.", "kind": "output" },
+      "r": { "role": "Annual interest rate", "description": "The annual rate of return in percent. For example, 8% a year makes r = 8.", "kind": "input" },
+      "72": { "role": "Constant", "description": "An approximating constant related to ln(2). It is used to estimate the doubling time of compound growth.", "kind": "constant", "value": 72 }
+    },
+    "realWorldExamples": [
+      "Quickly seeing that an investment returning 6% a year doubles in about 12 years",
+      "Estimating how long prices take to double at 3% inflation",
+      "Comparing how fast investment products at different rates grow"
+    ],
+    "relatedFormulas": ["compound-interest", "present-value"]
+  },
+  "duration": {
+    "name": "Duration",
+    "oneLiner": "The weighted average maturity of a bond's cash flows, measuring how sensitive its price is to interest rate changes",
+    "description": "Duration is the average of the times at which a bond's cash flows arrive, weighted by the present value share of each cash flow. Also called Macaulay duration, it is the key risk measure for how much a bond's price moves when interest rates change. It is essential to bond portfolio management and to designing immunization strategies.",
+    "discoverer": "Frederick Macaulay",
+    "field": "Finance",
+    "significance": "By quantifying interest rate risk, it is the key tool for bond investment strategy, asset-liability matching, and portfolio immunization.",
+    "elementMeanings": {
+      "D": { "role": "Duration", "description": "The present-value-weighted average maturity of the cash flows, in years.", "kind": "output" },
+      "t": { "role": "Time of a cash flow", "description": "The point in time, in years, at which each cash flow arrives.", "kind": "input" },
+      "PV(CF_t)": { "role": "Present value of a cash flow", "description": "The discounted present value of the cash flow arriving at time t.", "kind": "input" },
+      "P": { "role": "Bond price", "description": "The sum of the present values of all cash flows, that is, the market price of the bond.", "kind": "input" },
+      "\\Sigma": { "role": "Summation sign", "description": "The operation of summing over every cash flow date.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Predicting the loss on a bond portfolio when interest rates rise",
+      "Building an asset-liability matching strategy for a pension fund",
+      "Comparing the interest rate sensitivity of different bonds"
+    ],
+    "relatedFormulas": ["present-value", "compound-interest", "capm"]
+  }
+}

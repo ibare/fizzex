@@ -1,0 +1,137 @@
+{
+  "gini-coefficient": {
+    "name": "Coefficient de Gini",
+    "oneLiner": "Mesure qui exprime le degré d'inégalité des revenus ou des patrimoines par une valeur comprise entre 0 et 1",
+    "description": "Le coefficient de Gini se calcule comme le rapport de l'aire comprise entre la courbe de Lorenz et la droite d'égalité parfaite. Une valeur de 0 signifie l'égalité parfaite (tout le monde a le même revenu) et une valeur de 1 l'inégalité totale (une seule personne détient tout). C'est l'indicateur d'inégalité le plus utilisé pour comparer les pays et évaluer les politiques publiques.",
+    "discoverer": "Corrado Gini",
+    "field": "Sciences sociales",
+    "significance": "En résumant l'inégalité économique en un seul nombre, il est devenu l'indicateur de référence des comparaisons internationales et de l'élaboration des politiques publiques.",
+    "elementMeanings": {
+      "G": { "role": "Coefficient de Gini", "description": "Mesure d'inégalité comprise entre 0 (égalité parfaite) et 1 (inégalité totale).", "kind": "output" },
+      "L(x)": { "role": "Courbe de Lorenz", "description": "Courbe qui donne la part cumulée des revenus correspondant à la part x de la population.", "kind": "structural" },
+      "\\int L(x) dx": { "role": "Aire sous la courbe de Lorenz", "description": "Aire située sous la courbe de Lorenz, de 0 à 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "L'indicateur clé qu'utilise la Banque mondiale pour comparer les inégalités de revenus entre pays",
+      "Évaluer quantitativement l'évolution de la répartition des revenus avant et après la mise en œuvre d'une politique sociale"
+    ],
+    "relatedFormulas": ["laffer-curve"]
+  },
+  "ebbinghaus-curve": {
+    "name": "Courbe de l'oubli d'Ebbinghaus",
+    "oneLiner": "Courbe qui décrit la décroissance exponentielle de la mémoire au fil du temps",
+    "description": "La courbe de l'oubli d'Ebbinghaus montre que le taux de rétention décroît exponentiellement à mesure que le temps passe après l'apprentissage. La perte de mémoire est la plus rapide juste après l'apprentissage, puis l'oubli ralentit. Les révisions répétées (répétition espacée) augmentent la force de mémorisation S et ralentissent donc l'oubli.",
+    "discoverer": "Hermann Ebbinghaus",
+    "field": "Sciences sociales",
+    "significance": "En ouvrant la voie à l'étude quantitative de la mémoire humaine, elle a fourni les fondements de stratégies d'apprentissage scientifiques comme la répétition espacée.",
+    "elementMeanings": {
+      "R": { "role": "Taux de rétention", "description": "Proportion de ce qui a été appris et demeure en mémoire. Valeur comprise entre 0 et 1.", "kind": "output" },
+      "t": { "role": "Temps écoulé", "description": "Temps écoulé depuis le moment de l'apprentissage.", "kind": "input" },
+      "S": { "role": "Force de mémorisation", "description": "Stabilité du souvenir. Les révisions l'augmentent ; plus elle est grande, plus l'oubli est lent.", "kind": "input" },
+      "e^{-t/S}": { "role": "Décroissance exponentielle", "description": "Décroissance exponentielle déterminée par le rapport entre le temps écoulé et la force de mémorisation.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Le principe par lequel les applications de répétition espacée comme Anki calculent le moment optimal de révision",
+      "Le fait que, sans révision, plus de 70 % du vocabulaire d'une langue étrangère est oublié en une seule journée"
+    ],
+    "relatedFormulas": ["malthus-population"]
+  },
+  "malthus-population": {
+    "name": "Modèle de population de Malthus",
+    "oneLiner": "Modèle de croissance géométrique selon lequel la population augmente exponentiellement à taux constant",
+    "description": "Le modèle de population de Malthus suppose qu'en l'absence de contrainte sur les ressources, la population croît exponentiellement à un taux constant. On estime la population future en multipliant la population initiale par l'exponentielle du produit du taux d'accroissement naturel et du temps. Dans la réalité, les limites des ressources et la résistance du milieu obligent à le compléter par le modèle logistique, mais il reste un cadre utile pour prévoir la croissance à court terme.",
+    "discoverer": "Thomas Malthus",
+    "field": "Sciences sociales",
+    "significance": "En déclenchant le débat savant sur la surpopulation et la pénurie de ressources, il a posé les bases de la démographie et de l'écologie.",
+    "elementMeanings": {
+      "N(t)": { "role": "Population à l'instant t", "description": "Effectif total de la population à l'instant t.", "kind": "output" },
+      "N_0": { "role": "Population initiale", "description": "Effectif de la population à l'instant t = 0.", "kind": "input" },
+      "r": { "role": "Taux d'accroissement naturel", "description": "Taux d'accroissement net de la population : la natalité diminuée de la mortalité.", "kind": "input" },
+      "t": { "role": "Temps", "description": "Temps écoulé depuis l'instant initial.", "kind": "input" },
+      "e^{rt}": { "role": "Facteur de croissance exponentielle", "description": "Croissance géométrique déterminée par le produit du taux de croissance et du temps.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Modèle de prévision de la croissance démographique à court terme dans les pays en développement",
+      "Prévision de la multiplication des individus dans une culture bactérienne, tant que le milieu n'impose aucune contrainte"
+    ],
+    "relatedFormulas": ["ebbinghaus-curve", "gravity-model"]
+  },
+  "weber-fechner": {
+    "name": "Loi de Weber-Fechner",
+    "oneLiner": "Loi psychophysique selon laquelle l'intensité d'une sensation est proportionnelle au logarithme de l'intensité du stimulus",
+    "description": "La loi de Weber-Fechner énonce que l'intensité physique d'un stimulus doit croître de façon géométrique pour que la sensation croisse de façon arithmétique. Autrement dit, on perçoit aisément de petites variations lorsque le stimulus est faible, alors qu'il faut une variation importante pour ressentir une différence lorsqu'il est fort. Elle montre que les sens humains fonctionnent sur une échelle logarithmique.",
+    "discoverer": "Ernst Weber, Gustav Fechner",
+    "field": "Sciences sociales",
+    "significance": "En fondant la psychophysique, elle a ouvert la voie à la mesure quantitative des sensations subjectives et a marqué jusqu'à la conception de l'expérience utilisateur et l'ingénierie acoustique.",
+    "elementMeanings": {
+      "S": { "role": "Intensité de la sensation", "description": "Intensité du stimulus telle qu'elle est subjectivement ressentie.", "kind": "output" },
+      "k": { "role": "Constante de proportionnalité", "description": "Constante qui varie selon la modalité sensorielle (vue, ouïe, etc.).", "kind": "input" },
+      "I": { "role": "Intensité du stimulus", "description": "Intensité du stimulus mesurée physiquement.", "kind": "input" },
+      "I_0": { "role": "Stimulus seuil", "description": "Intensité minimale détectable du stimulus (seuil absolu).", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "Logarithme du rapport des stimuli", "description": "Logarithme népérien du rapport entre le stimulus courant et le seuil.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Pourquoi le décibel (dB) est une échelle logarithmique : il faut dix fois plus d'énergie sonore pour percevoir un son « deux fois plus fort »",
+      "La correction gamma, qui découpe finement les zones sombres et largement les zones claires dans le réglage de la luminosité d'un écran"
+    ],
+    "relatedFormulas": ["elo-rating"]
+  },
+  "elo-rating": {
+    "name": "Système de classement Elo",
+    "oneLiner": "Système de classement qui calcule la probabilité de victoire attendue à partir de l'écart de niveau entre deux joueurs",
+    "description": "Le classement Elo calcule la probabilité de victoire attendue en faisant passer l'écart de classement entre deux joueurs dans une fonction logistique. Pour un écart de 400 points, la probabilité de victoire attendue du mieux classé est d'environ 91 %. Les classements sont mis à jour selon le résultat des parties, avec une variation d'autant plus forte que le résultat était inattendu.",
+    "discoverer": "Arpad Elo",
+    "field": "Sciences sociales",
+    "significance": "Né aux échecs, il est devenu la norme internationale d'évaluation du niveau dans le sport, l'e-sport et les systèmes d'appariement.",
+    "elementMeanings": {
+      "E_A": { "role": "Probabilité de victoire attendue de A", "description": "Probabilité que le joueur A l'emporte sur le joueur B.", "kind": "output" },
+      "R_A": { "role": "Classement de A", "description": "Niveau actuel du joueur A.", "kind": "input" },
+      "R_B": { "role": "Classement de B", "description": "Niveau actuel du joueur B.", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "Conversion de l'écart de classement", "description": "Terme exponentiel qui convertit l'écart de classement entre les deux joueurs en rapport de probabilités.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Le calcul du classement officiel des joueurs lors d'un championnat du monde d'échecs",
+      "L'appariement des adversaires selon le niveau dans les jeux en ligne (League of Legends, etc.)"
+    ],
+    "relatedFormulas": ["sigmoid", "weber-fechner"]
+  },
+  "laffer-curve": {
+    "name": "Courbe de Laffer",
+    "oneLiner": "Courbe qui décrit la relation entre taux d'imposition et recettes fiscales, où un taux poussé à l'extrême finit par réduire les recettes",
+    "description": "La courbe de Laffer met en image l'idée suivante : à un taux d'imposition de 0 %, les recettes sont nulles ; à 100 %, l'activité économique s'arrête et les recettes sont nulles également ; il existe donc entre les deux un taux optimal qui maximise les recettes. L'essentiel tient moins à une formule précise qu'à l'intuition qualitative d'une relation en U inversé entre taux et recettes, la position du taux optimal dépendant de la conjoncture.",
+    "discoverer": "Arthur Laffer",
+    "field": "Sciences sociales",
+    "significance": "Cadre central des débats de politique fiscale, elle a fourni à l'économie de l'offre son fondement théorique : la possibilité d'accroître les recettes en baissant les impôts.",
+    "elementMeanings": {
+      "세율": { "role": "Variable indépendante", "description": "Taux d'imposition fixé par l'État, compris entre 0 % et 100 %.", "kind": "input" },
+      "세수": { "role": "Variable dépendante", "description": "Montant total des impôts effectivement perçus par l'État.", "kind": "output" },
+      "최적 세율": { "role": "Point de maximum", "description": "Taux d'imposition qui maximise les recettes. Il correspond au sommet de la courbe.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Le fondement théorique de la politique de baisse des impôts de l'administration Reagan aux États-Unis dans les années 1980 (les « Reaganomics »)",
+      "Le cadre de discussion utilisé par les gouvernements pour prévoir l'évolution des recettes lorsqu'ils ajustent le taux de l'impôt sur les sociétés"
+    ],
+    "relatedFormulas": ["gini-coefficient"]
+  },
+  "gravity-model": {
+    "name": "Modèle gravitaire",
+    "oneLiner": "Modèle d'interaction spatiale selon lequel les échanges entre deux régions sont proportionnels à leur taille (population) et inversement proportionnels à la distance",
+    "description": "Inspiré de la loi de la gravitation universelle de Newton, le modèle gravitaire explique que le volume des échanges entre deux régions (commerce, déplacements, communications, etc.) est proportionnel au produit de leurs tailles (population, PIB, etc.) et inversement proportionnel au carré de la distance. Malgré sa structure simple, il prédit remarquablement bien le commerce international, les migrations pendulaires ou les flux migratoires.",
+    "discoverer": "William Reilly (modèle gravitaire du commerce de détail), Jan Tinbergen (modèle gravitaire du commerce international)",
+    "field": "Sciences sociales",
+    "significance": "Modèle empirique central de l'analyse du commerce international, il sert de référence pour estimer les effets des accords commerciaux et des politiques douanières.",
+    "elementMeanings": {
+      "T_{ij}": { "role": "Volume des échanges", "description": "Volume des échanges (commerce, déplacements, etc.) entre les régions i et j.", "kind": "output" },
+      "k": { "role": "Constante de proportionnalité", "description": "Constante qui ajuste l'échelle globale du modèle.", "kind": "input" },
+      "P_i": { "role": "Taille de la région i", "description": "Variable qui exprime la taille de la région i : population, PIB, etc.", "kind": "input" },
+      "P_j": { "role": "Taille de la région j", "description": "Variable qui exprime la taille de la région j : population, PIB, etc.", "kind": "input" },
+      "d_{ij}": { "role": "Distance entre les deux régions", "description": "Distance géographique entre les régions i et j.", "kind": "input" },
+      "d_{ij}^2": { "role": "Carré de la distance", "description": "Il traduit la loi en carré inverse : si la distance double, le volume des échanges est divisé par quatre.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Expliquer par la distance et la taille des économies pourquoi le commerce entre la Corée et le Japon dépasse celui entre la Corée et le Brésil",
+      "Estimer, dans l'étude de la zone de chalandise d'un nouveau centre commercial, l'afflux de clients selon la population et la distance des villes voisines"
+    ],
+    "relatedFormulas": ["universal-gravitation", "malthus-population"]
+  }
+}

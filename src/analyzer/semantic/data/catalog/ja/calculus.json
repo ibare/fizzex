@@ -1,0 +1,330 @@
+{
+  "ftc": {
+    "name": "微分積分学の基本定理",
+    "oneLiner": "微分と積分がたがいに逆の演算であることを明らかにする定理",
+    "description": "微分積分学の基本定理は、連続関数の定積分が、その原始関数の両端の値の差に等しいことを示します。この定理のおかげで、面積を直接求めなくても原始関数だけで定積分を計算できます。微分と積分が一つの体系にまとまる中心的な根拠です。",
+    "discoverer": "アイザック・ニュートン、ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "微分と積分が逆の関係にあることを確立し、解析学全体の土台を築きました。",
+    "elementMeanings": {
+      "f(x)": { "role": "被積分関数", "description": "積分しようとする連続関数です。", "kind": "structural" },
+      "F(x)": { "role": "原始関数", "description": "f(x) の不定積分です。F'(x) = f(x) を満たします。", "kind": "structural" },
+      "a": { "role": "積分の下端", "description": "定積分の区間の始まりの点です。", "kind": "input" },
+      "b": { "role": "積分の上端", "description": "定積分の区間の終わりの点です。", "kind": "input" },
+      "dx": { "role": "積分変数", "description": "x について積分することを表す微小な変化量です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "gaussian-integral"]
+  },
+  "taylor-series": {
+    "name": "テイラー級数",
+    "oneLiner": "関数をある点のまわりの無限次の多項式として表す展開",
+    "description": "テイラー級数は、何回でも微分できる関数を、点 a における導関数の値から作られるべき級数として表します。それぞれの項は、n 次の導関数を n! で割った係数に (x-a) の n 乗を掛けた形です。数値計算や物理学で複雑な関数を近似する中心的な道具です。",
+    "discoverer": "ブルック・テイラー",
+    "field": "微分積分学",
+    "significance": "三角関数や指数関数などの超越関数を多項式で近似できるようにし、数値解析の基礎になっています。",
+    "elementMeanings": {
+      "f(x)": { "role": "もとの関数", "description": "級数に展開しようとする対象の関数です。", "kind": "structural" },
+      "a": { "role": "展開の中心", "description": "級数を展開する基準の点です。a=0 のときはマクローリン級数と呼びます。", "kind": "input" },
+      "f^{(n)}(a)": { "role": "n 次導関数の値", "description": "点 a における n 回目の導関数の値です。それぞれの項の係数を決めます。", "kind": "structural" },
+      "n!": { "role": "階乗", "description": "n の階乗です。それぞれの項の分母に置かれて係数を整えます。", "kind": "structural" },
+      "(x-a)^n": { "role": "べき乗の項", "description": "展開の中心 a からの隔たりの n 乗です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
+  },
+  "gaussian-integral": {
+    "name": "ガウス積分",
+    "oneLiner": "e のマイナス x の2乗の形の関数を、負の無限大から正の無限大まで積分したもの",
+    "description": "ガウス積分は、e のマイナス x の2乗を全区間で積分した値がルートパイになることを明らかにします。初等関数では不定積分が求められませんが、極座標に変換する巧みな方法によって定積分の値が求まります。確率論と統計学では正規分布の土台になります。",
+    "discoverer": "カール・フリードリヒ・ガウス",
+    "field": "微分積分学",
+    "significance": "正規分布の正規化定数を与え、量子力学や統計力学の経路積分でも中心的な役割をはたします。",
+    "elementMeanings": {
+      "e^{-x^2}": { "role": "ガウス関数", "description": "釣鐘の形をした関数です。x が0から離れるほど急激に0に近づきます。", "kind": "structural" },
+      "\\int_{-\\infty}^{\\infty}": { "role": "全区間の積分", "description": "負の無限大から正の無限大までの積分です。", "kind": "structural" },
+      "\\sqrt{\\pi}": { "role": "積分の結果", "description": "ガウス積分の値です。円周率の平方根になります。", "kind": "output" },
+      "dx": { "role": "積分変数", "description": "x について積分することを表します。", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "ftc"]
+  },
+  "derivative-definition": {
+    "name": "導関数の定義",
+    "oneLiner": "関数の瞬間の変化率を極限として定める式",
+    "description": "導関数の定義は、関数の値の変化量を独立変数の変化量で割った比の極限です。この極限が存在するとき、関数はその点で微分可能であるといい、その値が接線の傾きになります。微分積分学のもっとも根本的な考え方です。",
+    "discoverer": "アイザック・ニュートン、ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "瞬間の変化率という考えを厳密に定め、微分積分学の論理的な基礎を確立しました。",
+    "elementMeanings": {
+      "f'(x)": { "role": "導関数", "description": "x における瞬間の変化率です。グラフの接線の傾きにあたります。", "kind": "output" },
+      "f(x+h)": { "role": "ずらした点での関数の値", "description": "x から h だけ動かした点での関数の値です。", "kind": "structural" },
+      "f(x)": { "role": "もとの関数の値", "description": "点 x における関数の値です。", "kind": "structural" },
+      "h": { "role": "変化量", "description": "x の微小な増分です。極限では0に近づけます。", "kind": "input" },
+      "\\lim_{h \\to 0}": { "role": "極限の演算", "description": "h を0に限りなく近づける演算です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
+  },
+  "chain-rule": {
+    "name": "連鎖律",
+    "oneLiner": "合成関数の導関数を、外側の関数と内側の関数の導関数の積として求める法則",
+    "description": "連鎖律は、合成関数 f(g(x)) を微分するとき、外側の関数の導関数に内側の関数の導関数を掛ければよいという規則です。多変数の微分積分学や誤差逆伝播法など、現代の数学と人工知能の中心的な手法へと広がっています。",
+    "discoverer": "ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "複雑な合成関数の微分を体系的に行えるようにし、深層学習の誤差逆伝播法の数学的な土台になっています。",
+    "elementMeanings": {
+      "f": { "role": "外側の関数", "description": "合成の外側にある関数です。", "kind": "structural" },
+      "g": { "role": "内側の関数", "description": "合成の内側にある関数です。", "kind": "structural" },
+      "f'(g(x))": { "role": "外側の導関数", "description": "外側の関数の導関数を g(x) で評価した値です。", "kind": "structural" },
+      "g'(x)": { "role": "内側の導関数", "description": "内側の関数を x について微分したものです。", "kind": "structural" },
+      "x": { "role": "独立変数", "description": "微分の基準になる変数です。", "kind": "input" }
+    },
+    "relatedFormulas": ["derivative-definition", "ftc"]
+  },
+  "product-rule": {
+    "name": "積の微分法",
+    "oneLiner": "二つの関数の積を微分するとき、片方ずつ順に微分して足し合わせる法則",
+    "description": "積の微分法は、二つの関数 f(x) と g(x) の積を微分すると f'(x)g(x) + f(x)g'(x) になるという規則です。導関数の定義から極限をとる過程で自然に導かれ、三つ以上の関数の積にも広げられます。微分の計算でもっともよく使われる基本的な法則の一つです。",
+    "discoverer": "ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "積の形をした関数の微分を体系的に扱えるようにし、部分積分の理論的な土台になります。",
+    "elementMeanings": {
+      "f": { "role": "一つ目の関数", "description": "積の左側にある関数です。", "kind": "structural" },
+      "g": { "role": "二つ目の関数", "description": "積の右側にある関数です。", "kind": "structural" },
+      "f'": { "role": "一つ目の関数の導関数", "description": "f を x について微分した結果です。", "kind": "structural" },
+      "g'": { "role": "二つ目の関数の導関数", "description": "g を x について微分した結果です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
+    "realWorldExamples": [
+      "物理学で運動量 p = mv を時間で微分する: 質量と速度がどちらも変わるときの力を求めるのに使う",
+      "経済学で総収入 R = p(x) * x を微分して限界収入を計算する"
+    ]
+  },
+  "quotient-rule": {
+    "name": "商の微分法",
+    "oneLiner": "二つの関数の割り算を微分するとき、分子と分母の導関数を組み合わせる法則",
+    "description": "商の微分法は、f(x)/g(x) の形の関数を微分すると (f'g - fg')/g^2 になるという規則です。積の微分法と連鎖律から導くことができ、分母が0でない区間で使えます。有理関数や三角関数の比などを微分するときに欠かせません。",
+    "discoverer": "ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "分数の形をした関数の微分を機械的に処理できるようにし、tan x など三角関数の導関数を導く要になります。",
+    "elementMeanings": {
+      "f": { "role": "分子の関数", "description": "割り算の分子にあたる関数です。", "kind": "structural" },
+      "g": { "role": "分母の関数", "description": "割り算の分母にあたる関数です。g(x) != 0 でなければなりません。", "kind": "structural" },
+      "f'": { "role": "分子の導関数", "description": "f を x について微分した結果です。", "kind": "structural" },
+      "g'": { "role": "分母の導関数", "description": "g を x について微分した結果です。", "kind": "structural" },
+      "g^2": { "role": "分母の2乗", "description": "結果の分母に置かれる g(x) の2乗です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
+    "realWorldExamples": [
+      "濃度の計算で、溶質と溶液の比の変化率を求めるときに使う",
+      "電気回路で電圧と電流の比の変化を分析し、インピーダンスの変化を追う"
+    ]
+  },
+  "power-rule": {
+    "name": "べき関数の微分法",
+    "oneLiner": "x の n 乗を微分すると、指数を前に下ろして指数を1減らすという法則",
+    "description": "べき関数の微分法は、d/dx(x^n) = nx^(n-1) という、微分のもっとも基本的な公式です。指数が自然数のときは二項定理で、実数のときは指数関数と対数関数を使って証明されます。ほとんどすべての多項式関数の微分の出発点になります。",
+    "discoverer": "アイザック・ニュートン",
+    "field": "微分積分学",
+    "significance": "微分を学ぶ最初の関門であり、もっともよく使われる微分の公式として、多項式関数の微分の土台になっています。",
+    "elementMeanings": {
+      "x": { "role": "独立変数", "description": "微分の基準になる変数です。", "kind": "input" },
+      "n": { "role": "指数", "description": "べき乗の指数です。自然数でも整数でも実数でもかまいません。", "kind": "input" },
+      "x^n": { "role": "べき関数", "description": "x の n 乗です。微分の対象になります。", "kind": "structural" },
+      "nx^{n-1}": { "role": "導関数", "description": "指数 n が係数として下りてきて、指数が n-1 に減った結果です。", "kind": "output" }
+    },
+    "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
+    "realWorldExamples": [
+      "自由落下の距離 s = (1/2)gt^2 を時間で微分して速さ v = gt を求めるときに使う",
+      "円の面積 A = pi*r^2 を半径で微分すると円周 2*pi*r になるという関係"
+    ]
+  },
+  "exp-derivative": {
+    "name": "指数関数の微分",
+    "oneLiner": "自然指数関数 e^x を微分すると自分自身になるという性質",
+    "description": "指数関数の微分は、d/dx(e^x) = e^x という驚くべき性質を表します。自然対数の底 e は、この自分自身に戻る性質を満たすただ一つの底であり、微分方程式と自然現象のモデル化の要です。一般の指数関数 a^x の導関数は a^x * ln(a) に広がります。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "微分積分学",
+    "significance": "微分しても形の変わらないただ一つの関数であり、微分方程式の基本の解として自然現象のモデル化の根幹になっています。",
+    "elementMeanings": {
+      "e": { "role": "自然対数の底", "description": "およそ2.71828…。自然対数の底になる無理数です。", "kind": "constant", "value": 2.71828183 },
+      "e^x": { "role": "自然指数関数", "description": "e の x 乗です。微分しても自分自身になります。", "kind": "structural" },
+      "x": { "role": "独立変数", "description": "指数の位置にある変数です。", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "微分の演算子", "description": "x についての微分を行う演算子です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
+    "realWorldExamples": [
+      "放射性崩壊 N(t) = N_0 * e^(-lambda*t) で崩壊の速さを求めるときに使う",
+      "連続複利の計算で、元金の成長率がそのときの残高に比例するモデル"
+    ]
+  },
+  "log-derivative": {
+    "name": "対数関数の微分",
+    "oneLiner": "自然対数 ln x を微分すると x 分の1になる公式",
+    "description": "対数関数の微分は、d/dx(ln x) = 1/x という簡潔な結果を与えます。これは指数関数の微分と逆関数の関係から導かれます。x > 0 で定義され、逆に積分では 1/x の不定積分が ln|x| + C になります。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "微分積分学",
+    "significance": "1/x の原始関数を与え、対数微分法によって複雑な積やべき関数の微分を簡単にします。",
+    "elementMeanings": {
+      "\\ln x": { "role": "自然対数", "description": "底が e の対数関数です。x > 0 で定義されます。", "kind": "structural" },
+      "x": { "role": "独立変数", "description": "対数の真数であり、微分の変数でもあります。", "kind": "input" },
+      "\\frac{1}{x}": { "role": "導関数", "description": "ln x の導関数です。x に反比例します。", "kind": "output" },
+      "\\frac{d}{dx}": { "role": "微分の演算子", "description": "x についての微分を行う演算子です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
+    "realWorldExamples": [
+      "情報理論でエントロピー H = -sum(p * ln p) の変化率を分析するときに使う",
+      "ウェーバー・フェヒナーの法則: 刺激の強さと感覚の大きさが対数の関係にあることをモデル化する"
+    ]
+  },
+  "sin-derivative": {
+    "name": "三角関数の微分(サイン)",
+    "oneLiner": "sin x を微分すると cos x になる公式",
+    "description": "三角関数の微分でもっとも基本になる結果で、d/dx(sin x) = cos x です。導関数の定義から、lim(h->0) sin(h)/h = 1 という極限を使って証明されます。cos x の微分は -sin x なので、サインとコサインは微分を通じてたがいに循環する関係にあります。",
+    "discoverer": "レオンハルト・オイラー",
+    "field": "微分積分学",
+    "significance": "周期的な現象を数学で記述するのに欠かせず、波動方程式や調和運動の解析の基礎になっています。",
+    "elementMeanings": {
+      "\\sin x": { "role": "サイン関数", "description": "周期が2パイの基本的な三角関数です。", "kind": "structural" },
+      "\\cos x": { "role": "導関数(コサイン)", "description": "sin x を微分した結果です。サインより位相がパイ/2だけ進んでいます。", "kind": "output" },
+      "x": { "role": "独立変数", "description": "ラジアンを単位とする角度の変数です。", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "微分の演算子", "description": "x についての微分を行う演算子です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
+    "realWorldExamples": [
+      "単振り子の運動で変位 theta(t) = A*sin(omega*t) を微分して角速度を求めるときに使う",
+      "交流電圧 V(t) = V_0*sin(omega*t) を微分して電流との位相の関係をつかむ"
+    ]
+  },
+  "power-integral": {
+    "name": "べき関数の不定積分",
+    "oneLiner": "x の n 乗を積分すると、指数を1上げて新しい指数で割るという公式",
+    "description": "べき関数の不定積分は、x^n の積分が x^(n+1)/(n+1) + C (n != -1) になるという、微分の逆の過程です。べき関数の微分法を逆にたどったものであり、n = -1 の場合は ln|x| + C として別に扱います。多項式の積分のもっとも基本的な公式です。",
+    "discoverer": "アイザック・ニュートン、ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "積分を学ぶ最初の出発点であり、もっともよく使われる不定積分の公式です。",
+    "elementMeanings": {
+      "x^n": { "role": "被積分関数", "description": "積分しようとするべき関数です。", "kind": "structural" },
+      "n": { "role": "指数", "description": "べき乗の指数です。n != -1 でなければなりません。", "kind": "input" },
+      "x^{n+1}": { "role": "積分の結果のべき", "description": "指数が1増えたべき乗です。", "kind": "structural" },
+      "n+1": { "role": "新しい指数(分母)", "description": "結果の分母に置かれ、微分するともとの関数に戻ります。", "kind": "structural" },
+      "C": { "role": "積分定数", "description": "不定積分の任意の定数です。微分すると消える項です。", "kind": "constant" },
+      "dx": { "role": "積分変数", "description": "x について積分することを表します。", "kind": "structural" }
+    },
+    "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
+    "realWorldExamples": [
+      "速さ v = at を時間について積分して、進んだ距離 s = (1/2)at^2 を求めるときに使う",
+      "流体力学で圧力の分布を積分して全体の力を計算する"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "部分積分",
+    "oneLiner": "二つの関数の積を積分するとき、一方を微分しもう一方を積分して形を変える手法",
+    "description": "部分積分は、積の微分法を積分に応用したもので、int(u dv) = uv - int(v du) という公式です。そのままでは積分しにくい関数の積を、より扱いやすい形に変えてくれます。u と dv をうまく選ぶことが要点で、くり返し適用したり循環の関係を利用したりもします。",
+    "discoverer": "ブルック・テイラー",
+    "field": "微分積分学",
+    "significance": "積の微分法の積分版であり、ln x や arctan x などの逆関数の積分、さまざまな超越関数の積分に欠かせません。",
+    "elementMeanings": {
+      "u": { "role": "微分するほうの関数", "description": "積分の過程で微分する側に選ばれた関数です。", "kind": "structural" },
+      "dv": { "role": "積分するほうの部分", "description": "積分の過程で積分する側に選ばれた微分形式です。", "kind": "structural" },
+      "v": { "role": "dv の原始関数", "description": "dv を積分した結果です。", "kind": "structural" },
+      "du": { "role": "u の微分", "description": "u を微分した結果です。", "kind": "structural" },
+      "uv": { "role": "境界の項", "description": "u と v の積です。定積分では両端の値を代入します。", "kind": "output" }
+    },
+    "relatedFormulas": ["product-rule", "ftc", "power-integral"],
+    "realWorldExamples": [
+      "ラプラス変換 L{t*f(t)} を計算するとき、部分積分で変換の公式を導く",
+      "確率論で期待値 E[X] = int(x * f(x) dx) を計算するときによく使う"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "指数関数のマクローリン級数",
+    "oneLiner": "e^x を x = 0 のまわりで 1 + x + x^2/2! + … と無限次の多項式に展開した級数",
+    "description": "指数関数のマクローリン級数は e^x = sum(x^n / n!, n=0..inf) であり、すべての実数 x で収束します。e^x はどの次数の導関数も e^x のままで、x=0 での値が1になるため、それぞれの項の係数が 1/n! になります。数値計算で指数関数を近似するもっとも基本的な方法であり、オイラーの公式を導く出発点でもあります。",
+    "discoverer": "コリン・マクローリン",
+    "field": "微分積分学",
+    "significance": "指数関数を多項式で近似する方法を与え、オイラーの等式 e^(i*pi) + 1 = 0 を導く要の段階になります。",
+    "elementMeanings": {
+      "e^x": { "role": "もとの関数", "description": "級数に展開しようとする自然指数関数です。", "kind": "structural" },
+      "x^n": { "role": "べき乗の項", "description": "x の n 乗です。n 番目の項の分子になります。", "kind": "structural" },
+      "n!": { "role": "階乗", "description": "n の階乗です。n 番目の項の分母になります。", "kind": "structural" },
+      "\\sum_{n=0}^{\\infty}": { "role": "無限級数", "description": "n=0 から無限大まで、すべての項を足し合わせる演算です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
+    "realWorldExamples": [
+      "電卓やコンピュータが e^x の値を計算するとき、この級数の有限個の項を使う",
+      "量子力学で時間発展の演算子 e^(-iHt) を級数に展開して近似計算する"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "サイン関数のマクローリン級数",
+    "oneLiner": "sin x を x = 0 のまわりで x - x^3/3! + x^5/5! - … と展開した級数",
+    "description": "サイン関数のマクローリン級数は sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf) です。奇数次の項だけが現れ、符号が交互に入れかわります。すべての実数 x で収束し、x が小さいときの近似 sin x ≒ x は最初の項にあたります。",
+    "discoverer": "コリン・マクローリン",
+    "field": "微分積分学",
+    "significance": "三角関数を多項式で近似できるようにし、微小角近似 sin x ≒ x の数学的な根拠を与えます。",
+    "elementMeanings": {
+      "\\sin x": { "role": "もとの関数", "description": "級数に展開しようとするサイン関数です。", "kind": "structural" },
+      "(-1)^n": { "role": "符号を入れかえる因子", "description": "項の符号を正と負に交互に変えます。", "kind": "structural" },
+      "x^{2n+1}": { "role": "奇数乗の項", "description": "奇数次だけが現れるのは、サインが奇関数だからです。", "kind": "structural" },
+      "(2n+1)!": { "role": "階乗", "description": "それぞれの項の分母です。級数が収束することを保証します。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
+    "realWorldExamples": [
+      "物理学で微小角近似(sin theta ≒ theta)を用いて単振り子の周期の公式を導く",
+      "デジタル信号処理でサイン波を多項式で近似して高速に計算する"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "コサイン関数のマクローリン級数",
+    "oneLiner": "cos x を x = 0 のまわりで 1 - x^2/2! + x^4/4! - … と展開した級数",
+    "description": "コサイン関数のマクローリン級数は cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf) です。偶数次の項だけが現れ、符号が交互に入れかわります。サインの級数を項ごとに微分するとコサインの級数になり、二つの級数の関係が微分を通して確かめられます。",
+    "discoverer": "コリン・マクローリン",
+    "field": "微分積分学",
+    "significance": "コサイン関数を多項式で近似する方法を与え、サインの級数とともにオイラーの公式を導くのに使われます。",
+    "elementMeanings": {
+      "\\cos x": { "role": "もとの関数", "description": "級数に展開しようとするコサイン関数です。", "kind": "structural" },
+      "(-1)^n": { "role": "符号を入れかえる因子", "description": "項の符号を正と負に交互に変えます。", "kind": "structural" },
+      "x^{2n}": { "role": "偶数乗の項", "description": "偶数次だけが現れるのは、コサインが偶関数だからです。", "kind": "structural" },
+      "(2n)!": { "role": "階乗", "description": "それぞれの項の分母です。級数が収束することを保証します。", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
+    "realWorldExamples": [
+      "光学で cos theta ≒ 1 - theta^2/2 を使ってレンズの収差を近似して計算する",
+      "ロボット工学で回転行列のコサインを多項式で近似し、実時間の制御に役立てる"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "ロピタルの定理",
+    "oneLiner": "0/0 または 無限大/無限大 の形の不定形の極限を、分子と分母の導関数の比で求める定理",
+    "description": "ロピタルの定理は、極限が 0/0 や 無限大/無限大 のような不定形になるとき、分子と分母をそれぞれ微分してからその比の極限をとれば、もとの極限と等しくなるという定理です。必要なら何度でもくり返し使えますが、不定形でない場合には使えません。コーシーの平均値の定理を用いて厳密に証明されます。",
+    "discoverer": "ギヨーム・ド・ロピタル(発見したのはヨハン・ベルヌーイ)",
+    "field": "微分積分学",
+    "significance": "不定形の極限の計算を微分の問題に置きかえ、極限を求める強力な道具を与えます。",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": { "role": "極限の演算", "description": "x を c に限りなく近づける演算です。", "kind": "structural" },
+      "f(x)": { "role": "分子の関数", "description": "極限のなかで分子にあたる関数です。", "kind": "structural" },
+      "g(x)": { "role": "分母の関数", "description": "極限のなかで分母にあたる関数です。", "kind": "structural" },
+      "f'(x)": { "role": "分子の導関数", "description": "f(x) を x について微分した結果です。", "kind": "structural" },
+      "g'(x)": { "role": "分母の導関数", "description": "g(x) を x について微分した結果です。", "kind": "structural" },
+      "\\frac{0}{0}": { "role": "不定形", "description": "分子も分母もともに0へ向かう不定形です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "taylor-series"],
+    "realWorldExamples": [
+      "物理学でエネルギー準位の差が0に近づくときの遷移確率の極限を計算する",
+      "経済学で限界費用と限界収入がともに0に近づく状況の利潤を分析する"
+    ]
+  },
+  "tangent": {
+    "name": "接線",
+    "oneLiner": "曲線上の一点を通り、その点で曲線と同じ傾きを持つ直線",
+    "description": "接線は、曲線 y=f(x) の点 (a, f(a)) において、導関数の値 f'(a) を傾きとする直線 y - f(a) = f'(a)(x - a) です。その点の近くで曲線をもっともよく近似する一次関数であり、一点における瞬間の変化率を図形として表します。微分のもっとも直感的な意味が曲線の上で目に見える形になります。",
+    "discoverer": "ピエール・ド・フェルマー、アイザック・ニュートン、ゴットフリート・ライプニッツ",
+    "field": "微分積分学",
+    "significance": "導関数の図形的な意味を曲線上の直線として見せ、微分の考えを視覚的な直感と結びつける学習の出発点になります。",
+    "elementMeanings": {
+      "f(x)": { "role": "曲線", "description": "接線を引く対象の関数です。", "kind": "input" },
+      "x": { "role": "接点の x 座標", "description": "曲線上のどこに接線を置くかを決める点です。", "kind": "input" },
+      "f'(x)": { "role": "接線の傾き", "description": "点 x における導関数の値です。接線の傾きを決めます。", "kind": "output" },
+      "y - f(x) = f'(x)(X - x)": { "role": "接線の方程式", "description": "点 (x, f(x)) を通り、傾きが f'(x) の直線です。", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "chain-rule", "taylor-series"]
+  }
+}

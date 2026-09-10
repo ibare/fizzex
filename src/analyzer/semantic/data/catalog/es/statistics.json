@@ -1,0 +1,191 @@
+{
+  "bayes-theorem": {
+    "name": "Teorema de Bayes",
+    "oneLiner": "Teorema que obtiene la probabilidad a posteriori actualizando la probabilidad a priori cuando aparece una nueva evidencia",
+    "description": "El teorema de Bayes es la fórmula que, a partir de la relación entre probabilidades condicionadas, actualiza una probabilidad a priori y la convierte en una probabilidad a posteriori. Permite revisar de forma sistemática las creencias previas cada vez que se observan datos nuevos. Es una herramienta central de la inferencia estadística, el aprendizaje automático y la teoría de la decisión.",
+    "discoverer": "Thomas Bayes",
+    "field": "Estadística",
+    "significance": "Formaliza matemáticamente el razonamiento bajo incertidumbre y es la base de aplicaciones modernas como los filtros de correo basura, el diagnóstico médico y el aprendizaje automático.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Probabilidad a posteriori", "description": "Es la probabilidad de que ocurra el suceso A una vez observado el suceso B.", "kind": "output" },
+      "P(B|A)": { "role": "Verosimilitud", "description": "Es la probabilidad de observar el suceso B cuando el suceso A es cierto.", "kind": "input" },
+      "P(A)": { "role": "Probabilidad a priori", "description": "Es la creencia previa sobre el suceso A antes de observar el suceso B.", "kind": "input" },
+      "P(B)": { "role": "Probabilidad de la evidencia", "description": "Es la probabilidad total de observar el suceso B. Actúa como constante de normalización.", "kind": "input" }
+    },
+    "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
+  },
+  "normal-distribution": {
+    "name": "Función de densidad de la distribución normal",
+    "oneLiner": "Distribución de probabilidad que forma una curva simétrica en forma de campana centrada en la media",
+    "description": "La distribución normal es una distribución de probabilidad continua determinada por dos parámetros: la media y la desviación típica. Su función de densidad alcanza el máximo en la media y decrece de forma simétrica a ambos lados, dibujando una campana. Por el teorema central del límite, es la distribución más importante para aproximar fenómenos naturales y valores medidos.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Estadística",
+    "significance": "Por el teorema central del límite es la base de casi toda la inferencia estadística y la distribución de probabilidad más utilizada en las ciencias naturales y sociales.",
+    "elementMeanings": {
+      "f(x)": { "role": "Densidad de probabilidad", "description": "Es el valor de la densidad de probabilidad en el punto x. No es una probabilidad directa: la probabilidad se obtiene integrando en un intervalo.", "kind": "output" },
+      "\\mu": { "role": "Media", "description": "Es el centro de la distribución, la posición del vértice de la campana.", "kind": "input" },
+      "\\sigma": { "role": "Desviación típica", "description": "Es el grado de dispersión de la distribución. Cuanto mayor es, más aplanada queda la curva.", "kind": "input" },
+      "\\sigma^2": { "role": "Varianza", "description": "Es el cuadrado de la desviación típica. Indica cuánto se dispersan los datos alrededor de la media.", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "Núcleo gaussiano", "description": "Es la parte exponencial, que decrece bruscamente a medida que uno se aleja de la media.", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "Constante de normalización", "description": "Es el coeficiente que hace que el área total valga 1.", "kind": "structural" }
+    },
+    "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
+  },
+  "standard-deviation": {
+    "name": "Desviación típica",
+    "oneLiner": "Medida que indica cuánto se dispersan los datos respecto de la media",
+    "description": "La desviación típica se obtiene elevando al cuadrado la diferencia entre cada dato y la media, promediando esos cuadrados y extrayendo después la raíz cuadrada. Es la raíz cuadrada positiva de la varianza y, como se expresa en las mismas unidades que los datos originales, su interpretación resulta intuitiva. Es el estadístico más básico para describir la dispersión de los datos.",
+    "field": "Estadística",
+    "significance": "Permite medir la variabilidad de los datos en sus unidades originales y se usa de forma central en el control de calidad y en el análisis del riesgo financiero.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Desviación típica", "description": "Es la desviación típica poblacional. Indica el grado de dispersión de los datos.", "kind": "output" },
+      "x_i": { "role": "Dato individual", "description": "Es la observación i del conjunto de datos.", "kind": "input" },
+      "\\mu": { "role": "Media poblacional", "description": "Es la media de la población. Si se trabaja con una muestra, se emplea la media muestral.", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "Cuadrado de la desviación", "description": "Es el cuadrado de lo que cada dato se aleja de la media.", "kind": "structural" },
+      "N": { "role": "Número de datos", "description": "Es el número total de datos de la población.", "kind": "input" },
+      "\\sqrt{}": { "role": "Raíz cuadrada", "description": "Extrae la raíz cuadrada de la varianza para expresarla en las mismas unidades que los datos originales.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
+  },
+  "correlation-coefficient": {
+    "name": "Coeficiente de correlación",
+    "oneLiner": "Valor entre -1 y 1 que expresa la fuerza y el sentido de la relación lineal entre dos variables",
+    "description": "El coeficiente de correlación de Pearson es la covarianza de dos variables dividida entre el producto de sus desviaciones típicas. Un valor próximo a 1 indica una relación lineal positiva fuerte; próximo a -1, una relación lineal negativa fuerte; y próximo a 0, una relación lineal débil. Es el estadístico más básico para resumir la asociación entre dos variables.",
+    "discoverer": "Karl Pearson",
+    "field": "Estadística",
+    "significance": "Al resumir en un solo número la relación entre variables, sirve de base al análisis de regresión, a la teoría de carteras financieras y al diseño de experimentos.",
+    "elementMeanings": {
+      "r": { "role": "Coeficiente de correlación", "description": "Es el coeficiente de correlación de Pearson. Toma valores entre -1 y 1.", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "Covarianza", "description": "Mide en qué grado X e Y varían conjuntamente.", "kind": "input" },
+      "\\sigma_X": { "role": "Desviación típica de X", "description": "Es el grado de dispersión de la variable X.", "kind": "input" },
+      "\\sigma_Y": { "role": "Desviación típica de Y", "description": "Es el grado de dispersión de la variable Y.", "kind": "input" },
+      "X": { "role": "Primera variable", "description": "Es la primera variable cuya correlación se analiza.", "kind": "input" },
+      "Y": { "role": "Segunda variable", "description": "Es la segunda variable cuya correlación se analiza.", "kind": "input" }
+    },
+    "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
+  },
+  "law-of-large-numbers": {
+    "name": "Ley de los grandes números",
+    "oneLiner": "Ley según la cual la media muestral converge a la media poblacional a medida que crece el tamaño de la muestra",
+    "description": "La ley de los grandes números garantiza que la media muestral de variables aleatorias independientes e idénticamente distribuidas converge a la media poblacional cuando el tamaño de la muestra crece indefinidamente. Tiene una versión débil y una fuerte, y es el teorema fundamental que respalda teóricamente la legitimidad de la estimación estadística.",
+    "discoverer": "Jacob Bernoulli",
+    "field": "Estadística",
+    "significance": "Garantiza matemáticamente que un estudio por muestreo permite inferencias válidas sobre la población y es el fundamento teórico de los seguros, los juegos de azar y las ciencias experimentales.",
+    "elementMeanings": {
+      "\\bar{X}_n": { "role": "Media muestral", "description": "Es la media aritmética de n observaciones.", "kind": "output" },
+      "\\mu": { "role": "Media poblacional", "description": "Es el valor medio verdadero de la población, el objetivo al que converge la media muestral.", "kind": "input" },
+      "n": { "role": "Tamaño de la muestra", "description": "Es el número de datos observados. Cuanto mayor es, más se acerca la media muestral a la poblacional.", "kind": "input" },
+      "X_i": { "role": "Observación individual", "description": "Es la observación independiente i. Todas siguen la misma distribución.", "kind": "input" },
+      "\\epsilon": { "role": "Margen de error", "description": "La probabilidad de que la diferencia entre la media muestral y la poblacional quede dentro de este valor converge a 1.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
+  },
+  "t-test": {
+    "name": "Estadístico de la prueba t",
+    "oneLiner": "Estadístico que contrasta si la media muestral difiere de forma significativa de la media poblacional",
+    "description": "El estadístico de la prueba t es la diferencia entre la media muestral y la media poblacional de la hipótesis nula, dividida entre el error típico. Cuando se desconoce la varianza poblacional se emplea en su lugar la varianza muestral, y el estadístico sigue una distribución t con los grados de libertad correspondientes. Como se puede aplicar incluso con muestras pequeñas, es el contraste de hipótesis más utilizado en la investigación experimental y en los ensayos clínicos.",
+    "discoverer": "William Gosset",
+    "field": "Estadística",
+    "significance": "Hace posible la inferencia estadística sobre la media poblacional con muestras pequeñas y es el contraste estándar en la investigación médica, psicológica y educativa.",
+    "elementMeanings": {
+      "t": { "role": "Estadístico t", "description": "Expresa la diferencia entre la media muestral y la poblacional en unidades de error típico.", "kind": "output" },
+      "\\bar{x}": { "role": "Media muestral", "description": "Es la media aritmética de los datos de la muestra.", "kind": "input" },
+      "\\mu": { "role": "Media poblacional", "description": "Es la media de la población que supone la hipótesis nula.", "kind": "input" },
+      "s": { "role": "Desviación típica muestral", "description": "Es la desviación típica estimada a partir de los datos de la muestra.", "kind": "input" },
+      "\\sqrt{n}": { "role": "Raíz del tamaño de la muestra", "description": "Es la raíz cuadrada del tamaño muestral n. Se usa para calcular el error típico.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
+  },
+  "chi-squared": {
+    "name": "Prueba de chi cuadrado",
+    "oneLiner": "Estadístico que contrasta si la diferencia entre las frecuencias observadas y las esperadas es estadísticamente significativa",
+    "description": "El estadístico de chi cuadrado se obtiene elevando al cuadrado la diferencia entre la frecuencia observada y la esperada en cada categoría, dividiéndola entre la frecuencia esperada y sumando los resultados. Se emplea en las pruebas de bondad de ajuste y de independencia, y es el método por excelencia del análisis de datos categóricos. La significación se juzga tomando como referencia la distribución de chi cuadrado con los grados de libertad correspondientes.",
+    "discoverer": "Karl Pearson",
+    "field": "Estadística",
+    "significance": "Hace posible el contraste de hipótesis con datos categóricos y se usa de forma central en el análisis de encuestas, la genética y el control de calidad.",
+    "elementMeanings": {
+      "\\chi^2": { "role": "Estadístico de chi cuadrado", "description": "Es el estadístico de contraste que agrega las diferencias entre los valores observados y los esperados.", "kind": "output" },
+      "O": { "role": "Frecuencia observada", "description": "Es la frecuencia realmente observada en cada categoría.", "kind": "input" },
+      "E": { "role": "Frecuencia esperada", "description": "Es la frecuencia que cabe esperar en cada categoría si la hipótesis nula es cierta.", "kind": "input" },
+      "(O-E)^2": { "role": "Cuadrado de la desviación", "description": "Es el cuadrado de la diferencia entre el valor observado y el esperado. Acumula las desviaciones sin importar su signo.", "kind": "structural" },
+      "\\Sigma": { "role": "Símbolo de sumatorio", "description": "Es la operación que suma sobre todas las categorías.", "kind": "structural" }
+    },
+    "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
+  },
+  "poisson-dist": {
+    "name": "Distribución de Poisson",
+    "oneLiner": "Distribución de probabilidad del número de veces que ocurre un suceso poco frecuente en un intervalo de tiempo o de espacio",
+    "description": "La distribución de Poisson modela el número de sucesos independientes que ocurren en una unidad de tiempo o de espacio cuando su tasa media de aparición es constante. Queda determinada por un único parámetro, la tasa media, y tiene la particularidad de que su media y su varianza coinciden. Es la distribución discreta más utilizada para analizar la frecuencia de sucesos raros.",
+    "discoverer": "Siméon Denis Poisson",
+    "field": "Estadística",
+    "significance": "Al modelar el patrón de aparición de sucesos raros, se aplica de forma central a la predicción de siniestros en seguros, al análisis del tráfico en telecomunicaciones y al control de calidad.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Probabilidad", "description": "Es la probabilidad de que el suceso ocurra exactamente k veces.", "kind": "output" },
+      "\\lambda": { "role": "Tasa media de aparición", "description": "Es el número medio de veces que ocurre el suceso por unidad de tiempo o de espacio.", "kind": "input" },
+      "k": { "role": "Número de ocurrencias", "description": "Es el número de veces que ocurre el suceso de interés (un entero mayor o igual que 0).", "kind": "input" },
+      "e^{-\\lambda}": { "role": "Factor de normalización", "description": "Es la parte exponencial que hace que la suma de todas las probabilidades valga 1.", "kind": "structural" },
+      "k!": { "role": "Factorial de k", "description": "Es el factorial que corrige el número de ordenaciones de los k sucesos.", "kind": "structural" }
+    },
+    "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "binomial-dist": {
+    "name": "Distribución binomial",
+    "oneLiner": "Distribución que da la probabilidad de obtener k éxitos en n ensayos independientes",
+    "description": "La distribución binomial es la distribución de probabilidad del número de éxitos al repetir de forma independiente n ensayos de Bernoulli con probabilidad de éxito p. La probabilidad de cada resultado se calcula como el producto del número de combinaciones por las probabilidades de éxito y de fracaso. Si n es suficientemente grande se puede aproximar por la distribución normal y, si la probabilidad de éxito es muy pequeña, por la de Poisson.",
+    "discoverer": "Jacob Bernoulli",
+    "field": "Estadística",
+    "significance": "Como modelo básico de los experimentos dicotómicos de éxito y fracaso, es el fundamento teórico de la inspección de calidad, los ensayos médicos y el análisis de encuestas de opinión.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Probabilidad", "description": "Es la probabilidad de obtener exactamente k éxitos en n ensayos.", "kind": "output" },
+      "C(n,k)": { "role": "Número de combinaciones", "description": "Es el número de formas de elegir k elementos entre n; equivale a n!/(k!(n-k)!).", "kind": "structural" },
+      "p": { "role": "Probabilidad de éxito", "description": "Es la probabilidad de éxito en un solo ensayo.", "kind": "input" },
+      "1-p": { "role": "Probabilidad de fracaso", "description": "Es la probabilidad de fracaso en un solo ensayo.", "kind": "input" },
+      "n": { "role": "Número de ensayos", "description": "Es el número total de ensayos independientes.", "kind": "input" },
+      "k": { "role": "Número de éxitos", "description": "Es el número de éxitos de interés (de 0 a n).", "kind": "input" }
+    },
+    "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "conditional-prob": {
+    "name": "Probabilidad condicionada",
+    "oneLiner": "Probabilidad de que ocurra un suceso sabiendo que otro ya ha ocurrido",
+    "description": "La probabilidad condicionada define la probabilidad de que ocurra el suceso A sabiendo que el suceso B ya ha ocurrido. Se calcula dividiendo la probabilidad de la intersección de ambos sucesos entre la probabilidad del suceso condicionante. Es la base del teorema de Bayes y el concepto más fundamental de toda la teoría de la probabilidad y la inferencia estadística.",
+    "field": "Estadística",
+    "significance": "Expresa cuantitativamente la relación de dependencia entre sucesos y es el fundamento matemático de la inferencia bayesiana, las cadenas de Markov y la teoría de la decisión.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Probabilidad condicionada", "description": "Es la probabilidad de que ocurra el suceso A dado el suceso B.", "kind": "output" },
+      "P(A \\cap B)": { "role": "Probabilidad de la intersección", "description": "Es la probabilidad de que los sucesos A y B ocurran a la vez.", "kind": "input" },
+      "P(B)": { "role": "Probabilidad del suceso condicionante", "description": "Es la probabilidad del suceso B, que se toma como condición. No puede ser 0.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
+  },
+  "total-probability": {
+    "name": "Teorema de la probabilidad total",
+    "oneLiner": "Fórmula que obtiene la probabilidad global cuando el espacio muestral está partido en sucesos mutuamente excluyentes",
+    "description": "El teorema de la probabilidad total obtiene la probabilidad de un suceso como suma ponderada de sus probabilidades condicionadas a cada parte, cuando el espacio muestral se ha partido en sucesos mutuamente excluyentes que lo cubren por completo. Permite descomponer un problema de probabilidad complejo en varias situaciones condicionadas. Es esencial para calcular el denominador del teorema de Bayes.",
+    "field": "Estadística",
+    "significance": "Es la herramienta que descompone de forma sistemática los cálculos de probabilidad complejos y, junto con el teorema de Bayes, forma el armazón de la inferencia estadística.",
+    "elementMeanings": {
+      "P(A)": { "role": "Probabilidad del suceso A", "description": "Es la probabilidad global del suceso A que se quiere calcular.", "kind": "output" },
+      "P(A|B_i)": { "role": "Probabilidad condicionada", "description": "Es la probabilidad del suceso A dado el suceso B_i.", "kind": "input" },
+      "P(B_i)": { "role": "Probabilidad del suceso de la partición", "description": "Es la probabilidad del suceso B_i, la parte i de la partición.", "kind": "input" },
+      "\\Sigma": { "role": "Símbolo de sumatorio", "description": "Es la operación que suma sobre todos los sucesos B_i de la partición.", "kind": "structural" }
+    },
+    "relatedFormulas": ["conditional-prob", "bayes-theorem"]
+  },
+  "covariance": {
+    "name": "Covarianza",
+    "oneLiner": "Valor que mide el sentido y la magnitud de la tendencia de dos variables aleatorias a variar conjuntamente",
+    "description": "La covarianza es la esperanza del producto de las desviaciones de cada variable aleatoria respecto de su propia media. Si es positiva, indica que ambas tienden a variar en el mismo sentido; si es negativa, en sentidos opuestos. Es la base del coeficiente de correlación y se usa de forma central en la teoría de carteras y en el análisis multivariante.",
+    "field": "Estadística",
+    "significance": "Al medir la variación conjunta entre variables, sirve de base al cálculo de la varianza de una cartera, al análisis de componentes principales y a la regresión multivariante.",
+    "elementMeanings": {
+      "\\text{Cov}(X,Y)": { "role": "Covarianza", "description": "Es el valor que expresa en qué grado varían conjuntamente X e Y.", "kind": "output" },
+      "E": { "role": "Operador esperanza", "description": "Es la operación que calcula la esperanza (la media) de una variable aleatoria.", "kind": "structural" },
+      "X": { "role": "Primera variable aleatoria", "description": "Es la primera variable con la que se calcula la covarianza.", "kind": "input" },
+      "Y": { "role": "Segunda variable aleatoria", "description": "Es la segunda variable con la que se calcula la covarianza.", "kind": "input" },
+      "\\mu_X": { "role": "Media de X", "description": "Es la esperanza (la media) de la variable aleatoria X.", "kind": "input" },
+      "\\mu_Y": { "role": "Media de Y", "description": "Es la esperanza (la media) de la variable aleatoria Y.", "kind": "input" }
+    },
+    "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
+  }
+}

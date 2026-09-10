@@ -1,0 +1,220 @@
+{
+  "roles": {
+    "root": "Whole expression",
+    "number": "Number",
+    "variable": "Variable",
+    "operator": "Operator",
+    "frac": "Fraction",
+    "sqrt": "Square root",
+    "sum": "Summation (Sigma)",
+    "product": "Product (Pi)",
+    "integral": "Integral",
+    "limit": "Limit (lim)",
+    "matrix": "Matrix",
+    "paren": "Parentheses",
+    "abs": "Absolute value",
+    "overline": "Overline",
+    "text": "Text",
+    "cases": "Piecewise",
+    "cancel": "Strikethrough",
+    "chem": "Chemical formula",
+    "func": "{name} function"
+  },
+  "descriptions": {
+    "root": "The overall structure of this expression.",
+    "number": "The number {value}.",
+    "variable": "The variable {name}. Its value can change.",
+    "frac": "Fraction — the top (numerator) divided by the bottom (denominator).",
+    "sqrt": "Square root — the number that gives this value when squared.",
+    "sum": "Summation — add up the general term as the index runs through its range.",
+    "product": "Product — multiply the general term as the index runs through its range.",
+    "integral": "Integral — the area under the curve of a function.",
+    "limit": "Limit — the value an expression converges to as the variable approaches a given point.",
+    "paren": "An expression grouped in parentheses.",
+    "abs": "Absolute value — the magnitude with the sign ignored.",
+    "overline": "A symbol with an overline. It denotes a mean, a conjugate, a closure, and so on.",
+    "chem": "Chemical notation representing substances and reactions.",
+    "matrix": "A {rows}x{cols} matrix."
+  },
+  "specialVariables": {
+    "infinity": "It denotes infinity.",
+    "eulerE": "The natural constant e (about 2.718). It underlies exponentials and calculus.",
+    "pi": "Pi, the circle constant (about 3.14159).",
+    "imaginaryI": "The imaginary unit. i squared is -1."
+  },
+  "operators": {
+    "+": "Addition.",
+    "-": "Subtraction, or a negative sign.",
+    "×": "Multiplication.",
+    "·": "Multiplication.",
+    "*": "Multiplication.",
+    "÷": "Division.",
+    "=": "Equals sign — the two sides are equal.",
+    "<": "Inequality — the left side is less than the right.",
+    ">": "Inequality — the left side is greater than the right.",
+    "≤": "Less than or equal to — the left side is at most the right.",
+    "≥": "Greater than or equal to — the left side is at least the right.",
+    "≠": "It states that the two sides are not equal.",
+    "∈": "Membership — the left side belongs to the set on the right.",
+    "→": "Implication — the condition on the left leads to the conclusion on the right.",
+    "⟹": "Implication — the condition on the left leads to the conclusion on the right.",
+    "∪": "Union — take every element of both sets.",
+    "∩": "Intersection — keep only the elements common to both sets."
+  },
+  "functions": {
+    "sin": "Sine function — a trigonometric function; in a right triangle, opposite over hypotenuse.",
+    "cos": "Cosine function — a trigonometric function; adjacent over hypotenuse.",
+    "tan": "Tangent function — sin over cos.",
+    "log": "Logarithm — the inverse of exponentiation.",
+    "ln": "Natural logarithm — the logarithm with base e.",
+    "exp": "Exponential function — a power of e.",
+    "lim": "The limit operator.",
+    "det": "Determinant — a scalar characteristic value of a matrix.",
+    "max": "The function that takes the maximum value.",
+    "min": "The function that takes the minimum value."
+  },
+  "accents": {
+    "hat": {
+      "role": "Estimate / unit vector",
+      "description": "A hat denotes an estimate or a unit vector."
+    },
+    "widehat": {
+      "role": "Estimate / unit vector",
+      "description": "A hat denotes an estimate or a unit vector."
+    },
+    "vec": {
+      "role": "Vector",
+      "description": "An arrow marks a vector, which has both magnitude and direction."
+    },
+    "overrightarrow": {
+      "role": "Vector",
+      "description": "An arrow marks a vector, which has both magnitude and direction."
+    },
+    "overleftarrow": {
+      "role": "Vector",
+      "description": "An arrow marks a vector, which has both magnitude and direction."
+    },
+    "dot": {
+      "role": "Time derivative",
+      "description": "A dot denotes a derivative with respect to time. In physics it is used for velocity and the like."
+    },
+    "ddot": {
+      "role": "Second time derivative",
+      "description": "Two dots denote a second derivative with respect to time, such as acceleration."
+    },
+    "tilde": {
+      "role": "Approximation / transform",
+      "description": "A tilde denotes an approximate value or a transformed quantity."
+    },
+    "widetilde": {
+      "role": "Approximation / transform",
+      "description": "A tilde denotes an approximate value or a transformed quantity."
+    },
+    "bar": {
+      "role": "Mean / conjugate",
+      "description": "A bar denotes a mean value or the conjugate of a complex number."
+    }
+  },
+  "defaultAccent": {
+    "role": "Accent",
+    "description": "A symbol carrying an accent."
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "Power",
+      "description": "Power — the base multiplied by itself as many times as the exponent says."
+    },
+    "subscriptOnly": {
+      "role": "Subscript",
+      "description": "Subscript — it picks out a particular element or component."
+    },
+    "both": {
+      "role": "Scripts",
+      "description": "A symbol carrying both a superscript and a subscript."
+    },
+    "withLeft": {
+      "role": "Pre- and post-scripts",
+      "description": "Notation with scripts on both sides of the symbol."
+    }
+  },
+  "defaultOperator": "The operator {op}.",
+  "defaultFunction": "The function {name}.",
+  "chem": {
+    "formula": {
+      "role": "Chemical formula",
+      "description": "Notation that writes a substance out in element symbols."
+    },
+    "equation": {
+      "role": "Chemical equation",
+      "description": "It shows the substances on the left turning into the substances on the right."
+    },
+    "species": {
+      "role": "Chemical species",
+      "description": "One of the substances taking part in the reaction."
+    },
+    "element": {
+      "role": "Element",
+      "description": "A symbol standing for an element of the periodic table."
+    },
+    "group": {
+      "role": "Group of atoms",
+      "description": "A cluster of atoms enclosed in parentheses that behaves as a single unit."
+    },
+    "coefficient": {
+      "role": "Coefficient",
+      "description": "The ratio of particles taking part in the reaction. It is the number that balances the atoms on both sides."
+    },
+    "count": {
+      "role": "Atom count",
+      "description": "It says how many of the preceding element or group are present."
+    },
+    "charge": {
+      "role": "Charge",
+      "description": "The size of the charge an ion carries. It equals the number of electrons lost or gained."
+    },
+    "chargeSign": {
+      "role": "Charge sign",
+      "description": "It says whether electrons were lost, giving a cation (+), or gained, giving an anion (−)."
+    },
+    "massNumber": {
+      "role": "Mass number",
+      "description": "The protons and neutrons in the nucleus added together. It distinguishes isotopes."
+    },
+    "atomicNumber": {
+      "role": "Atomic number",
+      "description": "The number of protons in the nucleus. It determines which element this is."
+    },
+    "arrow": {
+      "role": "Reaction arrow",
+      "description": "It shows that the reaction proceeds in the direction of the arrow."
+    },
+    "equilibriumArrow": {
+      "role": "Reversible reaction",
+      "description": "The forward and reverse reactions run together and reach equilibrium."
+    },
+    "condition": {
+      "role": "Reaction conditions",
+      "description": "The catalyst, temperature, pressure, and other conditions the reaction needs."
+    },
+    "plus": {
+      "role": "Species separator",
+      "description": "It joins the substances on the same side. It is not addition."
+    },
+    "hydrate": {
+      "role": "Hydrate bond",
+      "description": "It shows that water molecules are held inside the crystal."
+    },
+    "state": {
+      "role": "State",
+      "description": "It says which state the substance is in: solid (s), liquid (l), gas (g), or aqueous solution (aq)."
+    },
+    "gas": {
+      "role": "Gas evolved",
+      "description": "It shows that the reaction gives off a gas."
+    },
+    "precipitate": {
+      "role": "Precipitate",
+      "description": "It shows that the reaction forms a solid that settles out."
+    }
+  }
+}

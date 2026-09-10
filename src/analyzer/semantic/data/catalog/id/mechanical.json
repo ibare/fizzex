@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "Tegangan",
+    "oneLiner": "Besaran fisika yang menyatakan gaya dalam yang bekerja pada tiap satuan luas",
+    "description": "Tegangan adalah gaya per satuan luas yang timbul di dalam benda akibat gaya luar. Bentuknya bermacam-macam, seperti tarik, tekan, dan geser, dan tegangan menjadi petunjuk paling dasar untuk menilai apakah bahan akan patah. Dalam perancangan struktur, menjaga tegangan tetap di bawah tegangan izin adalah inti keselamatan.",
+    "field": "Teknik mesin",
+    "significance": "Sebagai konsep dasar mekanika bahan, tegangan menjadi titik tolak penilaian keamanan dan perancangan struktur.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Tegangan", "description": "Gaya dalam per satuan luas. Satuan: pascal (Pa) atau N/m persegi.", "kind": "output" },
+      "F": { "role": "Gaya", "description": "Gaya luar yang bekerja pada benda. Satuan: newton (N).", "kind": "input" },
+      "A": { "role": "Luas penampang", "description": "Luas penampang tempat gaya bekerja. Satuan: m persegi.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung tegangan tarik pada kabel jembatan", "Memeriksa tegangan tekan pada kolom bangunan"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "Regangan",
+    "oneLiner": "Perbandingan perubahan panjang terhadap panjang mula-mula",
+    "description": "Regangan adalah besaran tak berdimensi yang menyatakan seberapa jauh benda berubah bentuk akibat gaya luar, dinyatakan sebagai perbandingan terhadap panjang mula-mula. Ketika regangannya kecil, benda kembali ke bentuk semula karena masih berada dalam daerah elastis, tetapi bila melewati nilai kritis terjadi deformasi plastis sehingga bentuknya berubah secara tetap.",
+    "field": "Teknik mesin",
+    "significance": "Regangan menakar seberapa besar bahan berubah bentuk sehingga menyiapkan dasar analisis perilaku elastis maupun plastis.",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "Regangan", "description": "Perbandingan perubahan panjang. Besaran tak berdimensi (tanpa satuan).", "kind": "output" },
+      "\\Delta L": { "role": "Perubahan panjang", "description": "Panjang setelah berubah bentuk dikurangi panjang mula-mula. Satuan: m.", "kind": "input" },
+      "L": { "role": "Panjang mula-mula", "description": "Panjang awal benda sebelum gaya luar bekerja. Satuan: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Mengukur pertambahan panjang benda uji dalam uji tarik logam", "Menilai besarnya deformasi rangka bangunan saat gempa"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "Hukum Hooke",
+    "oneLiner": "Hukum yang menyatakan bahwa tegangan sebanding dengan regangan selama masih dalam daerah elastis",
+    "description": "Hukum Hooke menyatakan bahwa tegangan yang bekerja pada bahan sama dengan hasil kali modulus elastisitas dengan regangan. Hukum ini hanya berlaku dalam batas elastis, dan di luar batas itu muncul perilaku taklinear. Gaya pemulih pegas (F=kx) pun merupakan bentuk khusus dari hukum ini.",
+    "discoverer": "Robert Hooke",
+    "field": "Teknik mesin",
+    "significance": "Hukum ini menegakkan hubungan linear pada perilaku elastis sehingga menjadi landasan teoretis analisis struktur dan pengujian bahan.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Tegangan", "description": "Gaya yang bekerja pada tiap satuan luas. Satuan: pascal (Pa).", "kind": "output" },
+      "E": { "role": "Modulus elastisitas", "description": "Modulus Young. Konstanta khas bahan yang menyatakan kekakuannya. Satuan: Pa.", "kind": "input" },
+      "\\varepsilon": { "role": "Regangan", "description": "Perbandingan perubahan panjang. Tak berdimensi.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung gaya pemulih elastis sebuah pegas", "Memperkirakan deformasi kolom beton di bawah beban"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "Persamaan Bernoulli",
+    "oneLiner": "Asas yang menyatakan bahwa jumlah energi tekanan, kecepatan, dan ketinggian tetap pada aliran fluida tak termampatkan",
+    "description": "Persamaan Bernoulli menyatakan kekekalan energi pada aliran fluida tak termampatkan dan tak kental dalam keadaan tunak. Persamaan ini menyatakan secara kuantitatif bahwa makin cepat aliran maka tekanannya makin rendah, dan makin tinggi kedudukannya maka tekanannya juga makin rendah. Penerapannya luas, mulai dari asas gaya angkat sayap pesawat sampai perancangan perpipaan.",
+    "discoverer": "Daniel Bernoulli",
+    "field": "Teknik mesin",
+    "significance": "Sebagai asas inti mekanika fluida, persamaan ini menyediakan dasar perancangan di berbagai bidang keteknikan seperti penerbangan, tenaga air, dan perpipaan.",
+    "elementMeanings": {
+      "P": { "role": "Tekanan statis", "description": "Tekanan statis fluida. Satuan: pascal (Pa).", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "Tekanan dinamis", "description": "Tekanan akibat gerak fluida. Nilainya sebanding dengan kuadrat kecepatan.", "kind": "structural" },
+      "\\rho": { "role": "Massa jenis", "description": "Massa jenis fluida. Satuan: kg/m³.", "kind": "input" },
+      "v": { "role": "Kecepatan aliran", "description": "Kecepatan aliran fluida. Satuan: m/s.", "kind": "input" },
+      "g": { "role": "Percepatan gravitasi", "description": "Percepatan gravitasi di dekat permukaan bumi. Kira-kira 9,8 m/s persegi.", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "Ketinggian", "description": "Ketinggian kedudukan fluida diukur dari bidang acuan. Satuan: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Timbulnya gaya angkat akibat beda tekanan di atas dan di bawah sayap pesawat", "Pancaran air menjadi lebih cepat ketika ujung selang taman dipersempit"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "Bilangan Reynolds",
+    "oneLiner": "Bilangan tak berdimensi yang membedakan apakah aliran fluida bersifat laminar atau turbulen",
+    "description": "Bilangan Reynolds adalah bilangan tak berdimensi yang menyatakan perbandingan gaya inersia terhadap gaya kental. Bila nilainya kecil (kira-kira di bawah 2300) alirannya laminar, sedangkan bila besar timbul aliran turbulen. Bilangan ini menjadi petunjuk utama untuk meramalkan sifat aliran pada semua sistem keteknikan yang berkaitan dengan fluida, seperti perpipaan, pesawat terbang, dan kapal.",
+    "discoverer": "Osborne Reynolds",
+    "field": "Teknik mesin",
+    "significance": "Bilangan ini membuat peralihan aliran dari laminar ke turbulen dapat diramalkan sehingga menjadi acuan pembeda utama dalam perancangan sistem fluida.",
+    "elementMeanings": {
+      "Re": { "role": "Bilangan Reynolds", "description": "Perbandingan gaya inersia terhadap gaya kental. Bilangan tak berdimensi.", "kind": "output" },
+      "\\rho": { "role": "Massa jenis", "description": "Massa jenis fluida. Satuan: kg/m³.", "kind": "input" },
+      "v": { "role": "Kecepatan aliran", "description": "Kecepatan aliran rata-rata fluida. Satuan: m/s.", "kind": "input" },
+      "L": { "role": "Panjang karakteristik", "description": "Panjang yang mewakili ciri geometri aliran, seperti garis tengah pipa. Satuan: m.", "kind": "input" },
+      "\\mu": { "role": "Koefisien kekentalan", "description": "Kekentalan dinamik fluida. Satuan: Pa dikali s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Meramalkan timbulnya aliran turbulen saat merancang pipa air", "Menganalisis aliran lapisan batas di permukaan sayap pesawat"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "Persamaan Navier-Stokes",
+    "oneLiner": "Persamaan diferensial parsial dasar yang memerikan gerak fluida kental",
+    "description": "Persamaan Navier-Stokes adalah penerapan hukum kedua Newton pada fluida kontinu, dan menyatakan bahwa gradien tekanan, gaya kental, serta gaya luar menentukan percepatan fluida. Karena penyelesaian analitiknya umumnya tidak ada, persamaan ini diselesaikan secara numerik (CFD), dan kedudukannya dalam matematika pun begitu penting sampai terpilih sebagai salah satu Masalah Milenium.",
+    "discoverer": "Claude-Louis Navier, George Gabriel Stokes",
+    "field": "Teknik mesin",
+    "significance": "Sebagai persamaan paling umum yang memerikan seluruh aliran fluida kental, persamaan ini menjadi dasar dinamika fluida komputasional (CFD).",
+    "elementMeanings": {
+      "\\rho": { "role": "Massa jenis", "description": "Massa jenis fluida. Satuan: kg/m³.", "kind": "input" },
+      "\\mathbf{v}": { "role": "Medan kecepatan", "description": "Vektor kecepatan partikel fluida. Merupakan fungsi kedudukan dan waktu.", "kind": "output" },
+      "p": { "role": "Tekanan", "description": "Medan tekanan yang bekerja pada fluida. Satuan: pascal (Pa).", "kind": "input" },
+      "\\mu": { "role": "Koefisien kekentalan", "description": "Kekentalan dinamik fluida. Satuan: Pa dikali s.", "kind": "input" },
+      "\\mathbf{f}": { "role": "Gaya luar", "description": "Gaya benda yang bekerja pada fluida, seperti gravitasi.", "kind": "input" }
+    },
+    "realWorldExamples": ["Simulasi numerik aliran udara di sekitar mobil", "Analisis pola aliran darah di dalam pembuluh"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "Hukum konduksi kalor",
+    "oneLiner": "Hukum yang menyatakan besarnya kalor yang berpindah melalui bahan akibat beda suhu",
+    "description": "Hukum konduksi kalor Fourier menyatakan bahwa laju perpindahan kalor sebanding dengan hasil kali konduktivitas termal, luas penampang, dan gradien suhu. Kalor mengalir dari tempat bersuhu tinggi ke tempat bersuhu rendah, dan makin tinggi konduktivitas termal bahan makin cepat perpindahannya. Hukum ini menjadi dasar perancangan pengelolaan kalor, mulai dari pemilihan bahan isolasi sampai pendinginan semikonduktor.",
+    "discoverer": "Joseph Fourier",
+    "field": "Teknik mesin",
+    "significance": "Hukum ini memungkinkan analisis kuantitatif gejala perpindahan kalor sehingga menegakkan dasar termodinamika dan keteknikan pengelolaan kalor.",
+    "elementMeanings": {
+      "Q": { "role": "Laju perpindahan kalor", "description": "Energi kalor yang berpindah tiap satuan waktu. Satuan: watt (W).", "kind": "output" },
+      "k": { "role": "Konduktivitas termal", "description": "Konstanta khas bahan yang menyatakan kemampuannya menghantarkan kalor. Satuan: W/(m dikali K).", "kind": "input" },
+      "A": { "role": "Luas penampang", "description": "Luas penampang yang dilalui kalor. Satuan: m persegi.", "kind": "input" },
+      "\\Delta T": { "role": "Beda suhu", "description": "Beda suhu antara sisi sumber panas dan sisi dingin. Satuan: K atau derajat Celsius.", "kind": "input" },
+      "\\Delta x": { "role": "Tebal", "description": "Tebal bahan searah perpindahan kalor. Satuan: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung kinerja isolasi dinding bangunan", "Merancang pelat pelepas kalor untuk CPU laptop"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "Beban tekuk Euler",
+    "oneLiner": "Beban kritis saat kolom panjang tiba-tiba melengkung akibat gaya tekan",
+    "description": "Rumus tekuk Euler menyatakan beban kritis yang membuat tekuk terjadi ketika kolom panjang bertumpuan sendi di kedua ujungnya menerima gaya tekan searah sumbu. Nilainya sebanding dengan modulus elastisitas dan momen inersia penampang, serta berbanding terbalik dengan kuadrat panjang kolom. Makin panjang kolomnya makin rawan tertekuk, sehingga hal ini wajib diperiksa dalam perancangan struktur yang aman.",
+    "discoverer": "Leonhard Euler",
+    "field": "Teknik mesin",
+    "significance": "Rumus ini membuat batas kestabilan batang tekan dapat diramalkan secara teoretis sehingga menjadi kriteria pemeriksaan wajib dalam perancangan teknik struktur.",
+    "elementMeanings": {
+      "P_{cr}": { "role": "Beban tekuk kritis", "description": "Gaya tekan terkecil yang membuat tekuk mulai terjadi. Satuan: newton (N).", "kind": "output" },
+      "\\pi^2": { "role": "Kuadrat pi", "description": "Konstanta yang berasal dari bentuk gelombang ragam tekuk.", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "Modulus elastisitas", "description": "Kekakuan bahan (modulus Young). Satuan: pascal (Pa).", "kind": "input" },
+      "I": { "role": "Momen inersia penampang", "description": "Sifat geometri yang menyatakan ketahanan penampang terhadap lentur. Satuan: m pangkat empat.", "kind": "input" },
+      "L": { "role": "Panjang kolom", "description": "Panjang tekuk. Panjang efektifnya berubah menurut kondisi tumpuan. Satuan: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Memeriksa keamanan terhadap tekuk pada kolom baja gedung bertingkat", "Menentukan tebal minimum tabung rangka sepeda"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

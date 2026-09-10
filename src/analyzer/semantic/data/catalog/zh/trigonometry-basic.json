@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "正弦的定义",
+    "oneLiner": "在直角三角形中，一个角的对边长度除以斜边长度所得的比值",
+    "description": "正弦(sin)是在直角三角形中，把特定角度的对面那条边（对边）除以最长的边（斜边）所得的值。角度一旦确定，无论三角形大小如何，它总是同一个值。它是三角比中最基本的比值。",
+    "field": "三角学",
+    "significance": "它是表示直角三角形边与角关系的最基本三角比，在物理学和工程学的波动、振动分析中被核心使用。",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "正弦值", "description": "角度 θ 所对应的正弦比值。", "kind": "output" },
+      "\\theta": { "role": "角度", "description": "直角三角形中作为基准的角度。指的是非直角的那一个角。", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "对边", "description": "位于基准角对面的那条边。", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "斜边", "description": "直角三角形中最长的边。它位于直角的对面。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "由树影长度和太阳高度角求出树的高度",
+      "已知坡路的倾角时计算垂直高度",
+      "求秋千摆动时能达到的最大高度"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "余弦的定义",
+    "oneLiner": "在直角三角形中，一个角的邻边长度除以斜边长度所得的比值",
+    "description": "余弦(cos)是在直角三角形中，把紧靠基准角的那条边（邻边）除以最长的边（斜边）所得的值。和正弦一样，只要角度相同，它就与三角形大小无关，总是同一个值。",
+    "field": "三角学",
+    "significance": "它与正弦一同构成三角学的两大支柱，在向量的点积、信号处理、坐标旋转等场合中不可或缺。",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "余弦值", "description": "角度 θ 所对应的余弦比值。", "kind": "output" },
+      "\\theta": { "role": "角度", "description": "直角三角形中作为基准的角度。", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "邻边", "description": "紧靠基准角的那条边（不含斜边）。", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "斜边", "description": "直角三角形中最长的边。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "梯子靠在墙上时，计算从墙脚到梯脚的水平距离",
+      "已知山坡的倾角时求出水平移动距离",
+      "由机械臂的关节角度计算臂端的水平位置"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "正切的定义",
+    "oneLiner": "在直角三角形中，一个角的对边长度除以邻边长度所得的比值",
+    "description": "正切(tan)是在直角三角形中，把基准角的对边除以紧靠它的邻边所得的值。它等于正弦除以余弦。在表示坡度或斜率时特别有用。",
+    "field": "三角学",
+    "significance": "它是直接表示坡度与斜率的三角比，在测量、导航、建筑设计中被广泛使用。",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "正切值", "description": "角度 θ 所对应的正切比值。", "kind": "output" },
+      "\\theta": { "role": "角度", "description": "直角三角形中作为基准的角度。", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "对边", "description": "位于基准角对面的那条边。", "kind": "input" },
+      "\\text{adjacent}": { "role": "邻边", "description": "紧靠基准角的那条边（不含斜边）。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在离建筑物一定距离处，用仰角测出建筑物的高度",
+      "计算道路标志上标示的坡度(%)",
+      "由水平距离和角度求出到山顶的高度"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "毕达哥拉斯三角恒等式",
+    "oneLiner": "正弦的平方加上余弦的平方总是等于 1 的恒等式",
+    "description": "毕达哥拉斯三角恒等式保证：无论角度为何，sin 的平方加 cos 的平方都恰好等于 1。把勾股定理（斜边平方 = 两直角边平方之和）两边同除以斜边的平方，就可以直接推导出来。它是三角函数最基本的关系式。",
+    "field": "三角学",
+    "significance": "它是一切三角恒等式的出发点，也是式子变换与证明中最常用到的基本关系。",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "正弦的平方", "description": "sin θ 的平方值。", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "余弦的平方", "description": "cos θ 的平方值。", "kind": "structural" },
+      "\\theta": { "role": "角度", "description": "任意角度。取任何值恒等式都成立。", "kind": "input", "unit": "rad" },
+      "1": { "role": "和", "description": "正弦的平方与余弦的平方之和总是 1。", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "三角函数计算中，已知 sin 值时直接求出 cos 值",
+      "在物理学中检验向量分量分解的正确性",
+      "在计算机图形学中确认旋转变换保持长度不变"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "正弦定理",
+    "oneLiner": "三角形中每条边的长度除以它对角的正弦，所得的值都相同的定理",
+    "description": "正弦定理是在任意三角形（不必是直角三角形）中都成立的关系。边 a 除以角 A 的正弦、边 b 除以角 B 的正弦、边 c 除以角 C 的正弦，这三个值都相等。这个比值还等于该三角形外接圆的直径。",
+    "field": "三角学",
+    "significance": "它使得在非直角的一般三角形中也能求出边与角的关系，是测量与导航的核心工具。",
+    "elementMeanings": {
+      "a": { "role": "边 a", "description": "位于角 A 对面的那条边的长度。", "kind": "input" },
+      "b": { "role": "边 b", "description": "位于角 B 对面的那条边的长度。", "kind": "input" },
+      "c": { "role": "边 c", "description": "位于角 C 对面的那条边的长度。", "kind": "input" },
+      "\\sin A": { "role": "角 A 的正弦", "description": "三角形顶点 A 处角度的正弦值。", "kind": "structural" },
+      "\\sin B": { "role": "角 B 的正弦", "description": "三角形顶点 B 处角度的正弦值。", "kind": "structural" },
+      "\\sin C": { "role": "角 C 的正弦", "description": "三角形顶点 C 处角度的正弦值。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "用在两个地点测得的角度计算到河对岸建筑物的距离",
+      "不依靠 GPS，用三角测量确定位置",
+      "航海途中由两座灯塔之间的夹角判定船的位置"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

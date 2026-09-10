@@ -1,0 +1,184 @@
+{
+  "pythagorean-theorem": {
+    "name": "Teorema de Pitágoras",
+    "oneLiner": "Teorema segundo o qual, em um triângulo retângulo, o quadrado da hipotenusa é igual à soma dos quadrados dos outros dois lados",
+    "description": "O teorema de Pitágoras estabelece que o quadrado do comprimento da hipotenusa de um triângulo retângulo é igual à soma dos quadrados dos comprimentos dos outros dois lados. É o teorema mais básico da geometria euclidiana e a base do conceito de distância. É o teorema mais estudado da história da matemática, a ponto de existirem milhares de demonstrações dele.",
+    "discoverer": "Pitágoras (atribuição tradicional)",
+    "field": "Geometria",
+    "significance": "Fornece a definição da distância euclidiana e é a base de toda a matemática moderna: trigonometria, geometria analítica, espaços vetoriais e mais.",
+    "elementMeanings": {
+      "a": { "role": "cateto", "description": "É o comprimento de um dos lados que formam o ângulo reto.", "kind": "input" },
+      "b": { "role": "cateto", "description": "É o comprimento do outro lado que forma o ângulo reto.", "kind": "input" },
+      "c": { "role": "hipotenusa", "description": "É o comprimento do lado mais longo, oposto ao ângulo reto.", "kind": "output" },
+      "a^2+b^2": { "role": "soma dos quadrados dos catetos", "description": "É o valor obtido somando os quadrados dos comprimentos dos dois catetos.", "kind": "output" },
+      "c^2": { "role": "quadrado da hipotenusa", "description": "É o quadrado do comprimento da hipotenusa. Equivale à soma dos quadrados dos catetos.", "kind": "output" }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "cateto",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "cateto",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": ["law-of-cosines", "heron-formula"]
+  },
+  "heron-formula": {
+    "name": "Fórmula de Heron",
+    "oneLiner": "Fórmula que calcula a área de um triângulo apenas a partir dos comprimentos dos três lados",
+    "description": "A fórmula de Heron calcula a área usando os três lados a, b, c do triângulo e o semiperímetro s. Como dispensa a determinação da altura, é bastante prática quando se têm as coordenadas ou em trabalhos de topografia. Tem a estrutura elegante em que o quadrado da área é expresso como o produto do semiperímetro pelas suas diferenças em relação a cada lado.",
+    "discoverer": "Heron de Alexandria",
+    "field": "Geometria",
+    "significance": "Como permite obter a área só com os comprimentos dos lados, sem informação de altura, é amplamente usada em topografia e em computação gráfica.",
+    "elementMeanings": {
+      "a": { "role": "primeiro lado", "description": "É o comprimento do primeiro lado do triângulo.", "kind": "input" },
+      "b": { "role": "segundo lado", "description": "É o comprimento do segundo lado do triângulo.", "kind": "input" },
+      "c": { "role": "terceiro lado", "description": "É o comprimento do terceiro lado do triângulo.", "kind": "input" },
+      "s": { "role": "semiperímetro", "description": "É a metade da soma dos três lados. s = (a+b+c)/2.", "kind": "output" },
+      "A": { "role": "área", "description": "É a área do triângulo. Calcula-se pela raiz de s(s-a)(s-b)(s-c).", "kind": "output" }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "circle-area"]
+  },
+  "circle-area": {
+    "name": "Área do círculo",
+    "oneLiner": "Fórmula que calcula a área do círculo multiplicando o quadrado do raio pelo número pi",
+    "description": "A fórmula da área do círculo mostra que a superfície ocupada por um círculo de raio r é igual ao produto do número pi pelo quadrado do raio. Desde que Arquimedes a demonstrou dividindo o círculo em triângulos infinitamente finos, ela se tornou o protótipo da integral.",
+    "discoverer": "Arquimedes",
+    "field": "Geometria",
+    "significance": "É a fórmula de área mais básica entre as figuras curvas e o ponto de partida histórico do conceito de integral.",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo círculo. Unidade: comprimento ao quadrado.", "kind": "output" },
+      "\\pi": { "role": "número pi", "description": "É a razão entre o comprimento da circunferência e o diâmetro. Cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É a distância do centro do círculo até a circunferência.", "kind": "input" },
+      "r^2": { "role": "quadrado do raio", "description": "É o quadrado do raio. Determina o tamanho da área.", "kind": "input" }
+    },
+    "relatedFormulas": ["sphere-volume", "pythagorean-theorem"]
+  },
+  "law-of-cosines": {
+    "name": "Lei dos cossenos",
+    "oneLiner": "Lei que determina o comprimento de um lado de um triângulo qualquer a partir dos outros dois lados e do ângulo entre eles",
+    "description": "A lei dos cossenos é a relação segundo a qual, em um triângulo, o quadrado de um lado é igual à soma dos quadrados dos outros dois lados menos o dobro do produto desses dois lados pelo cosseno do ângulo entre eles. É a generalização do teorema de Pitágoras: quando o ângulo entre os lados é reto, o cosseno vale 0 e a lei se reduz ao teorema de Pitágoras.",
+    "field": "Geometria",
+    "significance": "Permite obter a relação entre lados e ângulos também em triângulos quaisquer, e não apenas nos retângulos, e é indispensável em topografia e navegação.",
+    "elementMeanings": {
+      "a": { "role": "lado procurado", "description": "É o lado cujo comprimento se quer obter pela lei dos cossenos.", "kind": "output" },
+      "b": { "role": "lado conhecido", "description": "É o comprimento de um dos lados conhecidos do triângulo.", "kind": "input" },
+      "c": { "role": "lado conhecido", "description": "É o comprimento do outro lado conhecido do triângulo.", "kind": "input" },
+      "C": { "role": "ângulo entre os lados", "description": "É o ângulo compreendido entre os lados b e c.", "kind": "input", "unit": "rad" },
+      "\\cos C": { "role": "cosseno do ângulo entre os lados", "description": "É o cosseno do ângulo C. Se o ângulo for reto, vale 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "heron-formula"]
+  },
+  "sphere-volume": {
+    "name": "Volume da esfera",
+    "oneLiner": "Fórmula do volume da esfera, proporcional ao cubo do raio",
+    "description": "A fórmula do volume da esfera mostra que o espaço ocupado por uma esfera de raio r é o produto de (4/3) pelo número pi e pelo cubo do raio. Essa relação, descoberta por Arquimedes ao inscrever a esfera em um cilindro, também pode ser deduzida por integração e é um resultado básico da geometria tridimensional.",
+    "discoverer": "Arquimedes",
+    "field": "Geometria",
+    "significance": "É a fórmula de volume do sólido de superfície curva mais básico do espaço tridimensional e é amplamente aproveitada na física e na engenharia.",
+    "elementMeanings": {
+      "V": { "role": "volume", "description": "É o tamanho do espaço ocupado pela esfera. Unidade: comprimento ao cubo.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "constante de proporcionalidade", "description": "É o fator de proporcionalidade entre o volume da esfera e o cubo do raio.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "número pi", "description": "É a razão entre o comprimento da circunferência e o diâmetro. Cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É a distância do centro da esfera até a superfície.", "kind": "input" },
+      "r^3": { "role": "cubo do raio", "description": "É o raio multiplicado por si mesmo três vezes. Reflete o crescimento tridimensional do volume.", "kind": "input" }
+    },
+    "relatedFormulas": ["circle-area"]
+  },
+  "euler-polyhedron": {
+    "name": "Fórmula de Euler para poliedros",
+    "oneLiner": "Relação entre os números de vértices, arestas e faces de um poliedro convexo",
+    "description": "A fórmula de Euler para poliedros mostra a relação surpreendente segundo a qual, em um poliedro convexo, o número de vértices menos o número de arestas mais o número de faces é sempre 2. É a fórmula que deu início à topologia: ainda que a forma do poliedro mude, essa relação não se altera. É o exemplo mais básico do invariante topológico chamado característica de Euler.",
+    "discoverer": "Leonhard Euler",
+    "field": "Geometria",
+    "significance": "É o primeiro resultado a quantificar as propriedades topológicas de um objeto geométrico e o ponto de partida da topologia e da teoria dos grafos.",
+    "elementMeanings": {
+      "V": { "role": "número de vértices", "description": "É o número total de vértices do poliedro (os pontos onde as arestas se encontram).", "kind": "input" },
+      "E": { "role": "número de arestas", "description": "É o número total de arestas do poliedro (os segmentos onde duas faces se encontram).", "kind": "input" },
+      "F": { "role": "número de faces", "description": "É o número total de faces do poliedro (os polígonos planos).", "kind": "input" },
+      "2": { "role": "característica de Euler", "description": "É a característica de Euler de um poliedro convexo (topologicamente equivalente à esfera). Vale sempre 2.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": [
+      "Verificação no cubo: 8 vértices - 12 arestas + 6 faces = 2",
+      "Verificação na bola de futebol (icosaedro truncado): 60 vértices - 90 arestas + 32 faces = 2"
+    ],
+    "relatedFormulas": ["pythagorean-theorem"]
+  },
+  "circle-equation": {
+    "name": "Equação da circunferência",
+    "oneLiner": "Equação que representa uma circunferência no plano cartesiano por seu centro e seu raio",
+    "description": "A equação da circunferência expressa a condição satisfeita por todos os pontos (x, y) da circunferência de centro (a, b) e raio r. Deduz-se diretamente do teorema de Pitágoras e é a ferramenta básica para tratar circunferências algebricamente na geometria analítica. Ao ser desenvolvida, chega-se à forma geral; ao ser reorganizada como quadrado perfeito, volta-se à forma reduzida.",
+    "field": "Geometria",
+    "significance": "É o exemplo central da geometria analítica, que expressa figuras geométricas por equações algébricas, e é indispensável na análise da relação entre circunferências e retas.",
+    "elementMeanings": {
+      "x": { "role": "abscissa do ponto", "description": "É a coordenada horizontal de um ponto qualquer da circunferência.", "kind": "input" },
+      "y": { "role": "ordenada do ponto", "description": "É a coordenada vertical de um ponto qualquer da circunferência.", "kind": "input" },
+      "a": { "role": "abscissa do centro", "description": "É a coordenada horizontal do centro da circunferência.", "kind": "input" },
+      "b": { "role": "ordenada do centro", "description": "É a coordenada vertical do centro da circunferência.", "kind": "input" },
+      "r": { "role": "raio", "description": "É a distância do centro do círculo até a circunferência.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "No rastreamento de posição por GPS, o conjunto das posições possíveis a uma distância fixa de determinada estação-base",
+      "Cálculo da área de trabalho de um braço robótico modelando seu alcance pela equação da circunferência"
+    ],
+    "relatedFormulas": ["pythagorean-theorem", "circle-area", "ellipse-equation"]
+  },
+  "ellipse-equation": {
+    "name": "Equação da elipse",
+    "oneLiner": "Equação que representa o lugar geométrico dos pontos cuja soma das distâncias a dois focos é constante",
+    "description": "A equação da elipse é a condição satisfeita por todos os pontos de uma elipse centrada na origem cujos semieixos maior e menor medem a e b, respectivamente. É a generalização da equação da circunferência para o caso em que as escalas dos eixos x e y são diferentes; se a = b, obtém-se uma circunferência. Tem papel central nas leis de Kepler do movimento planetário.",
+    "discoverer": "Apolônio (estudo das cônicas)",
+    "field": "Geometria",
+    "significance": "É o modelo matemático das órbitas planetárias e tem aplicações variadas, como as propriedades de reflexão em óptica e as galerias de sussurros na arquitetura.",
+    "elementMeanings": {
+      "x": { "role": "abscissa do ponto", "description": "É a coordenada horizontal de um ponto qualquer da elipse.", "kind": "input" },
+      "y": { "role": "ordenada do ponto", "description": "É a coordenada vertical de um ponto qualquer da elipse.", "kind": "input" },
+      "a": { "role": "semieixo maior", "description": "É a metade do eixo horizontal (eixo maior) da elipse. É a distância até o ponto mais afastado.", "kind": "input" },
+      "b": { "role": "semieixo menor", "description": "É a metade do eixo vertical (eixo menor) da elipse. É a distância até o ponto mais próximo.", "kind": "input" },
+      "a^2": { "role": "quadrado do semieixo maior", "description": "É o denominador de normalização da componente x.", "kind": "input" },
+      "b^2": { "role": "quadrado do semieixo menor", "description": "É o denominador de normalização da componente y.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Primeira lei de Kepler: os planetas descrevem órbitas elípticas com o Sol em um dos focos",
+      "Galeria de sussurros: fenômeno em que, em uma sala elíptica, o som emitido em um foco se concentra no foco oposto"
+    ],
+    "relatedFormulas": ["circle-equation", "hyperbola-equation", "circle-area"]
+  },
+  "hyperbola-equation": {
+    "name": "Equação da hipérbole",
+    "oneLiner": "Equação que representa o lugar geométrico dos pontos cuja diferença das distâncias a dois focos é constante",
+    "description": "A equação da hipérbole é a condição satisfeita por todos os pontos de uma hipérbole centrada na origem cujos semieixos real e imaginário medem a e b, respectivamente. Diferentemente da elipse, o que é constante é a 'diferença' das distâncias, e a curva é aberta e dividida em dois ramos. Tem a característica de se aproximar cada vez mais das assíntotas y = (b/a)x e y = -(b/a)x sem jamais tocá-las.",
+    "discoverer": "Apolônio (estudo das cônicas)",
+    "field": "Geometria",
+    "significance": "É aproveitada na navegação (sistema LORAN), no projeto de torres de resfriamento hiperbólicas e na estrutura do espaço-tempo da relatividade restrita, entre outros.",
+    "elementMeanings": {
+      "x": { "role": "abscissa do ponto", "description": "É a coordenada horizontal de um ponto qualquer da hipérbole.", "kind": "input" },
+      "y": { "role": "ordenada do ponto", "description": "É a coordenada vertical de um ponto qualquer da hipérbole.", "kind": "input" },
+      "a": { "role": "semieixo real", "description": "É a distância do vértice da hipérbole até o centro.", "kind": "input" },
+      "b": { "role": "semieixo imaginário", "description": "É a metade do eixo que determina a inclinação das assíntotas.", "kind": "input" },
+      "a^2": { "role": "quadrado do semieixo real", "description": "É o denominador de normalização da componente x.", "kind": "input" },
+      "b^2": { "role": "quadrado do semieixo imaginário", "description": "É o denominador de normalização da componente y.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Navegação LORAN: princípio que determina a posição pela diferença de tempo entre os sinais recebidos de duas estações-base",
+      "Torre de resfriamento hiperbólica: forma que otimiza a resistência estrutural e a eficiência do fluxo de ar"
+    ],
+    "relatedFormulas": ["ellipse-equation", "circle-equation"]
+  }
+}

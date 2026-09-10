@@ -1,0 +1,165 @@
+{
+  "gdp-formula": {
+    "name": "国内生产总值公式",
+    "oneLiner": "把一国的经济活动衡量为消费、投资、政府支出与净出口之和的公式",
+    "description": "GDP 公式衡量一定时期内一国境内生产的所有最终产品与服务的市场价值。按支出法可分解为家庭消费、企业投资、政府支出、净出口四个组成部分。它是比较各国经济规模、追踪经济波动最基本的宏观经济指标。",
+    "discoverer": "西蒙·库兹涅茨",
+    "field": "经济学",
+    "significance": "它把国家经济表现概括为单一数值，成为政策决策、国际比较与经济周期分析的基准。",
+    "elementMeanings": {
+      "Y": { "role": "国内生产总值", "description": "一定时期内在国内生产的所有最终产品与服务的市场价值总和。", "kind": "output" },
+      "C": { "role": "消费", "description": "家庭购买产品与服务的支出。", "kind": "input" },
+      "I": { "role": "投资", "description": "包含企业购置资本品与存货变动在内的总投资。", "kind": "input" },
+      "G": { "role": "政府支出", "description": "政府用于购买产品与服务的支出。", "kind": "input" },
+      "X": { "role": "出口", "description": "销往外国的产品与服务的价值。", "kind": "input" },
+      "M": { "role": "进口", "description": "从外国购入的产品与服务的价值。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "计算一国的年度经济增长率",
+      "判断是否陷入衰退（GDP 连续两个季度下降）",
+      "比较各国之间的经济规模"
+    ],
+    "relatedFormulas": ["supply-demand", "quantity-theory"]
+  },
+  "supply-demand": {
+    "name": "供求均衡",
+    "oneLiner": "市场价格在需求量与供给量相等之处决定的原理",
+    "description": "供求均衡是经济学的核心原理：在需求量与供给量相等的价格上，市场达到均衡。需求曲线与供给曲线相交之点决定均衡价格与均衡交易量。它是通过价格机制配置资源的基础模型。",
+    "discoverer": "阿尔弗雷德·马歇尔",
+    "field": "经济学",
+    "significance": "它解释了市场价格的形成原理，为政府价格管制、税收效应分析、市场效率评估提供理论基础。",
+    "elementMeanings": {
+      "Q_d": { "role": "需求量", "description": "在给定价格下消费者愿意购买的商品数量。", "kind": "input" },
+      "Q_s": { "role": "供给量", "description": "在给定价格下生产者愿意出售的商品数量。", "kind": "input" },
+      "P": { "role": "价格", "description": "商品每单位的市场价格。在均衡处它使需求量与供给量相等。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "随油价变动决定汽油价格",
+      "分析最低工资上调对劳动市场的影响",
+      "预测农产品丰收时的价格下跌"
+    ],
+    "relatedFormulas": ["elasticity", "consumer-surplus", "gdp-formula"]
+  },
+  "elasticity": {
+    "name": "弹性",
+    "oneLiner": "用比值表示需求量对价格变化的敏感程度的量",
+    "description": "价格弹性衡量价格变动 1% 时需求量变动百分之几。弹性的绝对值大于 1 称为富有弹性，小于 1 称为缺乏弹性。它在企业定价策略、税收负担归宿、市场分析中被核心使用。",
+    "discoverer": "阿尔弗雷德·马歇尔",
+    "field": "经济学",
+    "significance": "它把价格变动对消费者行为的影响定量化，是企业定价与政府税收政策设计不可或缺的工具。",
+    "elementMeanings": {
+      "E": { "role": "弹性", "description": "需求的价格弹性。需求量变动相对于价格变动的比值。", "kind": "output" },
+      "\\Delta Q": { "role": "需求量变动", "description": "由价格变动引起的需求量变化。", "kind": "input" },
+      "Q": { "role": "需求量", "description": "基准时点的需求量。", "kind": "input" },
+      "\\Delta P": { "role": "价格变动", "description": "价格的变化。", "kind": "input" },
+      "P": { "role": "价格", "description": "基准时点的价格。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "预测提高烟草税后消费减少的效果",
+      "奢侈品牌提价对销售额的影响",
+      "比较生活必需品与奢侈品的需求反应差异"
+    ],
+    "relatedFormulas": ["supply-demand", "consumer-surplus", "marginal-cost"]
+  },
+  "cobb-douglas": {
+    "name": "柯布-道格拉斯生产函数",
+    "oneLiner": "用劳动与资本的投入量解释总产出的宏观经济生产函数",
+    "description": "柯布-道格拉斯生产函数用指数函数的形式表示劳动与资本两种生产要素投入所对应的产出。它以代表技术水平的常数和各生产要素的产出弹性为参数。它是规模报酬分析、经济增长理论、收入分配研究的基本工具。",
+    "discoverer": "查尔斯·柯布、保罗·道格拉斯",
+    "field": "经济学",
+    "significance": "它用于分析生产要素之间的替代可能性与规模经济，是索洛增长模型等现代宏观经济学的基础函数。",
+    "elementMeanings": {
+      "Y": { "role": "总产出", "description": "由生产要素投入所获得的总产出。", "kind": "output" },
+      "A": { "role": "全要素生产率", "description": "表示技术水平或效率的常数。", "kind": "input" },
+      "L": { "role": "劳动投入量", "description": "投入生产的劳动数量。", "kind": "input" },
+      "K": { "role": "资本投入量", "description": "投入生产的资本（机器、设备等）数量。", "kind": "input" },
+      "\\alpha": { "role": "劳动的产出弹性", "description": "表示劳动投入增加 1% 时产出增加百分之几。", "kind": "input" },
+      "\\beta": { "role": "资本的产出弹性", "description": "表示资本投入增加 1% 时产出增加百分之几。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "分析各国经济增长率的差异",
+      "测量技术进步对生产率的影响",
+      "估计劳动与资本之间的收入分配比例"
+    ],
+    "relatedFormulas": ["gdp-formula", "marginal-cost"]
+  },
+  "fisher-equation": {
+    "name": "费雪方程式",
+    "oneLiner": "表示名义利率、实际利率与通货膨胀率三者关系的公式",
+    "description": "费雪方程式表明名义利率由实际利率与预期通货膨胀率相乘构成。它用于评估投资收益的实际购买力，并分析中央银行利率政策对经济的影响。它是把货币的时间价值与物价变动联系起来的核心公式。",
+    "discoverer": "欧文·费雪",
+    "field": "经济学",
+    "significance": "它是区分名义变量与实际变量的古典二分法的核心，为利率政策与通货膨胀分析提供了基本框架。",
+    "elementMeanings": {
+      "i": { "role": "名义利率", "description": "未考虑物价变动的利率。", "kind": "output" },
+      "r": { "role": "实际利率", "description": "剔除通货膨胀后按实际购买力计的利率。", "kind": "input" },
+      "\\pi": { "role": "通货膨胀率", "description": "一定时期内的物价上涨率。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "计算存款的实际收益率",
+      "中央银行决定基准利率时考虑通货膨胀",
+      "评估债券投资的实际收益"
+    ],
+    "relatedFormulas": ["quantity-theory", "compound-interest", "present-value"]
+  },
+  "quantity-theory": {
+    "name": "货币数量论",
+    "oneLiner": "货币量与流通速度之积等于物价水平与实际产出之积的理论",
+    "description": "货币数量论说明：经济中货币的总量及其流通速度与名义 GDP（物价水平与实际产出之积）之间存在恒等关系。它是货币主义理论的基础——长期来看货币量增加是物价上涨的主要原因。它是通货膨胀分析与货币政策设计不可或缺的框架。",
+    "discoverer": "欧文·费雪",
+    "field": "经济学",
+    "significance": "它把通货膨胀的根本原因归结为货币量增加，为中央银行制定货币政策提供了理论依据。",
+    "elementMeanings": {
+      "M": { "role": "货币量", "description": "在经济中流通的货币总量。", "kind": "input" },
+      "V": { "role": "货币流通速度", "description": "一定时期内每单位货币被用于交易的平均次数。", "kind": "input" },
+      "P": { "role": "物价水平", "description": "产品与服务的总体价格水平。", "kind": "output" },
+      "Y": { "role": "实际产出", "description": "剔除物价变动后的实际 GDP。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "分析量化宽松政策对物价的影响",
+      "解释恶性通货膨胀现象",
+      "预测紧缩性货币政策的经济效果"
+    ],
+    "relatedFormulas": ["gdp-formula", "fisher-equation"]
+  },
+  "consumer-surplus": {
+    "name": "消费者剩余",
+    "oneLiner": "消费者愿意支付的最高金额与实际支付金额之差",
+    "description": "消费者剩余由需求曲线以下、市场价格以上的面积算出。它是福利经济学的核心概念，以货币单位衡量消费者购买商品所获得的净收益。它使政策变化或市场结构变动对消费者福利的影响得以定量评估。",
+    "discoverer": "朱尔·杜普伊",
+    "field": "经济学",
+    "significance": "它是衡量市场效率与消费者福利的标尺，被用于分析垄断规制、课税、贸易政策的福利效应。",
+    "elementMeanings": {
+      "CS": { "role": "消费者剩余", "description": "消费者获得的总净收益。等于需求曲线以下的面积减去实际支出。", "kind": "output" },
+      "D(q)": { "role": "需求函数", "description": "在数量 q 处消费者愿意支付的最高价格。", "kind": "structural" },
+      "p^*": { "role": "市场均衡价格", "description": "消费者实际支付的市场价格。", "kind": "input" },
+      "q": { "role": "数量", "description": "商品的交易量。它是积分变量。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "计算促销期间消费者获得的额外好处",
+      "垄断企业的定价对消费者福利的影响",
+      "估计课征关税所导致的消费者剩余减少量"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity"]
+  },
+  "marginal-cost": {
+    "name": "边际成本",
+    "oneLiner": "产量每增加一单位时所发生的追加成本",
+    "description": "边际成本是总成本函数对产量求导所得的值，即产量增加一单位时额外发生的成本。它是企业利润最大化条件（边际成本 = 边际收益）的核心要素，也是供给曲线的理论基础。它是生产决策与定价策略的基本工具。",
+    "discoverer": "阿尔弗雷德·马歇尔",
+    "field": "经济学",
+    "significance": "它是企业确定最优产量与制定价格的依据，也是在完全竞争市场中构成供给曲线的核心概念。",
+    "elementMeanings": {
+      "MC": { "role": "边际成本", "description": "产量增加一单位所引起的总成本变化量。", "kind": "output" },
+      "TC": { "role": "总成本", "description": "生产给定产量所需一切成本的总和。", "kind": "input" },
+      "Q": { "role": "产量", "description": "所生产商品的数量。", "kind": "input" },
+      "\\frac{d}{dQ}": { "role": "求导运算符", "description": "对产量的导数。求成本的瞬时变化率。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "判断是否要让工厂加开产线",
+      "航空公司决定对空座位打折出售",
+      "软件多复制一份时几乎为零的边际成本"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity", "cobb-douglas"]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "gdp-formula": {
+    "name": "GDP formula",
+    "oneLiner": "The formula that measures a country's economic activity as the sum of consumption, investment, government spending, and net exports",
+    "description": "The GDP formula measures the market value of all final goods and services produced inside a country over a given period. Under the expenditure approach it breaks into four components: household consumption, business investment, government spending, and net exports. It is the most basic macroeconomic indicator for comparing the size of economies and tracking the business cycle.",
+    "discoverer": "Simon Kuznets",
+    "field": "Economics",
+    "significance": "By summarizing a country's economic performance in a single number, it became the reference point for policy decisions, international comparison, and business cycle analysis.",
+    "elementMeanings": {
+      "Y": { "role": "Gross domestic product", "description": "The total market value of all final goods and services produced domestically over a given period.", "kind": "output" },
+      "C": { "role": "Consumption", "description": "Household spending on goods and services.", "kind": "input" },
+      "I": { "role": "Investment", "description": "Gross investment, including business purchases of capital goods and changes in inventories.", "kind": "input" },
+      "G": { "role": "Government spending", "description": "What the government spends buying goods and services.", "kind": "input" },
+      "X": { "role": "Exports", "description": "The value of goods and services sold abroad.", "kind": "input" },
+      "M": { "role": "Imports", "description": "The value of goods and services bought from abroad.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calculating a country's annual economic growth rate",
+      "Judging whether a recession is under way (two consecutive quarters of falling GDP)",
+      "Comparing the size of economies across countries"
+    ],
+    "relatedFormulas": ["supply-demand", "quantity-theory"]
+  },
+  "supply-demand": {
+    "name": "Supply and demand equilibrium",
+    "oneLiner": "The principle that the market price settles where the quantity demanded meets the quantity supplied",
+    "description": "Supply and demand equilibrium is the central principle of economics that a market reaches balance at the price where quantity demanded equals quantity supplied. The point where the demand curve and the supply curve cross determines the equilibrium price and the equilibrium quantity. It is the model underlying how the price mechanism allocates resources.",
+    "discoverer": "Alfred Marshall",
+    "field": "Economics",
+    "significance": "It explains how market prices form, and it provides the theoretical basis for analyzing price controls, the effects of taxation, and market efficiency.",
+    "elementMeanings": {
+      "Q_d": { "role": "Quantity demanded", "description": "The amount of a good consumers want to buy at a given price.", "kind": "input" },
+      "Q_s": { "role": "Quantity supplied", "description": "The amount of a good producers want to sell at a given price.", "kind": "input" },
+      "P": { "role": "Price", "description": "The market price of one unit of the good. At equilibrium it is the value that makes quantity demanded and quantity supplied match.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "How gasoline prices are set as oil prices move",
+      "Analyzing the effect of a minimum wage increase on the labor market",
+      "Predicting the price drop that follows a bumper harvest"
+    ],
+    "relatedFormulas": ["elasticity", "consumer-surplus", "gdp-formula"]
+  },
+  "elasticity": {
+    "name": "Price elasticity of demand",
+    "oneLiner": "A ratio expressing how sensitively quantity demanded responds to a change in price",
+    "description": "Price elasticity measures what percentage quantity demanded changes by when price changes by 1 percent. If the absolute value of the elasticity is greater than 1 demand is called elastic, and if it is less than 1, inelastic. It is central to firms' pricing strategy, to who really bears a tax, and to market analysis.",
+    "discoverer": "Alfred Marshall",
+    "field": "Economics",
+    "significance": "By quantifying how price changes affect consumer behavior, it is an essential tool for firms setting prices and for governments designing tax policy.",
+    "elementMeanings": {
+      "E": { "role": "Elasticity", "description": "The price elasticity of demand — the relative change in quantity demanded against the change in price.", "kind": "output" },
+      "\\Delta Q": { "role": "Change in quantity demanded", "description": "The change in quantity demanded caused by the price change.", "kind": "input" },
+      "Q": { "role": "Quantity demanded", "description": "The quantity demanded at the reference point.", "kind": "input" },
+      "\\Delta P": { "role": "Change in price", "description": "The change in the price.", "kind": "input" },
+      "P": { "role": "Price", "description": "The price at the reference point.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Predicting how much consumption falls when tobacco taxes rise",
+      "The effect on revenue when a luxury brand raises its prices",
+      "Comparing how differently necessities and luxuries respond in demand"
+    ],
+    "relatedFormulas": ["supply-demand", "consumer-surplus", "marginal-cost"]
+  },
+  "cobb-douglas": {
+    "name": "Cobb-Douglas production function",
+    "oneLiner": "The macroeconomic production function that explains total output from labor and capital inputs",
+    "description": "The Cobb-Douglas production function expresses output as an exponential function of two factor inputs, labor and capital. Its parameters are a constant standing for the level of technology and the output elasticity of each factor. It is the basic tool for analyzing returns to scale, for growth theory, and for research on income distribution.",
+    "discoverer": "Charles Cobb, Paul Douglas",
+    "field": "Economics",
+    "significance": "It analyzes substitutability between factors of production and economies of scale, and it is the function underlying modern macroeconomics, including the Solow growth model.",
+    "elementMeanings": {
+      "Y": { "role": "Total output", "description": "The total output obtained from the factor inputs.", "kind": "output" },
+      "A": { "role": "Total factor productivity", "description": "A constant standing for the level of technology or efficiency.", "kind": "input" },
+      "L": { "role": "Labor input", "description": "The amount of labor put into production.", "kind": "input" },
+      "K": { "role": "Capital input", "description": "The amount of capital — machinery, equipment, and so on — put into production.", "kind": "input" },
+      "\\alpha": { "role": "Output elasticity of labor", "description": "It says what percentage output rises by when labor input rises by 1 percent.", "kind": "input" },
+      "\\beta": { "role": "Output elasticity of capital", "description": "It says what percentage output rises by when capital input rises by 1 percent.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analyzing why growth rates differ across countries",
+      "Measuring how technological progress affects productivity",
+      "Estimating how income is split between labor and capital"
+    ],
+    "relatedFormulas": ["gdp-formula", "marginal-cost"]
+  },
+  "fisher-equation": {
+    "name": "Fisher equation",
+    "oneLiner": "The formula relating the nominal interest rate, the real interest rate, and the inflation rate",
+    "description": "The Fisher equation shows that the nominal interest rate is made up of the real interest rate together with expected inflation. It is used to assess the real purchasing power of investment returns and to analyze how a central bank's interest rate policy affects the economy. It is the key formula tying the time value of money to changes in the price level.",
+    "discoverer": "Irving Fisher",
+    "field": "Economics",
+    "significance": "It is the heart of the classical dichotomy between nominal and real variables, and it provides the basic framework for interest rate policy and inflation analysis.",
+    "elementMeanings": {
+      "i": { "role": "Nominal interest rate", "description": "The interest rate without accounting for changes in the price level.", "kind": "output" },
+      "r": { "role": "Real interest rate", "description": "The interest rate in terms of actual purchasing power, with inflation stripped out.", "kind": "input" },
+      "\\pi": { "role": "Inflation rate", "description": "The rate at which the price level rises over a given period.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calculating the real return on a savings deposit",
+      "Accounting for inflation when a central bank sets its policy rate",
+      "Assessing the real return on a bond investment"
+    ],
+    "relatedFormulas": ["quantity-theory", "compound-interest", "present-value"]
+  },
+  "quantity-theory": {
+    "name": "Quantity theory of money",
+    "oneLiner": "The theory that the money supply times its velocity equals the price level times real output",
+    "description": "The quantity theory of money says that the total quantity of money in an economy and the speed at which it circulates stand in an identity relation to nominal GDP, the price level times real output. It is the foundation of the monetarist claim that, in the long run, growth in the money supply is the main cause of rising prices. It is an essential framework for analyzing inflation and designing monetary policy.",
+    "discoverer": "Irving Fisher",
+    "field": "Economics",
+    "significance": "It explains the root cause of inflation as growth in the money supply, and it gives central banks a theoretical basis for setting monetary policy.",
+    "elementMeanings": {
+      "M": { "role": "Money supply", "description": "The total quantity of money circulating in the economy.", "kind": "input" },
+      "V": { "role": "Velocity of money", "description": "The average number of times one unit of money is used in transactions over a given period.", "kind": "input" },
+      "P": { "role": "Price level", "description": "The overall level of prices of goods and services.", "kind": "output" },
+      "Y": { "role": "Real output", "description": "Real GDP, with changes in the price level stripped out.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Analyzing how quantitative easing affects prices",
+      "Explaining hyperinflation",
+      "Predicting the economic effects of monetary tightening"
+    ],
+    "relatedFormulas": ["gdp-formula", "fisher-equation"]
+  },
+  "consumer-surplus": {
+    "name": "Consumer surplus",
+    "oneLiner": "The gap between the most a consumer would be willing to pay and what they actually pay",
+    "description": "Consumer surplus is computed as the area below the demand curve and above the market price. It is the central idea of welfare economics for measuring, in money terms, the net benefit consumers get from buying a good. It makes it possible to put numbers on how a policy change or a shift in market structure affects consumer welfare.",
+    "discoverer": "Jules Dupuit",
+    "field": "Economics",
+    "significance": "It serves as the yardstick for market efficiency and consumer welfare, and it is used to analyze the welfare effects of antitrust regulation, taxation, and trade policy.",
+    "elementMeanings": {
+      "CS": { "role": "Consumer surplus", "description": "The total net benefit consumers get — the area under the demand curve minus what they actually spend.", "kind": "output" },
+      "D(q)": { "role": "Demand function", "description": "The highest price consumers are willing to pay at quantity q.", "kind": "structural" },
+      "p^*": { "role": "Market equilibrium price", "description": "The market price consumers actually pay.", "kind": "input" },
+      "q": { "role": "Quantity", "description": "The quantity of the good traded. It is the variable of integration.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Working out the extra gain consumers get during a sale",
+      "How a monopolist's pricing affects consumer welfare",
+      "Estimating the loss in consumer surplus caused by a tariff"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity"]
+  },
+  "marginal-cost": {
+    "name": "Marginal cost",
+    "oneLiner": "The extra cost incurred by producing one more unit of output",
+    "description": "Marginal cost is the derivative of the total cost function with respect to output — the additional cost incurred when output rises by one unit. It is the key element of a firm's profit-maximizing condition (marginal cost equals marginal revenue) and the theoretical foundation of the supply curve. It is the basic tool for production decisions and pricing strategy.",
+    "discoverer": "Alfred Marshall",
+    "field": "Economics",
+    "significance": "It is the basis on which a firm decides its optimal output and sets its prices, and it is the concept that builds the supply curve in a perfectly competitive market.",
+    "elementMeanings": {
+      "MC": { "role": "Marginal cost", "description": "The change in total cost that comes with a one-unit increase in output.", "kind": "output" },
+      "TC": { "role": "Total cost", "description": "The sum of every cost of producing a given level of output.", "kind": "input" },
+      "Q": { "role": "Output", "description": "The quantity of the good being produced.", "kind": "input" },
+      "\\frac{d}{dQ}": { "role": "Derivative operator", "description": "The derivative with respect to output. It gives the instantaneous rate of change of cost.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Deciding whether to run an extra shift at a factory",
+      "An airline deciding to sell empty seats at a discount",
+      "The near-zero marginal cost of producing one more copy of a piece of software"
+    ],
+    "relatedFormulas": ["supply-demand", "elasticity", "cobb-douglas"]
+  }
+}

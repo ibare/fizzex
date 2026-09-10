@@ -1,0 +1,471 @@
+{
+  "arrhenius-equation": {
+    "name": "Arrhenius equation",
+    "oneLiner": "The formula showing that a reaction rate constant changes exponentially with temperature",
+    "description": "The Arrhenius equation explains how the rate constant of a chemical reaction changes with temperature. The higher the activation energy, the slower the reaction; the higher the temperature, the faster it goes. The pre-exponential factor A reflects how often molecules collide and whether they are oriented correctly, and the exponential term gives the fraction of molecules able to clear the activation energy barrier.",
+    "discoverer": "Svante Arrhenius",
+    "field": "Chemistry",
+    "significance": "It quantified the relationship between temperature and reaction rate, establishing the central law of chemical kinetics.",
+    "elementMeanings": {
+      "k": {
+        "role": "Rate constant",
+        "description": "The constant that sets how fast the reaction runs at a given temperature.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "Pre-exponential factor",
+        "description": "The frequency factor reflecting collision frequency and orientation effects.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Base of the natural logarithm",
+        "description": "About 2.718. It is the base of the exponential function.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "E_a": {
+        "role": "Activation energy",
+        "description": "The energy barrier that has to be cleared for the reaction to happen. Unit: J/mol.",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Gas constant",
+        "description": "The ideal gas constant. About 8.314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "Absolute temperature",
+        "description": "The reaction temperature. Unit: kelvin (K).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Why food spoils slowly in a refrigerator (a lower temperature means a slower reaction)",
+      "How a catalyst speeds a reaction up by lowering the activation energy",
+      "Choosing the best reaction temperature for an industrial process"
+    ],
+    "relatedFormulas": [
+      "half-life",
+      "gibbs-free-energy"
+    ]
+  },
+  "gibbs-free-energy": {
+    "name": "Gibbs free energy",
+    "oneLiner": "The formula that judges whether a reaction is spontaneous from its enthalpy and entropy changes",
+    "description": "The change in Gibbs free energy is the criterion for whether a reaction proceeds spontaneously at constant temperature and pressure. A negative change means a spontaneous reaction, a positive one means a nonspontaneous reaction, and zero means equilibrium. It is settled by the competition between the change in enthalpy (heat energy) and the change in entropy (disorder).",
+    "discoverer": "Josiah Willard Gibbs",
+    "field": "Chemistry",
+    "significance": "It supplies thermodynamics with its central test for predicting whether chemical reactions and phase changes will happen on their own.",
+    "elementMeanings": {
+      "\\Delta G": {
+        "role": "Change in Gibbs free energy",
+        "description": "The indicator of spontaneity. Negative means spontaneous. Unit: J or kJ.",
+        "kind": "output"
+      },
+      "\\Delta H": {
+        "role": "Change in enthalpy",
+        "description": "The heat energy released or absorbed by the reaction. Unit: J or kJ.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "Absolute temperature",
+        "description": "The reaction temperature. Unit: kelvin (K).",
+        "kind": "input"
+      },
+      "\\Delta S": {
+        "role": "Change in entropy",
+        "description": "The change in disorder that comes with the reaction. Unit: J/K.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Analyzing solid-liquid phase equilibrium at the freezing point of water",
+      "Explaining why ATP hydrolysis is spontaneous inside living things",
+      "Predicting decomposition reactions that run on their own at high temperature"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "nernst-equation"
+    ]
+  },
+  "nernst-equation": {
+    "name": "Nernst equation",
+    "oneLiner": "The formula showing how a cell potential shifts with the ratio of reactant and product concentrations",
+    "description": "The Nernst equation computes the potential of an electrochemical cell under nonstandard conditions. It starts from the standard potential and applies a correction based on the ratio of product to reactant concentrations (the reaction quotient Q). At equilibrium the cell potential becomes zero, which links it directly to the Gibbs free energy.",
+    "discoverer": "Walther Nernst",
+    "field": "Chemistry",
+    "significance": "By predicting electrochemical potentials precisely for any set of concentrations, it laid the theoretical groundwork for batteries and electrolysis.",
+    "elementMeanings": {
+      "E": {
+        "role": "Cell potential",
+        "description": "The actual potential under nonstandard conditions. Unit: volt (V).",
+        "kind": "output"
+      },
+      "E^\\circ": {
+        "role": "Standard cell potential",
+        "description": "The potential under standard conditions (1 M, 1 atm, 25 degrees). Unit: volt (V).",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Gas constant",
+        "description": "The ideal gas constant. About 8.314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "Absolute temperature",
+        "description": "The reaction temperature. Unit: kelvin (K).",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Number of electrons",
+        "description": "The moles of electrons transferred in the reaction.",
+        "kind": "input"
+      },
+      "F": {
+        "role": "Faraday constant",
+        "description": "The charge on one mole of electrons. About 96,485 C/mol.",
+        "kind": "constant",
+        "value": 96485,
+        "unit": "C/mol"
+      },
+      "Q": {
+        "role": "Reaction quotient",
+        "description": "The ratio of product concentrations to reactant concentrations. At equilibrium it equals the equilibrium constant K.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Predicting how the potential of a lithium-ion battery shifts as it charges and discharges",
+      "How a pH meter works (the potential changes with the hydrogen ion concentration)",
+      "Assessing metal potentials in corrosion reactions"
+    ],
+    "relatedFormulas": [
+      "gibbs-free-energy",
+      "ph-definition"
+    ]
+  },
+  "half-life": {
+    "name": "Half-life",
+    "oneLiner": "The formula for the time it takes for an amount of a substance to fall by half",
+    "description": "The half-life is the time it takes, in radioactive decay or a first-order reaction, for the amount of a substance to reach half its initial value. It is inversely proportional to the rate constant k, so the faster the reaction, the shorter the half-life. That this value is the same no matter what the starting concentration was is the hallmark of a first-order reaction.",
+    "field": "Chemistry",
+    "significance": "It is the key idea for quantifying how a substance dwindles over time — radiometric dating, drug metabolism, nuclear waste management.",
+    "elementMeanings": {
+      "t_{1/2}": {
+        "role": "Half-life",
+        "description": "The time it takes for the amount of a substance to fall by half. Unit: seconds (s) and the like.",
+        "kind": "output"
+      },
+      "\\ln 2": {
+        "role": "Natural logarithm of 2",
+        "description": "About 0.693. It falls out naturally from the condition of reaching 'half'.",
+        "kind": "constant",
+        "value": 0.693147,
+        "unit": ""
+      },
+      "k": {
+        "role": "Rate constant",
+        "description": "The proportionality constant that sets the reaction rate. Unit: 1/s (first-order reaction).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Carbon-14 dating (a half-life of about 5,730 years)",
+      "Setting dosing intervals from a drug's half-life in the body",
+      "Calculating how long radioactive waste has to be stored safely"
+    ],
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "exponential-growth"
+    ]
+  },
+  "ph-definition": {
+    "name": "Definition of pH",
+    "oneLiner": "The formula giving the acidity of a solution as the negative common logarithm of the hydrogen ion concentration",
+    "description": "pH is the scale for how acidic or basic an aqueous solution is, defined as the negative common logarithm of the hydrogen ion concentration. A pH of 7 is neutral; below 7 is acidic and above 7 is basic. A change of 1 in pH means a tenfold change in the hydrogen ion concentration.",
+    "discoverer": "Søren Sørensen",
+    "field": "Chemistry",
+    "significance": "It puts a simple number on the acid-base character of a solution, which is why it is used so widely across chemistry, biology, and environmental science.",
+    "elementMeanings": {
+      "pH": {
+        "role": "Hydrogen ion exponent",
+        "description": "A dimensionless number giving the acidity. The usual range is 0 to 14.",
+        "kind": "output"
+      },
+      "[H^+]": {
+        "role": "Hydrogen ion concentration",
+        "description": "The molar concentration of hydrogen ions in the solution. Unit: mol/L.",
+        "kind": "input"
+      },
+      "\\log": {
+        "role": "Common logarithm",
+        "description": "The logarithm with base 10. It compresses huge differences in concentration into a small range.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Managing the pH of pool water (kept around 7.2 to 7.8)",
+      "Measuring the pH of stomach acid (about 1.5 to 3.5)",
+      "Measuring the pH of acid rain and assessing its environmental impact"
+    ],
+    "relatedFormulas": [
+      "nernst-equation"
+    ]
+  },
+  "boyle-law": {
+    "name": "Boyle's law",
+    "oneLiner": "The law that the pressure and volume of a gas are inversely proportional at constant temperature",
+    "description": "Boyle's law says that the product of a gas's pressure and volume stays constant when the temperature does. Squeeze the volume and the pressure rises; expand it and the pressure falls. It is a special case of the ideal gas law and one of the most basic laws for understanding how gases behave in bulk.",
+    "discoverer": "Robert Boyle",
+    "field": "Chemistry",
+    "significance": "As the first quantitative law of gas behavior, it was the starting point for the ideal gas law and the kinetic theory of gases.",
+    "elementMeanings": {
+      "P_1": {
+        "role": "Initial pressure",
+        "description": "The pressure of the gas before the change. Unit: pascal (Pa) or atmosphere (atm).",
+        "kind": "input"
+      },
+      "V_1": {
+        "role": "Initial volume",
+        "description": "The volume of the gas before the change. Unit: liter (L) or cubic meter.",
+        "kind": "input"
+      },
+      "P_2": {
+        "role": "Final pressure",
+        "description": "The pressure of the gas after the change.",
+        "kind": "input"
+      },
+      "V_2": {
+        "role": "Final volume",
+        "description": "The volume of the gas after the change.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "The pressure inside a syringe rising as you push the plunger in",
+      "How the volume of air changes with depth while scuba diving",
+      "Compressing gas inside a car engine cylinder"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law"
+    ]
+  },
+  "avogadro-number": {
+    "name": "Avogadro's number",
+    "oneLiner": "The fundamental constant giving how many particles are in one mole",
+    "description": "Avogadro's number is the count of particles — atoms, molecules, ions — that make up one mole of a substance, about 6.022 times 10 to the 23rd power. It acts as the bridge between the macroscopic world of grams and liters and the microscopic world of atoms and molecules. It is the key constant behind the mole concept in chemistry.",
+    "discoverer": "Jean Baptiste Perrin (experimental determination), Amedeo Avogadro (conceptual contribution)",
+    "field": "Chemistry",
+    "significance": "It is chemistry's most basic constant, linking the microscopic world of atoms and molecules to the macroscopic scale of the laboratory.",
+    "elementMeanings": {
+      "N_A": {
+        "role": "Avogadro's number",
+        "description": "The number of particles per mole. About 6.022x10 to the 23rd power /mol.",
+        "kind": "constant",
+        "value": 6.022e+23,
+        "unit": "mol⁻¹"
+      },
+      "n": {
+        "role": "Amount in moles",
+        "description": "The amount of substance. Unit: mole (mol).",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Number of particles",
+        "description": "The actual count of particles (atoms, molecules, and so on).",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "Counting the atoms in 12 g of carbon",
+      "Working out the quantitative relations in a chemical reaction (using mole ratios)",
+      "Relating the volume of a gas to the number of molecules in it"
+    ],
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "boyle-law"
+    ]
+  },
+  "water-synthesis": {
+    "name": "Synthesis of water",
+    "oneLiner": "Hydrogen meeting oxygen to become water — how hydrogen fuel works",
+    "description": "Two hydrogen molecules react with one oxygen molecule to give two water molecules. It is an exothermic reaction that gives off a lot of heat, and because water is the only product, it emits no carbon. The coefficients 2, 1, 2 are what it takes to match 4 hydrogen atoms and 2 oxygen atoms on both sides.",
+    "field": "Chemistry",
+    "significance": "It is the reaction that hydrogen fuel cells and hydrogen cars draw their energy from. It is also the first example most people meet when learning to balance a chemical equation.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Powering a hydrogen fuel cell vehicle",
+      "Liquid hydrogen and liquid oxygen propulsion in a rocket engine"
+    ]
+  },
+  "methane-combustion": {
+    "name": "Combustion of methane",
+    "oneLiner": "The reaction that gives off carbon dioxide and water as natural gas burns",
+    "description": "One methane molecule reacts with two oxygen molecules to give one carbon dioxide molecule and two water molecules. Whenever a hydrocarbon reacts fully with oxygen the products are always carbon dioxide and water, which is what complete combustion means. When oxygen runs short, carbon monoxide or soot forms instead.",
+    "field": "Chemistry",
+    "significance": "It is the basic reaction behind burning the natural gas used in homes and power plants, and the starting point for calculating greenhouse gas emissions.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Combustion in a gas stove or a boiler",
+      "Heat production at a natural gas power plant"
+    ]
+  },
+  "photosynthesis": {
+    "name": "Photosynthesis",
+    "oneLiner": "The reaction by which plants use light to make glucose from carbon dioxide and water",
+    "description": "Six carbon dioxide molecules and six water molecules take in light energy to become one glucose molecule and six oxygen molecules. It is an endothermic reaction that stores light energy as chemical bond energy, and it happens in the chloroplasts. Nearly all the oxygen in Earth's atmosphere came out of this reaction.",
+    "field": "Chemistry",
+    "significance": "It converts solar energy into a form living things can use, which makes it the starting point of almost every food chain.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Plants and algae producing their own food",
+      "Forests and oceans acting as carbon sinks"
+    ],
+    "relatedFormulas": [
+      "cellular-respiration"
+    ]
+  },
+  "cellular-respiration": {
+    "name": "Cellular respiration",
+    "oneLiner": "The reaction that burns glucose with oxygen to get the energy for living",
+    "description": "One glucose molecule reacts with six oxygen molecules to give six carbon dioxide molecules and six water molecules. It runs in exactly the opposite direction from photosynthesis, and the energy that comes out is stored in ATP. In reality it goes through many steps, but the whole balance sums up in this one line.",
+    "field": "Chemistry",
+    "significance": "It is how most living things, animals and plants alike, get their energy. Paired with photosynthesis, it cycles carbon.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Supplying energy to muscles as they move",
+      "What the oxygen you breathe in is used for"
+    ],
+    "relatedFormulas": [
+      "photosynthesis"
+    ]
+  },
+  "neutralization-hcl-naoh": {
+    "name": "Neutralization reaction",
+    "oneLiner": "An acid and a base meeting to become a salt and water",
+    "description": "Hydrochloric acid reacts with sodium hydroxide to give sodium chloride and water. What the reaction really is, is the acid's hydrogen ions meeting the base's hydroxide ions to become water; the ions left over form the salt. It is exothermic, so it gives off heat.",
+    "field": "Chemistry",
+    "significance": "It is the standard reaction showing that acidity and basicity cancel each other out, and it is the principle behind titration experiments.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Taking an antacid for heartburn",
+      "Spreading lime on acidic soil to neutralize it"
+    ]
+  },
+  "haber-process": {
+    "name": "Haber-Bosch process",
+    "oneLiner": "The reaction that makes ammonia from the nitrogen in air — where fertilizer starts",
+    "description": "One nitrogen molecule and three hydrogen molecules react over an iron catalyst to give two ammonia molecules. It is a reversible reaction, so the forward and reverse reactions run together, and high temperature, high pressure, and a catalyst are used to push the yield toward ammonia. The conditions are harsh because the triple bond in the nitrogen molecule is so strong.",
+    "discoverer": "Fritz Haber, Carl Bosch",
+    "field": "Chemistry",
+    "significance": "It is the reaction that turned atmospheric nitrogen into a form plants can use. Mass production of nitrogen fertilizer became possible, and it sustained the population growth of the twentieth century.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Producing nitrogen fertilizer",
+      "The standard example of chemical equilibrium and Le Chatelier's principle"
+    ]
+  },
+  "carbonic-acid-equilibrium": {
+    "name": "Carbonic acid equilibrium",
+    "oneLiner": "The reversible reaction in which carbon dioxide dissolves in water to become carbonic acid",
+    "description": "Carbon dioxide and water react to become carbonic acid, and the carbonic acid goes back to carbon dioxide and water. Neither side wins outright; they settle into an equilibrium, and lowering the pressure tips it toward carbon dioxide.",
+    "field": "Chemistry",
+    "significance": "It explains the buffering that keeps the acidity of blood steady, and how seawater absorbs carbon dioxide.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Bubbles rising when you open a bottle of a carbonated drink",
+      "Ocean acidification",
+      "pH buffering in blood"
+    ]
+  },
+  "barium-sulfate-precipitation": {
+    "name": "Precipitation of barium sulfate",
+    "oneLiner": "Mixing two solutions and having a solid that will not dissolve settle out",
+    "description": "Mix a barium chloride solution with a sodium sulfate solution and the barium ions meet the sulfate ions to become barium sulfate, which barely dissolves in water and settles out as a white precipitate. The downward arrow marks the precipitate. The sodium chloride left over stays dissolved in the water.",
+    "field": "Chemistry",
+    "significance": "It is the standard example of a precipitation reaction in which ions meet to form a solid, and it is used in tests that check whether a particular ion is present.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "The contrast agent people drink for a gastrointestinal X-ray",
+      "Detecting sulfate ions in an aqueous solution"
+    ]
+  },
+  "water-molecule": {
+    "name": "Water",
+    "oneLiner": "A molecule made of two hydrogen atoms and one oxygen atom",
+    "description": "Two hydrogen atoms sit on one oxygen atom in a bent shape. The electrons pull toward the oxygen, which makes the molecule polar, and that is what lets water molecules hold on to each other through hydrogen bonds. This is why such a small molecule has such a high boiling point and dissolves so many substances.",
+    "field": "Chemistry",
+    "significance": "It is the stage on which life happens and the most widely used solvent there is.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Making up more than half the body weight of a living thing",
+      "Why ice floats on water"
+    ]
+  },
+  "carbon-dioxide": {
+    "name": "Carbon dioxide",
+    "oneLiner": "A linear molecule with two oxygen atoms attached to one carbon atom",
+    "description": "Carbon sits in the middle with an oxygen attached straight out on either side. The bonds themselves are polar, but because the two sides are symmetric the polarity cancels out over the molecule as a whole. It absorbs infrared radiation and re-emits it, which holds heat in around the Earth.",
+    "field": "Chemistry",
+    "significance": "It is the product of combustion and respiration, the raw material of photosynthesis, and the archetypal greenhouse gas.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "The bubbles in a carbonated drink",
+      "Dry ice",
+      "The greenhouse effect"
+    ]
+  },
+  "sulfate-ion": {
+    "name": "Sulfate ion",
+    "oneLiner": "An anion of one sulfur with four oxygens attached and two extra electrons",
+    "description": "It is a polyatomic ion in which four oxygen atoms surround a central sulfur atom in a tetrahedral shape. It carries two extra electrons, giving it a charge of 2-; the number in the superscript is the size of the charge and the sign says that electrons were gained.",
+    "field": "Chemistry",
+    "significance": "It is the shared component of sulfuric acid and its salts, and the standard example of a polyatomic ion that behaves as a single unit in water.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "An aqueous solution of sulfuric acid",
+      "Sulfates such as gypsum and copper sulfate"
+    ]
+  },
+  "calcium-hydroxide": {
+    "name": "Calcium hydroxide",
+    "oneLiner": "A base with two hydroxide ions on one calcium — slaked lime",
+    "description": "One calcium ion is bound to two hydroxide ions. The parentheses show that the hydroxide ion is a single unit, and the 2 after them says there are two of that unit. It dissolves a little in water and is strongly basic.",
+    "field": "Chemistry",
+    "significance": "It is the standard example of using parentheses to group a set of atoms, and it is widely used to neutralize acidity.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Lime spread to neutralize acidic soil",
+      "Limewater used to test for carbon dioxide"
+    ]
+  },
+  "copper-sulfate-pentahydrate": {
+    "name": "Copper sulfate pentahydrate",
+    "oneLiner": "Blue copper sulfate holding five water molecules inside its crystal",
+    "description": "Every copper sulfate crystal carries five water molecules sitting in fixed positions within it. The centered dot shows that this water is not attached by a chemical bond but is lodged inside the crystal structure. Heat it to drive the water off and the blue color goes, leaving a white powder.",
+    "field": "Chemistry",
+    "significance": "It is the standard example of hydrate notation, and because its color changes with the presence of water, it is used to detect moisture.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "The experiment of growing blue copper sulfate crystals",
+      "Detecting water in alcohol"
+    ]
+  },
+  "thorium-227": {
+    "name": "Thorium-227",
+    "oneLiner": "A radioactive isotope of thorium with 90 protons and a mass number of 227",
+    "description": "The 227 at the upper left is the mass number, the protons and neutrons in the nucleus added together; the 90 at the lower left is the atomic number, the number of protons. The atomic number decides which element this is, and the mass number tells apart the isotopes of that same element. Thorium-227 alpha decays into radium-223.",
+    "field": "Chemistry",
+    "significance": "It is the standard example of isotope notation, and one step in the actinium decay series.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "Tracing a radioactive decay series",
+      "Research into targeted therapy using alpha-emitting nuclides"
+    ]
+  }
+}

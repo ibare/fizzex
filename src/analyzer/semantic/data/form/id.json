@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "Bentuk kuadrat",
+    "oneLiner": "Bentuk yang memuat kuadrat dari x — grafiknya berupa parabola",
+    "slots": {
+      "a": {
+        "role": "Koefisien suku kuadrat",
+        "description": "Menentukan arah dan lebar parabola"
+      },
+      "b": {
+        "role": "Koefisien suku linear",
+        "description": "Menggeser letak sumbu simetri ke kiri atau ke kanan"
+      },
+      "c": {
+        "role": "Suku konstanta",
+        "description": "Ketinggian titik potong dengan sumbu y"
+      },
+      "x": {
+        "role": "Titik pengamatan",
+        "description": "Nilai x yang ingin diamati pada grafik"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "Eksplorasi bebas — fungsi kuadrat",
+        "description": "Mengamati perubahan a, b, dan c pada bidang koordinat"
+      },
+      "quadratic-bridge-2d": {
+        "name": "Lengkung jembatan — fungsi kuadrat",
+        "description": "Parabola dilihat lewat pilar, lengkungan, dan pantulannya"
+      },
+      "quadratic-basketball-2d": {
+        "name": "Lemparan bebas bola basket — fungsi kuadrat",
+        "description": "Lintasan dari tinggi lemparan, titik tertinggi, hingga titik jatuh"
+      },
+      "quadratic-fountain-2d": {
+        "name": "Air mancur — fungsi kuadrat",
+        "description": "Titik tertinggi pancuran air adalah titik puncak parabola"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "Bentuk jumlah dua kuadrat",
+    "oneLiner": "Hubungan ketika jumlah kuadrat dua nilai sama dengan kuadrat nilai yang satu lagi",
+    "slots": {
+      "a": {
+        "role": "Sisi pertama",
+        "description": "Salah satu sisi yang mengapit sudut siku-siku"
+      },
+      "b": {
+        "role": "Sisi kedua",
+        "description": "Sisi lain yang mengapit sudut siku-siku"
+      },
+      "c": {
+        "role": "Sisi miring",
+        "description": "Sisi di hadapan sudut siku-siku, yang paling panjang"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "Eksplorasi bebas",
+        "description": "Teorema Pythagoras dilihat lewat segitiga siku-siku dan persegi pada ketiga sisinya"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "Tangga",
+        "description": "Sudut dan tingkat keamanan tangga yang disandarkan ke dinding"
+      },
+      "pythagorean-tv-2d": {
+        "name": "Layar TV",
+        "description": "Menghitung ukuran diagonal dalam inci dari lebar dan tinggi layar"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "Jalan pintas",
+        "description": "Membandingkan jarak memutari blok dengan memotong lurus"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "Bentuk perubahan eksponensial",
+    "oneLiner": "Bentuk ketika laju perubahan sebanding dengan besaran saat ini sehingga tumbuh atau menyusut secara berlipat",
+    "slots": {
+      "N_0": {
+        "role": "Nilai awal",
+        "description": "Besaran pada saat waktu sama dengan 0"
+      },
+      "r": {
+        "role": "Laju perubahan",
+        "description": "Bernilai positif berarti tumbuh, negatif berarti meluruh"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "Peluruhan eksponensial — 2D",
+        "description": "Merasakan waktu paruh dengan berganti acuan antara kafein, baterai, karbon-14, dan obat"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "Bentuk bunga majemuk",
+    "oneLiner": "Bentuk ketika bunga ikut berbunga sehingga modal terus membesar",
+    "slots": {
+      "P": {
+        "role": "Modal awal",
+        "description": "Jumlah uang yang disetorkan pada awalnya"
+      },
+      "r": {
+        "role": "Suku bunga tahunan",
+        "description": "Tingkat bunga per satu tahun"
+      },
+      "n": {
+        "role": "Frekuensi pemajemukan per tahun",
+        "description": "Berapa kali bunga diperhitungkan dalam setahun"
+      },
+      "t": {
+        "role": "Jangka waktu",
+        "description": "Lamanya penyimpanan dalam tahun"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "Bunga majemuk — 2D",
+        "description": "Merasakan pertumbuhan majemuk dengan berganti acuan antara deposito, saham, tabungan berjangka, dan inflasi"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "Bentuk perpindahan berpercepatan tetap",
+    "oneLiner": "Jarak tempuh saat bergerak dengan percepatan tetap — memuat suku yang sebanding dengan kuadrat waktu",
+    "slots": {
+      "v_0": {
+        "role": "Kecepatan awal",
+        "description": "Kecepatan pada saat mulai bergerak"
+      },
+      "a": {
+        "role": "Percepatan",
+        "description": "Percepatan yang dijaga tetap"
+      },
+      "t": {
+        "role": "Waktu tempuh",
+        "description": "Saat yang sedang diamati"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "Jatuh bebas — 2D",
+        "description": "Merasakan percepatan gravitasi tiap planet dengan acuan Bumi, Bulan, Mars, dan Jupiter"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "Bentuk gelombang sinus",
+    "oneLiner": "Gelombang dengan bentuk sama yang berulang dalam periode tetap",
+    "slots": {
+      "A": {
+        "role": "Amplitudo",
+        "description": "Tinggi dari kedudukan setimbang sampai puncak"
+      },
+      "\\omega": {
+        "role": "Frekuensi sudut",
+        "description": "Seberapa cepat gelombang berulang"
+      },
+      "\\varphi": {
+        "role": "Fase",
+        "description": "Seberapa jauh gelombang tergeser ke kiri atau ke kanan"
+      },
+      "t": {
+        "role": "Saat pengamatan",
+        "description": "Saat yang ingin diamati pada gelombang"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "Gelombang sinus — 2D",
+        "description": "Merasakan peran amplitudo, periode, dan fase lewat acuan pengeras suara, bandul, pasang surut, dan voltmeter"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "Bentuk periode orbit",
+    "oneLiner": "Hubungan ketika orbit yang makin besar membuat satu putaran makin lama",
+    "slots": {
+      "M": {
+        "role": "Massa benda pusat",
+        "description": "Massa benda langit yang menjadi pusat peredaran"
+      },
+      "a": {
+        "role": "Setengah sumbu panjang orbit",
+        "description": "Jari-jari sisi panjang dari orbit elips"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "Orbit Bumi — 2D",
+        "description": "Tampilan 2D dari atas untuk mengamati dengan berganti acuan antara ISS, GPS, orbit geostasioner, dan Bulan"
+      },
+      "kepler-orbit-3d": {
+        "name": "Orbit Bumi — 3D",
+        "description": "Tampilan ruang untuk memutar acuan yang sama dalam 3D agar terasa jaraknya"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "Bentuk garis singgung",
+    "oneLiner": "Garis lurus yang menyerempet kurva di satu titik dengan kemiringan yang sama",
+    "slots": {
+      "f": {
+        "role": "Kurva",
+        "description": "Fungsi yang akan ditarik garis singgungnya"
+      },
+      "x": {
+        "role": "Titik pengamatan",
+        "description": "Nilai x untuk menggeser titik singgungnya"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "Jelajah garis singgung — 2D",
+        "description": "Tampilan interaktif yang menyajikan kurva y=f(x) bersama garis singgungnya di titik x"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "Bentuk bilangan kompleks",
+    "oneLiner": "Bilangan yang tersusun dari bagian real dan bagian imajiner — sebuah titik pada bidang",
+    "slots": {
+      "a": {
+        "role": "Bagian real",
+        "description": "Koordinat pada sumbu mendatar"
+      },
+      "b": {
+        "role": "Bagian imajiner",
+        "description": "Koordinat pada sumbu tegak"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "Bentuk transformasi 2×2",
+    "oneLiner": "Transformasi linear yang memetakan vektor pada bidang ke vektor lain",
+    "slots": {
+      "a": {
+        "role": "Baris 1 kolom 1",
+        "description": "Seberapa jauh bayangan sumbu x meregang secara mendatar"
+      },
+      "b": {
+        "role": "Baris 1 kolom 2",
+        "description": "Seberapa jauh bayangan sumbu y miring secara mendatar"
+      },
+      "c": {
+        "role": "Baris 2 kolom 1",
+        "description": "Seberapa jauh bayangan sumbu x miring secara tegak"
+      },
+      "d": {
+        "role": "Baris 2 kolom 2",
+        "description": "Seberapa jauh bayangan sumbu y meregang secara tegak"
+      }
+    }
+  }
+}

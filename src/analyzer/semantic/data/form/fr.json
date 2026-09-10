@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "Forme du second degré",
+    "oneLiner": "Expression contenant le carré de x — sa courbe est une parabole",
+    "slots": {
+      "a": {
+        "role": "Coefficient du second degré",
+        "description": "Il fixe le sens et l'ouverture de la parabole"
+      },
+      "b": {
+        "role": "Coefficient du premier degré",
+        "description": "Il déplace l'axe vers la gauche ou vers la droite"
+      },
+      "c": {
+        "role": "Terme constant",
+        "description": "Hauteur du point de rencontre avec l'axe des ordonnées"
+      },
+      "x": {
+        "role": "Point d'observation",
+        "description": "Valeur de x que l'on examine sur la courbe"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "Exploration libre — fonction du second degré",
+        "description": "Observer dans le plan l'effet des variations de a, b et c"
+      },
+      "quadratic-bridge-2d": {
+        "name": "Arche de pont — fonction du second degré",
+        "description": "La parabole vue par les piles, l'arche et le reflet"
+      },
+      "quadratic-basketball-2d": {
+        "name": "Lancer franc — fonction du second degré",
+        "description": "La trajectoire du tir : hauteur de départ, sommet et retombée"
+      },
+      "quadratic-fountain-2d": {
+        "name": "Fontaine — fonction du second degré",
+        "description": "Le point le plus haut du jet d'eau est justement le sommet"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "Forme somme de deux carrés",
+    "oneLiner": "Relation où la somme des carrés de deux valeurs égale le carré de la troisième",
+    "slots": {
+      "a": {
+        "role": "Premier côté",
+        "description": "Un des côtés de l'angle droit"
+      },
+      "b": {
+        "role": "Deuxième côté",
+        "description": "L'autre côté de l'angle droit"
+      },
+      "c": {
+        "role": "Hypoténuse",
+        "description": "Le côté opposé à l'angle droit, le plus long"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "Exploration libre",
+        "description": "Le théorème de Pythagore vu par un triangle rectangle et les carrés construits sur ses trois côtés"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "Échelle",
+        "description": "Angle et stabilité d'une échelle appuyée contre un mur"
+      },
+      "pythagorean-tv-2d": {
+        "name": "Écran de télévision",
+        "description": "Passer de la largeur et de la hauteur à la diagonale en pouces"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "Raccourci",
+        "description": "Comparer les distances : contourner le pâté de maisons ou le traverser"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "Forme de variation exponentielle",
+    "oneLiner": "Forme où le taux de variation est proportionnel à la quantité présente, d'où une croissance ou une décroissance très rapide",
+    "slots": {
+      "N_0": {
+        "role": "Valeur initiale",
+        "description": "Quantité à l'instant zéro"
+      },
+      "r": {
+        "role": "Taux de variation",
+        "description": "Croissance s'il est positif, décroissance s'il est négatif"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "Décroissance exponentielle — 2D",
+        "description": "Ressentir la demi-vie en passant d'un ancrage à l'autre : caféine, batterie, carbone 14, médicament"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "Forme des intérêts composés",
+    "oneLiner": "Forme où les intérêts produisent à leur tour des intérêts et font grossir le capital",
+    "slots": {
+      "P": {
+        "role": "Capital initial",
+        "description": "Somme placée au départ"
+      },
+      "r": {
+        "role": "Taux annuel",
+        "description": "Taux d'intérêt sur une année"
+      },
+      "n": {
+        "role": "Nombre de capitalisations par an",
+        "description": "Combien de fois par an les intérêts sont ajoutés"
+      },
+      "t": {
+        "role": "Durée",
+        "description": "Nombre d'années de placement"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "Intérêts composés — 2D",
+        "description": "Ressentir la croissance composée en passant d'un ancrage à l'autre : dépôt, actions, épargne, inflation"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "Forme du déplacement à accélération constante",
+    "oneLiner": "Distance parcourue avec une accélération constante — un terme y est proportionnel au carré du temps",
+    "slots": {
+      "v_0": {
+        "role": "Vitesse initiale",
+        "description": "Vitesse au moment du départ"
+      },
+      "a": {
+        "role": "Accélération",
+        "description": "Accélération maintenue constante"
+      },
+      "t": {
+        "role": "Temps écoulé",
+        "description": "Instant observé"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "Chute libre — 2D",
+        "description": "Ressentir la pesanteur de chaque astre avec les ancrages Terre, Lune, Mars et Jupiter"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "Forme sinusoïdale",
+    "oneLiner": "Onde dont le même motif se répète à intervalle régulier",
+    "slots": {
+      "A": {
+        "role": "Amplitude",
+        "description": "Hauteur entre la position moyenne et la crête"
+      },
+      "\\omega": {
+        "role": "Pulsation",
+        "description": "À quelle vitesse le motif se répète"
+      },
+      "\\varphi": {
+        "role": "Phase",
+        "description": "De combien l'onde est décalée vers la gauche ou vers la droite"
+      },
+      "t": {
+        "role": "Instant observé",
+        "description": "Moment que l'on examine sur l'onde"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "Onde sinusoïdale — 2D",
+        "description": "Ressentir le rôle de l'amplitude, de la période et de la phase avec les ancrages haut-parleur, pendule, marée et voltmètre"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "Forme de la période orbitale",
+    "oneLiner": "Relation selon laquelle plus l'orbite est grande, plus un tour complet prend de temps",
+    "slots": {
+      "M": {
+        "role": "Masse de l'astre central",
+        "description": "Masse de l'astre autour duquel se fait la révolution"
+      },
+      "a": {
+        "role": "Demi-grand axe de l'orbite",
+        "description": "Rayon du côté long de l'orbite elliptique"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "Orbite terrestre — 2D",
+        "description": "Vue en plan 2D que l'on observe en passant d'un ancrage à l'autre : ISS, GPS, orbite géostationnaire, Lune"
+      },
+      "kepler-orbit-3d": {
+        "name": "Orbite terrestre — 3D",
+        "description": "Vue en volume où l'on fait tourner les mêmes ancrages dans l'espace pour saisir les distances"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "Forme de la tangente",
+    "oneLiner": "Droite qui effleure la courbe en un point avec la même pente",
+    "slots": {
+      "f": {
+        "role": "Courbe",
+        "description": "Fonction à laquelle on trace la tangente"
+      },
+      "x": {
+        "role": "Point d'observation",
+        "description": "Valeur de x où l'on déplace le point de contact"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "Exploration des tangentes — 2D",
+        "description": "Vue interactive qui montre ensemble la courbe y=f(x) et la tangente au point x"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "Forme d'un nombre complexe",
+    "oneLiner": "Nombre formé d'une partie réelle et d'une partie imaginaire — un point du plan",
+    "slots": {
+      "a": {
+        "role": "Partie réelle",
+        "description": "Coordonnée sur l'axe horizontal"
+      },
+      "b": {
+        "role": "Partie imaginaire",
+        "description": "Coordonnée sur l'axe vertical"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "Forme d'une transformation 2×2",
+    "oneLiner": "Transformation linéaire qui envoie un vecteur du plan sur un autre vecteur",
+    "slots": {
+      "a": {
+        "role": "Ligne 1, colonne 1",
+        "description": "De combien l'image de l'axe des x s'étire horizontalement"
+      },
+      "b": {
+        "role": "Ligne 1, colonne 2",
+        "description": "De combien l'image de l'axe des y penche horizontalement"
+      },
+      "c": {
+        "role": "Ligne 2, colonne 1",
+        "description": "De combien l'image de l'axe des x penche verticalement"
+      },
+      "d": {
+        "role": "Ligne 2, colonne 2",
+        "description": "De combien l'image de l'axe des y s'étire verticalement"
+      }
+    }
+  }
+}

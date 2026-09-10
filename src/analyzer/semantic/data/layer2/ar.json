@@ -1,0 +1,58 @@
+{
+  "frac.denominator>power.base": {
+    "role": null,
+    "description": "أساس القوة في المقام. وإذا كان متغيرًا فكلما كبر انخفضت قيمة الدالة كلها."
+  },
+  "frac.denominator>power.exponent": {
+    "role": null,
+    "description": "درجة القوة في المقام. وكلما كبر الأس كبر المقام بسرعة فانخفضت القيمة الكلية."
+  },
+  "sum.body>frac.denominator": {
+    "role": "مقام حد المتسلسلة",
+    "description": "مقام كل حد من حدود المتسلسلة. وإذا كبر بسرعة زاد احتمال تقارب المتسلسلة."
+  },
+  "sum.body>frac.denominator>power.exponent": {
+    "role": "أس متسلسلة p",
+    "description": "أس القوة في مقام المتسلسلة. وإذا كان أكبر من 1 تقاربت المتسلسلة (اختبار متسلسلة p)."
+  },
+  "sum.body>frac.numerator": {
+    "role": "بسط حد المتسلسلة",
+    "description": "بسط كل حد من حدود المتسلسلة."
+  },
+  "integral.lower": {
+    "role": null,
+    "description": "تكامل معتل يبدأ من سالب ما لا نهاية. ولا يتقارب إلا إذا اضمحلت الدالة المُكامَلة بسرعة كافية."
+  },
+  "power.exponent>frac.numerator": {
+    "role": null,
+    "description": "الأس هو بسط كسر. وإذا كان الأس كله كسرًا فهو يدل على جذر."
+  },
+  "power.exponent>frac.denominator": {
+    "role": null,
+    "description": "مقام الأس. وإذا كان المقام n فهذا يكافئ الجذر النوني."
+  },
+  "frac.numerator>frac.numerator": {
+    "role": "بسط متداخل",
+    "description": "يوجد كسر متداخل داخل كسر. وهو يعبّر عن علاقة نسبية مركّبة."
+  },
+  "frac.denominator>frac.denominator": {
+    "role": "مقام متداخل",
+    "description": "يوجد كسر آخر داخل المقام. ويمكن تحويل المقدار كله إلى ضرب عند تبسيطه."
+  },
+  "integral.integrand>frac.numerator": {
+    "role": null,
+    "description": "بسط الكسر الذي نكامله."
+  },
+  "integral.integrand>frac.denominator": {
+    "role": null,
+    "description": "مقام الكسر الذي نكامله. وقد يفيد تحليله إلى كسور جزئية."
+  },
+  "limit.body>frac.numerator": {
+    "role": null,
+    "description": "بسط الكسر في النهاية. وإذا آل هو والمقام معًا إلى صفر أو إلى ما لا نهاية أمكن تطبيق قاعدة لوبيتال."
+  },
+  "limit.body>frac.denominator": {
+    "role": null,
+    "description": "مقام الكسر في النهاية. وإذا آل هو والبسط معًا إلى صفر أو إلى ما لا نهاية أمكن تطبيق قاعدة لوبيتال."
+  }
+}

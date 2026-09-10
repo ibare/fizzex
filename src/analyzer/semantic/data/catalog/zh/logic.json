@@ -1,0 +1,101 @@
+{
+  "de-morgan": {
+    "name": "德摩根定律",
+    "oneLiner": "合取的否定等于否定的析取、析取的否定等于否定的合取的定律",
+    "description": "德摩根定律确立了否定运算会把合取与析取互相交换的性质。它在化简复杂逻辑式或作等价变换时不可或缺，在集合论中同样以并集与交集的补集关系成立。",
+    "discoverer": "奥古斯塔斯·德摩根",
+    "field": "逻辑学",
+    "significance": "它是逻辑电路设计、程序中条件语句的优化、集合论基础证明等场合中被核心使用的变换规则。",
+    "elementMeanings": {
+      "A": { "role": "第一个命题", "description": "构成逻辑式的第一个命题或集合。", "kind": "input" },
+      "B": { "role": "第二个命题", "description": "构成逻辑式的第二个命题或集合。", "kind": "input" },
+      "\\neg": { "role": "否定运算符", "description": "把命题的真假颠倒过来的运算符。", "kind": "structural" },
+      "\\wedge": { "role": "合取", "description": "只有两个命题都为真时才为真的运算。", "kind": "structural" },
+      "\\vee": { "role": "析取", "description": "两个命题中只要有一个为真就为真的运算。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "在编程中化简复杂 if 条件语句的否定",
+      "在数字逻辑电路中设计 NAND/NOR 门的转换",
+      "在数据库查询中优化 NOT (A AND B) 条件"
+    ],
+    "relatedFormulas": ["boolean-complement"]
+  },
+  "inclusion-exclusion": {
+    "name": "容斥原理",
+    "oneLiner": "用两个集合的大小之和减去交集大小，求出并集大小的原理",
+    "description": "容斥原理是在数并集的元素个数时修正重复计数的方法。两个集合时减去一次交集，三个以上集合时则推广为奇数个时相加、偶数个时相减的模式。",
+    "field": "集合论",
+    "significance": "它是计数问题的基本原理，也是概率论加法定理、欧拉函数推导等整个组合数学的基础。",
+    "elementMeanings": {
+      "|A \\cup B|": { "role": "并集大小", "description": "属于 A 或 B 的元素总数。", "kind": "output" },
+      "|A|": { "role": "A 的大小", "description": "属于集合 A 的元素个数。", "kind": "input" },
+      "|B|": { "role": "B 的大小", "description": "属于集合 B 的元素个数。", "kind": "input" },
+      "|A \\cap B|": { "role": "交集大小", "description": "同时属于 A 和 B 的元素个数。为了修正重复计数而减去它。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在问卷调查中计算至少选择了两个选项之一的受访者人数",
+      "在搜索引擎中对 OR 条件的结果去重后算出总条数",
+      "在概率计算中求两个事件至少发生一个的概率"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "power-set": {
+    "name": "幂集的大小",
+    "oneLiner": "含 n 个元素的集合，其全部子集的个数是 2 的 n 次方的定理",
+    "description": "幂集大小公式表明，有限集合 S 的全部子集（包含空集和它自身）恰好有 2^|S| 个。因为每个元素都独立地面临被包含或不被包含这两种选择，所以可以用二选一的乘积来解释。",
+    "field": "集合论",
+    "significance": "它是组合数学与集合论的基本结果，可直接用于子集枚举、位掩码算法、逻辑电路的状态空间分析。",
+    "elementMeanings": {
+      "|P(S)|": { "role": "幂集的大小", "description": "集合 S 的全部子集的个数。", "kind": "output" },
+      "2": { "role": "选项个数", "description": "表示对每个元素都有「包含」或「不包含」两种选择。", "kind": "constant", "value": 2 },
+      "|S|": { "role": "元素个数", "description": "原集合 S 中所含元素的个数。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "计算从 n 道菜中可能点出的所有组合数",
+      "在网络安全中分析防火墙规则组合的总情形数",
+      "设计利用位掩码枚举子集的算法"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "combination": {
+    "name": "组合",
+    "oneLiner": "求从 n 个中不考虑顺序选出 k 个的情形数的公式",
+    "description": "组合公式计算从互不相同的 n 个元素中不论顺序地取出 k 个的方法数。它是把排列除以 k 个元素的顺序排法 (k!) 以消去重复的结果，与二项式系数的值相同。",
+    "field": "组合数学",
+    "significance": "它是概率计算、二项式定理、统计抽样等数学与科学各领域中使用最频繁的计数工具。",
+    "elementMeanings": {
+      "C(n,k)": { "role": "组合数", "description": "从 n 个中不计顺序选出 k 个的情形数。", "kind": "output" },
+      "n": { "role": "元素总数", "description": "作为选取对象的全部元素的个数。", "kind": "input" },
+      "k": { "role": "所选元素个数", "description": "要选出的元素的个数。", "kind": "input" },
+      "n!": { "role": "n 的阶乘", "description": "从 1 到 n 所有自然数的乘积。", "kind": "structural" },
+      "k!": { "role": "k 的阶乘", "description": "被选出的元素的顺序排法数。为了消去重复而除以它。", "kind": "structural" },
+      "(n-k)!": { "role": "剩余部分的阶乘", "description": "未被选出的元素的排法数。同样用于消去重复。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "计算从 45 个号码中选出 6 个彩票号码的情形数",
+      "在小组项目中从 30 人里选 5 人组队的方法数",
+      "在统计中算出抽取样本时可能的组合数"
+    ],
+    "relatedFormulas": ["permutation", "inclusion-exclusion", "power-set"]
+  },
+  "permutation": {
+    "name": "排列",
+    "oneLiner": "求从 n 个中考虑顺序排出 k 个的情形数的公式",
+    "description": "排列公式计算从互不相同的 n 个元素中取出 k 个并按顺序排列的方法数。它可由第一位有 n 种、第二位有 (n-1) 种……这样依次相乘的乘法原理自然推导出来。",
+    "field": "组合数学",
+    "significance": "它是顺序具有意义的排列问题的基本工具，广泛用于密码破解、日程安排、情形数分析等。",
+    "elementMeanings": {
+      "P(n,k)": { "role": "排列数", "description": "从 n 个中按顺序取出 k 个的情形数。", "kind": "output" },
+      "n": { "role": "元素总数", "description": "作为选取对象的全部元素的个数。", "kind": "input" },
+      "k": { "role": "所选元素个数", "description": "取出并排列的元素的个数。", "kind": "input" },
+      "n!": { "role": "n 的阶乘", "description": "从 1 到 n 所有自然数的乘积。", "kind": "structural" },
+      "(n-k)!": { "role": "剩余部分的阶乘", "description": "未被选出的元素的排法数。在分母中除掉它，就只数前面的 k 个位置。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "4 位密码中数字不重复排列的情形数",
+      "赛跑中 8 人里颁发金/银/铜牌的组合",
+      "面试中把 5 名应聘者按顺序安排的日程制定"
+    ],
+    "relatedFormulas": ["combination", "inclusion-exclusion", "power-set"]
+  }
+}

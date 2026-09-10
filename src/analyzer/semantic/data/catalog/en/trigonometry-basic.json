@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "Definition of sine",
+    "oneLiner": "The ratio of the side opposite an angle to the hypotenuse in a right triangle",
+    "description": "The sine (sin) of an angle in a right triangle is the side across from it (the opposite side) divided by the longest side (the hypotenuse). Once the angle is fixed, the value is always the same no matter how big the triangle is. It is the most basic of the trigonometric ratios.",
+    "field": "Trigonometry",
+    "significance": "As the most basic trigonometric ratio relating the sides and angles of a right triangle, it is central to the analysis of waves and oscillations in physics and engineering.",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "Sine value", "description": "The sine ratio for the angle theta.", "kind": "output" },
+      "\\theta": { "role": "Angle", "description": "The reference angle in the right triangle. It refers to one of the non-right angles.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Opposite side", "description": "The side lying across from the reference angle.", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Hypotenuse", "description": "The longest side of a right triangle. It lies across from the right angle.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Finding the height of a tree from the length of its shadow and the angle of the sun",
+      "Working out the vertical rise of a slope when you know its angle",
+      "Finding the greatest height a swing reaches"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "Definition of cosine",
+    "oneLiner": "The ratio of the side adjacent to an angle to the hypotenuse in a right triangle",
+    "description": "The cosine (cos) of an angle in a right triangle is the side touching it (the adjacent side) divided by the longest side (the hypotenuse). As with sine, equal angles give the same value no matter how big the triangle is.",
+    "field": "Trigonometry",
+    "significance": "Together with sine it is one of the two pillars of trigonometry, and it is indispensable for vector dot products, signal processing, and coordinate rotation.",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "Cosine value", "description": "The cosine ratio for the angle theta.", "kind": "output" },
+      "\\theta": { "role": "Angle", "description": "The reference angle in the right triangle.", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "Adjacent side", "description": "The side touching the reference angle (not counting the hypotenuse).", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "Hypotenuse", "description": "The longest side of a right triangle.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Working out the horizontal distance from the wall to the foot of a ladder leaning against it",
+      "Finding the horizontal distance covered when you know the angle of a hill",
+      "Computing the horizontal position of a robot arm's tip from its joint angles"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "Definition of tangent",
+    "oneLiner": "The ratio of the side opposite an angle to the side adjacent to it in a right triangle",
+    "description": "The tangent (tan) of an angle in a right triangle is the side across from it (the opposite side) divided by the side touching it (the adjacent side). It is the same as sine divided by cosine. It is especially handy for expressing slope or gradient.",
+    "field": "Trigonometry",
+    "significance": "As the trigonometric ratio that gives slope and gradient directly, it is widely used in surveying, navigation, and architectural design.",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "Tangent value", "description": "The tangent ratio for the angle theta.", "kind": "output" },
+      "\\theta": { "role": "Angle", "description": "The reference angle in the right triangle.", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "Opposite side", "description": "The side lying across from the reference angle.", "kind": "input" },
+      "\\text{adjacent}": { "role": "Adjacent side", "description": "The side touching the reference angle (not counting the hypotenuse).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Measuring the height of a building from the angle you look up at it from a known distance away",
+      "Working out the percentage grade on a road sign",
+      "Finding the height of a mountain summit from the horizontal distance and the angle"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "Pythagorean identity",
+    "oneLiner": "The identity that sine squared plus cosine squared is always 1",
+    "description": "The Pythagorean identity guarantees that at any angle at all, sin squared plus cos squared comes to exactly 1. It follows immediately from the Pythagorean theorem (hypotenuse squared equals the sum of the squares of the other two sides) by dividing both sides by the hypotenuse squared. It is the most basic relation among the trigonometric functions.",
+    "field": "Trigonometry",
+    "significance": "It is where every trigonometric identity starts, and it is the basic relation used most often in rewriting expressions and in proofs.",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "Sine squared", "description": "The value of sin theta squared.", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "Cosine squared", "description": "The value of cos theta squared.", "kind": "structural" },
+      "\\theta": { "role": "Angle", "description": "Any angle at all. The identity holds whatever the value.", "kind": "input", "unit": "rad" },
+      "1": { "role": "Sum", "description": "Sine squared plus cosine squared always comes to 1.", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "Getting the cosine straight away when you know the sine in a trigonometric calculation",
+      "Checking that a decomposition into vector components is right in physics",
+      "Confirming that a rotation preserves length in computer graphics"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "Law of sines",
+    "oneLiner": "The law that each side of a triangle divided by the sine of the opposite angle gives the same value",
+    "description": "The law of sines is a relation that holds in any triangle at all, right-angled or not. Side a divided by the sine of angle A, side b divided by the sine of angle B, and side c divided by the sine of angle C all come to the same value. That ratio also equals the diameter of the triangle's circumscribed circle.",
+    "field": "Trigonometry",
+    "significance": "It lets you work out sides and angles in a general triangle rather than only a right one, which makes it a key tool in surveying and navigation.",
+    "elementMeanings": {
+      "a": { "role": "Side a", "description": "The length of the side across from angle A.", "kind": "input" },
+      "b": { "role": "Side b", "description": "The length of the side across from angle B.", "kind": "input" },
+      "c": { "role": "Side c", "description": "The length of the side across from angle C.", "kind": "input" },
+      "\\sin A": { "role": "Sine of angle A", "description": "The sine of the angle at vertex A of the triangle.", "kind": "structural" },
+      "\\sin B": { "role": "Sine of angle B", "description": "The sine of the angle at vertex B of the triangle.", "kind": "structural" },
+      "\\sin C": { "role": "Sine of angle C", "description": "The sine of the angle at vertex C of the triangle.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Working out the distance to a building across a river from angles measured at two points",
+      "Fixing a position by triangulation without GPS",
+      "Locating a ship at sea from the angle between two lighthouses"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

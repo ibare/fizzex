@@ -1,0 +1,126 @@
+{
+  "logistic-growth": {
+    "name": "Crescimento logístico",
+    "oneLiner": "Modelo em que a taxa de crescimento diminui à medida que a população se aproxima da capacidade de suporte do ambiente",
+    "description": "O modelo de crescimento logístico descreve o processo em que o crescimento de uma população é exponencial no início, mas vai se desacelerando por causa da competição por recursos à medida que se aproxima da capacidade de suporte do ambiente (K). É o modelo matemático mais básico de crescimento dependente da densidade e produz uma curva de crescimento em forma de S (curva sigmoide).",
+    "discoverer": "Pierre François Verhulst",
+    "field": "Biologia",
+    "significance": "É o modelo básico para prever a dinâmica populacional em ecologia e tem aplicações em áreas diversas, como epidemiologia, economia e difusão de tecnologias.",
+    "elementMeanings": {
+      "dN/dt": { "role": "taxa de variação da população", "description": "Variação do número de indivíduos por unidade de tempo.", "kind": "output" },
+      "r": { "role": "taxa intrínseca de crescimento", "description": "Taxa máxima de crescimento da população quando não há limitação de recursos.", "kind": "input" },
+      "N": { "role": "população atual", "description": "Tamanho da população em um dado instante.", "kind": "input" },
+      "K": { "role": "capacidade de suporte", "description": "Número máximo de indivíduos que o ambiente dado consegue sustentar.", "kind": "input" },
+      "(1 - N/K)": { "role": "fator de freio do crescimento", "description": "Quando N se aproxima de K, tende a 0 e freia o crescimento.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Curva de crescimento em S da população de peixes soltos em um lago",
+      "Análise do padrão de entrada na fase estacionária em uma cultura de bactérias",
+      "Modelagem do aumento do número de usuários de uma rede social"
+    ],
+    "relatedFormulas": ["exponential-growth", "lotka-volterra"]
+  },
+  "hardy-weinberg": {
+    "name": "Lei de Hardy-Weinberg",
+    "oneLiner": "Lei que mostra a manutenção das frequências gênicas em condições ideais nas quais não há evolução",
+    "description": "A lei de Hardy-Weinberg mostra que, em uma população ideal sem mutação, seleção natural, deriva genética, migração nem acasalamento preferencial, as frequências alélicas e genotípicas se mantêm constantes ao longo das gerações. Chamando de p e q as frequências dos dois alelos, as frequências genotípicas são expressas pela expansão binomial.",
+    "discoverer": "Godfrey Harold Hardy, Wilhelm Weinberg",
+    "field": "Biologia",
+    "significance": "É a base da genética de populações e fornece o critério (hipótese nula) para julgar se está ocorrendo evolução em uma população real.",
+    "elementMeanings": {
+      "p": { "role": "frequência do alelo dominante", "description": "Frequência relativa do alelo dominante na população. Está entre 0 e 1.", "kind": "input" },
+      "q": { "role": "frequência do alelo recessivo", "description": "Frequência relativa do alelo recessivo na população. p + q = 1.", "kind": "input" },
+      "p^2": { "role": "frequência do homozigoto dominante", "description": "Frequência do genótipo homozigoto dominante (AA).", "kind": "output" },
+      "2pq": { "role": "frequência do heterozigoto", "description": "Frequência do genótipo heterozigoto (Aa).", "kind": "output" },
+      "q^2": { "role": "frequência do homozigoto recessivo", "description": "Frequência do genótipo homozigoto recessivo (aa).", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Estimativa da frequência de portadores de doenças genéticas (como a anemia falciforme)",
+      "Verificação da ocorrência de deriva genética em populações pequenas",
+      "Confirmação do equilíbrio genético de uma população pela distribuição dos tipos sanguíneos"
+    ],
+    "relatedFormulas": ["logistic-growth"]
+  },
+  "michaelis-menten": {
+    "name": "Cinética de Michaelis-Menten",
+    "oneLiner": "Modelo em que a velocidade da reação enzimática descreve uma curva de saturação em função da concentração do substrato",
+    "description": "A equação de Michaelis-Menten descreve como a velocidade inicial de uma reação enzimática varia com a concentração do substrato. Quando a concentração do substrato é baixa, a velocidade aumenta quase proporcionalmente; quando é alta, a enzima se satura e a velocidade converge para o valor máximo. A constante de Michaelis Km é a concentração de substrato na qual a velocidade da reação é metade da máxima.",
+    "discoverer": "Leonor Michaelis, Maud Menten",
+    "field": "Biologia",
+    "significance": "É o modelo básico da cinética enzimática e tem papel central no planejamento de fármacos e na engenharia metabólica.",
+    "elementMeanings": {
+      "v": { "role": "velocidade da reação", "description": "Velocidade inicial da reação enzimática. Unidade: mol/(L s), entre outras.", "kind": "output" },
+      "V_{max}": { "role": "velocidade máxima da reação", "description": "Velocidade máxima, atingida quando todas as enzimas estão ligadas ao substrato.", "kind": "input" },
+      "[S]": { "role": "concentração do substrato", "description": "Concentração do substrato que se liga à enzima. Unidade: mol/L.", "kind": "input" },
+      "K_m": { "role": "constante de Michaelis", "description": "Concentração de substrato na qual a velocidade da reação é metade de Vmax. É o indicador da afinidade entre enzima e substrato.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "O princípio pelo qual um fármaco inibe a reação alterando o Km da enzima",
+      "Saturação da enzima que degrada o álcool (limite da velocidade de degradação em caso de excesso de bebida)",
+      "Definição da concentração ótima de substrato para enzimas de uso industrial"
+    ],
+    "relatedFormulas": ["arrhenius-equation", "logistic-growth"]
+  },
+  "exponential-growth": {
+    "name": "Crescimento exponencial",
+    "oneLiner": "Modelo em que a população cresce exponencialmente com o tempo, sem limitação de recursos",
+    "description": "O modelo de crescimento exponencial descreve a situação ideal em que uma população cresce a uma taxa constante em um ambiente de recursos infinitos. Tem a forma da população inicial multiplicada pela função exponencial natural e, se a taxa de crescimento r for positiva, o número de indivíduos explode exponencialmente. Na realidade, o mais comum é que a limitação de recursos leve à transição para o crescimento logístico.",
+    "field": "Biologia",
+    "significance": "É o modelo matemático mais básico do crescimento populacional e o ponto de partida de modelos mais complexos, como o logístico.",
+    "elementMeanings": {
+      "N(t)": { "role": "população no instante t", "description": "Tamanho da população depois de decorrido o tempo t.", "kind": "output" },
+      "N_0": { "role": "população inicial", "description": "Tamanho da população no instante t=0.", "kind": "input" },
+      "e": { "role": "base do logaritmo natural", "description": "Cerca de 2,718. Constante matemática que representa o crescimento contínuo.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "r": { "role": "taxa intrínseca de crescimento", "description": "Taxa líquida de crescimento da população. Se r > 0 há crescimento; se r < 0 há redução.", "kind": "input" },
+      "t": { "role": "tempo", "description": "Tempo decorrido. A unidade varia conforme a situação (horas, dias, anos etc.).", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Multiplicação acelerada na fase log do início de uma cultura de bactérias",
+      "Explosão populacional no início da introdução de uma espécie exótica",
+      "Cálculo de juros compostos (aplicação do crescimento exponencial em finanças)"
+    ],
+    "relatedFormulas": ["logistic-growth", "half-life"]
+  },
+  "sir-model": {
+    "name": "Modelo SIR",
+    "oneLiner": "Modelo que representa a propagação e a extinção de uma doença infecciosa em três compartimentos: suscetíveis, infectados e recuperados",
+    "description": "O modelo SIR é o modelo compartimental básico da epidemiologia: divide a população em três grupos — suscetíveis (S), infectados (I) e recuperados (R) — para descrever a dinâmica de uma doença infecciosa. O aumento ou a queda do número de infectados é determinado pelos parâmetros de taxa de infecção e de taxa de recuperação, e ocorre uma pandemia quando o número básico de reprodução (R0 = taxa de infecção/taxa de recuperação) é maior que 1.",
+    "discoverer": "William Ogilvy Kermack, Anderson McKendrick",
+    "field": "Biologia",
+    "significance": "É o arcabouço básico para modelar matematicamente a propagação de epidemias e tem papel central na formulação de políticas sanitárias e de estratégias de vacinação.",
+    "elementMeanings": {
+      "dI/dt": { "role": "taxa de variação do número de infectados", "description": "Variação do número de infectados por unidade de tempo.", "kind": "output" },
+      "\\beta": { "role": "taxa de infecção", "description": "Probabilidade de um suscetível se infectar ao entrar em contato com um infectado, multiplicada pela frequência de contatos.", "kind": "input" },
+      "S": { "role": "número de suscetíveis", "description": "População que ainda não foi infectada e pode se infectar.", "kind": "input" },
+      "I": { "role": "número de infectados", "description": "População que está atualmente infectada.", "kind": "input" },
+      "\\gamma": { "role": "taxa de recuperação", "description": "Proporção de infectados que se recupera por unidade de tempo. É o inverso do tempo médio até a recuperação.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Previsão da tendência de propagação da covid-19 e análise do efeito do distanciamento social",
+      "Cálculo da cobertura vacinal necessária para atingir a imunidade coletiva",
+      "Previsão do momento do pico de infecções na temporada de gripe"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth"]
+  },
+  "lotka-volterra": {
+    "name": "Equações de Lotka-Volterra",
+    "oneLiner": "Sistema de equações diferenciais que representa a oscilação periódica das populações de predador e de presa",
+    "description": "As equações de Lotka-Volterra formam o modelo que descreve matematicamente a interação predador-presa. A presa cresce exponencialmente na ausência do predador, mas diminui com os encontros com ele. O predador diminui quando não há alimento, mas cresce ao devorar as presas. Essa interação produz oscilações periódicas nas duas populações.",
+    "discoverer": "Alfred Lotka, Vito Volterra",
+    "field": "Biologia",
+    "significance": "É o modelo básico para analisar matematicamente a dinâmica das interações entre espécies em ecologia e o ponto de partida do estudo da estabilidade dos ecossistemas.",
+    "elementMeanings": {
+      "dx/dt": { "role": "taxa de variação da população de presas", "description": "Variação do número de presas por unidade de tempo.", "kind": "output" },
+      "x": { "role": "população de presas", "description": "Tamanho da população da espécie que serve de presa (alimento).", "kind": "input" },
+      "y": { "role": "população de predadores", "description": "Tamanho da população da espécie predadora.", "kind": "input" },
+      "\\alpha": { "role": "taxa de crescimento das presas", "description": "Taxa intrínseca de crescimento da presa quando não há pressão de predação.", "kind": "input" },
+      "\\beta": { "role": "coeficiente de predação", "description": "Proporção em que a presa diminui a cada encontro entre predador e presa.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Oscilação de cerca de 10 anos nas populações do lince-do-canadá e da lebre-americana",
+      "Variação das populações de fitoplâncton e zooplâncton em ecossistemas marinhos",
+      "Previsão do efeito da introdução de inimigos naturais no controle biológico"
+    ],
+    "relatedFormulas": ["logistic-growth", "exponential-growth", "sir-model"]
+  }
+}

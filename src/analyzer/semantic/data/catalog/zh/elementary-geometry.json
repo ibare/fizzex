@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "三角形的面积",
+    "oneLiner": "把底乘以高再除以二来求三角形面积的公式",
+    "description": "三角形的面积等于底边长度乘以高再除以 2。把长方形沿对角线剪开会得到两个三角形，所以它是长方形面积的一半。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "三角形所占的面积。", "kind": "output" },
+      "b": { "role": "底", "description": "三角形下方那条边的长度。", "kind": "input" },
+      "h": { "role": "高", "description": "从底边到顶点的垂直距离。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "一半", "description": "意思是长方形的一半。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["求屋顶三角形部分的面积", "计算三角旗所需布料的面积"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "长方形的面积",
+    "oneLiner": "把长和宽相乘来求长方形面积的公式",
+    "description": "长方形的面积等于长乘以宽。在四个角都是直角的四边形中，这相当于数出一行能放下几个单位正方形，再乘以有多少行。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "长方形所占的面积。", "kind": "output" },
+      "l": { "role": "长", "description": "长方形的长边长度。", "kind": "input" },
+      "w": { "role": "宽", "description": "长方形的宽边长度。", "kind": "input" }
+    },
+    "realWorldExamples": ["求房间地面的面积", "计算黑板的面积", "比较手机屏幕的大小"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "正方形的面积",
+    "oneLiner": "把一条边的长度平方来求正方形面积的公式",
+    "description": "正方形的面积等于一条边的长度与自身相乘。因为四条边长度都相同，所以它和长宽相等的长方形面积是同一个道理。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "正方形所占的面积。", "kind": "output" },
+      "s": { "role": "边长", "description": "正方形一条边的长度。", "kind": "input" },
+      "s^2": { "role": "边长的平方", "description": "把一条边的长度相乘两次所得的值。", "kind": "output" }
+    },
+    "realWorldExamples": ["求一块瓷砖的面积", "计算正方形相框的大小"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "平行四边形的面积",
+    "oneLiner": "把底乘以高来求平行四边形面积的公式",
+    "description": "平行四边形的面积等于底边长度乘以高。把平行四边形剪下一块挪到另一侧就成了长方形，所以它与长方形面积公式形式相同。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "平行四边形所占的面积。", "kind": "output" },
+      "b": { "role": "底", "description": "平行四边形下方那条边的长度。", "kind": "input" },
+      "h": { "role": "高", "description": "两条平行边之间的垂直距离。", "kind": "input" }
+    },
+    "realWorldExamples": ["计算倾斜窗玻璃的面积", "平行四边形桌布的尺寸"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "梯形的面积",
+    "oneLiner": "把上底与下底之和乘以高再除以二来求面积的公式",
+    "description": "梯形的面积等于两条平行边（上底与下底）长度之和乘以高再除以 2。把两个相同的梯形倒过来拼在一起会成为平行四边形，梯形是它的一半，所以要除以 2。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "梯形所占的面积。", "kind": "output" },
+      "a": { "role": "上底", "description": "梯形上方那条平行边的长度。", "kind": "input" },
+      "b": { "role": "下底", "description": "梯形下方那条平行边的长度。", "kind": "input" },
+      "h": { "role": "高", "description": "两条平行边之间的垂直距离。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "一半", "description": "意思是平行四边形的一半。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["求梯形花坛的面积", "计算梯形屋顶的面积"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "菱形的面积",
+    "oneLiner": "把两条对角线的长度相乘再除以二来求菱形面积的公式",
+    "description": "菱形的面积等于两条对角线长度之积除以 2。菱形的两条对角线互相垂直，沿对角线剪开重新拼合就成为长方形的一半。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "菱形所占的面积。", "kind": "output" },
+      "d_1": { "role": "对角线 1", "description": "菱形一条对角线的长度。", "kind": "input" },
+      "d_2": { "role": "对角线 2", "description": "菱形另一条对角线的长度。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "一半", "description": "意思是长方形的一半。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["计算菱形宝石的面积", "求风筝所用布料的面积"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "圆的面积",
+    "oneLiner": "把半径的平方乘以圆周率来求圆面积的公式",
+    "description": "圆的面积等于半径的平方乘以圆周率(π)。把圆切成很薄的小块再排开，会越来越接近一个长方形，这个长方形的长是圆周的一半、宽是半径，由此得出这个公式。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "圆所占的面积。", "kind": "output" },
+      "\\pi": { "role": "圆周率", "description": "圆的周长除以直径所得的值，约为 3.14159。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "从圆心到圆周的距离。", "kind": "input" },
+      "r^2": { "role": "半径的平方", "description": "把半径相乘两次所得的值。", "kind": "input" }
+    },
+    "realWorldExamples": ["比较比萨的大小", "求圆形挂钟的面积", "计算硬币的面积"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "圆的周长",
+    "oneLiner": "把半径的两倍乘以圆周率来求圆周长的公式",
+    "description": "圆的周长等于半径的 2 倍——也就是直径——乘以圆周率(π)。沿着圆走一圈的距离就是圆的周长。",
+    "field": "几何学",
+    "elementMeanings": {
+      "C": { "role": "周长", "description": "沿圆的外缘量得的总长度。", "kind": "output" },
+      "2": { "role": "常数", "description": "把半径换成直径所用的值。", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "圆周率", "description": "圆的周长除以直径所得的值，约为 3.14159。", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "半径", "description": "从圆心到圆周的距离。", "kind": "input" }
+    },
+    "realWorldExamples": ["自行车轮子转一圈所走的距离", "环形跑道一圈的长度"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "扇形的面积",
+    "oneLiner": "把半径的平方乘以圆心角再除以二来求扇形面积的公式",
+    "description": "扇形的面积等于半径的平方乘以圆心角（弧度）再除以 2。扇形是圆的一部分，圆心角越大面积也越大。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "扇形所占的面积。", "kind": "output" },
+      "r": { "role": "半径", "description": "扇形的半径长度。", "kind": "input" },
+      "r^2": { "role": "半径的平方", "description": "把半径相乘两次所得的值。", "kind": "input" },
+      "\\theta": { "role": "圆心角", "description": "从扇形中心张开的角度（以弧度为单位）。", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "一半", "description": "面积公式中的系数。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["钟表上分针扫过区域的面积", "一块比萨的面积"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "弧长",
+    "oneLiner": "把半径乘以圆心角来求弧长的公式",
+    "description": "弧长等于半径乘以圆心角（弧度）。弧是圆周的一部分，当圆心角为一整圈(2π)时，弧长就等于圆的周长。",
+    "field": "几何学",
+    "elementMeanings": {
+      "l": { "role": "弧长", "description": "圆周中一部分的长度。", "kind": "output" },
+      "r": { "role": "半径", "description": "从圆心到圆周的距离。", "kind": "input" },
+      "\\theta": { "role": "圆心角", "description": "与该弧相对应的圆心角（以弧度为单位）。", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["过山车弯道区段的长度", "钟表刻度之间的弧长"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "长方形的周长",
+    "oneLiner": "把长与宽之和乘以二来求长方形周长的公式",
+    "description": "长方形的周长等于长加宽再乘以 2。因为长方形相对的两边长度相等，所以把一组长和宽相加再翻倍，就是四条边的总长度。",
+    "field": "几何学",
+    "elementMeanings": {
+      "P": { "role": "周长", "description": "长方形四条边的总长度。", "kind": "output" },
+      "l": { "role": "长", "description": "长方形的长边长度。", "kind": "input" },
+      "w": { "role": "宽", "description": "长方形的宽边长度。", "kind": "input" },
+      "2": { "role": "常数", "description": "因为有相对的两组边，所以要乘以 2。", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["计算相框边框的长度", "沿操场外圈跑一圈的距离"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "三角形的周长",
+    "oneLiner": "把三条边的长度全部相加来求三角形周长的公式",
+    "description": "三角形的周长等于三条边长度之和。它等于沿着三角形边缘走一圈的总距离。",
+    "field": "几何学",
+    "elementMeanings": {
+      "P": { "role": "周长", "description": "三角形三条边的总长度。", "kind": "output" },
+      "a": { "role": "第一条边", "description": "三角形第一条边的长度。", "kind": "input" },
+      "b": { "role": "第二条边", "description": "三角形第二条边的长度。", "kind": "input" },
+      "c": { "role": "第三条边", "description": "三角形第三条边的长度。", "kind": "input" }
+    },
+    "realWorldExamples": ["三角形围栏的总长度", "给三角旗滚边所需绳子的长度"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "正多边形的面积",
+    "oneLiner": "利用边数、边长和边心距来求正多边形面积的公式",
+    "description": "正多边形的面积等于边数乘以边长再乘以边心距（从中心到边的垂直距离），然后除以 2。把正多边形从中心分成若干个三角形，它就等于这些三角形面积之和。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "正多边形所占的面积。", "kind": "output" },
+      "n": { "role": "边数", "description": "正多边形的边的条数。", "kind": "input" },
+      "s": { "role": "边长", "description": "正多边形一条边的长度。", "kind": "input" },
+      "a": { "role": "边心距", "description": "从中心到边的中点的垂直距离。", "kind": "input" },
+      "\\frac{1}{2}": { "role": "一半", "description": "来自三角形面积公式的系数。", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["正六边形蜂巢一格的面积", "正五角星装饰的面积"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "圆环的面积",
+    "oneLiner": "把大圆与小圆半径的平方差乘以圆周率来求甜甜圈形面积的公式",
+    "description": "圆环（甜甜圈形）的面积等于外圆面积减去内圆面积。用大半径的平方减去小半径的平方，再乘以圆周率。",
+    "field": "几何学",
+    "elementMeanings": {
+      "A": { "role": "面积", "description": "圆环（甜甜圈形）所占的面积。", "kind": "output" },
+      "\\pi": { "role": "圆周率", "description": "圆的周长除以直径所得的值，约为 3.14159。", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "外半径", "description": "外侧大圆的半径。", "kind": "input" },
+      "r": { "role": "内半径", "description": "内侧小圆的半径。", "kind": "input" },
+      "R^2 - r^2": { "role": "半径平方之差", "description": "外半径的平方减去内半径的平方所得的值。", "kind": "output" }
+    },
+    "realWorldExamples": ["求甜甜圈上表面的面积", "环形跑道（跑步赛道）的面积"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "三角形内角和",
+    "oneLiner": "三角形三个内角相加总是等于 180 度的性质",
+    "description": "三角形内角和是指：把三个顶点处的角度全部相加，总是得到 180 度（半圈）。无论是锐角三角形、直角三角形还是钝角三角形，三个内角之和永远是 180 度。",
+    "field": "几何学",
+    "elementMeanings": {
+      "\\alpha": { "role": "第一个内角", "description": "三角形第一个顶点处的角度。", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "第二个内角", "description": "三角形第二个顶点处的角度。", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "第三个内角", "description": "三角形第三个顶点处的角度。", "kind": "input", "unit": "deg" },
+      "180°": { "role": "半圈", "description": "一条直线所成的角度，它等于三角形的内角和。", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["已知两个角时求出剩下的一个角", "在建筑中对准三角形结构件的角度"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

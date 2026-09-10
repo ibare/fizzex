@@ -1,0 +1,762 @@
+{
+  "mass-energy": {
+    "name": "Asas kesetaraan massa-energi",
+    "oneLiner": "Rumus yang menyatakan massa dan energi saling berubah dengan nisbah kuadrat laju cahaya",
+    "description": "Kesamaan yang diturunkan dari teori relativitas khusus Einstein. Rumus ini menunjukkan bahwa massa dapat berubah menjadi energi dan energi dapat berubah menjadi massa, dengan nisbah perubahannya berupa kuadrat laju cahaya. Karena kuadrat laju cahaya sangat besar, massa yang kecil pun dapat menghasilkan energi yang teramat besar.",
+    "discoverer": "Albert Einstein",
+    "field": "Fisika",
+    "significance": "Dengan mengungkap bahwa massa sesungguhnya adalah salah satu wujud energi, asas ini mengubah paradigma fisika modern dan menjelaskan asas pembelahan serta penggabungan inti.",
+    "elementMeanings": {
+      "E": {
+        "role": "Energi",
+        "kind": "output",
+        "unit": "J",
+        "description": "Energi yang dimiliki sebuah benda. Satuan: joule (J)."
+      },
+      "m": {
+        "role": "Massa",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa diam sebuah benda. Satuan: kilogram (kg)."
+      },
+      "c": {
+        "role": "Laju cahaya",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "Laju cahaya dalam ruang hampa. Kira-kira 3x10 pangkat 8 m/s."
+      },
+      "c^2": {
+        "role": "Kuadrat laju cahaya",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Kira-kira 9x10 pangkat 16. Inilah nisbah perubahan massa-energi."
+      }
+    },
+    "relatedFormulas": ["kinetic-energy", "newton-second"]
+  },
+  "newton-second": {
+    "name": "Hukum II Newton tentang gerak",
+    "oneLiner": "Hukum yang menyatakan gaya yang bekerja pada sebuah benda sama dengan hasil kali massa dan percepatannya",
+    "description": "Hukum II Newton menyatakan bahwa resultan gaya yang bekerja pada sebuah benda sama dengan hasil kali massa dan percepatannya. Pada gaya yang sama, makin besar massanya makin kecil percepatannya, dan inilah yang mengukur besarnya kelembaman lewat massa. Ini persamaan gerak yang paling inti dalam mekanika klasik.",
+    "discoverer": "Isaac Newton",
+    "field": "Fisika",
+    "significance": "Dengan menetapkan hubungan kuantitatif antara gaya, massa, dan percepatan, hukum ini mendirikan dasar mekanika klasik.",
+    "elementMeanings": {
+      "F": {
+        "role": "Gaya",
+        "kind": "output",
+        "unit": "N",
+        "description": "Resultan gaya yang bekerja pada benda. Satuan: newton (N)."
+      },
+      "m": {
+        "role": "Massa",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda. Menyatakan besarnya kelembaman. Satuan: kg."
+      },
+      "a": {
+        "role": "Percepatan",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "Laju perubahan kecepatan tiap satuan waktu. Satuan: m/s kuadrat."
+      }
+    },
+    "relatedFormulas": ["universal-gravitation", "kinetic-energy", "mass-energy"]
+  },
+  "universal-gravitation": {
+    "name": "Hukum gravitasi umum",
+    "oneLiner": "Hukum yang menyatakan bekerjanya gaya tarik antara dua benda yang sebanding dengan hasil kali massanya dan berbanding terbalik dengan kuadrat jaraknya",
+    "description": "Hukum gravitasi umum memerikan bahwa semua benda bermassa saling tarik-menarik, dengan besar gayanya sebanding dengan hasil kali kedua massanya dan berbanding terbalik dengan kuadrat jaraknya. Ini hukum yang membawa perubahan besar karena menyatukan jatuhnya buah apel dan peredaran Bulan ke dalam satu asas yang sama.",
+    "discoverer": "Isaac Newton",
+    "field": "Fisika",
+    "significance": "Dengan menyatukan gerak benda langit dan mekanika di permukaan Bumi, hukum ini menegakkan hukum fisika semesta yang pertama.",
+    "elementMeanings": {
+      "F": {
+        "role": "Gaya gravitasi",
+        "kind": "output",
+        "unit": "N",
+        "description": "Gaya tarik yang bekerja antara dua benda. Satuan: newton (N)."
+      },
+      "G": {
+        "role": "Tetapan gravitasi",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "Tetapan gravitasi umum. Kira-kira 6,674x10 pangkat -11 N m kuadrat/kg kuadrat."
+      },
+      "m_1": {
+        "role": "Massa benda pertama",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda pertama yang saling berinteraksi."
+      },
+      "m_2": {
+        "role": "Massa benda kedua",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda kedua yang saling berinteraksi."
+      },
+      "r": {
+        "role": "Jarak",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jarak antara pusat massa kedua benda."
+      },
+      "r^2": {
+        "role": "Kuadrat jarak",
+        "kind": "structural",
+        "description": "Mencerminkan hukum kebalikan kuadrat. Bila jaraknya dua kali lipat, gayanya menjadi 1/4."
+      }
+    },
+    "relatedFormulas": ["coulomb-law", "newton-second"]
+  },
+  "coulomb-law": {
+    "name": "Hukum Coulomb",
+    "oneLiner": "Hukum yang menyatakan bekerjanya gaya listrik antara dua muatan yang sebanding dengan hasil kali muatannya dan berbanding terbalik dengan kuadrat jaraknya",
+    "description": "Hukum Coulomb menyatakan bahwa gaya listrik antara dua muatan titik sebanding dengan hasil kali besar muatannya dan berbanding terbalik dengan kuadrat jaraknya. Susunannya sama dengan hukum kebalikan kuadrat pada gravitasi umum, bedanya gaya listrik dapat berupa gaya tarik maupun gaya tolak.",
+    "discoverer": "Charles-Augustin de Coulomb",
+    "field": "Fisika",
+    "significance": "Ini titik awal elektromagnetisme, sekaligus penyedia dasar bagi persamaan Maxwell dan teori elektromagnetik modern.",
+    "elementMeanings": {
+      "F": {
+        "role": "Gaya listrik",
+        "kind": "output",
+        "unit": "N",
+        "description": "Gaya yang bekerja antara dua muatan. Satuan: newton (N)."
+      },
+      "k_e": {
+        "role": "Tetapan Coulomb",
+        "kind": "constant",
+        "value": 8.988e9,
+        "unit": "N·m²/C²",
+        "description": "Kira-kira 8,988x10 pangkat 9 N m kuadrat/C kuadrat. Tetapan ini menentukan kuatnya gaya listrik."
+      },
+      "q_1": {
+        "role": "Muatan pertama",
+        "kind": "input",
+        "unit": "C",
+        "description": "Besar muatan benda bermuatan pertama. Satuan: coulomb (C)."
+      },
+      "q_2": {
+        "role": "Muatan kedua",
+        "kind": "input",
+        "unit": "C",
+        "description": "Besar muatan benda bermuatan kedua. Bila tandanya sama gayanya tolak-menolak, bila berbeda gayanya tarik-menarik."
+      },
+      "r": {
+        "role": "Jarak",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jarak antara kedua muatan titik."
+      },
+      "r^2": {
+        "role": "Kuadrat jarak",
+        "kind": "structural",
+        "description": "Mencerminkan hukum kebalikan kuadrat. Makin jauh jaraknya, makin cepat gayanya melemah."
+      }
+    },
+    "relatedFormulas": ["universal-gravitation", "newton-second"]
+  },
+  "kinetic-energy": {
+    "name": "Energi kinetik",
+    "oneLiner": "Rumus yang menyatakan energi benda bergerak lewat massa dan lajunya",
+    "description": "Rumus energi kinetik menyatakan bahwa energi yang dimiliki benda bermassa m yang bergerak dengan laju v adalah (1/2)mv kuadrat. Karena sebanding dengan kuadrat laju, laju yang dua kali lipat membuat energinya empat kali lipat. Ini inti teorema usaha-energi sekaligus penyusun dasar hukum kekekalan energi.",
+    "field": "Fisika",
+    "significance": "Ini penyusun inti hukum kekekalan energi, sekaligus bentuk energi yang paling sering dipakai dalam menyelesaikan soal mekanika.",
+    "elementMeanings": {
+      "K": {
+        "role": "Energi kinetik",
+        "kind": "output",
+        "unit": "J",
+        "description": "Energi yang timbul karena gerak sebuah benda. Satuan: joule (J)."
+      },
+      "\\frac{1}{2}": {
+        "role": "Tetapan kesebandingan",
+        "kind": "constant",
+        "value": 0.5,
+        "description": "Koefisien yang muncul saat rumus ini diturunkan dari hukum II Newton lewat integral."
+      },
+      "m": {
+        "role": "Massa",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda yang bergerak. Satuan: kg."
+      },
+      "v": {
+        "role": "Laju",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "Laju gerak benda. Satuan: m/s."
+      },
+      "v^2": {
+        "role": "Kuadrat laju",
+        "kind": "structural",
+        "description": "Laju yang dua kali lipat membuat energinya empat kali lipat. Ini menyatakan hubungan yang taklinear."
+      }
+    },
+    "relatedFormulas": ["mass-energy", "newton-second"]
+  },
+  "kinematic-displacement": {
+    "name": "Rumus perpindahan pada gerak berpercepatan tetap",
+    "oneLiner": "Rumus yang menyatakan perpindahan benda berkecepatan awal tertentu dan berpercepatan tetap sebagai fungsi waktu",
+    "description": "Ini rumus dasar untuk mencari perpindahan sebuah benda pada gerak lurus berpercepatan tetap. Rumus ini menjumlahkan jarak tempuh akibat kecepatan awal dengan tambahan jarak tempuh akibat percepatannya. Bersama hukum II Newton, rumus ini adalah alat inti penyelesaian soal mekanika klasik dan berlaku pada berbagai keadaan seperti jatuh bebas maupun gerak benda yang dilemparkan.",
+    "discoverer": "Galileo Galilei",
+    "field": "Fisika",
+    "significance": "Ini rumus kinematika inti yang memerikan gerak berpercepatan tetap secara kuantitatif, sekaligus alat paling dasar dalam soal mekanika.",
+    "elementMeanings": {
+      "s": {
+        "role": "Perpindahan",
+        "kind": "output",
+        "unit": "m",
+        "description": "Jarak yang ditempuh benda. Satuan: meter (m)."
+      },
+      "v_0": {
+        "role": "Kecepatan awal",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "Kecepatan pada saat gerak dimulai. Satuan: m/s."
+      },
+      "t": {
+        "role": "Waktu",
+        "kind": "input",
+        "unit": "s",
+        "description": "Lamanya gerak berlangsung. Satuan: sekon (s)."
+      },
+      "a": {
+        "role": "Percepatan",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "Percepatan yang tetap. Satuan: m/s kuadrat."
+      },
+      "\\frac{1}{2}": {
+        "role": "Tetapan kesebandingan",
+        "kind": "constant",
+        "value": 0.5,
+        "description": "Koefisien yang diturunkan lewat integral. Ini faktor kesebandingan bagi perpindahan akibat percepatan."
+      },
+      "t^2": {
+        "role": "Kuadrat waktu",
+        "kind": "structural",
+        "description": "Menyatakan bahwa perpindahan akibat percepatan sebanding dengan kuadrat waktu."
+      }
+    },
+    "relatedFormulas": ["velocity-acceleration", "velocity-displacement", "newton-second"],
+    "realWorldExamples": [
+      "Menghitung sejauh mana benda yang jatuh bebas turun setelah beberapa sekon",
+      "Menghitung jarak pengereman mobil sejak rem diinjak sampai berhenti",
+      "Menghitung panjang landas pacu yang dibutuhkan pesawat saat lepas landas"
+    ]
+  },
+  "velocity-acceleration": {
+    "name": "Hubungan kecepatan-percepatan",
+    "oneLiner": "Rumus yang menyatakan perubahan kecepatan menurut waktu pada gerak berpercepatan tetap",
+    "description": "Ini rumus kinematika paling dasar yang menyatakan kecepatan pada sebarang saat dalam gerak lurus berpercepatan tetap lewat kecepatan awal, percepatan, dan waktu yang berlalu. Ketika percepatannya tetap, kecepatan berubah secara linear terhadap waktu, dan dari hubungan inilah definisi percepatan itu sendiri diturunkan.",
+    "discoverer": "Galileo Galilei",
+    "field": "Fisika",
+    "significance": "Ini hubungan kinematika paling dasar yang mengukur gagasan percepatan, sekaligus titik awal seluruh analisis gerak berpercepatan tetap.",
+    "elementMeanings": {
+      "v": {
+        "role": "Kecepatan akhir",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "Kecepatan pada waktu t. Satuan: m/s."
+      },
+      "v_0": {
+        "role": "Kecepatan awal",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "Kecepatan pada saat gerak dimulai. Satuan: m/s."
+      },
+      "a": {
+        "role": "Percepatan",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "Percepatan yang tetap. Satuan: m/s kuadrat."
+      },
+      "t": {
+        "role": "Waktu",
+        "kind": "input",
+        "unit": "s",
+        "description": "Lamanya gerak berlangsung. Satuan: sekon (s)."
+      }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-displacement", "newton-second"],
+    "realWorldExamples": [
+      "Menghitung kecepatan mobil 5 sekon setelah berangkat dari lampu lalu lintas",
+      "Menaksir kecepatan penerjun payung pada saat tertentu setelah mulai jatuh",
+      "Menghitung laju naik roket beberapa saat setelah diluncurkan"
+    ]
+  },
+  "velocity-displacement": {
+    "name": "Hubungan kecepatan-perpindahan",
+    "oneLiner": "Rumus yang langsung menyatakan hubungan kecepatan dan perpindahan tanpa melewati waktu",
+    "description": "Ini rumus yang langsung menyatakan hubungan kecepatan dan perpindahan pada gerak lurus berpercepatan tetap dengan melenyapkan variabel waktu. Kuadrat kecepatan akhir sama dengan kuadrat kecepatan awal ditambah dua kali hasil kali percepatan dan perpindahan. Rumus ini sangat berguna terutama saat waktunya tidak diketahui, dan berkaitan erat dengan sudut pandang kekekalan energi.",
+    "discoverer": "Galileo Galilei",
+    "field": "Fisika",
+    "significance": "Karena hubungan kecepatan dan jarak dapat dicari langsung tanpa waktu, rumus ini menjadi alat bantu inti dalam soal mekanika.",
+    "elementMeanings": {
+      "v^2": {
+        "role": "Kuadrat kecepatan akhir",
+        "kind": "output",
+        "unit": "(m/s)²",
+        "description": "Kuadrat kecepatan akhir. Satuan: (m/s) kuadrat."
+      },
+      "v_0^2": {
+        "role": "Kuadrat kecepatan awal",
+        "kind": "input",
+        "unit": "(m/s)²",
+        "description": "Kuadrat kecepatan awal. Satuan: (m/s) kuadrat."
+      },
+      "2": {
+        "role": "Koefisien tetap",
+        "kind": "constant",
+        "value": 2,
+        "description": "Koefisien yang muncul dalam proses penurunan persamaan gerak."
+      },
+      "a": {
+        "role": "Percepatan",
+        "kind": "input",
+        "unit": "m/s²",
+        "description": "Percepatan yang tetap. Satuan: m/s kuadrat."
+      },
+      "s": {
+        "role": "Perpindahan",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jarak yang ditempuh benda. Satuan: meter (m)."
+      }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-acceleration", "kinetic-energy"],
+    "realWorldExamples": [
+      "Menghitung balik kecepatan mobil sesaat sebelum bertabrakan bila hanya jarak pengeremannya yang diketahui",
+      "Menghitung kecepatan awal peluru yang meninggalkan moncong dari panjang laras dan percepatannya",
+      "Menghitung laju yang dicapai roller coaster pada ketinggian tertentu"
+    ]
+  },
+  "projectile-motion": {
+    "name": "Persamaan lintasan gerak parabola",
+    "oneLiner": "Persamaan parabola yang menyatakan lintasan benda yang dilemparkan sebagai fungsi jarak mendatar",
+    "description": "Ini persamaan yang menyatakan lintasan benda yang dilemparkan dengan kecepatan awal dan sudut tembak tertentu. Arah mendatar berupa gerak berkecepatan tetap dan arah tegak berupa gerak berpercepatan tetap akibat gravitasi; perpaduan keduanya membentuk lintasan parabola. Meskipun ini model ideal yang mengabaikan hambatan udara, penerapannya luas mulai dari fisika olahraga sampai balistik.",
+    "discoverer": "Galileo Galilei",
+    "field": "Fisika",
+    "significance": "Persamaan ini menegakkan cara menganalisis gerak dua dimensi dengan memisahkannya menjadi arah mendatar dan tegak, sekaligus menjadi dasar balistik.",
+    "elementMeanings": {
+      "y": {
+        "role": "Kedudukan tegak",
+        "kind": "output",
+        "unit": "m",
+        "description": "Ketinggian tegak terhadap titik lempar. Satuan: meter (m)."
+      },
+      "x": {
+        "role": "Jarak mendatar",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jarak perpindahan mendatar dari titik lempar. Satuan: meter (m)."
+      },
+      "\\theta": {
+        "role": "Sudut tembak",
+        "kind": "input",
+        "unit": "rad",
+        "description": "Sudut yang dibentuk vektor kecepatan awal terhadap bidang mendatar."
+      },
+      "\\tan\\theta": {
+        "role": "Tangen sudut tembak",
+        "kind": "structural",
+        "description": "Menyatakan gradien lintasan pada awal gerak."
+      },
+      "g": {
+        "role": "Percepatan gravitasi",
+        "kind": "constant",
+        "value": 9.8,
+        "unit": "m/s²",
+        "description": "Kira-kira 9,8 m/s kuadrat di dekat permukaan Bumi."
+      },
+      "v_0": {
+        "role": "Laju awal",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "Laju pada saat dilemparkan. Satuan: m/s."
+      },
+      "\\cos^2\\theta": {
+        "role": "Kuadrat kosinus sudut tembak",
+        "kind": "structural",
+        "description": "Mencerminkan kuadrat komponen kecepatan mendatar."
+      }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-acceleration"],
+    "realWorldExamples": [
+      "Meramalkan jarak tempuh dan titik tertinggi bola yang dipukul pemukul dalam bisbol",
+      "Merancang lintasan parabola pancaran air mancur",
+      "Menghitung titik jatuh peluru meriam yang ditembakkan"
+    ]
+  },
+  "simple-harmonic": {
+    "name": "Persamaan gerak harmonik sederhana",
+    "oneLiner": "Rumus yang menyatakan gerak berulang berkala akibat gaya pemulih lewat fungsi sinus",
+    "description": "Gerak harmonik sederhana adalah gerak sebuah benda yang mengalami gaya pemulih sebanding dengan simpangannya dari kedudukan setimbang. Simpangannya dinyatakan sebagai fungsi sinus (atau kosinus) dan terperikan sepenuhnya oleh amplitudo, frekuensi sudut, dan fase awalnya. Ini model dasar yang menjelaskan sangat banyak gejala getaran di alam, seperti getaran pegas, gerak bandul, dan rangkaian LC.",
+    "field": "Fisika",
+    "significance": "Ini model paling dasar untuk memerikan gejala getaran dan gelombang, dan gerak berkala yang rumit pun dapat dianalisis sebagai tumpangan beberapa gerak harmonik sederhana.",
+    "elementMeanings": {
+      "x": {
+        "role": "Simpangan",
+        "kind": "output",
+        "unit": "m",
+        "description": "Jarak penyimpangan dari kedudukan setimbang. Satuan: meter (m)."
+      },
+      "A": {
+        "role": "Amplitudo",
+        "kind": "input",
+        "unit": "m",
+        "description": "Simpangan terbesar. Menyatakan besarnya getaran. Satuan: meter (m)."
+      },
+      "\\omega": {
+        "role": "Frekuensi sudut",
+        "kind": "input",
+        "unit": "rad/s",
+        "description": "Besarnya perubahan fase tiap satuan waktu. Satuan: rad/s. Hubungannya dengan perioda T: 2 pi/T."
+      },
+      "t": {
+        "role": "Waktu",
+        "kind": "input",
+        "unit": "s",
+        "description": "Lamanya gerak berlangsung. Satuan: sekon (s)."
+      },
+      "\\varphi": {
+        "role": "Fase awal",
+        "kind": "input",
+        "unit": "rad",
+        "description": "Fase pada saat t=0. Mencerminkan syarat awalnya."
+      }
+    },
+    "relatedFormulas": ["wave-speed", "kinetic-energy"],
+    "realWorldExamples": [
+      "Menganalisis perioda ayunan bolak-balik bandul jam",
+      "Memodelkan pola getaran dawai gitar",
+      "Asas kerja seismograf dalam mendeteksi getaran"
+    ]
+  },
+  "wave-speed": {
+    "name": "Rumus cepat rambat gelombang",
+    "oneLiner": "Hubungan yang menyatakan cepat rambat gelombang sama dengan hasil kali frekuensi dan panjang gelombang",
+    "description": "Cepat rambat gelombang adalah jarak yang ditempuh gelombang selama 1 sekon, dan nilainya sama dengan banyaknya getaran selama 1 sekon (frekuensi) dikalikan panjang satu gelombang. Ini hubungan dasar yang berlaku umum untuk segala jenis gelombang, seperti bunyi, cahaya, dan riak air.",
+    "field": "Fisika",
+    "significance": "Ini hubungan dasar yang berlaku umum pada semua gejala gelombang, sekaligus landasan akustika, optika, dan telekomunikasi.",
+    "elementMeanings": {
+      "v": {
+        "role": "Cepat rambat gelombang",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "Kecepatan merambatnya gelombang melalui medium. Satuan: m/s."
+      },
+      "f": {
+        "role": "Frekuensi",
+        "kind": "input",
+        "unit": "Hz",
+        "description": "Banyaknya getaran tiap satuan waktu. Satuan: hertz (Hz)."
+      },
+      "\\lambda": {
+        "role": "Panjang gelombang",
+        "kind": "input",
+        "unit": "m",
+        "description": "Panjang ruang yang sepadan dengan satu perioda. Satuan: meter (m)."
+      }
+    },
+    "relatedFormulas": ["simple-harmonic", "de-broglie"],
+    "realWorldExamples": [
+      "Menghitung panjang gelombang radio dari frekuensinya",
+      "Menentukan panjang gelombang bunyi dalam medium pada pemeriksaan ultrasonografi",
+      "Menganalisis hubungan tinggi nada alat musik dengan panjang tabung resonansinya"
+    ]
+  },
+  "ideal-gas-law": {
+    "name": "Hukum gas ideal",
+    "oneLiner": "Persamaan keadaan yang menyatakan hubungan antara tekanan, volume, suhu, dan jumlah zat pada gas ideal",
+    "description": "Hukum gas ideal adalah persamaan keadaan yang menyatakan bahwa hasil kali tekanan dan volume sebuah gas sebanding dengan hasil kali jumlah zat dan suhu mutlaknya. Hukum ini menyatukan hukum Boyle, hukum Charles, dan hukum Avogadro menjadi satu, dengan menganggap keadaan ideal yang tidak ada interaksi antarmolekul dan volume molekulnya sendiri dapat diabaikan.",
+    "field": "Fisika",
+    "significance": "Ini persamaan dasar termodinamika dan mekanika gas, sekaligus titik awal untuk memahami perilaku gas nyata secara hampiran.",
+    "elementMeanings": {
+      "P": {
+        "role": "Tekanan",
+        "kind": "input",
+        "unit": "Pa",
+        "description": "Besarnya gaya yang dikerahkan gas pada dinding wadah. Satuan: pascal (Pa)."
+      },
+      "V": {
+        "role": "Volume",
+        "kind": "input",
+        "unit": "m³",
+        "description": "Besarnya ruang yang ditempati gas. Satuan: meter kubik (m pangkat 3) atau liter (L)."
+      },
+      "n": {
+        "role": "Jumlah zat",
+        "kind": "input",
+        "unit": "mol",
+        "description": "Banyaknya gas. Satuan: mol."
+      },
+      "R": {
+        "role": "Tetapan gas",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)",
+        "description": "Tetapan gas ideal. Kira-kira 8,314 J/(mol K)."
+      },
+      "T": {
+        "role": "Suhu mutlak",
+        "kind": "input",
+        "unit": "K",
+        "description": "Suhu dalam satuan kelvin. 0 K adalah nol mutlak."
+      }
+    },
+    "relatedFormulas": ["first-law-thermo", "boltzmann-dist"],
+    "realWorldExamples": [
+      "Meramalkan berubahnya tekanan udara dalam ban menurut perubahan suhu",
+      "Menghitung perubahan volume balon saat dipanaskan atau didinginkan",
+      "Menjelaskan gejala menggembungnya bungkus makanan ringan di dataran tinggi"
+    ]
+  },
+  "first-law-thermo": {
+    "name": "Hukum I termodinamika",
+    "oneLiner": "Hukum kekekalan energi yang menyatakan perubahan energi dalam sebuah sistem sama dengan selisih kalor yang diserap dan usaha yang dilakukan",
+    "description": "Hukum I termodinamika adalah bentuk termodinamis dari hukum kekekalan energi. Bila sebuah sistem menyerap kalor dari luar, energi dalamnya bertambah atau ia melakukan usaha pada lingkungannya, dan energi tidak diciptakan maupun dimusnahkan. Ini syarat pembatas dasar bagi semua proses yang melibatkan energi, seperti mesin kalor, mesin pendingin, dan reaksi kimia.",
+    "field": "Fisika",
+    "significance": "Dengan menetapkan bahwa kalor dan usaha adalah wujud energi yang berbeda, hukum ini memperluas keberlakuan umum kekekalan energi ke dalam termodinamika.",
+    "elementMeanings": {
+      "\\Delta U": {
+        "role": "Perubahan energi dalam",
+        "kind": "output",
+        "unit": "J",
+        "description": "Besarnya perubahan energi dalam sistem. Perubahan jumlah keseluruhan energi gerak molekul dan energi potensialnya."
+      },
+      "Q": {
+        "role": "Kalor",
+        "kind": "input",
+        "unit": "J",
+        "description": "Jumlah kalor yang diserap sistem dari luar. Bila positif berarti menyerap kalor, bila negatif berarti melepas kalor. Satuan: joule (J)."
+      },
+      "W": {
+        "role": "Usaha",
+        "kind": "input",
+        "unit": "J",
+        "description": "Usaha yang dilakukan sistem terhadap lingkungannya. Bila positif berarti memuai, bila negatif berarti termampatkan. Satuan: joule (J)."
+      }
+    },
+    "relatedFormulas": ["ideal-gas-law", "kinetic-energy"],
+    "realWorldExamples": [
+      "Proses berubahnya kalor pembakaran bahan bakar menjadi gerak torak pada mesin mobil",
+      "Asas kerja lemari es dalam membuang kalor dari dalam ke luar",
+      "Menjelaskan mengapa suhu gas naik saat dimampatkan secara adiabatik"
+    ]
+  },
+  "schrodinger-eq": {
+    "name": "Persamaan Schrödinger",
+    "oneLiner": "Persamaan mendasar mekanika kuantum yang memerikan perubahan keadaan kuantum menurut waktu",
+    "description": "Persamaan Schrödinger adalah persamaan diferensial parsial yang memerikan perubahan fungsi gelombang menurut waktu dalam mekanika kuantum. Ini persamaan gerak mekanika kuantum yang sepadan dengan persamaan gerak Newton dalam mekanika klasik, dan dipakai untuk meramalkan perilaku kuantum atom, molekul, dan zat padat. Kuadrat nilai mutlak fungsi gelombangnya menyatakan rapat peluang menemukan partikel.",
+    "discoverer": "Erwin Schrödinger",
+    "field": "Fisika",
+    "significance": "Sebagai persamaan gerak dasar mekanika kuantum, persamaan ini menyediakan landasan bagi sains modern seperti struktur atom, ikatan kimia, dan fisika semikonduktor.",
+    "elementMeanings": {
+      "i": {
+        "role": "Satuan imajiner",
+        "kind": "structural",
+        "description": "Bilangan yang bila dikuadratkan menghasilkan -1. Menyatakan perubahan fase fungsi gelombang."
+      },
+      "\\hbar": {
+        "role": "Tetapan Planck tereduksi",
+        "kind": "constant",
+        "value": 1.055e-34,
+        "unit": "J·s",
+        "description": "Tetapan Planck dibagi 2 pi. Kira-kira 1,055x10 pangkat -34 J s."
+      },
+      "\\frac{\\partial \\psi}{\\partial t}": {
+        "role": "Turunan parsial fungsi gelombang terhadap waktu",
+        "kind": "structural",
+        "description": "Menyatakan bagaimana fungsi gelombang berubah menurut waktu."
+      },
+      "\\hat{H}": {
+        "role": "Operator Hamilton",
+        "kind": "structural",
+        "description": "Operator yang sepadan dengan energi total sistem (energi kinetik + energi potensial)."
+      },
+      "\\psi": {
+        "role": "Fungsi gelombang",
+        "kind": "structural",
+        "description": "Fungsi kompleks yang memerikan keadaan kuantum. Kuadrat nilai mutlaknya adalah rapat peluang."
+      }
+    },
+    "relatedFormulas": ["de-broglie", "mass-energy"],
+    "realWorldExamples": [
+      "Menghitung aras energi orbit elektron pada atom hidrogen",
+      "Menganalisis struktur pita elektron pada semikonduktor",
+      "Asas kerja mikroskop terowongan payar (STM) yang memanfaatkan gejala penerowongan"
+    ]
+  },
+  "de-broglie": {
+    "name": "Panjang gelombang de Broglie",
+    "oneLiner": "Rumus yang menyatakan bahwa setiap partikel bersifat gelombang dengan panjang gelombang berbanding terbalik dengan momentumnya",
+    "description": "Menurut hipotesis de Broglie, setiap partikel bermassa memiliki sifat gelombang, dengan panjang gelombangnya berupa tetapan Planck dibagi momentumnya. Gagasan gelombang materi ini adalah asas kerja mikroskop elektron sekaligus pendorong langsung lahirnya persamaan Schrödinger. Panjang gelombang de Broglie benda makroskopis teramat kecil sehingga tidak teramati, tetapi pada partikel mikroskopis seperti elektron hal itu terbukti lewat percobaan.",
+    "discoverer": "Louis de Broglie",
+    "field": "Fisika",
+    "significance": "Dengan memperluas dwisifat partikel-gelombang ke materi, rumus ini menyediakan pemicu inti bagi lahirnya mekanika kuantum.",
+    "elementMeanings": {
+      "\\lambda": {
+        "role": "Panjang gelombang de Broglie",
+        "kind": "output",
+        "unit": "m",
+        "description": "Panjang gelombang materi yang sepadan dengan sebuah partikel. Satuan: meter (m)."
+      },
+      "h": {
+        "role": "Tetapan Planck",
+        "kind": "constant",
+        "value": 6.626e-34,
+        "unit": "J·s",
+        "description": "Kira-kira 6,626x10 pangkat -34 J s. Ini tetapan dasar mekanika kuantum."
+      },
+      "p": {
+        "role": "Momentum",
+        "kind": "input",
+        "unit": "kg·m/s",
+        "description": "Momentum partikel (massa dikali kecepatan). Satuan: kg m/s."
+      }
+    },
+    "relatedFormulas": ["schrodinger-eq", "wave-speed", "mass-energy"],
+    "realWorldExamples": [
+      "Menghitung panjang gelombang yang menentukan daya urai berkas elektron pada mikroskop elektron",
+      "Menganalisis struktur hablur lewat percobaan difraksi neutron",
+      "Pengukuran saksama yang memanfaatkan sifat gelombang atom pada interferometer atom"
+    ]
+  },
+  "boltzmann-dist": {
+    "name": "Sebaran Boltzmann",
+    "oneLiner": "Sebaran yang menyatakan peluang sebuah partikel memiliki energi tertentu menurun secara eksponensial terhadap energinya dalam keadaan setimbang termal",
+    "description": "Sebaran Boltzmann adalah hasil dasar mekanika statistika yang menyatakan bahwa pada sistem dalam kesetimbangan termal, peluang sebuah partikel memiliki energi E sebanding dengan e pangkat (-E/kT). Makin tinggi suhunya, makin besar peluang terisinya keadaan berenergi tinggi; bila suhunya rendah, sebagian besar partikel berkerumun di keadaan berenergi rendah. Sebaran ini menjelaskan laju reaksi kimia, sebaran elektron pada semikonduktor, dan sebaran kerapatan atmosfer.",
+    "discoverer": "Ludwig Boltzmann",
+    "field": "Fisika",
+    "significance": "Ini asas mendasar mekanika statistika, sekaligus jembatan yang menjelaskan hukum termodinamika makroskopis lewat gerak partikel mikroskopis.",
+    "elementMeanings": {
+      "P": {
+        "role": "Peluang",
+        "kind": "output",
+        "description": "Peluang sebuah partikel berada pada keadaan energi tertentu."
+      },
+      "e": {
+        "role": "Konstanta alami",
+        "kind": "constant",
+        "value": 2.71828183,
+        "description": "Bilangan pokok logaritma natural. Kira-kira 2,718."
+      },
+      "E": {
+        "role": "Energi",
+        "kind": "input",
+        "unit": "J",
+        "description": "Energi keadaan yang bersangkutan. Satuan: joule (J)."
+      },
+      "k": {
+        "role": "Tetapan Boltzmann",
+        "kind": "constant",
+        "value": 1.381e-23,
+        "unit": "J/K",
+        "description": "Kira-kira 1,381x10 pangkat -23 J/K. Ini tetapan yang menghubungkan suhu dan energi."
+      },
+      "T": {
+        "role": "Suhu mutlak",
+        "kind": "input",
+        "unit": "K",
+        "description": "Suhu dalam satuan kelvin. Makin tinggi, makin besar penyebaran energinya."
+      }
+    },
+    "relatedFormulas": ["ideal-gas-law", "first-law-thermo"],
+    "realWorldExamples": [
+      "Menjelaskan gejala menurunnya kerapatan atmosfer secara eksponensial pada ketinggian yang makin besar",
+      "Meramalkan perubahan banyaknya elektron bebas menurut suhu pada semikonduktor",
+      "Menghitung bagian molekul yang melampaui penghalang energi pengaktifan dalam reaksi kimia"
+    ]
+  },
+  "lorentz-transform": {
+    "name": "Transformasi Lorentz untuk waktu",
+    "oneLiner": "Rumus teori relativitas khusus yang menyatakan alih koordinat waktu antar kerangka acuan inersia",
+    "description": "Transformasi Lorentz adalah rumus untuk mengalihkan koordinat ruang-waktu antara dua kerangka acuan inersia yang saling bergerak dengan kecepatan tetap. Rumus alih waktunya menunjukkan bahwa waktu pada satu kerangka juga bergantung pada koordinat ruang di kerangka yang lain, dan inilah pernyataan matematis dari kenisbian keserentakan. Ini akar dari berbagai akibat relativistik seperti pemuluran waktu dan penyusutan panjang.",
+    "discoverer": "Hendrik Lorentz",
+    "field": "Fisika",
+    "significance": "Dengan menggantikan transformasi Galileo, rumus ini menegakkan landasan matematis teori relativitas khusus.",
+    "elementMeanings": {
+      "t'": {
+        "role": "Waktu hasil alih",
+        "kind": "output",
+        "unit": "s",
+        "description": "Koordinat waktu pada kerangka acuan pengamat yang bergerak."
+      },
+      "\\gamma": {
+        "role": "Faktor Lorentz",
+        "kind": "structural",
+        "description": "1/akar(1 - v kuadrat/c kuadrat). Makin dekat kecepatannya ke laju cahaya, makin besar nilainya."
+      },
+      "t": {
+        "role": "Waktu asal",
+        "kind": "input",
+        "unit": "s",
+        "description": "Koordinat waktu pada kerangka acuan diam."
+      },
+      "v": {
+        "role": "Kecepatan nisbi",
+        "kind": "input",
+        "unit": "m/s",
+        "description": "Kecepatan nisbi antara kedua kerangka acuan. Satuan: m/s."
+      },
+      "x": {
+        "role": "Koordinat ruang",
+        "kind": "input",
+        "unit": "m",
+        "description": "Kedudukan pada kerangka acuan diam. Menunjukkan bahwa ruang ikut campur dalam alih waktu."
+      },
+      "c^2": {
+        "role": "Kuadrat laju cahaya",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Tetapan kesebandingan alih ruang-waktu. Nilainya menentukan nisbah bercampurnya waktu dan ruang."
+      }
+    },
+    "relatedFormulas": ["mass-energy", "velocity-acceleration"],
+    "realWorldExamples": [
+      "Koreksi waktu pada satelit GPS (memperhitungkan pemuluran waktu relativistik)",
+      "Pengamatan memanjangnya umur partikel berkecepatan tinggi di pemercepat partikel",
+      "Menjelaskan mengapa muon sanggup mencapai permukaan Bumi dari atmosfer"
+    ]
+  },
+  "gauss-law": {
+    "name": "Hukum Gauss",
+    "oneLiner": "Persamaan pertama Maxwell yang menyatakan divergensi medan listrik dari sebaran muatan sebanding dengan rapat muatannya",
+    "description": "Hukum Gauss adalah yang pertama dari empat persamaan Maxwell; ia menyatakan bahwa divergensi (penyebaran ruang) medan listrik sama dengan rapat muatan di titik itu dibagi permitivitas ruang hampa. Hukum ini menyatakan secara matematis bahwa muatanlah sumber medan listrik, dan memerikan bahwa medan listrik keluar dari muatan positif dan masuk ke muatan negatif. Ia sangat berguna terutama untuk mencari medan listrik sebaran muatan yang setangkup dengan ringkas.",
+    "discoverer": "Carl Friedrich Gauss / James Clerk Maxwell",
+    "field": "Fisika",
+    "significance": "Sebagai salah satu dari empat persamaan dasar elektromagnetisme (persamaan Maxwell), hukum ini menetapkan hubungan antara muatan dan medan listrik.",
+    "elementMeanings": {
+      "\\nabla \\cdot \\mathbf{E}": {
+        "role": "Divergensi medan listrik",
+        "kind": "structural",
+        "description": "Operasi turunan yang menyatakan seberapa banyak medan listrik menyebar atau berkumpul di suatu titik."
+      },
+      "\\rho": {
+        "role": "Rapat muatan",
+        "kind": "input",
+        "unit": "C/m³",
+        "description": "Besar muatan tiap satuan volume. Satuan: C/m pangkat 3."
+      },
+      "\\varepsilon_0": {
+        "role": "Permitivitas ruang hampa",
+        "kind": "constant",
+        "value": 8.854e-12,
+        "unit": "C²/(N·m²)",
+        "description": "Kira-kira 8,854x10 pangkat -12 F/m. Ini tetapan yang menentukan kuatnya medan listrik dalam ruang hampa."
+      }
+    },
+    "relatedFormulas": ["coulomb-law"],
+    "realWorldExamples": [
+      "Menghitung sebaran medan listrik pada permukaan bola penghantar",
+      "Menurunkan medan listrik seragam di dalam kapasitor keping sejajar",
+      "Menjelaskan mengapa medan listrik di dalam penghantar bermuatan sama dengan 0"
+    ]
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "Luas segitiga",
+    "oneLiner": "Rumus mencari luas segitiga dengan mengalikan alas dan tinggi lalu membaginya dua",
+    "description": "Luas segitiga adalah panjang alas dikali tinggi lalu dibagi 2. Bila sebuah persegi panjang dipotong menurut diagonalnya akan diperoleh dua segitiga, dan karena itu luasnya menjadi separuh luas persegi panjang tersebut.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati segitiga.", "kind": "output" },
+      "b": { "role": "Alas", "description": "Panjang sisi bawah segitiga.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak tegak lurus dari alas ke titik sudut puncak.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Setengah", "description": "Menyatakan separuh dari persegi panjang.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Mencari luas bidang segitiga pada atap", "Menghitung luas kain sebuah bendera segitiga"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "Luas persegi panjang",
+    "oneLiner": "Rumus mencari luas persegi panjang dengan mengalikan panjang dan lebar",
+    "description": "Luas persegi panjang adalah panjang dikali lebar. Pada segi empat yang keempat sudutnya siku-siku, hal ini sama dengan menghitung berapa persegi satuan yang muat dalam satu baris lalu mengalikannya dengan banyaknya baris.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati persegi panjang.", "kind": "output" },
+      "l": { "role": "Panjang", "description": "Ukuran panjang persegi panjang.", "kind": "input" },
+      "w": { "role": "Lebar", "description": "Ukuran lebar persegi panjang.", "kind": "input" }
+    },
+    "realWorldExamples": ["Mencari luas lantai sebuah kamar", "Menghitung luas papan tulis", "Membandingkan ukuran layar telepon pintar"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "Luas persegi",
+    "oneLiner": "Rumus mencari luas persegi dengan mengkuadratkan panjang sisinya",
+    "description": "Luas persegi adalah panjang satu sisi dikalikan dengan dirinya sendiri. Karena keempat sisinya sama panjang, asasnya sama dengan luas persegi panjang yang panjang dan lebarnya sama.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati persegi.", "kind": "output" },
+      "s": { "role": "Satu sisi", "description": "Panjang satu sisi persegi.", "kind": "input" },
+      "s^2": { "role": "Kuadrat sisi", "description": "Panjang satu sisi yang dikalikan dua kali.", "kind": "output" }
+    },
+    "realWorldExamples": ["Mencari luas sekeping ubin", "Menghitung ukuran bingkai foto berbentuk persegi"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "Luas jajaran genjang",
+    "oneLiner": "Rumus mencari luas jajaran genjang dengan mengalikan alas dan tinggi",
+    "description": "Luas jajaran genjang adalah panjang alas dikali tinggi. Karena jajaran genjang dapat dipotong lalu digeser menjadi persegi panjang, bentuk rumusnya sama dengan rumus luas persegi panjang.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati jajaran genjang.", "kind": "output" },
+      "b": { "role": "Alas", "description": "Panjang sisi bawah jajaran genjang.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak tegak lurus antara kedua sisi yang sejajar.", "kind": "input" }
+    },
+    "realWorldExamples": ["Menghitung luas kaca jendela yang miring", "Ukuran alas meja berbentuk jajaran genjang"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "Luas trapesium",
+    "oneLiner": "Rumus yang mengalikan jumlah sisi atas dan sisi bawah dengan tinggi lalu membaginya dua",
+    "description": "Luas trapesium adalah jumlah panjang kedua sisi sejajar (sisi atas dan sisi bawah) dikali tinggi lalu dibagi 2. Bila dua trapesium yang sama dibalik dan disatukan akan terbentuk jajaran genjang, dan karena luasnya separuh dari itu maka dibagi 2.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati trapesium.", "kind": "output" },
+      "a": { "role": "Sisi atas", "description": "Panjang sisi sejajar bagian atas trapesium.", "kind": "input" },
+      "b": { "role": "Sisi bawah", "description": "Panjang sisi sejajar bagian bawah trapesium.", "kind": "input" },
+      "h": { "role": "Tinggi", "description": "Jarak tegak lurus antara kedua sisi yang sejajar.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Setengah", "description": "Menyatakan separuh dari jajaran genjang.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Mencari luas petak bunga berbentuk trapesium", "Menghitung luas atap berbentuk trapesium"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "Luas belah ketupat",
+    "oneLiner": "Rumus mencari luas belah ketupat dengan mengalikan panjang kedua diagonalnya lalu membaginya dua",
+    "description": "Luas belah ketupat adalah hasil kali panjang kedua diagonalnya dibagi 2. Kedua diagonal belah ketupat berpotongan tegak lurus, dan bila dipotong menurut diagonalnya lalu disusun ulang, hasilnya menjadi separuh sebuah persegi panjang.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati belah ketupat.", "kind": "output" },
+      "d_1": { "role": "Diagonal 1", "description": "Panjang salah satu diagonal belah ketupat.", "kind": "input" },
+      "d_2": { "role": "Diagonal 2", "description": "Panjang diagonal lain dari belah ketupat.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Setengah", "description": "Menyatakan separuh dari persegi panjang.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Menghitung luas permata berbentuk belah ketupat", "Mencari luas kain sebuah layang-layang"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "Luas lingkaran",
+    "oneLiner": "Rumus mencari luas lingkaran dengan mengalikan kuadrat jari-jari dengan konstanta lingkaran",
+    "description": "Luas lingkaran adalah kuadrat jari-jari dikali konstanta lingkaran (pi). Bila lingkaran dipotong menjadi juring-juring yang sangat tipis lalu dijajarkan, bentuknya mendekati persegi panjang yang panjangnya separuh keliling lingkaran dan lebarnya jari-jari, dan dari situlah rumus ini muncul.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati lingkaran.", "kind": "output" },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jarak dari pusat lingkaran ke kelilingnya.", "kind": "input" },
+      "r^2": { "role": "Kuadrat jari-jari", "description": "Panjang jari-jari yang dikalikan dua kali.", "kind": "input" }
+    },
+    "realWorldExamples": ["Membandingkan ukuran piza", "Mencari luas muka jam dinding bundar", "Menghitung luas sekeping uang logam"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "Keliling lingkaran",
+    "oneLiner": "Rumus mencari keliling lingkaran dengan mengalikan dua kali jari-jari dengan konstanta lingkaran",
+    "description": "Keliling lingkaran adalah dua kali jari-jari, yaitu diameter, dikali konstanta lingkaran (pi). Jarak yang ditempuh saat mengelilingi lingkaran satu putaran penuh itulah kelilingnya.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "C": { "role": "Keliling", "description": "Panjang seluruh tepi luar lingkaran.", "kind": "output" },
+      "2": { "role": "Konstanta", "description": "Nilai untuk mengubah jari-jari menjadi diameter.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Jari-jari", "description": "Jarak dari pusat lingkaran ke kelilingnya.", "kind": "input" }
+    },
+    "realWorldExamples": ["Jarak yang ditempuh roda sepeda dalam satu putaran", "Panjang satu putaran lintasan lari berbentuk lingkaran"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "Luas juring",
+    "oneLiner": "Rumus mencari luas juring dengan mengalikan kuadrat jari-jari dan sudut pusat lalu membaginya dua",
+    "description": "Luas juring adalah kuadrat jari-jari dikali sudut pusat (dalam radian) lalu dibagi 2. Karena juring adalah bagian dari lingkaran, makin besar sudut pusatnya makin besar pula luasnya.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati juring.", "kind": "output" },
+      "r": { "role": "Jari-jari", "description": "Panjang jari-jari juring.", "kind": "input" },
+      "r^2": { "role": "Kuadrat jari-jari", "description": "Panjang jari-jari yang dikalikan dua kali.", "kind": "input" },
+      "\\theta": { "role": "Sudut pusat", "description": "Besar sudut yang terbuka di pusat juring (dalam satuan radian).", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "Setengah", "description": "Koefisien dalam rumus luas ini.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Luas daerah yang disapu jarum menit pada jam", "Luas sepotong piza"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "Panjang busur",
+    "oneLiner": "Rumus mencari panjang busur dengan mengalikan jari-jari dan sudut pusat",
+    "description": "Panjang busur adalah jari-jari dikali sudut pusat (dalam radian). Busur adalah sebagian dari keliling lingkaran, dan bila sudut pusatnya satu putaran penuh (2 pi) maka panjang busurnya sama dengan keliling lingkaran.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "l": { "role": "Panjang busur", "description": "Panjang sebagian dari keliling lingkaran.", "kind": "output" },
+      "r": { "role": "Jari-jari", "description": "Jarak dari pusat lingkaran ke kelilingnya.", "kind": "input" },
+      "\\theta": { "role": "Sudut pusat", "description": "Sudut pusat yang bersesuaian dengan busur itu (dalam satuan radian).", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["Panjang bagian lengkung sebuah roller coaster", "Panjang busur antara dua garis skala pada jam"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "Keliling persegi panjang",
+    "oneLiner": "Rumus mencari keliling persegi panjang dengan menggandakan jumlah panjang dan lebar",
+    "description": "Keliling persegi panjang adalah panjang ditambah lebar lalu dikali 2. Karena sisi-sisi yang berhadapan pada persegi panjang sama panjang, menjumlahkan sepasang panjang dan lebar lalu menggandakannya menghasilkan panjang total keempat sisinya.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "P": { "role": "Keliling", "description": "Panjang total keempat sisi persegi panjang.", "kind": "output" },
+      "l": { "role": "Panjang", "description": "Ukuran panjang persegi panjang.", "kind": "input" },
+      "w": { "role": "Lebar", "description": "Ukuran lebar persegi panjang.", "kind": "input" },
+      "2": { "role": "Konstanta", "description": "Dikalikan 2 karena ada dua pasang sisi yang berhadapan.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["Menghitung panjang bingkai sebuah pigura", "Jarak yang ditempuh saat berlari mengelilingi lapangan"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "Keliling segitiga",
+    "oneLiner": "Rumus mencari keliling segitiga dengan menjumlahkan panjang ketiga sisinya",
+    "description": "Keliling segitiga adalah jumlah panjang ketiga sisinya. Nilainya sama dengan jarak total yang ditempuh saat menyusuri tepi segitiga satu putaran penuh.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "P": { "role": "Keliling", "description": "Panjang total ketiga sisi segitiga.", "kind": "output" },
+      "a": { "role": "Sisi pertama", "description": "Panjang sisi pertama segitiga.", "kind": "input" },
+      "b": { "role": "Sisi kedua", "description": "Panjang sisi kedua segitiga.", "kind": "input" },
+      "c": { "role": "Sisi ketiga", "description": "Panjang sisi ketiga segitiga.", "kind": "input" }
+    },
+    "realWorldExamples": ["Panjang total pagar berbentuk segitiga", "Panjang tali yang diperlukan untuk tepi bendera segitiga"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "Luas segi banyak beraturan",
+    "oneLiner": "Rumus mencari luas segi banyak beraturan dengan memakai banyaknya sisi, panjang satu sisi, dan apotema",
+    "description": "Luas segi banyak beraturan adalah banyaknya sisi dikali panjang satu sisi dan apotema (jarak tegak lurus dari pusat ke sisi) lalu dibagi 2. Bila segi banyak beraturan dibagi dari pusatnya menjadi segitiga-segitiga, hasilnya sama dengan jumlah luas seluruh segitiga itu.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati segi banyak beraturan.", "kind": "output" },
+      "n": { "role": "Banyak sisi", "description": "Jumlah sisi segi banyak beraturan.", "kind": "input" },
+      "s": { "role": "Panjang satu sisi", "description": "Panjang satu sisi segi banyak beraturan.", "kind": "input" },
+      "a": { "role": "Apotema", "description": "Jarak tegak lurus dari pusat ke titik tengah sebuah sisi.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Setengah", "description": "Koefisien yang berasal dari rumus luas segitiga.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Luas satu sel sarang lebah berbentuk segi enam beraturan", "Luas hiasan bintang berbentuk segi lima beraturan"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "Luas cincin lingkaran",
+    "oneLiner": "Rumus mencari luas bentuk donat dengan mengalikan selisih kuadrat jari-jari lingkaran besar dan kecil dengan konstanta lingkaran",
+    "description": "Luas cincin lingkaran (bentuk donat) adalah luas lingkaran luar dikurangi luas lingkaran dalam. Kuadrat jari-jari kecil dikurangkan dari kuadrat jari-jari besar, lalu hasilnya dikali konstanta lingkaran.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "A": { "role": "Luas", "description": "Luas daerah yang ditempati cincin lingkaran (bentuk donat).", "kind": "output" },
+      "\\pi": { "role": "Konstanta lingkaran", "description": "Keliling lingkaran dibagi diameternya, kira-kira 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "Jari-jari luar", "description": "Jari-jari lingkaran besar di sebelah luar.", "kind": "input" },
+      "r": { "role": "Jari-jari dalam", "description": "Jari-jari lingkaran kecil di sebelah dalam.", "kind": "input" },
+      "R^2 - r^2": { "role": "Selisih kuadrat jari-jari", "description": "Kuadrat jari-jari luar dikurangi kuadrat jari-jari dalam.", "kind": "output" }
+    },
+    "realWorldExamples": ["Mencari luas permukaan atas sebuah donat", "Luas lintasan lari berbentuk lingkaran"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "Jumlah sudut dalam segitiga",
+    "oneLiner": "Sifat bahwa jumlah ketiga sudut dalam segitiga selalu 180 derajat",
+    "description": "Jumlah sudut dalam segitiga adalah sifat bahwa menjumlahkan besar sudut pada ketiga titik sudutnya selalu menghasilkan 180 derajat (setengah putaran). Pada segitiga apa pun — lancip, siku-siku, maupun tumpul — jumlah ketiga sudut dalamnya selalu 180 derajat.",
+    "field": "Geometri",
+    "elementMeanings": {
+      "\\alpha": { "role": "Sudut dalam pertama", "description": "Besar sudut pada titik sudut pertama segitiga.", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "Sudut dalam kedua", "description": "Besar sudut pada titik sudut kedua segitiga.", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "Sudut dalam ketiga", "description": "Besar sudut pada titik sudut ketiga segitiga.", "kind": "input", "unit": "deg" },
+      "180°": { "role": "Setengah putaran", "description": "Besar sudut yang membentuk garis lurus, dan sama dengan jumlah sudut dalam segitiga.", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["Mencari sudut yang tersisa bila dua sudut sudah diketahui", "Menyesuaikan sudut rangka segitiga dalam pembangunan"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "ohm-law": {
+    "name": "Ohm's law",
+    "oneLiner": "The basic law of electric circuits: voltage equals current times resistance",
+    "description": "Ohm's law states that the current flowing through a conductor is proportional to the voltage across its ends and inversely proportional to its resistance. It is the most basic relation in circuit analysis and holds for linear elements whose resistance stays constant. It is where circuit design and analysis begin.",
+    "discoverer": "Georg Simon Ohm",
+    "field": "Electrical engineering",
+    "significance": "By pinning down the quantitative relation between voltage, current, and resistance, it laid the foundation of electric circuit theory.",
+    "elementMeanings": {
+      "V": { "role": "Voltage", "description": "The potential difference across the ends of the conductor. Units: volts (V).", "kind": "input" },
+      "I": { "role": "Current", "description": "The flow of charge through the conductor. Units: amperes (A).", "kind": "input" },
+      "R": { "role": "Resistance", "description": "How strongly the conductor opposes the flow of current. Units: ohms (Ω).", "kind": "input" }
+    },
+    "realWorldExamples": ["The relation between the voltage across a light bulb and its brightness", "Calculating the power a household heater draws"],
+    "relatedFormulas": ["electric-power", "kirchhoff-voltage", "impedance"]
+  },
+  "electric-power": {
+    "name": "Electric power",
+    "oneLiner": "The formula for the rate at which electrical energy is consumed or supplied per unit time",
+    "description": "Electric power is defined as voltage times current and gives the rate at which electrical energy is converted. Combined with Ohm's law it can also be written as P = I²R or P = V²/R. It is the key quantity for the efficiency and capacity planning of electrical systems.",
+    "discoverer": "James Watt",
+    "field": "Electrical engineering",
+    "significance": "By quantifying the consumption and supply of electrical energy, it provides the basis for designing generation, transmission, and distribution systems.",
+    "elementMeanings": {
+      "P": { "role": "Power", "description": "The energy consumed or supplied per unit time. Units: watts (W).", "kind": "output" },
+      "I": { "role": "Current", "description": "The current flowing in the circuit. Units: amperes (A).", "kind": "input" },
+      "V": { "role": "Voltage", "description": "The potential difference across the circuit. Units: volts (V).", "kind": "input" }
+    },
+    "realWorldExamples": ["The power rating printed on a household appliance", "The basis for working out an electricity bill"],
+    "relatedFormulas": ["ohm-law", "kirchhoff-voltage", "kirchhoff-current"]
+  },
+  "kirchhoff-voltage": {
+    "name": "Kirchhoff's voltage law",
+    "oneLiner": "The law that the voltage drops around a closed loop sum to zero",
+    "description": "Kirchhoff's voltage law (KVL) states that the algebraic sum of all voltage drops and rises around any closed loop is zero. It is the electrical expression of conservation of energy and is essential for finding unknown voltages in complicated networks.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Electrical engineering",
+    "significance": "By making the analysis of complicated networks systematic, it became one of the pillars of modern circuit theory.",
+    "elementMeanings": {
+      "\\sum V": { "role": "Sum of the voltages", "description": "The algebraic sum of every voltage drop and rise in the loop. It is always 0.", "kind": "output" },
+      "V_k": { "role": "Individual voltage", "description": "The voltage across each element in the loop. Sources count as positive, resistors as negative.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out how voltage divides across the resistors in a series circuit", "Setting the voltage levels on an electronic circuit board"],
+    "relatedFormulas": ["kirchhoff-current", "ohm-law", "impedance"]
+  },
+  "kirchhoff-current": {
+    "name": "Kirchhoff's current law",
+    "oneLiner": "The law that the currents entering and leaving any node in a circuit sum to zero",
+    "description": "Kirchhoff's current law (KCL) states that at any node in a circuit the total current flowing in equals the total current flowing out. It follows directly from conservation of charge and is essential for analysing parallel circuits.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Electrical engineering",
+    "significance": "By bringing conservation of charge into circuit analysis, it established the basis of nodal analysis.",
+    "elementMeanings": {
+      "\\sum I": { "role": "Sum of the currents", "description": "The algebraic sum of every current entering and leaving one node. It is always 0.", "kind": "output" },
+      "I_k": { "role": "Individual current", "description": "The current flowing in each branch connected to the node.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculating the current in each branch of a parallel resistor circuit", "Analysing load balance in a power distribution system"],
+    "relatedFormulas": ["kirchhoff-voltage", "ohm-law", "electric-power"]
+  },
+  "rc-time-constant": {
+    "name": "RC time constant",
+    "oneLiner": "The time constant that sets how fast a resistor-capacitor circuit charges or discharges",
+    "description": "The RC time constant is defined as resistance times capacitance and gives the time it takes a capacitor to charge to about 63.2% of its final voltage. It is the key parameter setting the transient response in filter design, timing circuits, signal processing, and many other electronic circuits.",
+    "discoverer": "Developed collectively in electrical engineering",
+    "field": "Electrical engineering",
+    "significance": "By summing up transient response and frequency behaviour in a single parameter, it became a central tool of analogue circuit design.",
+    "elementMeanings": {
+      "\\tau": { "role": "Time constant", "description": "The time constant that sets how fast the circuit responds to a transient. Units: seconds (s).", "kind": "output" },
+      "R": { "role": "Resistance", "description": "The resistance of the circuit. Units: ohms (Ω).", "kind": "input" },
+      "C": { "role": "Capacitance", "description": "How much charge the capacitor can store. Units: farads (F).", "kind": "input" }
+    },
+    "realWorldExamples": ["Setting the charge time of a camera flash", "The touch-sensing circuit of a touchscreen"],
+    "relatedFormulas": ["ohm-law", "impedance", "resonance-frequency"]
+  },
+  "impedance": {
+    "name": "Impedance",
+    "oneLiner": "The total opposition in an AC circuit, combining resistance, inductive reactance, and capacitive reactance",
+    "description": "Impedance expresses the total effect opposing the flow of current in an AC circuit. It combines the pure resistive part with the reactive part (the difference between the inductive and capacitive reactances) through the Pythagorean theorem. It is an essential concept for analysing AC circuits and optimising power transmission efficiency.",
+    "discoverer": "Oliver Heaviside",
+    "field": "Electrical engineering",
+    "significance": "By folding the intricate phase relations of an AC circuit into a single quantity, it made AC circuit analysis systematic.",
+    "elementMeanings": {
+      "Z": { "role": "Impedance", "description": "The total opposition of the AC circuit. Units: ohms (Ω).", "kind": "output" },
+      "R": { "role": "Resistance", "description": "The pure resistive part. It dissipates energy.", "kind": "input" },
+      "X_L": { "role": "Inductive reactance", "description": "The reactance due to the inductor. X_L = 2πfL.", "kind": "input" },
+      "X_C": { "role": "Capacitive reactance", "description": "The reactance due to the capacitor. X_C = 1/(2πfC).", "kind": "input" }
+    },
+    "realWorldExamples": ["Designing the frequency response of a loudspeaker system", "Minimising power loss in transmission lines"],
+    "relatedFormulas": ["ohm-law", "resonance-frequency", "rc-time-constant"]
+  },
+  "resonance-frequency": {
+    "name": "Resonant frequency",
+    "oneLiner": "The frequency at which the inductive and capacitive reactances of an LC circuit become equal",
+    "description": "The resonant frequency is the natural frequency at which energy passes freely back and forth between the inductor and the capacitor of a circuit. At this frequency the impedance is at its minimum (in series) or its maximum (in parallel), and the effect is used everywhere from tuning a radio receiver to wireless charging.",
+    "discoverer": "William Thomson (Lord Kelvin)",
+    "field": "Electrical engineering",
+    "significance": "By supplying the principle behind frequency-selective circuits, it established the basis of wireless communication and filter design.",
+    "elementMeanings": {
+      "f_0": { "role": "Resonant frequency", "description": "The natural frequency at which the circuit resonates. Units: hertz (Hz).", "kind": "output" },
+      "L": { "role": "Inductance", "description": "How much magnetic energy the inductor can store. Units: henries (H).", "kind": "input" },
+      "C": { "role": "Capacitance", "description": "How much electrical energy the capacitor can store. Units: farads (F).", "kind": "input" },
+      "2\\pi": { "role": "Circle-constant factor", "description": "The factor that converts between angular frequency and ordinary frequency.", "kind": "constant", "value": 6.283185307, "unit": "" }
+    },
+    "realWorldExamples": ["Tuning a radio frequency", "Setting the resonance frequency of an MRI machine"],
+    "relatedFormulas": ["impedance", "rc-time-constant", "shannon-capacity"]
+  },
+  "shannon-capacity": {
+    "name": "Shannon channel capacity",
+    "oneLiner": "The highest rate at which information can be sent error-free over a noisy channel",
+    "description": "The Shannon channel capacity theorem defines the maximum data rate theoretically achievable for a given bandwidth and signal-to-noise ratio (SNR). It shows quantitatively that the wider the bandwidth and the higher the SNR, the more information you can send. It sets the fundamental limit for information theory and modern communication system design.",
+    "discoverer": "Claude Shannon",
+    "field": "Electrical engineering",
+    "significance": "As the central result of information theory, it set the theoretical ceiling for the design of every digital communication system.",
+    "elementMeanings": {
+      "C": { "role": "Channel capacity", "description": "The maximum bit rate that can be sent error-free. Units: bits per second (bps).", "kind": "output" },
+      "B": { "role": "Bandwidth", "description": "The width of the frequency range the channel can use. Units: hertz (Hz).", "kind": "input" },
+      "S": { "role": "Signal power", "description": "The average power of the received signal.", "kind": "input" },
+      "N": { "role": "Noise power", "description": "The average noise power of the channel.", "kind": "input" },
+      "\\log_2": { "role": "Base-2 logarithm", "description": "The logarithm that puts the result in bits.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Calculating the theoretical top data rate of a 5G mobile system", "Deciding the bandwidth when planning Wi-Fi channels"],
+    "relatedFormulas": ["resonance-frequency", "ohm-law"]
+  }
+}

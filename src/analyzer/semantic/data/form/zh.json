@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "二次式形式",
+    "oneLiner": "含有 x 平方的式子 — 图像是抛物线",
+    "slots": {
+      "a": {
+        "role": "二次项系数",
+        "description": "决定抛物线的开口方向和宽窄"
+      },
+      "b": {
+        "role": "一次项系数",
+        "description": "把对称轴左右移动"
+      },
+      "c": {
+        "role": "常数项",
+        "description": "与 y 轴相交的高度"
+      },
+      "x": {
+        "role": "观察点",
+        "description": "要在图像上考察的 x 值"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "自由探究 — 二次函数",
+        "description": "在坐标平面上观察 a·b·c 的变化"
+      },
+      "quadratic-bridge-2d": {
+        "name": "桥拱 — 二次函数",
+        "description": "用桥墩、拱形与倒影来看抛物线"
+      },
+      "quadratic-basketball-2d": {
+        "name": "篮球罚球 — 二次函数",
+        "description": "出手高度、最高点与落点连成的轨迹"
+      },
+      "quadratic-fountain-2d": {
+        "name": "喷泉 — 二次函数",
+        "description": "水柱的最高点就是顶点"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "两数平方和形式",
+    "oneLiner": "两个值的平方之和等于另一个值的平方的关系",
+    "slots": {
+      "a": {
+        "role": "第一条直角边",
+        "description": "夹住直角的一条边"
+      },
+      "b": {
+        "role": "第二条直角边",
+        "description": "夹住直角的另一条边"
+      },
+      "c": {
+        "role": "斜边",
+        "description": "直角的对边，也是最长的一条边"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "自由探究",
+        "description": "用直角三角形和三条边上的正方形来看勾股定理"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "梯子",
+        "description": "靠在墙上的梯子的角度与安全性"
+      },
+      "pythagorean-tv-2d": {
+        "name": "电视屏幕",
+        "description": "由屏幕的宽和高换算对角线英寸数"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "近路",
+        "description": "绕过街区与直接穿过的距离比较"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "指数变化形式",
+    "oneLiner": "变化率与当前的量成正比，从而成倍增长或衰减的形式",
+    "slots": {
+      "N_0": {
+        "role": "初始值",
+        "description": "时间为 0 时的量"
+      },
+      "r": {
+        "role": "变化率",
+        "description": "为正表示增长，为负表示衰减"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "指数衰减 — 2D",
+        "description": "在咖啡因、电池、碳-14、药物之间切换锚点，体会半衰期"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "复利形式",
+    "oneLiner": "利息之上再生利息、本金不断增长的形式",
+    "slots": {
+      "P": {
+        "role": "本金",
+        "description": "最初投入的金额"
+      },
+      "r": {
+        "role": "年利率",
+        "description": "以一年为准的利率"
+      },
+      "n": {
+        "role": "每年计息次数",
+        "description": "一年计算几次利息"
+      },
+      "t": {
+        "role": "期限",
+        "description": "存放的年数"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "复利 — 2D",
+        "description": "在存款、股票、零存整取、通货膨胀之间切换锚点，体会复利增长"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "匀加速位移形式",
+    "oneLiner": "以恒定加速度运动的距离 — 带有与时间平方成正比的项",
+    "slots": {
+      "v_0": {
+        "role": "初速度",
+        "description": "出发时的速度"
+      },
+      "a": {
+        "role": "加速度",
+        "description": "保持恒定不变的加速度"
+      },
+      "t": {
+        "role": "经过时间",
+        "description": "观察的时刻"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "自由落体 — 2D",
+        "description": "以地球、月球、火星、木星为锚点，体会各行星的重力加速度"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "正弦波形式",
+    "oneLiner": "同一形状按固定周期反复出现的波形",
+    "slots": {
+      "A": {
+        "role": "振幅",
+        "description": "从中心到波峰的高度"
+      },
+      "\\omega": {
+        "role": "角频率",
+        "description": "重复得有多快"
+      },
+      "\\varphi": {
+        "role": "相位",
+        "description": "把波形左右平移的程度"
+      },
+      "t": {
+        "role": "观察时刻",
+        "description": "要在波形上考察的时刻"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "正弦波 — 2D",
+        "description": "以扬声器、单摆、潮汐、电压表为锚点，体会振幅、周期、相位的作用"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "轨道周期形式",
+    "oneLiner": "轨道越大，绕一圈所需时间越长的关系",
+    "slots": {
+      "M": {
+        "role": "中心天体质量",
+        "description": "作为公转中心的天体的质量"
+      },
+      "a": {
+        "role": "轨道半长轴",
+        "description": "椭圆轨道较长一侧的半径"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "地球轨道 — 2D",
+        "description": "在国际空间站、GPS、地球同步轨道、月球之间切换锚点观察的 2D 俯视图"
+      },
+      "kepler-orbit-3d": {
+        "name": "地球轨道 — 3D",
+        "description": "在 3D 空间中旋转同样的锚点，获得距离感的立体视图"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "切线形式",
+    "oneLiner": "在曲线上一点以相同斜率掠过的直线",
+    "slots": {
+      "f": {
+        "role": "曲线",
+        "description": "要作切线的目标函数"
+      },
+      "x": {
+        "role": "观察点",
+        "description": "可以移动切点的 x 值"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "切线探究 — 2D",
+        "description": "同时显示曲线 y=f(x) 与点 x 处切线的交互视图"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "复数形式",
+    "oneLiner": "由实部与虚部构成的数 — 平面上的一个点",
+    "slots": {
+      "a": {
+        "role": "实部",
+        "description": "横轴坐标"
+      },
+      "b": {
+        "role": "虚部",
+        "description": "纵轴坐标"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "2×2 变换形式",
+    "oneLiner": "把平面上的向量映到另一个向量的线性变换",
+    "slots": {
+      "a": {
+        "role": "第 1 行第 1 列",
+        "description": "x 轴的像在横向被拉伸多少"
+      },
+      "b": {
+        "role": "第 1 行第 2 列",
+        "description": "y 轴的像在横向倾斜多少"
+      },
+      "c": {
+        "role": "第 2 行第 1 列",
+        "description": "x 轴的像在纵向倾斜多少"
+      },
+      "d": {
+        "role": "第 2 行第 2 列",
+        "description": "y 轴的像在纵向被拉伸多少"
+      }
+    }
+  }
+}

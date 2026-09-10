@@ -1,0 +1,131 @@
+{
+  "stress": {
+    "name": "Esfuerzo",
+    "oneLiner": "La magnitud física que expresa la fuerza interna que actúa por unidad de área",
+    "description": "El esfuerzo es la fuerza por unidad de área que aparece en el interior de un cuerpo a causa de una fuerza externa. Tiene formas diversas —de tracción, de compresión, cortante— y es el indicador más básico para juzgar si un material va a romperse. En el diseño de estructuras, mantenerlo por debajo del esfuerzo admisible es la clave de la seguridad.",
+    "field": "Ingeniería mecánica",
+    "significance": "Es el concepto básico de la resistencia de materiales y el punto de partida de la evaluación de la seguridad y del diseño de las estructuras.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Esfuerzo", "description": "La fuerza interna por unidad de área. Unidad: pascal (Pa) o N/m².", "kind": "output" },
+      "F": { "role": "Fuerza", "description": "La fuerza externa que actúa sobre el cuerpo. Unidad: newton (N).", "kind": "input" },
+      "A": { "role": "Área de la sección", "description": "El área de la sección sobre la que actúa la fuerza. Unidad: m².", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular el esfuerzo de tracción de los cables de un puente", "Revisar el esfuerzo de compresión de las columnas de un edificio"],
+    "relatedFormulas": ["strain", "hooke-law", "euler-buckling"]
+  },
+  "strain": {
+    "name": "Deformación unitaria",
+    "oneLiner": "La razón entre la longitud deformada y la longitud original",
+    "description": "La deformación unitaria es una magnitud adimensional que expresa, como razón respecto de la longitud original, cuánto se ha deformado un cuerpo por acción de una fuerza externa. Cuando la deformación es pequeña, el material se mantiene dentro del régimen elástico y recupera su forma original, pero al superar un valor crítico aparece deformación plástica y la forma cambia de manera permanente.",
+    "field": "Ingeniería mecánica",
+    "significance": "Cuantifica el grado de deformación del material y sienta la base del análisis del comportamiento elástico y plástico.",
+    "elementMeanings": {
+      "\\varepsilon": { "role": "Deformación unitaria", "description": "La razón de variación de la longitud. Magnitud adimensional (sin unidades).", "kind": "output" },
+      "\\Delta L": { "role": "Variación de longitud", "description": "La longitud después de la deformación menos la longitud original. Unidad: m.", "kind": "input" },
+      "L": { "role": "Longitud original", "description": "La longitud inicial del cuerpo antes de aplicar la fuerza externa. Unidad: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Medir el alargamiento de la probeta en un ensayo de tracción de metales", "Evaluar el grado de deformación de la estructura de un edificio durante un terremoto"],
+    "relatedFormulas": ["stress", "hooke-law"]
+  },
+  "hooke-law": {
+    "name": "Ley de Hooke",
+    "oneLiner": "La ley según la cual, dentro del régimen elástico, el esfuerzo es proporcional a la deformación unitaria",
+    "description": "La ley de Hooke establece que el esfuerzo que actúa sobre un material es el producto del módulo de elasticidad por la deformación unitaria. Solo se cumple dentro del límite elástico; al superarlo aparece un comportamiento no lineal. La fuerza recuperadora de un muelle (F=kx) es también una forma particular de esta ley.",
+    "discoverer": "Robert Hooke",
+    "field": "Ingeniería mecánica",
+    "significance": "Al establecer la relación lineal del comportamiento elástico, fijó la base teórica del análisis estructural y de los ensayos de materiales.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Esfuerzo", "description": "La fuerza que actúa por unidad de área. Unidad: pascal (Pa).", "kind": "output" },
+      "E": { "role": "Módulo de elasticidad", "description": "El módulo de Young. Es la constante propia del material que expresa su rigidez. Unidad: Pa.", "kind": "input" },
+      "\\varepsilon": { "role": "Deformación unitaria", "description": "La razón de variación de la longitud. Es adimensional.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular la fuerza elástica recuperadora de un muelle", "Predecir la deformación de una columna de hormigón bajo carga"],
+    "relatedFormulas": ["stress", "strain", "euler-buckling"]
+  },
+  "bernoulli-equation": {
+    "name": "Ecuación de Bernoulli",
+    "oneLiner": "El principio según el cual, en el flujo de un fluido incompresible, la suma de las energías de presión, velocidad y altura se mantiene constante",
+    "description": "La ecuación de Bernoulli expresa la conservación de la energía en el flujo estacionario de un fluido incompresible y no viscoso. Describe cuantitativamente que, al aumentar la velocidad del fluido, la presión baja, y que al subir la altura la presión también baja. Se aplica en un abanico muy amplio, desde el principio de sustentación del ala de un avión hasta el diseño de tuberías.",
+    "discoverer": "Daniel Bernoulli",
+    "field": "Ingeniería mecánica",
+    "significance": "Es el principio central de la mecánica de fluidos y aporta la base del diseño en campos tan diversos como la aeronáutica, la hidráulica o las conducciones.",
+    "elementMeanings": {
+      "P": { "role": "Presión estática", "description": "La presión estática del fluido. Unidad: pascal (Pa).", "kind": "input" },
+      "\\frac{1}{2}\\rho v^2": { "role": "Presión dinámica", "description": "La presión debida al movimiento del fluido. Es proporcional al cuadrado de la velocidad.", "kind": "structural" },
+      "\\rho": { "role": "Densidad", "description": "La densidad de masa del fluido. Unidad: kg/m³.", "kind": "input" },
+      "v": { "role": "Velocidad del fluido", "description": "La velocidad a la que fluye el fluido. Unidad: m/s.", "kind": "input" },
+      "g": { "role": "Aceleración de la gravedad", "description": "La aceleración de la gravedad cerca de la superficie terrestre. Unos 9,8 m/s².", "kind": "constant", "value": 9.80665, "unit": "m/s²" },
+      "h": { "role": "Altura", "description": "La altura a la que se encuentra el fluido respecto del plano de referencia. Unidad: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["La sustentación que genera la diferencia de presión entre la parte superior e inferior del ala de un avión", "El fenómeno por el que el chorro de agua se acelera al estrechar la boca de una manguera de jardín"],
+    "relatedFormulas": ["reynolds-number", "navier-stokes"]
+  },
+  "reynolds-number": {
+    "name": "Número de Reynolds",
+    "oneLiner": "El número adimensional que determina si el flujo de un fluido es laminar o turbulento",
+    "description": "El número de Reynolds es un número adimensional que expresa la razón entre las fuerzas de inercia y las viscosas. Si su valor es pequeño (por debajo de unos 2300) el flujo es laminar, y si es grande aparece turbulencia. Es el indicador clave para predecir el comportamiento del flujo en cualquier sistema de ingeniería que trabaje con fluidos: conducciones, aeronaves, buques, etc.",
+    "discoverer": "Osborne Reynolds",
+    "field": "Ingeniería mecánica",
+    "significance": "Hizo predecible la transición de flujo laminar a turbulento y aportó el criterio central para el diseño de sistemas de fluidos.",
+    "elementMeanings": {
+      "Re": { "role": "Número de Reynolds", "description": "La razón entre las fuerzas de inercia y las viscosas. Es un número adimensional.", "kind": "output" },
+      "\\rho": { "role": "Densidad", "description": "La densidad de masa del fluido. Unidad: kg/m³.", "kind": "input" },
+      "v": { "role": "Velocidad del fluido", "description": "La velocidad media a la que fluye el fluido. Unidad: m/s.", "kind": "input" },
+      "L": { "role": "Longitud característica", "description": "La longitud que representa la geometría del flujo, como el diámetro de la tubería. Unidad: m.", "kind": "input" },
+      "\\mu": { "role": "Coeficiente de viscosidad", "description": "La viscosidad dinámica del fluido. Unidad: Pa·s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Predecir si aparecerá turbulencia al diseñar una tubería de agua", "Analizar el flujo de la capa límite sobre la superficie del ala de un avión"],
+    "relatedFormulas": ["bernoulli-equation", "navier-stokes"]
+  },
+  "navier-stokes": {
+    "name": "Ecuaciones de Navier-Stokes",
+    "oneLiner": "Las ecuaciones en derivadas parciales fundamentales que describen el movimiento de un fluido viscoso",
+    "description": "Las ecuaciones de Navier-Stokes aplican la segunda ley de Newton a un fluido continuo y muestran que el gradiente de presión, las fuerzas viscosas y las fuerzas externas determinan la aceleración del fluido. Como en general no existe solución analítica, se resuelven por métodos numéricos (CFD), y son tan importantes desde el punto de vista matemático que figuran entre los problemas del milenio.",
+    "discoverer": "Claude-Louis Navier, George Gabriel Stokes",
+    "field": "Ingeniería mecánica",
+    "significance": "Son las ecuaciones más generales que describen cualquier flujo de un fluido viscoso y constituyen la base de la dinámica de fluidos computacional (CFD).",
+    "elementMeanings": {
+      "\\rho": { "role": "Densidad", "description": "La densidad de masa del fluido. Unidad: kg/m³.", "kind": "input" },
+      "\\mathbf{v}": { "role": "Campo de velocidades", "description": "El vector velocidad de las partículas del fluido. Es función de la posición y del tiempo.", "kind": "output" },
+      "p": { "role": "Presión", "description": "El campo de presión que actúa sobre el fluido. Unidad: pascal (Pa).", "kind": "input" },
+      "\\mu": { "role": "Coeficiente de viscosidad", "description": "La viscosidad dinámica del fluido. Unidad: Pa·s.", "kind": "input" },
+      "\\mathbf{f}": { "role": "Fuerza externa", "description": "Es la fuerza volumétrica que actúa sobre el fluido, como la gravedad.", "kind": "input" }
+    },
+    "realWorldExamples": ["La simulación numérica del flujo de aire alrededor de un automóvil", "El análisis del patrón del flujo sanguíneo dentro de un vaso"],
+    "relatedFormulas": ["bernoulli-equation", "reynolds-number"]
+  },
+  "heat-conduction": {
+    "name": "Ley de Fourier de la conducción del calor",
+    "oneLiner": "La ley que expresa la cantidad de calor que se transmite por el interior de un material debido a una diferencia de temperatura",
+    "description": "La ley de conducción del calor de Fourier establece que el flujo de calor es proporcional al producto de la conductividad térmica, el área de la sección y el gradiente de temperatura. El calor va de donde la temperatura es alta a donde es baja, y cuanto mayor es la conductividad térmica del material, más deprisa se transmite. Es la base del diseño de la gestión térmica, desde la elección de un aislante hasta la refrigeración de un semiconductor.",
+    "discoverer": "Joseph Fourier",
+    "field": "Ingeniería mecánica",
+    "significance": "Hizo posible el análisis cuantitativo de la transmisión del calor y estableció las bases de la termodinámica y de la ingeniería de la gestión térmica.",
+    "elementMeanings": {
+      "Q": { "role": "Flujo de calor", "description": "La energía térmica transmitida por unidad de tiempo. Unidad: vatio (W).", "kind": "output" },
+      "k": { "role": "Conductividad térmica", "description": "La constante propia del material que expresa su capacidad de transmitir el calor. Unidad: W/(m·K).", "kind": "input" },
+      "A": { "role": "Área de la sección", "description": "El área de la sección que atraviesa el calor. Unidad: m².", "kind": "input" },
+      "\\Delta T": { "role": "Diferencia de temperatura", "description": "La diferencia de temperatura entre el lado caliente y el lado frío. Unidad: K o grados Celsius.", "kind": "input" },
+      "\\Delta x": { "role": "Espesor", "description": "El espesor del material en la dirección en que se transmite el calor. Unidad: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular el rendimiento del aislamiento de la pared de un edificio", "Diseñar el disipador de la CPU de un ordenador portátil"],
+    "relatedFormulas": ["bernoulli-equation", "stress"]
+  },
+  "euler-buckling": {
+    "name": "Carga crítica de pandeo de Euler",
+    "oneLiner": "La carga crítica a la que una columna esbelta se dobla de forma repentina por efecto de una fuerza de compresión",
+    "description": "La fórmula del pandeo de Euler da la carga crítica a la que se produce el pandeo de una columna esbelta articulada en sus dos extremos cuando se somete a una compresión axial. Es proporcional al módulo de elasticidad y al momento de inercia de la sección, e inversamente proporcional al cuadrado de la longitud de la columna. Cuanto más larga es la columna, más vulnerable resulta al pandeo, por lo que es una comprobación obligada en el diseño seguro de estructuras.",
+    "discoverer": "Leonhard Euler",
+    "field": "Ingeniería mecánica",
+    "significance": "Permitió predecir teóricamente el límite de estabilidad de los elementos comprimidos y se convirtió en un criterio de comprobación imprescindible del diseño en ingeniería estructural.",
+    "elementMeanings": {
+      "P_{cr}": { "role": "Carga crítica de pandeo", "description": "La fuerza de compresión mínima a la que empieza el pandeo. Unidad: newton (N).", "kind": "output" },
+      "\\pi^2": { "role": "Cuadrado del número pi", "description": "Es la constante que procede de la forma de onda del modo de pandeo.", "kind": "constant", "value": 9.8696, "unit": "" },
+      "E": { "role": "Módulo de elasticidad", "description": "La rigidez del material (el módulo de Young). Unidad: pascal (Pa).", "kind": "input" },
+      "I": { "role": "Momento de inercia de la sección", "description": "La propiedad geométrica que expresa la resistencia de la sección a la flexión. Unidad: m⁴.", "kind": "input" },
+      "L": { "role": "Longitud de la columna", "description": "La longitud de pandeo. La longitud efectiva varía según las condiciones de apoyo. Unidad: m.", "kind": "input" }
+    },
+    "realWorldExamples": ["Comprobar la seguridad frente al pandeo de las columnas de acero de un edificio de gran altura", "Determinar el espesor mínimo de los tubos del cuadro de una bicicleta"],
+    "relatedFormulas": ["stress", "hooke-law", "strain"]
+  }
+}

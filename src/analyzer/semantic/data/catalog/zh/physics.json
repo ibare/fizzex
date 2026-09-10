@@ -1,0 +1,344 @@
+{
+  "mass-energy": {
+    "name": "质能等价原理",
+    "oneLiner": "表明质量与能量以光速的平方为比例相互转换的公式",
+    "description": "这是从爱因斯坦的狭义相对论中导出的等式。它表明质量可以转化为能量，能量也可以转化为质量，而转换的比例正是光速的平方。由于光速的平方非常大，即使很小的质量也能放出巨大的能量。",
+    "discoverer": "阿尔伯特·爱因斯坦",
+    "field": "物理学",
+    "significance": "它揭示了质量本身就是能量的一种形式，改变了现代物理学的范式，并解释了核裂变与核聚变的原理。",
+    "elementMeanings": {
+      "E": { "role": "能量", "kind": "output", "unit": "J", "description": "物体所具有的能量。单位：焦耳(J)。" },
+      "m": { "role": "质量", "kind": "input", "unit": "kg", "description": "物体的静止质量。单位：千克(kg)。" },
+      "c": { "role": "光速", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "真空中的光速。约为 3×10⁸ m/s。" },
+      "c^2": { "role": "光速的平方", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "约为 9×10¹⁶。它是质量与能量的转换比例。" }
+    },
+    "relatedFormulas": ["kinetic-energy", "newton-second"]
+  },
+  "newton-second": {
+    "name": "牛顿第二运动定律",
+    "oneLiner": "作用在物体上的力等于质量与加速度之积的定律",
+    "description": "牛顿第二定律表明，作用在物体上的合力等于质量与加速度之积。同样大小的力，质量越大加速度就越小，这把惯性的大小用质量定量化了。它是经典力学最核心的运动方程。",
+    "discoverer": "艾萨克·牛顿",
+    "field": "物理学",
+    "significance": "定量地确立了力、质量与加速度之间的关系，奠定了经典力学的基础。",
+    "elementMeanings": {
+      "F": { "role": "力", "kind": "output", "unit": "N", "description": "作用在物体上的合力。单位：牛顿(N)。" },
+      "m": { "role": "质量", "kind": "input", "unit": "kg", "description": "物体的质量，表示惯性的大小。单位：kg。" },
+      "a": { "role": "加速度", "kind": "input", "unit": "m/s²", "description": "速度对时间的变化率。单位：m/s²。" }
+    },
+    "relatedFormulas": ["universal-gravitation", "kinetic-energy", "mass-energy"]
+  },
+  "universal-gravitation": {
+    "name": "万有引力定律",
+    "oneLiner": "两个物体之间存在与质量之积成正比、与距离平方成反比的引力的定律",
+    "description": "万有引力定律指出，一切有质量的物体都相互吸引，这个力的大小与两个质量之积成正比，与它们之间距离的平方成反比。它把苹果的下落与月球的公转统一到同一个原理之下，是一条革命性的定律。",
+    "discoverer": "艾萨克·牛顿",
+    "field": "物理学",
+    "significance": "把天体运动与地面力学统一起来，确立了人类历史上第一条普适的物理定律。",
+    "elementMeanings": {
+      "F": { "role": "引力", "kind": "output", "unit": "N", "description": "两个物体之间的吸引力。单位：牛顿(N)。" },
+      "G": { "role": "引力常数", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "万有引力常数。约为 6.674×10⁻¹¹ N·m²/kg²。" },
+      "m_1": { "role": "第一个物体的质量", "kind": "input", "unit": "kg", "description": "相互作用的第一个物体的质量。" },
+      "m_2": { "role": "第二个物体的质量", "kind": "input", "unit": "kg", "description": "相互作用的第二个物体的质量。" },
+      "r": { "role": "距离", "kind": "input", "unit": "m", "description": "两个物体质心之间的距离。" },
+      "r^2": { "role": "距离的平方", "kind": "structural", "description": "体现平方反比定律。距离变为两倍，力就变成 1/4。" }
+    },
+    "relatedFormulas": ["coulomb-law", "newton-second"]
+  },
+  "coulomb-law": {
+    "name": "库仑定律",
+    "oneLiner": "两个电荷之间存在与电荷量之积成正比、与距离平方成反比的电力的定律",
+    "description": "库仑定律表明，两个点电荷之间的电力与电荷量之积成正比，与距离的平方成反比。它与万有引力有着同样的平方反比结构，区别在于电力既可以是引力也可以是斥力。",
+    "discoverer": "夏尔·奥古斯丁·德·库仑",
+    "field": "物理学",
+    "significance": "它是电磁学的出发点，为麦克斯韦方程组与现代电磁理论提供了基础。",
+    "elementMeanings": {
+      "F": { "role": "电力", "kind": "output", "unit": "N", "description": "两个电荷之间作用的力。单位：牛顿(N)。" },
+      "k_e": { "role": "库仑常数", "kind": "constant", "value": 8.988e9, "unit": "N·m²/C²", "description": "约为 8.988×10⁹ N·m²/C²，它决定电力的强弱。" },
+      "q_1": { "role": "第一个电荷", "kind": "input", "unit": "C", "description": "第一个带电体的电荷量。单位：库仑(C)。" },
+      "q_2": { "role": "第二个电荷", "kind": "input", "unit": "C", "description": "第二个带电体的电荷量。同号相斥，异号相吸。" },
+      "r": { "role": "距离", "kind": "input", "unit": "m", "description": "两个点电荷之间的距离。" },
+      "r^2": { "role": "距离的平方", "kind": "structural", "description": "体现平方反比定律。距离越远，力就衰减得越快。" }
+    },
+    "relatedFormulas": ["universal-gravitation", "newton-second"]
+  },
+  "kinetic-energy": {
+    "name": "动能",
+    "oneLiner": "用质量与速率表示运动物体所具有能量的公式",
+    "description": "动能公式表明，质量为 m 的物体以速率 v 运动时所具有的能量是 (1/2)mv²。它与速率的平方成正比，所以速率变为两倍，能量就变成四倍。它是动能定理的核心，也是能量守恒定律的基本组成部分。",
+    "field": "物理学",
+    "significance": "它是能量守恒定律的核心组成部分，也是解力学问题时使用最频繁的一种能量形式。",
+    "elementMeanings": {
+      "K": { "role": "动能", "kind": "output", "unit": "J", "description": "物体因运动而具有的能量。单位：焦耳(J)。" },
+      "\\frac{1}{2}": { "role": "比例常数", "kind": "constant", "value": 0.5, "description": "由牛顿第二定律经积分推导时出现的系数。" },
+      "m": { "role": "质量", "kind": "input", "unit": "kg", "description": "运动物体的质量。单位：kg。" },
+      "v": { "role": "速率", "kind": "input", "unit": "m/s", "description": "物体运动的速率。单位：m/s。" },
+      "v^2": { "role": "速率的平方", "kind": "structural", "description": "速率变为两倍，能量就变成四倍，体现非线性关系。" }
+    },
+    "relatedFormulas": ["mass-energy", "newton-second"]
+  },
+  "kinematic-displacement": {
+    "name": "匀加速运动位移公式",
+    "oneLiner": "用时间表示以初速度和恒定加速度运动的物体位移的公式",
+    "description": "这是在匀加速直线运动中求物体位移的基本公式。它把由初速度产生的位移与由加速度产生的额外位移相加。它与牛顿第二定律一起构成解决经典力学问题的核心工具，可用于自由落体、抛体运动等各种情形。",
+    "discoverer": "伽利略·伽利雷",
+    "field": "物理学",
+    "significance": "它是定量描述匀加速运动的核心运动学公式，也是力学问题中最基本的工具。",
+    "elementMeanings": {
+      "s": { "role": "位移", "kind": "output", "unit": "m", "description": "物体移动的距离。单位：米(m)。" },
+      "v_0": { "role": "初速度", "kind": "input", "unit": "m/s", "description": "运动开始时刻的速度。单位：m/s。" },
+      "t": { "role": "时间", "kind": "input", "unit": "s", "description": "运动持续的时间。单位：秒(s)。" },
+      "a": { "role": "加速度", "kind": "input", "unit": "m/s²", "description": "恒定的加速度。单位：m/s²。" },
+      "\\frac{1}{2}": { "role": "比例常数", "kind": "constant", "value": 0.5, "description": "由积分推导出的系数，是加速度所致位移的比例因子。" },
+      "t^2": { "role": "时间的平方", "kind": "structural", "description": "表示由加速度产生的位移与时间的平方成正比。" }
+    },
+    "relatedFormulas": ["velocity-acceleration", "velocity-displacement", "newton-second"],
+    "realWorldExamples": [
+      "计算自由落体的物体在几秒之后下落了多远",
+      "推算汽车踩下刹车到停住为止的制动距离",
+      "计算飞机起飞时在跑道上所需的滑跑距离"
+    ]
+  },
+  "velocity-acceleration": {
+    "name": "速度-加速度关系式",
+    "oneLiner": "表示匀加速运动中速度随时间变化的公式",
+    "description": "这是最基本的运动学公式，它用初速度、加速度和经过的时间来表示匀加速直线运动中任意时刻的速度。加速度恒定时，速度随时间线性变化，加速度的定义本身也可以从这一关系导出。",
+    "discoverer": "伽利略·伽利雷",
+    "field": "物理学",
+    "significance": "它是把加速度概念定量化的最基本运动学关系式，也是一切匀加速运动分析的出发点。",
+    "elementMeanings": {
+      "v": { "role": "末速度", "kind": "output", "unit": "m/s", "description": "时刻 t 的速度。单位：m/s。" },
+      "v_0": { "role": "初速度", "kind": "input", "unit": "m/s", "description": "运动开始时刻的速度。单位：m/s。" },
+      "a": { "role": "加速度", "kind": "input", "unit": "m/s²", "description": "恒定的加速度。单位：m/s²。" },
+      "t": { "role": "时间", "kind": "input", "unit": "s", "description": "运动持续的时间。单位：秒(s)。" }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-displacement", "newton-second"],
+    "realWorldExamples": [
+      "计算汽车绿灯起步 5 秒后达到的速度",
+      "推算跳伞者开始下落后某一时刻的速度",
+      "算出火箭发射一段时间后的上升速度"
+    ]
+  },
+  "velocity-displacement": {
+    "name": "速度-位移关系式",
+    "oneLiner": "不经过时间、直接表示速度与位移关系的公式",
+    "description": "这是在匀加速直线运动中消去时间变量、直接表示速度与位移关系的公式。末速度的平方等于初速度的平方加上加速度与位移之积的两倍。在不知道时间时特别有用，它与能量守恒的视角也有着深刻联系。",
+    "discoverer": "伽利略·伽利雷",
+    "field": "物理学",
+    "significance": "不需要时间就能直接求出速度与距离的关系，是解力学问题的核心辅助工具。",
+    "elementMeanings": {
+      "v^2": { "role": "末速度的平方", "kind": "output", "unit": "(m/s)²", "description": "最终速度的平方。单位：(m/s)²。" },
+      "v_0^2": { "role": "初速度的平方", "kind": "input", "unit": "(m/s)²", "description": "初速度的平方。单位：(m/s)²。" },
+      "2": { "role": "常数系数", "kind": "constant", "value": 2, "description": "在推导运动方程的过程中出现的系数。" },
+      "a": { "role": "加速度", "kind": "input", "unit": "m/s²", "description": "恒定的加速度。单位：m/s²。" },
+      "s": { "role": "位移", "kind": "input", "unit": "m", "description": "物体移动的距离。单位：米(m)。" }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-acceleration", "kinetic-energy"],
+    "realWorldExamples": [
+      "只知道制动距离时，反推汽车碰撞前的速度",
+      "用枪管长度与加速度计算子弹出膛时的初速度",
+      "算出过山车在某一高度处达到的速率"
+    ]
+  },
+  "projectile-motion": {
+    "name": "抛体运动轨迹方程",
+    "oneLiner": "把抛射体的轨迹表示为水平距离函数的抛物线方程",
+    "description": "这是表示以某一初速度和抛射角投出的物体轨迹的方程。水平方向是匀速运动，竖直方向是重力作用下的匀加速运动，两者合成便形成抛物线路径。它是忽略空气阻力的理想模型，但从体育物理到弹道学都有广泛应用。",
+    "discoverer": "伽利略·伽利雷",
+    "field": "物理学",
+    "significance": "确立了把二维运动分解为水平与竖直两个方向来分析的方法论，是弹道学的基础。",
+    "elementMeanings": {
+      "y": { "role": "竖直位置", "kind": "output", "unit": "m", "description": "相对抛射点的竖直高度。单位：米(m)。" },
+      "x": { "role": "水平距离", "kind": "input", "unit": "m", "description": "从抛射点算起的水平移动距离。单位：米(m)。" },
+      "\\theta": { "role": "抛射角", "kind": "input", "unit": "rad", "description": "初速度矢量与水平面所成的角。" },
+      "\\tan\\theta": { "role": "抛射角的正切", "kind": "structural", "description": "表示初始轨迹的斜率。" },
+      "g": { "role": "重力加速度", "kind": "constant", "value": 9.8, "unit": "m/s²", "description": "在地球表面附近约为 9.8 m/s²。" },
+      "v_0": { "role": "初速率", "kind": "input", "unit": "m/s", "description": "抛射时刻的速率。单位：m/s。" },
+      "\\cos^2\\theta": { "role": "抛射角余弦的平方", "kind": "structural", "description": "体现水平速度分量的平方。" }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-acceleration"],
+    "realWorldExamples": [
+      "预测棒球击球后的飞行距离与最高点高度",
+      "设计喷泉水柱的抛物线路径",
+      "计算大炮发射的炮弹的落点"
+    ]
+  },
+  "simple-harmonic": {
+    "name": "简谐运动方程",
+    "oneLiner": "用正弦函数表示在回复力作用下周期性重复的运动的公式",
+    "description": "简谐运动是物体受到与其相对平衡位置的位移成正比的回复力时所做的运动。位移用正弦（或余弦）函数表示，由振幅、角频率和初相位完全确定。它是说明弹簧振动、单摆运动、LC 电路等自然界众多振动现象的基本模型。",
+    "field": "物理学",
+    "significance": "它是描述振动与波动现象最基本的模型，复杂的周期运动也可以分解为简谐运动的叠加来分析。",
+    "elementMeanings": {
+      "x": { "role": "位移", "kind": "output", "unit": "m", "description": "偏离平衡位置的距离。单位：米(m)。" },
+      "A": { "role": "振幅", "kind": "input", "unit": "m", "description": "最大位移，表示振动的幅度。单位：米(m)。" },
+      "\\omega": { "role": "角频率", "kind": "input", "unit": "rad/s", "description": "单位时间内的相位变化量。单位：rad/s。与周期 T 的关系为 2π/T。" },
+      "t": { "role": "时间", "kind": "input", "unit": "s", "description": "运动持续的时间。单位：秒(s)。" },
+      "\\varphi": { "role": "初相位", "kind": "input", "unit": "rad", "description": "t=0 时的相位，反映初始条件。" }
+    },
+    "relatedFormulas": ["wave-speed", "kinetic-energy"],
+    "realWorldExamples": [
+      "分析时钟摆左右往复运动的周期",
+      "对吉他弦的振动模式建模",
+      "地震仪感知振动的原理"
+    ]
+  },
+  "wave-speed": {
+    "name": "波速公式",
+    "oneLiner": "波的传播速度等于频率与波长之积的关系式",
+    "description": "波的传播速度是波在 1 秒内前进的距离，它等于 1 秒内的振动次数（频率）乘以一个波长的长度。声音、光、水波等一切种类的波都普遍适用这一基本关系式。",
+    "field": "物理学",
+    "significance": "它是普遍适用于一切波动现象的基本关系式，也是声学、光学、通信等领域的基础。",
+    "elementMeanings": {
+      "v": { "role": "波速", "kind": "output", "unit": "m/s", "description": "波在介质中传播的速度。单位：m/s。" },
+      "f": { "role": "频率", "kind": "input", "unit": "Hz", "description": "单位时间内的振动次数。单位：赫兹(Hz)。" },
+      "\\lambda": { "role": "波长", "kind": "input", "unit": "m", "description": "一个周期所对应的空间长度。单位：米(m)。" }
+    },
+    "relatedFormulas": ["simple-harmonic", "de-broglie"],
+    "realWorldExamples": [
+      "由无线电频率计算电波的波长",
+      "在超声检查中确定声波在介质中的波长",
+      "分析乐器音高与共鸣管长度之间的关系"
+    ]
+  },
+  "ideal-gas-law": {
+    "name": "理想气体定律",
+    "oneLiner": "表示理想气体的压强、体积、温度与物质的量之间关系的状态方程",
+    "description": "理想气体定律是这样一个状态方程：气体压强与体积之积，与物质的量和绝对温度之积成正比。它把玻意耳定律、查理定律和阿伏伽德罗定律统一为一体，并假设分子之间没有相互作用、分子自身的体积可以忽略这样的理想条件。",
+    "field": "物理学",
+    "significance": "它是热力学与气体动力学的基本方程，也是近似理解真实气体行为的出发点。",
+    "elementMeanings": {
+      "P": { "role": "压强", "kind": "input", "unit": "Pa", "description": "气体施加在容器壁上的力的强度。单位：帕斯卡(Pa)。" },
+      "V": { "role": "体积", "kind": "input", "unit": "m³", "description": "气体所占空间的大小。单位：立方米(m³)或升(L)。" },
+      "n": { "role": "物质的量", "kind": "input", "unit": "mol", "description": "气体的量。单位：摩尔(mol)。" },
+      "R": { "role": "气体常数", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)", "description": "理想气体常数。约为 8.314 J/(mol·K)。" },
+      "T": { "role": "绝对温度", "kind": "input", "unit": "K", "description": "以开尔文为单位的温度。0 K 是绝对零度。" }
+    },
+    "relatedFormulas": ["first-law-thermo", "boltzmann-dist"],
+    "realWorldExamples": [
+      "预测轮胎内气压随温度变化而发生的波动",
+      "计算气球被加热或冷却时的体积变化",
+      "解释在高海拔地区零食袋鼓起来的现象"
+    ]
+  },
+  "first-law-thermo": {
+    "name": "热力学第一定律",
+    "oneLiner": "系统内能的变化等于吸收的热量与对外做功之差的能量守恒定律",
+    "description": "热力学第一定律是能量守恒定律在热力学中的表述。系统从外界吸收热量后，其内能增加或者对外做功，能量既不会凭空产生也不会凭空消失。它是热机、制冷机、化学反应等一切涉及能量的过程的基本约束条件。",
+    "field": "物理学",
+    "significance": "确立了热与功是能量的不同形式，把能量守恒的普适性扩展到了热力学。",
+    "elementMeanings": {
+      "\\Delta U": { "role": "内能的变化", "kind": "output", "unit": "J", "description": "系统内能的变化量，即分子运动能与势能总和的变化。" },
+      "Q": { "role": "热量", "kind": "input", "unit": "J", "description": "系统从外界吸收的热量。为正表示吸热，为负表示放热。单位：焦耳(J)。" },
+      "W": { "role": "功", "kind": "input", "unit": "J", "description": "系统对外界所做的功。为正表示膨胀，为负表示被压缩。单位：焦耳(J)。" }
+    },
+    "relatedFormulas": ["ideal-gas-law", "kinetic-energy"],
+    "realWorldExamples": [
+      "汽车发动机中燃料燃烧的热转化为活塞运动的过程",
+      "冰箱把内部的热量排到外部的原理",
+      "解释绝热压缩时气体温度上升的原因"
+    ]
+  },
+  "schrodinger-eq": {
+    "name": "薛定谔方程",
+    "oneLiner": "描述量子态随时间演化的量子力学根本方程",
+    "description": "薛定谔方程是量子力学中描述波函数随时间变化的偏微分方程。它是与经典力学的牛顿运动方程相对应的量子力学运动方程，用于预测原子、分子、固体的量子行为。波函数绝对值的平方表示发现粒子的概率密度。",
+    "discoverer": "埃尔温·薛定谔",
+    "field": "物理学",
+    "significance": "作为量子力学的基本运动方程，它为原子结构、化学键、半导体物理等现代科学奠定了基础。",
+    "elementMeanings": {
+      "i": { "role": "虚数单位", "kind": "structural", "description": "平方等于 -1 的数，表示波函数的相位变化。" },
+      "\\hbar": { "role": "约化普朗克常数", "kind": "constant", "value": 1.055e-34, "unit": "J·s", "description": "普朗克常数除以 2π 所得的值。约为 1.055×10⁻³⁴ J·s。" },
+      "\\frac{\\partial \\psi}{\\partial t}": { "role": "波函数对时间的偏导数", "kind": "structural", "description": "表示波函数如何随时间变化。" },
+      "\\hat{H}": { "role": "哈密顿算符", "kind": "structural", "description": "与系统总能量（动能 + 势能）相对应的算符。" },
+      "\\psi": { "role": "波函数", "kind": "structural", "description": "描述量子态的复函数，其绝对值的平方就是概率密度。" }
+    },
+    "relatedFormulas": ["de-broglie", "mass-energy"],
+    "realWorldExamples": [
+      "计算氢原子中电子轨道的能级",
+      "分析半导体的电子能带结构",
+      "利用隧穿效应的扫描隧道显微镜(STM)的原理"
+    ]
+  },
+  "de-broglie": {
+    "name": "德布罗意波长",
+    "oneLiner": "表明一切粒子都具有波动性、其波长与动量成反比的公式",
+    "description": "按照德布罗意假设，一切有质量的粒子都具有波动性质，其波长等于普朗克常数除以动量。这个物质波概念是电子显微镜的原理，也是薛定谔方程得以提出的直接契机。宏观物体的德布罗意波长极其微小、无法观测，但在电子等微观粒子上已经通过实验得到确认。",
+    "discoverer": "路易·德布罗意",
+    "field": "物理学",
+    "significance": "把波粒二象性扩展到物质，为量子力学的诞生提供了关键契机。",
+    "elementMeanings": {
+      "\\lambda": { "role": "德布罗意波长", "kind": "output", "unit": "m", "description": "与粒子相对应的物质波的波长。单位：米(m)。" },
+      "h": { "role": "普朗克常数", "kind": "constant", "value": 6.626e-34, "unit": "J·s", "description": "约为 6.626×10⁻³⁴ J·s，是量子力学的基本常数。" },
+      "p": { "role": "动量", "kind": "input", "unit": "kg·m/s", "description": "粒子的动量（质量乘以速度）。单位：kg·m/s。" }
+    },
+    "relatedFormulas": ["schrodinger-eq", "wave-speed", "mass-energy"],
+    "realWorldExamples": [
+      "计算决定电子显微镜中电子束分辨率的波长",
+      "用中子衍射实验分析晶体结构",
+      "在原子干涉仪中利用原子的波动性进行精密测量"
+    ]
+  },
+  "boltzmann-dist": {
+    "name": "玻尔兹曼分布",
+    "oneLiner": "表明在热平衡状态下粒子具有某一能量的概率随能量呈指数衰减的分布",
+    "description": "玻尔兹曼分布是统计力学的基本结果：在处于热平衡的系统中，粒子具有能量 E 的概率与 e 的 (-E/kT) 次方成正比。温度越高，高能态被占据的概率就越大；温度越低，大部分粒子就聚集在低能态。它可以解释化学反应速率、半导体中的电子分布、大气密度分布等现象。",
+    "discoverer": "路德维希·玻尔兹曼",
+    "field": "物理学",
+    "significance": "它是统计力学的根本原理，起着用微观粒子运动解释宏观热力学定律的桥梁作用。",
+    "elementMeanings": {
+      "P": { "role": "概率", "kind": "output", "description": "粒子处于某一能态的概率。" },
+      "e": { "role": "自然常数", "kind": "constant", "value": 2.71828183, "description": "自然对数的底，约为 2.718。" },
+      "E": { "role": "能量", "kind": "input", "unit": "J", "description": "该能态的能量。单位：焦耳(J)。" },
+      "k": { "role": "玻尔兹曼常数", "kind": "constant", "value": 1.381e-23, "unit": "J/K", "description": "约为 1.381×10⁻²³ J/K，是连接温度与能量的常数。" },
+      "T": { "role": "绝对温度", "kind": "input", "unit": "K", "description": "以开尔文为单位的温度。温度越高，能量的分散程度就越大。" }
+    },
+    "relatedFormulas": ["ideal-gas-law", "first-law-thermo"],
+    "realWorldExamples": [
+      "解释海拔越高大气密度就呈指数下降的现象",
+      "预测半导体中自由电子数随温度的变化",
+      "计算化学反应中越过活化能垒的分子所占的比例"
+    ]
+  },
+  "lorentz-transform": {
+    "name": "洛伦兹时间变换",
+    "oneLiner": "表示惯性参考系之间时间坐标变换的狭义相对论公式",
+    "description": "洛伦兹变换是在相互做匀速运动的两个惯性参考系之间变换时空坐标的公式。时间变换式表明，一个参考系中的时间在另一个参考系中还依赖于空间坐标，这正是同时性的相对性的数学表达。它是时间膨胀、长度收缩等相对论效应的根本。",
+    "discoverer": "亨德里克·洛伦兹",
+    "field": "物理学",
+    "significance": "取代了伽利略变换，确立了狭义相对论的数学基础。",
+    "elementMeanings": {
+      "t'": { "role": "变换后的时间", "kind": "output", "unit": "s", "description": "运动观察者参考系中的时间坐标。" },
+      "\\gamma": { "role": "洛伦兹因子", "kind": "structural", "description": "1/根号(1-v²/c²)。速度越接近光速，它就越大。" },
+      "t": { "role": "原来的时间", "kind": "input", "unit": "s", "description": "静止参考系中的时间坐标。" },
+      "v": { "role": "相对速度", "kind": "input", "unit": "m/s", "description": "两个参考系之间的相对速度。单位：m/s。" },
+      "x": { "role": "空间坐标", "kind": "input", "unit": "m", "description": "静止参考系中的位置，它表明空间也参与了时间的变换。" },
+      "c^2": { "role": "光速的平方", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "时空变换的比例常数，它决定时间与空间相互混合的比例。" }
+    },
+    "relatedFormulas": ["mass-energy", "velocity-acceleration"],
+    "realWorldExamples": [
+      "GPS 卫星的时间校正（计入相对论性时间膨胀）",
+      "在粒子加速器中观测到高速粒子寿命被延长",
+      "解释μ子为什么能够从大气层到达地面"
+    ]
+  },
+  "gauss-law": {
+    "name": "高斯定律",
+    "oneLiner": "麦克斯韦方程组的第一个方程：电荷分布产生的电场的散度与电荷密度成正比",
+    "description": "高斯定律是麦克斯韦四个方程中的第一个，它表明电场的散度（在空间中的发散程度）等于该处的电荷密度除以真空介电常数。它用数学方式表达了电荷是电场之源，描述电场从正电荷发出、汇入负电荷。在求解具有高度对称性的电荷分布的电场时尤其简洁好用。",
+    "discoverer": "卡尔·弗里德里希·高斯 / 詹姆斯·克拉克·麦克斯韦",
+    "field": "物理学",
+    "significance": "它是电磁学四大基本方程（麦克斯韦方程组）之一，规定了电荷与电场之间的关系。",
+    "elementMeanings": {
+      "\\nabla \\cdot \\mathbf{E}": { "role": "电场的散度", "kind": "structural", "description": "表示电场在某一点上发散或汇聚程度的微分运算。" },
+      "\\rho": { "role": "电荷密度", "kind": "input", "unit": "C/m³", "description": "单位体积内的电荷量。单位：C/m³。" },
+      "\\varepsilon_0": { "role": "真空介电常数", "kind": "constant", "value": 8.854e-12, "unit": "C²/(N·m²)", "description": "约为 8.854×10⁻¹² F/m，是决定真空中电场强度的常数。" }
+    },
+    "relatedFormulas": ["coulomb-law"],
+    "realWorldExamples": [
+      "计算导体球表面的电场分布",
+      "推导平行板电容器内部的均匀电场",
+      "解释带电导体内部电场为零的原因"
+    ]
+  }
+}

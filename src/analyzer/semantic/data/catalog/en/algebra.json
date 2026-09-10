@@ -1,0 +1,307 @@
+{
+  "euler-identity": {
+    "name": "Euler's identity",
+    "oneLiner": "The equation that ties the five fundamental constants of mathematics together",
+    "description": "Euler's identity binds the natural constant e, the imaginary unit i, pi, 1, and 0 into a single compact equation. It follows naturally from Euler's formula once the angle is set to pi, and it stands for the deep connections that run across many branches of mathematics.",
+    "discoverer": "Leonhard Euler",
+    "field": "Algebra",
+    "significance": "It shows that exponentials, trigonometric functions, and complex numbers are all one thing, and it is often called the most beautiful equation in the history of mathematics.",
+    "elementMeanings": {
+      "e": { "role": "Natural constant", "description": "About 2.71828. It is the base of the natural logarithm and describes continuous growth.", "kind": "constant", "value": 2.71828183 },
+      "i": { "role": "Imaginary unit", "description": "The number whose square is -1. It is the building block of the complex numbers.", "kind": "constant" },
+      "\\pi": { "role": "Pi", "description": "The ratio of a circle's circumference to its diameter. It is about 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "1": { "role": "Multiplicative identity", "description": "The identity for multiplication and the start of the natural numbers.", "kind": "constant", "value": 1 },
+      "0": { "role": "Additive identity", "description": "The identity for addition, and the value this equation comes out to.", "kind": "constant", "value": 0 }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "quadratic-formula": {
+    "name": "Quadratic formula",
+    "oneLiner": "The formula that gets the solutions of ax2+bx+c=0 straight from the coefficients",
+    "description": "The quadratic formula computes both roots of a quadratic equation exactly, using nothing but the coefficients a, b, and c. The sign of the discriminant decides how many real roots there are, and this is the most basic solving method in algebra.",
+    "field": "Algebra",
+    "significance": "It is a universal tool that solves every quadratic equation, and through the discriminant it lets you judge whether real roots exist at all.",
+    "elementMeanings": {
+      "a": { "role": "Quadratic coefficient", "description": "The number multiplying x squared. It has to be nonzero for the equation to be quadratic.", "kind": "input" },
+      "b": { "role": "Linear coefficient", "description": "The number multiplying x. It shifts where the axis of the parabola sits.", "kind": "input" },
+      "c": { "role": "Constant term", "description": "The constant added on with no variable attached. It fixes the y-intercept.", "kind": "input" },
+      "b^2-4ac": { "role": "Discriminant", "description": "It decides how many roots there are and of what kind. Positive gives two distinct real roots, zero gives a repeated root, negative gives imaginary roots.", "kind": "output" },
+      "\\pm": { "role": "Plus-minus sign", "description": "It covers the addition and subtraction cases at once, giving both roots.", "kind": "structural" }
+    },
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem"]
+  },
+  "binomial-theorem": {
+    "name": "Binomial theorem",
+    "oneLiner": "The theorem that expands a power of a sum of two terms using binomial coefficients",
+    "description": "The binomial theorem expands (a+b) to the nth power into a series built from binomial coefficients. It is the key link between combinatorics and algebra, and it is closely tied to Pascal's triangle.",
+    "discoverer": "Isaac Newton (generalization)",
+    "field": "Algebra",
+    "significance": "It is used widely across mathematics — polynomial expansion, probability, combinatorics — and it provides the basis for approximation.",
+    "elementMeanings": {
+      "a": { "role": "First term", "description": "The first term of the binomial. Its degree drops as the expansion goes on.", "kind": "input" },
+      "b": { "role": "Second term", "description": "The second term of the binomial. Its degree rises as the expansion goes on.", "kind": "input" },
+      "n": { "role": "Power exponent", "description": "A nonnegative integer saying how many times the binomial is multiplied by itself.", "kind": "input" },
+      "k": { "role": "Expansion index", "description": "The summation variable counting how many times b is multiplied in each term.", "kind": "input" },
+      "\\binom{n}{k}": { "role": "Binomial coefficient", "description": "The number of ways to choose k things out of n. It matches each entry of Pascal's triangle.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "geometric-series"]
+  },
+  "geometric-series": {
+    "name": "Geometric series sum",
+    "oneLiner": "The formula that gives the sum of a series with a constant ratio in closed form",
+    "description": "The geometric series formula computes the sum compactly once the first term a and the common ratio r are known. If the absolute value of the ratio is less than 1, even the infinite series converges, and the formula is used all over financial mathematics and physics.",
+    "field": "Algebra",
+    "significance": "It lets a converging infinite process be written as a finite value, and its practical reach is very wide — compound interest, signal processing, and more.",
+    "elementMeanings": {
+      "a": { "role": "First term", "description": "The first term of the series. It is the reference value that sets the size of the whole sum.", "kind": "input" },
+      "r": { "role": "Common ratio", "description": "The ratio between consecutive terms. Its absolute value must be less than 1 for the infinite series to converge.", "kind": "input" },
+      "n": { "role": "Number of terms", "description": "How many terms to add in a finite series.", "kind": "input" },
+      "S_n": { "role": "Partial sum", "description": "The sum of the first n terms.", "kind": "output" },
+      "S_{\\infty}": { "role": "Infinite series sum", "description": "The value it converges to, a/(1-r), when the absolute value of the ratio is less than 1.", "kind": "output" }
+    },
+    "relatedFormulas": ["taylor-series", "binomial-theorem"]
+  },
+  "difference-of-squares": {
+    "name": "Difference of squares",
+    "oneLiner": "The formula that factors a difference of two squares into a product of a sum and a difference",
+    "description": "The difference of squares is the identity saying that a squared minus b squared equals (a+b)(a-b). It is the most basic pattern in factoring, and it also serves for breaking down higher-degree polynomials and for mental arithmetic.",
+    "field": "Algebra",
+    "significance": "It is where algebraic factoring starts, and it turns up everywhere — rationalizing denominators, evaluating limits, factoring integers in number theory.",
+    "elementMeanings": {
+      "a": { "role": "First value", "description": "The first number or expression being squared.", "kind": "input" },
+      "b": { "role": "Second value", "description": "The second number or expression being squared.", "kind": "input" },
+      "a^2": { "role": "First square", "description": "The value of a squared.", "kind": "structural" },
+      "b^2": { "role": "Second square", "description": "The value of b squared.", "kind": "structural" },
+      "(a+b)": { "role": "Sum factor", "description": "The factor made from the sum of a and b.", "kind": "structural" },
+      "(a-b)": { "role": "Difference factor", "description": "The factor made from a minus b.", "kind": "structural" }
+    },
+    "relatedFormulas": ["quadratic-formula", "binomial-theorem"]
+  },
+  "perfect-square": {
+    "name": "Perfect square expansion",
+    "oneLiner": "The identity that expands the square of a sum of two terms",
+    "description": "The perfect square identity says that (a+b) squared equals a squared plus 2ab plus b squared. It is central to factoring quadratics and to recognizing perfect squares, and it underlies solving quadratic equations by completing the square.",
+    "field": "Algebra",
+    "significance": "It is the most basic tool for reading the structure of a quadratic, and it is essential for converting to vertex form and for minimum-value problems.",
+    "elementMeanings": {
+      "a": { "role": "First term", "description": "The first term of the binomial being squared.", "kind": "input" },
+      "b": { "role": "Second term", "description": "The second term of the binomial being squared.", "kind": "input" },
+      "a^2": { "role": "Square of the first term", "description": "The value of a squared.", "kind": "structural" },
+      "2ab": { "role": "Cross term", "description": "Twice the product of a and b. It is the middle term that shows up in the expansion.", "kind": "structural" },
+      "b^2": { "role": "Square of the second term", "description": "The value of b squared.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Working out how much total area a square garden plot gains when one side is extended by b",
+      "Expanding or rearranging the variance formula in statistics"
+    ],
+    "relatedFormulas": ["difference-of-squares", "binomial-theorem", "quadratic-formula"]
+  },
+  "sum-difference-product": {
+    "name": "Product of a sum and a difference",
+    "oneLiner": "The identity that turns a sum times a difference into a difference of squares",
+    "description": "This identity says that (a+b)(a-b) equals a squared minus b squared. It is the same statement as the difference of squares, but read in the multiplying direction rather than the factoring one. It is handy for turning an awkward multiplication into a simple subtraction of squares.",
+    "field": "Algebra",
+    "significance": "It simplifies mental and numerical arithmetic by trading a multiplication for a difference of squares, and it is a key tool for rationalizing and factoring.",
+    "elementMeanings": {
+      "a": { "role": "Reference value", "description": "The value that appears in both the sum and the difference.", "kind": "input" },
+      "b": { "role": "Offset", "description": "The value added to or subtracted from the reference value.", "kind": "input" },
+      "(a+b)": { "role": "Sum", "description": "The factor formed by adding a and b.", "kind": "structural" },
+      "(a-b)": { "role": "Difference", "description": "The factor formed by subtracting b from a.", "kind": "structural" },
+      "a^2-b^2": { "role": "Difference of squares", "description": "The result — the difference between the two squares.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Doing 49 x 51 in your head as (50+1)(50-1) = 2500-1 = 2499",
+      "Clearing an irrational number out of a denominator when rationalizing"
+    ],
+    "relatedFormulas": ["difference-of-squares", "perfect-square"]
+  },
+  "arithmetic-series-sum": {
+    "name": "Sum of an arithmetic series",
+    "oneLiner": "The formula for the sum of the first n terms of an arithmetic sequence",
+    "description": "The arithmetic series formula multiplies the average of the first and last terms by the number of terms. It is famous from the story of Gauss adding 1 through 100 as a schoolboy, and it is an elegant formula that exploits the symmetry of an arithmetic sequence.",
+    "discoverer": "Carl Friedrich Gauss (anecdotally)",
+    "field": "Algebra",
+    "significance": "It gives a fast total for quantities that rise or fall at a steady rate, and it is fundamental to discrete mathematics and algorithm analysis.",
+    "elementMeanings": {
+      "S_n": { "role": "Sum of the series", "description": "The result of adding up the first n terms.", "kind": "output" },
+      "n": { "role": "Number of terms", "description": "The total count of terms being added.", "kind": "input" },
+      "a_1": { "role": "First term", "description": "The first term of the sequence.", "kind": "input" },
+      "a_n": { "role": "Last term", "description": "The nth term of the sequence.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Counting the total seats in tiered seating where each row adds a fixed number of seats",
+      "Working out a year's total income when a salary rises by a fixed amount every month"
+    ],
+    "relatedFormulas": ["arithmetic-general", "geometric-series-sum"]
+  },
+  "arithmetic-general": {
+    "name": "General term of an arithmetic sequence",
+    "oneLiner": "The formula for the nth term of an arithmetic sequence from its first term and common difference",
+    "description": "This formula adds (n-1) times the common difference to the first term to get any nth term directly. It captures the rule of the sequence in a single expression and makes the linear character of an arithmetic sequence plain.",
+    "field": "Algebra",
+    "significance": "It is the most basic way to pin a sequence's pattern down in a formula, and it provides the bridge to the idea of a function.",
+    "elementMeanings": {
+      "a_n": { "role": "General term", "description": "The value of the nth term of the sequence.", "kind": "output" },
+      "a_1": { "role": "First term", "description": "The starting value of the sequence.", "kind": "input" },
+      "n": { "role": "Term index", "description": "A natural number saying which term you want.", "kind": "input" },
+      "d": { "role": "Common difference", "description": "The fixed gap between two consecutive terms.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Finding the height of floor n when an elevator climbs the same distance every floor",
+      "Predicting a value at a given moment when time advances at a steady rate"
+    ],
+    "relatedFormulas": ["arithmetic-series-sum", "geometric-general"]
+  },
+  "geometric-series-sum": {
+    "name": "Finite geometric series sum",
+    "oneLiner": "The formula for the sum of the first n terms of a geometric sequence",
+    "description": "This formula computes the sum in closed form from the first term, the common ratio, and the number of terms. It applies whenever the ratio is not 1, and the ratio raised to the nth power does the central work. Unlike the general geometric series formula (geometric-series), this one focuses on the finite sum.",
+    "field": "Algebra",
+    "significance": "It is used directly to quantify exponential change in everyday life — compound interest, installment payments, depreciation.",
+    "elementMeanings": {
+      "S_n": { "role": "Finite sum", "description": "The sum of the first n terms.", "kind": "output" },
+      "a_1": { "role": "First term", "description": "The first term of the series.", "kind": "input" },
+      "r": { "role": "Common ratio", "description": "The ratio between consecutive terms. It must not be 1.", "kind": "input" },
+      "n": { "role": "Number of terms", "description": "The total count of terms being added.", "kind": "input" },
+      "r^n": { "role": "Ratio to the nth power", "description": "The ratio multiplied by itself n times. It sets how fast the series grows or converges.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Finding the accumulated total after n years of an investment that grows by a fixed percentage annually",
+      "Finding the accumulated residue of a drug that breaks down by a fixed fraction each hour"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-general", "infinite-geometric"]
+  },
+  "geometric-general": {
+    "name": "General term of a geometric sequence",
+    "oneLiner": "The formula for the nth term of a geometric sequence from its first term and common ratio",
+    "description": "This formula multiplies the first term by the common ratio raised to the (n-1)th power to get any nth term directly. It writes the sequence's exponential growth or decay as a single expression.",
+    "field": "Algebra",
+    "significance": "It is the basic tool for modeling exponential change — population growth, radioactive decay, compound interest.",
+    "elementMeanings": {
+      "a_n": { "role": "General term", "description": "The value of the nth term of the sequence.", "kind": "output" },
+      "a_1": { "role": "First term", "description": "The starting value of the sequence.", "kind": "input" },
+      "r": { "role": "Common ratio", "description": "The ratio between two consecutive terms.", "kind": "input" },
+      "n": { "role": "Term index", "description": "A natural number saying which term you want.", "kind": "input" },
+      "r^{n-1}": { "role": "Power of the ratio", "description": "The ratio multiplied by itself (n-1) times. It is the factor applied to the first term.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Counting bacteria after n generations when the colony doubles every generation",
+      "Finding the balance after n years on a deposit compounding at a fixed rate"
+    ],
+    "relatedFormulas": ["geometric-series-sum", "arithmetic-general", "infinite-geometric"]
+  },
+  "infinite-geometric": {
+    "name": "Infinite geometric series",
+    "oneLiner": "The sum of a geometric series added forever, when the ratio has absolute value less than 1",
+    "description": "This formula shows that when the absolute value of the ratio is under 1, a geometric series settles on a finite value even though it goes on forever. Dividing the first term by (1 minus the ratio) gives that limit. It is the most intuitive example there is for understanding limits and convergence.",
+    "field": "Algebra",
+    "significance": "It is the standard illustration of the mathematical insight that an infinite process can produce a finite result, and it is the starting point of analysis and the theory of series.",
+    "elementMeanings": {
+      "S": { "role": "Sum of the infinite series", "description": "The value that adding infinitely many terms converges to.", "kind": "output" },
+      "a_1": { "role": "First term", "description": "The first term of the series.", "kind": "input" },
+      "r": { "role": "Common ratio", "description": "The ratio between consecutive terms. Convergence requires |r|<1.", "kind": "input" },
+      "1-r": { "role": "Convergence denominator", "description": "The ratio subtracted from 1. Dividing by it gives the limit.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "The total distance travelled by a ball that bounces back to a fixed fraction of its height each time it hits the floor",
+      "Converting a repeating decimal into a fraction (for instance 0.333... = 1/3)"
+    ],
+    "relatedFormulas": ["geometric-series", "geometric-series-sum", "geometric-general"]
+  },
+  "exponent-law": {
+    "name": "Law of exponents",
+    "oneLiner": "The law that you add exponents when multiplying powers of the same base",
+    "description": "This law says that multiplying powers of the same base a is the same as adding the exponents. It follows straight from the definition of a power, and it is the foundation of the whole system of exponent arithmetic. The other laws — for division, for a power of a power — all come out of this one.",
+    "field": "Algebra",
+    "significance": "It is the most fundamental rule of exponent arithmetic, and it underpins the laws of logarithms, exponential functions, and scientific notation.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "The number the power is built on. It is a nonzero real number.", "kind": "input" },
+      "m": { "role": "First exponent", "description": "The exponent of the first power.", "kind": "input" },
+      "n": { "role": "Second exponent", "description": "The exponent of the second power.", "kind": "input" },
+      "m+n": { "role": "Combined exponent", "description": "The two exponents added together. It is the exponent of the product.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Adding exponents to multiply powers of 10 easily in scientific notation",
+      "Handling powers of 2 when converting computer memory units"
+    ],
+    "relatedFormulas": ["log-definition", "log-product-rule"]
+  },
+  "log-definition": {
+    "name": "Definition of the logarithm",
+    "oneLiner": "The equivalence that defines the logarithm as the inverse of exponentiation",
+    "description": "The definition of the logarithm restates, in logarithmic notation, the exponential relation that raising the base a to the power c gives b. It makes the inverse relationship between exponents and logarithms explicit, and it is where logarithmic computation begins.",
+    "discoverer": "John Napier",
+    "field": "Algebra",
+    "significance": "It makes possible the key logarithmic property of turning multiplication into addition, and it is a basic tool of scientific computation and information theory.",
+    "elementMeanings": {
+      "a": { "role": "Base", "description": "The base of the logarithm. It must be positive and not equal to 1.", "kind": "input" },
+      "b": { "role": "Argument", "description": "The quantity the logarithm is taken of. It must be positive.", "kind": "input" },
+      "c": { "role": "Logarithm value", "description": "The number saying what power the base must be raised to in order to give the argument.", "kind": "output" },
+      "\\log_a b": { "role": "Logarithmic form", "description": "The logarithm with base a and argument b.", "kind": "structural" },
+      "a^c = b": { "role": "Exponential form", "description": "The same relation written as a power.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Earthquake magnitude (the Richter scale) is defined on a logarithmic scale, so one step up means about 31.6 times the energy",
+      "Loudness (decibels) is measured on a logarithmic scale so that the whole range of human hearing can be handled"
+    ],
+    "relatedFormulas": ["exponent-law", "log-product-rule"]
+  },
+  "log-product-rule": {
+    "name": "Product rule for logarithms",
+    "oneLiner": "The law that the logarithm of a product equals the sum of the logarithms",
+    "description": "The product rule shows that the logarithm of a product breaks apart into a sum of individual logarithms. It follows directly from the law of exponents and expresses the key logarithmic property of turning multiplication into addition. The quotient rule and the power rule are extensions of the same principle.",
+    "field": "Algebra",
+    "significance": "By trading complicated multiplication for simple addition, it revolutionized numerical computation in the age before calculators.",
+    "elementMeanings": {
+      "a": { "role": "First factor", "description": "The first of the positive numbers being multiplied.", "kind": "input" },
+      "b": { "role": "Second factor", "description": "The second of the positive numbers being multiplied.", "kind": "input" },
+      "\\log(ab)": { "role": "Logarithm of the product", "description": "The logarithm taken of the product of a and b.", "kind": "structural" },
+      "\\log a": { "role": "First logarithm", "description": "The logarithm taken of a.", "kind": "structural" },
+      "\\log b": { "role": "Second logarithm", "description": "The logarithm taken of b.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "In astronomy, comparing stellar brightness by turning a brightness ratio into a difference of magnitudes",
+      "In information theory, computing the joint information of independent events as a sum of their information contents"
+    ],
+    "relatedFormulas": ["log-definition", "exponent-law"]
+  },
+  "complex-plane": {
+    "name": "Complex plane",
+    "oneLiner": "The plane that pictures a complex number z = a + bi as the point (a, b)",
+    "description": "The complex plane (the Argand plane) is a two-dimensional coordinate system that puts the real part of a complex number on the horizontal axis and the imaginary part on the vertical one. Every complex number corresponds to a point on the plane, or to a vector from the origin; the modulus |z| is the distance from the origin, and the argument arg(z) is the angle made with the positive real axis. Through polar form and Euler's formula, geometric meanings like rotation and scaling emerge naturally.",
+    "field": "Algebra",
+    "significance": "It connects the abstract definition of complex numbers to geometric intuition, making complex functions and rotational transformations something you can see.",
+    "elementMeanings": {
+      "z": { "role": "Complex number", "description": "A point on the plane made of a real part and an imaginary part.", "kind": "input" },
+      "a": { "role": "Real part", "description": "The horizontal coordinate of z, Re(z).", "kind": "structural" },
+      "b": { "role": "Imaginary part", "description": "The vertical coordinate of z, Im(z).", "kind": "structural" },
+      "|z|": { "role": "Modulus", "description": "The distance from the origin to z. It is sqrt(a^2 + b^2).", "kind": "output" },
+      "\\arg(z)": { "role": "Argument", "description": "The angle between the positive real axis and the vector from the origin to z. It is atan2(b, a).", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Drawing the impedance of an AC circuit as a vector in the complex plane to see the phase difference",
+      "Analyzing the result of a Fourier transform in signal processing as magnitude and phase in the complex plane"
+    ],
+    "relatedFormulas": ["euler-identity"]
+  },
+  "linear-transform-2x2": {
+    "name": "2×2 linear transformation",
+    "oneLiner": "The linear map by which a 2×2 matrix M sends a vector in the plane to another vector",
+    "description": "A 2×2 linear transformation is the function by which the matrix M = [[a, b], [c, d]] sends every point (x, y) of the plane to (ax + by, cx + dy). The basis vectors e1 and e2 move to the columns of M, the unit square becomes a parallelogram, and the grid becomes a transformed grid. The determinant det(M) gives the change in area together with orientation; when it is 0, a dimension collapses.",
+    "field": "Algebra",
+    "significance": "It expresses rotation, reflection, scaling, and shear — every geometric transformation of the plane — as a single matrix, which makes it the basis of computer graphics and linear algebra.",
+    "elementMeanings": {
+      "M": { "role": "Transformation matrix", "description": "A 2×2 real matrix. It determines the linear transformation of the plane.", "kind": "input" },
+      "a": { "role": "M[0][0]", "description": "The horizontal coordinate that the horizontal component of the basis vector e1 takes after the transformation.", "kind": "structural" },
+      "b": { "role": "M[0][1]", "description": "The horizontal coordinate that the horizontal component of the basis vector e2 takes after the transformation.", "kind": "structural" },
+      "c": { "role": "M[1][0]", "description": "The vertical coordinate that the vertical component of the basis vector e1 takes after the transformation.", "kind": "structural" },
+      "d": { "role": "M[1][1]", "description": "The vertical coordinate that the vertical component of the basis vector e2 takes after the transformation.", "kind": "structural" },
+      "\\det(M)": { "role": "Determinant", "description": "ad - bc. It is the factor by which unit area scales, and its sign gives the orientation.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "A 2D graphics engine handling rotation, scaling, and shear as a single 2×2 matrix multiplication",
+      "Principal component analysis (PCA) extracting the directions of variance in data as eigenvectors of a 2×2 covariance matrix"
+    ],
+    "relatedFormulas": []
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "Volumen de la esfera",
+    "oneLiner": "Fórmula que obtiene el volumen de una esfera multiplicando el cubo del radio por el número pi y por cuatro tercios",
+    "description": "El volumen de la esfera se obtiene multiplicando el radio tres veces por sí mismo y ese resultado por el número pi y por cuatro tercios. Se usa para hallar el espacio que ocupa un cuerpo completamente redondo, como un balón de baloncesto.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "V": { "role": "Volumen", "description": "Es el espacio que ocupa la esfera.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "Constante de proporcionalidad", "description": "Es el coeficiente fijo que determina el volumen de la esfera.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de una circunferencia y su diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es la distancia desde el centro de la esfera hasta su superficie.", "kind": "input" },
+      "r^3": { "role": "Cubo del radio", "description": "Es el radio multiplicado tres veces por sí mismo. Se eleva al cubo porque el volumen es tridimensional.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular el volumen de un balón de baloncesto", "Estimar el volumen de la Tierra", "Comparar el tamaño de unas canicas"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "Área de la esfera",
+    "oneLiner": "Fórmula que obtiene el área de una esfera multiplicando el cuadrado del radio por el número pi y por 4",
+    "description": "El área de la esfera es el cuadrado del radio multiplicado por el número pi y por 4. Equivale exactamente a cuatro veces el área de un círculo del mismo radio. Es la superficie que habría que cubrir al pintar una pelota.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "S": { "role": "Área", "description": "Es el área de toda la superficie de la esfera.", "kind": "output" },
+      "4": { "role": "Constante", "description": "Significa que el área de la esfera es cuatro veces el área del círculo del mismo radio.", "kind": "constant", "value": 4 },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de una circunferencia y su diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es la distancia desde el centro de la esfera hasta su superficie.", "kind": "input" },
+      "r^2": { "role": "Cuadrado del radio", "description": "Es el radio multiplicado dos veces por sí mismo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Superficie total del cuero de un balón de fútbol", "Cantidad de papel necesaria para forrar la superficie de un globo terráqueo"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "Volumen del cilindro",
+    "oneLiner": "Fórmula que obtiene el volumen de un cilindro multiplicando el área del círculo de la base por la altura",
+    "description": "El volumen del cilindro es el área de la base (el área del círculo) multiplicada por la altura. Basta con imaginar que la base circular se va apilando hasta alcanzar esa altura.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "V": { "role": "Volumen", "description": "Es el espacio que ocupa el cilindro.", "kind": "output" },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de una circunferencia y su diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es el radio del círculo de la base del cilindro.", "kind": "input" },
+      "r^2": { "role": "Cuadrado del radio", "description": "Es el radio multiplicado dos veces por sí mismo. Determina el área de la base.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia entre las dos bases del cilindro.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular la cantidad de líquido que cabe en una lata de refresco", "Capacidad de un depósito de agua cilíndrico"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "Área total del cilindro",
+    "oneLiner": "Fórmula que obtiene el área total de un cilindro sumando el área de las dos bases y la de la superficie lateral",
+    "description": "El área total del cilindro es la suma del área de los dos círculos de arriba y abajo y del área de la superficie lateral. Al desplegar la cara lateral se obtiene un rectángulo cuya base es la longitud de la circunferencia y cuya altura es la del cilindro.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "S": { "role": "Área total", "description": "Es el área de toda la superficie del cilindro.", "kind": "output" },
+      "2": { "role": "Constante", "description": "Es el coeficiente que queda al sacar el factor común.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de una circunferencia y su diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es el radio del círculo de la base del cilindro.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia entre las dos bases del cilindro.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular el área de la etiqueta de una lata de refresco", "Cantidad de papel de regalo necesaria para envolver una caja cilíndrica"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "Volumen del cono",
+    "oneLiner": "Fórmula que obtiene el volumen de un cono multiplicando el área del círculo de la base por la altura y dividiendo entre 3",
+    "description": "El volumen del cono es el área de la base multiplicada por la altura y dividida entre 3. Es exactamente un tercio del volumen de un cilindro con la misma base y la misma altura.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "V": { "role": "Volumen", "description": "Es el espacio que ocupa el cono.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "Un tercio", "description": "Significa que el volumen del cono es un tercio del de un cilindro con la misma base y la misma altura.", "kind": "constant", "value": 0.33333333 },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de una circunferencia y su diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es el radio del círculo de la base del cono.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia vertical desde el vértice del cono hasta la base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular la cantidad de helado que cabe en un cucurucho", "Volumen de un gorro de fiesta cónico"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "Área total del cono",
+    "oneLiner": "Fórmula que obtiene el área total de un cono sumando el área del círculo de la base y la de la superficie lateral",
+    "description": "El área total del cono es la suma del área del círculo de la base y la de la cara lateral, que tiene forma de sector circular. Al desplegar la cara lateral se obtiene un sector cuya área es el producto del radio por la generatriz y por el número pi.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "S": { "role": "Área total", "description": "Es el área de toda la superficie del cono.", "kind": "output" },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de una circunferencia y su diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es el radio del círculo de la base del cono.", "kind": "input" },
+      "l": { "role": "Generatriz", "description": "Es la longitud del lado inclinado que va del vértice del cono al borde de la base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Superficie de papel necesaria para un gorro de fiesta cónico", "Calcular la tela que se necesita para una tienda de campaña cónica"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "Volumen del ortoedro",
+    "oneLiner": "Fórmula que obtiene el volumen de un ortoedro multiplicando el largo, el ancho y la altura",
+    "description": "El volumen del ortoedro es el producto del largo, el ancho y la altura. Equivale a multiplicar el área del rectángulo de la base por la altura y es lo mismo que contar cuántos cubos unidad caben dentro de la caja.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "V": { "role": "Volumen", "description": "Es el espacio que ocupa el ortoedro.", "kind": "output" },
+      "l": { "role": "Largo", "description": "Es la longitud del ortoedro.", "kind": "input" },
+      "w": { "role": "Ancho", "description": "Es la anchura del ortoedro.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la altura del ortoedro.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular el volumen de una caja de envío", "Cantidad de agua que cabe en una piscina", "Estimar la capacidad interior de un frigorífico"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "Área total del ortoedro",
+    "oneLiner": "Fórmula que obtiene el área total de un ortoedro sumando el área de las tres parejas de caras y multiplicando por dos",
+    "description": "El área total del ortoedro es la suma de las áreas de tres caras distintas multiplicada por 2. El ortoedro tiene tres parejas de caras opuestas y, como las caras de cada pareja tienen la misma área, se suman los tres tipos de cara y se duplica el resultado.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "S": { "role": "Área total", "description": "Es el área de toda la superficie del ortoedro.", "kind": "output" },
+      "2": { "role": "Constante", "description": "Se multiplica por 2 porque hay tres parejas de caras opuestas.", "kind": "constant", "value": 2 },
+      "l": { "role": "Largo", "description": "Es la longitud del ortoedro.", "kind": "input" },
+      "w": { "role": "Ancho", "description": "Es la anchura del ortoedro.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la altura del ortoedro.", "kind": "input" },
+      "lw": { "role": "Cara superior e inferior", "description": "Es el área de la cara que resulta de multiplicar el largo por el ancho.", "kind": "output" },
+      "lh": { "role": "Cara delantera y trasera", "description": "Es el área de la cara que resulta de multiplicar el largo por la altura.", "kind": "output" },
+      "wh": { "role": "Caras laterales", "description": "Es el área de la cara que resulta de multiplicar el ancho por la altura.", "kind": "output" }
+    },
+    "realWorldExamples": ["Cantidad de papel de regalo necesaria para envolver una caja", "Calcular el área exterior de una caja de envío"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "Volumen del tetraedro regular",
+    "oneLiner": "Fórmula que obtiene el volumen de un tetraedro regular multiplicando el cubo de la arista por raíz de 2 dividido entre 12",
+    "description": "El volumen del tetraedro regular es el cubo de la longitud de una arista multiplicado por raíz de 2 dividido entre 12. El tetraedro regular es el cuerpo cuyas cuatro caras son triángulos equiláteros iguales, el poliedro regular más sencillo.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "V": { "role": "Volumen", "description": "Es el espacio que ocupa el tetraedro regular.", "kind": "output" },
+      "\\frac{\\sqrt{2}}{12}": { "role": "Constante de proporcionalidad", "description": "Es el coeficiente fijo que se deriva de la estructura geométrica del tetraedro regular.", "kind": "constant", "value": 0.11785113 },
+      "a": { "role": "Longitud de la arista", "description": "Es la longitud de una arista del tetraedro regular. Todas las aristas miden lo mismo.", "kind": "input" },
+      "a^3": { "role": "Cubo de la arista", "description": "Es la longitud de la arista multiplicada tres veces por sí misma.", "kind": "input" }
+    },
+    "realWorldExamples": ["Volumen de un bombón con forma de pirámide", "Calcular el tamaño de un dado tetraédrico (D4)"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "Volumen de la pirámide",
+    "oneLiner": "Fórmula que obtiene el volumen de una pirámide multiplicando el área de la base por la altura y dividiendo entre 3",
+    "description": "El volumen de la pirámide es el área de la base multiplicada por la altura y dividida entre 3. Es exactamente un tercio del volumen de un prisma con la misma base y la misma altura. Se usa para cuerpos de base poligonal y vértice puntiagudo, como las pirámides de Egipto.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "V": { "role": "Volumen", "description": "Es el espacio que ocupa la pirámide.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "Un tercio", "description": "Significa que el volumen de la pirámide es un tercio del de un prisma con la misma base y la misma altura.", "kind": "constant", "value": 0.33333333 },
+      "B": { "role": "Área de la base", "description": "Es el área de la base poligonal de la pirámide.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia vertical desde el vértice de la pirámide hasta la base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Estimar el volumen de una pirámide de Egipto", "Calcular el espacio interior de una tienda de campaña con forma de pirámide"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}

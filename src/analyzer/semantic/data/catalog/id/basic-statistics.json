@@ -1,0 +1,187 @@
+{
+  "arithmetic-mean": {
+    "name": "Rata-rata hitung",
+    "oneLiner": "Nilai wakil yang diperoleh dengan menjumlahkan seluruh nilai data lalu membaginya dengan banyaknya data",
+    "description": "Rata-rata hitung adalah jumlah seluruh data dibagi dengan banyaknya data. Kalau orang menyebut 'rata-rata', biasanya yang dimaksud adalah rata-rata hitung ini. Ia merupakan nilai wakil yang paling sederhana untuk menunjukkan di mana pusat data berada, dan merupakan besaran statistik yang paling sering dipakai dalam kehidupan sehari-hari.",
+    "field": "Statistika",
+    "significance": "Ini cara paling dasar untuk meringkas data menjadi satu bilangan, sekaligus titik awal hampir semua analisis statistik.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Rata-rata hitung",
+        "description": "Nilai rata-rata dari seluruh data.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Nilai data ke-i",
+        "description": "Nilai ke-i dalam himpunan data.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Banyaknya data",
+        "description": "Menyatakan ada berapa banyak data.",
+        "kind": "input"
+      },
+      "\\sum": {
+        "role": "Lambang penjumlahan",
+        "description": "Artinya seluruh nilai data harus dijumlahkan.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Mencari rata-rata nilai ujian siswa satu kelas",
+      "Menghitung rata-rata suhu harian selama sebulan",
+      "Mencari rata-rata pengeluaran per hari dari catatan uang saku"
+    ],
+    "relatedFormulas": ["weighted-mean", "variance-basic", "std-dev-basic"]
+  },
+  "variance-basic": {
+    "name": "Varians",
+    "oneLiner": "Nilai rata-rata dari kuadrat jarak setiap data terhadap rata-ratanya",
+    "description": "Varians adalah ukuran yang menyatakan dengan satu bilangan seberapa menyebar data di sekitar rata-ratanya. Caranya: kurangkan rata-rata dari setiap data, kuadratkan selisihnya, jumlahkan semuanya, lalu bagi dengan banyaknya data. Makin besar nilainya, makin lebar sebaran datanya.",
+    "field": "Statistika",
+    "significance": "Ini ukuran inti untuk mengukur tingkat sebaran data, dan bersama simpangan baku menjadi dasar analisis statistik.",
+    "elementMeanings": {
+      "\\sigma^2": {
+        "role": "Varians",
+        "description": "Varians populasi. Menyatakan tingkat sebaran data.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Nilai data ke-i",
+        "description": "Nilai ke-i dalam himpunan data.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Rata-rata",
+        "description": "Rata-rata hitung dari seluruh data.",
+        "kind": "output"
+      },
+      "(x_i - \\bar{x})^2": {
+        "role": "Kuadrat simpangan",
+        "description": "Kuadrat dari jarak setiap data terhadap rata-ratanya.",
+        "kind": "structural"
+      },
+      "n": {
+        "role": "Banyaknya data",
+        "description": "Jumlah seluruh data.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Membandingkan perbedaan sebaran nilai dua kelas yang rata-rata ujiannya sama lewat variansnya",
+      "Memakai varians untuk memeriksa keseragaman berat produk di pabrik",
+      "Mengukur lebar naik-turunnya imbal hasil saham dengan varians"
+    ],
+    "relatedFormulas": ["arithmetic-mean", "std-dev-basic", "coefficient-of-variation"]
+  },
+  "std-dev-basic": {
+    "name": "Simpangan baku",
+    "oneLiner": "Ukuran sebaran data terhadap rata-rata yang dinyatakan dalam satuan aslinya",
+    "description": "Simpangan baku adalah akar kuadrat dari varians. Varians bersatuan kuadrat sehingga sulit ditafsirkan secara langsung, tetapi setelah diakarkan satuannya kembali sama dengan data aslinya sehingga kita bisa langsung memahaminya sebagai 'kira-kira sejauh ini jaraknya dari rata-rata'.",
+    "field": "Statistika",
+    "significance": "Karena menyatakan tingkat sebaran dalam satuan yang sama dengan data aslinya, penafsirannya intuitif, dan bersama distribusi normal ia menjadi ukuran sebaran yang paling luas dipakai.",
+    "elementMeanings": {
+      "\\sigma": {
+        "role": "Simpangan baku",
+        "description": "Simpangan baku populasi. Menyatakan tingkat sebaran data dalam satuan aslinya.",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "Nilai data ke-i",
+        "description": "Nilai ke-i dalam himpunan data.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Rata-rata",
+        "description": "Rata-rata hitung dari seluruh data.",
+        "kind": "output"
+      },
+      "n": {
+        "role": "Banyaknya data",
+        "description": "Jumlah seluruh data.",
+        "kind": "input"
+      },
+      "\\sqrt{}": {
+        "role": "Akar kuadrat",
+        "description": "Mengakarkan varians untuk mengembalikannya ke satuan asli.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Menyatakan sebaran data tinggi badan siswa seperti 'rata-rata 165 cm, simpangan baku 5 cm'",
+      "Menilai merata atau tidaknya sebaran nilai lewat simpangan baku skor ujian",
+      "Menjelaskan lebar perubahan suhu dalam prakiraan cuaca dengan simpangan baku"
+    ],
+    "relatedFormulas": ["variance-basic", "arithmetic-mean", "coefficient-of-variation"]
+  },
+  "weighted-mean": {
+    "name": "Rata-rata terbobot",
+    "oneLiner": "Rata-rata yang dihitung dengan memperhitungkan tingkat kepentingan (bobot) setiap data",
+    "description": "Rata-rata terbobot tidak memperlakukan semua data sama rata: setiap data dikalikan dengan bobot yang menyatakan tingkat kepentingannya, dijumlahkan, lalu dibagi dengan jumlah bobotnya. Perhitungan nilai sekolah dengan jumlah satuan kredit yang berbeda tiap mata pelajaran adalah contoh yang paling khas.",
+    "field": "Statistika",
+    "significance": "Ketika tingkat kepentingan tiap data berbeda, cara ini memberi nilai wakil yang lebih tepat daripada rata-rata hitung biasa.",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "Rata-rata terbobot",
+        "description": "Nilai rata-rata yang dihitung dengan memperhitungkan bobot.",
+        "kind": "output"
+      },
+      "w_i": {
+        "role": "Bobot",
+        "description": "Tingkat kepentingan atau porsi dari data ke-i.",
+        "kind": "input"
+      },
+      "x_i": {
+        "role": "Nilai data ke-i",
+        "description": "Nilai ke-i dalam himpunan data.",
+        "kind": "input"
+      },
+      "\\sum w_i x_i": {
+        "role": "Jumlah terbobot",
+        "description": "Jumlah dari hasil kali setiap data dengan bobotnya.",
+        "kind": "structural"
+      },
+      "\\sum w_i": {
+        "role": "Jumlah bobot",
+        "description": "Nilai hasil penjumlahan seluruh bobot.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung rata-rata nilai kuliah (IPK) dengan satuan kredit (bobot) yang berbeda tiap mata kuliah",
+      "Menghitung total nilai penilaian kinerja yang bobot tiap komponennya berbeda",
+      "Menghitung rata-rata imbal hasil portofolio investasi dengan memperhitungkan porsi tiap saham"
+    ],
+    "relatedFormulas": ["arithmetic-mean", "variance-basic"]
+  },
+  "coefficient-of-variation": {
+    "name": "Koefisien variasi",
+    "oneLiner": "Nilai untuk membandingkan tingkat sebaran tanpa terpengaruh satuan, dengan membagi simpangan baku oleh rata-rata",
+    "description": "Koefisien variasi adalah rasio simpangan baku terhadap rata-rata. Ia memungkinkan kita membandingkan tingkat sebaran secara adil, bahkan antara data yang satuannya berbeda atau besar rata-ratanya berbeda. Biasanya dinyatakan dalam persen (%).",
+    "field": "Statistika",
+    "significance": "Ini ukuran tanpa satuan yang memungkinkan perbandingan keragaman antardata dengan satuan atau skala yang berbeda.",
+    "elementMeanings": {
+      "CV": {
+        "role": "Koefisien variasi",
+        "description": "Simpangan baku dibagi rata-rata. Menyatakan tingkat sebaran secara relatif.",
+        "kind": "output"
+      },
+      "\\sigma": {
+        "role": "Simpangan baku",
+        "description": "Tingkat sebaran data.",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "Rata-rata",
+        "description": "Rata-rata hitung dari seluruh data. Nilainya tidak boleh 0.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Membandingkan secara adil tingkat sebaran tinggi badan (cm) dan berat badan (kg)",
+      "Membandingkan keragaman relatif nilai ujian dari mata pelajaran yang berbeda",
+      "Membandingkan keseragaman mutu produk berbeda yang diproduksi pabrik A dan B"
+    ],
+    "relatedFormulas": ["std-dev-basic", "arithmetic-mean", "variance-basic"]
+  }
+}

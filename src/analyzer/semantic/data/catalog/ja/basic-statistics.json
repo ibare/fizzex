@@ -1,0 +1,206 @@
+{
+  "arithmetic-mean": {
+    "name": "算術平均",
+    "oneLiner": "すべてのデータ値を足してから個数で割った代表値",
+    "description": "算術平均はデータ全体を合計してデータの個数で割った値です。「平均」といえばふつうこの算術平均を指します。データの中心がどこにあるかを最も簡単に示す代表値で、日常生活で最もよく使われる統計量です。",
+    "field": "統計学",
+    "significance": "データを一つの数にまとめる最も基本的な方法であり、ほとんどすべての統計分析の出発点です。",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "算術平均",
+        "description": "データ全体の平均値です。",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "個々のデータ値",
+        "description": "データの集まりの中の i 番目の値です。",
+        "kind": "input"
+      },
+      "n": {
+        "role": "データの個数",
+        "description": "データがいくつあるかを表します。",
+        "kind": "input"
+      },
+      "\\sum": {
+        "role": "総和記号",
+        "description": "すべてのデータ値を足しなさいという意味です。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "クラスの生徒の試験の点数の平均を求める",
+      "1か月間の日ごとの気温の平均を計算する",
+      "お小遣いの支出記録から1日あたりの平均支出額を求める"
+    ],
+    "relatedFormulas": [
+      "weighted-mean",
+      "variance-basic",
+      "std-dev-basic"
+    ]
+  },
+  "variance-basic": {
+    "name": "分散",
+    "oneLiner": "各データが平均からどれだけ離れているかを2乗して平均した値",
+    "description": "分散はデータが平均のまわりにどれだけ散らばっているかを一つの数で表す尺度です。各データから平均を引き、その差を2乗して、すべて足してからデータの個数で割ります。値が大きいほどデータが広く散らばっているという意味です。",
+    "field": "統計学",
+    "significance": "データの散らばりの程度を数量化する中心的な尺度で、標準偏差とともに統計分析の基礎になります。",
+    "elementMeanings": {
+      "\\sigma^2": {
+        "role": "分散",
+        "description": "母分散です。データの散らばりの程度を表します。",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "個々のデータ値",
+        "description": "データの集まりの中の i 番目の値です。",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "平均",
+        "description": "データ全体の算術平均です。",
+        "kind": "output"
+      },
+      "(x_i - \\bar{x})^2": {
+        "role": "偏差の2乗",
+        "description": "各データが平均からどれだけ離れているかを2乗した値です。",
+        "kind": "structural"
+      },
+      "n": {
+        "role": "データの個数",
+        "description": "データ全体の数です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "二つのクラスの試験の点数が同じ平均でも分散で成績の分布の違いを比べる",
+      "工場で製品の重さのそろい具合を確かめるときに分散を使う",
+      "株式の収益率の変動の幅を分散で測る"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "std-dev-basic",
+      "coefficient-of-variation"
+    ]
+  },
+  "std-dev-basic": {
+    "name": "標準偏差",
+    "oneLiner": "データが平均からどれだけ散らばっているかをもとの単位で表す尺度",
+    "description": "標準偏差は分散に平方根をとった値です。分散は2乗した単位なので直感的に読み取りにくいのですが、平方根をとるともとのデータと同じ単位になり、「平均からおおよそこれくらい離れている」とすぐに理解できます。",
+    "field": "統計学",
+    "significance": "もとのデータと同じ単位で散らばりを表すので解釈が直感的で、正規分布とともに最も広く使われる散らばりの尺度です。",
+    "elementMeanings": {
+      "\\sigma": {
+        "role": "標準偏差",
+        "description": "母標準偏差です。データの散らばりの程度をもとの単位で表します。",
+        "kind": "output"
+      },
+      "x_i": {
+        "role": "個々のデータ値",
+        "description": "データの集まりの中の i 番目の値です。",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "平均",
+        "description": "データ全体の算術平均です。",
+        "kind": "output"
+      },
+      "n": {
+        "role": "データの個数",
+        "description": "データ全体の数です。",
+        "kind": "input"
+      },
+      "\\sqrt{}": {
+        "role": "平方根",
+        "description": "分散に平方根をとってもとの単位に戻します。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "生徒の身長のデータで「平均165cm、標準偏差5cm」のように散らばりを表す",
+      "試験の点数の標準偏差で成績の分布がそろっているかを判断する",
+      "天気予報で気温の変動の幅を標準偏差で説明する"
+    ],
+    "relatedFormulas": [
+      "variance-basic",
+      "arithmetic-mean",
+      "coefficient-of-variation"
+    ]
+  },
+  "weighted-mean": {
+    "name": "加重平均",
+    "oneLiner": "各データに重要度(重み)を反映させて求めた平均",
+    "description": "加重平均はすべてのデータを同じように扱わず、データごとに重要度を表す重みを掛けてから合計し、重みの合計で割った値です。科目ごとに単位数が異なる学校の成績の計算が代表的な例です。",
+    "field": "統計学",
+    "significance": "データごとに重要度が異なるとき、単純な算術平均よりも正確な代表値を与えます。",
+    "elementMeanings": {
+      "\\bar{x}": {
+        "role": "加重平均",
+        "description": "重みを反映させて計算した平均値です。",
+        "kind": "output"
+      },
+      "w_i": {
+        "role": "重み",
+        "description": "i 番目のデータの重要度または比重です。",
+        "kind": "input"
+      },
+      "x_i": {
+        "role": "個々のデータ値",
+        "description": "データの集まりの中の i 番目の値です。",
+        "kind": "input"
+      },
+      "\\sum w_i x_i": {
+        "role": "重み付きの和",
+        "description": "各データに重みを掛けた値をすべて足したものです。",
+        "kind": "structural"
+      },
+      "\\sum w_i": {
+        "role": "重みの合計",
+        "description": "すべての重みを足した値です。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "科目ごとの単位数(重み)が異なる大学の成績平均(GPA)を計算する",
+      "課題ごとに配点が異なる実技評価の総点を出す",
+      "投資ポートフォリオで銘柄ごとの比重を反映した平均収益率を計算する"
+    ],
+    "relatedFormulas": [
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  },
+  "coefficient-of-variation": {
+    "name": "変動係数",
+    "oneLiner": "標準偏差を平均で割って、単位に関係なく散らばりを比べられるようにした値",
+    "description": "変動係数は標準偏差を平均で割った比です。単位が違ったり平均の大きさが違ったりするデータどうしでも、散らばりの程度を公平に比べられるようにしてくれます。ふつうは百分率(%)で表します。",
+    "field": "統計学",
+    "significance": "単位や規模の異なるデータの間で変動の大きさを比べられる無次元の尺度です。",
+    "elementMeanings": {
+      "CV": {
+        "role": "変動係数",
+        "description": "標準偏差を平均で割った値です。相対的な散らばりの程度を表します。",
+        "kind": "output"
+      },
+      "\\sigma": {
+        "role": "標準偏差",
+        "description": "データの散らばりの程度です。",
+        "kind": "input"
+      },
+      "\\bar{x}": {
+        "role": "平均",
+        "description": "データ全体の算術平均です。0であってはいけません。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "身長(cm)と体重(kg)の散らばりの程度を公平に比べる",
+      "異なる科目の試験の点数の相対的な変動を比べる",
+      "工場AとBで作る異なる製品の品質のそろい具合を比べる"
+    ],
+    "relatedFormulas": [
+      "std-dev-basic",
+      "arithmetic-mean",
+      "variance-basic"
+    ]
+  }
+}

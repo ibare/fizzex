@@ -1,0 +1,168 @@
+{
+  "direct-proportion": {
+    "name": "Proporcionalidade direta",
+    "oneLiner": "Relação em que, quando uma grandeza aumenta, a outra aumenta na mesma proporção",
+    "description": "Na proporcionalidade direta y = kx, se x dobra, y também dobra; se x triplica, y também triplica. O gráfico é uma reta que passa pela origem, e k é a constante de proporcionalidade.",
+    "field": "Álgebra",
+    "significance": "Representa a relação proporcional mais básica e, sendo o caso particular da função afim em que o coeficiente linear é 0, é o ponto de partida de todo o estudo das proporções.",
+    "elementMeanings": {
+      "y": {
+        "role": "variável dependente",
+        "description": "É o valor de saída determinado por x.",
+        "kind": "output"
+      },
+      "k": {
+        "role": "constante de proporcionalidade",
+        "description": "É a razão constante entre x e y. Pode ser obtida por k = y/x.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "variável independente",
+        "description": "É o valor de entrada, escolhido livremente.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "A relação entre a quantidade de maçãs e o preço quando cada maçã custa R$ 5",
+      "A relação entre tempo e distância quando se corre a uma velocidade constante"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "inverse-proportion"
+    ]
+  },
+  "inverse-proportion": {
+    "name": "Proporcionalidade inversa",
+    "oneLiner": "Relação em que, quando uma grandeza aumenta, a outra diminui na mesma proporção",
+    "description": "Na proporcionalidade inversa y = k/x, se x dobra, y cai pela metade; se x triplica, y passa a um terço. O gráfico tem forma de hipérbole e se aproxima indefinidamente dos eixos x e y, sem nunca tocá-los.",
+    "field": "Álgebra",
+    "significance": "Representa a relação em que o produto se mantém constante e é a base matemática de diversos fenômenos, como a lei de Boyle na física e a relação entre trabalho e tempo.",
+    "elementMeanings": {
+      "y": {
+        "role": "variável dependente",
+        "description": "É o valor de saída determinado por x.",
+        "kind": "output"
+      },
+      "k": {
+        "role": "constante de proporcionalidade",
+        "description": "É o valor do produto de x por y, que se mantém sempre o mesmo. Pode ser obtido por k = xy.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "variável independente",
+        "description": "É o valor de entrada, que não pode ser 0.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "A relação em que, para percorrer a mesma distância, quanto maior a velocidade, menor o tempo",
+      "A relação em que, num retângulo de área fixa, quanto maior a base, menor a altura"
+    ],
+    "relatedFormulas": [
+      "direct-proportion",
+      "speed-formula"
+    ]
+  },
+  "percentage": {
+    "name": "Porcentagem",
+    "oneLiner": "O tamanho que uma parte ocupa quando o todo é tomado como 100",
+    "description": "A porcentagem p = (parte/todo) x 100 expressa a fração que uma quantidade ocupa do todo tomando 100 como referência. Usa o símbolo de por cento (%) e facilita comparações e comunicação.",
+    "field": "Aritmética",
+    "significance": "É a forma de expressar razões mais usada no dia a dia: descontos, taxas de juros, notas e estatísticas.",
+    "elementMeanings": {
+      "p": {
+        "role": "porcentagem",
+        "description": "É a razão calculada tomando o todo como 100. A unidade é %.",
+        "kind": "output",
+        "unit": "%"
+      },
+      "부분": {
+        "role": "quantidade comparada",
+        "description": "É o tamanho da parte do todo que se quer conhecer.",
+        "kind": "input"
+      },
+      "전체": {
+        "role": "quantidade de referência",
+        "description": "É o tamanho total, que corresponde a 100%.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "A proporção de questões acertadas numa prova (nota 80 = 80%)",
+      "Calcular o valor real do desconto de um produto com 30% de abatimento"
+    ],
+    "relatedFormulas": [
+      "direct-proportion"
+    ]
+  },
+  "speed-formula": {
+    "name": "Fórmula da velocidade",
+    "oneLiner": "Fórmula que obtém a rapidez dividindo a distância percorrida pelo tempo gasto",
+    "description": "A fórmula da velocidade v = d/t indica a distância que um objeto percorre por unidade de tempo. É a fórmula física mais básica, organizando a relação entre as três grandezas: distância, tempo e velocidade.",
+    "field": "Física",
+    "significance": "É a fórmula mais elementar para descrever o movimento e o ponto de partida para entender a relação entre distância, tempo e velocidade.",
+    "elementMeanings": {
+      "v": {
+        "role": "velocidade",
+        "description": "É a distância percorrida por unidade de tempo. Exemplo: 60 km/h significa percorrer 60 km em 1 hora.",
+        "kind": "output",
+        "unit": "m/s"
+      },
+      "d": {
+        "role": "distância",
+        "description": "É o comprimento efetivamente percorrido pelo objeto.",
+        "kind": "input",
+        "unit": "m"
+      },
+      "t": {
+        "role": "tempo",
+        "description": "É o tempo gasto no deslocamento.",
+        "kind": "input",
+        "unit": "s"
+      }
+    },
+    "realWorldExamples": [
+      "Obter a velocidade em km/h de um carro que percorreu 120 km em 2 horas",
+      "Calcular o tempo e a velocidade média numa corrida de 100 m"
+    ],
+    "relatedFormulas": [
+      "direct-proportion",
+      "inverse-proportion",
+      "density-formula"
+    ]
+  },
+  "density-formula": {
+    "name": "Fórmula da densidade",
+    "oneLiner": "Fórmula que indica o quanto de matéria está concentrado em uma unidade de volume",
+    "description": "A fórmula da densidade divide a massa pelo volume para obter o quanto a matéria está concentrada. Para um mesmo tamanho, quanto maior a massa, maior a densidade; para uma mesma massa, quanto maior o volume, menor a densidade.",
+    "field": "Física",
+    "significance": "É uma grandeza física fundamental, usada para distinguir tipos de material e para julgar se um corpo flutua ou afunda na água.",
+    "elementMeanings": {
+      "\\rho": {
+        "role": "densidade",
+        "description": "É a massa por unidade de volume. A unidade costuma ser g/cm3 ou kg/m3.",
+        "kind": "output",
+        "unit": "kg/m3"
+      },
+      "m": {
+        "role": "massa",
+        "description": "É o valor que indica a quantidade de matéria do corpo. A unidade é g ou kg.",
+        "kind": "input",
+        "unit": "kg"
+      },
+      "V": {
+        "role": "volume",
+        "description": "É o tamanho do espaço ocupado pelo corpo. A unidade é cm3 ou m3.",
+        "kind": "input",
+        "unit": "m3"
+      }
+    },
+    "realWorldExamples": [
+      "Por que uma bola de ferro afunda e um bloco de madeira flutua na água",
+      "Como distinguir ouro verdadeiro de ouro falso pela densidade"
+    ],
+    "relatedFormulas": [
+      "speed-formula"
+    ]
+  }
+}

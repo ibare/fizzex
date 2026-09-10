@@ -1,0 +1,285 @@
+{
+  "ohm-law": {
+    "name": "オームの法則",
+    "oneLiner": "電圧が電流と抵抗の積に等しいという電気回路の基本法則",
+    "description": "オームの法則は、導体を流れる電流が両端の電圧に比例し、抵抗に反比例することを表します。電気回路を調べるうえで最も基本となる関係式で、抵抗が一定の線形な素子で成り立ちます。回路の設計と解析の出発点です。",
+    "discoverer": "ゲオルク・ジーモン・オーム",
+    "field": "電気工学",
+    "significance": "電圧・電流・抵抗の量的な関係を確立し、電気回路理論の土台をつくりました。",
+    "elementMeanings": {
+      "V": {
+        "role": "電圧",
+        "description": "導体の両端にかかる電位差。単位はボルト(V)。",
+        "kind": "input"
+      },
+      "I": {
+        "role": "電流",
+        "description": "導体を通って流れる電荷の流れ。単位はアンペア(A)。",
+        "kind": "input"
+      },
+      "R": {
+        "role": "抵抗",
+        "description": "電流の流れをさまたげる度合い。単位はオーム(Ohm)。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "電球にかかる電圧と明るさの関係",
+      "家庭用の電気ヒーターの消費電力の計算"
+    ],
+    "relatedFormulas": [
+      "electric-power",
+      "kirchhoff-voltage",
+      "impedance"
+    ]
+  },
+  "electric-power": {
+    "name": "電力",
+    "oneLiner": "電気エネルギーが単位時間あたりに消費または供給される割合を表す式",
+    "description": "電力は電圧と電流の積として定義され、電気エネルギーが変換される速さを表します。オームの法則と組み合わせると P=I²R や P=V²/R とも書けます。電気システムの効率や容量の設計に欠かせない物理量です。",
+    "discoverer": "ジェームズ・ワット",
+    "field": "電気工学",
+    "significance": "電気エネルギーの消費と供給を数量化し、発電・送電・配電システムの設計の基礎を与えます。",
+    "elementMeanings": {
+      "P": {
+        "role": "電力",
+        "description": "単位時間あたりに消費または供給されるエネルギー。単位はワット(W)。",
+        "kind": "output"
+      },
+      "I": {
+        "role": "電流",
+        "description": "回路を流れる電流。単位はアンペア(A)。",
+        "kind": "input"
+      },
+      "V": {
+        "role": "電圧",
+        "description": "回路の両端の電位差。単位はボルト(V)。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "家電製品に表示される消費電力",
+      "電気料金を計算するときのもとになる量"
+    ],
+    "relatedFormulas": [
+      "ohm-law",
+      "kirchhoff-voltage",
+      "kirchhoff-current"
+    ]
+  },
+  "kirchhoff-voltage": {
+    "name": "キルヒホッフの電圧則",
+    "oneLiner": "閉回路を一周したとき電圧降下の和が0になる法則",
+    "description": "キルヒホッフの電圧則(KVL)は、任意の閉じたループに沿って、すべての電圧降下と電圧上昇の代数和が0になることを表します。エネルギー保存則を電気の言葉で言いかえたもので、複雑な回路網で未知の電圧を求めるのに欠かせません。",
+    "discoverer": "グスタフ・キルヒホフ",
+    "field": "電気工学",
+    "significance": "複雑な回路網の解析を筋道立てて行えるようにし、現代の回路理論の柱の一つになりました。",
+    "elementMeanings": {
+      "\\sum V": {
+        "role": "電圧の和",
+        "description": "閉ループ内のすべての電圧降下と上昇の代数和。つねに0です。",
+        "kind": "output"
+      },
+      "V_k": {
+        "role": "個々の電圧",
+        "description": "ループ内の各素子にかかる電圧。電源は正、抵抗は負の符号をとります。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "直列回路で各抵抗にかかる電圧の分配を計算する",
+      "電子回路基板の電圧レベルの設計"
+    ],
+    "relatedFormulas": [
+      "kirchhoff-current",
+      "ohm-law",
+      "impedance"
+    ]
+  },
+  "kirchhoff-current": {
+    "name": "キルヒホッフの電流則",
+    "oneLiner": "回路の任意の節点で入る電流と出る電流の和が0になる法則",
+    "description": "キルヒホッフの電流則(KCL)は、回路のどの節点(ノード)でも、流れ込む電流の合計が流れ出る電流の合計と等しいことを表します。電荷保存則から直接導かれるもので、並列回路の解析に欠かせません。",
+    "discoverer": "グスタフ・キルヒホフ",
+    "field": "電気工学",
+    "significance": "電荷保存の原理を回路の解析に持ち込み、節点解析法の基礎を確立しました。",
+    "elementMeanings": {
+      "\\sum I": {
+        "role": "電流の和",
+        "description": "一つの節点に入り、また出るすべての電流の代数和。つねに0です。",
+        "kind": "output"
+      },
+      "I_k": {
+        "role": "個々の電流",
+        "description": "節点につながる各枝(branch)を流れる電流です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "並列抵抗回路で各枝を流れる電流を計算する",
+      "電力の分配システムにおける負荷のつり合いの分析"
+    ],
+    "relatedFormulas": [
+      "kirchhoff-voltage",
+      "ohm-law",
+      "electric-power"
+    ]
+  },
+  "rc-time-constant": {
+    "name": "RC時定数",
+    "oneLiner": "抵抗とコンデンサの回路で充電や放電の速さを決める時間の定数",
+    "description": "RC時定数は抵抗と静電容量の積として定義され、コンデンサが最終的な電圧の約63.2%まで充電されるのにかかる時間を表します。フィルタの設計、タイミング回路、信号処理など、さまざまな電子回路で過渡応答の特性を決める重要なパラメータです。",
+    "discoverer": "電気工学における共同の発展",
+    "field": "電気工学",
+    "significance": "過渡応答と周波数の特性を一つのパラメータにまとめ、アナログ回路設計の中心的な道具になりました。",
+    "elementMeanings": {
+      "\\tau": {
+        "role": "時定数",
+        "description": "回路の過渡応答の速さを決める時間の定数。単位は秒(s)。",
+        "kind": "output"
+      },
+      "R": {
+        "role": "抵抗",
+        "description": "回路の抵抗の値。単位はオーム(Ohm)。",
+        "kind": "input"
+      },
+      "C": {
+        "role": "静電容量",
+        "description": "コンデンサが電荷をためられる量。単位はファラド(F)。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "カメラのフラッシュの充電時間を決める",
+      "タッチスクリーンのタッチを感知する回路"
+    ],
+    "relatedFormulas": [
+      "ohm-law",
+      "impedance",
+      "resonance-frequency"
+    ]
+  },
+  "impedance": {
+    "name": "インピーダンス",
+    "oneLiner": "交流回路で抵抗・誘導リアクタンス・容量リアクタンスをまとめた全体の抵抗",
+    "description": "インピーダンスは、交流回路で電流の流れをさまたげる働きを全体として表したものです。純粋な抵抗の成分と、リアクタンスの成分(誘導性と容量性の差)を三平方の定理で合成したものです。交流回路の解析や電力伝送の効率を高めるうえで欠かせない考え方です。",
+    "discoverer": "オリバー・ヘヴィサイド",
+    "field": "電気工学",
+    "significance": "交流回路の複雑な位相の関係を一つの物理量にまとめ、交流回路の解析を体系づけました。",
+    "elementMeanings": {
+      "Z": {
+        "role": "インピーダンス",
+        "description": "交流回路の全体の抵抗。単位はオーム(Ohm)。",
+        "kind": "output"
+      },
+      "R": {
+        "role": "抵抗",
+        "description": "純粋な抵抗の成分。エネルギーを消費します。",
+        "kind": "input"
+      },
+      "X_L": {
+        "role": "誘導リアクタンス",
+        "description": "コイルによるリアクタンス。X_L = 2πfL。",
+        "kind": "input"
+      },
+      "X_C": {
+        "role": "容量リアクタンス",
+        "description": "コンデンサによるリアクタンス。X_C = 1/(2πfC)。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "スピーカーシステムの周波数ごとの応答特性の設計",
+      "送電線での電力の損失を最小にする"
+    ],
+    "relatedFormulas": [
+      "ohm-law",
+      "resonance-frequency",
+      "rc-time-constant"
+    ]
+  },
+  "resonance-frequency": {
+    "name": "共振周波数",
+    "oneLiner": "LC回路で誘導リアクタンスと容量リアクタンスが等しくなる周波数",
+    "description": "共振周波数は、コイルとコンデンサでできた回路で、エネルギーが二つの素子の間を自由に行き来する固有の振動数です。この周波数でインピーダンスが最小(直列)または最大(並列)になり、ラジオ受信機の周波数の選択から無線充電まで、幅広く使われています。",
+    "discoverer": "ウィリアム・トムソン(ケルビン卿)",
+    "field": "電気工学",
+    "significance": "周波数を選び出す回路の原理を与え、無線通信とフィルタ設計の基礎を確立しました。",
+    "elementMeanings": {
+      "f_0": {
+        "role": "共振周波数",
+        "description": "回路が共振する固有の周波数。単位はヘルツ(Hz)。",
+        "kind": "output"
+      },
+      "L": {
+        "role": "インダクタンス",
+        "description": "コイルが磁気のエネルギーをためる能力。単位はヘンリー(H)。",
+        "kind": "input"
+      },
+      "C": {
+        "role": "静電容量",
+        "description": "コンデンサが電気のエネルギーをためる能力。単位はファラド(F)。",
+        "kind": "input"
+      },
+      "2\\pi": {
+        "role": "円周率の係数",
+        "description": "角周波数とふつうの周波数との間の変換の係数です。",
+        "kind": "constant",
+        "value": 6.283185307,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "ラジオの周波数のチューニング",
+      "MRI装置の共鳴周波数の設定"
+    ],
+    "relatedFormulas": [
+      "impedance",
+      "rc-time-constant",
+      "shannon-capacity"
+    ]
+  },
+  "shannon-capacity": {
+    "name": "シャノンの通信路容量",
+    "oneLiner": "雑音のある通信路で誤りなく送れる情報の最大の伝送速度",
+    "description": "シャノンの通信路容量の定理は、与えられた帯域幅と信号対雑音比(SNR)のもとで理論的に達成できるデータ伝送速度の上限を定めます。帯域幅が広いほど、またSNRが高いほど多くの情報を送れることを量的に示します。情報理論と現代の通信システム設計における根本的な限界を示すものです。",
+    "discoverer": "クロード・シャノン",
+    "field": "電気工学",
+    "significance": "情報理論の中心的な成果であり、あらゆるデジタル通信システムの設計に理論上の上限を与えました。",
+    "elementMeanings": {
+      "C": {
+        "role": "通信路容量",
+        "description": "誤りなく送れる最大のビット速度。単位はビット毎秒(bps)。",
+        "kind": "output"
+      },
+      "B": {
+        "role": "帯域幅",
+        "description": "通信路が使える周波数の範囲の幅。単位はヘルツ(Hz)。",
+        "kind": "input"
+      },
+      "S": {
+        "role": "信号電力",
+        "description": "受信した信号の平均の電力です。",
+        "kind": "input"
+      },
+      "N": {
+        "role": "雑音電力",
+        "description": "通信路の平均の雑音電力です。",
+        "kind": "input"
+      },
+      "\\log_2": {
+        "role": "底が2の対数",
+        "description": "結果をビットの単位で表すための対数関数です。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "5G移動通信システムの理論上の最大伝送速度を計算する",
+      "Wi-Fiのチャンネル設計で帯域幅を決める"
+    ],
+    "relatedFormulas": [
+      "resonance-frequency",
+      "ohm-law"
+    ]
+  }
+}

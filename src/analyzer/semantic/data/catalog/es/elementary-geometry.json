@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "Área del triángulo",
+    "oneLiner": "La fórmula que obtiene el área de un triángulo multiplicando la base por la altura y dividiendo entre dos",
+    "description": "El área de un triángulo es el resultado de multiplicar la longitud de la base por la altura y dividir entre 2. Si se corta un rectángulo por su diagonal salen dos triángulos, y por eso el área es la mitad de la del rectángulo.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el triángulo.", "kind": "output" },
+      "b": { "role": "Base", "description": "Es la longitud del lado inferior del triángulo.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia perpendicular desde la base hasta el vértice.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Mitad", "description": "Significa que es la mitad del rectángulo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Hallar la superficie triangular de un tejado", "Calcular la tela que ocupa un banderín triangular"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "Área del rectángulo",
+    "oneLiner": "La fórmula que obtiene el área de un rectángulo multiplicando el largo por el ancho",
+    "description": "El área de un rectángulo es el resultado de multiplicar el largo por el ancho. En un cuadrilátero con los cuatro ángulos rectos, equivale a contar cuántos cuadrados unidad caben en una fila y multiplicarlo por el número de filas.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el rectángulo.", "kind": "output" },
+      "l": { "role": "Largo", "description": "Es la longitud horizontal del rectángulo.", "kind": "input" },
+      "w": { "role": "Ancho", "description": "Es la longitud vertical del rectángulo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Hallar la superficie del suelo de una habitación", "Calcular el área de una pizarra", "Comparar el tamaño de la pantalla de un teléfono móvil"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "Área del cuadrado",
+    "oneLiner": "La fórmula que obtiene el área de un cuadrado elevando al cuadrado la longitud de un lado",
+    "description": "El área de un cuadrado es el resultado de multiplicar la longitud de un lado por sí misma. Como los cuatro lados miden lo mismo, es el mismo principio que el área de un rectángulo cuyo largo y ancho coinciden.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el cuadrado.", "kind": "output" },
+      "s": { "role": "Lado", "description": "Es la longitud de un lado del cuadrado.", "kind": "input" },
+      "s^2": { "role": "Cuadrado del lado", "description": "Es el resultado de multiplicar dos veces la longitud del lado.", "kind": "output" }
+    },
+    "realWorldExamples": ["Hallar la superficie de una baldosa", "Calcular el tamaño de un marco cuadrado"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "Área del paralelogramo",
+    "oneLiner": "La fórmula que obtiene el área de un paralelogramo multiplicando la base por la altura",
+    "description": "El área de un paralelogramo es el resultado de multiplicar la longitud de la base por la altura. Si se corta el paralelogramo y se recoloca la pieza se obtiene un rectángulo, por eso la fórmula tiene la misma forma que la del área del rectángulo.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el paralelogramo.", "kind": "output" },
+      "b": { "role": "Base", "description": "Es la longitud del lado inferior del paralelogramo.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia perpendicular entre los dos lados paralelos.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular la superficie del cristal de una ventana inclinada", "El tamaño de un tapete de mesa con forma de paralelogramo"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "Área del trapecio",
+    "oneLiner": "La fórmula que multiplica por la altura la suma de la base menor y la base mayor y divide el resultado entre dos",
+    "description": "El área de un trapecio es el resultado de sumar las longitudes de los dos lados paralelos (la base menor y la base mayor), multiplicar por la altura y dividir entre 2. Si se juntan dos trapecios iguales dándole la vuelta a uno se obtiene un paralelogramo, y como el trapecio es la mitad, se divide entre 2.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el trapecio.", "kind": "output" },
+      "a": { "role": "Base menor", "description": "Es la longitud del lado paralelo superior del trapecio.", "kind": "input" },
+      "b": { "role": "Base mayor", "description": "Es la longitud del lado paralelo inferior del trapecio.", "kind": "input" },
+      "h": { "role": "Altura", "description": "Es la distancia perpendicular entre los dos lados paralelos.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Mitad", "description": "Significa que es la mitad del paralelogramo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Hallar la superficie de un parterre con forma de trapecio", "Calcular la superficie de un tejado trapezoidal"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "Área del rombo",
+    "oneLiner": "La fórmula que obtiene el área de un rombo multiplicando las longitudes de sus dos diagonales y dividiendo entre dos",
+    "description": "El área de un rombo es el producto de las longitudes de sus dos diagonales dividido entre 2. Las dos diagonales del rombo se cortan perpendicularmente, y si se corta por ellas y se recolocan las piezas se obtiene la mitad de un rectángulo.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el rombo.", "kind": "output" },
+      "d_1": { "role": "Diagonal 1", "description": "Es la longitud de una de las diagonales del rombo.", "kind": "input" },
+      "d_2": { "role": "Diagonal 2", "description": "Es la longitud de la otra diagonal del rombo.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Mitad", "description": "Significa que es la mitad del rectángulo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Calcular la superficie de una gema con forma de rombo", "Hallar la tela que ocupa una cometa"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "Área del círculo",
+    "oneLiner": "La fórmula que obtiene el área de un círculo multiplicando el cuadrado del radio por el número pi",
+    "description": "El área de un círculo es el cuadrado del radio multiplicado por el número pi. Si se corta el círculo en porciones muy finas y se colocan alternadas se obtiene algo muy parecido a un rectángulo, cuyo largo es la mitad de la circunferencia y cuyo ancho es el radio; de ahí sale esta fórmula.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el círculo.", "kind": "output" },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de la circunferencia y el diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es la distancia desde el centro del círculo hasta el borde.", "kind": "input" },
+      "r^2": { "role": "Cuadrado del radio", "description": "Es el resultado de multiplicar dos veces el radio.", "kind": "input" }
+    },
+    "realWorldExamples": ["Comparar el tamaño de las pizzas", "Hallar la superficie de un reloj redondo", "Calcular el área de una moneda"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "Longitud de la circunferencia",
+    "oneLiner": "La fórmula que obtiene la longitud de una circunferencia multiplicando el doble del radio por el número pi",
+    "description": "La longitud de la circunferencia es el doble del radio, es decir, el diámetro, multiplicado por el número pi. La distancia recorrida al dar una vuelta completa siguiendo el círculo es precisamente la longitud de la circunferencia.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "C": { "role": "Longitud de la circunferencia", "description": "Es la longitud total medida a lo largo del borde exterior del círculo.", "kind": "output" },
+      "2": { "role": "Constante", "description": "Es el valor que convierte el radio en diámetro.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de la circunferencia y el diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radio", "description": "Es la distancia desde el centro del círculo hasta el borde.", "kind": "input" }
+    },
+    "realWorldExamples": ["La distancia que recorre la rueda de una bicicleta en una vuelta completa", "La longitud de una vuelta a una pista circular"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "Área del sector circular",
+    "oneLiner": "La fórmula que obtiene el área de un sector circular multiplicando el cuadrado del radio por el ángulo central y dividiendo entre dos",
+    "description": "El área de un sector circular es el cuadrado del radio multiplicado por el ángulo central (en radianes) y dividido entre 2. Como el sector es una parte del círculo, cuanto mayor es el ángulo central, mayor es también su área.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el sector circular.", "kind": "output" },
+      "r": { "role": "Radio", "description": "Es la longitud del radio del sector circular.", "kind": "input" },
+      "r^2": { "role": "Cuadrado del radio", "description": "Es el resultado de multiplicar dos veces el radio.", "kind": "input" },
+      "\\theta": { "role": "Ángulo central", "description": "Es el ángulo que abarca el sector desde el centro (en radianes).", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "Mitad", "description": "Es el coeficiente que aparece en la fórmula del área.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["La superficie que barre el minutero de un reloj", "La superficie de una porción de pizza"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "Longitud de arco",
+    "oneLiner": "La fórmula que obtiene la longitud de un arco multiplicando el radio por el ángulo central",
+    "description": "La longitud de un arco es el radio multiplicado por el ángulo central (en radianes). El arco es una parte de la circunferencia, y cuando el ángulo central es una vuelta completa (2 pi), la longitud del arco coincide con la de la circunferencia.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "l": { "role": "Longitud del arco", "description": "Es la longitud de una parte de la circunferencia.", "kind": "output" },
+      "r": { "role": "Radio", "description": "Es la distancia desde el centro del círculo hasta el borde.", "kind": "input" },
+      "\\theta": { "role": "Ángulo central", "description": "Es el ángulo central que corresponde al arco (en radianes).", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["La longitud del tramo curvo de una montaña rusa", "La longitud del arco entre dos marcas de un reloj"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "Perímetro del rectángulo",
+    "oneLiner": "La fórmula que obtiene el perímetro de un rectángulo duplicando la suma del largo y el ancho",
+    "description": "El perímetro de un rectángulo es el resultado de sumar el largo y el ancho y multiplicar por 2. Como los lados opuestos del rectángulo miden lo mismo, al sumar una pareja de largo y ancho y duplicarla se obtiene la longitud total de los cuatro lados.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "P": { "role": "Perímetro", "description": "Es la longitud total de los cuatro lados del rectángulo.", "kind": "output" },
+      "l": { "role": "Largo", "description": "Es la longitud horizontal del rectángulo.", "kind": "input" },
+      "w": { "role": "Ancho", "description": "Es la longitud vertical del rectángulo.", "kind": "input" },
+      "2": { "role": "Constante", "description": "Se multiplica por 2 porque hay dos parejas de lados opuestos.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["Calcular la longitud del borde de un marco", "La distancia recorrida al correr alrededor de un patio"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "Perímetro del triángulo",
+    "oneLiner": "La fórmula que obtiene el perímetro de un triángulo sumando las longitudes de sus tres lados",
+    "description": "El perímetro de un triángulo es la suma de las longitudes de sus tres lados. Coincide con la distancia total recorrida al dar una vuelta completa siguiendo su contorno.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "P": { "role": "Perímetro", "description": "Es la longitud total de los tres lados del triángulo.", "kind": "output" },
+      "a": { "role": "Primer lado", "description": "Es la longitud del primer lado del triángulo.", "kind": "input" },
+      "b": { "role": "Segundo lado", "description": "Es la longitud del segundo lado del triángulo.", "kind": "input" },
+      "c": { "role": "Tercer lado", "description": "Es la longitud del tercer lado del triángulo.", "kind": "input" }
+    },
+    "realWorldExamples": ["La longitud total de una valla con forma de triángulo", "La longitud de cinta necesaria para ribetear un banderín triangular"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "Área del polígono regular",
+    "oneLiner": "La fórmula que obtiene el área de un polígono regular a partir del número de lados, la longitud de un lado y la apotema",
+    "description": "El área de un polígono regular es el número de lados multiplicado por la longitud de un lado y por la apotema (la distancia perpendicular desde el centro hasta el lado), dividido entre 2. Si se divide el polígono regular en triángulos que parten del centro, equivale a sumar las áreas de todos esos triángulos.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa el polígono regular.", "kind": "output" },
+      "n": { "role": "Número de lados", "description": "Es la cantidad de lados del polígono regular.", "kind": "input" },
+      "s": { "role": "Longitud del lado", "description": "Es la longitud de un lado del polígono regular.", "kind": "input" },
+      "a": { "role": "Apotema", "description": "Es la distancia perpendicular desde el centro hasta el punto medio de un lado.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Mitad", "description": "Es el coeficiente que procede de la fórmula del área del triángulo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["La superficie de una celda hexagonal de un panal", "El área de un adorno con forma de estrella pentagonal"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "Área de la corona circular",
+    "oneLiner": "La fórmula que obtiene el área de una figura en forma de rosquilla multiplicando por el número pi la diferencia de los cuadrados de los radios del círculo mayor y el menor",
+    "description": "El área de una corona circular (con forma de rosquilla) es el área del círculo exterior menos la del círculo interior. Se resta el cuadrado del radio menor al cuadrado del radio mayor y se multiplica por el número pi.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "A": { "role": "Área", "description": "Es la superficie que ocupa la corona circular (la figura con forma de rosquilla).", "kind": "output" },
+      "\\pi": { "role": "Número pi", "description": "Es el cociente entre la longitud de la circunferencia y el diámetro, aproximadamente 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "Radio exterior", "description": "Es el radio del círculo grande exterior.", "kind": "input" },
+      "r": { "role": "Radio interior", "description": "Es el radio del círculo pequeño interior.", "kind": "input" },
+      "R^2 - r^2": { "role": "Diferencia de los cuadrados de los radios", "description": "Es el cuadrado del radio exterior menos el cuadrado del radio interior.", "kind": "output" }
+    },
+    "realWorldExamples": ["Hallar la superficie de la cara superior de una rosquilla", "La superficie de una pista circular de carreras"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "Suma de los ángulos interiores de un triángulo",
+    "oneLiner": "La propiedad según la cual la suma de los tres ángulos interiores de un triángulo es siempre 180 grados",
+    "description": "La suma de los ángulos interiores de un triángulo es la propiedad según la cual, al sumar los ángulos de sus tres vértices, se obtienen siempre 180 grados (media vuelta). Sea cual sea el triángulo —acutángulo, rectángulo u obtusángulo—, la suma de sus tres ángulos interiores es siempre 180 grados.",
+    "field": "Geometría",
+    "elementMeanings": {
+      "\\alpha": { "role": "Primer ángulo interior", "description": "Es el ángulo del primer vértice del triángulo.", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "Segundo ángulo interior", "description": "Es el ángulo del segundo vértice del triángulo.", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "Tercer ángulo interior", "description": "Es el ángulo del tercer vértice del triángulo.", "kind": "input", "unit": "deg" },
+      "180°": { "role": "Media vuelta", "description": "Es el ángulo que forma una línea recta y coincide con la suma de los ángulos interiores del triángulo.", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["Hallar el ángulo que falta cuando se conocen los otros dos", "Ajustar los ángulos de una estructura triangular en construcción"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

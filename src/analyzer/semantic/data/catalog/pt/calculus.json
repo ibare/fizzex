@@ -1,0 +1,330 @@
+{
+  "ftc": {
+    "name": "Teorema fundamental do cálculo",
+    "oneLiner": "Teorema que revela que a derivação e a integração são operações inversas uma da outra",
+    "description": "O teorema fundamental do cálculo mostra que a integral definida de uma função contínua é igual à diferença entre os valores da sua primitiva nos dois extremos. Graças a ele, é possível calcular uma integral definida apenas com a primitiva, sem obter a área diretamente. É o fundamento central que unifica derivação e integração num único sistema.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "Ao estabelecer que derivação e integração são operações inversas, assentou as bases de toda a análise.",
+    "elementMeanings": {
+      "f(x)": { "role": "integrando", "description": "É a função contínua que se quer integrar.", "kind": "structural" },
+      "F(x)": { "role": "primitiva", "description": "É a integral indefinida de f(x). Satisfaz F'(x) = f(x).", "kind": "structural" },
+      "a": { "role": "limite inferior de integração", "description": "É o ponto inicial do intervalo da integral definida.", "kind": "input" },
+      "b": { "role": "limite superior de integração", "description": "É o ponto final do intervalo da integral definida.", "kind": "input" },
+      "dx": { "role": "variável de integração", "description": "É a variação infinitesimal que indica que se integra em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "gaussian-integral"]
+  },
+  "taylor-series": {
+    "name": "Série de Taylor",
+    "oneLiner": "Desenvolvimento que representa uma função como um polinômio infinito em torno de um ponto",
+    "description": "A série de Taylor representa uma função infinitamente derivável como uma série de potências formada pelos valores das suas derivadas num ponto a. Cada termo é a derivada de ordem n dividida por n! e multiplicada por (x-a) elevado a n. É a ferramenta central para aproximar funções complicadas em cálculo numérico e em física.",
+    "discoverer": "Brook Taylor",
+    "field": "Cálculo",
+    "significance": "Permite aproximar por polinômios funções transcendentes como as trigonométricas e as exponenciais, sendo a base da análise numérica.",
+    "elementMeanings": {
+      "f(x)": { "role": "função original", "description": "É a função que se quer desenvolver em série.", "kind": "structural" },
+      "a": { "role": "centro do desenvolvimento", "description": "É o ponto de referência em torno do qual a série é desenvolvida. Se a=0, chama-se série de Maclaurin.", "kind": "input" },
+      "f^{(n)}(a)": { "role": "valor da derivada de ordem n", "description": "É o valor da n-ésima derivada no ponto a. Determina o coeficiente de cada termo.", "kind": "structural" },
+      "n!": { "role": "fatorial", "description": "É o fatorial de n. Fica no denominador de cada termo, ajustando o coeficiente.", "kind": "structural" },
+      "(x-a)^n": { "role": "termo de potência", "description": "É a n-ésima potência da distância até o centro do desenvolvimento a.", "kind": "structural" }
+    },
+    "relatedFormulas": ["euler-identity", "binomial-theorem", "derivative-definition"]
+  },
+  "gaussian-integral": {
+    "name": "Integral de Gauss",
+    "oneLiner": "Integral da função e elevado a menos x ao quadrado de menos infinito a mais infinito",
+    "description": "A integral de Gauss revela que o valor da integral de e elevado a menos x ao quadrado em toda a reta é raiz de pi. Embora não exista primitiva em termos de funções elementares, o valor da integral definida se obtém por um método engenhoso que usa a mudança para coordenadas polares. É o alicerce da distribuição normal na teoria da probabilidade e na estatística.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Cálculo",
+    "significance": "Fornece a constante de normalização da distribuição normal e desempenha papel central também nas integrais de caminho da mecânica quântica e da mecânica estatística.",
+    "elementMeanings": {
+      "e^{-x^2}": { "role": "função gaussiana", "description": "É a função em forma de sino. Quanto mais x se afasta de 0, mais bruscamente ela converge para 0.", "kind": "structural" },
+      "\\int_{-\\infty}^{\\infty}": { "role": "integral em toda a reta", "description": "É a integral de menos infinito a mais infinito.", "kind": "structural" },
+      "\\sqrt{\\pi}": { "role": "resultado da integral", "description": "É o valor da integral de Gauss, a raiz quadrada de pi.", "kind": "output" },
+      "dx": { "role": "variável de integração", "description": "Indica que se integra em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "ftc"]
+  },
+  "derivative-definition": {
+    "name": "Definição de derivada",
+    "oneLiner": "Expressão que define por meio de um limite a taxa de variação instantânea de uma função",
+    "description": "A definição de derivada é o limite da razão entre a variação do valor da função e a variação da variável independente. Quando esse limite existe, diz-se que a função é derivável naquele ponto, e o seu valor é a inclinação da reta tangente. É o conceito mais fundamental do cálculo.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "Ao definir com rigor a noção de taxa de variação instantânea, estabeleceu a base lógica do cálculo.",
+    "elementMeanings": {
+      "f'(x)": { "role": "derivada", "description": "É a taxa de variação instantânea em x, isto é, a inclinação da reta tangente ao gráfico.", "kind": "output" },
+      "f(x+h)": { "role": "valor da função no ponto deslocado", "description": "É o valor da função no ponto deslocado de h a partir de x.", "kind": "structural" },
+      "f(x)": { "role": "valor original da função", "description": "É o valor da função no ponto x.", "kind": "structural" },
+      "h": { "role": "variação", "description": "É o incremento infinitesimal de x. No limite, ele tende a 0.", "kind": "input" },
+      "\\lim_{h \\to 0}": { "role": "operação de limite", "description": "É a operação de fazer h se aproximar indefinidamente de 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "ftc", "taylor-series"]
+  },
+  "chain-rule": {
+    "name": "Regra da cadeia",
+    "oneLiner": "Regra que obtém a derivada de uma função composta como o produto das derivadas da função externa e da interna",
+    "description": "A regra da cadeia diz que, ao derivar a função composta f(g(x)), basta multiplicar a derivada da função externa pela derivada da função interna. Ela se estende ao cálculo de várias variáveis e ao algoritmo de retropropagação, técnicas centrais da matemática moderna e da inteligência artificial.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "Permite derivar sistematicamente funções compostas complexas e é a base matemática do algoritmo de retropropagação do aprendizado profundo.",
+    "elementMeanings": {
+      "f": { "role": "função externa", "description": "É a função situada por fora na composição.", "kind": "structural" },
+      "g": { "role": "função interna", "description": "É a função situada por dentro na composição.", "kind": "structural" },
+      "f'(g(x))": { "role": "derivada externa", "description": "É o valor da derivada da função externa avaliada em g(x).", "kind": "structural" },
+      "g'(x)": { "role": "derivada interna", "description": "É a derivada da função interna em relação a x.", "kind": "structural" },
+      "x": { "role": "variável independente", "description": "É a variável em relação à qual se deriva.", "kind": "input" }
+    },
+    "relatedFormulas": ["derivative-definition", "ftc"]
+  },
+  "product-rule": {
+    "name": "Regra do produto",
+    "oneLiner": "Regra que, ao derivar o produto de duas funções, deriva uma de cada vez e soma os resultados",
+    "description": "A regra do produto diz que a derivada do produto de duas funções f(x) e g(x) é f'(x)g(x) + f(x)g'(x). Ela se deduz naturalmente no processo de tomar o limite na definição de derivada e pode ser estendida ao produto de três ou mais funções. É uma das regras básicas mais frequentemente usadas nos cálculos de derivada.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "Permite tratar sistematicamente a derivada de funções formadas por produtos e é a base teórica da integração por partes.",
+    "elementMeanings": {
+      "f": { "role": "primeira função", "description": "É a função situada à esquerda no produto.", "kind": "structural" },
+      "g": { "role": "segunda função", "description": "É a função situada à direita no produto.", "kind": "structural" },
+      "f'": { "role": "derivada da primeira função", "description": "É o resultado de derivar f em relação a x.", "kind": "structural" },
+      "g'": { "role": "derivada da segunda função", "description": "É o resultado de derivar g em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "quotient-rule", "integration-by-parts"],
+    "realWorldExamples": [
+      "A derivada temporal do momento linear p = mv na física: usada para obter a força quando massa e velocidade variam ao mesmo tempo",
+      "Derivar a receita total R = p(x) * x em economia para calcular a receita marginal"
+    ]
+  },
+  "quotient-rule": {
+    "name": "Regra do quociente",
+    "oneLiner": "Regra que, ao derivar a divisão de duas funções, combina de forma cruzada as derivadas do numerador e do denominador",
+    "description": "A regra do quociente diz que a derivada de uma função da forma f(x)/g(x) é (f'g - fg')/g^2. Pode ser deduzida a partir da regra do produto e da regra da cadeia e vale nos intervalos em que o denominador não se anula. É indispensável para derivar funções racionais ou razões de funções trigonométricas.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "Permite tratar mecanicamente a derivada de funções em forma de fração e é a chave para deduzir derivadas de funções trigonométricas como tan x.",
+    "elementMeanings": {
+      "f": { "role": "função do numerador", "description": "É a função que corresponde ao numerador da divisão.", "kind": "structural" },
+      "g": { "role": "função do denominador", "description": "É a função que corresponde ao denominador da divisão. É preciso que g(x) != 0.", "kind": "structural" },
+      "f'": { "role": "derivada do numerador", "description": "É o resultado de derivar f em relação a x.", "kind": "structural" },
+      "g'": { "role": "derivada do denominador", "description": "É o resultado de derivar g em relação a x.", "kind": "structural" },
+      "g^2": { "role": "quadrado do denominador", "description": "É o quadrado de g(x), que fica no denominador do resultado.", "kind": "structural" }
+    },
+    "relatedFormulas": ["product-rule", "derivative-definition", "chain-rule"],
+    "realWorldExamples": [
+      "Aproveitada no cálculo de concentrações, para obter a taxa de variação da razão soluto/solução",
+      "Analisar a variação da razão tensão/corrente num circuito elétrico para acompanhar a mudança de impedância"
+    ]
+  },
+  "power-rule": {
+    "name": "Regra da potência",
+    "oneLiner": "Regra segundo a qual, ao derivar x elevado a n, o expoente desce como fator e diminui de 1",
+    "description": "A regra da potência é a fórmula mais básica da derivação: d/dx(x^n) = nx^(n-1). Para expoentes naturais, demonstra-se pelo teorema binomial; para expoentes reais, usando as funções exponencial e logarítmica. É o ponto de partida da derivação de praticamente todas as funções polinomiais.",
+    "discoverer": "Isaac Newton",
+    "field": "Cálculo",
+    "significance": "É a primeira porta de entrada no estudo da derivação e a fórmula mais usada, sendo a base da derivação de funções polinomiais.",
+    "elementMeanings": {
+      "x": { "role": "variável independente", "description": "É a variável em relação à qual se deriva.", "kind": "input" },
+      "n": { "role": "expoente", "description": "É o expoente da potência. Pode ser natural, inteiro ou real.", "kind": "input" },
+      "x^n": { "role": "função potência", "description": "É x elevado a n, a função a ser derivada.", "kind": "structural" },
+      "nx^{n-1}": { "role": "derivada", "description": "É o resultado em que o expoente n desce como coeficiente e o expoente passa a n-1.", "kind": "output" }
+    },
+    "relatedFormulas": ["derivative-definition", "power-integral", "chain-rule"],
+    "realWorldExamples": [
+      "Aplicada ao derivar em relação ao tempo a distância de queda livre s = (1/2)gt^2 para obter a velocidade v = gt",
+      "A relação em que derivar a área do círculo A = pi*r^2 em relação ao raio devolve o comprimento da circunferência 2*pi*r"
+    ]
+  },
+  "exp-derivative": {
+    "name": "Derivada da função exponencial",
+    "oneLiner": "Propriedade de que derivar a função exponencial natural e^x devolve ela mesma",
+    "description": "A derivada da função exponencial exibe a propriedade notável d/dx(e^x) = e^x. A constante natural e é a única base que satisfaz essa autorreplicação, e isso é central nas equações diferenciais e na modelagem de fenômenos naturais. Para a exponencial geral a^x, a derivada estende-se para a^x * ln(a).",
+    "discoverer": "Leonhard Euler",
+    "field": "Cálculo",
+    "significance": "Sendo a única função cuja forma não muda ao ser derivada, é a solução básica das equações diferenciais e o alicerce da modelagem de fenômenos naturais.",
+    "elementMeanings": {
+      "e": { "role": "constante natural", "description": "Vale cerca de 2,71828... É o número irracional que serve de base ao logaritmo natural.", "kind": "constant", "value": 2.71828183 },
+      "e^x": { "role": "função exponencial natural", "description": "É e elevado a x. Ao ser derivada, resulta nela mesma.", "kind": "structural" },
+      "x": { "role": "variável independente", "description": "É a variável que ocupa a posição do expoente.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "operador de derivação", "description": "É o operador que executa a derivação em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["log-derivative", "chain-rule", "maclaurin-exp"],
+    "realWorldExamples": [
+      "Aproveitada para obter a velocidade de decaimento em N(t) = N_0 * e^(-lambda*t), no decaimento radioativo",
+      "O modelo de capitalização contínua, em que a taxa de crescimento do capital é proporcional ao saldo atual"
+    ]
+  },
+  "log-derivative": {
+    "name": "Derivada da função logarítmica",
+    "oneLiner": "Fórmula segundo a qual derivar o logaritmo natural ln x resulta em 1 sobre x",
+    "description": "A derivada da função logarítmica dá o resultado conciso d/dx(ln x) = 1/x. Ele se deduz da relação de função inversa com a derivada da exponencial. Está definida para x > 0 e, na integração, o caminho inverso mostra que a integral indefinida de 1/x é ln|x| + C.",
+    "discoverer": "Leonhard Euler",
+    "field": "Cálculo",
+    "significance": "Fornece a primitiva de 1/x e, por meio da derivação logarítmica, simplifica a derivada de produtos e potências complicados.",
+    "elementMeanings": {
+      "\\ln x": { "role": "logaritmo natural", "description": "É a função logarítmica de base e. Está definida para x > 0.", "kind": "structural" },
+      "x": { "role": "variável independente", "description": "É o logaritmando e também a variável de derivação.", "kind": "input" },
+      "\\frac{1}{x}": { "role": "derivada", "description": "É a derivada de ln x. É inversamente proporcional a x.", "kind": "output" },
+      "\\frac{d}{dx}": { "role": "operador de derivação", "description": "É o operador que executa a derivação em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["exp-derivative", "chain-rule", "power-rule"],
+    "realWorldExamples": [
+      "Usada na teoria da informação ao analisar a taxa de variação da entropia H = -sum(p * ln p)",
+      "Lei de Weber-Fechner: modelar a relação logarítmica entre a intensidade do estímulo e a intensidade da sensação"
+    ]
+  },
+  "sin-derivative": {
+    "name": "Derivada das funções trigonométricas (seno)",
+    "oneLiner": "Fórmula segundo a qual derivar sin x resulta em cos x",
+    "description": "É o resultado mais básico da derivação das funções trigonométricas: d/dx(sin x) = cos x. Demonstra-se a partir da definição de derivada, usando o limite lim(h->0) sin(h)/h = 1. Como a derivada de cos x é -sin x, o seno e o cosseno mantêm entre si uma relação cíclica por meio da derivação.",
+    "discoverer": "Leonhard Euler",
+    "field": "Cálculo",
+    "significance": "É indispensável à descrição matemática de fenômenos periódicos e é a base da equação de onda e da análise do movimento harmônico.",
+    "elementMeanings": {
+      "\\sin x": { "role": "função seno", "description": "É a função trigonométrica básica de período 2 pi.", "kind": "structural" },
+      "\\cos x": { "role": "derivada (cosseno)", "description": "É o resultado de derivar sin x. Está adiantado em pi/2 de fase em relação ao seno.", "kind": "output" },
+      "x": { "role": "variável independente", "description": "É a variável de ângulo, em radianos.", "kind": "input" },
+      "\\frac{d}{dx}": { "role": "operador de derivação", "description": "É o operador que executa a derivação em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["chain-rule", "derivative-definition", "maclaurin-sin"],
+    "realWorldExamples": [
+      "Usada no movimento do pêndulo simples, ao derivar o deslocamento theta(t) = A*sin(omega*t) para obter a velocidade angular",
+      "Derivar a tensão alternada V(t) = V_0*sin(omega*t) para entender a relação de fase da corrente"
+    ]
+  },
+  "power-integral": {
+    "name": "Integral indefinida da função potência",
+    "oneLiner": "Fórmula segundo a qual integrar x elevado a n aumenta o expoente em 1 e divide pelo novo expoente",
+    "description": "A integral indefinida da função potência é o processo inverso da derivação: a integral de x^n é x^(n+1)/(n+1) + C (com n != -1). É a aplicação ao contrário da regra da potência; o caso n = -1 é tratado à parte, resultando em ln|x| + C. É a fórmula mais básica da integração de funções polinomiais.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "É o primeiro ponto de partida no estudo da integração e a fórmula de integral indefinida mais usada.",
+    "elementMeanings": {
+      "x^n": { "role": "integrando", "description": "É a função potência que se quer integrar.", "kind": "structural" },
+      "n": { "role": "expoente", "description": "É o expoente da potência. É preciso que n != -1.", "kind": "input" },
+      "x^{n+1}": { "role": "potência do resultado da integral", "description": "É a potência com o expoente aumentado em 1.", "kind": "structural" },
+      "n+1": { "role": "novo expoente (denominador)", "description": "Fica no denominador do resultado, de modo que derivá-lo recupera a função original.", "kind": "structural" },
+      "C": { "role": "constante de integração", "description": "É a constante arbitrária da integral indefinida, o termo que desaparece ao derivar.", "kind": "constant" },
+      "dx": { "role": "variável de integração", "description": "Indica que se integra em relação a x.", "kind": "structural" }
+    },
+    "relatedFormulas": ["power-rule", "ftc", "log-derivative"],
+    "realWorldExamples": [
+      "Usada ao integrar a velocidade v = at em relação ao tempo para obter a distância percorrida s = (1/2)at^2",
+      "Integrar a distribuição de pressão em mecânica dos fluidos para calcular a força total"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "Integração por partes",
+    "oneLiner": "Técnica que, ao integrar o produto de duas funções, deriva um dos fatores e integra o outro para transformar a expressão",
+    "description": "A integração por partes é a aplicação da regra do produto à integração e resulta na fórmula int(u dv) = uv - int(v du). Ela converte o produto de funções difíceis de integrar diretamente numa forma mais tratável. O essencial é escolher bem u e dv, e por vezes recorre-se à aplicação repetida ou a relações de recorrência.",
+    "discoverer": "Brook Taylor",
+    "field": "Cálculo",
+    "significance": "Sendo a versão integral da regra do produto, é indispensável para integrar funções inversas como ln x e arctan x e diversas funções transcendentes.",
+    "elementMeanings": {
+      "u": { "role": "função a derivar", "description": "É a função escolhida para ser derivada no processo de integração.", "kind": "structural" },
+      "dv": { "role": "parte a integrar", "description": "É a forma diferencial escolhida para ser integrada no processo.", "kind": "structural" },
+      "v": { "role": "primitiva de dv", "description": "É o resultado de integrar dv.", "kind": "structural" },
+      "du": { "role": "diferencial de u", "description": "É o resultado de derivar u.", "kind": "structural" },
+      "uv": { "role": "termo de fronteira", "description": "É o produto de u por v. Numa integral definida, avalia-se nos dois extremos.", "kind": "output" }
+    },
+    "relatedFormulas": ["product-rule", "ftc", "power-integral"],
+    "realWorldExamples": [
+      "Deduzir a fórmula de transformação ao calcular a transformada de Laplace L{t*f(t)} por integração por partes",
+      "Frequentemente aproveitada na teoria da probabilidade ao calcular a esperança E[X] = int(x * f(x) dx)"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "Série de Maclaurin da função exponencial",
+    "oneLiner": "Série que desenvolve e^x em torno de x = 0 no polinômio infinito 1 + x + x^2/2! + ...",
+    "description": "A série de Maclaurin da função exponencial é e^x = sum(x^n / n!, n=0..inf) e converge para todo x real. Como todas as derivadas de e^x são o próprio e^x e valem 1 em x=0, o coeficiente de cada termo é 1/n!. É o modo mais básico de aproximar a exponencial em cálculo numérico e também o ponto de partida da dedução da fórmula de Euler.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Cálculo",
+    "significance": "Fornece a aproximação polinomial da função exponencial e é o passo central na dedução da identidade de Euler e^(i*pi) + 1 = 0.",
+    "elementMeanings": {
+      "e^x": { "role": "função original", "description": "É a função exponencial natural que se quer desenvolver em série.", "kind": "structural" },
+      "x^n": { "role": "termo de potência", "description": "É x elevado a n, o numerador do n-ésimo termo.", "kind": "structural" },
+      "n!": { "role": "fatorial", "description": "É o fatorial de n, o denominador do n-ésimo termo.", "kind": "structural" },
+      "\\sum_{n=0}^{\\infty}": { "role": "série infinita", "description": "É a operação que soma todos os termos de n=0 até o infinito.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "exp-derivative", "euler-identity"],
+    "realWorldExamples": [
+      "Calculadoras e computadores usam um número finito de termos desta série para calcular o valor de e^x",
+      "Desenvolver em série o operador de evolução temporal e^(-iHt) na mecânica quântica para um cálculo aproximado"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "Série de Maclaurin da função seno",
+    "oneLiner": "Série que desenvolve sin x em torno de x = 0 como x - x^3/3! + x^5/5! - ...",
+    "description": "A série de Maclaurin da função seno é sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf). Só aparecem termos de ordem ímpar, e os sinais se alternam. Converge para todo x real, e a aproximação sin x aproximadamente x para x pequeno corresponde ao primeiro termo.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Cálculo",
+    "significance": "Torna possível a aproximação polinomial das funções trigonométricas e fornece o fundamento matemático da aproximação de ângulos pequenos sin x aproximadamente x.",
+    "elementMeanings": {
+      "\\sin x": { "role": "função original", "description": "É a função seno que se quer desenvolver em série.", "kind": "structural" },
+      "(-1)^n": { "role": "fator de alternância de sinal", "description": "Faz o sinal dos termos alternar entre positivo e negativo.", "kind": "structural" },
+      "x^{2n+1}": { "role": "termo de potência ímpar", "description": "Só aparecem ordens ímpares porque o seno é uma função ímpar.", "kind": "structural" },
+      "(2n+1)!": { "role": "fatorial", "description": "É o denominador de cada termo. Garante a convergência da série.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "sin-derivative", "maclaurin-cos"],
+    "realWorldExamples": [
+      "Aplicar em física a aproximação de ângulos pequenos (sin theta aproximadamente theta) para deduzir a fórmula do período do pêndulo simples",
+      "Aproximar a onda senoidal por um polinômio no processamento digital de sinais para calcular mais rápido"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "Série de Maclaurin da função cosseno",
+    "oneLiner": "Série que desenvolve cos x em torno de x = 0 como 1 - x^2/2! + x^4/4! - ...",
+    "description": "A série de Maclaurin da função cosseno é cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf). Só aparecem termos de ordem par, e os sinais se alternam. Derivando termo a termo a série do seno, obtém-se a série do cosseno, o que confirma pela derivação a relação entre as duas séries.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Cálculo",
+    "significance": "Fornece a aproximação polinomial da função cosseno e, junto com a série do seno, é usada na dedução da fórmula de Euler.",
+    "elementMeanings": {
+      "\\cos x": { "role": "função original", "description": "É a função cosseno que se quer desenvolver em série.", "kind": "structural" },
+      "(-1)^n": { "role": "fator de alternância de sinal", "description": "Faz o sinal dos termos alternar entre positivo e negativo.", "kind": "structural" },
+      "x^{2n}": { "role": "termo de potência par", "description": "Só aparecem ordens pares porque o cosseno é uma função par.", "kind": "structural" },
+      "(2n)!": { "role": "fatorial", "description": "É o denominador de cada termo. Garante a convergência da série.", "kind": "structural" }
+    },
+    "relatedFormulas": ["taylor-series", "maclaurin-sin", "maclaurin-exp"],
+    "realWorldExamples": [
+      "Usar em óptica a aproximação cos theta aproximadamente 1 - theta^2/2 para estimar as aberrações de uma lente",
+      "Aproximar por polinômios os cossenos da matriz de rotação em robótica, para uso em controle em tempo real"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "Regra de L'Hôpital",
+    "oneLiner": "Teorema que obtém limites indeterminados da forma 0/0 ou infinito/infinito pela razão das derivadas do numerador e do denominador",
+    "description": "A regra de L'Hôpital afirma que, quando o limite assume uma forma indeterminada como 0/0 ou infinito/infinito, derivar numerador e denominador separadamente e tomar o limite dessa razão dá o mesmo resultado que o limite original. Pode ser aplicada repetidamente quando necessário e não vale nos casos que não são indeterminados. Demonstra-se com rigor pelo teorema do valor médio de Cauchy.",
+    "discoverer": "Guillaume de L'Hôpital (descoberta por Johann Bernoulli)",
+    "field": "Cálculo",
+    "significance": "Ao reduzir o cálculo de limites indeterminados a um problema de derivação, oferece uma ferramenta poderosa para o cálculo de limites.",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": { "role": "operação de limite", "description": "É a operação de fazer x se aproximar indefinidamente de c.", "kind": "structural" },
+      "f(x)": { "role": "função do numerador", "description": "É a função que ocupa o numerador no limite.", "kind": "structural" },
+      "g(x)": { "role": "função do denominador", "description": "É a função que ocupa o denominador no limite.", "kind": "structural" },
+      "f'(x)": { "role": "derivada do numerador", "description": "É o resultado de derivar f(x) em relação a x.", "kind": "structural" },
+      "g'(x)": { "role": "derivada do denominador", "description": "É o resultado de derivar g(x) em relação a x.", "kind": "structural" },
+      "\\frac{0}{0}": { "role": "forma indeterminada", "description": "É a indeterminação em que numerador e denominador tendem ambos a 0.", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "taylor-series"],
+    "realWorldExamples": [
+      "Calcular em física o limite da probabilidade de transição quando a diferença entre níveis de energia se aproxima de 0",
+      "Analisar em economia o lucro na situação em que o custo marginal e a receita marginal convergem ambos para 0"
+    ]
+  },
+  "tangent": {
+    "name": "Reta tangente",
+    "oneLiner": "Reta que passa por um ponto de uma curva e tem nesse ponto a mesma inclinação da curva",
+    "description": "A reta tangente à curva y=f(x) no ponto (a, f(a)) é a reta y - f(a) = f'(a)(x - a), cuja inclinação é o valor da derivada f'(a). É a função de primeiro grau que melhor aproxima a curva na vizinhança do ponto e revela geometricamente a taxa de variação instantânea naquele ponto. O significado mais intuitivo da derivada fica visualizado sobre a curva.",
+    "discoverer": "Pierre de Fermat, Isaac Newton, Gottfried Leibniz",
+    "field": "Cálculo",
+    "significance": "Ao mostrar o significado geométrico da derivada como uma reta sobre a curva, é o ponto de partida do aprendizado que liga o conceito de derivada à intuição visual.",
+    "elementMeanings": {
+      "f(x)": { "role": "curva", "description": "É a função sobre a qual se quer traçar a tangente.", "kind": "input" },
+      "x": { "role": "coordenada x do ponto de tangência", "description": "É o ponto que determina onde sobre a curva a tangente será colocada.", "kind": "input" },
+      "f'(x)": { "role": "inclinação da tangente", "description": "É o valor da derivada no ponto x. Determina a inclinação da reta tangente.", "kind": "output" },
+      "y - f(x) = f'(x)(X - x)": { "role": "equação da reta tangente", "description": "É a reta que passa pelo ponto (x, f(x)) e tem inclinação f'(x).", "kind": "structural" }
+    },
+    "relatedFormulas": ["derivative-definition", "chain-rule", "taylor-series"]
+  }
+}

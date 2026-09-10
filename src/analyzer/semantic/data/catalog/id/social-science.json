@@ -1,0 +1,137 @@
+{
+  "gini-coefficient": {
+    "name": "Koefisien Gini",
+    "oneLiner": "Ukuran yang menyatakan tingkat ketimpangan pendapatan atau kekayaan sebagai nilai antara 0 dan 1",
+    "description": "Koefisien Gini dihitung dari perbandingan luas daerah antara kurva Lorenz dan garis pemerataan sempurna. Nilai 0 berarti pemerataan sempurna (semua orang berpendapatan sama), sedangkan 1 berarti ketimpangan sempurna (satu orang menguasai seluruhnya). Ini indikator ketimpangan yang paling luas dipakai untuk membandingkan antarnegara dan menilai kebijakan.",
+    "discoverer": "Corrado Gini",
+    "field": "Ilmu sosial",
+    "significance": "Memampatkan ketimpangan ekonomi menjadi satu angka sehingga menjadi indikator dasar untuk perbandingan internasional dan penyusunan kebijakan.",
+    "elementMeanings": {
+      "G": { "role": "Koefisien Gini", "description": "Ukuran ketimpangan antara 0 (pemerataan sempurna) dan 1 (ketimpangan sempurna).", "kind": "output" },
+      "L(x)": { "role": "Kurva Lorenz", "description": "Kurva yang menyatakan proporsi pendapatan kumulatif terhadap proporsi penduduk x.", "kind": "structural" },
+      "\\int L(x) dx": { "role": "Luas daerah di bawah kurva Lorenz", "description": "Luas daerah di bawah kurva Lorenz dari 0 sampai 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Indikator utama yang dipakai Bank Dunia untuk membandingkan ketimpangan pendapatan antarnegara",
+      "Menilai secara kuantitatif perubahan sebaran pendapatan sebelum dan sesudah kebijakan kesejahteraan dijalankan"
+    ],
+    "relatedFormulas": ["laffer-curve"]
+  },
+  "ebbinghaus-curve": {
+    "name": "Kurva lupa Ebbinghaus",
+    "oneLiner": "Kurva yang menyatakan pola berkurangnya ingatan secara eksponensial seiring berjalannya waktu",
+    "description": "Kurva lupa Ebbinghaus menunjukkan bahwa tingkat retensi ingatan menurun secara eksponensial seiring waktu setelah belajar. Kehilangan ingatan paling cepat terjadi sesaat setelah belajar, lalu laju lupanya melambat seiring berjalannya waktu. Dengan pengulangan belajar (pengulangan berjarak), kekuatan ingatan S dapat ditingkatkan sehingga laju lupanya melambat.",
+    "discoverer": "Hermann Ebbinghaus",
+    "field": "Ilmu sosial",
+    "significance": "Merintis kajian kuantitatif atas ingatan manusia sehingga meletakkan dasar bagi strategi belajar ilmiah seperti metode pengulangan berjarak.",
+    "elementMeanings": {
+      "R": { "role": "Tingkat retensi ingatan", "description": "Proporsi bahan pelajaran yang masih tersimpan dalam ingatan. Nilainya antara 0 dan 1.", "kind": "output" },
+      "t": { "role": "Waktu berlalu", "description": "Waktu yang berlalu sejak saat belajar.", "kind": "input" },
+      "S": { "role": "Kekuatan ingatan", "description": "Kemantapan ingatan. Dapat ditingkatkan dengan pengulangan belajar, dan makin besar nilainya makin lambat lupanya.", "kind": "input" },
+      "e^{-t/S}": { "role": "Peluruhan eksponensial", "description": "Menyatakan penurunan eksponensial menurut nisbah waktu terhadap kekuatan ingatan.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Prinsip yang dipakai aplikasi pengulangan berjarak seperti Anki untuk menghitung saat pengulangan yang paling tepat",
+      "Gejala lebih dari 70% kosakata bahasa asing terlupakan dalam sehari bila tidak diulang"
+    ],
+    "relatedFormulas": ["malthus-population"]
+  },
+  "malthus-population": {
+    "name": "Model populasi Malthus",
+    "oneLiner": "Model pertumbuhan deret ukur yang menyatakan penduduk bertambah secara eksponensial dengan laju tetap",
+    "description": "Model populasi Malthus mengandaikan bahwa tanpa kendala sumber daya, penduduk bertambah secara eksponensial dengan laju pertumbuhan yang tetap. Jumlah penduduk pada masa depan ditaksir dengan mengalikan penduduk awal dengan eksponen dari hasil kali laju pertumbuhan alami dan waktu. Pada kenyataannya ada batas sumber daya dan hambatan lingkungan sehingga model ini dilengkapi model logistik, tetapi ia tetap berguna sebagai kerangka dasar untuk memperkirakan pertumbuhan jangka pendek.",
+    "discoverer": "Thomas Malthus",
+    "field": "Ilmu sosial",
+    "significance": "Memantik perdebatan ilmiah tentang kelebihan penduduk dan kelangkaan sumber daya sehingga meletakkan dasar demografi dan ekologi.",
+    "elementMeanings": {
+      "N(t)": { "role": "Penduduk pada waktu t", "description": "Jumlah seluruh penduduk pada waktu t.", "kind": "output" },
+      "N_0": { "role": "Penduduk awal", "description": "Jumlah penduduk pada waktu t=0.", "kind": "input" },
+      "r": { "role": "Laju pertumbuhan alami", "description": "Laju pertumbuhan bersih penduduk, yaitu angka kelahiran dikurangi angka kematian.", "kind": "input" },
+      "t": { "role": "Waktu", "description": "Waktu yang berlalu sejak saat awal.", "kind": "input" },
+      "e^{rt}": { "role": "Faktor pertumbuhan eksponensial", "description": "Menyatakan pertambahan menurut deret ukur berdasarkan hasil kali laju pertumbuhan dan waktu.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Model untuk memperkirakan kecenderungan pertambahan penduduk jangka pendek di negara berkembang",
+      "Memperkirakan perbanyakan jumlah individu pada percobaan biakan bakteri di lingkungan yang mula-mula tanpa kendala"
+    ],
+    "relatedFormulas": ["ebbinghaus-curve", "gravity-model"]
+  },
+  "weber-fechner": {
+    "name": "Hukum Weber-Fechner",
+    "oneLiner": "Hukum psikofisika yang menyatakan besar penginderaan sebanding dengan logaritma kuat rangsangan",
+    "description": "Hukum Weber-Fechner menjelaskan bahwa kuat rangsangan fisik harus bertambah menurut deret ukur agar besar penginderaan bertambah menurut deret hitung. Artinya, ketika rangsangan lemah, perubahan kecil pun mudah terdeteksi, tetapi ketika rangsangan kuat, diperlukan perubahan besar agar bedanya terasa. Hukum ini menunjukkan bahwa indra manusia bekerja pada skala logaritma.",
+    "discoverer": "Ernst Weber, Gustav Fechner",
+    "field": "Ilmu sosial",
+    "significance": "Melahirkan psikofisika dan membuka jalan untuk mengukur penginderaan yang subjektif secara kuantitatif, serta berpengaruh pada perancangan UX dan teknik akustik.",
+    "elementMeanings": {
+      "S": { "role": "Besar penginderaan", "description": "Kuat rangsangan sebagaimana dirasakan manusia secara subjektif.", "kind": "output" },
+      "k": { "role": "Konstanta perbandingan", "description": "Konstanta yang berbeda-beda menurut ragam penginderaannya (penglihatan, pendengaran, dan sebagainya).", "kind": "input" },
+      "I": { "role": "Kuat rangsangan", "description": "Kuat rangsangan yang terukur secara fisik.", "kind": "input" },
+      "I_0": { "role": "Rangsangan ambang", "description": "Kuat rangsangan terkecil yang masih dapat terdeteksi (ambang mutlak).", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "Logaritma nisbah rangsangan", "description": "Nilai logaritma natural dari nisbah rangsangan saat ini terhadap ambangnya.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Alasan satuan desibel (dB) memakai skala logaritma: energi bunyi harus 10 kali lipat agar terasa 'dua kali lebih bising'",
+      "Koreksi gamma pada pengaturan kecerahan layar yang membagi rentang gelap secara halus dan rentang terang secara lebar"
+    ],
+    "relatedFormulas": ["elo-rating"]
+  },
+  "elo-rating": {
+    "name": "Sistem peringkat Elo",
+    "oneLiner": "Sistem pemeringkatan yang menghitung peluang harapan menang dari selisih kemampuan dua pemain",
+    "description": "Peringkat Elo menghitung peluang harapan menang dengan memasukkan selisih peringkat dua pemain ke dalam fungsi logistik. Bila selisih peringkatnya 400 angka, harapan menang pihak yang lebih tinggi kira-kira 91%. Peringkat diperbarui menurut hasil pertandingan, dan makin di luar dugaan hasilnya, makin besar perubahannya.",
+    "discoverer": "Arpad Elo",
+    "field": "Ilmu sosial",
+    "significance": "Bermula dari catur, sistem ini menjadi patokan internasional untuk menilai kemampuan dalam olahraga, e-sports, dan sistem penjodohan lawan.",
+    "elementMeanings": {
+      "E_A": { "role": "Harapan menang A", "description": "Peluang bahwa pemain A diharapkan mengalahkan B.", "kind": "output" },
+      "R_A": { "role": "Peringkat A", "description": "Tingkat kemampuan pemain A saat ini.", "kind": "input" },
+      "R_B": { "role": "Peringkat B", "description": "Tingkat kemampuan pemain B saat ini.", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "Transformasi selisih peringkat", "description": "Suku eksponensial yang mengubah selisih peringkat kedua pemain menjadi nisbah peluang.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Penetapan peringkat resmi para pemain pada kejuaraan catur dunia",
+      "Penjodohan lawan berdasarkan kemampuan pada permainan daring seperti League of Legends"
+    ],
+    "relatedFormulas": ["sigmoid", "weber-fechner"]
+  },
+  "laffer-curve": {
+    "name": "Kurva Laffer",
+    "oneLiner": "Kurva yang menyatakan hubungan tarif pajak dan penerimaan pajak, yaitu tarif yang terlampau tinggi justru menurunkan penerimaan",
+    "description": "Kurva Laffer menggambarkan gagasan bahwa pada tarif pajak 0% penerimaan pajak adalah 0, dan pada tarif 100% kegiatan ekonomi berhenti sehingga penerimaan juga 0, sehingga di antara keduanya pasti ada tarif optimal yang memaksimumkan penerimaan. Intinya bukan rumus yang persis, melainkan wawasan kualitatif berupa hubungan berbentuk U terbalik antara tarif dan penerimaan pajak, sedangkan letak tarif optimalnya berbeda-beda menurut keadaan ekonomi.",
+    "discoverer": "Arthur Laffer",
+    "field": "Ilmu sosial",
+    "significance": "Kerangka pokok dalam perdebatan kebijakan perpajakan, dan menjadi landasan teoretis ekonomi sisi penawaran tentang kemungkinan naiknya penerimaan pajak lewat penurunan tarif.",
+    "elementMeanings": {
+      "세율": { "role": "Variabel bebas", "description": "Persentase pajak yang ditetapkan pemerintah. Nilainya antara 0% dan 100%.", "kind": "input" },
+      "세수": { "role": "Variabel terikat", "description": "Total pajak yang benar-benar dipungut pemerintah.", "kind": "output" },
+      "최적 세율": { "role": "Titik maksimum", "description": "Tarif pajak yang memaksimumkan penerimaan pajak. Letaknya di titik puncak kurva.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Latar teoretis kebijakan penurunan pajak pemerintahan Reagan di Amerika Serikat pada 1980-an (Reaganomics)",
+      "Kerangka pembahasan untuk memperkirakan perubahan penerimaan pajak ketika pemerintah berbagai negara menyesuaikan tarif pajak badan"
+    ],
+    "relatedFormulas": ["gini-coefficient"]
+  },
+  "gravity-model": {
+    "name": "Model gravitasi",
+    "oneLiner": "Model interaksi keruangan yang menyatakan besar pertukaran antara dua wilayah sebanding dengan ukurannya (penduduk) dan berbanding terbalik dengan jaraknya",
+    "description": "Model gravitasi, yang terilhami hukum gravitasi semesta Newton, menjelaskan bahwa besar pertukaran antara dua wilayah (perdagangan, perpindahan, komunikasi, dan sebagainya) sebanding dengan hasil kali ukuran masing-masing wilayah (penduduk, PDB, dan sebagainya) serta berbanding terbalik dengan kuadrat jaraknya. Meski strukturnya sederhana, model ini secara mengejutkan baik dalam memperkirakan perdagangan internasional, perjalanan komuter kota, dan pola migrasi.",
+    "discoverer": "William Reilly (model gravitasi ritel), Jan Tinbergen (model gravitasi perdagangan)",
+    "field": "Ilmu sosial",
+    "significance": "Model empiris utama dalam analisis perdagangan internasional, yang dipakai secara baku untuk menaksir dampak perjanjian dagang dan kebijakan tarif bea.",
+    "elementMeanings": {
+      "T_{ij}": { "role": "Besar pertukaran", "description": "Besar pertukaran (perdagangan, perpindahan, dan sebagainya) antara wilayah i dan j.", "kind": "output" },
+      "k": { "role": "Konstanta perbandingan", "description": "Konstanta yang mengatur skala keseluruhan model.", "kind": "input" },
+      "P_i": { "role": "Ukuran wilayah i", "description": "Variabel yang menyatakan ukuran wilayah i, seperti jumlah penduduk atau PDB.", "kind": "input" },
+      "P_j": { "role": "Ukuran wilayah j", "description": "Variabel yang menyatakan ukuran wilayah j, seperti jumlah penduduk atau PDB.", "kind": "input" },
+      "d_{ij}": { "role": "Jarak antara dua wilayah", "description": "Jarak geografis antara wilayah i dan j.", "kind": "input" },
+      "d_{ij}^2": { "role": "Kuadrat jarak", "description": "Mencerminkan hukum kuadrat terbalik. Bila jaraknya dua kali lipat, besar pertukarannya menyusut menjadi 1/4.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menjelaskan mengapa perdagangan Korea-Jepang lebih besar daripada Korea-Brasil melalui jarak dan ukuran ekonominya",
+      "Menaksir arus pelanggan menurut penduduk kota sekitar dan jaraknya dalam analisis wilayah dagang sebuah pusat perbelanjaan besar yang baru"
+    ],
+    "relatedFormulas": ["universal-gravitation", "malthus-population"]
+  }
+}

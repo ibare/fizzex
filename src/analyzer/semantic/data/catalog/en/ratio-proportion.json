@@ -1,0 +1,72 @@
+{
+  "direct-proportion": {
+    "name": "Direct proportion",
+    "oneLiner": "A relationship where one quantity grows by the same factor as the other",
+    "description": "In a direct proportion y = kx, doubling x doubles y and tripling x triples y. The graph is a straight line through the origin, and k is the constant of proportionality.",
+    "field": "Algebra",
+    "significance": "It expresses the most basic proportional relationship. As the special case of a linear function whose y-intercept is 0, it is the starting point for all study of proportion.",
+    "elementMeanings": {
+      "y": { "role": "Dependent variable", "description": "The output value determined by x.", "kind": "output" },
+      "k": { "role": "Constant of proportionality", "description": "The fixed ratio between x and y. You can find it as k = y/x.", "kind": "input" },
+      "x": { "role": "Independent variable", "description": "The input value you are free to choose.", "kind": "input" }
+    },
+    "realWorldExamples": ["The relationship between count and price when one apple costs 500 won", "The relationship between time and distance when you travel at a constant speed"],
+    "relatedFormulas": ["linear-function", "inverse-proportion"]
+  },
+  "inverse-proportion": {
+    "name": "Inverse proportion",
+    "oneLiner": "A relationship where one quantity shrinks by the same factor as the other grows",
+    "description": "In an inverse proportion y = k/x, doubling x halves y and tripling x cuts y to a third. The graph is a hyperbola that comes arbitrarily close to the x- and y-axes without ever touching them.",
+    "field": "Algebra",
+    "significance": "It expresses a relationship that keeps a constant product, and it underpins Boyle's law in physics, the relationship between work and time, and many other phenomena.",
+    "elementMeanings": {
+      "y": { "role": "Dependent variable", "description": "The output value determined by x.", "kind": "output" },
+      "k": { "role": "Constant of proportionality", "description": "The value the product of x and y always keeps. You can find it as k = xy.", "kind": "input" },
+      "x": { "role": "Independent variable", "description": "The input value, which cannot be 0.", "kind": "input" }
+    },
+    "realWorldExamples": ["Covering the same distance in less time as your speed goes up", "In rectangles of equal area, the height shrinks as the width grows"],
+    "relatedFormulas": ["direct-proportion", "speed-formula"]
+  },
+  "percentage": {
+    "name": "Percentage",
+    "oneLiner": "How large a part is when the whole is taken as 100",
+    "description": "The percentage p = (part/whole) x 100 expresses what share a quantity takes of the whole on a scale of 100. It uses the percent (%) sign and makes comparison and communication easy.",
+    "field": "Arithmetic",
+    "significance": "It is the most widely used way of expressing a ratio in everyday life — discounts, interest rates, grades, and statistics.",
+    "elementMeanings": {
+      "p": { "role": "Percentage", "description": "The ratio taken with the whole as 100. Its unit is %.", "kind": "output", "unit": "%" },
+      "부분": { "role": "Quantity being compared", "description": "The size of the part of the whole you want to know about.", "kind": "input" },
+      "전체": { "role": "Reference quantity", "description": "The whole amount that counts as 100%.", "kind": "input" }
+    },
+    "realWorldExamples": ["The share of questions answered correctly on a test (a score of 80 = 80%)", "Working out the actual discount on an item marked 30% off"],
+    "relatedFormulas": ["direct-proportion"]
+  },
+  "speed-formula": {
+    "name": "Speed formula",
+    "oneLiner": "The formula that finds how fast something moves by dividing distance travelled by time taken",
+    "description": "The speed formula v = d/t gives the distance an object covers per unit of time. It is the most basic formula in physics, tying together the three quantities distance, time, and speed.",
+    "field": "Physics",
+    "significance": "It is the most elementary formula for describing motion and the starting point for understanding the distance-time-speed relationship.",
+    "elementMeanings": {
+      "v": { "role": "Speed", "description": "Distance covered per unit of time. For example, 60 km/h means you travel 60 km in one hour.", "kind": "output", "unit": "m/s" },
+      "d": { "role": "Distance", "description": "The length the object actually travelled.", "kind": "input", "unit": "m" },
+      "t": { "role": "Time", "description": "The time the journey took.", "kind": "input", "unit": "s" }
+    },
+    "realWorldExamples": ["Finding the speed of a car that covers 120 km in 2 hours", "Working out an average speed from a 100 m sprint time"],
+    "relatedFormulas": ["direct-proportion", "inverse-proportion", "density-formula"]
+  },
+  "density-formula": {
+    "name": "Density formula",
+    "oneLiner": "The formula for how tightly packed a substance is per unit of volume",
+    "description": "The density formula divides mass by volume to find how tightly packed a substance is. At the same size, more mass means higher density; at the same mass, more volume means lower density.",
+    "field": "Physics",
+    "significance": "It is a basic physical quantity used to tell substances apart and to judge whether something floats or sinks in water.",
+    "elementMeanings": {
+      "\\rho": { "role": "Density", "description": "Mass per unit volume. The unit is usually g/cm3 or kg/m3.", "kind": "output", "unit": "kg/m3" },
+      "m": { "role": "Mass", "description": "The value giving the amount of matter in the object. The unit is g or kg.", "kind": "input", "unit": "kg" },
+      "V": { "role": "Volume", "description": "The amount of space the object takes up. The unit is cm3 or m3.", "kind": "input", "unit": "m3" }
+    },
+    "realWorldExamples": ["Why an iron ball sinks while a wooden block floats", "Telling real gold from fake by its density"],
+    "relatedFormulas": ["speed-formula"]
+  }
+}

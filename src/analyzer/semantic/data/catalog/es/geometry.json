@@ -1,0 +1,396 @@
+{
+  "pythagorean-theorem": {
+    "name": "Teorema de Pitágoras",
+    "oneLiner": "El teorema según el cual, en un triángulo rectángulo, el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los otros dos lados",
+    "description": "El teorema de Pitágoras establece que el cuadrado de la longitud de la hipotenusa de un triángulo rectángulo es igual a la suma de los cuadrados de las longitudes de los otros dos lados. Es el teorema más básico de la geometría euclídea y el fundamento del concepto de distancia. Es el teorema más estudiado de la historia de las matemáticas: existen miles de demostraciones distintas.",
+    "discoverer": "Pitágoras (atribución tradicional)",
+    "field": "Geometría",
+    "significance": "Proporciona la definición de la distancia euclídea y es la base de buena parte de las matemáticas modernas: la trigonometría, la geometría analítica o los espacios vectoriales.",
+    "elementMeanings": {
+      "a": {
+        "role": "Cateto",
+        "description": "Es la longitud de uno de los lados que forman el ángulo recto.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Cateto",
+        "description": "Es la longitud del otro lado que forma el ángulo recto.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Hipotenusa",
+        "description": "Es la longitud del lado más largo, el opuesto al ángulo recto.",
+        "kind": "output"
+      },
+      "a^2+b^2": {
+        "role": "Suma de los cuadrados de los catetos",
+        "description": "Es el resultado de sumar los cuadrados de las longitudes de los dos catetos.",
+        "kind": "output"
+      },
+      "c^2": {
+        "role": "Cuadrado de la hipotenusa",
+        "description": "El cuadrado de la longitud de la hipotenusa. Es igual a la suma de los cuadrados de los catetos.",
+        "kind": "output"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Cateto",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "Cateto",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": [
+      "law-of-cosines",
+      "heron-formula"
+    ]
+  },
+  "heron-formula": {
+    "name": "Fórmula de Herón",
+    "oneLiner": "La fórmula que da el área de un triángulo únicamente a partir de la longitud de sus tres lados",
+    "description": "La fórmula de Herón calcula el área de un triángulo a partir de sus tres lados a, b y c y de su semiperímetro s. Como no hace falta hallar la altura, resulta muy práctica cuando se dispone de coordenadas o en topografía. Tiene una estructura elegante: el cuadrado del área se expresa como el producto del semiperímetro por sus diferencias con cada lado.",
+    "discoverer": "Herón de Alejandría",
+    "field": "Geometría",
+    "significance": "Permite hallar el área sin conocer la altura, solo con la longitud de los lados, por lo que se usa mucho en topografía y en gráficos por ordenador.",
+    "elementMeanings": {
+      "a": {
+        "role": "Primer lado",
+        "description": "Es la longitud del primer lado del triángulo.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Segundo lado",
+        "description": "Es la longitud del segundo lado del triángulo.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Tercer lado",
+        "description": "Es la longitud del tercer lado del triángulo.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Semiperímetro",
+        "description": "La mitad de la suma de los tres lados. s = (a+b+c)/2.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "Área",
+        "description": "El área del triángulo. Se calcula como √(s(s−a)(s−b)(s−c)).",
+        "kind": "output"
+      }
+    },
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "circle-area"
+    ]
+  },
+  "circle-area": {
+    "name": "Área del círculo",
+    "oneLiner": "La fórmula que da el área de un círculo multiplicando el cuadrado del radio por el número pi",
+    "description": "La fórmula del área del círculo indica que la superficie que ocupa un círculo de radio r es igual al producto del número pi por el cuadrado del radio. Desde que Arquímedes la demostró dividiendo el círculo en triángulos infinitamente finos, se considera el precedente del cálculo integral.",
+    "discoverer": "Arquímedes",
+    "field": "Geometría",
+    "significance": "Es la fórmula de área más básica de una figura curva y el punto de partida histórico del concepto de integral.",
+    "elementMeanings": {
+      "A": {
+        "role": "Área",
+        "description": "Es la superficie que ocupa el círculo. Unidades: longitud al cuadrado.",
+        "kind": "output"
+      },
+      "\\pi": {
+        "role": "Número pi",
+        "description": "La razón entre la longitud de la circunferencia y su diámetro. Unos 3,14159.",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "Radio",
+        "description": "Es la distancia desde el centro del círculo hasta la circunferencia.",
+        "kind": "input"
+      },
+      "r^2": {
+        "role": "Cuadrado del radio",
+        "description": "El radio elevado al cuadrado. Determina el tamaño del área.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "sphere-volume",
+      "pythagorean-theorem"
+    ]
+  },
+  "law-of-cosines": {
+    "name": "Teorema del coseno",
+    "oneLiner": "El teorema que permite hallar un lado de un triángulo cualquiera a partir de los otros dos y del ángulo que forman",
+    "description": "El teorema del coseno establece que, en un triángulo, el cuadrado de un lado es igual a la suma de los cuadrados de los otros dos menos el doble del producto de esos dos lados por el coseno del ángulo que forman. Es la generalización del teorema de Pitágoras: cuando ese ángulo es recto, el coseno vale 0 y se reduce al teorema de Pitágoras.",
+    "field": "Geometría",
+    "significance": "Permite relacionar lados y ángulos también en triángulos que no son rectángulos y resulta imprescindible en topografía y navegación.",
+    "elementMeanings": {
+      "a": {
+        "role": "Lado que se quiere hallar",
+        "description": "Es el lado cuya longitud se quiere obtener con el teorema del coseno.",
+        "kind": "output"
+      },
+      "b": {
+        "role": "Lado conocido",
+        "description": "Es la longitud de uno de los lados conocidos del triángulo.",
+        "kind": "input"
+      },
+      "c": {
+        "role": "Lado conocido",
+        "description": "Es la longitud del otro lado conocido del triángulo.",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Ángulo comprendido",
+        "description": "Es el ángulo comprendido entre los lados b y c.",
+        "kind": "input",
+        "unit": "rad"
+      },
+      "\\cos C": {
+        "role": "Coseno del ángulo comprendido",
+        "description": "El coseno del ángulo C. Si el ángulo es recto vale 0.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "heron-formula"
+    ]
+  },
+  "sphere-volume": {
+    "name": "Volumen de la esfera",
+    "oneLiner": "La fórmula del volumen de la esfera, proporcional al cubo del radio",
+    "description": "La fórmula del volumen de la esfera indica que el espacio que ocupa una esfera de radio r es el producto de 4/3 por el número pi y por el cubo del radio. Arquímedes descubrió esta relación inscribiendo la esfera en un cilindro; también puede deducirse por integración y es un resultado básico de la geometría del espacio.",
+    "discoverer": "Arquímedes",
+    "field": "Geometría",
+    "significance": "Es la fórmula de volumen del cuerpo curvo más básico del espacio tridimensional y se emplea de forma muy amplia en física y en ingeniería.",
+    "elementMeanings": {
+      "V": {
+        "role": "Volumen",
+        "description": "Es la cantidad de espacio que ocupa la esfera. Unidades: longitud al cubo.",
+        "kind": "output"
+      },
+      "\\frac{4}{3}": {
+        "role": "Constante de proporcionalidad",
+        "description": "Es el factor de proporcionalidad entre el volumen de la esfera y el cubo del radio.",
+        "kind": "constant",
+        "value": 1.33333333
+      },
+      "\\pi": {
+        "role": "Número pi",
+        "description": "La razón entre la longitud de la circunferencia y su diámetro. Unos 3,14159.",
+        "kind": "constant",
+        "value": 3.14159265
+      },
+      "r": {
+        "role": "Radio",
+        "description": "Es la distancia desde el centro de la esfera hasta su superficie.",
+        "kind": "input"
+      },
+      "r^3": {
+        "role": "Cubo del radio",
+        "description": "El radio multiplicado por sí mismo tres veces. Refleja que el volumen crece de forma tridimensional.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "circle-area"
+    ]
+  },
+  "euler-polyhedron": {
+    "name": "Fórmula de Euler para poliedros",
+    "oneLiner": "La relación entre el número de vértices, aristas y caras de un poliedro convexo",
+    "description": "La fórmula de Euler para poliedros muestra la sorprendente relación por la que, en un poliedro convexo, si al número de vértices se le resta el de aristas y se le suma el de caras, el resultado es siempre 2. Es la fórmula que dio origen a la topología: por mucho que cambie la forma del poliedro, la relación se mantiene. Es el ejemplo más básico de un invariante topológico, la característica de Euler.",
+    "discoverer": "Leonhard Euler",
+    "field": "Geometría",
+    "significance": "Fue el primer resultado que cuantificó una propiedad topológica de un objeto geométrico y es el punto de partida de la topología y de la teoría de grafos.",
+    "elementMeanings": {
+      "V": {
+        "role": "Número de vértices",
+        "description": "Es el número total de vértices del poliedro (los puntos donde concurren las aristas).",
+        "kind": "input"
+      },
+      "E": {
+        "role": "Número de aristas",
+        "description": "Es el número total de aristas del poliedro (los segmentos donde se encuentran dos caras).",
+        "kind": "input"
+      },
+      "F": {
+        "role": "Número de caras",
+        "description": "Es el número total de caras del poliedro (los polígonos planos).",
+        "kind": "input"
+      },
+      "2": {
+        "role": "Característica de Euler",
+        "description": "La característica de Euler de un poliedro convexo (topológicamente equivalente a la esfera). Siempre vale 2.",
+        "kind": "constant",
+        "value": 2
+      }
+    },
+    "realWorldExamples": [
+      "Comprobación con el cubo: 8 vértices − 12 aristas + 6 caras = 2",
+      "Comprobación con un balón de fútbol (icosaedro truncado): 60 vértices − 90 aristas + 32 caras = 2"
+    ],
+    "relatedFormulas": [
+      "pythagorean-theorem"
+    ]
+  },
+  "circle-equation": {
+    "name": "Ecuación de la circunferencia",
+    "oneLiner": "La ecuación que describe una circunferencia en el plano de coordenadas a partir de su centro y su radio",
+    "description": "La ecuación de la circunferencia expresa la condición que cumplen todos los puntos (x, y) de una circunferencia de centro (a, b) y radio r. Se deduce directamente del teorema de Pitágoras y es la herramienta básica para tratar algebraicamente las circunferencias en geometría analítica. Al desarrollarla se obtiene la forma general y, al completar cuadrados, se vuelve a la forma canónica.",
+    "field": "Geometría",
+    "significance": "Es el ejemplo central de la geometría analítica, que expresa una figura geométrica mediante una ecuación algebraica, y resulta imprescindible para analizar la relación entre rectas y circunferencias.",
+    "elementMeanings": {
+      "x": {
+        "role": "Coordenada x del punto",
+        "description": "Es la coordenada horizontal de un punto cualquiera de la circunferencia.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Coordenada y del punto",
+        "description": "Es la coordenada vertical de un punto cualquiera de la circunferencia.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Coordenada x del centro",
+        "description": "Es la coordenada horizontal del centro de la circunferencia.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Coordenada y del centro",
+        "description": "Es la coordenada vertical del centro de la circunferencia.",
+        "kind": "input"
+      },
+      "r": {
+        "role": "Radio",
+        "description": "Es la distancia desde el centro hasta la circunferencia.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "El conjunto de posiciones posibles a una distancia dada de una estación base concreta en la localización por GPS",
+      "El cálculo del área de trabajo de un brazo robótico modelando su alcance con la ecuación de la circunferencia"
+    ],
+    "relatedFormulas": [
+      "pythagorean-theorem",
+      "circle-area",
+      "ellipse-equation"
+    ]
+  },
+  "ellipse-equation": {
+    "name": "Ecuación de la elipse",
+    "oneLiner": "La ecuación que describe el lugar geométrico de los puntos cuya suma de distancias a dos focos es constante",
+    "description": "La ecuación de la elipse expresa la condición que cumplen todos los puntos de una elipse centrada en el origen y con semiejes mayor y menor a y b, respectivamente. Generaliza la ecuación de la circunferencia al caso en que las escalas de los ejes x e y son distintas; si a = b se obtiene una circunferencia. Desempeña un papel central en las leyes de Kepler del movimiento planetario.",
+    "discoverer": "Apolonio (estudio de las cónicas)",
+    "field": "Geometría",
+    "significance": "Es el modelo matemático de las órbitas planetarias y tiene aplicaciones muy diversas: las propiedades de reflexión en óptica o las galerías de los susurros en arquitectura.",
+    "elementMeanings": {
+      "x": {
+        "role": "Coordenada x del punto",
+        "description": "Es la coordenada horizontal de un punto cualquiera de la elipse.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Coordenada y del punto",
+        "description": "Es la coordenada vertical de un punto cualquiera de la elipse.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Semieje mayor",
+        "description": "Es la mitad del eje horizontal (el eje mayor) de la elipse. La distancia hasta el punto más lejano.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Semieje menor",
+        "description": "Es la mitad del eje vertical (el eje menor) de la elipse. La distancia hasta el punto más cercano.",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "Cuadrado del semieje mayor",
+        "description": "Es el denominador que normaliza la componente x.",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "Cuadrado del semieje menor",
+        "description": "Es el denominador que normaliza la componente y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Primera ley de Kepler: los planetas describen órbitas elípticas con el Sol en uno de los focos",
+      "Galería de los susurros: en una sala elíptica, el sonido emitido en un foco se concentra en el foco opuesto"
+    ],
+    "relatedFormulas": [
+      "circle-equation",
+      "hyperbola-equation",
+      "circle-area"
+    ]
+  },
+  "hyperbola-equation": {
+    "name": "Ecuación de la hipérbola",
+    "oneLiner": "La ecuación que describe el lugar geométrico de los puntos cuya diferencia de distancias a dos focos es constante",
+    "description": "La ecuación de la hipérbola expresa la condición que cumplen todos los puntos de una hipérbola centrada en el origen y con semiejes real e imaginario a y b, respectivamente. A diferencia de la elipse, lo que se mantiene constante es la diferencia de distancias, y la curva es abierta y se divide en dos ramas. Tiene la particularidad de acercarse cada vez más a las asíntotas y = (b/a)x e y = −(b/a)x sin llegar nunca a tocarlas.",
+    "discoverer": "Apolonio (estudio de las cónicas)",
+    "field": "Geometría",
+    "significance": "Se aplica en navegación (el sistema LORAN), en el diseño de las torres de refrigeración hiperbólicas o en la estructura del espacio-tiempo de la relatividad especial.",
+    "elementMeanings": {
+      "x": {
+        "role": "Coordenada x del punto",
+        "description": "Es la coordenada horizontal de un punto cualquiera de la hipérbola.",
+        "kind": "input"
+      },
+      "y": {
+        "role": "Coordenada y del punto",
+        "description": "Es la coordenada vertical de un punto cualquiera de la hipérbola.",
+        "kind": "input"
+      },
+      "a": {
+        "role": "Semieje real",
+        "description": "Es la distancia desde el vértice de la hipérbola hasta el centro.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Semieje imaginario",
+        "description": "Es el semieje que determina la pendiente de las asíntotas.",
+        "kind": "input"
+      },
+      "a^2": {
+        "role": "Cuadrado del semieje real",
+        "description": "Es el denominador que normaliza la componente x.",
+        "kind": "input"
+      },
+      "b^2": {
+        "role": "Cuadrado del semieje imaginario",
+        "description": "Es el denominador que normaliza la componente y.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Navegación LORAN: el principio de determinar la posición por la diferencia de tiempos de las señales recibidas de dos estaciones",
+      "Torres de refrigeración hiperbólicas: una forma que optimiza la resistencia estructural y la eficiencia del flujo de aire"
+    ],
+    "relatedFormulas": [
+      "ellipse-equation",
+      "circle-equation"
+    ]
+  }
+}

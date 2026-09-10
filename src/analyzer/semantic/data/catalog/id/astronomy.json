@@ -1,0 +1,532 @@
+{
+  "kepler-third": {
+    "name": "Hukum III Kepler",
+    "oneLiner": "Makin tinggi orbitnya, makin lambat peredarannya",
+    "description": "Kuadrat periode orbit sebanding dengan pangkat tiga jari-jari orbitnya. Planet, satelit alami, maupun satelit buatan semuanya menuruti hukum ini.",
+    "discoverer": "Johannes Kepler",
+    "field": "Mekanika benda langit",
+    "significance": "Dengan menegakkan keteraturan gerak planet secara matematis, hukum ini meletakkan dasar mekanika Newton, dan dipakai secara mendasar untuk menganalisis orbit planet luar surya serta satelit.",
+    "elementMeanings": {
+      "T": {
+        "role": "Periode orbit",
+        "kind": "output",
+        "unit": "s",
+        "description": "Waktu yang dibutuhkan satelit untuk mengelilingi Bumi satu putaran"
+      },
+      "T^2": {
+        "role": "Kuadrat periode orbit",
+        "kind": "output",
+        "unit": "s²",
+        "description": "Nilai yang sebanding dengan pangkat tiga jari-jari orbit"
+      },
+      "4pi2": {
+        "role": "4π²",
+        "kind": "constant",
+        "value": 39.478,
+        "description": "Tetapan yang muncul dari sifat geometri orbit lingkaran ≈ 39,48"
+      },
+      "G": {
+        "role": "Tetapan gravitasi umum",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "Tetapan dasar yang menentukan kuatnya gravitasi. Karena bilangan ini teramat kecil, dalam keseharian gravitasi baru terasa bila ada massa raksasa seperti Bumi"
+      },
+      "M": {
+        "role": "Massa Bumi",
+        "kind": "constant",
+        "value": 5.972e24,
+        "unit": "kg",
+        "description": "Makin berat benda langit pusatnya, makin kuat ia menarik satelitnya. Pada orbit yang sama, mengelilingi Yupiter membuat periodenya jauh lebih pendek"
+      },
+      "a": {
+        "role": "Jari-jari orbit",
+        "kind": "input",
+        "unit": "km",
+        "description": "Jarak antara satelit dan pusat Bumi. Karena masuk sebagai pangkat tiga, perubahan kecil pun sangat mempengaruhi periodenya"
+      },
+      "a^3": {
+        "role": "Pangkat tiga jari-jari",
+        "kind": "output",
+        "unit": "km³",
+        "description": "Inilah sebabnya menaikkan orbit sedikit saja membuat periodenya memanjang dengan cepat"
+      }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Jari-jari orbit",
+        "min": 6500,
+        "max": 400000,
+        "default": 6771,
+        "step": 1,
+        "unit": "km",
+        "scale": "log",
+        "effects": [
+          {
+            "range": [6500, 8000],
+            "description": "Orbit rendah (LEO). Gravitasinya kuat sehingga harus mengelilingi Bumi dengan cepat agar tidak jatuh. Satu putaran dalam 90 menit, dan matahari terbit terlihat 16 kali sehari."
+          },
+          {
+            "range": [8000, 35000],
+            "description": "Orbit menengah. Gravitasinya melemah sehingga boleh mengelilingi Bumi lebih pelan. Satelit GPS mengelilingi Bumi tepat 2 putaran sehari."
+          },
+          {
+            "range": [35000, 50000],
+            "description": "Sekitar orbit geostasioner. Bila satu putarannya tepat 24 jam, dari Bumi satelit itu tampak terpaku di langit sehingga dipakai untuk siaran TV."
+          },
+          {
+            "range": [50000, 400000],
+            "description": "Orbit tinggi. Makin dekat ke Bulan, gravitasi Bumi makin banyak melemah. Bulan bahkan butuh 27 hari untuk satu putaran."
+          }
+        ]
+      }
+    ],
+    "derivedValues": [
+      {
+        "id": "period",
+        "label": "Periode orbit",
+        "unit": "h",
+        "format": "time",
+        "sourceParams": ["a"],
+        "transform": { "type": "custom", "sourceParam": "a" },
+        "expression": "2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600"
+      },
+      {
+        "id": "velocity",
+        "label": "Laju orbit",
+        "unit": "km/s",
+        "format": "number",
+        "sourceParams": ["a"],
+        "expression": "2 * Math.PI * a / (2 * Math.PI * Math.sqrt(Math.pow(a * 1000, 3) / (6.674e-11 * 5.972e24)) / 3600)"
+      },
+      {
+        "id": "altitude",
+        "label": "Ketinggian",
+        "unit": "km",
+        "format": "distance",
+        "sourceParams": ["a"],
+        "transform": { "type": "subtract", "sourceParam": "a", "operand": 6371 }
+      },
+      {
+        "id": "earthRatio",
+        "label": "Dibanding jari-jari Bumi",
+        "unit": "×",
+        "format": "number",
+        "sourceParams": ["a"],
+        "transform": { "type": "divide", "sourceParam": "a", "operand": 6371 }
+      }
+    ],
+    "constraints": [
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6371,
+        "severity": "error",
+        "message": "Bila lebih kecil daripada jari-jari Bumi (6.371 km), letaknya di dalam Bumi sehingga orbit tidak mungkin ada"
+      },
+      {
+        "param": "a",
+        "type": "min",
+        "value": 6571,
+        "severity": "warning",
+        "message": "Pada ketinggian di bawah 200 km, orbit meluruh dengan cepat akibat hambatan atmosfer"
+      }
+    ],
+    "milestones": [
+      {
+        "param": "a",
+        "value": 6771,
+        "label": "Orbit ISS",
+        "shortLabel": "ISS",
+        "emoji": "🛸",
+        "description": "Ketinggian 400 km. Satu putaran dalam 90 menit, matahari terbit 16 kali sehari"
+      },
+      {
+        "param": "a",
+        "value": 26560,
+        "label": "Orbit GPS",
+        "shortLabel": "GPS",
+        "emoji": "📡",
+        "description": "Ketinggian 20.200 km. Periodenya tepat 12 jam"
+      },
+      {
+        "param": "a",
+        "value": 42164,
+        "label": "Orbit geostasioner",
+        "shortLabel": "GEO",
+        "emoji": "📺",
+        "description": "Ketinggian 35.786 km. Tepat 24 jam — tampak terpaku di langit"
+      },
+      {
+        "param": "a",
+        "value": 384400,
+        "label": "Bulan",
+        "shortLabel": "Bulan",
+        "emoji": "🌙",
+        "description": "Periodenya 27,3 hari. Benda langit terdekat dari Bumi"
+      }
+    ],
+    "anchors": [
+      {
+        "param": "altitude",
+        "ranges": [
+          {
+            "range": [0, 500],
+            "template": "Kira-kira {ratio} kali ketinggian jelajah pesawat penumpang (10 km)",
+            "referenceValue": 10,
+            "referenceLabel": "Ketinggian jelajah pesawat penumpang"
+          },
+          {
+            "range": [500, 5000],
+            "template": "Setinggi kira-kira {ratio} kali jarak Surabaya-Yogyakarta ({ref} km)",
+            "referenceValue": 325,
+            "referenceLabel": "Jarak Surabaya-Yogyakarta"
+          },
+          {
+            "range": [5000, 50000],
+            "template": "Kira-kira {ratio} kali garis tengah Bumi ({ref} km)",
+            "referenceValue": 12742,
+            "referenceLabel": "Garis tengah Bumi"
+          },
+          {
+            "range": [50000, 400000],
+            "template": "Kira-kira {ratio}% dari jarak Bumi-Bulan",
+            "referenceValue": 384400,
+            "referenceLabel": "Jarak Bumi-Bulan"
+          }
+        ]
+      }
+    ],
+    "realWorldExamples": [
+      "Menghitung massa Matahari dari periode orbit dan jari-jari orbit Bumi",
+      "Menaksir ukuran orbit lewat pengamatan periode orbit planet luar surya",
+      "Merancang periode orbit satelit buatan menurut ketinggian orbitnya"
+    ],
+    "relatedFormulas": ["universal-gravitation", "escape-velocity"]
+  },
+  "hubble-law": {
+    "name": "Hukum Hubble",
+    "oneLiner": "Hukum pengembangan alam semesta yang menyatakan kecepatan menjauh galaksi jauh sebanding dengan jaraknya",
+    "description": "Hukum Hubble menyatakan bahwa makin jauh sebuah galaksi, makin cepat ia menjauh dari kita, dan kecepatan menjauhnya berbanding lurus dengan jaraknya. Tetapan kesebandingannya, yaitu tetapan Hubble, bermakna laju pengembangan alam semesta dan berperan penting untuk menaksir umur alam semesta. Ini salah satu bukti pengamatan terkuat bagi kosmologi dentuman besar.",
+    "discoverer": "Edwin Hubble",
+    "field": "Astronomi",
+    "significance": "Dengan membuktikan lewat pengamatan bahwa alam semesta sedang mengembang, hukum ini menyiapkan titik awal kosmologi modern.",
+    "elementMeanings": {
+      "v": {
+        "role": "Kecepatan menjauh",
+        "kind": "output",
+        "unit": "km/s",
+        "description": "Kecepatan galaksi menjauh dari pengamat. Satuan: km/s."
+      },
+      "H_0": {
+        "role": "Tetapan Hubble",
+        "kind": "constant",
+        "value": 70,
+        "unit": "km/s/Mpc",
+        "description": "Laju pengembangan alam semesta saat ini. Kira-kira 70 km/s/Mpc."
+      },
+      "d": {
+        "role": "Jarak",
+        "kind": "input",
+        "unit": "Mpc",
+        "description": "Jarak dari pengamat ke galaksi. Satuan: megaparsek (Mpc)."
+      }
+    },
+    "realWorldExamples": [
+      "Menaksir jarak lewat pergeseran merah sebuah galaksi",
+      "Menghitung umur alam semesta (kira-kira 13,8 miliar tahun)",
+      "Meneliti ada tidaknya percepatan pengembangan alam semesta"
+    ],
+    "relatedFormulas": ["schwarzschild-radius", "gravitational-lensing"]
+  },
+  "schwarzschild-radius": {
+    "name": "Jari-jari Schwarzschild",
+    "oneLiner": "Rumus yang menyatakan jari-jari kritis agar sebuah benda menjadi lubang hitam",
+    "description": "Jari-jari Schwarzschild adalah jari-jari terkecil yang harus dicapai bila sebuah benda bermassa tertentu hendak menjadi lubang hitam. Bila massanya termampatkan ke dalam jari-jari ini, terbentuklah cakrawala peristiwa yang bahkan cahaya pun tak dapat lolos darinya. Ini hasil yang diturunkan dari penyelesaian Schwarzschild dalam teori relativitas umum.",
+    "discoverer": "Karl Schwarzschild",
+    "field": "Astronomi",
+    "significance": "Dengan mendefinisikan ukuran lubang hitam secara kuantitatif, rumus ini menegakkan konsep inti astrofisika relativistik.",
+    "elementMeanings": {
+      "r_s": {
+        "role": "Jari-jari Schwarzschild",
+        "kind": "output",
+        "unit": "m",
+        "description": "Jari-jari cakrawala peristiwa. Satuan: meter (m)."
+      },
+      "G": {
+        "role": "Tetapan gravitasi",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "Tetapan gravitasi umum. Kira-kira 6,674x10 pangkat -11 N m kuadrat/kg kuadrat."
+      },
+      "M": {
+        "role": "Massa",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda langit. Satuan: kg."
+      },
+      "c": {
+        "role": "Laju cahaya",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "Laju cahaya dalam ruang hampa. Kira-kira 3x10 pangkat 8 m/s."
+      },
+      "c^2": {
+        "role": "Kuadrat laju cahaya",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Terletak di penyebut, menyatakan hubungan bahwa makin besar massanya, makin besar jari-jarinya."
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung jari-jari Schwarzschild Matahari (kira-kira 3 km)",
+      "Menaksir ukuran cakrawala peristiwa lubang hitam supermasif",
+      "Menganalisis syarat kritis runtuhnya bintang neutron menjadi lubang hitam"
+    ],
+    "relatedFormulas": ["mass-energy", "escape-velocity", "gravitational-lensing"]
+  },
+  "stefan-boltzmann": {
+    "name": "Hukum Stefan-Boltzmann",
+    "oneLiner": "Hukum yang menyatakan luminositas radiasi total sebuah bintang sebanding dengan kuadrat jari-jarinya dan pangkat empat suhu permukaannya",
+    "description": "Hukum Stefan-Boltzmann menyatakan bahwa energi radiasi total (luminositas) sebuah benda hitam sebanding dengan luas permukaannya dan sebanding dengan pangkat empat suhu permukaannya. Pada bintang, luminositas total dapat dihitung bila jari-jari dan suhu permukaannya diketahui, dan sebaliknya ukuran bintang dapat ditaksir dari luminositas dan suhunya.",
+    "discoverer": "Josef Stefan, Ludwig Boltzmann",
+    "field": "Astronomi",
+    "significance": "Dengan mengukur hubungan antara sifat fisis bintang (ukuran, suhu, luminositas), hukum ini menjadi landasan penggolongan bintang dan teori evolusi bintang.",
+    "elementMeanings": {
+      "L": {
+        "role": "Luminositas",
+        "kind": "output",
+        "unit": "W",
+        "description": "Energi total yang dipancarkan bintang per satuan waktu. Satuan: watt (W)."
+      },
+      "R": {
+        "role": "Jari-jari bintang",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jari-jari bintang. Satuan: meter (m)."
+      },
+      "R^2": {
+        "role": "Kuadrat jari-jari",
+        "kind": "structural",
+        "description": "Faktor yang sebanding dengan luas permukaan (4 pi R kuadrat)."
+      },
+      "\\sigma": {
+        "role": "Tetapan Stefan-Boltzmann",
+        "kind": "constant",
+        "value": 5.670e-8,
+        "unit": "W/(m²·K⁴)",
+        "description": "Kira-kira 5,67x10 pangkat -8 W/m kuadrat/K pangkat 4."
+      },
+      "T": {
+        "role": "Suhu permukaan",
+        "kind": "input",
+        "unit": "K",
+        "description": "Suhu efektif permukaan bintang. Satuan: kelvin (K)."
+      },
+      "T^4": {
+        "role": "Pangkat empat suhu",
+        "kind": "structural",
+        "description": "Bila suhunya dua kali lipat, luminositasnya 16 kali lipat. Ini menyatakan hubungan taklinear yang kuat."
+      }
+    },
+    "realWorldExamples": [
+      "Menaksir jari-jari bintang dari suhu permukaan dan luminositasnya",
+      "Membandingkan ukuran bintang raksasa merah dan katai putih",
+      "Menafsirkan kedudukan bintang pada diagram HR (diagram Hertzsprung-Russell)"
+    ],
+    "relatedFormulas": ["wien-displacement", "mass-energy"]
+  },
+  "wien-displacement": {
+    "name": "Hukum pergeseran Wien",
+    "oneLiner": "Hukum yang menyatakan panjang gelombang berintensitas terbesar pada radiasi benda hitam berbanding terbalik dengan suhunya",
+    "description": "Hukum pergeseran Wien menyatakan bahwa panjang gelombang yang paling kuat dipancarkan sebuah benda hitam berbanding terbalik dengan suhunya. Makin tinggi suhunya, makin pendek panjang gelombang puncaknya sehingga bergeser ke arah biru; makin rendah suhunya, makin bergeser ke panjang gelombang panjang yaitu merah. Dengan hukum ini, suhu permukaan sebuah bintang dapat ditaksir hanya dari warnanya.",
+    "discoverer": "Wilhelm Wien",
+    "field": "Astronomi",
+    "significance": "Dengan mengungkap hubungan kuantitatif antara warna dan suhu bintang, hukum ini menyediakan dasar pengamatan benda langit berbasis spektroskopi.",
+    "elementMeanings": {
+      "\\lambda_{max}": {
+        "role": "Panjang gelombang radiasi puncak",
+        "kind": "output",
+        "unit": "m",
+        "description": "Panjang gelombang berintensitas terbesar pada spektrum radiasi benda hitam. Satuan: meter (m)."
+      },
+      "b": {
+        "role": "Tetapan pergeseran Wien",
+        "kind": "constant",
+        "value": 2.898e-3,
+        "unit": "m·K",
+        "description": "Kira-kira 2,898x10 pangkat -3 m K."
+      },
+      "T": {
+        "role": "Suhu",
+        "kind": "input",
+        "unit": "K",
+        "description": "Suhu mutlak benda hitam. Satuan: kelvin (K)."
+      }
+    },
+    "realWorldExamples": [
+      "Menaksir suhu permukaan bintang dari warnanya (bintang biru panas, bintang merah dingin)",
+      "Mengukur suhu permukaan Matahari (kira-kira 5.778 K, di daerah warna kuning)",
+      "Mengamati benda langit yang dingin dengan teleskop inframerah"
+    ],
+    "relatedFormulas": ["stefan-boltzmann"]
+  },
+  "drake-equation": {
+    "name": "Persamaan Drake",
+    "oneLiner": "Persamaan peluang untuk menaksir banyaknya peradaban cerdas yang dapat dihubungi di galaksi kita",
+    "description": "Persamaan Drake menaksir banyaknya peradaban di galaksi kita yang saat ini memancarkan sinyal radio yang dapat dideteksi, sebagai hasil kali beberapa faktor peluang. Faktor-faktornya mencakup mulai dari laju pembentukan bintang sampai umur sebuah peradaban; meskipun sebagian besar nilainya belum pasti, persamaan ini menyodorkan arah pencarian kehidupan cerdas di luar Bumi (SETI) secara sistematis.",
+    "discoverer": "Frank Drake",
+    "field": "Astronomi",
+    "significance": "Dengan menyistematiskan persoalan pencarian kehidupan cerdas di luar Bumi secara ilmiah, persamaan ini menyediakan kerangka teoretis bagi penelitian SETI.",
+    "elementMeanings": {
+      "N": {
+        "role": "Banyaknya peradaban yang dapat dihubungi",
+        "kind": "output",
+        "description": "Banyaknya peradaban di dalam galaksi yang saat ini memancarkan sinyal yang dapat dideteksi."
+      },
+      "R_*": {
+        "role": "Laju pembentukan bintang",
+        "kind": "input",
+        "unit": "/yr",
+        "description": "Banyaknya bintang yang lahir baru setiap tahun di galaksi."
+      },
+      "f_p": {
+        "role": "Bagian bintang yang berplanet",
+        "kind": "input",
+        "description": "Bagian bintang yang memiliki sistem keplanetan."
+      },
+      "n_e": {
+        "role": "Banyaknya planet layak huni",
+        "kind": "input",
+        "description": "Banyaknya planet di daerah layak huni per sistem keplanetan."
+      },
+      "f_l": {
+        "role": "Bagian yang memunculkan kehidupan",
+        "kind": "input",
+        "description": "Peluang kehidupan benar-benar lahir di planet yang layak huni."
+      },
+      "f_i": {
+        "role": "Bagian kehidupan cerdas",
+        "kind": "input",
+        "description": "Peluang kehidupan berkembang menjadi makhluk cerdas."
+      },
+      "f_c": {
+        "role": "Bagian yang berteknologi komunikasi",
+        "kind": "input",
+        "description": "Peluang kehidupan cerdas mengembangkan teknologi untuk memancarkan sinyal yang dapat dideteksi."
+      },
+      "L": {
+        "role": "Umur peradaban",
+        "kind": "input",
+        "unit": "yr",
+        "description": "Lamanya sebuah peradaban yang dapat dihubungi memancarkan sinyal. Satuan: tahun."
+      }
+    },
+    "realWorldExamples": [
+      "Menyusun siasat pencarian dalam proyek SETI",
+      "Memperbarui nilai f_p dan n_e dengan data penemuan planet luar surya",
+      "Pembahasan kuantitatif atas paradoks Fermi (mengapa tidak ada bukti peradaban luar Bumi)"
+    ],
+    "relatedFormulas": ["hubble-law"]
+  },
+  "gravitational-lensing": {
+    "name": "Efek lensa gravitasi",
+    "oneLiner": "Rumus yang menyatakan sudut pembelokan lintasan cahaya oleh benda langit bermassa raksasa",
+    "description": "Efek lensa gravitasi adalah gejala membeloknya cahaya yang melintas dekat benda langit bermassa raksasa akibat melengkungnya ruang-waktu. Sudut pembelokannya sebanding dengan massa benda langit itu dan berbanding terbalik dengan jarak terdekat lintasan cahaya terhadap benda tersebut. Ini ramalan langsung teori relativitas umum, dan pembuktian pengamatannya yang pertama dilakukan saat gerhana matahari tahun 1919.",
+    "discoverer": "Albert Einstein",
+    "field": "Astronomi",
+    "significance": "Ini gejala pertama yang membuktikan teori relativitas umum lewat pengamatan, dan dipakai sebagai alat utama untuk mengamati sebaran materi gelap.",
+    "elementMeanings": {
+      "\\theta": {
+        "role": "Sudut pembelokan",
+        "kind": "output",
+        "unit": "rad",
+        "description": "Besar sudut membeloknya cahaya. Satuan: radian (rad)."
+      },
+      "G": {
+        "role": "Tetapan gravitasi",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "Tetapan gravitasi umum. Kira-kira 6,674x10 pangkat -11 N m kuadrat/kg kuadrat."
+      },
+      "M": {
+        "role": "Massa benda langit lensa",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda langit yang membelokkan cahaya. Satuan: kg."
+      },
+      "c": {
+        "role": "Laju cahaya",
+        "kind": "constant",
+        "value": 2.998e8,
+        "unit": "m/s",
+        "description": "Laju cahaya dalam ruang hampa. Kira-kira 3x10 pangkat 8 m/s."
+      },
+      "c^2": {
+        "role": "Kuadrat laju cahaya",
+        "kind": "constant",
+        "value": 8.988e16,
+        "unit": "m²/s²",
+        "description": "Faktor yang mencerminkan koreksi relativistik."
+      },
+      "b": {
+        "role": "Parameter dampak",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jarak terdekat lintasan cahaya terhadap benda langit lensa. Satuan: meter (m)."
+      }
+    },
+    "realWorldExamples": [
+      "Mengamati cacat bayangan galaksi latar akibat gugus galaksi",
+      "Mencari planet luar surya dengan mikrolensa gravitasi",
+      "Membuat peta sebaran materi gelap"
+    ],
+    "relatedFormulas": ["schwarzschild-radius", "universal-gravitation"]
+  },
+  "escape-velocity": {
+    "name": "Kecepatan lepas",
+    "oneLiner": "Rumus yang menyatakan kecepatan terkecil yang dibutuhkan untuk melepaskan diri dari gravitasi sebuah benda langit",
+    "description": "Kecepatan lepas adalah kecepatan terkecil yang harus dimiliki sebuah benda di permukaan benda langit agar dapat sepenuhnya keluar dari daerah gravitasinya. Makin besar massa benda langit itu dan makin kecil jari-jarinya, makin besar kecepatan lepasnya. Pada jari-jari Schwarzschild, kecepatan lepasnya mencapai laju cahaya sehingga langsung berkaitan dengan definisi lubang hitam.",
+    "field": "Astronomi",
+    "significance": "Ini dasar bagi berbagai persoalan astrofisika, seperti peluncuran roket, dapat atau tidaknya sebuah planet mempertahankan atmosfernya, dan syarat terbentuknya lubang hitam.",
+    "elementMeanings": {
+      "v_e": {
+        "role": "Kecepatan lepas",
+        "kind": "output",
+        "unit": "m/s",
+        "description": "Kecepatan terkecil untuk keluar dari daerah gravitasi. Satuan: m/s."
+      },
+      "G": {
+        "role": "Tetapan gravitasi",
+        "kind": "constant",
+        "value": 6.674e-11,
+        "unit": "N·m²/kg²",
+        "description": "Tetapan gravitasi umum. Kira-kira 6,674x10 pangkat -11 N m kuadrat/kg kuadrat."
+      },
+      "M": {
+        "role": "Massa benda langit",
+        "kind": "input",
+        "unit": "kg",
+        "description": "Massa benda langit yang hendak ditinggalkan. Satuan: kg."
+      },
+      "r": {
+        "role": "Jari-jari",
+        "kind": "input",
+        "unit": "m",
+        "description": "Jarak dari pusat benda langit ke titik berangkat. Satuan: meter (m)."
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung kecepatan lepas Bumi (kira-kira 11,2 km/s)",
+      "Menjelaskan tiadanya atmosfer Bulan akibat kecepatan lepasnya yang rendah",
+      "Hubungan antara kecepatan lepas Yupiter yang tinggi dan atmosfernya yang tebal"
+    ],
+    "relatedFormulas": ["universal-gravitation", "schwarzschild-radius", "kepler-third", "kinetic-energy"]
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "mass-energy": {
+    "name": "Mass-energy equivalence",
+    "oneLiner": "The formula showing that mass and energy convert into each other at the rate of the speed of light squared",
+    "description": "An equation that comes out of Einstein's special relativity. It shows that mass can turn into energy and energy into mass, and that the exchange rate is the speed of light squared. Because that square is so large, even a small mass can release an enormous amount of energy.",
+    "discoverer": "Albert Einstein",
+    "field": "Physics",
+    "significance": "By revealing that mass is itself a form of energy, it changed the paradigm of modern physics, and it explains how nuclear fission and fusion work.",
+    "elementMeanings": {
+      "E": { "role": "Energy", "kind": "output", "unit": "J", "description": "The energy the object holds. Units: joules (J)." },
+      "m": { "role": "Mass", "kind": "input", "unit": "kg", "description": "The rest mass of the object. Units: kilograms (kg)." },
+      "c": { "role": "Speed of light", "kind": "constant", "value": 2.998e8, "unit": "m/s", "description": "The speed of light in a vacuum. About 3×10⁸ m/s." },
+      "c^2": { "role": "Square of the speed of light", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "About 9×10¹⁶. It is the mass-energy conversion rate." }
+    },
+    "relatedFormulas": ["kinetic-energy", "newton-second"]
+  },
+  "newton-second": {
+    "name": "Newton's second law of motion",
+    "oneLiner": "The law that the force acting on a body equals its mass times its acceleration",
+    "description": "Newton's second law states that the net force on a body is its mass times its acceleration. For the same force, the greater the mass the smaller the acceleration, which is how mass quantifies inertia. It is the most central equation of motion in classical mechanics.",
+    "discoverer": "Isaac Newton",
+    "field": "Physics",
+    "significance": "By establishing the quantitative relation between force, mass, and acceleration, it laid the foundation of classical mechanics.",
+    "elementMeanings": {
+      "F": { "role": "Force", "kind": "output", "unit": "N", "description": "The net force acting on the body. Units: newtons (N)." },
+      "m": { "role": "Mass", "kind": "input", "unit": "kg", "description": "The mass of the body. It measures its inertia. Units: kg." },
+      "a": { "role": "Acceleration", "kind": "input", "unit": "m/s²", "description": "The rate at which velocity changes with time. Units: m/s²." }
+    },
+    "relatedFormulas": ["universal-gravitation", "kinetic-energy", "mass-energy"]
+  },
+  "universal-gravitation": {
+    "name": "Law of universal gravitation",
+    "oneLiner": "The law that two bodies attract each other with a force proportional to the product of their masses and inversely proportional to the square of their separation",
+    "description": "The law of universal gravitation says that every body with mass attracts every other, with a force proportional to the product of the two masses and inversely proportional to the square of the distance between them. It was a revolutionary law, uniting the fall of an apple and the orbit of the Moon under a single principle.",
+    "discoverer": "Isaac Newton",
+    "field": "Physics",
+    "significance": "By uniting celestial motion with terrestrial mechanics, it established the first universal law of physics.",
+    "elementMeanings": {
+      "F": { "role": "Gravitational force", "kind": "output", "unit": "N", "description": "The attractive force between the two bodies. Units: newtons (N)." },
+      "G": { "role": "Gravitational constant", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "The constant of universal gravitation. About 6.674×10⁻¹¹ N·m²/kg²." },
+      "m_1": { "role": "Mass of the first body", "kind": "input", "unit": "kg", "description": "The mass of the first of the interacting bodies." },
+      "m_2": { "role": "Mass of the second body", "kind": "input", "unit": "kg", "description": "The mass of the second of the interacting bodies." },
+      "r": { "role": "Distance", "kind": "input", "unit": "m", "description": "The distance between the centres of mass of the two bodies." },
+      "r^2": { "role": "Square of the distance", "kind": "structural", "description": "It carries the inverse-square law. Double the distance and the force falls to a quarter." }
+    },
+    "relatedFormulas": ["coulomb-law", "newton-second"]
+  },
+  "coulomb-law": {
+    "name": "Coulomb's law",
+    "oneLiner": "The law that the electric force between two charges is proportional to the product of the charges and inversely proportional to the square of their separation",
+    "description": "Coulomb's law states that the electric force between two point charges is proportional to the product of the charges and inversely proportional to the square of the distance between them. It has the same inverse-square structure as gravitation, with the difference that the electric force can be either attractive or repulsive.",
+    "discoverer": "Charles-Augustin de Coulomb",
+    "field": "Physics",
+    "significance": "It is where electromagnetism begins, and it provides the basis for Maxwell's equations and modern electromagnetic theory.",
+    "elementMeanings": {
+      "F": { "role": "Electric force", "kind": "output", "unit": "N", "description": "The force acting between the two charges. Units: newtons (N)." },
+      "k_e": { "role": "Coulomb constant", "kind": "constant", "value": 8.988e9, "unit": "N·m²/C²", "description": "About 8.988×10⁹ N·m²/C². It sets the strength of the electric force." },
+      "q_1": { "role": "First charge", "kind": "input", "unit": "C", "description": "The charge on the first body. Units: coulombs (C)." },
+      "q_2": { "role": "Second charge", "kind": "input", "unit": "C", "description": "The charge on the second body. Like signs repel, unlike signs attract." },
+      "r": { "role": "Distance", "kind": "input", "unit": "m", "description": "The distance between the two point charges." },
+      "r^2": { "role": "Square of the distance", "kind": "structural", "description": "It carries the inverse-square law. The farther apart, the more sharply the force falls off." }
+    },
+    "relatedFormulas": ["universal-gravitation", "newton-second"]
+  },
+  "kinetic-energy": {
+    "name": "Kinetic energy",
+    "oneLiner": "The formula giving the energy of a moving body from its mass and speed",
+    "description": "The kinetic energy formula states that a body of mass m moving at speed v holds an energy of (1/2)mv². Because it goes with the square of the speed, doubling the speed quadruples the energy. It is the heart of the work-energy theorem and a basic building block of the conservation of energy.",
+    "field": "Physics",
+    "significance": "It is a core component of the conservation of energy and the form of energy used most often in mechanics problems.",
+    "elementMeanings": {
+      "K": { "role": "Kinetic energy", "kind": "output", "unit": "J", "description": "The energy a body has by virtue of its motion. Units: joules (J)." },
+      "\\frac{1}{2}": { "role": "Constant of proportionality", "kind": "constant", "value": 0.5, "description": "The factor that appears when the formula is derived by integrating Newton's second law." },
+      "m": { "role": "Mass", "kind": "input", "unit": "kg", "description": "The mass of the moving body. Units: kg." },
+      "v": { "role": "Speed", "kind": "input", "unit": "m/s", "description": "The speed at which the body travels. Units: m/s." },
+      "v^2": { "role": "Square of the speed", "kind": "structural", "description": "Double the speed and the energy quadruples. A non-linear relation." }
+    },
+    "relatedFormulas": ["mass-energy", "newton-second"]
+  },
+  "kinematic-displacement": {
+    "name": "Displacement under constant acceleration",
+    "oneLiner": "The formula giving the displacement of a body with an initial velocity and constant acceleration as a function of time",
+    "description": "This is the basic formula for the displacement of a body in straight-line motion under constant acceleration. It adds the distance covered by the initial velocity to the extra distance produced by the acceleration. Together with Newton's second law it is a key tool for solving classical mechanics problems, and it applies to free fall, projectile motion, and much else.",
+    "discoverer": "Galileo Galilei",
+    "field": "Physics",
+    "significance": "It is the central kinematic formula for describing constant-acceleration motion quantitatively, and the most basic tool for mechanics problems.",
+    "elementMeanings": {
+      "s": { "role": "Displacement", "kind": "output", "unit": "m", "description": "The distance the body has moved. Units: metres (m)." },
+      "v_0": { "role": "Initial velocity", "kind": "input", "unit": "m/s", "description": "The velocity at the moment the motion starts. Units: m/s." },
+      "t": { "role": "Time", "kind": "input", "unit": "s", "description": "How long the motion has been going on. Units: seconds (s)." },
+      "a": { "role": "Acceleration", "kind": "input", "unit": "m/s²", "description": "The constant acceleration. Units: m/s²." },
+      "\\frac{1}{2}": { "role": "Constant of proportionality", "kind": "constant", "value": 0.5, "description": "The factor that comes out of the integration. It scales the displacement due to the acceleration." },
+      "t^2": { "role": "Square of the time", "kind": "structural", "description": "It shows that the displacement due to acceleration goes with the square of the time." }
+    },
+    "relatedFormulas": ["velocity-acceleration", "velocity-displacement", "newton-second"],
+    "realWorldExamples": [
+      "Working out how far a freely falling object has dropped after a given number of seconds",
+      "Calculating a car's braking distance from the moment the brakes go on until it stops",
+      "Calculating the runway length an aeroplane needs for take-off"
+    ]
+  },
+  "velocity-acceleration": {
+    "name": "Velocity under constant acceleration",
+    "oneLiner": "The formula giving how velocity changes with time under constant acceleration",
+    "description": "This is the most basic kinematic formula, giving the velocity at any moment of straight-line motion under constant acceleration in terms of the initial velocity, the acceleration, and the elapsed time. When the acceleration is constant the velocity changes linearly with time, and the definition of acceleration itself follows from this relation.",
+    "discoverer": "Galileo Galilei",
+    "field": "Physics",
+    "significance": "It is the most basic kinematic relation quantifying the idea of acceleration, and the starting point for analysing any constant-acceleration motion.",
+    "elementMeanings": {
+      "v": { "role": "Final velocity", "kind": "output", "unit": "m/s", "description": "The velocity at time t. Units: m/s." },
+      "v_0": { "role": "Initial velocity", "kind": "input", "unit": "m/s", "description": "The velocity at the moment the motion starts. Units: m/s." },
+      "a": { "role": "Acceleration", "kind": "input", "unit": "m/s²", "description": "The constant acceleration. Units: m/s²." },
+      "t": { "role": "Time", "kind": "input", "unit": "s", "description": "How long the motion has been going on. Units: seconds (s)." }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-displacement", "newton-second"],
+    "realWorldExamples": [
+      "Calculating the speed a car reaches 5 seconds after pulling away from the lights",
+      "Estimating a skydiver's speed at a given moment after the jump",
+      "Working out a rocket's climb rate a set time after launch"
+    ]
+  },
+  "velocity-displacement": {
+    "name": "Velocity-displacement relation",
+    "oneLiner": "The formula relating velocity and displacement directly, with no time involved",
+    "description": "This formula eliminates the time variable from straight-line motion under constant acceleration, relating velocity and displacement directly. The square of the final velocity equals the square of the initial velocity plus twice the product of acceleration and displacement. It is especially handy when the time is unknown, and it connects closely to the conservation of energy.",
+    "discoverer": "Galileo Galilei",
+    "field": "Physics",
+    "significance": "Because it links speed and distance without needing the time, it is a key auxiliary tool for mechanics problems.",
+    "elementMeanings": {
+      "v^2": { "role": "Square of the final velocity", "kind": "output", "unit": "(m/s)²", "description": "The square of the final velocity. Units: (m/s)²." },
+      "v_0^2": { "role": "Square of the initial velocity", "kind": "input", "unit": "(m/s)²", "description": "The square of the initial velocity. Units: (m/s)²." },
+      "2": { "role": "Constant factor", "kind": "constant", "value": 2, "description": "The factor that appears when the equation of motion is derived." },
+      "a": { "role": "Acceleration", "kind": "input", "unit": "m/s²", "description": "The constant acceleration. Units: m/s²." },
+      "s": { "role": "Displacement", "kind": "input", "unit": "m", "description": "The distance the body has moved. Units: metres (m)." }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-acceleration", "kinetic-energy"],
+    "realWorldExamples": [
+      "Working backwards from the braking distance alone to a car's speed just before a crash",
+      "Calculating a bullet's muzzle velocity from the barrel length and the acceleration",
+      "Working out the speed a roller coaster reaches at a given height"
+    ]
+  },
+  "projectile-motion": {
+    "name": "Projectile trajectory equation",
+    "oneLiner": "The parabolic equation giving a projectile's path as a function of horizontal distance",
+    "description": "This equation gives the trajectory of an object launched with a given initial speed and launch angle. Uniform motion in the horizontal direction combines with constant acceleration under gravity in the vertical direction to form a parabolic path. It is an idealised model that ignores air resistance, but it applies widely, from sports physics to ballistics.",
+    "discoverer": "Galileo Galilei",
+    "field": "Physics",
+    "significance": "It established the method of analysing two-dimensional motion by splitting it into horizontal and vertical parts, and it is the basis of ballistics.",
+    "elementMeanings": {
+      "y": { "role": "Vertical position", "kind": "output", "unit": "m", "description": "The height above the launch point. Units: metres (m)." },
+      "x": { "role": "Horizontal distance", "kind": "input", "unit": "m", "description": "The horizontal distance travelled from the launch point. Units: metres (m)." },
+      "\\theta": { "role": "Launch angle", "kind": "input", "unit": "rad", "description": "The angle between the horizontal and the initial velocity vector." },
+      "\\tan\\theta": { "role": "Tangent of the launch angle", "kind": "structural", "description": "It gives the slope of the trajectory at the start." },
+      "g": { "role": "Acceleration due to gravity", "kind": "constant", "value": 9.8, "unit": "m/s²", "description": "About 9.8 m/s² near the surface of the Earth." },
+      "v_0": { "role": "Initial speed", "kind": "input", "unit": "m/s", "description": "The speed at the moment of launch. Units: m/s." },
+      "\\cos^2\\theta": { "role": "Square of the cosine of the launch angle", "kind": "structural", "description": "It carries the square of the horizontal velocity component." }
+    },
+    "relatedFormulas": ["kinematic-displacement", "velocity-acceleration"],
+    "realWorldExamples": [
+      "Predicting how far and how high a batted baseball flies",
+      "Designing the parabolic arc of a fountain's jet of water",
+      "Calculating where a shell fired from a cannon will land"
+    ]
+  },
+  "simple-harmonic": {
+    "name": "Simple harmonic motion equation",
+    "oneLiner": "The formula expressing motion that repeats periodically under a restoring force as a sine function",
+    "description": "Simple harmonic motion is the motion of a body subject to a restoring force proportional to its displacement from equilibrium. The displacement is written as a sine (or cosine) function and is described completely by the amplitude, the angular frequency, and the initial phase. It is the basic model for countless oscillations in nature, from a vibrating spring to a swinging pendulum to an LC circuit.",
+    "field": "Physics",
+    "significance": "It is the most basic model for describing oscillation and wave phenomena, and even complicated periodic motion can be analysed as a superposition of simple harmonic motions.",
+    "elementMeanings": {
+      "x": { "role": "Displacement", "kind": "output", "unit": "m", "description": "How far the body has moved from equilibrium. Units: metres (m)." },
+      "A": { "role": "Amplitude", "kind": "input", "unit": "m", "description": "The maximum displacement. It measures the size of the oscillation. Units: metres (m)." },
+      "\\omega": { "role": "Angular frequency", "kind": "input", "unit": "rad/s", "description": "How much the phase changes per unit time. Units: rad/s. It relates to the period T as 2π/T." },
+      "t": { "role": "Time", "kind": "input", "unit": "s", "description": "How long the motion has been going on. Units: seconds (s)." },
+      "\\varphi": { "role": "Initial phase", "kind": "input", "unit": "rad", "description": "The phase at t=0. It carries the initial conditions." }
+    },
+    "relatedFormulas": ["wave-speed", "kinetic-energy"],
+    "realWorldExamples": [
+      "Analysing the period of a clock pendulum swinging back and forth",
+      "Modelling the vibration pattern of a guitar string",
+      "How a seismometer detects ground vibration"
+    ]
+  },
+  "wave-speed": {
+    "name": "Wave speed formula",
+    "oneLiner": "The relation that a wave's propagation speed equals its frequency times its wavelength",
+    "description": "The propagation speed of a wave is the distance the wave travels in one second, which equals the number of oscillations per second (the frequency) times the length of one wavelength. It is a basic relation that applies universally to every kind of wave — sound, light, ripples on water.",
+    "field": "Physics",
+    "significance": "It is the basic relation applying universally to all wave phenomena, and it underlies acoustics, optics, and communications.",
+    "elementMeanings": {
+      "v": { "role": "Wave speed", "kind": "output", "unit": "m/s", "description": "The speed at which the wave travels through the medium. Units: m/s." },
+      "f": { "role": "Frequency", "kind": "input", "unit": "Hz", "description": "The number of oscillations per unit time. Units: hertz (Hz)." },
+      "\\lambda": { "role": "Wavelength", "kind": "input", "unit": "m", "description": "The spatial length of one period. Units: metres (m)." }
+    },
+    "relatedFormulas": ["simple-harmonic", "de-broglie"],
+    "realWorldExamples": [
+      "Calculating a radio wave's wavelength from its frequency",
+      "Determining the wavelength of sound in a medium during an ultrasound scan",
+      "Analysing the relation between an instrument's pitch and the length of its resonating tube"
+    ]
+  },
+  "ideal-gas-law": {
+    "name": "Ideal gas law",
+    "oneLiner": "The equation of state relating the pressure, volume, temperature, and amount of an ideal gas",
+    "description": "The ideal gas law is the equation of state saying that the pressure times the volume of a gas is proportional to the amount of substance times the absolute temperature. It unites Boyle's law, Charles's law, and Avogadro's law in one relation, assuming the ideal conditions of no interaction between molecules and negligible molecular volume.",
+    "field": "Physics",
+    "significance": "It is the basic equation of thermodynamics and gas dynamics, and the starting point for understanding the behaviour of real gases approximately.",
+    "elementMeanings": {
+      "P": { "role": "Pressure", "kind": "input", "unit": "Pa", "description": "How hard the gas pushes on the walls of its container. Units: pascals (Pa)." },
+      "V": { "role": "Volume", "kind": "input", "unit": "m³", "description": "The amount of space the gas occupies. Units: cubic metres (m³) or litres (L)." },
+      "n": { "role": "Amount of substance", "kind": "input", "unit": "mol", "description": "How much gas there is. Units: moles (mol)." },
+      "R": { "role": "Gas constant", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)", "description": "The ideal gas constant. About 8.314 J/(mol·K)." },
+      "T": { "role": "Absolute temperature", "kind": "input", "unit": "K", "description": "The temperature in kelvin. 0 K is absolute zero." }
+    },
+    "relatedFormulas": ["first-law-thermo", "boltzmann-dist"],
+    "realWorldExamples": [
+      "Predicting how tyre pressure shifts as the temperature changes",
+      "Calculating how a balloon's volume changes when it is heated or cooled",
+      "Explaining why a bag of crisps puffs up at high altitude"
+    ]
+  },
+  "first-law-thermo": {
+    "name": "First law of thermodynamics",
+    "oneLiner": "The conservation of energy: the change in a system's internal energy equals the heat absorbed minus the work done",
+    "description": "The first law of thermodynamics is the conservation of energy expressed thermodynamically. When a system absorbs heat from its surroundings, its internal energy rises or it does work on the surroundings; energy is neither created nor destroyed. It is the basic constraint on every process involving energy — heat engines, refrigerators, chemical reactions.",
+    "field": "Physics",
+    "significance": "By establishing that heat and work are different forms of the same energy, it extended the universality of energy conservation into thermodynamics.",
+    "elementMeanings": {
+      "\\Delta U": { "role": "Change in internal energy", "kind": "output", "unit": "J", "description": "How much the system's internal energy changes. The total change in molecular motion and potential energy." },
+      "Q": { "role": "Heat", "kind": "input", "unit": "J", "description": "The heat the system absorbs from its surroundings. Positive means heat taken in, negative heat given off. Units: joules (J)." },
+      "W": { "role": "Work", "kind": "input", "unit": "J", "description": "The work the system does on its surroundings. Positive means expansion, negative compression. Units: joules (J)." }
+    },
+    "relatedFormulas": ["ideal-gas-law", "kinetic-energy"],
+    "realWorldExamples": [
+      "How the heat of burning fuel turns into piston motion in a car engine",
+      "How a refrigerator moves heat from inside to outside",
+      "Explaining why a gas heats up when compressed adiabatically"
+    ]
+  },
+  "schrodinger-eq": {
+    "name": "Schrödinger equation",
+    "oneLiner": "The fundamental equation of quantum mechanics, describing how a quantum state changes with time",
+    "description": "The Schrödinger equation is the partial differential equation describing how a wave function changes with time in quantum mechanics. It is the quantum counterpart of Newton's equation of motion in classical mechanics, and it is used to predict the quantum behaviour of atoms, molecules, and solids. The squared magnitude of the wave function gives the probability density of finding the particle.",
+    "discoverer": "Erwin Schrödinger",
+    "field": "Physics",
+    "significance": "As the basic equation of motion of quantum mechanics, it underpins atomic structure, chemical bonding, semiconductor physics, and much of modern science.",
+    "elementMeanings": {
+      "i": { "role": "Imaginary unit", "kind": "structural", "description": "The number whose square is -1. It carries the change of phase of the wave function." },
+      "\\hbar": { "role": "Reduced Planck constant", "kind": "constant", "value": 1.055e-34, "unit": "J·s", "description": "The Planck constant divided by 2π. About 1.055×10⁻³⁴ J·s." },
+      "\\frac{\\partial \\psi}{\\partial t}": { "role": "Time partial derivative of the wave function", "kind": "structural", "description": "It expresses how the wave function changes with time." },
+      "\\hat{H}": { "role": "Hamiltonian operator", "kind": "structural", "description": "The operator corresponding to the total energy of the system (kinetic plus potential)." },
+      "\\psi": { "role": "Wave function", "kind": "structural", "description": "The complex function describing the quantum state. Its squared magnitude is the probability density." }
+    },
+    "relatedFormulas": ["de-broglie", "mass-energy"],
+    "realWorldExamples": [
+      "Calculating the energy levels of the electron orbitals of a hydrogen atom",
+      "Analysing the electronic band structure of a semiconductor",
+      "How a scanning tunnelling microscope (STM) works, using quantum tunnelling"
+    ]
+  },
+  "de-broglie": {
+    "name": "de Broglie wavelength",
+    "oneLiner": "The formula showing that every particle has a wave nature, with a wavelength inversely proportional to its momentum",
+    "description": "According to de Broglie's hypothesis, every particle with mass has wave-like properties, with a wavelength equal to the Planck constant divided by the momentum. This idea of matter waves is the principle behind the electron microscope and was the direct motivation for developing the Schrödinger equation. The de Broglie wavelength of a macroscopic object is far too small to observe, but for microscopic particles such as electrons it has been confirmed experimentally.",
+    "discoverer": "Louis de Broglie",
+    "field": "Physics",
+    "significance": "By extending wave-particle duality to matter, it supplied the key impetus for the birth of quantum mechanics.",
+    "elementMeanings": {
+      "\\lambda": { "role": "de Broglie wavelength", "kind": "output", "unit": "m", "description": "The wavelength of the matter wave belonging to the particle. Units: metres (m)." },
+      "h": { "role": "Planck constant", "kind": "constant", "value": 6.626e-34, "unit": "J·s", "description": "About 6.626×10⁻³⁴ J·s. The fundamental constant of quantum mechanics." },
+      "p": { "role": "Momentum", "kind": "input", "unit": "kg·m/s", "description": "The particle's momentum (mass times velocity). Units: kg·m/s." }
+    },
+    "relatedFormulas": ["schrodinger-eq", "wave-speed", "mass-energy"],
+    "realWorldExamples": [
+      "Calculating the wavelength that sets the resolving power of the electron beam in an electron microscope",
+      "Analysing crystal structure by neutron diffraction",
+      "Precision measurement using the wave nature of atoms in an atom interferometer"
+    ]
+  },
+  "boltzmann-dist": {
+    "name": "Boltzmann distribution",
+    "oneLiner": "The distribution showing that at thermal equilibrium the probability of a particle having a given energy falls off exponentially with that energy",
+    "description": "The Boltzmann distribution is the basic result of statistical mechanics stating that in a system at thermal equilibrium the probability of a particle having energy E is proportional to e^(-E/kT). The higher the temperature, the more likely the high-energy states are occupied; at low temperature, most particles crowd into the low-energy states. It explains chemical reaction rates, the distribution of electrons in semiconductors, the density profile of the atmosphere, and more.",
+    "discoverer": "Ludwig Boltzmann",
+    "field": "Physics",
+    "significance": "It is a fundamental principle of statistical mechanics, and it bridges macroscopic thermodynamic laws and the microscopic motion of particles.",
+    "elementMeanings": {
+      "P": { "role": "Probability", "kind": "output", "description": "The probability that the particle is in a particular energy state." },
+      "e": { "role": "Natural constant", "kind": "constant", "value": 2.71828183, "description": "The base of the natural logarithm. About 2.718." },
+      "E": { "role": "Energy", "kind": "input", "unit": "J", "description": "The energy of the state in question. Units: joules (J)." },
+      "k": { "role": "Boltzmann constant", "kind": "constant", "value": 1.381e-23, "unit": "J/K", "description": "About 1.381×10⁻²³ J/K. The constant linking temperature to energy." },
+      "T": { "role": "Absolute temperature", "kind": "input", "unit": "K", "description": "The temperature in kelvin. The higher it is, the more the energy spreads out." }
+    },
+    "relatedFormulas": ["ideal-gas-law", "first-law-thermo"],
+    "realWorldExamples": [
+      "Explaining why atmospheric density falls off exponentially with altitude",
+      "Predicting how the number of free electrons in a semiconductor changes with temperature",
+      "Calculating the fraction of molecules that clear the activation energy barrier in a chemical reaction"
+    ]
+  },
+  "lorentz-transform": {
+    "name": "Lorentz transformation of time",
+    "oneLiner": "The formula of special relativity for transforming the time coordinate between inertial frames",
+    "description": "The Lorentz transformation converts spacetime coordinates between two inertial frames moving at constant velocity relative to each other. The time equation shows that the time in one frame depends on the space coordinate in the other, which is the mathematical statement of the relativity of simultaneity. It is the root of relativistic effects such as time dilation and length contraction.",
+    "discoverer": "Hendrik Lorentz",
+    "field": "Physics",
+    "significance": "By replacing the Galilean transformation, it established the mathematical foundation of special relativity.",
+    "elementMeanings": {
+      "t'": { "role": "Transformed time", "kind": "output", "unit": "s", "description": "The time coordinate in the moving observer's frame." },
+      "\\gamma": { "role": "Lorentz factor", "kind": "structural", "description": "1/sqrt(1 - v²/c²). It grows as the speed approaches that of light." },
+      "t": { "role": "Original time", "kind": "input", "unit": "s", "description": "The time coordinate in the rest frame." },
+      "v": { "role": "Relative velocity", "kind": "input", "unit": "m/s", "description": "The relative velocity between the two frames. Units: m/s." },
+      "x": { "role": "Space coordinate", "kind": "input", "unit": "m", "description": "The position in the rest frame. It shows that space enters the transformation of time." },
+      "c^2": { "role": "Square of the speed of light", "kind": "constant", "value": 8.988e16, "unit": "m²/s²", "description": "The constant of proportionality of the spacetime transformation. It sets how time and space mix." }
+    },
+    "relatedFormulas": ["mass-energy", "velocity-acceleration"],
+    "realWorldExamples": [
+      "The clock corrections applied to GPS satellites (accounting for relativistic time dilation)",
+      "Observing the extended lifetime of fast particles in an accelerator",
+      "Explaining how muons manage to reach the ground from the upper atmosphere"
+    ]
+  },
+  "gauss-law": {
+    "name": "Gauss's law",
+    "oneLiner": "The first of Maxwell's equations: the divergence of the electric field produced by a charge distribution is proportional to the charge density",
+    "description": "Gauss's law, the first of the four Maxwell equations, states that the divergence of the electric field — how much it spreads out at a point — equals the charge density there divided by the permittivity of free space. It is the mathematical statement that charge is the source of the electric field, with the field flowing out of positive charge and into negative charge. It is especially useful for finding the field of a highly symmetric charge distribution concisely.",
+    "discoverer": "Carl Friedrich Gauss / James Clerk Maxwell",
+    "field": "Physics",
+    "significance": "As one of the four fundamental equations of electromagnetism (Maxwell's equations), it fixes the relation between charge and the electric field.",
+    "elementMeanings": {
+      "\\nabla \\cdot \\mathbf{E}": { "role": "Divergence of the electric field", "kind": "structural", "description": "The differential operation saying how much the electric field spreads out from, or converges on, a point." },
+      "\\rho": { "role": "Charge density", "kind": "input", "unit": "C/m³", "description": "The charge per unit volume. Units: C/m³." },
+      "\\varepsilon_0": { "role": "Permittivity of free space", "kind": "constant", "value": 8.854e-12, "unit": "C²/(N·m²)", "description": "About 8.854×10⁻¹² F/m. The constant setting the strength of the electric field in a vacuum." }
+    },
+    "relatedFormulas": ["coulomb-law"],
+    "realWorldExamples": [
+      "Calculating the electric field at the surface of a conducting sphere",
+      "Deriving the uniform field inside a parallel-plate capacitor",
+      "Explaining why the electric field inside a charged conductor is zero"
+    ]
+  }
+}

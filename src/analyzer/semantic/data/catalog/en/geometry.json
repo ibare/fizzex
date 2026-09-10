@@ -1,0 +1,184 @@
+{
+  "pythagorean-theorem": {
+    "name": "Pythagorean theorem",
+    "oneLiner": "The theorem that in a right triangle the square of the hypotenuse equals the sum of the squares of the other two sides",
+    "description": "The Pythagorean theorem states that the square of the hypotenuse of a right triangle equals the sum of the squares of the other two sides. It is the most basic theorem of Euclidean geometry and the foundation of the notion of distance. With thousands of known proofs, it is the most studied theorem in the history of mathematics.",
+    "discoverer": "Pythagoras (traditional attribution)",
+    "field": "Geometry",
+    "significance": "It supplies the definition of Euclidean distance and underlies trigonometry, analytic geometry, vector spaces, and much of modern mathematics.",
+    "elementMeanings": {
+      "a": { "role": "Leg", "description": "The length of one of the sides that meet at the right angle.", "kind": "input" },
+      "b": { "role": "Leg", "description": "The length of the other side that meets at the right angle.", "kind": "input" },
+      "c": { "role": "Hypotenuse", "description": "The length of the longest side, the one opposite the right angle.", "kind": "output" },
+      "a^2+b^2": { "role": "Sum of the squares of the legs", "description": "The squares of the two leg lengths added together.", "kind": "output" },
+      "c^2": { "role": "Square of the hypotenuse", "description": "The hypotenuse length squared. It equals the sum of the squares of the legs.", "kind": "output" }
+    },
+    "parameterConfig": [
+      {
+        "id": "a",
+        "name": "a",
+        "role": "Leg",
+        "min": 0.1,
+        "max": 200,
+        "default": 3,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      },
+      {
+        "id": "b",
+        "name": "b",
+        "role": "Leg",
+        "min": 0.1,
+        "max": 200,
+        "default": 4,
+        "step": 0.1,
+        "unit": "m",
+        "scale": "log"
+      }
+    ],
+    "relatedFormulas": ["law-of-cosines", "heron-formula"]
+  },
+  "heron-formula": {
+    "name": "Heron's formula",
+    "oneLiner": "The formula for the area of a triangle from the lengths of its three sides alone",
+    "description": "Heron's formula computes the area of a triangle from its three sides a, b, c and its semiperimeter s. Because you never have to find the height, it is very practical in surveying and whenever you are given coordinates. It has the elegant structure of the squared area written as a product of the semiperimeter and its differences from each side.",
+    "discoverer": "Heron of Alexandria",
+    "field": "Geometry",
+    "significance": "Because it gives the area from side lengths alone, with no height needed, it is widely used in surveying and computer graphics.",
+    "elementMeanings": {
+      "a": { "role": "First side", "description": "The length of the triangle's first side.", "kind": "input" },
+      "b": { "role": "Second side", "description": "The length of the triangle's second side.", "kind": "input" },
+      "c": { "role": "Third side", "description": "The length of the triangle's third side.", "kind": "input" },
+      "s": { "role": "Semiperimeter", "description": "Half the sum of the three sides. s = (a+b+c)/2.", "kind": "output" },
+      "A": { "role": "Area", "description": "The area of the triangle, computed as sqrt(s(s-a)(s-b)(s-c)).", "kind": "output" }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "circle-area"]
+  },
+  "circle-area": {
+    "name": "Area of a circle",
+    "oneLiner": "The formula that gives the area of a circle as pi times the radius squared",
+    "description": "The area formula for a circle states that the area covered by a circle of radius r equals pi times the radius squared. Ever since Archimedes proved it by cutting the circle into infinitely thin triangles, it has stood as the prototype of integration.",
+    "discoverer": "Archimedes",
+    "field": "Geometry",
+    "significance": "It is the most basic area formula for a curved figure and the historical starting point of the idea of the integral.",
+    "elementMeanings": {
+      "A": { "role": "Area", "description": "The area the circle covers. Units: length squared.", "kind": "output" },
+      "\\pi": { "role": "Pi", "description": "The ratio of a circle's circumference to its diameter. About 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The distance from the centre of the circle to its edge.", "kind": "input" },
+      "r^2": { "role": "Square of the radius", "description": "The radius squared. It sets the size of the area.", "kind": "input" }
+    },
+    "relatedFormulas": ["sphere-volume", "pythagorean-theorem"]
+  },
+  "law-of-cosines": {
+    "name": "Law of cosines",
+    "oneLiner": "The law that gives one side of any triangle from the other two sides and the angle between them",
+    "description": "The law of cosines states that the square of one side of a triangle equals the sum of the squares of the other two sides minus twice their product times the cosine of the included angle. It generalises the Pythagorean theorem: when the included angle is a right angle the cosine is 0 and it reduces to the Pythagorean theorem.",
+    "field": "Geometry",
+    "significance": "It lets you relate sides and angles in any triangle, not just right ones, and it is essential to surveying and navigation.",
+    "elementMeanings": {
+      "a": { "role": "Side being found", "description": "The side whose length the law of cosines is being used to find.", "kind": "output" },
+      "b": { "role": "Known side", "description": "The length of one known side of the triangle.", "kind": "input" },
+      "c": { "role": "Known side", "description": "The length of the other known side of the triangle.", "kind": "input" },
+      "C": { "role": "Included angle", "description": "The angle between side b and side c.", "kind": "input", "unit": "rad" },
+      "\\cos C": { "role": "Cosine of the included angle", "description": "The cosine of the included angle C. It is 0 when the angle is a right angle.", "kind": "structural" }
+    },
+    "relatedFormulas": ["pythagorean-theorem", "heron-formula"]
+  },
+  "sphere-volume": {
+    "name": "Volume of a sphere",
+    "oneLiner": "The formula giving the volume of a sphere as proportional to the cube of its radius",
+    "description": "The volume formula for a sphere states that the space taken up by a sphere of radius r is (4/3) times pi times the radius cubed. Archimedes found this relation by inscribing a sphere in a cylinder; it can also be derived by integration, and it is a basic result of three-dimensional geometry.",
+    "discoverer": "Archimedes",
+    "field": "Geometry",
+    "significance": "It is the most basic volume formula for a curved solid in three-dimensional space and is used widely in physics and engineering.",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "The amount of space the sphere takes up. Units: length cubed.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "Constant of proportionality", "description": "The factor relating the volume of a sphere to the cube of its radius.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "Pi", "description": "The ratio of a circle's circumference to its diameter. About 3.14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Radius", "description": "The distance from the centre of the sphere to its surface.", "kind": "input" },
+      "r^3": { "role": "Cube of the radius", "description": "The radius multiplied by itself three times. It reflects how volume grows in three dimensions.", "kind": "input" }
+    },
+    "relatedFormulas": ["circle-area"]
+  },
+  "euler-polyhedron": {
+    "name": "Euler's polyhedron formula",
+    "oneLiner": "The relation between the numbers of vertices, edges, and faces of a convex polyhedron",
+    "description": "Euler's polyhedron formula reveals the striking fact that for any convex polyhedron, the number of vertices minus the number of edges plus the number of faces always comes to 2. It marked the beginning of topology: however the shape of the polyhedron changes, this relation does not. It is the most basic instance of the topological invariant known as the Euler characteristic.",
+    "discoverer": "Leonhard Euler",
+    "field": "Geometry",
+    "significance": "It was the first result to put a number on a topological property of a geometric object, and it is the starting point of topology and graph theory.",
+    "elementMeanings": {
+      "V": { "role": "Number of vertices", "description": "The total number of vertices (points where edges meet) of the polyhedron.", "kind": "input" },
+      "E": { "role": "Number of edges", "description": "The total number of edges (segments where two faces meet) of the polyhedron.", "kind": "input" },
+      "F": { "role": "Number of faces", "description": "The total number of faces (flat polygons) of the polyhedron.", "kind": "input" },
+      "2": { "role": "Euler characteristic", "description": "The Euler characteristic of a convex polyhedron (topologically a sphere). It is always 2.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": [
+      "Checking a cube: 8 vertices - 12 edges + 6 faces = 2",
+      "Checking a football (truncated icosahedron): 60 vertices - 90 edges + 32 faces = 2"
+    ],
+    "relatedFormulas": ["pythagorean-theorem"]
+  },
+  "circle-equation": {
+    "name": "Equation of a circle",
+    "oneLiner": "The equation describing a circle on the coordinate plane by its centre and radius",
+    "description": "The equation of a circle gives the condition satisfied by every point (x, y) on a circle with centre (a, b) and radius r. It follows directly from the Pythagorean theorem and is the basic tool for handling circles algebraically in analytic geometry. Expanding it gives the general form, and completing the square brings it back to the standard form.",
+    "field": "Geometry",
+    "significance": "It is the central example of analytic geometry's project of writing geometric figures as algebraic equations, and it is essential for analysing how circles and lines relate.",
+    "elementMeanings": {
+      "x": { "role": "x-coordinate of the point", "description": "The horizontal coordinate of any point on the circle.", "kind": "input" },
+      "y": { "role": "y-coordinate of the point", "description": "The vertical coordinate of any point on the circle.", "kind": "input" },
+      "a": { "role": "x-coordinate of the centre", "description": "The horizontal coordinate of the circle's centre.", "kind": "input" },
+      "b": { "role": "y-coordinate of the centre", "description": "The vertical coordinate of the circle's centre.", "kind": "input" },
+      "r": { "role": "Radius", "description": "The distance from the centre of the circle to its edge.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "In GPS positioning, the set of possible locations lying a fixed distance from a given base station",
+      "Modelling the reach of a robot arm as the equation of a circle to work out its working area"
+    ],
+    "relatedFormulas": ["pythagorean-theorem", "circle-area", "ellipse-equation"]
+  },
+  "ellipse-equation": {
+    "name": "Equation of an ellipse",
+    "oneLiner": "The equation for the locus of points whose distances to two foci add to a constant",
+    "description": "The equation of an ellipse gives the condition satisfied by every point on an ellipse centred at the origin with semi-major and semi-minor axes a and b. It generalises the equation of a circle to the case where the x and y axes are scaled differently, and when a = b it becomes a circle. It plays a central role in Kepler's laws of planetary motion.",
+    "discoverer": "Apollonius (in his work on conic sections)",
+    "field": "Geometry",
+    "significance": "It is the mathematical model of planetary orbits, and it has many other applications, from reflective properties in optics to whispering galleries in architecture.",
+    "elementMeanings": {
+      "x": { "role": "x-coordinate of the point", "description": "The horizontal coordinate of any point on the ellipse.", "kind": "input" },
+      "y": { "role": "y-coordinate of the point", "description": "The vertical coordinate of any point on the ellipse.", "kind": "input" },
+      "a": { "role": "Semi-major axis", "description": "Half the length of the ellipse's horizontal (major) axis. The distance to the farthest point.", "kind": "input" },
+      "b": { "role": "Semi-minor axis", "description": "Half the length of the ellipse's vertical (minor) axis. The distance to the nearest point.", "kind": "input" },
+      "a^2": { "role": "Square of the semi-major axis", "description": "The normalising denominator of the x term.", "kind": "input" },
+      "b^2": { "role": "Square of the semi-minor axis", "description": "The normalising denominator of the y term.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Kepler's first law: a planet traces an elliptical orbit with the Sun at one focus",
+      "Whispering galleries: in an elliptical room, sound from one focus gathers at the other"
+    ],
+    "relatedFormulas": ["circle-equation", "hyperbola-equation", "circle-area"]
+  },
+  "hyperbola-equation": {
+    "name": "Equation of a hyperbola",
+    "oneLiner": "The equation for the locus of points whose distances to two foci differ by a constant",
+    "description": "The equation of a hyperbola gives the condition satisfied by every point on a hyperbola centred at the origin with semi-transverse and semi-conjugate axes a and b. Unlike an ellipse, it is the difference of the distances that stays constant, and the curve is open, splitting into two branches. It draws ever closer to the asymptotes y = (b/a)x and y = -(b/a)x without ever meeting them.",
+    "discoverer": "Apollonius (in his work on conic sections)",
+    "field": "Geometry",
+    "significance": "It is used in navigation (the LORAN system), in the design of hyperbolic cooling towers, and in the spacetime structure of special relativity.",
+    "elementMeanings": {
+      "x": { "role": "x-coordinate of the point", "description": "The horizontal coordinate of any point on the hyperbola.", "kind": "input" },
+      "y": { "role": "y-coordinate of the point", "description": "The vertical coordinate of any point on the hyperbola.", "kind": "input" },
+      "a": { "role": "Semi-transverse axis", "description": "The distance from the centre to a vertex of the hyperbola.", "kind": "input" },
+      "b": { "role": "Semi-conjugate axis", "description": "Half the length of the axis that sets the slope of the asymptotes.", "kind": "input" },
+      "a^2": { "role": "Square of the semi-transverse axis", "description": "The normalising denominator of the x term.", "kind": "input" },
+      "b^2": { "role": "Square of the semi-conjugate axis", "description": "The normalising denominator of the y term.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "LORAN navigation: fixing a position from the difference in arrival times of signals from two stations",
+      "Hyperbolic cooling towers: a shape that optimises structural strength and airflow efficiency"
+    ],
+    "relatedFormulas": ["ellipse-equation", "circle-equation"]
+  }
+}

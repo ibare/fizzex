@@ -1,0 +1,101 @@
+{
+  "de-morgan": {
+    "name": "Leyes de De Morgan",
+    "oneLiner": "Ley según la cual la negación de una conjunción es la disyunción de las negaciones, y la negación de una disyunción es la conjunción de las negaciones",
+    "description": "Las leyes de De Morgan establecen que la negación intercambia la conjunción y la disyunción. Son imprescindibles para simplificar expresiones lógicas complejas o transformarlas en otras equivalentes, y en teoría de conjuntos se aplican igual a la relación entre el complementario de la unión y el de la intersección.",
+    "discoverer": "Augustus De Morgan",
+    "field": "Lógica",
+    "significance": "Es una regla de transformación esencial en el diseño de circuitos lógicos, en la optimización de condicionales al programar y en las demostraciones básicas de la teoría de conjuntos.",
+    "elementMeanings": {
+      "A": { "role": "Primera proposición", "description": "Es la primera proposición o el primer conjunto que forma la expresión lógica.", "kind": "input" },
+      "B": { "role": "Segunda proposición", "description": "Es la segunda proposición o el segundo conjunto que forma la expresión lógica.", "kind": "input" },
+      "\\neg": { "role": "Operador de negación", "description": "Es el operador que invierte el valor de verdad de una proposición.", "kind": "structural" },
+      "\\wedge": { "role": "Conjunción", "description": "Es la operación que solo es verdadera cuando las dos proposiciones son verdaderas.", "kind": "structural" },
+      "\\vee": { "role": "Disyunción", "description": "Es la operación que es verdadera si al menos una de las dos proposiciones lo es.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Simplificar la negación de una condición if compleja al programar",
+      "Diseñar conversiones con puertas NAND/NOR en circuitos lógicos digitales",
+      "Optimizar la condición NOT (A AND B) en una consulta de base de datos"
+    ],
+    "relatedFormulas": ["boolean-complement"]
+  },
+  "inclusion-exclusion": {
+    "name": "Principio de inclusión-exclusión",
+    "oneLiner": "Principio que obtiene el tamaño de la unión de dos conjuntos restando el tamaño de la intersección a la suma de los tamaños de cada conjunto",
+    "description": "El principio de inclusión-exclusión es el método que corrige el doble recuento al contar los elementos de una unión. Con dos conjuntos basta con restar una vez la intersección; con tres o más se generaliza según el patrón de incluir los términos impares y excluir los pares.",
+    "field": "Teoría de conjuntos",
+    "significance": "Es un principio básico del recuento y la base de buena parte de la combinatoria: el teorema de la suma en probabilidad, la deducción de la función indicatriz de Euler, etc.",
+    "elementMeanings": {
+      "|A \\cup B|": { "role": "Tamaño de la unión", "description": "Es el número total de elementos que pertenecen a A o a B.", "kind": "output" },
+      "|A|": { "role": "Tamaño de A", "description": "Es el número de elementos que pertenecen al conjunto A.", "kind": "input" },
+      "|B|": { "role": "Tamaño de B", "description": "Es el número de elementos que pertenecen al conjunto B.", "kind": "input" },
+      "|A \\cap B|": { "role": "Tamaño de la intersección", "description": "Es el número de elementos que pertenecen a la vez a A y a B. Se resta para corregir el doble recuento.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular en una encuesta cuántas personas eligieron al menos una de dos opciones",
+      "Obtener el número total de resultados de una condición OR en un buscador tras eliminar los duplicados",
+      "Hallar la probabilidad de que ocurra al menos uno de dos sucesos"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "power-set": {
+    "name": "Cardinal del conjunto potencia",
+    "oneLiner": "Teorema según el cual el número de subconjuntos de un conjunto de n elementos es 2 elevado a n",
+    "description": "La fórmula del cardinal del conjunto potencia muestra que el número de subconjuntos de un conjunto finito S (incluidos el conjunto vacío y el propio S) es exactamente 2^|S|. Se explica como un producto de decisiones binarias, porque para cada elemento hay dos opciones independientes: pertenecer o no pertenecer.",
+    "field": "Teoría de conjuntos",
+    "significance": "Es un resultado básico de la combinatoria y la teoría de conjuntos, y se aplica directamente a la enumeración de subconjuntos, a los algoritmos con máscaras de bits y al análisis del espacio de estados de los circuitos lógicos.",
+    "elementMeanings": {
+      "|P(S)|": { "role": "Cardinal del conjunto potencia", "description": "Es el número de subconjuntos del conjunto S.", "kind": "output" },
+      "2": { "role": "Número de opciones", "description": "Indica que para cada elemento hay dos opciones: 'pertenece' o 'no pertenece'.", "kind": "constant", "value": 2 },
+      "|S|": { "role": "Número de elementos", "description": "Es el número de elementos del conjunto original S.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular todas las combinaciones de pedido posibles a partir de n platos de la carta",
+      "Analizar el número total de combinaciones de reglas de un cortafuegos en seguridad de redes",
+      "Diseñar un algoritmo de enumeración de subconjuntos con máscaras de bits"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "combination": {
+    "name": "Combinaciones",
+    "oneLiner": "Fórmula que calcula de cuántas maneras se pueden elegir k elementos de entre n sin tener en cuenta el orden",
+    "description": "La fórmula de las combinaciones calcula de cuántas formas se pueden escoger k elementos, sin importar el orden, de entre n elementos distintos. Es el resultado de dividir las variaciones entre las k! ordenaciones de los elementos elegidos para eliminar las repeticiones, y coincide con el coeficiente binomial.",
+    "field": "Combinatoria",
+    "significance": "Es la herramienta de recuento más utilizada en matemáticas y en ciencias: cálculo de probabilidades, teorema del binomio, muestreo estadístico, etc.",
+    "elementMeanings": {
+      "C(n,k)": { "role": "Número de combinaciones", "description": "Es el número de formas de elegir k elementos de entre n sin tener en cuenta el orden.", "kind": "output" },
+      "n": { "role": "Número total de elementos", "description": "Es el número total de elementos entre los que se elige.", "kind": "input" },
+      "k": { "role": "Número de elementos elegidos", "description": "Es la cantidad de elementos que se escogen.", "kind": "input" },
+      "n!": { "role": "Factorial de n", "description": "Es el producto de todos los números naturales desde 1 hasta n.", "kind": "structural" },
+      "k!": { "role": "Factorial de k", "description": "Es el número de ordenaciones de los elementos elegidos. Se divide entre él para eliminar las repeticiones.", "kind": "structural" },
+      "(n-k)!": { "role": "Factorial del resto", "description": "Es el número de ordenaciones de los elementos no elegidos. También sirve para eliminar repeticiones.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular de cuántas maneras se eligen 6 números de lotería entre 45",
+      "Número de formas de formar un equipo de 5 personas entre 30 en un trabajo en grupo",
+      "Obtener el número de muestras posibles en un muestreo estadístico"
+    ],
+    "relatedFormulas": ["permutation", "inclusion-exclusion", "power-set"]
+  },
+  "permutation": {
+    "name": "Permutaciones",
+    "oneLiner": "Fórmula que calcula de cuántas maneras se pueden ordenar k elementos elegidos de entre n teniendo en cuenta el orden",
+    "description": "La fórmula de las permutaciones, llamadas también variaciones sin repetición, calcula de cuántas formas se pueden extraer k elementos de entre n distintos y colocarlos en un orden determinado. Se deduce de forma natural de la regla del producto: n opciones para el primer lugar, n-1 para el segundo, y así sucesivamente.",
+    "field": "Combinatoria",
+    "significance": "Es la herramienta básica de los problemas de ordenación en los que el orden importa, y se aplica al criptoanálisis, a la organización de horarios y al análisis del número de casos posibles.",
+    "elementMeanings": {
+      "P(n,k)": { "role": "Número de permutaciones", "description": "Es el número de formas de extraer k elementos de entre n teniendo en cuenta el orden.", "kind": "output" },
+      "n": { "role": "Número total de elementos", "description": "Es el número total de elementos entre los que se elige.", "kind": "input" },
+      "k": { "role": "Número de elementos elegidos", "description": "Es la cantidad de elementos que se extraen y se ordenan.", "kind": "input" },
+      "n!": { "role": "Factorial de n", "description": "Es el producto de todos los números naturales desde 1 hasta n.", "kind": "structural" },
+      "(n-k)!": { "role": "Factorial del resto", "description": "Es el número de ordenaciones de los elementos no elegidos. Al dividir entre él solo se cuentan los k primeros lugares.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Número de contraseñas de 4 cifras en las que los dígitos no se repiten",
+      "Formas de repartir las medallas de oro, plata y bronce entre 8 corredores de una carrera",
+      "Organizar el horario para entrevistar en orden a 5 candidatos"
+    ],
+    "relatedFormulas": ["combination", "inclusion-exclusion", "power-set"]
+  }
+}

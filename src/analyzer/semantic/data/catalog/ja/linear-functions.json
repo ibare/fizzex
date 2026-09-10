@@ -1,0 +1,355 @@
+{
+  "linear-function": {
+    "name": "一次関数",
+    "oneLiner": "x に比例して直線のグラフを描く、最も基本的な関数",
+    "description": "一次関数 y = ax + b は、x が1増えるごとに y がいつも a だけ変わる関数です。グラフはつねに直線で、a が傾き、b が y 切片を表します。",
+    "field": "代数学",
+    "significance": "関数を学ぶすべての出発点であり、変化の割合が一定の現象を数学で表す最も基本的な道具です。",
+    "elementMeanings": {
+      "a": {
+        "role": "傾き",
+        "description": "直線がどれくらい急かを表します。正なら右上がり、負なら右下がりになります。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "y 切片",
+        "description": "直線が y 軸と交わる点の y 座標です。x が0のときの y の値でもあります。",
+        "kind": "input"
+      },
+      "x": {
+        "role": "独立変数",
+        "description": "自由に値を決められる入力の値です。",
+        "kind": "input"
+      },
+      "y": {
+        "role": "従属変数",
+        "description": "x の値によって決まる出力の値です。",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "タクシーの初乗り運賃に距離ごとの運賃が加わる料金の計算",
+      "一定の速さで歩く人の時間と距離の関係"
+    ],
+    "relatedFormulas": [
+      "slope-formula",
+      "point-slope-form",
+      "direct-proportion"
+    ]
+  },
+  "slope-formula": {
+    "name": "傾きの公式",
+    "oneLiner": "2点の座標から直線の傾きを求める公式",
+    "description": "傾きの公式 m = (y2 - y1) / (x2 - x1) は、座標平面上の2点を通る直線がどれくらい急かを計算します。x の変化量に対する y の変化量、つまり変化の割合を表します。",
+    "field": "代数学",
+    "significance": "直線の向きと急さを数で正確に表し、微分の基本となる考え方である変化の割合へ自然につながります。",
+    "elementMeanings": {
+      "m": {
+        "role": "傾き",
+        "description": "直線の急さを表す値です。",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "1つ目の点の x 座標",
+        "description": "1つ目の点の横の位置です。",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "1つ目の点の y 座標",
+        "description": "1つ目の点の縦の位置です。",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "2つ目の点の x 座標",
+        "description": "2つ目の点の横の位置です。",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "2つ目の点の y 座標",
+        "description": "2つ目の点の縦の位置です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "山道の傾斜の計算",
+      "株価チャートで一定の期間の上昇の割合"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "point-slope-form",
+      "distance-formula"
+    ]
+  },
+  "point-slope-form": {
+    "name": "点傾き形",
+    "oneLiner": "1つの点と傾きがわかっているときに直線の方程式を立てる形",
+    "description": "点傾き形 y - y1 = m(x - x1) は、直線上の1点 (x1, y1) と傾き m がわかっていれば、すぐに直線の方程式を立てられるようにしてくれます。",
+    "field": "代数学",
+    "significance": "直線の方程式を求める最も実用的な形であり、微分で接線の方程式を求めるときにもこの形を使います。",
+    "elementMeanings": {
+      "m": {
+        "role": "傾き",
+        "description": "直線の急さです。",
+        "kind": "input"
+      },
+      "x_1": {
+        "role": "わかっている点の x 座標",
+        "description": "直線上にあると確かめられた点の横の位置です。",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "わかっている点の y 座標",
+        "description": "直線上にあると確かめられた点の縦の位置です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "現在の気温と変化の割合から先の気温を予測するモデル",
+      "ある時点の売上と成長率から売上の推移を表す式"
+    ],
+    "relatedFormulas": [
+      "linear-function",
+      "slope-formula"
+    ]
+  },
+  "quadratic-standard": {
+    "name": "二次関数の一般形",
+    "oneLiner": "放物線のグラフを描く二次関数の基本の形",
+    "description": "二次関数の一般形 y = ax² + bx + c は x の2乗を含む関数で、グラフは放物線の形になります。a の符号によって上に凸か下に凸かが決まります。",
+    "field": "代数学",
+    "significance": "放物運動や最大・最小の問題など、暮らしの中のさまざまな現象を説明する中心的な関数です。",
+    "elementMeanings": {
+      "a": {
+        "role": "2次の項の係数",
+        "description": "放物線の向きと開き方を決めます。正なら下に凸、負なら上に凸になります。",
+        "kind": "input"
+      },
+      "b": {
+        "role": "1次の項の係数",
+        "description": "放物線の軸の位置に影響します。",
+        "kind": "input"
+      },
+      "c": {
+        "role": "定数項",
+        "description": "放物線が y 軸と交わる点の y 座標です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "ボールを投げたときの高さの変わり方",
+      "橋のアーチの構造が描く曲線"
+    ],
+    "relatedFormulas": [
+      "quadratic-vertex",
+      "discriminant",
+      "quadratic-formula"
+    ]
+  },
+  "quadratic-vertex": {
+    "name": "二次関数の標準形(頂点形)",
+    "oneLiner": "放物線の頂点の座標がそのまま読み取れる二次関数の形",
+    "description": "二次関数の標準形 y = a(x - h)² + k は、放物線の頂点が (h, k) であることがひと目でわかる形です。一般形を平方完成すると、この形になります。",
+    "field": "代数学",
+    "significance": "関数の最大値や最小値をすぐにつかめるので、最適化の問題を解くときに中心的に使われます。",
+    "elementMeanings": {
+      "a": {
+        "role": "2次の項の係数",
+        "description": "放物線の向きと開き方を決めます。一般形の a と同じ値です。",
+        "kind": "input"
+      },
+      "h": {
+        "role": "頂点の x 座標",
+        "description": "放物線が対称になる軸の位置です。",
+        "kind": "input"
+      },
+      "k": {
+        "role": "頂点の y 座標",
+        "description": "放物線の最小値(a > 0)または最大値(a < 0)です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "噴水の水の流れがいちばん高くなる高さを求める",
+      "商品の値段を決めるときに利益が最大になる値段を探す"
+    ],
+    "relatedFormulas": [
+      "quadratic-standard",
+      "discriminant"
+    ]
+  },
+  "discriminant": {
+    "name": "判別式",
+    "oneLiner": "二次方程式の解がいくつあるかを前もって教えてくれる式",
+    "description": "判別式 D = b² - 4ac は、二次方程式 ax² + bx + c = 0 の解の個数と種類を、方程式を解かなくても判断できるようにしてくれます。D が正なら異なる二つの解、0なら重解、負なら実数の解がありません。",
+    "field": "代数学",
+    "significance": "方程式を解く前に解があるかどうかを判断できるようにし、問題を解く方向を決めるうえで重要な役目を果たします。",
+    "elementMeanings": {
+      "D": {
+        "role": "判別式の値",
+        "description": "この値の符号で解の個数と種類が決まります。",
+        "kind": "output"
+      },
+      "b": {
+        "role": "1次の項の係数",
+        "description": "二次方程式で x に掛けられている数です。",
+        "kind": "input"
+      },
+      "a": {
+        "role": "2次の項の係数",
+        "description": "二次方程式で x の2乗に掛けられている数です。",
+        "kind": "input"
+      },
+      "c": {
+        "role": "定数項",
+        "description": "二次方程式で変数なしに足されている数です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "ボールを投げたときにある高さまで届くかどうかを判断する",
+      "二つの曲線が交わる点があるかどうかを確かめる"
+    ],
+    "relatedFormulas": [
+      "quadratic-formula",
+      "quadratic-standard",
+      "quadratic-vertex"
+    ]
+  },
+  "absolute-value-function": {
+    "name": "絶対値関数",
+    "oneLiner": "出力がつねに0以上になるV字の形の関数",
+    "description": "絶対値関数 y = |x| は、入力の符号を無視して大きさだけを残す関数です。グラフは原点を頂点とするV字の形で、x が正ならそのまま、負なら符号を変えて返します。",
+    "field": "代数学",
+    "significance": "距離・誤差・偏差のように、向きに関係なく大きさだけが問題になる場面を数学で表す基本の道具です。",
+    "elementMeanings": {
+      "x": {
+        "role": "入力の値",
+        "description": "正・負・0のいずれでもよい、もとの値です。",
+        "kind": "input"
+      },
+      "|x|": {
+        "role": "絶対値",
+        "description": "x から符号を取り去った大きさ。数直線上で0までの距離と同じです。",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "氷点下の気温と氷点上の気温の差を求めるとき",
+      "目標の値からどれだけ外れているか(誤差)を測るとき"
+    ],
+    "relatedFormulas": [
+      "distance-formula",
+      "linear-function"
+    ]
+  },
+  "floor-function": {
+    "name": "床関数",
+    "oneLiner": "小数部分を切り捨てて、いちばん近い整数まで下げる関数",
+    "description": "床関数(階段関数) y = floor(x) は、x を超えない最大の整数を返します。グラフは階段の形で、整数のところで値が一段ずつ上がります。",
+    "field": "代数学",
+    "significance": "わり算の商、料金の区分の計算、コンピュータプログラミングの整数のわり算など、暮らしの中で「切り捨て」が必要なあらゆる場面の数学的な土台です。",
+    "elementMeanings": {
+      "x": {
+        "role": "入力の値",
+        "description": "実数の範囲の入力の値です。",
+        "kind": "input"
+      },
+      "\\lfloor x \\rfloor": {
+        "role": "床の値",
+        "description": "x 以下の整数のうち最大の数です。例: floor(3.7) = 3、floor(-1.2) = -2。",
+        "kind": "output"
+      }
+    },
+    "realWorldExamples": [
+      "バス運賃の区分の計算(5km ごとの運賃を当てはめる)",
+      "お菓子を友だちに同じ数ずつ分けるとき、一人がもらえる個数"
+    ],
+    "relatedFormulas": [
+      "absolute-value-function"
+    ]
+  },
+  "distance-formula": {
+    "name": "2点間の距離の公式",
+    "oneLiner": "座標平面上の2点の間の直線距離を求める公式",
+    "description": "距離の公式 d = sqrt((x2 - x1)² + (y2 - y1)²) は、座標平面で2点 (x1, y1) と (x2, y2) の間の直線距離を計算します。三平方の定理を座標に当てはめたものです。",
+    "field": "幾何学",
+    "significance": "座標幾何の最も基本的な道具であり、図形の辺の長さや円の半径など、さまざまな幾何の問題の出発点です。",
+    "elementMeanings": {
+      "d": {
+        "role": "距離",
+        "description": "2点を結ぶ直線(線分)の長さです。",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "1つ目の点の x 座標",
+        "description": "1つ目の点の横の位置です。",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "1つ目の点の y 座標",
+        "description": "1つ目の点の縦の位置です。",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "2つ目の点の x 座標",
+        "description": "2つ目の点の横の位置です。",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "2つ目の点の y 座標",
+        "description": "2つ目の点の縦の位置です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "地図上で2つの場所の間の直線距離を計算する",
+      "ゲームで2つのキャラクターの間の距離を判定する"
+    ],
+    "relatedFormulas": [
+      "midpoint-formula",
+      "slope-formula"
+    ]
+  },
+  "midpoint-formula": {
+    "name": "中点の公式",
+    "oneLiner": "2点のちょうど真ん中の位置を求める公式",
+    "description": "中点の公式 M = ((x1 + x2)/2, (y1 + y2)/2) は、座標平面で2点を結んだ線分のちょうど真ん中の点を求めます。それぞれの座標の平均をとればよいのです。",
+    "field": "幾何学",
+    "significance": "線分の二等分点、図形の中心、対称な点などを求めるときの基本となる公式で、座標幾何の問題を解くのに欠かせない道具です。",
+    "elementMeanings": {
+      "M": {
+        "role": "中点",
+        "description": "2点のちょうど真ん中にある点です。",
+        "kind": "output"
+      },
+      "x_1": {
+        "role": "1つ目の点の x 座標",
+        "description": "1つ目の点の横の位置です。",
+        "kind": "input"
+      },
+      "y_1": {
+        "role": "1つ目の点の y 座標",
+        "description": "1つ目の点の縦の位置です。",
+        "kind": "input"
+      },
+      "x_2": {
+        "role": "2つ目の点の x 座標",
+        "description": "2つ目の点の横の位置です。",
+        "kind": "input"
+      },
+      "y_2": {
+        "role": "2つ目の点の y 座標",
+        "description": "2つ目の点の縦の位置です。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "2人の友だちの家のちょうど真ん中にある待ち合わせ場所を探す",
+      "線分の中心に標識を立てる位置の計算"
+    ],
+    "relatedFormulas": [
+      "distance-formula",
+      "slope-formula"
+    ]
+  }
+}

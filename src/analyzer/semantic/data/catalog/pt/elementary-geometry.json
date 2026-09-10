@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "Área do triângulo",
+    "oneLiner": "A fórmula que obtém a área do triângulo multiplicando a base pela altura e dividindo por dois",
+    "description": "A área do triângulo é o comprimento da base multiplicado pela altura e dividido por 2. Cortando um retângulo pela diagonal saem dois triângulos, e por isso a área é a metade da do retângulo.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo triângulo.", "kind": "output" },
+      "b": { "role": "base", "description": "É o comprimento do lado de baixo do triângulo.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância perpendicular da base até o vértice.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "metade", "description": "Significa que é a metade do retângulo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Obter a área triangular de um telhado", "Calcular a área de tecido de uma bandeirinha triangular"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "Área do retângulo",
+    "oneLiner": "A fórmula que obtém a área do retângulo multiplicando o comprimento pela largura",
+    "description": "A área do retângulo é o comprimento multiplicado pela largura. Num quadrilátero com os quatro ângulos retos, isso equivale a contar quantos quadrados unitários cabem numa fileira e multiplicar pelo número de fileiras.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo retângulo.", "kind": "output" },
+      "l": { "role": "comprimento", "description": "É o comprimento do retângulo.", "kind": "input" },
+      "w": { "role": "largura", "description": "É a largura do retângulo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Obter a área do piso de um quarto", "Calcular a área de um quadro-negro", "Comparar o tamanho das telas de celulares"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "Área do quadrado",
+    "oneLiner": "A fórmula que obtém a área do quadrado elevando ao quadrado o comprimento de um lado",
+    "description": "A área do quadrado é o comprimento de um lado multiplicado por si mesmo. Como os quatro lados têm o mesmo comprimento, o princípio é o mesmo da área de um retângulo cujo comprimento e largura são iguais.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo quadrado.", "kind": "output" },
+      "s": { "role": "lado", "description": "É o comprimento de um lado do quadrado.", "kind": "input" },
+      "s^2": { "role": "quadrado do lado", "description": "É o comprimento do lado multiplicado duas vezes.", "kind": "output" }
+    },
+    "realWorldExamples": ["Obter a área de um azulejo", "Calcular o tamanho de um porta-retratos quadrado"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "Área do paralelogramo",
+    "oneLiner": "A fórmula que obtém a área do paralelogramo multiplicando a base pela altura",
+    "description": "A área do paralelogramo é o comprimento da base multiplicado pela altura. Cortando o paralelogramo e deslocando a parte cortada obtém-se um retângulo, e por isso a fórmula tem a mesma forma que a da área do retângulo.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo paralelogramo.", "kind": "output" },
+      "b": { "role": "base", "description": "É o comprimento do lado de baixo do paralelogramo.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância perpendicular entre os dois lados paralelos.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calcular a área do vidro de uma janela inclinada", "Tamanho de uma capa de mesa em forma de paralelogramo"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "Área do trapézio",
+    "oneLiner": "A fórmula que multiplica a soma das bases pela altura e divide por dois",
+    "description": "A área do trapézio é a soma dos comprimentos dos dois lados paralelos (a base menor e a base maior) multiplicada pela altura e dividida por 2. Juntando dois trapézios iguais, um deles invertido, forma-se um paralelogramo; como se quer a metade dele, divide-se por 2.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo trapézio.", "kind": "output" },
+      "a": { "role": "base menor", "description": "É o comprimento do lado paralelo de cima do trapézio.", "kind": "input" },
+      "b": { "role": "base maior", "description": "É o comprimento do lado paralelo de baixo do trapézio.", "kind": "input" },
+      "h": { "role": "altura", "description": "É a distância perpendicular entre os dois lados paralelos.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "metade", "description": "Significa que é a metade do paralelogramo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Obter a área de um canteiro em forma de trapézio", "Calcular a área de um telhado trapezoidal"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "Área do losango",
+    "oneLiner": "A fórmula que obtém a área do losango multiplicando os comprimentos das duas diagonais e dividindo por dois",
+    "description": "A área do losango é o produto dos comprimentos das duas diagonais dividido por 2. As duas diagonais do losango se cruzam perpendicularmente e, cortando pelas diagonais e reorganizando as partes, obtém-se a metade de um retângulo.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo losango.", "kind": "output" },
+      "d_1": { "role": "diagonal 1", "description": "É o comprimento de uma das diagonais do losango.", "kind": "input" },
+      "d_2": { "role": "diagonal 2", "description": "É o comprimento da outra diagonal do losango.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "metade", "description": "Significa que é a metade do retângulo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Calcular a área de uma joia em forma de losango", "Obter a área de tecido de uma pipa"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "Área do círculo",
+    "oneLiner": "A fórmula que obtém a área do círculo multiplicando o quadrado do raio pelo número pi",
+    "description": "A área do círculo é o quadrado do raio multiplicado pelo número pi. Cortando o círculo em fatias bem finas e enfileirando-as, a figura se aproxima de um retângulo cuja base é a metade do comprimento da circunferência e cuja altura é o raio — e daí sai esta fórmula.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo círculo.", "kind": "output" },
+      "\\pi": { "role": "número pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É a distância do centro do círculo até a circunferência.", "kind": "input" },
+      "r^2": { "role": "quadrado do raio", "description": "É o raio multiplicado duas vezes.", "kind": "input" }
+    },
+    "realWorldExamples": ["Comparar o tamanho de pizzas", "Obter a área de um relógio redondo", "Calcular a área de uma moeda"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "Comprimento da circunferência",
+    "oneLiner": "A fórmula que obtém o comprimento da circunferência multiplicando o dobro do raio pelo número pi",
+    "description": "O comprimento da circunferência é o dobro do raio — ou seja, o diâmetro — multiplicado pelo número pi. A distância percorrida ao dar uma volta completa acompanhando o círculo é exatamente o comprimento da circunferência.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "C": { "role": "comprimento da circunferência", "description": "É o comprimento total medido ao longo da borda externa do círculo.", "kind": "output" },
+      "2": { "role": "constante", "description": "É o valor que converte o raio em diâmetro.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "número pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "raio", "description": "É a distância do centro do círculo até a circunferência.", "kind": "input" }
+    },
+    "realWorldExamples": ["Distância percorrida por uma volta completa da roda da bicicleta", "Comprimento de uma volta numa pista circular"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "Área do setor circular",
+    "oneLiner": "A fórmula que obtém a área do setor circular multiplicando o quadrado do raio pelo ângulo central e dividindo por dois",
+    "description": "A área do setor circular é o quadrado do raio multiplicado pelo ângulo central (em radianos) e dividido por 2. Como o setor é uma parte do círculo, quanto maior o ângulo central, maior a área.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo setor circular.", "kind": "output" },
+      "r": { "role": "raio", "description": "É o comprimento do raio do setor circular.", "kind": "input" },
+      "r^2": { "role": "quadrado do raio", "description": "É o raio multiplicado duas vezes.", "kind": "input" },
+      "\\theta": { "role": "ângulo central", "description": "É a abertura do ângulo no centro do setor circular (em radianos).", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "metade", "description": "É o coeficiente que aparece na fórmula da área.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Área da região varrida pelo ponteiro dos minutos de um relógio", "Área de uma fatia de pizza"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "Comprimento do arco",
+    "oneLiner": "A fórmula que obtém o comprimento do arco multiplicando o raio pelo ângulo central",
+    "description": "O comprimento do arco é o raio multiplicado pelo ângulo central (em radianos). O arco é uma parte da circunferência e, quando o ângulo central é uma volta completa (2 pi), o comprimento do arco coincide com o comprimento da circunferência.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "l": { "role": "comprimento do arco", "description": "É o comprimento de uma parte da circunferência.", "kind": "output" },
+      "r": { "role": "raio", "description": "É a distância do centro do círculo até a circunferência.", "kind": "input" },
+      "\\theta": { "role": "ângulo central", "description": "É o ângulo central correspondente ao arco (em radianos).", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["Comprimento do trecho curvo de uma montanha-russa", "Comprimento do arco entre duas marcas do mostrador de um relógio"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "Perímetro do retângulo",
+    "oneLiner": "A fórmula que obtém o perímetro do retângulo dobrando a soma do comprimento com a largura",
+    "description": "O perímetro do retângulo é a soma do comprimento com a largura multiplicada por 2. Como os lados opostos do retângulo têm o mesmo comprimento, somar um par (comprimento e largura) e dobrar dá o comprimento total dos quatro lados.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "P": { "role": "perímetro", "description": "É o comprimento total dos quatro lados do retângulo.", "kind": "output" },
+      "l": { "role": "comprimento", "description": "É o comprimento do retângulo.", "kind": "input" },
+      "w": { "role": "largura", "description": "É a largura do retângulo.", "kind": "input" },
+      "2": { "role": "constante", "description": "Multiplica-se por 2 porque há dois pares de lados opostos.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["Calcular o comprimento da moldura de um quadro", "Distância percorrida correndo ao longo da borda de um campo"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "Perímetro do triângulo",
+    "oneLiner": "A fórmula que obtém o perímetro do triângulo somando os comprimentos dos três lados",
+    "description": "O perímetro do triângulo é a soma dos comprimentos dos três lados. É igual à distância total percorrida ao dar uma volta completa acompanhando a borda do triângulo.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "P": { "role": "perímetro", "description": "É o comprimento total dos três lados do triângulo.", "kind": "output" },
+      "a": { "role": "primeiro lado", "description": "É o comprimento do primeiro lado do triângulo.", "kind": "input" },
+      "b": { "role": "segundo lado", "description": "É o comprimento do segundo lado do triângulo.", "kind": "input" },
+      "c": { "role": "terceiro lado", "description": "É o comprimento do terceiro lado do triângulo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Comprimento total de uma cerca em forma de triângulo", "Comprimento de cordão necessário para debruar uma bandeirinha triangular"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "Área do polígono regular",
+    "oneLiner": "A fórmula que obtém a área do polígono regular a partir do número de lados, do comprimento de um lado e do apótema",
+    "description": "A área do polígono regular é o número de lados multiplicado pelo comprimento de um lado e pelo apótema (a distância perpendicular do centro até o lado), dividido por 2. Dividindo o polígono regular em triângulos a partir do centro, o resultado é igual à soma das áreas de todos esses triângulos.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pelo polígono regular.", "kind": "output" },
+      "n": { "role": "número de lados", "description": "É a quantidade de lados do polígono regular.", "kind": "input" },
+      "s": { "role": "comprimento do lado", "description": "É o comprimento de um lado do polígono regular.", "kind": "input" },
+      "a": { "role": "apótema", "description": "É a distância perpendicular do centro até o ponto médio do lado.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "metade", "description": "É o coeficiente que vem da fórmula da área do triângulo.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Área de uma célula hexagonal de favo de mel", "Área de um enfeite em forma de estrela de cinco pontas"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "Área da coroa circular",
+    "oneLiner": "A fórmula que obtém a área da figura em forma de rosquinha multiplicando pelo número pi a diferença dos quadrados dos raios do círculo maior e do menor",
+    "description": "A área da coroa circular (a figura em forma de rosquinha) é a área do círculo externo menos a área do círculo interno. Subtrai-se o quadrado do raio menor do quadrado do raio maior e multiplica-se pelo número pi.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "A": { "role": "área", "description": "É a superfície ocupada pela coroa circular (a figura em forma de rosquinha).", "kind": "output" },
+      "\\pi": { "role": "número pi", "description": "É o comprimento da circunferência dividido pelo diâmetro, cerca de 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "raio externo", "description": "É o raio do círculo maior, o de fora.", "kind": "input" },
+      "r": { "role": "raio interno", "description": "É o raio do círculo menor, o de dentro.", "kind": "input" },
+      "R^2 - r^2": { "role": "diferença dos quadrados dos raios", "description": "É o quadrado do raio externo menos o quadrado do raio interno.", "kind": "output" }
+    },
+    "realWorldExamples": ["Obter a área da face superior de uma rosquinha", "Área de uma pista circular de corrida"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "Soma dos ângulos internos do triângulo",
+    "oneLiner": "A propriedade de que a soma dos três ângulos internos de um triângulo é sempre 180 graus",
+    "description": "A soma dos ângulos internos do triângulo é a propriedade de que somar os ângulos dos três vértices dá sempre 180 graus (meia volta). Em qualquer triângulo — acutângulo, retângulo ou obtusângulo — a soma dos três ângulos internos é sempre 180 graus.",
+    "field": "Geometria",
+    "elementMeanings": {
+      "\\alpha": { "role": "primeiro ângulo interno", "description": "É o ângulo no primeiro vértice do triângulo.", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "segundo ângulo interno", "description": "É o ângulo no segundo vértice do triângulo.", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "terceiro ângulo interno", "description": "É o ângulo no terceiro vértice do triângulo.", "kind": "input", "unit": "deg" },
+      "180°": { "role": "meia volta", "description": "É o ângulo formado por uma linha reta e coincide com a soma dos ângulos internos do triângulo.", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["Obter o ângulo que falta quando se conhecem dois deles", "Ajustar os ângulos de uma estrutura triangular na construção"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

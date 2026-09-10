@@ -1,0 +1,191 @@
+{
+  "bayes-theorem": {
+    "name": "Bayes' theorem",
+    "oneLiner": "The theorem that updates a prior probability into a posterior probability once new evidence arrives",
+    "description": "Bayes' theorem uses the relationship between conditional probabilities to update a prior probability into a posterior probability. It lets you revise your existing beliefs systematically each time new data is observed. It is the central tool of statistical inference, machine learning, and decision theory.",
+    "discoverer": "Thomas Bayes",
+    "field": "Statistics",
+    "significance": "It formalizes reasoning under uncertainty mathematically, and it underlies modern applications such as spam filters, medical diagnosis, and machine learning.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Posterior probability", "description": "The probability that event A occurs once event B has been observed.", "kind": "output" },
+      "P(B|A)": { "role": "Likelihood", "description": "The probability of observing event B when event A is true.", "kind": "input" },
+      "P(A)": { "role": "Prior probability", "description": "The belief you held about event A before observing event B.", "kind": "input" },
+      "P(B)": { "role": "Probability of the evidence", "description": "The overall probability of observing event B. It acts as a normalizing constant.", "kind": "input" }
+    },
+    "relatedFormulas": ["normal-distribution", "law-of-large-numbers", "conditional-prob", "total-probability"]
+  },
+  "normal-distribution": {
+    "name": "Normal distribution probability density function",
+    "oneLiner": "The probability distribution that forms a symmetric bell-shaped curve around the mean",
+    "description": "The normal distribution is a continuous probability distribution determined by two parameters, the mean and the standard deviation. Its probability density function peaks at the mean and falls off symmetrically on both sides in a bell shape. By the central limit theorem it is the single most important distribution for approximating natural phenomena and measurements.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Statistics",
+    "significance": "Through the central limit theorem it underpins almost all statistical inference, and it is the most widely used probability distribution in the natural and social sciences.",
+    "elementMeanings": {
+      "f(x)": { "role": "Probability density", "description": "The density at the point x. It is not a probability itself; you integrate over an interval to get a probability.", "kind": "output" },
+      "\\mu": { "role": "Mean", "description": "The centre of the distribution, the position of the peak of the bell curve.", "kind": "input" },
+      "\\sigma": { "role": "Standard deviation", "description": "How spread out the distribution is. The larger it is, the flatter the curve.", "kind": "input" },
+      "\\sigma^2": { "role": "Variance", "description": "The square of the standard deviation. It says how far the data scatter from the mean.", "kind": "input" },
+      "e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}": { "role": "Gaussian kernel", "description": "The exponential part that falls off sharply as you move away from the mean.", "kind": "structural" },
+      "\\frac{1}{\\sigma\\sqrt{2\\pi}}": { "role": "Normalizing constant", "description": "The coefficient that makes the total area equal 1.", "kind": "structural" }
+    },
+    "relatedFormulas": ["gaussian-integral", "standard-deviation", "bayes-theorem", "t-test"]
+  },
+  "standard-deviation": {
+    "name": "Standard deviation",
+    "oneLiner": "The measure of how far the data spread out from the mean",
+    "description": "The standard deviation is the square root of the average of the squared differences between each value and the mean. As the positive square root of the variance it carries the same units as the original data, which makes it intuitive to read. It is the most basic statistic for describing the dispersion of data.",
+    "field": "Statistics",
+    "significance": "It lets you measure variability in the original units of the data, and it is central to quality control, financial risk analysis, and much else.",
+    "elementMeanings": {
+      "\\sigma": { "role": "Standard deviation", "description": "The population standard deviation. It says how spread out the data are.", "kind": "output" },
+      "x_i": { "role": "Individual data value", "description": "The i-th observation in the data set.", "kind": "input" },
+      "\\mu": { "role": "Population mean", "description": "The mean of the population. For a sample you use the sample mean instead.", "kind": "input" },
+      "(x_i - \\mu)^2": { "role": "Squared deviation", "description": "The square of how far each value lies from the mean.", "kind": "structural" },
+      "N": { "role": "Number of data points", "description": "The total number of data points in the population.", "kind": "input" },
+      "\\sqrt{}": { "role": "Square root", "description": "Taking the square root of the variance puts the result back in the units of the original data.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "correlation-coefficient", "covariance"]
+  },
+  "correlation-coefficient": {
+    "name": "Correlation coefficient",
+    "oneLiner": "A value between -1 and 1 giving the strength and direction of the linear relationship between two variables",
+    "description": "The Pearson correlation coefficient is the covariance of two variables divided by the product of their standard deviations. Close to 1 means a strong positive linear relationship, close to -1 a strong negative one, and close to 0 a weak linear relationship. It is the most basic statistic for summarizing the association between two variables.",
+    "discoverer": "Karl Pearson",
+    "field": "Statistics",
+    "significance": "By summarizing the relationship between variables in a single number, it provides the basis for regression analysis, financial portfolio theory, and experimental design.",
+    "elementMeanings": {
+      "r": { "role": "Correlation coefficient", "description": "The Pearson correlation coefficient. It takes values between -1 and 1.", "kind": "output" },
+      "\\text{Cov}(X,Y)": { "role": "Covariance", "description": "It measures the extent to which X and Y vary together.", "kind": "input" },
+      "\\sigma_X": { "role": "Standard deviation of X", "description": "How spread out the variable X is.", "kind": "input" },
+      "\\sigma_Y": { "role": "Standard deviation of Y", "description": "How spread out the variable Y is.", "kind": "input" },
+      "X": { "role": "First variable", "description": "The first of the two variables whose correlation you are analysing.", "kind": "input" },
+      "Y": { "role": "Second variable", "description": "The second of the two variables whose correlation you are analysing.", "kind": "input" }
+    },
+    "relatedFormulas": ["standard-deviation", "normal-distribution", "covariance"]
+  },
+  "law-of-large-numbers": {
+    "name": "Law of large numbers",
+    "oneLiner": "The law that the sample mean converges to the population mean as the sample grows",
+    "description": "The law of large numbers guarantees that the sample mean of independent, identically distributed random variables converges to the population mean as the sample size grows without bound. It comes in a weak and a strong form, and it is the fundamental theorem that justifies statistical estimation.",
+    "discoverer": "Jacob Bernoulli",
+    "field": "Statistics",
+    "significance": "It guarantees mathematically that sampling can yield valid inferences about a population, and it is the theoretical basis of insurance, gambling, and experimental science.",
+    "elementMeanings": {
+      "\\bar{X}_n": { "role": "Sample mean", "description": "The arithmetic mean of n observations.", "kind": "output" },
+      "\\mu": { "role": "Population mean", "description": "The true mean of the population, the value the sample mean converges to.", "kind": "input" },
+      "n": { "role": "Sample size", "description": "The number of observations. The larger it is, the closer the sample mean comes to the population mean.", "kind": "input" },
+      "X_i": { "role": "Individual observation", "description": "The i-th independent observation. All of them follow the same distribution.", "kind": "input" },
+      "\\epsilon": { "role": "Error margin", "description": "The probability that the sample mean falls within this distance of the population mean converges to 1.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "normal-distribution", "standard-deviation", "binomial-dist"]
+  },
+  "t-test": {
+    "name": "t-test statistic",
+    "oneLiner": "The statistic that tests whether a sample mean differs significantly from a population mean",
+    "description": "The t statistic is the difference between the sample mean and the population mean under the null hypothesis, divided by the standard error. When the population variance is unknown you use the sample variance instead, and the statistic follows a t distribution with the appropriate degrees of freedom. Because it works with small samples too, it is the most widely used hypothesis test in experimental research and clinical trials.",
+    "discoverer": "William Gosset",
+    "field": "Statistics",
+    "significance": "It makes statistical inference about a population mean possible with small samples, and it is the standard test in medicine, psychology, and education research.",
+    "elementMeanings": {
+      "t": { "role": "t statistic", "description": "The difference between the sample mean and the population mean, expressed in units of the standard error.", "kind": "output" },
+      "\\bar{x}": { "role": "Sample mean", "description": "The arithmetic mean of the sample data.", "kind": "input" },
+      "\\mu": { "role": "Population mean", "description": "The population mean assumed under the null hypothesis.", "kind": "input" },
+      "s": { "role": "Sample standard deviation", "description": "The standard deviation estimated from the sample data.", "kind": "input" },
+      "\\sqrt{n}": { "role": "Square root of the sample size", "description": "The square root of the sample size n. It is used in computing the standard error.", "kind": "structural" }
+    },
+    "relatedFormulas": ["normal-distribution", "standard-deviation", "chi-squared"]
+  },
+  "chi-squared": {
+    "name": "Chi-squared test",
+    "oneLiner": "The statistic that tests whether the gap between observed and expected frequencies is statistically significant",
+    "description": "The chi-squared statistic squares the difference between the observed and expected frequency in each category, divides by the expected frequency, and sums the results. It is used for goodness-of-fit tests and tests of independence, and it is the standard method for analysing categorical data. Significance is judged against a chi-squared distribution with the appropriate degrees of freedom.",
+    "discoverer": "Karl Pearson",
+    "field": "Statistics",
+    "significance": "It makes hypothesis testing possible for categorical data, and it is central to survey analysis, genetics, and quality control.",
+    "elementMeanings": {
+      "\\chi^2": { "role": "Chi-squared statistic", "description": "The test statistic that gathers up the differences between observed and expected values.", "kind": "output" },
+      "O": { "role": "Observed frequency", "description": "The frequency actually observed in each category.", "kind": "input" },
+      "E": { "role": "Expected frequency", "description": "The frequency expected in each category when the null hypothesis is true.", "kind": "input" },
+      "(O-E)^2": { "role": "Squared deviation", "description": "The square of the difference between observed and expected. It accumulates the deviations regardless of sign.", "kind": "structural" },
+      "\\Sigma": { "role": "Summation sign", "description": "The operation of summing over every category.", "kind": "structural" }
+    },
+    "relatedFormulas": ["t-test", "normal-distribution", "binomial-dist"]
+  },
+  "poisson-dist": {
+    "name": "Poisson distribution",
+    "oneLiner": "The probability distribution for how many times a rare event occurs in a fixed span of time or space",
+    "description": "The Poisson distribution models the number of independent events occurring in a unit of time or space when the average rate is constant. It is determined by the single parameter of the mean rate, and it has the distinctive property that its mean and variance are equal. It is the discrete distribution most widely used for analysing the frequency of rare events.",
+    "discoverer": "Siméon Denis Poisson",
+    "field": "Statistics",
+    "significance": "By modelling the pattern of rare events, it is central to predicting insurance claims, analysing communication traffic, and quality control.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Probability", "description": "The probability that the event occurs exactly k times.", "kind": "output" },
+      "\\lambda": { "role": "Mean rate", "description": "The average number of times the event occurs per unit of time or space.", "kind": "input" },
+      "k": { "role": "Number of occurrences", "description": "The number of occurrences of interest, a non-negative integer.", "kind": "input" },
+      "e^{-\\lambda}": { "role": "Normalizing factor", "description": "The exponential part that makes the probabilities sum to 1.", "kind": "structural" },
+      "k!": { "role": "k factorial", "description": "The factorial that corrects for the number of orderings of the k events.", "kind": "structural" }
+    },
+    "relatedFormulas": ["binomial-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "binomial-dist": {
+    "name": "Binomial distribution",
+    "oneLiner": "The distribution giving the probability of k successes in n independent trials",
+    "description": "The binomial distribution is the distribution of the number of successes when a Bernoulli trial with success probability p is repeated independently n times. The probability of each outcome is the number of combinations times the success and failure probabilities. For large enough n it can be approximated by the normal distribution, and for a very small success probability by the Poisson distribution.",
+    "discoverer": "Jacob Bernoulli",
+    "field": "Statistics",
+    "significance": "As the basic model for success-failure experiments, it is the theoretical foundation of quality inspection, medical trials, and opinion poll analysis.",
+    "elementMeanings": {
+      "P(X=k)": { "role": "Probability", "description": "The probability of exactly k successes in n trials.", "kind": "output" },
+      "C(n,k)": { "role": "Number of combinations", "description": "The number of ways to choose k out of n, that is, n!/(k!(n-k)!).", "kind": "structural" },
+      "p": { "role": "Probability of success", "description": "The probability of success on a single trial.", "kind": "input" },
+      "1-p": { "role": "Probability of failure", "description": "The probability of failure on a single trial.", "kind": "input" },
+      "n": { "role": "Number of trials", "description": "The total number of independent trials.", "kind": "input" },
+      "k": { "role": "Number of successes", "description": "The number of successes of interest, from 0 to n.", "kind": "input" }
+    },
+    "relatedFormulas": ["poisson-dist", "normal-distribution", "law-of-large-numbers"]
+  },
+  "conditional-prob": {
+    "name": "Conditional probability",
+    "oneLiner": "The probability that one event occurs given that another has occurred",
+    "description": "Conditional probability defines the probability that event A occurs given that event B has already occurred. You compute it by dividing the probability of the intersection of the two events by the probability of the conditioning event. It is the basis of Bayes' theorem and the most fundamental concept in probability theory and statistical inference.",
+    "field": "Statistics",
+    "significance": "It expresses the dependence between events quantitatively, and it is the mathematical foundation of Bayesian inference, Markov chains, and decision theory.",
+    "elementMeanings": {
+      "P(A|B)": { "role": "Conditional probability", "description": "The probability that event A occurs given event B.", "kind": "output" },
+      "P(A \\cap B)": { "role": "Probability of the intersection", "description": "The probability that events A and B both occur.", "kind": "input" },
+      "P(B)": { "role": "Probability of the conditioning event", "description": "The probability of the event B given as the condition. It must not be 0.", "kind": "input" }
+    },
+    "relatedFormulas": ["bayes-theorem", "total-probability", "binomial-dist"]
+  },
+  "total-probability": {
+    "name": "Law of total probability",
+    "oneLiner": "The formula for the overall probability of an event when the sample space is split into mutually exclusive cases",
+    "description": "The law of total probability finds the probability of an event as a weighted sum of conditional probabilities once the sample space has been partitioned into mutually exclusive and exhaustive events. It lets you break a complicated probability problem into several conditional situations. It is central to computing the denominator of Bayes' theorem.",
+    "field": "Statistics",
+    "significance": "It is the tool for decomposing complicated probability calculations systematically, and combined with Bayes' theorem it forms the core framework of statistical inference.",
+    "elementMeanings": {
+      "P(A)": { "role": "Probability of event A", "description": "The overall probability of the event A you are after.", "kind": "output" },
+      "P(A|B_i)": { "role": "Conditional probability", "description": "The probability of event A given the event B_i.", "kind": "input" },
+      "P(B_i)": { "role": "Probability of a partition event", "description": "The probability of the i-th partition event B_i.", "kind": "input" },
+      "\\Sigma": { "role": "Summation sign", "description": "The operation of summing over every partition event B_i.", "kind": "structural" }
+    },
+    "relatedFormulas": ["conditional-prob", "bayes-theorem"]
+  },
+  "covariance": {
+    "name": "Covariance",
+    "oneLiner": "The value measuring the direction and size of the tendency of two random variables to vary together",
+    "description": "Covariance is the expected value of the product of how far each of two random variables departs from its own mean. A positive value means they tend to move in the same direction, a negative value in opposite directions. It underlies the correlation coefficient and is central to portfolio theory and multivariate analysis.",
+    "field": "Statistics",
+    "significance": "By measuring joint variation between variables, it provides the basis for portfolio variance calculations, principal component analysis, and multivariate regression.",
+    "elementMeanings": {
+      "\\text{Cov}(X,Y)": { "role": "Covariance", "description": "The value giving how much X and Y vary together.", "kind": "output" },
+      "E": { "role": "Expectation operator", "description": "The operation that takes the expected value (mean) of a random variable.", "kind": "structural" },
+      "X": { "role": "First random variable", "description": "The first of the two variables whose covariance you are computing.", "kind": "input" },
+      "Y": { "role": "Second random variable", "description": "The second of the two variables whose covariance you are computing.", "kind": "input" },
+      "\\mu_X": { "role": "Mean of X", "description": "The expected value (mean) of the random variable X.", "kind": "input" },
+      "\\mu_Y": { "role": "Mean of Y", "description": "The expected value (mean) of the random variable Y.", "kind": "input" }
+    },
+    "relatedFormulas": ["correlation-coefficient", "standard-deviation", "normal-distribution"]
+  }
+}

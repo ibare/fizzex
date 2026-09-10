@@ -1,0 +1,151 @@
+{
+  "sphere-volume-solid": {
+    "name": "Volume d'une boule",
+    "oneLiner": "Formule qui donne le volume d'une boule en multipliant le cube du rayon par le nombre pi et par quatre tiers",
+    "description": "Le volume d'une boule s'obtient en multipliant le rayon pris trois fois par lui-même par le nombre pi et par quatre tiers. On l'utilise pour connaître l'espace occupé par un objet parfaitement rond, comme un ballon de basket.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par la boule.", "kind": "output" },
+      "\\frac{4}{3}": { "role": "Coefficient de proportionnalité", "description": "Coefficient fixe qui détermine le volume de la boule.", "kind": "constant", "value": 1.33333333 },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre, soit environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Distance du centre de la boule à sa surface.", "kind": "input" },
+      "r^3": { "role": "Cube du rayon", "description": "Rayon multiplié trois fois par lui-même. Comme le volume relève de trois dimensions, on l'élève au cube.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer le volume d'un ballon de basket", "Estimer le volume de la Terre", "Comparer la taille de billes"],
+    "relatedFormulas": ["sphere-surface", "circle-area-elem"]
+  },
+  "sphere-surface": {
+    "name": "Aire d'une sphère",
+    "oneLiner": "Formule qui donne l'aire d'une sphère en multipliant le carré du rayon par le nombre pi et par quatre",
+    "description": "L'aire d'une sphère est le carré du rayon multiplié par le nombre pi et par quatre. Elle vaut exactement quatre fois l'aire d'un disque de même rayon. C'est précisément la surface qu'il faut couvrir pour peindre un ballon.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "S": { "role": "Aire", "description": "Aire de toute la surface de la sphère.", "kind": "output" },
+      "4": { "role": "Constante", "description": "Elle exprime que l'aire de la sphère vaut quatre fois celle d'un disque de même rayon.", "kind": "constant", "value": 4 },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre, soit environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Distance du centre de la sphère à sa surface.", "kind": "input" },
+      "r^2": { "role": "Carré du rayon", "description": "Rayon multiplié deux fois par lui-même.", "kind": "input" }
+    },
+    "realWorldExamples": ["L'aire totale du cuir d'un ballon de football", "La quantité de papier nécessaire pour recouvrir la surface d'un globe terrestre"],
+    "relatedFormulas": ["sphere-volume-solid", "circle-area-elem"]
+  },
+  "cylinder-volume": {
+    "name": "Volume d'un cylindre",
+    "oneLiner": "Formule qui donne le volume d'un cylindre en multipliant l'aire du disque de base par la hauteur",
+    "description": "Le volume d'un cylindre est l'aire de sa base, c'est-à-dire l'aire d'un disque, multipliée par la hauteur. On peut se le représenter comme un disque empilé sur toute la hauteur.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par le cylindre.", "kind": "output" },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre, soit environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Rayon du disque de base du cylindre.", "kind": "input" },
+      "r^2": { "role": "Carré du rayon", "description": "Rayon multiplié deux fois par lui-même. Il détermine l'aire de la base.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance entre les deux bases du cylindre.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer la contenance d'une canette de boisson", "La capacité d'un réservoir d'eau cylindrique"],
+    "relatedFormulas": ["cylinder-surface", "circle-area-elem", "cone-volume"]
+  },
+  "cylinder-surface": {
+    "name": "Aire totale d'un cylindre",
+    "oneLiner": "Formule qui donne l'aire totale d'un cylindre en additionnant l'aire des deux bases et celle de la face latérale",
+    "description": "L'aire totale d'un cylindre est la somme des aires des deux disques du haut et du bas et de l'aire de la face latérale. Déroulée, la face latérale forme un rectangle dont la longueur est la circonférence du disque et la largeur la hauteur.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "S": { "role": "Aire totale", "description": "Aire de toute la surface du cylindre.", "kind": "output" },
+      "2": { "role": "Constante", "description": "Coefficient mis en facteur commun.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre, soit environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Rayon du disque de base du cylindre.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance entre les deux bases du cylindre.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer l'aire de l'étiquette d'une canette de boisson", "La quantité de papier nécessaire pour emballer une boîte cadeau cylindrique"],
+    "relatedFormulas": ["cylinder-volume", "circle-circumference"]
+  },
+  "cone-volume": {
+    "name": "Volume d'un cône",
+    "oneLiner": "Formule qui donne le volume d'un cône en multipliant l'aire du disque de base par la hauteur, puis en divisant par trois",
+    "description": "Le volume d'un cône est l'aire de sa base multipliée par la hauteur, le tout divisé par trois. C'est exactement le tiers du volume d'un cylindre de même base et de même hauteur.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par le cône.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "Un tiers", "description": "Il exprime que le volume du cône vaut le tiers de celui d'un cylindre de même base et de même hauteur.", "kind": "constant", "value": 0.33333333 },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre, soit environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Rayon du disque de base du cône.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance verticale du sommet du cône à sa base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer la quantité que contient un cornet de glace", "Le volume d'un chapeau pointu"],
+    "relatedFormulas": ["cone-surface", "cylinder-volume", "pyramid-volume"]
+  },
+  "cone-surface": {
+    "name": "Aire totale d'un cône",
+    "oneLiner": "Formule qui donne l'aire totale d'un cône en additionnant l'aire du disque de base et celle de la face latérale",
+    "description": "L'aire totale d'un cône est la somme de l'aire du disque de base et de l'aire de la face latérale, qui a la forme d'un secteur. Déroulée, la face latérale devient un secteur circulaire dont l'aire est le produit du rayon par la génératrice, multiplié par le nombre pi.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "S": { "role": "Aire totale", "description": "Aire de toute la surface du cône.", "kind": "output" },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence d'un cercle à son diamètre, soit environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Rayon du disque de base du cône.", "kind": "input" },
+      "l": { "role": "Génératrice", "description": "Longueur de la ligne oblique qui va du sommet du cône au bord de sa base.", "kind": "input" }
+    },
+    "realWorldExamples": ["L'aire de papier nécessaire pour un chapeau pointu", "Calculer la surface de toile d'une tente conique"],
+    "relatedFormulas": ["cone-volume", "sector-area"]
+  },
+  "cuboid-volume": {
+    "name": "Volume d'un pavé droit",
+    "oneLiner": "Formule qui donne le volume d'un pavé droit en multipliant entre elles la longueur, la largeur et la hauteur",
+    "description": "Le volume d'un pavé droit est le produit de sa longueur, de sa largeur et de sa hauteur. Cela revient à multiplier par la hauteur l'aire du rectangle de base, ou encore à compter combien de cubes unités tiennent dans la boîte.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par le pavé droit.", "kind": "output" },
+      "l": { "role": "Longueur", "description": "Longueur du pavé droit.", "kind": "input" },
+      "w": { "role": "Largeur", "description": "Largeur du pavé droit.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Hauteur du pavé droit.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer le volume d'un colis", "La quantité d'eau que contient une piscine", "Estimer le volume intérieur d'un réfrigérateur"],
+    "relatedFormulas": ["cuboid-surface", "rectangle-area"]
+  },
+  "cuboid-surface": {
+    "name": "Aire totale d'un pavé droit",
+    "oneLiner": "Formule qui donne l'aire totale d'un pavé droit en additionnant l'aire de trois faces, puis en doublant le résultat",
+    "description": "L'aire totale d'un pavé droit est la somme des aires de ses trois faces différentes, multipliée par 2. Un pavé droit possède trois paires de faces opposées, et les faces d'une même paire ont la même aire : on additionne donc les trois sortes de faces et l'on double le résultat.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "S": { "role": "Aire totale", "description": "Aire de toute la surface du pavé droit.", "kind": "output" },
+      "2": { "role": "Constante", "description": "On multiplie par 2 parce que les faces opposées vont par trois paires.", "kind": "constant", "value": 2 },
+      "l": { "role": "Longueur", "description": "Longueur du pavé droit.", "kind": "input" },
+      "w": { "role": "Largeur", "description": "Largeur du pavé droit.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Hauteur du pavé droit.", "kind": "input" },
+      "lw": { "role": "Face du dessus et du dessous", "description": "Aire de la face obtenue en multipliant la longueur par la largeur.", "kind": "output" },
+      "lh": { "role": "Face avant et arrière", "description": "Aire de la face obtenue en multipliant la longueur par la hauteur.", "kind": "output" },
+      "wh": { "role": "Faces latérales", "description": "Aire de la face obtenue en multipliant la largeur par la hauteur.", "kind": "output" }
+    },
+    "realWorldExamples": ["La quantité de papier nécessaire pour emballer une boîte cadeau", "Calculer l'aire extérieure d'un carton de livraison"],
+    "relatedFormulas": ["cuboid-volume", "rectangle-area"]
+  },
+  "tetrahedron-volume": {
+    "name": "Volume d'un tétraèdre régulier",
+    "oneLiner": "Formule qui donne le volume d'un tétraèdre régulier en multipliant le cube de la longueur d'une arête par racine de 2 divisé par 12",
+    "description": "Le volume d'un tétraèdre régulier est le cube de la longueur d'une arête multiplié par racine de 2 divisé par 12. Le tétraèdre régulier est le solide dont les quatre faces sont des triangles équilatéraux identiques ; c'est le plus simple des polyèdres réguliers.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par le tétraèdre régulier.", "kind": "output" },
+      "\\frac{\\sqrt{2}}{12}": { "role": "Coefficient de proportionnalité", "description": "Coefficient fixe qui découle de la structure géométrique du tétraèdre régulier.", "kind": "constant", "value": 0.11785113 },
+      "a": { "role": "Longueur d'une arête", "description": "Longueur d'une arête du tétraèdre régulier. Toutes les arêtes sont égales.", "kind": "input" },
+      "a^3": { "role": "Cube de l'arête", "description": "Longueur de l'arête multipliée trois fois par elle-même.", "kind": "input" }
+    },
+    "realWorldExamples": ["Le volume d'un chocolat en forme de pyramide", "Calculer la taille d'un dé tétraédrique (D4)"],
+    "relatedFormulas": ["pyramid-volume", "sphere-volume-solid"]
+  },
+  "pyramid-volume": {
+    "name": "Volume d'une pyramide",
+    "oneLiner": "Formule qui donne le volume d'une pyramide en multipliant l'aire de la base par la hauteur, puis en divisant par trois",
+    "description": "Le volume d'une pyramide est l'aire de sa base multipliée par la hauteur, le tout divisé par trois. C'est exactement le tiers du volume d'un prisme de même base et de même hauteur. On l'emploie pour les solides à base polygonale terminés par un sommet pointu, comme les pyramides d'Égypte.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "V": { "role": "Volume", "description": "Étendue de l'espace occupé par la pyramide.", "kind": "output" },
+      "\\frac{1}{3}": { "role": "Un tiers", "description": "Il exprime que le volume de la pyramide vaut le tiers de celui d'un prisme de même base et de même hauteur.", "kind": "constant", "value": 0.33333333 },
+      "B": { "role": "Aire de la base", "description": "Aire du polygone qui forme la base de la pyramide.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance verticale du sommet de la pyramide à sa base.", "kind": "input" }
+    },
+    "realWorldExamples": ["Estimer le volume d'une pyramide d'Égypte", "Calculer l'espace intérieur d'une tente en forme de pyramide"],
+    "relatedFormulas": ["cone-volume", "tetrahedron-volume", "cuboid-volume"]
+  }
+}

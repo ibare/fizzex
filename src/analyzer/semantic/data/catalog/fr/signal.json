@@ -1,0 +1,346 @@
+{
+  "fourier-transform": {
+    "name": "Transformation de Fourier",
+    "oneLiner": "Transformation intégrale qui fait passer un signal du domaine temporel au domaine fréquentiel",
+    "description": "La transformation de Fourier décompose un signal, fonction du temps, en une fonction de la fréquence. Elle repose sur le principe que tout signal peut s'écrire comme une somme de sinusoïdes de fréquences différentes, et elle fournit l'amplitude et la phase de chaque composante fréquentielle. Elle est employée dans l'ensemble des sciences et des techniques : traitement du signal, analyse d'images, mécanique quantique.",
+    "discoverer": "Joseph Fourier",
+    "field": "Traitement du signal",
+    "significance": "En rendant possible la double représentation temporelle et fréquentielle, elle a établi le socle théorique du traitement du signal moderne.",
+    "elementMeanings": {
+      "f": {
+        "role": "Fonction / signal",
+        "description": "La fonction de départ, ou le signal temporel, que l'on transforme.",
+        "kind": "input"
+      },
+      "ξ": {
+        "role": "Fréquence",
+        "description": "La variable de fréquence ordinaire. Unité : Hz.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "La variable indépendante de la fonction de départ (le temps, par exemple).",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Constante de Néper",
+        "description": "La base de l'exponentielle complexe.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "i": {
+        "role": "Unité imaginaire",
+        "description": "i² = −1. Dans l'exponentielle complexe, elle traduit la rotation de phase.",
+        "kind": "constant"
+      },
+      "π": {
+        "role": "Nombre pi",
+        "description": "Il fait partie de la constante de normalisation 2π.",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "La reconnaissance vocale par analyse fréquentielle du signal de parole",
+      "La reconstruction d'une image spatiale à partir des données fréquentielles d'une IRM"
+    ],
+    "relatedFormulas": [
+      "inverse-fourier",
+      "laplace-transform",
+      "convolution"
+    ]
+  },
+  "inverse-fourier": {
+    "name": "Transformation de Fourier inverse",
+    "oneLiner": "Transformation intégrale qui reconstitue le signal temporel à partir de son spectre fréquentiel",
+    "description": "La transformation de Fourier inverse est l'opération réciproque de la transformation de Fourier : elle reconstitue le signal temporel d'origine à partir de l'information spectrale exprimée dans le domaine fréquentiel. Le signe de l'exponentielle complexe devient positif et, avec la convention de la fréquence ordinaire, les deux transformations forment un couple symétrique sans facteur de normalisation.",
+    "discoverer": "Joseph Fourier",
+    "field": "Traitement du signal",
+    "significance": "En garantissant que le résultat d'une analyse fréquentielle peut être ramené intégralement au signal d'origine, elle fonde théoriquement la synthèse des signaux.",
+    "elementMeanings": {
+      "f": {
+        "role": "Fonction / signal",
+        "description": "Le signal temporel d'origine, reconstitué.",
+        "kind": "output"
+      },
+      "ξ": {
+        "role": "Fréquence",
+        "description": "La variable indépendante du domaine fréquentiel. Unité : Hz.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "La variable indépendante de la fonction à reconstituer (le temps, par exemple).",
+        "kind": "input"
+      },
+      "e": {
+        "role": "Constante de Néper",
+        "description": "La base de l'exponentielle complexe.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "π": {
+        "role": "Nombre pi",
+        "description": "Il fait partie de la constante de normalisation 2π.",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Reconvertir en signal temporel des données fréquentielles après filtrage",
+      "Restituer à la lecture des données audio compressées"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "laplace-transform",
+      "convolution"
+    ]
+  },
+  "laplace-transform": {
+    "name": "Transformation de Laplace",
+    "oneLiner": "Transformation intégrale qui fait passer une fonction du domaine temporel au domaine des fréquences complexes",
+    "description": "La transformation de Laplace convertit une fonction du temps en une fonction de la variable complexe s, ce qui change les équations différentielles en équations algébriques. On peut la voir comme une généralisation de la transformation de Fourier, capable de traiter aussi les signaux amortis. Elle est un outil essentiel de l'analyse des systèmes asservis, de l'étude des circuits et de l'examen de la stabilité des systèmes.",
+    "discoverer": "Pierre-Simon Laplace",
+    "field": "Traitement du signal",
+    "significance": "En permettant de résoudre algébriquement les équations différentielles, elle est devenue l'outil standard de l'automatique et de l'analyse des systèmes.",
+    "elementMeanings": {
+      "F(s)": {
+        "role": "Résultat de la transformation de Laplace",
+        "description": "La représentation de la fonction dans le domaine des fréquences complexes.",
+        "kind": "output"
+      },
+      "f(t)": {
+        "role": "Fonction du temps",
+        "description": "La fonction temporelle de départ que l'on transforme. Elle est définie pour t >= 0.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Fréquence complexe",
+        "description": "s = σ + jω. La partie réelle traduit l'amortissement, la partie imaginaire l'oscillation.",
+        "kind": "structural"
+      },
+      "e^{-st}": {
+        "role": "Exponentielle complexe amortie",
+        "description": "Le noyau par lequel on multiplie la fonction du temps.",
+        "kind": "structural"
+      },
+      "\\int_0^{\\infty}": {
+        "role": "Intégrale unilatérale",
+        "description": "L'intégrale de 0 à l'infini. Elle traite les systèmes causaux.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "La conception de la fonction de transfert d'un régulateur PID",
+      "L'analyse du régime transitoire d'un circuit RLC"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "z-transform",
+      "transfer-function"
+    ]
+  },
+  "z-transform": {
+    "name": "Transformation en Z",
+    "oneLiner": "Outil mathématique qui fait passer un signal à temps discret dans le domaine complexe z",
+    "description": "La transformation en Z est la version à temps discret de la transformation de Laplace : elle convertit un signal discret x[n] en une fonction de la variable complexe z. Elle est indispensable à la conception des filtres numériques, à l'analyse des systèmes de commande numérique et à la résolution des équations aux différences. La relation z = e^(sT) la relie à la transformation de Laplace.",
+    "discoverer": "Witold Hurewicz",
+    "field": "Traitement du signal",
+    "significance": "Outil standard de l'analyse des systèmes à temps discret, elle fournit le socle théorique du traitement numérique du signal et de la commande numérique.",
+    "elementMeanings": {
+      "X(z)": {
+        "role": "Résultat de la transformation en Z",
+        "description": "La représentation du signal discret dans le domaine complexe z.",
+        "kind": "output"
+      },
+      "x[n]": {
+        "role": "Signal à temps discret",
+        "description": "La valeur de l'échantillon à l'indice entier n.",
+        "kind": "input"
+      },
+      "z": {
+        "role": "Variable complexe",
+        "description": "Nombre complexe dont le cercle unité (|z| = 1) correspond au domaine fréquentiel.",
+        "kind": "structural"
+      },
+      "z^{-n}": {
+        "role": "Opérateur de retard",
+        "description": "Puissance négative de z, qui représente un retard de n échantillons.",
+        "kind": "structural"
+      },
+      "\\sum": {
+        "role": "Somme de la série",
+        "description": "La somme pour n allant de moins l'infini à plus l'infini (ou à partir de 0).",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Le calcul des coefficients de filtrage d'un égaliseur audio numérique",
+      "Le système de commande numérique de position d'un bras robotisé"
+    ],
+    "relatedFormulas": [
+      "laplace-transform",
+      "sampling",
+      "transfer-function"
+    ]
+  },
+  "nyquist-theorem": {
+    "name": "Théorème de Nyquist",
+    "oneLiner": "Condition sur la fréquence d'échantillonnage minimale pour numériser un signal analogique sans le déformer",
+    "description": "Le théorème de Nyquist stipule que, pour reconstituer parfaitement un signal analogique à bande limitée, il faut l'échantillonner à au moins deux fois sa fréquence maximale. Si cette condition n'est pas remplie, un repliement de spectre apparaît et le signal d'origine ne peut plus être reconstitué. C'est la base de la conception de tout convertisseur analogique-numérique.",
+    "discoverer": "Harry Nyquist, Claude Shannon",
+    "field": "Traitement du signal",
+    "significance": "En énonçant la condition fondamentale qui relie le monde analogique au monde numérique, il a établi les bases des communications et de l'enregistrement numériques.",
+    "elementMeanings": {
+      "f_s": {
+        "role": "Fréquence d'échantillonnage",
+        "description": "Le nombre d'échantillons prélevés par seconde. Unité : hertz (Hz).",
+        "kind": "input"
+      },
+      "f_{max}": {
+        "role": "Fréquence maximale",
+        "description": "La composante de fréquence la plus élevée contenue dans le signal. Unité : hertz (Hz).",
+        "kind": "input"
+      },
+      "2": {
+        "role": "Rapport de Nyquist",
+        "description": "Il faut échantillonner à au moins deux fois cette fréquence pour éviter le repliement de spectre.",
+        "kind": "constant",
+        "value": 2,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Pourquoi l'audio d'un CD (44,1 kHz) couvre toute l'audition humaine (20 kHz)",
+      "Le filtre anti-repliement du capteur d'un appareil photo numérique"
+    ],
+    "relatedFormulas": [
+      "sampling",
+      "fourier-transform",
+      "shannon-capacity"
+    ]
+  },
+  "sampling": {
+    "name": "Échantillonnage",
+    "oneLiner": "Procédé qui prélève un signal à temps continu à intervalles réguliers pour en faire un signal à temps discret",
+    "description": "L'échantillonnage consiste à prélever, à chaque période T, la valeur d'un signal analogique continu x(t) pour le convertir en un signal discret x[n]. C'est la première étape du traitement numérique du signal, et la condition de Nyquist doit être respectée pour que le signal d'origine soit restitué fidèlement. La période d'échantillonnage T et la fréquence d'échantillonnage f_s sont inverses l'une de l'autre.",
+    "field": "Traitement du signal",
+    "significance": "Procédé fondamental de conversion d'un signal analogique en signal numérique, il définit l'étage d'entrée de tout système numérique.",
+    "elementMeanings": {
+      "x[n]": {
+        "role": "Signal discret",
+        "description": "La valeur du n-ième échantillon. C'est l'unité de base du signal numérique.",
+        "kind": "output"
+      },
+      "x(t)": {
+        "role": "Signal continu",
+        "description": "Le signal temporel analogique de départ.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Indice d'échantillon",
+        "description": "Nombre entier qui indique de quel échantillon il s'agit.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "Période d'échantillonnage",
+        "description": "L'intervalle de temps entre deux échantillons successifs. Unité : seconde (s). T = 1/f_s.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Convertir en données numériques la voix captée par un microphone",
+      "La numérisation des signaux physiologiques d'un électrocardiographe (ECG)"
+    ],
+    "relatedFormulas": [
+      "nyquist-theorem",
+      "z-transform",
+      "fourier-transform"
+    ]
+  },
+  "convolution": {
+    "name": "Produit de convolution",
+    "oneLiner": "Opération qui crée une nouvelle fonction en faisant glisser deux fonctions l'une sur l'autre et en intégrant leur recouvrement",
+    "description": "La convolution consiste à retourner une fonction, à la faire glisser le long de l'autre et à calculer l'intégrale de la zone de recouvrement. Dans un système linéaire invariant dans le temps (LIT), la convolution du signal d'entrée avec la réponse impulsionnelle donne le signal de sortie. Elle est utilisée très largement : filtrage des signaux, traitement d'images, composition de lois de probabilité.",
+    "field": "Traitement du signal",
+    "significance": "En décrivant complètement la relation entrée-sortie d'un système LIT, elle est devenue l'opération centrale du traitement du signal et de l'analyse des systèmes.",
+    "elementMeanings": {
+      "(f*g)(t)": {
+        "role": "Résultat de la convolution",
+        "description": "La nouvelle fonction engendrée par la convolution des deux fonctions f et g.",
+        "kind": "output"
+      },
+      "f(\\tau)": {
+        "role": "Première fonction",
+        "description": "La première fonction, exprimée en fonction de la variable d'intégration tau. C'est généralement le signal d'entrée.",
+        "kind": "input"
+      },
+      "g(t-\\tau)": {
+        "role": "Fonction retournée et décalée",
+        "description": "La seconde fonction, retournée puis décalée de t. C'est généralement la réponse impulsionnelle.",
+        "kind": "input"
+      },
+      "\\tau": {
+        "role": "Variable d'intégration",
+        "description": "Variable muette qui parcourt la zone de recouvrement des deux fonctions.",
+        "kind": "structural"
+      },
+      "\\int": {
+        "role": "Intégrale",
+        "description": "L'intégrale de moins l'infini à plus l'infini, qui prend en compte tout le recouvrement.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "La modélisation mathématique de l'effet de flou d'un appareil photo",
+      "L'extraction des caractéristiques d'une image par un réseau de neurones convolutif"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "transfer-function",
+      "inverse-fourier"
+    ]
+  },
+  "transfer-function": {
+    "name": "Fonction de transfert",
+    "oneLiner": "Fonction caractéristique d'un système, définie comme le rapport des transformées de Laplace de sa sortie et de son entrée",
+    "description": "La fonction de transfert exprime la relation entrée-sortie d'un système LIT dans le domaine des fréquences complexes : c'est la transformée de Laplace de la sortie divisée par celle de l'entrée. Ses pôles et ses zéros renseignent sur la stabilité, la réponse en fréquence et le régime transitoire du système. C'est l'outil d'analyse le plus important de l'automatique.",
+    "field": "Traitement du signal",
+    "significance": "En résumant en une seule fonction le comportement dynamique d'un système, elle est devenue l'outil standard de la conception des asservissements et de l'analyse de leur stabilité.",
+    "elementMeanings": {
+      "H(s)": {
+        "role": "Fonction de transfert",
+        "description": "Les caractéristiques du système exprimées comme une fonction de la fréquence complexe s.",
+        "kind": "output"
+      },
+      "Y(s)": {
+        "role": "Transformée de Laplace de la sortie",
+        "description": "Le résultat de la transformation de Laplace du signal de sortie du système.",
+        "kind": "output"
+      },
+      "X(s)": {
+        "role": "Transformée de Laplace de l'entrée",
+        "description": "Le résultat de la transformation de Laplace du signal d'entrée du système.",
+        "kind": "input"
+      },
+      "s": {
+        "role": "Fréquence complexe",
+        "description": "La variable de Laplace. Elle sert à analyser les pôles et les zéros du système.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "La conception de la réponse du régulateur de vitesse d'une automobile",
+      "L'analyse de la réponse en fréquence d'un amplificateur audio"
+    ],
+    "relatedFormulas": [
+      "laplace-transform",
+      "z-transform",
+      "convolution"
+    ]
+  }
+}

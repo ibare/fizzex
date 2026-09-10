@@ -1,0 +1,152 @@
+{
+  "softmax": {
+    "name": "Função softmax",
+    "oneLiner": "Função exponencial normalizada que converte um vetor de entrada numa distribuição de probabilidade",
+    "description": "A função softmax converte um vetor qualquer de números reais numa distribuição de probabilidade cuja soma é 1. Aplica a exponencial a cada elemento e divide pela soma total, fazendo com que o maior valor receba a maior probabilidade. É usada como padrão na camada de saída da classificação multiclasse.",
+    "discoverer": "John Nash / Luce / McCulloch-Pitts (originada na mecânica estatística, como generalização da distribuição de Boltzmann)",
+    "field": "Aprendizado de máquina",
+    "significance": "É a função central que converte a saída de uma rede neural em probabilidades interpretáveis nos problemas de classificação multiclasse.",
+    "elementMeanings": {
+      "P(y_i)": { "role": "probabilidade da classe", "description": "É a probabilidade prevista de pertencer à i-ésima classe.", "kind": "output" },
+      "z_i": { "role": "logito", "description": "É a saída bruta da rede neural para a i-ésima classe.", "kind": "input" },
+      "e^{z_i}": { "role": "valor exponenciado", "description": "É o logito transformado em número positivo pela aplicação da exponencial.", "kind": "structural" },
+      "\\sum e^{z_j}": { "role": "constante de normalização", "description": "É a soma dos valores exponenciados de todas as classes. Faz com que o total das probabilidades seja 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Quando um modelo de classificação de imagens indica em probabilidade se a figura é gato, cachorro ou pássaro",
+      "Gerar a distribuição de probabilidade sobre todo o vocabulário ao prever a próxima palavra em processamento de linguagem natural"
+    ],
+    "relatedFormulas": ["cross-entropy", "sigmoid"]
+  },
+  "cross-entropy": {
+    "name": "Perda de entropia cruzada",
+    "oneLiner": "Função de perda que mede a diferença entre a distribuição real e a distribuição prevista",
+    "description": "A entropia cruzada quantifica o desacordo entre a distribuição real dos rótulos e a distribuição prevista pelo modelo. Quanto mais próxima a previsão está da distribuição real, menor a perda; e quanto maior a confiança numa previsão errada, mais bruscamente a perda cresce. É a função de perda mais usada em problemas de classificação.",
+    "discoverer": "Claude Shannon (originada na teoria da informação)",
+    "field": "Aprendizado de máquina",
+    "significance": "É usada como função de perda padrão no treino de modelos de classificação e otimiza diretamente a qualidade das previsões probabilísticas.",
+    "elementMeanings": {
+      "H": { "role": "perda de entropia cruzada", "description": "É o valor escalar que expressa a diferença entre a distribuição real e a prevista.", "kind": "output" },
+      "y_i": { "role": "rótulo real", "description": "É a probabilidade real da i-ésima classe. Na codificação one-hot, vale 1 para a classe correta e 0 para as demais.", "kind": "input" },
+      "\\hat{y}_i": { "role": "probabilidade prevista", "description": "É a probabilidade prevista pelo modelo para a i-ésima classe.", "kind": "input" },
+      "\\log(\\hat{y}_i)": { "role": "log da probabilidade", "description": "É o logaritmo da probabilidade prevista. Quanto mais perto de 0 está a probabilidade, mais ele diverge para menos infinito.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O critério para calcular o erro de previsão ao treinar um classificador de e-mails de spam",
+      "O treino de classificação binária que determina a presença ou ausência de doença num modelo de diagnóstico por imagem médica"
+    ],
+    "relatedFormulas": ["softmax", "mse-loss", "shannon-entropy"]
+  },
+  "mse-loss": {
+    "name": "Perda do erro quadrático médio",
+    "oneLiner": "Função que mede o erro de um modelo de regressão pela média dos quadrados das diferenças entre valores previstos e reais",
+    "description": "O erro quadrático médio (EQM) eleva ao quadrado a diferença entre o valor previsto e o valor real em cada ponto de dado e tira a média. Por causa do quadrado, penaliza mais fortemente os erros grandes e, sendo fácil de derivar, combina-se naturalmente com o gradiente descendente. É a função de perda padrão dos problemas de regressão.",
+    "field": "Aprendizado de máquina",
+    "significance": "É a função de perda básica da análise de regressão e do treino de redes neurais, sendo uma extensão do método dos mínimos quadrados.",
+    "elementMeanings": {
+      "L": { "role": "valor da perda", "description": "É o valor escalar que expressa o erro médio do modelo como um todo.", "kind": "output" },
+      "n": { "role": "número de dados", "description": "É a quantidade total de pontos de dados.", "kind": "input" },
+      "y_i": { "role": "valor real", "description": "É o valor-alvo real do i-ésimo dado.", "kind": "input" },
+      "\\hat{y}_i": { "role": "valor previsto", "description": "É o valor previsto pelo modelo para o i-ésimo dado.", "kind": "input" },
+      "(y_i - \\hat{y}_i)^2": { "role": "erro quadrático", "description": "Eleva cada erro ao quadrado, removendo o sinal e dando mais peso aos erros grandes.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular a diferença entre o preço real e o preço previsto ao treinar um modelo de previsão de preços de imóveis",
+      "Avaliar o erro entre a temperatura prevista e a medida em cada dia num modelo de previsão de temperatura"
+    ],
+    "relatedFormulas": ["cross-entropy", "gradient-descent"]
+  },
+  "gradient-descent": {
+    "name": "Gradiente descendente",
+    "oneLiner": "Algoritmo de otimização que busca o mínimo atualizando repetidamente os parâmetros no sentido contrário ao gradiente da função de perda",
+    "description": "O gradiente descendente calcula o gradiente da função de perda na posição atual dos parâmetros e os atualiza deslocando-os no sentido contrário ao gradiente, por um passo do tamanho da taxa de aprendizado. Repetindo esse processo, a perda vai diminuindo; é o método de otimização básico de praticamente todo treino de redes neurais.",
+    "discoverer": "Augustin-Louis Cauchy",
+    "field": "Aprendizado de máquina",
+    "significance": "É o algoritmo de otimização central no treino de quase todos os modelos de aprendizado de máquina, incluindo o aprendizado profundo.",
+    "elementMeanings": {
+      "\\theta": { "role": "parâmetros", "description": "É o vetor de parâmetros que reúne os pesos e vieses treináveis do modelo.", "kind": "input" },
+      "\\alpha": { "role": "taxa de aprendizado", "description": "É o tamanho do passo dado em cada atualização. Se for grande demais, o processo diverge; se for pequeno demais, a convergência fica lenta.", "kind": "input" },
+      "\\nabla L": { "role": "gradiente da perda", "description": "É o vetor das derivadas parciais da função de perda em relação a cada parâmetro. Aponta o sentido em que a perda cresce mais rápido.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O processo de ajustar automaticamente aos dados os milhões de pesos de uma rede neural",
+      "Otimizar os parâmetros de um modelo para refletir as preferências dos usuários num sistema de recomendação"
+    ],
+    "relatedFormulas": ["mse-loss", "backpropagation", "batch-normalization"]
+  },
+  "sigmoid": {
+    "name": "Função sigmoide",
+    "oneLiner": "Função de ativação em forma de S que comprime qualquer número real num valor entre 0 e 1",
+    "description": "A função sigmoide desenha uma curva em S que converge para 0 quando a entrada é muito negativa e para 1 quando é muito positiva. Como a saída pode ser lida como probabilidade, é adequada à camada de saída da classificação binária. Ela sofre, porém, do problema do desvanecimento do gradiente: quando o módulo da entrada é grande, a inclinação fica quase nula, e por isso nas camadas ocultas vem sendo substituída pela ReLU e afins.",
+    "field": "Aprendizado de máquina",
+    "significance": "É a função de ativação básica da regressão logística e das redes neurais, cumprindo o papel de introduzir não linearidade.",
+    "elementMeanings": {
+      "\\sigma(x)": { "role": "saída da sigmoide", "description": "É o valor de saída entre 0 e 1, que pode ser interpretado como probabilidade.", "kind": "output" },
+      "x": { "role": "entrada", "description": "É o valor de entrada passado à função de ativação (uma soma ponderada, por exemplo).", "kind": "input" },
+      "e^{-x}": { "role": "exponencial negativa", "description": "Quanto maior a entrada, mais ela se aproxima de 0, levando a saída total para perto de 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Um classificador binário que devolve entre 0 e 1 a probabilidade de um e-mail ser spam",
+      "Um modelo de diagnóstico médico que determina em forma de probabilidade se o paciente é positivo para uma doença"
+    ],
+    "relatedFormulas": ["softmax", "cross-entropy"]
+  },
+  "batch-normalization": {
+    "name": "Normalização em lote",
+    "oneLiner": "Técnica que estabiliza o treino normalizando as entradas por minilote",
+    "description": "A normalização em lote normaliza as entradas de cada camada da rede neural usando a média e a variância do minilote. Ao reduzir a mudança interna de covariáveis, estabiliza o treino e permite usar taxas de aprendizado mais altas. Depois da normalização, aplica parâmetros treináveis de escala e deslocamento, preservando o poder de representação.",
+    "discoverer": "Sergey Ioffe, Christian Szegedy",
+    "field": "Aprendizado de máquina",
+    "significance": "Ao melhorar drasticamente a estabilidade e a velocidade do treino em aprendizado profundo, tornou-se componente indispensável do projeto de redes neurais modernas.",
+    "elementMeanings": {
+      "\\hat{x}": { "role": "entrada normalizada", "description": "É o valor de entrada normalizado para média 0 e variância 1.", "kind": "output" },
+      "x": { "role": "entrada original", "description": "É o valor de entrada da camada antes da normalização.", "kind": "input" },
+      "\\mu": { "role": "média do lote", "description": "É a média das entradas calculada no minilote atual.", "kind": "input" },
+      "\\sigma": { "role": "desvio padrão do lote", "description": "É o desvio padrão das entradas calculado no minilote atual.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "O treino estável de centenas de camadas em redes profundas de reconhecimento de imagens (como a ResNet)",
+      "Acelerar o treino e evitar o sobreajuste em modelos de reconhecimento de fala"
+    ],
+    "relatedFormulas": ["gradient-descent", "backpropagation"]
+  },
+  "attention-mechanism": {
+    "name": "Atenção por produto escalar escalonado",
+    "oneLiner": "Mecanismo de atenção que soma os valores de forma ponderada com base na semelhança entre consultas e chaves",
+    "description": "O mecanismo de atenção calcula a semelhança pelo produto escalar entre a consulta (Q) e a chave (K), escalona pelo valor da raiz quadrada da dimensão das chaves e aplica a softmax para obter os pesos. Somando os valores (V) com esses pesos, é possível concentrar-se seletivamente nas partes relevantes da sequência de entrada. É o núcleo da arquitetura Transformer.",
+    "discoverer": "Ashish Vaswani e outros (equipe de pesquisa do Google)",
+    "field": "Aprendizado de máquina",
+    "significance": "Como componente central do Transformer, é a tecnologia que serve de base aos grandes modelos de linguagem atuais, como GPT e BERT.",
+    "elementMeanings": {
+      "Q": { "role": "matriz de consultas", "description": "É a matriz dos vetores que indicam 'o que se está procurando' na posição atual.", "kind": "input" },
+      "K": { "role": "matriz de chaves", "description": "É a matriz dos vetores que indicam 'que informação cada posição carrega'.", "kind": "input" },
+      "V": { "role": "matriz de valores", "description": "É a matriz dos vetores que contêm a informação a ser efetivamente transmitida.", "kind": "input" },
+      "K^T": { "role": "transposta das chaves", "description": "É a matriz de chaves transposta para o cálculo do produto escalar com as consultas.", "kind": "structural" },
+      "\\sqrt{d_k}": { "role": "fator de escalonamento", "description": "É a raiz quadrada do número de dimensões do vetor de chaves. Impede que o produto escalar fique grande demais.", "kind": "structural" },
+      "\\text{softmax}": { "role": "função de normalização", "description": "Converte as pontuações de semelhança em pesos cuja soma é 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O processo pelo qual a tradução automática gera o texto concentrando-se nas palavras relevantes do original",
+      "O princípio pelo qual inteligências artificiais conversacionais como o ChatGPT entendem o contexto e geram respostas"
+    ],
+    "relatedFormulas": ["softmax", "backpropagation"]
+  },
+  "backpropagation": {
+    "name": "Algoritmo de retropropagação",
+    "oneLiner": "Algoritmo que propaga o gradiente da perda da camada de saída em direção à camada de entrada usando a regra da cadeia",
+    "description": "A retropropagação aplica repetidamente a regra da cadeia para derivar o valor da função de perda em relação a cada peso. Como propaga os gradientes partindo da camada de saída em direção à de entrada, consegue calcular de uma só vez e de forma eficiente os gradientes de todos os pesos. Esses gradientes são então passados ao gradiente descendente para atualizar os pesos.",
+    "discoverer": "David Rumelhart, Geoffrey Hinton, Ronald Williams",
+    "field": "Aprendizado de máquina",
+    "significance": "É o algoritmo central que tornou prático o treino de redes neurais de múltiplas camadas e assentou as bases do aprendizado profundo.",
+    "elementMeanings": {
+      "\\partial L / \\partial w": { "role": "gradiente da perda em relação ao peso", "description": "É a intensidade e o sentido do efeito que um peso específico tem sobre a perda.", "kind": "output" },
+      "\\partial L / \\partial \\hat{y}": { "role": "gradiente da perda em relação à saída", "description": "Indica o quanto a perda varia quando o valor previsto varia.", "kind": "structural" },
+      "\\partial \\hat{y} / \\partial w": { "role": "gradiente da saída em relação ao peso", "description": "Indica o quanto a saída varia quando o peso varia.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "O treino de um modelo de reconhecimento de imagens com dezenas de milhões de parâmetros",
+      "O cálculo de gradientes para aprender representações contextuais num modelo de processamento de linguagem natural"
+    ],
+    "relatedFormulas": ["gradient-descent", "cross-entropy", "mse-loss"]
+  }
+}

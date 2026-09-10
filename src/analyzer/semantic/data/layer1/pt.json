@@ -1,0 +1,162 @@
+{
+  "frac.numerator": {
+    "role": "numerador",
+    "description": "Parte de cima da fração. É a quantidade que está sendo dividida.",
+    "refinements": {
+      "containsVariable": "O numerador contém uma variável, por isso determina os zeros da função (f(x)=0).",
+      "constantOnly": "Como o numerador é constante, esta fração representa uma proporção de tamanho fixo."
+    }
+  },
+  "frac.denominator": {
+    "role": "denominador",
+    "description": "Parte de baixo da fração. É a quantidade pela qual se divide. Se for 0, a expressão fica indefinida.",
+    "refinements": {
+      "containsVariable": "Há uma variável no denominador, então a expressão pode ficar indefinida em certos valores (assíntotas).",
+      "constantOnly": "Como o denominador é constante, ele aplica uma proporção fixa à expressão inteira."
+    }
+  },
+  "power.base": {
+    "role": "base",
+    "description": "É aquilo que se multiplica repetidamente na potência.",
+    "refinements": {
+      "isEulerE": "É uma função exponencial de base e, a constante de Euler. Representa crescimento ou decaimento.",
+      "isVariable": "É a potência de uma variável. Quanto maior o expoente, mais rápido ela cresce."
+    }
+  },
+  "power.exponent": {
+    "role": "expoente",
+    "description": "É o número de vezes que a base é multiplicada por si mesma.",
+    "refinements": {
+      "isTwo": "Quadrado — o resultado é sempre maior ou igual a zero.",
+      "isNegativeOne": "Inverso — equivale a 1 dividido pela base.",
+      "isHalf": "Raiz quadrada — é a raiz quadrada positiva da base.",
+      "containsVariable": "O expoente contém uma variável, o que representa crescimento ou decaimento exponencial."
+    }
+  },
+  "sqrt.content": {
+    "role": "radicando",
+    "description": "É aquilo de que se extrai a raiz quadrada. No conjunto dos números reais, não pode ser negativo."
+  },
+  "sqrt.index": {
+    "role": "índice do radical",
+    "description": "É o n da raiz n-ésima. Quando omitido, vale 2 (raiz quadrada)."
+  },
+  "subscript.base": {
+    "role": "elemento indexado",
+    "description": "É o elemento ao qual o índice inferior se aplica."
+  },
+  "subscript.subscript": {
+    "role": "índice",
+    "description": "É o número que identifica um elemento ou componente específico."
+  },
+  "scripts.leftSuperscript": {
+    "role": "índice superior à esquerda",
+    "description": "É o número escrito acima e à esquerda do símbolo. Identifica o objeto, como o número de massa de um isótopo."
+  },
+  "scripts.leftSubscript": {
+    "role": "índice inferior à esquerda",
+    "description": "É o número escrito abaixo e à esquerda do símbolo. Identifica o objeto, como o número atômico de um elemento."
+  },
+  "sum.lower": {
+    "role": "início do somatório",
+    "description": "É o valor do índice em que o somatório começa."
+  },
+  "sum.upper": {
+    "role": "fim do somatório",
+    "description": "É o valor do índice em que o somatório termina.",
+    "refinements": {
+      "isInfinity": "É uma série infinita, somada até o infinito. Saber se ela converge é o que importa."
+    }
+  },
+  "sum.body": {
+    "role": "termo geral",
+    "description": "É a quantidade somada em cada etapa. Seu valor muda conforme o índice."
+  },
+  "product.lower": {
+    "role": "início do produtório",
+    "description": "É o valor do índice em que a multiplicação começa."
+  },
+  "product.upper": {
+    "role": "fim do produtório",
+    "description": "É o valor do índice em que a multiplicação termina."
+  },
+  "product.body": {
+    "role": "termo geral",
+    "description": "É a quantidade multiplicada em cada etapa."
+  },
+  "integral.lower": {
+    "role": "limite inferior de integração",
+    "description": "É o ponto onde o intervalo de integração começa."
+  },
+  "integral.upper": {
+    "role": "limite superior de integração",
+    "description": "É o ponto onde o intervalo de integração termina.",
+    "refinements": {
+      "isInfinity": "A integração vai até o infinito positivo. É preciso verificar se ela converge."
+    }
+  },
+  "integral.integrand": {
+    "role": "integrando",
+    "description": "É aquilo que se integra. Calcula-se a área sob a curva desta função."
+  },
+  "limit.approach": {
+    "role": "valor de aproximação",
+    "description": "É o valor do qual a variável se aproxima indefinidamente."
+  },
+  "limit.body": {
+    "role": "expressão do limite",
+    "description": "Observa-se para onde o valor desta expressão converge quando a variável se aproxima."
+  },
+  "paren.content": {
+    "role": "agrupamento",
+    "description": "É a expressão reunida por parênteses e tratada como uma única unidade."
+  },
+  "chem.content": {
+    "role": "fórmula química",
+    "description": "É a notação química que representa substâncias e reações."
+  },
+  "abs.content": {
+    "role": "conteúdo do módulo",
+    "description": "É o tamanho sem considerar o sinal. O resultado é sempre maior ou igual a zero."
+  },
+  "func.argument": {
+    "role": "argumento da função",
+    "description": "É o valor de entrada da função."
+  },
+  "matrix.element": {
+    "role": "elemento da matriz",
+    "description": "É um elemento da matriz."
+  },
+  "cases.element": {
+    "role": "valor condicional",
+    "description": "É o valor da função quando determinada condição é satisfeita."
+  },
+  "accent.content": {
+    "role": "elemento acentuado",
+    "description": "É o símbolo que recebe o acento."
+  },
+  "overline.content": {
+    "role": "média/conjugado",
+    "description": "A barra superior indica média, conjugado complexo ou, em topologia, o fecho."
+  },
+  "cancel.content": {
+    "role": "termo cancelado",
+    "description": "É a parte que se simplifica ou se elimina."
+  },
+  "overset.base": {
+    "role": "símbolo base",
+    "description": "É o símbolo que recebe a anotação."
+  },
+  "overset.annotation": {
+    "role": "anotação",
+    "description": "É a explicação adicional colocada acima ou abaixo do símbolo."
+  },
+  "xarrow.above": {
+    "role": "texto acima da seta",
+    "description": "Indica as condições da reação ou da transformação."
+  },
+  "xarrow.below": {
+    "role": "texto abaixo da seta",
+    "description": "Indica condições complementares da reação ou da transformação."
+  }
+}

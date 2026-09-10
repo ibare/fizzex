@@ -1,0 +1,99 @@
+{
+  "sin-definition": {
+    "name": "正弦の定義",
+    "oneLiner": "直角三角形で、一つの角の対辺の長さを斜辺の長さで割った比",
+    "description": "正弦(sin)は、直角三角形において、ある角の向かい側にある辺(対辺)を一番長い辺(斜辺)で割った値です。角の大きさが決まれば、三角形の大きさに関係なく常に同じ値になります。三角比のうち最も基本となる比です。",
+    "field": "三角法",
+    "significance": "直角三角形の辺と角の関係を表す最も基本的な三角比であり、物理学や工学における波動・振動の解析に欠かせません。",
+    "elementMeanings": {
+      "\\sin\\theta": { "role": "正弦の値", "description": "角シータに対する正弦の比です。", "kind": "output" },
+      "\\theta": { "role": "角", "description": "直角三角形で基準となる角です。直角ではないほうの一つの角を指します。", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "対辺", "description": "基準となる角の向かい側にある辺です。", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "斜辺", "description": "直角三角形で一番長い辺。直角の向かい側にあります。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "木の影の長さと太陽の角度から木の高さを求める",
+      "坂道の傾きの角がわかっているとき、垂直方向の高さを計算する",
+      "ぶらんこが揺れるときの最高点の高さを求める"
+    ],
+    "relatedFormulas": ["cos-definition", "tan-definition", "pythagorean-trig", "law-of-sines"]
+  },
+  "cos-definition": {
+    "name": "余弦の定義",
+    "oneLiner": "直角三角形で、一つの角の隣辺の長さを斜辺の長さで割った比",
+    "description": "余弦(cos)は、直角三角形において、基準となる角に接している辺(隣辺)を一番長い辺(斜辺)で割った値です。正弦と同じように、角が等しければ三角形の大きさに関係なく常に同じ値になります。",
+    "field": "三角法",
+    "significance": "正弦とともに三角法を支える二本の柱であり、ベクトルの内積、信号処理、座標の回転などで必ず使われます。",
+    "elementMeanings": {
+      "\\cos\\theta": { "role": "余弦の値", "description": "角シータに対する余弦の比です。", "kind": "output" },
+      "\\theta": { "role": "角", "description": "直角三角形で基準となる角です。", "kind": "input", "unit": "rad" },
+      "\\text{adjacent}": { "role": "隣辺", "description": "基準となる角に接している辺(斜辺を除く)です。", "kind": "input" },
+      "\\text{hypotenuse}": { "role": "斜辺", "description": "直角三角形で一番長い辺です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "はしごを壁に立てかけたとき、足元から壁までの水平距離を計算する",
+      "丘の傾きの角がわかっているとき、水平方向の移動距離を求める",
+      "ロボットアームの関節の角度から手先の水平位置を計算する"
+    ],
+    "relatedFormulas": ["sin-definition", "tan-definition", "pythagorean-trig"]
+  },
+  "tan-definition": {
+    "name": "正接の定義",
+    "oneLiner": "直角三角形で、一つの角の対辺の長さを隣辺の長さで割った比",
+    "description": "正接(tan)は、直角三角形において、基準となる角の向かい側の辺(対辺)を接している辺(隣辺)で割った値です。正弦を余弦で割ったものと同じです。傾斜や勾配を表すときに特に役立ちます。",
+    "field": "三角法",
+    "significance": "傾斜や勾配をそのまま表す三角比であり、測量、航法、建築の設計で広く使われます。",
+    "elementMeanings": {
+      "\\tan\\theta": { "role": "正接の値", "description": "角シータに対する正接の比です。", "kind": "output" },
+      "\\theta": { "role": "角", "description": "直角三角形で基準となる角です。", "kind": "input", "unit": "rad" },
+      "\\text{opposite}": { "role": "対辺", "description": "基準となる角の向かい側にある辺です。", "kind": "input" },
+      "\\text{adjacent}": { "role": "隣辺", "description": "基準となる角に接している辺(斜辺を除く)です。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "建物から一定の距離だけ離れた場所から見上げた角度で建物の高さを測る",
+      "道路標識にある勾配(%)を計算する",
+      "山頂までの高さを水平距離と角度から求める"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "pythagorean-trig"]
+  },
+  "pythagorean-trig": {
+    "name": "ピタゴラスの三角恒等式",
+    "oneLiner": "正弦の2乗と余弦の2乗を足すと必ず1になる恒等式",
+    "description": "ピタゴラスの三角恒等式は、どんな角に対しても sin の2乗 足す cos の2乗 がちょうど1になることを保証します。ピタゴラスの定理(斜辺の2乗 = 他の2辺の2乗の和)の両辺を斜辺の2乗で割ると、そのまま導かれます。三角関数の最も基本的な関係式です。",
+    "field": "三角法",
+    "significance": "すべての三角関数の恒等式の出発点であり、式の変形や証明で最もよく使われる基本の関係です。",
+    "elementMeanings": {
+      "\\sin^2\\theta": { "role": "正弦の2乗", "description": "sin シータを2乗した値です。", "kind": "structural" },
+      "\\cos^2\\theta": { "role": "余弦の2乗", "description": "cos シータを2乗した値です。", "kind": "structural" },
+      "\\theta": { "role": "角", "description": "任意の角。どんな値でも恒等式が成り立ちます。", "kind": "input", "unit": "rad" },
+      "1": { "role": "和", "description": "正弦の2乗と余弦の2乗の和は常に1です。", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "三角関数の計算で sin の値がわかっているとき cos の値をすぐに求める",
+      "物理学でベクトルの成分分解が正しいかを確かめる",
+      "コンピューターグラフィックスで回転変換が長さを保つことを確認する"
+    ],
+    "relatedFormulas": ["sin-definition", "cos-definition", "tan-definition", "law-of-sines"]
+  },
+  "law-of-sines": {
+    "name": "正弦定理",
+    "oneLiner": "三角形で、各辺の長さを向かい合う角の正弦で割った値がすべて等しいという定理",
+    "description": "正弦定理は、任意の三角形(直角でなくてもよい)で成り立つ関係です。辺 a を角 A の正弦で割った値、辺 b を角 B の正弦で割った値、辺 c を角 C の正弦で割った値がすべて等しくなります。この比は三角形の外接円の直径とも等しくなります。",
+    "field": "三角法",
+    "significance": "直角三角形でない一般の三角形でも辺と角の関係を求められるようにするもので、測量と航法の中心的な道具です。",
+    "elementMeanings": {
+      "a": { "role": "辺 a", "description": "角 A の向かい側にある辺の長さです。", "kind": "input" },
+      "b": { "role": "辺 b", "description": "角 B の向かい側にある辺の長さです。", "kind": "input" },
+      "c": { "role": "辺 c", "description": "角 C の向かい側にある辺の長さです。", "kind": "input" },
+      "\\sin A": { "role": "角 A の正弦", "description": "三角形の頂点 A における角の正弦の値です。", "kind": "structural" },
+      "\\sin B": { "role": "角 B の正弦", "description": "三角形の頂点 B における角の正弦の値です。", "kind": "structural" },
+      "\\sin C": { "role": "角 C の正弦", "description": "三角形の頂点 C における角の正弦の値です。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "川の向こう側の建物までの距離を、2地点から測った角度で計算する",
+      "GPS を使わずに三角測量で位置を決める",
+      "航海中に2つの灯台の間の角度から船の位置をつかむ"
+    ],
+    "relatedFormulas": ["sin-definition", "pythagorean-trig"]
+  }
+}

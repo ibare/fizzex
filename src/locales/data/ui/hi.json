@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "बंद करें",
+    "closeWithKey": "बंद करें (Esc)",
+    "hintHover": "होवर: भाग देखें",
+    "hintClick": "क्लिक: मान बदलें",
+    "hintEsc": "Esc: बंद करें",
+    "explore": "सूत्र अन्वेषण",
+    "copyImage": "छवि कॉपी करें",
+    "reset": "रीसेट",
+    "similarTo": "{name} के समान",
+    "closeNamed": "{name} बंद करें",
+    "domainGuard": "प्रांत सुरक्षा: {reason}"
+  },
+  "bindingFault": {
+    "derivative": "{name} का अवकलज नहीं निकल सका",
+    "domain": "{name} का मान प्रांत के बाहर है",
+    "divergent": "{name} का मान अपसारी है",
+    "unsupported": "यह दृश्य {name} के रूप को नहीं दिखा सकता",
+    "evalFailed": "{name} का मान नहीं निकल सका",
+    "unbound": "{name} का अभी कोई मान नहीं है",
+    "unknown": "{name} का मान निकालना संभव नहीं"
+  },
+  "duration": {
+    "seconds": "{value} सेकंड",
+    "minutes": "{value} मिनट",
+    "hours": "{value} घंटे",
+    "days": "{value} दिन"
+  },
+  "summary": {
+    "variables": "चर {names} का",
+    "constantExpression": "अचर व्यंजक",
+    "polynomialOfDegree": "घात {degree} बहुपद",
+    "withFunctions": "({names} सहित)",
+    "domains": "[{names}]",
+    "chemicalFormula": "रासायनिक सूत्र",
+    "chemicalEquation": "रासायनिक समीकरण",
+    "reversibleChemicalEquation": "उत्क्रमणीय रासायनिक समीकरण",
+    "domainNames": {
+      "arithmetic": "अंकगणित",
+      "polynomial": "बहुपद",
+      "rational": "परिमेय",
+      "trigonometric": "त्रिकोणमिति",
+      "exponential": "चरघातांकी",
+      "logarithmic": "लघुगणक",
+      "calculus": "कलन",
+      "linear-algebra": "रैखिक बीजगणित",
+      "statistics": "सांख्यिकी",
+      "chemistry": "रसायन"
+    },
+    "listSeparator": ", "
+  }
+}

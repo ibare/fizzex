@@ -1,0 +1,346 @@
+{
+  "fourier-transform": {
+    "name": "フーリエ変換",
+    "oneLiner": "時間領域の信号を周波数領域へ移す積分変換",
+    "description": "フーリエ変換は、時間の関数である信号を周波数の関数に分解します。どんな信号も異なる周波数の正弦波の和で表せるという原理にもとづき、それぞれの周波数成分の大きさと位相の情報を与えます。信号処理、画像解析、量子力学など、科学と工学の全般で使われます。",
+    "discoverer": "ジョゼフ・フーリエ",
+    "field": "信号処理",
+    "significance": "時間領域と周波数領域という二つの表し方を行き来できるようにし、現代の信号処理の理論的な土台を確立しました。",
+    "elementMeanings": {
+      "f": {
+        "role": "関数・信号",
+        "description": "変換するもとの関数、または時間信号です。",
+        "kind": "input"
+      },
+      "ξ": {
+        "role": "周波数",
+        "description": "ふつうの周波数の変数です。単位は Hz。",
+        "kind": "input"
+      },
+      "x": {
+        "role": "独立変数",
+        "description": "もとの関数の独立変数(時間など)です。",
+        "kind": "input"
+      },
+      "e": {
+        "role": "自然対数の底",
+        "description": "複素指数関数の底です。",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "i": {
+        "role": "虚数単位",
+        "description": "i² = −1。複素指数関数における位相の回転を表します。",
+        "kind": "constant"
+      },
+      "π": {
+        "role": "円周率",
+        "description": "正規化の定数 2π の一部です。",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "音声信号の周波数分析による音声認識",
+      "MRI画像の周波数データを空間の画像に再構成する"
+    ],
+    "relatedFormulas": [
+      "inverse-fourier",
+      "laplace-transform",
+      "convolution"
+    ]
+  },
+  "inverse-fourier": {
+    "name": "逆フーリエ変換",
+    "oneLiner": "周波数領域のスペクトルを時間領域の信号へ戻す積分変換",
+    "description": "逆フーリエ変換はフーリエ変換の逆の手続きで、周波数領域で表されたスペクトルの情報をもとの時間領域の信号へ戻します。複素指数関数の符号が正に変わり、ふつうの周波数を使う流儀では正規化の因子なしに対称な変換の組をなします。",
+    "discoverer": "ジョゼフ・フーリエ",
+    "field": "信号処理",
+    "significance": "周波数分析の結果からもとの信号を完全に復元できることを保証し、信号を合成する理論的な根拠を与えます。",
+    "elementMeanings": {
+      "f": {
+        "role": "関数・信号",
+        "description": "復元されたもとの時間領域の信号です。",
+        "kind": "output"
+      },
+      "ξ": {
+        "role": "周波数",
+        "description": "周波数領域の独立変数です。単位は Hz。",
+        "kind": "input"
+      },
+      "x": {
+        "role": "独立変数",
+        "description": "復元する関数の独立変数(時間など)です。",
+        "kind": "input"
+      },
+      "e": {
+        "role": "自然対数の底",
+        "description": "複素指数関数の底です。",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "π": {
+        "role": "円周率",
+        "description": "正規化の定数 2π の一部です。",
+        "kind": "constant",
+        "value": 3.14159265,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "フィルタをかけたあとの周波数データをふたたび時間信号に変換する",
+      "圧縮された音声データを復元して再生する"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "laplace-transform",
+      "convolution"
+    ]
+  },
+  "laplace-transform": {
+    "name": "ラプラス変換",
+    "oneLiner": "時間領域の関数を複素周波数領域へ移す積分変換",
+    "description": "ラプラス変換は時間の関数を複素数 s の関数に変換し、微分方程式を代数方程式に置きかえてくれます。フーリエ変換を一般化したものと見ることができ、減衰する信号も扱えます。制御システムの分析、回路の解析、システムの安定性の判定などで中心的に使われます。",
+    "discoverer": "ピエール=シモン・ラプラス",
+    "field": "信号処理",
+    "significance": "微分方程式を代数的に解けるようにし、制御工学とシステム解析の標準的な道具になりました。",
+    "elementMeanings": {
+      "F(s)": {
+        "role": "ラプラス変換の結果",
+        "description": "複素周波数領域での関数の表し方です。",
+        "kind": "output"
+      },
+      "f(t)": {
+        "role": "時間の関数",
+        "description": "変換するもとの時間領域の関数。t >= 0 で定義されます。",
+        "kind": "input"
+      },
+      "s": {
+        "role": "複素周波数",
+        "description": "s = σ + jω。実部は減衰を、虚部は振動を表します。",
+        "kind": "structural"
+      },
+      "e^{-st}": {
+        "role": "減衰する複素指数",
+        "description": "時間の関数に掛けられる核(カーネル)の関数です。",
+        "kind": "structural"
+      },
+      "\\int_0^{\\infty}": {
+        "role": "片側積分",
+        "description": "0から無限大までの積分。因果的なシステムを扱います。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "PID制御器の伝達関数の設計",
+      "RLC回路の過渡応答の解析"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "z-transform",
+      "transfer-function"
+    ]
+  },
+  "z-transform": {
+    "name": "Z変換",
+    "oneLiner": "離散時間の信号を複素 z 領域へ移す数学的な道具",
+    "description": "Z変換はラプラス変換の離散時間版で、離散時間の信号 x[n] を複素変数 z の関数に変換します。ディジタルフィルタの設計、ディジタル制御システムの分析、差分方程式の解法に欠かせません。z = e^(sT) という関係を通じてラプラス変換とつながっています。",
+    "discoverer": "ヴィトルト・フレヴィッチ",
+    "field": "信号処理",
+    "significance": "離散時間システムを解析する標準的な道具であり、ディジタル信号処理とディジタル制御の理論的な土台を与えます。",
+    "elementMeanings": {
+      "X(z)": {
+        "role": "Z変換の結果",
+        "description": "複素 z 領域での離散信号の表し方です。",
+        "kind": "output"
+      },
+      "x[n]": {
+        "role": "離散時間の信号",
+        "description": "整数の添字 n における標本の値です。",
+        "kind": "input"
+      },
+      "z": {
+        "role": "複素変数",
+        "description": "単位円(|z|=1)が周波数領域に対応する複素数です。",
+        "kind": "structural"
+      },
+      "z^{-n}": {
+        "role": "遅延の演算子",
+        "description": "n 標本ぶんの遅れを表す z の負のべき乗です。",
+        "kind": "structural"
+      },
+      "\\sum": {
+        "role": "級数の和",
+        "description": "n = -無限大から無限大まで(あるいは0から)の和です。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "ディジタルオーディオのイコライザのフィルタ係数の設計",
+      "ロボットアームのディジタル位置制御システム"
+    ],
+    "relatedFormulas": [
+      "laplace-transform",
+      "sampling",
+      "transfer-function"
+    ]
+  },
+  "nyquist-theorem": {
+    "name": "ナイキストの定理",
+    "oneLiner": "アナログ信号をゆがみなくディジタルに変換するための最小の標本化周波数の条件",
+    "description": "ナイキストの定理は、帯域が制限されたアナログ信号を完全に復元するには、信号の最大周波数の2倍以上で標本化しなければならないことを定めます。この条件を満たさないとエイリアシングが起こり、もとの信号を復元できません。あらゆるアナログ-ディジタル変換システムの設計の土台です。",
+    "discoverer": "ハリー・ナイキスト、クロード・シャノン",
+    "field": "信号処理",
+    "significance": "アナログの世界とディジタルの世界を結ぶ根本の条件を示し、ディジタル通信と記録技術の基礎を確立しました。",
+    "elementMeanings": {
+      "f_s": {
+        "role": "標本化周波数",
+        "description": "1秒あたりに標本をとる回数。単位はヘルツ(Hz)。",
+        "kind": "input"
+      },
+      "f_{max}": {
+        "role": "最大周波数",
+        "description": "信号に含まれる最も高い周波数成分。単位はヘルツ(Hz)。",
+        "kind": "input"
+      },
+      "2": {
+        "role": "ナイキスト比",
+        "description": "最低でも2倍以上で標本化してはじめてエイリアシングを防げます。",
+        "kind": "constant",
+        "value": 2,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "CDオーディオ(44.1kHz)が人の聴覚の範囲(20kHz)をカバーできるしくみ",
+      "ディジタルカメラのセンサーのエイリアシング防止フィルタ"
+    ],
+    "relatedFormulas": [
+      "sampling",
+      "fourier-transform",
+      "shannon-capacity"
+    ]
+  },
+  "sampling": {
+    "name": "標本化",
+    "oneLiner": "連続時間の信号を一定の間隔で取り出し、離散時間の信号に変える手続き",
+    "description": "標本化は、連続的なアナログ信号 x(t) から周期 T ごとに値を取り出して離散信号 x[n] に変える手続きです。ディジタル信号処理の最初の段階であり、ナイキストの条件を満たしてはじめてもとの信号を忠実に再現できます。標本化周期 T と標本化周波数 f_s は互いに逆数の関係です。",
+    "field": "信号処理",
+    "significance": "アナログ信号をディジタルに変える根本の手続きであり、あらゆるディジタルシステムの入力の段階を定めます。",
+    "elementMeanings": {
+      "x[n]": {
+        "role": "離散信号",
+        "description": "n 番目の標本の値。ディジタル信号の基本の単位です。",
+        "kind": "output"
+      },
+      "x(t)": {
+        "role": "連続信号",
+        "description": "もとのアナログの時間信号です。",
+        "kind": "input"
+      },
+      "n": {
+        "role": "標本の添字",
+        "description": "整数の値で、何番目の標本かを表します。",
+        "kind": "input"
+      },
+      "T": {
+        "role": "標本化周期",
+        "description": "続けてとる標本どうしの時間の間隔。単位は秒(s)。T = 1/f_s。",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "マイクから入った音声をディジタルデータに変換する",
+      "心電図(ECG)装置で生体信号をディジタル化する"
+    ],
+    "relatedFormulas": [
+      "nyquist-theorem",
+      "z-transform",
+      "fourier-transform"
+    ]
+  },
+  "convolution": {
+    "name": "畳み込み",
+    "oneLiner": "二つの関数を重ねながらずらして積分し、新しい関数をつくる演算",
+    "description": "畳み込みは、一方の関数を反転させてからもう一方の関数の上を動かし、重なった部分の積分を求める演算です。線形時不変(LTI)システムでは、入力信号とインパルス応答の畳み込みが出力信号になります。信号のフィルタリング、画像処理、確率分布の合成などに幅広く使われます。",
+    "field": "信号処理",
+    "significance": "LTIシステムの入力と出力の関係を余さず記述し、信号処理とシステム分析の中心的な演算になりました。",
+    "elementMeanings": {
+      "(f*g)(t)": {
+        "role": "畳み込みの結果",
+        "description": "二つの関数 f と g の畳み込みでできる新しい関数です。",
+        "kind": "output"
+      },
+      "f(\\tau)": {
+        "role": "1つ目の関数",
+        "description": "積分変数タウについての1つ目の関数。多くは入力信号です。",
+        "kind": "input"
+      },
+      "g(t-\\tau)": {
+        "role": "反転してずらした関数",
+        "description": "2つ目の関数を反転させてから t だけずらしたもの。多くはインパルス応答です。",
+        "kind": "input"
+      },
+      "\\tau": {
+        "role": "積分変数",
+        "description": "二つの関数が重なる範囲をたどっていくためのダミー変数です。",
+        "kind": "structural"
+      },
+      "\\int": {
+        "role": "積分",
+        "description": "-無限大から無限大までの積分で、重なる範囲の全体を計算します。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "カメラのぼけの効果の数学的なモデル化",
+      "ディープラーニングのCNNにおける画像の特徴の抽出"
+    ],
+    "relatedFormulas": [
+      "fourier-transform",
+      "transfer-function",
+      "inverse-fourier"
+    ]
+  },
+  "transfer-function": {
+    "name": "伝達関数",
+    "oneLiner": "システムの出力と入力のラプラス変換の比として定められるシステムの特性の関数",
+    "description": "伝達関数は、LTIシステムの入力と出力の関係を複素周波数領域で表したもので、出力のラプラス変換を入力のラプラス変換で割った比です。システムの極と零点から、安定性・周波数応答・過渡応答の特性をつかむことができます。制御工学で最も重要な分析の道具です。",
+    "field": "信号処理",
+    "significance": "システムの動的な特性を一つの関数にまとめ、制御システムの設計と安定性の分析の標準的な道具になりました。",
+    "elementMeanings": {
+      "H(s)": {
+        "role": "伝達関数",
+        "description": "複素周波数 s の関数として表されたシステムの特性です。",
+        "kind": "output"
+      },
+      "Y(s)": {
+        "role": "出力のラプラス変換",
+        "description": "システムの出力信号をラプラス変換した結果です。",
+        "kind": "output"
+      },
+      "X(s)": {
+        "role": "入力のラプラス変換",
+        "description": "システムの入力信号をラプラス変換した結果です。",
+        "kind": "input"
+      },
+      "s": {
+        "role": "複素周波数",
+        "description": "ラプラス変数。システムの極と零点を分析するのに使われます。",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "自動車のクルーズコントロールの応答特性の設計",
+      "オーディオアンプの周波数応答の分析"
+    ],
+    "relatedFormulas": [
+      "laplace-transform",
+      "z-transform",
+      "convolution"
+    ]
+  }
+}

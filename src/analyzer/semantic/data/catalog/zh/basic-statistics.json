@@ -1,0 +1,99 @@
+{
+  "arithmetic-mean": {
+    "name": "算术平均数",
+    "oneLiner": "把所有数据相加后再除以个数所得到的代表值",
+    "description": "算术平均数是把全部数据求和后除以数据个数所得的值。平常说“平均”，通常指的就是这个算术平均数。它以最简单的方式告诉我们数据的中心在哪里，是日常生活中使用最多的统计量。",
+    "field": "统计学",
+    "significance": "它是把数据概括成一个数字的最基本方法，几乎是所有统计分析的出发点。",
+    "elementMeanings": {
+      "\\bar{x}": { "role": "算术平均数", "description": "全部数据的平均值。", "kind": "output" },
+      "x_i": { "role": "各个数据值", "description": "数据集中的第 i 个值。", "kind": "input" },
+      "n": { "role": "数据个数", "description": "表示一共有多少个数据。", "kind": "input" },
+      "\\sum": { "role": "求和符号", "description": "表示把所有数据值加起来。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "求班上同学考试成绩的平均分",
+      "计算一个月里每日气温的平均值",
+      "从零花钱支出明细中求每天的平均开销"
+    ],
+    "relatedFormulas": ["weighted-mean", "variance-basic", "std-dev-basic"]
+  },
+  "variance-basic": {
+    "name": "方差",
+    "oneLiner": "把每个数据与平均数之差平方后再取平均所得的值",
+    "description": "方差是用一个数字来表示数据在平均数周围分散程度的尺度。做法是把每个数据减去平均数，把差平方，再全部相加后除以数据个数。值越大，说明数据分布得越分散。",
+    "field": "统计学",
+    "significance": "它是把数据离散程度定量化的核心尺度，与标准差一起构成统计分析的基础。",
+    "elementMeanings": {
+      "\\sigma^2": { "role": "方差", "description": "总体方差，表示数据的离散程度。", "kind": "output" },
+      "x_i": { "role": "各个数据值", "description": "数据集中的第 i 个值。", "kind": "input" },
+      "\\bar{x}": { "role": "平均数", "description": "全部数据的算术平均数。", "kind": "output" },
+      "(x_i - \\bar{x})^2": { "role": "离差的平方", "description": "把每个数据与平均数之间的距离平方后的值。", "kind": "structural" },
+      "n": { "role": "数据个数", "description": "全部数据的个数。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "两个班考试平均分相同时，用方差比较成绩分布的差别",
+      "工厂里用方差检查产品重量是否均匀",
+      "用方差衡量股票收益率的波动幅度"
+    ],
+    "relatedFormulas": ["arithmetic-mean", "std-dev-basic", "coefficient-of-variation"]
+  },
+  "std-dev-basic": {
+    "name": "标准差",
+    "oneLiner": "以原来的单位表示数据相对平均数分散程度的尺度",
+    "description": "标准差是对方差开平方所得的值。方差的单位是平方单位，不便于直观理解；开平方之后就与原始数据的单位相同，可以直接理解为“大致离平均数有这么远”。",
+    "field": "统计学",
+    "significance": "由于用与原始数据相同的单位表示离散程度，解释起来很直观，它与正态分布一起是使用最广泛的离散尺度。",
+    "elementMeanings": {
+      "\\sigma": { "role": "标准差", "description": "总体标准差，用原来的单位表示数据的离散程度。", "kind": "output" },
+      "x_i": { "role": "各个数据值", "description": "数据集中的第 i 个值。", "kind": "input" },
+      "\\bar{x}": { "role": "平均数", "description": "全部数据的算术平均数。", "kind": "output" },
+      "n": { "role": "数据个数", "description": "全部数据的个数。", "kind": "input" },
+      "\\sqrt{}": { "role": "平方根", "description": "对方差开平方，使其回到原来的单位。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "用“平均身高 165cm、标准差 5cm”这样的说法描述身高数据的分散程度",
+      "用考试成绩的标准差判断成绩分布是否均匀",
+      "天气预报中用标准差说明气温的波动幅度"
+    ],
+    "relatedFormulas": ["variance-basic", "arithmetic-mean", "coefficient-of-variation"]
+  },
+  "weighted-mean": {
+    "name": "加权平均数",
+    "oneLiner": "把各个数据的重要程度（权重）考虑进去而求得的平均数",
+    "description": "加权平均数不把所有数据同等看待，而是给每个数据乘上表示其重要程度的权重，求和后再除以权重之和。各科学分不同的学校成绩计算就是典型的例子。",
+    "field": "统计学",
+    "significance": "当各个数据的重要程度不同时，它比简单的算术平均数给出更准确的代表值。",
+    "elementMeanings": {
+      "\\bar{x}": { "role": "加权平均数", "description": "考虑权重后计算得到的平均值。", "kind": "output" },
+      "w_i": { "role": "权重", "description": "第 i 个数据的重要程度或所占比重。", "kind": "input" },
+      "x_i": { "role": "各个数据值", "description": "数据集中的第 i 个值。", "kind": "input" },
+      "\\sum w_i x_i": { "role": "加权和", "description": "把每个数据乘上权重之后再相加所得的和。", "kind": "structural" },
+      "\\sum w_i": { "role": "权重之和", "description": "把所有权重加起来的值。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "计算各科学分（权重）不同的大学成绩平均绩点(GPA)",
+      "计算各项分值不同的过程性评价总分",
+      "计算投资组合中按各标的比重加权的平均收益率"
+    ],
+    "relatedFormulas": ["arithmetic-mean", "variance-basic"]
+  },
+  "coefficient-of-variation": {
+    "name": "变异系数",
+    "oneLiner": "用标准差除以平均数，从而不受单位影响地比较离散程度的值",
+    "description": "变异系数是标准差与平均数之比。它使单位不同或平均数大小不同的数据之间也能公平地比较离散程度，通常用百分数(%)表示。",
+    "field": "统计学",
+    "significance": "它是可以在不同单位或不同规模的数据之间比较变异性的无量纲尺度。",
+    "elementMeanings": {
+      "CV": { "role": "变异系数", "description": "标准差除以平均数所得的值，表示相对离散程度。", "kind": "output" },
+      "\\sigma": { "role": "标准差", "description": "数据的离散程度。", "kind": "input" },
+      "\\bar{x}": { "role": "平均数", "description": "全部数据的算术平均数，不能为 0。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "公平地比较身高(cm)与体重(kg)的离散程度",
+      "比较不同科目考试成绩的相对变异性",
+      "比较 A、B 两家工厂生产的不同产品的质量均匀性"
+    ],
+    "relatedFormulas": ["std-dev-basic", "arithmetic-mean", "variance-basic"]
+  }
+}

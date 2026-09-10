@@ -1,0 +1,142 @@
+{
+  "fermat-little": {
+    "name": "Teorema kecil Fermat",
+    "oneLiner": "Teorema yang menjamin bahwa untuk bilangan prima p dan bilangan bulat a yang saling prima dengannya, a pangkat (p-1) bersisa 1 bila dibagi p",
+    "description": "Teorema kecil Fermat menyatakan bahwa bila bilangan prima p tidak membagi a, sisa pembagian a^(p-1) oleh p pasti bernilai 1. Teorema ini menyederhanakan perhitungan perpangkatan modulo secara drastis dan menjadi landasan teoretis sistem sandi RSA.",
+    "discoverer": "Pierre de Fermat",
+    "field": "Teori bilangan",
+    "significance": "Teorema ini adalah landasan utama kriptografi modern, dan pemakaiannya tak terhindarkan pada algoritma uji keprimaan maupun perhitungan invers modulo.",
+    "elementMeanings": {
+      "a": { "role": "Bilangan pokok", "description": "Bilangan bulat yang saling prima dengan bilangan prima p. Bilangan ini menjadi pokok perpangkatan.", "kind": "input" },
+      "p": { "role": "Modulo prima", "description": "Bilangan prima yang menjadi acuan pembagian.", "kind": "input" },
+      "p-1": { "role": "Pangkat", "description": "Bilangan prima dikurangi 1. Bila dipangkatkan sebanyak itu, sisanya menjadi 1.", "kind": "structural" },
+      "\\equiv 1": { "role": "Hasil kekongruenan", "description": "Menyatakan bahwa hasil operasi modulo bernilai 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Menghitung invers modulo bilangan besar pada sistem sandi RSA",
+      "Menguji calon bilangan prima dengan algoritma uji keprimaan Fermat",
+      "Menganalisis peluang tabrakan saat merancang fungsi hash"
+    ],
+    "relatedFormulas": ["euler-theorem"]
+  },
+  "euler-theorem": {
+    "name": "Teorema Euler",
+    "oneLiner": "Teorema yang menyatakan bahwa untuk bilangan bulat a dan bilangan bulat positif n yang saling prima, a dipangkatkan nilai fungsi phi Euler bersisa 1 bila dibagi n",
+    "description": "Teorema Euler adalah perluasan teorema kecil Fermat sampai ke bilangan komposit. Bila a dan n saling prima, memangkatkan a sebanyak nilai fungsi phi Euler membuat sisa pembagiannya oleh n bernilai 1. Teorema kecil Fermat merupakan kasus khusus ketika n berupa bilangan prima.",
+    "discoverer": "Leonhard Euler",
+    "field": "Teori bilangan",
+    "significance": "Sebagai perumuman teorema kecil Fermat, teorema ini langsung dipakai untuk membuktikan keabsahan sandi RSA dan menjadi dasar operasi modulo pada bilangan komposit.",
+    "elementMeanings": {
+      "a": { "role": "Bilangan pokok", "description": "Bilangan bulat yang saling prima dengan n.", "kind": "input" },
+      "n": { "role": "Modulo", "description": "Bilangan bulat positif yang menjadi acuan pembagian.", "kind": "input" },
+      "\\varphi(n)": { "role": "Fungsi phi Euler", "description": "Banyaknya bilangan dari 1 sampai n yang saling prima dengan n.", "kind": "output" },
+      "\\equiv 1": { "role": "Hasil kekongruenan", "description": "Menyatakan bahwa hasil operasi modulo bernilai 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Dasar matematis perhitungan pangkat pendekripsian pada sandi RSA",
+      "Analisis keamanan protokol pertukaran kunci Diffie-Hellman",
+      "Perhitungan orde sebuah grup siklik"
+    ],
+    "relatedFormulas": ["fermat-little"]
+  },
+  "prime-counting": {
+    "name": "Teorema bilangan prima",
+    "oneLiner": "Teorema yang mengungkap bahwa banyaknya bilangan prima yang tidak melebihi x menghampiri x/ln(x) secara asimtotik",
+    "description": "Teorema bilangan prima menunjukkan bahwa ketika x cukup besar, fungsi yang menghitung banyaknya bilangan prima sampai x menuju x/ln(x). Teorema ini membuktikan kenyataan mengejutkan bahwa sebaran bilangan prima, walau tampak tak beraturan, secara besar-besaran mengikuti kerapatan yang dapat diramalkan.",
+    "discoverer": "Jacques Hadamard, Charles Jean de la Vallée Poussin (pembuktian secara terpisah)",
+    "field": "Teori bilangan",
+    "significance": "Teorema ini adalah teorema paling dasar tentang sebaran bilangan prima, sekaligus titik tolak teori bilangan analitik yang berkaitan langsung dengan hipotesis Riemann.",
+    "elementMeanings": {
+      "\\pi(x)": { "role": "Fungsi pencacah prima", "description": "Fungsi yang menghitung banyaknya bilangan prima yang tidak melebihi x.", "kind": "output" },
+      "x": { "role": "Batas atas", "description": "Batas atas rentang tempat bilangan prima dihitung.", "kind": "input" },
+      "\\ln(x)": { "role": "Logaritma natural", "description": "Logaritma natural dari x. Menyatakan laju berkurangnya kerapatan bilangan prima.", "kind": "structural" },
+      "\\sim": { "role": "Kesetaraan asimtotik", "description": "Berarti bahwa saat x membesar tanpa batas, perbandingan kedua fungsi menuju 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Memperkirakan rentang pencarian saat mencari bilangan prima besar untuk kriptografi",
+      "Merancang algoritma uji keprimaan probabilistik dengan memanfaatkan kerapatan bilangan prima",
+      "Analisis statistik selang antarbilangan prima dalam penelitian matematika"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "euclidean-algorithm": {
+    "name": "Algoritma Euklides",
+    "oneLiner": "Algoritma yang mencari faktor persekutuan terbesar dua bilangan bulat dengan mengulang operasi sisa pembagian",
+    "description": "Algoritma Euklides menghitung faktor persekutuan terbesar secara efisien dengan menerapkan sifat gcd(a,b) = gcd(b, a mod b) berulang-ulang. Bilangan pembagi pada saat sisanya menjadi 0 itulah faktor persekutuan terbesarnya. Algoritma ini dikenal sebagai algoritma tertua yang pernah tercatat.",
+    "discoverer": "Euklides",
+    "field": "Teori bilangan",
+    "significance": "Inilah algoritma pertama yang tercatat, dan pemakaiannya menjadi inti di seluruh ilmu komputer, mulai dari menyederhanakan pecahan, menghitung invers modulo, sampai membangkitkan kunci RSA.",
+    "elementMeanings": {
+      "a": { "role": "Bilangan bulat pertama", "description": "Salah satu dari dua bilangan yang dicari faktor persekutuan terbesarnya.", "kind": "input" },
+      "b": { "role": "Bilangan bulat kedua", "description": "Bilangan lain dari dua bilangan yang dicari faktor persekutuan terbesarnya.", "kind": "input" },
+      "\\gcd": { "role": "Fungsi faktor persekutuan terbesar", "description": "Fungsi yang mengembalikan faktor persekutuan terbesar dua bilangan bulat.", "kind": "output" },
+      "a \\mod b": { "role": "Sisa", "description": "Sisa pembagian a oleh b. Langkah ini diulang sampai nilainya menjadi 0.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung faktor persekutuan terbesar pembilang dan penyebut saat menyederhanakan pecahan",
+      "Menghasilkan kunci rahasia dengan algoritma Euklides yang diperluas saat membangkitkan kunci RSA",
+      "Menghitung daur permainan bersama dari kelipatan persekutuan terkecil dua pola ketukan dalam musik"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "quadratic-reciprocity": {
+    "name": "Hukum resiprositas kuadratik",
+    "oneLiner": "Hukum yang mengungkap bahwa hubungan residu kuadratik dua bilangan prima ganjil p dan q ditentukan secara timbal balik",
+    "description": "Hukum resiprositas kuadratik memberikan hubungan yang tepat antara pertanyaan apakah p merupakan residu kuadratik dari q dan apakah q merupakan residu kuadratik dari p, untuk bilangan prima ganjil p dan q yang diberikan. Hukum yang oleh Gauss disebut 'permata aritmetika' ini adalah hasil pertama yang memperlihatkan asas resiprositas dalam teori bilangan.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Teori bilangan",
+    "significance": "Hukum ini adalah titik tolak teori bilangan aljabar dan teori medan kelas, sekaligus alat utama untuk menentukan ada tidaknya penyelesaian modulo bagi persamaan kuadrat.",
+    "elementMeanings": {
+      "p": { "role": "Bilangan prima ganjil pertama", "description": "Salah satu dari dua bilangan prima yang dikenai hukum resiprositas.", "kind": "input" },
+      "q": { "role": "Bilangan prima ganjil kedua", "description": "Bilangan prima lain dari dua bilangan prima yang dikenai hukum resiprositas.", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "Simbol Legendre", "description": "Simbol yang bernilai 1 bila p merupakan residu kuadratik dari q, dan -1 bila bukan.", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "Penentu tanda", "description": "Suku yang menentukan tanda hasil kali kedua simbol Legendre.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menentukan dengan cepat ada tidaknya penyelesaian kekongruenan kuadratik",
+      "Merancang sistem sandi berbasis residu kuadratik dalam kriptografi",
+      "Perumuman menuju hukum resiprositas berderajat tinggi dalam penelitian teori bilangan aljabar"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "goldbach-conjecture": {
+    "name": "Konjektur Goldbach",
+    "oneLiner": "Konjektur yang belum terpecahkan bahwa setiap bilangan genap yang lebih besar daripada 2 dapat dinyatakan sebagai jumlah dua bilangan prima",
+    "description": "Konjektur Goldbach menyatakan bahwa setiap bilangan genap mulai dari 4 dapat dinyatakan sebagai jumlah dua bilangan prima. Konjektur ini pertama kali diajukan Goldbach dalam suratnya kepada Euler pada tahun 1742, dan meskipun sudah diperiksa dengan komputer sampai rentang yang sangat besar, hingga kini belum terbukti sehingga menjadi salah satu persoalan terbuka paling terkenal dalam matematika.",
+    "discoverer": "Christian Goldbach",
+    "field": "Teori bilangan",
+    "significance": "Konjektur ini adalah persoalan sulit yang mewakili teori bilangan aditif, dan menuntut pemahaman mendalam tentang sifat penjumlahan bilangan prima.",
+    "elementMeanings": {
+      "2n": { "role": "Bilangan genap", "description": "Bilangan genap sembarang mulai dari 4.", "kind": "input" },
+      "p": { "role": "Bilangan prima pertama", "description": "Salah satu dari dua bilangan prima yang menyusun bilangan genap itu.", "kind": "input" },
+      "q": { "role": "Bilangan prima kedua", "description": "Bilangan prima lain dari dua bilangan prima yang menyusun bilangan genap itu.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Proyek pemeriksaan numerik berskala besar dengan bantuan komputer",
+      "Pendorong lahirnya persoalan aditif dalam penelitian sebaran bilangan prima",
+      "Contoh utama untuk menjelaskan beda antara konjektur dan pembuktian dalam pendidikan matematika"
+    ],
+    "relatedFormulas": ["prime-counting", "fermat-little"]
+  },
+  "fibonacci-general": {
+    "name": "Rumus suku ke-n Fibonacci",
+    "oneLiner": "Rumus bentuk tertutup yang menghitung suku ke-n barisan Fibonacci secara langsung dengan rasio emas",
+    "description": "Rumus suku ke-n Fibonacci (rumus Binet) menghitung suku ke-n barisan Fibonacci secara langsung tanpa rekursi, dengan memakai rasio emas dan konjugatnya. Mengherankan bahwa gabungan bilangan-bilangan irasional selalu menghasilkan bilangan bulat, dan rumus ini menjadi contoh utama cara menyelesaikan relasi rekurens linear melalui persamaan karakteristik.",
+    "discoverer": "Jacques Philippe Marie Binet (perumusan), Abraham de Moivre (penemuan terdahulu)",
+    "field": "Teori bilangan",
+    "significance": "Rumus ini memperlihatkan bahwa relasi rekurens linear dapat diselesaikan dalam bentuk tertutup, sekaligus mengungkap kaitan yang dalam antara rasio emas dan barisan Fibonacci.",
+    "elementMeanings": {
+      "F_n": { "role": "Bilangan Fibonacci", "description": "Suku ke-n dari barisan itu.", "kind": "output" },
+      "\\varphi": { "role": "Rasio emas", "description": "(1+akar 5)/2, kira-kira 1,618. Akar karakteristik yang positif.", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "Konjugat rasio emas", "description": "(1-akar 5)/2, kira-kira -0,618. Akar karakteristik yang negatif.", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "Konstanta penormal", "description": "Selisih kedua akar karakteristik, yang berperan sebagai pembagi agar hasilnya berupa bilangan bulat.", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "Nomor suku", "description": "Kedudukan suku barisan Fibonacci yang hendak dicari.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung batas kinerja Fibonacci heap dalam analisis algoritma",
+      "Menjelaskan pola rasio emas seperti jumlah kelopak bunga dan pilinan pada bonggol pinus di alam",
+      "Menghitung tingkat retracement Fibonacci dalam keuangan"
+    ],
+    "relatedFormulas": ["euclidean-algorithm"]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "shannon-entropy": {
+    "name": "香农熵",
+    "oneLiner": "衡量概率分布的不确定性（信息量）的信息论基本尺度",
+    "description": "香农熵把在知道随机变量的结果之前的平均不确定性定量化。概率越均匀熵越高，某一个结果越确定熵越低。它给出了压缩或传输信息所需最少比特数的理论下界。",
+    "discoverer": "克劳德·香农",
+    "field": "信息论",
+    "significance": "它是开创信息论的核心概念，对数据压缩、通信、密码学、机器学习等所有领域都产生了影响。",
+    "elementMeanings": {
+      "H(X)": { "role": "熵", "description": "随机变量 X 的平均信息量。单位：比特（底数为 2 时）或奈特（底数为 e 时）。", "kind": "output" },
+      "p(x)": { "role": "概率", "description": "事件 x 发生的概率。", "kind": "input" },
+      "\\log p(x)": { "role": "自信息量", "description": "事件 x 的信息量。概率越低信息量越高。", "kind": "structural" },
+      "-\\sum": { "role": "负的期望值", "description": "给自信息量的期望值加上负号，使其成为正数。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "掷硬币的不确定性：公平硬币是 1 比特，有偏硬币则不足 1 比特",
+      "算出数据压缩算法（ZIP 等）所能达到的理论最大压缩率"
+    ],
+    "relatedFormulas": ["kl-divergence", "mutual-information", "cross-entropy", "source-coding"]
+  },
+  "kl-divergence": {
+    "name": "库尔贝克-莱布勒散度",
+    "oneLiner": "衡量两个概率分布之间非对称差异的尺度",
+    "description": "KL 散度衡量用近似分布 Q 代替真实分布 P 时产生的信息损失。它总是大于或等于 0，只有两个分布相同时才为 0。由于它是非对称的，D_KL(P||Q) 与 D_KL(Q||P) 一般并不相等。它在变分推断、生成模型等中被核心使用。",
+    "discoverer": "所罗门·库尔贝克、理查德·莱布勒",
+    "field": "信息论",
+    "significance": "它是衡量分布间差异的基本工具，广泛用于贝叶斯推断、VAE、强化学习的策略优化等。",
+    "elementMeanings": {
+      "D_{KL}(P \\| Q)": { "role": "KL 散度", "description": "从 P 到 Q 的信息损失量。", "kind": "output" },
+      "p(x)": { "role": "真实分布", "description": "实际的（作为参照的）概率分布。", "kind": "input" },
+      "q(x)": { "role": "近似分布", "description": "想要逼近真实分布的模型分布。", "kind": "input" },
+      "\\log(p(x)/q(x))": { "role": "对数概率比", "description": "在每个事件上两个分布的概率之比的对数值。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "在变分自编码器（VAE）中引导潜变量分布靠近正态分布",
+      "评估自然语言生成模型的输出分布偏离训练数据分布有多远"
+    ],
+    "relatedFormulas": ["shannon-entropy", "mutual-information", "cross-entropy"]
+  },
+  "mutual-information": {
+    "name": "互信息",
+    "oneLiner": "衡量两个随机变量所共享的信息量的尺度",
+    "description": "互信息衡量观测到一个变量后，关于另一个变量的不确定性减少了多少。两个变量独立时它为 0，依赖性越完全它的值越大。它不仅能捕捉线性关系，还能捕捉非线性依赖，因而是比相关系数更一般的依赖性尺度。",
+    "discoverer": "克劳德·香农",
+    "field": "信息论",
+    "significance": "它能以非线性的方式衡量变量间的依赖性，因而被用于特征选择、聚类、神经科学等多个领域。",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "互信息", "description": "X 与 Y 所共享的信息量。", "kind": "output" },
+      "H(X)": { "role": "X 的熵", "description": "X 单独的不确定性（信息量）。", "kind": "input" },
+      "H(X|Y)": { "role": "条件熵", "description": "在知道 Y 之后仍然残留的 X 的不确定性。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在基因表达数据中探测两个基因之间的非线性关系",
+      "在机器学习的特征选择中评估输入变量与输出变量共享的信息量"
+    ],
+    "relatedFormulas": ["shannon-entropy", "kl-divergence", "data-processing-inequality"]
+  },
+  "source-coding": {
+    "name": "香农信源编码定理",
+    "oneLiner": "无损压缩的平均码长必须不小于熵的定理",
+    "description": "香农信源编码定理证明，对信息源作无损压缩时，每个符号的平均码长不可能短于信源的熵。熵就是压缩的理论极限，而以足够长的分块为单位编码时，可以任意接近这个极限。",
+    "discoverer": "克劳德·香农",
+    "field": "信息论",
+    "significance": "它确立了数据压缩的根本极限，为霍夫曼编码、算术编码等实用压缩算法的开发奠定了理论基础。",
+    "elementMeanings": {
+      "L": { "role": "平均码长", "description": "编码一个符号所需的平均比特数。", "kind": "output" },
+      "H(X)": { "role": "信源的熵", "description": "信息源每个符号的平均信息量，也是压缩的理论下界。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在 ZIP 文件压缩中由原始数据的熵决定压缩极限",
+      "在音乐流媒体中算出无损格式（FLAC）的最小文件大小"
+    ],
+    "relatedFormulas": ["shannon-entropy"]
+  },
+  "data-processing-inequality": {
+    "name": "数据处理不等式",
+    "oneLiner": "加工数据只会保持或损失信息，绝不会增加信息的原理",
+    "description": "数据处理不等式说的是，在马尔可夫链 X -> Y -> Z 中，X 与 Z 之间的互信息不可能超过 X 与 Y 之间的互信息。也就是说，对数据作后处理并不能造出原本没有的信息。它保证了特征提取、降维、通信等场合中信息损失的不可逆性。",
+    "discoverer": "克劳德·香农（作为信息论的基本性质导出）",
+    "field": "信息论",
+    "significance": "它设定了信息处理的根本极限，为通信信道设计与机器学习的表示学习提供了理论上的约束条件。",
+    "elementMeanings": {
+      "I(X;Y)": { "role": "原始数据与中间阶段的互信息", "description": "原始数据 X 与中间处理结果 Y 所共享的信息量。", "kind": "input" },
+      "I(X;Z)": { "role": "原始数据与最终结果的互信息", "description": "原始数据 X 与进一步加工的结果 Z 所共享的信息量。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "把图像转成黑白之后无法还原原来颜色信息的原因",
+      "深度学习中层数越深输入信息越被逐步压缩的原理（信息瓶颈理论）"
+    ],
+    "relatedFormulas": ["mutual-information", "shannon-entropy"]
+  }
+}

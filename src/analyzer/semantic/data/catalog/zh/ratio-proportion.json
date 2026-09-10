@@ -1,0 +1,72 @@
+{
+  "direct-proportion": {
+    "name": "正比例",
+    "oneLiner": "一个量增大时，另一个量按相同倍数增大的关系",
+    "description": "正比例 y = kx 是指 x 变成 2 倍时 y 也变成 2 倍、x 变成 3 倍时 y 也变成 3 倍的关系。它的图像是一条过原点的直线，k 就是比例常数。",
+    "field": "代数学",
+    "significance": "它表示最基本的比例关系，作为一次函数的特殊情形（y 轴截距为 0），是学习一切比例的起点。",
+    "elementMeanings": {
+      "y": { "role": "因变量", "description": "由 x 决定的结果值。", "kind": "output" },
+      "k": { "role": "比例常数", "description": "x 与 y 之间固定不变的比值。可以用 k = y/x 求得。", "kind": "input" },
+      "x": { "role": "自变量", "description": "可以自由取定的输入值。", "kind": "input" }
+    },
+    "realWorldExamples": ["一个苹果 500 元时，个数与价格的关系", "以相同速度行驶时，时间与路程的关系"],
+    "relatedFormulas": ["linear-function", "inverse-proportion"]
+  },
+  "inverse-proportion": {
+    "name": "反比例",
+    "oneLiner": "一个量增大时，另一个量按相同倍数减小的关系",
+    "description": "反比例 y = k/x 是指 x 变成 2 倍时 y 变成一半、x 变成 3 倍时 y 变成 1/3 的关系。它的图像是双曲线，无限接近 x 轴和 y 轴却永远不会碰到。",
+    "field": "代数学",
+    "significance": "它表示乘积保持不变的关系，是物理学中玻意耳定律、工作量与时间的关系等许多现象的数学基础。",
+    "elementMeanings": {
+      "y": { "role": "因变量", "description": "由 x 决定的结果值。", "kind": "output" },
+      "k": { "role": "比例常数", "description": "x 与 y 的乘积始终保持不变的那个值。可以用 k = xy 求得。", "kind": "input" },
+      "x": { "role": "自变量", "description": "不能为 0 的输入值。", "kind": "input" }
+    },
+    "realWorldExamples": ["走同样的路程时，速度越快所用时间越短的关系", "面积相同的长方形中，长越大宽就越小的关系"],
+    "relatedFormulas": ["direct-proportion", "speed-formula"]
+  },
+  "percentage": {
+    "name": "百分比",
+    "oneLiner": "把整体看作 100 时，部分所占的大小",
+    "description": "百分比 p = (部分/整体) x 100 以 100 为基准，表示某个量在整体中所占的比例。它使用百分号 (%)，让比较和交流变得容易。",
+    "field": "算术",
+    "significance": "它是折扣率、利率、成绩、统计等日常生活中使用最广泛的比例表示方法。",
+    "elementMeanings": {
+      "p": { "role": "百分比", "description": "把整体看作 100 时的比例值。单位是 %。", "kind": "output", "unit": "%" },
+      "부분": { "role": "要比较的量", "description": "整体之中你想了解的那一部分的大小。", "kind": "input" },
+      "전체": { "role": "作为基准的量", "description": "相当于 100% 的整体大小。", "kind": "input" }
+    },
+    "realWorldExamples": ["考试中答对题目所占的比例（80 分 = 80%）", "商品打七折时实际优惠金额的计算"],
+    "relatedFormulas": ["direct-proportion"]
+  },
+  "speed-formula": {
+    "name": "速度公式",
+    "oneLiner": "用移动的路程除以所用的时间来求快慢的公式",
+    "description": "速度公式 v = d/t 表示物体在单位时间内移动的路程。它整理了路程、时间、速度这三个量之间的关系，是最基本的物理公式。",
+    "field": "物理学",
+    "significance": "它是描述运动最基础的公式，也是理解路程—时间—速度关系的起点。",
+    "elementMeanings": {
+      "v": { "role": "速度", "description": "单位时间内移动的路程。例如时速 60km 的意思是 1 小时走 60km。", "kind": "output", "unit": "m/s" },
+      "d": { "role": "路程", "description": "物体实际移动的长度。", "kind": "input", "unit": "m" },
+      "t": { "role": "时间", "description": "移动所花费的时间。", "kind": "input", "unit": "s" }
+    },
+    "realWorldExamples": ["汽车 2 小时行驶 120km 时求时速", "100m 赛跑中根据成绩计算平均速度"],
+    "relatedFormulas": ["direct-proportion", "inverse-proportion", "density-formula"]
+  },
+  "density-formula": {
+    "name": "密度公式",
+    "oneLiner": "表示物质在单位体积内堆积得有多密的公式",
+    "description": "密度公式用质量除以体积，求出物质的紧密程度。大小相同时质量越大密度越高，质量相同时体积越大密度越低。",
+    "field": "物理学",
+    "significance": "它是用来区分物质种类、判断物体在水中是浮还是沉的基本物理量。",
+    "elementMeanings": {
+      "\\rho": { "role": "密度", "description": "单位体积内的质量。单位通常是 g/cm3 或 kg/m3。", "kind": "output", "unit": "kg/m3" },
+      "m": { "role": "质量", "description": "表示物体多少的量。单位是 g 或 kg。", "kind": "input", "unit": "kg" },
+      "V": { "role": "体积", "description": "物体所占空间的大小。单位是 cm3 或 m3。", "kind": "input", "unit": "m3" }
+    },
+    "realWorldExamples": ["铁球会沉下去而木块会浮在水上的原因", "用密度区分真金与假金的方法"],
+    "relatedFormulas": ["speed-formula"]
+  }
+}

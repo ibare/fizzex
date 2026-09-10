@@ -1,0 +1,258 @@
+{
+  "quadratic-expression": {
+    "name": "Forma quadrática",
+    "oneLiner": "Expressão que contém x ao quadrado — o gráfico é uma parábola",
+    "slots": {
+      "a": {
+        "role": "coeficiente do termo quadrático",
+        "description": "define a concavidade e a largura da parábola"
+      },
+      "b": {
+        "role": "coeficiente do termo linear",
+        "description": "desloca o eixo para a esquerda ou para a direita"
+      },
+      "c": {
+        "role": "termo constante",
+        "description": "altura em que a curva cruza o eixo y"
+      },
+      "x": {
+        "role": "ponto de observação",
+        "description": "valor de x a examinar sobre o gráfico"
+      }
+    },
+    "visualizers": {
+      "quadratic-sandbox-2d": {
+        "name": "Exploração livre — função quadrática",
+        "description": "observação das mudanças de a, b e c no plano cartesiano"
+      },
+      "quadratic-bridge-2d": {
+        "name": "Arco de ponte — função quadrática",
+        "description": "a parábola vista em pilares, arcos e reflexos"
+      },
+      "quadratic-basketball-2d": {
+        "name": "Lance livre de basquete — função quadrática",
+        "description": "trajetória da altura de lançamento, do ponto mais alto e da queda"
+      },
+      "quadratic-fountain-2d": {
+        "name": "Chafariz — função quadrática",
+        "description": "o ponto mais alto do jato de água é o vértice"
+      }
+    }
+  },
+  "sum-of-two-squares": {
+    "name": "Forma da soma de dois quadrados",
+    "oneLiner": "Relação em que a soma dos quadrados de dois valores é igual ao quadrado do terceiro",
+    "slots": {
+      "a": {
+        "role": "primeiro cateto",
+        "description": "um dos lados que formam o ângulo reto"
+      },
+      "b": {
+        "role": "segundo cateto",
+        "description": "o outro lado que forma o ângulo reto"
+      },
+      "c": {
+        "role": "hipotenusa",
+        "description": "o lado oposto ao ângulo reto, o mais longo"
+      }
+    },
+    "visualizers": {
+      "pythagorean-explore-2d": {
+        "name": "Exploração livre",
+        "description": "o teorema de Pitágoras visto com o triângulo retângulo e os quadrados sobre seus três lados"
+      },
+      "pythagorean-ladder-2d": {
+        "name": "Escada",
+        "description": "ângulo e segurança de uma escada apoiada na parede"
+      },
+      "pythagorean-tv-2d": {
+        "name": "Tela de TV",
+        "description": "conversão da diagonal em polegadas a partir da largura e da altura da tela"
+      },
+      "pythagorean-shortcut-2d": {
+        "name": "Atalho",
+        "description": "comparação da distância entre contornar o quarteirão e atravessá-lo"
+      }
+    }
+  },
+  "exponential-change": {
+    "name": "Forma de variação exponencial",
+    "oneLiner": "Forma em que a taxa de variação é proporcional à quantidade atual, crescendo ou decrescendo exponencialmente",
+    "slots": {
+      "N_0": {
+        "role": "valor inicial",
+        "description": "quantidade no instante zero"
+      },
+      "r": {
+        "role": "taxa de variação",
+        "description": "positiva indica crescimento; negativa, decaimento"
+      }
+    },
+    "visualizers": {
+      "exponential-decay-2d": {
+        "name": "Decaimento exponencial — 2D",
+        "description": "percepção da meia-vida alternando entre as âncoras cafeína, bateria, carbono-14 e medicamento"
+      }
+    }
+  },
+  "compound-growth": {
+    "name": "Forma de juros compostos",
+    "oneLiner": "Forma em que os juros rendem novos juros e o capital vai aumentando",
+    "slots": {
+      "P": {
+        "role": "capital inicial",
+        "description": "quantia aplicada no começo"
+      },
+      "r": {
+        "role": "taxa anual de juros",
+        "description": "taxa de juros considerada em um ano"
+      },
+      "n": {
+        "role": "capitalizações por ano",
+        "description": "quantas vezes por ano os juros são aplicados"
+      },
+      "t": {
+        "role": "prazo",
+        "description": "número de anos da aplicação"
+      }
+    },
+    "visualizers": {
+      "compound-interest-2d": {
+        "name": "Juros compostos — 2D",
+        "description": "percepção do crescimento composto alternando entre as âncoras poupança, ações, aplicação mensal e inflação"
+      }
+    }
+  },
+  "constant-acceleration-displacement": {
+    "name": "Forma do deslocamento com aceleração constante",
+    "oneLiner": "Distância percorrida com aceleração constante — traz um termo proporcional ao quadrado do tempo",
+    "slots": {
+      "v_0": {
+        "role": "velocidade inicial",
+        "description": "velocidade no momento da partida"
+      },
+      "a": {
+        "role": "aceleração",
+        "description": "aceleração que se mantém constante"
+      },
+      "t": {
+        "role": "tempo decorrido",
+        "description": "instante observado"
+      }
+    },
+    "visualizers": {
+      "freefall-2d": {
+        "name": "Queda livre — 2D",
+        "description": "percepção da aceleração da gravidade de cada planeta com as âncoras Terra, Lua, Marte e Júpiter"
+      }
+    }
+  },
+  "sinusoid": {
+    "name": "Forma senoidal",
+    "oneLiner": "Onda em que o mesmo formato se repete em períodos regulares",
+    "slots": {
+      "A": {
+        "role": "amplitude",
+        "description": "altura do centro até a crista"
+      },
+      "\\omega": {
+        "role": "frequência angular",
+        "description": "com que rapidez a onda se repete"
+      },
+      "\\varphi": {
+        "role": "fase",
+        "description": "quanto a onda foi deslocada para os lados"
+      },
+      "t": {
+        "role": "instante de observação",
+        "description": "momento a examinar sobre a onda"
+      }
+    },
+    "visualizers": {
+      "sine-wave-2d": {
+        "name": "Onda senoidal — 2D",
+        "description": "percepção do papel da amplitude, do período e da fase com as âncoras alto-falante, pêndulo, maré e voltímetro"
+      }
+    }
+  },
+  "orbit-period-radius": {
+    "name": "Forma do período orbital",
+    "oneLiner": "Relação em que órbitas maiores levam mais tempo para completar uma volta",
+    "slots": {
+      "M": {
+        "role": "massa do corpo central",
+        "description": "massa do corpo celeste que está no centro da órbita"
+      },
+      "a": {
+        "role": "semieixo maior da órbita",
+        "description": "raio do lado mais longo da órbita elíptica"
+      }
+    },
+    "visualizers": {
+      "kepler-orbit-2d": {
+        "name": "Órbita da Terra — 2D",
+        "description": "vista aérea em 2D observada alternando entre as âncoras ISS, GPS, órbita geoestacionária e Lua"
+      },
+      "kepler-orbit-3d": {
+        "name": "Órbita da Terra — 3D",
+        "description": "vista tridimensional que gira as mesmas âncoras no espaço 3D para dar noção de distância"
+      }
+    }
+  },
+  "tangent-line": {
+    "name": "Forma da reta tangente",
+    "oneLiner": "Reta que toca a curva em um ponto com a mesma inclinação",
+    "slots": {
+      "f": {
+        "role": "curva",
+        "description": "função sobre a qual a tangente será traçada"
+      },
+      "x": {
+        "role": "ponto de observação",
+        "description": "valor de x usado para mover o ponto de tangência"
+      }
+    },
+    "visualizers": {
+      "tangent-explore-2d": {
+        "name": "Explorar a tangente — 2D",
+        "description": "vista interativa que mostra a curva y=f(x) junto com a reta tangente no ponto x"
+      }
+    }
+  },
+  "complex-number": {
+    "name": "Forma do número complexo",
+    "oneLiner": "Número formado por uma parte real e uma parte imaginária — um ponto no plano",
+    "slots": {
+      "a": {
+        "role": "parte real",
+        "description": "coordenada do eixo horizontal"
+      },
+      "b": {
+        "role": "parte imaginária",
+        "description": "coordenada do eixo vertical"
+      }
+    }
+  },
+  "linear-map-2x2": {
+    "name": "Forma da transformação 2×2",
+    "oneLiner": "Transformação linear que leva vetores do plano a outros vetores",
+    "slots": {
+      "a": {
+        "role": "linha 1, coluna 1",
+        "description": "quanto a imagem do eixo x se estica na horizontal"
+      },
+      "b": {
+        "role": "linha 1, coluna 2",
+        "description": "quanto a imagem do eixo y se inclina na horizontal"
+      },
+      "c": {
+        "role": "linha 2, coluna 1",
+        "description": "quanto a imagem do eixo x se inclina na vertical"
+      },
+      "d": {
+        "role": "linha 2, coluna 2",
+        "description": "quanto a imagem do eixo y se estica na vertical"
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "comparison-sort-bound": {
+    "name": "比较排序的下界",
+    "oneLiner": "保证基于比较的排序算法最坏情况时间复杂度不可能低于 O(n log n) 的定理",
+    "description": "比较排序下界定理证明：仅靠元素之间的比较来排序的算法，在最坏情况下至少要做 O(n log n) 次比较。在决策树模型中，要区分 n! 种排列，树的高度必须不小于 log2(n!)，而由斯特林近似可知这就是 O(n log n)。",
+    "field": "计算机科学",
+    "significance": "它证明了归并排序、堆排序等在渐近意义上是最优的，并清楚地界定了比较排序的性能极限。",
+    "elementMeanings": {
+      "n": { "role": "元素个数", "description": "需要排序的元素总个数。", "kind": "input" },
+      "\\log n": { "role": "对数因子", "description": "源自决策树高度的比较次数中的对数成分。", "kind": "structural" },
+      "n!": { "role": "排列数", "description": "n 个元素所有可能的排列数。它是决策树叶子数的下界。", "kind": "structural" },
+      "\\Omega(n \\log n)": { "role": "下界记号", "description": "表示最坏情况下的比较次数不低于与 n log n 成正比的值。", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "为数据库索引排序时选择算法提供理论依据",
+      "在程序设计竞赛中分析基于排序的解法的时间复杂度",
+      "库中排序函数（如 Timsort）性能保证的依据"
+    ],
+    "relatedFormulas": ["master-theorem"]
+  },
+  "master-theorem": {
+    "name": "主定理",
+    "oneLiner": "把 T(n) = aT(n/b) + f(n) 形式的分治递推式的时间复杂度分为三种情形的定理",
+    "description": "主定理是分析分治算法递推式的标准工具。依据子问题个数 a、规模缩小比例 b 与合并代价 f(n) 三者的关系分为三种情形，可以立即得到闭形式的时间复杂度。",
+    "discoverer": "乔恩·本特利、多萝西娅·哈肯、詹姆斯·萨克斯",
+    "field": "计算机科学",
+    "significance": "它是分治算法分析的核心工具，使归并排序、二分查找、施特拉森矩阵乘法等的复杂度得以立即判定。",
+    "elementMeanings": {
+      "T(n)": { "role": "时间函数", "description": "算法对输入规模 n 的运行时间。", "kind": "output" },
+      "a": { "role": "子问题个数", "description": "递归划分出的子问题的个数。是不小于 1 的整数。", "kind": "input" },
+      "n/b": { "role": "子问题规模", "description": "每个子问题的输入规模。b 是大于 1 的常数。", "kind": "input" },
+      "f(n)": { "role": "合并代价", "description": "在划分与合并阶段所耗费的非递归代价。", "kind": "input" },
+      "\\log_b a": { "role": "临界指数", "description": "与 f(n) 的多项式次数相比较、用来判别三种情形的基准值。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "由归并排序的 T(n) = 2T(n/2) + O(n) 推出 O(n log n)",
+      "由二分查找的 T(n) = T(n/2) + O(1) 推出 O(log n)",
+      "分析施特拉森矩阵乘法的 T(n) = 7T(n/2) + O(n^2)"
+    ],
+    "relatedFormulas": ["comparison-sort-bound"]
+  },
+  "hamming-distance": {
+    "name": "汉明距离",
+    "oneLiner": "数出等长的两个字符串中对应位置取值不同的次数的距离度量",
+    "description": "汉明距离定义为等长的两个二进制字符串（或一般字符串）中彼此不同的位置的个数。它是检错与纠错码理论的核心概念，可直接用来测量数据传输时有多少比特发生了翻转。",
+    "discoverer": "理查德·汉明",
+    "field": "计算机科学",
+    "significance": "它是纠错码（汉明码）设计的基础，在通信系统、DNA 序列比对、相似度检索等场合中被广泛使用。",
+    "elementMeanings": {
+      "x": { "role": "第一个字符串", "description": "要比较的两个字符串之一。", "kind": "input" },
+      "y": { "role": "第二个字符串", "description": "要比较的两个字符串中的另一个。", "kind": "input" },
+      "d(x,y)": { "role": "汉明距离", "description": "x 与 y 中对应位置不同的个数。", "kind": "output" },
+      "n": { "role": "字符串长度", "description": "两个字符串共同的长度。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在网络通信中检出接收数据的比特错误个数",
+      "设计二维码的纠错能力时设定最小汉明距离",
+      "在生物信息学中用汉明距离测量 DNA 突变数"
+    ],
+    "relatedFormulas": ["password-entropy"]
+  },
+  "boolean-complement": {
+    "name": "布尔代数的互补律",
+    "oneLiner": "任意逻辑变量与它的补作析取运算，结果总是 1（真）的布尔代数基本定律",
+    "description": "布尔代数互补律是指：变量 A 与它的否定 A' 作 OR 运算总是得 1，作 AND 运算总是得 0 的性质。它是化简逻辑式最基本的规则，在数字电路设计与编程中不可或缺。",
+    "discoverer": "乔治·布尔",
+    "field": "计算机科学",
+    "significance": "它是数字逻辑电路优化与逻辑式化简的出发点，也是全部布尔代数定理的基础。",
+    "elementMeanings": {
+      "A": { "role": "逻辑变量", "description": "取真(1)或假(0)的布尔变量。", "kind": "input" },
+      "A'": { "role": "补", "description": "A 的否定。A 为 1 时它是 0，A 为 0 时它是 1。", "kind": "structural" },
+      "+": { "role": "析取(OR)", "description": "在布尔代数中表示 OR 运算。", "kind": "structural" },
+      "1": { "role": "恒真值", "description": "恒为真的值。它表明析取的结果必定是 1。", "kind": "constant", "value": 1 }
+    },
+    "realWorldExamples": [
+      "在用卡诺图化简逻辑式时应用互补律",
+      "编程中优化位运算时确认 x | ~x == 1",
+      "在 FPGA 电路设计中去掉多余的逻辑门"
+    ],
+    "relatedFormulas": ["de-morgan"]
+  },
+  "handshaking-lemma": {
+    "name": "图论握手引理",
+    "oneLiner": "图中所有顶点度数之和等于边数的两倍的引理",
+    "description": "握手引理由无向图中每条边恰好为两个顶点的度数各贡献 1 这一事实推出。因此所有度数的总和总是偶数，度数为奇数的顶点个数也必定是偶数。",
+    "discoverer": "莱昂哈德·欧拉",
+    "field": "计算机科学",
+    "significance": "它是图论最基本的定理，也是网络分析、欧拉路径判定、图的有效性检验等的基础。",
+    "elementMeanings": {
+      "\\sum \\deg(v)": { "role": "度数总和", "description": "对图中所有顶点，把与之相连的边数相加所得的值。", "kind": "output" },
+      "2|E|": { "role": "边数的两倍", "description": "边的总个数乘以 2 所得的值。因为每条边为两个顶点各贡献一次，所以它等于度数总和。", "kind": "output" },
+      "\\deg(v)": { "role": "顶点的度数", "description": "与顶点 v 相连的边的条数。", "kind": "input" },
+      "|E|": { "role": "边数", "description": "图中所含边的总条数。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在社交网络中分析好友关系总数与每人连接数之间的关系",
+      "检验计算机网络拓扑时确认端口数与链路数的一致性",
+      "确认判定欧拉路径/回路是否存在的前提条件"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  },
+  "password-entropy": {
+    "name": "口令熵",
+    "oneLiner": "由可用字符种类数 N 和长度 L 以比特为单位衡量口令信息量的公式",
+    "description": "口令熵公式把从大小为 N 的字符集中取长度 L 时可能的组合数取对数，算出以比特为单位的信息量。熵越高，对暴力破解的抵抗力越强，它也是制定安全策略时的定量依据。",
+    "discoverer": "克劳德·香农（信息熵概念）",
+    "field": "计算机科学",
+    "significance": "它是信息安全中客观衡量口令强度的标准尺度，为安全策略与认证系统设计提供定量基础。",
+    "elementMeanings": {
+      "H": { "role": "熵", "description": "以比特为单位的信息量。它是暴力破解时平均所需尝试次数的对数值。", "kind": "output" },
+      "N": { "role": "字符集大小", "description": "可以使用的不同字符的种类数。只用小写字母是 26，大小写字母加数字加特殊符号则在 90 以上。", "kind": "input" },
+      "L": { "role": "口令长度", "description": "构成口令的字符个数。", "kind": "input" },
+      "\\log_2": { "role": "二进制对数", "description": "把情形数换算为比特单位的函数。", "kind": "structural" },
+      "N^L": { "role": "全部情形数", "description": "所有可能的口令组合的个数。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "在网站注册时实现口令强度指示器",
+      "在企业安全策略中设定最低口令熵标准",
+      "比较口令短语方式与随机字符串方式的安全强度"
+    ],
+    "relatedFormulas": ["hamming-distance"]
+  }
+}

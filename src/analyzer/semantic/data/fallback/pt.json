@@ -1,0 +1,220 @@
+{
+  "roles": {
+    "root": "expressão completa",
+    "number": "número",
+    "variable": "variável",
+    "operator": "operador",
+    "frac": "fração",
+    "sqrt": "raiz quadrada",
+    "sum": "somatório (Sigma)",
+    "product": "produtório (Pi)",
+    "integral": "integral",
+    "limit": "limite (lim)",
+    "matrix": "matriz",
+    "paren": "parênteses",
+    "abs": "valor absoluto",
+    "overline": "barra superior",
+    "text": "texto",
+    "cases": "expressão condicional",
+    "cancel": "traço de cancelamento",
+    "chem": "fórmula química",
+    "func": "função {name}"
+  },
+  "descriptions": {
+    "root": "É a estrutura completa desta expressão.",
+    "number": "É o número {value}.",
+    "variable": "É a variável {name}. Seu valor pode mudar.",
+    "frac": "Fração — é o valor de cima (numerador) dividido pelo de baixo (denominador).",
+    "sqrt": "Raiz quadrada — é o número que, elevado ao quadrado, resulta neste valor.",
+    "sum": "Somatório — soma todos os termos gerais variando o índice.",
+    "product": "Produtório — multiplica todos os termos gerais variando o índice.",
+    "integral": "Integral — calcula a área sob a curva da função.",
+    "limit": "Limite — é o valor para o qual a expressão converge quando a variável se aproxima de um ponto.",
+    "paren": "É uma expressão entre parênteses.",
+    "abs": "Valor absoluto — é o tamanho sem considerar o sinal.",
+    "overline": "É um símbolo com barra superior. Indica média, conjugado, fecho, entre outros.",
+    "chem": "É uma notação química que representa substâncias e reações.",
+    "matrix": "É uma matriz {rows}x{cols}."
+  },
+  "specialVariables": {
+    "infinity": "Representa o infinito.",
+    "eulerE": "É a constante de Euler e (cerca de 2,718). Está na base das funções exponenciais e do cálculo.",
+    "pi": "É o número pi (cerca de 3,14159).",
+    "imaginaryI": "É a unidade imaginária. O quadrado de i é -1."
+  },
+  "operators": {
+    "+": "É a operação de adição.",
+    "-": "É a operação de subtração ou o sinal de número negativo.",
+    "×": "É a operação de multiplicação.",
+    "·": "É a operação de multiplicação.",
+    "*": "É a operação de multiplicação.",
+    "÷": "É a operação de divisão.",
+    "=": "Sinal de igual — indica que os dois lados são iguais.",
+    "<": "Desigualdade — o lado esquerdo é menor que o direito.",
+    ">": "Desigualdade — o lado esquerdo é maior que o direito.",
+    "≤": "Menor ou igual — o lado esquerdo é menor que o direito ou igual a ele.",
+    "≥": "Maior ou igual — o lado esquerdo é maior que o direito ou igual a ele.",
+    "≠": "Indica que os dois lados não são iguais.",
+    "∈": "Pertence — o elemento da esquerda faz parte do conjunto da direita.",
+    "→": "Implicação — a condição da esquerda leva à conclusão da direita.",
+    "⟹": "Implicação — a condição da esquerda leva à conclusão da direita.",
+    "∪": "União — reúne todos os elementos dos dois conjuntos.",
+    "∩": "Interseção — mantém apenas os elementos comuns aos dois conjuntos."
+  },
+  "functions": {
+    "sin": "Função seno — uma das funções trigonométricas: é o cateto oposto dividido pela hipotenusa.",
+    "cos": "Função cosseno — uma das funções trigonométricas: é o cateto adjacente dividido pela hipotenusa.",
+    "tan": "Função tangente — é o seno dividido pelo cosseno.",
+    "log": "Função logaritmo — é a inversa da potenciação.",
+    "ln": "Logaritmo natural — é o logaritmo de base e.",
+    "exp": "Função exponencial — é a potência de e.",
+    "lim": "É a função limite.",
+    "det": "Determinante — é o valor escalar característico de uma matriz.",
+    "max": "É a função que encontra o valor máximo.",
+    "min": "É a função que encontra o valor mínimo."
+  },
+  "accents": {
+    "hat": {
+      "role": "estimativa/vetor unitário",
+      "description": "O acento circunflexo indica uma estimativa ou um vetor unitário."
+    },
+    "widehat": {
+      "role": "estimativa/vetor unitário",
+      "description": "O acento circunflexo indica uma estimativa ou um vetor unitário."
+    },
+    "vec": {
+      "role": "vetor",
+      "description": "A seta indica que se trata de um vetor, com módulo e direção."
+    },
+    "overrightarrow": {
+      "role": "vetor",
+      "description": "A seta indica que se trata de um vetor, com módulo e direção."
+    },
+    "overleftarrow": {
+      "role": "vetor",
+      "description": "A seta indica que se trata de um vetor, com módulo e direção."
+    },
+    "dot": {
+      "role": "derivada temporal",
+      "description": "O ponto indica a derivada em relação ao tempo. Na física, é usado para velocidade, entre outras grandezas."
+    },
+    "ddot": {
+      "role": "segunda derivada temporal",
+      "description": "Os dois pontos indicam a segunda derivada em relação ao tempo. É usado para aceleração, entre outras grandezas."
+    },
+    "tilde": {
+      "role": "aproximação/transformação",
+      "description": "O til indica um valor aproximado ou uma quantidade transformada."
+    },
+    "widetilde": {
+      "role": "aproximação/transformação",
+      "description": "O til indica um valor aproximado ou uma quantidade transformada."
+    },
+    "bar": {
+      "role": "média/conjugado",
+      "description": "A barra horizontal indica o valor médio ou o conjugado de um número complexo."
+    }
+  },
+  "defaultAccent": {
+    "role": "acento",
+    "description": "É um símbolo com acento."
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "potência",
+      "description": "Potência — a base é multiplicada por si mesma tantas vezes quanto indica o expoente."
+    },
+    "subscriptOnly": {
+      "role": "índice inferior",
+      "description": "Índice inferior — identifica um elemento ou componente específico."
+    },
+    "both": {
+      "role": "índices",
+      "description": "É um símbolo com índices acima e abaixo."
+    },
+    "withLeft": {
+      "role": "índices dos dois lados",
+      "description": "É uma notação com índices antes e depois do símbolo."
+    }
+  },
+  "defaultOperator": "É o operador {op}.",
+  "defaultFunction": "É a função {name}.",
+  "chem": {
+    "formula": {
+      "role": "fórmula química",
+      "description": "É a notação que representa uma substância por meio de símbolos de elementos."
+    },
+    "equation": {
+      "role": "equação química",
+      "description": "Representa o processo em que as substâncias da esquerda se transformam nas da direita."
+    },
+    "species": {
+      "role": "espécie química",
+      "description": "É uma das substâncias que participam da reação."
+    },
+    "element": {
+      "role": "elemento",
+      "description": "É o símbolo que representa um elemento da tabela periódica."
+    },
+    "group": {
+      "role": "grupo de átomos",
+      "description": "É um conjunto de átomos reunido por parênteses que se comporta como uma única unidade."
+    },
+    "coefficient": {
+      "role": "coeficiente",
+      "description": "É a proporção entre as quantidades de partículas que participam da reação. É o valor que iguala o número de átomos dos dois lados."
+    },
+    "count": {
+      "role": "número de átomos",
+      "description": "Indica quantos átomos do elemento ou do grupo imediatamente anterior estão presentes."
+    },
+    "charge": {
+      "role": "carga",
+      "description": "É o valor da carga que o íon possui. Equivale ao número de elétrons perdidos ou ganhos."
+    },
+    "chargeSign": {
+      "role": "sinal da carga",
+      "description": "Indica se o átomo perdeu elétrons, virando cátion (+), ou se os ganhou, virando ânion (−)."
+    },
+    "massNumber": {
+      "role": "número de massa",
+      "description": "É a soma de prótons e nêutrons do núcleo atômico. Distingue os isótopos."
+    },
+    "atomicNumber": {
+      "role": "número atômico",
+      "description": "É o número de prótons do núcleo atômico. Determina de que elemento se trata."
+    },
+    "arrow": {
+      "role": "seta de reação",
+      "description": "Indica que a reação ocorre no sentido da seta."
+    },
+    "equilibriumArrow": {
+      "role": "reação reversível",
+      "description": "As reações direta e inversa acontecem juntas e atingem o equilíbrio."
+    },
+    "condition": {
+      "role": "condição da reação",
+      "description": "São as condições necessárias à reação, como catalisador, temperatura e pressão."
+    },
+    "plus": {
+      "role": "separador de espécies",
+      "description": "Liga as substâncias que estão do mesmo lado. Não é uma adição."
+    },
+    "hydrate": {
+      "role": "ligação de hidratação",
+      "description": "Indica que há moléculas de água dentro do cristal."
+    },
+    "state": {
+      "role": "estado físico",
+      "description": "Indica em que estado a substância está: sólido (s), líquido (l), gasoso (g) ou solução aquosa (aq)."
+    },
+    "gas": {
+      "role": "liberação de gás",
+      "description": "Indica que a reação libera um gás."
+    },
+    "precipitate": {
+      "role": "precipitado",
+      "description": "Indica que a reação forma um sólido que se deposita no fundo."
+    }
+  }
+}

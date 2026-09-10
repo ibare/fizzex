@@ -1,0 +1,220 @@
+{
+  "roles": {
+    "root": "Seluruh rumus",
+    "number": "Bilangan",
+    "variable": "Variabel",
+    "operator": "Operator",
+    "frac": "Pecahan",
+    "sqrt": "Akar kuadrat",
+    "sum": "Penjumlahan (Sigma)",
+    "product": "Perkalian (Pi)",
+    "integral": "Integral",
+    "limit": "Limit (lim)",
+    "matrix": "Matriks",
+    "paren": "Tanda kurung",
+    "abs": "Nilai mutlak",
+    "overline": "Garis atas",
+    "text": "Teks",
+    "cases": "Bersyarat",
+    "cancel": "Coretan",
+    "chem": "Rumus kimia",
+    "func": "Fungsi {name}"
+  },
+  "descriptions": {
+    "root": "Ini struktur menyeluruh dari rumus tersebut.",
+    "number": "Bilangan {value}.",
+    "variable": "Variabel {name}. Nilainya dapat berubah.",
+    "frac": "Pecahan — nilai bagian atas (pembilang) dibagi bagian bawah (penyebut).",
+    "sqrt": "Akar kuadrat — bilangan yang bila dikuadratkan menghasilkan nilai ini.",
+    "sum": "Penjumlahan — semua suku umum dijumlahkan sambil indeksnya berubah.",
+    "product": "Perkalian — semua suku umum dikalikan sambil indeksnya berubah.",
+    "integral": "Integral — mencari luas daerah di bawah kurva sebuah fungsi.",
+    "limit": "Limit — nilai yang dituju saat variabel mendekati suatu nilai tertentu.",
+    "paren": "Bentuk yang diapit tanda kurung.",
+    "abs": "Nilai mutlak — besar nilai tanpa memperhatikan tandanya.",
+    "overline": "Lambang dengan garis di atasnya. Menyatakan rata-rata, konjugat, penutup, dan sebagainya.",
+    "chem": "Notasi kimia yang menyatakan zat dan reaksi.",
+    "matrix": "Matriks {rows}x{cols}."
+  },
+  "specialVariables": {
+    "infinity": "Menyatakan takhingga.",
+    "eulerE": "Konstanta alami e (kira-kira 2,718). Dasar dari fungsi eksponensial dan kalkulus.",
+    "pi": "Konstanta lingkaran pi (kira-kira 3,14159).",
+    "imaginaryI": "Satuan imajiner. Kuadrat dari i adalah -1."
+  },
+  "operators": {
+    "+": "Operasi penjumlahan.",
+    "-": "Operasi pengurangan atau tanda negatif.",
+    "×": "Operasi perkalian.",
+    "·": "Operasi perkalian.",
+    "*": "Operasi perkalian.",
+    "÷": "Operasi pembagian.",
+    "=": "Tanda sama dengan — menyatakan kedua ruas bernilai sama.",
+    "<": "Tanda ketaksamaan — ruas kiri lebih kecil daripada ruas kanan.",
+    ">": "Tanda ketaksamaan — ruas kiri lebih besar daripada ruas kanan.",
+    "≤": "Kurang dari atau sama dengan — ruas kiri lebih kecil atau sama dengan ruas kanan.",
+    "≥": "Lebih dari atau sama dengan — ruas kiri lebih besar atau sama dengan ruas kanan.",
+    "≠": "Menyatakan kedua ruas tidak sama.",
+    "∈": "Keanggotaan — ruas kiri adalah anggota himpunan di ruas kanan.",
+    "→": "Implikasi — syarat di kiri menghasilkan kesimpulan di kanan.",
+    "⟹": "Implikasi — syarat di kiri menghasilkan kesimpulan di kanan.",
+    "∪": "Gabungan — menyatukan semua anggota dari dua himpunan.",
+    "∩": "Irisan — menyisakan hanya anggota yang dimiliki kedua himpunan."
+  },
+  "functions": {
+    "sin": "Fungsi sinus — salah satu fungsi trigonometri, yaitu sisi depan/sisi miring pada segitiga siku-siku.",
+    "cos": "Fungsi kosinus — salah satu fungsi trigonometri, yaitu sisi samping/sisi miring.",
+    "tan": "Fungsi tangen — sama dengan sin/cos.",
+    "log": "Fungsi logaritma — invers dari perpangkatan.",
+    "ln": "Logaritma natural — logaritma dengan bilangan pokok e.",
+    "exp": "Fungsi eksponensial — perpangkatan dari e.",
+    "lim": "Fungsi limit.",
+    "det": "Determinan — nilai skalar yang mencirikan sebuah matriks.",
+    "max": "Fungsi yang mencari nilai terbesar.",
+    "min": "Fungsi yang mencari nilai terkecil."
+  },
+  "accents": {
+    "hat": {
+      "role": "Nilai taksiran / vektor satuan",
+      "description": "Lambang topi menyatakan nilai taksiran atau vektor satuan."
+    },
+    "widehat": {
+      "role": "Nilai taksiran / vektor satuan",
+      "description": "Lambang topi menyatakan nilai taksiran atau vektor satuan."
+    },
+    "vec": {
+      "role": "Vektor",
+      "description": "Tanda panah menyatakan bahwa besaran ini vektor, yang punya besar dan arah."
+    },
+    "overrightarrow": {
+      "role": "Vektor",
+      "description": "Tanda panah menyatakan bahwa besaran ini vektor, yang punya besar dan arah."
+    },
+    "overleftarrow": {
+      "role": "Vektor",
+      "description": "Tanda panah menyatakan bahwa besaran ini vektor, yang punya besar dan arah."
+    },
+    "dot": {
+      "role": "Turunan terhadap waktu",
+      "description": "Titik menyatakan turunan terhadap waktu. Dalam fisika dipakai untuk kecepatan dan sejenisnya."
+    },
+    "ddot": {
+      "role": "Turunan kedua terhadap waktu",
+      "description": "Dua titik menyatakan turunan kedua terhadap waktu. Dipakai untuk percepatan dan sejenisnya."
+    },
+    "tilde": {
+      "role": "Hampiran / hasil transformasi",
+      "description": "Tanda gelombang menyatakan nilai hampiran atau besaran yang sudah ditransformasi."
+    },
+    "widetilde": {
+      "role": "Hampiran / hasil transformasi",
+      "description": "Tanda gelombang menyatakan nilai hampiran atau besaran yang sudah ditransformasi."
+    },
+    "bar": {
+      "role": "Rata-rata / konjugat",
+      "description": "Garis mendatar menyatakan nilai rata-rata atau konjugat sebuah bilangan kompleks."
+    }
+  },
+  "defaultAccent": {
+    "role": "Aksen",
+    "description": "Lambang yang membawa sebuah aksen."
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "Perpangkatan",
+      "description": "Perpangkatan — bilangan pokok dikalikan berulang sebanyak pangkatnya."
+    },
+    "subscriptOnly": {
+      "role": "Indeks bawah",
+      "description": "Indeks bawah — menunjuk elemen atau komponen tertentu."
+    },
+    "both": {
+      "role": "Indeks",
+      "description": "Lambang yang diberi indeks atas dan indeks bawah sekaligus."
+    },
+    "withLeft": {
+      "role": "Indeks kiri dan kanan",
+      "description": "Notasi dengan indeks di sisi kiri dan kanan sebuah lambang."
+    }
+  },
+  "defaultOperator": "Operator {op}.",
+  "defaultFunction": "Fungsi {name}.",
+  "chem": {
+    "formula": {
+      "role": "Rumus kimia",
+      "description": "Notasi yang menyatakan suatu zat dengan lambang unsur."
+    },
+    "equation": {
+      "role": "Persamaan reaksi kimia",
+      "description": "Menyatakan proses berubahnya zat di ruas kiri menjadi zat di ruas kanan."
+    },
+    "species": {
+      "role": "Spesi kimia",
+      "description": "Satu jenis zat yang ikut serta dalam reaksi."
+    },
+    "element": {
+      "role": "Unsur",
+      "description": "Lambang yang menyatakan sebuah unsur dalam tabel periodik."
+    },
+    "group": {
+      "role": "Gugus atom",
+      "description": "Kumpulan atom yang diapit tanda kurung dan berperilaku sebagai satu kesatuan."
+    },
+    "coefficient": {
+      "role": "Koefisien",
+      "description": "Perbandingan jumlah partikel yang ikut bereaksi. Nilai ini menyetarakan jumlah atom di kedua ruas."
+    },
+    "count": {
+      "role": "Jumlah atom",
+      "description": "Menyatakan berapa banyak unsur atau gugus atom tepat di depannya."
+    },
+    "charge": {
+      "role": "Muatan",
+      "description": "Besar muatan yang dibawa sebuah ion. Nilainya sama dengan jumlah elektron yang dilepas atau diterima."
+    },
+    "chargeSign": {
+      "role": "Tanda muatan",
+      "description": "Menyatakan apakah partikel melepas elektron sehingga menjadi kation (+) atau menerimanya sehingga menjadi anion (−)."
+    },
+    "massNumber": {
+      "role": "Nomor massa",
+      "description": "Jumlah proton dan neutron di dalam inti atom. Nilai ini membedakan isotop."
+    },
+    "atomicNumber": {
+      "role": "Nomor atom",
+      "description": "Jumlah proton di dalam inti atom. Nilai ini menentukan jenis unsurnya."
+    },
+    "arrow": {
+      "role": "Tanda panah reaksi",
+      "description": "Menyatakan bahwa reaksi berlangsung ke arah panah."
+    },
+    "equilibriumArrow": {
+      "role": "Reaksi bolak-balik",
+      "description": "Reaksi maju dan reaksi balik berlangsung bersamaan sehingga tercapai kesetimbangan."
+    },
+    "condition": {
+      "role": "Kondisi reaksi",
+      "description": "Kondisi yang diperlukan reaksi, seperti katalis, suhu, dan tekanan."
+    },
+    "plus": {
+      "role": "Pemisah spesi kimia",
+      "description": "Menghubungkan zat-zat yang berada di ruas yang sama. Ini bukan operasi penjumlahan."
+    },
+    "hydrate": {
+      "role": "Ikatan hidrat",
+      "description": "Menyatakan bahwa ada molekul air yang ikut terkandung di dalam kristal."
+    },
+    "state": {
+      "role": "Wujud",
+      "description": "Menyatakan wujud zat: padat (s), cair (l), gas (g), atau larutan berair (aq)."
+    },
+    "gas": {
+      "role": "Pembentukan gas",
+      "description": "Menyatakan bahwa reaksi melepaskan gas."
+    },
+    "precipitate": {
+      "role": "Endapan",
+      "description": "Menyatakan bahwa reaksi menghasilkan zat padat yang mengendap."
+    }
+  }
+}

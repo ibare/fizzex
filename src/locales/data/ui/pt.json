@@ -1,0 +1,53 @@
+{
+  "explorer": {
+    "close": "Fechar",
+    "closeWithKey": "Fechar (Esc)",
+    "hintHover": "Mouse: explorar partes",
+    "hintClick": "Clique: ajustar valor",
+    "hintEsc": "Esc: fechar",
+    "explore": "Explorar fórmula",
+    "copyImage": "Copiar imagem",
+    "reset": "Redefinir",
+    "similarTo": "Semelhante a {name}",
+    "closeNamed": "Fechar {name}",
+    "domainGuard": "Proteção de domínio: {reason}"
+  },
+  "bindingFault": {
+    "derivative": "Não foi possível calcular a derivada de {name}",
+    "domain": "{name} está fora do domínio",
+    "divergent": "{name} diverge",
+    "unsupported": "Esta visualização não suporta a forma de {name}",
+    "evalFailed": "Não foi possível calcular {name}",
+    "unbound": "{name} ainda não tem valor",
+    "unknown": "Não é possível calcular {name}"
+  },
+  "duration": {
+    "seconds": "{value} s",
+    "minutes": "{value} min",
+    "hours": "{value} h",
+    "days": "{value} d"
+  },
+  "summary": {
+    "variables": "em {names}",
+    "constantExpression": "Expressão constante",
+    "polynomialOfDegree": "polinômio de grau {degree}",
+    "withFunctions": "(com {names})",
+    "domains": "[{names}]",
+    "chemicalFormula": "Fórmula química",
+    "chemicalEquation": "Equação química",
+    "reversibleChemicalEquation": "Equação química reversível",
+    "domainNames": {
+      "arithmetic": "Aritmética",
+      "polynomial": "Polinomial",
+      "rational": "Racional",
+      "trigonometric": "Trigonométrica",
+      "exponential": "Exponencial",
+      "logarithmic": "Logarítmica",
+      "calculus": "Cálculo",
+      "linear-algebra": "Álgebra linear",
+      "statistics": "Estatística",
+      "chemistry": "Química"
+    },
+    "listSeparator": ", "
+  }
+}

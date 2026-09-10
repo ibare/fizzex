@@ -1,0 +1,137 @@
+{
+  "gini-coefficient": {
+    "name": "Gini coefficient",
+    "oneLiner": "A measure that expresses the degree of income or wealth inequality as a value between 0 and 1",
+    "description": "The Gini coefficient is computed as the ratio of the area between the Lorenz curve and the line of perfect equality. A value of 0 means perfect equality (everyone earns the same) and 1 means perfect inequality (one person takes everything). It is the most widely used measure of inequality for comparing countries and evaluating policy.",
+    "discoverer": "Corrado Gini",
+    "field": "Social science",
+    "significance": "By compressing economic inequality into a single number, it became the basic indicator for international comparison and policy-making.",
+    "elementMeanings": {
+      "G": { "role": "Gini coefficient", "description": "The inequality measure, running from 0 (perfect equality) to 1 (perfect inequality).", "kind": "output" },
+      "L(x)": { "role": "Lorenz curve", "description": "The curve giving the cumulative share of income against the population share x.", "kind": "structural" },
+      "\\int L(x) dx": { "role": "Area under the Lorenz curve", "description": "The area under the Lorenz curve from 0 to 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "The headline indicator the World Bank uses to compare income inequality between countries",
+      "Measuring how income distribution changed before and after a welfare policy took effect"
+    ],
+    "relatedFormulas": ["laffer-curve"]
+  },
+  "ebbinghaus-curve": {
+    "name": "Ebbinghaus forgetting curve",
+    "oneLiner": "The curve describing how memory decays exponentially as time passes",
+    "description": "The Ebbinghaus forgetting curve shows that the fraction of material retained falls exponentially as time passes after learning. Memory is lost fastest right after learning, and forgetting slows as more time goes by. Repeated study (spaced repetition) raises the memory strength S and so slows the forgetting.",
+    "discoverer": "Hermann Ebbinghaus",
+    "field": "Social science",
+    "significance": "It pioneered the quantitative study of human memory and laid the groundwork for scientific learning strategies such as spaced repetition.",
+    "elementMeanings": {
+      "R": { "role": "Retention", "description": "The fraction of the learned material still remembered, a value between 0 and 1.", "kind": "output" },
+      "t": { "role": "Elapsed time", "description": "The time that has passed since the material was learned.", "kind": "input" },
+      "S": { "role": "Memory strength", "description": "The stability of the memory. Repeated study increases it, and the larger it is, the slower the forgetting.", "kind": "input" },
+      "e^{-t/S}": { "role": "Exponential decay", "description": "It gives the exponential decline set by the ratio of time to memory strength.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "How spaced repetition apps such as Anki work out the best moment to review",
+      "Forgetting more than 70% of newly learned foreign vocabulary within a day when you do not review it"
+    ],
+    "relatedFormulas": ["malthus-population"]
+  },
+  "malthus-population": {
+    "name": "Malthusian growth model",
+    "oneLiner": "The exponential growth model in which population grows at a constant rate",
+    "description": "The Malthusian growth model assumes that, absent any constraint on resources, population grows exponentially at a constant rate. Future population is estimated by multiplying the initial population by the exponential of the natural growth rate times time. In practice resource limits and environmental resistance call for the logistic model instead, but it remains a useful basic frame for short-term growth forecasts.",
+    "discoverer": "Thomas Malthus",
+    "field": "Social science",
+    "significance": "It sparked scholarly debate on overpopulation and resource scarcity, laying the foundations of demography and ecology.",
+    "elementMeanings": {
+      "N(t)": { "role": "Population at time t", "description": "The total population at time t.", "kind": "output" },
+      "N_0": { "role": "Initial population", "description": "The population at time t=0.", "kind": "input" },
+      "r": { "role": "Natural growth rate", "description": "The net growth rate of the population, the birth rate minus the death rate.", "kind": "input" },
+      "t": { "role": "Time", "description": "The time elapsed since the initial moment.", "kind": "input" },
+      "e^{rt}": { "role": "Exponential growth factor", "description": "It gives the exponential increase set by the growth rate times the time.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "A model for forecasting short-term population trends in a developing country",
+      "Predicting how a bacterial culture multiplies in an environment with no early constraints"
+    ],
+    "relatedFormulas": ["ebbinghaus-curve", "gravity-model"]
+  },
+  "weber-fechner": {
+    "name": "Weber-Fechner law",
+    "oneLiner": "The psychophysical law that sensation grows with the logarithm of stimulus intensity",
+    "description": "The Weber-Fechner law states that the physical intensity of a stimulus must grow geometrically for the sensation to grow arithmetically. In other words, when a stimulus is weak you notice even small changes, but when it is strong you need a large change to feel any difference. It shows that human perception works on a logarithmic scale.",
+    "discoverer": "Ernst Weber, Gustav Fechner",
+    "field": "Social science",
+    "significance": "It founded psychophysics and opened the way to measuring subjective sensation quantitatively, and it has influenced UX design and acoustic engineering as well.",
+    "elementMeanings": {
+      "S": { "role": "Magnitude of sensation", "description": "The intensity of the stimulus as a person subjectively feels it.", "kind": "output" },
+      "k": { "role": "Constant of proportionality", "description": "A constant that differs by sensory modality (sight, hearing, and so on).", "kind": "input" },
+      "I": { "role": "Stimulus intensity", "description": "The physically measured intensity of the stimulus.", "kind": "input" },
+      "I_0": { "role": "Threshold stimulus", "description": "The smallest stimulus intensity that can be detected, the absolute threshold.", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "Logarithm of the stimulus ratio", "description": "The natural logarithm of the ratio of the current stimulus to the threshold.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Why the decibel (dB) is a logarithmic unit: sound energy has to grow tenfold before it feels 'twice as loud'",
+      "Gamma correction in screen brightness, which divides the dark range into fine steps and the bright range into coarse ones"
+    ],
+    "relatedFormulas": ["elo-rating"]
+  },
+  "elo-rating": {
+    "name": "Elo rating system",
+    "oneLiner": "The rating system that computes the expected chance of winning from the skill gap between two players",
+    "description": "The Elo rating puts the difference between two players' ratings through a logistic function to compute the expected chance of winning. A 400-point gap gives the stronger player an expected score of about 91%. Ratings are updated after each game, and the more surprising the result, the larger the change.",
+    "discoverer": "Arpad Elo",
+    "field": "Social science",
+    "significance": "Starting with chess, it became the international standard for rating skill in sports, esports, and matchmaking systems.",
+    "elementMeanings": {
+      "E_A": { "role": "Expected score of A", "description": "The probability that player A is expected to beat player B.", "kind": "output" },
+      "R_A": { "role": "Rating of A", "description": "The current skill rating of player A.", "kind": "input" },
+      "R_B": { "role": "Rating of B", "description": "The current skill rating of player B.", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "Rating gap transform", "description": "The exponential term that turns the rating gap between the two players into a probability ratio.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Computing official player ratings at the world chess championship",
+      "Matching players of similar skill in online games such as League of Legends"
+    ],
+    "relatedFormulas": ["sigmoid", "weber-fechner"]
+  },
+  "laffer-curve": {
+    "name": "Laffer curve",
+    "oneLiner": "The curve showing the tax rate-revenue relationship in which pushing rates too high actually lowers revenue",
+    "description": "The Laffer curve visualizes the idea that revenue is 0 at a tax rate of 0%, and 0 again at 100% because economic activity stops, so somewhere in between there is a rate that maximizes revenue. The point is the qualitative insight of an inverted-U relationship between rate and revenue rather than any exact formula, and where the optimum lies depends on economic conditions.",
+    "discoverer": "Arthur Laffer",
+    "field": "Social science",
+    "significance": "It is the central framework of tax policy debate, and it became the theoretical basis for the supply-side claim that cutting taxes can raise revenue.",
+    "elementMeanings": {
+      "세율": { "role": "Independent variable", "description": "The tax rate the government sets, between 0% and 100%.", "kind": "input" },
+      "세수": { "role": "Dependent variable", "description": "The total tax the government actually collects.", "kind": "output" },
+      "최적 세율": { "role": "Maximum point", "description": "The tax rate that maximizes revenue, at the peak of the curve.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "The theoretical background of the tax cuts under the Reagan administration in the 1980s (Reaganomics)",
+      "The frame governments use to argue about how revenue will move when they adjust corporate tax rates"
+    ],
+    "relatedFormulas": ["gini-coefficient"]
+  },
+  "gravity-model": {
+    "name": "Gravity model",
+    "oneLiner": "The spatial interaction model in which flows between two places grow with their size and fall with the distance between them",
+    "description": "Borrowing from Newton's law of universal gravitation, the gravity model says that the flow between two places - trade, travel, communication - is proportional to the product of their sizes (population, GDP, and so on) and inversely proportional to the square of the distance between them. Despite its simple form it predicts international trade, urban commuting, and migration patterns remarkably well.",
+    "discoverer": "William J. Reilly (retail gravity model), Jan Tinbergen (trade gravity model)",
+    "field": "Social science",
+    "significance": "It is the empirical workhorse of international trade analysis, used as standard for estimating the effects of trade agreements and tariff policy.",
+    "elementMeanings": {
+      "T_{ij}": { "role": "Flow", "description": "The volume of interaction - trade, travel, and the like - between places i and j.", "kind": "output" },
+      "k": { "role": "Constant of proportionality", "description": "The constant that sets the overall scale of the model.", "kind": "input" },
+      "P_i": { "role": "Size of place i", "description": "The variable standing for the size of place i, such as population or GDP.", "kind": "input" },
+      "P_j": { "role": "Size of place j", "description": "The variable standing for the size of place j, such as population or GDP.", "kind": "input" },
+      "d_{ij}": { "role": "Distance between the two places", "description": "The geographical distance between places i and j.", "kind": "input" },
+      "d_{ij}^2": { "role": "Square of the distance", "description": "It reflects the inverse square law: double the distance and the flow falls to a quarter.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Explaining, from distance and economic size, why trade between Korea and Japan exceeds trade between Korea and Brazil",
+      "Estimating customer inflow from surrounding cities by population and distance in the catchment analysis for a new shopping mall"
+    ],
+    "relatedFormulas": ["universal-gravitation", "malthus-population"]
+  }
+}

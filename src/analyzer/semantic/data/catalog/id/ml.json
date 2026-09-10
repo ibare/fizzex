@@ -1,0 +1,152 @@
+{
+  "softmax": {
+    "name": "Fungsi softmax",
+    "oneLiner": "Fungsi eksponensial ternormalkan yang mengubah vektor masukan menjadi sebaran peluang",
+    "description": "Fungsi softmax mengubah sembarang vektor bilangan real menjadi sebaran peluang yang jumlahnya 1. Setiap anggotanya dikenai fungsi eksponensial lalu dibagi dengan jumlah keseluruhannya, sehingga nilai terbesar memperoleh peluang tertinggi. Fungsi ini dipakai secara baku pada lapisan keluaran klasifikasi multikelas.",
+    "discoverer": "John Nash / Luce / McCulloch-Pitts (berasal dari mekanika statistik, perumuman sebaran Boltzmann)",
+    "field": "Pembelajaran mesin",
+    "significance": "Fungsi pokok yang mengubah keluaran jaringan saraf tiruan menjadi peluang yang dapat ditafsirkan pada persoalan klasifikasi multikelas.",
+    "elementMeanings": {
+      "P(y_i)": { "role": "Peluang kelas", "description": "Peluang ramalan bahwa data itu termasuk kelas ke-i.", "kind": "output" },
+      "z_i": { "role": "Logit", "description": "Nilai keluaran mentah jaringan saraf tiruan untuk kelas ke-i.", "kind": "input" },
+      "e^{z_i}": { "role": "Nilai hasil transformasi eksponensial", "description": "Nilai logit yang diubah menjadi bilangan positif dengan fungsi eksponensial.", "kind": "structural" },
+      "\\sum e^{z_j}": { "role": "Konstanta penormalan", "description": "Jumlah nilai hasil transformasi eksponensial semua kelas. Perannya membuat total peluangnya menjadi 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Ketika model klasifikasi citra mengeluarkan peluang bahwa gambarnya kucing, anjing, atau burung",
+      "Membangkitkan sebaran peluang atas seluruh kosakata ketika meramalkan kata berikutnya dalam pemrosesan bahasa alami"
+    ],
+    "relatedFormulas": ["cross-entropy", "sigmoid"]
+  },
+  "cross-entropy": {
+    "name": "Kerugian entropi silang",
+    "oneLiner": "Fungsi kerugian yang mengukur perbedaan antara sebaran sebenarnya dan sebaran ramalan",
+    "description": "Entropi silang mengukur ketidakcocokan antara sebaran label yang sebenarnya dan sebaran ramalan model. Makin dekat ramalannya dengan sebaran sebenarnya, makin kecil kerugiannya; dan makin yakin model pada ramalan yang salah, makin tajam kerugiannya membesar. Ini fungsi kerugian yang paling luas dipakai pada persoalan klasifikasi.",
+    "discoverer": "Claude Shannon (berasal dari teori informasi)",
+    "field": "Pembelajaran mesin",
+    "significance": "Dipakai sebagai fungsi kerugian baku dalam pelatihan model klasifikasi, dan langsung mengoptimalkan mutu ramalan peluangnya.",
+    "elementMeanings": {
+      "H": { "role": "Kerugian entropi silang", "description": "Nilai skalar yang menyatakan perbedaan antara sebaran sebenarnya dan sebaran ramalan.", "kind": "output" },
+      "y_i": { "role": "Label sebenarnya", "description": "Peluang sebenarnya kelas ke-i. Pada pengodean one-hot, nilainya 1 bila benar dan 0 bila tidak.", "kind": "input" },
+      "\\hat{y}_i": { "role": "Peluang ramalan", "description": "Peluang ramalan kelas ke-i yang dikeluarkan model.", "kind": "input" },
+      "\\log(\\hat{y}_i)": { "role": "Logaritma peluang", "description": "Nilai logaritma peluang ramalan. Makin dekat peluangnya ke 0, makin menuju takhingga negatif.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Patokan untuk menghitung galat ramalan saat melatih penggolong surel sampah",
+      "Pelatihan klasifikasi biner untuk menentukan ada tidaknya penyakit pada model diagnosis citra medis"
+    ],
+    "relatedFormulas": ["softmax", "mse-loss", "shannon-entropy"]
+  },
+  "mse-loss": {
+    "name": "Kerugian galat kuadrat rata-rata",
+    "oneLiner": "Fungsi yang mengukur galat model regresi melalui rata-rata kuadrat selisih nilai ramalan dan nilai sebenarnya",
+    "description": "Galat kuadrat rata-rata (MSE) mengkuadratkan selisih antara nilai ramalan dan nilai sebenarnya pada setiap titik data lalu mencari rata-ratanya. Karena operasi pengkuadratan, galat yang besar memperoleh hukuman yang lebih besar; dan karena mudah diturunkan, fungsi ini berpadu secara wajar dengan metode penurunan gradien. Ini fungsi kerugian baku untuk persoalan regresi.",
+    "field": "Pembelajaran mesin",
+    "significance": "Fungsi kerugian dasar dalam analisis regresi dan pelatihan jaringan saraf tiruan, sekaligus perluasan metode kuadrat terkecil.",
+    "elementMeanings": {
+      "L": { "role": "Nilai kerugian", "description": "Nilai skalar yang menyatakan galat rata-rata seluruh model.", "kind": "output" },
+      "n": { "role": "Banyak data", "description": "Banyak seluruh titik data.", "kind": "input" },
+      "y_i": { "role": "Nilai sebenarnya", "description": "Nilai sasaran sebenarnya dari data ke-i.", "kind": "input" },
+      "\\hat{y}_i": { "role": "Nilai ramalan", "description": "Nilai ramalan data ke-i yang dikeluarkan model.", "kind": "input" },
+      "(y_i - \\hat{y}_i)^2": { "role": "Galat kuadrat", "description": "Mengkuadratkan galat masing-masing untuk menghilangkan arahnya dan memberi bobot lebih pada galat yang besar.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung selisih antara harga sebenarnya dan harga ramalan saat melatih model peramalan harga rumah",
+      "Menilai galat antara suhu ramalan harian dan suhu terukur pada model peramalan suhu"
+    ],
+    "relatedFormulas": ["cross-entropy", "gradient-descent"]
+  },
+  "gradient-descent": {
+    "name": "Penurunan gradien",
+    "oneLiner": "Algoritma pengoptimalan yang mencari nilai minimum dengan memperbarui parameter berulang kali ke arah berlawanan dengan gradien fungsi kerugian",
+    "description": "Penurunan gradien menghitung kemiringan (gradien) fungsi kerugian pada posisi parameter saat ini, lalu memperbarui parameter dengan bergerak sejauh laju pembelajaran ke arah berlawanan dengan gradien itu. Bila proses ini diulang, kerugiannya berangsur mengecil, dan inilah metode pengoptimalan dasar bagi hampir semua pelatihan jaringan saraf tiruan.",
+    "discoverer": "Augustin-Louis Cauchy",
+    "field": "Pembelajaran mesin",
+    "significance": "Algoritma pengoptimalan pokok dalam pelatihan hampir semua model pembelajaran mesin, termasuk pembelajaran mendalam.",
+    "elementMeanings": {
+      "\\theta": { "role": "Parameter", "description": "Vektor parameter yang mencakup bobot dan bias model yang dapat dilatih.", "kind": "input" },
+      "\\alpha": { "role": "Laju pembelajaran", "description": "Besar langkah perpindahan pada satu kali pembaruan. Bila terlalu besar hasilnya menyebar, bila terlalu kecil kekonvergenannya lambat.", "kind": "input" },
+      "\\nabla L": { "role": "Gradien kerugian", "description": "Vektor turunan parsial fungsi kerugian terhadap setiap parameter. Inilah arah kerugian bertambah paling cepat.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Proses menyetel jutaan bobot sebuah jaringan saraf tiruan secara otomatis agar sesuai dengan datanya",
+      "Mengoptimalkan parameter model agar mencerminkan selera pengguna pada sistem rekomendasi"
+    ],
+    "relatedFormulas": ["mse-loss", "backpropagation", "batch-normalization"]
+  },
+  "sigmoid": {
+    "name": "Fungsi sigmoid",
+    "oneLiner": "Fungsi aktivasi berbentuk S yang memampatkan sembarang bilangan real menjadi nilai antara 0 dan 1",
+    "description": "Fungsi sigmoid membentuk kurva S yang menuju 0 bila masukannya sangat negatif dan menuju 1 bila masukannya sangat positif. Karena keluarannya dapat ditafsirkan sebagai peluang, fungsi ini cocok untuk lapisan keluaran klasifikasi biner. Namun, bila nilai mutlak masukannya besar, kemiringannya hampir 0 sehingga muncul masalah hilangnya gradien; oleh karena itu pada lapisan tersembunyi fungsi ini cenderung digantikan ReLU dan sejenisnya.",
+    "field": "Pembelajaran mesin",
+    "significance": "Fungsi aktivasi dasar pada regresi logistik dan jaringan saraf tiruan, yang berperan memasukkan sifat taklinear.",
+    "elementMeanings": {
+      "\\sigma(x)": { "role": "Keluaran sigmoid", "description": "Nilai keluaran antara 0 dan 1 yang dapat ditafsirkan sebagai peluang.", "kind": "output" },
+      "x": { "role": "Masukan", "description": "Nilai masukan yang diteruskan ke fungsi aktivasi (misalnya jumlah terbobot).", "kind": "input" },
+      "e^{-x}": { "role": "Eksponen negatif", "description": "Makin besar masukannya, makin dekat nilainya ke 0 sehingga keluaran keseluruhannya mendekati 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Penggolong biner yang mengeluarkan peluang sebuah surel merupakan sampah sebagai nilai antara 0 dan 1",
+      "Model diagnosis medis yang menentukan positif tidaknya penyakit seorang pasien dalam bentuk peluang"
+    ],
+    "relatedFormulas": ["softmax", "cross-entropy"]
+  },
+  "batch-normalization": {
+    "name": "Normalisasi batch",
+    "oneLiner": "Teknik yang memantapkan pelatihan dengan menormalkan masukan pada tiap minibatch",
+    "description": "Normalisasi batch menormalkan masukan pada setiap lapisan jaringan saraf tiruan dengan memakai rata-rata dan variansi minibatch. Teknik ini mengurangi pergeseran kovariat internal sehingga pelatihan menjadi mantap dan laju pembelajaran yang lebih tinggi dapat dipakai. Setelah dinormalkan, parameter skala dan geseran yang dapat dilatih diterapkan agar daya ungkapnya tetap terjaga.",
+    "discoverer": "Sergey Ioffe, Christian Szegedy",
+    "field": "Pembelajaran mesin",
+    "significance": "Memperbaiki kemantapan dan kecepatan pelatihan pembelajaran mendalam secara mencolok sehingga menjadi komponen wajib dalam perancangan jaringan saraf tiruan modern.",
+    "elementMeanings": {
+      "\\hat{x}": { "role": "Masukan ternormalkan", "description": "Nilai masukan yang telah dinormalkan menjadi berrata-rata 0 dan bervariansi 1.", "kind": "output" },
+      "x": { "role": "Masukan asli", "description": "Nilai masukan lapisan sebelum dinormalkan.", "kind": "input" },
+      "\\mu": { "role": "Rata-rata batch", "description": "Rata-rata masukan yang dihitung pada minibatch saat ini.", "kind": "input" },
+      "\\sigma": { "role": "Simpangan baku batch", "description": "Simpangan baku masukan yang dihitung pada minibatch saat ini.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Pelatihan yang mantap pada ratusan lapisan jaringan pengenalan citra yang dalam (misalnya ResNet)",
+      "Mempercepat pelatihan model pengenalan suara sekaligus mencegah overfitting"
+    ],
+    "relatedFormulas": ["gradient-descent", "backpropagation"]
+  },
+  "attention-mechanism": {
+    "name": "Atensi hasil kali titik terskala",
+    "oneLiner": "Mekanisme atensi yang menjumlahkan nilai secara terbobot berdasarkan kemiripan antara kueri dan kunci",
+    "description": "Mekanisme atensi menghitung kemiripan melalui hasil kali titik antara kueri (Q) dan kunci (K), menskalakannya dengan akar kuadrat dimensi kunci, lalu menerapkan softmax untuk memperoleh bobotnya. Dengan bobot itu, nilai (V) dijumlahkan sehingga model dapat memusatkan perhatian secara terpilih pada bagian yang relevan dalam runtun masukan. Inilah inti arsitektur Transformer.",
+    "discoverer": "Ashish Vaswani dkk. (tim riset Google)",
+    "field": "Pembelajaran mesin",
+    "significance": "Komponen inti Transformer, sekaligus teknologi dasar model bahasa besar modern seperti GPT dan BERT.",
+    "elementMeanings": {
+      "Q": { "role": "Matriks kueri", "description": "Matriks berisi vektor-vektor yang menyatakan 'apa yang sedang dicari' pada posisi saat ini.", "kind": "input" },
+      "K": { "role": "Matriks kunci", "description": "Matriks berisi vektor-vektor yang menyatakan 'informasi apa yang dimiliki' setiap posisi.", "kind": "input" },
+      "V": { "role": "Matriks nilai", "description": "Matriks berisi vektor-vektor yang memuat informasi yang sebenarnya akan diteruskan.", "kind": "input" },
+      "K^T": { "role": "Transpos kunci", "description": "Matriks kunci yang ditranspos untuk perhitungan hasil kali titik dengan kueri.", "kind": "structural" },
+      "\\sqrt{d_k}": { "role": "Koefisien penskalaan", "description": "Akar kuadrat banyaknya dimensi vektor kunci. Nilai ini mencegah hasil kali titiknya menjadi terlalu besar.", "kind": "structural" },
+      "\\text{softmax}": { "role": "Fungsi penormalan", "description": "Mengubah skor kemiripan menjadi bobot yang jumlahnya 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Proses membangkitkan terjemahan dengan memusatkan perhatian pada kata yang relevan dalam teks sumber pada penerjemahan mesin",
+      "Prinsip kecerdasan buatan percakapan seperti ChatGPT dalam memahami konteks dan menyusun jawaban"
+    ],
+    "relatedFormulas": ["softmax", "backpropagation"]
+  },
+  "backpropagation": {
+    "name": "Algoritma perambatan balik",
+    "oneLiner": "Algoritma yang merambatkan gradien kerugian dari lapisan keluaran ke arah lapisan masukan dengan aturan rantai",
+    "description": "Perambatan balik menerapkan aturan rantai berulang kali untuk menurunkan nilai fungsi kerugian terhadap setiap bobot. Karena gradiennya dirambatkan mulai dari lapisan keluaran ke arah lapisan masukan, gradien semua bobot dapat dihitung sekaligus secara efisien. Gradien ini lalu diteruskan ke metode penurunan gradien untuk memperbarui bobotnya.",
+    "discoverer": "David Rumelhart, Geoffrey Hinton, Ronald Williams",
+    "field": "Pembelajaran mesin",
+    "significance": "Algoritma pokok yang membuat pelatihan jaringan saraf tiruan berlapis banyak menjadi praktis, dan menegakkan landasan pembelajaran mendalam.",
+    "elementMeanings": {
+      "\\partial L / \\partial w": { "role": "Gradien kerugian terhadap bobot", "description": "Besar dan arah pengaruh sebuah bobot tertentu terhadap kerugiannya.", "kind": "output" },
+      "\\partial L / \\partial \\hat{y}": { "role": "Gradien kerugian terhadap keluaran", "description": "Menyatakan seberapa besar kerugian berubah ketika nilai ramalannya berubah.", "kind": "structural" },
+      "\\partial \\hat{y} / \\partial w": { "role": "Gradien keluaran terhadap bobot", "description": "Menyatakan seberapa besar keluarannya berubah ketika bobotnya berubah.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Pelatihan model pengenalan citra yang punya puluhan juta parameter",
+      "Perhitungan gradien untuk melatih representasi konteks pada model pemrosesan bahasa alami"
+    ],
+    "relatedFormulas": ["gradient-descent", "cross-entropy", "mse-loss"]
+  }
+}

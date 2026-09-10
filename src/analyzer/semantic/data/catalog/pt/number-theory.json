@@ -1,0 +1,142 @@
+{
+  "fermat-little": {
+    "name": "Pequeno teorema de Fermat",
+    "oneLiner": "O teorema que garante que, para um primo p e um inteiro a coprimo com ele, a elevado a (p-1) deixa resto 1 na divisão por p",
+    "description": "O pequeno teorema de Fermat afirma que, quando o primo p não divide a, o resto de a^(p-1) na divisão por p é necessariamente 1. Ele simplifica drasticamente o cálculo de potências modulares e forma a base teórica do sistema criptográfico RSA.",
+    "discoverer": "Pierre de Fermat",
+    "field": "Teoria dos números",
+    "significance": "É um alicerce central da criptografia moderna e é indispensável aos algoritmos de teste de primalidade e ao cálculo do inverso modular.",
+    "elementMeanings": {
+      "a": { "role": "base", "description": "Inteiro coprimo com o primo p. É a base da potência.", "kind": "input" },
+      "p": { "role": "módulo primo", "description": "É o número primo que serve de referência para a divisão.", "kind": "input" },
+      "p-1": { "role": "expoente", "description": "É o primo menos 1; elevando a esse expoente, o resto passa a ser 1.", "kind": "structural" },
+      "\\equiv 1": { "role": "resultado da congruência", "description": "Indica que o resultado da operação modular é 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Calcular o inverso modular de números grandes no sistema criptográfico RSA",
+      "Verificar candidatos a primo no algoritmo de teste de primalidade (teste de Fermat)",
+      "Analisar a probabilidade de colisão ao projetar funções de hash"
+    ],
+    "relatedFormulas": ["euler-theorem"]
+  },
+  "euler-theorem": {
+    "name": "Teorema de Euler",
+    "oneLiner": "O teorema segundo o qual, para um inteiro a coprimo com um inteiro positivo n, a elevado ao valor da função phi de Euler deixa resto 1 na divisão por n",
+    "description": "O teorema de Euler é a extensão do pequeno teorema de Fermat aos números compostos. Quando a e n são coprimos, elevar a ao valor da função phi de Euler dá resto 1 na divisão por n. O pequeno teorema de Fermat corresponde ao caso particular em que n é primo.",
+    "discoverer": "Leonhard Euler",
+    "field": "Teoria dos números",
+    "significance": "Como generalização do pequeno teorema de Fermat, é usado diretamente na prova de validade da criptografia RSA e fornece a base da aritmética modular com números compostos.",
+    "elementMeanings": {
+      "a": { "role": "base", "description": "É um inteiro coprimo com n.", "kind": "input" },
+      "n": { "role": "módulo", "description": "É o inteiro positivo que serve de referência para a divisão.", "kind": "input" },
+      "\\varphi(n)": { "role": "função phi de Euler", "description": "É a quantidade de inteiros de 1 até n que são coprimos com n.", "kind": "output" },
+      "\\equiv 1": { "role": "resultado da congruência", "description": "Indica que o resultado da operação modular é 1.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Fundamento matemático do cálculo do expoente de decifragem na criptografia RSA",
+      "Análise da segurança do protocolo de troca de chaves de Diffie-Hellman",
+      "Cálculo da ordem de um grupo cíclico"
+    ],
+    "relatedFormulas": ["fermat-little"]
+  },
+  "prime-counting": {
+    "name": "Teorema dos números primos",
+    "oneLiner": "O teorema que revelou que a quantidade de primos até x se aproxima assintoticamente de x/ln(x)",
+    "description": "O teorema dos números primos mostra que, quando x é suficientemente grande, a função que conta os primos até x converge para x/ln(x). Ele prova o fato surpreendente de que, embora a distribuição dos primos pareça irregular, em escala macroscópica ela segue uma densidade previsível.",
+    "discoverer": "Jacques Hadamard, Charles-Jean de la Vallée Poussin (provas independentes)",
+    "field": "Teoria dos números",
+    "significance": "É o teorema mais básico sobre a distribuição dos primos e o ponto de partida da teoria analítica dos números, ligada diretamente à hipótese de Riemann.",
+    "elementMeanings": {
+      "\\pi(x)": { "role": "função de contagem de primos", "description": "É a função que conta a quantidade de primos até x.", "kind": "output" },
+      "x": { "role": "limite superior", "description": "É o valor máximo do intervalo em que se contam os primos.", "kind": "input" },
+      "\\ln(x)": { "role": "logaritmo natural", "description": "É o logaritmo natural de x. Representa a taxa de queda da densidade dos primos.", "kind": "structural" },
+      "\\sim": { "role": "equivalência assintótica", "description": "Significa que a razão entre as duas funções converge para 1 quando x cresce indefinidamente.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Estimar o intervalo de busca ao procurar primos grandes para criptografia",
+      "Projetar algoritmos probabilísticos de teste de primalidade usando a densidade dos primos",
+      "Análise estatística dos intervalos entre primos na pesquisa matemática"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "euclidean-algorithm": {
+    "name": "Algoritmo de Euclides",
+    "oneLiner": "O algoritmo que obtém o máximo divisor comum de dois inteiros repetindo a operação de resto",
+    "description": "O algoritmo de Euclides calcula o máximo divisor comum de forma eficiente aplicando repetidamente a propriedade mdc(a,b) = mdc(b, a mod b). O divisor no momento em que o resto chega a 0 é o máximo divisor comum. É tido como o algoritmo mais antigo já registrado.",
+    "discoverer": "Euclides",
+    "field": "Teoria dos números",
+    "significance": "É o primeiro algoritmo registrado e tem papel central em toda a ciência da computação: simplificação de frações, cálculo do inverso modular, geração de chaves RSA, entre outros.",
+    "elementMeanings": {
+      "a": { "role": "primeiro inteiro", "description": "É um dos dois números de que se quer o máximo divisor comum.", "kind": "input" },
+      "b": { "role": "segundo inteiro", "description": "É o outro dos dois números de que se quer o máximo divisor comum.", "kind": "input" },
+      "\\gcd": { "role": "função máximo divisor comum", "description": "É a função que devolve o máximo divisor comum de dois inteiros.", "kind": "output" },
+      "a \\mod b": { "role": "resto", "description": "É o resto de a dividido por b. Repete-se até que esse valor seja 0.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Calcular o máximo divisor comum do numerador e do denominador ao reduzir uma fração à forma irredutível",
+      "Obter a chave privada com o algoritmo de Euclides estendido na geração de chaves RSA",
+      "Calcular na música o ciclo de encontro de dois compassos pelo mínimo múltiplo comum"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "quadratic-reciprocity": {
+    "name": "Lei da reciprocidade quadrática",
+    "oneLiner": "A lei que revelou que, para dois primos ímpares p e q, as relações de resíduo quadrático se determinam de forma simétrica entre si",
+    "description": "A lei da reciprocidade quadrática apresenta a relação exata entre o fato de p ser resíduo quadrático de q e o de q ser resíduo quadrático de p, dados dois primos ímpares. Chamada por Gauss de 'joia da aritmética', foi o primeiro resultado a exibir um princípio de reciprocidade na teoria dos números.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Teoria dos números",
+    "significance": "É o ponto de partida da teoria algébrica dos números e da teoria de corpos de classes, além de ferramenta central para decidir se uma equação quadrática tem solução modular.",
+    "elementMeanings": {
+      "p": { "role": "primeiro primo ímpar", "description": "É um dos dois primos a que se aplica a lei de reciprocidade.", "kind": "input" },
+      "q": { "role": "segundo primo ímpar", "description": "É o outro dos dois primos a que se aplica a lei de reciprocidade.", "kind": "input" },
+      "\\left(\\frac{p}{q}\\right)": { "role": "símbolo de Legendre", "description": "É o símbolo que devolve 1 se p é resíduo quadrático de q e -1 caso contrário.", "kind": "output" },
+      "(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}": { "role": "fator que determina o sinal", "description": "É o termo que determina o sinal do produto dos dois símbolos de Legendre.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Decidir rapidamente se uma congruência quadrática tem solução",
+      "Projetar sistemas criptográficos baseados em resíduos quadráticos",
+      "Generalizar para leis de reciprocidade de grau superior na pesquisa em teoria algébrica dos números"
+    ],
+    "relatedFormulas": ["fermat-little", "euler-theorem"]
+  },
+  "goldbach-conjecture": {
+    "name": "Conjectura de Goldbach",
+    "oneLiner": "A conjectura em aberto de que todo número par maior que 2 pode ser escrito como a soma de dois primos",
+    "description": "A conjectura de Goldbach afirma que todo número par a partir de 4 pode ser expresso como a soma de dois primos. Foi levantada pela primeira vez numa carta que Goldbach enviou a Euler em 1742 e, embora tenha sido verificada por computador em intervalos muito grandes, continua sem demonstração, sendo um dos problemas em aberto mais emblemáticos da matemática.",
+    "discoverer": "Christian Goldbach",
+    "field": "Teoria dos números",
+    "significance": "É o problema difícil mais representativo da teoria aditiva dos números e exige uma compreensão profunda das propriedades aditivas dos primos.",
+    "elementMeanings": {
+      "2n": { "role": "número par", "description": "É um número par qualquer a partir de 4.", "kind": "input" },
+      "p": { "role": "primeiro primo", "description": "É um dos dois primos que compõem o número par.", "kind": "input" },
+      "q": { "role": "segundo primo", "description": "É o outro dos dois primos que compõem o número par.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Projetos de verificação numérica em larga escala com uso de computadores",
+      "Motivação de problemas aditivos na pesquisa sobre a distribuição dos primos",
+      "Exemplo típico para explicar no ensino de matemática a diferença entre conjectura e demonstração"
+    ],
+    "relatedFormulas": ["prime-counting", "fermat-little"]
+  },
+  "fibonacci-general": {
+    "name": "Fórmula de Binet",
+    "oneLiner": "A fórmula fechada que calcula diretamente o n-ésimo termo da sequência de Fibonacci por meio da razão áurea",
+    "description": "A fórmula do termo geral de Fibonacci (fórmula de Binet) calcula diretamente o n-ésimo termo da sequência, sem recursão, usando a razão áurea e a sua conjugada. Surpreende que uma combinação de irracionais resulte sempre num inteiro, e ela é o exemplo típico do método de resolução por equação característica das recorrências lineares.",
+    "discoverer": "Jacques Philippe Marie Binet (formulação), Abraham de Moivre (descoberta anterior)",
+    "field": "Teoria dos números",
+    "significance": "Mostra que recorrências lineares podem ser resolvidas em forma fechada e revela a ligação profunda entre a razão áurea e a sequência de Fibonacci.",
+    "elementMeanings": {
+      "F_n": { "role": "número de Fibonacci", "description": "É o n-ésimo termo da sequência.", "kind": "output" },
+      "\\varphi": { "role": "razão áurea", "description": "(1+raiz de 5)/2, cerca de 1,618. É a raiz característica positiva.", "kind": "constant", "value": 1.61803399 },
+      "\\psi": { "role": "conjugada da razão áurea", "description": "(1-raiz de 5)/2, cerca de -0,618. É a raiz característica negativa.", "kind": "constant", "value": -0.61803399 },
+      "\\sqrt{5}": { "role": "constante de normalização", "description": "É a diferença entre as duas raízes características e serve de divisor para que o resultado seja inteiro.", "kind": "constant", "value": 2.2360679775 },
+      "n": { "role": "número do termo", "description": "É a posição procurada na sequência de Fibonacci.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Calcular o limite de desempenho do heap de Fibonacci na análise de algoritmos",
+      "Explicar padrões de razão áurea na natureza, como o número de pétalas e as espirais das pinhas",
+      "Obter os níveis de retração de Fibonacci em finanças"
+    ],
+    "relatedFormulas": ["euclidean-algorithm"]
+  }
+}

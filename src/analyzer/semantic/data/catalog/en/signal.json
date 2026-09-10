@@ -1,0 +1,132 @@
+{
+  "fourier-transform": {
+    "name": "Fourier transform",
+    "oneLiner": "The integral transform that carries a signal from the time domain into the frequency domain",
+    "description": "The Fourier transform decomposes a signal that is a function of time into a function of frequency. It rests on the principle that any signal can be written as a sum of sine waves of different frequencies, and it gives the magnitude and phase of each frequency component. It is used throughout science and engineering, from signal processing and image analysis to quantum mechanics.",
+    "discoverer": "Joseph Fourier",
+    "field": "Signal processing",
+    "significance": "By making the dual description in time and frequency possible, it established the theoretical basis of modern signal processing.",
+    "elementMeanings": {
+      "f": { "role": "Function / signal", "description": "The original function or time signal to be transformed.", "kind": "input" },
+      "ξ": { "role": "Frequency", "description": "The ordinary frequency variable. Units: Hz.", "kind": "input" },
+      "x": { "role": "Independent variable", "description": "The independent variable of the original function (time, for instance).", "kind": "input" },
+      "e": { "role": "Natural constant", "description": "The base of the complex exponential function.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "i": { "role": "Imaginary unit", "description": "i² = −1. In the complex exponential it stands for rotation of phase.", "kind": "constant" },
+      "π": { "role": "Pi", "description": "Part of the normalising constant 2π.", "kind": "constant", "value": 3.14159265, "unit": "" }
+    },
+    "realWorldExamples": ["Speech recognition through frequency analysis of a voice signal", "Reconstructing a spatial image from the frequency data of an MRI scan"],
+    "relatedFormulas": ["inverse-fourier", "laplace-transform", "convolution"]
+  },
+  "inverse-fourier": {
+    "name": "Inverse Fourier transform",
+    "oneLiner": "The integral transform that recovers a time-domain signal from its frequency-domain spectrum",
+    "description": "The inverse Fourier transform reverses the Fourier transform, recovering the original time-domain signal from the spectrum given in the frequency domain. The sign in the complex exponential turns positive, and in the ordinary-frequency convention the pair is symmetric, with no normalising factor.",
+    "discoverer": "Joseph Fourier",
+    "field": "Signal processing",
+    "significance": "By guaranteeing that a frequency analysis can be turned back into the original signal without loss, it provides the theoretical basis for signal synthesis.",
+    "elementMeanings": {
+      "f": { "role": "Function / signal", "description": "The recovered original time-domain signal.", "kind": "output" },
+      "ξ": { "role": "Frequency", "description": "The independent variable of the frequency domain. Units: Hz.", "kind": "input" },
+      "x": { "role": "Independent variable", "description": "The independent variable of the function being recovered (time, for instance).", "kind": "input" },
+      "e": { "role": "Natural constant", "description": "The base of the complex exponential function.", "kind": "constant", "value": 2.718281828, "unit": "" },
+      "π": { "role": "Pi", "description": "Part of the normalising constant 2π.", "kind": "constant", "value": 3.14159265, "unit": "" }
+    },
+    "realWorldExamples": ["Turning filtered frequency data back into a time signal", "Decoding and playing back compressed audio data"],
+    "relatedFormulas": ["fourier-transform", "laplace-transform", "convolution"]
+  },
+  "laplace-transform": {
+    "name": "Laplace transform",
+    "oneLiner": "The integral transform that carries a time-domain function into the complex frequency domain",
+    "description": "The Laplace transform turns a function of time into a function of the complex variable s, converting differential equations into algebraic ones. It can be seen as a generalisation of the Fourier transform, and it can handle decaying signals as well. It is central to control system analysis, circuit analysis, and tests of system stability.",
+    "discoverer": "Pierre-Simon Laplace",
+    "field": "Signal processing",
+    "significance": "By letting differential equations be solved algebraically, it became the standard tool of control engineering and system analysis.",
+    "elementMeanings": {
+      "F(s)": { "role": "Result of the Laplace transform", "description": "The function as expressed in the complex frequency domain.", "kind": "output" },
+      "f(t)": { "role": "Time function", "description": "The original time-domain function to be transformed. It is defined for t >= 0.", "kind": "input" },
+      "s": { "role": "Complex frequency", "description": "s = σ + jω. The real part stands for decay, the imaginary part for oscillation.", "kind": "structural" },
+      "e^{-st}": { "role": "Decaying complex exponential", "description": "The kernel function multiplied into the time function.", "kind": "structural" },
+      "\\int_0^{\\infty}": { "role": "One-sided integral", "description": "The integral from 0 to infinity. It handles causal systems.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Designing the transfer function of a PID controller", "Analysing the transient response of an RLC circuit"],
+    "relatedFormulas": ["fourier-transform", "z-transform", "transfer-function"]
+  },
+  "z-transform": {
+    "name": "Z-transform",
+    "oneLiner": "The mathematical tool that carries a discrete-time signal into the complex z domain",
+    "description": "The Z-transform is the discrete-time counterpart of the Laplace transform, turning a discrete-time signal x[n] into a function of the complex variable z. It is essential for digital filter design, digital control system analysis, and the solution of difference equations. The relation z = e^(sT) connects it to the Laplace transform.",
+    "discoverer": "Witold Hurewicz",
+    "field": "Signal processing",
+    "significance": "As the standard tool for analysing discrete-time systems, it provides the theoretical basis of digital signal processing and digital control.",
+    "elementMeanings": {
+      "X(z)": { "role": "Result of the Z-transform", "description": "The discrete signal as expressed in the complex z domain.", "kind": "output" },
+      "x[n]": { "role": "Discrete-time signal", "description": "The sample value at the integer index n.", "kind": "input" },
+      "z": { "role": "Complex variable", "description": "A complex number whose unit circle (|z|=1) corresponds to the frequency domain.", "kind": "structural" },
+      "z^{-n}": { "role": "Delay operator", "description": "A negative power of z standing for a delay of n samples.", "kind": "structural" },
+      "\\sum": { "role": "Sum of the series", "description": "The sum from n = minus infinity to infinity (or from 0).", "kind": "structural" }
+    },
+    "realWorldExamples": ["Designing the filter coefficients of a digital audio equaliser", "The digital position control system of a robot arm"],
+    "relatedFormulas": ["laplace-transform", "sampling", "transfer-function"]
+  },
+  "nyquist-theorem": {
+    "name": "Nyquist theorem",
+    "oneLiner": "The condition on the minimum sampling frequency for converting an analogue signal to digital without distortion",
+    "description": "The Nyquist theorem states that to reconstruct a band-limited analogue signal perfectly you must sample at more than twice the signal's highest frequency. Fail this condition and aliasing sets in, making the original signal impossible to recover. It is the design basis of every analogue-to-digital conversion system.",
+    "discoverer": "Harry Nyquist, Claude Shannon",
+    "field": "Signal processing",
+    "significance": "By setting out the fundamental condition linking the analogue and digital worlds, it established the basis of digital communication and recording technology.",
+    "elementMeanings": {
+      "f_s": { "role": "Sampling frequency", "description": "How many samples are taken per second. Units: hertz (Hz).", "kind": "input" },
+      "f_{max}": { "role": "Maximum frequency", "description": "The highest frequency component present in the signal. Units: hertz (Hz).", "kind": "input" },
+      "2": { "role": "Nyquist ratio", "description": "You must sample at least twice as fast to keep aliasing away.", "kind": "constant", "value": 2, "unit": "" }
+    },
+    "realWorldExamples": ["Why CD audio (44.1kHz) covers the range of human hearing (20kHz)", "The anti-aliasing filter on a digital camera sensor"],
+    "relatedFormulas": ["sampling", "fourier-transform", "shannon-capacity"]
+  },
+  "sampling": {
+    "name": "Sampling",
+    "oneLiner": "The process of taking a continuous-time signal at regular intervals to turn it into a discrete-time signal",
+    "description": "Sampling turns a continuous analogue signal x(t) into a discrete signal x[n] by taking its value once every period T. It is the first step of digital signal processing, and only when the Nyquist condition is met can the original signal be reproduced faithfully. The sampling period T and the sampling frequency f_s are reciprocals of each other.",
+    "field": "Signal processing",
+    "significance": "As the fundamental process that turns an analogue signal into a digital one, it defines the input stage of every digital system.",
+    "elementMeanings": {
+      "x[n]": { "role": "Discrete signal", "description": "The value of the n-th sample. It is the basic unit of a digital signal.", "kind": "output" },
+      "x(t)": { "role": "Continuous signal", "description": "The original analogue time signal.", "kind": "input" },
+      "n": { "role": "Sample index", "description": "An integer saying which sample this is.", "kind": "input" },
+      "T": { "role": "Sampling period", "description": "The time between consecutive samples. Units: seconds (s). T = 1/f_s.", "kind": "input" }
+    },
+    "realWorldExamples": ["Turning speech picked up by a microphone into digital data", "Digitising the biosignal from an electrocardiogram (ECG) machine"],
+    "relatedFormulas": ["nyquist-theorem", "z-transform", "fourier-transform"]
+  },
+  "convolution": {
+    "name": "Convolution",
+    "oneLiner": "The operation that builds a new function by sliding two functions over each other and integrating the overlap",
+    "description": "Convolution flips one function, slides it across the other, and integrates the region where they overlap. In a linear time-invariant (LTI) system, the convolution of the input signal with the impulse response is the output signal. It is used widely in signal filtering, image processing, and combining probability distributions.",
+    "field": "Signal processing",
+    "significance": "By describing the input-output relation of an LTI system completely, it became the central operation of signal processing and system analysis.",
+    "elementMeanings": {
+      "(f*g)(t)": { "role": "Result of the convolution", "description": "The new function produced by convolving the two functions f and g.", "kind": "output" },
+      "f(\\tau)": { "role": "First function", "description": "The first function, in the integration variable tau. Usually the input signal.", "kind": "input" },
+      "g(t-\\tau)": { "role": "Flipped and shifted function", "description": "The second function flipped and then shifted by t. Usually the impulse response.", "kind": "input" },
+      "\\tau": { "role": "Integration variable", "description": "The dummy variable that sweeps across the region where the two functions overlap.", "kind": "structural" },
+      "\\int": { "role": "Integral", "description": "The integral from minus infinity to infinity, covering the whole overlap.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Modelling a camera blur effect mathematically", "Extracting image features in a deep learning CNN"],
+    "relatedFormulas": ["fourier-transform", "transfer-function", "inverse-fourier"]
+  },
+  "transfer-function": {
+    "name": "Transfer function",
+    "oneLiner": "The function characterising a system, defined as the ratio of the Laplace transforms of its output and input",
+    "description": "The transfer function expresses the input-output relation of an LTI system in the complex frequency domain, as the Laplace transform of the output divided by the Laplace transform of the input. Its poles and zeros tell you the system's stability, frequency response, and transient behaviour. It is the most important analytical tool of control engineering.",
+    "field": "Signal processing",
+    "significance": "By summing up a system's dynamic behaviour in a single function, it became the standard tool for control system design and stability analysis.",
+    "elementMeanings": {
+      "H(s)": { "role": "Transfer function", "description": "The system's behaviour expressed as a function of the complex frequency s.", "kind": "output" },
+      "Y(s)": { "role": "Laplace transform of the output", "description": "The Laplace transform of the system's output signal.", "kind": "output" },
+      "X(s)": { "role": "Laplace transform of the input", "description": "The Laplace transform of the system's input signal.", "kind": "input" },
+      "s": { "role": "Complex frequency", "description": "The Laplace variable. It is used to analyse the poles and zeros of the system.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Designing the response of a car's cruise control system", "Analysing the frequency response of an audio amplifier"],
+    "relatedFormulas": ["laplace-transform", "z-transform", "convolution"]
+  }
+}

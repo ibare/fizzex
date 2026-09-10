@@ -1,0 +1,212 @@
+{
+  "triangle-area": {
+    "name": "Aire du triangle",
+    "oneLiner": "Formule qui donne l'aire d'un triangle en multipliant la base par la hauteur, puis en divisant par deux",
+    "description": "L'aire d'un triangle vaut la longueur de la base multipliée par la hauteur, le tout divisé par 2. En coupant un rectangle selon sa diagonale, on obtient deux triangles : c'est pourquoi l'aire est la moitié de celle du rectangle.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le triangle.", "kind": "output" },
+      "b": { "role": "Base", "description": "Longueur du côté inférieur du triangle.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance perpendiculaire de la base au sommet opposé.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Moitié", "description": "Elle traduit le fait qu'il s'agit de la moitié du rectangle.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Trouver l'aire de la partie triangulaire d'un toit", "Calculer la surface de tissu d'un fanion triangulaire"],
+    "relatedFormulas": ["rectangle-area", "parallelogram-area", "triangle-angle-sum"]
+  },
+  "rectangle-area": {
+    "name": "Aire du rectangle",
+    "oneLiner": "Formule qui donne l'aire d'un rectangle en multipliant sa longueur par sa largeur",
+    "description": "L'aire d'un rectangle vaut sa longueur multipliée par sa largeur. Dans un quadrilatère dont les quatre angles sont droits, cela revient à compter combien de carrés unités tiennent sur une rangée, puis à multiplier par le nombre de rangées.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le rectangle.", "kind": "output" },
+      "l": { "role": "Longueur", "description": "Longueur du rectangle.", "kind": "input" },
+      "w": { "role": "Largeur", "description": "Largeur du rectangle.", "kind": "input" }
+    },
+    "realWorldExamples": ["Trouver la surface au sol d'une pièce", "Calculer l'aire d'un tableau noir", "Comparer la taille des écrans de téléphone"],
+    "relatedFormulas": ["square-area", "rectangle-perimeter", "triangle-area"]
+  },
+  "square-area": {
+    "name": "Aire du carré",
+    "oneLiner": "Formule qui donne l'aire d'un carré en élevant la longueur d'un côté au carré",
+    "description": "L'aire d'un carré vaut la longueur d'un côté multipliée par elle-même. Comme les quatre côtés ont la même longueur, c'est le même principe que l'aire d'un rectangle dont la longueur et la largeur seraient égales.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le carré.", "kind": "output" },
+      "s": { "role": "Côté", "description": "Longueur d'un côté du carré.", "kind": "input" },
+      "s^2": { "role": "Carré du côté", "description": "La longueur d'un côté multipliée deux fois par elle-même.", "kind": "output" }
+    },
+    "realWorldExamples": ["Trouver la surface d'un carreau de carrelage", "Calculer la taille d'un cadre carré"],
+    "relatedFormulas": ["rectangle-area", "rhombus-area"]
+  },
+  "parallelogram-area": {
+    "name": "Aire du parallélogramme",
+    "oneLiner": "Formule qui donne l'aire d'un parallélogramme en multipliant la base par la hauteur",
+    "description": "L'aire d'un parallélogramme vaut la longueur de sa base multipliée par sa hauteur. En découpant un parallélogramme et en déplaçant le morceau obtenu, on forme un rectangle : la formule a donc la même forme que celle de l'aire du rectangle.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le parallélogramme.", "kind": "output" },
+      "b": { "role": "Base", "description": "Longueur du côté inférieur du parallélogramme.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance perpendiculaire entre les deux côtés parallèles.", "kind": "input" }
+    },
+    "realWorldExamples": ["Calculer la surface d'une vitre de fenêtre inclinée", "Dimensionner un dessus de bureau en forme de parallélogramme"],
+    "relatedFormulas": ["rectangle-area", "triangle-area", "rhombus-area"]
+  },
+  "trapezoid-area": {
+    "name": "Aire du trapèze",
+    "oneLiner": "Formule qui multiplie la somme de la petite et de la grande base par la hauteur, puis divise par deux",
+    "description": "L'aire d'un trapèze s'obtient en additionnant les longueurs des deux côtés parallèles (la petite et la grande base), en multipliant par la hauteur, puis en divisant par 2. En accolant deux trapèzes identiques dont l'un est retourné, on forme un parallélogramme : on divise donc par 2 pour n'en garder que la moitié.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le trapèze.", "kind": "output" },
+      "a": { "role": "Petite base", "description": "Longueur du côté parallèle supérieur du trapèze.", "kind": "input" },
+      "b": { "role": "Grande base", "description": "Longueur du côté parallèle inférieur du trapèze.", "kind": "input" },
+      "h": { "role": "Hauteur", "description": "Distance perpendiculaire entre les deux côtés parallèles.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Moitié", "description": "Elle traduit le fait qu'il s'agit de la moitié du parallélogramme.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Trouver la surface d'un massif de fleurs en forme de trapèze", "Calculer la surface d'un pan de toit trapézoïdal"],
+    "relatedFormulas": ["parallelogram-area", "triangle-area"]
+  },
+  "rhombus-area": {
+    "name": "Aire du losange",
+    "oneLiner": "Formule qui donne l'aire d'un losange en multipliant les longueurs des deux diagonales, puis en divisant par deux",
+    "description": "L'aire d'un losange vaut le produit des longueurs de ses deux diagonales divisé par 2. Les deux diagonales d'un losange se coupent perpendiculairement ; en découpant selon ces diagonales et en réarrangeant les morceaux, on obtient la moitié d'un rectangle.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le losange.", "kind": "output" },
+      "d_1": { "role": "Diagonale 1", "description": "Longueur de l'une des diagonales du losange.", "kind": "input" },
+      "d_2": { "role": "Diagonale 2", "description": "Longueur de l'autre diagonale du losange.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Moitié", "description": "Elle traduit le fait qu'il s'agit de la moitié du rectangle.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Calculer la surface d'une pierre précieuse taillée en losange", "Trouver la surface de toile d'un cerf-volant"],
+    "relatedFormulas": ["square-area", "parallelogram-area"]
+  },
+  "circle-area-elem": {
+    "name": "Aire du disque",
+    "oneLiner": "Formule qui donne l'aire d'un disque en multipliant le carré du rayon par pi",
+    "description": "L'aire d'un disque vaut le carré du rayon multiplié par pi. Si l'on découpe le disque en parts très fines et qu'on les aligne, on s'approche d'un rectangle dont la longueur est la moitié de la circonférence et la largeur le rayon : d'où cette formule.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le disque.", "kind": "output" },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence au diamètre, environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Distance du centre du cercle à sa circonférence.", "kind": "input" },
+      "r^2": { "role": "Carré du rayon", "description": "Le rayon multiplié deux fois par lui-même.", "kind": "input" }
+    },
+    "realWorldExamples": ["Comparer la taille de deux pizzas", "Trouver la surface d'une horloge ronde", "Calculer l'aire d'une pièce de monnaie"],
+    "relatedFormulas": ["circle-circumference", "sector-area", "annulus-area"]
+  },
+  "circle-circumference": {
+    "name": "Circonférence du cercle",
+    "oneLiner": "Formule qui donne la circonférence d'un cercle en multipliant le double du rayon par pi",
+    "description": "La circonférence d'un cercle vaut le double du rayon — c'est-à-dire le diamètre — multiplié par pi. C'est exactement la distance parcourue en faisant un tour complet le long du cercle.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "C": { "role": "Circonférence", "description": "Longueur totale mesurée le long du contour du cercle.", "kind": "output" },
+      "2": { "role": "Constante", "description": "Valeur qui convertit le rayon en diamètre.", "kind": "constant", "value": 2 },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence au diamètre, environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "r": { "role": "Rayon", "description": "Distance du centre du cercle à sa circonférence.", "kind": "input" }
+    },
+    "realWorldExamples": ["Distance parcourue par une roue de vélo en un tour", "Longueur d'un tour de piste circulaire"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "sector-area": {
+    "name": "Aire du secteur circulaire",
+    "oneLiner": "Formule qui multiplie le carré du rayon par l'angle au centre, puis divise par deux, pour donner l'aire d'un secteur circulaire",
+    "description": "L'aire d'un secteur circulaire vaut le carré du rayon multiplié par l'angle au centre (en radians), le tout divisé par 2. Un secteur n'étant qu'une portion de disque, son aire est d'autant plus grande que l'angle au centre est grand.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le secteur circulaire.", "kind": "output" },
+      "r": { "role": "Rayon", "description": "Longueur du rayon du secteur circulaire.", "kind": "input" },
+      "r^2": { "role": "Carré du rayon", "description": "Le rayon multiplié deux fois par lui-même.", "kind": "input" },
+      "\\theta": { "role": "Angle au centre", "description": "Angle d'ouverture du secteur, mesuré depuis le centre (en radians).", "kind": "input", "unit": "rad" },
+      "\\frac{1}{2}": { "role": "Moitié", "description": "C'est le coefficient de la formule de l'aire.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Aire de la zone balayée par la grande aiguille d'une horloge", "Surface d'une part de pizza"],
+    "relatedFormulas": ["circle-area-elem", "arc-length"]
+  },
+  "arc-length": {
+    "name": "Longueur d'un arc",
+    "oneLiner": "Formule qui donne la longueur d'un arc en multipliant le rayon par l'angle au centre",
+    "description": "La longueur d'un arc vaut le rayon multiplié par l'angle au centre (en radians). Un arc est une portion de la circonférence : si l'angle au centre couvre un tour complet (2 pi), la longueur de l'arc est égale à la circonférence du cercle.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "l": { "role": "Longueur de l'arc", "description": "Longueur d'une portion de la circonférence du cercle.", "kind": "output" },
+      "r": { "role": "Rayon", "description": "Distance du centre du cercle à sa circonférence.", "kind": "input" },
+      "\\theta": { "role": "Angle au centre", "description": "Angle au centre qui intercepte l'arc (en radians).", "kind": "input", "unit": "rad" }
+    },
+    "realWorldExamples": ["Longueur d'une portion courbe de montagnes russes", "Longueur de l'arc entre deux graduations d'une horloge"],
+    "relatedFormulas": ["circle-circumference", "sector-area"]
+  },
+  "rectangle-perimeter": {
+    "name": "Périmètre du rectangle",
+    "oneLiner": "Formule qui donne le périmètre d'un rectangle en doublant la somme de sa longueur et de sa largeur",
+    "description": "Le périmètre d'un rectangle vaut la somme de la longueur et de la largeur, multipliée par 2. Comme les côtés opposés d'un rectangle ont la même longueur, additionner une longueur et une largeur puis doubler le résultat donne bien la longueur totale des quatre côtés.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "P": { "role": "Périmètre", "description": "Longueur totale des quatre côtés du rectangle.", "kind": "output" },
+      "l": { "role": "Longueur", "description": "Longueur du rectangle.", "kind": "input" },
+      "w": { "role": "Largeur", "description": "Largeur du rectangle.", "kind": "input" },
+      "2": { "role": "Constante", "description": "On multiplie par 2 car il y a deux paires de côtés opposés.", "kind": "constant", "value": 2 }
+    },
+    "realWorldExamples": ["Calculer la longueur du contour d'un cadre", "Distance parcourue en faisant le tour d'un terrain de sport"],
+    "relatedFormulas": ["rectangle-area", "triangle-perimeter"]
+  },
+  "triangle-perimeter": {
+    "name": "Périmètre du triangle",
+    "oneLiner": "Formule qui donne le périmètre d'un triangle en additionnant les longueurs de ses trois côtés",
+    "description": "Le périmètre d'un triangle vaut la somme des longueurs de ses trois côtés. C'est la distance totale parcourue en faisant un tour complet le long de son contour.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "P": { "role": "Périmètre", "description": "Longueur totale des trois côtés du triangle.", "kind": "output" },
+      "a": { "role": "Premier côté", "description": "Longueur du premier côté du triangle.", "kind": "input" },
+      "b": { "role": "Deuxième côté", "description": "Longueur du deuxième côté du triangle.", "kind": "input" },
+      "c": { "role": "Troisième côté", "description": "Longueur du troisième côté du triangle.", "kind": "input" }
+    },
+    "realWorldExamples": ["Longueur totale d'une clôture triangulaire", "Longueur de cordon nécessaire pour border un fanion triangulaire"],
+    "relatedFormulas": ["triangle-area", "rectangle-perimeter"]
+  },
+  "regular-polygon-area": {
+    "name": "Aire du polygone régulier",
+    "oneLiner": "Formule qui donne l'aire d'un polygone régulier à partir du nombre de côtés, de la longueur d'un côté et de l'apothème",
+    "description": "L'aire d'un polygone régulier vaut le nombre de côtés multiplié par la longueur d'un côté et par l'apothème (distance perpendiculaire du centre à un côté), le tout divisé par 2. En découpant le polygone en triangles depuis son centre, on retrouve la somme des aires de ces triangles.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par le polygone régulier.", "kind": "output" },
+      "n": { "role": "Nombre de côtés", "description": "Nombre de côtés du polygone régulier.", "kind": "input" },
+      "s": { "role": "Longueur d'un côté", "description": "Longueur d'un côté du polygone régulier.", "kind": "input" },
+      "a": { "role": "Apothème", "description": "Distance perpendiculaire du centre au milieu d'un côté.", "kind": "input" },
+      "\\frac{1}{2}": { "role": "Moitié", "description": "C'est le coefficient hérité de la formule de l'aire du triangle.", "kind": "constant", "value": 0.5 }
+    },
+    "realWorldExamples": ["Surface d'une alvéole hexagonale de ruche", "Aire d'une décoration en étoile à base de pentagone régulier"],
+    "relatedFormulas": ["triangle-area", "circle-area-elem"]
+  },
+  "annulus-area": {
+    "name": "Aire de la couronne circulaire",
+    "oneLiner": "Formule qui donne l'aire d'une forme en anneau en multipliant par pi la différence des carrés des rayons du grand et du petit cercle",
+    "description": "L'aire d'une couronne circulaire (en forme d'anneau) vaut l'aire du disque extérieur diminuée de celle du disque intérieur. On soustrait le carré du petit rayon du carré du grand rayon, puis on multiplie par pi.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "A": { "role": "Aire", "description": "Surface occupée par la couronne circulaire (l'anneau).", "kind": "output" },
+      "\\pi": { "role": "Nombre pi", "description": "Rapport de la circonférence au diamètre, environ 3,14159.", "kind": "constant", "value": 3.14159265 },
+      "R": { "role": "Rayon extérieur", "description": "Rayon du grand cercle extérieur.", "kind": "input" },
+      "r": { "role": "Rayon intérieur", "description": "Rayon du petit cercle intérieur.", "kind": "input" },
+      "R^2 - r^2": { "role": "Différence des carrés des rayons", "description": "Le carré du rayon extérieur diminué du carré du rayon intérieur.", "kind": "output" }
+    },
+    "realWorldExamples": ["Trouver la surface du dessus d'un beignet", "Surface d'une piste circulaire (les couloirs de course)"],
+    "relatedFormulas": ["circle-area-elem"]
+  },
+  "triangle-angle-sum": {
+    "name": "Somme des angles d'un triangle",
+    "oneLiner": "Propriété selon laquelle la somme des trois angles intérieurs d'un triangle vaut toujours 180 degrés",
+    "description": "La somme des angles d'un triangle est la propriété selon laquelle l'addition des angles de ses trois sommets donne toujours 180 degrés (un demi-tour). Quel que soit le triangle — acutangle, rectangle ou obtusangle — la somme de ses trois angles intérieurs vaut toujours 180 degrés.",
+    "field": "Géométrie",
+    "elementMeanings": {
+      "\\alpha": { "role": "Premier angle intérieur", "description": "Angle au premier sommet du triangle.", "kind": "input", "unit": "deg" },
+      "\\beta": { "role": "Deuxième angle intérieur", "description": "Angle au deuxième sommet du triangle.", "kind": "input", "unit": "deg" },
+      "\\gamma": { "role": "Troisième angle intérieur", "description": "Angle au troisième sommet du triangle.", "kind": "input", "unit": "deg" },
+      "180°": { "role": "Demi-tour", "description": "C'est l'angle formé par une droite, égal à la somme des angles d'un triangle.", "kind": "constant", "value": 180, "unit": "deg" }
+    },
+    "realWorldExamples": ["Trouver le troisième angle quand on connaît les deux autres", "Ajuster les angles d'une structure triangulaire en architecture"],
+    "relatedFormulas": ["triangle-area", "triangle-perimeter"]
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "ohm-law": {
+    "name": "Hukum Ohm",
+    "oneLiner": "Hukum dasar rangkaian listrik yang menyatakan tegangan sama dengan hasil kali arus dan hambatan",
+    "description": "Hukum Ohm menyatakan bahwa arus yang mengalir pada sebuah penghantar sebanding dengan tegangan di kedua ujungnya dan berbanding terbalik dengan hambatannya. Ini hubungan yang paling mendasar dalam analisis rangkaian listrik dan berlaku pada komponen linear yang hambatannya tetap. Inilah titik awal perancangan dan penelaahan rangkaian.",
+    "discoverer": "Georg Simon Ohm",
+    "field": "Teknik elektro",
+    "significance": "Dengan menetapkan hubungan kuantitatif antara tegangan, arus, dan hambatan, hukum ini meletakkan fondasi teori rangkaian listrik.",
+    "elementMeanings": {
+      "V": {
+        "role": "Tegangan",
+        "description": "Beda potensial pada kedua ujung penghantar. Satuan: volt (V).",
+        "kind": "input"
+      },
+      "I": {
+        "role": "Arus listrik",
+        "description": "Aliran muatan yang mengalir melalui penghantar. Satuan: ampere (A).",
+        "kind": "input"
+      },
+      "R": {
+        "role": "Hambatan",
+        "description": "Tingkat penghalangan terhadap aliran arus. Satuan: ohm (Ohm).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Hubungan antara tegangan pada bola lampu dan tingkat terangnya",
+      "Menghitung daya yang dipakai pemanas listrik rumah tangga"
+    ],
+    "relatedFormulas": ["electric-power", "kirchhoff-voltage", "impedance"]
+  },
+  "electric-power": {
+    "name": "Daya listrik",
+    "oneLiner": "Rumus yang menyatakan laju energi listrik dipakai atau dipasok per satuan waktu",
+    "description": "Daya listrik didefinisikan sebagai hasil kali tegangan dan arus, dan menyatakan laju perubahan energi listrik. Bila digabungkan dengan hukum Ohm, ia juga dapat ditulis sebagai P = I kuadrat R atau P = V kuadrat / R. Ini besaran yang sangat penting untuk merancang efisiensi dan kapasitas sistem kelistrikan.",
+    "discoverer": "James Watt",
+    "field": "Teknik elektro",
+    "significance": "Dengan mengukur pemakaian dan pasokan energi listrik, rumus ini menjadi dasar perancangan sistem pembangkitan, penyaluran, dan pendistribusian tenaga listrik.",
+    "elementMeanings": {
+      "P": {
+        "role": "Daya listrik",
+        "description": "Energi yang dipakai atau dipasok per satuan waktu. Satuan: watt (W).",
+        "kind": "output"
+      },
+      "I": {
+        "role": "Arus listrik",
+        "description": "Arus yang mengalir dalam rangkaian. Satuan: ampere (A).",
+        "kind": "input"
+      },
+      "V": {
+        "role": "Tegangan",
+        "description": "Beda potensial pada kedua ujung rangkaian. Satuan: volt (V).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Keterangan daya yang tertera pada alat elektronik rumah tangga",
+      "Dasar perhitungan tagihan listrik"
+    ],
+    "relatedFormulas": ["ohm-law", "kirchhoff-voltage", "kirchhoff-current"]
+  },
+  "kirchhoff-voltage": {
+    "name": "Hukum tegangan Kirchhoff",
+    "oneLiner": "Hukum yang menyatakan jumlah penurunan tegangan sepanjang satu putaran rangkaian tertutup sama dengan nol",
+    "description": "Hukum tegangan Kirchhoff (KVL) menyatakan bahwa jumlah aljabar seluruh penurunan dan kenaikan tegangan sepanjang sebarang loop tertutup sama dengan nol. Ini bentuk kelistrikan dari hukum kekekalan energi, dan sangat diperlukan untuk mencari tegangan yang belum diketahui pada jaringan rangkaian yang rumit.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Teknik elektro",
+    "significance": "Karena memungkinkan penelaahan jaringan rangkaian yang rumit secara sistematis, hukum ini menjadi salah satu pilar teori rangkaian modern.",
+    "elementMeanings": {
+      "\\sum V": {
+        "role": "Jumlah tegangan",
+        "description": "Jumlah aljabar seluruh penurunan dan kenaikan tegangan di dalam loop tertutup. Nilainya selalu 0.",
+        "kind": "output"
+      },
+      "V_k": {
+        "role": "Tegangan tiap komponen",
+        "description": "Tegangan pada masing-masing komponen di dalam loop. Sumber tegangan bertanda positif, hambatan bertanda negatif.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung pembagian tegangan pada tiap hambatan dalam rangkaian seri",
+      "Merancang tingkat tegangan pada papan rangkaian elektronik"
+    ],
+    "relatedFormulas": ["kirchhoff-current", "ohm-law", "impedance"]
+  },
+  "kirchhoff-current": {
+    "name": "Hukum arus Kirchhoff",
+    "oneLiner": "Hukum yang menyatakan jumlah arus yang masuk dan keluar pada sebarang simpul rangkaian sama dengan nol",
+    "description": "Hukum arus Kirchhoff (KCL) menyatakan bahwa pada simpul (node) mana pun dalam sebuah rangkaian, jumlah seluruh arus yang masuk sama dengan jumlah seluruh arus yang keluar. Ini akibat langsung dari hukum kekekalan muatan dan sangat diperlukan dalam analisis rangkaian paralel.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Teknik elektro",
+    "significance": "Dengan menerapkan asas kekekalan muatan pada penelaahan rangkaian, hukum ini menegakkan dasar metode analisis simpul.",
+    "elementMeanings": {
+      "\\sum I": {
+        "role": "Jumlah arus",
+        "description": "Jumlah aljabar seluruh arus yang masuk dan keluar pada satu simpul. Nilainya selalu 0.",
+        "kind": "output"
+      },
+      "I_k": {
+        "role": "Arus tiap cabang",
+        "description": "Arus yang mengalir pada masing-masing cabang (branch) yang terhubung ke simpul itu.",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung arus tiap cabang pada rangkaian hambatan paralel",
+      "Menganalisis keseimbangan beban pada sistem distribusi tenaga listrik"
+    ],
+    "relatedFormulas": ["kirchhoff-voltage", "ohm-law", "electric-power"]
+  },
+  "rc-time-constant": {
+    "name": "Konstanta waktu RC",
+    "oneLiner": "Konstanta waktu yang menentukan laju pengisian atau pengosongan pada rangkaian hambatan-kapasitor",
+    "description": "Konstanta waktu RC didefinisikan sebagai hasil kali hambatan dan kapasitansi, dan menyatakan waktu yang dibutuhkan kapasitor untuk terisi sampai kira-kira 63,2% dari tegangan akhirnya. Ini parameter kunci yang menentukan sifat tanggapan peralihan pada berbagai rangkaian elektronik, seperti perancangan tapis, rangkaian pewaktu, dan pengolahan sinyal.",
+    "discoverer": "Perkembangan bersama dalam teknik elektro",
+    "field": "Teknik elektro",
+    "significance": "Karena merangkum tanggapan peralihan dan sifat frekuensi dalam satu parameter, besaran ini menjadi alat utama perancangan rangkaian analog.",
+    "elementMeanings": {
+      "\\tau": {
+        "role": "Konstanta waktu",
+        "description": "Konstanta waktu yang menentukan laju tanggapan peralihan rangkaian. Satuan: sekon (s).",
+        "kind": "output"
+      },
+      "R": {
+        "role": "Hambatan",
+        "description": "Nilai hambatan rangkaian. Satuan: ohm (Ohm).",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Kapasitansi",
+        "description": "Kemampuan kapasitor menyimpan muatan. Satuan: farad (F).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Menentukan waktu pengisian lampu kilat kamera",
+      "Rangkaian pendeteksi sentuhan pada layar sentuh"
+    ],
+    "relatedFormulas": ["ohm-law", "impedance", "resonance-frequency"]
+  },
+  "impedance": {
+    "name": "Impedansi",
+    "oneLiner": "Hambatan total pada rangkaian arus bolak-balik yang menggabungkan hambatan, reaktansi induktif, dan reaktansi kapasitif",
+    "description": "Impedansi menyatakan keseluruhan pengaruh yang menghalangi aliran arus pada rangkaian arus bolak-balik. Ia merupakan gabungan komponen hambatan murni dengan komponen reaktansi (selisih antara yang bersifat induktif dan kapasitif) melalui teorema Pythagoras. Ini konsep yang sangat diperlukan untuk penelaahan rangkaian arus bolak-balik dan pengoptimalan efisiensi penyaluran daya.",
+    "discoverer": "Oliver Heaviside",
+    "field": "Teknik elektro",
+    "significance": "Dengan menyatukan hubungan fase yang rumit pada rangkaian arus bolak-balik ke dalam satu besaran, konsep ini menyistematiskan penelaahan rangkaian arus bolak-balik.",
+    "elementMeanings": {
+      "Z": {
+        "role": "Impedansi",
+        "description": "Hambatan total pada rangkaian arus bolak-balik. Satuan: ohm (Ohm).",
+        "kind": "output"
+      },
+      "R": {
+        "role": "Hambatan",
+        "description": "Komponen hambatan murni. Komponen inilah yang memakai energi.",
+        "kind": "input"
+      },
+      "X_L": {
+        "role": "Reaktansi induktif",
+        "description": "Reaktansi yang ditimbulkan induktor. X_L = 2 pi f L.",
+        "kind": "input"
+      },
+      "X_C": {
+        "role": "Reaktansi kapasitif",
+        "description": "Reaktansi yang ditimbulkan kapasitor. X_C = 1/(2 pi f C).",
+        "kind": "input"
+      }
+    },
+    "realWorldExamples": [
+      "Merancang sifat tanggapan sistem pengeras suara pada tiap frekuensi",
+      "Menekan serendah mungkin kehilangan daya pada saluran transmisi"
+    ],
+    "relatedFormulas": ["ohm-law", "resonance-frequency", "rc-time-constant"]
+  },
+  "resonance-frequency": {
+    "name": "Frekuensi resonansi",
+    "oneLiner": "Frekuensi saat reaktansi induktif dan reaktansi kapasitif menjadi sama pada rangkaian LC",
+    "description": "Frekuensi resonansi adalah frekuensi alami sebuah rangkaian yang tersusun dari induktor dan kapasitor, yaitu saat energi berpindah bolak-balik dengan bebas di antara kedua komponen itu. Pada frekuensi ini impedansi menjadi paling kecil (seri) atau paling besar (paralel), dan konsep ini dipakai luas mulai dari pemilihan frekuensi pada pesawat radio sampai pengisian daya nirkabel.",
+    "discoverer": "William Thomson (Lord Kelvin)",
+    "field": "Teknik elektro",
+    "significance": "Dengan menyediakan asas rangkaian pemilih frekuensi, konsep ini menegakkan dasar komunikasi nirkabel dan perancangan tapis.",
+    "elementMeanings": {
+      "f_0": {
+        "role": "Frekuensi resonansi",
+        "description": "Frekuensi alami saat rangkaian beresonansi. Satuan: hertz (Hz).",
+        "kind": "output"
+      },
+      "L": {
+        "role": "Induktansi",
+        "description": "Kemampuan induktor menyimpan energi magnetik. Satuan: henry (H).",
+        "kind": "input"
+      },
+      "C": {
+        "role": "Kapasitansi",
+        "description": "Kemampuan kapasitor menyimpan energi listrik. Satuan: farad (F).",
+        "kind": "input"
+      },
+      "2\\pi": {
+        "role": "Koefisien pi",
+        "description": "Faktor pengubah antara frekuensi sudut dan frekuensi biasa.",
+        "kind": "constant",
+        "value": 6.283185307,
+        "unit": ""
+      }
+    },
+    "realWorldExamples": [
+      "Menala frekuensi radio",
+      "Menetapkan frekuensi resonansi pada mesin MRI"
+    ],
+    "relatedFormulas": ["impedance", "rc-time-constant", "shannon-capacity"]
+  },
+  "shannon-capacity": {
+    "name": "Kapasitas kanal Shannon",
+    "oneLiner": "Laju pengiriman informasi terbesar yang dapat dikirim tanpa galat pada kanal yang berderau",
+    "description": "Teorema kapasitas kanal Shannon mendefinisikan laju pengiriman data terbesar yang secara teoretis dapat dicapai pada lebar pita dan nisbah sinyal terhadap derau (SNR) tertentu. Ia menunjukkan secara kuantitatif bahwa makin lebar pitanya dan makin tinggi SNR-nya, makin banyak informasi yang dapat dikirim. Teorema ini menyodorkan batas mendasar bagi teori informasi dan perancangan sistem komunikasi modern.",
+    "discoverer": "Claude Shannon",
+    "field": "Teknik elektro",
+    "significance": "Sebagai hasil inti teori informasi, teorema ini menyodorkan batas atas teoretis bagi perancangan semua sistem komunikasi digital.",
+    "elementMeanings": {
+      "C": {
+        "role": "Kapasitas kanal",
+        "description": "Laju bit terbesar yang dapat dikirim tanpa galat. Satuan: bit per sekon (bps).",
+        "kind": "output"
+      },
+      "B": {
+        "role": "Lebar pita",
+        "description": "Lebar rentang frekuensi yang dapat dipakai kanal. Satuan: hertz (Hz).",
+        "kind": "input"
+      },
+      "S": {
+        "role": "Daya sinyal",
+        "description": "Daya rata-rata sinyal yang diterima.",
+        "kind": "input"
+      },
+      "N": {
+        "role": "Daya derau",
+        "description": "Daya derau rata-rata pada kanal.",
+        "kind": "input"
+      },
+      "\\log_2": {
+        "role": "Logaritma berbasis 2",
+        "description": "Fungsi logaritma untuk menyatakan hasilnya dalam satuan bit.",
+        "kind": "structural"
+      }
+    },
+    "realWorldExamples": [
+      "Menghitung laju pengiriman terbesar secara teoretis pada sistem telekomunikasi bergerak 5G",
+      "Menentukan lebar pita saat merancang kanal Wi-Fi"
+    ],
+    "relatedFormulas": ["resonance-frequency", "ohm-law"]
+  }
+}

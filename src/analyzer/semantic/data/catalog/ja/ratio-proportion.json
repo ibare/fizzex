@@ -1,0 +1,72 @@
+{
+  "direct-proportion": {
+    "name": "比例",
+    "oneLiner": "一方の量が増えると、もう一方の量も同じ割合で増える関係",
+    "description": "比例 y = kx は、x が2倍になれば y も2倍、x が3倍になれば y も3倍になる関係です。グラフは原点を通る直線で、k が比例定数です。",
+    "field": "代数学",
+    "significance": "もっとも基本的な比例関係を表し、一次関数の特別な場合(y切片が0)として、比例の学習すべての出発点になります。",
+    "elementMeanings": {
+      "y": { "role": "従属変数", "description": "x によって決まる結果の値です。", "kind": "output" },
+      "k": { "role": "比例定数", "description": "x と y の間の一定の割合です。k = y/x で求められます。", "kind": "input" },
+      "x": { "role": "独立変数", "description": "自由に決められる入力の値です。", "kind": "input" }
+    },
+    "realWorldExamples": ["リンゴ1個が500円のときの、個数と代金の関係", "同じ速さで走るときの、時間と距離の関係"],
+    "relatedFormulas": ["linear-function", "inverse-proportion"]
+  },
+  "inverse-proportion": {
+    "name": "反比例",
+    "oneLiner": "一方の量が増えると、もう一方の量が同じ割合で減る関係",
+    "description": "反比例 y = k/x は、x が2倍になれば y は半分、x が3倍になれば y は1/3になる関係です。グラフは双曲線の形で、x軸と y軸に限りなく近づきますが、触れることはありません。",
+    "field": "代数学",
+    "significance": "積が一定に保たれる関係を表し、物理学のボイルの法則や、仕事と時間の関係などさまざまな現象の数学的な土台になります。",
+    "elementMeanings": {
+      "y": { "role": "従属変数", "description": "x によって決まる結果の値です。", "kind": "output" },
+      "k": { "role": "比例定数", "description": "x と y の積が常に一定になる値です。k = xy で求められます。", "kind": "input" },
+      "x": { "role": "独立変数", "description": "0ではない入力の値です。", "kind": "input" }
+    },
+    "realWorldExamples": ["同じ距離を進むとき、速さが大きいほど時間が短くなる関係", "面積が同じ長方形で、横が長いほど縦が短くなる関係"],
+    "relatedFormulas": ["direct-proportion", "speed-formula"]
+  },
+  "percentage": {
+    "name": "百分率",
+    "oneLiner": "全体を100としたときに、部分が占める大きさ",
+    "description": "百分率 p = (部分/全体) x 100 は、ある量が全体に占める割合を100を基準にして表したものです。パーセント(%)の記号を使い、比較や説明をしやすくしてくれます。",
+    "field": "算術",
+    "significance": "割引率、利率、成績、統計など、日常生活のあらゆる場面でもっとも広く使われる割合の表し方です。",
+    "elementMeanings": {
+      "p": { "role": "百分率", "description": "全体を100としたときの割合の値です。単位は % です。", "kind": "output", "unit": "%" },
+      "부분": { "role": "比べたい量", "description": "全体のうち、知りたい部分の大きさです。", "kind": "input" },
+      "전체": { "role": "基準になる量", "description": "100%にあたる全体の大きさです。", "kind": "input" }
+    },
+    "realWorldExamples": ["テストで正解した問題数の割合(80点 = 80%)", "商品が30%引きのときの実際の割引額の計算"],
+    "relatedFormulas": ["direct-proportion"]
+  },
+  "speed-formula": {
+    "name": "速さの公式",
+    "oneLiner": "進んだ距離をかかった時間で割って速さを求める公式",
+    "description": "速さの公式 v = d/t は、物体が単位時間あたりに進んだ距離を表します。距離・時間・速さという三つの量の関係をまとめた、もっとも基本的な物理の公式です。",
+    "field": "物理学",
+    "significance": "運動を説明するもっとも基礎的な公式であり、距離と時間と速さの関係を理解する出発点です。",
+    "elementMeanings": {
+      "v": { "role": "速さ", "description": "単位時間あたりに進む距離です。例えば時速60kmは、1時間に60km進むという意味です。", "kind": "output", "unit": "m/s" },
+      "d": { "role": "距離", "description": "物体が実際に進んだ長さです。", "kind": "input", "unit": "m" },
+      "t": { "role": "時間", "description": "進むのにかかった時間です。", "kind": "input", "unit": "s" }
+    },
+    "realWorldExamples": ["自動車が2時間で120km進んだときの時速を求める", "100m走の記録から平均の速さを計算する"],
+    "relatedFormulas": ["direct-proportion", "inverse-proportion", "density-formula"]
+  },
+  "density-formula": {
+    "name": "密度の公式",
+    "oneLiner": "物質が単位体積にどれだけ詰まっているかを表す公式",
+    "description": "密度の公式は、質量を体積で割って物質の詰まり具合を求めます。同じ大きさでも質量が大きければ密度は高く、同じ質量でも体積が大きければ密度は低くなります。",
+    "field": "物理学",
+    "significance": "物質の種類を見分けたり、水に浮くか沈むかを判断したりするのに使われる基本的な物理量です。",
+    "elementMeanings": {
+      "\\rho": { "role": "密度", "description": "単位体積あたりの質量です。単位はふつう g/cm3 または kg/m3 です。", "kind": "output", "unit": "kg/m3" },
+      "m": { "role": "質量", "description": "物体の量を表す値です。単位は g または kg です。", "kind": "input", "unit": "kg" },
+      "V": { "role": "体積", "description": "物体が占める空間の大きさです。単位は cm3 または m3 です。", "kind": "input", "unit": "m3" }
+    },
+    "realWorldExamples": ["鉄の球は沈み、木のブロックは水に浮く理由", "金と偽物の金を密度で見分ける方法"],
+    "relatedFormulas": ["speed-formula"]
+  }
+}

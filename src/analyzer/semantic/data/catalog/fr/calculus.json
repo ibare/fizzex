@@ -1,0 +1,727 @@
+{
+  "ftc": {
+    "name": "Théorème fondamental de l'analyse",
+    "oneLiner": "Théorème qui établit que la dérivation et l'intégration sont des opérations réciproques",
+    "description": "Le théorème fondamental de l'analyse montre que l'intégrale définie d'une fonction continue est égale à la différence des valeurs d'une primitive aux deux bornes. Grâce à lui, on peut calculer une intégrale définie à partir de la seule primitive, sans déterminer directement l'aire. C'est ce qui permet de réunir la dérivation et l'intégration en un même édifice.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "En établissant que la dérivation et l'intégration sont réciproques, il a posé les fondements de toute l'analyse.",
+    "elementMeanings": {
+      "f(x)": {
+        "role": "Intégrande",
+        "description": "Fonction continue que l'on intègre.",
+        "kind": "structural"
+      },
+      "F(x)": {
+        "role": "Primitive",
+        "description": "Intégrale indéfinie de f(x). Elle vérifie F'(x) = f(x).",
+        "kind": "structural"
+      },
+      "a": {
+        "role": "Borne inférieure",
+        "description": "Point de départ de l'intervalle d'intégration.",
+        "kind": "input"
+      },
+      "b": {
+        "role": "Borne supérieure",
+        "description": "Point d'arrivée de l'intervalle d'intégration.",
+        "kind": "input"
+      },
+      "dx": {
+        "role": "Variable d'intégration",
+        "description": "Variation infinitésimale qui indique que l'on intègre par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "derivative-definition",
+      "gaussian-integral"
+    ]
+  },
+  "taylor-series": {
+    "name": "Série de Taylor",
+    "oneLiner": "Développement qui exprime une fonction sous la forme d'un polynôme infini au voisinage d'un point",
+    "description": "La série de Taylor représente une fonction indéfiniment dérivable par une série entière construite à partir des valeurs de ses dérivées en un point a. Chaque terme est le produit d'un coefficient — la dérivée n-ième divisée par n! — par (x-a) élevé à la puissance n. C'est l'outil central pour approcher des fonctions compliquées en calcul numérique et en physique.",
+    "discoverer": "Brook Taylor",
+    "field": "Analyse",
+    "significance": "Elle permet d'approcher par des polynômes les fonctions transcendantes comme les fonctions trigonométriques ou exponentielles et constitue la base de l'analyse numérique.",
+    "elementMeanings": {
+      "f(x)": {
+        "role": "Fonction de départ",
+        "description": "Fonction que l'on cherche à développer en série.",
+        "kind": "structural"
+      },
+      "a": {
+        "role": "Centre du développement",
+        "description": "Point autour duquel on développe la série. Si a = 0, on parle de série de Maclaurin.",
+        "kind": "input"
+      },
+      "f^{(n)}(a)": {
+        "role": "Valeur de la dérivée n-ième",
+        "description": "Valeur de la n-ième dérivée au point a. Elle détermine le coefficient de chaque terme.",
+        "kind": "structural"
+      },
+      "n!": {
+        "role": "Factorielle",
+        "description": "Factorielle de n. Placée au dénominateur de chaque terme, elle en ajuste le coefficient.",
+        "kind": "structural"
+      },
+      "(x-a)^n": {
+        "role": "Terme puissance",
+        "description": "Puissance n-ième de la distance au centre a du développement.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "euler-identity",
+      "binomial-theorem",
+      "derivative-definition"
+    ]
+  },
+  "gaussian-integral": {
+    "name": "Intégrale de Gauss",
+    "oneLiner": "Intégrale de la fonction e puissance moins x carré, de moins l'infini à plus l'infini",
+    "description": "L'intégrale de Gauss établit que l'intégrale de e puissance moins x carré sur tout l'axe réel vaut racine de pi. Sa primitive ne s'exprime pas à l'aide de fonctions élémentaires, mais un procédé ingénieux fondé sur le passage en coordonnées polaires en donne la valeur. Elle est au fondement de la loi normale en probabilités et en statistique.",
+    "discoverer": "Carl Friedrich Gauss",
+    "field": "Analyse",
+    "significance": "Elle fournit la constante de normalisation de la loi normale et joue aussi un rôle central dans les intégrales de chemin de la mécanique quantique et de la physique statistique.",
+    "elementMeanings": {
+      "e^{-x^2}": {
+        "role": "Fonction gaussienne",
+        "description": "Fonction en forme de cloche. Elle tend brutalement vers 0 à mesure que x s'éloigne de 0.",
+        "kind": "structural"
+      },
+      "\\int_{-\\infty}^{\\infty}": {
+        "role": "Intégrale sur tout l'axe",
+        "description": "Intégrale de moins l'infini à plus l'infini.",
+        "kind": "structural"
+      },
+      "\\sqrt{\\pi}": {
+        "role": "Résultat de l'intégrale",
+        "description": "Valeur de l'intégrale de Gauss : la racine carrée du nombre pi.",
+        "kind": "output"
+      },
+      "dx": {
+        "role": "Variable d'intégration",
+        "description": "Elle indique que l'on intègre par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "normal-distribution",
+      "ftc"
+    ]
+  },
+  "derivative-definition": {
+    "name": "Définition de la dérivée",
+    "oneLiner": "Expression qui définit par une limite le taux de variation instantané d'une fonction",
+    "description": "La définition de la dérivée est la limite du rapport entre la variation de la fonction et celle de la variable indépendante. Lorsque cette limite existe, on dit que la fonction est dérivable en ce point, et sa valeur est le coefficient directeur de la tangente. C'est la notion la plus fondamentale de l'analyse.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "En définissant rigoureusement la notion de taux de variation instantané, elle a établi les fondements logiques de l'analyse.",
+    "elementMeanings": {
+      "f'(x)": {
+        "role": "Dérivée",
+        "description": "Taux de variation instantané en x. C'est le coefficient directeur de la tangente à la courbe.",
+        "kind": "output"
+      },
+      "f(x+h)": {
+        "role": "Valeur décalée de la fonction",
+        "description": "Valeur de la fonction au point décalé de h à partir de x.",
+        "kind": "structural"
+      },
+      "f(x)": {
+        "role": "Valeur de la fonction",
+        "description": "Valeur de la fonction au point x.",
+        "kind": "structural"
+      },
+      "h": {
+        "role": "Accroissement",
+        "description": "Accroissement infinitésimal de x. On le fait tendre vers 0 dans la limite.",
+        "kind": "input"
+      },
+      "\\lim_{h \\to 0}": {
+        "role": "Passage à la limite",
+        "description": "Opération qui fait tendre h vers 0.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "chain-rule",
+      "ftc",
+      "taylor-series"
+    ]
+  },
+  "chain-rule": {
+    "name": "Règle de dérivation en chaîne",
+    "oneLiner": "Règle qui donne la dérivée d'une fonction composée comme le produit des dérivées de la fonction extérieure et de la fonction intérieure",
+    "description": "La règle de dérivation en chaîne énonce que, pour dériver une fonction composée f(g(x)), il suffit de multiplier la dérivée de la fonction extérieure par celle de la fonction intérieure. Elle se prolonge dans le calcul différentiel à plusieurs variables et dans l'algorithme de rétropropagation, techniques centrales des mathématiques contemporaines et de l'intelligence artificielle.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "Elle permet de dériver systématiquement des fonctions composées compliquées et constitue le fondement mathématique de l'algorithme de rétropropagation en apprentissage profond.",
+    "elementMeanings": {
+      "f": {
+        "role": "Fonction extérieure",
+        "description": "Fonction placée à l'extérieur de la composition.",
+        "kind": "structural"
+      },
+      "g": {
+        "role": "Fonction intérieure",
+        "description": "Fonction placée à l'intérieur de la composition.",
+        "kind": "structural"
+      },
+      "f'(g(x))": {
+        "role": "Dérivée extérieure",
+        "description": "Valeur de la dérivée de la fonction extérieure évaluée en g(x).",
+        "kind": "structural"
+      },
+      "g'(x)": {
+        "role": "Dérivée intérieure",
+        "description": "Dérivée de la fonction intérieure par rapport à x.",
+        "kind": "structural"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "Variable par rapport à laquelle on dérive.",
+        "kind": "input"
+      }
+    },
+    "relatedFormulas": [
+      "derivative-definition",
+      "ftc"
+    ]
+  },
+  "product-rule": {
+    "name": "Règle de dérivation d'un produit",
+    "oneLiner": "Règle qui, pour dériver un produit de deux fonctions, dérive chacune à tour de rôle et additionne les résultats",
+    "description": "La règle du produit énonce que la dérivée du produit de deux fonctions f(x) et g(x) vaut f'(x)g(x) + f(x)g'(x). Elle se déduit naturellement du passage à la limite dans la définition de la dérivée et s'étend à un produit de trois fonctions ou plus. C'est l'une des règles de base les plus fréquemment employées dans les calculs de dérivées.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "Elle permet de traiter systématiquement la dérivation des fonctions données sous forme de produit et fonde théoriquement l'intégration par parties.",
+    "elementMeanings": {
+      "f": {
+        "role": "Première fonction",
+        "description": "Fonction placée à gauche du produit.",
+        "kind": "structural"
+      },
+      "g": {
+        "role": "Deuxième fonction",
+        "description": "Fonction placée à droite du produit.",
+        "kind": "structural"
+      },
+      "f'": {
+        "role": "Dérivée de la première fonction",
+        "description": "Résultat de la dérivation de f par rapport à x.",
+        "kind": "structural"
+      },
+      "g'": {
+        "role": "Dérivée de la deuxième fonction",
+        "description": "Résultat de la dérivation de g par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "derivative-definition",
+      "quotient-rule",
+      "integration-by-parts"
+    ],
+    "realWorldExamples": [
+      "En physique, la dérivée par rapport au temps de la quantité de mouvement p = mv : elle sert à obtenir la force lorsque la masse et la vitesse varient toutes deux",
+      "En économie, dériver la recette totale R = p(x) * x pour calculer la recette marginale"
+    ]
+  },
+  "quotient-rule": {
+    "name": "Règle de dérivation d'un quotient",
+    "oneLiner": "Règle qui, pour dériver un quotient de deux fonctions, croise les dérivées du numérateur et du dénominateur",
+    "description": "La règle du quotient énonce que la dérivée d'une fonction de la forme f(x)/g(x) vaut (f'g - fg')/g^2. Elle se déduit de la règle du produit et de la règle en chaîne et s'applique sur tout intervalle où le dénominateur ne s'annule pas. Elle est indispensable pour dériver les fonctions rationnelles ou les rapports de fonctions trigonométriques.",
+    "discoverer": "Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "Elle permet de traiter mécaniquement la dérivation des fonctions en forme de fraction et joue un rôle clé dans l'obtention des dérivées trigonométriques comme celle de tan x.",
+    "elementMeanings": {
+      "f": {
+        "role": "Fonction au numérateur",
+        "description": "Fonction qui occupe le numérateur du quotient.",
+        "kind": "structural"
+      },
+      "g": {
+        "role": "Fonction au dénominateur",
+        "description": "Fonction qui occupe le dénominateur du quotient. Elle doit vérifier g(x) != 0.",
+        "kind": "structural"
+      },
+      "f'": {
+        "role": "Dérivée du numérateur",
+        "description": "Résultat de la dérivation de f par rapport à x.",
+        "kind": "structural"
+      },
+      "g'": {
+        "role": "Dérivée du dénominateur",
+        "description": "Résultat de la dérivation de g par rapport à x.",
+        "kind": "structural"
+      },
+      "g^2": {
+        "role": "Carré du dénominateur",
+        "description": "Carré de g(x), qui figure au dénominateur du résultat.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "product-rule",
+      "derivative-definition",
+      "chain-rule"
+    ],
+    "realWorldExamples": [
+      "Utile pour obtenir le taux de variation du rapport soluté/solution dans un calcul de concentration",
+      "Analyser la variation du rapport tension/intensité dans un circuit électrique pour suivre l'évolution de l'impédance"
+    ]
+  },
+  "power-rule": {
+    "name": "Dérivée d'une fonction puissance",
+    "oneLiner": "Règle selon laquelle dériver x puissance n fait descendre l'exposant en facteur et diminue cet exposant de 1",
+    "description": "La dérivée d'une fonction puissance est la formule la plus élémentaire du calcul différentiel : d/dx(x^n) = nx^(n-1). Elle se démontre par la formule du binôme pour un exposant entier naturel, et à l'aide des fonctions exponentielle et logarithme pour un exposant réel. C'est le point de départ de la dérivation de presque toutes les fonctions polynomiales.",
+    "discoverer": "Isaac Newton",
+    "field": "Analyse",
+    "significance": "Première étape de l'apprentissage de la dérivation et formule de dérivation la plus fréquemment employée, elle fonde la dérivation des fonctions polynomiales.",
+    "elementMeanings": {
+      "x": {
+        "role": "Variable indépendante",
+        "description": "Variable par rapport à laquelle on dérive.",
+        "kind": "input"
+      },
+      "n": {
+        "role": "Exposant",
+        "description": "Exposant de la puissance. Il peut être entier naturel, entier relatif ou réel.",
+        "kind": "input"
+      },
+      "x^n": {
+        "role": "Fonction puissance",
+        "description": "x à la puissance n. C'est la fonction que l'on dérive.",
+        "kind": "structural"
+      },
+      "nx^{n-1}": {
+        "role": "Dérivée",
+        "description": "Résultat où l'exposant n est descendu en coefficient et où l'exposant est réduit à n-1.",
+        "kind": "output"
+      }
+    },
+    "relatedFormulas": [
+      "derivative-definition",
+      "power-integral",
+      "chain-rule"
+    ],
+    "realWorldExamples": [
+      "S'applique lorsqu'on dérive par rapport au temps la distance de chute libre s = (1/2)gt^2 pour obtenir la vitesse v = gt",
+      "La relation qui fait que dériver l'aire du disque A = pi*r^2 par rapport au rayon donne le périmètre 2*pi*r"
+    ]
+  },
+  "exp-derivative": {
+    "name": "Dérivée de la fonction exponentielle",
+    "oneLiner": "Propriété selon laquelle la fonction exponentielle e^x est sa propre dérivée",
+    "description": "La dérivée de la fonction exponentielle exprime cette propriété remarquable : d/dx(e^x) = e^x. La constante de Néper e est la seule base qui vérifie cette reproduction d'elle-même, ce qui en fait la clé des équations différentielles et de la modélisation des phénomènes naturels. Pour une exponentielle de base quelconque, la dérivée de a^x vaut a^x * ln(a).",
+    "discoverer": "Leonhard Euler",
+    "field": "Analyse",
+    "significance": "Seule fonction dont la forme reste inchangée par dérivation, elle est la solution de base des équations différentielles et le socle de la modélisation des phénomènes naturels.",
+    "elementMeanings": {
+      "e": {
+        "role": "Constante de Néper",
+        "description": "Environ 2,71828... C'est le nombre irrationnel qui sert de base au logarithme népérien.",
+        "kind": "constant",
+        "value": 2.71828183
+      },
+      "e^x": {
+        "role": "Fonction exponentielle",
+        "description": "e à la puissance x. Sa dérivée est elle-même.",
+        "kind": "structural"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "Variable placée en exposant.",
+        "kind": "input"
+      },
+      "\\frac{d}{dx}": {
+        "role": "Opérateur de dérivation",
+        "description": "Opérateur qui effectue la dérivation par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "log-derivative",
+      "chain-rule",
+      "maclaurin-exp"
+    ],
+    "realWorldExamples": [
+      "Utile pour obtenir la vitesse de désintégration dans la décroissance radioactive N(t) = N_0 * e^(-lambda*t)",
+      "Le modèle des intérêts composés continus, où la croissance du capital est proportionnelle au solde courant"
+    ]
+  },
+  "log-derivative": {
+    "name": "Dérivée de la fonction logarithme",
+    "oneLiner": "Formule selon laquelle la dérivée du logarithme népérien ln x vaut 1 sur x",
+    "description": "La dérivée de la fonction logarithme donne un résultat très simple : d/dx(ln x) = 1/x. Elle se déduit de la relation de réciprocité avec la dérivée de la fonction exponentielle. Elle est définie pour x > 0 et, réciproquement en intégration, une primitive de 1/x est ln|x| + C.",
+    "discoverer": "Leonhard Euler",
+    "field": "Analyse",
+    "significance": "Elle fournit une primitive de 1/x et, par la dérivation logarithmique, simplifie la dérivation de produits et de puissances compliqués.",
+    "elementMeanings": {
+      "\\ln x": {
+        "role": "Logarithme népérien",
+        "description": "Fonction logarithme de base e. Elle est définie pour x > 0.",
+        "kind": "structural"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "Argument du logarithme, et variable par rapport à laquelle on dérive.",
+        "kind": "input"
+      },
+      "\\frac{1}{x}": {
+        "role": "Dérivée",
+        "description": "Dérivée de ln x. Elle est inversement proportionnelle à x.",
+        "kind": "output"
+      },
+      "\\frac{d}{dx}": {
+        "role": "Opérateur de dérivation",
+        "description": "Opérateur qui effectue la dérivation par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "exp-derivative",
+      "chain-rule",
+      "power-rule"
+    ],
+    "realWorldExamples": [
+      "Sert à analyser le taux de variation de l'entropie H = -sum(p * ln p) en théorie de l'information",
+      "La loi de Weber-Fechner : elle modélise la relation logarithmique entre l'intensité d'un stimulus et celle de la sensation"
+    ]
+  },
+  "sin-derivative": {
+    "name": "Dérivée d'une fonction trigonométrique (sinus)",
+    "oneLiner": "Formule selon laquelle la dérivée de sin x vaut cos x",
+    "description": "C'est le résultat le plus élémentaire de la dérivation des fonctions trigonométriques : d/dx(sin x) = cos x. Il se démontre à partir de la définition de la dérivée, en utilisant la limite lim(h->0) sin(h)/h = 1. Comme la dérivée de cos x vaut -sin x, le sinus et le cosinus se répondent en cycle par dérivation.",
+    "discoverer": "Leonhard Euler",
+    "field": "Analyse",
+    "significance": "Indispensable à la description mathématique des phénomènes périodiques, elle est à la base de l'équation des ondes et de l'étude du mouvement harmonique.",
+    "elementMeanings": {
+      "\\sin x": {
+        "role": "Fonction sinus",
+        "description": "Fonction trigonométrique élémentaire, de période 2 pi.",
+        "kind": "structural"
+      },
+      "\\cos x": {
+        "role": "Dérivée (cosinus)",
+        "description": "Résultat de la dérivation de sin x. Sa phase est en avance de pi/2 sur celle du sinus.",
+        "kind": "output"
+      },
+      "x": {
+        "role": "Variable indépendante",
+        "description": "Variable d'angle, exprimée en radians.",
+        "kind": "input"
+      },
+      "\\frac{d}{dx}": {
+        "role": "Opérateur de dérivation",
+        "description": "Opérateur qui effectue la dérivation par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "chain-rule",
+      "derivative-definition",
+      "maclaurin-sin"
+    ],
+    "realWorldExamples": [
+      "Sert à dériver le déplacement theta(t) = A*sin(omega*t) d'un pendule simple pour obtenir sa vitesse angulaire",
+      "Dériver la tension alternative V(t) = V_0*sin(omega*t) pour établir la relation de phase du courant"
+    ]
+  },
+  "power-integral": {
+    "name": "Primitive d'une fonction puissance",
+    "oneLiner": "Formule selon laquelle intégrer x puissance n augmente l'exposant de 1 et divise par ce nouvel exposant",
+    "description": "La primitive d'une fonction puissance est l'opération inverse de la dérivation : l'intégrale de x^n vaut x^(n+1)/(n+1) + C, avec n != -1. C'est la règle de dérivation des puissances appliquée à l'envers ; le cas n = -1 se traite à part et donne ln|x| + C. C'est la formule d'intégration la plus élémentaire pour les fonctions polynomiales.",
+    "discoverer": "Isaac Newton, Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "Premier pas de l'apprentissage de l'intégration, c'est la formule de primitive la plus fréquemment utilisée.",
+    "elementMeanings": {
+      "x^n": {
+        "role": "Intégrande",
+        "description": "Fonction puissance que l'on intègre.",
+        "kind": "structural"
+      },
+      "n": {
+        "role": "Exposant",
+        "description": "Exposant de la puissance. Il doit vérifier n != -1.",
+        "kind": "input"
+      },
+      "x^{n+1}": {
+        "role": "Puissance du résultat",
+        "description": "Puissance dont l'exposant a augmenté de 1.",
+        "kind": "structural"
+      },
+      "n+1": {
+        "role": "Nouvel exposant (dénominateur)",
+        "description": "Placé au dénominateur du résultat, il fait que la dérivation restitue la fonction de départ.",
+        "kind": "structural"
+      },
+      "C": {
+        "role": "Constante d'intégration",
+        "description": "Constante arbitraire de la primitive. C'est le terme qui disparaît à la dérivation.",
+        "kind": "constant"
+      },
+      "dx": {
+        "role": "Variable d'intégration",
+        "description": "Elle indique que l'on intègre par rapport à x.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "power-rule",
+      "ftc",
+      "log-derivative"
+    ],
+    "realWorldExamples": [
+      "Sert à intégrer la vitesse v = at par rapport au temps pour obtenir la distance parcourue s = (1/2)at^2",
+      "En mécanique des fluides, intégrer la répartition des pressions pour calculer la force totale"
+    ]
+  },
+  "integration-by-parts": {
+    "name": "Intégration par parties",
+    "oneLiner": "Technique qui, pour intégrer un produit de deux fonctions, dérive l'une et intègre l'autre",
+    "description": "L'intégration par parties est la transposition à l'intégrale de la règle de dérivation d'un produit : int(u dv) = uv - int(v du). Elle transforme un produit difficile à intégrer directement en une forme plus maniable. Tout tient au choix judicieux de u et de dv ; on l'applique parfois plusieurs fois de suite, ou l'on exploite une relation de récurrence.",
+    "discoverer": "Brook Taylor",
+    "field": "Analyse",
+    "significance": "Version intégrale de la règle du produit, elle est indispensable à l'intégration des fonctions réciproques comme ln x ou arctan x, ainsi que de nombreuses fonctions transcendantes.",
+    "elementMeanings": {
+      "u": {
+        "role": "Fonction à dériver",
+        "description": "Fonction choisie comme celle que l'on dérive au cours du procédé.",
+        "kind": "structural"
+      },
+      "dv": {
+        "role": "Partie à intégrer",
+        "description": "Forme différentielle choisie comme celle que l'on intègre au cours du procédé.",
+        "kind": "structural"
+      },
+      "v": {
+        "role": "Primitive de dv",
+        "description": "Résultat de l'intégration de dv.",
+        "kind": "structural"
+      },
+      "du": {
+        "role": "Différentielle de u",
+        "description": "Résultat de la dérivation de u.",
+        "kind": "structural"
+      },
+      "uv": {
+        "role": "Terme de bord",
+        "description": "Produit de u et de v. Dans une intégrale définie, on y substitue les valeurs aux deux bornes.",
+        "kind": "output"
+      }
+    },
+    "relatedFormulas": [
+      "product-rule",
+      "ftc",
+      "power-integral"
+    ],
+    "realWorldExamples": [
+      "Obtenir la formule de la transformée de Laplace L{t*f(t)} en passant par une intégration par parties",
+      "En probabilités, calculer l'espérance E[X] = int(x * f(x) dx), où on l'emploie très souvent"
+    ]
+  },
+  "maclaurin-exp": {
+    "name": "Série de Maclaurin de la fonction exponentielle",
+    "oneLiner": "Série qui développe e^x autour de x = 0 en le polynôme infini 1 + x + x^2/2! + ...",
+    "description": "La série de Maclaurin de la fonction exponentielle s'écrit e^x = sum(x^n / n!, n=0..inf) et converge pour tout réel x. Comme toutes les dérivées successives de e^x valent e^x et prennent la valeur 1 en x = 0, le coefficient de chaque terme est 1/n!. C'est la méthode la plus élémentaire pour approcher l'exponentielle en calcul numérique, et le point de départ de l'obtention de la formule d'Euler.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Analyse",
+    "significance": "Elle fournit l'approximation polynomiale de la fonction exponentielle et constitue l'étape clé de l'obtention de l'identité d'Euler e^(i*pi) + 1 = 0.",
+    "elementMeanings": {
+      "e^x": {
+        "role": "Fonction de départ",
+        "description": "Fonction exponentielle que l'on développe en série.",
+        "kind": "structural"
+      },
+      "x^n": {
+        "role": "Terme puissance",
+        "description": "x à la puissance n. C'est le numérateur du n-ième terme.",
+        "kind": "structural"
+      },
+      "n!": {
+        "role": "Factorielle",
+        "description": "Factorielle de n. C'est le dénominateur du n-ième terme.",
+        "kind": "structural"
+      },
+      "\\sum_{n=0}^{\\infty}": {
+        "role": "Série infinie",
+        "description": "Opération qui additionne tous les termes de n = 0 jusqu'à l'infini.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "taylor-series",
+      "exp-derivative",
+      "euler-identity"
+    ],
+    "realWorldExamples": [
+      "Les calculatrices et les ordinateurs utilisent un nombre fini de termes de cette série pour calculer e^x",
+      "En mécanique quantique, développer en série l'opérateur d'évolution temporelle e^(-iHt) pour en faire un calcul approché"
+    ]
+  },
+  "maclaurin-sin": {
+    "name": "Série de Maclaurin de la fonction sinus",
+    "oneLiner": "Série qui développe sin x autour de x = 0 en x - x^3/3! + x^5/5! - ...",
+    "description": "La série de Maclaurin du sinus s'écrit sin x = sum((-1)^n * x^(2n+1) / (2n+1)!, n=0..inf). Seuls les termes de degré impair y apparaissent, et leurs signes alternent. Elle converge pour tout réel x, et son premier terme correspond à l'approximation sin x proche de x pour les petites valeurs de x.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Analyse",
+    "significance": "Elle rend possible l'approximation polynomiale des fonctions trigonométriques et fournit la justification mathématique de l'approximation des petits angles sin x proche de x.",
+    "elementMeanings": {
+      "\\sin x": {
+        "role": "Fonction de départ",
+        "description": "Fonction sinus que l'on développe en série.",
+        "kind": "structural"
+      },
+      "(-1)^n": {
+        "role": "Facteur d'alternance des signes",
+        "description": "Il fait alterner le signe des termes entre plus et moins.",
+        "kind": "structural"
+      },
+      "x^{2n+1}": {
+        "role": "Terme de puissance impaire",
+        "description": "Seuls les degrés impairs apparaissent, parce que le sinus est une fonction impaire.",
+        "kind": "structural"
+      },
+      "(2n+1)!": {
+        "role": "Factorielle",
+        "description": "Dénominateur de chaque terme. Elle assure la convergence de la série.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "taylor-series",
+      "sin-derivative",
+      "maclaurin-cos"
+    ],
+    "realWorldExamples": [
+      "En physique, appliquer l'approximation des petits angles (sin theta proche de theta) pour obtenir la formule de la période d'un pendule simple",
+      "En traitement numérique du signal, approcher une sinusoïde par un polynôme pour la calculer rapidement"
+    ]
+  },
+  "maclaurin-cos": {
+    "name": "Série de Maclaurin de la fonction cosinus",
+    "oneLiner": "Série qui développe cos x autour de x = 0 en 1 - x^2/2! + x^4/4! - ...",
+    "description": "La série de Maclaurin du cosinus s'écrit cos x = sum((-1)^n * x^(2n) / (2n)!, n=0..inf). Seuls les termes de degré pair y apparaissent, et leurs signes alternent. En dérivant terme à terme la série du sinus, on obtient celle du cosinus : la dérivation confirme ainsi la relation entre les deux séries.",
+    "discoverer": "Colin Maclaurin",
+    "field": "Analyse",
+    "significance": "Elle fournit l'approximation polynomiale du cosinus et sert, avec la série du sinus, à obtenir la formule d'Euler.",
+    "elementMeanings": {
+      "\\cos x": {
+        "role": "Fonction de départ",
+        "description": "Fonction cosinus que l'on développe en série.",
+        "kind": "structural"
+      },
+      "(-1)^n": {
+        "role": "Facteur d'alternance des signes",
+        "description": "Il fait alterner le signe des termes entre plus et moins.",
+        "kind": "structural"
+      },
+      "x^{2n}": {
+        "role": "Terme de puissance paire",
+        "description": "Seuls les degrés pairs apparaissent, parce que le cosinus est une fonction paire.",
+        "kind": "structural"
+      },
+      "(2n)!": {
+        "role": "Factorielle",
+        "description": "Dénominateur de chaque terme. Elle assure la convergence de la série.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "taylor-series",
+      "maclaurin-sin",
+      "maclaurin-exp"
+    ],
+    "realWorldExamples": [
+      "En optique, utiliser cos theta proche de 1 - theta^2/2 pour calculer approximativement les aberrations d'une lentille",
+      "En robotique, approcher par un polynôme le cosinus d'une matrice de rotation pour la commande en temps réel"
+    ]
+  },
+  "lhopital-rule": {
+    "name": "Règle de L'Hôpital",
+    "oneLiner": "Théorème qui calcule une limite indéterminée de la forme 0/0 ou infini/infini par le rapport des dérivées du numérateur et du dénominateur",
+    "description": "La règle de L'Hôpital énonce que, lorsqu'une limite prend une forme indéterminée telle que 0/0 ou infini/infini, la limite du rapport des dérivées du numérateur et du dénominateur est égale à la limite cherchée. On peut l'appliquer plusieurs fois de suite si nécessaire, mais jamais en dehors d'une forme indéterminée. Elle se démontre rigoureusement à l'aide du théorème des accroissements finis de Cauchy.",
+    "discoverer": "Guillaume de L'Hôpital (découverte de Jean Bernoulli)",
+    "field": "Analyse",
+    "significance": "En ramenant le calcul des limites indéterminées à un problème de dérivation, elle offre un outil puissant pour le calcul des limites.",
+    "elementMeanings": {
+      "\\lim_{x \\to c}": {
+        "role": "Passage à la limite",
+        "description": "Opération qui fait tendre x vers c.",
+        "kind": "structural"
+      },
+      "f(x)": {
+        "role": "Fonction au numérateur",
+        "description": "Fonction qui occupe le numérateur dans la limite.",
+        "kind": "structural"
+      },
+      "g(x)": {
+        "role": "Fonction au dénominateur",
+        "description": "Fonction qui occupe le dénominateur dans la limite.",
+        "kind": "structural"
+      },
+      "f'(x)": {
+        "role": "Dérivée du numérateur",
+        "description": "Résultat de la dérivation de f(x) par rapport à x.",
+        "kind": "structural"
+      },
+      "g'(x)": {
+        "role": "Dérivée du dénominateur",
+        "description": "Résultat de la dérivation de g(x) par rapport à x.",
+        "kind": "structural"
+      },
+      "\\frac{0}{0}": {
+        "role": "Forme indéterminée",
+        "description": "Forme indéterminée où le numérateur et le dénominateur tendent tous deux vers 0.",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "derivative-definition",
+      "taylor-series"
+    ],
+    "realWorldExamples": [
+      "En physique, calculer la limite de la probabilité de transition lorsque l'écart entre deux niveaux d'énergie tend vers 0",
+      "En économie, analyser le profit dans une situation où le coût marginal et la recette marginale tendent simultanément vers 0"
+    ]
+  },
+  "tangent": {
+    "name": "Tangente",
+    "oneLiner": "Droite qui passe par un point d'une courbe et qui a en ce point la même pente que la courbe",
+    "description": "La tangente à la courbe y = f(x) au point (a, f(a)) est la droite y - f(a) = f'(a)(x - a), dont le coefficient directeur est la valeur de la dérivée f'(a). C'est la fonction affine qui approche le mieux la courbe au voisinage de ce point, et elle donne une traduction géométrique du taux de variation instantané. Le sens le plus intuitif de la dérivation s'y visualise directement sur la courbe.",
+    "discoverer": "Pierre de Fermat, Isaac Newton, Gottfried Leibniz",
+    "field": "Analyse",
+    "significance": "En montrant le sens géométrique de la dérivée sous la forme d'une droite tracée sur la courbe, elle est le point de départ qui relie la notion de dérivation à l'intuition visuelle.",
+    "elementMeanings": {
+      "f(x)": {
+        "role": "Courbe",
+        "description": "Fonction à laquelle on veut mener une tangente.",
+        "kind": "input"
+      },
+      "x": {
+        "role": "Abscisse du point de contact",
+        "description": "Point qui détermine où l'on place la tangente sur la courbe.",
+        "kind": "input"
+      },
+      "f'(x)": {
+        "role": "Pente de la tangente",
+        "description": "Valeur de la dérivée au point x. Elle détermine le coefficient directeur de la tangente.",
+        "kind": "output"
+      },
+      "y - f(x) = f'(x)(X - x)": {
+        "role": "Équation de la tangente",
+        "description": "Droite qui passe par le point (x, f(x)) et dont la pente vaut f'(x).",
+        "kind": "structural"
+      }
+    },
+    "relatedFormulas": [
+      "derivative-definition",
+      "chain-rule",
+      "taylor-series"
+    ]
+  }
+}

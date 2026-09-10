@@ -1,0 +1,137 @@
+{
+  "gini-coefficient": {
+    "name": "Coeficiente de Gini",
+    "oneLiner": "Medida que expresa con un valor entre 0 y 1 el grado de desigualdad de la renta o de la riqueza",
+    "description": "El coeficiente de Gini se calcula como la proporción del área comprendida entre la curva de Lorenz y la línea de igualdad perfecta. Un valor de 0 significa igualdad total (todo el mundo tiene la misma renta) y un valor de 1, desigualdad total (una sola persona lo acapara todo). Es el indicador de desigualdad más utilizado para comparar países y evaluar políticas.",
+    "discoverer": "Corrado Gini",
+    "field": "Ciencias sociales",
+    "significance": "Al condensar la desigualdad económica en una única cifra, se ha convertido en el indicador de referencia para la comparación internacional y el diseño de políticas.",
+    "elementMeanings": {
+      "G": { "role": "Coeficiente de Gini", "description": "Es la medida de desigualdad, comprendida entre 0 (igualdad total) y 1 (desigualdad total).", "kind": "output" },
+      "L(x)": { "role": "Curva de Lorenz", "description": "Es la curva que indica la proporción acumulada de renta para cada proporción x de población.", "kind": "structural" },
+      "\\int L(x) dx": { "role": "Área bajo la curva de Lorenz", "description": "Es el área que queda bajo la curva de Lorenz entre 0 y 1.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Indicador clave que utiliza el Banco Mundial para comparar la desigualdad de renta entre países",
+      "Evaluar cuantitativamente el cambio en la distribución de la renta antes y después de aplicar una política social"
+    ],
+    "relatedFormulas": ["laffer-curve"]
+  },
+  "ebbinghaus-curve": {
+    "name": "Curva del olvido de Ebbinghaus",
+    "oneLiner": "Curva que describe cómo la memoria decae de forma exponencial con el paso del tiempo",
+    "description": "La curva del olvido de Ebbinghaus muestra que la proporción de contenido retenido disminuye exponencialmente a medida que pasa el tiempo desde el aprendizaje. La pérdida de memoria es más rápida justo después de aprender y se va ralentizando con el tiempo. Repasando de forma repetida (repetición espaciada) se puede aumentar la fuerza de memoria S y frenar así el olvido.",
+    "discoverer": "Hermann Ebbinghaus",
+    "field": "Ciencias sociales",
+    "significance": "Fue pionera en el estudio cuantitativo de la memoria humana y sentó las bases de estrategias de aprendizaje con respaldo científico, como la repetición espaciada.",
+    "elementMeanings": {
+      "R": { "role": "Proporción retenida", "description": "Es la parte de lo aprendido que sigue en la memoria. Toma valores entre 0 y 1.", "kind": "output" },
+      "t": { "role": "Tiempo transcurrido", "description": "Es el tiempo que ha pasado desde el momento del aprendizaje.", "kind": "input" },
+      "S": { "role": "Fuerza de memoria", "description": "Es la estabilidad del recuerdo. Aumenta con el repaso repetido y, cuanto mayor es, más lento es el olvido.", "kind": "input" },
+      "e^{-t/S}": { "role": "Decaimiento exponencial", "description": "Representa la disminución exponencial según la razón entre el tiempo y la fuerza de memoria.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "El principio con el que aplicaciones de repetición espaciada como Anki calculan el momento óptimo de repaso",
+      "El fenómeno por el que, al aprender vocabulario de un idioma extranjero, se olvida más del 70 % en un solo día si no se repasa"
+    ],
+    "relatedFormulas": ["malthus-population"]
+  },
+  "malthus-population": {
+    "name": "Modelo de población de Malthus",
+    "oneLiner": "Modelo de crecimiento geométrico según el cual la población crece exponencialmente a una tasa constante",
+    "description": "El modelo de población de Malthus supone que, si no hay restricciones de recursos, la población crece exponencialmente con una tasa de crecimiento constante. La población futura se estima multiplicando la población inicial por la exponencial del producto de la tasa de crecimiento natural y el tiempo. En la realidad existen límites de recursos y resistencia ambiental, por lo que se complementa con el modelo logístico, pero sigue siendo útil como marco básico de predicción a corto plazo.",
+    "discoverer": "Thomas Malthus",
+    "field": "Ciencias sociales",
+    "significance": "Impulsó el debate académico sobre la superpoblación y la escasez de recursos, y puso los cimientos de la demografía y la ecología.",
+    "elementMeanings": {
+      "N(t)": { "role": "Población en el instante t", "description": "Es la población total en el instante t.", "kind": "output" },
+      "N_0": { "role": "Población inicial", "description": "Es la población en el instante t = 0.", "kind": "input" },
+      "r": { "role": "Tasa de crecimiento natural", "description": "Es la tasa neta de crecimiento de la población: la natalidad menos la mortalidad.", "kind": "input" },
+      "t": { "role": "Tiempo", "description": "Es el tiempo transcurrido desde el instante inicial.", "kind": "input" },
+      "e^{rt}": { "role": "Factor de crecimiento exponencial", "description": "Representa el aumento geométrico según el producto de la tasa de crecimiento y el tiempo.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Modelo para predecir la tendencia de crecimiento demográfico a corto plazo en países en desarrollo",
+      "Predecir la multiplicación de individuos en un cultivo bacteriano en un entorno inicial sin restricciones"
+    ],
+    "relatedFormulas": ["ebbinghaus-curve", "gravity-model"]
+  },
+  "weber-fechner": {
+    "name": "Ley de Weber-Fechner",
+    "oneLiner": "Ley psicofísica según la cual la magnitud de la sensación es proporcional al logaritmo de la intensidad del estímulo",
+    "description": "La ley de Weber-Fechner explica que la intensidad física del estímulo debe crecer de forma geométrica para que la magnitud de la sensación crezca de forma aritmética. Es decir, cuando el estímulo es débil se detectan bien incluso los cambios pequeños, pero cuando es fuerte hace falta un cambio grande para notar la diferencia. Muestra que los sentidos humanos funcionan en escala logarítmica.",
+    "discoverer": "Ernst Weber, Gustav Fechner",
+    "field": "Ciencias sociales",
+    "significance": "Fundó la psicofísica y abrió la vía para medir cuantitativamente las sensaciones subjetivas; también ha influido en el diseño de experiencia de usuario y en la ingeniería acústica.",
+    "elementMeanings": {
+      "S": { "role": "Magnitud de la sensación", "description": "Es la intensidad del estímulo tal como la percibe subjetivamente una persona.", "kind": "output" },
+      "k": { "role": "Constante de proporcionalidad", "description": "Es una constante que cambia según la modalidad sensorial (vista, oído, etc.).", "kind": "input" },
+      "I": { "role": "Intensidad del estímulo", "description": "Es la intensidad del estímulo medida físicamente.", "kind": "input" },
+      "I_0": { "role": "Estímulo umbral", "description": "Es la intensidad mínima de estímulo que se puede detectar (umbral absoluto).", "kind": "input" },
+      "\\ln(I/I_0)": { "role": "Logaritmo de la razón de estímulos", "description": "Es el logaritmo natural del cociente entre el estímulo actual y el umbral.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Por qué el decibelio (dB) es una unidad logarítmica: hace falta diez veces más energía sonora para percibir 'el doble de ruido'",
+      "La corrección gamma del brillo de pantalla, que divide en pasos finos la zona oscura y en pasos amplios la zona clara"
+    ],
+    "relatedFormulas": ["elo-rating"]
+  },
+  "elo-rating": {
+    "name": "Sistema de puntuación Elo",
+    "oneLiner": "Sistema de clasificación que calcula la probabilidad esperada de victoria a partir de la diferencia de nivel entre dos jugadores",
+    "description": "La puntuación Elo calcula la probabilidad esperada de victoria introduciendo la diferencia de puntuación entre dos jugadores en una función logística. Con una diferencia de 400 puntos, la probabilidad esperada de victoria del jugador mejor clasificado es de alrededor del 91 %. La puntuación se actualiza según el resultado de cada partida, y cuanto más inesperado es el resultado, mayor es la variación.",
+    "discoverer": "Arpad Elo",
+    "field": "Ciencias sociales",
+    "significance": "Empezó en el ajedrez y se ha convertido en el estándar internacional para valorar el nivel de juego en el deporte, los deportes electrónicos y los sistemas de emparejamiento.",
+    "elementMeanings": {
+      "E_A": { "role": "Probabilidad esperada de victoria de A", "description": "Es la probabilidad con la que se espera que el jugador A gane a B.", "kind": "output" },
+      "R_A": { "role": "Puntuación de A", "description": "Es la puntuación actual que refleja el nivel del jugador A.", "kind": "input" },
+      "R_B": { "role": "Puntuación de B", "description": "Es la puntuación actual que refleja el nivel del jugador B.", "kind": "input" },
+      "10^{(R_B - R_A)/400}": { "role": "Conversión de la diferencia de puntuación", "description": "Es el término exponencial que convierte la diferencia de puntuación entre los dos jugadores en una razón de probabilidades.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Cálculo de la clasificación oficial de los jugadores en un campeonato mundial de ajedrez",
+      "Emparejamiento por nivel en el sistema de partidas de juegos en línea como League of Legends"
+    ],
+    "relatedFormulas": ["sigmoid", "weber-fechner"]
+  },
+  "laffer-curve": {
+    "name": "Curva de Laffer",
+    "oneLiner": "Curva que representa la relación entre el tipo impositivo y la recaudación, según la cual un tipo extremadamente alto acaba reduciendo lo recaudado",
+    "description": "La curva de Laffer visualiza la idea de que, como con un tipo impositivo del 0 % la recaudación es nula y con un tipo del 100 % también lo es (porque la actividad económica se detendría), entre ambos extremos debe existir un tipo óptimo que maximiza la recaudación. Más que una fórmula precisa, lo esencial es la intuición cualitativa de una relación en forma de U invertida entre tipo y recaudación; dónde se sitúa el tipo óptimo depende de la situación económica.",
+    "discoverer": "Arthur Laffer",
+    "field": "Ciencias sociales",
+    "significance": "Es el marco central del debate sobre política fiscal y sirvió de fundamento teórico a la economía de la oferta, con su tesis de que bajar impuestos puede aumentar la recaudación.",
+    "elementMeanings": {
+      "세율": { "role": "Variable independiente", "description": "Es el porcentaje de impuestos que fija el Estado. Va del 0 % al 100 %.", "kind": "input" },
+      "세수": { "role": "Variable dependiente", "description": "Es el importe total de impuestos que el Estado recauda realmente.", "kind": "output" },
+      "최적 세율": { "role": "Punto máximo", "description": "Es el tipo impositivo que maximiza la recaudación. Corresponde al vértice de la curva.", "kind": "output" }
+    },
+    "realWorldExamples": [
+      "Fundamento teórico de la política de bajada de impuestos de la Administración Reagan en los años ochenta en Estados Unidos",
+      "Marco de discusión con el que los gobiernos prevén los cambios en la recaudación al ajustar el impuesto de sociedades"
+    ],
+    "relatedFormulas": ["gini-coefficient"]
+  },
+  "gravity-model": {
+    "name": "Modelo gravitacional",
+    "oneLiner": "Modelo de interacción espacial según el cual el intercambio entre dos regiones es proporcional a su tamaño (población) e inversamente proporcional a la distancia",
+    "description": "El modelo gravitacional, inspirado en la ley de gravitación universal de Newton, explica que el volumen de intercambio entre dos regiones (comercio, desplazamientos, comunicaciones, etc.) es proporcional al producto de sus tamaños (población, PIB, etc.) e inversamente proporcional al cuadrado de la distancia. Pese a su estructura sencilla, predice sorprendentemente bien el comercio internacional, los desplazamientos urbanos o los patrones migratorios.",
+    "discoverer": "William Reilly (modelo gravitacional del comercio minorista), Jan Tinbergen (modelo gravitacional del comercio internacional)",
+    "field": "Ciencias sociales",
+    "significance": "Es el modelo empírico central del análisis del comercio internacional y se usa de forma estándar para estimar los efectos de los acuerdos comerciales y de la política arancelaria.",
+    "elementMeanings": {
+      "T_{ij}": { "role": "Volumen de intercambio", "description": "Es el volumen de intercambio (comercio, desplazamientos, etc.) entre las regiones i y j.", "kind": "output" },
+      "k": { "role": "Constante de proporcionalidad", "description": "Es la constante que ajusta la escala global del modelo.", "kind": "input" },
+      "P_i": { "role": "Tamaño de la región i", "description": "Es la variable que representa el tamaño de la región i: población, PIB, etc.", "kind": "input" },
+      "P_j": { "role": "Tamaño de la región j", "description": "Es la variable que representa el tamaño de la región j: población, PIB, etc.", "kind": "input" },
+      "d_{ij}": { "role": "Distancia entre las dos regiones", "description": "Es la distancia geográfica entre las regiones i y j.", "kind": "input" },
+      "d_{ij}^2": { "role": "Cuadrado de la distancia", "description": "Refleja la ley del inverso del cuadrado: si la distancia se duplica, el intercambio se reduce a la cuarta parte.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Explicar mediante la distancia y el tamaño económico por qué Corea del Sur comercia más con Japón que con Brasil",
+      "Estimar la afluencia de clientes según la población y la distancia de las ciudades cercanas al analizar el área de influencia de un nuevo centro comercial"
+    ],
+    "relatedFormulas": ["universal-gravitation", "malthus-population"]
+  }
+}

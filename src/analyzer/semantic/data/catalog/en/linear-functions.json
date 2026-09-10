@@ -1,0 +1,148 @@
+{
+  "linear-function": {
+    "name": "Linear function",
+    "oneLiner": "The most basic function, whose graph is a straight line proportional to x",
+    "description": "The linear function y = ax + b changes y by the same amount a every time x increases by 1. Its graph is always a straight line, where a is the slope and b is the y-intercept.",
+    "field": "Algebra",
+    "significance": "It is where the study of functions begins, and the most basic tool for expressing any phenomenon whose rate of change stays constant.",
+    "elementMeanings": {
+      "a": { "role": "Slope", "description": "It says how steep the line is. Positive tilts it up to the right, negative down to the right.", "kind": "input" },
+      "b": { "role": "y-intercept", "description": "The y-coordinate of the point where the line meets the y-axis. It is also the value of y when x is 0.", "kind": "input" },
+      "x": { "role": "Independent variable", "description": "The input value, which you are free to choose.", "kind": "input" },
+      "y": { "role": "Dependent variable", "description": "The output value, decided by the value of x.", "kind": "output" }
+    },
+    "realWorldExamples": ["A taxi fare made up of a base fare plus a charge per distance", "The time-distance relation for someone walking at a steady speed"],
+    "relatedFormulas": ["slope-formula", "point-slope-form", "direct-proportion"]
+  },
+  "slope-formula": {
+    "name": "Slope formula",
+    "oneLiner": "The formula for the slope of a line from the coordinates of two points",
+    "description": "The slope formula m = (y2 - y1) / (x2 - x1) works out how steep the line through two points on the coordinate plane is. It gives the change in y against the change in x — that is, the rate of change.",
+    "field": "Algebra",
+    "significance": "It puts the direction and steepness of a line into a precise number, and leads naturally into the rate of change that underlies differentiation.",
+    "elementMeanings": {
+      "m": { "role": "Slope", "description": "The value that says how steep the line is.", "kind": "output" },
+      "x_1": { "role": "x-coordinate of the first point", "description": "The horizontal position of the first point.", "kind": "input" },
+      "y_1": { "role": "y-coordinate of the first point", "description": "The vertical position of the first point.", "kind": "input" },
+      "x_2": { "role": "x-coordinate of the second point", "description": "The horizontal position of the second point.", "kind": "input" },
+      "y_2": { "role": "y-coordinate of the second point", "description": "The vertical position of the second point.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out the gradient of a mountain path", "The rate of rise over a given period on a stock chart"],
+    "relatedFormulas": ["linear-function", "point-slope-form", "distance-formula"]
+  },
+  "point-slope-form": {
+    "name": "Point-slope form",
+    "oneLiner": "The form that gives the equation of a line when you know one point and the slope",
+    "description": "The point-slope form y - y1 = m(x - x1) lets you write down the equation of a line straight away once you know one point (x1, y1) on it and the slope m.",
+    "field": "Algebra",
+    "significance": "It is the most practical form for finding the equation of a line, and it is the form used for the equation of a tangent line in calculus.",
+    "elementMeanings": {
+      "m": { "role": "Slope", "description": "How steep the line is.", "kind": "input" },
+      "x_1": { "role": "x-coordinate of the known point", "description": "The horizontal position of a point confirmed to lie on the line.", "kind": "input" },
+      "y_1": { "role": "y-coordinate of the known point", "description": "The vertical position of a point confirmed to lie on the line.", "kind": "input" }
+    },
+    "realWorldExamples": ["A model predicting future temperature from the current temperature and its rate of change", "An expression for a sales trend built from sales at one moment and the growth rate"],
+    "relatedFormulas": ["linear-function", "slope-formula"]
+  },
+  "quadratic-standard": {
+    "name": "Standard form of a quadratic function",
+    "oneLiner": "The basic form of the quadratic function, whose graph is a parabola",
+    "description": "The standard form of a quadratic function, y = ax² + bx + c, contains x squared, and its graph is a parabola. The sign of a decides whether the curve opens downward or upward.",
+    "field": "Algebra",
+    "significance": "It is the key function for describing many everyday phenomena, from projectile motion to maximum and minimum problems.",
+    "elementMeanings": {
+      "a": { "role": "Coefficient of the quadratic term", "description": "It decides the direction and width of the parabola. Positive opens upward, negative opens downward.", "kind": "input" },
+      "b": { "role": "Coefficient of the linear term", "description": "It affects where the axis of the parabola sits.", "kind": "input" },
+      "c": { "role": "Constant term", "description": "The y-coordinate of the point where the parabola meets the y-axis.", "kind": "input" }
+    },
+    "realWorldExamples": ["How the height of a thrown ball changes", "The curve of an arch in a bridge"],
+    "relatedFormulas": ["quadratic-vertex", "discriminant", "quadratic-formula"]
+  },
+  "quadratic-vertex": {
+    "name": "Vertex form of a quadratic function",
+    "oneLiner": "The form of a quadratic function in which the coordinates of the vertex are visible at once",
+    "description": "The vertex form of a quadratic function, y = a(x - h)² + k, shows at a glance that the vertex of the parabola is (h, k). You reach this form by completing the square on the standard form.",
+    "field": "Algebra",
+    "significance": "Because it hands you the maximum or minimum of the function directly, it is central to solving optimisation problems.",
+    "elementMeanings": {
+      "a": { "role": "Coefficient of the quadratic term", "description": "It decides the direction and width of the parabola. It is the same a as in the standard form.", "kind": "input" },
+      "h": { "role": "x-coordinate of the vertex", "description": "Where the axis of symmetry of the parabola sits.", "kind": "input" },
+      "k": { "role": "y-coordinate of the vertex", "description": "The minimum (when a > 0) or maximum (when a < 0) of the parabola.", "kind": "input" }
+    },
+    "realWorldExamples": ["Finding the highest point a fountain's jet of water reaches", "Finding the price that maximises profit when setting the price of a product"],
+    "relatedFormulas": ["quadratic-standard", "discriminant"]
+  },
+  "discriminant": {
+    "name": "Discriminant",
+    "oneLiner": "The expression that tells you in advance how many roots a quadratic equation has",
+    "description": "The discriminant D = b² - 4ac lets you judge the number and kind of roots of the quadratic equation ax² + bx + c = 0 without solving it. If D is positive there are two distinct roots, if it is 0 there is a repeated root, and if it is negative there are no real roots.",
+    "field": "Algebra",
+    "significance": "By letting you judge whether solutions exist before you solve the equation, it plays a key part in deciding how to approach a problem.",
+    "elementMeanings": {
+      "D": { "role": "Value of the discriminant", "description": "The sign of this value decides the number and kind of the roots.", "kind": "output" },
+      "b": { "role": "Coefficient of the linear term", "description": "The number multiplying x in the quadratic equation.", "kind": "input" },
+      "a": { "role": "Coefficient of the quadratic term", "description": "The number multiplying x squared in the quadratic equation.", "kind": "input" },
+      "c": { "role": "Constant term", "description": "The number added in the quadratic equation with no variable attached.", "kind": "input" }
+    },
+    "realWorldExamples": ["Judging whether a thrown ball can reach a certain height", "Checking whether two curves have a point of intersection"],
+    "relatedFormulas": ["quadratic-formula", "quadratic-standard", "quadratic-vertex"]
+  },
+  "absolute-value-function": {
+    "name": "Absolute value function",
+    "oneLiner": "A V-shaped function whose every output is 0 or greater",
+    "description": "The absolute value function y = |x| ignores the sign of the input and keeps only its size. Its graph is a V with its vertex at the origin: it returns x unchanged when x is positive, and with the sign flipped when x is negative.",
+    "field": "Algebra",
+    "significance": "It is the basic tool for expressing situations where only the size matters and the direction does not — distance, error, deviation, and the like.",
+    "elementMeanings": {
+      "x": { "role": "Input value", "description": "The original value, which may be positive, negative, or 0.", "kind": "input" },
+      "|x|": { "role": "Absolute value", "description": "The size of x with its sign stripped off. It equals the distance from 0 on the number line.", "kind": "output" }
+    },
+    "realWorldExamples": ["Finding the difference between a below-zero and an above-zero temperature", "Measuring how far a value strays from a target (the error)"],
+    "relatedFormulas": ["distance-formula", "linear-function"]
+  },
+  "floor-function": {
+    "name": "Floor function",
+    "oneLiner": "The function that drops everything after the decimal point, rounding down to the nearest integer",
+    "description": "The floor function (a step function) y = floor(x) returns the largest integer no greater than x. Its graph is a staircase, stepping up by one at each integer.",
+    "field": "Algebra",
+    "significance": "It is the mathematical basis for every everyday situation that calls for rounding down — the quotient of a division, banded fares, integer division in computer programming.",
+    "elementMeanings": {
+      "x": { "role": "Input value", "description": "An input value anywhere in the reals.", "kind": "input" },
+      "\\lfloor x \\rfloor": { "role": "Floor value", "description": "The largest integer that is no greater than x. For example floor(3.7) = 3, floor(-1.2) = -2.", "kind": "output" }
+    },
+    "realWorldExamples": ["Working out a banded bus fare (charged in 5km bands)", "How many sweets each friend gets when you share them out equally"],
+    "relatedFormulas": ["absolute-value-function"]
+  },
+  "distance-formula": {
+    "name": "Distance formula",
+    "oneLiner": "The formula for the straight-line distance between two points on the coordinate plane",
+    "description": "The distance formula d = sqrt((x2 - x1)² + (y2 - y1)²) works out the straight-line distance between the points (x1, y1) and (x2, y2) on the coordinate plane. It is the Pythagorean theorem applied to coordinates.",
+    "field": "Geometry",
+    "significance": "It is the most basic tool of coordinate geometry and the starting point for many geometric problems, from the side lengths of a figure to the radius of a circle.",
+    "elementMeanings": {
+      "d": { "role": "Distance", "description": "The length of the straight line (segment) joining the two points.", "kind": "output" },
+      "x_1": { "role": "x-coordinate of the first point", "description": "The horizontal position of the first point.", "kind": "input" },
+      "y_1": { "role": "y-coordinate of the first point", "description": "The vertical position of the first point.", "kind": "input" },
+      "x_2": { "role": "x-coordinate of the second point", "description": "The horizontal position of the second point.", "kind": "input" },
+      "y_2": { "role": "y-coordinate of the second point", "description": "The vertical position of the second point.", "kind": "input" }
+    },
+    "realWorldExamples": ["Working out the straight-line distance between two places on a map", "Judging the distance between two characters in a game"],
+    "relatedFormulas": ["midpoint-formula", "slope-formula"]
+  },
+  "midpoint-formula": {
+    "name": "Midpoint formula",
+    "oneLiner": "The formula for the point exactly halfway between two points",
+    "description": "The midpoint formula M = ((x1 + x2)/2, (y1 + y2)/2) finds the point exactly halfway along the segment joining two points on the coordinate plane. You simply average each coordinate.",
+    "field": "Geometry",
+    "significance": "It is the basic formula for finding the bisection point of a segment, the centre of a figure, a point of symmetry, and it is essential for solving coordinate geometry problems.",
+    "elementMeanings": {
+      "M": { "role": "Midpoint", "description": "The point exactly halfway between the two points.", "kind": "output" },
+      "x_1": { "role": "x-coordinate of the first point", "description": "The horizontal position of the first point.", "kind": "input" },
+      "y_1": { "role": "y-coordinate of the first point", "description": "The vertical position of the first point.", "kind": "input" },
+      "x_2": { "role": "x-coordinate of the second point", "description": "The horizontal position of the second point.", "kind": "input" },
+      "y_2": { "role": "y-coordinate of the second point", "description": "The vertical position of the second point.", "kind": "input" }
+    },
+    "realWorldExamples": ["Finding a meeting place exactly halfway between two friends' homes", "Working out where to put a sign at the centre of a stretch"],
+    "relatedFormulas": ["distance-formula", "slope-formula"]
+  }
+}

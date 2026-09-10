@@ -1,0 +1,101 @@
+{
+  "de-morgan": {
+    "name": "Hukum De Morgan",
+    "oneLiner": "Hukum yang menyatakan ingkaran konjungsi sama dengan disjungsi dari ingkarannya, dan ingkaran disjungsi sama dengan konjungsi dari ingkarannya",
+    "description": "Hukum De Morgan menetapkan sifat bahwa operasi ingkaran saling menukar konjungsi dan disjungsi. Hukum ini penting untuk menyederhanakan atau mengubah bentuk logika yang rumit menjadi bentuk ekuivalen, dan dalam teori himpunan berlaku sama sebagai hubungan komplemen antara gabungan dan irisan.",
+    "discoverer": "Augustus De Morgan",
+    "field": "Logika",
+    "significance": "Aturan transformasi yang berperan pokok dalam perancangan rangkaian logika, penyederhanaan pernyataan bersyarat dalam pemrograman, dan pembuktian dasar teori himpunan.",
+    "elementMeanings": {
+      "A": { "role": "Pernyataan pertama", "description": "Pernyataan atau himpunan pertama yang menyusun bentuk logika ini.", "kind": "input" },
+      "B": { "role": "Pernyataan kedua", "description": "Pernyataan atau himpunan kedua yang menyusun bentuk logika ini.", "kind": "input" },
+      "\\neg": { "role": "Operator ingkaran", "description": "Operator yang membalik nilai benar/salah sebuah pernyataan.", "kind": "structural" },
+      "\\wedge": { "role": "Konjungsi", "description": "Operasi yang bernilai benar hanya jika kedua pernyataan bernilai benar.", "kind": "structural" },
+      "\\vee": { "role": "Disjungsi", "description": "Operasi yang bernilai benar jika salah satu pernyataan saja bernilai benar.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menyederhanakan ingkaran pernyataan if yang rumit dalam pemrograman",
+      "Merancang konversi gerbang NAND/NOR pada rangkaian logika digital",
+      "Mengoptimalkan syarat NOT (A AND B) pada kueri basis data"
+    ],
+    "relatedFormulas": ["boolean-complement"]
+  },
+  "inclusion-exclusion": {
+    "name": "Prinsip inklusi-eksklusi",
+    "oneLiner": "Prinsip untuk mencari ukuran gabungan dua himpunan dengan mengurangkan ukuran irisan dari jumlah ukuran masing-masing himpunan",
+    "description": "Prinsip inklusi-eksklusi adalah cara mengoreksi perhitungan ganda ketika mencacah banyak anggota sebuah gabungan. Untuk dua himpunan, irisannya dikurangkan satu kali; untuk tiga himpunan atau lebih, prinsip ini diperumum dengan pola memasukkan pada langkah ganjil dan mengeluarkan pada langkah genap.",
+    "field": "Teori himpunan",
+    "significance": "Prinsip dasar pencacahan, sekaligus landasan seluruh kombinatorika seperti aturan penjumlahan dalam teori peluang dan penurunan fungsi phi Euler.",
+    "elementMeanings": {
+      "|A \\cup B|": { "role": "Ukuran gabungan", "description": "Jumlah seluruh anggota yang termasuk A atau B.", "kind": "output" },
+      "|A|": { "role": "Ukuran A", "description": "Banyak anggota yang termasuk himpunan A.", "kind": "input" },
+      "|B|": { "role": "Ukuran B", "description": "Banyak anggota yang termasuk himpunan B.", "kind": "input" },
+      "|A \\cap B|": { "role": "Ukuran irisan", "description": "Banyak anggota yang termasuk A sekaligus B. Nilai ini dikurangkan untuk mengoreksi perhitungan ganda.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung banyak responden yang memilih setidaknya salah satu dari dua pilihan dalam survei",
+      "Menghitung total hasil pencarian dengan syarat OR setelah duplikatnya dibuang",
+      "Mencari peluang bahwa setidaknya satu dari dua kejadian terjadi"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "power-set": {
+    "name": "Ukuran himpunan kuasa",
+    "oneLiner": "Teorema yang menyatakan banyak himpunan bagian dari sebuah himpunan beranggota n adalah 2 pangkat n",
+    "description": "Rumus ukuran himpunan kuasa menunjukkan bahwa banyak himpunan bagian dari himpunan berhingga S (termasuk himpunan kosong dan dirinya sendiri) tepat 2^|S|. Karena setiap anggota punya dua pilihan bebas, yaitu termasuk atau tidak termasuk, hasilnya dijelaskan sebagai perkalian pilihan biner.",
+    "field": "Teori himpunan",
+    "significance": "Hasil dasar dalam kombinatorika dan teori himpunan, yang langsung dipakai untuk pencacahan himpunan bagian, algoritma bitmask, dan analisis ruang keadaan rangkaian logika.",
+    "elementMeanings": {
+      "|P(S)|": { "role": "Ukuran himpunan kuasa", "description": "Banyak seluruh himpunan bagian dari himpunan S.", "kind": "output" },
+      "2": { "role": "Banyak pilihan", "description": "Menyatakan bahwa setiap anggota punya dua pilihan, yaitu 'termasuk' atau 'tidak termasuk'.", "kind": "constant", "value": 2 },
+      "|S|": { "role": "Banyak anggota", "description": "Banyak anggota yang termasuk himpunan asal S.", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "Menghitung semua kombinasi pesanan yang mungkin dari n pilihan menu",
+      "Menganalisis total kemungkinan kombinasi aturan firewall dalam keamanan jaringan",
+      "Merancang algoritma pencacahan himpunan bagian dengan bitmask"
+    ],
+    "relatedFormulas": ["combination", "permutation"]
+  },
+  "combination": {
+    "name": "Kombinasi",
+    "oneLiner": "Rumus untuk mencari banyak cara memilih k benda dari n benda tanpa memperhatikan urutan",
+    "description": "Rumus kombinasi menghitung banyak cara memilih k anggota dari n anggota yang berbeda tanpa memperhatikan urutan. Hasilnya diperoleh dengan membagi permutasi dengan banyak susunan urutan k anggota (k!) untuk membuang perhitungan ganda, dan nilainya sama dengan koefisien binomial.",
+    "field": "Kombinatorika",
+    "significance": "Alat pencacahan yang paling sering dipakai di seluruh matematika dan sains, seperti pada perhitungan peluang, teorema binomial, dan penarikan sampel statistik.",
+    "elementMeanings": {
+      "C(n,k)": { "role": "Banyak kombinasi", "description": "Banyak cara memilih k benda dari n benda tanpa urutan.", "kind": "output" },
+      "n": { "role": "Banyak seluruh anggota", "description": "Banyak seluruh anggota yang menjadi objek pemilihan.", "kind": "input" },
+      "k": { "role": "Banyak anggota terpilih", "description": "Banyak anggota yang dipilih.", "kind": "input" },
+      "n!": { "role": "Faktorial n", "description": "Hasil kali semua bilangan asli dari 1 sampai n.", "kind": "structural" },
+      "k!": { "role": "Faktorial k", "description": "Banyak susunan urutan anggota yang terpilih. Nilai ini dibagikan untuk membuang perhitungan ganda.", "kind": "structural" },
+      "(n-k)!": { "role": "Faktorial sisanya", "description": "Banyak susunan anggota yang tidak terpilih. Nilai ini juga dipakai untuk membuang perhitungan ganda.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Menghitung banyak cara mengambil 6 nomor lotre dari 45 nomor",
+      "Banyak cara menyusun tim beranggota 5 orang dari 30 orang dalam proyek kelompok",
+      "Menghitung banyak kombinasi sampel yang mungkin diambil dalam statistik"
+    ],
+    "relatedFormulas": ["permutation", "inclusion-exclusion", "power-set"]
+  },
+  "permutation": {
+    "name": "Permutasi",
+    "oneLiner": "Rumus untuk mencari banyak cara menyusun k benda dari n benda dengan memperhatikan urutan",
+    "description": "Rumus permutasi menghitung banyak cara mengambil k anggota dari n anggota yang berbeda lalu menyusunnya berurutan. Rumus ini muncul secara wajar dari aturan perkalian, yaitu n pilihan untuk tempat pertama, (n-1) pilihan untuk tempat kedua, dan seterusnya.",
+    "field": "Kombinatorika",
+    "significance": "Alat dasar untuk soal penyusunan yang urutannya bermakna, dan luas dipakai dalam pemecahan sandi, penjadwalan, serta analisis banyak kemungkinan.",
+    "elementMeanings": {
+      "P(n,k)": { "role": "Banyak permutasi", "description": "Banyak cara mengambil k benda dari n benda dengan memperhatikan urutan.", "kind": "output" },
+      "n": { "role": "Banyak seluruh anggota", "description": "Banyak seluruh anggota yang menjadi objek pemilihan.", "kind": "input" },
+      "k": { "role": "Banyak anggota terpilih", "description": "Banyak anggota yang diambil lalu disusun.", "kind": "input" },
+      "n!": { "role": "Faktorial n", "description": "Hasil kali semua bilangan asli dari 1 sampai n.", "kind": "structural" },
+      "(n-k)!": { "role": "Faktorial sisanya", "description": "Banyak susunan anggota yang tidak terpilih. Dengan membaginya di penyebut, yang tercacah hanya k tempat di depan.", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "Banyak cara menyusun kata sandi 4 digit tanpa angka berulang",
+      "Kombinasi pemberian medali emas/perak/perunggu kepada 8 pelari dalam sebuah lomba",
+      "Menyusun jadwal untuk menempatkan 5 pelamar secara berurutan dalam wawancara"
+    ],
+    "relatedFormulas": ["combination", "inclusion-exclusion", "power-set"]
+  }
+}

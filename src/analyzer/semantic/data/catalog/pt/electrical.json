@@ -1,0 +1,124 @@
+{
+  "ohm-law": {
+    "name": "Lei de Ohm",
+    "oneLiner": "Lei fundamental dos circuitos elétricos segundo a qual a tensão é igual ao produto da corrente pela resistência",
+    "description": "A lei de Ohm mostra que a corrente que percorre um condutor é proporcional à tensão entre suas extremidades e inversamente proporcional à resistência. É a relação mais básica da análise de circuitos elétricos e vale para componentes lineares de resistência constante. É o ponto de partida do projeto e da análise de circuitos.",
+    "discoverer": "Georg Simon Ohm",
+    "field": "Engenharia elétrica",
+    "significance": "Estabeleceu a relação quantitativa entre tensão, corrente e resistência, criando a base da teoria dos circuitos elétricos.",
+    "elementMeanings": {
+      "V": { "role": "tensão", "description": "Diferença de potencial entre as extremidades do condutor. Unidade: volt (V).", "kind": "input" },
+      "I": { "role": "corrente", "description": "Fluxo de cargas que atravessa o condutor. Unidade: ampere (A).", "kind": "input" },
+      "R": { "role": "resistência", "description": "Grau de oposição à passagem da corrente. Unidade: ohm (Ω).", "kind": "input" }
+    },
+    "realWorldExamples": ["Relação entre a tensão aplicada a uma lâmpada e seu brilho", "Cálculo do consumo de energia de um aquecedor elétrico doméstico"],
+    "relatedFormulas": ["electric-power", "kirchhoff-voltage", "impedance"]
+  },
+  "electric-power": {
+    "name": "Potência elétrica",
+    "oneLiner": "Fórmula que expressa a taxa com que a energia elétrica é consumida ou fornecida por unidade de tempo",
+    "description": "A potência elétrica é definida como o produto da tensão pela corrente e representa a velocidade de conversão da energia elétrica. Combinada com a lei de Ohm, também pode ser escrita como P = I²R ou P = V²/R. É uma grandeza física central para a eficiência e o dimensionamento de sistemas elétricos.",
+    "discoverer": "James Watt",
+    "field": "Engenharia elétrica",
+    "significance": "Quantifica o consumo e o fornecimento de energia elétrica e fornece a base para o projeto de sistemas de geração, transmissão e distribuição.",
+    "elementMeanings": {
+      "P": { "role": "potência elétrica", "description": "Energia consumida ou fornecida por unidade de tempo. Unidade: watt (W).", "kind": "output" },
+      "I": { "role": "corrente", "description": "Corrente que percorre o circuito. Unidade: ampere (A).", "kind": "input" },
+      "V": { "role": "tensão", "description": "Diferença de potencial entre os terminais do circuito. Unidade: volt (V).", "kind": "input" }
+    },
+    "realWorldExamples": ["Indicação do consumo de energia dos eletrodomésticos", "Base do cálculo da conta de luz"],
+    "relatedFormulas": ["ohm-law", "kirchhoff-voltage", "kirchhoff-current"]
+  },
+  "kirchhoff-voltage": {
+    "name": "Lei das tensões de Kirchhoff",
+    "oneLiner": "Lei segundo a qual a soma das quedas de tensão ao percorrer uma malha fechada é zero",
+    "description": "A lei das tensões de Kirchhoff (LKT) mostra que, ao longo de qualquer malha fechada, a soma algébrica de todas as quedas e elevações de tensão é zero. É a expressão elétrica da lei de conservação da energia e é indispensável para determinar tensões desconhecidas em redes complexas.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Engenharia elétrica",
+    "significance": "Tornou possível analisar sistematicamente redes complexas e se tornou um dos pilares da teoria moderna de circuitos.",
+    "elementMeanings": {
+      "\\sum V": { "role": "soma das tensões", "description": "Soma algébrica de todas as quedas e elevações de tensão da malha. É sempre zero.", "kind": "output" },
+      "V_k": { "role": "tensão individual", "description": "Tensão em cada componente da malha. As fontes têm sinal positivo e as resistências, negativo.", "kind": "input" }
+    },
+    "realWorldExamples": ["Cálculo da divisão de tensão entre resistores em um circuito em série", "Projeto dos níveis de tensão de uma placa de circuito eletrônico"],
+    "relatedFormulas": ["kirchhoff-current", "ohm-law", "impedance"]
+  },
+  "kirchhoff-current": {
+    "name": "Lei das correntes de Kirchhoff",
+    "oneLiner": "Lei segundo a qual, em qualquer nó do circuito, a soma das correntes que entram e das que saem é zero",
+    "description": "A lei das correntes de Kirchhoff (LKC) mostra que, em qualquer nó de um circuito, a soma total das correntes que entram é igual à soma total das que saem. É consequência direta da lei de conservação da carga e é indispensável na análise de circuitos em paralelo.",
+    "discoverer": "Gustav Kirchhoff",
+    "field": "Engenharia elétrica",
+    "significance": "Aplicou o princípio de conservação da carga à análise de circuitos e estabeleceu a base do método de análise nodal.",
+    "elementMeanings": {
+      "\\sum I": { "role": "soma das correntes", "description": "Soma algébrica de todas as correntes que entram e saem de um nó. É sempre zero.", "kind": "output" },
+      "I_k": { "role": "corrente individual", "description": "É a corrente que percorre cada ramo ligado ao nó.", "kind": "input" }
+    },
+    "realWorldExamples": ["Cálculo da corrente em cada ramo de um circuito com resistores em paralelo", "Análise do equilíbrio de cargas em um sistema de distribuição de energia"],
+    "relatedFormulas": ["kirchhoff-voltage", "ohm-law", "electric-power"]
+  },
+  "rc-time-constant": {
+    "name": "Constante de tempo RC",
+    "oneLiner": "Constante de tempo que determina a velocidade de carga ou descarga em um circuito resistor-capacitor",
+    "description": "A constante de tempo RC é definida como o produto da resistência pela capacitância e representa o tempo necessário para o capacitor se carregar até cerca de 63,2% da tensão final. É o parâmetro central que determina as características de resposta transitória em circuitos eletrônicos diversos, como projeto de filtros, circuitos de temporização e processamento de sinais.",
+    "discoverer": "Desenvolvimento coletivo da engenharia elétrica",
+    "field": "Engenharia elétrica",
+    "significance": "Resume a resposta transitória e as características de frequência em um único parâmetro e se tornou uma ferramenta central do projeto de circuitos analógicos.",
+    "elementMeanings": {
+      "\\tau": { "role": "constante de tempo", "description": "Constante de tempo que determina a velocidade da resposta transitória do circuito. Unidade: segundo (s).", "kind": "output" },
+      "R": { "role": "resistência", "description": "Valor da resistência do circuito. Unidade: ohm (Ω).", "kind": "input" },
+      "C": { "role": "capacitância", "description": "Capacidade do capacitor de armazenar carga. Unidade: farad (F).", "kind": "input" }
+    },
+    "realWorldExamples": ["Determinação do tempo de carga do flash de uma câmera", "Circuito de detecção de toque de uma tela sensível ao toque"],
+    "relatedFormulas": ["ohm-law", "impedance", "resonance-frequency"]
+  },
+  "impedance": {
+    "name": "Impedância",
+    "oneLiner": "Oposição total em um circuito de corrente alternada, reunindo resistência, reatância indutiva e reatância capacitiva",
+    "description": "A impedância representa o efeito total de oposição à passagem da corrente em um circuito de corrente alternada. Ela compõe, pelo teorema de Pitágoras, a parcela puramente resistiva e a parcela reativa (a diferença entre a indutiva e a capacitiva). É um conceito indispensável para analisar circuitos de corrente alternada e otimizar a eficiência da transmissão de energia.",
+    "discoverer": "Oliver Heaviside",
+    "field": "Engenharia elétrica",
+    "significance": "Unificou as complexas relações de fase dos circuitos de corrente alternada em uma única grandeza física e sistematizou sua análise.",
+    "elementMeanings": {
+      "Z": { "role": "impedância", "description": "Oposição total de um circuito de corrente alternada. Unidade: ohm (Ω).", "kind": "output" },
+      "R": { "role": "resistência", "description": "Parcela puramente resistiva. É ela que consome energia.", "kind": "input" },
+      "X_L": { "role": "reatância indutiva", "description": "Reatância devida ao indutor. X_L = 2πfL.", "kind": "input" },
+      "X_C": { "role": "reatância capacitiva", "description": "Reatância devida ao capacitor. X_C = 1/(2πfC).", "kind": "input" }
+    },
+    "realWorldExamples": ["Projeto da resposta em frequência de um sistema de alto-falantes", "Minimização das perdas de energia em linhas de transmissão"],
+    "relatedFormulas": ["ohm-law", "resonance-frequency", "rc-time-constant"]
+  },
+  "resonance-frequency": {
+    "name": "Frequência de ressonância",
+    "oneLiner": "Frequência em que a reatância indutiva e a reatância capacitiva se igualam em um circuito LC",
+    "description": "A frequência de ressonância é a frequência natural com que a energia transita livremente entre os dois componentes em um circuito formado por indutor e capacitor. Nessa frequência a impedância é mínima (em série) ou máxima (em paralelo), e ela é amplamente aproveitada, desde a seleção de estações em receptores de rádio até o carregamento sem fio.",
+    "discoverer": "William Thomson (Lorde Kelvin)",
+    "field": "Engenharia elétrica",
+    "significance": "Forneceu o princípio dos circuitos seletores de frequência e estabeleceu a base das comunicações sem fio e do projeto de filtros.",
+    "elementMeanings": {
+      "f_0": { "role": "frequência de ressonância", "description": "Frequência natural em que o circuito entra em ressonância. Unidade: hertz (Hz).", "kind": "output" },
+      "L": { "role": "indutância", "description": "Capacidade do indutor de armazenar energia magnética. Unidade: henry (H).", "kind": "input" },
+      "C": { "role": "capacitância", "description": "Capacidade do capacitor de armazenar energia elétrica. Unidade: farad (F).", "kind": "input" },
+      "2\\pi": { "role": "coeficiente com pi", "description": "É o fator de conversão entre a frequência angular e a frequência comum.", "kind": "constant", "value": 6.283185307, "unit": "" }
+    },
+    "realWorldExamples": ["Sintonia de frequência em rádios", "Ajuste da frequência de ressonância em aparelhos de ressonância magnética"],
+    "relatedFormulas": ["impedance", "rc-time-constant", "shannon-capacity"]
+  },
+  "shannon-capacity": {
+    "name": "Capacidade de canal de Shannon",
+    "oneLiner": "Taxa máxima de transmissão de informação que pode ser enviada sem erros por um canal com ruído",
+    "description": "O teorema da capacidade de canal de Shannon define a taxa máxima de transmissão de dados teoricamente alcançável dadas a largura de banda e a relação sinal-ruído (SNR). Ele mostra quantitativamente que, quanto maior a largura de banda e quanto mais alta a SNR, mais informação é possível transmitir. Apresenta o limite fundamental da teoria da informação e do projeto de sistemas modernos de comunicação.",
+    "discoverer": "Claude Shannon",
+    "field": "Engenharia elétrica",
+    "significance": "Como resultado central da teoria da informação, estabeleceu o limite superior teórico do projeto de todo sistema de comunicação digital.",
+    "elementMeanings": {
+      "C": { "role": "capacidade de canal", "description": "Taxa máxima de bits transmissível sem erros. Unidade: bits por segundo (bps).", "kind": "output" },
+      "B": { "role": "largura de banda", "description": "Largura da faixa de frequências que o canal pode usar. Unidade: hertz (Hz).", "kind": "input" },
+      "S": { "role": "potência do sinal", "description": "É a potência média do sinal recebido.", "kind": "input" },
+      "N": { "role": "potência do ruído", "description": "É a potência média do ruído do canal.", "kind": "input" },
+      "\\log_2": { "role": "logaritmo de base 2", "description": "É a função logarítmica que expressa o resultado em bits.", "kind": "structural" }
+    },
+    "realWorldExamples": ["Cálculo da velocidade máxima teórica de transmissão em sistemas móveis 5G", "Definição da largura de banda no projeto de canais de wi-fi"],
+    "relatedFormulas": ["resonance-frequency", "ohm-law"]
+  }
+}

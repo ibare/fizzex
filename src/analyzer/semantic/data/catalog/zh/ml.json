@@ -1,0 +1,152 @@
+{
+  "softmax": {
+    "name": "Softmax 函数",
+    "oneLiner": "把输入向量转换为概率分布的归一化指数函数",
+    "description": "Softmax 函数把任意实数向量转换成总和为 1 的概率分布。它对每个分量施加指数函数，再除以全体之和，使最大的值获得最高的概率。它被标准地用于多分类模型的输出层。",
+    "discoverer": "约翰·纳什 / 卢斯 / 麦卡洛克-皮茨（源自统计力学，是玻尔兹曼分布的推广）",
+    "field": "机器学习",
+    "significance": "它是在神经网络的多分类问题中把输出转换为可解释概率的核心函数。",
+    "elementMeanings": {
+      "P(y_i)": { "role": "类别概率", "description": "预测属于第 i 个类别的概率。", "kind": "output" },
+      "z_i": { "role": "logit", "description": "神经网络对第 i 个类别的原始输出值。", "kind": "input" },
+      "e^{z_i}": { "role": "指数变换值", "description": "对 logit 施加指数函数、转换为正数后的值。", "kind": "structural" },
+      "\\sum e^{z_j}": { "role": "归一化常数", "description": "所有类别指数变换值之和，作用是让概率总和为 1。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "图像分类模型以概率输出属于猫/狗/鸟中哪一类时",
+      "自然语言处理中预测下一个词时对整个词表生成概率分布"
+    ],
+    "relatedFormulas": ["cross-entropy", "sigmoid"]
+  },
+  "cross-entropy": {
+    "name": "交叉熵损失",
+    "oneLiner": "衡量真实分布与预测分布之间差异的损失函数",
+    "description": "交叉熵把真实标签分布与模型预测分布之间的不一致定量化。预测越接近真实分布损失越小，而对错误预测越有把握，损失就急剧增大。它是分类问题中使用最广泛的损失函数。",
+    "discoverer": "克劳德·香农（源自信息论）",
+    "field": "机器学习",
+    "significance": "它是分类模型训练中的标准损失函数，直接优化概率预测的质量。",
+    "elementMeanings": {
+      "H": { "role": "交叉熵损失", "description": "表示真实分布与预测分布之间差异的标量值。", "kind": "output" },
+      "y_i": { "role": "真实标签", "description": "第 i 个类别的真实概率。在独热编码中，正确答案为 1，否则为 0。", "kind": "input" },
+      "\\hat{y}_i": { "role": "预测概率", "description": "模型输出的第 i 个类别的预测概率。", "kind": "input" },
+      "\\log(\\hat{y}_i)": { "role": "对数概率", "description": "预测概率的对数值。概率越接近 0 就越发散到负无穷大。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "训练垃圾邮件分类器时计算预测误差的依据",
+      "医学影像诊断模型中判别有无疾病的二分类训练"
+    ],
+    "relatedFormulas": ["softmax", "mse-loss", "shannon-entropy"]
+  },
+  "mse-loss": {
+    "name": "均方误差损失",
+    "oneLiner": "用预测值与真实值之差的平方的平均来衡量回归模型误差的函数",
+    "description": "均方误差 (MSE) 在每个数据点上把预测值与真实值之差平方后再求平均。由于有平方运算，它对大误差施加更大的惩罚；又因为容易求导，能自然地与梯度下降法结合。它是回归问题的标准损失函数。",
+    "field": "机器学习",
+    "significance": "它是回归分析与神经网络训练的基本损失函数，也是最小二乘法的推广。",
+    "elementMeanings": {
+      "L": { "role": "损失值", "description": "表示模型整体平均误差的标量值。", "kind": "output" },
+      "n": { "role": "数据个数", "description": "全部数据点的个数。", "kind": "input" },
+      "y_i": { "role": "真实值", "description": "第 i 个数据的实际目标值。", "kind": "input" },
+      "\\hat{y}_i": { "role": "预测值", "description": "模型输出的第 i 个数据的预测值。", "kind": "input" },
+      "(y_i - \\hat{y}_i)^2": { "role": "平方误差", "description": "把单个误差平方，消去方向性并给大误差加上权重。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "训练房价预测模型时计算实际价格与预测价格之差",
+      "在气温预测模型中评估每日预测温度与实测温度的误差"
+    ],
+    "relatedFormulas": ["cross-entropy", "gradient-descent"]
+  },
+  "gradient-descent": {
+    "name": "梯度下降法",
+    "oneLiner": "沿损失函数梯度的反方向反复更新参数以寻找最小值的优化算法",
+    "description": "梯度下降法在当前参数位置计算损失函数的梯度，再沿梯度的反方向移动一个学习率的步长来更新参数。反复这一过程，损失就会逐渐减小。它是几乎所有神经网络训练的基本优化方法。",
+    "discoverer": "奥古斯丁·路易·柯西",
+    "field": "机器学习",
+    "significance": "它是包括深度学习在内几乎所有机器学习模型训练的核心优化算法。",
+    "elementMeanings": {
+      "\\theta": { "role": "参数", "description": "涵盖模型可学习的权重与偏置的参数向量。", "kind": "input" },
+      "\\alpha": { "role": "学习率", "description": "一次更新中移动的步长大小。太大会发散，太小则收敛缓慢。", "kind": "input" },
+      "\\nabla L": { "role": "损失的梯度", "description": "把损失函数对各参数求偏导所得的向量，指向损失增长最快的方向。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "把神经网络数百万个权重自动调整到与数据相符的过程",
+      "在推荐系统中优化模型参数以反映用户偏好"
+    ],
+    "relatedFormulas": ["mse-loss", "backpropagation", "batch-normalization"]
+  },
+  "sigmoid": {
+    "name": "Sigmoid 函数",
+    "oneLiner": "把任意实数压缩到 0 与 1 之间的 S 形激活函数",
+    "description": "Sigmoid 函数画出一条 S 形曲线：输入非常小（负）时收敛到 0，非常大（正）时收敛到 1。因为输出可以解释为概率，它适合用在二分类的输出层。不过输入的绝对值大时梯度几乎为 0，存在梯度消失问题，所以在隐藏层中正逐渐被 ReLU 等取代。",
+    "field": "机器学习",
+    "significance": "它是逻辑回归与神经网络的基本激活函数，起着引入非线性的作用。",
+    "elementMeanings": {
+      "\\sigma(x)": { "role": "Sigmoid 输出", "description": "介于 0 与 1 之间的输出值，可以解释为概率。", "kind": "output" },
+      "x": { "role": "输入", "description": "传给激活函数的输入值（加权和等）。", "kind": "input" },
+      "e^{-x}": { "role": "负指数", "description": "输入越大它越接近 0，从而使整体输出接近 1。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "把邮件是垃圾邮件的概率输出为 0~1 之间的二分类器",
+      "以概率判别患者疾病是否呈阳性的医疗诊断模型"
+    ],
+    "relatedFormulas": ["softmax", "cross-entropy"]
+  },
+  "batch-normalization": {
+    "name": "批归一化",
+    "oneLiner": "以小批量为单位对输入作归一化以稳定训练的技术",
+    "description": "批归一化在神经网络的每一层利用小批量的均值与方差对输入作归一化。它减小内部协变量偏移以稳定训练，并使人能够采用更高的学习率。归一化之后再施加可学习的缩放与平移参数，从而保持表达能力。",
+    "discoverer": "谢尔盖·约费、克里斯蒂安·塞盖迪",
+    "field": "机器学习",
+    "significance": "它大幅改善了深度学习训练的稳定性与速度，成为现代神经网络设计的必备组成部分。",
+    "elementMeanings": {
+      "\\hat{x}": { "role": "归一化后的输入", "description": "被归一化为均值 0、方差 1 的输入值。", "kind": "output" },
+      "x": { "role": "原始输入", "description": "归一化之前的层输入值。", "kind": "input" },
+      "\\mu": { "role": "批均值", "description": "在当前小批量上算出的输入的均值。", "kind": "input" },
+      "\\sigma": { "role": "批标准差", "description": "在当前小批量上算出的输入的标准差。", "kind": "input" }
+    },
+    "realWorldExamples": [
+      "在深层图像识别网络（ResNet 等）中稳定地训练数百层",
+      "提升语音识别模型的训练速度并防止过拟合"
+    ],
+    "relatedFormulas": ["gradient-descent", "backpropagation"]
+  },
+  "attention-mechanism": {
+    "name": "缩放点积注意力",
+    "oneLiner": "基于查询与键的相似度对值作加权求和的注意力机制",
+    "description": "注意力机制用查询 (Q) 与键 (K) 的内积计算相似度，除以键维度的平方根作缩放后再施加 softmax 求出权重。用这些权重对值 (V) 求和，就能有选择地聚焦于输入序列中相关的部分。它是 Transformer 架构的核心。",
+    "discoverer": "阿希什·瓦斯瓦尼等（谷歌研究团队）",
+    "field": "机器学习",
+    "significance": "它是 Transformer 的核心组成部分，也是 GPT、BERT 等现代大规模语言模型的基础技术。",
+    "elementMeanings": {
+      "Q": { "role": "查询矩阵", "description": "表示当前位置「在找什么」的那些向量所构成的矩阵。", "kind": "input" },
+      "K": { "role": "键矩阵", "description": "表示各个位置「拥有什么信息」的那些向量所构成的矩阵。", "kind": "input" },
+      "V": { "role": "值矩阵", "description": "装有实际要传递的信息的那些向量所构成的矩阵。", "kind": "input" },
+      "K^T": { "role": "键的转置", "description": "为了与查询作内积计算而转置过的键矩阵。", "kind": "structural" },
+      "\\sqrt{d_k}": { "role": "缩放系数", "description": "键向量维数的平方根，用来防止内积值变得过大。", "kind": "structural" },
+      "\\text{softmax}": { "role": "归一化函数", "description": "把相似度分数转换为总和为 1 的权重。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "机器翻译中聚焦于原文相关词语来生成译文的过程",
+      "ChatGPT 等对话式人工智能理解上下文并生成回答的原理"
+    ],
+    "relatedFormulas": ["softmax", "backpropagation"]
+  },
+  "backpropagation": {
+    "name": "反向传播算法",
+    "oneLiner": "利用链式法则把损失的梯度从输出层向输入层方向传播的算法",
+    "description": "反向传播为了把损失函数的值对各个权重求导，反复运用链式法则。它从输出层开始向输入层方向传播梯度，因而能够高效地一次算出全部权重的梯度。这些梯度再交给梯度下降法来更新权重。",
+    "discoverer": "戴维·鲁梅尔哈特、杰弗里·辛顿、罗纳德·威廉姆斯",
+    "field": "机器学习",
+    "significance": "它是使多层神经网络的实用训练成为可能的核心算法，确立了深度学习的基础。",
+    "elementMeanings": {
+      "\\partial L / \\partial w": { "role": "损失对权重的梯度", "description": "某个特定权重对损失所产生影响的大小与方向。", "kind": "output" },
+      "\\partial L / \\partial \\hat{y}": { "role": "损失对输出的梯度", "description": "表示预测值变化时损失会变化多少。", "kind": "structural" },
+      "\\partial \\hat{y} / \\partial w": { "role": "输出对权重的梯度", "description": "表示权重变化时输出会变化多少。", "kind": "structural" }
+    },
+    "realWorldExamples": [
+      "训练拥有数千万个参数的图像识别模型",
+      "在自然语言处理模型中为学习上下文表示而计算梯度"
+    ],
+    "relatedFormulas": ["gradient-descent", "cross-entropy", "mse-loss"]
+  }
+}

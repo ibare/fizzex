@@ -1,0 +1,220 @@
+{
+  "roles": {
+    "root": "整个式子",
+    "number": "数字",
+    "variable": "变量",
+    "operator": "运算符",
+    "frac": "分数",
+    "sqrt": "平方根",
+    "sum": "求和 (Sigma)",
+    "product": "连乘 (Pi)",
+    "integral": "积分",
+    "limit": "极限 (lim)",
+    "matrix": "矩阵",
+    "paren": "括号",
+    "abs": "绝对值",
+    "overline": "上划线",
+    "text": "文本",
+    "cases": "分段",
+    "cancel": "删除线",
+    "chem": "化学式",
+    "func": "{name} 函数"
+  },
+  "descriptions": {
+    "root": "这个式子的整体结构。",
+    "number": "数字 {value}。",
+    "variable": "变量 {name}，它的值可以变化。",
+    "frac": "分数 — 用上方（分子）除以下方（分母）所得的值。",
+    "sqrt": "平方根 — 平方之后等于这个值的数。",
+    "sum": "求和 — 逐个改变指标，把所有通项加起来。",
+    "product": "连乘 — 逐个改变指标，把所有通项乘起来。",
+    "integral": "积分 — 求函数曲线下方的面积。",
+    "limit": "极限 — 变量趋近某个特定值时的收敛值。",
+    "paren": "用括号括起来的式子。",
+    "abs": "绝对值 — 忽略符号后的大小。",
+    "overline": "带有上划线的符号，表示平均值、共轭、闭包等。",
+    "chem": "表示物质与反应的化学记法。",
+    "matrix": "{rows}x{cols} 矩阵。"
+  },
+  "specialVariables": {
+    "infinity": "表示无穷大。",
+    "eulerE": "自然常数 e（约 2.718），是指数函数与微积分的基础。",
+    "pi": "圆周率 π（约 3.14159）。",
+    "imaginaryI": "虚数单位。i 的平方等于 -1。"
+  },
+  "operators": {
+    "+": "加法运算。",
+    "-": "减法运算，或表示负号。",
+    "×": "乘法运算。",
+    "·": "乘法运算。",
+    "*": "乘法运算。",
+    "÷": "除法运算。",
+    "=": "等号 — 表示两边相等。",
+    "<": "不等号 — 左边小于右边。",
+    ">": "不等号 — 左边大于右边。",
+    "≤": "小于等于 — 左边小于或等于右边。",
+    "≥": "大于等于 — 左边大于或等于右边。",
+    "≠": "表示两边不相等。",
+    "∈": "属于 — 左边是右边集合中的元素。",
+    "→": "蕴含 — 由左边的条件推出右边的结论。",
+    "⟹": "蕴含 — 由左边的条件推出右边的结论。",
+    "∪": "并集 — 把两个集合的所有元素合在一起。",
+    "∩": "交集 — 只留下两个集合共有的元素。"
+  },
+  "functions": {
+    "sin": "正弦函数 — 三角函数之一，在直角三角形中等于对边比斜边。",
+    "cos": "余弦函数 — 三角函数之一，等于邻边比斜边。",
+    "tan": "正切函数 — 等于 sin/cos。",
+    "log": "对数函数 — 乘方的反函数。",
+    "ln": "自然对数 — 以 e 为底的对数。",
+    "exp": "指数函数 — e 的乘方。",
+    "lim": "求极限的函数。",
+    "det": "行列式 — 矩阵的标量特征量。",
+    "max": "求最大值的函数。",
+    "min": "求最小值的函数。"
+  },
+  "accents": {
+    "hat": {
+      "role": "估计值/单位向量",
+      "description": "尖帽记号表示估计值或单位向量。"
+    },
+    "widehat": {
+      "role": "估计值/单位向量",
+      "description": "尖帽记号表示估计值或单位向量。"
+    },
+    "vec": {
+      "role": "向量",
+      "description": "箭头表示这是既有大小又有方向的向量。"
+    },
+    "overrightarrow": {
+      "role": "向量",
+      "description": "箭头表示这是既有大小又有方向的向量。"
+    },
+    "overleftarrow": {
+      "role": "向量",
+      "description": "箭头表示这是既有大小又有方向的向量。"
+    },
+    "dot": {
+      "role": "对时间求导",
+      "description": "一个点表示对时间求导，物理中用于速度等。"
+    },
+    "ddot": {
+      "role": "对时间求二阶导",
+      "description": "两个点表示对时间求二阶导，用于加速度等。"
+    },
+    "tilde": {
+      "role": "近似/变换",
+      "description": "波浪号表示近似值或经过变换的量。"
+    },
+    "widetilde": {
+      "role": "近似/变换",
+      "description": "波浪号表示近似值或经过变换的量。"
+    },
+    "bar": {
+      "role": "平均值/共轭",
+      "description": "横线表示平均值或复数的共轭。"
+    }
+  },
+  "defaultAccent": {
+    "role": "标注记号",
+    "description": "带有标注记号的符号。"
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "乘方",
+      "description": "乘方 — 把底数按指数所示的次数重复相乘。"
+    },
+    "subscriptOnly": {
+      "role": "下标",
+      "description": "下标 — 指定特定的元素或分量。"
+    },
+    "both": {
+      "role": "上下标",
+      "description": "同时带有上标和下标的符号。"
+    },
+    "withLeft": {
+      "role": "左右标",
+      "description": "在符号前后都带有标号的记法。"
+    }
+  },
+  "defaultOperator": "运算符 {op}。",
+  "defaultFunction": "函数 {name}。",
+  "chem": {
+    "formula": {
+      "role": "化学式",
+      "description": "用元素符号表示物质的记法。"
+    },
+    "equation": {
+      "role": "化学方程式",
+      "description": "表示左边的物质转变为右边的物质的过程。"
+    },
+    "species": {
+      "role": "化学物种",
+      "description": "参与反应的其中一种物质。"
+    },
+    "element": {
+      "role": "元素",
+      "description": "表示周期表中某个元素的符号。"
+    },
+    "group": {
+      "role": "原子团",
+      "description": "被括号括起、像一个整体那样起作用的一组原子。"
+    },
+    "coefficient": {
+      "role": "化学计量数",
+      "description": "参与反应的粒子个数之比。它使两边的原子数相等。"
+    },
+    "count": {
+      "role": "原子个数",
+      "description": "表示紧靠前面的元素或原子团含有几个。"
+    },
+    "charge": {
+      "role": "电荷",
+      "description": "离子所带电荷的大小，等于失去或得到的电子数。"
+    },
+    "chargeSign": {
+      "role": "电荷符号",
+      "description": "表示是失去电子成为阳离子（+），还是得到电子成为阴离子（−）。"
+    },
+    "massNumber": {
+      "role": "质量数",
+      "description": "原子核中质子数与中子数之和，用来区分同位素。"
+    },
+    "atomicNumber": {
+      "role": "原子序数",
+      "description": "原子核中的质子数，它决定这是哪一种元素。"
+    },
+    "arrow": {
+      "role": "反应箭头",
+      "description": "表示反应沿箭头方向进行。"
+    },
+    "equilibriumArrow": {
+      "role": "可逆反应",
+      "description": "正反应与逆反应同时发生，达成平衡。"
+    },
+    "condition": {
+      "role": "反应条件",
+      "description": "反应所需的催化剂、温度、压强等条件。"
+    },
+    "plus": {
+      "role": "化学物种分隔",
+      "description": "连接同一边的各种物质，并不是加法。"
+    },
+    "hydrate": {
+      "role": "水合结合",
+      "description": "表示晶体中还一并含有水分子。"
+    },
+    "state": {
+      "role": "状态",
+      "description": "表示处于固体(s)、液体(l)、气体(g)、水溶液(aq) 中的哪一种状态。"
+    },
+    "gas": {
+      "role": "气体生成",
+      "description": "表示反应中有气体逸出。"
+    },
+    "precipitate": {
+      "role": "沉淀",
+      "description": "表示反应中有固体沉降析出。"
+    }
+  }
+}
