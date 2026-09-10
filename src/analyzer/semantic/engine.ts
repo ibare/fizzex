@@ -15,6 +15,7 @@ import { getSemanticTexts, getCatalogIndex, getCatalogDetail } from './loader.js
 import { matchLayer1, getLayer1RoleFromTexts } from './matchers/layer1-matcher.js';
 import { matchLayer2 } from './matchers/layer2-matcher.js';
 import { matchCatalog } from './matchers/catalog-matcher.js';
+import { matchChemCatalog } from './matchers/chem-matcher.js';
 import { compileForms, matchForm, type CompiledForm } from './matchers/form-matcher.js';
 import { normalizeAst } from '../canonical/from-ast.js';
 // 형식 템플릿은 LaTeX 이고 파서는 하나뿐이다. analyzer → latex 는 새 방향
@@ -197,13 +198,19 @@ function getCompiledForms(): CompiledForm[] {
 }
 
 /**
- * 수식을 형식 → 폴백 순서로 판정한다.
+ * 수식을 화학식 → 형식 → 폴백 순서로 판정한다.
  *
  * 형식 매칭은 구조 유니피케이션이라 점수가 없다. 성공하면 `confirmed` 이고,
- * 이것만이 시각화 칩을 만들 수 있다. 폴백 스코어러는 구조적으로
+ * **시각화 칩을 만들 수 있는 것은 이 경로뿐이다** — 칩은 형식이 소유한 슬롯에서
+ * 나오므로 formId 가 없으면 만들어질 수 없다. 화학식 매칭도 표기 정확 일치라
+ * `confirmed` 이지만 형식이 없어 칩을 갖지 않는다. 폴백 스코어러는 구조적으로
  * `approximate` 만 만든다 — 칩 오탐을 임계값이 아니라 타입으로 막는다.
  */
 export function matchExpression(ast: MathNode): CatalogMatchResult | null {
+  // 화학식이 먼저다. 표기가 곧 정체성이라 시그니처도 유니피케이션도 거칠 것이 없다.
+  const chemMatch = matchChemCatalog(ast, getCatalogIndex());
+  if (chemMatch) return chemMatch;
+
   const fallback = matchCatalog(ast, getCatalogIndex());
 
   // 이름만 가진 수식이 일반 형식에 삼켜지지 않게 한다.

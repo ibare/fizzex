@@ -7,19 +7,50 @@
     "field": "화학",
     "significance": "온도와 반응 속도의 관계를 정량화하여 화학 반응 속도론의 핵심 법칙을 확립했습니다.",
     "elementMeanings": {
-      "k": { "role": "반응 속도 상수", "description": "특정 온도에서 반응이 진행되는 속도를 결정하는 상수.", "kind": "output" },
-      "A": { "role": "빈도 인자", "description": "분자 충돌 빈도와 배향 효과를 반영하는 선지수 인자.", "kind": "input" },
-      "e": { "role": "자연로그의 밑", "description": "약 2.718. 지수 함수의 밑입니다.", "kind": "constant", "value": 2.718281828, "unit": "" },
-      "E_a": { "role": "활성화 에너지", "description": "반응이 일어나기 위해 넘어야 하는 에너지 장벽. 단위: J/mol.", "kind": "input" },
-      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K).", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)" },
-      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K).", "kind": "input" }
+      "k": {
+        "role": "반응 속도 상수",
+        "description": "특정 온도에서 반응이 진행되는 속도를 결정하는 상수.",
+        "kind": "output"
+      },
+      "A": {
+        "role": "빈도 인자",
+        "description": "분자 충돌 빈도와 배향 효과를 반영하는 선지수 인자.",
+        "kind": "input"
+      },
+      "e": {
+        "role": "자연로그의 밑",
+        "description": "약 2.718. 지수 함수의 밑입니다.",
+        "kind": "constant",
+        "value": 2.718281828,
+        "unit": ""
+      },
+      "E_a": {
+        "role": "활성화 에너지",
+        "description": "반응이 일어나기 위해 넘어야 하는 에너지 장벽. 단위: J/mol.",
+        "kind": "input"
+      },
+      "R": {
+        "role": "기체 상수",
+        "description": "이상기체 상수. 약 8.314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "절대 온도",
+        "description": "반응 온도. 단위: 켈빈(K).",
+        "kind": "input"
+      }
     },
     "realWorldExamples": [
       "냉장고에서 음식이 천천히 상하는 이유 (온도 낮으면 반응 느림)",
       "촉매가 활성화 에너지를 낮춰 반응을 가속하는 원리",
       "산업 공정에서 최적 반응 온도 설계"
     ],
-    "relatedFormulas": ["half-life", "gibbs-free-energy"]
+    "relatedFormulas": [
+      "half-life",
+      "gibbs-free-energy"
+    ]
   },
   "gibbs-free-energy": {
     "name": "깁스 자유 에너지",
@@ -29,17 +60,36 @@
     "field": "화학",
     "significance": "화학 반응과 상변화의 자발성을 예측하는 열역학의 핵심 판단 기준을 제공합니다.",
     "elementMeanings": {
-      "\\Delta G": { "role": "깁스 자유 에너지 변화", "description": "반응의 자발성 지표. 음수면 자발적. 단위: J 또는 kJ.", "kind": "output" },
-      "\\Delta H": { "role": "엔탈피 변화", "description": "반응에서 방출하거나 흡수하는 열에너지. 단위: J 또는 kJ.", "kind": "input" },
-      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K).", "kind": "input" },
-      "\\Delta S": { "role": "엔트로피 변화", "description": "반응에 따른 무질서도 변화. 단위: J/K.", "kind": "input" }
+      "\\Delta G": {
+        "role": "깁스 자유 에너지 변화",
+        "description": "반응의 자발성 지표. 음수면 자발적. 단위: J 또는 kJ.",
+        "kind": "output"
+      },
+      "\\Delta H": {
+        "role": "엔탈피 변화",
+        "description": "반응에서 방출하거나 흡수하는 열에너지. 단위: J 또는 kJ.",
+        "kind": "input"
+      },
+      "T": {
+        "role": "절대 온도",
+        "description": "반응 온도. 단위: 켈빈(K).",
+        "kind": "input"
+      },
+      "\\Delta S": {
+        "role": "엔트로피 변화",
+        "description": "반응에 따른 무질서도 변화. 단위: J/K.",
+        "kind": "input"
+      }
     },
     "realWorldExamples": [
       "물의 어는점에서 고체-액체 상평형 분석",
       "생체 내 ATP 가수분해 반응의 자발성 설명",
       "고온에서 자발적으로 진행되는 분해 반응 예측"
     ],
-    "relatedFormulas": ["arrhenius-equation", "nernst-equation"]
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "nernst-equation"
+    ]
   },
   "nernst-equation": {
     "name": "네른스트 방정식",
@@ -49,20 +99,55 @@
     "field": "화학",
     "significance": "전기화학 반응의 전위를 농도 조건에 따라 정밀하게 예측하여 배터리와 전기분해 기술의 이론적 기반을 마련했습니다.",
     "elementMeanings": {
-      "E": { "role": "전지 전위", "description": "비표준 조건에서의 실제 전위. 단위: 볼트(V).", "kind": "output" },
-      "E^\\circ": { "role": "표준 전지 전위", "description": "표준 조건(1 M, 1 atm, 25도)에서의 전위. 단위: 볼트(V).", "kind": "input" },
-      "R": { "role": "기체 상수", "description": "이상기체 상수. 약 8.314 J/(mol K).", "kind": "constant", "value": 8.314, "unit": "J/(mol·K)" },
-      "T": { "role": "절대 온도", "description": "반응 온도. 단위: 켈빈(K).", "kind": "input" },
-      "n": { "role": "전자 수", "description": "반응에서 이동하는 전자의 몰수.", "kind": "input" },
-      "F": { "role": "패러데이 상수", "description": "전자 1몰의 전하량. 약 96,485 C/mol.", "kind": "constant", "value": 96485, "unit": "C/mol" },
-      "Q": { "role": "반응 지수", "description": "생성물 농도와 반응물 농도의 비. 평형에서는 평형 상수 K와 같아집니다.", "kind": "input" }
+      "E": {
+        "role": "전지 전위",
+        "description": "비표준 조건에서의 실제 전위. 단위: 볼트(V).",
+        "kind": "output"
+      },
+      "E^\\circ": {
+        "role": "표준 전지 전위",
+        "description": "표준 조건(1 M, 1 atm, 25도)에서의 전위. 단위: 볼트(V).",
+        "kind": "input"
+      },
+      "R": {
+        "role": "기체 상수",
+        "description": "이상기체 상수. 약 8.314 J/(mol K).",
+        "kind": "constant",
+        "value": 8.314,
+        "unit": "J/(mol·K)"
+      },
+      "T": {
+        "role": "절대 온도",
+        "description": "반응 온도. 단위: 켈빈(K).",
+        "kind": "input"
+      },
+      "n": {
+        "role": "전자 수",
+        "description": "반응에서 이동하는 전자의 몰수.",
+        "kind": "input"
+      },
+      "F": {
+        "role": "패러데이 상수",
+        "description": "전자 1몰의 전하량. 약 96,485 C/mol.",
+        "kind": "constant",
+        "value": 96485,
+        "unit": "C/mol"
+      },
+      "Q": {
+        "role": "반응 지수",
+        "description": "생성물 농도와 반응물 농도의 비. 평형에서는 평형 상수 K와 같아집니다.",
+        "kind": "input"
+      }
     },
     "realWorldExamples": [
       "리튬 이온 배터리의 충방전 전위 변화 예측",
       "pH 미터의 작동 원리 (수소 이온 농도에 따른 전위 변화)",
       "부식 반응에서의 금속 전위 평가"
     ],
-    "relatedFormulas": ["gibbs-free-energy", "ph-definition"]
+    "relatedFormulas": [
+      "gibbs-free-energy",
+      "ph-definition"
+    ]
   },
   "half-life": {
     "name": "반감기",
@@ -71,16 +156,33 @@
     "field": "화학",
     "significance": "방사성 연대 측정, 약물 대사, 핵폐기물 관리 등 시간에 따른 물질 감소를 정량화하는 핵심 개념입니다.",
     "elementMeanings": {
-      "t_{1/2}": { "role": "반감기", "description": "물질의 양이 절반으로 줄어드는 데 걸리는 시간. 단위: 초(s) 등.", "kind": "output" },
-      "\\ln 2": { "role": "자연로그 2", "description": "약 0.693. '절반'이라는 조건에서 자연스럽게 도출되는 상수입니다.", "kind": "constant", "value": 0.693147, "unit": "" },
-      "k": { "role": "속도 상수", "description": "반응 속도를 결정하는 비례 상수. 단위: 1/s (1차 반응).", "kind": "input" }
+      "t_{1/2}": {
+        "role": "반감기",
+        "description": "물질의 양이 절반으로 줄어드는 데 걸리는 시간. 단위: 초(s) 등.",
+        "kind": "output"
+      },
+      "\\ln 2": {
+        "role": "자연로그 2",
+        "description": "약 0.693. '절반'이라는 조건에서 자연스럽게 도출되는 상수입니다.",
+        "kind": "constant",
+        "value": 0.693147,
+        "unit": ""
+      },
+      "k": {
+        "role": "속도 상수",
+        "description": "반응 속도를 결정하는 비례 상수. 단위: 1/s (1차 반응).",
+        "kind": "input"
+      }
     },
     "realWorldExamples": [
       "탄소-14 연대 측정 (반감기 약 5,730년)",
       "약물의 체내 반감기로 복용 간격 결정",
       "방사성 폐기물의 안전 보관 기간 산정"
     ],
-    "relatedFormulas": ["arrhenius-equation", "exponential-growth"]
+    "relatedFormulas": [
+      "arrhenius-equation",
+      "exponential-growth"
+    ]
   },
   "ph-definition": {
     "name": "pH 정의",
@@ -90,16 +192,30 @@
     "field": "화학",
     "significance": "용액의 산염기 성질을 간편하게 수치화하여 화학, 생물학, 환경과학 등 광범위한 분야에서 활용됩니다.",
     "elementMeanings": {
-      "pH": { "role": "수소 이온 지수", "description": "산성도를 나타내는 무차원 수. 0~14 범위가 일반적.", "kind": "output" },
-      "[H^+]": { "role": "수소 이온 농도", "description": "용액 내 수소 이온의 몰 농도. 단위: mol/L.", "kind": "input" },
-      "\\log": { "role": "상용로그", "description": "밑이 10인 로그. 농도의 크기 차이를 압축하여 표현합니다.", "kind": "structural" }
+      "pH": {
+        "role": "수소 이온 지수",
+        "description": "산성도를 나타내는 무차원 수. 0~14 범위가 일반적.",
+        "kind": "output"
+      },
+      "[H^+]": {
+        "role": "수소 이온 농도",
+        "description": "용액 내 수소 이온의 몰 농도. 단위: mol/L.",
+        "kind": "input"
+      },
+      "\\log": {
+        "role": "상용로그",
+        "description": "밑이 10인 로그. 농도의 크기 차이를 압축하여 표현합니다.",
+        "kind": "structural"
+      }
     },
     "realWorldExamples": [
       "수영장 물의 pH 관리 (약 7.2~7.8 유지)",
       "위산의 pH 측정 (약 1.5~3.5)",
       "산성비의 pH 측정과 환경 영향 평가"
     ],
-    "relatedFormulas": ["nernst-equation"]
+    "relatedFormulas": [
+      "nernst-equation"
+    ]
   },
   "boyle-law": {
     "name": "보일 법칙",
@@ -109,17 +225,35 @@
     "field": "화학",
     "significance": "기체 행동에 대한 최초의 정량적 법칙으로, 이상기체 법칙과 기체 분자 운동론의 출발점이 되었습니다.",
     "elementMeanings": {
-      "P_1": { "role": "초기 압력", "description": "변화 전 기체의 압력. 단위: 파스칼(Pa) 또는 기압(atm).", "kind": "input" },
-      "V_1": { "role": "초기 부피", "description": "변화 전 기체의 부피. 단위: 리터(L) 또는 m의 세제곱.", "kind": "input" },
-      "P_2": { "role": "최종 압력", "description": "변화 후 기체의 압력.", "kind": "input" },
-      "V_2": { "role": "최종 부피", "description": "변화 후 기체의 부피.", "kind": "input" }
+      "P_1": {
+        "role": "초기 압력",
+        "description": "변화 전 기체의 압력. 단위: 파스칼(Pa) 또는 기압(atm).",
+        "kind": "input"
+      },
+      "V_1": {
+        "role": "초기 부피",
+        "description": "변화 전 기체의 부피. 단위: 리터(L) 또는 m의 세제곱.",
+        "kind": "input"
+      },
+      "P_2": {
+        "role": "최종 압력",
+        "description": "변화 후 기체의 압력.",
+        "kind": "input"
+      },
+      "V_2": {
+        "role": "최종 부피",
+        "description": "변화 후 기체의 부피.",
+        "kind": "input"
+      }
     },
     "realWorldExamples": [
       "주사기를 누르면 내부 기체의 압력이 증가하는 현상",
       "스쿠버 다이빙 시 수심에 따른 공기 부피 변화",
       "자동차 엔진 실린더 내 기체 압축"
     ],
-    "relatedFormulas": ["ideal-gas-law"]
+    "relatedFormulas": [
+      "ideal-gas-law"
+    ]
   },
   "avogadro-number": {
     "name": "아보가드로 수",
@@ -129,15 +263,209 @@
     "field": "화학",
     "significance": "원자-분자 수준의 미시 세계와 실험실 규모의 거시 세계를 연결하는 화학의 가장 기본적인 상수입니다.",
     "elementMeanings": {
-      "N_A": { "role": "아보가드로 수", "description": "1몰당 입자 수. 약 6.022x10의 23제곱 /mol.", "kind": "constant", "value": 6.022e23, "unit": "mol⁻¹" },
-      "n": { "role": "몰수", "description": "물질의 양. 단위: 몰(mol).", "kind": "input" },
-      "N": { "role": "입자 수", "description": "실제 입자(원자, 분자 등)의 개수.", "kind": "output" }
+      "N_A": {
+        "role": "아보가드로 수",
+        "description": "1몰당 입자 수. 약 6.022x10의 23제곱 /mol.",
+        "kind": "constant",
+        "value": 6.022e+23,
+        "unit": "mol⁻¹"
+      },
+      "n": {
+        "role": "몰수",
+        "description": "물질의 양. 단위: 몰(mol).",
+        "kind": "input"
+      },
+      "N": {
+        "role": "입자 수",
+        "description": "실제 입자(원자, 분자 등)의 개수.",
+        "kind": "output"
+      }
     },
     "realWorldExamples": [
       "탄소 12g에 포함된 원자 수 계산",
       "화학 반응의 양적 관계 계산 (몰비 활용)",
       "기체의 부피와 분자 수 사이의 관계 파악"
     ],
-    "relatedFormulas": ["ideal-gas-law", "boyle-law"]
+    "relatedFormulas": [
+      "ideal-gas-law",
+      "boyle-law"
+    ]
+  },
+  "water-synthesis": {
+    "name": "물의 생성 반응",
+    "oneLiner": "수소가 산소와 만나 물이 되는 반응 — 수소 연료의 원리",
+    "description": "수소 분자 두 개와 산소 분자 하나가 반응해 물 분자 두 개가 됩니다. 많은 열을 내놓는 발열 반응이며, 생성물이 물뿐이라 탄소를 배출하지 않습니다. 계수 2, 1, 2 는 양변의 수소 원자 4개와 산소 원자 2개를 맞춘 결과입니다.",
+    "field": "화학",
+    "significance": "수소 연료 전지와 수소 자동차가 에너지를 얻는 반응입니다. 화학 반응식의 계수 맞추기를 배울 때 가장 먼저 만나는 예이기도 합니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "수소 연료 전지 자동차의 동력",
+      "로켓 엔진의 액체 수소·액체 산소 추진"
+    ]
+  },
+  "methane-combustion": {
+    "name": "메탄의 연소",
+    "oneLiner": "도시가스가 타면서 이산화탄소와 물이 나오는 반응",
+    "description": "메탄 한 분자가 산소 두 분자와 반응해 이산화탄소 한 분자와 물 두 분자가 됩니다. 탄화수소가 산소와 완전히 반응하면 언제나 이산화탄소와 물이 나오는데, 이를 완전 연소라 합니다. 산소가 모자라면 일산화탄소나 그을음이 생깁니다.",
+    "field": "화학",
+    "significance": "가정과 발전소에서 쓰는 천연가스 연소의 기본 반응이며, 온실가스 배출을 계산하는 출발점입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "가스레인지와 보일러의 연소",
+      "천연가스 발전소의 열 생산"
+    ]
+  },
+  "photosynthesis": {
+    "name": "광합성",
+    "oneLiner": "식물이 빛으로 이산화탄소와 물에서 포도당을 만드는 반응",
+    "description": "이산화탄소 여섯 분자와 물 여섯 분자가 빛에너지를 받아 포도당 한 분자와 산소 여섯 분자가 됩니다. 빛에너지가 화학 결합 에너지로 저장되는 흡열 반응이며, 엽록체에서 일어납니다. 지구 대기의 산소는 대부분 이 반응에서 나왔습니다.",
+    "field": "화학",
+    "significance": "태양에너지를 생물이 쓸 수 있는 형태로 바꾸는 반응으로, 거의 모든 먹이사슬의 출발점입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "식물과 조류의 양분 생산",
+      "탄소 흡수원으로서의 숲과 바다"
+    ],
+    "relatedFormulas": [
+      "cellular-respiration"
+    ]
+  },
+  "cellular-respiration": {
+    "name": "세포 호흡",
+    "oneLiner": "포도당을 산소로 태워 생명 활동의 에너지를 얻는 반응",
+    "description": "포도당 한 분자와 산소 여섯 분자가 반응해 이산화탄소 여섯 분자와 물 여섯 분자가 됩니다. 광합성과 정확히 반대 방향이며, 나온 에너지는 ATP 에 담깁니다. 실제로는 여러 단계를 거치지만 전체 수지는 이 한 줄로 요약됩니다.",
+    "field": "화학",
+    "significance": "동물과 식물을 포함한 대부분의 생물이 에너지를 얻는 방식입니다. 광합성과 짝을 이뤄 탄소가 순환합니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "근육이 움직일 때의 에너지 공급",
+      "숨을 쉴 때 들이마신 산소의 쓰임"
+    ],
+    "relatedFormulas": [
+      "photosynthesis"
+    ]
+  },
+  "neutralization-hcl-naoh": {
+    "name": "중화 반응",
+    "oneLiner": "산과 염기가 만나 염과 물이 되는 반응",
+    "description": "염산과 수산화나트륨이 반응해 염화나트륨과 물이 됩니다. 산의 수소 이온과 염기의 수산화 이온이 만나 물이 되는 것이 반응의 본질이고, 남은 이온들이 염을 이룹니다. 열이 나는 발열 반응입니다.",
+    "field": "화학",
+    "significance": "산성과 염기성이 서로를 상쇄한다는 사실을 보여주는 대표 반응으로, 적정 실험의 원리입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "속쓰림에 제산제를 먹는 것",
+      "산성 토양에 석회를 뿌려 중화하는 것"
+    ]
+  },
+  "haber-process": {
+    "name": "하버-보슈법",
+    "oneLiner": "공기 중 질소로 암모니아를 만드는 반응 — 비료의 출발점",
+    "description": "질소 분자 하나와 수소 분자 셋이 철 촉매 위에서 반응해 암모니아 두 분자가 됩니다. 가역 반응이라 정반응과 역반응이 함께 일어나며, 고온·고압과 촉매로 암모니아 쪽 수득률을 끌어올립니다. 질소 분자의 삼중 결합이 매우 튼튼해 조건이 가혹합니다.",
+    "discoverer": "프리츠 하버, 카를 보슈",
+    "field": "화학",
+    "significance": "공기 중 질소를 식물이 쓸 수 있는 형태로 바꾼 반응입니다. 질소 비료를 대량 생산할 수 있게 되어 20세기 인구 증가를 뒷받침했습니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "질소 비료 생산",
+      "화학 평형과 르샤틀리에 원리의 대표 사례"
+    ]
+  },
+  "carbonic-acid-equilibrium": {
+    "name": "탄산의 평형",
+    "oneLiner": "이산화탄소가 물에 녹아 탄산이 되는 가역 반응",
+    "description": "이산화탄소와 물이 반응해 탄산이 되고, 탄산은 다시 이산화탄소와 물로 돌아갑니다. 어느 쪽으로도 완전히 기울지 않고 평형을 이루며, 압력을 낮추면 이산화탄소 쪽으로 기웁니다.",
+    "field": "화학",
+    "significance": "혈액의 산성도를 일정하게 유지하는 완충 작용과 바닷물의 이산화탄소 흡수를 설명합니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "탄산음료 뚜껑을 열면 기포가 올라오는 것",
+      "바다 산성화",
+      "혈액의 pH 완충"
+    ]
+  },
+  "barium-sulfate-precipitation": {
+    "name": "황산바륨의 침전",
+    "oneLiner": "두 수용액을 섞으면 물에 녹지 않는 고체가 가라앉는 반응",
+    "description": "염화바륨 수용액과 황산나트륨 수용액을 섞으면 바륨 이온과 황산 이온이 만나 물에 거의 녹지 않는 황산바륨이 되어 흰 앙금으로 가라앉습니다. 아래 방향 화살표가 침전을 뜻합니다. 남은 염화나트륨은 물에 녹아 그대로 있습니다.",
+    "field": "화학",
+    "significance": "이온이 만나 앙금을 만드는 침전 반응의 대표 예로, 특정 이온이 있는지 확인하는 검출 실험에 쓰입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "위장 조영 검사에서 마시는 조영제",
+      "수용액에 든 황산 이온 검출"
+    ]
+  },
+  "water-molecule": {
+    "name": "물",
+    "oneLiner": "수소 원자 둘과 산소 원자 하나로 이루어진 분자",
+    "description": "산소 원자 하나에 수소 원자 두 개가 굽은 모양으로 붙어 있습니다. 전자가 산소 쪽으로 치우쳐 분자에 극성이 생기고, 그 덕분에 물 분자끼리 수소 결합으로 서로를 붙잡습니다. 작은 분자인데도 끓는점이 높고 많은 물질을 녹이는 이유가 여기 있습니다.",
+    "field": "화학",
+    "significance": "생명 활동이 일어나는 무대이자 가장 널리 쓰이는 용매입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "생물 몸무게의 절반 이상을 차지",
+      "얼음이 물에 뜨는 성질"
+    ]
+  },
+  "carbon-dioxide": {
+    "name": "이산화탄소",
+    "oneLiner": "탄소 원자 하나에 산소 원자 둘이 붙은 직선형 분자",
+    "description": "탄소를 가운데 두고 산소 두 개가 양쪽으로 곧게 붙어 있습니다. 결합 자체는 극성이지만 좌우가 대칭이라 분자 전체로는 극성이 상쇄됩니다. 적외선을 흡수했다 내놓아 지구의 온도를 붙잡아 둡니다.",
+    "field": "화학",
+    "significance": "연소와 호흡의 산물이자 광합성의 원료이며, 대표적인 온실가스입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "탄산음료의 기포",
+      "드라이아이스",
+      "온실 효과"
+    ]
+  },
+  "sulfate-ion": {
+    "name": "황산 이온",
+    "oneLiner": "황 하나에 산소 넷이 붙고 전자 둘을 더 가진 음이온",
+    "description": "황 원자를 가운데 두고 산소 원자 네 개가 정사면체 모양으로 둘러싼 다원자 이온입니다. 전자를 두 개 더 갖고 있어 2- 의 전하를 띠며, 위첨자의 숫자는 전하의 크기, 부호는 전자를 얻었다는 표시입니다.",
+    "field": "화학",
+    "significance": "황산과 그 염들의 공통 성분으로, 물속에서 하나의 단위처럼 행동하는 다원자 이온의 대표입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "황산의 수용액",
+      "석고와 황산구리 같은 황산염"
+    ]
+  },
+  "calcium-hydroxide": {
+    "name": "수산화칼슘",
+    "oneLiner": "칼슘 하나에 수산화 이온 둘이 붙은 염기 — 소석회",
+    "description": "칼슘 이온 하나가 수산화 이온 두 개와 결합해 있습니다. 괄호는 수산화 이온이 하나의 단위임을 나타내고, 뒤의 2 는 그 단위가 두 개라는 뜻입니다. 물에 조금 녹아 강한 염기성을 띱니다.",
+    "field": "화학",
+    "significance": "괄호로 원자단을 묶는 표기법의 대표 예이며, 산성을 중화하는 데 널리 쓰입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "산성 토양을 중화하는 석회",
+      "이산화탄소를 확인하는 석회수"
+    ]
+  },
+  "copper-sulfate-pentahydrate": {
+    "name": "황산구리 오수화물",
+    "oneLiner": "결정 안에 물 분자 다섯 개를 품은 파란 황산구리",
+    "description": "황산구리 결정 하나마다 물 분자 다섯 개가 일정한 자리에 함께 들어 있습니다. 가운뎃점은 이 물이 화학 결합으로 붙은 것이 아니라 결정 구조 안에 자리 잡고 있음을 나타냅니다. 가열해 물을 날리면 파란색이 사라지고 흰 가루가 됩니다.",
+    "field": "화학",
+    "significance": "수화물 표기법의 대표 예이며, 물의 유무로 색이 변해 수분 검출에 쓰입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "파란 황산구리 결정 만들기 실험",
+      "알코올 속 수분 검출"
+    ]
+  },
+  "thorium-227": {
+    "name": "토륨-227",
+    "oneLiner": "양성자 90개, 질량수 227인 토륨의 방사성 동위원소",
+    "description": "왼쪽 위의 227 은 원자핵 속 양성자와 중성자를 합한 질량수, 왼쪽 아래의 90 은 양성자 수인 원자 번호입니다. 원자 번호가 어떤 원소인지를 정하고, 질량수가 같은 원소의 어떤 동위원소인지를 가릅니다. 토륨-227 은 알파 붕괴로 라듐-223 이 됩니다.",
+    "field": "화학",
+    "significance": "동위원소 표기법의 대표 예이며, 악티늄 붕괴 계열의 한 단계입니다.",
+    "elementMeanings": {},
+    "realWorldExamples": [
+      "방사성 붕괴 계열 추적",
+      "알파 방출 핵종을 이용한 표적 치료 연구"
+    ]
   }
 }

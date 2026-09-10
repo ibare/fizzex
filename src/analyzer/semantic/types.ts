@@ -89,26 +89,46 @@ export interface VisualizerRef {
   default?: boolean;
 }
 
-/** 카탈로그 인덱스 항목 (번들에 포함, 가벼움) */
-export interface CatalogIndexEntry {
+/** 카탈로그 인덱스 항목의 공통 부분 */
+interface CatalogIndexEntryBase {
   id: string;
   category: CatalogCategory;
-  /** 매칭에 필요한 AST 노드 타입 */
-  requiredNodeTypes?: string[];
-  /** 매칭에 필요한 변수명 (exact 매칭용) */
-  requiredVariables?: string[];
-  /** AST 노드 수 범위 [min, max] */
-  complexity?: [number, number];
-  /** 매칭 패턴 타입 */
-  patternType: 'exact' | 'structural';
-  /** 구조 시그니처 — 필수 특징 */
-  signature: string[];
   /**
    * 이 수식이 사례가 되는 형식 id. 없는 것이 정상이다.
    * 시각화는 형식이 소유한다 — 카탈로그 항목은 이름과 설명만 갖는다.
    */
   form?: string;
 }
+
+/** 구조 시그니처로 가리는 항목 */
+export interface StructuralCatalogEntry extends CatalogIndexEntryBase {
+  /** 매칭 패턴 타입 */
+  patternType: 'exact' | 'structural';
+  /** 매칭에 필요한 AST 노드 타입 */
+  requiredNodeTypes?: string[];
+  /** 매칭에 필요한 변수명 (exact 매칭용) */
+  requiredVariables?: string[];
+  /** AST 노드 수 범위 [min, max] */
+  complexity?: [number, number];
+  /** 구조 시그니처 — 필수 특징 */
+  signature: string[];
+}
+
+/**
+ * 화학식 표기로 가리는 항목.
+ *
+ * 반응식은 구조 패턴이 아니라 개별 항목이다 — `2H2 + O2 -> 2H2O` 와
+ * `2H2 + Cl2 -> 2HCl` 은 구조가 같지만 다른 반응이다. 표기가 곧 정체성이므로
+ * 시그니처 점수가 아니라 정확 일치로만 가린다.
+ */
+export interface ChemCatalogEntry extends CatalogIndexEntryBase {
+  patternType: 'chem';
+  /** `\ce{}` 안의 정규 표기. 직렬화기가 내는 형태와 문자 단위로 같아야 한다. */
+  chemFormula: string;
+}
+
+/** 카탈로그 인덱스 항목 (번들에 포함, 가벼움) */
+export type CatalogIndexEntry = StructuralCatalogEntry | ChemCatalogEntry;
 
 /** 카탈로그 파라미터 설정 (JSON 직렬화 가능 — compute 함수 없음) */
 export interface CatalogParameterConfig {

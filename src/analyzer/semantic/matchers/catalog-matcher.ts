@@ -159,6 +159,10 @@ export function matchCatalog(
   let bestRigid = -1;
 
   for (const entry of index) {
+    // 화학식 항목은 표기 정확 일치로만 가린다 (chem-matcher.ts).
+    // 시그니처 점수로 재면 구조가 같은 다른 반응식이 서로를 오탐한다.
+    if (entry.patternType === 'chem') continue;
+
     // 1. 사전 필터: complexity 범위
     if (entry.complexity) {
       const [min, max] = entry.complexity;

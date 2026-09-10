@@ -164,10 +164,25 @@ function validateCatalog(): void {
   }
 
   // index → 상세
-  for (const { id, category } of entries) {
+  for (const entry of entries) {
+    const { id, category } = entry;
     const categoryData = detailCache.get(category);
     if (!categoryData) continue; // 위에서 이미 error 보고됨
-    if (!categoryData[id]) error(`index ID "${id}" (${category})가 ko/${category}.json에 없음`);
+    const detail = categoryData[id];
+    if (!detail) {
+      error(`index ID "${id}" (${category})가 ko/${category}.json에 없음`);
+      continue;
+    }
+
+    // elementMeanings 는 수식의 기호를 가리킨다. 화학식의 기호는 변수가 아니라
+    // 화학종이라 findElementKey 가 키를 만들 수 없으므로 요구하지 않는다.
+    // 이 판정은 스키마가 아니라 여기에 있다 — patternType 을 아는 곳이 여기다.
+    if (entry.patternType !== 'chem') {
+      const meanings = (detail as { elementMeanings?: Record<string, unknown> }).elementMeanings;
+      if (!meanings || Object.keys(meanings).length === 0) {
+        error(`ko/${category}.json "${id}": elementMeanings가 비어 있다`);
+      }
+    }
   }
 
   // 상세 → index (미참조 항목은 매칭 풀에 들어가지 못해 영원히 노출되지 않는다 → error)

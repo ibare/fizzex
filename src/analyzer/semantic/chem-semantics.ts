@@ -165,7 +165,7 @@ function keyFor(node: MathNode, parent: AncestorEntry): ChemTextKey | null {
  * `\ce{H2O}` 만 적은 수식의 전체 역할이 "수식 전체" 이면 화면에서 화학식이라는
  * 사실이 어디에도 드러나지 않는다.
  */
-function asChem(node: MathNode): ChemNode | null {
+export function asChem(node: MathNode): ChemNode | null {
   if (node.type === 'chem') return node;
   if (node.type === 'root') {
     const children = unwrapRow(node.children);

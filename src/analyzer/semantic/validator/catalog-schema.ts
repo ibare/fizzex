@@ -20,20 +20,37 @@ const visualizerRefSchema = z.object({
   default: z.boolean().optional(),
 });
 
-const catalogIndexEntrySchema = z.object({
+const catalogIndexEntryBase = {
   id: z.string().regex(idRegex, 'catalog id는 소문자·숫자·하이픈'),
   category: z.enum(CATALOG_CATEGORY_IDS),
-  requiredNodeTypes: z.array(z.string().min(1)).min(1).optional(),
-  requiredVariables: z.array(z.string().min(1)).min(1).optional(),
-  complexity: z
-    .tuple([z.number().int().nonnegative(), z.number().int().nonnegative()])
-    .optional(),
-  patternType: z.enum(['exact', 'structural']),
-  // signature 는 중복 원소를 허용한다. 중복은 다중도 요구사항이다 —
-  // 예: 피타고라스의 `power.exponent:2` ×3 은 "제곱이 세 개"를 뜻한다.
-  signature: z.array(z.string().min(1)).min(1),
   visualizers: z.array(visualizerRefSchema).min(1).optional(),
-});
+};
+
+/**
+ * 인덱스 항목은 patternType 으로 갈린다.
+ *
+ * 화학식 항목에 signature 를 허용하면 `["chem"]` 한 토큰으로 점수 1.0 이 나와
+ * 어떤 화학식이든 그 항목으로 오탐한다. 타입 수준에서 막는다.
+ */
+const catalogIndexEntrySchema = z.discriminatedUnion('patternType', [
+  z.object({
+    ...catalogIndexEntryBase,
+    patternType: z.enum(['exact', 'structural']),
+    requiredNodeTypes: z.array(z.string().min(1)).min(1).optional(),
+    requiredVariables: z.array(z.string().min(1)).min(1).optional(),
+    complexity: z
+      .tuple([z.number().int().nonnegative(), z.number().int().nonnegative()])
+      .optional(),
+    // signature 는 중복 원소를 허용한다. 중복은 다중도 요구사항이다 —
+    // 예: 피타고라스의 `power.exponent:2` ×3 은 "제곱이 세 개"를 뜻한다.
+    signature: z.array(z.string().min(1)).min(1),
+  }),
+  z.object({
+    ...catalogIndexEntryBase,
+    patternType: z.literal('chem'),
+    chemFormula: z.string().min(1),
+  }),
+]);
 
 export const catalogIndexSchema = z
   .object({
@@ -51,6 +68,8 @@ export const catalogIndexSchema = z
         });
       }
       seen.add(entry.id);
+
+      if (entry.patternType === 'chem') return;
 
       if (entry.complexity && entry.complexity[0] > entry.complexity[1]) {
         ctx.addIssue({
@@ -83,10 +102,9 @@ export const catalogDetailSchema = z
     elementMeanings: z.record(z.string(), elementMeaningSchema),
     relatedFormulas: z.array(z.string()).optional(),
   })
-  .catchall(z.unknown())
-  .refine((d) => Object.keys(d.elementMeanings).length > 0, {
-    message: 'elementMeanings가 비어 있다',
-    path: ['elementMeanings'],
-  });
+  .catchall(z.unknown());
+// "비어 있으면 안 된다" 는 여기서 판정하지 않는다. 화학식 항목의 기호는 변수가
+// 아니라 화학종이라 elementMeanings 로 가리킬 수 없다(findElementKey 참조).
+// 항목의 patternType 을 아는 곳, 즉 scripts/validate-semantic-data.ts 가 본다.
 
 export const catalogDetailFileSchema = z.record(z.string(), catalogDetailSchema);

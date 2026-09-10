@@ -1201,6 +1201,90 @@
       ]
     },
     {
+      "id": "water-synthesis",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "2H2 + O2 -> 2H2O"
+    },
+    {
+      "id": "methane-combustion",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "CH4 + 2O2 -> CO2 + 2H2O"
+    },
+    {
+      "id": "photosynthesis",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "6CO2 + 6H2O -> C6H12O6 + 6O2"
+    },
+    {
+      "id": "cellular-respiration",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "C6H12O6 + 6O2 -> 6CO2 + 6H2O"
+    },
+    {
+      "id": "neutralization-hcl-naoh",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "HCl + NaOH -> NaCl + H2O"
+    },
+    {
+      "id": "haber-process",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "N2 + 3H2 <=>[Fe] 2NH3"
+    },
+    {
+      "id": "carbonic-acid-equilibrium",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "CO2 + H2O <=> H2CO3"
+    },
+    {
+      "id": "barium-sulfate-precipitation",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "BaCl2 + Na2SO4 -> BaSO4 v + 2NaCl"
+    },
+    {
+      "id": "water-molecule",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "H2O"
+    },
+    {
+      "id": "carbon-dioxide",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "CO2"
+    },
+    {
+      "id": "sulfate-ion",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "SO4^2-"
+    },
+    {
+      "id": "calcium-hydroxide",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "Ca(OH)2"
+    },
+    {
+      "id": "copper-sulfate-pentahydrate",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "CuSO4 * 5H2O"
+    },
+    {
+      "id": "thorium-227",
+      "category": "chemistry",
+      "patternType": "chem",
+      "chemFormula": "^{227}_{90}Th"
+    },
+    {
       "id": "boolean-complement",
       "category": "cs",
       "complexity": [
