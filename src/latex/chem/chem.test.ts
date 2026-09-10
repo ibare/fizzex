@@ -79,11 +79,30 @@ describe('화학식 파싱', () => {
     expect(children[0].type).toBe('number');
   });
 
-  it('전하를 위첨자로 붙인다 (SO4^2-)', () => {
+  it('전하는 아래첨자와 같은 원자에 쌓지 않는다 (SO4^2-)', () => {
+    // 한 원자에 담으면 조판이 둘을 같은 x 에 세로로 쌓고(TeX Rule 18e)
+    // 아래첨자가 표준보다 더 내려간다. 표준 구현도 첨자마다 원자를 따로 만든다.
     const children = chemChildren('\\ce{SO4^2-}');
-    const scripts = children.find((c) => c.type === 'scripts') as ScriptsNode;
-    expect(scripts.subscript).toBeDefined();
+    const outer = children.find((c) => c.type === 'scripts') as ScriptsNode;
+
+    // 바깥 겹은 위첨자(전하)만 갖는다
+    expect(outer.superscript).toBeDefined();
+    expect(outer.subscript).toBeUndefined();
+
+    // 안쪽 겹이 원소와 원자 수를 갖는다
+    const inner = outer.base[0] as ScriptsNode;
+    expect(inner.type).toBe('scripts');
+    expect(inner.subscript).toBeDefined();
+    expect(inner.superscript).toBeUndefined();
+  });
+
+  it('전하만 있으면 한 원자에 붙인다 (Ca^2+)', () => {
+    // 아래첨자가 없으면 쌓일 일이 없다 — 표준과 같은 위치가 나온다
+    const children = chemChildren('\\ce{Ca^2+}');
+    const scripts = children[0] as ScriptsNode;
+
     expect(scripts.superscript).toBeDefined();
+    expect(scripts.base[0].type).toBe('text');
   });
 
   it('동위원소의 앞첨자를 읽는다 (^{227}_{90}Th)', () => {

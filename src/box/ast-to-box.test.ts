@@ -235,6 +235,32 @@ describe('AST to Box', () => {
       );
     });
 
+    it('전하를 아래첨자와 같은 x 에 쌓지 않는다', () => {
+      // 한 원자에 담으면 두 첨자가 같은 x 에 세로로 겹친다. 표준 구현은
+      // 첨자마다 원자를 따로 만들어 전하가 아래첨자 오른쪽에 온다.
+      const box = boxOf('\\ce{SO4^2-}');
+      layoutBox(box, 0, 0);
+      const glyphs = collectGlyphs(box);
+      const four = glyphs.find((g) => g.char === '4');
+      const two = glyphs.find((g) => g.char === '2');
+
+      expect(four).toBeDefined();
+      expect(two).toBeDefined();
+      expect(two.x).toBeGreaterThan(four.x);
+    });
+
+    it('전하가 붙어도 아래첨자는 단독일 때와 같은 깊이로 내려간다', () => {
+      // 동시 첨자로 두면 TeX Rule 18e 의 간격 확보가 발동해 더 내려간다
+      const subShift = (latex: string): number => {
+        const box = boxOf(latex);
+        layoutBox(box, 0, 0);
+        const four = collectGlyphs(box).find((g) => g.char === '4');
+        return four.y;
+      };
+
+      expect(subShift('\\ce{SO4^2-}')).toBe(subShift('\\ce{SO4}'));
+    });
+
     it('항 사이 공백이 폭 차이로 드러난다 — H2O (l) 이 H2O(l) 보다 넓다', () => {
       expect(boxOf('\\ce{H2O (l)}').width).toBeGreaterThan(boxOf('\\ce{H2O(l)}').width);
     });

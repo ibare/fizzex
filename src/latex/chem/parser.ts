@@ -175,10 +175,18 @@ function attachTrailingScripts(
   }
 
   if (!subscript && !superscript) return base;
-  return createScripts([base], {
-    ...(superscript ? { superscript } : {}),
-    ...(subscript ? { subscript } : {}),
-  });
+
+  // 아래첨자와 위첨자가 함께 오면 한 원자에 쌓지 않고 두 겹으로 만든다.
+  //
+  // `SO4^2-` 의 `2-` 는 O 의 지수가 아니라 화학종 전체의 전하다. 한 노드에
+  // 담으면 조판이 둘을 같은 x 에 세로로 쌓고(TeX Rule 18e) 아래첨자가 표준보다
+  // 더 내려간다. 표준 구현도 첨자마다 원자를 따로 만든다 — mhchem 은 폭 0
+  // 팬텀을 밑으로 쓰고, 여기서는 안쪽 겹이 그 높이 기준 노릇을 한다.
+  if (subscript && superscript) {
+    return createScripts([createScripts([base], { subscript })], { superscript });
+  }
+
+  return createScripts([base], subscript ? { subscript } : { superscript });
 }
 
 /** 항 시작의 앞첨자를 읽는다 (`^{227}_{90}Th`) */
@@ -238,7 +246,13 @@ function attachTrailingScriptsOnScripts(
     const tok = tk.peek('body');
     if (tok.kind === 'caret' && current.superscript === undefined) {
       tk.next('body');
-      current = attachScript(current, 'superscript', parseScriptArgument(tk, latex, ctx));
+      const superscript = parseScriptArgument(tk, latex, ctx);
+      // 본문 경로와 같은 규칙 — 아래첨자가 이미 있으면 위첨자는 바깥 겹으로.
+      // 앞첨자는 안쪽에 그대로 남아야 직렬화 순서가 유지된다.
+      if (current.subscript !== undefined) {
+        return createScripts([current], { superscript });
+      }
+      current = attachScript(current, 'superscript', superscript);
       continue;
     }
     if (tok.kind === 'underscore' && current.subscript === undefined) {
