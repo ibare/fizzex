@@ -26,6 +26,7 @@ import type { SemanticResult } from '../analyzer/semantic/index.js';
 import { analyzeBindings } from '../evaluator/analyze.js';
 import type { BindingAnalysis } from '../evaluator/analyze.js';
 import { getVisualizersForForm, getFormText } from '../analyzer/semantic/loader.js';
+import { getUiTexts, fill } from '../locales/ui.js';
 import type { VisualizerRef } from '../analyzer/semantic/types.js';
 import type {
   ApplyUserBindingsResult,
@@ -211,7 +212,7 @@ export class ExplorerOverlay {
     this.closeBtn = document.createElement('button');
     this.closeBtn.type = 'button';
     this.closeBtn.textContent = '\u2715'; // ✕
-    this.closeBtn.title = '닫기 (ESC)';
+    this.closeBtn.title = getUiTexts().explorer.closeWithKey;
     Object.assign(this.closeBtn.style, {
       position: 'absolute',
       top: '16px',
@@ -248,11 +249,11 @@ export class ExplorerOverlay {
       pointerEvents: 'none',
     });
     const hoverHint = document.createElement('span');
-    hoverHint.textContent = '호버: 요소 탐색';
+    hoverHint.textContent = getUiTexts().explorer.hintHover;
     const clickHint = document.createElement('span');
-    clickHint.textContent = '클릭: 값 조절';
+    clickHint.textContent = getUiTexts().explorer.hintClick;
     const escHint = document.createElement('span');
-    escHint.textContent = 'ESC: 닫기';
+    escHint.textContent = getUiTexts().explorer.hintEsc;
     this.hintBar.appendChild(hoverHint);
     this.hintBar.appendChild(clickHint);
     this.hintBar.appendChild(escHint);
@@ -1206,7 +1207,9 @@ export class ExplorerOverlay {
 
     const nameSpan = document.createElement('span');
     nameSpan.style.fontWeight = '600';
-    nameSpan.textContent = confirmed ? detail.name : `${detail.name}와(과) 유사`;
+    nameSpan.textContent = confirmed
+      ? detail.name
+      : fill(getUiTexts().explorer.similarTo, { name: detail.name });
 
     const sepSpan = document.createElement('span');
     sepSpan.textContent = ' — ';
@@ -1247,7 +1250,9 @@ export class ExplorerOverlay {
   private createVisualizerButton(ref: VisualizerRef, isOpen: boolean): HTMLButtonElement {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.title = isOpen ? `${ref.name} 닫기` : `${ref.name} — ${ref.description}`;
+    btn.title = isOpen
+      ? fill(getUiTexts().explorer.closeNamed, { name: ref.name })
+      : `${ref.name} — ${ref.description}`;
 
     const activeBg = this.isDark ? 'rgba(96,165,250,0.35)' : 'rgba(59,130,246,0.2)';
     const activeColor = this.isDark ? '#dbeafe' : '#1d4ed8';
@@ -1346,10 +1351,11 @@ export class ExplorerOverlay {
   private formatBadgeValue(value: number, unit?: string, format?: string): string {
     let numStr: string;
     if (format === 'time') {
-      if (value < 60) return `${value.toFixed(1)}초`;
-      if (value < 3600) return `${(value / 60).toFixed(1)}분`;
-      if (value < 86400) return `${(value / 3600).toFixed(1)}시간`;
-      return `${(value / 86400).toFixed(1)}일`;
+      const duration = getUiTexts().duration;
+      if (value < 60) return fill(duration.seconds, { value: value.toFixed(1) });
+      if (value < 3600) return fill(duration.minutes, { value: (value / 60).toFixed(1) });
+      if (value < 86400) return fill(duration.hours, { value: (value / 3600).toFixed(1) });
+      return fill(duration.days, { value: (value / 86400).toFixed(1) });
     }
     if (Math.abs(value) >= 1000) {
       numStr = Math.round(value).toLocaleString();
@@ -1615,23 +1621,25 @@ function formatBindingFault(result: ApplyUserBindingsResult): string | null {
     return formatSkipReason(meaningful[0].name, meaningful[0].reason);
   }
   const derivIssue = result.skippedDerivatives.find((d) => d.reason === 'eval-failed');
-  if (derivIssue) return `${derivIssue.binding} 도함수 평가 실패`;
+  if (derivIssue)
+    return fill(getUiTexts().bindingFault.derivative, { name: derivIssue.binding });
   return null;
 }
 
 function formatSkipReason(name: string, reason: SkipReason): string {
+  const t = getUiTexts().bindingFault;
   switch (reason) {
-    case 'domain': return `${name} 값이 정의역을 벗어남`;
-    case 'divergent': return `${name} 값이 발산`;
-    case 'unsupported': return `${name} 의 형식이 시각화에서 지원되지 않음`;
-    case 'eval-failed': return `${name} 평가 실패`;
+    case 'domain': return fill(t.domain, { name });
+    case 'divergent': return fill(t.divergent, { name });
+    case 'unsupported': return fill(t.unsupported, { name });
+    case 'eval-failed': return fill(t.evalFailed, { name });
     // 'unbound' 는 formatBindingFault 에서 사전 필터되어 도달하지 않는다.
     // 새 SkipReason 이 추가되면 컴파일 에러로 알려주기 위해 exhaustive switch.
-    case 'unbound': return `${name} 미바인딩`;
+    case 'unbound': return fill(t.unbound, { name });
     default: {
       const _exhaustive: never = reason;
       void _exhaustive;
-      return `${name} 평가 불가`;
+      return fill(t.unknown, { name });
     }
   }
 }

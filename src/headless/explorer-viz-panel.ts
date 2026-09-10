@@ -9,6 +9,7 @@
 import { ExplorerVisualizerController } from './explorer-visualizer.js';
 import { ExplorerSceneChips } from './explorer-scene-chips.js';
 import type { CreatedVisualizer, VisualizerRegistry } from '../visualizer/runtime/public-api.js';
+import { getUiTexts, fill } from '../locales/ui.js';
 
 export interface VizPanelBounds {
   left: number;
@@ -151,7 +152,7 @@ export class VizPanel {
     // 클릭 시 vizContainer 의 canvas를 PNG로 클립보드에 복사. 실패 시 다운로드 폴백.
     this.captureButton = document.createElement('button');
     this.captureButton.type = 'button';
-    this.captureButton.title = '이미지 복사';
+    this.captureButton.title = getUiTexts().explorer.copyImage;
     this.captureButton.textContent = '\u{1F4F7}'; // 📷
     Object.assign(this.captureButton.style, {
       position: 'absolute',
@@ -192,7 +193,7 @@ export class VizPanel {
     // ExplorerOverlay가 패널 제거 + 배너 버튼 상태 갱신을 처리하게 한다.
     this.closeButton = document.createElement('button');
     this.closeButton.type = 'button';
-    this.closeButton.title = '닫기';
+    this.closeButton.title = getUiTexts().explorer.close;
     this.closeButton.textContent = '\u2715';
     Object.assign(this.closeButton.style, {
       position: 'absolute',
@@ -364,7 +365,8 @@ export class VizPanel {
     }
 
     this.invalidOverlay.style.display = 'flex';
-    if (this.invalidLabel) this.invalidLabel.textContent = `도메인 가드: ${reason}`;
+    if (this.invalidLabel)
+      this.invalidLabel.textContent = fill(getUiTexts().explorer.domainGuard, { reason });
   }
 
   /** 창 리사이즈 시 패널 위치/크기를 화면 경계 안으로 보정 */

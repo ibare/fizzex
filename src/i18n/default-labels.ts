@@ -9,7 +9,6 @@ import type { FizzexLabels } from './types.js';
 export const defaultLabels: FizzexLabels = {
   placeholder: 'Enter formula...',
   debugToggle: 'Toggle debug mode',
-  structureViewer: 'View formula structure',
   showMore: 'More...',
   showLess: 'Less',
   showAll: 'All formulas',

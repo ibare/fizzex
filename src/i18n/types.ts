@@ -108,8 +108,6 @@ export interface FizzexLabels {
   placeholder: string;
   /** 디버그 토글 버튼 */
   debugToggle: string;
-  /** 구조 시각화 버튼 */
-  structureViewer: string;
   /** 더보기 버튼 */
   showMore: string;
   /** 접기 버튼 */
@@ -128,7 +126,6 @@ export interface FizzexLabels {
 export type PartialFizzexLabels = {
   placeholder?: string;
   debugToggle?: string;
-  structureViewer?: string;
   showMore?: string;
   showLess?: string;
   showAll?: string;

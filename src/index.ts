@@ -325,3 +325,31 @@ export type {
   MathPNGResult,
   MathPNGOptions,
 } from './export/index.js';
+
+// ─── 언어 ───
+export {
+  registerLocale,
+  loadLocale,
+  setLocale,
+  getLocale,
+  getLoadedLocales,
+  resetLocales,
+  LOCALES,
+  DEFAULT_LOCALE,
+  RTL_LOCALES,
+  isLocale,
+  isRtl,
+  getUiTexts,
+  fill,
+  formatSummary,
+} from './locales/index.js';
+
+export type {
+  Locale,
+  LocaleBundle,
+  UiTexts,
+  ExplorerTexts,
+  BindingFaultTexts,
+  DurationTexts,
+  SummaryTexts,
+} from './locales/index.js';

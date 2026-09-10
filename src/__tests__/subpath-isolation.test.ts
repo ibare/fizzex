@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve as resolvePath, relative } from 'node:path';
 import ts from 'typescript';
@@ -127,6 +127,97 @@ describe('fizzex/semantic 격리 (C6)', () => {
     expect(closure.files.filter((f) => f.startsWith('compute/'))).toEqual([]);
   });
 });
+
+describe('로케일 배럴이 언어를 끌어오지 않는다', () => {
+  const closure = collectClosure(resolvePath(srcDir, 'locales/index.ts'));
+
+  it('외부 패키지에 의존하지 않는다', () => {
+    expect(closure.externals).toEqual([]);
+  });
+
+  it('react 를 끌어오지 않는다', () => {
+    // i18n/context.tsx → locales/registry.ts 는 단방향이다. 역방향이 생기면
+    // headless 와 analyzer 가 이 배럴을 통해 react 를 물게 된다.
+    expect(closure.externals.filter((e) => e === 'react' || e === 'react-dom')).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('react/'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('i18n/'))).toEqual([]);
+  });
+
+  it('다른 배럴을 경유하지 않는다', () => {
+    const barrels = [
+      'index.ts',
+      'compute/index.ts',
+      'semantic/index.ts',
+      'headless/index.ts',
+      'react/index.ts',
+      'analyzer/index.ts',
+    ];
+    expect(closure.files.filter((f) => barrels.includes(f))).toEqual([]);
+  });
+
+  /**
+   * src 전체의 소스 파일.
+   *
+   * 클로저가 아니라 전수를 훑는 이유: "번들 0바이트" 를 깨는 가장 현실적인 경로는
+   * 배럴이 아니라 **아무 파일이나** 언어를 정적으로 무는 것이다
+   * (`import ko from '../locales/bundles/ko.js'` 를 headless 어딘가에 적는 식).
+   * 배럴 클로저만 보면 스물한 파일밖에 못 본다.
+   */
+  const allSources = (): string[] => {
+    const out: string[] = [];
+    const walk = (dir: string): void => {
+      for (const name of readdirSync(dir)) {
+        const full = resolvePath(dir, name);
+        if (statSync(full).isDirectory()) {
+          if (name !== 'node_modules') walk(full);
+        } else if (/\.tsx?$/.test(name) && !name.includes('.test.')) {
+          out.push(full);
+        }
+      }
+    };
+    walk(srcDir);
+    return out;
+  };
+
+  it('개별 언어를 정적으로 import 하지 않는다', () => {
+    // 이것이 "번들에 언어 0바이트" 를 지키는 지점이다. 어느 파일이든 bundles/*.ts 를
+    // 정적으로 물면 그 언어가 통째로 실리고, 열 개를 다 물면 5.7MB 가 된다.
+    //
+    // 클로저에는 bundles 파일이 **들어 있다** — `ts.preProcessFile` 이 동적 import 도
+    // 함께 수집하기 때문이다. 그래서 파일 목록이 아니라 **참조 형태**를 본다.
+    // `import()` 에는 `from` 이 없으므로 정적 import 만 잡히고,
+    // 부수효과 import(`import './bundles/ko.js';`)는 별도 패턴으로 함께 막는다.
+    const staticBundleImport =
+      /(?:from\s+|^\s*import\s+)['"][^'"]*locales\/bundles\/[^'"]+['"]/m;
+    const offenders = allSources()
+      .filter((f) => !f.includes('locales/bundles/') && !f.endsWith('registry.ts'))
+      .filter((f) => staticBundleImport.test(readFileSync(f, 'utf-8')))
+      .map((f) => relative(srcDir, f));
+    expect(offenders).toEqual([]);
+  });
+
+  it('언어 데이터는 로케일 번들 안에서만 import 된다', () => {
+    // 로케일과 무관한 catalog/index.json·form/index.json 은 걸리지 않는다 —
+    // 경로에 로케일 코드가 없다.
+    const localeData =
+      /['"][^'"]*data\/(?:catalog\/[a-z]{2}\/|(?:layer1|layer2|fallback|elements|form)\/[a-z]{2}\.json)/;
+    const offenders = allSources()
+      .filter((f) => !f.includes('locales/bundles/'))
+      .filter((f) => localeData.test(readFileSync(f, 'utf-8')))
+      .map((f) => relative(srcDir, f));
+    expect(offenders).toEqual([]);
+  });
+
+  it('UI 문구는 영어본만 정적으로 싣는다', () => {
+    // 마흔 개 남짓이라 2KB 다. 아무 언어도 내려받지 않은 호스트에서도 버튼은 나와야 한다.
+    const otherUi = /['"][^'"]*data\/ui\/(?!en\.json)/;
+    const offenders = allSources()
+      .filter((f) => !f.includes('locales/bundles/'))
+      .filter((f) => otherUi.test(readFileSync(f, 'utf-8')))
+      .map((f) => relative(srcDir, f));
+    expect(offenders).toEqual([]);
+    expect(closure.files).toContain('locales/data/ui/en.json');
+  });});
 
 describe('fizzex/headless 격리 (C6)', () => {
   const closure = collectClosure(resolvePath(srcDir, 'headless/index.ts'));

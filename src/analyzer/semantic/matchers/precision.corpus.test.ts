@@ -13,7 +13,7 @@
  * 레이아웃까지 돌려 분 단위인 것과, 입력이 .gitignore 대상이라 CI 에서 항상
  * ENOENT 인 것. 이 테스트는 추적되는 소스만 쓰고 파싱·정규화·매칭만 한다.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 // 추적되는 소스만 쓴다. `corpus/*.json` 은 .gitignore 대상이라 clean checkout
 // 에서 해소되지 않는다 — 기존 corpus.test.ts 가 기본 실행에서 제외된 이유가
 // 속도가 아니라 이것이다(ef2bac5).
@@ -24,6 +24,8 @@ import baseline from './precision-baseline.json' with { type: 'json' };
 import { parseLatex } from '../../../latex/latex-parser.js';
 import { buildSemanticMap } from '../engine.js';
 import { getVisualizersForForm } from '../loader.js';
+import { loadLocale, setLocale } from '../../../locales/registry.js';
+
 
 interface Measured {
   parsed: number;
@@ -77,7 +79,15 @@ function measure(): Measured {
 }
 
 describe('코퍼스 오탐률 래칫', () => {
-  const m = measure();
+  // 측정 전에 로케일을 받아 둬야 한다. 배너는 카탈로그 상세가 있어야 뜨는데
+  // 그 데이터가 로케일 번들 안에 있다 — 안 받으면 배너가 0으로 측정되고
+  // "크게 개선됐다" 는 거짓 신호가 난다.
+  let m: Measured;
+  beforeAll(async () => {
+    await loadLocale('ko');
+    setLocale('ko');
+    m = measure();
+  });
 
   it('파싱 실패가 없다', () => {
     expect(m.parseFailures).toBe(0);

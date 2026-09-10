@@ -5,6 +5,8 @@
  * 더블클릭 또는 호버 시 아이콘 표시 방식을 지원.
  */
 
+import { getUiTexts } from '../locales/ui.js';
+
 export interface ExplorerTriggerOptions {
   /** 더블클릭으로 탐색 진입 (기본 true) */
   dblclick?: boolean;
@@ -83,8 +85,9 @@ export function attachExplorerTrigger(
     const icon = document.createElement('button');
     icon.type = 'button';
     icon.textContent = '\uD83D\uDD0D'; // 돋보기
-    icon.title = '수식 탐색';
-    icon.setAttribute('aria-label', '수식 탐색');
+    const exploreLabel = getUiTexts().explorer.explore;
+    icon.title = exploreLabel;
+    icon.setAttribute('aria-label', exploreLabel);
     Object.assign(icon.style, {
       position: 'absolute',
       top: '4px',

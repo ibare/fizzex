@@ -8,12 +8,21 @@
  *    - 반대로 spec.json 을 가진 모든 디렉터리가 manifest 에 등재되어 있음
  */
 
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve as resolvePath } from 'node:path';
 import { createVisualizerRegistry, type VisualizerRegistryManifest } from './registry.js';
 import { compileSpec } from './compile.js';
+import { loadLocale, setLocale } from '../../locales/registry.js';
+
+// 이 파일은 한국어 설명을 기대한다. 기본 언어는 영어이므로 명시적으로 받아 둔다 —
+// 덤으로 로케일 로딩이 실제로 동작하는지도 함께 검증된다.
+beforeAll(async () => {
+  await loadLocale('ko');
+  setLocale('ko');
+});
+
 
 const here = dirname(fileURLToPath(import.meta.url));
 const defaultRegistryDir = resolvePath(here, '../../../registries/default');

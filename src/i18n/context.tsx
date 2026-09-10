@@ -4,9 +4,11 @@
  * 호스트 앱에서 라벨을 주입할 수 있는 Provider와 Hook 제공
  */
 
-import { createContext, useContext, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { FizzexLabels, PartialFizzexLabels } from './types.js';
 import { defaultLabels } from './default-labels.js';
+import { loadLocale, setLocale } from '../locales/registry.js';
+import type { Locale } from '../locales/types.js';
 
 /** Context */
 const FizzexI18nContext = createContext<FizzexLabels>(defaultLabels);
@@ -21,7 +23,6 @@ function deepMerge(
   return {
     placeholder: source.placeholder ?? target.placeholder,
     debugToggle: source.debugToggle ?? target.debugToggle,
-    structureViewer: source.structureViewer ?? target.structureViewer,
     showMore: source.showMore ?? target.showMore,
     showLess: source.showLess ?? target.showLess,
     showAll: source.showAll ?? target.showAll,
@@ -65,6 +66,16 @@ function mergeSuggestions(
 
 /** Provider Props */
 export interface FizzexI18nProviderProps {
+  /**
+   * 표시 언어.
+   *
+   * 주면 해당 언어의 설명 데이터를 내려받아 등록한다 — 수식 각 부분의 역할·설명,
+   * 원소 이름, 카탈로그가 이 언어로 나온다. 데이터는 번들에 없고 이때 처음 받으므로
+   * 첫 렌더에서는 설명이 비어 있다가 도착하면 채워진다.
+   *
+   * 주지 않으면 영어로 남는다.
+   */
+  locale?: Locale;
   /** 호스트에서 제공하는 라벨 (부분 가능) */
   labels?: PartialFizzexLabels;
   children: ReactNode;
@@ -75,16 +86,32 @@ export interface FizzexI18nProviderProps {
  *
  * @example
  * ```tsx
- * // 호스트 앱에서 한국어 라벨 제공
- * <FizzexI18nProvider labels={koLabels}>
+ * // 한국어로 표시한다 — 설명 데이터는 이 시점에 내려받는다
+ * <FizzexI18nProvider locale="ko">
  *   <EditorView />
  * </FizzexI18nProvider>
  * ```
  */
 export function FizzexI18nProvider({
+  locale,
   labels,
   children,
 }: FizzexI18nProviderProps) {
+  // 데이터가 도착하면 다시 그려야 한다 — 조회는 동기라서 스스로는 알 수 없다
+  const [, bumpLoaded] = useState(0);
+
+  useEffect(() => {
+    if (!locale) return;
+    let alive = true;
+    setLocale(locale);
+    void loadLocale(locale).then(() => {
+      if (alive) bumpLoaded((n) => n + 1);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [locale]);
+
   const mergedLabels = useMemo(
     () => deepMerge(defaultLabels, labels),
     [labels]

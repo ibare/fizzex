@@ -14,6 +14,7 @@ import {
   type CreatedVisualizer,
   type VisualizerRegistry,
 } from '../visualizer/runtime/public-api.js';
+import { getLocale } from '../locales/registry.js';
 
 export class ExplorerVisualizerController {
   private container: HTMLElement;
@@ -53,7 +54,7 @@ export class ExplorerVisualizerController {
         width: rect.width || 300,
         height: rect.height || 300,
         theme: this.theme,
-        locale: 'ko',
+        locale: getLocale(),
       });
     } finally {
       if (this.pendingAbort === abort) this.pendingAbort = null;

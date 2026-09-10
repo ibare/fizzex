@@ -9,11 +9,13 @@
 import type { SceneSpec } from '../visualizer/runtime/types/scene.js';
 import { resolveI18n } from '../visualizer/runtime/types/i18n.js';
 import type { CreatedVisualizerInstance } from '../visualizer/runtime/public-api.js';
+import { getLocale } from '../locales/registry.js';
 
 export interface SceneChipsConfig {
   scenes: readonly SceneSpec[];
   instance: CreatedVisualizerInstance;
   theme: 'light' | 'dark';
+  /** 생략하면 지금 고른 언어를 따른다 */
   locale?: string;
 }
 
@@ -32,7 +34,7 @@ export class ExplorerSceneChips {
 
   constructor(parent: HTMLElement, cfg: SceneChipsConfig) {
     this.isDark = cfg.theme === 'dark';
-    this.locale = cfg.locale ?? 'ko';
+    this.locale = cfg.locale ?? getLocale();
     this.scenes = cfg.scenes;
     this.instance = cfg.instance;
 

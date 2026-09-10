@@ -1,6 +1,15 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import { compileSpec } from './compile.js';
 import sineWaveSpec from '../../../registries/default/sine-wave-2d/spec.json' with { type: 'json' };
+import { loadLocale, setLocale } from '../../locales/registry.js';
+
+// 이 파일은 한국어 설명을 기대한다. 기본 언어는 영어이므로 명시적으로 받아 둔다 —
+// 덤으로 로케일 로딩이 실제로 동작하는지도 함께 검증된다.
+beforeAll(async () => {
+  await loadLocale('ko');
+  setLocale('ko');
+});
+
 
 describe('compileSpec', () => {
   it('sine-wave-2d 스펙 + 카탈로그 병합 성공', () => {

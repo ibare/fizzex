@@ -29,7 +29,8 @@ function scriptsTextKey(
 export function getDefaultRoleFromTexts(node: MathNode, fallback: FallbackTexts): string {
   switch (node.type) {
     case 'func':
-      return `${fallback.roles['func'] ?? '함수'} ${node.name}`;
+      // roles.func 는 `{name}` 을 함수 이름으로 바꾸는 형식이다 — 어순이 언어마다 다르다
+      return fallback.roles['func']?.replace('{name}', node.name) ?? node.name;
     case 'accent': {
       const accentData = fallback.accents[node.accentType];
       return accentData?.role ?? fallback.defaultAccent.role;
@@ -62,7 +63,9 @@ export function getDefaultDescriptionFromTexts(node: MathNode, fallback: Fallbac
       return fallback.functions[node.name]
         ?? (fallback.defaultFunction ?? '').replace('{name}', node.name);
     case 'matrix':
-      return `${node.rows.length}x${node.rows[0]?.length ?? 0} 행렬입니다.`;
+      return (fallback.descriptions['matrix'] ?? '')
+        .replace('{rows}', String(node.rows.length))
+        .replace('{cols}', String(node.rows[0]?.length ?? 0));
     case 'accent': {
       const accentData = fallback.accents[node.accentType];
       return accentData?.description ?? fallback.defaultAccent.description;

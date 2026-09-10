@@ -32,3 +32,31 @@ export type {
 // 형식(form) → 시각화 후보 조회
 export { getVisualizersForForm } from '../analyzer/semantic/loader.js';
 export type { VisualizerRef } from '../analyzer/semantic/types.js';
+
+// ─── 언어 ───
+export {
+  registerLocale,
+  loadLocale,
+  setLocale,
+  getLocale,
+  getLoadedLocales,
+  resetLocales,
+  LOCALES,
+  DEFAULT_LOCALE,
+  RTL_LOCALES,
+  isLocale,
+  isRtl,
+  getUiTexts,
+  fill,
+  formatSummary,
+} from '../locales/index.js';
+
+export type {
+  Locale,
+  LocaleBundle,
+  UiTexts,
+  ExplorerTexts,
+  BindingFaultTexts,
+  DurationTexts,
+  SummaryTexts,
+} from '../locales/index.js';

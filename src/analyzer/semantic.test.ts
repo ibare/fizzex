@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, beforeAll } from 'vitest';
 import { parseLatex } from '../latex/latex-parser.js';
 import { resetLatexIdCounter } from '../utils/id-generator.js';
 import {
@@ -8,6 +8,15 @@ import {
   containsVariable,
 } from './semantic/index.js';
 import type { MathNode } from '../types.js';
+import { loadLocale, setLocale } from '../locales/registry.js';
+
+// 이 파일은 한국어 설명을 기대한다. 기본 언어는 영어이므로 명시적으로 받아 둔다 —
+// 덤으로 로케일 로딩이 실제로 동작하는지도 함께 검증된다.
+beforeAll(async () => {
+  await loadLocale('ko');
+  setLocale('ko');
+});
+
 
 /** ID로 AST 노드 찾기 */
 function findNode(node: MathNode, predicate: (n: MathNode) => boolean): MathNode | null {

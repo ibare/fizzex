@@ -1,244 +1,117 @@
 /**
- * 의미 데이터 로더
+ * 의미 데이터 접근
  *
- * JSON 데이터를 정적 import로 번들에 포함시키고,
- * locale별 접근 인터페이스를 제공한다.
+ * 예전에는 한국어 JSON 서른한 개를 정적 import 해 번들에 박아 넣었다. 지금은
+ * 로케일 레지스트리(`src/locales/`)에 물어본다 — 열 개 언어를 지원하면서 번들에
+ * 한 언어도 싣지 않으려면 데이터가 동적으로 들어와야 하기 때문이다.
+ *
+ * 조회는 여전히 **동기**다. 비동기로 바꾸면 렌더 경로 전체가 뒤집힌다.
+ * 대신 호스트가 미리 `await loadLocale(...)` 을 부르는 계약이고, 부르지 않았으면
+ * 빈 텍스트가 나간다 — 설명이 비거나 영문 식별자가 보이지만 크래시하지는 않는다.
+ *
+ * 로케일과 무관한 것(카탈로그 인덱스, 형식 선언)은 여기 그대로 남는다.
+ * 매칭은 이것들만 보므로 **어느 언어를 쓰든 매칭 결과가 같다.**
  */
 
-import type {
-  CatalogIndexEntry,
-  CatalogDetail,
-  FormEntry,
-  FormText,
-  FormVisualizerRef,
-} from './types.js';
+import type { CatalogIndexEntry, CatalogDetail, FormEntry, FormText, FormVisualizerRef } from './types.js';
+import type { SemanticTexts } from './text-types.js';
+import { getBundle } from '../../locales/registry.js';
+import type { Locale } from '../../locales/types.js';
 
-// 번들 포함 (항상 로드) — 한국어 기본
-import koLayer1 from './data/layer1/ko.json' with { type: 'json' };
-import koLayer2 from './data/layer2/ko.json' with { type: 'json' };
-import koFallback from './data/fallback/ko.json' with { type: 'json' };
-
-// 카탈로그 인덱스 (번들 포함)
+// 로케일 독립 — 구조 선언이지 설명이 아니다
 import catalogIndex from './data/catalog/index.json' with { type: 'json' };
 import formIndex from './data/form/index.json' with { type: 'json' };
-import formKo from './data/form/ko.json' with { type: 'json' };
 
-// 카탈로그 상세 (번들 포함 — 25분야)
-// 초중등
-import koElementaryGeometry from './data/catalog/ko/elementary-geometry.json' with { type: 'json' };
-import koSolidGeometry from './data/catalog/ko/solid-geometry.json' with { type: 'json' };
-import koLinearFunctions from './data/catalog/ko/linear-functions.json' with { type: 'json' };
-import koRatioProportion from './data/catalog/ko/ratio-proportion.json' with { type: 'json' };
-import koBasicStatistics from './data/catalog/ko/basic-statistics.json' with { type: 'json' };
-import koTrigonometryBasic from './data/catalog/ko/trigonometry-basic.json' with { type: 'json' };
-// 수학 기초
-import koAlgebra from './data/catalog/ko/algebra.json' with { type: 'json' };
-import koCalculus from './data/catalog/ko/calculus.json' with { type: 'json' };
-import koGeometry from './data/catalog/ko/geometry.json' with { type: 'json' };
-import koNumberTheory from './data/catalog/ko/number-theory.json' with { type: 'json' };
-import koLogic from './data/catalog/ko/logic.json' with { type: 'json' };
-// 자연과학
-import koPhysics from './data/catalog/ko/physics.json' with { type: 'json' };
-import koAstronomy from './data/catalog/ko/astronomy.json' with { type: 'json' };
-import koChemistry from './data/catalog/ko/chemistry.json' with { type: 'json' };
-import koBiology from './data/catalog/ko/biology.json' with { type: 'json' };
-// 공학
-import koElectrical from './data/catalog/ko/electrical.json' with { type: 'json' };
-import koMechanical from './data/catalog/ko/mechanical.json' with { type: 'json' };
-import koSignal from './data/catalog/ko/signal.json' with { type: 'json' };
-// 경제/금융
-import koEconomics from './data/catalog/ko/economics.json' with { type: 'json' };
-import koFinance from './data/catalog/ko/finance.json' with { type: 'json' };
-// 통계/확률
-import koStatistics from './data/catalog/ko/statistics.json' with { type: 'json' };
-// 정보/AI
-import koCs from './data/catalog/ko/cs.json' with { type: 'json' };
-import koMl from './data/catalog/ko/ml.json' with { type: 'json' };
-import koInformation from './data/catalog/ko/information.json' with { type: 'json' };
-// 사회과학
-import koSocialScience from './data/catalog/ko/social-science.json' with { type: 'json' };
-// 원소 이름표 — 화학식 안의 원소 기호를 사람이 읽는 이름으로 바꾼다
-import koElements from './data/elements/ko.json' with { type: 'json' };
-
-// ─── 타입 ───
-
-export interface Layer1TextEntry {
-  role: string;
-  description: string;
-  refinements?: Record<string, string>;
-}
-
-export interface Layer2TextEntry {
-  role: string | null;
-  description: string;
-}
+export type {
+  Layer1TextEntry,
+  Layer2TextEntry,
+  ChemTextKey,
+  FallbackTexts,
+  ChemicalElement,
+  ChemicalElementTexts,
+  SemanticTexts,
+} from './text-types.js';
 
 /**
- * 화학식 어휘 키.
+ * 아무 언어도 등록되지 않았을 때 쓰는 빈 텍스트.
  *
- * 화학식 안에서만 쓰는 말이다. 같은 노드라도 화학식 밖에서는 다른 뜻이므로
- * (위첨자 = 지수 vs 전하) `roles` 와 섞지 않고 별도 섹션으로 둔다.
+ * 소비처는 `roles[node.type] ?? node.type` 처럼 빈 값을 견디게 돼 있으므로
+ * 설명이 비거나 영문 식별자가 나올 뿐 크래시하지 않는다.
+ *
+ * `scripts` 와 `chem` 만 키를 일일이 적는다 — 리터럴 union 이라 `{}` 로는 타입이 차지 않는다.
+ * 나머지는 인덱스 시그니처라 빈 객체로 충분하다.
  */
-export type ChemTextKey =
-  | 'formula' // 화학식 전체
-  | 'equation' // 반응 화살표가 있는 반응식
-  | 'species' // 화학종 한 덩어리
-  | 'element' // 원소 기호
-  | 'group' // 괄호로 묶인 원자단
-  | 'coefficient' // 반응식의 계수
-  | 'count' // 원자 수 (아래첨자)
-  | 'charge' // 전하 크기 (위첨자)
-  | 'chargeSign' // 전하 부호
-  | 'massNumber' // 질량수 (왼쪽 위첨자)
-  | 'atomicNumber' // 원자 번호 (왼쪽 아래첨자)
-  | 'arrow' // 반응 화살표
-  | 'equilibriumArrow' // 가역 반응 화살표
-  | 'condition' // 촉매·온도 등 반응 조건
-  | 'plus' // 화학종 구분
-  | 'hydrate' // 수화물 결합점
-  | 'state' // 상태 표기
-  | 'gas' // 기체 발생
-  | 'precipitate'; // 침전
+const NO_TEXT = { role: '', description: '' } as const;
 
-export interface FallbackTexts {
-  roles: Record<string, string>;
-  descriptions: Record<string, string>;
-  specialVariables: Record<string, string>;
-  operators: Record<string, string>;
-  functions: Record<string, string>;
-  accents: Record<string, { role: string; description: string }>;
-  defaultAccent: { role: string; description: string };
-  /** 첨자는 슬롯 조합에 따라 의미가 다르다 — node.type 만으로 구분할 수 없다 */
-  scripts: Record<
-    'superscriptOnly' | 'subscriptOnly' | 'both' | 'withLeft',
-    { role: string; description: string }
-  >;
-  /** 화학식 안에서만 쓰는 어휘 — chem-semantics.ts 가 소비한다 */
-  chem: Record<ChemTextKey, { role: string; description: string }>;
-  defaultOperator: string;
-  defaultFunction: string;
-}
+const EMPTY_TEXTS: SemanticTexts = {
+  layer1: {},
+  layer2: {},
+  fallback: {
+    roles: {},
+    descriptions: {},
+    specialVariables: {},
+    operators: {},
+    functions: {},
+    accents: {},
+    defaultAccent: { ...NO_TEXT },
+    scripts: {
+      superscriptOnly: { ...NO_TEXT },
+      subscriptOnly: { ...NO_TEXT },
+      both: { ...NO_TEXT },
+      withLeft: { ...NO_TEXT },
+    },
+    chem: {
+      formula: { ...NO_TEXT },
+      equation: { ...NO_TEXT },
+      species: { ...NO_TEXT },
+      element: { ...NO_TEXT },
+      group: { ...NO_TEXT },
+      coefficient: { ...NO_TEXT },
+      count: { ...NO_TEXT },
+      charge: { ...NO_TEXT },
+      chargeSign: { ...NO_TEXT },
+      massNumber: { ...NO_TEXT },
+      atomicNumber: { ...NO_TEXT },
+      arrow: { ...NO_TEXT },
+      equilibriumArrow: { ...NO_TEXT },
+      condition: { ...NO_TEXT },
+      plus: { ...NO_TEXT },
+      hydrate: { ...NO_TEXT },
+      state: { ...NO_TEXT },
+      gas: { ...NO_TEXT },
+      precipitate: { ...NO_TEXT },
+    },
+    defaultOperator: '',
+    defaultFunction: '',
+  },
+  chemicalElements: { descriptionFormat: '{desc}', bySymbol: {} },
+};
 
-/** 화학 원소 하나의 설명 */
-export interface ChemicalElement {
-  /** 원소 이름 (대한화학회 표기) */
-  name: string;
-  /** 원자 번호 */
-  z: number;
-  /** 한 줄 설명 */
-  desc: string;
-}
-
-/** 화학 원소 이름표 */
-export interface ChemicalElementTexts {
-  /** 설명 문장 형식 — `{z}` 와 `{desc}` 를 치환한다 */
-  descriptionFormat: string;
-  /** 원소 기호 → 설명 */
-  bySymbol: Record<string, ChemicalElement>;
-}
-
-export interface SemanticTexts {
-  layer1: Record<string, Layer1TextEntry>;
-  layer2: Record<string, Layer2TextEntry>;
-  fallback: FallbackTexts;
-  chemicalElements: ChemicalElementTexts;
-}
-
-// ─── 캐시 ───
-
-const textCache = new Map<string, SemanticTexts>();
-
-// ─── public API ───
-
-/**
- * 현재 locale의 텍스트 데이터를 반환한다.
- * 번들에 포함된 한국어 데이터는 동기적으로 즉시 반환.
- */
-export function getSemanticTexts(locale = 'ko'): SemanticTexts {
-  const cached = textCache.get(locale);
-  if (cached) return cached;
-
-  if (locale === 'ko') {
-    const texts: SemanticTexts = {
-      layer1: koLayer1 as Record<string, Layer1TextEntry>,
-      layer2: koLayer2 as Record<string, Layer2TextEntry>,
-      fallback: koFallback as FallbackTexts,
-      chemicalElements: koElements as ChemicalElementTexts,
-    };
-    textCache.set('ko', texts);
-    return texts;
-  }
-
-  // 다른 locale은 아직 지원하지 않음 — 한국어 폴백
-  return getSemanticTexts('ko');
+/** 지금 언어(또는 지정한 언어)의 설명 텍스트 */
+export function getSemanticTexts(locale?: Locale): SemanticTexts {
+  return getBundle(locale)?.semantic ?? EMPTY_TEXTS;
 }
 
 // ─── 카탈로그 ───
 
-/** 카탈로그 상세 데이터 캐시 (카테고리별) */
-const catalogDetailCache = new Map<string, Record<string, CatalogDetail>>();
-
-/** 전체 카탈로그 상세 (25분야 통합) */
-const allKoCatalogDetails: Record<string, Record<string, CatalogDetail>> = {
-  // 초중등
-  'elementary-geometry': koElementaryGeometry as Record<string, CatalogDetail>,
-  'solid-geometry': koSolidGeometry as Record<string, CatalogDetail>,
-  'linear-functions': koLinearFunctions as Record<string, CatalogDetail>,
-  'ratio-proportion': koRatioProportion as Record<string, CatalogDetail>,
-  'basic-statistics': koBasicStatistics as Record<string, CatalogDetail>,
-  'trigonometry-basic': koTrigonometryBasic as Record<string, CatalogDetail>,
-  // 수학 기초
-  algebra: koAlgebra as Record<string, CatalogDetail>,
-  calculus: koCalculus as Record<string, CatalogDetail>,
-  geometry: koGeometry as Record<string, CatalogDetail>,
-  'number-theory': koNumberTheory as Record<string, CatalogDetail>,
-  logic: koLogic as Record<string, CatalogDetail>,
-  // 자연과학
-  physics: koPhysics as Record<string, CatalogDetail>,
-  astronomy: koAstronomy as Record<string, CatalogDetail>,
-  chemistry: koChemistry as Record<string, CatalogDetail>,
-  biology: koBiology as Record<string, CatalogDetail>,
-  // 공학
-  electrical: koElectrical as Record<string, CatalogDetail>,
-  mechanical: koMechanical as Record<string, CatalogDetail>,
-  signal: koSignal as Record<string, CatalogDetail>,
-  // 경제/금융
-  economics: koEconomics as Record<string, CatalogDetail>,
-  finance: koFinance as Record<string, CatalogDetail>,
-  // 통계/확률
-  statistics: koStatistics as Record<string, CatalogDetail>,
-  // 정보/AI
-  cs: koCs as Record<string, CatalogDetail>,
-  ml: koMl as Record<string, CatalogDetail>,
-  information: koInformation as Record<string, CatalogDetail>,
-  // 사회과학
-  'social-science': koSocialScience as Record<string, CatalogDetail>,
-};
-
 /**
- * 카탈로그 인덱스를 반환한다 (번들에 포함, 동기).
+ * 카탈로그 인덱스 — 매칭의 입력이다.
+ *
+ * 시그니처·복잡도·형식만 담고 설명은 담지 않는다. 그래서 로케일과 무관하고,
+ * 어느 언어에서든 같은 수식이 같은 항목에 매칭된다.
  */
 export function getCatalogIndex(): CatalogIndexEntry[] {
   return catalogIndex.entries as CatalogIndexEntry[];
 }
 
-/**
- * 카탈로그 ID에서 연결된 Visualizer 참조 목록을 조회한다.
- * 동일 수식에 여러 시각화 관점이 붙을 수 있으므로 항상 배열로 반환한다.
- * 등록이 없으면 빈 배열.
- */
-/**
- * 형식 목록. 번들에 정적으로 박히며 런타임 검증은 하지 않는다
- * (`validator/` 는 빌드·테스트 시점 전용).
- */
+/** 형식 목록. 런타임 검증은 하지 않는다 (`validator/` 는 빌드·테스트 시점 전용). */
 export function getFormIndex(): FormEntry[] {
   return formIndex.forms as FormEntry[];
 }
 
-/** 형식 텍스트 (로케일별). */
-export function getFormText(locale = 'ko'): Record<string, FormText> {
-  void locale;
-  return formKo as Record<string, FormText>;
+/** 형식 텍스트 */
+export function getFormText(locale?: Locale): Record<string, FormText> {
+  return getBundle(locale)?.semantic.form ?? {};
 }
 
 /**
@@ -250,28 +123,16 @@ export function getVisualizersForForm(formId: string): FormVisualizerRef[] {
   return getFormIndex().find((f) => f.id === formId)?.visualizers ?? [];
 }
 
-/** 형식 텍스트 한 건. */
+/** 형식 선언 한 건 */
 export function getFormEntry(formId: string): FormEntry | null {
   return getFormIndex().find((f) => f.id === formId) ?? null;
 }
 
-/**
- * 카탈로그 상세 데이터를 반환한다 (동기, 번들 포함).
- */
+/** 카탈로그 상세 한 건 */
 export function getCatalogDetail(
   catalogId: string,
   category: string,
-  _locale = 'ko',
+  locale?: Locale
 ): CatalogDetail | null {
-  const cacheKey = `${_locale}:${category}`;
-  let categoryData = catalogDetailCache.get(cacheKey);
-
-  if (!categoryData) {
-    categoryData = allKoCatalogDetails[category];
-    if (categoryData) {
-      catalogDetailCache.set(cacheKey, categoryData);
-    }
-  }
-
-  return categoryData?.[catalogId] ?? null;
+  return getBundle(locale)?.semantic.catalog[category]?.[catalogId] ?? null;
 }

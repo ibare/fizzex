@@ -5,9 +5,18 @@
  * 회귀하면 전하가 "거듭제곱에서 곱하는 횟수" 로 돌아간다.
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import { parseLatex } from '../../latex/latex-parser.js';
 import { buildSemanticMap } from './engine.js';
+import { loadLocale, setLocale } from '../../locales/registry.js';
+
+// 이 파일은 한국어 설명을 기대한다. 기본 언어는 영어이므로 명시적으로 받아 둔다 —
+// 덤으로 로케일 로딩이 실제로 동작하는지도 함께 검증된다.
+beforeAll(async () => {
+  await loadLocale('ko');
+  setLocale('ko');
+});
+
 
 /** 수식 안의 모든 역할 이름 */
 function roles(latex: string): string[] {

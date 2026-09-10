@@ -6,6 +6,7 @@
  */
 
 import type { InlineControlConfig } from './inline-control-types.js';
+import { getUiTexts } from '../locales/ui.js';
 
 // ─── 콜백 타입 ───
 
@@ -129,7 +130,7 @@ export class ExplorerInlineControls {
     // 리셋 버튼 (stepper만 — slider는 파라미터 값이므로 리셋 불필요)
     if (this.config.controlType === 'stepper') {
       this.resetBtn = document.createElement('button');
-      this.resetBtn.textContent = '원래대로';
+      this.resetBtn.textContent = getUiTexts().explorer.reset;
       Object.assign(this.resetBtn.style, {
         display: showReset ? 'inline-block' : 'none',
         marginTop: '6px',
