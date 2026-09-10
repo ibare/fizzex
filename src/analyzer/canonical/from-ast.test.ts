@@ -230,8 +230,11 @@ describe('정규화 IR — 화학식', () => {
   });
 
   it('같은 화학식은 표기가 달라도 같은 태그로 수렴한다', () => {
-    // 직렬화기의 정규형을 그대로 쓴다 — H_2O 는 H2O 로 접힌다
-    expect(tag('\\ce{H_2O}')).toBe(tag('\\ce{H2O}'));
-    expect(tag('\\ce{A->B}')).toBe(tag('\\ce{A -> B}'));
+    // 직렬화기의 정규형을 그대로 쓴다 — H_2O 는 H2O 로 접힌다.
+    // 양쪽이 null 이어도 같아지므로 값을 먼저 고정한다.
+    expect(tag('\\ce{H_2O}')).toBe('chem:H2O');
+    expect(tag('\\ce{H2O}')).toBe('chem:H2O');
+    expect(tag('\\ce{A->B}')).toBe('chem:A -> B');
+    expect(tag('\\ce{A -> B}')).toBe('chem:A -> B');
   });
 });
