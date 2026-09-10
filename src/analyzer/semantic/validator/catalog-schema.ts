@@ -13,7 +13,7 @@ import { CATALOG_CATEGORY_IDS, ELEMENT_KIND_IDS } from '../types.js';
 const idRegex = /^[a-z][a-z0-9-]*$/;
 
 const visualizerRefSchema = z.object({
-  id: z.string().regex(idRegex, 'visualizer id는 소문자·숫자·하이픈'),
+  id: z.string().regex(idRegex, 'visualizer id must be lowercase letters, digits and hyphens'),
   name: z.string().min(1),
   description: z.string().min(1),
   icon: z.string().optional(),
@@ -21,7 +21,7 @@ const visualizerRefSchema = z.object({
 });
 
 const catalogIndexEntryBase = {
-  id: z.string().regex(idRegex, 'catalog id는 소문자·숫자·하이픈'),
+  id: z.string().regex(idRegex, 'catalog id must be lowercase letters, digits and hyphens'),
   category: z.enum(CATALOG_CATEGORY_IDS),
   visualizers: z.array(visualizerRefSchema).min(1).optional(),
 };
@@ -64,7 +64,7 @@ export const catalogIndexSchema = z
         ctx.addIssue({
           code: 'custom',
           path: ['entries', i, 'id'],
-          message: `중복 id "${entry.id}"`,
+          message: `duplicate id "${entry.id}"`,
         });
       }
       seen.add(entry.id);

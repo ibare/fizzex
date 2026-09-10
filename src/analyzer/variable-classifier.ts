@@ -170,21 +170,21 @@ function getNameBasedScore(variable: string): {
   // 단일 문자 확인
   if (variable.length === 1) {
     if (MAIN_VARIABLE_NAMES.has(variable)) {
-      return { score: 30, reason: `'${variable}'는 일반적인 변수명` };
+      return { score: 30, reason: `'${variable}' is a conventional variable name` };
     }
     if (COEFFICIENT_NAMES.has(variable)) {
-      return { score: -30, reason: `'${variable}'는 일반적인 계수명` };
+      return { score: -30, reason: `'${variable}' is a conventional coefficient name` };
     }
   }
 
   // 그리스 문자
   if (GREEK_LETTERS.has(variable.toLowerCase())) {
-    return { score: -20, reason: `'${variable}'는 그리스 문자 (보통 파라미터)` };
+    return { score: -20, reason: `'${variable}' is a Greek letter (usually a parameter)` };
   }
 
   // 숫자가 포함된 경우 (x1, x2 등) - 주 변수일 가능성
   if (/^[xyz]\d+$/.test(variable)) {
-    return { score: 20, reason: `'${variable}'는 인덱스가 붙은 변수` };
+    return { score: 20, reason: `'${variable}' carries an index` };
   }
 
   // 기본값
@@ -210,9 +210,9 @@ function getPowerBaseScore(
       // 지수가 숫자인 경우 더 높은 점수
       const exponentIsNumber = power.superscript!.some((n) => n.type === 'number');
       if (exponentIsNumber) {
-        return { score: 40, reason: `거듭제곱의 밑 (${variable}^n 형태)` };
+        return { score: 40, reason: `base of a power (${variable}^n)` };
       }
-      return { score: 30, reason: '거듭제곱의 밑' };
+      return { score: 30, reason: 'base of a power' };
     }
   }
 
@@ -292,7 +292,7 @@ function getSubscriptScore(
       sub.base[0].type === 'variable' &&
       sub.base[0].name === variable
     ) {
-      return { score: -30, reason: '아래첨자가 있음 (계수/시퀀스)' };
+      return { score: -30, reason: 'has a subscript (coefficient or sequence)' };
     }
   }
 
@@ -322,10 +322,10 @@ function getFrequencyScore(
   const score = Math.round(ratio * 20);
 
   if (ratio >= 0.8) {
-    return { score, reason: `가장 자주 등장 (${frequency}회)` };
+    return { score, reason: `most frequent (${frequency} occurrences)` };
   }
   if (ratio >= 0.5) {
-    return { score, reason: `자주 등장 (${frequency}회)` };
+    return { score, reason: `frequent (${frequency} occurrences)` };
   }
 
   return { score };
@@ -351,7 +351,7 @@ function getPositionScore(
   for (const func of funcNodes) {
     const funcNode = func as { argument: MathNode[] };
     if (containsVariable(funcNode.argument, variable)) {
-      return { score: 15, reason: '함수의 인자로 사용됨' };
+      return { score: 15, reason: 'used as a function argument' };
     }
   }
 

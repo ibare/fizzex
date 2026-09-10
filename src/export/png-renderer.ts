@@ -78,7 +78,7 @@ export function renderAstToPNG(
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   if (!ctx) {
-    throw new Error('Canvas 2D context를 생성할 수 없습니다.');
+    throw new Error('Cannot create a Canvas 2D context.');
   }
 
   // 임시로 큰 캔버스 설정 (크기 계산용)
@@ -211,7 +211,7 @@ export function renderAstToPNGWithCanvas(
 
   const ctx = canvas.getContext('2d');
   if (!ctx) {
-    throw new Error('Canvas 2D context를 생성할 수 없습니다.');
+    throw new Error('Cannot create a Canvas 2D context.');
   }
 
   // 임시 크기로 메트릭스 계산

@@ -161,7 +161,7 @@ export class ExplorerOverlay {
 
   constructor(cfg: ExplorerOverlayConfig) {
     if (!cfg.latex && !cfg.ast) {
-      throw new Error('ExplorerOverlay: latex 또는 ast 중 하나를 제공해야 합니다');
+      throw new Error('ExplorerOverlay: provide either latex or ast');
     }
 
     this.isDark = (cfg.theme ?? 'light') === 'dark';
@@ -204,7 +204,7 @@ export class ExplorerOverlay {
     this.overlay.appendChild(this.canvas);
 
     const ctx = this.canvas.getContext('2d');
-    if (!ctx) throw new Error('ExplorerOverlay: 2d context 획득 실패');
+    if (!ctx) throw new Error('ExplorerOverlay: failed to get a 2d context');
     this.ctx = ctx;
 
     // 닫기 버튼

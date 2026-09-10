@@ -66,7 +66,7 @@ export function recoverFromErrors(
       // 전진하지 못함 → 나머지 전체를 ErrorNode로 처리
       const errorNode = createErrorNode(
         remaining,
-        '파서가 전진하지 못하여 나머지를 에러로 처리',
+        'Parser made no progress; the remainder is treated as an error',
         { start: globalOffset, end: globalOffset + remaining.length },
       );
       allNodes.push(errorNode);
@@ -118,7 +118,7 @@ export function recoverFromErrors(
       // 최종 실패 → 나머지 전체를 ErrorNode로
       const errorNode = createErrorNode(
         remaining,
-        '복구 시도 한도 초과',
+        'Recovery attempt limit exceeded',
         { start: globalOffset, end: globalOffset + remaining.length },
       );
       allNodes.push(errorNode);

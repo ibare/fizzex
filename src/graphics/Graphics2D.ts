@@ -50,7 +50,7 @@ export class Graphics2D {
     this.canvas = canvas;
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) throw new Error('Graphics2D: 2d context 획득 실패');
+    if (!ctx) throw new Error('Graphics2D: failed to get a 2d context');
     this.ctx = ctx;
 
     this.applySize();

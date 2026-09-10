@@ -60,7 +60,7 @@ function parseScriptArgument(
         break;
       }
       if (tok.kind === 'eof') {
-        reportError('incomplete', '화학식 첨자의 중괄호가 닫히지 않았습니다', tok.start, latex);
+        reportError('incomplete', 'Unclosed brace in a chemical formula script', tok.start, latex);
         break;
       }
       if (!consumeScriptToken(tk, latex, ctx, nodes)) break;
@@ -122,7 +122,7 @@ function consumeScriptToken(
       if (bondMark === undefined) return false;
       reportWarning(
         'unsupported',
-        `화학 결합 표기(${tok.value})는 아직 지원하지 않습니다`,
+        `Chemical bond notation (${tok.value}) is not supported yet`,
         tok.start,
         latex
       );
@@ -149,7 +149,7 @@ function parseArrowLabel(tk: ChemTokenizer, latex: string, ctx: ReentryContext):
       break;
     }
     if (tok.kind === 'eof' || tok.kind === 'end') {
-      reportError('incomplete', '화살표 라벨의 대괄호가 닫히지 않았습니다', tok.start, latex);
+      reportError('incomplete', 'Unclosed bracket in an arrow label', tok.start, latex);
       break;
     }
     if (!consumeBodyToken(tk, latex, ctx, nodes, tok)) break;
@@ -375,7 +375,7 @@ function consumeBodyToken(
           break;
         }
         if (tok.kind === 'eof' || tok.kind === 'end') {
-          reportError('incomplete', `화학식의 ${open} 가 닫히지 않았습니다`, tok.start, latex);
+          reportError('incomplete', `Unclosed ${open} in a chemical formula`, tok.start, latex);
           break;
         }
         if (!consumeBodyToken(tk, latex, ctx, inner, tok)) break;
@@ -400,7 +400,7 @@ function consumeBodyToken(
       if (latex[result.consumed] === '$') {
         tk.seek(result.consumed + 1);
       } else {
-        reportError('incomplete', '화학식 안의 수식 구간 $ 가 닫히지 않았습니다', peeked.start, latex);
+        reportError('incomplete', 'Unclosed $ math span in a chemical formula', peeked.start, latex);
         tk.seek(result.consumed);
       }
       return true;
@@ -414,13 +414,13 @@ function consumeBodyToken(
         // 그래도 내용은 버리지 않는다 — 버리면 다른 화학식이 되어 버린다.
         reportWarning(
           'unsupported',
-          `화학 결합 표기(${peeked.value})는 아직 지원하지 않습니다`,
+          `Chemical bond notation (${peeked.value}) is not supported yet`,
           peeked.start,
           latex
         );
         out.push(createText(bondMark));
       } else {
-        reportWarning('syntax', `화학식에서 해석할 수 없는 문자: ${peeked.value}`, peeked.start, latex);
+        reportWarning('syntax', `Unrecognized character in a chemical formula: ${peeked.value}`, peeked.start, latex);
       }
       return true;
     }
@@ -430,7 +430,7 @@ function consumeBodyToken(
     case 'rbrace':
     case 'lbrace':
       tk.next('body');
-      reportWarning('syntax', `화학식에서 짝이 맞지 않는 ${peeked.value}`, peeked.start, latex);
+      reportWarning('syntax', `Unmatched ${peeked.value} in a chemical formula`, peeked.start, latex);
       return true;
 
     default:
@@ -472,7 +472,7 @@ export function parseChemBody(
       return { nodes: absorbOperatorSpaces(nodes), consumed: tk.pos };
     }
     if (tok.kind === 'eof') {
-      reportError('incomplete', '\\ce 의 중괄호가 닫히지 않았습니다', tok.start, latex);
+      reportError('incomplete', 'Unclosed brace in \\ce', tok.start, latex);
       return { nodes: absorbOperatorSpaces(nodes), consumed: tk.pos };
     }
     if (!consumeBodyToken(tk, latex, ctx, nodes, tok)) {

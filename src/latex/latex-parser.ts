@@ -107,7 +107,7 @@ export function parseLatex(latex: string): LatexParseResult {
   } catch (e) {
     // 예상치 못한 에러 처리
     const errorMessage = e instanceof Error ? e.message : String(e);
-    collector.addError('internal', `파싱 중 내부 오류: ${errorMessage}`, 0, latex);
+    collector.addError('internal', `Internal error while parsing: ${errorMessage}`, 0, latex);
 
     return {
       ast: { id: generateId(), type: 'root', children: [] },
@@ -257,7 +257,7 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
       if (prev.type === 'scripts' && prev[slot] !== undefined) {
         reportWarning(
           'syntax',
-          `첨자 중복 지정: '${isSup ? '^' : '_'}' 가 이미 채워진 자리에 다시 지정되었습니다`,
+          `Duplicate script: '${isSup ? '^' : '_'}' was assigned to a slot that is already filled`,
           markerPos,
           latex
         );
@@ -315,7 +315,7 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
     // 알 수 없는 문자 — 진단 후 스킵 (이전엔 silent skip이었음)
     reportWarning(
       'unknown_command',
-      `인식되지 않은 문자: '${latex[pos]}'`,
+      `Unrecognized character: '${latex[pos]}'`,
       pos,
       latex,
       latex[pos],
@@ -468,11 +468,11 @@ function parseCommand(latex: string, start: number): ParseResult {
   if (cmdName) {
     const pkgName = getPackageName(cmdName);
     if (isStandardUnimplemented(cmdName)) {
-      reportError('unsupported', `미구현 표준 명령어: \\${cmdName}`, start, latex, cmdName);
+      reportError('unsupported', `Unimplemented standard command: \\${cmdName}`, start, latex, cmdName);
     } else if (pkgName) {
-      reportWarning('unsupported', `패키지 명령어: \\${cmdName} (${pkgName})`, start, latex, cmdName);
+      reportWarning('unsupported', `Package command: \\${cmdName} (${pkgName})`, start, latex, cmdName);
     } else {
-      reportWarning('unknown_command', `알 수 없는 명령어: \\${cmdName}`, start, latex, cmdName);
+      reportWarning('unknown_command', `Unknown command: \\${cmdName}`, start, latex, cmdName);
     }
   }
   return { nodes: [], consumed: pos };

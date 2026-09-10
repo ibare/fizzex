@@ -19,7 +19,7 @@ export const chemicalElementsSchema = z
     // `{z}` 와 `{desc}` 는 치환 자리다. 하나라도 빠지면 그 정보가 화면에서 사라진다.
     descriptionFormat: z.string().includes('{z}').includes('{desc}'),
     bySymbol: z.record(
-      z.string().regex(/^[A-Z][a-z]?$/, '원소 기호는 대문자 하나 + 소문자 하나까지'),
+      z.string().regex(/^[A-Z][a-z]?$/, 'an element symbol is one uppercase letter optionally followed by one lowercase letter'),
       elementEntrySchema,
     ),
   })
@@ -30,7 +30,7 @@ export const chemicalElementsSchema = z
       ctx.addIssue({
         code: 'custom',
         path: ['bySymbol'],
-        message: `원소가 ${entries.length}개다 — ${CHEMICAL_ELEMENT_COUNT}개여야 한다`,
+        message: `found ${entries.length} elements — expected ${CHEMICAL_ELEMENT_COUNT}`,
       });
     }
 
@@ -42,7 +42,7 @@ export const chemicalElementsSchema = z
         ctx.addIssue({
           code: 'custom',
           path: ['bySymbol', symbol, 'z'],
-          message: `원자 번호 ${entry.z}이(가) "${dup}"와 겹친다`,
+          message: `atomic number ${entry.z} collides with "${dup}"`,
         });
       }
       seen.set(entry.z, symbol);
@@ -52,7 +52,7 @@ export const chemicalElementsSchema = z
         ctx.addIssue({
           code: 'custom',
           path: ['bySymbol'],
-          message: `원자 번호 ${z}인 원소가 없다`,
+          message: `no element with atomic number ${z}`,
         });
       }
     }

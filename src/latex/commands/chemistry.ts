@@ -13,7 +13,7 @@ export const ceHandler: CommandHandler = (ctx) => {
   if (ctx.latex[ctx.pos] !== '{') {
     reportError(
       'invalid_argument',
-      '\\ce 에 화학식 인자 {...} 가 없습니다',
+      '\\ce is missing its {...} formula argument',
       ctx.pos,
       ctx.latex,
       ctx.commandName,

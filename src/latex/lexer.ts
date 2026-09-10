@@ -140,7 +140,7 @@ export function tokenize(input: string): LexResult {
       if (!hasIntPart && !hasFracPart) {
         diagnostics.push({
           kind: 'lone-dot',
-          message: "외로운 '.': 앞뒤로 숫자가 없는 점은 무시됨",
+          message: "Lone '.': a dot with no digits on either side is ignored",
           pos: start,
           char: '.',
         });
@@ -152,7 +152,7 @@ export function tokenize(input: string): LexResult {
       if (hasIntPart && hasDot && !hasFracPart) {
         diagnostics.push({
           kind: 'trailing-dot',
-          message: "후행 '.': '3.'은 '3'으로 처리됨. 소수는 '3.14' 또는 '3.0' 형태 사용",
+          message: "Trailing '.': '3.' is read as '3'. Write decimals as '3.14' or '3.0'",
           pos: pos - 1,
           char: '.',
         });
@@ -234,7 +234,7 @@ export function tokenize(input: string): LexResult {
     // 인식되지 않은 문자 — 진단
     diagnostics.push({
       kind: 'stray-char',
-      message: `인식되지 않은 문자: '${ch}'`,
+      message: `Unrecognized character: '${ch}'`,
       pos,
       char: ch,
     });

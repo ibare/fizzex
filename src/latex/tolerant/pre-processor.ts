@@ -138,7 +138,7 @@ export function preProcess(input: string, options?: PreProcessOptions): PreProce
               type: 'backslash_norm',
               originalSpan: { start: pos, end: afterSlashes },
               normalizedSpan: { start: outPos - 1, end: outPos },
-              description: `연속 백슬래시 ${slashCount}개를 1개로 축소`,
+              description: `Collapsed ${slashCount} consecutive backslashes into one`,
             });
             pos = afterSlashes;
             identityOrigStart = pos;
@@ -188,7 +188,7 @@ export function preProcess(input: string, options?: PreProcessOptions): PreProce
               type: 'whitespace_trim',
               originalSpan: { start: spaceStart, end: spaceStart + spaceCount },
               normalizedSpan: { start: outPos, end: outPos },
-              description: `커맨드-중괄호 사이 공백 ${spaceCount}자 제거`,
+              description: `Removed ${spaceCount} space(s) between a command and its brace`,
             });
             identityOrigStart = pos;
             identityNormStart = outPos;

@@ -162,7 +162,7 @@ function astToBoxInternal(
 
     default: {
       const exhaustiveCheck: never = node;
-      console.warn(`[ast-to-box] 처리되지 않은 노드 타입: ${(exhaustiveCheck as MathNode).type}`);
+      console.warn(`[ast-to-box] unhandled node type: ${(exhaustiveCheck as MathNode).type}`);
       return createHBox([], (exhaustiveCheck as MathNode).id);
     }
   }

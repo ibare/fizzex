@@ -22,9 +22,9 @@ const rangeSchema = z
     step: z.number().positive(),
     default: z.number(),
   })
-  .refine((r) => r.min < r.max, { message: 'range.min 은 max 보다 작아야 한다' })
+  .refine((r) => r.min < r.max, { message: 'range.min must be less than range.max' })
   .refine((r) => r.min <= r.default && r.default <= r.max, {
-    message: 'range.default 가 [min, max] 밖이다',
+    message: 'range.default is outside [min, max]',
   });
 
 const slotSchema = z.object({
@@ -61,7 +61,7 @@ const exampleSchema = z.object({
 
 const formSchema = z
   .object({
-    id: z.string().regex(idRegex, 'form id 는 소문자·숫자·하이픈'),
+    id: z.string().regex(idRegex, 'form id must be lowercase letters, digits and hyphens'),
     slots: z.array(slotSchema).min(1),
     shapes: z.array(shapeSchema).min(1),
     /** 이 형식이 일반화하는 형식들. 진짜 포함관계일 때만 선언한다. */
@@ -73,7 +73,7 @@ const formSchema = z
   .superRefine((form, ctx) => {
     const bySlot = new Map(form.slots.map((s) => [s.name, s]));
     if (bySlot.size !== form.slots.length) {
-      ctx.addIssue({ code: 'custom', path: ['slots'], message: '슬롯 이름이 중복된다' });
+      ctx.addIssue({ code: 'custom', path: ['slots'], message: 'duplicate slot name' });
     }
     const formulaSlots = new Set(
       form.slots.filter((s) => s.source === 'formula').map((s) => s.name),
@@ -86,7 +86,7 @@ const formSchema = z
           ctx.addIssue({
             code: 'custom',
             path: ['shapes', i, 'slots'],
-            message: `선언되지 않은 슬롯 "${name}"`,
+            message: `undeclared slot "${name}"`,
           });
           continue;
         }
@@ -94,7 +94,7 @@ const formSchema = z
           ctx.addIssue({
             code: 'custom',
             path: ['shapes', i, 'slots'],
-            message: `viewer 슬롯 "${name}" 은 수식에서 읽는 값이 아니다`,
+            message: `viewer slot "${name}" is not read from the formula`,
           });
         }
       }
@@ -103,7 +103,7 @@ const formSchema = z
         ctx.addIssue({
           code: 'custom',
           path: ['shapes', i],
-          message: `slots 와 free 가 겹친다: ${overlap.join(', ')}`,
+          message: `slots and free overlap: ${overlap.join(', ')}`,
         });
       }
     });
@@ -115,7 +115,7 @@ const formSchema = z
         ctx.addIssue({
           code: 'custom',
           path: ['slots'],
-          message: `formula 슬롯 "${name}" 이 어떤 shape 에도 없다 — 채울 경로가 없다`,
+          message: `formula slot "${name}" appears in no shape — there is no path to fill it`,
         });
       }
     }
@@ -126,7 +126,7 @@ const formSchema = z
           ctx.addIssue({
             code: 'custom',
             path: ['examples', i, 'slots'],
-            message: `example 이 formula 슬롯이 아닌 "${key}" 를 선언한다`,
+            message: `example declares "${key}", which is not a formula slot`,
           });
         }
       }
@@ -136,7 +136,7 @@ const formSchema = z
           ctx.addIssue({
             code: 'custom',
             path: ['examples', i, 'slots'],
-            message: `필수 슬롯 "${name}" 의 기대 바인딩이 없다`,
+            message: `required slot "${name}" has no expected binding`,
           });
         }
       }
@@ -148,7 +148,7 @@ const formSchema = z
         ctx.addIssue({
           code: 'custom',
           path: ['visualizers'],
-          message: 'default 는 form 당 최대 1개',
+          message: 'at most one default per form',
         });
       }
     }
@@ -167,11 +167,11 @@ export const formIndexSchema = z
           ctx.addIssue({
             code: 'custom',
             path: ['forms', i, 'subsumes'],
-            message: `존재하지 않는 형식 "${sub}"`,
+            message: `unknown form "${sub}"`,
           });
         }
         if (sub === form.id) {
-          ctx.addIssue({ code: 'custom', path: ['forms', i, 'subsumes'], message: '자기 자신' });
+          ctx.addIssue({ code: 'custom', path: ['forms', i, 'subsumes'], message: 'a form cannot subsume itself' });
         }
       }
     });
@@ -179,7 +179,7 @@ export const formIndexSchema = z
     const vizSeen = new Map<string, string>();
     index.forms.forEach((form, i) => {
       if (seen.has(form.id)) {
-        ctx.addIssue({ code: 'custom', path: ['forms', i, 'id'], message: `중복 form id "${form.id}"` });
+        ctx.addIssue({ code: 'custom', path: ['forms', i, 'id'], message: `duplicate form id "${form.id}"` });
       }
       seen.add(form.id);
       // 한 viz 는 정확히 한 form 에만 속한다 — 아니면 같은 칩이 두 곳에서 뜬다.
@@ -189,7 +189,7 @@ export const formIndexSchema = z
           ctx.addIssue({
             code: 'custom',
             path: ['forms', i, 'visualizers'],
-            message: `viz "${v.id}" 가 "${owner}" 와 중복 소유된다`,
+            message: `viz "${v.id}" is already owned by "${owner}"`,
           });
         }
         vizSeen.set(v.id, form.id);

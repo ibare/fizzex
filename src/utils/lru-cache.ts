@@ -10,7 +10,7 @@ export class LRUCache<K, V> {
 
   constructor(maxSize: number) {
     if (maxSize < 1) {
-      throw new Error('LRU 캐시 최대 크기는 1 이상이어야 합니다.');
+      throw new Error('LRU cache max size must be at least 1.');
     }
     this.cache = new Map();
     this.maxSize = maxSize;
