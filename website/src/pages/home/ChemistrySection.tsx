@@ -6,24 +6,28 @@ import type { EditorState } from 'fizzex';
 import { useLang } from '../../i18n/context';
 
 /**
- * 섹션이 보여주는 화학식.
+ * 섹션이 보여주는 화학식과 그 캡션 키.
  *
- * 순서가 `t.chemistrySection.items` 와 짝을 이룬다. LaTeX 는 사람이 읽는 말이 아니라
- * 데이터라 i18n 이 아니라 여기 둔다 — HeroFormulas 의 FORMULAS 와 같은 이유다.
+ * 수식과 캡션을 한 배열에 묶는다. 둘을 따로 두고 인덱스로 맞물리게 하면 한쪽에만
+ * 항목을 더했을 때 카드가 조용히 사라지거나 수식 없는 카드가 나오는데, 컴파일러가
+ * 그것을 잡지 못한다. 여기서는 `captionKey` 가 틀리면 컴파일이 멈춘다.
+ *
+ * LaTeX 는 사람이 읽는 말이 아니라 데이터라 i18n 이 아니라 여기 둔다 —
+ * HeroFormulas 의 FORMULAS 와 같은 이유다.
  */
-const FORMULAS = [
-  '\\ce{2H2 + O2 -> 2H2O}',
-  '\\ce{SO4^2-}',
-  '\\ce{^{227}_{90}Th}',
-  '\\ce{N2 + 3H2 <=>[Fe] 2NH3}',
-];
+const CARDS = [
+  { latex: '\\ce{2H2 + O2 -> 2H2O}', captionKey: 'reaction' },
+  { latex: '\\ce{SO4^2-}', captionKey: 'charge' },
+  { latex: '\\ce{^{227}_{90}Th}', captionKey: 'isotope' },
+  { latex: '\\ce{N2 + 3H2 <=>[Fe] 2NH3}', captionKey: 'equilibrium' },
+] as const;
 
 export default function ChemistrySection() {
   const { t, lang } = useLang();
 
   const states = useMemo<(EditorState | null)[]>(
     () =>
-      FORMULAS.map((latex) => {
+      CARDS.map(({ latex }) => {
         try {
           return createStateFromLatex(latex);
         } catch {
@@ -42,18 +46,21 @@ export default function ChemistrySection() {
         </div>
 
         <div className="grid grid--2">
-          {t.chemistrySection.items.map((item, i) => (
-            <div key={item.title} className="card">
-              {states[i] && (
-                <div style={styles.renderBox}>
-                  <EditorView initialState={states[i]} readOnly autoSize />
-                </div>
-              )}
-              <h3 className="card__title">{item.title}</h3>
-              <p className="card__desc">{item.desc}</p>
-              <code style={styles.latex}>{FORMULAS[i]}</code>
-            </div>
-          ))}
+          {CARDS.map(({ latex, captionKey }, i) => {
+            const caption = t.chemistrySection[captionKey];
+            return (
+              <div key={latex} className="card">
+                {states[i] && (
+                  <div style={styles.renderBox}>
+                    <EditorView initialState={states[i]} readOnly autoSize />
+                  </div>
+                )}
+                <h3 className="card__title">{caption.title}</h3>
+                <p className="card__desc">{caption.desc}</p>
+                <code style={styles.latex}>{latex}</code>
+              </div>
+            );
+          })}
         </div>
 
         <div style={styles.ctaRow}>

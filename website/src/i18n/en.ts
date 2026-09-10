@@ -76,24 +76,22 @@ export const en: Dictionary = {
   chemistrySection: {
     title: 'Chemistry runs on the same engine',
     sub: 'Write mhchem notation as-is. It renders, edits and analyses exactly like any other formula.',
-    items: [
-      {
-        title: 'Reactions and coefficients',
-        desc: 'Arrows split the two sides, and the leading numbers are coefficients — not multiplication.',
-      },
-      {
-        title: 'Charges',
-        desc: 'A superscript on an ion is a charge, not an exponent. Fizzex reads it that way.',
-      },
-      {
-        title: 'Isotopes',
-        desc: 'Mass number and atomic number sit to the left of the symbol, stacked properly.',
-      },
-      {
-        title: 'Equilibrium and catalysts',
-        desc: 'Reversible arrows draw as two lines, and labels above the arrow carry the conditions.',
-      },
-    ],
+    reaction: {
+      title: 'Reactions and coefficients',
+      desc: 'Arrows split the two sides, and the leading numbers are coefficients — not multiplication.',
+    },
+    charge: {
+      title: 'Charges',
+      desc: 'A superscript on an ion is a charge, not an exponent. Fizzex reads it that way.',
+    },
+    isotope: {
+      title: 'Isotopes',
+      desc: 'Mass number and atomic number sit to the left of the symbol, stacked properly.',
+    },
+    equilibrium: {
+      title: 'Equilibrium and catalysts',
+      desc: 'Reversible arrows draw as two lines, and labels above the arrow carry the conditions.',
+    },
     cta: 'See more chemistry examples',
   },
   underTheHood: {

@@ -54,8 +54,11 @@ export interface Dictionary {
   chemistrySection: {
     title: string;
     sub: string;
-    /** 화학식 카드의 캡션 — 각 예가 무엇을 보여주는지. 순서는 ChemistrySection 의 상수와 맞춘다 */
-    items: FeatureItem[];
+    /** 화학식 카드의 캡션 — 각 예가 무엇을 보여주는지. 키는 ChemistrySection 의 CARDS 가 가리킨다 */
+    reaction: FeatureItem;
+    charge: FeatureItem;
+    isotope: FeatureItem;
+    equilibrium: FeatureItem;
     cta: string;
   };
   underTheHood: {
