@@ -5,7 +5,7 @@
  * 새 카탈로그 항목 추가 시 반드시 여기에 테스트 케이스를 추가해야 한다. (C8 규칙)
  */
 
-import { describe, test, expect } from 'vitest';
+import { describe, it, test, expect } from 'vitest';
 import { parseLatex } from '../../../latex/index.js';
 import { matchCatalog } from './catalog-matcher.js';
 import { matchExpression } from '../engine.js';
