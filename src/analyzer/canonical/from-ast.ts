@@ -33,12 +33,11 @@ import type {
   OverlineNode,
   OversetNode,
   ParenNode,
-  PowerNode,
+  ScriptsNode,
   ProductNode,
   RootNode,
   RowNode,
   SqrtNode,
-  SubscriptNode,
   SumNode,
   TextNode,
   VariableNode,
@@ -325,19 +324,33 @@ function normalizeNode(node: MathNode, ctx: Ctx, depth: number): ExprNode {
     case 'variable':
       return sym(normalizeVarName((node as VariableNode).name), undefined, src);
 
-    case 'subscript': {
-      const n = node as SubscriptNode;
-      const base = soleNode(n.base);
-      const subNode = soleNode(n.subscript);
-      if (base?.type === 'variable' && subNode) {
-        if (subNode.type === 'number') {
-          return sym(normalizeVarName(base.name), (subNode as NumberNode).value, src);
-        }
-        if (subNode.type === 'variable') {
-          return sym(normalizeVarName(base.name), normalizeVarName(subNode.name), src);
-        }
+    case 'scripts': {
+      const n = node as ScriptsNode;
+
+      // 좌측 첨자는 정규화 대상이 아니다 — 통째로 불투명 처리
+      if (n.leftSuperscript || n.leftSubscript) {
+        return opaque('scripts:left', [seq(n.base)], src);
       }
-      return opaque('subscript', [seq(n.base), seq(n.subscript)], src);
+
+      // 밑 ⊕ 아래첨자를 먼저 하나의 심볼로 접는다.
+      // 이 순서라야 x_1^2 가 pow(sym(x,1), 2) 로 정규화된다 — 뒤집으면 회귀한다.
+      let inner: ExprNode;
+      if (n.subscript) {
+        const base = soleNode(n.base);
+        const subNode = soleNode(n.subscript);
+        if (base?.type === 'variable' && subNode?.type === 'number') {
+          inner = sym(normalizeVarName(base.name), (subNode as NumberNode).value, src);
+        } else if (base?.type === 'variable' && subNode?.type === 'variable') {
+          inner = sym(normalizeVarName(base.name), normalizeVarName(subNode.name), src);
+        } else {
+          inner = opaque('scripts', [seq(n.base), seq(n.subscript)], src);
+        }
+      } else {
+        inner = seq(n.base);
+      }
+
+      // 그 위에 위첨자를 거듭제곱으로 씌운다
+      return n.superscript ? app('pow', [inner, seq(n.superscript)], src) : inner;
     }
 
     case 'frac': {
@@ -347,11 +360,6 @@ function normalizeNode(node: MathNode, ctx: Ctx, depth: number): ExprNode {
         return call('binom', [seq(n.numerator), seq(n.denominator)], src);
       }
       return app('div', [seq(n.numerator), seq(n.denominator)], src);
-    }
-
-    case 'power': {
-      const n = node as PowerNode;
-      return app('pow', [seq(n.base), seq(n.exponent)], src);
     }
 
     case 'sqrt': {

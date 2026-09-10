@@ -1,3 +1,4 @@
+import { MathConstants } from './font-metrics.js';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
   createGlyph,
@@ -8,10 +9,9 @@ import {
   createVerticalRule,
   createKern,
   createFraction,
-  createPower,
+  createScripts,
   createParenthesized,
   createOperator,
-  createSubscript,
   createAbsoluteValue,
   createIntegralBox,
   createSumBox,
@@ -439,13 +439,102 @@ describe('Box Builder', () => {
   });
 
   // ─────────────────────────────────────────────
-  // createPower
+  // createScripts — 위아래 동시 (TeX Rule 18e) / 좌측 첨자
   // ─────────────────────────────────────────────
-  describe('createPower', () => {
+  describe('createScripts — 위아래 동시 부착 (Rule 18e)', () => {
+    it('두 첨자가 형제로 공존한다 — 중첩되어 가로로 늘어지지 않는다', () => {
+      const base = makeBox({ width: 20 });
+      const sup = makeBox({ width: 10, height: 10, depth: 2 });
+      const sub = makeBox({ width: 8, height: 10, depth: 2 });
+      const result = createScripts(base, { superscript: sup, subscript: sub }, metrics);
+
+      const shifts = result.children
+        .map((c) => c.shift)
+        .filter((v): v is number => v !== undefined && v !== 0);
+      expect(shifts.some((v) => v < 0)).toBe(true); // 위첨자
+      expect(shifts.some((v) => v > 0)).toBe(true); // 아래첨자
+    });
+
+    it('두 첨자 사이에 4*xi8 이상의 간격을 확보한다', () => {
+      const base = makeBox({ width: 20 });
+      const sup = makeBox({ width: 10, height: 10, depth: 2 });
+      const sub = makeBox({ width: 8, height: 10, depth: 2 });
+      const em = metrics.getActualFontSize(1.0);
+      const result = createScripts(base, { superscript: sup, subscript: sub }, metrics);
+
+      const supBox = result.children.find((c) => (c.shift ?? 0) < 0)!;
+      const subBox = result.children.find((c) => (c.shift ?? 0) > 0)!;
+      const up = -supBox.shift!;
+      const down = subBox.shift!;
+      const gap = (up - supBox.depth) - (subBox.height - down);
+      expect(gap).toBeGreaterThanOrEqual(4 * em * MathConstants.fractionRuleThickness - 1e-9);
+    });
+
+    it('아래첨자를 sigma17 이상 내린다 (위첨자가 함께 있을 때)', () => {
+      const base = makeBox({ width: 20, depth: 0 });
+      const sup = makeBox({ width: 10, height: 10, depth: 2 });
+      const sub = makeBox({ width: 8, height: 10, depth: 2 });
+      const em = metrics.getActualFontSize(1.0);
+      const result = createScripts(base, { superscript: sup, subscript: sub }, metrics);
+
+      const subBox = result.children.find((c) => (c.shift ?? 0) > 0)!;
+      expect(subBox.shift!).toBeGreaterThanOrEqual(
+        em * MathConstants.subscriptShiftWithSup - 1e-9,
+      );
+    });
+  });
+
+  describe('createScripts — 좌측 첨자', () => {
+    it('좌측 첨자 컬럼을 밑 앞에 놓는다', () => {
+      const base = makeBox({ width: 20 });
+      const lsup = makeBox({ width: 12, height: 10, depth: 2 });
+      const lsub = makeBox({ width: 9, height: 10, depth: 2 });
+      const result = createScripts(base, { leftSuperscript: lsup, leftSubscript: lsub }, metrics);
+
+      // [sub, kern(-), sup, kern(+), base] — 밑이 마지막이다
+      expect(result.children[result.children.length - 1]).toBe(base);
+      const kerns = result.children.filter((c) => c.type === 'kern');
+      expect(kerns).toHaveLength(2);
+      // 되돌리는 kern 과 폭을 맞추는 kern
+      expect(kerns[0].width).toBeLessThan(0);
+      expect(kerns[1].width).toBeGreaterThanOrEqual(0);
+    });
+
+    it('좌측 컬럼의 폭이 두 첨자 중 넓은 쪽이 된다', () => {
+      const base = makeBox({ width: 20 });
+      const lsup = makeBox({ width: 12, height: 10, depth: 2 });
+      const lsub = makeBox({ width: 9, height: 10, depth: 2 });
+      const result = createScripts(base, { leftSuperscript: lsup, leftSubscript: lsub }, metrics);
+
+      const beforeBase = result.children.slice(0, result.children.indexOf(base));
+      const columnWidth = beforeBase.reduce((sum, c) => sum + c.width, 0);
+      expect(columnWidth).toBeCloseTo(Math.max(lsup.width, lsub.width), 6);
+    });
+
+    it('좌측·우측 첨자가 함께 있으면 밑을 가운데 둔다', () => {
+      const base = makeBox({ width: 20 });
+      const result = createScripts(
+        base,
+        {
+          superscript: makeBox({ width: 10 }),
+          leftSuperscript: makeBox({ width: 12 }),
+        },
+        metrics,
+      );
+      const baseIndex = result.children.indexOf(base);
+      expect(baseIndex).toBeGreaterThan(0);
+      expect(baseIndex).toBeLessThan(result.children.length - 1);
+    });
+  });
+
+  // ─────────────────────────────────────────────
+  // createScripts — 위첨자
+  // ─────────────────────────────────────────────
+  describe('createScripts — 위첨자', () => {
     it('base와 exponent를 HBox로 결합한다', () => {
       const base = makeBox({ width: 20 });
       const exp = makeBox({ width: 10 });
-      const power = createPower(base, exp, metrics);
+      const power = createScripts(base, { superscript: exp }, metrics);
       expect(power.type).toBe('hbox');
       expect(power.children).toHaveLength(2);
     });
@@ -453,7 +542,7 @@ describe('Box Builder', () => {
     it('exponent에 음수 shift를 적용한다', () => {
       const base = makeBox({ width: 20, height: 14 });
       const exp = makeBox({ width: 10 });
-      const power = createPower(base, exp, metrics);
+      const power = createScripts(base, { superscript: exp }, metrics);
       const shiftedExp = power.children[1];
       expect(shiftedExp.shift).toBeDefined();
       expect(shiftedExp.shift!).toBeLessThan(0);
@@ -462,7 +551,7 @@ describe('Box Builder', () => {
     it('sourceId를 설정한다', () => {
       const base = makeBox();
       const exp = makeBox();
-      const power = createPower(base, exp, metrics, 1.0, 'pow_1');
+      const power = createScripts(base, { superscript: exp }, metrics, 1.0, 'pow_1');
       expect(power.sourceId).toBe('pow_1');
     });
 
@@ -471,8 +560,8 @@ describe('Box Builder', () => {
       const base2 = makeBox({ height: 30 });
       const exp = makeBox();
 
-      const power1 = createPower(base1, exp, metrics);
-      const power2 = createPower(base2, exp, metrics);
+      const power1 = createScripts(base1, { superscript: exp }, metrics);
+      const power2 = createScripts(base2, { superscript: exp }, metrics);
 
       // base2가 더 높으므로 더 큰 (절대값) shift
       expect(Math.abs(power2.children[1].shift!)).toBeGreaterThan(
@@ -482,13 +571,13 @@ describe('Box Builder', () => {
   });
 
   // ─────────────────────────────────────────────
-  // createSubscript
+  // createScripts — 아래첨자
   // ─────────────────────────────────────────────
-  describe('createSubscript', () => {
+  describe('createScripts — 아래첨자', () => {
     it('base와 subscript를 HBox로 결합한다', () => {
       const base = makeBox({ width: 20 });
       const sub = makeBox({ width: 8 });
-      const result = createSubscript(base, sub, metrics);
+      const result = createScripts(base, { subscript: sub }, metrics);
       expect(result.type).toBe('hbox');
       expect(result.children).toHaveLength(2);
     });
@@ -496,7 +585,7 @@ describe('Box Builder', () => {
     it('subscript에 양수 shift를 적용한다', () => {
       const base = makeBox();
       const sub = makeBox();
-      const result = createSubscript(base, sub, metrics);
+      const result = createScripts(base, { subscript: sub }, metrics);
       const shiftedSub = result.children[1];
       expect(shiftedSub.shift).toBeGreaterThan(0);
     });
@@ -504,14 +593,14 @@ describe('Box Builder', () => {
     it('sourceId를 설정한다', () => {
       const base = makeBox();
       const sub = makeBox();
-      const result = createSubscript(base, sub, metrics, 1.0, 'sub_1');
+      const result = createScripts(base, { subscript: sub }, metrics, 1.0, 'sub_1');
       expect(result.sourceId).toBe('sub_1');
     });
 
     it('depth가 subscript shift를 고려한다', () => {
       const base = makeBox({ depth: 4 });
       const sub = makeBox({ depth: 4 });
-      const result = createSubscript(base, sub, metrics);
+      const result = createScripts(base, { subscript: sub }, metrics);
       // shift = 20 * 0.2 = 4, depth >= sub.depth + shift = 4 + 4 = 8
       expect(result.depth).toBeGreaterThanOrEqual(8);
     });

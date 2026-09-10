@@ -6,6 +6,8 @@
  */
 
 import type { MathNode } from '../../types.js';
+import { SCRIPT_SLOTS } from '../../types.js';
+import { scriptRole } from './script-roles.js';
 import type { AncestorEntry, SemanticResult, CatalogMatchResult, CatalogDetail } from './types.js';
 import { getChildArrays, getSemanticForAccent } from './helpers.js';
 import { getSemanticTexts, getCatalogIndex, getCatalogDetail } from './loader.js';
@@ -46,98 +48,99 @@ export function buildAstAncestorMap(ast: MathNode): Map<string, AncestorEntry[]>
       case 'root':
       case 'row':
         for (const child of node.children) {
-          walk(child, [...ancestors, { node, childPosition: 'child' }]);
+          walk(child, [...ancestors, { node, parentType: node.type, childPosition: 'child' }]);
         }
         break;
       case 'frac':
         for (const c of node.numerator)
-          walk(c, [...ancestors, { node, childPosition: 'numerator' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'numerator' }]);
         for (const c of node.denominator)
-          walk(c, [...ancestors, { node, childPosition: 'denominator' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'denominator' }]);
         break;
-      case 'power':
+      case 'scripts': {
+        // 첨자는 슬롯마다 의미 어휘가 다르다 (x^2 의 밑 vs x_i 의 밑)
+        const baseRole = scriptRole(node, 'base');
         for (const c of node.base)
-          walk(c, [...ancestors, { node, childPosition: 'base' }]);
-        for (const c of node.exponent)
-          walk(c, [...ancestors, { node, childPosition: 'exponent' }]);
+          walk(c, [...ancestors, { node, ...baseRole }]);
+        for (const slot of SCRIPT_SLOTS) {
+          const value = node[slot];
+          if (!value) continue;
+          const role = scriptRole(node, slot);
+          for (const c of value) walk(c, [...ancestors, { node, ...role }]);
+        }
         break;
-      case 'subscript':
-        for (const c of node.base)
-          walk(c, [...ancestors, { node, childPosition: 'base' }]);
-        for (const c of node.subscript)
-          walk(c, [...ancestors, { node, childPosition: 'subscript' }]);
-        break;
+      }
       case 'sqrt':
         for (const c of node.content)
-          walk(c, [...ancestors, { node, childPosition: 'content' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
         if (node.index) {
           for (const c of node.index)
-            walk(c, [...ancestors, { node, childPosition: 'index' }]);
+            walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'index' }]);
         }
         break;
       case 'paren':
         for (const c of node.content)
-          walk(c, [...ancestors, { node, childPosition: 'content' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
         break;
       case 'abs':
         for (const c of node.content)
-          walk(c, [...ancestors, { node, childPosition: 'content' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
         break;
       case 'func':
         for (const c of node.argument)
-          walk(c, [...ancestors, { node, childPosition: 'argument' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'argument' }]);
         break;
       case 'integral':
         if (node.lower) {
           for (const c of node.lower)
-            walk(c, [...ancestors, { node, childPosition: 'lower' }]);
+            walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'lower' }]);
         }
         if (node.upper) {
           for (const c of node.upper)
-            walk(c, [...ancestors, { node, childPosition: 'upper' }]);
+            walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'upper' }]);
         }
         for (const c of node.integrand)
-          walk(c, [...ancestors, { node, childPosition: 'integrand' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'integrand' }]);
         break;
       case 'sum':
       case 'product':
         for (const c of node.lower)
-          walk(c, [...ancestors, { node, childPosition: 'lower' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'lower' }]);
         for (const c of node.upper)
-          walk(c, [...ancestors, { node, childPosition: 'upper' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'upper' }]);
         for (const c of node.body)
-          walk(c, [...ancestors, { node, childPosition: 'body' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'body' }]);
         break;
       case 'limit':
         for (const c of node.approach)
-          walk(c, [...ancestors, { node, childPosition: 'approach' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'approach' }]);
         for (const c of node.body)
-          walk(c, [...ancestors, { node, childPosition: 'body' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'body' }]);
         break;
       case 'overline':
         for (const c of node.content)
-          walk(c, [...ancestors, { node, childPosition: 'content' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
         break;
       case 'accent':
         for (const c of node.content)
-          walk(c, [...ancestors, { node, childPosition: 'content' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
         break;
       case 'overset':
         for (const c of node.base)
-          walk(c, [...ancestors, { node, childPosition: 'base' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'base' }]);
         for (const c of node.annotation)
-          walk(c, [...ancestors, { node, childPosition: 'annotation' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'annotation' }]);
         break;
       case 'cancel':
         for (const c of node.content)
-          walk(c, [...ancestors, { node, childPosition: 'content' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'content' }]);
         break;
       case 'xarrow':
         for (const c of node.above)
-          walk(c, [...ancestors, { node, childPosition: 'above' }]);
+          walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'above' }]);
         if (node.below) {
           for (const c of node.below)
-            walk(c, [...ancestors, { node, childPosition: 'below' }]);
+            walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'below' }]);
         }
         break;
       case 'matrix':
@@ -147,18 +150,18 @@ export function buildAstAncestorMap(ast: MathNode): Map<string, AncestorEntry[]>
         for (let ri = 0; ri < node.rows.length; ri++) {
           const row = node.rows[ri];
           for (let ci = 0; ci < row.length; ci++) {
-            walk(row[ci], [...ancestors, { node, childPosition: 'element' }]);
+            walk(row[ci], [...ancestors, { node, parentType: node.type, childPosition: 'element' }]);
           }
         }
         break;
       case 'gather':
         for (const row of node.rows)
-          walk(row, [...ancestors, { node, childPosition: 'row' }]);
+          walk(row, [...ancestors, { node, parentType: node.type, childPosition: 'row' }]);
         break;
       case 'opaque':
         for (const argGroup of node.args) {
           for (const c of argGroup) {
-            walk(c, [...ancestors, { node, childPosition: 'arg' }]);
+            walk(c, [...ancestors, { node, parentType: node.type, childPosition: 'arg' }]);
           }
         }
         break;
@@ -267,7 +270,7 @@ export function getSemanticMeaning(
   );
 
   // 조상 경로를 "parentType.childPosition" 문자열 배열로 변환
-  const path = meaningfulAncestors.map(a => `${a.node.type}.${a.childPosition}`);
+  const path = meaningfulAncestors.map(a => `${a.parentType}.${a.childPosition}`);
 
   // 1. Layer 2: 조합 규칙
   const l2Match = matchLayer2(node, path, texts.layer2);
@@ -323,11 +326,18 @@ function findElementKey(
     return node.name;
   }
 
-  // power 노드: "base^exponent" 형태 키 (예: "c^2")
-  if (node.type === 'power') {
+  // 거듭제곱: "base^exponent" 형태 키 (예: "c^2").
+  // 다른 첨자가 함께 붙어 있으면 만들지 않는다 — E_k^2 가 E^2 로 오인되면 안 된다.
+  if (
+    node.type === 'scripts' &&
+    node.superscript &&
+    !node.subscript &&
+    !node.leftSuperscript &&
+    !node.leftSubscript
+  ) {
     const base = node.base.length === 1 && node.base[0].type === 'variable'
       ? node.base[0].name : null;
-    const expNode = unwrapRow(node.exponent);
+    const expNode = unwrapRow(node.superscript);
     const exp = expNode?.type === 'number' ? expNode.value : null;
     if (base && exp) {
       return `${base}^${exp}`;

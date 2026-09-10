@@ -7,8 +7,7 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
-  SubscriptNode,
+  ScriptsNode,
   ParenNode,
   AbsNode,
   SqrtNode,
@@ -36,8 +35,7 @@ import {
   createVariable,
   createOperator,
   createFrac,
-  createPower,
-  createSubscript,
+  createScripts,
   createParen,
   createAbs,
   createIntegral,
@@ -105,29 +103,29 @@ describe('Editor', () => {
       expect((frac.denominator[0] as RowNode).children).toContain(den);
     });
 
-    it('createPower: exponent를 Row로 감싼 거듭제곱을 생성한다', () => {
+    it('createScripts: 위첨자를 Row로 감싼다', () => {
       const base = createVariable('x');
       const exp = createNumber('2');
-      const power = createPower([base], [exp]);
+      const power = createScripts([base], 'superscript', [exp]);
 
-      expect(power.type).toBe('power');
+      expect(power.type).toBe('scripts');
       expect(power.base).toContain(base);
       // exponent가 row로 감싸져 있다
-      expect(power.exponent).toHaveLength(1);
-      expect(power.exponent[0].type).toBe('row');
-      expect((power.exponent[0] as RowNode).children).toContain(exp);
+      expect(power.superscript!).toHaveLength(1);
+      expect(power.superscript![0].type).toBe('row');
+      expect((power.superscript![0] as RowNode).children).toContain(exp);
     });
 
-    it('createSubscript: subscript를 Row로 감싼 아래첨자를 생성한다', () => {
+    it('createScripts: 아래첨자를 Row로 감싼다', () => {
       const base = createVariable('a');
       const sub = createNumber('1');
-      const subscript = createSubscript([base], [sub]);
+      const subscript = createScripts([base], 'subscript', [sub]);
 
-      expect(subscript.type).toBe('subscript');
+      expect(subscript.type).toBe('scripts');
       expect(subscript.base).toContain(base);
-      expect(subscript.subscript).toHaveLength(1);
-      expect(subscript.subscript[0].type).toBe('row');
-      expect((subscript.subscript[0] as RowNode).children).toContain(sub);
+      expect(subscript.subscript!).toHaveLength(1);
+      expect(subscript.subscript![0].type).toBe('row');
+      expect((subscript.subscript![0] as RowNode).children).toContain(sub);
     });
 
     it('createParen: content를 Row로 감싼 괄호를 생성한다', () => {
@@ -428,31 +426,31 @@ describe('Editor', () => {
         expect(bc(state.cursor).index).toBe(0);
       });
 
-      it('insertPower: 거듭제곱을 삽입하고 커서를 지수로 이동한다', () => {
+      it('insertScript(위첨자): 거듭제곱을 삽입하고 커서를 지수로 이동한다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
-        editor.insertPower();
+        editor.insertScript('superscript');
 
         const state = editor.getState();
         expect(state.ast.children).toHaveLength(1);
-        const powerNode = state.ast.children[0] as PowerNode;
-        expect(powerNode.type).toBe('power');
+        const powerNode = state.ast.children[0] as ScriptsNode;
+        expect(powerNode.type).toBe('scripts');
         // 커서가 exponent row에 위치
-        const expRow = powerNode.exponent[0] as RowNode;
+        const expRow = powerNode.superscript![0] as RowNode;
         expect(bc(state.cursor).parentId).toBe(expRow.id);
         expect(bc(state.cursor).index).toBe(0);
       });
 
-      it('insertSubscript: 아래첨자를 삽입하고 커서를 subscript로 이동한다', () => {
+      it('insertScript(아래첨자): 아래첨자를 삽입하고 커서를 subscript로 이동한다', () => {
         const onChange = vi.fn();
         const editor = new MathEditor(onChange);
-        editor.insertSubscript();
+        editor.insertScript('subscript');
 
         const state = editor.getState();
         expect(state.ast.children).toHaveLength(1);
-        const subNode = state.ast.children[0] as SubscriptNode;
-        expect(subNode.type).toBe('subscript');
-        const subRow = subNode.subscript[0] as RowNode;
+        const subNode = state.ast.children[0] as ScriptsNode;
+        expect(subNode.type).toBe('scripts');
+        const subRow = subNode.subscript![0] as RowNode;
         expect(bc(state.cursor).parentId).toBe(subRow.id);
         expect(bc(state.cursor).index).toBe(0);
       });
@@ -727,7 +725,7 @@ describe('Editor', () => {
         expect(event.preventDefault).toHaveBeenCalled();
         const state = editor.getState();
         expect(state.ast.children).toHaveLength(1);
-        expect(state.ast.children[0].type).toBe('power');
+        expect(state.ast.children[0].type).toBe('scripts');
       });
 
       it('_ 키로 아래첨자를 삽입한다', () => {
@@ -739,7 +737,7 @@ describe('Editor', () => {
         expect(event.preventDefault).toHaveBeenCalled();
         const state = editor.getState();
         expect(state.ast.children).toHaveLength(1);
-        expect(state.ast.children[0].type).toBe('subscript');
+        expect(state.ast.children[0].type).toBe('scripts');
       });
 
       it('( 키로 괄호를 삽입한다', () => {
@@ -900,6 +898,54 @@ describe('Editor', () => {
         expect(state.cursor.kind).toBe('boundary');
         expect(bc(state.cursor).index).toBe(1);
       });
+    });
+  });
+
+  // ─────────────────────────────────────────────
+  // 첨자 입력 회귀 — 키보드로 중첩이 재현되지 않아야 한다
+  // ─────────────────────────────────────────────
+  describe('첨자 키 입력', () => {
+    function typeKeys(editor: MathEditor, keys: string[]): void {
+      for (const k of keys) editor.handleKeyDown(createKeyEvent(k));
+    }
+
+    it('x^2 뒤에서 _ 를 누르면 같은 첨자 노드의 빈 자리를 채운다', () => {
+      // collectPrecedingTerm 이 첨자 노드를 통째로 밑으로 흡수하면
+      // 파서에서 없앤 중첩이 편집 경로로 되살아난다.
+      const editor = new MathEditor(vi.fn());
+      editor.setState(createStateFromLatex('x^2'));
+      editor.insertScript('subscript');
+
+      const children = editor.getState().ast.children;
+      expect(children).toHaveLength(1);
+      const node = children[0] as ScriptsNode;
+      expect(node.type).toBe('scripts');
+      expect(node.superscript).toBeDefined();
+      expect(node.subscript).toBeDefined();
+      // 밑이 다시 첨자 노드로 감싸이면 중첩이다
+      expect(node.base.every((c) => c.type !== 'scripts')).toBe(true);
+    });
+
+    it('x_1 뒤에서 ^ 를 눌러도 마찬가지다', () => {
+      const editor = new MathEditor(vi.fn());
+      editor.setState(createStateFromLatex('x_1'));
+      editor.insertScript('superscript');
+
+      const children = editor.getState().ast.children;
+      expect(children).toHaveLength(1);
+      const node = children[0] as ScriptsNode;
+      expect(node.superscript).toBeDefined();
+      expect(node.subscript).toBeDefined();
+      expect(node.base.every((c) => c.type !== 'scripts')).toBe(true);
+    });
+
+    it('첨자 안 맨 앞에서 Backspace 하면 첨자 노드가 통째로 지워진다', () => {
+      // complexTypes 목록에 'scripts' 가 빠지면 커서만 올라가고 노드가 남는다
+      const editor = new MathEditor(vi.fn());
+      typeKeys(editor, ['x', '^', '2', 'Backspace', 'Backspace']);
+
+      const children = editor.getState().ast.children;
+      expect(children.some((c) => c.type === 'scripts')).toBe(false);
     });
   });
 });

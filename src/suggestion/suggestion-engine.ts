@@ -376,7 +376,7 @@ const ALL_SUGGESTIONS: SuggestionWithAction[] = [
     category: 'structure',
     description: '위 첨자 (지수)',
     priority: 5,
-    action: { type: 'insert_power' },
+    action: { type: 'insert_script', slot: 'superscript' },
   },
   {
     id: 'subscript',
@@ -386,7 +386,7 @@ const ALL_SUGGESTIONS: SuggestionWithAction[] = [
     category: 'structure',
     description: '아래 첨자 (인덱스)',
     priority: 5,
-    action: { type: 'insert_subscript' },
+    action: { type: 'insert_script', slot: 'subscript' },
   },
 
   // ==================== 구조 - 단축키 직관적 (priority: 3) ====================
@@ -579,7 +579,8 @@ function findNodeById(node: MathNode, id: string): MathNode | null {
 
   // 구조별 하위 노드 탐색
   const childArrays = [
-    'numerator', 'denominator', 'base', 'exponent', 'subscript',
+    'numerator', 'denominator', 'base', 'superscript', 'subscript',
+    'leftSuperscript', 'leftSubscript',
     'content', 'argument', 'lower', 'upper', 'body', 'integrand',
     'approach', 'index',
   ];
@@ -669,8 +670,7 @@ export function analyzeCursorContext(state: EditorState): CursorContext {
         // 닫는 괄호/절댓값 뒤는 변수 뒤와 유사
         return 'after_variable';
       case 'frac':
-      case 'power':
-      case 'subscript':
+      case 'scripts':
       case 'sqrt':
       case 'func':
       case 'integral':

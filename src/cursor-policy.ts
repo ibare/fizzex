@@ -36,8 +36,7 @@ export interface SlotPolicy {
  */
 export type ContainerNodeType =
   | 'frac'
-  | 'power'
-  | 'subscript'
+  | 'scripts'
   | 'sqrt'
   | 'paren'
   | 'abs'
@@ -113,13 +112,12 @@ export const CONTAINER_POLICY: {
     numerator: TERM,
     denominator: TERM,
   },
-  power: {
+  scripts: {
     base: SUBEXPR,
-    exponent: TERM,
-  },
-  subscript: {
-    base: SUBEXPR,
+    superscript: TERM,
     subscript: TERM,
+    leftSuperscript: TERM,
+    leftSubscript: TERM,
   },
 
   // ── 명시 닫힘 컨테이너 ──

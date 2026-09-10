@@ -55,7 +55,7 @@ export function extractFeatures(
   if ((collected.nodeTypeCounts['frac'] || 0) > 0) {
     features.push('has-fraction');
   }
-  if ((collected.nodeTypeCounts['power'] || 0) > 0) {
+  if (collected.scriptSlotCounts.superscript > 0) {
     features.push('has-power');
   }
   if ((collected.nodeTypeCounts['sqrt'] || 0) > 0) {

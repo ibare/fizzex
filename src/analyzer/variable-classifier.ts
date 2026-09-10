@@ -5,7 +5,8 @@
  * 복합 휴리스틱 기반 점수 계산
  */
 
-import type { RootNode, MathNode, PowerNode, SubscriptNode, IntegralNode, SumNode, LimitNode, ProductNode } from '../types.js';
+import type { RootNode, MathNode, ScriptsNode, IntegralNode, SumNode, LimitNode, ProductNode } from '../types.js';
+import { SCRIPT_SLOTS } from '../types.js';
 import type { VariableClassification, VariableScore } from './types.js';
 import { findNodes } from './ast-walker.js';
 
@@ -201,13 +202,13 @@ function getPowerBaseScore(
   ast: RootNode,
   variable: string
 ): { score: number; reason?: string } {
-  const powerNodes = findNodes<PowerNode>(ast, 'power');
+  const powerNodes = findNodes<ScriptsNode>(ast, 'scripts').filter((n) => n.superscript);
 
   for (const power of powerNodes) {
     // base가 해당 변수만으로 구성되어 있는지 확인
     if (isVariableSoleBaseContent(power.base, variable)) {
       // 지수가 숫자인 경우 더 높은 점수
-      const exponentIsNumber = power.exponent.some((n) => n.type === 'number');
+      const exponentIsNumber = power.superscript!.some((n) => n.type === 'number');
       if (exponentIsNumber) {
         return { score: 40, reason: `거듭제곱의 밑 (${variable}^n 형태)` };
       }
@@ -282,7 +283,7 @@ function getSubscriptScore(
   ast: RootNode,
   variable: string
 ): { score: number; reason?: string } {
-  const subscriptNodes = findNodes<SubscriptNode>(ast, 'subscript');
+  const subscriptNodes = findNodes<ScriptsNode>(ast, 'scripts').filter((n) => n.subscript);
 
   for (const sub of subscriptNodes) {
     // base에 해당 변수가 단독으로 있는지 확인
@@ -409,16 +410,10 @@ function getNodeChildren(node: MathNode): MathNode[] {
         ...(node as { numerator: MathNode[] }).numerator,
         ...(node as { denominator: MathNode[] }).denominator,
       ];
-    case 'power':
-      return [
-        ...(node as { base: MathNode[] }).base,
-        ...(node as { exponent: MathNode[] }).exponent,
-      ];
-    case 'subscript':
-      return [
-        ...(node as { base: MathNode[] }).base,
-        ...(node as { subscript: MathNode[] }).subscript,
-      ];
+    case 'scripts': {
+      const n = node as ScriptsNode;
+      return [...n.base, ...SCRIPT_SLOTS.flatMap((slot) => n[slot] ?? [])];
+    }
     case 'sqrt': {
       const sqrt = node as { content: MathNode[]; index?: MathNode[] };
       return [...sqrt.content, ...(sqrt.index || [])];

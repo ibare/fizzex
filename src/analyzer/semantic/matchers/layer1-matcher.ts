@@ -48,6 +48,8 @@ const LAYER1_RULE_DEFS: Layer1RuleDef[] = [
   { key: 'sqrt.index', parentType: 'sqrt', childPosition: 'index' },
   { key: 'subscript.base', parentType: 'subscript', childPosition: 'base' },
   { key: 'subscript.subscript', parentType: 'subscript', childPosition: 'subscript' },
+  { key: 'scripts.leftSuperscript', parentType: 'scripts', childPosition: 'leftSuperscript' },
+  { key: 'scripts.leftSubscript', parentType: 'scripts', childPosition: 'leftSubscript' },
   { key: 'sum.lower', parentType: 'sum', childPosition: 'lower' },
   { key: 'sum.upper', parentType: 'sum', childPosition: 'upper', refinementIds: ['isInfinity'] },
   { key: 'sum.body', parentType: 'sum', childPosition: 'body' },
@@ -91,7 +93,7 @@ export function matchLayer1(
   texts: Record<string, Layer1TextEntry>,
 ): Layer1MatchResult | null {
   const ruleDef = LAYER1_RULE_DEFS.find(
-    r => r.parentType === parent.node.type && r.childPosition === parent.childPosition,
+    r => r.parentType === parent.parentType && r.childPosition === parent.childPosition,
   );
   if (!ruleDef) return null;
 
@@ -122,7 +124,7 @@ export function getLayer1RoleFromTexts(
   texts: Record<string, Layer1TextEntry>,
 ): string | null {
   const ruleDef = LAYER1_RULE_DEFS.find(
-    r => r.parentType === parent.node.type && r.childPosition === parent.childPosition,
+    r => r.parentType === parent.parentType && r.childPosition === parent.childPosition,
   );
   if (!ruleDef) return null;
   return texts[ruleDef.key]?.role ?? null;

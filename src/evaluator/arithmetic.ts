@@ -19,7 +19,7 @@ import type {
   MathNode,
   OperatorNode,
   FracNode,
-  PowerNode,
+  ScriptsNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -117,17 +117,23 @@ function evalFrac(node: MathNode, ctx: EvalContext): EvalOutcome {
   return value(num.value / den.value);
 }
 
-function evalPower(node: MathNode, ctx: EvalContext): EvalOutcome {
-  const n = node as PowerNode;
+function evalScripts(node: MathNode, ctx: EvalContext): EvalOutcome {
+  const n = node as ScriptsNode;
+  // 아래첨자·좌측 첨자는 지표 표기라 수치 평가 대상이 아니다 (x_1 은 현행도 unsupported)
+  if (n.subscript || n.leftSuperscript || n.leftSubscript) {
+    return fail('unsupported', { nodeType: 'scripts', reason: 'indexed-symbol' });
+  }
+  if (!n.superscript) return evalChildSequence(n.base, ctx);
+
   const base = evalChildSequence(n.base, ctx);
   if (base.kind === 'fail') return base;
-  const exp = evalChildSequence(n.exponent, ctx);
+  const exp = evalChildSequence(n.superscript, ctx);
   if (exp.kind === 'fail') return exp;
   if (base.value === 0 && exp.value <= 0) {
-    return fail('domain', { nodeType: 'power', reason: 'zero-base-non-positive-exp' });
+    return fail('domain', { nodeType: 'scripts', reason: 'zero-base-non-positive-exp' });
   }
   if (base.value < 0 && !Number.isInteger(exp.value)) {
-    return fail('domain', { nodeType: 'power', reason: 'negative-base-fractional-exp' });
+    return fail('domain', { nodeType: 'scripts', reason: 'negative-base-fractional-exp' });
   }
   return value(Math.pow(base.value, exp.value));
 }
@@ -176,7 +182,7 @@ export function installArithmeticHandlers(): void {
   installed = true;
   setSequenceEvaluator(evalSequence);
   register('frac', evalFrac);
-  register('power', evalPower);
+  register('scripts', evalScripts);
   register('sqrt', evalSqrt);
   register('paren', evalParen);
   register('abs', evalAbs);

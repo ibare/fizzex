@@ -14,6 +14,8 @@
  *    `x^2` 하나로 세 점을 받으면 안 된다.
  */
 
+import { SCRIPT_SLOTS } from '../../../types.js';
+import { scriptRole, scriptParentTypes } from '../script-roles.js';
 import type { MathNode } from '../../../types.js';
 import type { CatalogIndexEntry, CatalogMatchResult } from '../types.js';
 import { getChildArrays } from '../helpers.js';
@@ -43,8 +45,14 @@ function extractSignature(ast: MathNode): AstSignature {
   let nodeCount = 0;
 
   function walk(node: MathNode, parentContext?: string): void {
-    nodeCount++;
-    nodeTypes.add(node.type);
+    // 첨자 노드는 의미 어휘로 낸다. x_i^2 는 노드 하나지만 카탈로그 시그니처에서는
+    // 여전히 power 와 subscript 두 토큰이어야 한다 (다중도 보존).
+    const semanticTypes =
+      node.type === 'scripts' ? scriptParentTypes(node) : [node.type];
+    // 노드 수도 같은 기준으로 센다 — complexity 범위가 어휘 기준으로 저작되어 있어
+    // 노드 모델이 합쳐졌다고 수가 줄면 경계에서 매칭이 이동한다.
+    nodeCount += semanticTypes.length;
+    for (const t of semanticTypes) nodeTypes.add(t);
 
     switch (node.type) {
       case 'variable':
@@ -60,8 +68,9 @@ function extractSignature(ast: MathNode): AstSignature {
       case 'func':
         bump(`func:${node.name}`);
         break;
-      case 'power': {
-        const exp0 = node.exponent.length === 1 ? node.exponent[0] : null;
+      case 'scripts': {
+        if (!node.superscript) break;
+        const exp0 = node.superscript.length === 1 ? node.superscript[0] : null;
         if (exp0?.type === 'number') {
           bump(`power.exponent:${exp0.value}`);
         } else if (exp0?.type === 'row' && exp0.children.length === 1 && exp0.children[0].type === 'number') {
@@ -76,12 +85,12 @@ function extractSignature(ast: MathNode): AstSignature {
 
     // 노드 타입 자체를 특징으로 추가
     if (!['root', 'row', 'number', 'variable', 'operator'].includes(node.type)) {
-      bump(node.type);
+      for (const t of semanticTypes) bump(t);
     }
 
     // 부모 컨텍스트 + 현재 타입 조합
     if (parentContext) {
-      bump(`${parentContext}:${node.type}`);
+      for (const t of semanticTypes) bump(`${parentContext}:${t}`);
     }
 
     // 자식 순회 (context 전파)
@@ -90,10 +99,17 @@ function extractSignature(ast: MathNode): AstSignature {
         for (const c of node.numerator) walk(c, 'frac.numerator');
         for (const c of node.denominator) walk(c, 'frac.denominator');
         break;
-      case 'power':
-        for (const c of node.base) walk(c, 'power.base');
-        for (const c of node.exponent) walk(c, 'power.exponent');
+      case 'scripts': {
+        const baseRole = scriptRole(node, 'base');
+        for (const c of node.base) walk(c, `${baseRole.parentType}.${baseRole.childPosition}`);
+        for (const slot of SCRIPT_SLOTS) {
+          const value = node[slot];
+          if (!value) continue;
+          const role = scriptRole(node, slot);
+          for (const c of value) walk(c, `${role.parentType}.${role.childPosition}`);
+        }
         break;
+      }
       case 'func':
         for (const c of node.argument) walk(c, `func.${node.name}`);
         break;

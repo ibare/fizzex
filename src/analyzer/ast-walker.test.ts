@@ -110,13 +110,16 @@ describe('AST Walker', () => {
       expect(result.nodeTypeCounts['frac']).toBe(1);
     });
 
-    it('power/subscript 내부까지 순회한다', () => {
+    it('첨자 내부까지 순회하고 슬롯을 센다', () => {
       const { ast } = parseLatex('x^2');
       const result = walkAST(ast);
 
       expect(result.variables.has('x')).toBe(true);
       expect(result.numbers).toContain(2);
-      expect(result.nodeTypeCounts['power']).toBe(1);
+      expect(result.nodeTypeCounts['scripts']).toBe(1);
+      // 노드 타입만으로는 거듭제곱과 아래첨자를 구분할 수 없다
+      expect(result.scriptSlotCounts.superscript).toBe(1);
+      expect(result.scriptSlotCounts.subscript).toBe(0);
     });
 
     it('integral 내부까지 순회한다', () => {

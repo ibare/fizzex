@@ -50,8 +50,7 @@ export type SuggestionAction =
   | { type: 'insert_number'; value: string }
   | { type: 'insert_variable'; name: string }
   | { type: 'insert_frac' }
-  | { type: 'insert_power' }
-  | { type: 'insert_subscript' }
+  | { type: 'insert_script'; slot: 'superscript' | 'subscript' }
   | { type: 'insert_sqrt' }
   | { type: 'insert_paren'; parenType: '(' | '[' | '{' }
   | { type: 'insert_abs' }

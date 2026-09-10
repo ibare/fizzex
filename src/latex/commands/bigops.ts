@@ -12,8 +12,7 @@ import {
   createVariable,
   createOperator,
   createParen,
-  createPower,
-  createSubscript,
+  appendScript,
 } from './helpers.js';
 
 /** 적분 핸들러 생성 */
@@ -88,18 +87,12 @@ function integralHandler(integralType: 'int' | 'iint' | 'iiint' | 'oint'): Comma
       } else if ('+-=<>'.includes(ctx.latex[pos])) {
         integrandNodes.push(createOperator(ctx.latex[pos]));
         pos++;
-      } else if (ctx.latex[pos] === '^') {
+      } else if (ctx.latex[pos] === '^' || ctx.latex[pos] === '_') {
+        const slot = ctx.latex[pos] === '^' ? 'superscript' : 'subscript';
         pos++;
-        const expResult = ctx.parseGroup(ctx.latex, pos);
-        const base = integrandNodes.length > 0 ? [integrandNodes.pop()!] : [];
-        integrandNodes.push(createPower(base, expResult.nodes));
-        pos = expResult.consumed;
-      } else if (ctx.latex[pos] === '_') {
-        pos++;
-        const subResult = ctx.parseGroup(ctx.latex, pos);
-        const base = integrandNodes.length > 0 ? [integrandNodes.pop()!] : [];
-        integrandNodes.push(createSubscript(base, subResult.nodes));
-        pos = subResult.consumed;
+        const argResult = ctx.parseGroup(ctx.latex, pos);
+        appendScript(integrandNodes, slot, argResult.nodes);
+        pos = argResult.consumed;
       } else if (ctx.latex[pos] === '(') {
         pos++;
         const innerResult = ctx.parseExpression(ctx.latex, pos, [')']);

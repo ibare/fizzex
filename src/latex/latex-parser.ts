@@ -12,8 +12,7 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
-  SubscriptNode,
+  ScriptsNode,
   ParenNode,
   AbsNode,
   SqrtNode,
@@ -125,6 +124,9 @@ export function parseLatex(latex: string): LatexParseResult {
 function parseExpression(latex: string, start: number, stopChars: string[] = []): ParseResult {
   const nodes: MathNode[] = [];
   let pos = start;
+  // 직전에 소비한 빈 그룹 `{}` 의 위치. 좌측 첨자(`{}^{227}`) 판정에만 쓴다.
+  let emptyGroupStart = -1;
+  let emptyGroupEndedAt = -1;
 
   while (pos < latex.length) {
     // 공백 스킵
@@ -211,31 +213,63 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
       continue;
     }
 
-    // 거듭제곱
-    if (latex[pos] === '^') {
-      const caretPos = pos;
+    // 첨자 (^ / _) — 연속 지정은 하나의 첨자 노드로 모은다 (TeX Rule 18)
+    if (latex[pos] === '^' || latex[pos] === '_') {
+      const markerPos = pos;
+      const isSup = latex[pos] === '^';
       pos++;
-      const expResult = parseGroup(latex, pos);
-      // 이전 노드를 base로
-      const baseNode = nodes.length > 0 ? nodes.pop()! : undefined;
-      const base = baseNode ? [baseNode] : [];
-      const powerStart = baseNode?.sourceRange?.start ?? caretPos;
-      nodes.push(createPower(base, expResult.nodes, { start: powerStart, end: expResult.consumed }));
-      pos = expResult.consumed;
-      continue;
-    }
+      const argResult = parseGroup(latex, pos);
+      const prev = nodes.length > 0 ? nodes[nodes.length - 1] : undefined;
+      // 직전에 빈 그룹 `{}` 을 소비했고 그 자리가 바로 여기인가
+      const afterEmptyGroup = emptyGroupEndedAt === markerPos;
 
-    // 아래첨자
-    if (latex[pos] === '_') {
-      const underscorePos = pos;
-      pos++;
-      const subResult = parseGroup(latex, pos);
-      // 이전 노드를 base로
-      const baseNode = nodes.length > 0 ? nodes.pop()! : undefined;
-      const base = baseNode ? [baseNode] : [];
-      const subStart = baseNode?.sourceRange?.start ?? underscorePos;
-      nodes.push(createSubscript(base, subResult.nodes, { start: subStart, end: subResult.consumed }));
-      pos = subResult.consumed;
+      // (A) 밑이 없는 자리에서 시작된 첨자 → 좌측 첨자로 수집
+      if (afterEmptyGroup || prev === undefined) {
+        const slot: ScriptSlotName = isSup ? 'leftSuperscript' : 'leftSubscript';
+        const start = afterEmptyGroup ? emptyGroupStart : markerPos;
+        nodes.push(
+          createScripts([], slot, argResult.nodes, { start, end: argResult.consumed })
+        );
+        pos = argResult.consumed;
+        continue;
+      }
+
+      // (B) 좌측 첨자를 수집 중이면 나머지 좌측 자리를 채운다
+      if (isPendingLeftScripts(prev)) {
+        const leftSlot: ScriptSlotName = isSup ? 'leftSuperscript' : 'leftSubscript';
+        if (prev[leftSlot] === undefined) {
+          nodes[nodes.length - 1] = attachScript(prev, leftSlot, argResult.nodes, argResult.consumed);
+          pos = argResult.consumed;
+          continue;
+        }
+      }
+
+      const slot: ScriptSlotName = isSup ? 'superscript' : 'subscript';
+
+      // (C) 직전이 첨자 노드이고 그 자리가 비었으면 채운다 — x_i^2 가 중첩되지 않는 지점
+      if (prev.type === 'scripts' && prev.base.length > 0 && prev[slot] === undefined) {
+        nodes[nodes.length - 1] = attachScript(prev, slot, argResult.nodes, argResult.consumed);
+        pos = argResult.consumed;
+        continue;
+      }
+
+      // (D) 그 외 — 직전 노드를 밑으로 하는 새 첨자 노드
+      if (prev.type === 'scripts' && prev[slot] !== undefined) {
+        reportWarning(
+          'syntax',
+          `첨자 중복 지정: '${isSup ? '^' : '_'}' 가 이미 채워진 자리에 다시 지정되었습니다`,
+          markerPos,
+          latex
+        );
+      }
+      const baseNode = nodes.pop()!;
+      nodes.push(
+        createScripts([baseNode], slot, argResult.nodes, {
+          start: baseNode.sourceRange?.start ?? markerPos,
+          end: argResult.consumed,
+        })
+      );
+      pos = argResult.consumed;
       continue;
     }
 
@@ -264,11 +298,17 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
 
     // 중괄호 그룹 (명시적)
     if (latex[pos] === '{') {
+      const groupStart = pos;
       pos++;
       const innerResult = parseExpression(latex, pos, ['}']);
       // 중괄호는 그룹핑용이므로 노드들을 직접 추가
       nodes.push(...innerResult.nodes);
       pos = innerResult.consumed + 1;
+      // 빈 그룹은 노드를 남기지 않으므로 위치를 따로 기억해 둔다 (좌측 첨자 판정용)
+      if (innerResult.nodes.length === 0) {
+        emptyGroupStart = groupStart;
+        emptyGroupEndedAt = pos;
+      }
       continue;
     }
 
@@ -283,7 +323,7 @@ function parseExpression(latex: string, start: number, stopChars: string[] = [])
     pos++;
   }
 
-  return { nodes, consumed: pos };
+  return { nodes: absorbLeftScriptBases(nodes), consumed: pos };
 }
 
 /**
@@ -531,16 +571,79 @@ function createFrac(numerator: MathNode[], denominator: MathNode[], sourceRange?
   return withRange({ id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] }, sourceRange);
 }
 
-function createPower(base: MathNode[], exponent: MathNode[], sourceRange?: SourceRange): PowerNode {
-  const powerId = generateId();
-  const expRow: RowNode = { id: deriveId(powerId, '_exp'), type: 'row', children: exponent };
-  return withRange({ id: powerId, type: 'power', base, exponent: [expRow] }, sourceRange);
+/** 첨자 슬롯의 row id 접미사 */
+const SCRIPT_SLOT_SUFFIX = {
+  superscript: '_sup',
+  subscript: '_sub',
+  leftSuperscript: '_leftsup',
+  leftSubscript: '_leftsub',
+} as const;
+
+type ScriptSlotName = keyof typeof SCRIPT_SLOT_SUFFIX;
+
+function createScripts(
+  base: MathNode[],
+  slot: ScriptSlotName,
+  content: MathNode[],
+  sourceRange?: SourceRange
+): ScriptsNode {
+  const id = generateId();
+  const row: RowNode = { id: deriveId(id, SCRIPT_SLOT_SUFFIX[slot]), type: 'row', children: content };
+  return withRange({ id, type: 'scripts', base, [slot]: [row] } as ScriptsNode, sourceRange);
 }
 
-function createSubscript(base: MathNode[], subscript: MathNode[], sourceRange?: SourceRange): SubscriptNode {
-  const subId = generateId();
-  const subRow: RowNode = { id: deriveId(subId, '_sub'), type: 'row', children: subscript };
-  return withRange({ id: subId, type: 'subscript', base, subscript: [subRow] }, sourceRange);
+/** 이미 있는 첨자 노드의 빈 슬롯을 채운다 (불변 — 새 객체를 반환) */
+function attachScript(
+  node: ScriptsNode,
+  slot: ScriptSlotName,
+  content: MathNode[],
+  end: number
+): ScriptsNode {
+  const row: RowNode = {
+    id: deriveId(node.id, SCRIPT_SLOT_SUFFIX[slot]),
+    type: 'row',
+    children: content,
+  };
+  return {
+    ...node,
+    [slot]: [row],
+    sourceRange: node.sourceRange ? { ...node.sourceRange, end } : undefined,
+  };
+}
+
+/** 좌측 첨자만 수집 중인 (base 가 빈) 첨자 노드인가 */
+function isPendingLeftScripts(node: MathNode | undefined): node is ScriptsNode {
+  return (
+    node?.type === 'scripts' &&
+    node.base.length === 0 &&
+    (node.leftSuperscript !== undefined || node.leftSubscript !== undefined)
+  );
+}
+
+/**
+ * 좌측 첨자만 있는 첨자 노드가 뒤따르는 원자를 base 로 흡수한다.
+ *
+ * `{}^{227}_{90}Th` 에서 Th 를 밑으로 끌어온다. 연산자는 흡수하지 않는다 —
+ * `{}^{2}+x` 의 `+` 까지 삼키면 안 된다.
+ */
+function absorbLeftScriptBases(nodes: MathNode[]): MathNode[] {
+  const out: MathNode[] = [];
+  for (const node of nodes) {
+    const prev = out[out.length - 1];
+    if (isPendingLeftScripts(prev) && node.type !== 'operator') {
+      out[out.length - 1] = {
+        ...prev,
+        base: [node],
+        sourceRange:
+          prev.sourceRange && node.sourceRange
+            ? { start: prev.sourceRange.start, end: node.sourceRange.end }
+            : prev.sourceRange,
+      };
+      continue;
+    }
+    out.push(node);
+  }
+  return out;
 }
 
 function createParen(content: MathNode[], parenType: '(' | '[' | '{', autoSize: boolean = false, sourceRange?: SourceRange): ParenNode {

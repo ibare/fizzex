@@ -27,10 +27,8 @@ function getChildKeys(node: MathNode): string[] {
       return ['children'];
     case 'frac':
       return ['numerator', 'denominator'];
-    case 'power':
-      return ['base', 'exponent'];
-    case 'subscript':
-      return ['base', 'subscript'];
+    case 'scripts':
+      return ['base', 'superscript', 'subscript', 'leftSuperscript', 'leftSubscript'];
     case 'sqrt':
       return ['content', 'index'];
     case 'paren':

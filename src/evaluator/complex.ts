@@ -20,7 +20,7 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
+  ScriptsNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -130,7 +130,7 @@ function cTanh(z: Complex): ComplexOutcome {
 function cPowInt(z: Complex, n: number): ComplexOutcome {
   // 반복 제곱
   if (n === 0) {
-    if (z.re === 0 && z.im === 0) return fail('domain', { nodeType: 'power', reason: 'zero-pow-zero' });
+    if (z.re === 0 && z.im === 0) return fail('domain', { nodeType: 'scripts', reason: 'zero-pow-zero' });
     return okZ(ONE);
   }
   let base = z;
@@ -143,7 +143,7 @@ function cPowInt(z: Complex, n: number): ComplexOutcome {
   }
   if (n < 0) {
     if (result.re === 0 && result.im === 0) {
-      return fail('domain', { nodeType: 'power', reason: 'zero-base-negative-exp' });
+      return fail('domain', { nodeType: 'scripts', reason: 'zero-base-negative-exp' });
     }
     return cDiv(ONE, result);
   }
@@ -154,7 +154,7 @@ function cPow(z: Complex, w: Complex): ComplexOutcome {
   // 0^w 처리
   if (z.re === 0 && z.im === 0) {
     if (w.re > 0 && w.im === 0) return okZ(ZERO);
-    return fail('domain', { nodeType: 'power', reason: 'zero-base-non-positive-exp' });
+    return fail('domain', { nodeType: 'scripts', reason: 'zero-base-non-positive-exp' });
   }
   // 정수 지수 우선
   if (w.im === 0 && Number.isInteger(w.re)) {
@@ -233,8 +233,8 @@ function dispatchInner(node: MathNode, ctx: ComplexCtx): ComplexOutcome {
       return evalSequence((node as RootNode | RowNode).children, ctx);
     case 'frac':
       return evalFrac(node as FracNode, ctx);
-    case 'power':
-      return evalPower(node as PowerNode, ctx);
+    case 'scripts':
+      return evalPower(node as ScriptsNode, ctx);
     case 'sqrt':
       return evalSqrtNode(node as SqrtNode, ctx);
     case 'abs':
@@ -246,7 +246,6 @@ function dispatchInner(node: MathNode, ctx: ComplexCtx): ComplexOutcome {
         nodeType: 'operator',
         reason: `bare-operator:${(node as OperatorNode).operator}`,
       });
-    case 'subscript':
     case 'overline':
     case 'accent':
     case 'matrix':
@@ -301,10 +300,15 @@ function evalFrac(n: FracNode, ctx: ComplexCtx): ComplexOutcome {
   return cDiv(num.value, den.value);
 }
 
-function evalPower(n: PowerNode, ctx: ComplexCtx): ComplexOutcome {
+function evalPower(n: ScriptsNode, ctx: ComplexCtx): ComplexOutcome {
+  // 아래첨자·좌측 첨자는 지표 표기라 수치 평가 대상이 아니다
+  if (n.subscript || n.leftSuperscript || n.leftSubscript) {
+    return fail('unsupported', { nodeType: 'scripts', reason: 'indexed-symbol' });
+  }
   const base = evalSequence(n.base, ctx);
   if (base.kind === 'fail') return base;
-  const exp = evalSequence(n.exponent, ctx);
+  if (!n.superscript) return base;
+  const exp = evalSequence(n.superscript, ctx);
   if (exp.kind === 'fail') return exp;
   return cPow(base.value, exp.value);
 }

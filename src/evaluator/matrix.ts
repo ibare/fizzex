@@ -21,7 +21,7 @@ import type {
   ParenNode,
   RowNode,
   RootNode,
-  PowerNode,
+  ScriptsNode,
   AbsNode,
   OperatorNode,
   VariableNode,
@@ -263,28 +263,32 @@ function isTransposeMarker(nodes: MathNode[]): boolean {
   return false;
 }
 
-function evalPowerNode(node: PowerNode, bindings: Bindings): MatrixOutcome {
+function evalScriptsNode(node: ScriptsNode, bindings: Bindings): MatrixOutcome {
+  // 아래첨자·좌측 첨자가 있으면 행렬 거듭제곱이 아니다
+  if (node.subscript || node.leftSuperscript || node.leftSubscript || !node.superscript) {
+    return f('unsupported', { nodeType: 'scripts', reason: 'indexed-symbol' });
+  }
   const baseOut = dispatchSequence(node.base, bindings);
   if (baseOut.kind === 'fail') return baseOut;
   const base = baseOut.value;
-  if (isMatrix(base) && isTransposeMarker(node.exponent)) {
+  if (isMatrix(base) && isTransposeMarker(node.superscript)) {
     return v(transposeMatrix(base));
   }
-  const expOut = dispatchSequence(node.exponent, bindings);
+  const expOut = dispatchSequence(node.superscript, bindings);
   if (expOut.kind === 'fail') return expOut;
   const exp = expOut.value;
   if (isMatrix(base)) {
     if (typeof exp !== 'number') {
-      return f('unsupported', { nodeType: 'power', reason: 'matrix-exp-of-matrix' });
+      return f('unsupported', { nodeType: 'scripts', reason: 'matrix-exp-of-matrix' });
     }
     if (exp === -1) return inverseMatrix(base);
     return powerMatrix(base, exp);
   }
   if (typeof exp !== 'number') {
-    return f('unsupported', { nodeType: 'power', reason: 'matrix-exp-of-scalar' });
+    return f('unsupported', { nodeType: 'scripts', reason: 'matrix-exp-of-scalar' });
   }
   const r = Math.pow(base, exp);
-  if (!Number.isFinite(r)) return f('divergent', { nodeType: 'power', reason: 'non-finite' });
+  if (!Number.isFinite(r)) return f('divergent', { nodeType: 'scripts', reason: 'non-finite' });
   return v(r);
 }
 
@@ -422,8 +426,8 @@ function dispatchMatrix(node: MathNode, bindings: Bindings): MatrixOutcome {
     case 'root':
     case 'row':
       return dispatchSequence((node as RootNode | RowNode).children, bindings);
-    case 'power':
-      return evalPowerNode(node as PowerNode, bindings);
+    case 'scripts':
+      return evalScriptsNode(node as ScriptsNode, bindings);
     case 'abs':
       return evalAbsNode(node as AbsNode, bindings);
     default: {

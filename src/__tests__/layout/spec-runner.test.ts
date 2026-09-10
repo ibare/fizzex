@@ -28,7 +28,7 @@ describe('Layout Spec Compliance', () => {
 
   describe('카테고리별 결과', () => {
     const categoryNames = [
-      'fraction', 'superscript', 'subscript', 'subsup',
+      'fraction', 'superscript', 'subscript', 'subsup', 'prescript',
       'radical', 'accent', 'overline', 'delimiter', 'limits', 'spacing',
     ];
 

@@ -8,8 +8,7 @@ import type {
   MathNode,
   RootNode,
   FracNode,
-  PowerNode,
-  SubscriptNode,
+  ScriptsNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -28,6 +27,7 @@ import type {
   RowNode,
   OperatorNode,
 } from '../types.js';
+import { SCRIPT_SLOTS } from '../types.js';
 import type { ASTCollectionResult } from './types.js';
 
 /** 특수 상수 목록 */
@@ -54,6 +54,7 @@ export function walkAST(ast: RootNode): ASTCollectionResult {
     functions: new Map(),
     constants: new Set(),
     nodeTypeCounts: {},
+    scriptSlotCounts: { superscript: 0, subscript: 0, leftSuperscript: 0, leftSubscript: 0 },
     maxDepth: 0,
     totalNodes: 0,
   };
@@ -108,17 +109,15 @@ function walkNode(
       break;
     }
 
-    case 'power': {
-      const power = node as PowerNode;
-      walkChildren(power.base, result, depth + 1);
-      walkChildren(power.exponent, result, depth + 1);
-      break;
-    }
-
-    case 'subscript': {
-      const sub = node as SubscriptNode;
-      walkChildren(sub.base, result, depth + 1);
-      walkChildren(sub.subscript, result, depth + 1);
+    case 'scripts': {
+      const scripts = node as ScriptsNode;
+      walkChildren(scripts.base, result, depth + 1);
+      for (const slot of SCRIPT_SLOTS) {
+        const value = scripts[slot];
+        if (!value) continue;
+        result.scriptSlotCounts[slot]++;
+        walkChildren(value, result, depth + 1);
+      }
       break;
     }
 
@@ -289,16 +288,10 @@ export function findNodes<T extends MathNode>(
         frac.denominator.forEach(search);
         break;
       }
-      case 'power': {
-        const power = node as PowerNode;
-        power.base.forEach(search);
-        power.exponent.forEach(search);
-        break;
-      }
-      case 'subscript': {
-        const sub = node as SubscriptNode;
-        sub.base.forEach(search);
-        sub.subscript.forEach(search);
+      case 'scripts': {
+        const scripts = node as ScriptsNode;
+        scripts.base.forEach(search);
+        for (const slot of SCRIPT_SLOTS) scripts[slot]?.forEach(search);
         break;
       }
       case 'sqrt': {

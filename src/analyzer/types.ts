@@ -169,6 +169,18 @@ export interface ASTCollectionResult {
   constants: Set<string>;
   /** 노드 타입별 카운트 */
   nodeTypeCounts: Record<string, number>;
+  /**
+   * 첨자 슬롯별 등장 횟수.
+   *
+   * 첨자는 노드 타입 하나(scripts)로 합쳐져 있어 nodeTypeCounts 만으로는
+   * 거듭제곱(x^2)과 아래첨자(x_i)를 구분할 수 없다.
+   */
+  scriptSlotCounts: {
+    superscript: number;
+    subscript: number;
+    leftSuperscript: number;
+    leftSubscript: number;
+  };
   /** 최대 중첩 깊이 */
   maxDepth: number;
   /** 총 노드 수 */

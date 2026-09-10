@@ -103,7 +103,7 @@ function hasExponentialPower(collected: ASTCollectionResult): boolean {
   // e가 상수로 있고 power 노드가 있는 경우
   return (
     collected.constants.has('e') &&
-    (collected.nodeTypeCounts['power'] || 0) > 0
+    collected.scriptSlotCounts.superscript > 0
   );
 }
 

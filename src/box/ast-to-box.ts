@@ -4,7 +4,7 @@
  * 수식 AST를 Box 트리로 변환
  */
 
-import type { MathNode } from '../types.js';
+import type { MathNode, ScriptsNode } from '../types.js';
 import type { Box, HBox, PathBox, SurdBox, FontMetrics } from './types.js';
 import { DELIMITER_PATHS } from '../fonts/delimiter-paths.js';
 import { MathConstants } from './font-metrics.js';
@@ -27,8 +27,7 @@ import {
   createRule,
   createFraction,
   createBinomBox,
-  createPower,
-  createSubscript,
+  createScripts,
   createParenthesized,
   createAbsoluteValue,
   createOperator,
@@ -89,17 +88,14 @@ function astToBoxInternal(
     case 'frac':
       return convertFrac(node, metrics, fontSize, style);
 
-    case 'power':
-      return convertPowerNode(node, metrics, fontSize, style);
+    case 'scripts':
+      return convertScripts(node, metrics, fontSize, style);
 
     case 'sqrt':
       return convertSqrt(node, metrics, fontSize, style);
 
     case 'paren':
       return convertParen(node, metrics, fontSize, style);
-
-    case 'subscript':
-      return convertSubscriptNode(node, metrics, fontSize, style);
 
     case 'abs':
       return convertAbs(node, metrics, fontSize, style);
@@ -274,68 +270,68 @@ function convertFrac(
   return createFraction(numeratorBox, denominatorBox, metrics, fontSize, node.id, effectiveStyle);
 }
 
-/** 거듭제곱 노드 변환 */
-function convertPowerNode(
-  node: MathNode & { base: MathNode[]; exponent: MathNode[] },
+/** 첨자 노드 변환 — 위/아래/좌측 첨자를 한 노드가 소유한다 */
+function convertScripts(
+  node: ScriptsNode,
   metrics: FontMetrics,
   fontSize: number,
   style: MathStyle
 ): Box {
-  // overbrace annotation 감지: \overbrace{...}^{n}
+  // \overbrace{...}^{n} / \underbrace{...}_{n} 특례.
+  // 첨자가 정확히 하나일 때만 태운다 — 둘 이상이면 일반 경로로 보낸다.
   const baseNode = node.base.length === 1 ? node.base[0] : null;
-  if (baseNode && baseNode.type === 'overline' && 'variant' in baseNode && baseNode.variant === 'overbrace') {
-    const contentBox = convertOverline(baseNode as MathNode & { content: MathNode[]; variant?: 'underline' | 'boxed' | 'overbrace' | 'underbrace' }, metrics, fontSize, style);
-    const annotStyle = superscriptStyle(style);
-    const annotFontSize = fontSizeForStyle(fontSize, annotStyle);
-    const annotBox = astToBoxInternal(node.exponent[0], metrics, annotFontSize, annotStyle);
-    // contentBox는 이미 overbrace 렌더링 — annotation 포함 재생성
-    const innerContent = (baseNode as MathNode & { content: MathNode[] }).content;
-    const innerBox = astToBoxInternal(innerContent[0], metrics, fontSize, style);
-    return createOverbraceBox(innerBox, 'overbrace', metrics, fontSize, node.id, annotBox);
+  const onlySup = node.superscript && !node.subscript && !node.leftSuperscript && !node.leftSubscript;
+  const onlySub = node.subscript && !node.superscript && !node.leftSuperscript && !node.leftSubscript;
+
+  if (baseNode && baseNode.type === 'overline' && 'variant' in baseNode) {
+    const braceVariant = baseNode.variant === 'overbrace' && onlySup
+      ? 'overbrace'
+      : baseNode.variant === 'underbrace' && onlySub
+        ? 'underbrace'
+        : null;
+    if (braceVariant) {
+      const slot = braceVariant === 'overbrace' ? node.superscript! : node.subscript!;
+      const annotStyle = braceVariant === 'overbrace' ? superscriptStyle(style) : subscriptStyle(style);
+      const annotFontSize = fontSizeForStyle(fontSize, annotStyle);
+      const annotBox = astToBoxInternal(slot[0], metrics, annotFontSize, annotStyle);
+      const innerContent = (baseNode as MathNode & { content: MathNode[] }).content;
+      const innerBox = astToBoxInternal(innerContent[0], metrics, fontSize, style);
+      return createOverbraceBox(innerBox, braceVariant, metrics, fontSize, node.id, annotBox);
+    }
   }
 
-  // base 변환
   const baseChildren = node.base.map(child => astToBoxInternal(child, metrics, fontSize, style));
   const baseBox = createHBox(baseChildren);
 
-  // 지수: superscriptStyle로 스타일 전환 (D→S, T→S, S→SS)
-  const expStyle = superscriptStyle(style);
-  const expFontSize = fontSizeForStyle(fontSize, expStyle);
-  const expNode = node.exponent[0];
-  const exponentBox = astToBoxInternal(expNode, metrics, expFontSize, expStyle);
-
-  return createPower(baseBox, exponentBox, metrics, fontSize, node.id, style);
-}
-
-/** 아래첨자 노드 변환 */
-function convertSubscriptNode(
-  node: MathNode & { base: MathNode[]; subscript: MathNode[] },
-  metrics: FontMetrics,
-  fontSize: number,
-  style: MathStyle
-): Box {
-  // underbrace annotation 감지: \underbrace{...}_{n}
-  const baseNode = node.base.length === 1 ? node.base[0] : null;
-  if (baseNode && baseNode.type === 'overline' && 'variant' in baseNode && baseNode.variant === 'underbrace') {
-    const annotStyle = subscriptStyle(style);
-    const annotFontSize = fontSizeForStyle(fontSize, annotStyle);
-    const annotBox = astToBoxInternal(node.subscript[0], metrics, annotFontSize, annotStyle);
-    const innerContent = (baseNode as MathNode & { content: MathNode[] }).content;
-    const innerBox = astToBoxInternal(innerContent[0], metrics, fontSize, style);
-    return createOverbraceBox(innerBox, 'underbrace', metrics, fontSize, node.id, annotBox);
-  }
-
-  // base 변환
-  const baseChildren = node.base.map(child => astToBoxInternal(child, metrics, fontSize, style));
-  const baseBox = createHBox(baseChildren);
-
-  // 아래첨자: subscriptStyle로 스타일 전환 (항상 cramped: D→S', T→S', S→SS')
+  // 위첨자 계열: superscriptStyle (D→S, T→S, S→SS)
+  const supStyle = superscriptStyle(style);
+  const supFontSize = fontSizeForStyle(fontSize, supStyle);
+  // 아래첨자 계열: subscriptStyle (항상 cramped: D→S', T→S', S→SS')
   const subStyle = subscriptStyle(style);
   const subFontSize = fontSizeForStyle(fontSize, subStyle);
-  const subNode = node.subscript[0];
-  const subscriptBox = astToBoxInternal(subNode, metrics, subFontSize, subStyle);
 
-  return createSubscript(baseBox, subscriptBox, metrics, fontSize, node.id);
+  const convertSlot = (
+    slot: MathNode[] | undefined,
+    slotStyle: MathStyle,
+    slotFontSize: number
+  ): Box | undefined =>
+    slot && slot.length > 0
+      ? astToBoxInternal(slot[0], metrics, slotFontSize, slotStyle)
+      : undefined;
+
+  return createScripts(
+    baseBox,
+    {
+      superscript: convertSlot(node.superscript, supStyle, supFontSize),
+      subscript: convertSlot(node.subscript, subStyle, subFontSize),
+      leftSuperscript: convertSlot(node.leftSuperscript, supStyle, supFontSize),
+      leftSubscript: convertSlot(node.leftSubscript, subStyle, subFontSize),
+    },
+    metrics,
+    fontSize,
+    node.id,
+    style
+  );
 }
 
 /** 절댓값 노드 변환 */

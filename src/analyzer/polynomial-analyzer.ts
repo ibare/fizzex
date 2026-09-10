@@ -4,7 +4,8 @@
  * 다항식의 차수, 주 변수 등을 분석
  */
 
-import type { RootNode, MathNode, PowerNode, VariableNode } from '../types.js';
+import type { RootNode, MathNode, MathNodeType, ScriptsNode, VariableNode } from '../types.js';
+import { SCRIPT_SLOTS } from '../types.js';
 import type { PolynomialInfo, ASTCollectionResult } from './types.js';
 import { findNodes } from './ast-walker.js';
 
@@ -70,10 +71,10 @@ export function analyzePolynomial(
 function findMaxDegree(ast: RootNode, targetVariable: string): number {
   let maxDegree = 0;
 
-  // 모든 power 노드 검사
-  const powerNodes = findNodes<PowerNode>(ast, 'power');
+  // 위첨자가 있는 첨자 노드만이 거듭제곱이다 (x_i 는 차수와 무관)
+  const powerNodes = findNodes<ScriptsNode>(ast, 'scripts').filter((n) => n.superscript);
 
-  // DEBUG: 발견된 PowerNode 수 로깅
+  // DEBUG: 발견된 거듭제곱 노드 수 로깅
   if (debugEnabled) {
     console.log(`[Analyzer] Finding degree for '${targetVariable}', found ${powerNodes.length} power nodes`);
   }
@@ -82,14 +83,14 @@ function findMaxDegree(ast: RootNode, targetVariable: string): number {
     // base에 해당 변수가 있는지 확인
     const hasVar = containsVariable(power.base, targetVariable);
 
-    // DEBUG: 각 PowerNode 검사 로깅
+    // DEBUG: 각 거듭제곱 노드 검사 로깅
     if (debugEnabled) {
-      console.log(`[Analyzer] PowerNode base:`, power.base, `contains '${targetVariable}':`, hasVar);
-      console.log(`[Analyzer] PowerNode exponent:`, power.exponent);
+      console.log(`[Analyzer] scripts base:`, power.base, `contains '${targetVariable}':`, hasVar);
+      console.log(`[Analyzer] scripts superscript:`, power.superscript);
     }
 
     if (hasVar) {
-      const degree = extractDegree(power.exponent);
+      const degree = extractDegree(power.superscript!);
 
       // DEBUG: 추출된 차수 로깅
       if (debugEnabled) {
@@ -187,7 +188,7 @@ function extractDegree(exponent: MathNode[]): number {
  * 변수 노드가 power의 base 안에 있는지 확인
  */
 function isInsidePowerBase(ast: RootNode, targetNode: VariableNode): boolean {
-  const powerNodes = findNodes<PowerNode>(ast, 'power');
+  const powerNodes = findNodes<ScriptsNode>(ast, 'scripts').filter((n) => n.superscript);
 
   for (const power of powerNodes) {
     if (containsNodeById(power.base, targetNode.id)) {
@@ -220,12 +221,11 @@ function containsNodeById(nodes: MathNode[], targetId: string): boolean {
  * 노드가 자식을 가지는지 확인
  */
 function hasChildren(node: MathNode): boolean {
-  return [
+  const types: MathNodeType[] = [
     'root',
     'row',
     'frac',
-    'power',
-    'subscript',
+    'scripts',
     'sqrt',
     'paren',
     'abs',
@@ -245,7 +245,8 @@ function hasChildren(node: MathNode): boolean {
     'cancel',
     'xarrow',
     'opaque',
-  ].includes(node.type);
+  ];
+  return types.includes(node.type);
 }
 
 /**
@@ -261,16 +262,10 @@ function getChildren(node: MathNode): MathNode[] {
         ...(node as { numerator: MathNode[] }).numerator,
         ...(node as { denominator: MathNode[] }).denominator,
       ];
-    case 'power':
-      return [
-        ...(node as { base: MathNode[] }).base,
-        ...(node as { exponent: MathNode[] }).exponent,
-      ];
-    case 'subscript':
-      return [
-        ...(node as { base: MathNode[] }).base,
-        ...(node as { subscript: MathNode[] }).subscript,
-      ];
+    case 'scripts': {
+      const n = node as ScriptsNode;
+      return [...n.base, ...SCRIPT_SLOTS.flatMap((slot) => n[slot] ?? [])];
+    }
     case 'sqrt': {
       const sqrt = node as { content: MathNode[]; index?: MathNode[] };
       return [...sqrt.content, ...(sqrt.index || [])];

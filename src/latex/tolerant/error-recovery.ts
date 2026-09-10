@@ -338,13 +338,12 @@ function shiftChildRanges(node: MathNode, offset: number): void {
       node.numerator = shiftSourceRanges(node.numerator, offset);
       node.denominator = shiftSourceRanges(node.denominator, offset);
       break;
-    case 'power':
+    case 'scripts':
       node.base = shiftSourceRanges(node.base, offset);
-      node.exponent = shiftSourceRanges(node.exponent, offset);
-      break;
-    case 'subscript':
-      node.base = shiftSourceRanges(node.base, offset);
-      node.subscript = shiftSourceRanges(node.subscript, offset);
+      if (node.superscript) node.superscript = shiftSourceRanges(node.superscript, offset);
+      if (node.subscript) node.subscript = shiftSourceRanges(node.subscript, offset);
+      if (node.leftSuperscript) node.leftSuperscript = shiftSourceRanges(node.leftSuperscript, offset);
+      if (node.leftSubscript) node.leftSubscript = shiftSourceRanges(node.leftSubscript, offset);
       break;
     case 'sqrt':
       node.content = shiftSourceRanges(node.content, offset);
@@ -437,13 +436,12 @@ function reassignNodeId(node: MathNode): MathNode {
       cloned.numerator = cloned.numerator.map(reassignNodeId);
       cloned.denominator = cloned.denominator.map(reassignNodeId);
       break;
-    case 'power':
+    case 'scripts':
       cloned.base = cloned.base.map(reassignNodeId);
-      cloned.exponent = cloned.exponent.map(reassignNodeId);
-      break;
-    case 'subscript':
-      cloned.base = cloned.base.map(reassignNodeId);
-      cloned.subscript = cloned.subscript.map(reassignNodeId);
+      if (cloned.superscript) cloned.superscript = cloned.superscript.map(reassignNodeId);
+      if (cloned.subscript) cloned.subscript = cloned.subscript.map(reassignNodeId);
+      if (cloned.leftSuperscript) cloned.leftSuperscript = cloned.leftSuperscript.map(reassignNodeId);
+      if (cloned.leftSubscript) cloned.leftSubscript = cloned.leftSubscript.map(reassignNodeId);
       break;
     case 'sqrt':
       cloned.content = cloned.content.map(reassignNodeId);

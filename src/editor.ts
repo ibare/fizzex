@@ -14,8 +14,8 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
-  SubscriptNode,
+  ScriptsNode,
+  MathNodeType,
   ParenNode,
   AbsNode,
   SqrtNode,
@@ -114,8 +114,7 @@ export type InputAction =
   | { type: 'insertVariable'; name: string }
   | { type: 'insertOperator'; op: OperatorSymbol }
   | { type: 'insertFraction' }
-  | { type: 'insertPower' }
-  | { type: 'insertSubscript' }
+  | { type: 'insertScript'; slot: 'superscript' | 'subscript' }
   | { type: 'insertAbs' }
   | { type: 'insertParen'; paren: '(' | '[' | '{' }
   | { type: 'exitParen' }
@@ -137,8 +136,8 @@ export function keyToInputAction(key: string): InputAction | null {
     case '<': return { type: 'insertOperator', op: '<' };
     case '>': return { type: 'insertOperator', op: '>' };
     case '/': return { type: 'insertFraction' };
-    case '^': return { type: 'insertPower' };
-    case '_': return { type: 'insertSubscript' };
+    case '^': return { type: 'insertScript', slot: 'superscript' };
+    case '_': return { type: 'insertScript', slot: 'subscript' };
     case '|': return { type: 'insertAbs' };
     case '(':
     case '[':
@@ -170,24 +169,45 @@ export function createFrac(numerator: MathNode[], denominator: MathNode[]): Frac
   return { id: fracId, type: 'frac', numerator: [numRow], denominator: [denRow] };
 }
 
-export function createPower(base: MathNode[], exponent: MathNode[]): PowerNode {
-  const powerId = generateId();
-  // exponent를 row로 감싸서 별도 ID 부여 (커서 이동용)
-  const expRow: RowNode = { id: deriveId(powerId, '_exp'), type: 'row', children: exponent };
-  return { id: powerId, type: 'power', base, exponent: [expRow] };
+/** 첨자 슬롯의 row id 접미사 */
+export const SCRIPT_SLOT_SUFFIX = {
+  superscript: '_sup',
+  subscript: '_sub',
+  leftSuperscript: '_leftsup',
+  leftSubscript: '_leftsub',
+} as const;
+
+export type ScriptSlotName = keyof typeof SCRIPT_SLOT_SUFFIX;
+
+export function createScripts(
+  base: MathNode[],
+  slot: ScriptSlotName,
+  content: MathNode[]
+): ScriptsNode {
+  const id = generateId();
+  // 슬롯을 row로 감싸서 별도 ID 부여 (커서 이동용)
+  const row: RowNode = { id: deriveId(id, SCRIPT_SLOT_SUFFIX[slot]), type: 'row', children: content };
+  return { id, type: 'scripts', base, [slot]: [row] } as ScriptsNode;
+}
+
+/** 이미 있는 첨자 노드의 빈 슬롯을 채운다 (불변 — 새 객체를 반환) */
+export function attachScript(
+  node: ScriptsNode,
+  slot: ScriptSlotName,
+  content: MathNode[]
+): ScriptsNode {
+  const row: RowNode = {
+    id: deriveId(node.id, SCRIPT_SLOT_SUFFIX[slot]),
+    type: 'row',
+    children: content,
+  };
+  return { ...node, [slot]: [row] };
 }
 
 export function createParen(content: MathNode[], parenType: '(' | '[' | '{' = '('): ParenNode {
   const parenId = generateId();
   const contentRow: RowNode = { id: deriveId(parenId, '_content'), type: 'row', children: content };
   return { id: parenId, type: 'paren', content: [contentRow], parenType };
-}
-
-export function createSubscript(base: MathNode[], subscript: MathNode[]): SubscriptNode {
-  const subId = generateId();
-  // subscript를 row로 감싸서 별도 ID 부여 (커서 이동용)
-  const subRow: RowNode = { id: deriveId(subId, '_sub'), type: 'row', children: subscript };
-  return { id: subId, type: 'subscript', base, subscript: [subRow] };
 }
 
 export function createAbs(content: MathNode[]): AbsNode {
@@ -347,10 +367,8 @@ function getChildKeys(node: MathNode): string[] {
       return ['children'];
     case 'frac':
       return ['numerator', 'denominator'];
-    case 'power':
-      return ['base', 'exponent'];
-    case 'subscript':
-      return ['base', 'subscript'];
+    case 'scripts':
+      return ['base', 'superscript', 'subscript', 'leftSuperscript', 'leftSubscript'];
     case 'sqrt':
       return ['content', 'index'];
     case 'paren':
@@ -539,8 +557,7 @@ export class MathEditor {
       case 'insertVariable': this.insertVariable(action.name); return;
       case 'insertOperator': this.insertOperator(action.op); return;
       case 'insertFraction': this.insertFraction(); return;
-      case 'insertPower': this.insertPower(); return;
-      case 'insertSubscript': this.insertSubscript(); return;
+      case 'insertScript': this.insertScript(action.slot); return;
       case 'insertAbs': this.insertAbs(); return;
       case 'insertParen': this.insertParen(action.paren); return;
       case 'exitParen': this.exitParen(); return;
@@ -683,8 +700,14 @@ export class MathEditor {
     return result;
   }
 
-  /** 거듭제곱 삽입 */
-  insertPower(): void {
+  /**
+   * 첨자 삽입 (^ 또는 _)
+   *
+   * 커서 앞의 항을 밑으로 삼되, 그 항이 이미 첨자 노드이고 해당 자리가 비어 있으면
+   * 새 노드를 만들지 않고 그 자리를 채운다. 이 분기가 없으면 x^2 뒤에 _를 눌렀을 때
+   * 첨자 노드가 통째로 밑이 되어 파서에서 없앤 중첩이 키보드로 재현된다.
+   */
+  insertScript(slot: 'superscript' | 'subscript'): void {
     const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
     if (!targetNode) return;
 
@@ -697,36 +720,20 @@ export class MathEditor {
     const base = this.collectPrecedingTerm(children, offset);
     const removeCount = base.length;
 
-    let newChildren = children;
-    let insertOffset = offset;
-    if (removeCount > 0) {
-      newChildren = spliceChildren(newChildren, offset - removeCount, removeCount);
-      insertOffset = offset - removeCount;
+    // 빈 자리 채우기: 앞의 항이 정확히 하나의 첨자 노드이고 그 슬롯이 비어 있을 때
+    const sole = base.length === 1 ? base[0] : undefined;
+    if (sole?.type === 'scripts' && sole.base.length > 0 && sole[slot] === undefined) {
+      const attached = attachScript(sole, slot, []);
+      const newChildren = spliceChildren(children, offset - removeCount, removeCount, attached);
+      const newAst = rebuildAstWithNewChildren(
+        this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
+      );
+      this.state = freezeState(
+        buildNewState(newAst, boundary(deriveId(attached.id, SCRIPT_SLOT_SUFFIX[slot]), 0)),
+      );
+      this.onChange(this.state);
+      return;
     }
-
-    const powerNode = createPower(base, []);
-    newChildren = spliceChildren(newChildren, insertOffset, 0, powerNode);
-
-    const newAst = rebuildAstWithNewChildren(
-      this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
-    );
-    this.state = freezeState(buildNewState(newAst, boundary(deriveId(powerNode.id, '_exp'), 0)));
-    this.onChange(this.state);
-  }
-
-  /** 아래첨자 삽입 */
-  insertSubscript(): void {
-    const targetNode = findNodeById(this.state.ast, this.requireBoundary().parentId);
-    if (!targetNode) return;
-
-    const childKey = getChildKeys(targetNode)[0];
-    if (!childKey) return;
-
-    const children = getNodeChildArray(targetNode, childKey);
-    const offset = this.requireBoundary().index;
-
-    const base = this.collectPrecedingTerm(children, offset);
-    const removeCount = base.length;
 
     let newChildren = children;
     let insertOffset = offset;
@@ -735,13 +742,15 @@ export class MathEditor {
       insertOffset = offset - removeCount;
     }
 
-    const subscriptNode = createSubscript(base, []);
-    newChildren = spliceChildren(newChildren, insertOffset, 0, subscriptNode);
+    const scriptsNode = createScripts(base, slot, []);
+    newChildren = spliceChildren(newChildren, insertOffset, 0, scriptsNode);
 
     const newAst = rebuildAstWithNewChildren(
       this.state.ast, this.requireBoundary().parentId, childKey, newChildren,
     );
-    this.state = freezeState(buildNewState(newAst, boundary(deriveId(subscriptNode.id, '_sub'), 0)));
+    this.state = freezeState(
+      buildNewState(newAst, boundary(deriveId(scriptsNode.id, SCRIPT_SLOT_SUFFIX[slot]), 0)),
+    );
     this.onChange(this.state);
   }
 
@@ -864,7 +873,7 @@ export class MathEditor {
 
       const parent = parentInfo.parent;
 
-      const complexTypes = ['frac', 'power', 'paren', 'subscript', 'abs', 'integral', 'sum', 'limit', 'product', 'overline', 'matrix'];
+      const complexTypes: MathNodeType[] = ['frac', 'scripts', 'paren', 'abs', 'integral', 'sum', 'limit', 'product', 'overline', 'matrix'];
       if (complexTypes.includes(parent.type)) {
         // 복합 노드 전체를 삭제 (불변)
         const grandParentInfo = findParent(this.state.ast, parent.id);
@@ -1017,15 +1026,17 @@ export class MathEditor {
           return { id: denRow.id, length: denRow.children.length };
         }
       }
-      case 'power': {
-        // 거듭제곱: start면 base, end면 exponent
-        // power는 base가 row가 아닐 수 있음, exponent로 들어가기
-        if (node.exponent.length > 0) {
-          const exp = node.exponent;
-          // exponent가 row면 그 안으로
-          if (exp.length === 1 && exp[0].type === 'row') {
-            const expRow = exp[0] as RowNode;
-            return { id: expRow.id, length: expRow.children.length };
+      case 'scripts': {
+        // 첨자: 들어온 방향에 가까운 슬롯부터 시도한다.
+        // base 는 row 로 감싸지 않으므로 진입 대상이 아니다.
+        const order: ScriptSlotName[] = position === 'start'
+          ? ['leftSuperscript', 'leftSubscript', 'subscript', 'superscript']
+          : ['superscript', 'subscript', 'leftSubscript', 'leftSuperscript'];
+        for (const slot of order) {
+          const value = node[slot];
+          if (value && value.length === 1 && value[0].type === 'row') {
+            const row = value[0] as RowNode;
+            return { id: row.id, length: row.children.length };
           }
         }
         return null;
@@ -1033,17 +1044,6 @@ export class MathEditor {
       case 'sqrt': {
         const contentRow = node.content[0] as RowNode;
         return { id: contentRow.id, length: contentRow.children.length };
-      }
-      case 'subscript': {
-        // 아래첨자: subscript row로 들어가기
-        if (node.subscript.length > 0) {
-          const sub = node.subscript;
-          if (sub.length === 1 && sub[0].type === 'row') {
-            const subRow = sub[0] as RowNode;
-            return { id: subRow.id, length: subRow.children.length };
-          }
-        }
-        return null;
       }
       case 'abs': {
         const contentRow = node.content[0] as RowNode;

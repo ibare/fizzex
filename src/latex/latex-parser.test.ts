@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
+import type { MathNode, ScriptsNode } from '../types.js';
 import { parseLatex } from './latex-parser.js';
 import { resetLatexIdCounter } from '../utils/id-generator.js';
 import type { NumberNode, VariableNode, OperatorNode, FracNode, SqrtNode, FuncNode } from '../types.js';
@@ -103,20 +104,88 @@ describe('LaTeX Parser', () => {
     it('지수를 파싱한다', () => {
       const { ast: result } = parseLatex('x^2');
       expect(result.children).toHaveLength(1);
-      expect(result.children[0].type).toBe('power');
+      expect(result.children[0].type).toBe('scripts');
     });
 
     it('첨자를 파싱한다', () => {
       const { ast: result } = parseLatex('x_i');
       expect(result.children).toHaveLength(1);
-      expect(result.children[0].type).toBe('subscript');
+      expect(result.children[0].type).toBe('scripts');
     });
 
-    it('지수와 첨자 조합을 파싱한다', () => {
+    it('지수와 첨자 조합이 하나의 첨자 노드가 된다', () => {
       const { ast: result } = parseLatex('x_i^2');
       expect(result.children).toHaveLength(1);
-      // 지수가 우선 적용되어 power 타입일 수 있음
-      expect(['power', 'subscript']).toContain(result.children[0].type);
+      const node = result.children[0] as ScriptsNode;
+      expect(node.type).toBe('scripts');
+      // 중첩이 아니라 한 노드가 두 자리를 소유한다 (TeX Rule 18e)
+      expect(node.base).toHaveLength(1);
+      expect(node.base[0].type).toBe('variable');
+      expect(node.superscript).toBeDefined();
+      expect(node.subscript).toBeDefined();
+    });
+
+    it('x^2_i 는 x_i^2 와 같은 구조가 된다', () => {
+      const a = parseLatex('x_i^2').ast.children[0] as ScriptsNode;
+      const b = parseLatex('x^2_i').ast.children[0] as ScriptsNode;
+      expect(b.type).toBe('scripts');
+      expect(b.base[0].type).toBe(a.base[0].type);
+      expect(b.superscript).toBeDefined();
+      expect(b.subscript).toBeDefined();
+    });
+
+    it('좌측 첨자를 파싱하고 뒤따르는 원자를 밑으로 흡수한다', () => {
+      // 동위원소 표기 ^{227}_{90}Th 의 골격. Th 는 수식 모드에서 두 변수로 쪼개지므로
+      // 밑이 하나임을 보려고 단일 기호를 쓴다.
+      const { ast: result } = parseLatex('{}^{227}_{90}X');
+      expect(result.children).toHaveLength(1);
+      const node = result.children[0] as ScriptsNode;
+      expect(node.type).toBe('scripts');
+      expect(node.leftSuperscript).toBeDefined();
+      expect(node.leftSubscript).toBeDefined();
+      expect(node.base).toHaveLength(1);
+      expect(node.base[0].type).toBe('variable');
+    });
+
+    it('같은 자리를 다시 지정하면 경고를 내되 내용은 보존한다 (x^2^3)', () => {
+      const { ast: result, warnings } = parseLatex('x^2^3');
+      expect(warnings.some((w) => w.type === 'syntax')).toBe(true);
+      // 데이터를 버리지 않는다 — 중첩으로 남긴다
+      const outer = result.children[0] as ScriptsNode;
+      expect(outer.type).toBe('scripts');
+      expect(outer.superscript).toBeDefined();
+      expect(outer.base[0].type).toBe('scripts');
+    });
+
+    it('화학식의 이온 표기를 파싱한다 (SO_4^{2-})', () => {
+      const { ast: result } = parseLatex('SO_4^{2-}');
+      // S 와 첨자가 붙은 O
+      const scripts = result.children.find((c) => c.type === 'scripts') as ScriptsNode;
+      expect(scripts).toBeDefined();
+      expect(scripts.subscript).toBeDefined();
+      expect(scripts.superscript).toBeDefined();
+    });
+
+    it('적분 안에서도 첨자가 중첩되지 않는다 (bigops 경로)', () => {
+      const { ast: result } = parseLatex('\\int_0^1 x^2_i dx');
+      const collect = (nodes: MathNode[]): ScriptsNode[] =>
+        nodes.flatMap((n) => {
+          const found = n.type === 'scripts' ? [n as ScriptsNode] : [];
+          const kids = Object.values(n as unknown as Record<string, unknown>)
+            .filter((v): v is MathNode[] => Array.isArray(v) && v.every((x) => x && typeof x === 'object' && 'type' in x));
+          return [...found, ...kids.flatMap(collect)];
+        });
+      const nested = collect(result.children).filter(
+        (n) => n.base.some((b) => b.type === 'scripts'),
+      );
+      expect(nested).toHaveLength(0);
+    });
+
+    it('좌측 첨자가 뒤의 연산자를 흡수하지 않는다', () => {
+      const { ast: result } = parseLatex('{}^{2}+x');
+      // scripts(밑 없음), operator, variable
+      expect(result.children).toHaveLength(3);
+      expect(result.children[1].type).toBe('operator');
     });
   });
 
@@ -199,17 +268,17 @@ describe('LaTeX Parser', () => {
       expect(frac.sourceRange).toEqual({ start: 0, end: 11 });
     });
 
-    it('x^2의 power 노드 sourceRange가 base를 포함한다', () => {
+    it('x^2의 첨자 노드 sourceRange가 base를 포함한다', () => {
       const result = parseLatex('x^2');
       const power = result.ast.children[0];
-      expect(power.type).toBe('power');
+      expect(power.type).toBe('scripts');
       expect(power.sourceRange).toEqual({ start: 0, end: 3 });
     });
 
-    it('x_n의 subscript 노드 sourceRange가 base를 포함한다', () => {
+    it('x_n의 첨자 노드 sourceRange가 base를 포함한다', () => {
       const result = parseLatex('x_n');
       const sub = result.ast.children[0];
-      expect(sub.type).toBe('subscript');
+      expect(sub.type).toBe('scripts');
       expect(sub.sourceRange).toEqual({ start: 0, end: 3 });
     });
 

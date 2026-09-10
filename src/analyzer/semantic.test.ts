@@ -25,8 +25,11 @@ function getChildArrays(node: MathNode): MathNode[][] {
   switch (node.type) {
     case 'root': case 'row': return [node.children];
     case 'frac': return [node.numerator, node.denominator];
-    case 'power': return [node.base, node.exponent];
-    case 'subscript': return [node.base, node.subscript];
+    case 'scripts': return [
+      node.base,
+      ...([node.superscript, node.subscript, node.leftSuperscript, node.leftSubscript]
+        .filter((v): v is MathNode[] => v !== undefined)),
+    ];
     case 'sqrt': return node.index ? [node.content, node.index] : [node.content];
     case 'paren': case 'abs': case 'overline': case 'accent': case 'cancel': return [node.content];
     case 'func': return [node.argument];
@@ -113,7 +116,7 @@ describe('Semantic Roles', () => {
       expect(numNode).not.toBeNull();
 
       const ancestors = map.get(numNode!.id)!;
-      const powerAncestor = ancestors.find(a => a.node.type === 'power');
+      const powerAncestor = ancestors.find(a => a.node.type === 'scripts');
       expect(powerAncestor).toBeDefined();
       expect(powerAncestor!.childPosition).toBe('exponent');
     });
@@ -176,7 +179,7 @@ describe('Semantic Roles', () => {
       expect(integralNode).not.toBeNull();
       if (integralNode && integralNode.type === 'integral') {
         // integrand 중 power 노드 찾기
-        const powerInIntegrand = integralNode.integrand.find(n => n.type === 'power');
+        const powerInIntegrand = integralNode.integrand.find(n => n.type === 'scripts');
         if (powerInIntegrand) {
           const result = getSemanticMeaning(powerInIntegrand, map.get(powerInIntegrand.id)!);
           expect(result.role).toBe('피적분함수');
@@ -210,9 +213,9 @@ describe('Semantic Roles', () => {
       if (sumNode && sumNode.type === 'sum') {
         const fracInBody = sumNode.body.find(n => n.type === 'frac');
         if (fracInBody && fracInBody.type === 'frac') {
-          const powerInDenom = fracInBody.denominator.find(n => n.type === 'power');
-          if (powerInDenom && powerInDenom.type === 'power') {
-            const exp = powerInDenom.exponent[0];
+          const powerInDenom = fracInBody.denominator.find(n => n.type === 'scripts');
+          if (powerInDenom && powerInDenom.type === 'scripts') {
+            const exp = powerInDenom.superscript![0];
             if (exp) {
               const result = getSemanticMeaning(exp, map.get(exp.id)!);
               expect(result.layer).toBe('layer2');
@@ -381,7 +384,7 @@ describe('Semantic Roles', () => {
       const semanticMap = buildSemanticMap(ast);
 
       // c^2 power 노드 → 광속의 제곱
-      const powerNode = findNode(ast, n => n.type === 'power');
+      const powerNode = findNode(ast, n => n.type === 'scripts');
       expect(powerNode).not.toBeNull();
       const powerSemantic = semanticMap.get(powerNode!.id)!;
       expect(powerSemantic.layer).toBe('catalog');

@@ -1161,15 +1161,15 @@
         "sigma13_sup1",
         "sigma17_sub2",
         "xi8_defaultRuleThickness",
-        "sigma5_xHeight"
+        "sigma5_xHeight",
+        "sigma18_supDrop",
+        "sigma19_subDrop"
       ],
       "verification_cases": [
         {
           "id": "subsup-gap",
           "latex": "x_i^2",
           "style": "display",
-          "known_fail": true,
-          "known_fail_reason": "위+아래 동시 처리 시 sigma17 사용 미구현, 4*xi8 gap 조건 미구현",
           "assertions": [
             {
               "type": "subsup_gap_min",
@@ -1179,6 +1179,42 @@
             {
               "type": "sup_bottom_with_sub_min",
               "expected": "0.8 * sigma5_xHeight",
+              "tolerance": 0.01
+            }
+          ]
+        }
+      ]
+    },
+    "prescript": {
+      "source_rules": [
+        "TeXbook Appendix G 에 prescript 규칙이 없다 — 표준 구현들이 쓰는 null nucleus 관례를 따른다",
+        "tex-rule-010 (Rule 18e) 를 height=depth=0 인 가상 nucleus 에 적용한 뒤 밑 왼쪽에 붙인다"
+      ],
+      "parameters_used": [
+        "sigma13_sup1",
+        "sigma16_sub1",
+        "sigma17_sub2",
+        "xi8_defaultRuleThickness"
+      ],
+      "verification_cases": [
+        {
+          "id": "prescript-isotope",
+          "latex": "{}^{227}_{90}X",
+          "style": "display",
+          "assertions": [
+            {
+              "type": "prescript_shift_up_min",
+              "expected_param": "sigma13_sup1",
+              "tolerance": 0.02
+            },
+            {
+              "type": "prescript_shift_down_min",
+              "expected_param": "sigma16_sub1",
+              "tolerance": 0.02
+            },
+            {
+              "type": "prescript_gap_min",
+              "expected": "4 * xi8_defaultRuleThickness",
               "tolerance": 0.01
             }
           ]

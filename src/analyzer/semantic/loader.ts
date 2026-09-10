@@ -79,6 +79,11 @@ export interface FallbackTexts {
   functions: Record<string, string>;
   accents: Record<string, { role: string; description: string }>;
   defaultAccent: { role: string; description: string };
+  /** 첨자는 슬롯 조합에 따라 의미가 다르다 — node.type 만으로 구분할 수 없다 */
+  scripts: Record<
+    'superscriptOnly' | 'subscriptOnly' | 'both' | 'withLeft',
+    { role: string; description: string }
+  >;
   defaultOperator: string;
   defaultFunction: string;
 }

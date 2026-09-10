@@ -6,8 +6,7 @@ import {
   variable,
   operator,
   frac,
-  power,
-  subscript,
+  scripts,
   sqrt,
   paren,
   abs,
@@ -73,17 +72,17 @@ describe('AST to LaTeX', () => {
     });
 
     it('power -> base^{exp}', () => {
-      const node = power([variable('x')], [num('1'), num('0')]);
+      const node = scripts([variable('x')], { superscript: [num('1'), num('0')] });
       expect(astToLatex(node)).toBe('x^{10}');
     });
 
     it('단일 문자 지수는 중괄호를 생략한다', () => {
-      const node = power([variable('x')], [num('2')]);
+      const node = scripts([variable('x')], { superscript: [num('2')] });
       expect(astToLatex(node)).toBe('x^2');
     });
 
     it('subscript -> base_{sub}', () => {
-      const node = subscript([variable('a')], [num('1'), num('2')]);
+      const node = scripts([variable('a')], { subscript: [num('1'), num('2')] });
       expect(astToLatex(node)).toBe('a_{12}');
     });
 

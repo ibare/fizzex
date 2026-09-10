@@ -21,7 +21,7 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
+  ScriptsNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -94,14 +94,14 @@ function powDual(u: Dual, e: Dual): DualOutcome {
   if (e.d === 0) {
     const c = e.v;
     if (u.v === 0) {
-      if (c <= 0) return fail('domain', { nodeType: 'power', reason: 'zero-base-non-positive-exp' });
+      if (c <= 0) return fail('domain', { nodeType: 'scripts', reason: 'zero-base-non-positive-exp' });
       if (c === 1) return okDual(u);
       // 0^c (c>0): v=0, d = c · 0^(c-1) · u'. c<1 이면 무한대 → divergent. c≥1 이면 0.
-      if (c < 1) return fail('divergent', { nodeType: 'power', reason: 'pow-derivative-infinite-at-zero' });
+      if (c < 1) return fail('divergent', { nodeType: 'scripts', reason: 'pow-derivative-infinite-at-zero' });
       return ok(0, c === 1 ? u.d : 0);
     }
     if (u.v < 0 && !Number.isInteger(c)) {
-      return fail('domain', { nodeType: 'power', reason: 'negative-base-fractional-exp' });
+      return fail('domain', { nodeType: 'scripts', reason: 'negative-base-fractional-exp' });
     }
     const vNew = Math.pow(u.v, c);
     const dNew = c * Math.pow(u.v, c - 1) * u.d;
@@ -109,7 +109,7 @@ function powDual(u: Dual, e: Dual): DualOutcome {
   }
   // 일반 지수
   if (u.v <= 0) {
-    return fail('domain', { nodeType: 'power', reason: 'non-positive-base-variable-exp' });
+    return fail('domain', { nodeType: 'scripts', reason: 'non-positive-base-variable-exp' });
   }
   const vNew = Math.pow(u.v, e.v);
   const lnU = Math.log(u.v);
@@ -260,8 +260,8 @@ function dispatchInner(node: MathNode, ctx: AutoCtx): DualOutcome {
       return evalSequence((node as RootNode | RowNode).children, ctx);
     case 'frac':
       return evalFrac(node as FracNode, ctx);
-    case 'power':
-      return evalPower(node as PowerNode, ctx);
+    case 'scripts':
+      return evalPower(node as ScriptsNode, ctx);
     case 'sqrt':
       return evalSqrt(node as SqrtNode, ctx);
     case 'abs':
@@ -273,7 +273,6 @@ function dispatchInner(node: MathNode, ctx: AutoCtx): DualOutcome {
         nodeType: 'operator',
         reason: `bare-operator:${(node as OperatorNode).operator}`,
       });
-    case 'subscript':
     case 'overline':
     case 'accent':
     case 'matrix':
@@ -333,10 +332,15 @@ function evalFrac(n: FracNode, ctx: AutoCtx): DualOutcome {
   return okDual(div(num.dual, den.dual));
 }
 
-function evalPower(n: PowerNode, ctx: AutoCtx): DualOutcome {
+function evalPower(n: ScriptsNode, ctx: AutoCtx): DualOutcome {
+  // 아래첨자·좌측 첨자는 지표 표기라 미분 대상이 아니다
+  if (n.subscript || n.leftSuperscript || n.leftSubscript) {
+    return fail('unsupported', { nodeType: 'scripts', reason: 'indexed-symbol' });
+  }
   const base = evalSequence(n.base, ctx);
   if (base.kind === 'fail') return base;
-  const exp = evalSequence(n.exponent, ctx);
+  if (!n.superscript) return base;
+  const exp = evalSequence(n.superscript, ctx);
   if (exp.kind === 'fail') return exp;
   return powDual(base.dual, exp.dual);
 }

@@ -5,8 +5,6 @@
     "variable": "변수",
     "operator": "연산자",
     "frac": "분수",
-    "power": "거듭제곱",
-    "subscript": "아래첨자",
     "sqrt": "제곱근",
     "sum": "합산 (Sigma)",
     "product": "곱 (Pi)",
@@ -25,7 +23,6 @@
     "number": "숫자 {value}입니다.",
     "variable": "변수 {name}입니다. 값이 변할 수 있습니다.",
     "frac": "분수 — 위(분자)를 아래(분모)로 나눈 값입니다.",
-    "power": "거듭제곱 — 밑을 지수만큼 반복 곱합니다.",
     "sqrt": "제곱근 — 제곱해서 이 값이 되는 수입니다.",
     "sum": "합산 — 인덱스를 바꿔가며 일반항을 모두 더합니다.",
     "product": "곱 — 인덱스를 바꿔가며 일반항을 모두 곱합니다.",
@@ -73,18 +70,69 @@
     "min": "최솟값을 구하는 함수입니다."
   },
   "accents": {
-    "hat": { "role": "추정값/단위벡터", "description": "모자 기호는 추정값 또는 단위 벡터를 나타냅니다." },
-    "widehat": { "role": "추정값/단위벡터", "description": "모자 기호는 추정값 또는 단위 벡터를 나타냅니다." },
-    "vec": { "role": "벡터", "description": "화살표는 크기와 방향을 가진 벡터임을 나타냅니다." },
-    "overrightarrow": { "role": "벡터", "description": "화살표는 크기와 방향을 가진 벡터임을 나타냅니다." },
-    "overleftarrow": { "role": "벡터", "description": "화살표는 크기와 방향을 가진 벡터임을 나타냅니다." },
-    "dot": { "role": "시간 미분", "description": "점은 시간에 대한 미분을 나타냅니다. 물리에서 속도 등에 사용합니다." },
-    "ddot": { "role": "이계 시간 미분", "description": "점 두 개는 시간에 대한 이차 미분을 나타냅니다. 가속도 등에 사용합니다." },
-    "tilde": { "role": "근사/변환", "description": "물결표는 근사값 또는 변환된 양을 나타냅니다." },
-    "widetilde": { "role": "근사/변환", "description": "물결표는 근사값 또는 변환된 양을 나타냅니다." },
-    "bar": { "role": "평균/켤레", "description": "가로줄은 평균값 또는 복소수의 켤레를 나타냅니다." }
+    "hat": {
+      "role": "추정값/단위벡터",
+      "description": "모자 기호는 추정값 또는 단위 벡터를 나타냅니다."
+    },
+    "widehat": {
+      "role": "추정값/단위벡터",
+      "description": "모자 기호는 추정값 또는 단위 벡터를 나타냅니다."
+    },
+    "vec": {
+      "role": "벡터",
+      "description": "화살표는 크기와 방향을 가진 벡터임을 나타냅니다."
+    },
+    "overrightarrow": {
+      "role": "벡터",
+      "description": "화살표는 크기와 방향을 가진 벡터임을 나타냅니다."
+    },
+    "overleftarrow": {
+      "role": "벡터",
+      "description": "화살표는 크기와 방향을 가진 벡터임을 나타냅니다."
+    },
+    "dot": {
+      "role": "시간 미분",
+      "description": "점은 시간에 대한 미분을 나타냅니다. 물리에서 속도 등에 사용합니다."
+    },
+    "ddot": {
+      "role": "이계 시간 미분",
+      "description": "점 두 개는 시간에 대한 이차 미분을 나타냅니다. 가속도 등에 사용합니다."
+    },
+    "tilde": {
+      "role": "근사/변환",
+      "description": "물결표는 근사값 또는 변환된 양을 나타냅니다."
+    },
+    "widetilde": {
+      "role": "근사/변환",
+      "description": "물결표는 근사값 또는 변환된 양을 나타냅니다."
+    },
+    "bar": {
+      "role": "평균/켤레",
+      "description": "가로줄은 평균값 또는 복소수의 켤레를 나타냅니다."
+    }
   },
-  "defaultAccent": { "role": "악센트", "description": "악센트가 붙은 기호입니다." },
+  "defaultAccent": {
+    "role": "악센트",
+    "description": "악센트가 붙은 기호입니다."
+  },
+  "scripts": {
+    "superscriptOnly": {
+      "role": "거듭제곱",
+      "description": "거듭제곱 — 밑을 지수만큼 반복 곱합니다."
+    },
+    "subscriptOnly": {
+      "role": "아래첨자",
+      "description": "아래첨자 — 특정 원소나 성분을 지정합니다."
+    },
+    "both": {
+      "role": "첨자",
+      "description": "위아래 첨자가 함께 붙은 기호입니다."
+    },
+    "withLeft": {
+      "role": "앞뒤 첨자",
+      "description": "기호 앞뒤에 첨자가 붙은 표기입니다."
+    }
+  },
   "defaultOperator": "연산자 {op}입니다.",
   "defaultFunction": "함수 {name}입니다."
 }

@@ -49,24 +49,29 @@ export function astToLatex(node: MathNode): string {
       return `\\${cmd}{${num}}{${den}}`;
     }
 
-    case 'power': {
-      const base = node.base.map(astToLatex).join('');
-      const exp = node.exponent.map(astToLatex).join('');
-      // 지수가 단일 문자면 중괄호 생략 가능
-      if (exp.length === 1) {
-        return `${wrapIfNeeded(base)}^${exp}`;
-      }
-      return `${wrapIfNeeded(base)}^{${exp}}`;
-    }
+    case 'scripts': {
+      // 슬롯 하나를 LaTeX 인자로. 한 글자면 중괄호를 생략한다.
+      const arg = (nodes: MathNode[]): string => {
+        const s = nodes.map(astToLatex).join('');
+        return s.length === 1 ? s : `{${s}}`;
+      };
 
-    case 'subscript': {
-      const base = node.base.map(astToLatex).join('');
-      const sub = node.subscript.map(astToLatex).join('');
-      // 아래첨자가 단일 문자면 중괄호 생략 가능
-      if (sub.length === 1) {
-        return `${wrapIfNeeded(base)}_${sub}`;
+      let out = '';
+      // 좌측 첨자는 빈 그룹을 앞세워야 base 가 흡수되지 않는다
+      if (node.leftSuperscript || node.leftSubscript) {
+        out += '{}';
+        if (node.leftSuperscript) out += `^${arg(node.leftSuperscript)}`;
+        if (node.leftSubscript) out += `_${arg(node.leftSubscript)}`;
       }
-      return `${wrapIfNeeded(base)}_{${sub}}`;
+
+      const base = node.base.map(astToLatex).join('');
+      out += base.length > 0 ? wrapIfNeeded(base) : (out === '' ? '{}' : '');
+
+      // 아래첨자를 먼저 낸다 — 화학 관례(SO_4^{2-})와 맞고,
+      // 재파싱 시 슬롯 채우기 덕분에 어느 순서든 같은 AST 로 돌아온다.
+      if (node.subscript) out += `_${arg(node.subscript)}`;
+      if (node.superscript) out += `^${arg(node.superscript)}`;
+      return out;
     }
 
     case 'abs': {

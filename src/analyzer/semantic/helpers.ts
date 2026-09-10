@@ -4,6 +4,7 @@
  * AST 검사, 경로 매칭, 폴백 설명 생성 등 순수 유틸리티.
  */
 
+import { SCRIPT_SLOTS } from '../../types.js';
 import type { MathNode } from '../../types.js';
 import type { AncestorEntry, SemanticResult } from './types.js';
 import type { FallbackTexts } from './loader.js';
@@ -56,16 +57,16 @@ export function isNegativeExpression(nodes: MathNode[]): boolean {
 
 /** x² + c 형태로 항상 양수인지 (간단 패턴만) */
 export function isAlwaysPositive(nodes: MathNode[]): boolean {
-  // 단일 power 노드: base가 변수, exponent가 2 → x² (≥ 0)
-  if (nodes.length === 1 && nodes[0].type === 'power') {
-    const exp = nodes[0].exponent;
-    if (exp.length === 1 && isNumberValue(exp[0], 2)) return true;
+  // 단일 첨자 노드: 위첨자가 2 → x² (≥ 0)
+  if (nodes.length === 1 && nodes[0].type === 'scripts') {
+    const exp = nodes[0].superscript;
+    if (exp && exp.length === 1 && isNumberValue(exp[0], 2)) return true;
   }
   // x² + 상수 패턴
   if (nodes.length === 3) {
     const [a, op, b] = nodes;
     if (op.type === 'operator' && op.operator === '+') {
-      if (a.type === 'power' && a.exponent.length === 1 && isNumberValue(a.exponent[0], 2)) {
+      if (a.type === 'scripts' && a.superscript?.length === 1 && isNumberValue(a.superscript[0], 2)) {
         if (b.type === 'number' && parseFloat(b.value) > 0) return true;
       }
     }
@@ -81,10 +82,8 @@ export function getChildArrays(node: MathNode): MathNode[][] {
       return [node.children];
     case 'frac':
       return [node.numerator, node.denominator];
-    case 'power':
-      return [node.base, node.exponent];
-    case 'subscript':
-      return [node.base, node.subscript];
+    case 'scripts':
+      return [node.base, ...SCRIPT_SLOTS.map((slot) => node[slot]).filter((v): v is MathNode[] => v !== undefined)];
     case 'sqrt':
       return node.index ? [node.content, node.index] : [node.content];
     case 'paren':

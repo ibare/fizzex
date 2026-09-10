@@ -17,8 +17,7 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
-  SubscriptNode,
+  ScriptsNode,
   NumberNode,
 } from './types.js';
 import {
@@ -65,9 +64,9 @@ describe('cursor-policy — 단위', () => {
       expect(getSlotPolicy('frac', 'denominator')).toMatchObject({ autoExitOnBinop: true });
     });
 
-    it('power.exponent / subscript.subscript 는 term-shaped', () => {
-      expect(getSlotPolicy('power', 'exponent')).toMatchObject({ autoExitOnBinop: true });
-      expect(getSlotPolicy('subscript', 'subscript')).toMatchObject({ autoExitOnBinop: true });
+    it('첨자 슬롯은 term-shaped', () => {
+      expect(getSlotPolicy('scripts', 'superscript')).toMatchObject({ autoExitOnBinop: true });
+      expect(getSlotPolicy('scripts', 'subscript')).toMatchObject({ autoExitOnBinop: true });
     });
 
     it('sqrt.content 는 sub-expression (자동 종료 없음)', () => {
@@ -277,9 +276,9 @@ describe('cursor-policy — 키 시퀀스 행동 회귀', () => {
       // 루트 children: [x_or_power, ...] — collectPrecedingTerm 이 x 를 base 로 흡수
       // power, +, 1 구조
       expect(state.ast.children).toHaveLength(3);
-      const power = state.ast.children[0] as PowerNode;
-      expect(power.type).toBe('power');
-      const expRow = power.exponent[0] as RowNode;
+      const power = state.ast.children[0] as ScriptsNode;
+      expect(power.type).toBe('scripts');
+      const expRow = power.superscript![0] as RowNode;
       expect((expRow.children[0] as NumberNode).value).toBe('2');
       expect((state.ast.children[1] as OperatorNode).operator).toBe('+');
       expect((state.ast.children[2] as NumberNode).value).toBe('1');
@@ -291,9 +290,9 @@ describe('cursor-policy — 키 시퀀스 행동 회귀', () => {
 
       const state = editor.getState();
       expect(state.ast.children).toHaveLength(3);
-      const sub = state.ast.children[0] as SubscriptNode;
-      expect(sub.type).toBe('subscript');
-      const subRow = sub.subscript[0] as RowNode;
+      const sub = state.ast.children[0] as ScriptsNode;
+      expect(sub.type).toBe('scripts');
+      const subRow = sub.subscript![0] as RowNode;
       expect((subRow.children[0] as NumberNode).value).toBe('1');
       expect((state.ast.children[1] as OperatorNode).operator).toBe('+');
       expect((state.ast.children[2] as NumberNode).value).toBe('2');

@@ -10,7 +10,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { parseLatex } from '../../latex/latex-parser.js';
 import { resetLatexIdCounter } from '../../utils/id-generator.js';
 import * as nf from '../../latex/node-factory.js';
-import { createPower, createNumber, createVariable, createOperator } from '../../editor.js';
+import { createScripts, createNumber, createVariable, createOperator } from '../../editor.js';
 import { normalizeAst, flattenSequence } from './from-ast.js';
 import { canonicalKey } from './expr.js';
 
@@ -88,10 +88,10 @@ describe('정규화 IR — row 래핑 3경로 수렴', () => {
     // 파서와 editor 는 지수를 [RowNode] 로 감싸고 node-factory 는 감싸지 않는다.
     const fromParser = canonicalKey(normalizeAst(parseLatex('x^2').ast).root);
     const fromFactory = canonicalKey(
-      normalizeAst(nf.power([nf.variable('x')], [nf.num('2')])).root,
+      normalizeAst(nf.scripts([nf.variable('x')], { superscript: [nf.num('2')] })).root,
     );
     const fromEditor = canonicalKey(
-      normalizeAst(createPower([createVariable('x')], [createNumber('2')])).root,
+      normalizeAst(createScripts([createVariable('x')], 'superscript', [createNumber('2')])).root,
     );
     expect(fromFactory).toBe(fromParser);
     expect(fromEditor).toBe(fromParser);

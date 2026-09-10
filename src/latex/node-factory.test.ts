@@ -6,8 +6,7 @@ import {
   variable,
   operator,
   frac,
-  power,
-  subscript,
+  scripts,
   sqrt,
   paren,
   abs,
@@ -69,13 +68,13 @@ describe('Node Factory', () => {
       // \frac{x^2}{y_i}
       const node = createNode('frac', {
         numerator: [
-          createNode('power', {
+          createNode('scripts', {
             base: [createNode('variable', { name: 'x' })],
-            exponent: [createNode('number', { value: '2' })],
+            superscript: [createNode('number', { value: '2' })],
           }),
         ],
         denominator: [
-          createNode('subscript', {
+          createNode('scripts', {
             base: [createNode('variable', { name: 'y' })],
             subscript: [createNode('variable', { name: 'i' })],
           }),
@@ -83,8 +82,8 @@ describe('Node Factory', () => {
       });
 
       expect(node.type).toBe('frac');
-      expect(node.numerator[0].type).toBe('power');
-      expect(node.denominator[0].type).toBe('subscript');
+      expect(node.numerator[0].type).toBe('scripts');
+      expect(node.denominator[0].type).toBe('scripts');
     });
   });
 
@@ -124,13 +123,13 @@ describe('Node Factory', () => {
     });
 
     it('power() - 거듭제곱 노드', () => {
-      const node = power([variable('x')], [num('2')]);
-      expect(node.type).toBe('power');
+      const node = scripts([variable('x')], { superscript: [num('2')] });
+      expect(node.type).toBe('scripts');
     });
 
     it('subscript() - 아래첨자 노드', () => {
-      const node = subscript([variable('a')], [num('1')]);
-      expect(node.type).toBe('subscript');
+      const node = scripts([variable('a')], { subscript: [num('1')] });
+      expect(node.type).toBe('scripts');
     });
 
     it('sqrt() - 제곱근 노드', () => {

@@ -7,7 +7,7 @@ describe('Box Constants', () => {
       expect(COMPLEX_NODE_SUFFIXES).toContain('_num');
       expect(COMPLEX_NODE_SUFFIXES).toContain('_den');
       expect(COMPLEX_NODE_SUFFIXES).toContain('_content');
-      expect(COMPLEX_NODE_SUFFIXES).toContain('_exp');
+      expect(COMPLEX_NODE_SUFFIXES).toContain('_sup');
       expect(COMPLEX_NODE_SUFFIXES).toContain('_sub');
     });
   });
@@ -17,7 +17,8 @@ describe('Box Constants', () => {
       expect(isComplexNodeSlot('frac_1_num')).toBe(true);
       expect(isComplexNodeSlot('frac_1_den')).toBe(true);
       expect(isComplexNodeSlot('sqrt_1_content')).toBe(true);
-      expect(isComplexNodeSlot('sup_1_exp')).toBe(true);
+      expect(isComplexNodeSlot('scripts_1_sup')).toBe(true);
+      expect(isComplexNodeSlot('scripts_1_leftsub')).toBe(true);
     });
 
     it('셀 ID는 true를 반환한다', () => {

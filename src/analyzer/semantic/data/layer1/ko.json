@@ -49,6 +49,14 @@
     "role": "인덱스",
     "description": "특정 원소나 성분을 지정하는 번호입니다."
   },
+  "scripts.leftSuperscript": {
+    "role": "왼쪽 위첨자",
+    "description": "기호 왼쪽 위에 붙는 수입니다. 동위원소의 질량수처럼 대상을 특정합니다."
+  },
+  "scripts.leftSubscript": {
+    "role": "왼쪽 아래첨자",
+    "description": "기호 왼쪽 아래에 붙는 수입니다. 원소의 원자번호처럼 대상을 특정합니다."
+  },
   "sum.lower": {
     "role": "합산 시작",
     "description": "합산이 시작되는 인덱스 값입니다."

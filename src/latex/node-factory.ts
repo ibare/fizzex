@@ -12,8 +12,7 @@ import type {
   VariableNode,
   OperatorNode,
   FracNode,
-  PowerNode,
-  SubscriptNode,
+  ScriptsNode,
   SqrtNode,
   ParenNode,
   AbsNode,
@@ -52,8 +51,7 @@ export type MathNodeMap = {
   variable: VariableNode;
   operator: OperatorNode;
   frac: FracNode;
-  power: PowerNode;
-  subscript: SubscriptNode;
+  scripts: ScriptsNode;
   sqrt: SqrtNode;
   paren: ParenNode;
   abs: AbsNode;
@@ -159,14 +157,16 @@ export function frac(numerator: MathNode[], denominator: MathNode[]): FracNode {
   return createNode('frac', { numerator, denominator });
 }
 
-/** 거듭제곱 노드 생성 */
-export function power(base: MathNode[], exponent: MathNode[]): PowerNode {
-  return createNode('power', { base, exponent });
-}
-
-/** 아래첨자 노드 생성 */
-export function subscript(base: MathNode[], sub: MathNode[]): SubscriptNode {
-  return createNode('subscript', { base, subscript: sub });
+/**
+ * 첨자 노드 생성
+ *
+ * 붙일 슬롯만 넘긴다. 예: scripts([x], { superscript: [n2] }) → x^2
+ */
+export function scripts(
+  base: MathNode[],
+  slots: Pick<ScriptsNode, 'superscript' | 'subscript' | 'leftSuperscript' | 'leftSubscript'>
+): ScriptsNode {
+  return createNode('scripts', { base, ...slots });
 }
 
 /** 제곱근 노드 생성 */
@@ -359,8 +359,7 @@ export function hasChildren(node: MathNode): boolean {
     type === 'row' ||
     type === 'root' ||
     type === 'frac' ||
-    type === 'power' ||
-    type === 'subscript' ||
+    type === 'scripts' ||
     type === 'sqrt' ||
     type === 'paren' ||
     type === 'abs' ||

@@ -124,17 +124,14 @@ export function cloneAst(node: MathNode): MathNode {
         numerator: node.numerator.map(cloneAst),
         denominator: node.denominator.map(cloneAst),
       };
-    case 'power':
+    case 'scripts':
       return {
         ...node,
         base: node.base.map(cloneAst),
-        exponent: node.exponent.map(cloneAst),
-      };
-    case 'subscript':
-      return {
-        ...node,
-        base: node.base.map(cloneAst),
-        subscript: node.subscript.map(cloneAst),
+        ...(node.superscript && { superscript: node.superscript.map(cloneAst) }),
+        ...(node.subscript && { subscript: node.subscript.map(cloneAst) }),
+        ...(node.leftSuperscript && { leftSuperscript: node.leftSuperscript.map(cloneAst) }),
+        ...(node.leftSubscript && { leftSubscript: node.leftSubscript.map(cloneAst) }),
       };
     case 'sqrt':
       return {
@@ -242,10 +239,14 @@ function getChildren(node: MathNode): MathNode[] {
       return node.children;
     case 'frac':
       return [...node.numerator, ...node.denominator];
-    case 'power':
-      return [...node.base, ...node.exponent];
-    case 'subscript':
-      return [...node.base, ...node.subscript];
+    case 'scripts':
+      return [
+        ...node.base,
+        ...(node.superscript ?? []),
+        ...(node.subscript ?? []),
+        ...(node.leftSuperscript ?? []),
+        ...(node.leftSubscript ?? []),
+      ];
     case 'sqrt':
       return [...node.content, ...(node.index ?? [])];
     case 'paren': case 'abs': case 'overline': case 'accent': case 'cancel':

@@ -117,8 +117,26 @@ function extractScriptMeasurements(
     if (b.type !== 'hbox') return;
     const hbox = b as HBox;
 
+    // 좌측 첨자는 밑보다 앞에 놓인다 (createScripts 가 [pre..., base, post...] 로 만든다).
+    // 밑은 shift 도 kern 도 아닌 첫 자식이므로 그 지점을 경계로 삼는다.
+    const baseIndex = hbox.children.findIndex(
+      (c) => c.type !== 'kern' && (c.shift === undefined || c.shift === 0),
+    );
+
     hbox.children.forEach((child, idx) => {
       if (child.shift === undefined || child.shift === 0) return;
+
+      if (baseIndex > 0 && idx < baseIndex) {
+        const shiftEm = Math.abs(child.shift) / actualFontSize;
+        if (child.shift < 0) {
+          values['prescript.shift_up'] = shiftEm;
+          values['prescript.sup_bottom'] = shiftEm - child.depth / actualFontSize;
+        } else {
+          values['prescript.shift_down'] = shiftEm;
+          values['prescript.sub_top'] = child.height / actualFontSize - shiftEm;
+        }
+        return;
+      }
 
       // 위첨자: shift가 음수 (위로 이동)
       if (child.shift < 0) {
@@ -163,6 +181,9 @@ function extractScriptMeasurements(
   // 절대 좌표라 간격 계산은 그대로 성립한다.
   if (values['superscript.bottom'] !== undefined && values['subscript.top'] !== undefined) {
     values['subsup.gap'] = values['superscript.bottom'] - values['subscript.top'];
+  }
+  if (values['prescript.sup_bottom'] !== undefined && values['prescript.sub_top'] !== undefined) {
+    values['prescript.gap'] = values['prescript.sup_bottom'] - values['prescript.sub_top'];
   }
 }
 

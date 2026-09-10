@@ -68,13 +68,13 @@ describe('E3 — 콜드패스 detail.nodeType (도메인)', () => {
     }
   });
 
-  it('0^0 → domain, nodeType: power', () => {
+  it('0^0 → domain, nodeType: scripts', () => {
     const { ast } = parseLatex('0^0');
     const r = evaluate(ast);
     expect(r.ok).toBe(false);
     if (!r.ok) {
       expect(r.status).toBe('domain');
-      expect(r.detail?.nodeType).toBe('power');
+      expect(r.detail?.nodeType).toBe('scripts');
     }
   });
 

@@ -542,11 +542,8 @@ export function EditorView({
       case 'insert_frac':
         editorRef.current.insertFraction();
         break;
-      case 'insert_power':
-        editorRef.current.insertPower();
-        break;
-      case 'insert_subscript':
-        editorRef.current.insertSubscript();
+      case 'insert_script':
+        editorRef.current.insertScript(action.slot);
         break;
       case 'insert_sqrt':
         editorRef.current.insertSqrt();

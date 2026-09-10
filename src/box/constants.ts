@@ -14,8 +14,10 @@ export const COMPLEX_NODE_SUFFIXES = [
   '_num',        // 분자 (numerator)
   '_den',        // 분모 (denominator)
   '_content',    // 내용 (sqrt, paren, abs 등)
-  '_exp',        // 지수 (exponent)
+  '_sup',        // 위첨자 (superscript)
   '_sub',        // 아래첨자 (subscript)
+  '_leftsup',    // 왼쪽 위첨자
+  '_leftsub',    // 왼쪽 아래첨자
   '_lower',      // 하한 (integral, sum, product)
   '_upper',      // 상한 (integral, sum, product)
   '_integrand',  // 피적분함수

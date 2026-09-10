@@ -11,6 +11,14 @@ import type { ExprNode } from '../canonical/expr.js';
 export interface AncestorEntry {
   /** 부모 AST 노드 */
   node: MathNode;
+  /**
+   * 의미 계층이 쓰는 부모 종류.
+   *
+   * 노드 타입이 아니라 **의미 어휘**다. 대부분 node.type 과 같지만, 첨자 노드는
+   * 슬롯에 따라 'power' / 'subscript' 로 갈린다 (script-roles.ts 참조).
+   * 규칙 키와 카탈로그 시그니처가 이 값을 쓴다.
+   */
+  parentType: string;
   /** 이 노드가 부모의 어떤 자식 위치인지 */
   childPosition: string;
 }

@@ -2,7 +2,7 @@
  * 명령어 핸들러용 노드 생성 헬퍼 함수
  */
 
-import type { MathNode, RowNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
+import type { MathNode, RowNode, ScriptsNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
 import { generateLatexId, deriveId } from '../../utils/id-generator.js';
 
 /** ID 생성 (내부용 alias) */
@@ -102,16 +102,73 @@ export function createFunc(name: string, argument: MathNode[]): MathNode {
   return { id: generateId(), type: 'func', name, argument };
 }
 
-export function createPower(base: MathNode[], exponent: MathNode[]): MathNode {
-  const powerId = generateId();
-  const expRow: RowNode = { id: deriveId(powerId, '_exp'), type: 'row', children: exponent };
-  return { id: powerId, type: 'power', base, exponent: [expRow] };
+/** 첨자 노드 생성. 붙일 슬롯만 넘긴다. */
+export function createScripts(
+  base: MathNode[],
+  slots: {
+    superscript?: MathNode[];
+    subscript?: MathNode[];
+    leftSuperscript?: MathNode[];
+    leftSubscript?: MathNode[];
+  }
+): MathNode {
+  const id = generateId();
+  const node: ScriptsNode = { id, type: 'scripts', base };
+  if (slots.superscript) {
+    node.superscript = [{ id: deriveId(id, '_sup'), type: 'row', children: slots.superscript }];
+  }
+  if (slots.subscript) {
+    node.subscript = [{ id: deriveId(id, '_sub'), type: 'row', children: slots.subscript }];
+  }
+  if (slots.leftSuperscript) {
+    node.leftSuperscript = [{ id: deriveId(id, '_leftsup'), type: 'row', children: slots.leftSuperscript }];
+  }
+  if (slots.leftSubscript) {
+    node.leftSubscript = [{ id: deriveId(id, '_leftsub'), type: 'row', children: slots.leftSubscript }];
+  }
+  return node;
 }
 
-export function createSubscript(base: MathNode[], subscript: MathNode[]): MathNode {
-  const subId = generateId();
-  const subRow: RowNode = { id: deriveId(subId, '_sub'), type: 'row', children: subscript };
-  return { id: subId, type: 'subscript', base, subscript: [subRow] };
+/** 첨자 슬롯의 row id 접미사 */
+const SCRIPT_SLOT_SUFFIX = {
+  superscript: '_sup',
+  subscript: '_sub',
+  leftSuperscript: '_leftsup',
+  leftSubscript: '_leftsub',
+} as const;
+
+/**
+ * 이미 있는 첨자 노드의 빈 슬롯을 채운다 (불변 — 새 객체를 반환).
+ *
+ * x^2 뒤에 _3 이 오면 새 노드를 만들지 않고 같은 노드의 아래첨자 자리를 채운다.
+ * 이렇게 해야 x_i^2 가 중첩이 아니라 하나의 첨자 노드가 된다 (TeX Rule 18e).
+ */
+export function attachScript(
+  node: ScriptsNode,
+  slot: keyof typeof SCRIPT_SLOT_SUFFIX,
+  content: MathNode[]
+): ScriptsNode {
+  const row: RowNode = {
+    id: deriveId(node.id, SCRIPT_SLOT_SUFFIX[slot]),
+    type: 'row',
+    children: content,
+  };
+  return { ...node, [slot]: [row] };
+}
+
+/** 첨자를 붙인다 — 직전 노드가 빈 슬롯을 가진 첨자 노드면 그 자리를 채운다. */
+export function appendScript(
+  nodes: MathNode[],
+  slot: 'superscript' | 'subscript',
+  content: MathNode[]
+): void {
+  const prev = nodes.length > 0 ? nodes[nodes.length - 1] : undefined;
+  if (prev?.type === 'scripts' && prev.base.length > 0 && prev[slot] === undefined) {
+    nodes[nodes.length - 1] = attachScript(prev, slot, content);
+    return;
+  }
+  const base = nodes.length > 0 ? [nodes.pop()!] : [];
+  nodes.push(createScripts(base, { [slot]: content }));
 }
 
 export function createIntegral(

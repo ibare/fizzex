@@ -10,8 +10,7 @@ export type MathNodeType =
   | 'variable'  // 변수 (x, y, θ 등)
   | 'operator'  // 연산자 (+, -, ×, ÷, =, <, >, ≤, ≥, ≠)
   | 'frac'      // 분수
-  | 'power'     // 거듭제곱
-  | 'subscript' // 아래첨자
+  | 'scripts'   // 첨자 (위/아래/왼쪽위/왼쪽아래)
   | 'sqrt'      // 제곱근
   | 'paren'     // 괄호
   | 'abs'       // 절댓값
@@ -85,19 +84,47 @@ export interface FracNode extends MathNodeBase {
   denominator: MathNode[]; // 분모
 }
 
-/** 거듭제곱 노드 */
-export interface PowerNode extends MathNodeBase {
-  type: 'power';
-  base: MathNode[];     // 밑
-  exponent: MathNode[]; // 지수
+/**
+ * 첨자 노드 — 하나의 밑에 최대 네 방향의 첨자가 붙는다.
+ *
+ * x^2, x_i, x_i^2, SO_4^{2-}, ^{227}_{90}Th 를 모두 이 한 노드가 표현한다.
+ * 위/아래 첨자는 가로로 나열되지 않고 같은 x 위치에 수직으로 쌓인다 (TeX Rule 18e).
+ *
+ * 불변식:
+ * - 네 첨자 중 최소 하나는 존재한다. 넷 다 없는 scripts 노드는 만들지 않는다.
+ * - 존재하는 첨자 슬롯은 항상 RowNode 하나로 감싼다.
+ *   row id 는 deriveId(node.id, '_sup' | '_sub' | '_leftsup' | '_leftsub').
+ * - base 는 row 로 감싸지 않는다. 빈 base 가 placeholder 로 렌더되는 것을 막기 위함이다.
+ */
+export interface ScriptsNode extends MathNodeBase {
+  type: 'scripts';
+  /** 첨자가 붙는 대상. 비어 있으면 첨자만 있는 형태 */
+  base: MathNode[];
+  /** 오른쪽 위첨자 — x^2 의 2, SO_4^{2-} 의 2- */
+  superscript?: MathNode[];
+  /** 오른쪽 아래첨자 — x_i 의 i, SO_4 의 4 */
+  subscript?: MathNode[];
+  /** 왼쪽 위첨자 — ^{227}_{90}Th 의 227 */
+  leftSuperscript?: MathNode[];
+  /** 왼쪽 아래첨자 — ^{227}_{90}Th 의 90 */
+  leftSubscript?: MathNode[];
 }
 
-/** 아래첨자 노드 */
-export interface SubscriptNode extends MathNodeBase {
-  type: 'subscript';
-  base: MathNode[];     // 밑
-  subscript: MathNode[]; // 아래첨자
-}
+/** 첨자 노드의 슬롯 이름 */
+export type ScriptSlot =
+  | 'base'
+  | 'superscript'
+  | 'subscript'
+  | 'leftSuperscript'
+  | 'leftSubscript';
+
+/** 밑을 제외한 첨자 슬롯 (실제로 첨자가 놓이는 네 자리) */
+export const SCRIPT_SLOTS = [
+  'superscript',
+  'subscript',
+  'leftSuperscript',
+  'leftSubscript',
+] as const satisfies readonly Exclude<ScriptSlot, 'base'>[];
 
 /** 제곱근 노드 */
 export interface SqrtNode extends MathNodeBase {
@@ -314,8 +341,7 @@ export type MathNode =
   | VariableNode
   | OperatorNode
   | FracNode
-  | PowerNode
-  | SubscriptNode
+  | ScriptsNode
   | SqrtNode
   | ParenNode
   | AbsNode

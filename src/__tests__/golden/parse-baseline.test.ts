@@ -102,16 +102,16 @@ describe('P0 골든 — 기본 식 구조 (모두 OK, 전 구간 유지)', () =>
   it('[OK] x^2 (단일자리 지수)', () => {
     const { ast } = parseLatex('x^2');
     expect(ast.children.length).toBe(1);
-    expect(ast.children[0].type).toBe('power');
+    expect(ast.children[0].type).toBe('scripts');
   });
 
   it('[OK] x^{12} 지수는 단일 NumberNode("12")로 파싱됨', () => {
     const { ast } = parseLatex('x^{12}');
     expect(ast.children.length).toBe(1);
-    expect(ast.children[0].type).toBe('power');
-    const power = ast.children[0] as { exponent: MathNode[] };
-    expect(power.exponent.length).toBe(1);
-    expect(shape(power.exponent[0])).toEqual({
+    expect(ast.children[0].type).toBe('scripts');
+    const power = ast.children[0] as { superscript: MathNode[] };
+    expect(power.superscript.length).toBe(1);
+    expect(shape(power.superscript[0])).toEqual({
       type: 'row',
       children: [{ type: 'number', value: '12' }],
     });

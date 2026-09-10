@@ -85,13 +85,12 @@ function collectAstNodes(node: MathNode): Map<string, MathNode> {
         for (const c of n.numerator) walk(c);
         for (const c of n.denominator) walk(c);
         break;
-      case 'power':
+      case 'scripts':
         for (const c of n.base) walk(c);
-        for (const c of n.exponent) walk(c);
-        break;
-      case 'subscript':
-        for (const c of n.base) walk(c);
-        for (const c of n.subscript) walk(c);
+        if (n.superscript) for (const c of n.superscript) walk(c);
+        if (n.subscript) for (const c of n.subscript) walk(c);
+        if (n.leftSuperscript) for (const c of n.leftSuperscript) walk(c);
+        if (n.leftSubscript) for (const c of n.leftSubscript) walk(c);
         break;
       case 'sqrt':
         for (const c of n.content) walk(c);

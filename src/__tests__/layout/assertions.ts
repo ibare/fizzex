@@ -155,6 +155,10 @@ function extractActualValue(
     // 위+아래
     subsup_gap_min: 'subsup.gap',
     sup_bottom_with_sub_min: 'superscript.bottom',
+    // 좌측 첨자 (prescript)
+    prescript_shift_up_min: 'prescript.shift_up',
+    prescript_shift_down_min: 'prescript.shift_down',
+    prescript_gap_min: 'prescript.gap',
     // 근호
     content_rule_clearance_min: 'radical.content_rule_clearance',
     radical_rule_thickness: 'radical.rule_thickness',

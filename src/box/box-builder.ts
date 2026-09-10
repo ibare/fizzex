@@ -366,40 +366,135 @@ export function createBinomBox(
   return createParenthesized(vbox, '(', metrics, fontSize, sourceId, true);
 }
 
-/** 거듭제곱 Box 생성 */
-export function createPower(
+/** 첨자 컬럼의 baseline 이동량 (em 단위 아님 — 실제 픽셀) */
+interface ScriptShifts {
+  /** 위첨자를 baseline 위로 올리는 양 (양수) */
+  up: number;
+  /** 아래첨자를 baseline 아래로 내리는 양 (양수) */
+  down: number;
+}
+
+/**
+ * TeX Rule 18a/18b/18c/18e 에 따른 첨자 shift 계산.
+ *
+ * nucleus 는 첨자가 붙는 대상의 height/depth 다. 좌측 첨자는 붙을 대상이 없으므로
+ * null nucleus (height=depth=0) 를 넘긴다 — TeXbook Appendix G 에 prescript 규칙이
+ * 없어 표준 구현들이 쓰는 관례를 따른다.
+ */
+function scriptShifts(
+  nucleus: { height: number; depth: number },
+  sup: Box | undefined,
+  sub: Box | undefined,
+  em: number,
+  style: MathStyle
+): ScriptShifts {
+  // Rule 18c: sup1(display) / sup2(text) / sup3(cramped), 그리고 큰 base 보정
+  let up = sup
+    ? Math.max(
+        em * (isCramped(style)
+          ? MathConstants.supCrampedShift
+          : isDisplay(style)
+            ? MathConstants.exponentShift
+            : MathConstants.supTextShift),
+        nucleus.height - em * MathConstants.supDrop
+      )
+    : 0;
+
+  // Rule 18a: sub1, 그리고 깊은 base 보정
+  let down = sub
+    ? Math.max(
+        em * MathConstants.subscriptShift,
+        nucleus.depth + em * MathConstants.subDrop
+      )
+    : 0;
+
+  if (sup && !sub) {
+    // Rule 18c: 위첨자 하단이 xHeight/4 이상
+    up = Math.max(up, sup.depth + (em * MathConstants.xHeight) / 4);
+  } else if (sub && !sup) {
+    // Rule 18b: 아래첨자 상단이 (4/5)·xHeight 이하
+    down = Math.max(down, sub.height - (em * MathConstants.xHeight * 4) / 5);
+  } else if (sup && sub) {
+    // Rule 18e (tex-rule-010): 위아래가 함께 붙을 때. sigma17 의 유일한 사용처.
+    down = Math.max(down, em * MathConstants.subscriptShiftWithSup);
+    const xi8 = em * MathConstants.fractionRuleThickness;
+    const clearance = 4 * xi8 - ((up - sup.depth) - (sub.height - down));
+    if (clearance > 0) {
+      down += clearance;
+      const psi = (em * MathConstants.xHeight * 4) / 5 - (up - sup.depth);
+      if (psi > 0) {
+        up += psi;
+        down -= psi;
+      }
+    }
+  }
+
+  return { up, down };
+}
+
+/**
+ * 첨자 컬럼을 자식 Box 배열로 만든다.
+ *
+ * 위아래가 함께 있으면 같은 x 에서 시작하도록 음수 kern 으로 되돌린 뒤 쌓고,
+ * 마지막 kern 으로 컬럼 폭을 max(sup, sub) 에 맞춘다 — layoutHBox 가
+ * currentX += child.width 로 진행하므로 kern 이 폭에 반영돼야 다음 형제와 겹치지 않는다.
+ */
+function scriptColumn(
+  nucleus: { height: number; depth: number },
+  sup: Box | undefined,
+  sub: Box | undefined,
+  em: number,
+  style: MathStyle
+): Box[] {
+  if (!sup && !sub) return [];
+  const { up, down } = scriptShifts(nucleus, sup, sub, em, style);
+
+  if (sup && sub) {
+    const columnWidth = Math.max(sup.width, sub.width);
+    return [
+      { ...sub, shift: down },
+      createKern(-sub.width),
+      { ...sup, shift: -up },
+      createKern(columnWidth - sup.width),
+    ];
+  }
+  if (sup) return [{ ...sup, shift: -up }];
+  return [{ ...sub!, shift: down }];
+}
+
+/**
+ * 첨자 Box 생성 — TeX Rule 18a~18e + 좌측 첨자.
+ *
+ * 위/아래 첨자는 가로로 나열되지 않고 같은 x 위치에 수직으로 쌓인다.
+ * height/depth 는 createHBox 가 자식의 shift 를 접어 계산하므로 여기서 손보지 않는다.
+ */
+export function createScripts(
   base: Box,
-  exponent: Box,
+  scripts: {
+    superscript?: Box;
+    subscript?: Box;
+    leftSuperscript?: Box;
+    leftSubscript?: Box;
+  },
   metrics: FontMetrics,
   fontSize: number = 1.0,
   sourceId?: string,
   style: MathStyle = MathStyle.Display
 ): HBox {
-  const actualFontSize = metrics.getActualFontSize(fontSize);
-  // TeX 스타일별 위첨자 shift: cramped → sup3, display → sup1, text → sup2
-  const supShiftEm = isCramped(style) ? MathConstants.supCrampedShift
-    : isDisplay(style) ? MathConstants.exponentShift
-    : MathConstants.supTextShift;
-  const baseShift = actualFontSize * supShiftEm;
+  const em = metrics.getActualFontSize(fontSize);
 
-  // base 높이가 기본보다 큰 경우 (예: autoSize 괄호, 분수 등) 추가 shift
-  // 지수가 base의 오른쪽 위 모서리에 위치하도록 조정
-  const baseDefaultHeight = metrics.getHeight(fontSize);
-  const extraHeight = Math.max(0, base.height - baseDefaultHeight);
-  const shift = baseShift + extraHeight * 0.6;  // base 높이 차이의 60%만큼 추가
+  const post = scriptColumn(base, scripts.superscript, scripts.subscript, em, style);
+  // 좌측 첨자는 붙을 대상이 없다 — null nucleus 기준으로 같은 규칙을 적용한다.
+  const NULL_NUCLEUS = { height: 0, depth: 0 };
+  const pre = scriptColumn(
+    NULL_NUCLEUS,
+    scripts.leftSuperscript,
+    scripts.leftSubscript,
+    em,
+    style
+  );
 
-  // 지수를 위로 이동 (shift를 음수로 설정하여 baseline을 위로)
-  const shiftedExponent: Box = {
-    ...exponent,
-    shift: -shift,  // 음수 = 위로 이동
-  };
-
-  // HBox의 전체 height는 base와 shifted exponent를 고려
-  const hbox = createHBox([base, shiftedExponent], sourceId);
-  // 지수가 위로 올라간 만큼 전체 height 조정
-  hbox.height = Math.max(hbox.height, exponent.height + shift);
-
-  return hbox;
+  return createHBox([...pre, base, ...post], sourceId);
 }
 
 /** 경로 데이터로 최적 크기 변형 인덱스 선택 */
@@ -662,38 +757,6 @@ export function createOperator(
     glyph,
     createKern(spacing),
   ]);
-}
-
-/** 아래첨자 Box 생성 */
-export function createSubscript(
-  base: Box,
-  subscript: Box,
-  metrics: FontMetrics,
-  fontSize: number = 1.0,
-  sourceId?: string
-): HBox {
-  const actualFontSize = metrics.getActualFontSize(fontSize);
-  let shift = actualFontSize * MathConstants.subscriptShift;
-
-  // TeX Rule 18a: 아래첨자 상단이 4/5 * xHeight를 초과하면 shift 증가
-  const topMax = actualFontSize * MathConstants.xHeight * 4 / 5;
-  const subscriptTop = subscript.height - shift;
-  if (subscriptTop > topMax) {
-    shift = subscript.height - topMax;
-  }
-
-  // 아래첨자를 아래로 이동 (shift를 양수로 설정하여 baseline을 아래로)
-  const shiftedSubscript: Box = {
-    ...subscript,
-    shift: shift,  // 양수 = 아래로 이동
-  };
-
-  // HBox의 전체 depth는 base와 shifted subscript를 고려
-  const hbox = createHBox([base, shiftedSubscript], sourceId);
-  // 아래첨자가 아래로 내려간 만큼 전체 depth 조정
-  hbox.depth = Math.max(hbox.depth, subscript.depth + shift);
-
-  return hbox;
 }
 
 /** 절댓값 Box 생성 */
