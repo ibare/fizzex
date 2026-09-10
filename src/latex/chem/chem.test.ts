@@ -105,6 +105,23 @@ describe('화학식 파싱', () => {
     expect(scripts.base[0].type).toBe('text');
   });
 
+  it('첨자를 쓴 순서가 구조를 바꾸지 않는다', () => {
+    // 본문 경로는 두 첨자를 다 모은 뒤 판정하는데 앞첨자 경로만 만나는 자리에서
+    // 판정해, 전하를 원자 수보다 먼저 쓰면 한 겹으로 남던 자리다.
+    const shape = (node: MathNode): string => {
+      if (node.type !== 'scripts') return node.type;
+      const s = node as ScriptsNode;
+      const slots = (['leftSuperscript', 'leftSubscript', 'subscript', 'superscript'] as const)
+        .filter((k) => s[k] !== undefined);
+      return `scripts[${s.base.map(shape).join(',')}]{${slots.join('+')}}`;
+    };
+
+    const shapeOf = (latex: string): string => chemChildren(latex).map(shape).join(' ');
+
+    expect(shapeOf('\\ce{^{227}_{90}Th^{3+}2}')).toBe(shapeOf('\\ce{^{227}_{90}Th2^{3+}}'));
+    expect(shapeOf('\\ce{O^2-_4}')).toBe(shapeOf('\\ce{O_4^2-}'));
+  });
+
   it('동위원소의 앞첨자를 읽는다 (^{227}_{90}Th)', () => {
     const children = chemChildren('\\ce{^{227}_{90}Th}');
     const scripts = children[0] as ScriptsNode;

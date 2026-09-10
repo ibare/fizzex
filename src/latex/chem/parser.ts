@@ -232,8 +232,9 @@ function parseLeadingScripts(
 /**
  * 앞첨자가 붙은 노드에 뒤첨자까지 마저 붙인다.
  *
- * 슬롯 row 는 `attachScript` 로 만든다 — id 가 `deriveId(부모.id, '_sup'|'_sub')` 규약을
- * 지켜야 편집기가 나중에 같은 슬롯을 채울 때 커서가 떠 있지 않는다.
+ * 아래첨자 슬롯은 `attachScript` 로 채운다 — id 가 `deriveId(부모.id, '_sub')` 규약을
+ * 지켜야 편집기가 나중에 같은 슬롯을 채울 때 커서가 떠 있지 않는다. 위첨자는 바깥
+ * 겹으로 갈 수 있어 `createScripts` 가 새 부모 id 기준으로 슬롯 row 를 만든다.
  */
 function attachTrailingScriptsOnScripts(
   tk: ChemTokenizer,
@@ -242,17 +243,15 @@ function attachTrailingScriptsOnScripts(
   node: ScriptsNode
 ): MathNode {
   let current = node;
+  // 위첨자는 바로 붙이지 않고 모아 둔다. 아래첨자가 위첨자보다 뒤에 올 수도 있어서
+  // (`Th^{3+}2`), 다 읽고 나서야 한 겹으로 둘지 두 겹으로 나눌지 정할 수 있다.
+  let superscript: MathNode[] | undefined;
+
   for (;;) {
     const tok = tk.peek('body');
-    if (tok.kind === 'caret' && current.superscript === undefined) {
+    if (tok.kind === 'caret' && superscript === undefined) {
       tk.next('body');
-      const superscript = parseScriptArgument(tk, latex, ctx);
-      // 본문 경로와 같은 규칙 — 아래첨자가 이미 있으면 위첨자는 바깥 겹으로.
-      // 앞첨자는 안쪽에 그대로 남아야 직렬화 순서가 유지된다.
-      if (current.subscript !== undefined) {
-        return createScripts([current], { superscript });
-      }
-      current = attachScript(current, 'superscript', superscript);
+      superscript = parseScriptArgument(tk, latex, ctx);
       continue;
     }
     if (tok.kind === 'underscore' && current.subscript === undefined) {
@@ -267,7 +266,14 @@ function attachTrailingScriptsOnScripts(
     }
     break;
   }
-  return current;
+
+  if (!superscript) return current;
+
+  // 본문 경로와 같은 규칙 — 아래첨자가 있으면 위첨자는 바깥 겹으로.
+  // 앞첨자는 안쪽에 그대로 남아야 직렬화 순서가 유지된다.
+  return current.subscript !== undefined
+    ? createScripts([current], { superscript })
+    : attachScript(current, 'superscript', superscript);
 }
 
 /** 본문 토큰 하나를 소비한다. 계속 읽을 수 있으면 true */
