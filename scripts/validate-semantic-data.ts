@@ -14,6 +14,7 @@ import { readFileSync } from 'node:fs';
 import {
   validateCatalogIndex,
   validateCatalogDetailFile,
+  validateElements,
   CatalogValidationError,
 } from '../src/analyzer/semantic/validator/index.js';
 import { formIndexSchema, formTextSchema } from '../src/analyzer/semantic/validator/form-schema.js';
@@ -212,6 +213,24 @@ function collectSymKeys(e: ExprNode, out: Set<string>): void {
   for (const c of childrenOfExpr(e)) collectSymKeys(c, out);
 }
 
+// ─── 원소 이름표 검증 ───
+
+function validateElementNames(): void {
+  console.log('\n[원소] 이름표 스키마 검증');
+
+  const path = resolve(dataDir, 'elements/ko.json');
+  try {
+    const data = validateElements('elements/ko.json', loadJson<unknown>(path));
+    ok(`${Object.keys(data.bySymbol).length}개 원소 검증 완료`);
+  } catch (e) {
+    if (e instanceof CatalogValidationError) {
+      for (const issue of e.issues) error(`elements/ko.json: ${issue.path.join('.')}: ${issue.message}`);
+    } else {
+      error(`elements/ko.json 로드 실패: ${String(e)}`);
+    }
+  }
+}
+
 function validateForms(): void {
   console.log('\n[형식] 스키마 + 템플릿 ↔ 선언 슬롯 검증');
 
@@ -317,6 +336,7 @@ const l2Errors = errors - prevErrors2;
 const prevErrors3 = errors;
 validateCatalog();
 validateForms();
+validateElementNames();
 const catalogErrors = errors - prevErrors3;
 
 console.log('\n--- 결과 ---');

@@ -40,7 +40,7 @@ describe('화학식 의미 해석', () => {
     const r = roles('\\ce{H2O}');
 
     expect(r).toContain('원자 수');
-    expect(r).toContain('원소');
+    expect(r).toContain('수소');
     expect(r).not.toContain('인덱스');
     expect(r).not.toContain('인덱싱 대상');
   });
@@ -51,7 +51,7 @@ describe('화학식 의미 해석', () => {
     expect(r).toContain('질량수');
     expect(r).toContain('원자 번호');
     // 밑이 "거듭제곱에서 반복 곱해지는 대상" 이던 자리
-    expect(r).toContain('원소');
+    expect(r).toContain('토륨');
     expect(r).not.toContain('밑');
   });
 
@@ -95,5 +95,45 @@ describe('화학식 의미 해석', () => {
 
     expect(r).toContain('분자');
     expect(r).toContain('분모');
+  });
+});
+
+describe('원소 이름', () => {
+  it('원소 기호가 실제 이름으로 설명된다', () => {
+    const r = roles('\\ce{H2O}');
+
+    expect(r).toContain('수소');
+    expect(r).toContain('산소');
+    // "원소" 라고만 나오던 자리다
+    expect(r).not.toContain('원소');
+  });
+
+  it('설명에 원자 번호가 들어간다', () => {
+    expect(describeRole('\\ce{H2O}', '수소')).toMatch(/^원자번호 1\./);
+    expect(describeRole('\\ce{CuSO4}', '구리')).toMatch(/^원자번호 29\./);
+  });
+
+  it('두 글자 기호도 찾는다', () => {
+    expect(roles('\\ce{Ca(OH)2}')).toContain('칼슘');
+    expect(roles('\\ce{^{227}_{90}Th}')).toContain('토륨');
+  });
+
+  it('괄호 안의 원소도 이름이 나온다', () => {
+    // 본문·첨자의 밑·괄호 안 셋이 모두 같은 자리로 수렴한다
+    const r = roles('\\ce{Ca(OH)2}');
+
+    expect(r).toContain('산소');
+    expect(r).toContain('수소');
+  });
+
+  it('주기율표에 없는 기호는 일반 설명으로 돌아간다', () => {
+    // 파서는 주기율표 없이 [A-Z][a-z]* 형태로만 자른다
+    const r = roles('\\ce{Xy2}');
+
+    expect(r).toContain('원소');
+  });
+
+  it('화학식 밖의 글자는 원소로 읽지 않는다', () => {
+    expect(roles('\\text{H}')).not.toContain('수소');
   });
 });

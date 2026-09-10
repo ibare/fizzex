@@ -7,7 +7,9 @@
 
 import type { z } from 'zod';
 import type { CatalogIndexEntry, CatalogDetail } from '../types.js';
+import type { ElementTexts } from '../loader.js';
 import { catalogIndexSchema, catalogDetailFileSchema } from './catalog-schema.js';
+import { elementsSchema } from './elements-schema.js';
 
 export class CatalogValidationError extends Error {
   constructor(
@@ -43,4 +45,14 @@ export function validateCatalogDetailFile(
   return result.data as Record<string, CatalogDetail>;
 }
 
+/** 원소 이름표를 검증·반환. 실패 시 CatalogValidationError throw. */
+export function validateElements(source: string, input: unknown): ElementTexts {
+  const result = elementsSchema.safeParse(input);
+  if (!result.success) {
+    throw new CatalogValidationError(source, result.error.issues);
+  }
+  return result.data as ElementTexts;
+}
+
 export { catalogIndexSchema, catalogDetailSchema, catalogDetailFileSchema } from './catalog-schema.js';
+export { elementsSchema, ELEMENT_COUNT } from './elements-schema.js';

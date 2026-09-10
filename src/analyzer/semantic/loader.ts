@@ -57,6 +57,8 @@ import koMl from './data/catalog/ko/ml.json' with { type: 'json' };
 import koInformation from './data/catalog/ko/information.json' with { type: 'json' };
 // 사회과학
 import koSocialScience from './data/catalog/ko/social-science.json' with { type: 'json' };
+// 원소 이름표 — 화학식 안의 원소 기호를 사람이 읽는 이름으로 바꾼다
+import koElements from './data/elements/ko.json' with { type: 'json' };
 
 // ─── 타입 ───
 
@@ -117,10 +119,29 @@ export interface FallbackTexts {
   defaultFunction: string;
 }
 
+/** 원소 하나의 설명 */
+export interface ElementEntry {
+  /** 원소 이름 (대한화학회 표기) */
+  name: string;
+  /** 원자 번호 */
+  z: number;
+  /** 한 줄 설명 */
+  desc: string;
+}
+
+/** 원소 이름표 */
+export interface ElementTexts {
+  /** 설명 문장 형식 — `{z}` 와 `{desc}` 를 치환한다 */
+  descriptionFormat: string;
+  /** 원소 기호 → 설명 */
+  bySymbol: Record<string, ElementEntry>;
+}
+
 export interface SemanticTexts {
   layer1: Record<string, Layer1TextEntry>;
   layer2: Record<string, Layer2TextEntry>;
   fallback: FallbackTexts;
+  elements: ElementTexts;
 }
 
 // ─── 캐시 ───
@@ -142,6 +163,7 @@ export function getSemanticTexts(locale = 'ko'): SemanticTexts {
       layer1: koLayer1 as Record<string, Layer1TextEntry>,
       layer2: koLayer2 as Record<string, Layer2TextEntry>,
       fallback: koFallback as FallbackTexts,
+      elements: koElements as ElementTexts,
     };
     textCache.set('ko', texts);
     return texts;

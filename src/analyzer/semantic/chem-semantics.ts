@@ -24,7 +24,7 @@ import {
   isEquilibriumDirection,
 } from '../../latex/chem/grammar.js';
 import type { AncestorEntry, SemanticResult } from './types.js';
-import type { ChemTextKey, FallbackTexts } from './loader.js';
+import type { ChemTextKey, SemanticTexts } from './loader.js';
 
 /**
  * 상태 표기 기호.
@@ -113,12 +113,12 @@ function inChemScope(ancestors: AncestorEntry[]): boolean {
 export function getSemanticForChem(
   node: MathNode,
   ancestors: AncestorEntry[],
-  fallback: FallbackTexts,
+  texts: SemanticTexts,
 ): SemanticResult | null {
   // 화학식 노드 자신 — 반응 화살표 유무로 갈린다
   const chem = asChem(node);
   if (chem) {
-    return result(hasArrow(chem.content) ? 'equation' : 'formula', fallback);
+    return result(hasArrow(chem.content) ? 'equation' : 'formula', node, texts);
   }
 
   if (!inChemScope(ancestors)) return null;
@@ -130,7 +130,7 @@ export function getSemanticForChem(
   if (!parent) return null;
 
   const key = keyFor(node, parent);
-  return key ? result(key, fallback) : null;
+  return key ? result(key, node, texts) : null;
 }
 
 /** 부모 관계로 뜻을 정한다 */
@@ -182,7 +182,28 @@ function hasArrow(nodes: MathNode[]): boolean {
   return false;
 }
 
-function result(key: ChemTextKey, fallback: FallbackTexts): SemanticResult {
-  const text = fallback.chem[key];
+/**
+ * 어휘 키를 사람이 읽는 말로.
+ *
+ * 원소는 여기서만 이름표를 찾는다. `'element'` 로 수렴하는 자리가 셋이라
+ * (본문 · 첨자의 밑 · 괄호 안) 조회를 세 곳에 흩으면 하나를 빠뜨린다.
+ */
+function result(key: ChemTextKey, node: MathNode, texts: SemanticTexts): SemanticResult {
+  if (key === 'element' && node.type === 'text') {
+    const element = texts.elements.bySymbol[node.content];
+    if (element) {
+      return {
+        role: element.name,
+        description: texts.elements.descriptionFormat
+          .replace('{z}', String(element.z))
+          .replace('{desc}', element.desc),
+        layer: 'layer1',
+      };
+    }
+    // 파서는 주기율표 없이 `[A-Z][a-z]*` 형태로만 자른다. 실재하지 않는
+    // 기호도 여기로 오므로 이름표에 없으면 일반 설명으로 돌아간다.
+  }
+
+  const text = texts.fallback.chem[key];
   return { role: text.role, description: text.description, layer: 'layer1' };
 }

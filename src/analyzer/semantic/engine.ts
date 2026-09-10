@@ -280,7 +280,7 @@ export function getSemanticMeaning(
   // 화학식 안에서는 같은 기호가 다른 뜻이다 — `+` 는 덧셈이 아니고 위첨자는
   // 지수가 아니다. 수학 레이어보다 앞에 둔다. 화학 어휘로 설명할 수 없는
   // 노드에는 null 이 오므로 `$...$` 로 끼워 넣은 수식 조각은 아래로 흘러간다.
-  const chemMeaning = getSemanticForChem(node, ancestors, texts.fallback);
+  const chemMeaning = getSemanticForChem(node, ancestors, texts);
   if (chemMeaning) return chemMeaning;
 
   // 의미 있는 조상만 추출 (root, row는 구조적 의미가 없으므로 건너뜀)
