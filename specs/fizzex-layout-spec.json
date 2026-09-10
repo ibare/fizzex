@@ -1038,7 +1038,7 @@
             },
             {
               "type": "num_rule_clearance_min",
-              "expected": "3 * xi8",
+              "expected": "3 * xi8_defaultRuleThickness",
               "tolerance": 0.01
             }
           ]
@@ -1285,7 +1285,7 @@
           "assertions": [
             {
               "type": "content_rule_clearance_min",
-              "expected": "xi8 + sigma5 / 4",
+              "expected": "xi8_defaultRuleThickness + sigma5_xHeight / 4",
               "tolerance": 0.01
             },
             {
@@ -1302,7 +1302,7 @@
           "assertions": [
             {
               "type": "content_rule_clearance_min",
-              "expected": "1.25 * xi8",
+              "expected": "1.25 * xi8_defaultRuleThickness",
               "tolerance": 0.01
             }
           ]
@@ -1381,7 +1381,7 @@
           "assertions": [
             {
               "type": "overline_gap",
-              "expected": "3 * xi8",
+              "expected": "3 * xi8_defaultRuleThickness",
               "tolerance": 0.01
             },
             {
@@ -1487,12 +1487,12 @@
           "known_fail": false,
           "assertions": [
             {
-              "type": "subscript_shift_down",
+              "type": "subscript_shift_down_min",
               "expected_param": "sigma16_sub1",
               "tolerance": 0.05
             },
             {
-              "type": "superscript_shift_up",
+              "type": "superscript_shift_up_min",
               "expected_param": "sigma13_sup1",
               "tolerance": 0.05
             }
@@ -1525,7 +1525,7 @@
           "known_fail": false,
           "assertions": [
             {
-              "type": "subscript_shift_down",
+              "type": "subscript_shift_down_min",
               "expected_param": "sigma16_sub1",
               "tolerance": 0.05
             },
@@ -1542,7 +1542,7 @@
           "known_fail": false,
           "assertions": [
             {
-              "type": "subscript_shift_down",
+              "type": "subscript_shift_down_min",
               "expected_param": "sigma16_sub1",
               "tolerance": 0.05
             },
@@ -1563,7 +1563,7 @@
               "expected": true
             },
             {
-              "type": "subscript_shift_down",
+              "type": "subscript_shift_down_min",
               "expected_param": "sigma16_sub1",
               "tolerance": 0.05
             }
