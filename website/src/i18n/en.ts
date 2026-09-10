@@ -170,6 +170,7 @@ export const en: Dictionary = {
       algebra: 'Algebra',
       geometry: 'Geometry',
       physics: 'Physics',
+      chemistry: 'Chemistry',
       analysis: 'Analysis',
       statistics: 'Statistics',
       astronomy: 'Astronomy',
@@ -227,6 +228,16 @@ export const en: Dictionary = {
       kinetic_energy: 'Kinetic energy',
       projectile_motion: 'Projectile motion',
       simple_harmonic: 'Simple harmonic motion',
+      // chemistry
+      water_molecule: 'Water molecule',
+      sulfate_ion: 'Sulfate ion',
+      calcium_hydroxide: 'Calcium hydroxide',
+      hydrogen_combustion: 'Combustion of hydrogen',
+      carbonic_equilibrium: 'Carbonic acid equilibrium',
+      ammonia_synthesis: 'Ammonia synthesis (Haber process)',
+      thorium_isotope: 'Thorium-227 isotope',
+      copper_sulfate_hydrate: 'Copper sulfate pentahydrate',
+      barium_sulfate_precipitate: 'Barium sulfate precipitate',
       // astronomy
       kepler_third: "Kepler's third law",
       // biology

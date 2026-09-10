@@ -1,15 +1,28 @@
 import { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { parseLatex, createStateFromLatex, analyzeExpression } from 'fizzex';
+import { parseLatex, createStateFromLatex, analyzeExpression, findNodes } from 'fizzex';
 import { EditorView } from 'fizzex/react';
 import { useLang } from '../i18n/context';
 import { visualizerRegistry } from '../visualizer-registry';
 import { categories } from '../data/examples-data';
-import type { ExpressionAnalysis, EditorState } from 'fizzex';
+import type { ExpressionAnalysis, EditorState, ChemNode, RootNode } from 'fizzex';
 
 interface RenderedItem {
   state: EditorState | null;
   analysis: ExpressionAnalysis | null;
+}
+
+/**
+ * 화학식은 아직 의미 분석 대상이 아니다.
+ *
+ * 지금 analyzeExpression 에 넣으면 domain=arithmetic, variables=[] 처럼 수식으로 읽은
+ * 결과가 나와 화면에 틀린 정보가 붙는다. 카탈로그·semantic 연동이 끝나면 이 함수를 지우고
+ * 분석 결과를 그대로 보여주면 된다.
+ *
+ * 카테고리 이름이 아니라 AST 로 판별한다 — 화학식이 다른 카테고리에 들어와도 맞아야 한다.
+ */
+function isChemistry(ast: RootNode): boolean {
+  return findNodes<ChemNode>(ast, 'chem').length > 0;
 }
 
 export default function Examples() {
@@ -27,7 +40,7 @@ export default function Examples() {
       try {
         state = createStateFromLatex(item.latex);
         const { ast } = parseLatex(item.latex);
-        analysis = analyzeExpression(ast);
+        if (!isChemistry(ast)) analysis = analyzeExpression(ast);
       } catch {
         try { state = createStateFromLatex(item.latex); } catch { /* skip */ }
       }

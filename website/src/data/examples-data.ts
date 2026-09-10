@@ -96,6 +96,20 @@ export const categories: ExampleCategory[] = [
     ],
   },
   {
+    key: 'chemistry',
+    items: [
+      { labelKey: 'water_molecule', latex: '\\ce{H2O}' },
+      { labelKey: 'sulfate_ion', latex: '\\ce{SO4^2-}' },
+      { labelKey: 'calcium_hydroxide', latex: '\\ce{Ca(OH)2}' },
+      { labelKey: 'hydrogen_combustion', latex: '\\ce{2H2 + O2 -> 2H2O}' },
+      { labelKey: 'carbonic_equilibrium', latex: '\\ce{CO2 + H2O <=> H2CO3}' },
+      { labelKey: 'ammonia_synthesis', latex: '\\ce{N2 + 3H2 <=>[Fe] 2NH3}' },
+      { labelKey: 'thorium_isotope', latex: '\\ce{^{227}_{90}Th}' },
+      { labelKey: 'copper_sulfate_hydrate', latex: '\\ce{CuSO4 * 5H2O}' },
+      { labelKey: 'barium_sulfate_precipitate', latex: '\\ce{BaSO4 v}' },
+    ],
+  },
+  {
     key: 'astronomy',
     items: [
       { labelKey: 'kepler_third', latex: 'T^2 = \\frac{4\\pi^2}{GM}a^3' },

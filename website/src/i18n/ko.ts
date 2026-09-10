@@ -170,6 +170,7 @@ export const ko: Dictionary = {
       algebra: '대수학',
       geometry: '기하학',
       physics: '물리학',
+      chemistry: '화학',
       analysis: '해석학',
       statistics: '통계학',
       astronomy: '천문학',
@@ -227,6 +228,16 @@ export const ko: Dictionary = {
       kinetic_energy: '운동 에너지',
       projectile_motion: '포물체 운동',
       simple_harmonic: '단순 조화 운동',
+      // chemistry
+      water_molecule: '물 분자',
+      sulfate_ion: '황산 이온',
+      calcium_hydroxide: '수산화칼슘',
+      hydrogen_combustion: '수소의 연소',
+      carbonic_equilibrium: '탄산의 평형',
+      ammonia_synthesis: '암모니아 합성 (하버법)',
+      thorium_isotope: '토륨-227 동위원소',
+      copper_sulfate_hydrate: '황산구리 오수화물',
+      barium_sulfate_precipitate: '황산바륨 침전',
       // astronomy
       kepler_third: '케플러 제3법칙',
       // biology

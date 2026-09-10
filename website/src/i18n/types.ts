@@ -136,6 +136,7 @@ export interface Dictionary {
       algebra: string;
       geometry: string;
       physics: string;
+      chemistry: string;
       analysis: string;
       statistics: string;
       astronomy: string;
