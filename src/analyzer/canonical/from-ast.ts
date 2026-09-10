@@ -45,6 +45,9 @@ import type {
   XArrowNode,
 } from '../../types.js';
 import { normalizeVarName } from '../../evaluator/normalize.js';
+// 화학식의 정규 표기는 직렬화기가 소유한다. 사본을 만들면 표기 규칙이 두 벌이 된다.
+import { astToLatex } from '../../latex/ast-to-latex.js';
+import { chemNotation } from '../../latex/chem/serializer.js';
 import { tokenizeSequence, toRPN, type SeqToken } from '../../evaluator/sequence.js';
 import {
   type ExprNode,
@@ -110,6 +113,10 @@ export function flattenSequence(nodes: readonly MathNode[]): MathNode[] {
  */
 function opaqueTag(node: MathNode): string {
   switch (node.type) {
+    // 화학식의 판별 필드는 내용 전체다. `\ce{H2O}` 와 `\ce{CO2}` 가 같은 태그로
+    // 붕괴하면 서로 다른 화학식이 정규화 동치가 되고 카탈로그도 가릴 수 없다.
+    case 'chem':
+      return `chem:${chemNotation((node as ChemNode).content, astToLatex)}`;
     case 'accent':
       return `accent:${(node as AccentNode).accentType}`;
     case 'overline':
@@ -355,8 +362,9 @@ function normalizeNode(node: MathNode, ctx: Ctx, depth: number): ExprNode {
     }
 
     case 'chem':
-      // 화학식은 수식이 아니다 — 통째로 불투명 처리한다
-      return opaque('chem', [seq((node as ChemNode).content)], src);
+      // 화학식은 수식이 아니다 — 통째로 불투명 처리한다.
+      // 태그에 정규 표기를 실어 화학식끼리도 구분되게 한다 (opaqueTag 참조).
+      return opaque(opaqueTag(node), [seq((node as ChemNode).content)], src);
 
     case 'frac': {
       const n = node as FracNode;

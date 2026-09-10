@@ -79,6 +79,20 @@ export function extractFeatures(
     features.push('periodic');
   }
 
+  // 화학식 특성
+  if (collected.chem.hasReaction) {
+    features.push('chemical-reaction');
+  }
+  if (collected.chem.hasEquilibrium) {
+    features.push('reversible-reaction');
+  }
+  if (collected.chem.hasIsotope) {
+    features.push('isotope');
+  }
+  if (collected.chem.hasCharge) {
+    features.push('ionic-charge');
+  }
+
   return features;
 }
 
@@ -166,6 +180,15 @@ export function generateSummary(
 ): string {
   const parts: string[] = [];
 
+  // 화학식은 변수도 차수도 없다. 수학 어휘로 요약하면 "상수 표현식" 이 된다.
+  if (domains.includes('chemistry')) {
+    return features.includes('chemical-reaction')
+      ? features.includes('reversible-reaction')
+        ? '가역 화학 반응식'
+        : '화학 반응식'
+      : '화학식';
+  }
+
   // 변수 정보
   if (variables.length === 0) {
     parts.push('상수 표현식');
@@ -205,6 +228,7 @@ export function generateSummary(
     calculus: '미적분',
     'linear-algebra': '선형대수',
     statistics: '통계',
+    chemistry: '화학',
   };
 
   const mainDomains = domains

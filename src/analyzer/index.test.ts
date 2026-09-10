@@ -114,4 +114,65 @@ describe('Expression Analyzer (통합)', () => {
       expect(Array.isArray(result.features)).toBe(true);
     });
   });
+
+  // ── 화학식 ──
+  //
+  // 화학식 안의 기호를 수학 어휘로 집계하면 `+` 가 덧셈이 되고 `2-` 가 지수가 된다.
+  // 그 결과가 arithmetic 도메인과 constant/has-power 특징이었다.
+  describe('화학식 분류', () => {
+    it('화합물은 chemical-formula 이고 도메인이 화학이다', () => {
+      const result = analyzeExpression(parseLatex('\\ce{H2O}').ast);
+
+      expect(result.form).toBe('chemical-formula');
+      expect(result.primaryDomain).toBe('chemistry');
+      expect(result.domains).toEqual(['chemistry']);
+      expect(result.summary).toBe('화학식');
+    });
+
+    it('반응 화살표가 있으면 chemical-equation 이다', () => {
+      const result = analyzeExpression(parseLatex('\\ce{2H2 + O2 -> 2H2O}').ast);
+
+      expect(result.form).toBe('chemical-equation');
+      expect(result.features).toContain('chemical-reaction');
+      expect(result.features).not.toContain('reversible-reaction');
+    });
+
+    it('평형 화살표는 가역 반응으로 표시한다', () => {
+      const result = analyzeExpression(parseLatex('\\ce{N2 + 3H2 <=>[Fe] 2NH3}').ast);
+
+      expect(result.features).toContain('reversible-reaction');
+      expect(result.summary).toBe('가역 화학 반응식');
+    });
+
+    it('앞첨자는 동위원소, 첨자 부호는 전하로 읽는다', () => {
+      expect(analyzeExpression(parseLatex('\\ce{^{227}_{90}Th}').ast).features).toContain('isotope');
+      expect(analyzeExpression(parseLatex('\\ce{SO4^2-}').ast).features).toContain('ionic-charge');
+    });
+
+    it('화학식의 + 는 덧셈이 아니고 첨자는 지수가 아니다', () => {
+      const result = analyzeExpression(parseLatex('\\ce{2H2 + O2 -> 2H2O}').ast);
+
+      expect(result.domains).not.toContain('arithmetic');
+      expect(result.features).not.toContain('constant');
+      expect(result.features).not.toContain('has-power');
+      expect(result.variables).toEqual([]);
+    });
+
+    it('화학식은 그래프로 그릴 수 없다', () => {
+      const { visualization } = analyzeExpression(parseLatex('\\ce{2H2 + O2 -> 2H2O}').ast);
+
+      expect(visualization.graphable2D).toBe(false);
+      expect(visualization.graphable3D).toBe(false);
+      expect(visualization.numberLine).toBe(false);
+      expect(visualization.geometric).toBe(false);
+    });
+
+    it('화학식 옆의 수식은 그대로 수학으로 읽는다', () => {
+      const result = analyzeExpression(parseLatex('\\ce{H2O} + x^2').ast);
+
+      expect(result.primaryDomain).toBe('chemistry');
+      expect(result.variables).toEqual(['x']);
+      expect(result.features).toContain('has-power');
+    });
+  });
 });

@@ -16,7 +16,8 @@ export type MathDomain =
   | 'logarithmic' // 로그함수
   | 'calculus' // 미적분
   | 'linear-algebra' // 선형대수
-  | 'statistics'; // 통계
+  | 'statistics' // 통계
+  | 'chemistry'; // 화학 — 수학 분야는 아니지만 수식이 속한 분야다 (\ce{} 화학식)
 
 /**
  * 함수 카테고리
@@ -73,7 +74,11 @@ export type ExpressionFeature =
   | 'has-integral' // 적분 포함
   | 'has-sum' // 시그마 합 포함
   | 'has-limit' // 극한 포함
-  | 'has-matrix'; // 행렬 포함
+  | 'has-matrix' // 행렬 포함
+  | 'chemical-reaction' // 반응 화살표가 있는 화학 반응식
+  | 'reversible-reaction' // 가역 반응 (평형 화살표)
+  | 'isotope' // 동위원소 표기 (질량수·원자번호 앞첨자)
+  | 'ionic-charge'; // 이온 전하 표기
 
 /**
  * 시각화 가능 여부
@@ -116,8 +121,12 @@ export interface VariableScore {
  * 수식 분석 결과
  */
 export interface ExpressionAnalysis {
-  /** 수식 형태 */
-  form: 'expression' | 'equation' | 'inequality';
+  /**
+   * 수식 형태.
+   *
+   * 화학식은 등호가 아니라 반응 화살표로 좌우가 갈리므로 `equation` 과 구분한다.
+   */
+  form: 'expression' | 'equation' | 'inequality' | 'chemical-formula' | 'chemical-equation';
 
   /** 수학 도메인 (해당하는 모든 분야) */
   domains: MathDomain[];
@@ -181,8 +190,31 @@ export interface ASTCollectionResult {
     leftSuperscript: number;
     leftSubscript: number;
   };
+  /**
+   * 화학식에서 수집한 사실.
+   *
+   * chem 스코프 안의 기호는 수학 어휘로 집계하지 않는다 — `+` 는 화학종
+   * 구분자이지 덧셈이 아니고 `SO4^2-` 의 `2-` 는 지수가 아니라 전하다.
+   * 그래서 위의 수학 지표(variables/operators/numbers/nodeTypeCounts 등)는
+   * chem 안쪽을 보지 않고, 화학의 사실은 전부 이 필드로 온다.
+   */
+  chem: ChemCollectionFacts;
   /** 최대 중첩 깊이 */
   maxDepth: number;
   /** 총 노드 수 */
   totalNodes: number;
+}
+
+/** 화학식에서 수집한 사실 */
+export interface ChemCollectionFacts {
+  /** \ce{} 노드 수 */
+  count: number;
+  /** 반응 화살표가 있는가 — 있으면 반응식, 없으면 화학식 */
+  hasReaction: boolean;
+  /** 가역(평형) 화살표가 있는가 */
+  hasEquilibrium: boolean;
+  /** 앞첨자로 질량수·원자번호를 적었는가 */
+  hasIsotope: boolean;
+  /** 전하를 적었는가 */
+  hasCharge: boolean;
 }

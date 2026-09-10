@@ -29,7 +29,8 @@ import type {
   OperatorNode,
 } from '../types.js';
 import { SCRIPT_SLOTS } from '../types.js';
-import type { ASTCollectionResult } from './types.js';
+import { MINUS_SIGN } from '../latex/chem/grammar.js';
+import type { ASTCollectionResult, ChemCollectionFacts } from './types.js';
 
 /** 특수 상수 목록 */
 const SPECIAL_CONSTANTS = new Set([
@@ -48,7 +49,16 @@ const SPECIAL_CONSTANTS = new Set([
  * AST를 순회하며 정보 수집
  */
 export function walkAST(ast: RootNode): ASTCollectionResult {
-  const result: ASTCollectionResult = {
+  const result = emptyCollection();
+
+  walkNode(ast, result, 0);
+
+  return result;
+}
+
+/** 빈 수집 결과 */
+function emptyCollection(): ASTCollectionResult {
+  return {
     variables: new Set(),
     numbers: [],
     operators: new Set(),
@@ -56,13 +66,16 @@ export function walkAST(ast: RootNode): ASTCollectionResult {
     constants: new Set(),
     nodeTypeCounts: {},
     scriptSlotCounts: { superscript: 0, subscript: 0, leftSuperscript: 0, leftSubscript: 0 },
+    chem: {
+      count: 0,
+      hasReaction: false,
+      hasEquilibrium: false,
+      hasIsotope: false,
+      hasCharge: false,
+    },
     maxDepth: 0,
     totalNodes: 0,
   };
-
-  walkNode(ast, result, 0);
-
-  return result;
 }
 
 /**
@@ -111,7 +124,18 @@ function walkNode(
     }
 
     case 'chem': {
-      walkChildren((node as ChemNode).content, result, depth + 1);
+      const chem = node as ChemNode;
+      result.chem.count++;
+      collectChemFacts(chem.content, result.chem);
+
+      // 화학식 안쪽은 수학 어휘로 집계하지 않는다. `+` 는 화학종 구분자이지
+      // 덧셈이 아니고 `SO4^2-` 의 `2-` 는 지수가 아니라 전하다. 그대로 세면
+      // 화학식이 arithmetic 도메인과 has-power 특징을 켠다.
+      // 버릴 수집기에 순회를 태워 규모(노드 수·깊이)만 가져온다.
+      const inner = emptyCollection();
+      walkChildren(chem.content, inner, 0);
+      result.totalNodes += inner.totalNodes;
+      result.maxDepth = Math.max(result.maxDepth, depth + 1 + inner.maxDepth);
       break;
     }
 
@@ -253,6 +277,64 @@ function walkNode(
       break;
     }
   }
+}
+
+/**
+ * 화학식 안에서 화학의 사실을 모은다.
+ *
+ * 화학 문법이 만드는 노드(row·paren·scripts·xarrow)만 따라 내려간다.
+ * `$...$` 로 끼워 넣은 수식 조각 안의 화살표는 반응 화살표가 아니므로
+ * 일부러 보지 않는다.
+ */
+function collectChemFacts(nodes: MathNode[], facts: ChemCollectionFacts): void {
+  for (const node of nodes) {
+    switch (node.type) {
+      case 'row':
+        collectChemFacts(node.children, facts);
+        break;
+
+      case 'paren':
+        collectChemFacts(node.content, facts);
+        break;
+
+      case 'xarrow':
+        facts.hasReaction = true;
+        if (node.direction.startsWith('equilibrium')) {
+          facts.hasEquilibrium = true;
+        }
+        collectChemFacts(node.above, facts);
+        if (node.below) collectChemFacts(node.below, facts);
+        break;
+
+      case 'scripts':
+        if (node.leftSuperscript || node.leftSubscript) {
+          facts.hasIsotope = true;
+        }
+        if (node.superscript && hasChargeSign(node.superscript)) {
+          facts.hasCharge = true;
+        }
+        collectChemFacts(node.base, facts);
+        for (const slot of SCRIPT_SLOTS) {
+          const value = node[slot];
+          if (value) collectChemFacts(value, facts);
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+}
+
+/** 첨자 내용이 전하 부호를 담고 있는가 (`SO4^2-` 의 `-`) */
+function hasChargeSign(nodes: MathNode[]): boolean {
+  for (const node of nodes) {
+    if (node.type === 'row' && hasChargeSign(node.children)) return true;
+    if (node.type === 'text' && (node.content === '+' || node.content === MINUS_SIGN)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**

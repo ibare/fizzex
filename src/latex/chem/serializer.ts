@@ -31,6 +31,16 @@ function unwrapRow(nodes: MathNode[]): MathNode[] {
   return nodes;
 }
 
+/**
+ * chem 노드의 내용을 mhchem 표기로.
+ *
+ * `\ce{...}` 의 중괄호 안에 들어가는 문자열이다. 슬롯 row 한 겹을 벗기는 처리를
+ * 여기 한 곳에 두어 직렬화기와 정규화기가 같은 문자열을 보게 한다.
+ */
+export function chemNotation(content: MathNode[], toLatex: LatexSerializer): string {
+  return chemNodesToNotation(unwrapRow(content), toLatex);
+}
+
 /** 수식 구간으로 감싼다 (화학 표기로 적을 수 없는 내용) */
 function escapeToMath(node: MathNode, toLatex: LatexSerializer): string {
   return `$${toLatex(node)}$`;

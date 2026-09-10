@@ -62,9 +62,13 @@ export function analyzeExpression(ast: RootNode): ExpressionAnalysis {
   // 7. 복잡도 계산
   const complexity = calculateComplexity(collected, polynomial, functions);
 
-  // 8. 수식 형태 판별
-  let form: 'expression' | 'equation' | 'inequality' = 'expression';
-  if (hasEquality(ast)) {
+  // 8. 수식 형태 판별.
+  // 화학식이 먼저다 — 반응 화살표는 등호가 아니고, 화학식 안의 기호로
+  // equation/inequality 를 판정하면 표기 체계가 뒤섞인다.
+  let form: ExpressionAnalysis['form'] = 'expression';
+  if (collected.chem.count > 0) {
+    form = collected.chem.hasReaction ? 'chemical-equation' : 'chemical-formula';
+  } else if (hasEquality(ast)) {
     form = 'equation';
   } else if (hasInequality(ast)) {
     form = 'inequality';

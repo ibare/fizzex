@@ -5,7 +5,7 @@
  */
 
 import type { MathNode, XArrowNode } from '../types.js';
-import { chemNodesToNotation } from './chem/serializer.js';
+import { chemNotation } from './chem/serializer.js';
 
 /** AST를 LaTeX 문자열로 변환 */
 export function astToLatex(node: MathNode): string {
@@ -75,11 +75,8 @@ export function astToLatex(node: MathNode): string {
       return out;
     }
 
-    case 'chem': {
-      const row = node.content[0];
-      const inner = row && row.type === 'row' ? row.children : node.content;
-      return `\\ce{${chemNodesToNotation(inner, astToLatex)}}`;
-    }
+    case 'chem':
+      return `\\ce{${chemNotation(node.content, astToLatex)}}`;
 
     case 'abs': {
       const content = node.content.map(astToLatex).join('');

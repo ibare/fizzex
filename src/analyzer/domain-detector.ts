@@ -63,6 +63,11 @@ export function detectDomains(
     domains.add('linear-algebra');
   }
 
+  // 9. 화학 (\ce{} 화학식)
+  if (collected.chem.count > 0) {
+    domains.add('chemistry');
+  }
+
   // 도메인이 비어있으면 산술로 기본 설정
   if (domains.size === 0) {
     domains.add('arithmetic');
@@ -75,8 +80,12 @@ export function detectDomains(
  * 주요 도메인 결정 (가장 특징적인 도메인)
  */
 export function determinePrimaryDomain(domains: MathDomain[]): MathDomain {
-  // 우선순위: 미적분 > 선형대수 > 삼각함수 > 로그 > 지수 > 유리식 > 다항식 > 산술
+  // 우선순위: 화학 > 미적분 > 선형대수 > 삼각함수 > 로그 > 지수 > 유리식 > 다항식 > 산술
+  //
+  // 화학이 맨 앞인 이유: 화학식은 수학 분야의 하나가 아니라 다른 표기 체계다.
+  // 화학식 옆에 수식이 함께 있어도 그 수식이 화학식을 대표할 수는 없다.
   const priority: MathDomain[] = [
+    'chemistry',
     'calculus',
     'linear-algebra',
     'trigonometric',

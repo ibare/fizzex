@@ -216,3 +216,19 @@ describe('정규화 IR — provenance', () => {
     expect(r.root.src.length).toBeGreaterThanOrEqual(2);
   });
 });
+
+describe('정규화 IR — 화학식', () => {
+  const tag = (latex: string) => normalizeAst(parseLatex(latex).ast).root.tag;
+
+  it('서로 다른 화학식은 서로 다른 태그를 갖는다', () => {
+    expect(tag('\\ce{H2O}')).toBe('chem:H2O');
+    expect(tag('\\ce{CO2}')).toBe('chem:CO2');
+    expect(tag('\\ce{2H2 + O2 -> 2H2O}')).toBe('chem:2H2 + O2 -> 2H2O');
+  });
+
+  it('같은 화학식은 표기가 달라도 같은 태그로 수렴한다', () => {
+    // 직렬화기의 정규형을 그대로 쓴다 — H_2O 는 H2O 로 접힌다
+    expect(tag('\\ce{H_2O}')).toBe(tag('\\ce{H2O}'));
+    expect(tag('\\ce{A->B}')).toBe(tag('\\ce{A -> B}'));
+  });
+});
