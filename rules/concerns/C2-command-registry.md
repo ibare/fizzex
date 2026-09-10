@@ -1,6 +1,6 @@
 ---
 version: 1
-last_verified: 2026-03-26
+last_verified: 2026-09-10
 ---
 
 # LaTeX 명령어 등록 규칙 (C2)
@@ -10,7 +10,8 @@ last_verified: 2026-03-26
 
 ## MUST
 - 새 명령어는 `latex/commands/` 하위의 적절한 카테고리 파일에 CommandHandler로 등록한다
-- CommandHandler는 `(context) => MathNode[]` 시그니처를 따른다
+- CommandHandler는 `(ctx: CommandContext) => CommandResult` 시그니처를 따른다 (`latex/commands/types.ts`).
+  노드만 돌려주는 것이 아니라 **소비한 문자 수(`consumed`)를 함께** 돌려준다 — 파서는 그 값으로 커서를 옮긴다
 - 명령어 핸들러는 `latex/commands/index.ts`의 통합 레지스트리에 포함되어야 한다
 
 ## MUST NOT
