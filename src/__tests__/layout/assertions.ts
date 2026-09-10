@@ -159,6 +159,7 @@ function extractActualValue(
     prescript_shift_up_min: 'prescript.shift_up',
     prescript_shift_down_min: 'prescript.shift_down',
     prescript_gap_min: 'prescript.gap',
+    prescript_right_align_delta_max: 'prescript.right_align_delta',
     // 근호
     content_rule_clearance_min: 'radical.content_rule_clearance',
     radical_rule_thickness: 'radical.rule_thickness',

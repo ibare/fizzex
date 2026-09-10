@@ -128,12 +128,16 @@ function extractScriptMeasurements(
 
       if (baseIndex > 0 && idx < baseIndex) {
         const shiftEm = Math.abs(child.shift) / actualFontSize;
+        // 앞첨자는 오른쪽 끝을 맞춘다 — 밑에 닿는 쪽이 그 끝이다
+        const rightEm = (child.x + child.width) / actualFontSize;
         if (child.shift < 0) {
           values['prescript.shift_up'] = shiftEm;
           values['prescript.sup_bottom'] = shiftEm - child.depth / actualFontSize;
+          values['prescript.sup_right'] = rightEm;
         } else {
           values['prescript.shift_down'] = shiftEm;
           values['prescript.sub_top'] = child.height / actualFontSize - shiftEm;
+          values['prescript.sub_right'] = rightEm;
         }
         return;
       }
@@ -184,6 +188,12 @@ function extractScriptMeasurements(
   }
   if (values['prescript.sup_bottom'] !== undefined && values['prescript.sub_top'] !== undefined) {
     values['prescript.gap'] = values['prescript.sup_bottom'] - values['prescript.sub_top'];
+  }
+  // 두 앞첨자가 다 있을 때만 낸다 — 하나뿐이면 정렬이랄 것이 없다
+  if (values['prescript.sup_right'] !== undefined && values['prescript.sub_right'] !== undefined) {
+    values['prescript.right_align_delta'] = Math.abs(
+      values['prescript.sup_right'] - values['prescript.sub_right'],
+    );
   }
 }
 

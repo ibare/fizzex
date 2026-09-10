@@ -439,22 +439,36 @@ function scriptShifts(
 /**
  * 첨자 컬럼을 자식 Box 배열로 만든다.
  *
- * 위아래가 함께 있으면 같은 x 에서 시작하도록 음수 kern 으로 되돌린 뒤 쌓고,
- * 마지막 kern 으로 컬럼 폭을 max(sup, sub) 에 맞춘다 — layoutHBox 가
- * currentX += child.width 로 진행하므로 kern 이 폭에 반영돼야 다음 형제와 겹치지 않는다.
+ * 위아래가 함께 있으면 음수 kern 으로 커서를 되돌린 뒤 쌓고, 컬럼 폭을
+ * max(sup, sub) 에 맞춘다 — layoutHBox 가 currentX += child.width 로 진행하므로
+ * kern 이 폭에 반영돼야 다음 형제와 겹치지 않는다.
+ *
+ * 정렬은 첨자가 밑의 어느 쪽에 붙느냐를 따른다. 뒤첨자는 밑의 오른쪽에 붙으니
+ * 왼쪽 끝을 맞추고(TeX Rule 18), 앞첨자는 왼쪽에 붙으니 오른쪽 끝을 맞춘다.
  */
 function scriptColumn(
   nucleus: { height: number; depth: number },
   sup: Box | undefined,
   sub: Box | undefined,
   em: number,
-  style: MathStyle
+  style: MathStyle,
+  align: 'left' | 'right'
 ): Box[] {
   if (!sup && !sub) return [];
   const { up, down } = scriptShifts(nucleus, sup, sub, em, style);
 
   if (sup && sub) {
     const columnWidth = Math.max(sup.width, sub.width);
+    // 커서 이동: 0 → w−subW → w → w−supW → w
+    if (align === 'right') {
+      return [
+        createKern(columnWidth - sub.width),
+        { ...sub, shift: down },
+        createKern(-sup.width),
+        { ...sup, shift: -up },
+      ];
+    }
+    // 커서 이동: 0 → subW → 0 → supW → w
     return [
       { ...sub, shift: down },
       createKern(-sub.width),
@@ -487,15 +501,17 @@ export function createScripts(
 ): HBox {
   const em = metrics.getActualFontSize(fontSize);
 
-  const post = scriptColumn(base, scripts.superscript, scripts.subscript, em, style);
+  const post = scriptColumn(base, scripts.superscript, scripts.subscript, em, style, 'left');
   // 좌측 첨자는 붙을 대상이 없다 — null nucleus 기준으로 같은 규칙을 적용한다.
+  // 다만 정렬은 반대다. 밑의 왼쪽에 붙으므로 오른쪽 끝을 맞춰야 밑에 닿는다.
   const NULL_NUCLEUS = { height: 0, depth: 0 };
   const pre = scriptColumn(
     NULL_NUCLEUS,
     scripts.leftSuperscript,
     scripts.leftSubscript,
     em,
-    style
+    style,
+    'right'
   );
 
   return createHBox([...pre, base, ...post], sourceId);

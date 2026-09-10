@@ -491,13 +491,53 @@ describe('Box Builder', () => {
       const lsub = makeBox({ width: 9, height: 10, depth: 2 });
       const result = createScripts(base, { leftSuperscript: lsup, leftSubscript: lsub }, metrics);
 
-      // [sub, kern(-), sup, kern(+), base] — 밑이 마지막이다
+      // [kern(+), sub, kern(-), sup, base] — 밑이 마지막이다
       expect(result.children[result.children.length - 1]).toBe(base);
       const kerns = result.children.filter((c) => c.type === 'kern');
       expect(kerns).toHaveLength(2);
-      // 되돌리는 kern 과 폭을 맞추는 kern
-      expect(kerns[0].width).toBeLessThan(0);
-      expect(kerns[1].width).toBeGreaterThanOrEqual(0);
+      // 좁은 쪽을 밀어 오른쪽 끝을 맞추는 kern 과 커서를 되돌리는 kern
+      expect(kerns[0].width).toBeGreaterThanOrEqual(0);
+      expect(kerns[1].width).toBeLessThan(0);
+    });
+
+    it('좌측 첨자는 오른쪽 끝을 맞춘다 — 밑에 닿아야 한다', () => {
+      // 왼쪽 끝을 맞추면(뒤첨자 방식) 좁은 쪽이 밑에서 떨어져 보인다.
+      // 표준 구현이 앞첨자를 오른쪽 정렬하는 이유다.
+      const base = makeBox({ width: 20 });
+      const lsup = makeBox({ width: 12, height: 10, depth: 2 });
+      const lsub = makeBox({ width: 9, height: 10, depth: 2 });
+      const result = createScripts(base, { leftSuperscript: lsup, leftSubscript: lsub }, metrics);
+
+      // 누적 폭으로 각 첨자의 오른쪽 끝을 구한다
+      let cursor = 0;
+      const rightEdges: number[] = [];
+      for (const child of result.children) {
+        if (child === base) break;
+        if (child.type !== 'kern') rightEdges.push(cursor + child.width);
+        cursor += child.width;
+      }
+
+      expect(rightEdges).toHaveLength(2);
+      expect(rightEdges[0]).toBeCloseTo(rightEdges[1], 6);
+      // 그 끝이 곧 밑이 시작하는 자리다
+      expect(rightEdges[0]).toBeCloseTo(cursor, 6);
+    });
+
+    it('우측 첨자는 왼쪽 끝을 맞춘다 — 앞첨자와 반대다', () => {
+      const base = makeBox({ width: 20 });
+      const sup = makeBox({ width: 12, height: 10, depth: 2 });
+      const sub = makeBox({ width: 9, height: 10, depth: 2 });
+      const result = createScripts(base, { superscript: sup, subscript: sub }, metrics);
+
+      let cursor = 0;
+      const leftEdges: number[] = [];
+      for (const child of result.children.slice(result.children.indexOf(base) + 1)) {
+        if (child.type !== 'kern') leftEdges.push(cursor);
+        cursor += child.width;
+      }
+
+      expect(leftEdges).toHaveLength(2);
+      expect(leftEdges[0]).toBeCloseTo(leftEdges[1], 6);
     });
 
     it('좌측 컬럼의 폭이 두 첨자 중 넓은 쪽이 된다', () => {

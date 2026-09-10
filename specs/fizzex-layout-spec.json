@@ -1224,7 +1224,8 @@
     "prescript": {
       "source_rules": [
         "TeXbook Appendix G 에 prescript 규칙이 없다 — 표준 구현들이 쓰는 null nucleus 관례를 따른다",
-        "tex-rule-010 (Rule 18e) 를 height=depth=0 인 가상 nucleus 에 적용한 뒤 밑 왼쪽에 붙인다"
+        "tex-rule-010 (Rule 18e) 를 height=depth=0 인 가상 nucleus 에 적용한 뒤 밑 왼쪽에 붙인다",
+        "정렬만은 Rule 18e 와 반대다. Rule 18e 는 두 첨자의 왼쪽 끝을 맞추지만(밑의 오른쪽에 붙으므로) 앞첨자는 밑의 왼쪽에 붙어 오른쪽 끝을 맞춰야 밑에 닿는다 — TeXbook 이 아니라 표준 구현(KaTeX·MathJax 의 mhchem) 관례가 근거다"
       ],
       "parameters_used": [
         "sigma13_sup1",
@@ -1252,6 +1253,11 @@
               "type": "prescript_gap_min",
               "expected": "4 * xi8_defaultRuleThickness",
               "tolerance": 0.01
+            },
+            {
+              "type": "prescript_right_align_delta_max",
+              "expected": 0,
+              "tolerance": 0.001
             }
           ]
         }
