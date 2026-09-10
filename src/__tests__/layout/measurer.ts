@@ -153,6 +153,17 @@ function extractScriptMeasurements(
       }
     });
   });
+
+  // 위/아래 첨자가 함께 있을 때의 둘 사이 간격 (TeX Rule 18e 검증용).
+  // gap = (위첨자 하단) - (아래첨자 상단) 으로, specs/references/03-tex-layout-rules.md 의
+  // (shift_up - sup.depth) - (sub.height - shift_down) 와 같은 식이다.
+  //
+  // 두 첨자가 같은 HBox 의 형제인지는 보지 않는다. 첨자가 base 를 감싸는 방식으로
+  // 중첩되어 있으면 서로 다른 HBox 방문에서 기록되지만, 두 값 모두 baseline 기준
+  // 절대 좌표라 간격 계산은 그대로 성립한다.
+  if (values['superscript.bottom'] !== undefined && values['subscript.top'] !== undefined) {
+    values['subsup.gap'] = values['superscript.bottom'] - values['subscript.top'];
+  }
 }
 
 /** 근호 관련 측정값 추출 */

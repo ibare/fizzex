@@ -1173,11 +1173,11 @@
           "assertions": [
             {
               "type": "subsup_gap_min",
-              "expected": "4 * xi8",
+              "expected": "4 * xi8_defaultRuleThickness",
               "tolerance": 0.01
             },
             {
-              "type": "sup_bottom_with_sub",
+              "type": "sup_bottom_with_sub_min",
               "expected": "0.8 * sigma5_xHeight",
               "tolerance": 0.01
             }

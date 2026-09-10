@@ -154,7 +154,7 @@ function extractActualValue(
     subscript_font_scale: 'subscript.font_scale',
     // 위+아래
     subsup_gap_min: 'subsup.gap',
-    sup_bottom_with_sub: 'superscript.bottom',
+    sup_bottom_with_sub_min: 'superscript.bottom',
     // 근호
     content_rule_clearance_min: 'radical.content_rule_clearance',
     radical_rule_thickness: 'radical.rule_thickness',
