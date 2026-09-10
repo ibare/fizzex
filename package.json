@@ -1,6 +1,6 @@
 {
   "name": "fizzex",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Fizzex - Canvas-based mathematical expression editor. Light and easy formula input.",
   "type": "module",
   "main": "./dist/cjs/index.js",
