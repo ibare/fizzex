@@ -178,7 +178,7 @@ export interface ElementMeaning {
   kind: ElementKind;
   /** constant일 때 실제 값 (예: G = 6.674e-11) */
   value?: number;
-  /** 단위 (예: "N·m²/kg²", "km", "초") */
+  /** 단위 — 언어 중립 기호로만 쓴다 (예: "N·m²/kg²", "km", "s") */
   unit?: string;
 }
 

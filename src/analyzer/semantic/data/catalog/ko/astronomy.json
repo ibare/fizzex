@@ -7,8 +7,8 @@
     "field": "천체역학",
     "significance": "행성 운동의 규칙성을 수학적으로 정립하여 뉴턴 역학의 토대를 마련했으며, 외계 행성 및 위성 궤도 분석에 핵심적으로 사용됩니다.",
     "elementMeanings": {
-      "T": { "role": "공전 주기", "kind": "output", "unit": "초", "description": "위성이 지구를 한 바퀴 도는 데 걸리는 시간" },
-      "T^2": { "role": "공전 주기의 제곱", "kind": "output", "unit": "초²", "description": "궤도 반지름의 세제곱에 비례하는 값입니다" },
+      "T": { "role": "공전 주기", "kind": "output", "unit": "s", "description": "위성이 지구를 한 바퀴 도는 데 걸리는 시간" },
+      "T^2": { "role": "공전 주기의 제곱", "kind": "output", "unit": "s²", "description": "궤도 반지름의 세제곱에 비례하는 값입니다" },
       "4pi2": { "role": "4π²", "kind": "constant", "value": 39.478, "description": "원 궤도의 기하학적 성질에서 나오는 상수 ≈ 39.48" },
       "G": { "role": "만유인력 상수", "kind": "constant", "value": 6.674e-11, "unit": "N·m²/kg²", "description": "중력의 세기를 결정하는 기본 상수. 이 수가 극도로 작기 때문에 일상에서 중력은 지구처럼 거대한 질량이 있어야 느낄 수 있다" },
       "M": { "role": "지구의 질량", "kind": "constant", "value": 5.972e24, "unit": "kg", "description": "중심 천체가 무거울수록 위성을 더 강하게 당긴다. 같은 궤도라도 목성 주위를 돌면 주기가 훨씬 짧다" },
@@ -38,7 +38,7 @@
       {
         "id": "period",
         "label": "공전 주기",
-        "unit": "시간",
+        "unit": "h",
         "format": "time",
         "sourceParams": ["a"],
         "transform": { "type": "custom", "sourceParam": "a" },
@@ -63,7 +63,7 @@
       {
         "id": "earthRatio",
         "label": "지구 반지름 대비",
-        "unit": "배",
+        "unit": "×",
         "format": "number",
         "sourceParams": ["a"],
         "transform": { "type": "divide", "sourceParam": "a", "operand": 6371 }
@@ -187,13 +187,13 @@
     "significance": "외계 지적 생명체 탐색 문제를 과학적으로 체계화하여 SETI 연구의 이론적 프레임워크를 제공했습니다.",
     "elementMeanings": {
       "N": { "role": "교신 가능 문명 수", "kind": "output", "description": "은하 내에서 현재 탐지 가능한 신호를 보내는 문명의 수." },
-      "R_*": { "role": "항성 생성률", "kind": "input", "unit": "개/년", "description": "은하에서 매년 새로 태어나는 항성의 수." },
+      "R_*": { "role": "항성 생성률", "kind": "input", "unit": "/yr", "description": "은하에서 매년 새로 태어나는 항성의 수." },
       "f_p": { "role": "행성 보유 비율", "kind": "input", "description": "행성계를 가진 항성의 비율." },
       "n_e": { "role": "거주 가능 행성 수", "kind": "input", "description": "행성계당 생명 거주 가능 영역의 행성 수." },
       "f_l": { "role": "생명 발생 비율", "kind": "input", "description": "거주 가능 행성에서 실제로 생명이 탄생할 확률." },
       "f_i": { "role": "지적 생명 비율", "kind": "input", "description": "생명이 지적 존재로 진화할 확률." },
       "f_c": { "role": "통신 기술 비율", "kind": "input", "description": "지적 생명이 탐지 가능한 신호를 보낼 기술을 발전시킬 확률." },
-      "L": { "role": "문명 수명", "kind": "input", "unit": "년", "description": "교신 가능 문명이 신호를 방출하는 기간. 단위: 년." }
+      "L": { "role": "문명 수명", "kind": "input", "unit": "yr", "description": "교신 가능 문명이 신호를 방출하는 기간. 단위: 년." }
     },
     "realWorldExamples": [
       "SETI 프로젝트에서 탐색 전략 수립",
