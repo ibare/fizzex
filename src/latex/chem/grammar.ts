@@ -87,6 +87,11 @@ export const HYDRATE_MARK = '·';
 /** 음전하 — ASCII 하이픈이 아니라 진짜 마이너스 기호를 쓴다 */
 export const MINUS_SIGN = '−';
 
+/** 전하 부호인가 (`Ca^2+` 의 `+`, `SO4^2-` 의 `−`) */
+export function isChargeSign(text: string): boolean {
+  return text === '+' || text === MINUS_SIGN;
+}
+
 /**
  * 본문에 놓인 text 노드 ↔ 화학 표기.
  *

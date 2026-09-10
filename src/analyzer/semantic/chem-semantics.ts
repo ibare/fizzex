@@ -19,8 +19,8 @@ import type { ChemNode, MathNode, ParenNode } from '../../types.js';
 import {
   GAS_MARK,
   HYDRATE_MARK,
-  MINUS_SIGN,
   PRECIPITATE_MARK,
+  isChargeSign,
   isEquilibriumDirection,
 } from '../../latex/chem/grammar.js';
 import type { AncestorEntry, SemanticResult } from './types.js';
@@ -66,7 +66,7 @@ function bodyKey(node: MathNode): ChemTextKey | null {
     case 'text':
       if (node.content === GAS_MARK) return 'gas';
       if (node.content === PRECIPITATE_MARK) return 'precipitate';
-      if (node.content === '+' || node.content === MINUS_SIGN) return 'chargeSign';
+      if (isChargeSign(node.content)) return 'chargeSign';
       return 'element';
 
     case 'paren':

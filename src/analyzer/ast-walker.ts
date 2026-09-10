@@ -29,7 +29,7 @@ import type {
   OperatorNode,
 } from '../types.js';
 import { SCRIPT_SLOTS } from '../types.js';
-import { MINUS_SIGN } from '../latex/chem/grammar.js';
+import { isChargeSign, isEquilibriumDirection } from '../latex/chem/grammar.js';
 import type { ASTCollectionResult, ChemCollectionFacts } from './types.js';
 
 /** 특수 상수 목록 */
@@ -299,7 +299,7 @@ function collectChemFacts(nodes: MathNode[], facts: ChemCollectionFacts): void {
 
       case 'xarrow':
         facts.hasReaction = true;
-        if (node.direction.startsWith('equilibrium')) {
+        if (isEquilibriumDirection(node.direction)) {
           facts.hasEquilibrium = true;
         }
         collectChemFacts(node.above, facts);
@@ -330,9 +330,7 @@ function collectChemFacts(nodes: MathNode[], facts: ChemCollectionFacts): void {
 function hasChargeSign(nodes: MathNode[]): boolean {
   for (const node of nodes) {
     if (node.type === 'row' && hasChargeSign(node.children)) return true;
-    if (node.type === 'text' && (node.content === '+' || node.content === MINUS_SIGN)) {
-      return true;
-    }
+    if (node.type === 'text' && isChargeSign(node.content)) return true;
   }
   return false;
 }
