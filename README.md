@@ -301,6 +301,8 @@ const instance = refs[0]
 
 ### `fizzex`
 
+Framework-neutral — nothing here needs React, so Node, Vue and Svelte hosts can import it.
+
 - **Parser** — `parseLatex`, `astToLatex`
 - **Editor primitives** — `MathEditor`, `createInitialState`, `createStateFromLatex`, node creators (`createNumber`, `createFrac`, `createIntegral`, `createMatrix`, …)
 - **Analyzer** — `analyzeExpression`, `analyzeBindings`, `analyzeEvaluability`, `buildSemanticMap`
@@ -356,6 +358,9 @@ JSON that a worker doing arithmetic has no reason to load.
 
 - `EditorView`, `StreamView`, `SuggestionChips`, `SuggestionPopover`, `ExpressionExplorer`
 
+`FizzexI18nProvider` and the label hooks (`useFizzexLabels`, `useLocalizedSuggestions`, …) live here too.
+The root does not export anything React; import components and the Provider from `fizzex/react`.
+
 ### `fizzex/tiptap`
 
 - `MathInline`, `MathBlock`
@@ -371,7 +376,7 @@ Descriptions come in ten languages: `en` (default), `ko`, `ja`, `zh`, `ar`, `es`
 `fr`, `hi`, `id`, `pt`.
 
 ```tsx
-import { FizzexI18nProvider } from 'fizzex';
+import { FizzexI18nProvider } from 'fizzex/react';
 
 <FizzexI18nProvider locale="ja">
   <EditorView />
