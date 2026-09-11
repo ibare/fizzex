@@ -115,6 +115,28 @@ describe('fizzex/compute 격리 (C6)', () => {
   });
 });
 
+describe('fizzex 루트 격리 (C6)', () => {
+  const closure = collectClosure(resolvePath(srcDir, 'index.ts'));
+
+  it('react 와 tiptap 을 끌어오지 않는다', () => {
+    // react 는 optional peer 다. 루트가 이를 물면 선언과 달리 필수가 되어,
+    // react 가 없는 호스트(Node, Vue, Svelte)는 루트를 import 하는 순간 실패한다 —
+    // 0.5.0 까지 실제로 그랬다. React 표면은 fizzex/react 에서만 나간다.
+    const framework = closure.externals.filter(
+      (e) => e === 'react' || e === 'react-dom' || e.startsWith('@tiptap/'),
+    );
+    expect(framework).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('react/'))).toEqual([]);
+    expect(closure.files.filter((f) => f.startsWith('integrations/'))).toEqual([]);
+  });
+
+  it('JSX 파일을 끌어오지 않는다', () => {
+    // 자동 JSX 런타임을 쓰는 .tsx 는 react 를 import 하지 않고도 react/jsx-runtime 에 기댄다.
+    // 그 의존은 소스의 import 그래프에 드러나지 않아 위 externals 검사를 빠져나간다.
+    expect(closure.files.filter((f) => f.endsWith('.tsx'))).toEqual([]);
+  });
+});
+
 describe('fizzex/semantic 격리 (C6)', () => {
   const closure = collectClosure(resolvePath(srcDir, 'semantic/index.ts'));
 
@@ -136,7 +158,7 @@ describe('로케일 배럴이 언어를 끌어오지 않는다', () => {
   });
 
   it('react 를 끌어오지 않는다', () => {
-    // i18n/context.tsx → locales/registry.ts 는 단방향이다. 역방향이 생기면
+    // react/i18n/context.tsx → locales/registry.ts 는 단방향이다. 역방향이 생기면
     // headless 와 analyzer 가 이 배럴을 통해 react 를 물게 된다.
     expect(closure.externals.filter((e) => e === 'react' || e === 'react-dom')).toEqual([]);
     expect(closure.files.filter((f) => f.startsWith('react/'))).toEqual([]);
