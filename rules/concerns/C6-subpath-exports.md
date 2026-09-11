@@ -1,6 +1,6 @@
 ---
-version: 3
-last_verified: 2026-09-09
+version: 4
+last_verified: 2026-09-11
 ---
 
 # Subpath Export 규칙 (C6)
@@ -10,8 +10,12 @@ package.json의 exports를 변경하거나, 새 subpath를 추가하거나, subp
 
 ## MUST
 - 각 subpath export는 독립적으로 import 가능해야 한다
-  - 루트(`.`)는 전체 표면을 집약하는 자리이므로 하위 subpath 배럴을 재수출해도 된다
+  - 루트(`.`)는 **프레임워크 중립** 표면을 집약하는 자리다. 중립 subpath 배럴은 재수출해도 되지만
+    `fizzex/react`·`fizzex/tiptap` 은 재수출하지 않는다
+    (react·tiptap 은 optional peer 다. 루트가 이를 물면 선언과 달리 필수가 되어 react 없는 호스트가
+    루트를 import 하는 순간 실패한다 — 0.5.0 까지 실제로 그랬다)
   - 그 반대는 금지 — 루트를 제외한 어떤 subpath도 자기보다 무거운 다른 subpath를 로드하지 않는다
+- `fizzex`(루트)는 React, Tiptap 코드를 포함하지 않는다
 - `fizzex/compute`는 React, DOM/Canvas API, three, 그리고 semantic 카탈로그를 포함하지 않는다
   (`analyzer/semantic` 의 설명 JSON 은 500KB 를 넘는다 — 계산만 하는 워커가 물 비용이 아니다)
 - `fizzex/semantic`은 `fizzex/compute` 배럴을 경유하지 않는다
