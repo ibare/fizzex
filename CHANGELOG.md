@@ -1,5 +1,42 @@
 # fizzex
 
+## 0.6.0
+
+### Minor Changes
+
+- fix: the root entry no longer requires React
+
+  **Breaking.** React components and the i18n Provider moved off the root.
+
+  | Before                                                                                                                          | After                                               |
+  | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+  | `import { EditorView } from 'fizzex'`                                                                                           | `import { EditorView } from 'fizzex/react'`         |
+  | `import { FizzexI18nProvider } from 'fizzex'`                                                                                   | `import { FizzexI18nProvider } from 'fizzex/react'` |
+  | `useFizzexLabels`, `useSuggestionLabel`, `useLocalizedSuggestions`, `useCategoryLabel`, `FizzexI18nProviderProps` from `fizzex` | the same names from `fizzex/react`                  |
+
+  The same applies to `StreamView`, `SuggestionChips`, `SuggestionPopover`,
+  `ExpressionExplorer` and their `…Props` types. `defaultLabels`, `FizzexLabels`
+  and `PartialFizzexLabels` stay on the root — they are plain data and types.
+
+  ***
+
+  `react` is an optional peer dependency, but the root re-exported React
+  components, so importing `fizzex` failed wherever React was not installed:
+
+  ```
+  Node:     Cannot find module 'react/jsx-runtime'
+  esbuild:  Could not resolve "react"
+  ```
+
+  Bundlers fail too — module resolution runs before tree-shaking, so Vue and
+  Svelte hosts hit it at build time. It had been this way since before 0.5.0, but
+  0.5.0 made everyone step on it by documenting
+  `import { loadLocale } from 'fizzex'` for non-React hosts.
+
+  The root is now framework-neutral. Node, Vue and Svelte hosts can import
+  `fizzex` directly, including `loadLocale` / `setLocale`. A test now fails if
+  the root ever pulls in `react`, `react-dom` or `@tiptap/*` again.
+
 ## 0.5.0
 
 ### Minor Changes
@@ -8,12 +45,12 @@
 
   **Breaking.**
 
-  | Gone | Instead |
-  | --- | --- |
+  | Gone                                 | Instead                                            |
+  | ------------------------------------ | -------------------------------------------------- |
   | `ExpressionAnalysis.summary: string` | `summary: AnalysisSummary` (facts, not a sentence) |
-  | Korean by default | `en` by default + `loadLocale(code)` |
+  | Korean by default                    | `en` by default + `loadLocale(code)`               |
 
-  ---
+  ***
 
   **Languages.** `en` `ko` `ja` `zh` `ar` `es` `fr` `hi` `id` `pt` — English by
   default, `ar` is RTL.
@@ -32,8 +69,8 @@
   rather than throwing — the lookups are synchronous, so they cannot wait.
 
   ```ts
-  await loadLocale('ja');
-  setLocale('ja');
+  await loadLocale("ja");
+  setLocale("ja");
   ```
 
   **No language ships in the bundle.** One locale is about 570KB; ten would be
@@ -45,7 +82,7 @@
   Catalog matching reads only the locale-independent index, so the same formula
   matches the same entry in every language. Language affects display alone.
 
-  ---
+  ***
 
   **Diagnostics are English from now on.** Parser warnings, schema messages and
   thrown errors — 64 of them — used to be Korean. They are not written for the
@@ -58,8 +95,8 @@
   `formatSummary` turns it into prose in whichever language you loaded.
 
   ```ts
-  analysis.summary;                 // { variables: ['x'], degree: 2, functions: [], domains: ['polynomial'] }
-  formatSummary(analysis.summary);  // in the loaded language
+  analysis.summary; // { variables: ['x'], degree: 2, functions: [], domains: ['polynomial'] }
+  formatSummary(analysis.summary); // in the loaded language
   ```
 
   `AnalysisSummary` and the locale API (`loadLocale` `setLocale` `getLocale`
@@ -72,14 +109,14 @@
   **Breaking.** `x^2` and `x_i` used to be separate nodes; they are now one
   `scripts` node. Code that touches the AST directly needs these changes.
 
-  | Gone | Instead |
-  | --- | --- |
-  | `PowerNode`, `SubscriptNode` | `ScriptsNode` (`base` + four slots) |
-  | `createPower`, `createSubscript` | `createScripts(base, slots)` |
+  | Gone                             | Instead                             |
+  | -------------------------------- | ----------------------------------- |
+  | `PowerNode`, `SubscriptNode`     | `ScriptsNode` (`base` + four slots) |
+  | `createPower`, `createSubscript` | `createScripts(base, slots)`        |
 
   `ChemNode` is new.
 
-  ---
+  ***
 
   **Chemistry.** Write mhchem notation inside `\ce{}`.
 
@@ -101,7 +138,7 @@
   representative formulas and equations are in the catalog.
 
   `analyzeExpression` classifies chemistry as chemistry: `primaryDomain:
-  'chemistry'`, `form: 'chemical-formula' | 'chemical-equation'`, plus reaction,
+'chemistry'`, `form: 'chemical-formula' | 'chemical-equation'`, plus reaction,
   reversible, isotope and charge features. It used to count the `+` in a reaction
   as addition and report `arithmetic`.
 
