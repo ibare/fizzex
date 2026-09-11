@@ -5,10 +5,10 @@
  */
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import type { FizzexLabels, PartialFizzexLabels } from './types.js';
-import { defaultLabels } from './default-labels.js';
-import { loadLocale, setLocale } from '../locales/registry.js';
-import type { Locale } from '../locales/types.js';
+import type { FizzexLabels, PartialFizzexLabels } from '../../i18n/types.js';
+import { defaultLabels } from '../../i18n/default-labels.js';
+import { loadLocale, setLocale } from '../../locales/registry.js';
+import type { Locale } from '../../locales/types.js';
 
 /** Context */
 const FizzexI18nContext = createContext<FizzexLabels>(defaultLabels);

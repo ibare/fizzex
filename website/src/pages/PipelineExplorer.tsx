@@ -7,8 +7,8 @@ import {
   evaluate,
   analyzeBindings,
   createStateFromLatex,
-  EditorView,
 } from 'fizzex';
+import { EditorView } from 'fizzex/react';
 import type { ExpressionAnalysis, RootNode } from 'fizzex';
 import { visualizerRegistry } from '../visualizer-registry';
 

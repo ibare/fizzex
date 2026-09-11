@@ -202,20 +202,9 @@ export type {
   CursorContext,
 } from './suggestion/index.js';
 
-// i18n
-export {
-  FizzexI18nProvider,
-  useFizzexLabels,
-  useSuggestionLabel,
-  useLocalizedSuggestions,
-  useCategoryLabel,
-  defaultLabels,
-} from './i18n/index.js';
-export type {
-  FizzexLabels,
-  PartialFizzexLabels,
-  FizzexI18nProviderProps,
-} from './i18n/index.js';
+// i18n — 라벨 타입과 영어 기본값만. Provider·훅은 React 에 묶이므로 fizzex/react 에서 나간다
+export { defaultLabels } from './i18n/index.js';
+export type { FizzexLabels, PartialFizzexLabels } from './i18n/index.js';
 
 // 폰트
 export {
@@ -235,21 +224,8 @@ export type {
   FontGlyphMapping,
 } from './fonts/index.js';
 
-// React 컴포넌트 — 새 이름 (primary)
-export {
-  EditorView,
-  StreamView,
-  SuggestionChips,
-  SuggestionPopover,
-  ExpressionExplorer,
-} from './react/index.js';
-export type {
-  EditorViewProps,
-  StreamViewProps,
-  SuggestionChipsProps,
-  SuggestionPopoverProps,
-  ExpressionExplorerProps,
-} from './react/index.js';
+// React 컴포넌트는 루트에서 내보내지 않는다 — fizzex/react 에서 가져온다.
+// 루트는 프레임워크 중립이어야 react 가 없는 호스트(Node, Vue, Svelte)도 쓸 수 있다.
 
 // Confidence Indicator
 export { ConfidenceIndicator, DEFAULT_CONFIDENCE_CONFIG } from './box/index.js';

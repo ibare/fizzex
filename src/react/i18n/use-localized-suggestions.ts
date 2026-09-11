@@ -4,8 +4,8 @@
 
 import { useMemo } from 'react';
 import { useFizzexLabels } from './context.js';
-import type { SuggestionWithAction } from '../suggestion/types.js';
-import type { SuggestionLabels } from './types.js';
+import type { SuggestionWithAction } from '../../suggestion/types.js';
+import type { SuggestionLabels } from '../../i18n/types.js';
 
 /**
  * 제안 목록에 i18n 라벨 적용
