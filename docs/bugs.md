@@ -89,29 +89,3 @@ VBox([높이10,                 높이10]) 총 높이 = 20   ← 같다
 
 **남겨 둔 이유** — `\lim`·`\sum` 에서 이미 있던 증상이고, 고치면 기존 SVG 출력이 전부
 바뀐다. 회귀 범위가 넓어 별도로 다룬다.
-
----
-
-## B4. evaluator 모듈에 순환 import 가 있다
-
-**증상** — 런타임 오류는 없다. 구조 부채다.
-
-```
-arithmetic → mathop → arithmetic
-mathop → calculus → arithmetic → mathop
-```
-
-**위치** — `src/evaluator/arithmetic.ts:33`, `src/evaluator/mathop.ts:19,21`
-
-**원인** — 극값 연산자는 피연산자가 형제로 오므로 시퀀스 평가기(`arithmetic`)가 불러야 하고,
-그 피연산자를 평가하려면 다시 시퀀스 평가기가 필요하다. 상호 재귀를 import 로 직접 이었다.
-
-**왜 지금 터지지 않는가** — 세 모듈 모두 top-level 부수효과가 없고(`register` 호출은 전부
-`install*` 함수 안), 함수 선언은 호이스팅되며 실제 호출은 평가 시점이라 import 순서와 무관하다.
-
-**영향** — 지금은 없다. 다만 evaluator 에 처음 생긴 순환이라, 이후 top-level 초기화를 더하는
-사람이 순서 의존 버그를 만들 여지가 생겼다.
-
-**남겨 둔 이유** — 규칙 위반이 아니고 동작도 정상이다. 다만 `src/evaluator/core.ts:21` 의
-`setSequenceEvaluator` 가 **이미 같은 종류의 역방향 의존을 끊는 이음새**이므로,
-`arithmetic → mathop` 한 방향만 그 이음새나 registry 로 돌리면 순환 없이 같은 결과가 된다.

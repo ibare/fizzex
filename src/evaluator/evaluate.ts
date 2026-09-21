@@ -9,12 +9,9 @@
  * - 결정적·순수·재진입 가능.
  */
 import type { MathNode } from '../types.js';
+import { installEvaluatorHandlers } from './install.js';
 import type { Bindings, EvalContext, EvalOutcome, EvalResult } from './types.js';
 import { lookup } from './registry.js';
-import { installCoreHandlers } from './core.js';
-import { installArithmeticHandlers } from './arithmetic.js';
-import { installFunctionHandlers } from './functions.js';
-import { installCalculusHandlers } from './calculus.js';
 
 function dispatch(node: MathNode, ctx: EvalContext): EvalOutcome {
   const fn = lookup(node.type);
@@ -44,10 +41,7 @@ function makeContext(bindings: Bindings): EvalContext {
 const EMPTY_BINDINGS: Bindings = Object.freeze({});
 
 export function evaluateSync(node: MathNode, bindings: Bindings = EMPTY_BINDINGS): number | undefined {
-  installCoreHandlers();
-  installArithmeticHandlers();
-  installFunctionHandlers();
-  installCalculusHandlers();
+  installEvaluatorHandlers();
   try {
     const out = dispatch(node, makeContext(bindings));
     return out.kind === 'value' ? out.value : undefined;
@@ -57,10 +51,7 @@ export function evaluateSync(node: MathNode, bindings: Bindings = EMPTY_BINDINGS
 }
 
 export function evaluate(node: MathNode, bindings: Bindings = EMPTY_BINDINGS): EvalResult {
-  installCoreHandlers();
-  installArithmeticHandlers();
-  installFunctionHandlers();
-  installCalculusHandlers();
+  installEvaluatorHandlers();
   try {
     const out = dispatch(node, makeContext(bindings));
     if (out.kind === 'value') return { ok: true, value: out.value };

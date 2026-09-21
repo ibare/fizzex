@@ -28,16 +28,24 @@ export type RelOp = (typeof REL_OPS)[number];
 
 const REL_OP_SET: ReadonlySet<string> = new Set(REL_OPS);
 
+/**
+ * 극값·한계 연산자와 그 피연산자를 묶은 토큰.
+ *
+ * `\max` 는 자식을 갖지 않고 피연산자가 형제로 온다 — `\max f(x)` 의 `f(x)` 는
+ * AST 상 `\max` 의 아래가 아니라 옆이다. 그래서 결합은 이 단계에서만 가능하다.
+ * 우선순위 계산에서는 하나의 피연산자처럼 다룬다.
+ */
+export interface MathOpToken {
+  kind: 'mathop';
+  name: string;
+  lower?: MathNode[];
+  upper?: MathNode[];
+  operand: MathNode[];
+}
+
 export type SeqToken =
   | { kind: 'operand'; node: MathNode }
-  /**
-   * 극값·한계 연산자와 그 피연산자를 묶은 토큰.
-   *
-   * `\max` 는 자식을 갖지 않고 피연산자가 형제로 온다 — `\max f(x)` 의 `f(x)` 는
-   * AST 상 `\max` 의 아래가 아니라 옆이다. 그래서 결합은 이 단계에서만 가능하다.
-   * 우선순위 계산에서는 하나의 피연산자처럼 다룬다.
-   */
-  | { kind: 'mathop'; name: string; lower?: MathNode[]; upper?: MathNode[]; operand: MathNode[] }
+  | MathOpToken
   | { kind: 'binop'; op: BinaryOp; prec: number }
   | { kind: 'rel'; op: RelOp; prec: number }
   | { kind: 'unaryMinus' };

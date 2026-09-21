@@ -8,7 +8,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { parseLatex } from '../../latex/latex-parser.js';
 import { resetLatexIdCounter } from '../../utils/id-generator.js';
-import { evaluateSync } from '../index.js';
+import { evaluateSync, evaluate } from '../index.js';
 
 beforeEach(() => {
   resetLatexIdCounter();
@@ -17,6 +17,11 @@ beforeEach(() => {
 function ev(src: string, bindings: Record<string, number> = {}): number | undefined {
   const { ast } = parseLatex(src);
   return evaluateSync(ast, bindings);
+}
+
+function evCold(src: string, bindings: Record<string, number> = {}): ReturnType<typeof evaluate> {
+  const { ast } = parseLatex(src);
+  return evaluate(ast, bindings);
 }
 
 describe('유한 인자', () => {
@@ -114,5 +119,25 @@ describe('피연산자가 하나', () => {
 
   it('바인딩이 없으면 값이 없다', () => {
     expect(ev('\\max x')).toBeUndefined();
+  });
+});
+
+describe('콜드패스', () => {
+  // 등록 묶음이 호출처마다 복제되면 한쪽 API 에서만 조용히 죽는다.
+  // 핫패스(evaluateSync)와 콜드패스(evaluate) 양쪽을 모두 지난다.
+  it('evaluate 도 같은 값을 돌려준다', () => {
+    expect(evCold('\\max(3, 7, 5)')).toEqual({ ok: true, value: 7 });
+    expect(evCold('\\max_{i=1}^{4} i')).toEqual({ ok: true, value: 4 });
+  });
+
+  it('평가자가 등록되지 않은 채로 실패하지 않는다', () => {
+    const out = evCold('\\max(1, 2)');
+    expect(out.ok).toBe(true);
+  });
+
+  it('계산할 수 없는 것은 이유를 붙여 실패한다', () => {
+    const out = evCold('\\det A');
+    expect(out.ok).toBe(false);
+    if (!out.ok) expect(out.status).toBe('unsupported');
   });
 });

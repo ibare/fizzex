@@ -29,10 +29,24 @@ import {
   type SeqToken,
   tokenizeSequence,
   toRPN,
+  type MathOpToken,
 } from './sequence.js';
-import { evalMathOpToken } from './mathop.js';
 import { setSequenceEvaluator } from './core.js';
 import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
+
+/**
+ * 극값·한계 연산자 평가 hook.
+ *
+ * `\max` 의 피연산자는 형제로 오므로 시퀀스 평가기가 결합을 맡는데, 그 피연산자를
+ * 평가하려면 다시 시퀀스 평가기가 필요하다. 이 상호 재귀를 import 로 직접 이으면
+ * 모듈 순환이 생기므로, `core.ts` 의 `sequenceEval` 과 같은 방식으로 주입받는다.
+ */
+type MathOpEvalFn = (token: MathOpToken, ctx: EvalContext) => EvalOutcome;
+let mathOpEval: MathOpEvalFn | null = null;
+
+export function setMathOpEvaluator(fn: MathOpEvalFn): void {
+  mathOpEval = fn;
+}
 
 function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
   const stack: number[] = [];
@@ -47,7 +61,10 @@ function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
       continue;
     }
     if (t.kind === 'mathop') {
-      const out = evalMathOpToken(t, ctx);
+      if (!mathOpEval) {
+        return fail('unsupported', { nodeType: 'mathop', reason: 'evaluator-not-registered' });
+      }
+      const out = mathOpEval(t, ctx);
       if (out.kind === 'fail') return out;
       stack.push(out.value);
       continue;

@@ -7,11 +7,8 @@
  * 호스트는 식 노드 생성 시 1회 호출하여 입력 슬롯/배지 UX 를 결정한다.
  */
 import type { MathNode, MathNodeType, VariableNode } from '../types.js';
+import { installEvaluatorHandlers } from './install.js';
 import { registeredTypes } from './registry.js';
-import { installCoreHandlers } from './core.js';
-import { installArithmeticHandlers } from './arithmetic.js';
-import { installFunctionHandlers } from './functions.js';
-import { installCalculusHandlers } from './calculus.js';
 import { normalizeVarName } from './normalize.js';
 import { isMathConstantName } from './constants.js';
 
@@ -72,10 +69,7 @@ export function analyzeBindings(node: MathNode): BindingAnalysis {
 }
 
 export function analyzeEvaluability(node: MathNode): EvaluabilityAnalysis {
-  installCoreHandlers();
-  installArithmeticHandlers();
-  installFunctionHandlers();
-  installCalculusHandlers();
+  installEvaluatorHandlers();
   const registered = registeredTypes();
   const unsupported = new Set<MathNodeType>();
   walk(node, (n) => {

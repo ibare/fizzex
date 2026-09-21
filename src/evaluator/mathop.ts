@@ -15,8 +15,9 @@
  * 정직하게 `unsupported` 를 돌려준다 — 값을 지어내지 않는다.
  */
 import type { MathNode, OperatorNode, ParenNode, RowNode, VariableNode } from '../types.js';
+import type { MathOpToken } from './sequence.js';
 import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
-import { evalChildSequence } from './arithmetic.js';
+import { evalChildSequence, setMathOpEvaluator } from './arithmetic.js';
 import { unwrapArgumentParen, splitByComma } from './args.js';
 import { resolveRange } from './calculus.js';
 import { normalizeVarName } from './normalize.js';
@@ -172,10 +173,7 @@ function optimizeOnInterval(
 }
 
 /** `sequence.ts` 가 묶어 준 극값 연산자 토큰을 평가한다 */
-export function evalMathOpToken(
-  token: { name: string; lower?: MathNode[]; upper?: MathNode[]; operand: MathNode[] },
-  ctx: EvalContext
-): EvalOutcome {
+function evalMathOpToken(token: MathOpToken, ctx: EvalContext): EvalOutcome {
   const { name, lower, upper, operand } = token;
 
   if (operand.length === 0) {
@@ -230,4 +228,12 @@ export function evalMathOpToken(
   const single = evalChildSequence(operand, ctx);
   if (single.kind === 'fail') return single;
   return reduceAll(name, [single.value]);
+}
+
+let installed = false;
+
+export function installMathOpEvaluator(): void {
+  if (installed) return;
+  installed = true;
+  setMathOpEvaluator(evalMathOpToken);
 }
