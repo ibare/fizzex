@@ -23,6 +23,7 @@ import type {
   ErrorNode,
   FracNode,
   FuncNode,
+  MathOpNode,
   GatherNode,
   IntegralNode,
   LimitNode,
@@ -227,6 +228,18 @@ function foldRpn(rpn: readonly SeqToken[], ctx: Ctx, depth: number): ExprNode | 
       stack.push(normalizeNode(t.node, ctx, depth + 1));
       continue;
     }
+    if (t.kind === 'mathop') {
+      // 연산자 + 피연산자 + limits 를 하나의 호출로 접는다. limits 는 있으면 뒤에 붙인다.
+      const fold = (nodes: readonly MathNode[]): ExprNode =>
+        nodes.length === 1
+          ? normalizeNode(nodes[0], ctx, depth + 1)
+          : normalizeSequence(nodes, ctx, depth + 1, []);
+      const args: ExprNode[] = [fold(t.operand)];
+      if (t.lower) args.push(fold(t.lower));
+      if (t.upper) args.push(fold(t.upper));
+      stack.push(call(t.name, args, []));
+      continue;
+    }
     if (t.kind === 'unaryMinus') {
       const a = stack.pop();
       if (!a) return null;
@@ -401,6 +414,10 @@ function normalizeNode(node: MathNode, ctx: Ctx, depth: number): ExprNode {
       const n = node as FuncNode;
       return call(n.name, n.argument.length > 0 ? [seq(n.argument)] : [], src);
     }
+
+    case 'mathop':
+      // 피연산자를 자식으로 갖지 않는다 — 인자 없는 호출로 남긴다.
+      return call((node as MathOpNode).name, [], src);
 
     case 'root':
       return seq((node as RootNode).children);

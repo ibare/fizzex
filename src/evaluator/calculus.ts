@@ -138,7 +138,7 @@ type IndexAssignment =
   | { ok: true; variable: string; startSeq: MathNode[] }
   | { ok: false; outcome: EvalOutcome };
 
-function parseIndexAssignment(lower: MathNode[], hostNodeType: 'sum' | 'product'): IndexAssignment {
+function parseIndexAssignment(lower: MathNode[], hostNodeType: RangeHost): IndexAssignment {
   const malformed = (reason: string): IndexAssignment => ({
     ok: false,
     outcome: fail('unsupported', { nodeType: hostNodeType, reason }),
@@ -161,22 +161,30 @@ function parseIndexAssignment(lower: MathNode[], hostNodeType: 'sum' | 'product'
   };
 }
 
-interface RangeResolution {
+/** 인덱스 범위를 갖는 노드 — 실패 메시지의 nodeType 으로도 쓰인다 */
+export type RangeHost = 'sum' | 'product' | 'mathop';
+
+export interface RangeResolution {
   ok: true;
   variable: string;
   start: number;
   end: number;
 }
-interface RangeFail {
+export interface RangeFail {
   ok: false;
   outcome: EvalOutcome;
 }
 
-function resolveRange(
+/**
+ * `_{i=1}^{n}` 형태의 인덱스 범위를 해석한다.
+ *
+ * 합·곱뿐 아니라 극값 연산자(`\max_{i=1}^{n}`)도 같은 표기를 쓰므로 공유한다.
+ */
+export function resolveRange(
   lower: MathNode[],
   upper: MathNode[],
   ctx: EvalContext,
-  hostNodeType: 'sum' | 'product',
+  hostNodeType: RangeHost,
 ): RangeResolution | RangeFail {
   const idx = parseIndexAssignment(lower, hostNodeType);
   if (!idx.ok) return idx;

@@ -66,7 +66,7 @@ export type ContainerNodeType =
  * 않으면 이 타입이 `false` 가 되어 컴파일 실패한다.
  */
 type LeafLikeNodeType =
-  | 'number' | 'variable' | 'operator'
+  | 'number' | 'variable' | 'operator' | 'mathop'
   | 'text' | 'space' | 'literal' | 'error'
   | 'row' | 'root';
 

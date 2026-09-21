@@ -66,6 +66,7 @@ function extractSignature(ast: MathNode): AstSignature {
         bump(`operator:${node.operator}`);
         break;
       case 'func':
+      case 'mathop':
         bump(`func:${node.name}`);
         break;
       case 'scripts': {

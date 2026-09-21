@@ -30,6 +30,7 @@ import {
   tokenizeSequence,
   toRPN,
 } from './sequence.js';
+import { evalMathOpToken } from './mathop.js';
 import { setSequenceEvaluator } from './core.js';
 import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
 
@@ -41,6 +42,12 @@ function evalRPN(rpn: SeqToken[], ctx: EvalContext): EvalOutcome {
     }
     if (t.kind === 'operand') {
       const out = ctx.evaluate(t.node);
+      if (out.kind === 'fail') return out;
+      stack.push(out.value);
+      continue;
+    }
+    if (t.kind === 'mathop') {
+      const out = evalMathOpToken(t, ctx);
       if (out.kind === 'fail') return out;
       stack.push(out.value);
       continue;

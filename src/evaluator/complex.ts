@@ -25,6 +25,7 @@ import type {
   ParenNode,
   AbsNode,
   FuncNode,
+  MathOpNode,
   RootNode,
   RowNode,
 } from '../types.js';
@@ -241,6 +242,12 @@ function dispatchInner(node: MathNode, ctx: ComplexCtx): ComplexOutcome {
       return evalAbsNode(node as AbsNode, ctx);
     case 'func':
       return evalFunc(node as FuncNode, ctx);
+    case 'mathop':
+      // 복소수에는 전순서가 없어 max/min 이 정의되지 않는다 — 값을 지어내지 않는다.
+      return fail('unsupported', {
+        nodeType: 'mathop',
+        reason: `no-total-order:${(node as MathOpNode).name}`,
+      });
     case 'operator':
       return fail('unsupported', {
         nodeType: 'operator',
@@ -363,6 +370,10 @@ function evalRPN(rpn: SeqToken[], ctx: ComplexCtx): ComplexOutcome {
       if (x === undefined) return fail('unsupported', { nodeType: 'row', reason: 'malformed-sequence' });
       stack.push(cNeg(x));
       continue;
+    }
+    if (t.kind === 'mathop') {
+      // 복소수에는 전순서가 없어 max/min 이 정의되지 않는다.
+      return fail('unsupported', { nodeType: 'mathop', reason: `no-total-order:${t.name}` });
     }
     const b = stack.pop();
     const a = stack.pop();

@@ -14,14 +14,15 @@
  *   - 푸아송: poisspmf, poisscdf       (모수 λ; λ>0)
  *
  * 인자 분리:
- *   parser 는 콤마를 `NumberNode(value=',')` 로 산출한다. arithmetic.ts
+ *   parser 는 콤마를 `NumberNode(value=',')` 로 산출한다. sequence.ts 의
  *   tokenize 가 빈 인자 FuncNode + 다음 ParenNode 를 합성하여 argument
- *   필드에 ParenNode 한 개를 넣어준다. 본 모듈은 그 paren content 안의
- *   콤마로 인자를 split 한다.
+ *   필드에 ParenNode 한 개를 넣어준다. 그 paren content 를 콤마로 가르는 일은
+ *   `args.ts` 가 맡는다 — 같은 표기를 쓰는 `\max(a, b)` 와 공유한다.
  */
-import type { MathNode, FuncNode, ParenNode, RowNode, NumberNode } from '../types.js';
+import type { FuncNode } from '../types.js';
 import { value, fail, type EvalContext, type EvalOutcome } from './types.js';
 import { evalChildSequence } from './arithmetic.js';
+import { unwrapArgumentParen, splitByComma } from './args.js';
 
 const DISTRIBUTION_NAMES: ReadonlySet<string> = new Set([
   'normpdf', 'normcdf', 'norminv',
@@ -33,35 +34,6 @@ const DISTRIBUTION_NAMES: ReadonlySet<string> = new Set([
 
 export function isDistributionFunction(name: string): boolean {
   return DISTRIBUTION_NAMES.has(name);
-}
-
-/* ─────────────────── 인자 split ─────────────────── */
-
-function unwrapArgumentParen(argument: MathNode[]): MathNode[] | null {
-  if (argument.length !== 1) return null;
-  const head = argument[0];
-  if (head.type !== 'paren') return null;
-  const content = (head as ParenNode).content;
-  // paren content 는 보통 [RowNode { children }] 로 래핑된다.
-  if (content.length === 1 && content[0].type === 'row') {
-    return (content[0] as RowNode).children;
-  }
-  return content;
-}
-
-function splitByComma(cells: MathNode[]): MathNode[][] {
-  const segments: MathNode[][] = [];
-  let current: MathNode[] = [];
-  for (const c of cells) {
-    if (c.type === 'number' && (c as NumberNode).value === ',') {
-      segments.push(current);
-      current = [];
-      continue;
-    }
-    current.push(c);
-  }
-  segments.push(current);
-  return segments;
 }
 
 function evalArguments(node: FuncNode, ctx: EvalContext): { ok: true; args: number[] } | { ok: false; outcome: EvalOutcome } {

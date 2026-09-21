@@ -2,7 +2,7 @@
  * 명령어 핸들러용 노드 생성 헬퍼 함수
  */
 
-import type { MathNode, RowNode, ScriptsNode, ChemNode, VariableNode, OperatorNode, SumNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
+import type { MathNode, RowNode, ScriptsNode, ChemNode, VariableNode, OperatorNode, SumNode, MathOpNode, FracNode, ParenNode, AccentNode, OversetNode, CancelNode, XArrowNode } from '../../types.js';
 import { generateLatexId, deriveId } from '../../utils/id-generator.js';
 
 /** ID 생성 (내부용 alias) */
@@ -31,6 +31,16 @@ export function createText(content: string): MathNode {
 
 export function createNumber(value: string): MathNode {
   return { id: generateId(), type: 'number', value };
+}
+
+/**
+ * 극값·한계 연산자 생성 (`\max`, `\min`, `\sup` 등)
+ *
+ * 인자도 첨자도 갖지 않는다 — 첨자는 `appendScript` 가 `ScriptsNode` 로 감싸고,
+ * 뒤따르는 식은 형제 노드로 남는다.
+ */
+export function createMathOp(name: string): MathOpNode {
+  return { id: generateId(), type: 'mathop', name };
 }
 
 /** 스타일 힌트가 포함된 Row 노드 생성 (\displaystyle, \textstyle 등) */

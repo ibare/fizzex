@@ -570,6 +570,14 @@ export function EditorView({
       case 'insert_func':
         editorRef.current.insertFunc(action.name);
         break;
+      case 'insert_mathop':
+        editorRef.current.insertMathOp(action.name);
+        break;
+      default: {
+        // 새 액션이 늘면 여기서 컴파일이 멈춘다 — 조용히 무시되는 제안을 막는다.
+        const exhaustive: never = action;
+        void exhaustive;
+      }
     }
 
     setCursorVisible(true);

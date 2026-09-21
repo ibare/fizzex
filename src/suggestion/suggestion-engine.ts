@@ -345,7 +345,7 @@ const ALL_SUGGESTIONS: SuggestionWithAction[] = [
     category: 'function',
     description: 'Determinant',
     priority: 7,
-    action: { type: 'insert_func', name: 'det' },
+    action: { type: 'insert_mathop', name: 'det' },
   },
   {
     id: 'tr',
@@ -674,6 +674,7 @@ export function analyzeCursorContext(state: EditorState): CursorContext {
       case 'scripts':
       case 'sqrt':
       case 'func':
+      case 'mathop':
       case 'integral':
       case 'sum':
       case 'product':

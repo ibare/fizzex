@@ -28,6 +28,7 @@ import {
   createFraction,
   createBinomBox,
   createScripts,
+  createOpLimitsBox,
   createParenthesized,
   createAbsoluteValue,
   createOperator,
@@ -105,6 +106,9 @@ function astToBoxInternal(
 
     case 'func':
       return convertFunc(node, metrics, fontSize, style);
+
+    case 'mathop':
+      return convertMathOp(node, metrics, fontSize);
 
     case 'integral':
       return convertIntegral(node, metrics, fontSize, style);
@@ -371,6 +375,26 @@ function convertScripts(
       ? astToBoxInternal(slot[0], metrics, slotFontSize, slotStyle)
       : undefined;
 
+  // 극값·한계 연산자의 첨자는 limits 다 — display 에서 연산자 위아래로 간다 (TeX Rule 13).
+  // 좌첨자가 붙은 경우는 limits 로 볼 수 없으므로 일반 첨자 경로로 보낸다.
+  if (
+    baseNode?.type === 'mathop' &&
+    !node.leftSuperscript &&
+    !node.leftSubscript
+  ) {
+    return createOpLimitsBox(
+      baseBox,
+      {
+        ...(node.subscript ? { lower: convertSlot(node.subscript, subStyle, subFontSize)! } : {}),
+        ...(node.superscript ? { upper: convertSlot(node.superscript, supStyle, supFontSize)! } : {}),
+      },
+      metrics,
+      fontSize,
+      node.id,
+      style
+    );
+  }
+
   return createScripts(
     baseBox,
     {
@@ -470,6 +494,28 @@ function convertFunc(
   const spacing = createKern(actualFontSize * 0.1);
 
   return createHBox([nameBox, spacing, argBox], node.id);
+}
+
+/**
+ * 극값·한계 연산자의 표시 이름.
+ *
+ * 명령 이름과 조판 모양이 다른 것만 적는다 — `\limsup` 은 "lim sup" 으로 그리되
+ * 왕복에는 `\limsup` 이 그대로 쓰여야 하므로 AST 의 name 은 건드리지 않는다.
+ */
+const MATHOP_DISPLAY_NAMES: Readonly<Record<string, string>> = {
+  limsup: 'lim sup',
+  liminf: 'lim inf',
+};
+
+/** 극값·한계 연산자 노드 변환 (`\max`, `\min`, `\sup` 등) */
+function convertMathOp(
+  node: MathNode & { name: string },
+  metrics: FontMetrics,
+  fontSize: number
+): HBox {
+  // 함수 이름과 마찬가지로 정체(이탤릭 아님)로 그린다.
+  const label = MATHOP_DISPLAY_NAMES[node.name] ?? node.name;
+  return createHBox([createGlyphString(label, metrics, fontSize, false)], node.id);
 }
 
 /** 적분 노드 변환 */

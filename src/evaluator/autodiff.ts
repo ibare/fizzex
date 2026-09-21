@@ -26,6 +26,7 @@ import type {
   ParenNode,
   AbsNode,
   FuncNode,
+  MathOpNode,
   RootNode,
   RowNode,
 } from '../types.js';
@@ -268,6 +269,12 @@ function dispatchInner(node: MathNode, ctx: AutoCtx): DualOutcome {
       return evalAbs(node as AbsNode, ctx);
     case 'func':
       return evalFunc(node as FuncNode, ctx);
+    case 'mathop':
+      // max/min 등은 인자가 교차하는 점에서 미분 불가 — abs 와 같은 정책이다.
+      return fail('unsupported', {
+        nodeType: 'mathop',
+        reason: `non-differentiable:${(node as MathOpNode).name}`,
+      });
     case 'operator':
       return fail('unsupported', {
         nodeType: 'operator',
@@ -408,6 +415,10 @@ function evalRPN(rpn: SeqToken[], ctx: AutoCtx): DualOutcome {
       if (x === undefined) return fail('unsupported', { nodeType: 'row', reason: 'malformed-sequence' });
       stack.push(neg(x));
       continue;
+    }
+    if (t.kind === 'mathop') {
+      // max/min 은 인자가 교차하는 점에서 미분 불가 — abs 와 같은 정책이다.
+      return fail('unsupported', { nodeType: 'mathop', reason: `non-differentiable:${t.name}` });
     }
     const b = stack.pop();
     const a = stack.pop();

@@ -1,0 +1,117 @@
+# 알려진 결함
+
+고치기로 한 것이 아니라 **지금 깨져 있다고 확인된 것**을 적는다. 각 항목은 추측이 아니라
+실측에서 나왔고, 재현 방법을 함께 둔다.
+
+수정하면 항목을 지운다 — "해결됨" 으로 남겨 두지 않는다. 이력은 git 이 갖는다.
+
+새 항목은 이 형식을 따른다.
+
+- **증상** — 사용자가 보는 잘못된 결과. 실측값으로 쓴다
+- **위치** — 파일과 줄
+- **원인** — 왜 그렇게 되는지
+- **영향** — 무엇이 막히는지
+- **남겨 둔 이유** — 왜 아직 안 고쳤는지
+
+---
+
+## B1. 중괄호 구분자를 인식하지 못한다
+
+**증상** — 세 표기 모두 중괄호를 잃는다.
+
+```
+\left\{1,2,3\right\}   → 파싱 에러 "Unmatched \right"
+\{1,2\}                → [number "{", number 1, number ",", number 2, number "}"]
+\lbrace 1,2 \rbrace    → 중괄호가 사라지고 경고 2건
+```
+
+**위치** — `src/latex/commands/basic.ts` 의 `parseDelimiter` (105-124행 부근)
+
+**원인** — `\` 다음의 **영문자만** 읽어 명령 이름을 만든다. `\{` 는 이름이 빈 문자열이 되어
+`NAMED_DELIMITERS` 조회에 실패하고 `null` 을 돌려준다. 그래서 `\left\{` 가 여는 구분자를
+찾지 못하고, 뒤따르는 `\right` 만 남아 짝이 맞지 않는다. `\lbrace` 는 이름이 사전에 있지만
+단독 명령 핸들러가 없어 본문에서 그냥 버려진다.
+
+**영향** — 집합 표기 전반이 불가능하다. 그 결과로 `\max_{x \in \{1,2,3\}} f(x)` 같은
+**유한 집합 위의 극값을 평가할 수 없다** — `src/evaluator/mathop.ts` 는 인덱스 범위와
+닫힌 구간까지만 읽고, 집합 표기는 `unrecognized-domain` 으로 돌려보낸다.
+
+**남겨 둔 이유** — `\max` 와 무관한 독립 결함이다. `\{1,2\}` 단독으로도 깨지므로 극값
+연산자 작업에 섞으면 두 변경이 한 커밋에 엉킨다. "집합 표기 지원" 으로 따로 다룬다.
+
+---
+
+## B2. 큰 연산자의 상·하한 간격이 실제로는 0 이다
+
+**증상** — `\sum` 과 `\prod` 의 display 조판에서 상한·하한과 연산자 기호 사이에 TeX 가
+요구하는 간격(xi9/xi10)이 들어가지 않는다. 코드는 간격을 넣으려 하지만 값이 0 이다.
+
+**위치** — `src/box/box-builder.ts:1031,1033` (`createSumBox`), `:1212,1214` (`createProductBox`)
+
+**원인** — `createVBox` 는 자식의 `height + depth` 를 세로로 쌓는데(`:160-163`),
+`createKern(x)` 는 **`width` 만** 채우고 `height`/`depth` 는 0 이다(`:244-250`).
+그래서 `createVBox([...upper, createKern(upperGap), ...sigma])` 의 kern 은 자리를 차지하지 않는다.
+
+실측:
+
+```
+createKern(50)                  → { width: 50, height: 0, depth: 0 }
+VBox([높이10, createKern(50), 높이10]) 총 높이 = 20
+VBox([높이10,                 높이10]) 총 높이 = 20   ← 같다
+```
+
+**영향** — 시그마·곱 기호가 상하한에 붙어 조판된다. TeX Rule 13 위반이다.
+
+**남겨 둔 이유** — 극값 연산자 작업의 최소 영향 범위 밖이다. 새로 만든
+`createOpLimitsBox` 는 `createVerticalGap`(`box-builder.ts:1051`)으로 이 함정을 피했으므로,
+지금 한 파일 안에 **올바른 관용구와 깨진 관용구가 공존한다**. 고칠 때 이 둘을 합쳐야 한다.
+
+**곁다리** — 같은 두 함수의 `:1038`, `:1219` 에 있는 `actualFontSize * 0.2` 는 C7(매직넘버
+금지) 위반이다. `createLimitBox` 는 `MathConstants.thinSpace` 로 고쳐졌으나 이 둘은 그대로라
+현재 어긋나 있다. 함께 정리한다.
+
+---
+
+## B3. SVG 렌더가 displayMode 를 조판에 전달하지 않는다
+
+**증상** — `renderLatexToSVG(latex, { font, displayMode: false })` 가 `displayMode: true` 와
+같은 결과를 낸다. inline 로 요청해도 항상 display 로 조판된다.
+
+**위치** — `src/svg/svg-renderer.ts:54`
+
+**원인** — `astToBox(ast, metrics, 1.0)` 이 네 번째 인자 `displayStyle` 을 넘기지 않는다.
+그 기본값이 `true` 라(`src/box/ast-to-box.ts:62`) 항상 `MathStyle.Display` 가 된다.
+옵션의 `displayMode` 는 `BoxRenderConfig` 를 거쳐 metrics 로만 흘러가고 조판 스타일에는
+닿지 않는다.
+
+**영향** — SVG 경로에서 inline 조판이 불가능하다. `\sum`·`\lim`·`\max` 처럼 style 에 따라
+배치가 달라지는 것이 전부 display 모양으로 나온다. 본문 중간에 넣을 수식이 줄 높이를 밀어낸다.
+
+**남겨 둔 이유** — `\lim`·`\sum` 에서 이미 있던 증상이고, 고치면 기존 SVG 출력이 전부
+바뀐다. 회귀 범위가 넓어 별도로 다룬다.
+
+---
+
+## B4. evaluator 모듈에 순환 import 가 있다
+
+**증상** — 런타임 오류는 없다. 구조 부채다.
+
+```
+arithmetic → mathop → arithmetic
+mathop → calculus → arithmetic → mathop
+```
+
+**위치** — `src/evaluator/arithmetic.ts:33`, `src/evaluator/mathop.ts:19,21`
+
+**원인** — 극값 연산자는 피연산자가 형제로 오므로 시퀀스 평가기(`arithmetic`)가 불러야 하고,
+그 피연산자를 평가하려면 다시 시퀀스 평가기가 필요하다. 상호 재귀를 import 로 직접 이었다.
+
+**왜 지금 터지지 않는가** — 세 모듈 모두 top-level 부수효과가 없고(`register` 호출은 전부
+`install*` 함수 안), 함수 선언은 호이스팅되며 실제 호출은 평가 시점이라 import 순서와 무관하다.
+
+**영향** — 지금은 없다. 다만 evaluator 에 처음 생긴 순환이라, 이후 top-level 초기화를 더하는
+사람이 순서 의존 버그를 만들 여지가 생겼다.
+
+**남겨 둔 이유** — 규칙 위반이 아니고 동작도 정상이다. 다만 `src/evaluator/core.ts:21` 의
+`setSequenceEvaluator` 가 **이미 같은 종류의 역방향 의존을 끊는 이음새**이므로,
+`arithmetic → mathop` 한 방향만 그 이음새나 registry 로 돌리면 순환 없이 같은 결과가 된다.

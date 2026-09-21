@@ -339,4 +339,48 @@ describe('AST to Box', () => {
       expect(equilibrium.depth).toBeGreaterThan(plain.depth);
     });
   });
+
+  describe('극값 연산자 limits (TeX Rule 13/18)', () => {
+    function build(latex: string, displayStyle: boolean): Box {
+      const { ast } = parseLatex(latex);
+      return astToBox(ast, metrics, 1.0, displayStyle);
+    }
+
+    function findVBox(box: Box): VBox | null {
+      if (box.type === 'vbox') return box as VBox;
+      const kids = (box as HBox).children;
+      if (Array.isArray(kids)) {
+        for (const c of kids) {
+          const found = findVBox(c);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+
+    it('display 에서는 첨자를 연산자 위아래로 쌓는다', () => {
+      expect(findVBox(build('\\max_{x} f(x)', true))).not.toBeNull();
+    });
+
+    it('text 에서는 일반 첨자 자리로 보낸다', () => {
+      // 위아래로 쌓는 VBox 가 없어야 한다 — createScripts 경로다.
+      expect(findVBox(build('\\max_{x}', false))).toBeNull();
+    });
+
+    it('limits 가 있으면 display 가 text 보다 아래로 깊어진다', () => {
+      const display = build('\\max_{x} f(x)', true);
+      const text = build('\\max_{x} f(x)', false);
+      expect(display.depth).toBeGreaterThan(text.depth);
+    });
+
+    it('\\lim 과 같은 배치를 받는다', () => {
+      const max = build('\\max_{x} f(x)', true);
+      const lim = build('\\lim_{x \\to 0} f(x)', true);
+      expect(max.depth).toBeCloseTo(lim.depth, 5);
+    });
+
+    it('첨자가 없으면 쌓지 않는다', () => {
+      expect(findVBox(build('\\max f(x)', true))).toBeNull();
+    });
+  });
 });

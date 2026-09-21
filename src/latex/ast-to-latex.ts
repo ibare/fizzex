@@ -7,14 +7,29 @@
 import type { MathNode, XArrowNode } from '../types.js';
 import { chemNotation } from './chem/serializer.js';
 
+/**
+ * LaTeX 조각들을 잇는다.
+ *
+ * 앞 조각이 `\\max` 처럼 명령으로 끝나고 뒤 조각이 글자로 시작하면 공백을 넣는다.
+ * 그냥 붙이면 `\\max f` 가 `\\maxf` 가 되어 존재하지 않는 다른 명령으로 읽힌다.
+ */
+function joinLatex(parts: string[]): string {
+  let out = '';
+  for (const part of parts) {
+    if (/\\[a-zA-Z]+$/.test(out) && /^[a-zA-Z]/.test(part)) out += ' ';
+    out += part;
+  }
+  return out;
+}
+
 /** AST를 LaTeX 문자열로 변환 */
 export function astToLatex(node: MathNode): string {
   switch (node.type) {
     case 'root':
-      return node.children.map(astToLatex).join('');
+      return joinLatex(node.children.map(astToLatex));
 
     case 'row': {
-      const inner = node.children.map(astToLatex).join('');
+      const inner = joinLatex(node.children.map(astToLatex));
       if (node.styleHint) {
         const styleCmd = { display: '\\displaystyle', text: '\\textstyle', script: '\\scriptstyle', scriptscript: '\\scriptscriptstyle' }[node.styleHint];
         return `${styleCmd} ${inner}`;
@@ -35,8 +50,8 @@ export function astToLatex(node: MathNode): string {
       return convertOperator(node.operator);
 
     case 'frac': {
-      const num = node.numerator.map(astToLatex).join('');
-      const den = node.denominator.map(astToLatex).join('');
+      const num = joinLatex(node.numerator.map(astToLatex));
+      const den = joinLatex(node.denominator.map(astToLatex));
       let cmd: string;
       if (node.variant === 'binom') {
         cmd = node.styleOverride === 'display' ? 'dbinom'
@@ -53,7 +68,7 @@ export function astToLatex(node: MathNode): string {
     case 'scripts': {
       // 슬롯 하나를 LaTeX 인자로. 한 글자면 중괄호를 생략한다.
       const arg = (nodes: MathNode[]): string => {
-        const s = nodes.map(astToLatex).join('');
+        const s = joinLatex(nodes.map(astToLatex));
         return s.length === 1 ? s : `{${s}}`;
       };
 
@@ -65,7 +80,7 @@ export function astToLatex(node: MathNode): string {
         if (node.leftSubscript) out += `_${arg(node.leftSubscript)}`;
       }
 
-      const base = node.base.map(astToLatex).join('');
+      const base = joinLatex(node.base.map(astToLatex));
       out += base.length > 0 ? wrapIfNeeded(base) : (out === '' ? '{}' : '');
 
       // 아래첨자를 먼저 낸다 — 화학 관례(SO_4^{2-})와 맞고,
@@ -79,21 +94,21 @@ export function astToLatex(node: MathNode): string {
       return `\\ce{${chemNotation(node.content, astToLatex)}}`;
 
     case 'abs': {
-      const content = node.content.map(astToLatex).join('');
+      const content = joinLatex(node.content.map(astToLatex));
       return `|${content}|`;
     }
 
     case 'sqrt': {
-      const content = node.content.map(astToLatex).join('');
+      const content = joinLatex(node.content.map(astToLatex));
       if (node.index && node.index.length > 0) {
-        const index = node.index.map(astToLatex).join('');
+        const index = joinLatex(node.index.map(astToLatex));
         return `\\sqrt[${index}]{${content}}`;
       }
       return `\\sqrt{${content}}`;
     }
 
     case 'paren': {
-      const content = node.content.map(astToLatex).join('');
+      const content = joinLatex(node.content.map(astToLatex));
       const openClose: Record<string, [string, string]> = {
         '(': ['(', ')'],
         '[': ['[', ']'],
@@ -113,14 +128,18 @@ export function astToLatex(node: MathNode): string {
     }
 
     case 'func': {
-      const arg = node.argument.map(astToLatex).join('');
+      const arg = joinLatex(node.argument.map(astToLatex));
       return `\\${node.name}(${arg})`;
     }
 
+    case 'mathop':
+      // 인자도 첨자도 없다 — 첨자는 이 노드를 감싼 scripts 가 찍는다.
+      return `\\${node.name}`;
+
     case 'integral': {
-      const lower = node.lower ? node.lower.map(astToLatex).join('') : '';
-      const upper = node.upper ? node.upper.map(astToLatex).join('') : '';
-      const integrand = node.integrand.map(astToLatex).join('');
+      const lower = node.lower ? joinLatex(node.lower.map(astToLatex)) : '';
+      const upper = node.upper ? joinLatex(node.upper.map(astToLatex)) : '';
+      const integrand = joinLatex(node.integrand.map(astToLatex));
       const diff = node.differential;
 
       let result = '\\int';
@@ -132,9 +151,9 @@ export function astToLatex(node: MathNode): string {
     }
 
     case 'sum': {
-      const lower = node.lower.map(astToLatex).join('');
-      const upper = node.upper.map(astToLatex).join('');
-      const body = node.body.map(astToLatex).join('');
+      const lower = joinLatex(node.lower.map(astToLatex));
+      const upper = joinLatex(node.upper.map(astToLatex));
+      const body = joinLatex(node.body.map(astToLatex));
       const symbolToCmd: Record<string, string> = {
         '∐': 'coprod', '∩': 'bigcap', '∪': 'bigcup',
         '∨': 'bigvee', '∧': 'bigwedge', '⊕': 'bigoplus',
@@ -145,32 +164,32 @@ export function astToLatex(node: MathNode): string {
     }
 
     case 'limit': {
-      const approach = node.approach.map(astToLatex).join('');
-      const body = node.body.map(astToLatex).join('');
+      const approach = joinLatex(node.approach.map(astToLatex));
+      const body = joinLatex(node.body.map(astToLatex));
       return `\\lim_{${node.variable} \\to ${approach}} ${body}`;
     }
 
     case 'product': {
-      const lower = node.lower.map(astToLatex).join('');
-      const upper = node.upper.map(astToLatex).join('');
-      const body = node.body.map(astToLatex).join('');
+      const lower = joinLatex(node.lower.map(astToLatex));
+      const upper = joinLatex(node.upper.map(astToLatex));
+      const body = joinLatex(node.body.map(astToLatex));
       return `\\prod_{${lower}}^{${upper}} ${body}`;
     }
 
     case 'overset': {
-      const base = node.base.map(astToLatex).join('');
-      const anno = node.annotation.map(astToLatex).join('');
+      const base = joinLatex(node.base.map(astToLatex));
+      const anno = joinLatex(node.annotation.map(astToLatex));
       const cmd = node.position === 'below' ? 'underset' : 'overset';
       return `\\${cmd}{${anno}}{${base}}`;
     }
 
     case 'cancel': {
-      const content = node.content.map(astToLatex).join('');
+      const content = joinLatex(node.content.map(astToLatex));
       return `\\${node.cancelType}{${content}}`;
     }
 
     case 'overline': {
-      const content = node.content.map(astToLatex).join('');
+      const content = joinLatex(node.content.map(astToLatex));
       const variantMap: Record<string, string> = {
         underline: 'underline', boxed: 'boxed',
         overbrace: 'overbrace', underbrace: 'underbrace',
@@ -180,7 +199,7 @@ export function astToLatex(node: MathNode): string {
     }
 
     case 'accent': {
-      const content = node.content.map(astToLatex).join('');
+      const content = joinLatex(node.content.map(astToLatex));
       // 확장형 악센트의 LaTeX 명령어 매핑
       const accentCmdMap: Record<string, string> = {
         widehat: 'widehat', widetilde: 'widetilde',
@@ -192,7 +211,7 @@ export function astToLatex(node: MathNode): string {
     }
 
     case 'xarrow': {
-      const above = node.above.map(astToLatex).join('');
+      const above = joinLatex(node.above.map(astToLatex));
       // Record 를 direction 유니온으로 좁혀 둔다 — 방향이 늘 때 컴파일이 잡아준다.
       const dirMap: Record<XArrowNode['direction'], string> = {
         left: 'xleftarrow',
@@ -206,7 +225,7 @@ export function astToLatex(node: MathNode): string {
       };
       const cmd = dirMap[node.direction];
       if (node.below && node.below.length > 0) {
-        const below = node.below.map(astToLatex).join('');
+        const below = joinLatex(node.below.map(astToLatex));
         return `\\${cmd}[${below}]{${above}}`;
       }
       return `\\${cmd}{${above}}`;
@@ -273,7 +292,7 @@ export function astToLatex(node: MathNode): string {
 
     case 'opaque': {
       const argsLatex = node.args.map(arg =>
-        `{${arg.map(astToLatex).join('')}}`
+        `{${joinLatex(arg.map(astToLatex))}}`
       ).join('');
       return `\\${node.command}${argsLatex}`;
     }
@@ -411,6 +430,9 @@ function convertOperator(op: string): string {
 function wrapIfNeeded(str: string): string {
   // 단일 문자나 이미 그룹화된 경우 그대로
   if (str.length === 1) return str;
+  // 명령 하나뿐이면 감싸지 않는다. `{\max}` 는 Ord atom 이라 첨자가 아래가 아니라
+  // 옆에 붙는다 — 내보낸 LaTeX 가 limits 의미를 잃는다.
+  if (/^\\[a-zA-Z]+$/.test(str)) return str;
   if (str.startsWith('(') && str.endsWith(')')) return str;
   if (str.startsWith('[') && str.endsWith(']')) return str;
   if (str.startsWith('\\{') && str.endsWith('\\}')) return str;

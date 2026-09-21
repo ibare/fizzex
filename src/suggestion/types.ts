@@ -58,7 +58,8 @@ export type SuggestionAction =
   | { type: 'insert_sum' }
   | { type: 'insert_limit' }
   | { type: 'insert_product' }
-  | { type: 'insert_func'; name: string };
+  | { type: 'insert_func'; name: string }
+  | { type: 'insert_mathop'; name: string };
 
 /** 제안 항목 + 액션 */
 export interface SuggestionWithAction extends Suggestion {

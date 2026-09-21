@@ -14,6 +14,7 @@ import type {
   ParenNode,
   AbsNode,
   FuncNode,
+  MathOpNode,
   IntegralNode,
   SumNode,
   LimitNode,
@@ -177,6 +178,13 @@ function walkNode(
       const currentCount = result.functions.get(func.name) || 0;
       result.functions.set(func.name, currentCount + 1);
       walkChildren(func.argument, result, depth + 1);
+      break;
+    }
+
+    case 'mathop': {
+      // 자식은 없지만 사용자에게는 여전히 함수로 보인다 — 같은 목록에 센다.
+      const op = node as MathOpNode;
+      result.functions.set(op.name, (result.functions.get(op.name) || 0) + 1);
       break;
     }
 

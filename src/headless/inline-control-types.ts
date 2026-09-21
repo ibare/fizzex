@@ -90,6 +90,7 @@ export function getControlType(
 
     case 'operator':
     case 'func':
+    case 'mathop':
     case 'row':
     case 'root':
     case 'text':

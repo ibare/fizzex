@@ -11,7 +11,7 @@
  * (파이프라인 단계 독립).
  */
 
-import type { MathNode, OperatorNode, FuncNode } from '../types.js';
+import type { MathNode, OperatorNode, FuncNode, MathOpNode, ScriptsNode } from '../types.js';
 
 export type BinaryOp = '+' | '-' | '×' | '÷' | '·';
 
@@ -30,6 +30,14 @@ const REL_OP_SET: ReadonlySet<string> = new Set(REL_OPS);
 
 export type SeqToken =
   | { kind: 'operand'; node: MathNode }
+  /**
+   * 극값·한계 연산자와 그 피연산자를 묶은 토큰.
+   *
+   * `\max` 는 자식을 갖지 않고 피연산자가 형제로 온다 — `\max f(x)` 의 `f(x)` 는
+   * AST 상 `\max` 의 아래가 아니라 옆이다. 그래서 결합은 이 단계에서만 가능하다.
+   * 우선순위 계산에서는 하나의 피연산자처럼 다룬다.
+   */
+  | { kind: 'mathop'; name: string; lower?: MathNode[]; upper?: MathNode[]; operand: MathNode[] }
   | { kind: 'binop'; op: BinaryOp; prec: number }
   | { kind: 'rel'; op: RelOp; prec: number }
   | { kind: 'unaryMinus' };
@@ -52,11 +60,64 @@ export const UNARY_PREC = 3;
 /** 관계 연산자는 모든 산술 연산자보다 느슨하게 묶인다. */
 export const REL_PREC = 0;
 
+/** mathop 과 그 limits 를 꺼낸다 — 맨 노드이거나 scripts 의 base 인 두 형태를 받는다 */
+function readMathOp(
+  node: MathNode
+): { name: string; lower?: MathNode[]; upper?: MathNode[] } | null {
+  if (node.type === 'mathop') {
+    return { name: (node as MathOpNode).name };
+  }
+  if (node.type === 'scripts') {
+    const n = node as ScriptsNode;
+    // 좌첨자가 붙은 것은 limits 로 볼 수 없다 — 조판이 일반 첨자로 보내는 것과 같은 기준이다.
+    if (n.leftSuperscript || n.leftSubscript) return null;
+    if (n.base.length !== 1 || n.base[0].type !== 'mathop') return null;
+    return {
+      name: (n.base[0] as MathOpNode).name,
+      ...(n.subscript ? { lower: n.subscript } : {}),
+      ...(n.superscript ? { upper: n.superscript } : {}),
+    };
+  }
+  return null;
+}
+
+/**
+ * 피연산자를 어디까지 끌어올지 가르는 경계.
+ *
+ * 덧셈·뺄셈과 관계 연산자에서 끊고, 곱셈 계열은 안으로 넣는다 — `\sum` 을 읽는
+ * 관례와 같다. `\max a + b` 는 `(\max a) + b` 지만 `\max a \cdot b` 는
+ * `\max(a \cdot b)` 다.
+ */
+function isOperandBoundary(node: MathNode): boolean {
+  if (node.type !== 'operator') return false;
+  const op = (node as OperatorNode).operator;
+  return op === '+' || op === '-' || REL_OP_SET.has(op);
+}
+
 export function tokenizeSequence(children: MathNode[]): SeqToken[] | TokenizeError {
   const tokens: SeqToken[] = [];
   let prevWasOperand = false;
   for (let i = 0; i < children.length; i++) {
     const c = children[i];
+
+    // 극값·한계 연산자: 뒤따르는 피연산자를 다음 연산자 앞까지 모아 하나로 묶는다.
+    const op = readMathOp(c);
+    if (op) {
+      const operand: MathNode[] = [];
+      let j = i + 1;
+      while (j < children.length && !isOperandBoundary(children[j])) {
+        operand.push(children[j]);
+        j++;
+      }
+      if (prevWasOperand) {
+        tokens.push({ kind: 'binop', op: '×', prec: PREC['×'] });
+      }
+      tokens.push({ kind: 'mathop', name: op.name, ...(op.lower ? { lower: op.lower } : {}), ...(op.upper ? { upper: op.upper } : {}), operand });
+      prevWasOperand = true;
+      i = j - 1;
+      continue;
+    }
+
     // `\operatorname{name}` 등은 parser 에서 FuncNode(argument=[]) 로 산출되고
     // 인자 paren 은 별개 자식으로 따라온다. 여기서 합성한다.
     if (c.type === 'func' && (c as FuncNode).argument.length === 0) {
@@ -122,7 +183,7 @@ export function toRPN(tokens: SeqToken[]): SeqToken[] {
     return 0;
   };
   for (const t of tokens) {
-    if (t.kind === 'operand') {
+    if (t.kind === 'operand' || t.kind === 'mathop') {
       output.push(t);
       continue;
     }

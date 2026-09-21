@@ -29,7 +29,9 @@ function scriptsTextKey(
 export function getDefaultRoleFromTexts(node: MathNode, fallback: FallbackTexts): string {
   switch (node.type) {
     case 'func':
-      // roles.func 는 `{name}` 을 함수 이름으로 바꾸는 형식이다 — 어순이 언어마다 다르다
+    case 'mathop':
+      // roles.func 는 `{name}` 을 함수 이름으로 바꾸는 형식이다 — 어순이 언어마다 다르다.
+      // mathop 도 같은 자리를 쓴다 — 사용자에게 `\max` 는 여전히 "함수"로 불린다.
       return fallback.roles['func']?.replace('{name}', node.name) ?? node.name;
     case 'accent': {
       const accentData = fallback.accents[node.accentType];
@@ -60,6 +62,7 @@ export function getDefaultDescriptionFromTexts(node: MathNode, fallback: Fallbac
       return fallback.operators[node.operator]
         ?? (fallback.defaultOperator ?? '').replace('{op}', node.operator);
     case 'func':
+    case 'mathop':
       return fallback.functions[node.name]
         ?? (fallback.defaultFunction ?? '').replace('{name}', node.name);
     case 'matrix':

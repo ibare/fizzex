@@ -264,7 +264,8 @@ function isVariableSoleBaseContent(base: MathNode[], variable: string): boolean 
         (n) => n.type === 'number' ||
                n.type === 'frac' ||
                n.type === 'sqrt' ||
-               n.type === 'func'
+               n.type === 'func' ||
+               n.type === 'mathop'
       );
       if (!hasOtherContent) {
         return true;

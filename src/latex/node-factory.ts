@@ -18,6 +18,7 @@ import type {
   ParenNode,
   AbsNode,
   FuncNode,
+  MathOpNode,
   IntegralNode,
   SumNode,
   LimitNode,
@@ -57,6 +58,7 @@ export type MathNodeMap = {
   paren: ParenNode;
   abs: AbsNode;
   func: FuncNode;
+  mathop: MathOpNode;
   integral: IntegralNode;
   sum: SumNode;
   limit: LimitNode;

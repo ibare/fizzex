@@ -77,17 +77,13 @@ export const functionHandlers: Map<string, CommandHandler> = new Map([
   ['exp', mathFunctionHandler('exp')],
 
   // 기타 함수
-  ['det', mathFunctionHandler('det')],
+  //
+  // max/min/sup/inf/det/gcd/Pr 은 여기 없다 — TeX 가 limits 를 붙이는 \mathop 부류라
+  // `latex/commands/bigops.ts` 가 MathOpNode 로 만든다. 함수처럼 인자를 삼키면 안 된다.
   ['dim', mathFunctionHandler('dim')],
   ['ker', mathFunctionHandler('ker')],
   ['hom', mathFunctionHandler('hom')],
   ['arg', mathFunctionHandler('arg')],
   ['deg', mathFunctionHandler('deg')],
-  ['gcd', mathFunctionHandler('gcd')],
-  ['min', mathFunctionHandler('min')],
-  ['max', mathFunctionHandler('max')],
-  ['sup', mathFunctionHandler('sup')],
-  ['inf', mathFunctionHandler('inf')],
   ['mod', mathFunctionHandler('mod')],
-  ['Pr', mathFunctionHandler('Pr')],
 ]);

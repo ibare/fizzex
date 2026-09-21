@@ -243,20 +243,36 @@ const PARAM_BINDINGS: Record<string, ParamBinding | null> = {
     location: 'MathConstants.smallMatrixScale',
   },
 
+  // ── 큰 연산자 limits (Rule 13) ──
+  xi11_bigOpSpacing3: {
+    resolve: () => MathConstants.upperLimitBaselineRise,
+    location: 'MathConstants.upperLimitBaselineRise',
+  },
+  xi12_bigOpSpacing4: {
+    resolve: () => MathConstants.lowerLimitBaselineDrop,
+    location: 'MathConstants.lowerLimitBaselineDrop',
+  },
+  xi13_bigOpSpacing5: {
+    resolve: () => MathConstants.limitsPadding,
+    location: 'MathConstants.limitsPadding',
+  },
+
+  // ── atom 간격 ──
+  operatorSpacing_thin: {
+    resolve: () => MathConstants.thinSpace,
+    location: 'MathConstants.thinSpace',
+  },
+  operatorSpacing_thick: {
+    resolve: () => MathConstants.thickSpace,
+    location: 'MathConstants.thickSpace',
+  },
+
   // ── 미구현 (unbound) ──
   sigma6_mathQuad: null,
   sigma10_num3: null,
   sigma20_delim1: null,
   sigma21_delim2: null,
-  xi11_bigOpSpacing3: null,
-  xi12_bigOpSpacing4: null,
-  xi13_bigOpSpacing5: null,
-  operatorSpacing_thin: null,
   operatorSpacing_medium: null,
-  operatorSpacing_thick: {
-    resolve: () => MathConstants.thickSpace,
-    location: 'MathConstants.thickSpace',
-  },
 };
 
 // ── 테스트 ──

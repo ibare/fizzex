@@ -20,6 +20,7 @@ import type {
   AbsNode,
   SqrtNode,
   FuncNode,
+  MathOpNode,
   IntegralNode,
   SumNode,
   LimitNode,
@@ -385,6 +386,8 @@ function getChildKeys(node: MathNode): string[] {
       return ['above', 'below'];
     case 'func':
       return ['argument'];
+    case 'mathop':
+      return [];
     case 'integral':
       return ['lower', 'upper', 'integrand'];
     case 'sum':
@@ -1198,5 +1201,16 @@ export class MathEditor {
       argument: [{ id: argRowId, type: 'row', children: [] }],
     };
     this.insertStructureAtCursor(funcNode, argRowId);
+  }
+
+  /**
+   * 극값·한계 연산자 삽입 (`\max`, `\min`, `\det` 등)
+   *
+   * 함수와 달리 인자 슬롯이 없다 — 피연산자는 뒤에 이어 쓰고, 첨자는
+   * 첨자 삽입으로 따로 붙인다.
+   */
+  insertMathOp(name: string): void {
+    const opNode: MathOpNode = { id: generateEditorId(), type: 'mathop', name };
+    this.insertNodeAtCursor(opNode);
   }
 }

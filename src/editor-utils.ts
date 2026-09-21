@@ -45,6 +45,8 @@ function getChildKeys(node: MathNode): string[] {
       return ['above', 'below'];
     case 'func':
       return ['argument'];
+    case 'mathop':
+      return [];
     case 'integral':
       return ['lower', 'upper', 'integrand'];
     case 'sum':

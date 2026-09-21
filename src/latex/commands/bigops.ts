@@ -1,5 +1,5 @@
 /**
- * 대형 연산자 핸들러 (적분, 시그마, 극한, 곱)
+ * 대형 연산자 핸들러 (적분, 시그마, 극한, 곱, 극값 연산자)
  */
 
 import type { MathNode } from '../../types.js';
@@ -12,6 +12,7 @@ import {
   createVariable,
   createOperator,
   createParen,
+  createMathOp,
   appendScript,
 } from './helpers.js';
 
@@ -223,6 +224,17 @@ const limHandler: CommandHandler = (ctx) => {
   };
 };
 
+/**
+ * 극값·한계 연산자 핸들러 생성 (`\max`, `\min`, `\sup` 등)
+ *
+ * 함수와 달리 뒤따르는 식을 인자로 삼키지 않는다 — 연산자 노드 하나만 돌려주고
+ * 커서를 그 자리에 둔다. 뒤에 `_`/`^` 가 오면 파서가 `ScriptsNode` 로 감싸고,
+ * 그 밖의 토큰은 형제로 이어진다. TeX 의 `\mathop` 의미론 그대로다.
+ */
+function mathOpHandler(opName: string): CommandHandler {
+  return (ctx) => ({ nodes: [createMathOp(opName)], consumed: ctx.pos });
+}
+
 /** 대형 연산자 핸들러 레지스트리 */
 export const bigOpHandlers: Map<string, CommandHandler> = new Map([
   // 적분
@@ -258,6 +270,15 @@ export const bigOpHandlers: Map<string, CommandHandler> = new Map([
 
   // 극한
   ['lim', limHandler],
-  ['limsup', limHandler],
-  ['liminf', limHandler],
+
+  // 극값·한계 연산자 — TeX 가 limits 를 붙이는 부류
+  ['max', mathOpHandler('max')],
+  ['min', mathOpHandler('min')],
+  ['sup', mathOpHandler('sup')],
+  ['inf', mathOpHandler('inf')],
+  ['limsup', mathOpHandler('limsup')],
+  ['liminf', mathOpHandler('liminf')],
+  ['det', mathOpHandler('det')],
+  ['gcd', mathOpHandler('gcd')],
+  ['Pr', mathOpHandler('Pr')],
 ]);

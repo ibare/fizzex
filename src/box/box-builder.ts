@@ -1042,6 +1042,85 @@ export function createSumBox(
   return result;
 }
 
+/**
+ * VBox 안에서 세로 간격으로 쓰는 kern.
+ *
+ * `createKern` 은 `width` 만 채우고 `height`/`depth` 가 0 이다. VBox 는 자식의
+ * `height + depth` 를 쌓아 올리므로, 그대로 넣으면 간격이 생기지 않는다.
+ */
+function createVerticalGap(size: number): KernBox {
+  const gap = createKern(0);
+  gap.height = size;
+  gap.depth = 0;
+  return gap;
+}
+
+/**
+ * 큰 연산자의 limits 배치 (TeX Rule 13)
+ *
+ * display 에서는 연산자 위아래 중앙에 쌓고, 그 밖의 스타일에서는 첨자 자리로 보낸다
+ * (Rule 18) — 후자는 `createScripts` 가 이미 하는 일이라 위임한다.
+ *
+ * 연산자 덩어리만 조판한다. 뒤따르는 본문은 호출자가 잇는다.
+ */
+export function createOpLimitsBox(
+  opBox: Box,
+  limits: { lower?: Box; upper?: Box },
+  metrics: FontMetrics,
+  fontSize: number = 1.0,
+  sourceId?: string,
+  style: MathStyle = MathStyle.Display
+): Box {
+  const { lower, upper } = limits;
+  if (!lower && !upper) return opBox;
+
+  if (!isDisplay(style)) {
+    return createScripts(
+      opBox,
+      { ...(lower ? { subscript: lower } : {}), ...(upper ? { superscript: upper } : {}) },
+      metrics,
+      fontSize,
+      sourceId,
+      style
+    );
+  }
+
+  const actualFontSize = metrics.getActualFontSize(fontSize);
+  const upperGap = actualFontSize * MathConstants.upperLimitGap;             // xi9
+  const lowerGap = actualFontSize * MathConstants.lowerLimitGap;             // xi10
+  const upperRise = actualFontSize * MathConstants.upperLimitBaselineRise;   // xi11
+  const lowerDrop = actualFontSize * MathConstants.lowerLimitBaselineDrop;   // xi12
+  const padding = actualFontSize * MathConstants.limitsPadding;              // xi13
+
+  const maxWidth = Math.max(opBox.width, lower?.width ?? 0, upper?.width ?? 0);
+
+  /** 연산자 폭에 맞춰 가운데로 민다 */
+  const centered = (box: Box): HBox => {
+    const padded = createHBox([createKern((maxWidth - box.width) / 2), box]);
+    padded.width = maxWidth;
+    return padded;
+  };
+
+  const rows: Box[] = [];
+  let baselineIndex = 0;
+
+  if (upper) {
+    // 두 상자 사이 최소 간격(xi9)과 기준선 최소 거리(xi11) 중 큰 쪽을 쓴다.
+    const gap = Math.max(upperGap, upperRise - upper.depth - opBox.height);
+    rows.push(createVerticalGap(padding), centered(upper), createVerticalGap(gap));
+    baselineIndex = rows.length;
+  }
+
+  rows.push(centered(opBox));
+
+  if (lower) {
+    const gap = Math.max(lowerGap, lowerDrop - lower.height - opBox.depth);
+    rows.push(createVerticalGap(gap), centered(lower), createVerticalGap(padding));
+  }
+
+  return createVBox(rows, baselineIndex, sourceId);
+}
+
 /** 극한 Box 생성 */
 export function createLimitBox(
   variable: string,
@@ -1063,42 +1142,10 @@ export function createLimitBox(
   const arrowGlyph = createGlyph('→', metrics, smallFontSize, false);
   const limitInfo = createHBox([varGlyph, arrowGlyph, approach]);
 
-  if (!isDisplay(style)) {
-    // Inline style: "lim" + 아래첨자
-    const shiftedInfo: Box = {
-      ...limitInfo,
-      shift: limGlyph.depth + limitInfo.height * 0.3,
-    };
+  const limWithInfo = createOpLimitsBox(limGlyph, { lower: limitInfo }, metrics, fontSize, undefined, style);
 
-    const kern = createKern(actualFontSize * 0.15);
-    const result = createHBox([limGlyph, shiftedInfo, kern, body], sourceId);
-    result.depth = Math.max(result.depth, (shiftedInfo.shift ?? 0) + limitInfo.depth);
-    return result;
-  }
-
-  // Display style: VBox (lim 위, x→0 아래)
-  const maxWidth = Math.max(limGlyph.width, limitInfo.width);
-
-  // lim을 중앙 정렬
-  const limPadLeft = (maxWidth - limGlyph.width) / 2;
-  const limRow = createHBox([createKern(limPadLeft), limGlyph]);
-  limRow.width = maxWidth;
-
-  // limitInfo를 중앙 정렬
-  const infoPadLeft = (maxWidth - limitInfo.width) / 2;
-  const infoRow = createHBox([createKern(infoPadLeft), limitInfo]);
-  infoRow.width = maxWidth;
-
-  // 간격
-  const gap = createKern(0);
-  gap.height = actualFontSize * 0.1;
-  gap.depth = 0;
-
-  // VBox로 조합: lim 위, x→0 아래 (baseline은 lim 기준)
-  const limWithInfo = createVBox([limRow, gap, infoRow], 'top');
-
-  // 간격
-  const kern = createKern(actualFontSize * 0.2);
+  // Op atom 과 뒤따르는 본문 사이는 thin space (TeX \thinmuskip).
+  const kern = createKern(actualFontSize * MathConstants.thinSpace);
 
   const result = createHBox([limWithInfo, kern, body], sourceId);
 

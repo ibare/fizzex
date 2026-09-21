@@ -15,6 +15,7 @@ export type MathNodeType =
   | 'paren'     // 괄호
   | 'abs'       // 절댓값
   | 'func'      // 함수 (sin, cos, log 등)
+  | 'mathop'    // 극값·한계 연산자 (max, min, sup, inf 등) — 첨자를 아래위로 받는다
   | 'integral'  // 적분
   | 'sum'       // 시그마/합
   | 'limit'     // 극한
@@ -156,6 +157,19 @@ export interface FuncNode extends MathNodeBase {
   type: 'func';
   name: string; // "sin", "cos", "log" 등
   argument: MathNode[];
+}
+
+/**
+ * 극값·한계 연산자 노드 (`\max`, `\min`, `\sup`, `\inf` 등)
+ *
+ * TeX 의 `\mathop` 중 limits 를 받는 부류다. 함수가 아니라서 인자를 삼키지 않는다 —
+ * `\max f(x)` 의 `f(x)` 는 이 노드의 자식이 아니라 뒤따르는 형제다.
+ * 첨자도 직접 갖지 않는다. `\max_{x \in S}` 는 `ScriptsNode` 가 이 노드를 base 로 감싸며,
+ * 아래위 배치 여부는 조판 단계가 math style 을 보고 정한다 (TeX Rule 13).
+ */
+export interface MathOpNode extends MathNodeBase {
+  type: 'mathop';
+  name: string; // "max", "min", "sup", "inf", "limsup" 등
 }
 
 /** 적분 노드 */
@@ -379,6 +393,7 @@ export type MathNode =
   | ParenNode
   | AbsNode
   | FuncNode
+  | MathOpNode
   | IntegralNode
   | SumNode
   | LimitNode

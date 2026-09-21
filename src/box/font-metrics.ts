@@ -341,6 +341,33 @@ export const MathConstants = {
   lowerLimitGap: 0.166,
 
   /**
+   * 큰 연산자와 상한 사이 최소 기준선 거리 (em 단위)
+   *
+   * TeX의 \fontdimen11 (xi11, big_op_spacing3).
+   *
+   * @see The TeXbook, Appendix G, Rule 13
+   */
+  upperLimitBaselineRise: 0.2,
+
+  /**
+   * 큰 연산자와 하한 사이 최소 기준선 거리 (em 단위)
+   *
+   * TeX의 \fontdimen12 (xi12, big_op_spacing4).
+   *
+   * @see The TeXbook, Appendix G, Rule 13
+   */
+  lowerLimitBaselineDrop: 0.6,
+
+  /**
+   * display 상한/하한 위아래 여백 (em 단위)
+   *
+   * TeX의 \fontdimen13 (xi13, big_op_spacing5).
+   *
+   * @see The TeXbook, Appendix G, Rule 13
+   */
+  limitsPadding: 0.1,
+
+  /**
    * sigma18: sup_drop — 위첨자 초기 위치 계산 (base.height - supDrop)
    * 큰 base(적분 등)에서 위첨자를 상단 근처에 배치하는 데 사용
    * @see The TeXbook, Appendix G, Rule 18c
@@ -475,6 +502,11 @@ export const MathConstants = {
   overbraceAnnotationGap: 0.15,
   xarrowPadding: 0.3,
 
+  /**
+   * Op atom 좌우 간격 (TeX \thinmuskip = 3mu).
+   * spec 의 operatorSpacing_thin 을 구현한 것이다.
+   */
+  thinSpace: 0.167,
   /**
    * Rel atom 좌우 간격 (TeX \thickmuskip = 5mu).
    * spec 의 operatorSpacing_thick 을 구현한 것이다.
