@@ -135,6 +135,7 @@ export type {
   ParenNode,
   AbsNode,
   FuncNode,
+  MathOpNode,
   IntegralNode,
   SumNode,
   LimitNode,
