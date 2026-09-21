@@ -27,7 +27,7 @@ import {
   createArrayBox,
   createSurd,
 } from './box-builder.js';
-import type { Box, GlyphBox, HBox, KernBox } from './types.js';
+import type { Box, GlyphBox, HBox, KernBox, VBox } from './types.js';
 
 function createMockMetrics(): any {
   return {
@@ -922,6 +922,25 @@ describe('Box Builder', () => {
       expect(result.children).toHaveLength(3);
     });
 
+    it('상하한과 기호 사이에 TeX 간격이 실제로 들어간다 (Rule 13)', () => {
+      // VBox 는 자식의 height + depth 를 쌓는다. 간격을 kern 의 width 로만 넣으면
+      // 자리를 차지하지 못해 기호와 상하한이 붙는다.
+      const result = createSumBox(makeBox({ width: 20 }), makeBox({ width: 15 }), makeBox({ width: 30 }), metrics);
+      const vbox = result.children[0] as VBox;
+      const actualFontSize = metrics.getActualFontSize(1.0);
+
+      const upperGap = vbox.children[1];
+      const lowerGap = vbox.children[3];
+      expect(upperGap.height + upperGap.depth).toBeCloseTo(actualFontSize * MathConstants.upperLimitGap, 5);
+      expect(lowerGap.height + lowerGap.depth).toBeCloseTo(actualFontSize * MathConstants.lowerLimitGap, 5);
+    });
+
+    it('기호와 본문 사이는 thin space 다', () => {
+      const result = createSumBox(makeBox({ width: 20 }), makeBox({ width: 15 }), makeBox({ width: 30 }), metrics);
+      const kern = result.children[1];
+      expect(kern.width).toBeCloseTo(metrics.getActualFontSize(1.0) * MathConstants.thinSpace, 5);
+    });
+
     it('sourceId를 설정한다', () => {
       const lower = makeBox();
       const upper = makeBox();
@@ -962,6 +981,17 @@ describe('Box Builder', () => {
   // createProductBox
   // ─────────────────────────────────────────────
   describe('createProductBox', () => {
+    it('상하한과 곱기호 사이에 TeX 간격이 실제로 들어간다 (Rule 13)', () => {
+      const result = createProductBox(makeBox({ width: 20 }), makeBox({ width: 15 }), makeBox({ width: 30 }), metrics);
+      const vbox = result.children[0] as VBox;
+      const actualFontSize = metrics.getActualFontSize(1.0);
+
+      const upperGap = vbox.children[1];
+      const lowerGap = vbox.children[3];
+      expect(upperGap.height + upperGap.depth).toBeCloseTo(actualFontSize * MathConstants.upperLimitGap, 5);
+      expect(lowerGap.height + lowerGap.depth).toBeCloseTo(actualFontSize * MathConstants.lowerLimitGap, 5);
+    });
+
     it('곱 기호 HBox를 생성한다', () => {
       const lower = makeBox({ width: 20 });
       const upper = makeBox({ width: 15 });

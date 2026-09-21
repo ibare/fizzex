@@ -38,34 +38,3 @@
 
 **남겨 둔 이유** — `\max` 와 무관한 독립 결함이다. `\{1,2\}` 단독으로도 깨지므로 극값
 연산자 작업에 섞으면 두 변경이 한 커밋에 엉킨다. "집합 표기 지원" 으로 따로 다룬다.
-
----
-
-## B2. 큰 연산자의 상·하한 간격이 실제로는 0 이다
-
-**증상** — `\sum` 과 `\prod` 의 display 조판에서 상한·하한과 연산자 기호 사이에 TeX 가
-요구하는 간격(xi9/xi10)이 들어가지 않는다. 코드는 간격을 넣으려 하지만 값이 0 이다.
-
-**위치** — `src/box/box-builder.ts:1031,1033` (`createSumBox`), `:1212,1214` (`createProductBox`)
-
-**원인** — `createVBox` 는 자식의 `height + depth` 를 세로로 쌓는데(`:160-163`),
-`createKern(x)` 는 **`width` 만** 채우고 `height`/`depth` 는 0 이다(`:244-250`).
-그래서 `createVBox([...upper, createKern(upperGap), ...sigma])` 의 kern 은 자리를 차지하지 않는다.
-
-실측:
-
-```
-createKern(50)                  → { width: 50, height: 0, depth: 0 }
-VBox([높이10, createKern(50), 높이10]) 총 높이 = 20
-VBox([높이10,                 높이10]) 총 높이 = 20   ← 같다
-```
-
-**영향** — 시그마·곱 기호가 상하한에 붙어 조판된다. TeX Rule 13 위반이다.
-
-**남겨 둔 이유** — 극값 연산자 작업의 최소 영향 범위 밖이다. 새로 만든
-`createOpLimitsBox` 는 `createVerticalGap`(`box-builder.ts:1051`)으로 이 함정을 피했으므로,
-지금 한 파일 안에 **올바른 관용구와 깨진 관용구가 공존한다**. 고칠 때 이 둘을 합쳐야 한다.
-
-**곁다리** — 같은 두 함수의 `:1038`, `:1219` 에 있는 `actualFontSize * 0.2` 는 C7(매직넘버
-금지) 위반이다. `createLimitBox` 는 `MathConstants.thinSpace` 로 고쳐졌으나 이 둘은 그대로라
-현재 어긋나 있다. 함께 정리한다.

@@ -272,9 +272,10 @@ function extractLimitsMeasurements(
       // gap kern들
       const upperGapKern = vbox.children[1];
       const lowerGapKern = vbox.children[3];
-      // kern의 width가 0이고 height/depth로 gap 표현
-      const upperGap = upperGapKern.width / actualFontSize;
-      const lowerGap = lowerGapKern.width / actualFontSize;
+      // VBox 안의 세로 간격은 height + depth 로 자리를 차지한다.
+      // width 로 재면 간격이 없는 박스도 통과하므로 여기서 잡히지 않는다.
+      const upperGap = (upperGapKern.height + upperGapKern.depth) / actualFontSize;
+      const lowerGap = (lowerGapKern.height + lowerGapKern.depth) / actualFontSize;
       values['limits.upper_gap'] = upperGap;
       values['limits.lower_gap'] = lowerGap;
       flags['limits.as_vbox'] = true;

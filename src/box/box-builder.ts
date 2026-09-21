@@ -1028,14 +1028,14 @@ export function createSumBox(
   // VBox로 위에서 아래로 배치: 상한 → 시그마 → 하한
   const sigmaWithLimits = createVBox([
     upperWithPadding,
-    createKern(upperGap),  // 상한과 시그마 사이 간격
+    createVerticalGap(upperGap),  // 상한과 시그마 사이 간격
     sigmaWithPadding,
-    createKern(lowerGap),  // 시그마와 하한 사이 간격
+    createVerticalGap(lowerGap),  // 시그마와 하한 사이 간격
     lowerWithPadding,
   ], 2); // 시그마 (인덱스 2)를 baseline으로
 
   // 간격
-  const kern = createKern(actualFontSize * 0.2);
+  const kern = createKern(actualFontSize * MathConstants.thinSpace);
 
   const result = createHBox([sigmaWithLimits, kern, body], sourceId);
 
@@ -1209,14 +1209,14 @@ export function createProductBox(
   // VBox로 위에서 아래로 배치: 상한 → 곱기호 → 하한
   const productWithLimits = createVBox([
     upperWithPadding,
-    createKern(upperGap),  // 상한과 곱기호 사이 간격
+    createVerticalGap(upperGap),  // 상한과 곱기호 사이 간격
     productWithPadding,
-    createKern(lowerGap),  // 곱기호와 하한 사이 간격
+    createVerticalGap(lowerGap),  // 곱기호와 하한 사이 간격
     lowerWithPadding,
   ], 2); // 곱기호 (인덱스 2)를 baseline으로
 
   // 간격
-  const kern = createKern(actualFontSize * 0.2);
+  const kern = createKern(actualFontSize * MathConstants.thinSpace);
 
   const result = createHBox([productWithLimits, kern, body], sourceId);
 
