@@ -74,8 +74,13 @@ VBox([높이10,                 높이10]) 총 높이 = 20   ← 같다
 
 ## B3. SVG 렌더가 displayMode 를 조판에 전달하지 않는다
 
-**증상** — `renderLatexToSVG(latex, { font, displayMode: false })` 가 `displayMode: true` 와
-같은 결과를 낸다. inline 로 요청해도 항상 display 로 조판된다.
+**증상** — `displayMode` 를 무엇으로 주든 같은 결과가 나온다. inline 로 요청해도 항상
+display 로 조판된다. 실측:
+
+```
+renderLatexToSVG('\\sum_{i=1}^{n} i', { font, displayMode: 'display' })  → w=52 h=80
+renderLatexToSVG('\\sum_{i=1}^{n} i', { font, displayMode: 'inline'  })  → w=52 h=80
+```
 
 **위치** — `src/svg/svg-renderer.ts:54`
 
