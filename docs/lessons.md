@@ -549,3 +549,43 @@ import {
 - [ ] 공개 표면에서 이름을 지웠으면 **그 이름을 쓰는 모든 빌드**(라이브러리·website·예제)를
       돌려서 확인한다. 검색 결과 0건은 근거가 아니다
 - [ ] grep 이 0건일 때는 "없다" 가 아니라 "이 패턴으로는 안 나온다" 로 보고한다
+
+---
+
+## L15. 새 노드 타입은 컴파일러가 3곳만 잡는다 — 나머지 27곳은 침묵한다
+
+**Date**: 2026-09-21
+**Source**: `mathop` 노드 도입 (`\max`/`\min` 을 `func` 에서 분리). rule-guard 사전 검토가
+4회차까지 ISSUE 를 냈는데, 매번 "계획 방향이 틀렸다" 가 아니라 "손댈 파일을 빠뜨렸다" 였다.
+
+### 문제
+
+`MathNode` 유니온에 타입을 하나 더하면 관련 분기를 전부 갱신해야 한다(principles 5).
+그런데 **컴파일이 강제하는 지점은 세 곳뿐**이다 — `never` 소진 검사가 있는
+`box/ast-to-box.ts`, `analyzer/canonical/from-ast.ts`, `cursor-policy.ts`(mapped type 가드).
+
+`'func'` 를 다루는 지점은 저장소에 30곳이었고, 나머지 27곳은 `default` 로 조용히 떨어진다.
+그중 다수는 `default` 가 정답이지만(자식 순회 switch 는 childless 노드에 정확하다),
+**아닌 곳이 섞여 있고 그 구별은 타입 검사가 해 주지 않는다**. 실제로 놓쳤던 것들:
+
+| 지점 | 놓쳤다면 |
+|---|---|
+| `analyzer/ast-walker.ts` | 요약의 함수 목록에서 `max` 가 사라진다 |
+| `semantic/matchers/catalog-matcher.ts` | 시그니처 토큰이 바뀌어 카탈로그 매칭이 깨진다 |
+| `semantic/fallback.ts` — **`case 'func'` 이 두 곳** | 설명만 고치고 역할명을 빠뜨리면 `"max 함수"` 가 리터럴 `"mathop"` 으로 노출된다 |
+| `suggestion-engine.ts:676` | 삽입 직후 커서 컨텍스트가 `'empty'` 로 잘못 잡힌다 |
+| `react/EditorView.tsx` | 액션 union 에 분기를 안 넣으면 **제안을 눌러도 아무 일도 없다** |
+
+마지막 것이 가장 나빴다. 액션 타입을 `insert_func` → `insert_mathop` 으로 바꿨는데 소비 측
+switch 에 `default` 도 `never` 도 없어서, 타입 검사·전체 테스트·조판 실측을 모두 통과하면서
+det 제안만 조용히 죽어 있었다.
+
+### 적용
+
+- [ ] 노드 타입을 더하면 **먼저** `grep -rn "case '<기존 유사타입>'" src` 로 전수 목록을 뽑고,
+      각 지점에 "분기 추가" 인지 "default 가 정답" 인지 **결론을 적는다**. 세지 않고 고치지 않는다
+- [ ] 한 파일에 같은 `case` 가 두 번 나올 수 있다. 파일 단위가 아니라 **지점 단위**로 센다
+- [ ] 분기를 넣은 union switch 에는 `default: const exhaustive: never = x` 가드를 **함께** 남긴다.
+      다음 사람은 컴파일러가 막아 준다 (`EditorView.tsx` 에 이렇게 넣었다)
+- [ ] UI 액션·제안처럼 **런타임에만 드러나는 경로**는 테스트가 없으면 조용히 죽는다.
+      타입 검사와 전체 테스트 통과는 "안 깨졌다" 의 증거가 아니다
