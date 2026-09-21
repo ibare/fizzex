@@ -69,28 +69,3 @@ VBox([높이10,                 높이10]) 총 높이 = 20   ← 같다
 **곁다리** — 같은 두 함수의 `:1038`, `:1219` 에 있는 `actualFontSize * 0.2` 는 C7(매직넘버
 금지) 위반이다. `createLimitBox` 는 `MathConstants.thinSpace` 로 고쳐졌으나 이 둘은 그대로라
 현재 어긋나 있다. 함께 정리한다.
-
----
-
-## B3. SVG 렌더가 displayMode 를 조판에 전달하지 않는다
-
-**증상** — `displayMode` 를 무엇으로 주든 같은 결과가 나온다. inline 로 요청해도 항상
-display 로 조판된다. 실측:
-
-```
-renderLatexToSVG('\\sum_{i=1}^{n} i', { font, displayMode: 'display' })  → w=52 h=80
-renderLatexToSVG('\\sum_{i=1}^{n} i', { font, displayMode: 'inline'  })  → w=52 h=80
-```
-
-**위치** — `src/svg/svg-renderer.ts:54`
-
-**원인** — `astToBox(ast, metrics, 1.0)` 이 네 번째 인자 `displayStyle` 을 넘기지 않는다.
-그 기본값이 `true` 라(`src/box/ast-to-box.ts:62`) 항상 `MathStyle.Display` 가 된다.
-옵션의 `displayMode` 는 `BoxRenderConfig` 를 거쳐 metrics 로만 흘러가고 조판 스타일에는
-닿지 않는다.
-
-**영향** — SVG 경로에서 inline 조판이 불가능하다. `\sum`·`\lim`·`\max` 처럼 style 에 따라
-배치가 달라지는 것이 전부 display 모양으로 나온다. 본문 중간에 넣을 수식이 줄 높이를 밀어낸다.
-
-**남겨 둔 이유** — `\lim`·`\sum` 에서 이미 있던 증상이고, 고치면 기존 SVG 출력이 전부
-바뀐다. 회귀 범위가 넓어 별도로 다룬다.

@@ -51,7 +51,8 @@ export function renderAstToSVG(ast: RootNode, options: SvgRenderOptions): SvgRen
   };
 
   const metrics = new CanvasFontMetrics(createFontMeasurer(font), config);
-  const box = astToBox(ast, metrics, 1.0);
+  // 조판 스타일은 여기서 정해 내려보낸다 — config 의 displayMode 는 metrics 까지만 간다.
+  const box = astToBox(ast, metrics, 1.0, (displayMode ?? 'display') === 'display');
   layoutBox(box, padding, padding + box.height);
 
   const surface = new SvgSurface(font);

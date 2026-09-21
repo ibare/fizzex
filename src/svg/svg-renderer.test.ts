@@ -74,6 +74,24 @@ describe('renderAstToSVG 옵션', () => {
     expect(large.height).toBeGreaterThan(small.height);
   });
 
+  it('displayMode 가 조판 스타일까지 간다', () => {
+    // limits 를 갖는 연산자는 display 에서 위아래로, inline 에서 첨자 자리로 간다.
+    // 이 단언이 없으면 옵션이 metrics 까지만 가고 조판에 닿지 않아도 아무도 모른다.
+    const sum = parseLatex('\\sum_{i=1}^{n} i').ast;
+    const display = renderAstToSVG(sum, { font, displayMode: 'display' });
+    const inline = renderAstToSVG(sum, { font, displayMode: 'inline' });
+    expect(display.height).toBeGreaterThan(inline.height);
+    expect(inline.width).toBeGreaterThan(display.width);
+  });
+
+  it('displayMode 를 생략하면 display 로 조판한다', () => {
+    const sum = parseLatex('\\sum_{i=1}^{n} i').ast;
+    const omitted = renderAstToSVG(sum, { font });
+    const display = renderAstToSVG(sum, { font, displayMode: 'display' });
+    expect(omitted.height).toBe(display.height);
+    expect(omitted.width).toBe(display.width);
+  });
+
   it('색상을 반영한다', () => {
     const { svg } = renderAstToSVG(ast, { font, color: '#ff0000' });
     expect(svg).toContain('fill="#ff0000"');
