@@ -608,9 +608,18 @@ const braceSetHandler: CommandHandler = (ctx) => {
     return { nodes: [createNumber('{')], consumed: ctx.pos };
   }
   const inner = ctx.parseExpression(ctx.latex, ctx.pos, ['\\}']);
+
+  // 안쪽 파싱이 선스캔이 찍은 자리에서 멈추지 않았다면 집합으로 묶지 않는다.
+  // `parseExpression` 은 절댓값 `|` 를 stopChars 보다 먼저 처리하므로 `\{ |x| \}`
+  // 처럼 집합이 `|` 로 곧장 열리면 안쪽이 닫는 `\}` 를 삼킨 채 먼저 끝난다.
+  // 그 상태로 묶으면 내용이 어긋나 왕복이 깨진다 — 예전처럼 글리프로 둔다.
+  if (inner.consumed !== close) {
+    return { nodes: [createNumber('{')], consumed: ctx.pos };
+  }
+
   return {
     nodes: [createParen(inner.nodes, '{', false)],
-    consumed: inner.consumed + 2, // 닫는 `\}` 소비
+    consumed: close + 2, // 닫는 `\}` 소비
   };
 };
 

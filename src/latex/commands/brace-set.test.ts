@@ -83,6 +83,28 @@ describe('짝이 없는 중괄호', () => {
   });
 });
 
+describe('절댓값이 든 집합', () => {
+  it('내용이 앞서면 묶는다', () => {
+    const nodes = children('\\{ x : |x| < 1 \\}');
+    expect(asParen(nodes[0]).parenType).toBe('{');
+  });
+
+  it('집합이 | 로 곧장 열리면 묶지 않는다', () => {
+    // parseExpression 은 절댓값을 stopChars 보다 먼저 처리해서 닫는 \} 를 삼킨다.
+    // 그 상태로 묶으면 내용이 어긋나 왕복이 깨지므로 글리프로 둔다.
+    const nodes = children('\\{ |x| \\}');
+    expect(nodes.some((n) => n.type === 'paren' && (n as ParenNode).parenType === '{')).toBe(false);
+  });
+
+  it('묶지 않아도 왕복은 안정적이다', () => {
+    for (const src of ['\\{ |x| \\}', '\\{ |1 \\}', '\\{ a, |b| \\}']) {
+      const once = astToLatex(parseLatex(src).ast);
+      const twice = astToLatex(parseLatex(once).ast);
+      expect(twice, src).toBe(once);
+    }
+  });
+});
+
 describe('왕복', () => {
   it('집합 표기를 유지한다', () => {
     expect(astToLatex(parseLatex('\\{1,2\\}').ast)).toBe('\\{1,2\\}');
