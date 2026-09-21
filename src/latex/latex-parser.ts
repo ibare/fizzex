@@ -397,15 +397,15 @@ function parseCommand(latex: string, start: number): ParseResult {
   let pos = start + 1;
   let cmdName = '';
 
-  // 특수 문자 이스케이프 처리 (\{, \}, \|, \%, \& 등)
-  if (pos < latex.length && /[{}|%&$#_]/.test(latex[pos])) {
+  // 특수 문자 이스케이프 처리 (\|, \%, \& 등)
+  //
+  // `\{` `\}` 는 여기서 다루지 않는다 — 아래 단일문자 명령 경로로 흘려보내
+  // `commands/basic.ts` 의 핸들러가 집합으로 묶게 한다. 짝이 없으면 그 핸들러와
+  // 이 함수의 폴백이 똑같이 중괄호 글리프를 낸다.
+  if (pos < latex.length && /[|%&$#_]/.test(latex[pos])) {
     const char = latex[pos];
     pos++;
     const escRange: SourceRange = { start, end: pos };
-    // \{ 와 \} 는 중괄호 기호로 렌더링
-    if (char === '{' || char === '}') {
-      return { nodes: [createNumber(char, escRange)], consumed: pos };
-    }
     // \| 는 이중 세로줄 (‖)
     if (char === '|') {
       return { nodes: [createOperator('‖', escRange)], consumed: pos };

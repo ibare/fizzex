@@ -38,6 +38,9 @@ export function astToLatex(node: MathNode): string {
     }
 
     case 'number':
+      // 짝을 못 찾은 중괄호는 글리프로 남는다. 맨 `{` 로 내보내면 LaTeX 에서
+      // 그룹 시작이 되어 의미가 달라지므로 이스케이프해 돌려준다.
+      if (node.value === '{' || node.value === '}') return `\\${node.value}`;
       return node.value;
 
     case 'variable':

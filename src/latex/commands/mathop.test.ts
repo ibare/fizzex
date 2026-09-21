@@ -37,9 +37,12 @@ describe('노드 종류', () => {
     expect(nodes.some((n) => n.type === 'paren')).toBe(true);
   });
 
-  it('중괄호 집합을 인자로 삼키지 않는다', () => {
+  it('중괄호 집합을 자식으로 갖지 않는다', () => {
+    // mathop 에는 argument 필드가 없다. 집합은 형제 ParenNode 로 남고,
+    // 둘을 잇는 일은 평가 단계의 시퀀스 결합이 맡는다.
     const nodes = children('\\max\\{1, 2\\}');
     expect(nodes[0].type).toBe('mathop');
+    expect(nodes[1].type).toBe('paren');
   });
 
   it('sin 같은 진짜 함수는 여전히 func 다', () => {

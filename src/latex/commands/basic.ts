@@ -6,7 +6,7 @@ import type { CommandHandler } from './types.js';
 import {
   createFrac, createBinom, createSqrt, createText, createParen, createAbs,
   createSpace, createStyledRow, createOverset, createUnderset, createBoxed,
-  createCancel, createFunc, createOperator, mapMathFont,
+  createCancel, createFunc, createOperator, createNumber, mapMathFont,
   generateId as generateLatexId, deriveId,
 } from './helpers.js';
 import type { MathFontStyle } from './helpers.js';
@@ -97,6 +97,12 @@ function parseDelimiter(latex: string, pos: number): DelimiterInfo | null {
   // \| (이중 세로줄)
   if (latex[pos] === '\\' && pos + 1 < latex.length && latex[pos + 1] === '|') {
     return { parenType: '(', char: '‖', isAbs: false, isDoubleBar: true, consumed: pos + 2 };
+  }
+
+  // \{ \} — 이스케이프된 중괄호. 아래 명령어 경로는 `\` 뒤 영문자만 읽으므로
+  // 이름이 빈 문자열이 되어 여기까지 오지 못한다.
+  if (latex[pos] === '\\' && pos + 1 < latex.length && (latex[pos + 1] === '{' || latex[pos + 1] === '}')) {
+    return { parenType: '{', char: latex[pos + 1], isAbs: false, isDoubleBar: false, consumed: pos + 2 };
   }
 
   // \ 명령어 delimiter (\langle, \lceil 등)
@@ -522,7 +528,109 @@ const unmatchedRightHandler: CommandHandler = (ctx) => {
   return { nodes: [], consumed: pos };
 };
 
+
+/**
+ * 짝이 맞는 닫는 `\}` 의 위치를 찾는다. 없으면 -1.
+ *
+ * 투기적으로 파싱해 보고 버리면 전역 수집기에 경고가 남고 id 카운터가 전진한다.
+ * 그래서 먼저 훑어 짝을 확정하고, 확정된 뒤에만 한 번 파싱한다.
+ *
+ * 경계는 `parseExpression` 과 같아야 한다 — 그쪽이 짝 없는 `)` `]` `}` 에서
+ * 무조건 멈추므로, 여기서 그 너머의 `\}` 를 짝으로 잡으면 파싱이 경계에서 멈춰
+ * 위치가 어긋난다.
+ */
+function findClosingBrace(latex: string, from: number): number {
+  /** 짝 맞는 닫는 문자까지 건너뛴다. 짝이 없으면 -1. */
+  const skipPaired = (start: number, open: string, close: string): number => {
+    let depth = 0;
+    let p = start;
+    while (p < latex.length) {
+      const c = latex[p];
+      if (c === '\\') {
+        p += 2;
+        continue;
+      }
+      if (c === open) depth++;
+      else if (c === close) {
+        depth--;
+        if (depth === 0) return p + 1;
+      }
+      p++;
+    }
+    return -1;
+  };
+
+  let pos = from;
+  while (pos < latex.length) {
+    const ch = latex[pos];
+
+    if (ch === '\\') {
+      const next = latex[pos + 1];
+      if (next === '}') return pos;
+      if (next === '{') {
+        // 중첩된 집합 — 그 짝까지 통째로 건너뛴다.
+        const inner = findClosingBrace(latex, pos + 2);
+        if (inner < 0) return -1;
+        pos = inner + 2;
+        continue;
+      }
+      if (latex.startsWith('\\right', pos)) return -1;
+      pos += 2;
+      continue;
+    }
+
+    // 그룹·괄호는 짝째 건너뛴다. 그 안의 닫는 문자는 이 집합의 경계가 아니다.
+    if (ch === '{' || ch === '(' || ch === '[') {
+      const close = ch === '{' ? '}' : ch === '(' ? ')' : ']';
+      const after = skipPaired(pos, ch, close);
+      if (after < 0) return -1;
+      pos = after;
+      continue;
+    }
+
+    // 짝 없는 닫는 문자 = parseExpression 이 멈추는 자리.
+    if (ch === ')' || ch === ']' || ch === '}') return -1;
+
+    pos++;
+  }
+  return -1;
+}
+
+/**
+ * `\{ ... \}` — 중괄호로 묶인 집합
+ *
+ * 짝이 맞을 때만 ParenNode 로 묶는다. 짝이 없으면 지금까지처럼 중괄호 글리프
+ * 하나로 떨어뜨린다 — `\{` 를 홀로 쓰는 수식이 깨지지 않게 하기 위함이다.
+ */
+const braceSetHandler: CommandHandler = (ctx) => {
+  const close = findClosingBrace(ctx.latex, ctx.pos);
+  if (close < 0) {
+    return { nodes: [createNumber('{')], consumed: ctx.pos };
+  }
+  const inner = ctx.parseExpression(ctx.latex, ctx.pos, ['\\}']);
+  return {
+    nodes: [createParen(inner.nodes, '{', false)],
+    consumed: inner.consumed + 2, // 닫는 `\}` 소비
+  };
+};
+
+/**
+ * `\lbrace` / `\rbrace` — `\{` `\}` 의 이름 있는 표기
+ *
+ * 등록되지 않으면 본문에서 통째로 버려진다(경고만 남고 중괄호가 사라진다).
+ * 왕복이 맨 `{` 를 뱉으면 재파싱 때 그룹으로 먹히므로, 글리프가 아니라
+ * `createNumber` 로 두어 `astToLatex` 가 `\{` 로 직렬화하게 한다.
+ */
+function namedBraceHandler(char: '{' | '}'): CommandHandler {
+  return (ctx) => ({ nodes: [createNumber(char)], consumed: ctx.pos });
+}
+
 export const basicHandlers: Map<string, CommandHandler> = new Map([
+  // `\{` 는 여기서 집합으로 묶는다. 닫는 `\}` 단독은 파서 폴백이 글리프로 처리하므로
+  // 따로 등록하지 않는다 — 등록하면 그 폴백과 다른 노드를 낼 위험만 생긴다.
+  ['{', braceSetHandler],
+  ['lbrace', namedBraceHandler('{')],
+  ['rbrace', namedBraceHandler('}')],
   ['frac', fracHandler],
   ['dfrac', fracHandler],
   ['tfrac', fracHandler],

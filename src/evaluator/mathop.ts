@@ -7,6 +7,7 @@
  * 표기 형태별 정책:
  *   `\max(a, b, c)`             유한 인자 — 확정
  *   `\max_{i=1}^{n} a_i`        인덱스 범위 순회 — 확정
+ *   `\max_{x \in \{1,2,3\}} f(x)` 유한 집합 원소를 훑는다 — 확정
  *   `\max_{x \in [a,b]} f(x)`   연속 구간 — 수치 근사. 전역 최적해는 보장할 수 없다
  *                               (정적분이 Simpson 근사를 value 로 돌려주는 것과 같은 규약)
  *   `\max x`                    피연산자가 하나뿐이면 그 값
@@ -103,6 +104,22 @@ function readClosedInterval(
   const hiOut = evalChildSequence(segments[1], ctx);
   if (hiOut.kind === 'fail') return null;
   return { lo: loOut.value, hi: hiOut.value };
+}
+
+/** `\{a, b, c\}` 처럼 원소를 늘어놓은 유한 집합이면 그 값들을 돌려준다 */
+function readFiniteSet(domain: MathNode[], ctx: EvalContext): number[] | null {
+  if (domain.length !== 1 || domain[0].type !== 'paren') return null;
+  if ((domain[0] as ParenNode).parenType !== '{') return null;
+  const cells = unwrapArgumentParen(domain);
+  if (!cells) return null;
+  const values: number[] = [];
+  for (const seg of splitByComma(cells)) {
+    if (seg.length === 0) return null;
+    const out = evalChildSequence(seg, ctx);
+    if (out.kind === 'fail') return null;
+    values.push(out.value);
+  }
+  return values;
 }
 
 /**
@@ -202,6 +219,20 @@ function evalMathOpToken(token: MathOpToken, ctx: EvalContext): EvalOutcome {
     if (!member) {
       return fail('unsupported', { nodeType: 'mathop', reason: 'unrecognized-limits' });
     }
+    const elements = readFiniteSet(member.domain, ctx);
+    if (elements) {
+      if (elements.length === 0) {
+        return fail('domain', { nodeType: 'mathop', reason: 'empty-set' });
+      }
+      const values: number[] = [];
+      for (const x of elements) {
+        const out = evalChildSequence(operand, ctx.withBinding(member.variable, x));
+        if (out.kind === 'fail') return out;
+        values.push(out.value);
+      }
+      return reduceAll(name, values);
+    }
+
     const interval = readClosedInterval(member.domain, ctx);
     if (interval) {
       return optimizeOnInterval(name, operand, member.variable, interval.lo, interval.hi, ctx);

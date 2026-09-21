@@ -76,6 +76,26 @@ describe('인덱스 범위', () => {
   });
 });
 
+describe('유한 집합', () => {
+  it('집합 원소 중 극값을 고른다', () => {
+    expect(ev('\\max_{x \\in \\{1,2,3\\}} x')).toBe(3);
+    expect(ev('\\min_{x \\in \\{4,2,9\\}} x')).toBe(2);
+  });
+
+  it('본문이 식이어도 원소마다 평가한다', () => {
+    expect(ev('\\max_{x \\in \\{1,2,3\\}} x^2')).toBe(9);
+  });
+
+  it('\\left\\{ ... \\right\\} 표기도 읽는다', () => {
+    expect(ev('\\max_{x \\in \\left\\{1,5,3\\right\\}} x')).toBe(5);
+  });
+
+  it('첨자 없이 집합만 줘도 극값을 구한다', () => {
+    expect(ev('\\max\\{1, 2\\}')).toBe(2);
+    expect(ev('\\min\\{7, 3, 5\\}')).toBe(3);
+  });
+});
+
 describe('닫힌 구간', () => {
   it('구간 위 극값을 수치로 찾는다', () => {
     expect(ev('\\max_{x \\in [0, 2]} x')).toBeCloseTo(2, 6);
